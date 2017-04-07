@@ -8,7 +8,7 @@ namespace Axle.Extensions.IO.StreamReader
     using StreamReader = System.IO.StreamReader;
 
     /// <summary>
-    /// A static class containing common extension methods to <see cref="StreamReader"/> instances.
+    /// A static class providing extension methods to <see cref="StreamReader"/> instances.
     /// </summary>
     public static class StreamReaderExtensions
     {

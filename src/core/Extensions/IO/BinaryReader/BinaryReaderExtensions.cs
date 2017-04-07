@@ -8,7 +8,7 @@ namespace Axle.Extensions.IO.BinaryReader
     using BinaryReader = System.IO.BinaryReader;
 
     /// <summary>
-    /// A static class containing common extension methods to <see cref="BinaryReader"/> instances.
+    /// A static class providing extension methods to <see cref="BinaryReader"/> instances.
     /// </summary>
     public static class BinaryReaderExtensions
     {

@@ -8,7 +8,7 @@ namespace Axle.Extensions.IO.StreamWriter
     using StreamWriter = System.IO.StreamWriter;
 
     /// <summary>
-    /// A static class containing common extension methods to <see cref="StreamWriter"/> instances.
+    /// A static class providing extension methods to <see cref="StreamWriter"/> instances.
     /// </summary>
     public static class StreamWriterExtensions
     {
