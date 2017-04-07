@@ -23,9 +23,12 @@ namespace Axle.Extensions.IO.Stream
         /// </summary>
         /// <param name="stream">The target to allocate bytes</param>
         /// <param name="length">The number of bytes to be allocated.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="stream"/> is <c>null</c>.</exception>
+        /// <exception cref="IOException">An I/O error occurs. </exception>
         /// <exception cref="NotSupportedException">
-        /// Thrown if the current <see cref="Stream"/> does not support writing.
+        /// Thrown if the current <see cref="Stream"/> does not support seeking or writing.
         /// </exception>
+        /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static void Allocate(this Stream stream, int length)
         {
             stream.VerifyArgument("stream").IsNotNull();
@@ -122,25 +125,34 @@ namespace Axle.Extensions.IO.Stream
         /// <param name="stream">The stream to read data from.</param>
         /// <param name="target">The target to write data to.</param>
         /// <param name="bufferSize">The size of the buffer (byte array) that will be used for writing.</param>
-        /// <exception cref="NotSupportedException">
-        /// The current input target does not support reading.
-        /// </exception>
-        /// <exception cref="NotSupportedException">
-        /// The specified output target does not support writing.
-        /// </exception>
-        /// <exception cref="InvalidOperationException">
-        /// The output target and the input target are the same instance.
-        /// </exception>
+        /// <exception cref="ArgumentNullException"><paramref name="stream"/> is <c>null</c>.</exception>
+        /// <exception cref="NotSupportedException">The current input target does not support reading.</exception>
+        /// <exception cref="NotSupportedException">The specified output target does not support writing.</exception>
+        /// <exception cref="InvalidOperationException">The output target and the input target are the same instance.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">Parameter <paramref name="bufferSize"/> is not a positive number. </exception>
         public static long WriteTo(this Stream stream, Stream target, int bufferSize)
         {
             stream.VerifyArgument ("stream").IsNotNull();
             if (bufferSize <= 0)
             {
-                throw new ArgumentOutOfRangeException("bufferSize", bufferSize, "Invalid buffer size");
+                throw new ArgumentOutOfRangeException(nameof(bufferSize), bufferSize, "Invalid buffer size");
             }
             var buffer = new byte[bufferSize];
             return WriteTo(stream, target, buffer);
         }
+        /// <summary>
+        /// Writes data to an output target using the specified input target and buffer size.
+        /// <remarks>
+        /// The data is being read from the input target's current position.
+        /// </remarks>
+        /// </summary>
+        /// <param name="stream">The stream to read data from.</param>
+        /// <param name="target">The target to write data to.</param>
+        /// <param name="buffer">A byte array to be used the buffer for the write operation.</param>
+        /// <exception cref="ArgumentNullException"><paramref name="stream"/> is <c>null</c>.</exception>
+        /// <exception cref="NotSupportedException">The current input target does not support reading.</exception>
+        /// <exception cref="NotSupportedException">The specified output target does not support writing.</exception>
+        /// <exception cref="InvalidOperationException">The output target and the input target are the same instance.</exception>
         public static long WriteTo(this Stream stream, Stream target, byte[] buffer)
         {
             stream.VerifyArgument("stream").IsNotNull();

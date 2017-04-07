@@ -33,6 +33,18 @@ namespace Axle.Verification
             }
             return argument;
         }
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is not <c>null</c>. In case the verification fails, an <see cref="ArgumentNullException"/> is thrown. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// </param>
+        /// <exception cref="ArgumentNullException">The represented by the <paramref name="argument"/> parameter object is <c>null</c></exception>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
         #if net45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
