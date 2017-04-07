@@ -51,8 +51,8 @@
     <Compile Include="Extensions\IO\StreamWriter\StreamWriterExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\Fluent\FluentStreamExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
-    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Signal.cs" />
     <Compile Include="Verification\ArgumentReference.cs" />
     <Compile Include="Verification\ArrayVerifier.cs" />
     <Compile Include="Verification\CollectionVerifier.cs" />
