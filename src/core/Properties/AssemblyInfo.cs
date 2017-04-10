@@ -4,12 +4,14 @@ using System.Runtime.CompilerServices;
 // Information about this assembly is defined by the following attributes. 
 // Change them to the values specific to your project.
 [assembly: AssemblyTitle("Axle.Core")]
-[assembly: AssemblyDescription("")]
-[assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Virtual Dimensions")]
 [assembly: AssemblyProduct("Axle.Core")]
+[assembly: AssemblyDescription("")]
+
+[assembly: AssemblyCompany("Virtual Dimensions")]
 [assembly: AssemblyCopyright("Virtual Dimensions")]
 [assembly: AssemblyTrademark("")]
+
+[assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
 // The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
 // The form "{Major}.{Minor}.*" will automatically update the build and revision,

@@ -63,10 +63,27 @@ namespace Axle.Extensions.IO.Stream
             return currentPosition;
         }
 
-
+        /// <summary>
+        /// Converts the contents of a <see cref="Stream"/> instance to an array of bytes.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream">stream</see> to convert.</param>
+        /// <param name="bufferSize">An integer value determining the size of the buffer used for reading from the stream.</param>
+        /// <param name="leaveOpen">A <see cref="bool">boolean</see> flag indicating wheter to leave the stream open or not. </param>
+        /// <returns>
+        /// An array of <see cref="byte"/> values representing the contents of the <paramref name="stream"/>.
+        /// </returns>
+        /// <exception cref="IOException">An I/O error occurs. </exception>
+        /// <exception cref="NotSupportedException">
+        /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output. 
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="bufferSize"/> is not a positive number.
+        /// </exception>
+        /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static byte[] ToByteArray(this Stream stream, int bufferSize, bool leaveOpen)
         {
-            stream.VerifyArgument("stream").IsNotNull();
+            stream.VerifyArgument(nameof(stream)).IsNotNull();
+            bufferSize.VerifyArgument(nameof(bufferSize)).IsGreaterThan(0);
 
             var result = new byte[stream.Length];
             var position = stream.Position;
@@ -95,8 +112,52 @@ namespace Axle.Extensions.IO.Stream
             }
             return result;
         }
+        /// <summary>
+        /// Converts the contents of a <see cref="Stream"/> instance to an array of bytes.
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream">stream</see> to convert.</param>
+        /// <param name="leaveOpen">A <see cref="bool">boolean</see> flag indicating wheter to leave the stream open or not. </param>
+        /// <returns>
+        /// An array of <see cref="byte"/> values representing the contents of the <paramref name="stream"/>.
+        /// </returns>
+        /// <exception cref="IOException">An I/O error occurs. </exception>
+        /// <exception cref="NotSupportedException">
+        /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output. 
+        /// </exception>
+        /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static byte[] ToByteArray(this Stream stream, bool leaveOpen) { return ToByteArray(stream, DefaultBufferSize, leaveOpen); }
+        /// <summary>
+        /// Converts the contents of a <see cref="Stream"/> instance to an array of bytes.
+        /// <remarks>
+        /// This method will not close the <paramref name="stream"/>.
+        /// </remarks>
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream">stream</see> to convert.</param>
+        /// <param name="bufferSize">An integer value determining the size of the buffer used for reading from the stream.</param>
+        /// <returns>
+        /// An array of <see cref="byte"/> values representing the contents of the <paramref name="stream"/>.
+        /// </returns>
+        /// <exception cref="IOException">An I/O error occurs. </exception>
+        /// <exception cref="NotSupportedException">
+        /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output. 
+        /// </exception>
+        /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static byte[] ToByteArray(this Stream stream, int bufferSize) { return ToByteArray(stream, bufferSize, false); }
+        /// <summary>
+        /// Converts the contents of a <see cref="Stream"/> instance to an array of bytes.
+        /// <remarks>
+        /// This method will not close the <paramref name="stream"/>.
+        /// </remarks>
+        /// </summary>
+        /// <param name="stream">The <see cref="Stream">stream</see> to convert.</param>
+        /// <returns>
+        /// An array of <see cref="byte"/> values representing the contents of the <paramref name="stream"/>.
+        /// </returns>
+        /// <exception cref="IOException">An I/O error occurs. </exception>
+        /// <exception cref="NotSupportedException">
+        /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output. 
+        /// </exception>
+        /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static byte[] ToByteArray(this Stream stream) { return ToByteArray(stream, DefaultBufferSize, false); }
 
         #if net45
