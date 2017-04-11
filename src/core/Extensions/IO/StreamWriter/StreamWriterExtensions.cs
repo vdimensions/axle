@@ -28,7 +28,7 @@ namespace Axle.Extensions.IO.StreamWriter
         /// The <see cref="StreamWriter.BaseStream">underlying stream</see> of the <see cref="StreamWriter" /> does not support seeking, 
         /// such as if the stream is constructed from a pipe or console output. 
         /// </exception>
-        /// <exception cref="ObjectDisposedException">
+        /// <exception cref="System.ObjectDisposedException">
         /// Methods were called after the <see cref="StreamWriter" /> or its <see cref="StreamWriter.BaseStream">underlying stream</see> were closed. 
         /// </exception>
         /// <seealso cref="StreamWriter"/>

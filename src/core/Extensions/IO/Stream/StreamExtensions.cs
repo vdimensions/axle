@@ -18,7 +18,7 @@ namespace Axle.Extensions.IO.Stream
         /// <summary>
         /// Allocates a specified number of bytes from the current position of the target.
         /// <remarks>
-        /// Any data within the current allocation range will be lost.
+        /// Any existing data within the current allocation range will be lost.
         /// </remarks>
         /// </summary>
         /// <param name="stream">The target to allocate bytes</param>

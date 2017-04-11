@@ -49,7 +49,7 @@ namespace Axle.Extensions.Globalization.CultureInfo
         ///     </description>  
         ///   </item>
         /// </list>
-        /// If we called the method on the culture <c>en</c> we will receive the following list:
+        /// If we called the method on the culture <c>en</c> we will receive the following list: 
         /// <list type="bullet">
         ///   <item>
         ///     <term>en</term>

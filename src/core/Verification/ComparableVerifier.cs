@@ -32,9 +32,9 @@ namespace Axle.Verification
         /// <exception cref="ArgumentOutOfRangeException">
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
-#if net45
+        #if net45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThan<T>(this ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
         {
@@ -69,9 +69,9 @@ namespace Axle.Verification
         /// <exception cref="ArgumentOutOfRangeException">
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
-#if net45
+        #if net45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThan<T>(this ArgumentReference<T> argument, T minValue) where T: IComparable<T>
         {

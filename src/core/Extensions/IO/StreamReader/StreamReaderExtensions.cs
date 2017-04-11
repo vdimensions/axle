@@ -28,7 +28,7 @@ namespace Axle.Extensions.IO.StreamReader
         /// The <see cref="StreamReader.BaseStream">underlying stream</see> of the <see cref="StreamReader" /> does not support seeking, 
         /// such as if the stream is constructed from a pipe or console output. 
         /// </exception>
-        /// <exception cref="ObjectDisposedException">
+        /// <exception cref="System.ObjectDisposedException">
         /// Methods were called after the <see cref="StreamReader" /> or its <see cref="StreamReader.BaseStream">underlying stream</see> were closed. 
         /// </exception>
         /// <seealso cref="StreamReader"/>

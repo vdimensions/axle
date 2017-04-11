@@ -4,6 +4,11 @@ using System.Diagnostics;
 
 namespace Axle.Verification
 {
+    /// <summary>
+    /// Extension methods to the <see cref="ArgumentReference{T}"/> class that enable verification for arguments 
+    /// of type <see cref="string" />.
+    /// </summary>
+    /// <seealso cref="string"/>
     public static class StringVerifier
     {
         #if net45

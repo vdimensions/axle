@@ -5,6 +5,11 @@ using System.Diagnostics;
 
 namespace Axle.Verification
 {
+    /// <summary>
+    /// Extension methods to the <see cref="ArgumentReference{T}"/> class that enable verification for arguments 
+    /// of type <see cref="IEnumerable" />.
+    /// </summary>
+    /// <seealso cref="IEnumerable"/>
     public static class EnumerableVerifier
     {
         #if net45

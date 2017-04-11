@@ -4,6 +4,10 @@ using System.Diagnostics;
 
 namespace Axle.Verification
 {
+    /// <summary>
+    /// Extension methods to the <see cref="ArgumentReference{T}"/> class that enable verification for arguments 
+    /// of array types.
+    /// </summary>
     public static class ArrayVerifier
     {
         #if net45
