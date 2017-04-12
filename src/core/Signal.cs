@@ -4,35 +4,8 @@ using Axle.Verification;
 
 namespace Axle
 {
-    public class Signal
+    public partial class Signal : IDisposable
     {
-        public static Signal Create(Action action)
-        {
-            return new Signal(() => action, x => action = x);
-        }
-        public static Signal Create(Func<Action> trigger, Func<Action, Action> updateFn)
-        {
-            return new Signal(trigger, updateFn);
-        }
-
-        public static Signal<T> Create<T>(Action<T> action)
-        {
-            return new Signal<T>(() => action, x => action = x);
-        }
-        public static Signal<T> Create<T>(Func<Action<T>> trigger, Func<Action<T>, Action<T>> updateFn)
-        {
-            return new Signal<T>(trigger, updateFn);
-        }
-
-        public static Signal<T1, T2> Create<T1, T2>(Action<T1, T2> action)
-        {
-            return new Signal<T1, T2>(() => action, x => action = x);
-        }
-        public static Signal<T1, T2> Create<T1, T2>(Func<Action<T1, T2>> trigger, Func<Action<T1, T2>, Action<T1, T2>> updateFn)
-        {
-            return new Signal<T1, T2>(trigger, updateFn);
-        }
-
         public static Signal operator +(Signal signal, Action action)
         {
             signal.Subscribe(action);
@@ -49,20 +22,20 @@ namespace Axle
             return signal;
         }
 
-        private readonly Func<Action> trigger;
-        private readonly Func<Action, Action> updateFn;
+        private readonly Func<Action> dereference;
+        private readonly Func<Action, Action> update;
 
         private Signal(Func<Action> trigger, Func<Action, Action> updateFn)
         {
-            this.trigger = trigger;
-            this.updateFn = updateFn;
+            this.dereference = trigger;
+            this.update = updateFn;
         }
 
         public void Subscribe(Action action)
         {
             if (action != null)
             {
-                updateFn(trigger() + action);
+                update(dereference() + action);
             }
         }
         public void SubscribeOnce(Action action)
@@ -78,10 +51,10 @@ namespace Axle
                     }
                     finally
                     {
-                        updateFn(trigger() - realAction[0]);
+                        update(dereference() - realAction[0]);
                     }
                 };
-                updateFn(trigger() + realAction[0]);
+                update(dereference() + realAction[0]);
             }
         }
         public void SubscribeWhile(Action action, Func<bool> predicate)
@@ -100,22 +73,28 @@ namespace Axle
                     {
                         if (!predicate())
                         {
-                            updateFn(trigger() - realAction[0]);
+                            update(dereference() - realAction[0]);
                         }
                     }
                 };
-                updateFn(trigger() + realAction[0]);
+                update(dereference() + realAction[0]);
             }
         }
         public void Unsubscribe(Action action)
         {
             if (action != null)
             {
-                updateFn(trigger() - action);
+                update(dereference() - action);
             }
         }
+
+        public void Dispose(bool disposing)
+        {
+            update(null);
+        }
+        void IDisposable.Dispose() { Dispose(true); }
     }
-    public class Signal<T>
+    public class Signal<T> : IDisposable
     {
         public static Signal<T> operator +(Signal<T> signal, Action<T> action)
         {
@@ -132,20 +111,20 @@ namespace Axle
             signal.SubscribeOnce(action);
             return signal;
         }
-        private readonly Func<Action<T>> trigger;
-        private readonly Func<Action<T>, Action<T>> updateFn;
+        private readonly Func<Action<T>> dereference;
+        private readonly Func<Action<T>, Action<T>> update;
 
         internal Signal(Func<Action<T>> trigger, Func<Action<T>, Action<T>> updateFn)
         {
-            this.trigger = trigger;
-            this.updateFn = updateFn;
+            this.dereference = trigger;
+            this.update = updateFn;
         }
 
         public void Subscribe(Action<T> action)
         {
             if (action != null)
             {
-                updateFn(trigger() + action);
+                update(dereference() + action);
             }
         }
         public void SubscribeOnce(Action<T> action)
@@ -161,10 +140,10 @@ namespace Axle
                     }
                     finally
                     {
-                        updateFn(trigger() - realAction[0]);
+                        update(dereference() - realAction[0]);
                     }
                 };
-                updateFn(trigger() + realAction[0]);
+                update(dereference() + realAction[0]);
             }
         }
         public void SubscribeWhile(Action<T> action, Func<T, bool> predicate)
@@ -183,22 +162,28 @@ namespace Axle
                     {
                         if (!predicate(t))
                         {
-                            updateFn(trigger() - realAction[0]);
+                            update(dereference() - realAction[0]);
                         }
                     }
                 };
-                updateFn(trigger() + realAction[0]);
+                update(dereference() + realAction[0]);
             }
         }
         public void Unsubscribe(Action<T> action)
         {
             if (action != null)
             {
-                updateFn(trigger() - action);
+                update(dereference() - action);
             }
         }
+
+        public void Dispose(bool disposing)
+        {
+            update(null);
+        }
+        void IDisposable.Dispose() { Dispose(true); }
     }
-    public class Signal<T1, T2>
+    public class Signal<T1, T2> : IDisposable
     {
         public static Signal<T1, T2> operator +(Signal<T1, T2> signal, Action<T1, T2> action)
         {
@@ -216,20 +201,20 @@ namespace Axle
             return signal;
         }
 
-        private readonly Func<Action<T1, T2>> trigger;
-        private readonly Func<Action<T1, T2>, Action<T1, T2>> updateFn;
+        private readonly Func<Action<T1, T2>> defererence;
+        private readonly Func<Action<T1, T2>, Action<T1, T2>> update;
 
         public Signal(Func<Action<T1, T2>> trigger, Func<Action<T1, T2>, Action<T1, T2>> updateFn)
         {
-            this.trigger = trigger;
-            this.updateFn = updateFn;
+            this.defererence = trigger;
+            this.update = updateFn;
         }
 
         public void Subscribe(Action<T1, T2> action)
         {
             if (action != null)
             {
-                updateFn(trigger() + action);
+                update(defererence() + action);
             }
         }
         public void SubscribeOnce(Action<T1, T2> action)
@@ -245,10 +230,10 @@ namespace Axle
                     }
                     finally
                     {
-                        updateFn(trigger() - realAction[0]);
+                        update(defererence() - realAction[0]);
                     }
                 };
-                updateFn(trigger() + realAction[0]);
+                update(defererence() + realAction[0]);
             }
         }
         public void SubscribeWhile(Action<T1, T2> action, Func<T1, T2, bool> predicate)
@@ -267,19 +252,25 @@ namespace Axle
                     {
                         if (!predicate(t1, t2))
                         {
-                            updateFn(trigger() - realAction[0]);
+                            update(defererence() - realAction[0]);
                         }
                     }
                 };
-                updateFn(trigger() + realAction[0]);
+                update(defererence() + realAction[0]);
             }
         }
         public void Unsubscribe(Action<T1, T2> action)
         {
             if (action != null)
             {
-                updateFn(trigger() - action);
+                update(defererence() - action);
             }
         }
+
+        public void Dispose(bool disposing)
+        {
+            update(null);
+        }
+        void IDisposable.Dispose() { Dispose(true); }
     }
 }
