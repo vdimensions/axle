@@ -112,7 +112,7 @@ namespace Axle.Verification
         /// <param name="context">
         /// The contextual information about the source or destination. 
         /// </param>
-        protected ArgumentTypeMismatchException( SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
     }
 
     /// <summary>

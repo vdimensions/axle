@@ -15,9 +15,15 @@ namespace Axle.Extensions.IO.BinaryReader
         /// <summary>
         /// Sets the position within the <see cref="BinaryReader.BaseStream">underlying stream</see> of the <see cref="BinaryReader" />.
         /// </summary>
-        /// <param name="reader">The <see cref="BinaryReader" /> instance that owns the stream.</param>
-        /// <param name="offset">A byte offset relative to the <paramref name="origin"/> parameter. </param>
-        /// <param name="origin">A value of type <see cref="SeekOrigin"/> indicating the reference point used to obtain the new position. </param>
+        /// <param name="reader">
+        /// The <see cref="BinaryReader" /> instance that owns the stream.
+        /// </param>
+        /// <param name="offset">
+        /// A byte offset relative to the <paramref name="origin"/> parameter. 
+        /// </param>
+        /// <param name="origin">
+        /// A value of type <see cref="SeekOrigin"/> indicating the reference point used to obtain the new position. 
+        /// </param>
         /// <returns>
         /// The new position within the <see cref="BinaryReader.BaseStream">underlying stream</see> of the <see cref="BinaryReader" />.
         /// </returns>

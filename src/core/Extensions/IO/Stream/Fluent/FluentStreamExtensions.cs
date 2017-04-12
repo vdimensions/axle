@@ -22,7 +22,9 @@ namespace Axle.Extensions.IO.Stream.Fluent
         /// <returns>
         /// A reference to the target <see cref="Stream"/> instance this extension method is being called on.
         /// </returns>
-        /// <exception cref="IOException">An I/O error occurs.</exception> 
+        /// <exception cref="IOException">
+        /// An I/O error occurs. 
+        /// </exception> 
         public static Stream FluentFlush(this Stream stream)
         {
             stream.VerifyArgument(nameof(stream)).IsNotNull().Value.Flush();
@@ -43,10 +45,18 @@ namespace Axle.Extensions.IO.Stream.Fluent
         /// <returns>
         /// A reference to the target <see cref="Stream"/> instance this extension method is being called on.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="stream" /> is <c>null</c>.</exception>
-        /// <exception cref="IOException">An I/O error occurs.</exception>
-        /// <exception cref="System.NotSupportedException">The stream does not support seeking, such as if the stream is constructed from a pipe or console output.</exception>
-        /// <exception cref="System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// <paramref name="stream" /> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IOException">
+        /// An I/O error occurs.
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output.
+        /// </exception>
+        /// <exception cref="System.ObjectDisposedException">
+        /// Methods were called after the stream was closed.
+        /// </exception>
         public static Stream FluentSeek(this Stream stream, long offset, SeekOrigin seekOrigin)
         {
             stream.VerifyArgument(nameof(stream)).IsNotNull().Value.Seek(offset, SeekOrigin.Begin);
@@ -70,10 +80,17 @@ namespace Axle.Extensions.IO.Stream.Fluent
         /// <returns>
         /// A reference to the target <see cref="Stream"/> instance this extension method is being called on.
         /// </returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="stream" /> is <c>null</c>.</exception>
-        /// <exception cref="IOException">An I/O error occurs.</exception>
-        /// <exception cref="System.NotSupportedException">The stream does not support seeking, such as if the stream is constructed from a pipe or console output.</exception>
-        /// <exception cref="System.ObjectDisposedException">Methods were called after the stream was closed.</exception>
+        /// <exception cref="System.ArgumentNullException">
+        /// <paramref name="stream" /> is <c>null</c>. </exception>
+        /// <exception cref="IOException">
+        /// An I/O error occurs. 
+        /// </exception>
+        /// <exception cref="System.NotSupportedException">
+        /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output. 
+        /// </exception>
+        /// <exception cref="System.ObjectDisposedException">
+        /// Methods were called after the stream was closed. 
+        /// </exception>
         public static Stream FluentSeek(this Stream stream, long offset, SeekOrigin seekOrigin, out long position)
         {
             position = stream.VerifyArgument(nameof(stream)).IsNotNull().Value.Seek(offset, SeekOrigin.Begin);
