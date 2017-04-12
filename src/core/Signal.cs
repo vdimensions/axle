@@ -5,8 +5,8 @@ using Axle.Verification;
 namespace Axle
 {
     /// <summary>
-    /// A class that represents a signal object; that is -- a wrapper arround a delegate (usually of type <see cref="Action"/>), which enables 
-    /// special event subscription options around that delegate.
+    /// A class that represents a signal object; that is, a wrapper arround a delegate (usually of type <see cref="Action"/>), 
+    /// which enables special event subscription options around that delegate.
     /// </summary>
     public partial class Signal : IDisposable
     {
