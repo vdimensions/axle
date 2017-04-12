@@ -2,10 +2,10 @@
 using System.Runtime.Serialization;
 
 
-namespace Axle
+namespace Axle.Verification
 {
     /// <summary>
-    /// The exception that is thrown if one of the arguments of a method is not of the expected type.
+    /// The exception that is thrown if one of the arguments to a method is not of the expected type.
     /// </summary>
     /// <seealso cref="ArgumentException" />
     [Serializable]
