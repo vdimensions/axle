@@ -18,6 +18,7 @@ namespace Axle.Verification
         /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
         /// <param name="argument">
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
         /// </param>
         /// <param name="minValue">The comparison value above which the argument will be accepted as valid. </param>
         /// <param name="message">
@@ -58,6 +59,7 @@ namespace Axle.Verification
         /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
         /// <param name="argument">
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
         /// </param>
         /// <param name="minValue">The comparison value above which the argument will be accepted as valid. </param>
         /// <returns>

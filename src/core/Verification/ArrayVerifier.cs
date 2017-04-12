@@ -10,6 +10,20 @@ namespace Axle.Verification
     /// </summary>
     public static class ArrayVerifier
     {
+        /// <summary>
+        /// Ensures the specified array argument is not an empty array.
+        /// </summary>
+        /// <typeparam name="T">The type of the array elements.</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="message">
+        /// An optional error message to be passed to the exception in case the given argument is an empty array.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
+        /// </returns>
         #if net45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -23,6 +37,17 @@ namespace Axle.Verification
             return argument;
         }
 
+        /// <summary>
+        /// Ensures the specified array argument is not an empty array.
+        /// </summary>
+        /// <typeparam name="T">The type of the array elements.</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
+        /// </returns>
         #if net45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
