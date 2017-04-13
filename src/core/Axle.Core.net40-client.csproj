@@ -70,6 +70,10 @@
     <Compile Include="Environment\OperatingSystemID.cs" />
     <Compile Include="AbstractEqualityComparer.cs" />
     <Compile Include="Threading\ILock.cs" />
+    <Compile Include="Threading\ILockHandle.cs" />
+    <Compile Include="Globalization\CultureScope.cs" />
+    <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
+    <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
