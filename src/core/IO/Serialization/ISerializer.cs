@@ -28,7 +28,7 @@ namespace Axle.IO.Serialization
         object Deserialize(Stream stream, Type objectType);
 
         /// <summary>
-        /// Serializes the provided by the <see cref="obj"/> parameter object or graph of objects 
+        /// Serializes the provided by the <paramref name="obj"/> parameter object or graph of objects 
         /// to the target <paramref name="stream"/>. 
         /// </summary>
         /// <param name="obj">
