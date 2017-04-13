@@ -69,6 +69,7 @@
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\OperatingSystemID.cs" />
     <Compile Include="AbstractEqualityComparer.cs" />
+    <Compile Include="Threading\ILock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
