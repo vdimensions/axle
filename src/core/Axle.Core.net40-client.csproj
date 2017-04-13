@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
+    <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryReader\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryWriter\BinaryWriterExtensions.cs" />
     <Compile Include="Extensions\IO\StreamReader\StreamReaderExtensions.cs" />
@@ -61,6 +62,12 @@
     <Compile Include="Verification\TypeVerifier.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="Signal.StaticMethods.cs" />
+    <Compile Include="IO\Serialization\BinarySerializer.cs" />
+    <Compile Include="IO\Serialization\ISerializer.cs" />
+    <Compile Include="IO\Serialization\XmlSerializer.cs" />
+    <Compile Include="Environment\IEnvironment.cs" />
+    <Compile Include="Environment\Endianness.cs" />
+    <Compile Include="Environment\OperatingSystemID.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
