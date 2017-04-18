@@ -98,6 +98,7 @@
     <Compile Include="Reflection\AccessModifier.cs" />
     <Compile Include="Reflection\AccessorType.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
+    <Compile Include="Environment\IRuntime.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
