@@ -21,7 +21,15 @@ namespace Axle.Reflection
         /// The name of the reflected <see cref="IMember">member</see>.
         /// </summary>
         string Name { get; }
+
+        /// <summary>
+        /// Gets the declaration type for the current member. 
+        /// </summary>
         DeclarationType Declaration { get; }
+        
+        /// <summary>
+        /// Gets the access modifier of the current member. 
+        /// </summary>
         AccessModifier AccessModifier { get; }
     }
 }

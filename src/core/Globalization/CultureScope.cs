@@ -153,14 +153,20 @@ namespace Axle.Globalization
             uiCulture == null ? null : CultureInfo.CreateSpecificCulture(uiCulture)) { }
 
         #region Implementation of IDisposable
+        /// <summary>
+        /// Disposes the current <see cref="CultureScope"/> instance and attempts to 
+        /// reset the <see cref="Thread.CurrentThread.CurrentCulture"/> and the
+        /// <see cref="Thread.CurrentThread.CurrentUICulture"/> properties to their
+        /// values prior creating the scope.
+        /// </summary>
         public void Dispose()
         {
             var thread = Thread.CurrentThread;
-            if (this.currentCulture != null && this.previousCulture != null)
+            if (this.currentCulture != null && this.previousCulture != null && thread.CurrentCulture == this.currentCulture)
             {
                 thread.CurrentCulture = this.previousCulture;
             }
-            if (this.currentUICulture != null && this.previousUICulture != null)
+            if (this.currentUICulture != null && this.previousUICulture != null && thread.CurrentUICulture == this.currentUICulture)
             {
                 thread.CurrentUICulture = this.previousUICulture;
             }
