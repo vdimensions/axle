@@ -87,7 +87,7 @@ namespace Axle
         /// Returns a hash code for the specified object. 
         /// </summary>
         /// <param name="obj">
-        /// The instance of <see cref="T"/> for which a hash code is to be returned.
+        /// The instance of <typeparamref name="T"/> for which a hash code is to be returned.
         /// </param>
         /// <param name="appendTypeHashCode">
         /// Indicates if the hashcode of the underlying type will be automatically
