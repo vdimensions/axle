@@ -1,7 +1,7 @@
 ﻿namespace Axle.Reflection
 {
     /// <summary>
-    /// An interface that represents a get accessor of a class member - a property or a field.
+    /// An interface that represents a get accessor (or getter) for a class member - a property or a field.
     /// </summary>
     /// <seealso cref="AccessorType.Get">AccessorType.Get</seealso>
     /// <seealso cref="ISetAccessor" />
