@@ -74,6 +74,30 @@
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
     <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
+    <Compile Include="Reflection\IReflected.cs" />
+    <Compile Include="Reflection\IAccessible.cs" />
+    <Compile Include="Reflection\IAccessor.cs" />
+    <Compile Include="Reflection\IAttributeInfo.cs" />
+    <Compile Include="Reflection\IAttributeTarget.cs" />
+    <Compile Include="Reflection\ICastOperator.cs" />
+    <Compile Include="Reflection\ICombineAccessor.cs" />
+    <Compile Include="Reflection\ICombineRemoveMember.cs" />
+    <Compile Include="Reflection\IConstructor.cs" />
+    <Compile Include="Reflection\IEvent.cs" />
+    <Compile Include="Reflection\IField.cs" />
+    <Compile Include="Reflection\IGenericMethod.cs" />
+    <Compile Include="Reflection\IGetAccessor.cs" />
+    <Compile Include="Reflection\IInvokable.cs" />
+    <Compile Include="Reflection\IMember.cs" />
+    <Compile Include="Reflection\IMethod.cs" />
+    <Compile Include="Reflection\IParameter.cs" />
+    <Compile Include="Reflection\IProperty.cs" />
+    <Compile Include="Reflection\IReadWriteMember.cs" />
+    <Compile Include="Reflection\IRemoveAccessor.cs" />
+    <Compile Include="Reflection\ISetAccessor.cs" />
+    <Compile Include="Reflection\AccessModifier.cs" />
+    <Compile Include="Reflection\AccessorType.cs" />
+    <Compile Include="Reflection\DeclarationType.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
