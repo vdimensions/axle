@@ -7,7 +7,7 @@ namespace Axle.Reflection
     /// Represents a reflected member of a <c>struct</c>, <c>class</c>, or <c>interface</c>.
     /// </summary>
     //[Maturity(CodeMaturity.Stable)]
-    public interface IMember : IAttributeTarget
+    public interface IMember
     {
         /// <summary>
         /// The <see cref="Type">type</see> that declares the reflected <see cref="IMember">member</see>.

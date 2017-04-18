@@ -12,7 +12,7 @@ namespace Axle.Reflection
     /// <seealso cref="IMember"/>
     /// <seealso cref="System.Reflection.MethodInfo"/>
     //[Maturity(CodeMaturity.Stable)]
-    public interface IMethod : IInvokable, IMember, IReflected<MethodInfo>
+    public interface IMethod : IInvokable, IMember, IReflected<MethodInfo>, IAttributeTarget
     {   
         IGenericMethod MakeGeneric(params Type[] types);
 

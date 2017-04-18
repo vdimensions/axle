@@ -1,7 +1,7 @@
 ﻿namespace Axle.Reflection
 {
     /// <summary>
-    /// 
+    /// An interface representing an accessor to a reflected member (e.g. getters, setters, event manipulators, etc.)
     /// </summary>
     //[Maturity(CodeMaturity.Stable)]
     public interface IAccessor

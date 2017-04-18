@@ -6,8 +6,6 @@
     //[Maturity(CodeMaturity.Stable)]
     public interface IInvokable
     {
-        //IEnumerable<IParameter> Parameters { get; }
-
         /// <summary>
         /// Returns an array of <see cref="IParameter" /> instances, each representing a parameter to the current 
         /// <see cref="IParameter" /> implementation. If the method has no parameters, an empty array is returned.
