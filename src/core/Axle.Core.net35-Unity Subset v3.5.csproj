@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEqualityComparer.cs" />
+    <Compile Include="Attempt.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\IEnvironment.cs" />
     <Compile Include="Environment\IRuntime.cs" />
@@ -62,6 +63,7 @@
     <Compile Include="IO\Serialization\ISerializer.cs" />
     <Compile Include="IO\Serialization\XmlSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceEqualityComparer.cs" />
     <Compile Include="Reflection\AccessModifier.cs" />
     <Compile Include="Reflection\AccessorType.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
@@ -86,6 +88,7 @@
     <Compile Include="Reflection\IReflected.cs" />
     <Compile Include="Reflection\IRemoveAccessor.cs" />
     <Compile Include="Reflection\ISetAccessor.cs" />
+    <Compile Include="Reflection\ParameterDirection.cs" />
     <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
     <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
     <Compile Include="Threading\ILock.cs" />

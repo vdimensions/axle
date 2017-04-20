@@ -14,6 +14,7 @@
         /// </summary>
         bool IsDefined { get; }
     }
+
     /// <summary>
     /// A generic interface representing a cast operator defined by a <see cref="System.Type">type</see>.
     /// </summary>
