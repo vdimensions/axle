@@ -5,5 +5,5 @@
     /// </summary>
     /// <seealso cref="System.Reflection.FieldInfo"/>
     //[Maturity(CodeMaturity.Stable)]
-    public interface IField : IReadWriteMember, IAttributeTarget { }
+    public interface IField : IReadableMember, IWriteableMember, IAttributeTarget { }
 }

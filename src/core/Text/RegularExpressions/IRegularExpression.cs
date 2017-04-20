@@ -13,6 +13,6 @@ namespace Axle.Text.RegularExpressions
 
 	    string[] Split(string value);
 	    string[] Split(string value, int count);
-        string[] Split(string value, int count, int startIndex);
+      string[] Split(string value, int count, int startIndex);
 	}
 }

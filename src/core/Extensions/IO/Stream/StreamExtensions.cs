@@ -41,7 +41,7 @@ namespace Axle.Extensions.IO.Stream
 		/// </exception>
         public static void Allocate(this Stream stream, int length)
         {
-            stream.VerifyArgument("stream").IsNotNull();
+            stream.VerifyArgument(nameof(stream)).IsNotNull();
             if (!stream.CanWrite)
             {
                 throw new NotSupportedException("The specified input stream does not support writing.");

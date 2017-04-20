@@ -1,8 +1,6 @@
 ﻿namespace Axle.Reflection
 {
-    public interface IReadWriteMember : IMember, IAccessible
+    public interface IReadWriteMember : IReadableMember, IWriteableMember
     {
-        IGetAccessor GetAccessor { get; }
-        ISetAccessor SetAccessor { get; }
     }
 }

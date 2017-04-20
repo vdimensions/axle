@@ -5,5 +5,5 @@
     /// </summary>
     /// <seealso cref="System.Reflection.PropertyInfo"/>
     //[Maturity(CodeMaturity.Stable)]
-    public interface IProperty : IReadWriteMember, IAttributeTarget { }
+    public interface IProperty : IReadableMember, IWriteableMember, IAttributeTarget { }
 }
