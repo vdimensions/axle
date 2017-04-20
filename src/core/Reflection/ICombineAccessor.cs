@@ -6,6 +6,15 @@ namespace Axle.Reflection
     //[Maturity(CodeMaturity.Stable)]
     public interface ICombineAccessor : IAccessor
     {
+        /// <summary>
+        /// Combines the target delegate with the one provided by the <paramref name="handler"/>.
+        /// </summary>
+        /// <param name="target">
+        /// 
+        /// </param>
+        /// <param name="handler">
+        /// The delegate to combine. 
+        /// </param>
         void AddDelegate(object target, Delegate handler);
     }
 }

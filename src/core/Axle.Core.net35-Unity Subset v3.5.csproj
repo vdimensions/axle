@@ -88,6 +88,8 @@
     <Compile Include="Reflection\ISetAccessor.cs" />
     <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
     <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
+    <Compile Include="Threading\ILock.cs" />
+    <Compile Include="Threading\ILockHandle.cs" />
     <Compile Include="Verification\ArgumentReference.cs" />
     <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
     <Compile Include="Verification\ArrayVerifier.cs" />

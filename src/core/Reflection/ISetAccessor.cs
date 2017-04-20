@@ -9,6 +9,11 @@
     //[Maturity(CodeMaturity.Stable)]
     public interface ISetAccessor : IAccessor
     {
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="value"></param>
         void SetValue(object target, object value);
     }
 }

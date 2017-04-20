@@ -11,7 +11,7 @@ namespace Axle.Reflection
     public enum AccessModifier
     {
         /// <summary>
-        /// An access modifier for publicly accessible members.
+        /// An access modifier for publicly accessible members (<c>public</c>).
         /// </summary>
         Public,
         /// <summary>

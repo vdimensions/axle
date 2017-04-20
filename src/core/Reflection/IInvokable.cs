@@ -1,18 +1,18 @@
 ﻿namespace Axle.Reflection
 {
     /// <summary>
-    /// An interface that represents a reflected member (usually a method or constructor) that can invoked trough reflection.
+    /// An interface that represents a reflected member (usually a method or constructor) that can be invoked trough reflection.
     /// </summary>
     //[Maturity(CodeMaturity.Stable)]
     public interface IInvokable
     {
         /// <summary>
         /// Returns an array of <see cref="IParameter" /> instances, each representing a parameter to the current 
-        /// <see cref="IParameter" /> implementation. If the method has no parameters, an empty array is returned.
+        /// <see cref="IInvokable" /> implementation. If the invocable has no parameters, an empty array is returned.
         /// </summary>
         /// <returns>
-        /// An array of <see cref="IMethod" /> instances, each representing a parameter to the current 
-        /// <see cref="IMethod" /> implementation, or an empty array if the method has no parameters.
+        /// An array of <see cref="IParameter" /> instances, each representing a parameter to the current 
+        /// <see cref="IInvokable" /> implementation, or an empty array if the method has no parameters.
         /// </returns>
         IParameter[] GetParameters();
 
@@ -34,7 +34,7 @@
         /// </returns>
         /// <remarks>
         /// If the reflected member is a static method, always use <c>null</c> for the <paramref name="target"/> parameter.<br/>
-        /// Reflected constructors will ignore any value passed to the the <paramref name="target"/> parameter.
+        /// A reflected constructor, on the other hand, will ignore any value passed by the <paramref name="target"/> parameter.
         /// </remarks>
         object Invoke(object target, params object[] args);
     }

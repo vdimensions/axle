@@ -49,7 +49,7 @@ namespace Axle.Reflection
         /// <seealso cref="MethodBase.IsHideBySig"/>
         HideBySig = (1 << 5),
         /// <summary>
-        /// The member is sealed; it cannot be overriden
+        /// The member is sealed; it cannot be overriden. 
         /// </summary>
         /// <seealso cref="MethodBase.IsFinal"/>
         Sealed = (1 << 6)
