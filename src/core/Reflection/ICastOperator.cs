@@ -6,11 +6,20 @@
     /// <seealso cref="ICastOperator{T1,T2}"/>
     public interface ICastOperator
     {
+        /// <summary>
+        /// Invokes the cast operation represented by the current <see cref="ICastOperator">cast operator</see> on the target object.
+        /// </summary>
+        /// <param name="target">
+        /// The target object to be cast. 
+        /// </param>
+        /// <returns>
+        /// An object that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance. 
+        /// </returns>
         object Invoke(object target);
         bool TryInvoke(object target, out object result);
 
         /// <summary>
-        /// Determines if the specified <see cref="ICastOperator">cast operator</see> is defined by the target <see cref="System.Type">type</see>.
+        /// Determines if the current <see cref="ICastOperator">cast operator</see> is defined by the target <see cref="System.Type">type</see>.
         /// </summary>
         bool IsDefined { get; }
     }

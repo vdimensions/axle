@@ -84,10 +84,11 @@
     <Compile Include="Reflection\IMethod.cs" />
     <Compile Include="Reflection\IParameter.cs" />
     <Compile Include="Reflection\IProperty.cs" />
-    <Compile Include="Reflection\IReadWriteMember.cs" />
+    <Compile Include="Reflection\IReadableMember.cs" />
     <Compile Include="Reflection\IReflected.cs" />
     <Compile Include="Reflection\IRemoveAccessor.cs" />
     <Compile Include="Reflection\ISetAccessor.cs" />
+    <Compile Include="Reflection\IWriteableMember.cs" />
     <Compile Include="Reflection\ParameterDirection.cs" />
     <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
     <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
