@@ -5,10 +5,10 @@
     <RootNamespace>Axle</RootNamespace>
     <Company>${company}</Company>
     <Copyright>${copyright}</Copyright>
-    <Version>${version}</Version>
+    <Version>${version.major}.${version.minor}.${version.build}</Version>
     <AssemblyVersion>${version}</AssemblyVersion>
     <FileVersion>${version}</FileVersion>
-    <PackageLicenseUrl>${license}</PackageLicenseUrl>
+    <PackageLicenseUrl>${license.url}</PackageLicenseUrl>
     <PackageTags>${tags}</PackageTags>
   </PropertyGroup>
 </Project>

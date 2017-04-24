@@ -131,4 +131,5 @@
       </Properties>
     </MonoDevelop>
   </ProjectExtensions>
+  <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
 </Project>
