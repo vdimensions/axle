@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+﻿<?xml version="1.0"?>
 <package>
   <metadata>
     <id>Axle.Core</id>
@@ -7,7 +7,7 @@
     <description>Axle Framework Core Library</description>
     <summary>Axle Framework Core Library</summary>
     <releaseNotes></releaseNotes>
-    <tags>Axle.Core Axle.Core</tags>
+    <tags>Axle.Core</tags>
     <!--
     <projectUrl>https://nuget.org/packages/Axle.Core</projectUrl>
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
@@ -39,6 +39,11 @@
     <references></references>
   </metadata>
   <files>
+    <file src="bin\*\netstandard1.2\Axle.Core.dll"    target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Core.xml"    target="lib\netstandard1.2" exclude="bin\*\netstandard1.2\Axle.Core.ExternalAnnotations.xml" />
+    <file src="bin\*\netstandard1.2\Axle.Core.pdb"    target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Core.mdb"    target="lib\netstandard1.2" />
+
     <file src="bin\*\net45\Axle.Core.dll"    target="lib\net45" />
     <file src="bin\*\net45\Axle.Core.xml"    target="lib\net45" exclude="bin\*\net45\Axle.Core.ExternalAnnotations.xml" />
     <file src="bin\*\net45\Axle.Core.pdb"    target="lib\net45" />

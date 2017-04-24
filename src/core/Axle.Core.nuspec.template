@@ -39,6 +39,11 @@
     <references></references>
   </metadata>
   <files>
+    <file src="bin\*\netstandard1.2\${id}.dll"    target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\${id}.xml"    target="lib\netstandard1.2" exclude="bin\*\netstandard1.2\${id}.ExternalAnnotations.xml" />
+    <file src="bin\*\netstandard1.2\${id}.pdb"    target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\${id}.mdb"    target="lib\netstandard1.2" />
+
     <file src="bin\*\net45\${id}.dll"    target="lib\net45" />
     <file src="bin\*\net45\${id}.xml"    target="lib\net45" exclude="bin\*\net45\${id}.ExternalAnnotations.xml" />
     <file src="bin\*\net45\${id}.pdb"    target="lib\net45" />
