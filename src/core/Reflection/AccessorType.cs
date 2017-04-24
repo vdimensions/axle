@@ -1,9 +1,8 @@
-﻿using System;
-
-
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
-    [Serializable]
+#if !NETSTANDARD
+    [System.Serializable]
+#endif
     //[Maturity(CodeMaturity.ProofOfConcept)]
     public enum AccessorType
     {

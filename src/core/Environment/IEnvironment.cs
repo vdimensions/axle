@@ -20,10 +20,12 @@ namespace Axle.Environment
         /// </summary>
         Encoding DefaultEncoding { get; }
 
+#if !NETSTANDARD
         /// <summary>
         /// Gets an <see cref="OperatingSystem"/> object that contains the platform's OS identifier and version number.
         /// </summary>
         OperatingSystem OperatingSystem { get; }
+#endif
 
         /// <summary>
         /// Gets the operating system identifier for the current platform. 
@@ -40,10 +42,12 @@ namespace Axle.Environment
         /// </summary>
         CultureInfo Culture { get; }
 
+#if !NETSTANDARD
         /// <summary>
         /// Gets the timezone on the current platform.
         /// </summary>
         TimeZone TimeZone { get; }
+#endif
 
         /// <summary>
         /// Gets the NetBIOS name of the current platform.

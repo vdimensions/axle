@@ -6,7 +6,9 @@ namespace Axle.Reflection
     /// An enumeration representing the possible parameter directions.
     /// </summary>
     [Flags]
+#if !NETSTANDARD
     [Serializable]
+#endif
     public enum ParameterDirection
     {
         /// <summary>

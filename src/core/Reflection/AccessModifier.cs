@@ -6,7 +6,9 @@ namespace Axle.Reflection
     /// <summary>
     /// An enumeration representing the possible access modifiers supported in the .NET framework.
     /// </summary>
+#if !NETSTANDARD
     [Serializable]
+#endif
     //[Maturity(CodeMaturity.Stable)]
     public enum AccessModifier
     {

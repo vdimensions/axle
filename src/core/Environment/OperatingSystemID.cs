@@ -31,58 +31,60 @@ namespace Axle.Environment
      *[__]*******\---------/***********[__]*
     \************\---------/****************/
 
-    /// <summary>
-    /// An enumeration of various operating system and platform identifiers, supported by an assembly. 
-    /// <list type="table">
-    ///   <listheader>
-    ///     <term>Value</term>
-    ///     <description>Flags</description>
-    ///   </listheader>
-    ///   <item>
-    ///     <term>
-    ///       <para><see cref="Unknown"/></para>
-    ///       <para><see cref="All"/></para>
-    ///       <code> </code>
-    ///     </term>
-    ///     <description>
-    ///       <para><b><c>0 0 0 0 </c></b><c>0 0 0 0</c></para>
-    ///       <para><b><c>1 1 1 1 </c></b><c>0 0 0 0</c></para>
-    ///       <para><see cref="Unix"/> | <see cref="Windows"/> | <see cref="Mac"/></para>
-    ///     </description>
-    ///   </item>
-    ///   <item>
-    ///     <term><see cref="Unix"/></term>
-    ///     <description><b><c>1 0 0 0 </c></b><c>0 0 0 0</c></description>
-    ///   </item>
-    ///   <item>
-    ///     <term><see cref="Mac"/> / <see cref="MacOS"/></term>
-    ///     <description><b><c>0 1 0 0 </c></b><c>0 0 0 0</c></description>
-    ///   </item>
-    ///   <item>
-    ///     <term><see cref="XBox"/></term>
-    ///     <description><b><c>0 0 1 0 </c></b><c>0 0 0 0</c></description>
-    ///   </item>
-    ///   <item>
-    ///     <term>
-    ///       <para><see cref="Windows"/> / <see cref="Win"/></para>
-    ///       <para><see cref="WinCE"/></para>
-    ///       <para><see cref="Win32"/></para>
-    ///       <para><see cref="Win32NT"/> / <see cref="WinNT"/></para>
-    ///       <para><see cref="Win32S"/></para>
-    ///       <para><see cref="Win32Windows"/></para>
-    ///     </term>
-    ///     <description>
-    ///       <para><b><c>0 0 0 1 </c></b><c>0 0 0 0</c></para>
-    ///       <para><b><c>0 0 0 1 </c></b><c>0 0 0 1</c></para>
-    ///       <para><b><c>0 0 0 1 </c></b><c>1 0 0 0</c></para>
-    ///       <para><b><c>0 0 0 1 </c></b><c>1 1 0 0</c></para>
-    ///       <para><b><c>0 0 0 1 </c></b><c>1 0 1 0</c></para>
-    ///       <para><b><c>0 0 0 1 </c></b><c>1 0 0 1</c></para>
-    ///     </description>
-    ///   </item>
-    /// </list>
-    /// </summary>
+/// <summary>
+/// An enumeration of various operating system and platform identifiers, supported by an assembly. 
+/// <list type="table">
+///   <listheader>
+///     <term>Value</term>
+///     <description>Flags</description>
+///   </listheader>
+///   <item>
+///     <term>
+///       <para><see cref="Unknown"/></para>
+///       <para><see cref="All"/></para>
+///       <code> </code>
+///     </term>
+///     <description>
+///       <para><b><c>0 0 0 0 </c></b><c>0 0 0 0</c></para>
+///       <para><b><c>1 1 1 1 </c></b><c>0 0 0 0</c></para>
+///       <para><see cref="Unix"/> | <see cref="Windows"/> | <see cref="Mac"/></para>
+///     </description>
+///   </item>
+///   <item>
+///     <term><see cref="Unix"/></term>
+///     <description><b><c>1 0 0 0 </c></b><c>0 0 0 0</c></description>
+///   </item>
+///   <item>
+///     <term><see cref="Mac"/> / <see cref="MacOS"/></term>
+///     <description><b><c>0 1 0 0 </c></b><c>0 0 0 0</c></description>
+///   </item>
+///   <item>
+///     <term><see cref="XBox"/></term>
+///     <description><b><c>0 0 1 0 </c></b><c>0 0 0 0</c></description>
+///   </item>
+///   <item>
+///     <term>
+///       <para><see cref="Windows"/> / <see cref="Win"/></para>
+///       <para><see cref="WinCE"/></para>
+///       <para><see cref="Win32"/></para>
+///       <para><see cref="Win32NT"/> / <see cref="WinNT"/></para>
+///       <para><see cref="Win32S"/></para>
+///       <para><see cref="Win32Windows"/></para>
+///     </term>
+///     <description>
+///       <para><b><c>0 0 0 1 </c></b><c>0 0 0 0</c></para>
+///       <para><b><c>0 0 0 1 </c></b><c>0 0 0 1</c></para>
+///       <para><b><c>0 0 0 1 </c></b><c>1 0 0 0</c></para>
+///       <para><b><c>0 0 0 1 </c></b><c>1 1 0 0</c></para>
+///       <para><b><c>0 0 0 1 </c></b><c>1 0 1 0</c></para>
+///       <para><b><c>0 0 0 1 </c></b><c>1 0 0 1</c></para>
+///     </description>
+///   </item>
+/// </list>
+/// </summary>
+#if !NETSTANDARD
     [Serializable]
+#endif
     [Flags]
     public enum OperatingSystemID : short
     {

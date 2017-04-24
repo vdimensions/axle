@@ -1,24 +1,39 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+# Visual Studio 15
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35-unity-subset", "net35-unity-subset", "{79DE4748-B1E7-4B8E-8758-23369D2E50E3}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{B3912000-B34B-4240-A437-924267F555D8}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{A395A6A5-DBEB-4E3F-9EE3-5B12B5EB78C5}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net35-Unity Subset v3.5", "src\core\Axle.Core.net35-Unity Subset v3.5.csproj", "{1A68609D-E57A-4C74-BA5E-35D159E14265}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{B3912000-B34B-4240-A437-924267F555D8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net40-client", "src\core\Axle.Core.net40-client.csproj", "{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{A395A6A5-DBEB-4E3F-9EE3-5B12B5EB78C5}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net45", "src\core\Axle.Core.net45.csproj", "{D75B523D-5EA6-4070-8AF2-896A88AB0865}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{52B03964-B2D2-46AA-912C-D3AB0253E879}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{CAFD1B10-FDB1-4F43-89E9-19D7AD4BBA23}"
 	ProjectSection(SolutionItems) = preProject
+		mason.properties = mason.properties
 		tools\paket.sh = tools\paket.sh
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.dist", "src\core\Axle.Core.dist.csproj", "{D7C8BBB3-0256-46CF-B778-5EB7E423229C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35", "net35", "{39C4FB8C-1CCC-43C9-9CE2-6E7AB2E5861B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35-unity-web", "net35-unity-web", "{2B9A499E-5059-4A08-95F7-E4F7425A3701}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net35-Unity Web v3.5", "src\core\Axle.Core.net35-Unity Web v3.5.csproj", "{EAF4D341-1A2F-4971-8B4B-A2E53197F370}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net35", "src\core\Axle.Core.net35.csproj", "{264E501C-B2FE-4138-BF10-297755E31243}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard", "netstandard", "{B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard12", "src\core\Axle.Core.netstandard12.csproj", "{05F361FD-45B2-4C4A-B1CF-436460B71376}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,26 +45,46 @@ Global
 		{1A68609D-E57A-4C74-BA5E-35D159E14265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A68609D-E57A-4C74-BA5E-35D159E14265}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A68609D-E57A-4C74-BA5E-35D159E14265}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Release|Any CPU.Build.0 = Release|Any CPU
 		{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D75B523D-5EA6-4070-8AF2-896A88AB0865}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C8BBB3-0256-46CF-B778-5EB7E423229C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C8BBB3-0256-46CF-B778-5EB7E423229C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C8BBB3-0256-46CF-B778-5EB7E423229C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C8BBB3-0256-46CF-B778-5EB7E423229C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EAF4D341-1A2F-4971-8B4B-A2E53197F370}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EAF4D341-1A2F-4971-8B4B-A2E53197F370}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EAF4D341-1A2F-4971-8B4B-A2E53197F370}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EAF4D341-1A2F-4971-8B4B-A2E53197F370}.Release|Any CPU.Build.0 = Release|Any CPU
+		{264E501C-B2FE-4138-BF10-297755E31243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{264E501C-B2FE-4138-BF10-297755E31243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{264E501C-B2FE-4138-BF10-297755E31243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{264E501C-B2FE-4138-BF10-297755E31243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{1A68609D-E57A-4C74-BA5E-35D159E14265} = {79DE4748-B1E7-4B8E-8758-23369D2E50E3}
 		{FAB89E44-7897-445A-A8F2-4CC2B536C6D1} = {B3912000-B34B-4240-A437-924267F555D8}
 		{D75B523D-5EA6-4070-8AF2-896A88AB0865} = {A395A6A5-DBEB-4E3F-9EE3-5B12B5EB78C5}
-		{1A68609D-E57A-4C74-BA5E-35D159E14265} = {79DE4748-B1E7-4B8E-8758-23369D2E50E3}
+		{D7C8BBB3-0256-46CF-B778-5EB7E423229C} = {CAFD1B10-FDB1-4F43-89E9-19D7AD4BBA23}
+		{EAF4D341-1A2F-4971-8B4B-A2E53197F370} = {2B9A499E-5059-4A08-95F7-E4F7425A3701}
+		{264E501C-B2FE-4138-BF10-297755E31243} = {39C4FB8C-1CCC-43C9-9CE2-6E7AB2E5861B}
+		{05F361FD-45B2-4C4A-B1CF-436460B71376} = {B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
-		$0.TextStylePolicy = $1
+		$0.TextStylePolicy = $3
 		$1.FileWidth = 120
 		$1.EolMarker = Windows
 		$1.inheritsSet = VisualStudio
@@ -60,7 +95,6 @@ Global
 		$2.inheritsSet = Mono
 		$2.inheritsScope = text/x-csharp
 		$2.scope = text/x-csharp
-		$0.TextStylePolicy = $3
 		$3.inheritsSet = null
 		$3.scope = application/x-sh
 	EndGlobalSection

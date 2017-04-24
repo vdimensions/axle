@@ -10,8 +10,6 @@
     <RootNamespace>Axle</RootNamespace>
     <AssemblyName>Axle.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FrameworkShortName>net45</FrameworkShortName>
   </PropertyGroup>
@@ -19,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\net45</OutputPath>
+    <OutputPath>bin\Debug\$(FrameworkShortName)</OutputPath>
     <DefineConstants>DEBUG;TRACE;net45;net40;net35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -42,11 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEqualityComparer.cs" />
+    <Compile Include="Attempt.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\IEnvironment.cs" />
     <Compile Include="Environment\IRuntime.cs" />
     <Compile Include="Environment\OperatingSystemID.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
+    <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryReader\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryWriter\BinaryWriterExtensions.cs" />
     <Compile Include="Extensions\IO\StreamReader\StreamReaderExtensions.cs" />
@@ -58,6 +58,7 @@
     <Compile Include="IO\Serialization\ISerializer.cs" />
     <Compile Include="IO\Serialization\XmlSerializer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceEqualityComparer.cs" />
     <Compile Include="Reflection\AccessModifier.cs" />
     <Compile Include="Reflection\AccessorType.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
@@ -78,10 +79,13 @@
     <Compile Include="Reflection\IMethod.cs" />
     <Compile Include="Reflection\IParameter.cs" />
     <Compile Include="Reflection\IProperty.cs" />
+    <Compile Include="Reflection\IReadableMember.cs" />
     <Compile Include="Reflection\IReadWriteMember.cs" />
     <Compile Include="Reflection\IReflected.cs" />
     <Compile Include="Reflection\IRemoveAccessor.cs" />
     <Compile Include="Reflection\ISetAccessor.cs" />
+    <Compile Include="Reflection\IWriteableMember.cs" />
+    <Compile Include="Reflection\ParameterDirection.cs" />
     <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
     <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
     <Compile Include="Threading\ILock.cs" />

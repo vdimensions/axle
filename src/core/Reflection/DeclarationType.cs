@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Reflection;
 
 
 namespace Axle.Reflection
@@ -10,7 +9,9 @@ namespace Axle.Reflection
     /// <remarks>
     /// Multiple values can be combined, as the enumeration has the <see cref="FlagsAttribute"/> specified.
     /// </remarks>
+    #if !NETSTANDARD
     [Serializable]
+    #endif
     [Flags]
     //[Maturity(CodeMaturity.Stable)]
     public enum DeclarationType : byte
@@ -26,18 +27,18 @@ namespace Axle.Reflection
         /// <summary>
         /// Used for static members of a class.
         /// </summary>
-        /// <seealso cref="MethodBase.IsStatic"/>
-        /// <seealso cref="FieldInfo.IsStatic"/>
+        /// <seealso cref="System.Reflection.MethodBase.IsStatic"/>
+        /// <seealso cref="System.Reflection.FieldInfo.IsStatic"/>
         Static = (1 << 1),
         /// <summary>
         /// The member is abstract.
         /// </summary>
-        /// <seealso cref="MethodBase.IsAbstract"/>
+        /// <seealso cref="System.Reflection.MethodBase.IsAbstract"/>
         Abstract = (1 << 2),
         /// <summary>
         /// The member is virtual.
         /// </summary>
-        /// <seealso cref="MethodBase.IsVirtual"/>
+        /// <seealso cref="System.Reflection.MethodBase.IsVirtual"/>
         Virtual = (1 << 3),
         /// <summary>
         /// The member is overriding another member defined up in the class hierarchy.
@@ -46,12 +47,12 @@ namespace Axle.Reflection
         /// <summary>
         /// Determines that only a member of the same kind with exactly the same signature is hidden in the derived class.
         /// </summary>
-        /// <seealso cref="MethodBase.IsHideBySig"/>
+        /// <seealso cref="System.Reflection.MethodBase.IsHideBySig"/>
         HideBySig = (1 << 5),
         /// <summary>
         /// The member is sealed; it cannot be overriden. 
         /// </summary>
-        /// <seealso cref="MethodBase.IsFinal"/>
+        /// <seealso cref="System.Reflection.MethodBase.IsFinal"/>
         Sealed = (1 << 6)
     }
 }

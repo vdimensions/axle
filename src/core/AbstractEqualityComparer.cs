@@ -13,13 +13,17 @@ namespace Axle
     /// see "Covariance and Contravariance in Generics".
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}" />
-    [Serializable]
+#if !NETSTANDARD
+[Serializable]
+#endif
     public abstract class AbstractEqualityComparer<T> : IEqualityComparer<T>
     {
-        #if !DEBUG
+#if !NETSTANDARD
+#if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-        #endif
+#endif
         private static readonly bool _isValueType = typeof (T).IsValueType;
+#endif
 
         /// <summary>
         /// Determines whether the specified object instances are considered equal. 
@@ -52,9 +56,13 @@ namespace Axle
         /// </param>
         public bool Equals(T x, T y)
         {
-            return _isValueType
+            return
+#if !NETSTANDARD
+                _isValueType
                 ? this.DoEquals(x, y)
-                : !ReferenceEquals(x, null)
+                : 
+#endif
+                !ReferenceEquals(x, null)
                     ? ReferenceEquals(y, null)
                         ? false
                         : ReferenceEquals(x, y) || this.DoEquals(x, y)

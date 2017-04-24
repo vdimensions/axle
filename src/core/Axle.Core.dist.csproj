@@ -1,0 +1,78 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{D7C8BBB3-0256-46CF-B778-5EB7E423229C}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Axle.Core.build</RootNamespace>
+    <AssemblyName>Axle.Core.build</AssemblyName>
+    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Axle.Core.dist.csproj.paket.references" />
+    <None Include="Axle.Core.nuspec.template">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="mason.properties" />
+    <None Include="Properties\AssemblyInfo.cs.template" />
+  </ItemGroup>
+  <ItemGroup>
+    <!--
+    <ProjectReference Include="Axle.Core.net35-Unity Subset v3.5.csproj">
+      <Project>{1a68609d-e57a-4c74-ba5e-35d159e14265}</Project>
+      <Name>Axle.Core.net35-Unity Subset v3.5</Name>
+    </ProjectReference>
+    <ProjectReference Include="Axle.Core.net35-Unity Web v3.5.csproj">
+      <Project>{eaf4d341-1a2f-4971-8b4b-a2e53197f370}</Project>
+      <Name>Axle.Core.net35-Unity Web v3.5</Name>
+    </ProjectReference>
+    <ProjectReference Include="Axle.Core.net35.csproj">
+      <Project>{264e501c-b2fe-4138-bf10-297755e31243}</Project>
+      <Name>Axle.Core.net35</Name>
+    </ProjectReference>
+    <ProjectReference Include="Axle.Core.net40-client.csproj">
+      <Project>{fab89e44-7897-445a-a8f2-4cc2b536c6d1}</Project>
+      <Name>Axle.Core.net40-client</Name>
+    </ProjectReference>
+    <ProjectReference Include="Axle.Core.net45.csproj">
+      <Project>{d75b523d-5ea6-4070-8af2-896a88ab0865}</Project>
+      <Name>Axle.Core.net45</Name>
+    </ProjectReference>
+    -->
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="packages\Mason.Targets.Packager\build\Mason.Targets.Packager.targets" Condition="Exists('packages\Mason.Targets.Packager\build\Mason.Targets.Packager.targets')" Label="Paket" />
+  <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <Import Project="packages\Mason.Targets.Verman\build\Mason.Targets.Verman.targets" Condition="Exists('packages\Mason.Targets.Verman\build\Mason.Targets.Verman.targets')" Label="Paket" />
+</Project>

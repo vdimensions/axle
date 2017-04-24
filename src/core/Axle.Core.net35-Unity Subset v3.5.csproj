@@ -10,11 +10,9 @@
     <RootNamespace>Axle</RootNamespace>
     <AssemblyName>Axle.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>8.0.30703</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <FrameworkShortName>net35-Unity Subset v3.5</FrameworkShortName>
+    <FrameworkShortName>net35-$(TargetFrameworkProfile)</FrameworkShortName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -107,7 +105,6 @@
     <Compile Include="Signal.StaticMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="build.properties" />
     <Content Include="paket-restore.sh" />
     <Content Include="paket-update.sh" />
     <Content Include="paket.dependencies" />

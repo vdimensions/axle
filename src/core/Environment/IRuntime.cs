@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Reflection;
+#if !NETSTANDARD
 using System.Security.Policy;
-
+#endif
 
 namespace Axle.Environment
 {
@@ -33,6 +34,7 @@ namespace Axle.Environment
         /// An <see cref="Assembly"/> object corresponding to the given <paramref name="assemblyName"/> parameter. 
         /// </returns>
         Assembly LoadAssembly(string assemblyName);
+#if !NETSTANDARD
         /// <summary>
         /// Instructs the current runtime to load the assembly specified by the 
         /// <paramref name="assemblyName"/>and <paramref name="securityEvidence"/> parameters. 
@@ -47,11 +49,14 @@ namespace Axle.Environment
         /// An <see cref="Assembly"/> object corresponding to the given <paramref name="assemblyName"/> parameter. 
         /// </returns>
         Assembly LoadAssembly(string assemblyName, Evidence securityEvidence);
+#endif
 
+#if !NETSTANDARD
         /// <summary>
         /// Returns a reference to the <see cref="AppDomain"/> instance hosting the current .NET runtime. 
         /// </summary>
         AppDomain Domain { get; }
+#endif
 
         /// <summary>
         /// Gets a <see cref="System.Version"/> object that describes the major, minor, build, and revision numbers of the common language runtime.

@@ -1,27 +1,21 @@
-using System.Reflection;
+﻿using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
-// Information about this assembly is defined by the following attributes. 
-// Change them to the values specific to your project.
 [assembly: AssemblyTitle("Axle.Core")]
 [assembly: AssemblyProduct("Axle.Core")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Axle Framework Core Library")]
 
 [assembly: AssemblyCompany("Virtual Dimensions")]
-[assembly: AssemblyCopyright("Virtual Dimensions")]
+[assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2017")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCulture("")]
-// The assembly version has the format "{Major}.{Minor}.{Build}.{Revision}".
-// The form "{Major}.{Minor}.*" will automatically update the build and revision,
-// and "{Major}.{Minor}.{Build}.*" will update just the revision.
-[assembly: AssemblyVersion("1.0.*")]
-//[assembly: AssemblyFileVersion ("1.0.*")]
-//[assembly: AssemblyInformationalVersion("1.0.*")]
 
-// The following attributes are used to specify the signing key for the assembly, 
-// if desired. See the Mono documentation for more information about signing.
-//[assembly: AssemblyDelaySign(false)]
-//[assembly: AssemblyKeyFile("")]
+[assembly: ComVisible(false)]
+[assembly: Guid("43919C97-BCFD-4802-95D7-76435E066962")]
 
+[assembly: AssemblyVersion("1.5.0.0")]
+[assembly: AssemblyFileVersion("1.5.0.0")]
+[assembly: AssemblyInformationalVersion("1.5.0.0")]

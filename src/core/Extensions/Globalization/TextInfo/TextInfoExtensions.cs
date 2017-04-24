@@ -30,13 +30,19 @@ namespace Axle.Extensions.Globalization.TextInfo
         /// </returns>
         /// <seealso cref="Encoding" />
         /// <seealso cref="TextInfo"/>
+#if !NETSTANDARD
         /// <seealso cref="TextInfo.OEMCodePage" />
+#endif
         /// <seealso cref="System.Globalization.CultureInfo.InvariantCulture" />
         public static Encoding GetEncoding(this TextInfo textInfo)
         {
+#if !NETSTANDARD
             return string.IsNullOrEmpty(textInfo.VerifyArgument(nameof(textInfo)).Value.CultureName) ? Encoding.UTF8 : GetOemEncoding(textInfo);
+#endif
+            return Encoding.UTF8;
         }
 
+#if !NETSTANDARD
         /// <summary>
         /// Gets the encoding for the OEM code page of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </summary>
@@ -51,7 +57,9 @@ namespace Axle.Extensions.Globalization.TextInfo
         {
             return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.OEMCodePage);
         }
+#endif
 
+#if !NETSTANDARD
         /// <summary>
         /// Gets the encoding for the EBCDIC codepage of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </summary>
@@ -66,7 +74,9 @@ namespace Axle.Extensions.Globalization.TextInfo
         {
             return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.EBCDICCodePage);
         }
+#endif
 
+#if !NETSTANDARD
         /// <summary>
         /// Gets the encoding for the ANSI codepage of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </summary>
@@ -81,7 +91,9 @@ namespace Axle.Extensions.Globalization.TextInfo
         {
             return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.ANSICodePage);
         }
+#endif
 
+#if !NETSTANDARD
         /// <summary>
         /// Gets the encoding for the Mac codepage of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </summary>
@@ -96,6 +108,7 @@ namespace Axle.Extensions.Globalization.TextInfo
         {
             return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.MacCodePage);
         }
+#endif
     }
 }
 

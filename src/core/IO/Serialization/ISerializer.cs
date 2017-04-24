@@ -1,7 +1,8 @@
 using System;
 using System.IO;
+#if !NETSTANDARD
 using System.Runtime.Serialization;
-
+#endif
 
 namespace Axle.IO.Serialization
 {
@@ -40,9 +41,11 @@ namespace Axle.IO.Serialization
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="obj"/> or <paramref name="stream"/> is <c>null</c>.
         /// </exception>
+#if !NETSTANDARD
         /// <exception cref="SerializationException">
         /// An error has occurred durring the serialization process.
         /// </exception>
+#endif
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permissions
         /// </exception>

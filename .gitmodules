@@ -1,0 +1,3 @@
+[submodule "submodules/mason"]
+	path = submodules/mason
+	url = https://github.com/ivaylo5ev/mason

@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard1.2</TargetFramework>
+    <AssemblyName>Axle.Core</AssemblyName>
+    <RootNamespace>Axle</RootNamespace>
+    <Company>Virtual Dimensions</Company>
+    <Copyright>Copyright © Virtual Dimensions 2013-2017</Copyright>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
+  </ItemGroup>
+
+</Project>

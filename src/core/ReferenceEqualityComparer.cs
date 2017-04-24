@@ -12,7 +12,9 @@ namespace Axle
     /// </summary>
     /// <typeparam name="T"> The type of objects to compare </typeparam>
     /// <seealso cref="object.ReferenceEquals(object, object)"/>
+#if !NETSTANDARD
     [Serializable]
+#endif
     public sealed class ReferenceEqualityComparer<T> : IEqualityComparer<T> where T: class
     {
         bool IEqualityComparer<T>.Equals(T x, T y) { return ReferenceEquals(x, y); }

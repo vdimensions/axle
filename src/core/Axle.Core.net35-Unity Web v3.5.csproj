@@ -4,24 +4,25 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}</ProjectGuid>
+    <ProjectGuid>{EAF4D341-1A2F-4971-8B4B-A2E53197F370}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Axle</RootNamespace>
     <AssemblyName>Axle.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <FrameworkShortName>net40-client</FrameworkShortName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Unity Web v3.5</TargetFrameworkProfile>
+    <FrameworkShortName>net35-$(TargetFrameworkProfile)</FrameworkShortName>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>bin\Debug\$(FrameworkShortName)\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;net40;net35</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;net35_unity_web</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
     <DocumentationFile>bin\Debug\$(FrameworkShortName)\Axle.Core.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -29,9 +30,10 @@
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\$(FrameworkShortName)\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <DefineConstants>TRACE;net35_unity_web</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -40,7 +42,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AbstractEqualityComparer.cs" />
     <Compile Include="Attempt.cs" />
+    <Compile Include="Environment\Endianness.cs" />
+    <Compile Include="Environment\IEnvironment.cs" />
+    <Compile Include="Environment\IRuntime.cs" />
+    <Compile Include="Environment\OperatingSystemID.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryReader\BinaryReaderExtensions.cs" />
@@ -49,35 +56,15 @@
     <Compile Include="Extensions\IO\StreamWriter\StreamWriterExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\Fluent\FluentStreamExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ReferenceEqualityComparer.cs" />
-    <Compile Include="Reflection\IReadableMember.cs" />
-    <Compile Include="Reflection\IWriteableMember.cs" />
-    <Compile Include="Reflection\ParameterDirection.cs" />
-    <Compile Include="Verification\ArgumentReference.cs" />
-    <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
-    <Compile Include="Verification\ArrayVerifier.cs" />
-    <Compile Include="Verification\CollectionVerifier.cs" />
-    <Compile Include="Verification\EnumerableVerifier.cs" />
-    <Compile Include="Verification\Verifier.cs" />
-    <Compile Include="Verification\ComparableVerifier.cs" />
-    <Compile Include="Verification\StringVerifier.cs" />
-    <Compile Include="Verification\TypeVerifier.cs" />
-    <Compile Include="Signal.cs" />
-    <Compile Include="Signal.StaticMethods.cs" />
+    <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
     <Compile Include="IO\Serialization\ISerializer.cs" />
     <Compile Include="IO\Serialization\XmlSerializer.cs" />
-    <Compile Include="Environment\IEnvironment.cs" />
-    <Compile Include="Environment\Endianness.cs" />
-    <Compile Include="Environment\OperatingSystemID.cs" />
-    <Compile Include="AbstractEqualityComparer.cs" />
-    <Compile Include="Threading\ILock.cs" />
-    <Compile Include="Threading\ILockHandle.cs" />
-    <Compile Include="Globalization\CultureScope.cs" />
-    <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
-    <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
-    <Compile Include="Reflection\IReflected.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReferenceEqualityComparer.cs" />
+    <Compile Include="Reflection\AccessModifier.cs" />
+    <Compile Include="Reflection\AccessorType.cs" />
+    <Compile Include="Reflection\DeclarationType.cs" />
     <Compile Include="Reflection\IAccessible.cs" />
     <Compile Include="Reflection\IAccessor.cs" />
     <Compile Include="Reflection\IAttributeInfo.cs" />
@@ -95,12 +82,27 @@
     <Compile Include="Reflection\IMethod.cs" />
     <Compile Include="Reflection\IParameter.cs" />
     <Compile Include="Reflection\IProperty.cs" />
+    <Compile Include="Reflection\IReadableMember.cs" />
+    <Compile Include="Reflection\IReflected.cs" />
     <Compile Include="Reflection\IRemoveAccessor.cs" />
     <Compile Include="Reflection\ISetAccessor.cs" />
-    <Compile Include="Reflection\AccessModifier.cs" />
-    <Compile Include="Reflection\AccessorType.cs" />
-    <Compile Include="Reflection\DeclarationType.cs" />
-    <Compile Include="Environment\IRuntime.cs" />
+    <Compile Include="Reflection\IWriteableMember.cs" />
+    <Compile Include="Reflection\ParameterDirection.cs" />
+    <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
+    <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
+    <Compile Include="Threading\ILock.cs" />
+    <Compile Include="Threading\ILockHandle.cs" />
+    <Compile Include="Verification\ArgumentReference.cs" />
+    <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
+    <Compile Include="Verification\ArrayVerifier.cs" />
+    <Compile Include="Verification\CollectionVerifier.cs" />
+    <Compile Include="Verification\EnumerableVerifier.cs" />
+    <Compile Include="Verification\Verifier.cs" />
+    <Compile Include="Verification\ComparableVerifier.cs" />
+    <Compile Include="Verification\StringVerifier.cs" />
+    <Compile Include="Verification\TypeVerifier.cs" />
+    <Compile Include="Signal.cs" />
+    <Compile Include="Signal.StaticMethods.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />

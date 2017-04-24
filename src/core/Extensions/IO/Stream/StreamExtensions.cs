@@ -163,7 +163,11 @@ namespace Axle.Extensions.IO.Stream
                 }
                 else
                 {
+#if !NETSTANDARD
                     stream.Close();
+#else
+                    stream.Dispose();
+#endif
                 }
             }
             return result;
@@ -232,9 +236,9 @@ namespace Axle.Extensions.IO.Stream
         /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static byte[] ToByteArray(this Stream stream) { return ToByteArray(stream, DefaultBufferSize, false); }
 
-        #if net45
+#if net45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
+#endif
         private static long WriteToUnchecked(Stream stream, Stream target, byte[] buffer)
         {
             var i = stream.Read(buffer, 0, buffer.Length);

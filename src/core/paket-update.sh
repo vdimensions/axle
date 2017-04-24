@@ -1,2 +1,2 @@
-./paket.sh update -v
+./paket.sh update
 read -rsp "Press [Enter] to quit"

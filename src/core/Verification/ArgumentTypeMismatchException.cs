@@ -1,6 +1,7 @@
 ﻿using System;
+#if !NETSTANDARD
 using System.Runtime.Serialization;
-
+#endif
 
 namespace Axle.Verification
 {
@@ -8,7 +9,9 @@ namespace Axle.Verification
     /// The exception that is thrown if one of the arguments to a method is not of the expected type.
     /// </summary>
     /// <seealso cref="ArgumentException" />
+    #if !NETSTANDARD
     [Serializable]
+    #endif
     public class ArgumentTypeMismatchException : ArgumentException
     {
         internal static string FormatMessage(Type expectedType, Type actualType)
@@ -103,6 +106,7 @@ namespace Axle.Verification
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName, Exception inner)
             : this(FormatMessage(expectedType, actualType), paramName, inner) { }
 
+        #if !NETSTANDARD
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with serialized data.
         /// </summary>
@@ -113,6 +117,7 @@ namespace Axle.Verification
         /// The contextual information about the source or destination. 
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        #endif
     }
 
     /// <summary>
@@ -121,7 +126,9 @@ namespace Axle.Verification
     /// <typeparam name="TExpected">
     /// The expected type of the argument. 
     /// </typeparam>
+     #if !NETSTANDARD
     [Serializable]
+    #endif
     public class ArgumentTypeMismatchException<TExpected> : ArgumentTypeMismatchException
     {
         /// <summary>
@@ -155,6 +162,7 @@ namespace Axle.Verification
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Type actualType, Exception inner) : base(typeof(TExpected), actualType, paramName, inner) { }
 
+        #if !NETSTANDARD
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected}" /> class with serialized data.
         /// </summary>
@@ -165,6 +173,7 @@ namespace Axle.Verification
         /// The contextual information about the source or destination. 
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        #endif
     }
 
     /// <summary>
@@ -176,7 +185,9 @@ namespace Axle.Verification
     /// <typeparam name="T">
     /// The actual type of the argument. 
     /// </typeparam>
+    #if !NETSTANDARD
     [Serializable]
+    #endif
     public class ArgumentTypeMismatchException<TExpected, T> : ArgumentTypeMismatchException
     {
         /// <summary>
@@ -204,6 +215,7 @@ namespace Axle.Verification
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Exception inner) : base(typeof(TExpected), typeof(T), paramName, inner) { }
 
+        #if !NETSTANDARD
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected,T}" /> class with serialized data.
         /// </summary>
@@ -214,5 +226,6 @@ namespace Axle.Verification
         /// The contextual information about the source or destination. 
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        #endif
     }
 }
