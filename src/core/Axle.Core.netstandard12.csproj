@@ -1,14 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
+  <Import Project="Axle.Core.netstandard.props" />
+  <Import Project="Axle.Core.netstandard.targets" />
 
   <PropertyGroup>
     <TargetFramework>netstandard1.2</TargetFramework>
-  </PropertyGroup>
-  
-  <PropertyGroup>
     <DefineConstants>NETSTANDARD</DefineConstants>
   </PropertyGroup>
-
-  <Import Project="Axle.Core.netstandard.props" />
 
   <ItemGroup>
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
@@ -20,9 +17,4 @@
     <Compile Remove="Verification\ArgumentReference.no-netstandard.cs" />
     <Compile Remove="Verification\TypeVerifier.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Globalization\" />
-  </ItemGroup>
-
 </Project>

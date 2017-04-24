@@ -55,6 +55,7 @@
     <Compile Include="Reflection\IWriteableMember.cs" />
     <Compile Include="Reflection\ParameterDirection.cs" />
     <Compile Include="Verification\ArgumentReference.cs" />
+    <Compile Include="Verification\ArgumentReference.no-netstandard.cs" />
     <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
     <Compile Include="Verification\ArrayVerifier.cs" />
     <Compile Include="Verification\CollectionVerifier.cs" />

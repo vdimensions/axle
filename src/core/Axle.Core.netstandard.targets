@@ -1,0 +1,8 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <Target Name="BeforeBuild">
+    <Exec Command="dotnet restore $(ProjectName)$(ProjectExt)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <RemoveDir Directories="$(ProjectDir)\obj" />
+  </Target>
+</Project>
