@@ -45,9 +45,7 @@
     <None Include="Axle.Core.netstandard.props.template" />
     <None Include="Axle.Core.netstandard.targets.template" />
     <None Include="Axle.Core.netstandard.targets" />
-    <None Include="Axle.Core.nuspec.template">
-      <SubType>Designer</SubType>
-    </None>
+    <None Include="Axle.Core.nuspec.template" />
     <None Include="mason.properties" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>

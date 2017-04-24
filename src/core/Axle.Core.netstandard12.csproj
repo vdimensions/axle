@@ -13,7 +13,7 @@
     <Compile Remove="IO\Serialization\XmlSerializer.cs" />
     <Compile Remove="Properties\AssemblyInfo.cs" />
     <Compile Remove="Reflection\CastOperator.cs" />
-    <Compile Remove="Verification\ArgumentReference.no-netstandard.cs" />
+    <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
     <Compile Remove="Verification\TypeVerifier.cs" />
   </ItemGroup>
   <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
