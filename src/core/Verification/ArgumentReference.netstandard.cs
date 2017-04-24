@@ -17,7 +17,7 @@ namespace Axle.Verification
         private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
         {
             var actualType = Value.GetType();
-            if (!expectedType.IsAssignableFrom(actualType))
+            if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType))
             {
                 throw new ArgumentTypeMismatchException(expectedType, actualType, this.Name);
             }
