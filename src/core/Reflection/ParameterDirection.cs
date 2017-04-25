@@ -1,12 +1,13 @@
 ﻿using System;
 
+
 namespace Axle.Reflection
 {
     /// <summary>
     /// An enumeration representing the possible parameter directions.
     /// </summary>
     [Flags]
-#if !NETSTANDARD
+#if !netstandard
     [Serializable]
 #endif
     public enum ParameterDirection

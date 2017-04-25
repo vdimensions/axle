@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-#if !NETSTANDARD
+#if !netstandard
 using System.Runtime.Serialization;
 #endif
 
@@ -41,7 +41,7 @@ namespace Axle.IO.Serialization
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="obj"/> or <paramref name="stream"/> is <c>null</c>.
         /// </exception>
-#if !NETSTANDARD
+#if !netstandard
         /// <exception cref="SerializationException">
         /// An error has occurred durring the serialization process.
         /// </exception>

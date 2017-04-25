@@ -13,12 +13,12 @@ namespace Axle
     /// see "Covariance and Contravariance in Generics".
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}" />
-#if !NETSTANDARD
+#if !netstandard
 [Serializable]
 #endif
     public abstract class AbstractEqualityComparer<T> : IEqualityComparer<T>
     {
-#if !NETSTANDARD
+#if !netstandard
 #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 #endif
@@ -57,7 +57,7 @@ namespace Axle
         public bool Equals(T x, T y)
         {
             return
-#if !NETSTANDARD
+#if !netstandard
                 _isValueType
                 ? this.DoEquals(x, y)
                 : 

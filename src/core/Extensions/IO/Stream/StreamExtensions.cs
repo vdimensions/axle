@@ -163,7 +163,7 @@ namespace Axle.Extensions.IO.Stream
                 }
                 else
                 {
-#if !NETSTANDARD
+#if !netstandard
                     stream.Close();
 #else
                     stream.Dispose();

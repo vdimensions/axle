@@ -43,9 +43,11 @@
     <Compile Include="Attempt.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\IEnvironment.cs" />
+    <Compile Include="Environment\IRuntime!netstandard.cs" />
     <Compile Include="Environment\IRuntime.cs" />
     <Compile Include="Environment\OperatingSystemID.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
+    <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryReader\BinaryReaderExtensions.cs" />
     <Compile Include="Extensions\IO\BinaryWriter\BinaryWriterExtensions.cs" />

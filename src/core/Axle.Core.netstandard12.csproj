@@ -4,7 +4,7 @@
   <Import Project="Axle.Core.netstandard.targets" />
   <PropertyGroup>
     <TargetFramework>netstandard1.2</TargetFramework>
-    <DefineConstants>NETSTANDARD</DefineConstants>
+    <DefineConstants>netstandard</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />

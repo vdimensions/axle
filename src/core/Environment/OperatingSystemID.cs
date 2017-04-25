@@ -82,7 +82,7 @@ namespace Axle.Environment
 ///   </item>
 /// </list>
 /// </summary>
-#if !NETSTANDARD
+#if !netstandard
     [Serializable]
 #endif
     [Flags]

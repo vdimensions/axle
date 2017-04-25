@@ -13,7 +13,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> VerifyArgument<T>(
             this T argument,
-#if !NETSTANDARD
+#if !netstandard
             [System.ComponentModel.Localizable(false)]
 #endif
             string argumentName)

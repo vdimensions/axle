@@ -20,7 +20,7 @@ namespace Axle.Environment
         /// </summary>
         Encoding DefaultEncoding { get; }
 
-#if !NETSTANDARD
+#if !netstandard
         /// <summary>
         /// Gets an <see cref="OperatingSystem"/> object that contains the platform's OS identifier and version number.
         /// </summary>
@@ -42,7 +42,7 @@ namespace Axle.Environment
         /// </summary>
         CultureInfo Culture { get; }
 
-#if !NETSTANDARD
+#if !netstandard
         /// <summary>
         /// Gets the timezone on the current platform.
         /// </summary>
