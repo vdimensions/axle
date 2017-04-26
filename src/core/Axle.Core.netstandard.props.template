@@ -1,13 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
     <AssemblyName>${id}</AssemblyName>
-    <RootNamespace>Axle</RootNamespace>
-    <Company>${company}</Company>
-    <Copyright>${copyright}</Copyright>
-    <Version>${version.major}.${version.minor}.${version.build}</Version>
-    <AssemblyVersion>${version}</AssemblyVersion>
-    <FileVersion>${version}</FileVersion>
+    <PackageId>${id}</PackageId>
+    <Authors>${company}</Authors>
     <PackageLicenseUrl>${license.url}</PackageLicenseUrl>
     <PackageTags>${tags}</PackageTags>
   </PropertyGroup>

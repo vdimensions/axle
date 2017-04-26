@@ -33,7 +33,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net35", "src\core
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard", "netstandard", "{B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard12", "src\core\Axle.Core.netstandard12.csproj", "{05F361FD-45B2-4C4A-B1CF-436460B71376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard14", "src\core\Axle.Core.netstandard14.csproj", "{05F361FD-45B2-4C4A-B1CF-436460B71376}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ClassLibrary1", "src\core\ClassLibrary1\ClassLibrary1.csproj", "{C1C3CCB4-706B-4AF5-B0A0-022314AAFE9E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard12", "src\core\Axle.Core.netstandard12.csproj", "{7052E29E-2A68-4367-A076-BF19CA7DAF77}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -69,6 +73,14 @@ Global
 		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05F361FD-45B2-4C4A-B1CF-436460B71376}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C1C3CCB4-706B-4AF5-B0A0-022314AAFE9E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C1C3CCB4-706B-4AF5-B0A0-022314AAFE9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C1C3CCB4-706B-4AF5-B0A0-022314AAFE9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C1C3CCB4-706B-4AF5-B0A0-022314AAFE9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7052E29E-2A68-4367-A076-BF19CA7DAF77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7052E29E-2A68-4367-A076-BF19CA7DAF77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7052E29E-2A68-4367-A076-BF19CA7DAF77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7052E29E-2A68-4367-A076-BF19CA7DAF77}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -81,6 +93,8 @@ Global
 		{EAF4D341-1A2F-4971-8B4B-A2E53197F370} = {2B9A499E-5059-4A08-95F7-E4F7425A3701}
 		{264E501C-B2FE-4138-BF10-297755E31243} = {39C4FB8C-1CCC-43C9-9CE2-6E7AB2E5861B}
 		{05F361FD-45B2-4C4A-B1CF-436460B71376} = {B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}
+		{C1C3CCB4-706B-4AF5-B0A0-022314AAFE9E} = {B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}
+		{7052E29E-2A68-4367-A076-BF19CA7DAF77} = {B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
