@@ -3,7 +3,7 @@
   <metadata>
     <id>Axle.Core</id>
     <title>Axle.Core</title>
-    <version>1.5.0.0</version>
+    <version>1.5.0.1</version>
     <description>Axle Framework Core Library</description>
     <summary>Axle Framework Core Library</summary>
     <releaseNotes></releaseNotes>
@@ -30,7 +30,7 @@
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" />
-      <frameworkAssembly assemblyName="System.Configuration" />
+      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
       <frameworkAssembly assemblyName="System.Core" />
       <frameworkAssembly assemblyName="System.Data" />
       <frameworkAssembly assemblyName="System.Xml" />

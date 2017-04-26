@@ -30,7 +30,7 @@
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" />
-      <frameworkAssembly assemblyName="System.Configuration" />
+      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
       <frameworkAssembly assemblyName="System.Core" />
       <frameworkAssembly assemblyName="System.Data" />
       <frameworkAssembly assemblyName="System.Xml" />
