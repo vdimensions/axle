@@ -9,7 +9,7 @@ namespace Axle.Threading
     /// An implementation of the <see cref="IReadWriteLock"/> interface which acts as a
     /// wrapper to the <see cref="System.Threading.ReaderWriterLockSlim"/> class.
     /// </summary>
-    public class ReadWriteLockSlim : IDisposable, IReadWriteLock
+    public class ReadWriteLock : IDisposable, IReadWriteLock
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private ReaderWriterLockSlim innerLock;
@@ -17,8 +17,8 @@ namespace Axle.Threading
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly bool supportsRecursion;
 
-        public ReadWriteLockSlim() : this(false) { }
-        internal ReadWriteLockSlim(bool supportRecursion)
+        public ReadWriteLock() : this(false) { }
+        internal ReadWriteLock(bool supportRecursion)
         {
             #pragma warning disable 665
             innerLock = new ReaderWriterLockSlim(

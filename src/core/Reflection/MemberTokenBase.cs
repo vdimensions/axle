@@ -69,7 +69,7 @@ namespace Axle.Reflection
         private IEnumerable<IAttributeInfo> attributes;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        protected internal readonly IReentrantReadWriteLock Lock = new ReentrantReadWriteLockSlim();
+        protected internal readonly IReentrantReadWriteLock Lock = new ReentrantReadWriteLock();
 
         protected MemberTokenBase(Type declaringType, string name)
         {
