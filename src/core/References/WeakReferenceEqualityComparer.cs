@@ -40,8 +40,17 @@ namespace Axle.References
             var xTarget = x.Value;
             var yTarget = y.Value;
 
-            return (!x.IsAlive && !y.IsAlive) 
-                || (!(ReferenceEquals(xTarget, null) || ReferenceEquals(yTarget, null)) && valueComparer.Equals(xTarget, yTarget));
+            if (! x.IsAlive && ! y.IsAlive) 
+            {
+                return true;
+            }
+
+            if (! (ReferenceEquals(xTarget, null) || ReferenceEquals(yTarget, null))) 
+            {
+                return valueComparer.Equals(xTarget, yTarget);
+            }
+
+            return false;
         }
 
         /// <summary>

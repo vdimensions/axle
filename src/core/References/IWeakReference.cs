@@ -6,7 +6,9 @@ namespace Axle.References
     /// <summary>
     /// Represents a generic weak reference, which references an object while still allowing that object to be reclaimed by garbage collection. 
     /// </summary>
-    /// <typeparam name="T">The type of the object that will be weakly referenced. This must be a reference type.</typeparam>
+    /// <typeparam name="T">
+    /// The type of the object that will be weakly referenced. This must be a reference type.
+    /// </typeparam>
     /// <seealso cref="WeakReference"/>
     public interface IWeakReference<T> : IReference<T> where T: class
     {
@@ -22,7 +24,7 @@ namespace Axle.References
         /// The reference to the target object is invalid. <br />
         /// This exception can be thrown while setting this property if the value is a null reference or if the object has been finalized during the set operation. 
         /// </exception>
-        /// <seealso cref="WeakReference"/>
+        /// <seealso cref="WeakReference.Target"/>
         new T Value { get; set; }
 
         /// <summary>
