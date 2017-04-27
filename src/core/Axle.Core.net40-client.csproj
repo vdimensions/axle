@@ -104,6 +104,12 @@
     <Compile Include="Reflection\DeclarationType.cs" />
     <Compile Include="Environment\IRuntime!netstandard.cs" />
     <Compile Include="Environment\IRuntime.cs" />
+    <Compile Include="References\IReference.cs" />
+    <Compile Include="References\ISingetonReference.cs" />
+    <Compile Include="References\IWeakReference.cs" />
+    <Compile Include="References\Singleton.cs" />
+    <Compile Include="References\WeakReference.cs" />
+    <Compile Include="References\WeakReferenceEqualityComparer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
