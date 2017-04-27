@@ -1,5 +1,8 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <!-- Prevent .netcore from automatically generating the AssemblyInfo.cs file -->
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    
     <AssemblyName>${id}</AssemblyName>
     <PackageId>${id}</PackageId>
     <Authors>${company}</Authors>

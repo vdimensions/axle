@@ -1,0 +1,3 @@
+- This directory contains the latest project artefacts. 
+- Only a single artefact per version is being kept.
+- One may add this repo as a submodule to their project and use paket filesystem sources to get the nuget packages instead of retrieving them online. In such cases, the sumbodule has to be regularly updated from mainstream in order to get latest packages version. 

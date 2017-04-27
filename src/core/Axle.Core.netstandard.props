@@ -1,5 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AssemblyName>Axle.Core</AssemblyName>
     <PackageId>Axle.Core</PackageId>
     <Authors>Virtual Dimensions</Authors>
