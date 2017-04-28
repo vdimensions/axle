@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 
 using Axle.References;
 using Axle.Threading;
-using Axle.Threading.ReaderWriterLock;
 
 
 namespace Axle.Reflection
 {
-    [Serializable]
     //[Maturity(CodeMaturity.Stable)]
-    public abstract class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
+    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
     {
+#if !netstandard
         [Serializable]
+#endif
         protected struct AttributeInfo : IAttributeInfo
         {
             public Attribute Attribute { get; internal set; }
@@ -24,7 +23,7 @@ namespace Axle.Reflection
             public bool Inherited { get; internal set; }
         }
 
-        internal static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
+        protected internal static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
         {
             if (isPublic)
             {
@@ -45,23 +44,32 @@ namespace Axle.Reflection
             return AccessModifier.ProtectedInternal;
         }
 
+#if !netstandard
         [Serializable]
+#endif
         private class MethodHandleBaseEqualityComparer<TT> : AbstractEqualityComparer<TT> where TT: MemberTokenBase<T>
         {
-            private MethodHandleBaseEqualityComparer() { }
+            internal MethodHandleBaseEqualityComparer() { }
 
             protected override int DoGetHashCode(TT obj) { return (obj.ReflectedMember.GetHashCode()); }
 
             protected override bool DoEquals(TT x, TT y) { return x.ReflectedMember.Equals(y.ReflectedMember); }
         }
 
+#if !netstandard
         private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer
         {
             get { return Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance; }
         }
+#else
+        private static AbstractEqualityComparer<MemberTokenBase<T>> comparer = new MethodHandleBaseEqualityComparer<MemberTokenBase<T>>();
+        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer { get { return comparer; } }
+#endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type declaringType;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly RuntimeTypeHandle typeHandle;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string name;
 
@@ -71,82 +79,32 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected internal readonly IReentrantReadWriteLock Lock = new ReentrantReadWriteLock();
 
-        protected MemberTokenBase(Type declaringType, string name)
-        {
-            this.name = name;
-            this.declaringType = declaringType;
-        }
-
         public virtual bool Equals(MemberTokenBase<T> other) { return EqualityComparer.Equals(this, other); }
         public override bool Equals(object obj) { return EqualityComparer.Equals(this, obj); }
 
         public override int GetHashCode() { return EqualityComparer.GetHashCode(this); }
 
-        public abstract T ReflectedMember { get; }
         MemberInfo IReflected.ReflectedMember { get { return this.ReflectedMember; } }
         public Type DeclaringType { get { return declaringType; } }
         public abstract Type MemberType { get; }
         public string Name { get { return name; } }
         public abstract DeclarationType Declaration { get; }
         public abstract AccessModifier AccessModifier { get; }
-        public virtual IEnumerable<IAttributeInfo> Attributes
-        {
-            get
-            {
-                return Lock.Invoke(
-                    () => attributes,
-                    xx => xx == null,
-                    () =>
-                    {
-                        var comparer = EqualityComparer<Attribute>.Default;
-                        var notInherited = ReflectedMember.GetCustomAttributes(false).Cast<Attribute>();
-                        var inherited = ReflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
-
-                        attributes = notInherited
-                            .Select(
-                                x => new
-                                {
-                                    Attribute = x,
-                                    Inherited = false,
-                                    AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                        .Cast<AttributeUsageAttribute>()
-                                        .Single()
-                                })
-                            .Union(
-                                inherited.Select(
-                                    x => new
-                                    {
-                                        Attribute = x,
-                                        Inherited = true,
-                                        AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                            .Cast<AttributeUsageAttribute>()
-                                            .Single()
-                                    }))
-                            .Select(
-                                x => new AttributeInfo
-                                {
-                                    Attribute = x.Attribute,
-                                    AllowMultiple = x.AttributeUsage.AllowMultiple,
-                                    AttributeTargets = x.AttributeUsage.ValidOn,
-                                    Inherited = x.Inherited
-                                } as IAttributeInfo);
-                        return attributes.ToArray();
-                    }) ?? new IAttributeInfo[0];
-            }
-        }
+        public RuntimeTypeHandle TypeHandle { get { return typeHandle; } }
     }
 
-    [Serializable]
     //[Maturity(CodeMaturity.Stable)]
-    public abstract class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
+    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
         where THandle: struct
     {
+#if !netstandard
         [Serializable]
+#endif
         private sealed class MethodHandleBaseEqualityComparer : AbstractEqualityComparer<MemberTokenBase<T, THandle>>
         {
-            private MethodHandleBaseEqualityComparer() { }
+            internal MethodHandleBaseEqualityComparer() { }
 
             protected override int DoGetHashCode(MemberTokenBase<T, THandle> obj)
             {
@@ -158,25 +116,23 @@ namespace Axle.Reflection
                 return x.Handle.Equals(y.Handle);
             }
         }
-
+#if !netstandard
         private static AbstractEqualityComparer<MemberTokenBase<T, THandle>> EqualityComparer
         {
             get { return Singleton<MethodHandleBaseEqualityComparer>.Instance; }
         }
+#else
+        private static readonly AbstractEqualityComparer<MemberTokenBase<T, THandle>> comparer = new MethodHandleBaseEqualityComparer();
+        private static AbstractEqualityComparer<MemberTokenBase<T, THandle>> EqualityComparer
+        {
+            get { return comparer; }
+        }
+#endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly THandle handle;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly RuntimeTypeHandle typeHandle;
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly WeakReference<T> memberRef;
-
-        protected MemberTokenBase(T member, THandle handle, Type declaringType, string name) : base(declaringType, name)
-        {
-            this.memberRef = new WeakReference<T>(member);
-            this.handle = handle;
-            this.typeHandle = declaringType.TypeHandle;
-        }
+        private readonly Axle.References.WeakReference<T> memberRef;
 
         public virtual bool Equals(MemberTokenBase<T, THandle> other) { return EqualityComparer.Equals(this, other); }
         public override bool Equals(object obj) { return EqualityComparer.Equals(this, obj); }
@@ -186,18 +142,5 @@ namespace Axle.Reflection
         protected abstract T GetMember(THandle handle, RuntimeTypeHandle typeHandle, bool isGeneric);
 
         public THandle Handle { get { return handle; } }
-        public RuntimeTypeHandle TypeHandle { get { return typeHandle; } }
-        public override T ReflectedMember
-        {
-            get
-            {
-                T item = null;
-                Lock.Invoke(
-                    () => item = memberRef.Value,
-                    xx => xx == null || !memberRef.IsAlive,
-                    () => memberRef.Value = item = GetMember(handle, typeHandle, DeclaringType.IsGenericType));
-                return item;
-            }
-        }
     }
 }

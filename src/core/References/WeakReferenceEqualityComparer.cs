@@ -12,7 +12,6 @@ namespace Axle.References
     /// The underlying type of the weak reference. Must be a reference type. 
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}"/>
-    [Serializable]
     public sealed class WeakReferenceEqualityComparer<T> : AbstractEqualityComparer<IWeakReference<T>> where T: class 
     {
         private readonly IEqualityComparer<T> valueComparer;

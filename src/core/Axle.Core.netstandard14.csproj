@@ -16,10 +16,20 @@
     <Compile Remove="Globalization\CultureScope.cs" />
     <Compile Remove="IO\Serialization\BinarySerializer.cs" />
     <Compile Remove="IO\Serialization\XmlSerializer.cs" />
+    <Compile Remove="References\Singleton!netstandard.cs" />
+    <Compile Remove="References\Singleton.cs" />
+    <Compile Remove="References\Singleton.netstandard.cs" />
     <Compile Remove="Reflection\CastOperator.cs" />
+    <Compile Remove="Reflection\EventToken!netstandard.cs" />
+    <Compile Remove="Reflection\FieldToken!netstandard.cs" />
+    <Compile Remove="Reflection\MemberExtensions!netstandard.cs" />
+    <Compile Remove="Reflection\MemberTokenBase!netstandard.cs" />
+    <Compile Remove="Reflection\MethodBaseToken!netstandard.cs" />
+    <Compile Remove="Reflection\MethodToken!netstandard.cs" />
+    <Compile Remove="Reflection\PropertyToken!netstandard.cs" />
+    <Compile Remove="Reflection\ReflectionExtensions!netstandard.cs" />
     <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
-    <Compile Remove="Verification\ArgumentReference.netstandard.cs" />
-    <Compile Remove="Verification\TypeVerifier.cs" />
+    <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
   </ItemGroup>
 
   <Target Name="BeforeBuild">
