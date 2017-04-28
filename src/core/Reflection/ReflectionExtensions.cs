@@ -74,7 +74,7 @@ namespace Axle.Reflection
         {
             if (method == null)
             {
-                throw new ArgumentNullException("method");
+                throw new ArgumentNullException(nameof(method));
             }
             var mi = method as MethodInfo;
             return mi != null && IsOverrideUnchecked(mi);
@@ -113,7 +113,7 @@ namespace Axle.Reflection
         {
             if (methodBase == null)
             {
-                throw new ArgumentNullException("methodBase");
+                throw new ArgumentNullException(nameof(methodBase));
             }
             var isNotConstructor = !methodBase.IsConstructor;
             return GetDeclarationType(
@@ -141,7 +141,7 @@ namespace Axle.Reflection
         {
             if (field == null)
             {
-                throw new ArgumentNullException("field");
+                throw new ArgumentNullException(nameof(field));
             }
             return GetDeclarationType(
                 field.IsStatic,
@@ -168,7 +168,7 @@ namespace Axle.Reflection
         {
             if (member == null)
             {
-                throw new ArgumentNullException("member");
+                throw new ArgumentNullException(nameof(member));
             }
             var method = member as MethodBase;
             if (method != null)
@@ -190,7 +190,7 @@ namespace Axle.Reflection
             {
                 return GetDeclarationType(evt);
             }
-            throw new ArgumentException("Cannot determine member's declaration type", "member");
+            throw new ArgumentException("Cannot determine member's declaration type", nameof(member));
         }
 
         private static bool DeclarationTypeFlagCompare(DeclarationType all, DeclarationType flag)

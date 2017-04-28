@@ -40,9 +40,6 @@ namespace Axle.Verification
 #else
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
 #endif
-#if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is(this ArgumentReference<Type> argument, Type expectedType)
         {
@@ -79,9 +76,6 @@ namespace Axle.Verification
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
 #else
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
-#endif
-#if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
 #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is<TExpected>(this ArgumentReference<Type> argument)

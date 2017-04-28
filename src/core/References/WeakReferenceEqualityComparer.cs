@@ -15,13 +15,17 @@ namespace Axle.References
     public sealed class WeakReferenceEqualityComparer<T> : AbstractEqualityComparer<IWeakReference<T>> where T: class 
     {
         private readonly IEqualityComparer<T> valueComparer;
+
         /// <summary>
         /// Initializes a new instance of the <see cref="WeakReferenceEqualityComparer{T}"/> class.
         /// </summary>
         /// <param name="valueComparer">
         /// The <see cref="IEqualityComparer{T}"/> that is used to compare the weakreference values.
         /// </param>
-        public WeakReferenceEqualityComparer(IEqualityComparer<T> valueComparer) { }
+        public WeakReferenceEqualityComparer(IEqualityComparer<T> valueComparer)
+        {
+            this.valueComparer = valueComparer;
+        }
         /// <summary>
         /// Initializes a new instance of the <see cref="WeakReferenceEqualityComparer{T}"/> class that compares the weak reference targets by reference.
         /// The <see cref="ValueComparer"/> implementation will be <see cref="ReferenceEqualityComparer{T}"/>. 

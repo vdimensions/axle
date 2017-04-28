@@ -33,9 +33,6 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotEmpty(this ArgumentReference<string> argument, string message)
         {
@@ -52,9 +49,6 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotEmpty(this ArgumentReference<string> argument) { return IsNotEmpty(argument, null); }
 
@@ -68,9 +62,6 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotNullOrEmpty(this ArgumentReference<string> argument)
         {
@@ -93,9 +84,6 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotNullOrEmpty(
             this ArgumentReference<string> argument, 

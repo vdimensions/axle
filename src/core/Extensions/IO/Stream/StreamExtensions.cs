@@ -74,7 +74,7 @@ namespace Axle.Extensions.IO.Stream
         {
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
             var currentPosition = stream.Position;
             stream.Seek(0, SeekOrigin.Begin);
@@ -104,7 +104,7 @@ namespace Axle.Extensions.IO.Stream
         {
             if (stream == null)
             {
-                throw new ArgumentNullException("stream");
+                throw new ArgumentNullException(nameof(stream));
             }
             var currentPosition = stream.Position;
             stream.Seek(0, SeekOrigin.End);
@@ -280,7 +280,7 @@ namespace Axle.Extensions.IO.Stream
 		/// </exception>
         public static long WriteTo(this Stream stream, Stream target, int bufferSize)
         {
-            stream.VerifyArgument ("stream").IsNotNull();
+            stream.VerifyArgument(nameof(stream)).IsNotNull();
             if (bufferSize <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(bufferSize), bufferSize, "Invalid buffer size");
@@ -316,7 +316,7 @@ namespace Axle.Extensions.IO.Stream
 		/// </exception>
         public static long WriteTo(this Stream stream, Stream target, byte[] buffer)
         {
-            stream.VerifyArgument("stream").IsNotNull();
+            stream.VerifyArgument(nameof(stream)).IsNotNull();
             if (!stream.CanRead)
             {
                 throw new NotSupportedException("The specified input stream does not support reading.");
