@@ -104,6 +104,21 @@
     <Compile Include="Reflection\DeclarationType.cs" />
     <Compile Include="Environment\IRuntime!netstandard.cs" />
     <Compile Include="Environment\IRuntime.cs" />
+    <Compile Include="References\IReference.cs" />
+    <Compile Include="References\ISingetonReference.cs" />
+    <Compile Include="References\IWeakReference.cs" />
+    <Compile Include="References\Singleton.cs" />
+    <Compile Include="References\WeakReference.cs" />
+    <Compile Include="References\WeakReferenceEqualityComparer.cs" />
+    <Compile Include="Reflection\MemberTokenBase.cs" />
+    <Compile Include="Threading\IReadWriteLock.cs" />
+    <Compile Include="Threading\IReentrantReadWriteLock.cs" />
+    <Compile Include="Threading\ReaderWriterLockExtensions.cs" />
+    <Compile Include="Threading\ReadLockHandle.cs" />
+    <Compile Include="Threading\UpgradeableReadLockHandle.cs" />
+    <Compile Include="Threading\WriteLockHandle.cs" />
+    <Compile Include="Threading\ReadWriteLock.cs" />
+    <Compile Include="Threading\ReentrantReadWriteLock.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />

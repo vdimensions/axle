@@ -4,19 +4,14 @@
     <TargetFramework>netstandard1.2</TargetFramework>
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
     <DefineConstants>netstandard</DefineConstants>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
   
-  <ItemGroup>
-    <Compile Remove="ClassLibrary1\**" />
-    <EmbeddedResource Remove="ClassLibrary1\**" />
-    <None Remove="ClassLibrary1\**" />
-  </ItemGroup>
+  <Import Project="Axle.Core.netstandard.props" />
   
   <ItemGroup>
     <Compile Remove="Environment\IRuntime!netstandard.cs" />
     <Compile Remove="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
-    <Compile Remove="Properties\AssemblyInfo.cs" />
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
     <Compile Remove="Globalization\CultureScope.cs" />
     <Compile Remove="IO\Serialization\BinarySerializer.cs" />
@@ -28,9 +23,11 @@
   </ItemGroup>
 
   <Target Name="BeforeBuild">
+    <!-- Ensure the correct dotnet version for this project is made present before the build process starts. -->
     <Exec Command="dotnet restore $(ProjectName)$(ProjectExt)" />
   </Target>
   <Target Name="AfterBuild">
+    <!-- Clean up the obj directory, as it prevents non-netstandard projects to fail during builds from Visual Studio. -->
     <RemoveDir Directories="$(ProjectDir)\obj" />
   </Target>
   

@@ -10,7 +10,9 @@ namespace Axle
     /// The equality is determined internally by using the 
     /// <see cref="object.ReferenceEquals(object, object)"/> method.
     /// </summary>
-    /// <typeparam name="T"> The type of objects to compare </typeparam>
+    /// <typeparam name="T">
+    /// The type of objects to compare.
+    /// </typeparam>
     /// <seealso cref="object.ReferenceEquals(object, object)"/>
 #if !netstandard
     [Serializable]

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 
-//using Axle.References;
+using Axle.References;
 
 
 namespace Axle.Verification
@@ -10,7 +10,7 @@ namespace Axle.Verification
     /// A struct that represents a reference to an argument for a method or constructor. 
     /// The argument reference is usually represented by its name (as defined in the respective method/constructor) and the value passed to it. 
     /// </summary>
-    public partial struct ArgumentReference<T>// : IReference<T>
+    public partial struct ArgumentReference<T> : IReference<T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string name;
@@ -33,8 +33,8 @@ namespace Axle.Verification
         /// Gets the value passed in the argument the current <see cref="ArgumentReference{T}"/> instance represents.
         /// </summary>
         public T Value { get { return value; } }
-        //T IReference<T>.Value { get { return value; } }
-        //object IReference.Value { get { return value; } }
+        T IReference<T>.Value { get { return value; } }
+        object IReference.Value { get { return value; } }
 
         /// <param name="reference">
         /// The argument reference instance to be unwrapped by this operator. 
