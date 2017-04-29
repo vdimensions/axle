@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+
 using Axle.Verification;
 
 
@@ -16,7 +17,7 @@ namespace Axle.Extensions.String
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
             return str.IndexOf(value, comparison) >= 0;
         }
@@ -24,7 +25,7 @@ namespace Axle.Extensions.String
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
             return str.IndexOf(value) >= 0;
         }
@@ -32,7 +33,7 @@ namespace Axle.Extensions.String
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
             return str.IndexOf(value, startIndex, comparison) >= 0;
         }
@@ -40,7 +41,7 @@ namespace Axle.Extensions.String
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
             return str.IndexOf(value, startIndex) >= 0;
         }
@@ -48,7 +49,7 @@ namespace Axle.Extensions.String
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
             return str.IndexOf(value, startIndex, count, comparison) >= 0;
         }
@@ -56,7 +57,7 @@ namespace Axle.Extensions.String
         {
             if (str == null)
             {
-                throw new ArgumentNullException("str");
+                throw new ArgumentNullException(nameof(str));
             }
             return str.IndexOf(value, startIndex, count) >= 0;
         }
@@ -72,6 +73,38 @@ namespace Axle.Extensions.String
         }
 
         public static bool IsNullOrEmpty(this string @this) { return string.IsNullOrEmpty(@this); }
+
+        /// <summary>
+        /// Creates a <see cref="string"/> using all the chracters from a target string instance, but in a reversed order.
+        /// </summary>
+        /// <param name="str">The <see cref="string">string instance</see> upon which this extension method is called upon.</param>
+        /// <returns>
+        /// A new string instance using all the chracters from a target string instance, but in a reversed order.
+        /// </returns>
+        public static string Reverse(this string str) { return new string(str.VerifyArgument(nameof(str)).IsNotNull().Value.ToCharArray().Reverse().ToArray()); }
+
+        #region Split(...)
+        public static string[] Split(this string @this, char separator, StringSplitOptions options) { return @this.Split(new[] { separator }, options); }
+        public static string[] Split(this string @this, StringSplitOptions options, params char[] separators) { return @this.Split(separators, options); }
+        public static string[] Split(
+            this string @this,
+            StringSplitOptions options,
+            int count,
+            params char[] separators)
+        {
+            return @this.Split(separators, count, options);
+        }
+        public static string[] Split(this string @this, StringSplitOptions options, params string[] separators) { return @this.Split(separators, options); }
+        public static string[] Split(
+            this string @this,
+            StringSplitOptions options,
+            int count,
+            params string[] separators)
+        {
+            return @this.Split(separators, count, options);
+        }
+        public static string[] Split(this string @this, params string[] separators) { return @this.Split(separators, StringSplitOptions.None); }
+        #endregion
 
         private static string CutFromIndex(
             Func<string, string, StringComparison, int> searchFunc,
@@ -303,6 +336,38 @@ namespace Axle.Extensions.String
         }
         #endregion
 
+        #region TrimStarting(...)
+        public static string TrimStart(this string str, string stringToSearch, StringComparison comparison)
+        {
+            return str.VerifyArgument("str").IsNotNull().Value.StartsWith(stringToSearch, comparison)
+                ? str.TakeAfterFirst(stringToSearch, 0, comparison)
+                : str;
+        }
+        public static string TrimStart(this string str, string stringToSearch) { return TrimStart(str, stringToSearch, StringComparison.CurrentCulture); }
+        public static string TrimStart(this string str, char charToSearch)
+        {
+            return str.VerifyArgument("str").IsNotNull().Value.Length > 0 && str[0] == charToSearch
+                ? str.Substring(1)
+                : str;
+        }
+        #endregion
+
+        #region TrimEnding(...)
+        public static string TrimEnd(this string str, string stringToSearch, StringComparison comparison)
+        {
+            return str.VerifyArgument("str").IsNotNull().Value.EndsWith(stringToSearch, comparison)
+                ? str.TakeBeforeLast(stringToSearch, comparison)
+                : str;
+        }
+        public static string TrimEnd(this string str, string stringToSearch) { return TrimEnd(str, stringToSearch, StringComparison.CurrentCulture); }
+        public static string TrimEnd(this string str, char charToSearch)
+        {
+            return str.VerifyArgument("str").IsNotNull().Value.Length > 0 && str[str.Length - 1] == charToSearch
+                ? str.Substring(0, str.Length - 1)
+                : str;
+        }
+        #endregion
+
         private static string JoinInternal(string[] values, string separator) { return string.Join(separator, values); }
         private static string JoinInternal(IEnumerable<string> values, string separator)
         {
@@ -313,5 +378,12 @@ namespace Axle.Extensions.String
         public static string Join(this char separator, IEnumerable<string> values) { return JoinInternal(values, separator.ToString()); }
         public static string Join(this string separator, params string[] values) { return JoinInternal(values, separator); }
         public static string Join(this char separator, params string[] values) { return JoinInternal(values, separator.ToString()); }
+
+        [Obsolete] public static string Join(this IEnumerable<string> @this, string separator) { return JoinInternal(@this, separator); }
+        [Obsolete] public static string Join(this IEnumerable<string> @this, char separator) { return JoinInternal(@this, separator.ToString()); }
+        [Obsolete] public static string Join(this IEnumerable<string> @this) { return JoinInternal(@this, string.Empty); }
+        [Obsolete] public static string Join(this string[] @this, string separator) { return JoinInternal(@this, separator); }
+        [Obsolete] public static string Join(this string[] @this, char separator) { return JoinInternal(@this, separator.ToString()); }
+        [Obsolete] public static string Join(this string[] @this) { return JoinInternal(@this, string.Empty); }
     }
 }

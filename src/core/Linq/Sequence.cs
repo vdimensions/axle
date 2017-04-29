@@ -14,7 +14,7 @@ namespace Axle.Linq
     /// </summary>
     /// <typeparam name="TE">The type of the underlying <see cref="IEnumerable{T}"/> represented by this instance.</typeparam>
     /// <typeparam name="T">The type of objects in the sequence.</typeparam>
-    public struct Sequence<TE, T> : IReference<TE>, IEnumerable<T> where TE : class, IEnumerable<T>
+    public struct Sequence<TE, T> : ISequence<T>, IReference<TE> where TE: class, IEnumerable<T>
     {
         public static readonly Sequence<TE, T> Empty = new Sequence<TE, T>();
 

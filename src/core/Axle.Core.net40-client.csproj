@@ -65,7 +65,9 @@
     <Compile Include="Extensions\IO\StreamWriter\StreamWriterExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\Fluent\FluentStreamExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
+    <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
     <Compile Include="Extensions\String\StringExtensions.cs" />
+    <Compile Include="Linq\ISequence.cs" />
     <Compile Include="Linq\Sequence.cs" />
     <Compile Include="Linq\SequenceExtensions.cs" />
     <Compile Include="Optional.cs" />
@@ -188,6 +190,7 @@
     <None Include="Extensions\IO\Stream\StreamExtensions2.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Extensions\Boolean\" />
     <Folder Include="Extensions\StringComparer\" />
   </ItemGroup>
   <ProjectExtensions>

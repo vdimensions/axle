@@ -50,10 +50,19 @@
     <Compile Include="Collections\Generic\GenericEnumerator.cs" />
     <Compile Include="Collections\Generic\GenericList.cs" />
     <Compile Include="Environment\Endianness.cs" />
+    <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
+    <Compile Include="Environment\EnvironmentExtensions.cs" />
+    <Compile Include="Environment\EnvironmentInfo!netstandard.cs" />
+    <Compile Include="Environment\EnvironmentInfo.cs" />
+    <Compile Include="Environment\IEnvironment!netstandard.cs" />
     <Compile Include="Environment\IEnvironment.cs" />
     <Compile Include="Environment\IRuntime!netstandard.cs" />
     <Compile Include="Environment\IRuntime.cs" />
     <Compile Include="Environment\OperatingSystemID.cs" />
+    <Compile Include="Environment\Platform.cs" />
+    <Compile Include="Environment\RuntimeExtensions.cs" />
+    <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
+    <Compile Include="Environment\RuntimeInfo.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
@@ -63,11 +72,15 @@
     <Compile Include="Extensions\IO\StreamWriter\StreamWriterExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\Fluent\FluentStreamExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
+    <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
     <Compile Include="Extensions\String\StringExtensions.cs" />
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
     <Compile Include="IO\Serialization\ISerializer.cs" />
     <Compile Include="IO\Serialization\XmlSerializer.cs" />
+    <Compile Include="Linq\ISequence.cs" />
+    <Compile Include="Linq\Sequence.cs" />
+    <Compile Include="Linq\SequenceExtensions.cs" />
     <Compile Include="Optional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceEqualityComparer.cs" />
@@ -80,6 +93,7 @@
     <Compile Include="References\WeakReferenceEqualityComparer.cs" />
     <Compile Include="Reflection\AccessModifier.cs" />
     <Compile Include="Reflection\AccessorType.cs" />
+    <Compile Include="Reflection\AssemblyNameEqualityComparer.cs" />
     <Compile Include="Reflection\CastOperator.cs" />
     <Compile Include="Reflection\ConstructorToken.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
@@ -175,6 +189,10 @@
   -->
   <ItemGroup>
     <None Include="Extensions\IO\Stream\StreamExtensions2.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\Boolean\" />
+    <Folder Include="Extensions\StringComparer\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
