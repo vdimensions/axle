@@ -14,7 +14,9 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
+#if !NETSTANDARD1_0
 [assembly: Guid("${guid}")]
+#endif
 
 [assembly: AssemblyVersion("${version}")]
 [assembly: AssemblyFileVersion("${version}")]

@@ -8,7 +8,7 @@ namespace Axle.Environment
     /// <summary>
     /// An interface representing an application's execution environment and its properties.
     /// </summary>
-    public interface IEnvironment 
+    public partial interface IEnvironment 
     {
         /// <summary>
         /// Indicates the byte order ("endianness") in which data is stored in the platform's computer architecture.
@@ -20,18 +20,6 @@ namespace Axle.Environment
         /// </summary>
         Encoding DefaultEncoding { get; }
 
-#if !netstandard
-        /// <summary>
-        /// Gets an <see cref="OperatingSystem"/> object that contains the platform's OS identifier and version number.
-        /// </summary>
-        OperatingSystem OperatingSystem { get; }
-#endif
-
-        /// <summary>
-        /// Gets the operating system identifier for the current platform. 
-        /// </summary>
-        OperatingSystemID OperatingSystemID { get; }
-
         /// <summary>
         /// Gets the number of processors on the current machine.
         /// </summary>
@@ -41,13 +29,6 @@ namespace Axle.Environment
         /// Gets the <see cref="CultureInfo"/> that represents the culture installed with the current operating system.
         /// </summary>
         CultureInfo Culture { get; }
-
-#if !netstandard
-        /// <summary>
-        /// Gets the timezone on the current platform.
-        /// </summary>
-        TimeZone TimeZone { get; }
-#endif
 
         /// <summary>
         /// Gets the NetBIOS name of the current platform.

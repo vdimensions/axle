@@ -11,9 +11,6 @@ namespace Axle.Verification
     /// </summary>
     public partial struct ArgumentReference<T>
     {
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
         {

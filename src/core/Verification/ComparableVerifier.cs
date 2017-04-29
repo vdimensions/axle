@@ -79,7 +79,7 @@ namespace Axle.Verification
         {
             if (ReferenceEquals(minValue, null))
             {
-                throw new ArgumentNullException("minValue");
+                throw new ArgumentNullException(nameof(minValue));
             }
             if (argument.Value.CompareTo(minValue) >= 0)
             {
@@ -101,7 +101,7 @@ namespace Axle.Verification
         {
             if (ReferenceEquals(maxValue, null))
             {
-                throw new ArgumentNullException("maxValue");
+                throw new ArgumentNullException(nameof(maxValue));
             }
             if (argument.Value.CompareTo(maxValue) < 0)
             {
@@ -123,7 +123,7 @@ namespace Axle.Verification
         {
             if (ReferenceEquals(maxValue, null))
             {
-                throw new ArgumentNullException("maxValue");
+                throw new ArgumentNullException(nameof(maxValue));
             }
             if (argument.Value.CompareTo(maxValue) <- 0)
             {

@@ -1,14 +1,14 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  
+
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.5</TargetFramework>
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <DefineConstants>DEBUG;netstandard;NETSTANDARD1_2</DefineConstants>
+    <DefineConstants>netstandard</DefineConstants>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
   
   <Import Project="Axle.Core.netstandard.props" />
-  
+   
   <ItemGroup>
     <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
@@ -38,6 +38,10 @@
     <Compile Remove="Reflection\ReflectionExtensions!netstandard.cs" />
     <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
     <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
+  </ItemGroup>
+   
+  <ItemGroup>
+    <Folder Include="Globalization\" />
   </ItemGroup>
 
   <Target Name="BeforeBuild">

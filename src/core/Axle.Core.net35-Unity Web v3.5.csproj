@@ -43,7 +43,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEqualityComparer.cs" />
+    <Compile Include="AdaptiveComparer.cs" />
+    <Compile Include="AdaptiveEqualityComparer.cs" />
     <Compile Include="Attempt.cs" />
+    <Compile Include="AttemptExtensions.cs" />
+    <Compile Include="Collections\Generic\GenericEnumerable.cs" />
+    <Compile Include="Collections\Generic\GenericEnumerator.cs" />
+    <Compile Include="Collections\Generic\GenericList.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\IEnvironment.cs" />
     <Compile Include="Environment\IRuntime!netstandard.cs" />
@@ -58,10 +64,12 @@
     <Compile Include="Extensions\IO\StreamWriter\StreamWriterExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\Fluent\FluentStreamExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
+    <Compile Include="Extensions\String\StringExtensions.cs" />
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
     <Compile Include="IO\Serialization\ISerializer.cs" />
     <Compile Include="IO\Serialization\XmlSerializer.cs" />
+    <Compile Include="Optional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceEqualityComparer.cs" />
     <Compile Include="References\IReference.cs" />

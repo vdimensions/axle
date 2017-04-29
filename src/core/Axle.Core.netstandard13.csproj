@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   
   <PropertyGroup>
-    <TargetFramework>netstandard1.2</TargetFramework>
+    <TargetFramework>netstandard1.3</TargetFramework>
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <DefineConstants>DEBUG;netstandard;NETSTANDARD1_2</DefineConstants>
+    <DefineConstants>DEBUG;netstandard;NETSTANDARD1_3</DefineConstants>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
   
