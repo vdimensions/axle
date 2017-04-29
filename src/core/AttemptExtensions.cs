@@ -111,5 +111,51 @@ namespace Axle
             TResult result;
             return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, arg4, out result) ? Optional.From(result) : Optional<TResult>.Undefined;
         }
+
+        public static Optional<TResult> Invoke<TResult>(this IEnumerable<Attempt<TResult>> attempts)
+        {
+            var res = default(TResult);
+            if (Enumerable.Any<Attempt<TResult>>(attempts.VerifyArgument(nameof(attempts)).IsNotNull().Value, x => x(out res)))
+            {
+                return Optional.From(res);
+            }
+            return Optional<TResult>.Undefined;
+        }
+        public static Optional<TResult> Invoke<T, TResult>(this IEnumerable<Attempt<T, TResult>> attempts, T arg)
+        {
+            var res = default(TResult);
+            if (Enumerable.Any<Attempt<T, TResult>>(attempts.VerifyArgument(nameof(attempts)).IsNotNull().Value, x => x(arg, out res)))
+            {
+                return Optional.From(res);
+            }
+            return Optional<TResult>.Undefined;
+        }
+        public static Optional<TResult> Invoke<T1, T2, TResult>(this IEnumerable<Attempt<T1, T2, TResult>> attempts, T1 arg1, T2 arg2)
+        {
+            var res = default(TResult);
+            if (Enumerable.Any<Attempt<T1, T2, TResult>>(attempts.VerifyArgument(nameof(attempts)).IsNotNull().Value, x => x(arg1, arg2, out res)))
+            {
+                return Optional.From(res);
+            }
+            return Optional<TResult>.Undefined;
+        }
+        public static Optional<TResult> Invoke<T1, T2, T3, TResult>(this IEnumerable<Attempt<T1, T2, T3, TResult>> attempts, T1 arg1, T2 arg2, T3 arg3)
+        {
+            var res = default(TResult);
+            if (Enumerable.Any<Attempt<T1, T2, T3, TResult>>(attempts.VerifyArgument(nameof(attempts)).IsNotNull().Value, x => x(arg1, arg2, arg3, out res)))
+            {
+                return Optional.From(res);
+            }
+            return Optional<TResult>.Undefined;
+        }
+        public static Optional<TResult> Invoke<T1, T2, T3, T4, TResult>(this IEnumerable<Attempt<T1, T2, T3, T4, TResult>> attempts, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+        {
+            var res = default(TResult);
+            if (Enumerable.Any<Attempt<T1, T2, T3, T4, TResult>>(attempts.VerifyArgument(nameof(attempts)).IsNotNull().Value, x => x(arg1, arg2, arg3, arg4, out res)))
+            {
+                return Optional.From(res);
+            }
+            return Optional<TResult>.Undefined;
+        }
     }
 }
