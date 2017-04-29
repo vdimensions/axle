@@ -3,7 +3,7 @@
   <metadata>
     <id>Axle.Core</id>
     <title>Axle.Core</title>
-    <version>1.5.0.3</version>
+    <version>1.5.0.4</version>
     <description>Axle Framework Core Library</description>
     <summary>Axle Framework Core Library</summary>
     <releaseNotes></releaseNotes>
@@ -40,33 +40,33 @@
   </metadata>
   <files>
     
-    <file src="bin\*\netstandard1.6\Axle.Core.json" target="lib\netstandard1.6" />
-    <file src="bin\*\netstandard1.6\Axle.Core.dll"  target="lib\netstandard1.6" />
-    <file src="bin\*\netstandard1.6\Axle.Core.xml"  target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Core.deps.json" target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Core.dll"       target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Core.xml"       target="lib\netstandard1.6" />
 
-    <file src="bin\*\netstandard1.5\Axle.Core.json" target="lib\netstandard1.5" />
-    <file src="bin\*\netstandard1.5\Axle.Core.dll"  target="lib\netstandard1.5" />
-    <file src="bin\*\netstandard1.5\Axle.Core.xml"  target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Core.deps.json" target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Core.dll"       target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Core.xml"       target="lib\netstandard1.5" />
 
-    <file src="bin\*\netstandard1.4\Axle.Core.json" target="lib\netstandard1.4" />
-    <file src="bin\*\netstandard1.4\Axle.Core.dll"  target="lib\netstandard1.4" />
-    <file src="bin\*\netstandard1.4\Axle.Core.xml"  target="lib\netstandard1.4" />
-
-    <file src="bin\*\netstandard1.3\Axle.Core.json" target="lib\netstandard1.3" />
-    <file src="bin\*\netstandard1.3\Axle.Core.dll"  target="lib\netstandard1.3" />
-    <file src="bin\*\netstandard1.3\Axle.Core.xml"  target="lib\netstandard1.3" />
-
-    <file src="bin\*\netstandard1.2\Axle.Core.json" target="lib\netstandard1.2" />
-    <file src="bin\*\netstandard1.2\Axle.Core.dll"  target="lib\netstandard1.2" />
-    <file src="bin\*\netstandard1.2\Axle.Core.xml"  target="lib\netstandard1.2" />
-
-    <file src="bin\*\netstandard1.1\Axle.Core.json" target="lib\netstandard1.1" />
-    <file src="bin\*\netstandard1.1\Axle.Core.dll"  target="lib\netstandard1.1" />
-    <file src="bin\*\netstandard1.1\Axle.Core.xml"  target="lib\netstandard1.1" />
-
-    <file src="bin\*\netstandard1.0\Axle.Core.json" target="lib\netstandard1.0" />
-    <file src="bin\*\netstandard1.0\Axle.Core.dll"  target="lib\netstandard1.0" />
-    <file src="bin\*\netstandard1.0\Axle.Core.xml"  target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.4\Axle.Core.deps.json" target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\Axle.Core.dll"       target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\Axle.Core.xml"       target="lib\netstandard1.4" />
+                                                     
+    <file src="bin\*\netstandard1.3\Axle.Core.deps.json" target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\Axle.Core.dll"       target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\Axle.Core.xml"       target="lib\netstandard1.3" />
+                                                     
+    <file src="bin\*\netstandard1.2\Axle.Core.deps.json" target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Core.dll"       target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Core.xml"       target="lib\netstandard1.2" />
+                                                     
+    <file src="bin\*\netstandard1.1\Axle.Core.deps.json" target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\Axle.Core.dll"       target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\Axle.Core.xml"       target="lib\netstandard1.1" />
+                                                     
+    <file src="bin\*\netstandard1.0\Axle.Core.deps.json" target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\Axle.Core.dll"       target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\Axle.Core.xml"       target="lib\netstandard1.0" />
 
     <file src="bin\*\net46\Axle.Core.dll" target="lib\net46" />
     <file src="bin\*\net46\Axle.Core.xml" target="lib\net46" />
