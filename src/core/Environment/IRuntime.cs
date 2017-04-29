@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 
 
@@ -20,6 +21,8 @@ namespace Axle.Environment
         /// A valid embedded resource path.
         /// </returns>
         string GetEmbeddedResourcePath(string resourceName);
+
+        IEnumerable<Assembly> GetAssemblies();
 
         /// <summary>
         /// Instructs the current runtime to load the assembly specified by the 

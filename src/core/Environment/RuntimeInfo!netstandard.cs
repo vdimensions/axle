@@ -13,19 +13,24 @@ namespace Axle.Environment
     [Serializable]
     partial class RuntimeInfo
     {
-        private static string ResolveAssemblyName(string assemblyName)
-        {
-            return !Platform.Environment.IsWindows()
-                ? AppDomain.CurrentDomain.GetAssemblies()
-                    .Select(x => x.GetName().Name)
-                    .Where(x => x.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
-                    .SingleOrDefault() ?? assemblyName
-                : assemblyName;
-        }
-
         private RuntimeInfo()
         {
             this.version = System.Environment.Version;
+        }
+
+        public IEnumerable<Assembly> GetAssemblies()
+        {
+            return AppDomain.CurrentDomain.GetAssemblies();
+        }
+
+        private string ResolveAssemblyName(string assemblyName)
+        {
+            return !Platform.Environment.IsWindows()
+                ? GetAssemblies()
+                      .Select(x => x.GetName().Name)
+                      .Where(x => x.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
+                      .SingleOrDefault() ?? assemblyName
+                : assemblyName;
         }
 
         public Assembly LoadAssembly(string assemblyName) { return LoadAssembly(assemblyName, null); }

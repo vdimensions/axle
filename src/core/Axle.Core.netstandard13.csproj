@@ -1,14 +1,11 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
-  
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.3</TargetFramework>
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
     <DefineConstants>DEBUG;netstandard;NETSTANDARD1_3</DefineConstants>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
-  
   <Import Project="Axle.Core.netstandard.props" />
-  
   <ItemGroup>
     <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
@@ -39,7 +36,6 @@
     <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
     <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
   </ItemGroup>
-
   <Target Name="BeforeBuild">
     <!-- Ensure the correct dotnet version for this project is made present before the build process starts. -->
     <Exec Command="dotnet restore $(ProjectName)$(ProjectExt)" />
@@ -48,7 +44,6 @@
     <!-- Clean up the obj directory, as it prevents non-netstandard projects to fail during builds from Visual Studio. -->
     <RemoveDir Directories="$(ProjectDir)\obj" />
   </Target>
-  
   <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
-  
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

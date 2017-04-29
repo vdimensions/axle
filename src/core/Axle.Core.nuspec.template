@@ -93,25 +93,25 @@
     <file src="bin\*\net35\${id}.pdb" target="lib\net35" />
     <file src="bin\*\net35\${id}.mdb" target="lib\net35" />
 
-    <file src="bin\*\net35-Unity Full v3.5\${id}.dll" target="lib\net35-Unity Full v3.5" />
-    <file src="bin\*\net35-Unity Full v3.5\${id}.xml" target="lib\net35-Unity Full v3.5" />
-    <file src="bin\*\net35-Unity Full v3.5\${id}.pdb" target="lib\net35-Unity Full v3.5" />
-    <file src="bin\*\net35-Unity Full v3.5\${id}.mdb" target="lib\net35-Unity Full v3.5" />
-
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.dll" target="lib\net35-Unity Subset v3.5" />
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.xml" target="lib\net35-Unity Subset v3.5" />
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.pdb" target="lib\net35-Unity Subset v3.5" />
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.mdb" target="lib\net35-Unity Subset v3.5" />
-
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.dll" target="lib\net35-Unity Micro v3.5" />
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.xml" target="lib\net35-Unity Micro v3.5" />
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.pdb" target="lib\net35-Unity Micro v3.5" />
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.mdb" target="lib\net35-Unity Micro v3.5" />
-
-    <file src="bin\*\net35-Unity Web v3.5\${id}.dll" target="lib\net35-Unity Web v3.5" />
-    <file src="bin\*\net35-Unity Web v3.5\${id}.xml" target="lib\net35-Unity Web v3.5" />
-    <file src="bin\*\net35-Unity Web v3.5\${id}.pdb" target="lib\net35-Unity Web v3.5" />
-    <file src="bin\*\net35-Unity Web v3.5\${id}.mdb" target="lib\net35-Unity Web v3.5" />
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.dll" target="lib\net35-Unity Full v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.xml" target="lib\net35-Unity Full v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.pdb" target="lib\net35-Unity Full v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.mdb" target="lib\net35-Unity Full v3.5" />-->
+<!---->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.dll" target="lib\net35-Unity Subset v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.xml" target="lib\net35-Unity Subset v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.pdb" target="lib\net35-Unity Subset v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.mdb" target="lib\net35-Unity Subset v3.5" />-->
+<!---->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.dll" target="lib\net35-Unity Micro v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.xml" target="lib\net35-Unity Micro v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.pdb" target="lib\net35-Unity Micro v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.mdb" target="lib\net35-Unity Micro v3.5" />-->
+<!---->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.dll" target="lib\net35-Unity Web v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.xml" target="lib\net35-Unity Web v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.pdb" target="lib\net35-Unity Web v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.mdb" target="lib\net35-Unity Web v3.5" />-->
 
     <file src="bin\*\net30\${id}.dll" target="lib\net30" />
     <file src="bin\*\net30\${id}.xml" target="lib\net30" />
