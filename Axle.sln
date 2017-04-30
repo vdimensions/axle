@@ -65,8 +65,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard16", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard20", "src\core\Axle.Core.netstandard20.csproj", "{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard", "netstandard", "{2705158F-C90A-4CAC-88C0-C4B9231B0FEC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -162,7 +160,6 @@ Global
 		{98ADC985-5017-4BC6-89E5-8D14499FD8A9} = {A416B709-1B2C-441C-9BFE-26A850104FCD}
 		{52DFF1D6-2912-4AD7-83A7-ECCF374F8A6B} = {F62E793A-DB91-44E1-96E8-5EFE28CBFD39}
 		{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA} = {05E3F547-E3CB-4DF4-9E7F-A2D1E9D352C0}
-		{2705158F-C90A-4CAC-88C0-C4B9231B0FEC} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

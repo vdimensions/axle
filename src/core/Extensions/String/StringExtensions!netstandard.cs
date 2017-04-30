@@ -16,6 +16,7 @@ namespace Axle.Extensions.String
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>.
         /// </exception>
+        /// <seealso cref="string.Intern(string)"/>
         public static string Intern(this string str) { return string.Intern(str.VerifyArgument(nameof(str)).IsNotNull()); }
 
     }

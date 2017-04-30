@@ -13,6 +13,31 @@ namespace Axle.Extensions.String
     public static partial class StringExtensions
     {
         #region Contains(...)
+        /// <summary>
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance.
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> to seek. 
+        /// </param>
+        /// <param name="comparison">
+        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search. 
+        /// </param>
+        /// <returns>
+        /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        /// <seealso cref="StringComparison"/>
+        /// <seealso cref="string.IndexOf(string, StringComparison)"/>
         public static bool Contains(this string str, string value, StringComparison comparison)
         {
             if (str == null)
@@ -21,6 +46,26 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, comparison) >= 0;
         }
+        /// <summary>
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance.
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> to seek. 
+        /// </param>
+        /// <returns>
+        /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// </exception>
+        /// <seealso cref="string.IndexOf(string)"/>
         public static bool Contains(this string str, string value)
         {
             if (str == null)
@@ -29,6 +74,37 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value) >= 0;
         }
+        /// <summary>
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance.
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> to seek. 
+        /// </param>
+        /// <param name="startIndex">
+        /// The search starting position. 
+        /// </param>
+        /// <param name="comparison">
+        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search. 
+        /// </param>
+        /// <returns>
+        /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="str"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        /// <seealso cref="StringComparison"/>
+        /// <seealso cref="string.IndexOf(string, int, StringComparison)"/>
         public static bool Contains(this string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
@@ -37,6 +113,30 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex, comparison) >= 0;
         }
+        /// <summary>
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance.
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> to seek. 
+        /// </param>
+        /// <param name="startIndex">
+        /// The search starting position. 
+        /// </param>
+        /// <returns>
+        /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
+        /// within the <paramref name="str">target string</paramref>; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="str"/>.
+        /// </exception>
+        /// <seealso cref="string.IndexOf(string, int)"/>
         public static bool Contains(this string str, string value, int startIndex)
         {
             if (str == null)
@@ -45,6 +145,44 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex) >= 0;
         }
+        /// <summary>
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance.
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> to seek. 
+        /// </param>
+        /// <param name="startIndex">
+        /// The search starting position. 
+        /// </param>
+        /// <param name="count">
+        /// The number of character positions to examine. 
+        /// </param>
+        /// <param name="comparison">
+        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search. 
+        /// </param>
+        /// <returns>
+        /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
+        /// within the <paramref name="str">target string</paramref>; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="count"/> or <paramref name="startIndex"/> is negative.
+        /// <para>-or-</para> 
+        /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
+        /// <para>-or-</para>
+        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        /// <seealso cref="StringComparison"/>
+        /// <seealso cref="string.IndexOf(string, int, int, StringComparison)"/>
         public static bool Contains(this string str, string value, int startIndex, int count, StringComparison comparison)
         {
             if (str == null)
@@ -53,6 +191,37 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex, count, comparison) >= 0;
         }
+        /// <summary>
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance.
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> to seek. 
+        /// </param>
+        /// <param name="startIndex">
+        /// The search starting position. 
+        /// </param>
+        /// <param name="count">
+        /// The number of character positions to examine. 
+        /// </param>
+        /// <returns>
+        /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
+        /// within the <paramref name="str">target string</paramref>; <c>false</c> otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="count"/> or <paramref name="startIndex"/> is negative.
+        /// <para>-or-</para> 
+        /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
+        /// <para>-or-</para>
+        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
+        /// </exception>
+        /// <seealso cref="string.IndexOf(string, int, int)"/>
         public static bool Contains(this string str, string value, int startIndex, int count)
         {
             if (str == null)
@@ -63,6 +232,17 @@ namespace Axle.Extensions.String
         }
         #endregion
 
+        /// <summary>
+        /// Checks if the target <see cref="string"/> is an empty string.
+        /// </summary>
+        /// <param name="str">The target <see cref="string"/>.</param>
+        /// <returns>
+        /// <c>true</c> if the <paramref name="str">target string</paramref> is an empty string instance; false otherwise.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>.
+        /// </exception>
+        /// <seealso cref="string.Empty"/>
         public static bool IsEmpty(this string str)
         {
             if (str == null)
@@ -336,7 +516,7 @@ namespace Axle.Extensions.String
         }
         #endregion
 
-        #region TrimStarting(...)
+        #region TrimStart(...)
         public static string TrimStart(this string str, string stringToSearch, StringComparison comparison)
         {
             return str.VerifyArgument("str").IsNotNull().Value.StartsWith(stringToSearch, comparison)
@@ -352,7 +532,7 @@ namespace Axle.Extensions.String
         }
         #endregion
 
-        #region TrimEnding(...)
+        #region TrimEnd(...)
         public static string TrimEnd(this string str, string stringToSearch, StringComparison comparison)
         {
             return str.VerifyArgument("str").IsNotNull().Value.EndsWith(stringToSearch, comparison)
