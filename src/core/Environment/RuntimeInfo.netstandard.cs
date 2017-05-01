@@ -21,7 +21,8 @@ namespace Axle.Environment
         {
             var assemblies = new List<Assembly>();
 #if NETSTANDARD1_5 || NETSTANDARD1_6
-//            var dependencies = DependencyContext.Default.RuntimeLibraries;
+            //var dependencies = AssemblyLoadContext.GetLoadedAssemblies();
+            //var dependencies = DependencyContext.Default.RuntimeLibraries;
 //            foreach (var library in dependencies)
 //            {
 //                if (IsCandidateCompilationLibrary(library))
@@ -34,10 +35,10 @@ namespace Axle.Environment
             return assemblies.ToArray();
         }
 #if NETSTANDARD1_5 || NETSTANDARD1_6
-        //        private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary)
-        //        {
-        //            return compilationLibrary.Name == "Specify" || compilationLibrary.Dependencies.Any(d => d.Name.StartsWith("Specify"));
-        //        }
+//        private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary)
+//        {
+//            return compilationLibrary.Name == "Specify" || compilationLibrary.Dependencies.Any(d => d.Name.StartsWith("Specify"));
+//        }
 #endif
 
 #warning Stub method

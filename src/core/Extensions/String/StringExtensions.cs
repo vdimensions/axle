@@ -252,38 +252,218 @@ namespace Axle.Extensions.String
             return str.Length == 0;
         }
 
-        public static bool IsNullOrEmpty(this string @this) { return string.IsNullOrEmpty(@this); }
+        /// <summary>
+        /// Checks if the target <see cref="string"/> is <c>null</c> or an empty string.
+        /// </summary>
+        /// <param name="str">The target <see cref="string"/>.</param>
+        /// <returns>
+        /// <c>true</c> if the <paramref name="str">target string</paramref> is <c>null</c> or an empty string instance; false otherwise.
+        /// </returns>
+        /// <seealso cref="string.Empty"/>
+        /// <seealso cref="string.IsNullOrEmpty(string)"/>
+        /// <seealso cref="IsEmpty(string)"/>
+        public static bool IsNullOrEmpty(this string str) { return string.IsNullOrEmpty(str); }
 
         /// <summary>
         /// Creates a <see cref="string"/> using all the chracters from a target string instance, but in a reversed order.
         /// </summary>
-        /// <param name="str">The <see cref="string">string instance</see> upon which this extension method is called upon.</param>
+        /// <param name="str">The <see cref="string">string instance</see> upon which str extension method is called upon.</param>
         /// <returns>
         /// A new string instance using all the chracters from a target string instance, but in a reversed order.
         /// </returns>
-        public static string Reverse(this string str) { return new string(str.VerifyArgument(nameof(str)).IsNotNull().Value.ToCharArray().Reverse().ToArray()); }
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>.
+        /// </exception>
+        public static string Reverse(this string str)
+        {
+            return new string(str.VerifyArgument(nameof(str)).IsNotNull().Value.ToCharArray().Reverse().ToArray());
+        }
 
         #region Split(...)
-        public static string[] Split(this string @this, char separator, StringSplitOptions options) { return @this.Split(new[] { separator }, options); }
-        public static string[] Split(this string @this, StringSplitOptions options, params char[] separators) { return @this.Split(separators, options); }
-        public static string[] Split(
-            this string @this,
-            StringSplitOptions options,
-            int count,
-            params char[] separators)
+        /// <summary>
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified Unicode character provided by the <paramref name="separator"/> parameter. 
+        /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/>
+        /// </param>
+        /// <param name="options">
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
+        /// </param>
+        /// <param name="separator">
+        /// An Unicode character to act as a delimiter.
+        /// </param>
+        /// <returns>
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified Unicode character. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>;
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
+        /// </exception>
+        /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
+        public static string[] Split(this string str, StringSplitOptions options, char separator)
         {
-            return @this.Split(separators, count, options);
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(new[] { separator }, options);
         }
-        public static string[] Split(this string @this, StringSplitOptions options, params string[] separators) { return @this.Split(separators, options); }
-        public static string[] Split(
-            this string @this,
-            StringSplitOptions options,
-            int count,
-            params string[] separators)
+        /// <summary>
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter. 
+        /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/>
+        /// </param>
+        /// <param name="options">
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
+        /// </param>
+        /// <param name="separators">
+        /// An array of Unicode characters to act as delimiters, an empty array or <c>null</c>.
+        /// </param>
+        /// <returns>
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified Unicode character. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>;
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
+        /// </exception>
+        /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
+        public static string[] Split(this string str, StringSplitOptions options, params char[] separators)
         {
-            return @this.Split(separators, count, options);
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, options);
         }
-        public static string[] Split(this string @this, params string[] separators) { return @this.Split(separators, StringSplitOptions.None); }
+        /// <summary>
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter. 
+        /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/>
+        /// </param>
+        /// <param name="options">
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
+        /// </param>
+        /// <param name="count">
+        /// The maximum number of substrings to return. 
+        /// </param>
+        /// <param name="separators">
+        /// An array of Unicode characters to act as delimiters, an empty array or <c>null</c>.
+        /// </param>
+        /// <returns>
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified Unicode character. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>;
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="count"/> is negative.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
+        /// </exception>
+        /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
+        public static string[] Split(this string str, StringSplitOptions options, int count, params char[] separators)
+        {
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, count, options);
+        }
+        /// <summary>
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
+        /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/>
+        /// </param>
+        /// <param name="options">
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
+        /// </param>
+        /// <param name="separators">
+        /// An array of strings to act as delimiters, an empty array or <c>null</c>.
+        /// </param>
+        /// <returns>
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified array of strings. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>;
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
+        /// </exception>
+        /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
+        public static string[] Split(this string str, StringSplitOptions options, params string[] separators)
+        {
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, options);
+        }
+        /// <summary>
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
+        /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/>
+        /// </param>
+        /// <param name="options">
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
+        /// </param>
+        /// <param name="count">
+        /// The maximum number of substrings to return. 
+        /// </param>
+        /// <param name="separators">
+        /// An array of strings to act as delimiters, an empty array or <c>null</c>.
+        /// </param>
+        /// <returns>
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified array of strings. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>;
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="count"/> is negative.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
+        /// </exception>
+        /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
+        public static string[] Split(this string str, StringSplitOptions options, int count, params string[] separators)
+        {
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, count, options);
+        }
+        /// <summary>
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/>
+        /// </param>
+        /// <param name="separators">
+        /// An array of strings to act as delimiters, an empty array or <c>null</c>.
+        /// </param>
+        /// <returns>
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
+        /// that are delimited by elements of a specified array of strings. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>;
+        /// </exception>
+        /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
+        public static string[] Split(this string str, params string[] separators)
+        {
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, StringSplitOptions.None);
+        }
         #endregion
 
         private static string CutFromIndex(
@@ -517,14 +697,14 @@ namespace Axle.Extensions.String
         #endregion
 
         #region TrimStart(...)
-        public static string TrimStart(this string str, string stringToSearch, StringComparison comparison)
+        public static string CutStart(this string str, string stringToSearch, StringComparison comparison)
         {
             return str.VerifyArgument("str").IsNotNull().Value.StartsWith(stringToSearch, comparison)
                 ? str.TakeAfterFirst(stringToSearch, 0, comparison)
                 : str;
         }
-        public static string TrimStart(this string str, string stringToSearch) { return TrimStart(str, stringToSearch, StringComparison.CurrentCulture); }
-        public static string TrimStart(this string str, char charToSearch)
+        public static string CutStart(this string str, string stringToSearch) { return CutStart(str, stringToSearch, StringComparison.CurrentCulture); }
+        public static string CutStart(this string str, char charToSearch)
         {
             return str.VerifyArgument("str").IsNotNull().Value.Length > 0 && str[0] == charToSearch
                 ? str.Substring(1)
@@ -533,14 +713,14 @@ namespace Axle.Extensions.String
         #endregion
 
         #region TrimEnd(...)
-        public static string TrimEnd(this string str, string stringToSearch, StringComparison comparison)
+        public static string CutEnd(this string str, string stringToSearch, StringComparison comparison)
         {
             return str.VerifyArgument("str").IsNotNull().Value.EndsWith(stringToSearch, comparison)
                 ? str.TakeBeforeLast(stringToSearch, comparison)
                 : str;
         }
-        public static string TrimEnd(this string str, string stringToSearch) { return TrimEnd(str, stringToSearch, StringComparison.CurrentCulture); }
-        public static string TrimEnd(this string str, char charToSearch)
+        public static string CutEnd(this string str, string stringToSearch) { return CutEnd(str, stringToSearch, StringComparison.CurrentCulture); }
+        public static string CutEnd(this string str, char charToSearch)
         {
             return str.VerifyArgument("str").IsNotNull().Value.Length > 0 && str[str.Length - 1] == charToSearch
                 ? str.Substring(0, str.Length - 1)

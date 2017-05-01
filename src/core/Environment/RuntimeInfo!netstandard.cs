@@ -38,11 +38,11 @@ namespace Axle.Environment
         {
             if (assemblyName == null)
             {
-                throw new ArgumentNullException(assemblyName);
+                throw new ArgumentNullException(nameof(assemblyName));
             }
             if (assemblyName.Length == 0)
             {
-                throw new ArgumentException("Assembly name cannot be an empty string,", "assemblyName");
+                throw new ArgumentException("Assembly name cannot be an empty string,", nameof(assemblyName));
             }
 
             assemblyName = ResolveAssemblyName(assemblyName);

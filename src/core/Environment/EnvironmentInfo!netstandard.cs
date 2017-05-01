@@ -2,13 +2,11 @@ using System;
 using System.Globalization;
 using System.Text;
 
-using Axle.IO;
-
 
 namespace Axle.Environment
 {
     [Serializable]
-    internal sealed partial class EnvironmentInfo : IEnvironment
+    internal sealed partial class EnvironmentInfo
     {
         internal static OperatingSystemID GetOSID(OperatingSystem os)
         {
