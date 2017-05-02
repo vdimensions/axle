@@ -1,0 +1,25 @@
+﻿using System;
+
+
+namespace Axle.Conversion.Parsing
+{
+    /// <summary>
+    /// A class that can parse <see cref="string">string</see> representations of a <see cref="Uri">uniform resource identifier</see> to a valid <see cref="Uri"/> instance.
+    /// </summary>
+#if !netstandard
+    [Serializable]
+#endif
+    //[Stateless]
+    public sealed class UriParser : AbstractParser<Uri>
+    {
+        protected override Uri DoParse(string value, IFormatProvider formatProvider)
+        {
+            return new Uri(value, UriKind.RelativeOrAbsolute);
+        }
+
+        public override bool TryParse(string value, IFormatProvider formatProvider, out Uri output)
+        {
+            return Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out output);
+        }
+    }
+}

@@ -188,6 +188,25 @@
     <Compile Include="Conversion\Parsing\ParseException!netstandard.cs" />
     <Compile Include="Conversion\ChainedConverter.cs" />
     <Compile Include="Conversion\Parsing\BooleanParser.cs" />
+    <Compile Include="Conversion\Parsing\ByteParser.cs" />
+    <Compile Include="Conversion\Parsing\CharacterParser.cs" />
+    <Compile Include="Conversion\Parsing\ContentTypeParser.cs" />
+    <Compile Include="Conversion\Parsing\EnumParser.cs" />
+    <Compile Include="Conversion\Parsing\Int16Parser.cs" />
+    <Compile Include="Conversion\Parsing\Int32Parser.cs" />
+    <Compile Include="Conversion\Parsing\Int64Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt16Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt32Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt64Parser.cs" />
+    <Compile Include="Conversion\Parsing\SByteParser.cs" />
+    <Compile Include="Conversion\Parsing\DateTimeParser.cs" />
+    <Compile Include="Conversion\Parsing\TimeSpanParser.cs" />
+    <Compile Include="Conversion\Parsing\UriParser.cs" />
+    <Compile Include="Conversion\Parsing\VersionParser.cs" />
+    <Compile Include="Conversion\Parsing\DecimalParser.cs" />
+    <Compile Include="Conversion\Parsing\DoubleParser.cs" />
+    <Compile Include="Conversion\Parsing\GuidParser.cs" />
+    <Compile Include="Conversion\Parsing\SingleParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
