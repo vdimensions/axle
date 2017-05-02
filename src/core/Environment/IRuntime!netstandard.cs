@@ -5,10 +5,7 @@ using System.Security.Policy;
 
 namespace Axle.Environment
 {
-    /// <summary>
-    /// An interface serving as an abstraction to a .NET runtime.
-    /// </summary>
-    public partial interface IRuntime
+    partial interface IRuntime
     {
         /// <summary>
         /// Instructs the current runtime to load the assembly specified by the 
