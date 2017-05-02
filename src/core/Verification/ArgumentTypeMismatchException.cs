@@ -1,7 +1,5 @@
 ﻿using System;
-#if !netstandard
-using System.Runtime.Serialization;
-#endif
+
 
 namespace Axle.Verification
 {
@@ -9,10 +7,7 @@ namespace Axle.Verification
     /// The exception that is thrown if one of the arguments to a method is not of the expected type.
     /// </summary>
     /// <seealso cref="ArgumentException" />
-    #if !netstandard
-    [Serializable]
-    #endif
-    public class ArgumentTypeMismatchException : ArgumentException
+    public partial class ArgumentTypeMismatchException : ArgumentException
     {
         internal static string FormatMessage(Type expectedType, Type actualType)
         {
@@ -105,19 +100,6 @@ namespace Axle.Verification
 		/// </param>
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName, Exception inner)
             : this(FormatMessage(expectedType, actualType), paramName, inner) { }
-
-        #if !netstandard
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data. 
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination. 
-        /// </param>
-        protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        #endif
     }
 
     /// <summary>
@@ -126,10 +108,7 @@ namespace Axle.Verification
     /// <typeparam name="TExpected">
     /// The expected type of the argument. 
     /// </typeparam>
-     #if !netstandard
-    [Serializable]
-    #endif
-    public class ArgumentTypeMismatchException<TExpected> : ArgumentTypeMismatchException
+    public partial class ArgumentTypeMismatchException<TExpected> : ArgumentTypeMismatchException
     {
         /// <summary>
         /// Initializes a new instance of <see cref="ArgumentTypeMismatchException{TExpected}" /> class.
@@ -161,19 +140,6 @@ namespace Axle.Verification
         /// the current exception is raised in a catch block that handles the inner exception. 
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Type actualType, Exception inner) : base(typeof(TExpected), actualType, paramName, inner) { }
-
-        #if !netstandard
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected}" /> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data. 
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination. 
-        /// </param>
-        protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        #endif
     }
 
     /// <summary>
@@ -185,10 +151,7 @@ namespace Axle.Verification
     /// <typeparam name="T">
     /// The actual type of the argument. 
     /// </typeparam>
-    #if !netstandard
-    [Serializable]
-    #endif
-    public class ArgumentTypeMismatchException<TExpected, T> : ArgumentTypeMismatchException
+    public partial class ArgumentTypeMismatchException<TExpected, T> : ArgumentTypeMismatchException
     {
         /// <summary>
         /// Initializes a new instance of <see cref="ArgumentTypeMismatchException{TExpected,T}" /> class.
@@ -214,18 +177,5 @@ namespace Axle.Verification
         /// the current exception is raised in a catch block that handles the inner exception. 
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Exception inner) : base(typeof(TExpected), typeof(T), paramName, inner) { }
-
-        #if !netstandard
-        /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected,T}" /> class with serialized data.
-        /// </summary>
-        /// <param name="info">
-        /// The object that holds the serialized object data. 
-        /// </param>
-        /// <param name="context">
-        /// The contextual information about the source or destination. 
-        /// </param>
-        protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
-        #endif
     }
 }

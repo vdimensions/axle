@@ -5,9 +5,6 @@ using System.Text;
 
 namespace Axle.Environment
 {
-    /// <summary>
-    /// An interface representing an application's execution environment and its properties.
-    /// </summary>
     public partial interface IEnvironment 
     {
         /// <summary>

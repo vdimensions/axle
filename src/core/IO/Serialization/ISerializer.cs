@@ -28,6 +28,7 @@ namespace Axle.IO.Serialization
         /// </exception>
         object Deserialize(Stream stream, Type objectType);
 
+        #if !netstandard
         /// <summary>
         /// Serializes the provided by the <paramref name="obj"/> parameter object or graph of objects 
         /// to the target <paramref name="stream"/>. 
@@ -41,14 +42,31 @@ namespace Axle.IO.Serialization
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="obj"/> or <paramref name="stream"/> is <c>null</c>.
         /// </exception>
-#if !netstandard
         /// <exception cref="SerializationException">
         /// An error has occurred durring the serialization process.
         /// </exception>
-#endif
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permissions
         /// </exception>
         void Serialize(object obj, Stream stream);
+        #else
+        /// <summary>
+        /// Serializes the provided by the <paramref name="obj"/> parameter object or graph of objects 
+        /// to the target <paramref name="stream"/>. 
+        /// </summary>
+        /// <param name="obj">
+        /// The object to be serialized.
+        /// </param>
+        /// <param name="stream">
+        /// The <see cref="Stream"/> to serialize the object into.
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="obj"/> or <paramref name="stream"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="System.Security.SecurityException">
+        /// The caller does not have the required permissions
+        /// </exception>
+        void Serialize(object obj, Stream stream);
+        #endif
     }
 }
