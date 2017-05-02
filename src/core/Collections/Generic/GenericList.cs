@@ -7,6 +7,12 @@ using System.Linq;
 
 namespace Axle.Collections.Generic
 {
+    /// <summary>
+    /// A generic wrapper around a non-generic <see cref="IList"/> collection.
+    /// </summary>
+    /// <typeparam name="T">The type of the elements in the list. </typeparam>
+    /// <seealso cref="IList"/>
+    /// <seealso cref="IList{T}"/>
 #if !netstandard
     [Serializable]
 #endif

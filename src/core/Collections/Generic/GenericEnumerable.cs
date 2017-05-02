@@ -6,6 +6,12 @@ using System.Diagnostics;
 
 namespace Axle.Collections.Generic
 {
+    /// <summary>
+    /// A generic wrapper for a non-generic <see cref="IEnumerable"/>
+    /// </summary>
+    /// <typeparam name="T">The type of objects to enumerate. </typeparam>
+    /// <seealso cref="IEnumerable"/>
+    /// <seealso cref="IEnumerable{T}"/>
 #if !netstandard
     [Serializable]
 #endif
