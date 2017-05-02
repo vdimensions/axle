@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard1.1</TargetFramework>
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <DefineConstants>DEBUG;netstandard;NETSTANDARD1_1</DefineConstants>
+    <RootNamespace>Axle</RootNamespace>
+  </PropertyGroup>
+  <Import Project="Axle.Core.netstandard.props" />
+  <ItemGroup>
+    <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
+    <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
+    <Compile Remove="Environment\IEnvironment!netstandard.cs" />
+    <Compile Remove="Environment\IRuntime!netstandard.cs" />
+    <Compile Remove="Environment\Platform.cs" />
+    <Compile Remove="Environment\RuntimeInfo!netstandard.cs" />
+    <Compile Remove="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
+    <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
+    <Compile Remove="Extensions\String\StringExtensions!netstandard.cs" />
+    <Compile Remove="Globalization\CultureScope.cs" />
+    <Compile Remove="IO\Serialization\BinarySerializer.cs" />
+    <Compile Remove="IO\Serialization\XmlSerializer.cs" />
+    <Compile Remove="Linq\Collection.cs" />
+    <Compile Remove="References\Singleton!netstandard.cs" />
+    <Compile Remove="References\Singleton.cs" />
+    <Compile Remove="References\Singleton.netstandard.cs" />
+    <Compile Remove="Reflection\AssemblyNameEqualityComparer.cs" />
+    <Compile Remove="Reflection\CastOperator.cs" />
+    <Compile Remove="Reflection\EventToken!netstandard.cs" />
+    <Compile Remove="Reflection\FieldToken!netstandard.cs" />
+    <Compile Remove="Reflection\MemberExtensions!netstandard.cs" />
+    <Compile Remove="Reflection\MemberTokenBase!netstandard.cs" />
+    <Compile Remove="Reflection\MethodBaseToken!netstandard.cs" />
+    <Compile Remove="Reflection\MethodToken!netstandard.cs" />
+    <Compile Remove="Reflection\PropertyToken!netstandard.cs" />
+    <Compile Remove="Reflection\ReflectionExtensions!netstandard.cs" />
+    <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
+    <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+    <!-- Ensure the correct dotnet version for this project is made present before the build process starts. -->
+    <Exec Command="dotnet restore $(ProjectName)$(ProjectExt)" />
+  </Target>
+  <Target Name="AfterBuild">
+    <!-- Clean up the obj directory, as it prevents non-netstandard projects to fail during builds from Visual Studio. -->
+    <RemoveDir Directories="$(ProjectDir)\obj" />
+  </Target>
+  <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>

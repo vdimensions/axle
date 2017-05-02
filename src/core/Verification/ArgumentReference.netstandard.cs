@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Reflection;
 
 
 namespace Axle.Verification
@@ -10,16 +11,13 @@ namespace Axle.Verification
     /// </summary>
     public partial struct ArgumentReference<T>
     {
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
         {
             var actualType = Value.GetType();
-            if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType))
+            if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType.GetTypeInfo()))
             {
-                throw new ArgumentTypeMismatchException(expectedType, actualType, this.Name);
+                throw new ArgumentTypeMismatchException(expectedType, actualType, Name);
             }
             return this;
         }

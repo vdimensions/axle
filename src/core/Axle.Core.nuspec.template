@@ -30,7 +30,7 @@
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" />
-      <frameworkAssembly assemblyName="System.Configuration" />
+      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
       <frameworkAssembly assemblyName="System.Core" />
       <frameworkAssembly assemblyName="System.Data" />
       <frameworkAssembly assemblyName="System.Xml" />
@@ -40,26 +40,33 @@
   </metadata>
   <files>
     
-    <file src="bin\*\netstandard1.6\${id}.dll" target="lib\netstandard1.6" />
-    <file src="bin\*\netstandard1.6\${id}.xml" target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\${id}.deps.json" target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\${id}.dll"       target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\${id}.xml"       target="lib\netstandard1.6" />
 
-    <file src="bin\*\netstandard1.5\${id}.dll" target="lib\netstandard1.5" />
-    <file src="bin\*\netstandard1.5\${id}.xml" target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\${id}.deps.json" target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\${id}.dll"       target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\${id}.xml"       target="lib\netstandard1.5" />
 
-    <file src="bin\*\netstandard1.4\${id}.dll" target="lib\netstandard1.4" />
-    <file src="bin\*\netstandard1.4\${id}.xml" target="lib\netstandard1.4" />
-
-    <file src="bin\*\netstandard1.3\${id}.dll" target="lib\netstandard1.3" />
-    <file src="bin\*\netstandard1.3\${id}.xml" target="lib\netstandard1.3" />
-
-    <file src="bin\*\netstandard1.2\${id}.dll" target="lib\netstandard1.2" />
-    <file src="bin\*\netstandard1.2\${id}.xml" target="lib\netstandard1.2" />
-
-    <file src="bin\*\netstandard1.1\${id}.dll" target="lib\netstandard1.1" />
-    <file src="bin\*\netstandard1.1\${id}.xml" target="lib\netstandard1.1" />
-
-    <file src="bin\*\netstandard1.0\${id}.dll" target="lib\netstandard1.0" />
-    <file src="bin\*\netstandard1.0\${id}.xml" target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.4\${id}.deps.json" target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\${id}.dll"       target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\${id}.xml"       target="lib\netstandard1.4" />
+                                                     
+    <file src="bin\*\netstandard1.3\${id}.deps.json" target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\${id}.dll"       target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\${id}.xml"       target="lib\netstandard1.3" />
+                                                     
+    <file src="bin\*\netstandard1.2\${id}.deps.json" target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\${id}.dll"       target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\${id}.xml"       target="lib\netstandard1.2" />
+                                                     
+    <file src="bin\*\netstandard1.1\${id}.deps.json" target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\${id}.dll"       target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\${id}.xml"       target="lib\netstandard1.1" />
+                                                     
+    <file src="bin\*\netstandard1.0\${id}.deps.json" target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\${id}.dll"       target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\${id}.xml"       target="lib\netstandard1.0" />
 
     <file src="bin\*\net46\${id}.dll" target="lib\net46" />
     <file src="bin\*\net46\${id}.xml" target="lib\net46" />
@@ -86,25 +93,25 @@
     <file src="bin\*\net35\${id}.pdb" target="lib\net35" />
     <file src="bin\*\net35\${id}.mdb" target="lib\net35" />
 
-    <file src="bin\*\net35-Unity Full v3.5\${id}.dll" target="lib\net35-Unity Full v3.5" />
-    <file src="bin\*\net35-Unity Full v3.5\${id}.xml" target="lib\net35-Unity Full v3.5" />
-    <file src="bin\*\net35-Unity Full v3.5\${id}.pdb" target="lib\net35-Unity Full v3.5" />
-    <file src="bin\*\net35-Unity Full v3.5\${id}.mdb" target="lib\net35-Unity Full v3.5" />
-
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.dll" target="lib\net35-Unity Subset v3.5" />
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.xml" target="lib\net35-Unity Subset v3.5" />
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.pdb" target="lib\net35-Unity Subset v3.5" />
-    <file src="bin\*\net35-Unity Subset v3.5\${id}.mdb" target="lib\net35-Unity Subset v3.5" />
-
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.dll" target="lib\net35-Unity Micro v3.5" />
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.xml" target="lib\net35-Unity Micro v3.5" />
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.pdb" target="lib\net35-Unity Micro v3.5" />
-    <file src="bin\*\net35-Unity Micro v3.5\${id}.mdb" target="lib\net35-Unity Micro v3.5" />
-
-    <file src="bin\*\net35-Unity Web v3.5\${id}.dll" target="lib\net35-Unity Web v3.5" />
-    <file src="bin\*\net35-Unity Web v3.5\${id}.xml" target="lib\net35-Unity Web v3.5" />
-    <file src="bin\*\net35-Unity Web v3.5\${id}.pdb" target="lib\net35-Unity Web v3.5" />
-    <file src="bin\*\net35-Unity Web v3.5\${id}.mdb" target="lib\net35-Unity Web v3.5" />
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.dll" target="lib\net35-Unity Full v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.xml" target="lib\net35-Unity Full v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.pdb" target="lib\net35-Unity Full v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Full v3.5\${id}.mdb" target="lib\net35-Unity Full v3.5" />-->
+<!---->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.dll" target="lib\net35-Unity Subset v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.xml" target="lib\net35-Unity Subset v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.pdb" target="lib\net35-Unity Subset v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Subset v3.5\${id}.mdb" target="lib\net35-Unity Subset v3.5" />-->
+<!---->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.dll" target="lib\net35-Unity Micro v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.xml" target="lib\net35-Unity Micro v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.pdb" target="lib\net35-Unity Micro v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Micro v3.5\${id}.mdb" target="lib\net35-Unity Micro v3.5" />-->
+<!---->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.dll" target="lib\net35-Unity Web v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.xml" target="lib\net35-Unity Web v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.pdb" target="lib\net35-Unity Web v3.5" />-->
+<!--    <file src="bin\*\net35-Unity Web v3.5\${id}.mdb" target="lib\net35-Unity Web v3.5" />-->
 
     <file src="bin\*\net30\${id}.dll" target="lib\net30" />
     <file src="bin\*\net30\${id}.xml" target="lib\net30" />

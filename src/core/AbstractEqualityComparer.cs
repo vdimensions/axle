@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+#if netstandard
+using System.Reflection;
+#endif
 
 
 namespace Axle
@@ -18,11 +21,13 @@ namespace Axle
 #endif
     public abstract class AbstractEqualityComparer<T> : IEqualityComparer<T>
     {
-#if !netstandard
 #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
 #endif
+#if !netstandard
         private static readonly bool _isValueType = typeof (T).IsValueType;
+#else
+        private static readonly bool _isValueType = typeof (T).GetTypeInfo().IsValueType;
 #endif
 
         /// <summary>
@@ -56,13 +61,9 @@ namespace Axle
         /// </param>
         public bool Equals(T x, T y)
         {
-            return
-#if !netstandard
-                _isValueType
+            return _isValueType
                 ? this.DoEquals(x, y)
-                : 
-#endif
-                !ReferenceEquals(x, null)
+                : !ReferenceEquals(x, null)
                     ? ReferenceEquals(y, null)
                         ? false
                         : ReferenceEquals(x, y) || this.DoEquals(x, y)
@@ -85,7 +86,7 @@ namespace Axle
         {
             if (ReferenceEquals(obj, null))
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return unchecked(this.DoGetHashCode(obj));
@@ -111,7 +112,7 @@ namespace Axle
         {
             if (ReferenceEquals(obj, null))
             {
-                throw new ArgumentNullException("obj");
+                throw new ArgumentNullException(nameof(obj));
             }
 
             return appendTypeHashCode 

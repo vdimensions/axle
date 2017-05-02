@@ -42,7 +42,7 @@ namespace Axle.Extensions.IO.BinaryReader
         /// <seealso cref="SeekOrigin"/>
         public static long Seek(this BinaryReader reader, long offset, SeekOrigin origin)
         {
-            return reader.VerifyArgument("reader").IsNotNull().Value.BaseStream.Seek(offset, origin);
+            return reader.VerifyArgument(nameof(reader)).IsNotNull().Value.BaseStream.Seek(offset, origin);
         }
     }
 }

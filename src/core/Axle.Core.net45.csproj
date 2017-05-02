@@ -40,12 +40,27 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AbstractEqualityComparer.cs" />
+    <Compile Include="AdaptiveComparer.cs" />
+    <Compile Include="AdaptiveEqualityComparer.cs" />
     <Compile Include="Attempt.cs" />
+    <Compile Include="AttemptExtensions.cs" />
+    <Compile Include="Collections\Generic\GenericEnumerable.cs" />
+    <Compile Include="Collections\Generic\GenericEnumerator.cs" />
+    <Compile Include="Collections\Generic\GenericList.cs" />
     <Compile Include="Environment\Endianness.cs" />
+    <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
+    <Compile Include="Environment\EnvironmentExtensions.cs" />
+    <Compile Include="Environment\EnvironmentInfo!netstandard.cs" />
+    <Compile Include="Environment\EnvironmentInfo.cs" />
+    <Compile Include="Environment\IEnvironment!netstandard.cs" />
     <Compile Include="Environment\IEnvironment.cs" />
     <Compile Include="Environment\IRuntime!netstandard.cs" />
     <Compile Include="Environment\IRuntime.cs" />
     <Compile Include="Environment\OperatingSystemID.cs" />
+    <Compile Include="Environment\Platform.cs" />
+    <Compile Include="Environment\RuntimeExtensions.cs" />
+    <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
+    <Compile Include="Environment\RuntimeInfo.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
@@ -55,15 +70,42 @@
     <Compile Include="Extensions\IO\StreamWriter\StreamWriterExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\Fluent\FluentStreamExtensions.cs" />
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
+    <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
+    <Compile Include="Extensions\String\StringExtensions.cs" />
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
     <Compile Include="IO\Serialization\ISerializer.cs" />
     <Compile Include="IO\Serialization\XmlSerializer.cs" />
+    <Compile Include="Linq\ISequence.cs" />
+    <Compile Include="Linq\Sequence.cs" />
+    <Compile Include="Linq\SequenceExtensions.cs" />
+    <Compile Include="Optional.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReferenceEqualityComparer.cs" />
+    <Compile Include="References\IReference.cs" />
+    <Compile Include="References\ISingetonReference.cs" />
+    <Compile Include="References\IWeakReference.cs" />
+    <Compile Include="References\Singleton!netstandard.cs" />
+    <Compile Include="References\Singleton.cs" />
+    <Compile Include="References\WeakReference.cs" />
+    <Compile Include="References\WeakReferenceEqualityComparer.cs" />
     <Compile Include="Reflection\AccessModifier.cs" />
     <Compile Include="Reflection\AccessorType.cs" />
+    <Compile Include="Reflection\AssemblyNameEqualityComparer.cs" />
+    <Compile Include="Reflection\CastOperator.cs" />
+    <Compile Include="Reflection\ConstructorToken.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
+    <Compile Include="Reflection\EventAccessor.cs" />
+    <Compile Include="Reflection\EventAddAccessor.cs" />
+    <Compile Include="Reflection\EventRemoveAccessor.cs" />
+    <Compile Include="Reflection\EventToken!netstandard.cs" />
+    <Compile Include="Reflection\EventToken.cs" />
+    <Compile Include="Reflection\FieldToken!netstandard.cs" />
+    <Compile Include="Reflection\FieldToken.cs" />
+    <Compile Include="Reflection\FieldTokenAccessor.cs" />
+    <Compile Include="Reflection\FieldTokenGetAccessor.cs" />
+    <Compile Include="Reflection\FieldTokenSetAccessor.cs" />
+    <Compile Include="Reflection\GenericMethodToken.cs" />
     <Compile Include="Reflection\IAccessible.cs" />
     <Compile Include="Reflection\IAccessor.cs" />
     <Compile Include="Reflection\IAttributeInfo.cs" />
@@ -82,22 +124,45 @@
     <Compile Include="Reflection\IParameter.cs" />
     <Compile Include="Reflection\IProperty.cs" />
     <Compile Include="Reflection\IReadableMember.cs" />
-    <Compile Include="Reflection\IReadWriteMember.cs" />
     <Compile Include="Reflection\IReflected.cs" />
     <Compile Include="Reflection\IRemoveAccessor.cs" />
     <Compile Include="Reflection\ISetAccessor.cs" />
     <Compile Include="Reflection\IWriteableMember.cs" />
+    <Compile Include="Reflection\MemberExtensions!netstandard.cs" />
+    <Compile Include="Reflection\MemberExtensions.cs" />
+    <Compile Include="Reflection\MemberTokenBase!netstandard.cs" />
+    <Compile Include="Reflection\MemberTokenBase.cs" />
+    <Compile Include="Reflection\MethodBaseToken!netstandard.cs" />
+    <Compile Include="Reflection\MethodBaseToken.cs" />
+    <Compile Include="Reflection\MethodToken!netstandard.cs" />
+    <Compile Include="Reflection\MethodToken.cs" />
     <Compile Include="Reflection\ParameterDirection.cs" />
+    <Compile Include="Reflection\PropertyAccessor.cs" />
+    <Compile Include="Reflection\PropertyGetAccessor.cs" />
+    <Compile Include="Reflection\PropertySetAccessor.cs" />
+    <Compile Include="Reflection\PropertyToken!netstandard.cs" />
+    <Compile Include="Reflection\PropertyToken.cs" />
+    <Compile Include="Reflection\ReflectionExtensions!netstandard.cs" />
+    <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Text\RegularExpressions\IPathExpression.cs" />
     <Compile Include="Text\RegularExpressions\IRegularExpression.cs" />
     <Compile Include="Threading\ILock.cs" />
     <Compile Include="Threading\ILockHandle.cs" />
+    <Compile Include="Threading\IReadWriteLock.cs" />
+    <Compile Include="Threading\IReentrantReadWriteLock.cs" />
+    <Compile Include="Threading\ReaderWriterLockExtensions.cs" />
+    <Compile Include="Threading\ReadLockHandle.cs" />
+    <Compile Include="Threading\ReadWriteLock.cs" />
+    <Compile Include="Threading\ReentrantReadWriteLock.cs" />
+    <Compile Include="Threading\UpgradeableReadLockHandle.cs" />
+    <Compile Include="Threading\WriteLockHandle.cs" />
     <Compile Include="Verification\ArgumentReference.cs" />
     <Compile Include="Verification\ArgumentReference!netstandard.cs" />
     <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
     <Compile Include="Verification\ArrayVerifier.cs" />
     <Compile Include="Verification\CollectionVerifier.cs" />
     <Compile Include="Verification\EnumerableVerifier.cs" />
+    <Compile Include="Verification\TypeVerifier!netstandard.cs" />
     <Compile Include="Verification\Verifier.cs" />
     <Compile Include="Verification\ComparableVerifier.cs" />
     <Compile Include="Verification\StringVerifier.cs" />
@@ -122,6 +187,9 @@
   -->
   <ItemGroup>
     <None Include="Extensions\IO\Stream\StreamExtensions2.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Extensions\Boolean\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

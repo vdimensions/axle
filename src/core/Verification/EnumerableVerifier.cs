@@ -12,9 +12,6 @@ namespace Axle.Verification
     /// <seealso cref="IEnumerable"/>
     public static class EnumerableVerifier
     {
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument, string message) where T: IEnumerable
         {
@@ -37,9 +34,6 @@ namespace Axle.Verification
             }
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument) where T: IEnumerable
         {

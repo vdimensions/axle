@@ -33,9 +33,6 @@ namespace Axle.Verification
         /// <exception cref="ArgumentOutOfRangeException">
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThan<T>(this ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
         {
@@ -71,24 +68,18 @@ namespace Axle.Verification
         /// <exception cref="ArgumentOutOfRangeException">
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThan<T>(this ArgumentReference<T> argument, T minValue) where T: IComparable<T>
         {
             return IsGreaterThan(argument, minValue, null);
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(this ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(minValue, null))
             {
-                throw new ArgumentNullException("minValue");
+                throw new ArgumentNullException(nameof(minValue));
             }
             if (argument.Value.CompareTo(minValue) >= 0)
             {
@@ -99,24 +90,18 @@ namespace Axle.Verification
                 : new ArgumentOutOfRangeException(argument.Name, message);
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(this ArgumentReference<T> argument, T minValue) where T: IComparable<T>
         {
             return IsGreaterThanOrEqualTo(argument, minValue, null);
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThan<T>(this ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(maxValue, null))
             {
-                throw new ArgumentNullException("maxValue");
+                throw new ArgumentNullException(nameof(maxValue));
             }
             if (argument.Value.CompareTo(maxValue) < 0)
             {
@@ -127,24 +112,18 @@ namespace Axle.Verification
                 : new ArgumentOutOfRangeException(argument.Name, message);
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThan<T>(this ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
         {
             return IsLessThan(argument, maxValue, null);
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(this ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(maxValue, null))
             {
-                throw new ArgumentNullException("maxValue");
+                throw new ArgumentNullException(nameof(maxValue));
             }
             if (argument.Value.CompareTo(maxValue) <- 0)
             {
@@ -155,9 +134,6 @@ namespace Axle.Verification
                 : new ArgumentOutOfRangeException(argument.Name, message);
         }
 
-        #if net45
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(this ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
         {

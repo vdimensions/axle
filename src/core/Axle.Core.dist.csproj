@@ -41,7 +41,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Axle.Core.dist.csproj.paket.references" />
-    <None Include="Axle.Core.netstandard.props" />
     <None Include="Axle.Core.netstandard.props.template" />
     <None Include="Axle.Core.netstandard.targets.template" />
     <None Include="Axle.Core.netstandard.targets" />
