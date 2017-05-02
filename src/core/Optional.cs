@@ -21,7 +21,7 @@ namespace Axle
 
 		public static IEnumerable<T> FilterPresent<T>(this IEnumerable<Optional<T>> collection)
 		{
-			return collection.VerifyArgument("collection").IsNotNull().Value.Where(x => x.HasValue).Select(x => x.Value);
+            return collection.VerifyArgument(nameof(collection)).IsNotNull().Value.Where(x => x.HasValue).Select(x => x.Value);
 		}
 	}
 

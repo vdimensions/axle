@@ -171,6 +171,23 @@
     <Compile Include="Threading\ReadWriteLock.cs" />
     <Compile Include="Threading\ReentrantReadWriteLock.cs" />
     <Compile Include="Verification\ArgumentTypeMismatchException!netstandard.cs" />
+    <Compile Include="Conversion\ITwoWayConverter.cs" />
+    <Compile Include="Conversion\IConverter.cs" />
+    <Compile Include="Conversion\IdentityConverter.cs" />
+    <Compile Include="Conversion\ConversionException.cs" />
+    <Compile Include="Conversion\ConversionException!netstandard.cs" />
+    <Compile Include="Conversion\BytesToStringConverter.cs" />
+    <Compile Include="Conversion\Parsing\AbstractParser.cs" />
+    <Compile Include="Conversion\AbstractConverter.cs" />
+    <Compile Include="Conversion\AbstractTwoWayConverter.cs" />
+    <Compile Include="Conversion\ReverseConverter.cs" />
+    <Compile Include="Conversion\Parsing\AbstractStrictParser.cs" />
+    <Compile Include="Conversion\Parsing\IParser.cs" />
+    <Compile Include="Conversion\Parsing\IStrictParser.cs" />
+    <Compile Include="Conversion\Parsing\ParseException.cs" />
+    <Compile Include="Conversion\Parsing\ParseException!netstandard.cs" />
+    <Compile Include="Conversion\ChainedConverter.cs" />
+    <Compile Include="Conversion\Parsing\BooleanParser.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
@@ -193,6 +210,9 @@
   <ItemGroup>
     <Folder Include="Extensions\Boolean\" />
     <Folder Include="Extensions\StringComparer\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Conversion\" />
+    <Folder Include="Conversion\Parsing\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
