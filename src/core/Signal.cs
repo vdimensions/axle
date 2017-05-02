@@ -143,7 +143,7 @@ namespace Axle
         }
 
         /// <summary>
-        /// Removes the provided delegate form any subscriptions to the current <see cref="Signal"/> instance
+        /// Removes the provided delegate from any subscriptions to the current <see cref="Signal"/> instance
         /// </summary>
         /// <param name="action">
         /// The unsubscribing delegate. Can be <c>null</c>. Passing <c>null</c> value will cause no effect. 
@@ -297,7 +297,7 @@ namespace Axle
         }
 
         /// <summary>
-        /// Removes the provided delegate form any subscriptions to the current <see cref="Signal{T}"/> instance
+        /// Removes the provided delegate from any subscriptions to the current <see cref="Signal{T}"/> instance
         /// </summary>
         /// <param name="action">
         /// The unsubscribing delegate. Can be <c>null</c>. Passing <c>null</c> value will cause no effect. 
@@ -453,7 +453,7 @@ namespace Axle
         }
 
         /// <summary>
-        /// Removes the provided delegate form any subscriptions to the current <see cref="Signal{T1, T2}"/> instance
+        /// Removes the provided delegate from any subscriptions to the current <see cref="Signal{T1, T2}"/> instance
         /// </summary>
         /// <param name="action">
         /// The unsubscribing delegate. Can be <c>null</c>. Passing <c>null</c> value will cause no effect. 

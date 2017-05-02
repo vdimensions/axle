@@ -170,6 +170,7 @@
     <Compile Include="Threading\WriteLockHandle.cs" />
     <Compile Include="Threading\ReadWriteLock.cs" />
     <Compile Include="Threading\ReentrantReadWriteLock.cs" />
+    <Compile Include="Verification\ArgumentTypeMismatchException!netstandard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />

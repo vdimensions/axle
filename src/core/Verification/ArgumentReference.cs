@@ -41,7 +41,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public ArgumentReference<T> IsOfType(Type expectedType)
         {
-            return IsOfTypeUnchecked(expectedType.VerifyArgument("expectedType").IsNotNull());
+            return IsOfTypeUnchecked(expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
         }
 
         /// <summary>
