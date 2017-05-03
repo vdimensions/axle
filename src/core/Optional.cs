@@ -24,7 +24,6 @@ namespace Axle
             return collection.VerifyArgument(nameof(collection)).IsNotNull().Value.Where(x => x.HasValue).Select(x => x.Value);
 		}
 
-        //public static Optional<TResult> Next<T, TResult>(this T arg, Func<T, TResult> map) { return Next(Optional.From (arg), map); }
         public static Optional<TResult> Next<T, TResult>(this Optional<T> arg, Func<T, TResult> map)
         {
             return arg ? Optional.From(map(arg.Value)) : Optional<TResult>.Undefined;
