@@ -56,6 +56,7 @@
     <Compile Include="Environment\RuntimeExtensions.cs" />
     <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
     <Compile Include="Environment\RuntimeInfo.cs" />
+    <Compile Include="Extensions\DateTime\DateTimeExtensions.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
@@ -231,8 +232,6 @@
     <Folder Include="Extensions\Boolean\" />
     <Folder Include="Extensions\StringComparer\" />
     <Folder Include="Resources\" />
-    <Folder Include="Conversion\" />
-    <Folder Include="Conversion\Parsing\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

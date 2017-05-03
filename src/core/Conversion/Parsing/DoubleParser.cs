@@ -10,11 +10,7 @@ namespace Axle.Conversion.Parsing
 #if !netstandard
     [Serializable]
 #endif
-    //[Stateless]
-    /// <summary>
-    /// A parser class for <see cref="Double"/>
-    /// </summary>
-    internal sealed class DoubleParser : AbstractParser<double>
+    public sealed class DoubleParser : AbstractParser<double>
     {
         protected override Double DoParse(string value, IFormatProvider formatProvider)
         {
