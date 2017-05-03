@@ -84,9 +84,6 @@
     <Compile Include="Reflection\EventToken.cs" />
     <Compile Include="Reflection\FieldToken!netstandard.cs" />
     <Compile Include="Reflection\FieldToken.cs" />
-    <Compile Include="Reflection\FieldTokenAccessor.cs" />
-    <Compile Include="Reflection\FieldTokenGetAccessor.cs" />
-    <Compile Include="Reflection\FieldTokenSetAccessor.cs" />
     <Compile Include="Reflection\GenericMethodToken.cs" />
     <Compile Include="Reflection\IReadableMember.cs" />
     <Compile Include="Reflection\IWriteableMember.cs" />
@@ -207,6 +204,10 @@
     <Compile Include="Conversion\Parsing\DoubleParser.cs" />
     <Compile Include="Conversion\Parsing\GuidParser.cs" />
     <Compile Include="Conversion\Parsing\SingleParser.cs" />
+    <Compile Include="Reflection\AttributeInfo.cs" />
+    <Compile Include="Reflection\FieldAccessor.cs" />
+    <Compile Include="Reflection\FieldGetAccessor.cs" />
+    <Compile Include="Reflection\FieldSetAccessor.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />

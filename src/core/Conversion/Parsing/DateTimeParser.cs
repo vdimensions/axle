@@ -10,9 +10,6 @@ namespace Axle.Conversion.Parsing
     [Serializable]
 #endif
     //[Stateless]
-    /// <summary>
-    /// A parser class for <see cref="DateTime"/> objects.
-    /// </summary>
     public sealed class DateTimeParser : AbstractStrictParser<DateTime>
     {
         protected override DateTime DoParse(string value, IFormatProvider formatProvider)

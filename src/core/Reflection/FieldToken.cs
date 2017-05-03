@@ -19,7 +19,7 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DeclarationType declaration;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly FieldTokenAccessor[] accessors;
+        private readonly FieldAccessor[] accessors;
 
         public override bool Equals(object obj) { return obj is FieldToken && base.Equals(obj); }
         bool IEquatable<FieldToken>.Equals(FieldToken other) { return base.Equals(other); }
