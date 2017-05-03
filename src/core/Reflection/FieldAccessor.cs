@@ -8,14 +8,14 @@ namespace Axle.Reflection
 #if !netstandard
     [Serializable]
 #endif
-    internal abstract class FieldTokenAccessor : IGetAccessor, ISetAccessor, IReflected<FieldInfo>
+    internal abstract class FieldAccessor : IGetAccessor, ISetAccessor, IReflected<FieldInfo>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly FieldToken fieldToken;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly AccessorType accessorType;
 
-        protected FieldTokenAccessor(FieldToken fieldToken, AccessorType accessorType)
+        protected FieldAccessor(FieldToken fieldToken, AccessorType accessorType)
         {
             this.fieldToken = fieldToken;
             this.accessorType = accessorType;
