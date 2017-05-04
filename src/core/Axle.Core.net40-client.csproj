@@ -21,11 +21,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Optimize>false</Optimize>
+    <OutputPath>bin\Release</OutputPath>
   </PropertyGroup>
   <Import Project="Axle.Core.Common.targets" />
   <ItemGroup>
@@ -204,6 +206,10 @@
     <Compile Include="Reflection\FieldAccessor.cs" />
     <Compile Include="Reflection\FieldGetAccessor.cs" />
     <Compile Include="Reflection\FieldSetAccessor.cs" />
+    <Compile Include="Text\Formatting\AbstractCustomFormatter.cs" />
+    <Compile Include="Text\Formatting\FormatMethod.cs" />
+    <Compile Include="Text\Formatting\FormatProvider.cs" />
+    <Compile Include="Text\Formatting\ICustomFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
@@ -227,6 +233,7 @@
     <Folder Include="Extensions\Boolean\" />
     <Folder Include="Extensions\StringComparer\" />
     <Folder Include="Resources\" />
+    <Folder Include="Text\Formatting\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
