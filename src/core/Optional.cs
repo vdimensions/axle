@@ -26,11 +26,11 @@ namespace Axle
 
         public static Optional<TResult> Next<T, TResult>(this Optional<T> arg, Func<T, TResult> map)
         {
-            return arg ? Optional.From(map(arg.Value)) : Optional<TResult>.Undefined;
+            return arg ? Optional.From(map(arg.Value)) : Optional.Create<TResult>();
         }
         public static Optional<TResult> Next<T, TResult>(this Optional<T> arg, Func<T, Optional<TResult>> map)
         {
-            return arg ? map(arg.Value) : Optional<TResult>.Undefined;
+            return arg ? map(arg.Value) : Optional.Create<TResult>();
         }
 	}
 
@@ -53,7 +53,7 @@ namespace Axle
 		}
 
 		public override bool Equals(object other) { return other is Optional<T> && ((Optional<T>) other).Equals (this); }
-		public bool Equals(Optional<T> other) { return this.isSet ? other.isSet && Equals (this.value, other.value) : !other.isSet; }
+		public bool Equals(Optional<T> other) { return this.isSet ? other.isSet && Equals(this.value, other.value) : !other.isSet; }
 		bool IEquatable<T>.Equals(T other) { return this.isSet && Equals(this.value, other); }
 
 		public override int GetHashCode() { return (this.value == null ? 0 : this.value.GetHashCode()) ^ typeof(T).GetHashCode(); }
