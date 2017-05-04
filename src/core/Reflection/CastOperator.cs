@@ -8,6 +8,11 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// A static class for handling cast operator; that is, an operator defined on a type that allows instances of that type
+    /// to be converted to instances of another type.
+    /// </summary>
+    /// <seealso cref="ICastOperator`2"/>
     public static class CastOperator
     {
         internal sealed class CastOp<T1, T2> : ICastOperator<T1, T2>

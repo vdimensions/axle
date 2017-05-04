@@ -20,7 +20,9 @@ namespace Axle.Verification
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
         /// which is being verified. 
         /// </param>
-        /// <param name="minValue">The comparison value above which the argument will be accepted as valid. </param>
+        /// <param name="minValue">
+        /// The comparison value above which the argument will be accepted as valid. 
+        /// </param>
         /// <param name="message">
         /// An error message passed to the exception in case the verification fails.
         /// </param>
@@ -58,7 +60,9 @@ namespace Axle.Verification
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
         /// which is being verified. 
         /// </param>
-        /// <param name="minValue">The comparison value above which the argument will be accepted as valid. </param>
+        /// <param name="minValue">
+        /// The comparison value above which the argument will be accepted as valid. 
+        /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
@@ -74,6 +78,30 @@ namespace Axle.Verification
             return IsGreaterThan(argument, minValue, null);
         }
 
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is greater than or equal to a given value. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="minValue">
+        /// The comparison value above which the argument will be accepted as valid. 
+        /// </param>
+        /// <param name="message">
+        /// An error message passed to the exception in case the verification fails.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="minValue"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
+        /// </exception>
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(this ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
         {
@@ -90,12 +118,57 @@ namespace Axle.Verification
                 : new ArgumentOutOfRangeException(argument.Name, message);
         }
 
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is greater than or equal to a given value. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="minValue">
+        /// The comparison value above which the argument will be accepted as valid. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="minValue"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
+        /// </exception>
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(this ArgumentReference<T> argument, T minValue) where T: IComparable<T>
         {
             return IsGreaterThanOrEqualTo(argument, minValue, null);
         }
 
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is less than a given value. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="maxValue">
+        /// The comparison value below which the argument will be accepted as valid. 
+        /// </param>
+        /// <param name="message">
+        /// An error message passed to the exception in case the verification fails.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="maxValue"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
+        /// </exception>
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThan<T>(this ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
         {
@@ -112,12 +185,55 @@ namespace Axle.Verification
                 : new ArgumentOutOfRangeException(argument.Name, message);
         }
 
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is less than a given value. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="maxValue">The comparison value below which the argument will be accepted as valid. </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="maxValue"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
+        /// </exception>
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThan<T>(this ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
         {
             return IsLessThan(argument, maxValue, null);
         }
 
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is less than or equal to a given value. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="maxValue">
+        /// The comparison value below which the argument will be accepted as valid. 
+        /// </param>
+        /// <param name="message">
+        /// An error message passed to the exception in case the verification fails.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="maxValue"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
+        /// </exception>
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(this ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
         {
@@ -134,6 +250,27 @@ namespace Axle.Verification
                 : new ArgumentOutOfRangeException(argument.Name, message);
         }
 
+        /// <summary>
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
+        /// is less than or equal to a given value. 
+        /// </summary>
+        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="maxValue">
+        /// The comparison value below which the argument will be accepted as valid. 
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="maxValue"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
+        /// </exception>
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(this ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
         {

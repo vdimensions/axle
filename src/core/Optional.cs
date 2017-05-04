@@ -10,6 +10,10 @@ using Axle.Verification;
 
 namespace Axle
 {
+    /// <summary>
+    /// A static class that aids the functionality of <see cref="Optional`1"/> instances.
+    /// </summary>
+    /// <seealso cref="Optional`1"/>
 	public static class Optional
 	{
 		public static Optional<T> Create<T>() { return Optional<T>.Undefined; }
@@ -34,6 +38,9 @@ namespace Axle
         }
 	}
 
+    /// <summary>
+    /// A container object for a non-null value. The <see cref="Optional{T}.HasValue"/> property indicates whether there is a value available.
+    /// </summary>
 #if !netstandard
     [Serializable]
 #endif
@@ -46,10 +53,13 @@ namespace Axle
 	    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
 		private readonly bool isSet;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Optional`1"/> struct.
+        /// </summary>
+        /// <param name="value">Value.</param>
 		internal Optional(T value)
 		{
-			this.value = value;
-			this.isSet = true;
+            this.isSet = (this.value = value) != null;
 		}
 
 		public override bool Equals(object other) { return other is Optional<T> && ((Optional<T>) other).Equals (this); }
@@ -67,12 +77,30 @@ namespace Axle
 //		}
 //		public TResult TryInvoke<TResult>(Func<T, TResult> func) { return TryInvoke(func, default(TResult)); }
 
+        /// <summary>
+        /// Returns a <see cref="System.String"/> that represents the current <see cref="Axle.Optional`1"/>.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="System.String"/> that represents the current <see cref="Axle.Optional`1"/>.
+        /// </returns>
 		public override string ToString () { return this.isSet ? (this.value == null ? "null" : this.value.ToString()) : "[Undefined]"; }
 
         //[CanBeNull(false)]
+        /// <summary>
+        /// Gets the value of the underlying object represented by the current <see cref="Optional{T}"/> instance, or <c>null</c> if there is no value present.
+        /// </summary>
+        /// <value>
+        /// A reference to the underlying object represented by the current <see cref="Optional{T}"/> instance, or <c>null</c> if there is no value present.
+        /// </value>
 		public T Value { get { return this.value; } }
         object IReference.Value { get { return this.Value; } }
 
+        /// <summary>
+        /// Gets a <see cref="bool"/> value indicating whether this <see cref="Optional{T}"/> instance has any value.
+        /// </summary>
+        /// <value>
+        /// <c>true</c> if this instance has value; otherwise, <c>false</c>.
+        /// </value>
         public bool HasValue { get { return this.isSet; } }
 
         public static bool operator false(Optional<T> optional) { return !optional.HasValue; }

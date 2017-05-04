@@ -696,37 +696,37 @@ namespace Axle.Extensions.String
         }
         #endregion
 
-        #region TrimStart(...)
+        #region CutStart(...)
         public static string CutStart(this string str, string stringToSearch, StringComparison comparison)
         {
-            return str.VerifyArgument("str").IsNotNull().Value.StartsWith(stringToSearch, comparison)
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.StartsWith(stringToSearch, comparison)
                 ? str.TakeAfterFirst(stringToSearch, 0, comparison)
                 : str;
         }
         public static string CutStart(this string str, string stringToSearch) { return CutStart(str, stringToSearch, StringComparison.CurrentCulture); }
         public static string CutStart(this string str, char charToSearch)
         {
-            return str.VerifyArgument("str").IsNotNull().Value.Length > 0 && str[0] == charToSearch
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Length > 0 && str[0] == charToSearch
                 ? str.Substring(1)
                 : str;
         }
-        #endregion
+        #endregion // CutStart(...)
 
-        #region TrimEnd(...)
+        #region CutEnd(...)
         public static string CutEnd(this string str, string stringToSearch, StringComparison comparison)
         {
-            return str.VerifyArgument("str").IsNotNull().Value.EndsWith(stringToSearch, comparison)
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.EndsWith(stringToSearch, comparison)
                 ? str.TakeBeforeLast(stringToSearch, comparison)
                 : str;
         }
         public static string CutEnd(this string str, string stringToSearch) { return CutEnd(str, stringToSearch, StringComparison.CurrentCulture); }
         public static string CutEnd(this string str, char charToSearch)
         {
-            return str.VerifyArgument("str").IsNotNull().Value.Length > 0 && str[str.Length - 1] == charToSearch
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Length > 0 && str[str.Length - 1] == charToSearch
                 ? str.Substring(0, str.Length - 1)
                 : str;
         }
-        #endregion
+        #endregion // CutEnd(...)
 
         private static string JoinInternal(string[] values, string separator) { return string.Join(separator, values); }
         private static string JoinInternal(IEnumerable<string> values, string separator)
