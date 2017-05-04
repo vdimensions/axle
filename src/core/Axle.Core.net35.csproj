@@ -6,34 +6,26 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{264E501C-B2FE-4138-BF10-297755E31243}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle</RootNamespace>
-    <AssemblyName>Axle.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FrameworkShortName>net35</FrameworkShortName>
   </PropertyGroup>
+  <!-- Axle Custom Properties Begin -->
+  <PropertyGroup> 
+    <FrameworkShortName>net35</FrameworkShortName>
+    <CustomSymbols>net35</CustomSymbols>
+  </PropertyGroup>
+  <!-- Axle Custom Properties End -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\$(FrameworkShortName)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;net35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>bin\Debug\$(FrameworkShortName)\Axle.Core.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\$(FrameworkShortName)\</OutputPath>
-    <DefineConstants>TRACE;net35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
+  <Import Project="Axle.Core.Common.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />

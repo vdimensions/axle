@@ -7,8 +7,8 @@
     <ProjectGuid>{D7C8BBB3-0256-46CF-B778-5EB7E423229C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle.Core.build</RootNamespace>
-    <AssemblyName>Axle.Core.build</AssemblyName>
+    <RootNamespace>Axle</RootNamespace>
+    <AssemblyName>Axle.Core.dist</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
