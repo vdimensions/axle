@@ -9,14 +9,13 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <TargetFrameworkProfile>Client</TargetFrameworkProfile>
-    <AssemblyName>Axle.Core.net40-client</AssemblyName>
   </PropertyGroup>
-  <!--Axle Properties Begin-->
+  <!-- Axle Properties Begin -->
   <PropertyGroup>
     <FrameworkShortName>net40-client</FrameworkShortName>
     <CustomSymbols>net40;net35</CustomSymbols>
   </PropertyGroup>
-  <!--Axle Properties End-->
+  <!-- Axle Properties End -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -206,6 +205,7 @@
     <Compile Include="Text\Formatting\FormatMethod.cs" />
     <Compile Include="Text\Formatting\FormatProvider.cs" />
     <Compile Include="Text\Formatting\ICustomFormatter.cs" />
+    <Compile Include="Resources\IResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
