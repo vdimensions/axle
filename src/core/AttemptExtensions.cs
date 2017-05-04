@@ -2,11 +2,11 @@
 
 using Axle.Verification;
 
-using Enumerable = System.Linq.Enumerable;
-
 
 namespace Axle
 {
+    using Enumerable = System.Linq.Enumerable;
+
     public static class AttemptExtensions
     {
         public static bool Any<TResult>(this IEnumerable<Attempt<TResult>> attempts, out TResult result)
