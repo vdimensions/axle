@@ -6,35 +6,27 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{1A68609D-E57A-4C74-BA5E-35D159E14265}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle</RootNamespace>
-    <AssemblyName>Axle.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
+  </PropertyGroup>
+  <!--Axle propertes begin-->
+  <PropertyGroup>
+    <CustomSymbols>net35_unity_subset</CustomSymbols>
     <FrameworkShortName>net35-$(TargetFrameworkProfile)</FrameworkShortName>
   </PropertyGroup>
+  <!--Axle properties end-->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\$(FrameworkShortName)\</OutputPath>
-    <DefineConstants>DEBUG;TRACE;net35_unity_subset</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
-    <DocumentationFile>bin\Debug\$(FrameworkShortName)\Axle.Core.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\$(FrameworkShortName)\</OutputPath>
-    <DefineConstants>TRACE;net35_unity_subset</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
+  <Import Project="Axle.Core.Common.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -50,6 +42,42 @@
     <Compile Include="Collections\Generic\GenericEnumerable.cs" />
     <Compile Include="Collections\Generic\GenericEnumerator.cs" />
     <Compile Include="Collections\Generic\GenericList.cs" />
+    <Compile Include="Conversion\AbstractConverter.cs" />
+    <Compile Include="Conversion\AbstractTwoWayConverter.cs" />
+    <Compile Include="Conversion\BytesToStringConverter.cs" />
+    <Compile Include="Conversion\ChainedConverter.cs" />
+    <Compile Include="Conversion\ConversionException!netstandard.cs" />
+    <Compile Include="Conversion\ConversionException.cs" />
+    <Compile Include="Conversion\IConverter.cs" />
+    <Compile Include="Conversion\IdentityConverter.cs" />
+    <Compile Include="Conversion\ITwoWayConverter.cs" />
+    <Compile Include="Conversion\Parsing\AbstractParser.cs" />
+    <Compile Include="Conversion\Parsing\AbstractStrictParser.cs" />
+    <Compile Include="Conversion\Parsing\BooleanParser.cs" />
+    <Compile Include="Conversion\Parsing\ByteParser.cs" />
+    <Compile Include="Conversion\Parsing\CharacterParser.cs" />
+    <Compile Include="Conversion\Parsing\ContentTypeParser.cs" />
+    <Compile Include="Conversion\Parsing\DateTimeParser.cs" />
+    <Compile Include="Conversion\Parsing\DecimalParser.cs" />
+    <Compile Include="Conversion\Parsing\DoubleParser.cs" />
+    <Compile Include="Conversion\Parsing\EnumParser.cs" />
+    <Compile Include="Conversion\Parsing\GuidParser.cs" />
+    <Compile Include="Conversion\Parsing\Int16Parser.cs" />
+    <Compile Include="Conversion\Parsing\Int32Parser.cs" />
+    <Compile Include="Conversion\Parsing\Int64Parser.cs" />
+    <Compile Include="Conversion\Parsing\IParser.cs" />
+    <Compile Include="Conversion\Parsing\IStrictParser.cs" />
+    <Compile Include="Conversion\Parsing\ParseException!netstandard.cs" />
+    <Compile Include="Conversion\Parsing\ParseException.cs" />
+    <Compile Include="Conversion\Parsing\SByteParser.cs" />
+    <Compile Include="Conversion\Parsing\SingleParser.cs" />
+    <Compile Include="Conversion\Parsing\TimeSpanParser.cs" />
+    <Compile Include="Conversion\Parsing\UInt16Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt32Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt64Parser.cs" />
+    <Compile Include="Conversion\Parsing\UriParser.cs" />
+    <Compile Include="Conversion\Parsing\VersionParser.cs" />
+    <Compile Include="Conversion\ReverseConverter.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
@@ -64,6 +92,7 @@
     <Compile Include="Environment\RuntimeExtensions.cs" />
     <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
     <Compile Include="Environment\RuntimeInfo.cs" />
+    <Compile Include="Extensions\DateTime\DateTimeExtensions.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
@@ -95,6 +124,7 @@
     <Compile Include="Reflection\AccessModifier.cs" />
     <Compile Include="Reflection\AccessorType.cs" />
     <Compile Include="Reflection\AssemblyNameEqualityComparer.cs" />
+    <Compile Include="Reflection\AttributeInfo.cs" />
     <Compile Include="Reflection\CastOperator.cs" />
     <Compile Include="Reflection\ConstructorToken.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
@@ -158,6 +188,7 @@
     <Compile Include="Threading\WriteLockHandle.cs" />
     <Compile Include="Verification\ArgumentReference.cs" />
     <Compile Include="Verification\ArgumentReference!netstandard.cs" />
+    <Compile Include="Verification\ArgumentTypeMismatchException!netstandard.cs" />
     <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
     <Compile Include="Verification\ArrayVerifier.cs" />
     <Compile Include="Verification\CollectionVerifier.cs" />
