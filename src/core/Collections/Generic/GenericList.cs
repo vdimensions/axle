@@ -11,8 +11,8 @@ namespace Axle.Collections.Generic
     /// A generic wrapper around a non-generic <see cref="IList"/> collection.
     /// </summary>
     /// <typeparam name="T">The type of the elements in the list. </typeparam>
-    /// <seealso cref="IList"/>
     /// <seealso cref="IList{T}"/>
+    /// <seealso cref="IList"/>
 #if !netstandard
     [Serializable]
 #endif

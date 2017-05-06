@@ -20,12 +20,12 @@ namespace Axle.Conversion
         private readonly Encoding encoding;
 
         /// <summary>
-        /// Creates a new <see cref="BytesToStringConverter" /> instance using the specified <paramref name="encoding">encoding</paramref>
+        /// Creates a new <see cref="BytesToStringConverter" /> instance using the specified <paramref name="encoding" /> parameter.
         /// </summary>
-        /// <param name="encoding">The encoding that is used for string conversion.</param>
+        /// <param name="encoding">The <see cref="System.Text.Encoding">encoding</see> that is used for the conversion.</param>
         public BytesToStringConverter(Encoding encoding)
         {
-            this.encoding = encoding.VerifyArgument("encoding").IsNotNull();
+            this.encoding = encoding.VerifyArgument(nameof(encoding)).IsNotNull();
         }
         /// <summary>
         /// Creates a new <see cref="BytesToStringConverter" /> instance using the <see cref="System.Text.Encoding.Default">default encoding</see>
@@ -37,7 +37,7 @@ namespace Axle.Conversion
         protected override byte[] DoConvertBack(string source) { return encoding.GetBytes(source); }
 
         /// <summary>
-        /// Gets the <see cref="Encoding" /> instance used to convert string to bytes and vice-versa.
+        /// Gets the <see cref="System.Text.Encoding" /> instance used to convert string instances to bytes and vice-versa.
         /// </summary>
         public Encoding Encoding { get { return encoding; } }
     }

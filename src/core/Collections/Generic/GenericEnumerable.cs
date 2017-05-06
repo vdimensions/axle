@@ -10,8 +10,8 @@ namespace Axle.Collections.Generic
     /// A generic wrapper for a non-generic <see cref="IEnumerable"/>
     /// </summary>
     /// <typeparam name="T">The type of objects to enumerate. </typeparam>
-    /// <seealso cref="IEnumerable"/>
     /// <seealso cref="IEnumerable{T}"/>
+    /// <seealso cref="IEnumerable"/>
 #if !netstandard
     [Serializable]
 #endif

@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 #if !NETSTANDARD1_0
-[assembly: Guid("43919C97-BCFD-4802-95D7-76435E066962")]
+[assembly: Guid("FAB89E44-7897-445A-A8F2-4CC2B536C6D1")]
 #endif
 
 [assembly: AssemblyVersion("1.5.0.7")]

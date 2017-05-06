@@ -54,7 +54,7 @@ namespace Axle
 		private readonly bool isSet;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Optional`1"/> struct.
+        /// Initializes a new instance of the <see cref="Optional{T}"/> struct.
         /// </summary>
         /// <param name="value">Value.</param>
 		internal Optional(T value)
@@ -71,19 +71,19 @@ namespace Axle
 		public T GetValueOrDefault() { return GetValueOrDefault (default(T)); }
 		public T GetValueOrDefault(T defaultValue) { return this.isSet ? this.value : defaultValue; }
 
-//		public TResult TryInvoke<TResult>(Func<T, TResult> func, TResult defaultValue)
-//		{
-//			return isSet ? func (value) : defaultValue;
-//		}
-//		public TResult TryInvoke<TResult>(Func<T, TResult> func) { return TryInvoke(func, default(TResult)); }
+        //		public TResult TryInvoke<TResult>(Func<T, TResult> func, TResult defaultValue)
+        //		{
+        //			return isSet ? func (value) : defaultValue;
+        //		}
+        //		public TResult TryInvoke<TResult>(Func<T, TResult> func) { return TryInvoke(func, default(TResult)); }
 
         /// <summary>
-        /// Returns a <see cref="System.String"/> that represents the current <see cref="Axle.Optional`1"/>.
+        /// Returns a <see cref="string"/> that represents the current <see cref="Axle.Optional{T}"/>.
         /// </summary>
         /// <returns>
-        /// A <see cref="System.String"/> that represents the current <see cref="Axle.Optional`1"/>.
+        /// A <see cref="string"/> that represents the current <see cref="Axle.Optional{T}"/>.
         /// </returns>
-		public override string ToString () { return this.isSet ? (this.value == null ? "null" : this.value.ToString()) : "[Undefined]"; }
+        public override string ToString () { return this.isSet ? (this.value == null ? "null" : this.value.ToString()) : "[Undefined]"; }
 
         //[CanBeNull(false)]
         /// <summary>
