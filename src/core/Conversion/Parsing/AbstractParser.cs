@@ -46,9 +46,9 @@ namespace Axle.Conversion.Parsing
         /// Parses a string to the specified type.
         /// </summary>
         /// <param name="value">The string value to be parsed.</param>
-        /// <returns>An instance of <see cref="T" />.</returns>
+        /// <returns>An instance of <typeparamref name="T" />.</returns>
         /// <exception cref="InvalidOperationException">Thrown if the string cannot be recognized
-        /// as a valid provider for and instance of <see cref="T"/>.</exception>
+        /// as a valid provider for and instance of <typeparamref name="T"/>.</exception>
         public T Parse(string value) { return Parse(value, null); }
         public T Parse(string value, IFormatProvider formatProvider)
         {
@@ -124,7 +124,7 @@ namespace Axle.Conversion.Parsing
         /// </summary>
         /// <param name="value">The string value to be parsed.</param>
         /// <param name="formatProvider"></param>
-        /// <returns>An instance of <see cref="T" />.</returns>
+        /// <returns>An instance of <typeparamref name="T" />.</returns>
         protected abstract T DoParse(string value, IFormatProvider formatProvider);
 
         /// <summary>
@@ -138,5 +138,7 @@ namespace Axle.Conversion.Parsing
 
         T IConverter<string, T>.Convert(string source) { return Parse(source); }
         bool IConverter<string, T>.TryConvert(string source, out T target) { return TryParse(source, out target); }
+
+        public Type TargetType { get { return typeof(T); } }
     }
 }

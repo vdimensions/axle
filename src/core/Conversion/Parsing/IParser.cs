@@ -38,7 +38,7 @@ namespace Axle.Conversion.Parsing
         object Parse(string value);
 
         /// <summary>
-        /// Converts the specified string representation of a logical value to its <typeparamref name="T"/> equivalent. 
+        /// Converts the specified string representation of a logical value to its <see cref="TargetType"/> equivalent. 
         /// A return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
@@ -58,7 +58,7 @@ namespace Axle.Conversion.Parsing
         /// <seealso cref="IParser{T}"/>
         bool TryParse(string value, IFormatProvider formatProvider, out object result);
         /// <summary>
-        /// Converts the specified string representation of a logical value to its <typeparamref name="T"/> equivalent. 
+        /// Converts the specified string representation of a logical value to its <see cref="TargetType"/> equivalent. 
         /// A return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
@@ -76,13 +76,20 @@ namespace Axle.Conversion.Parsing
         /// </returns>
         /// <seealso cref="IParser{T}"/>
         bool TryParse(string value, out object result);
+
+        /// <summary>
+        /// The result type of the parsing.
+        /// </summary>
+        Type TargetType { get; }
     }
 
     /// <summary>
     /// An interface for a parser, that is, an object which is capable of converting a <see cref="string">string representation</see>
     /// of a given type to an instance of that type.
     /// </summary>
-    /// <typeparam name="T">The result type of the parsing.</typeparam>
+    /// <typeparam name="T">
+    /// The result type of the parsing.
+    /// </typeparam>
     public interface IParser<T> : IParser, IConverter<string, T>
 	{
 	    /// <summary>
@@ -90,13 +97,13 @@ namespace Axle.Conversion.Parsing
 	    /// </summary>
 	    /// <param name="value">The string value to be parsed.</param>
         /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format recognition.</param>
-	    /// <returns>An instance of <see cref="T" />.</returns>
+	    /// <returns>An instance of <typeparamref name="T" />.</returns>
 	    new T Parse(string value, IFormatProvider formatProvider);
         /// <summary>
         /// Parses a string to the specified type.
         /// </summary>
         /// <param name="value">The string value to be parsed.</param>
-        /// <returns>An instance of <see cref="T" />.</returns>
+        /// <returns>An instance of <typeparamref name="T" />.</returns>
 		new T Parse(string value);
 
 	    /// <summary>

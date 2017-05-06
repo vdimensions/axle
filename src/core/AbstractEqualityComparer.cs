@@ -120,8 +120,23 @@ namespace Axle
 				: unchecked(this.DoGetHashCode(obj));
         }
 
+        /// <summary>
+        /// Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
+        /// </summary>
+        /// <param name="obj">
+        /// The object to compare with the current object. 
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, <c>false</c>.
+        /// </returns>
         public override bool Equals(object obj) { return base.Equals(obj); }
 
+        /// <summary>
+        /// Serves as a hash function for a particular type. 
+        /// </summary>
+        /// <returns>
+        /// A hash code for the current <see cref="T:System.Object" />.
+        /// </returns>
         public override int GetHashCode() { return base.GetHashCode(); }
 
         /// <summary>

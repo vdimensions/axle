@@ -5,15 +5,14 @@ using System.Linq;
 
 using Axle.References;
 using Axle.Verification;
-//using Axle.CodeDescriptors;
 
 
 namespace Axle
 {
     /// <summary>
-    /// A static class that aids the functionality of <see cref="Optional`1"/> instances.
+    /// A static class that aids the functionality of <see cref="Optional{T}"/> instances.
     /// </summary>
-    /// <seealso cref="Optional`1"/>
+    /// <seealso cref="Optional{T}"/>
 	public static class Optional
 	{
 		public static Optional<T> Create<T>() { return Optional<T>.Undefined; }

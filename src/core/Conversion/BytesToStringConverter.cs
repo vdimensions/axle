@@ -8,7 +8,8 @@ using Axle.Verification;
 namespace Axle.Conversion
 {
     /// <summary>
-    /// A converter class that can turn a byte sequence to a <see cref="string">string</see> representation, using a specified <see cref="Encoding"/>
+    /// A converter class that can turn a byte sequence to a <see cref="string">string</see> representation, using a specified 
+    /// <see cref="System.Text.Encoding"/>
     /// </summary>
 #if !netstandard
     [Serializable]

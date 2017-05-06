@@ -6,8 +6,8 @@
     /// </summary>
     /// <typeparam name="TSource">
     /// The type of the object to be converted. 
-    /// <typeparam>
-    /// <typeparam>
+    /// </typeparam>
+    /// <typeparam name="TTarget">
     /// The type of the conversion result. 
     /// </typeparam>
     public interface IConverter<TSource, TTarget>
@@ -23,6 +23,19 @@
         /// </returns>
         TTarget Convert(TSource source);
 
+        /// <summary>
+        /// Attempts to covert the specified by the <paramref name="source"/> parameter instance of the <typeparamref name="TSource" /> type
+        /// to an instance of the <typeparamref name="TTarget"/> type.
+        /// </summary>
+        /// <param name="source">
+        /// The source instance to be converted.
+        /// </param>
+        /// <param name="target">
+        /// An output parameter to contain the conversion result if the conversion succeeds.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the conversion was successful; <c>false</c> otherwise.
+        /// </returns>
         bool TryConvert(TSource source, out TTarget target);
     }
 }
