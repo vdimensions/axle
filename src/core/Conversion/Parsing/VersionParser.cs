@@ -4,7 +4,8 @@
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a <see cref="byte">version number</see> to a valid <see cref="Version"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of 
+    /// a <see cref="byte">version number</see> to a valid <see cref="Version"/> value.
     /// </summary>
 #if !netstandard
     [Serializable]

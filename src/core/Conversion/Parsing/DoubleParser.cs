@@ -5,7 +5,8 @@ using System.Globalization;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a <see cref="double">double precision floating point number</see> to a valid <see cref="double"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of 
+    /// a <see cref="double">double precision floating point number</see> to a valid <see cref="double"/> value.
     /// </summary>
 #if !netstandard
     [Serializable]

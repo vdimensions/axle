@@ -1,9 +1,8 @@
 ﻿using System;
-
 using Axle.Verification;
 
 
-namespace Axle.Conversion.Sdk
+namespace Axle.Conversion
 {
     [Serializable]
     public sealed class ReverseConverter<TS, TD> : ITwoWayConverter<TS, TD>

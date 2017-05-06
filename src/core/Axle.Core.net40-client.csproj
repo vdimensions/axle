@@ -205,7 +205,6 @@
     <Compile Include="Text\Formatting\FormatMethod.cs" />
     <Compile Include="Text\Formatting\FormatProvider.cs" />
     <Compile Include="Text\Formatting\ICustomFormatter.cs" />
-    <Compile Include="Resources\IResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="paket-restore.sh" />
@@ -226,10 +225,7 @@
     <None Include="Extensions\IO\Stream\StreamExtensions2.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Extensions\Boolean\" />
-    <Folder Include="Extensions\StringComparer\" />
-    <Folder Include="Resources\" />
-    <Folder Include="Text\Formatting\" />
+
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

@@ -5,7 +5,8 @@ using System.Globalization;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a <see cref="int">32-bit integer</see> to a valid <see cref="int"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of a 
+    /// <see cref="int">32-bit integer</see> to a valid <see cref="int"/> value.
     /// </summary>
 #if !netstandard
     [Serializable]

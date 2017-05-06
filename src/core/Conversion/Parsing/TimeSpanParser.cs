@@ -4,7 +4,8 @@
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of a 
+    /// <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
     /// </summary>
 #if !netstandard
     [Serializable]

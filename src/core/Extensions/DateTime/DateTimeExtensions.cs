@@ -17,12 +17,13 @@ namespace Axle.Extensions.DateTime
         /// <param name="current">The <see cref="DateTime"/> instance upon which this extension method is invoked.</param>
         /// <returns>
         /// Returns the number of days in the specified date's month and year. 
-        /// For example, if month equals 2 for February, the return value is 28 or 29 depending upon whether year is a leap year. 
+        /// For example, if month equals 2 for February, the return value is 28 or 29 depending upon whether year is a 
+        /// leap year. 
         /// </returns>
         /// <seealso cref="DateTime.DaysInMonth" />
         public static int DaysInMonth(this DateTime current)
         {
-            return System.DateTime.DaysInMonth(current.Year, current.Month);
+            return DateTime.DaysInMonth(current.Year, current.Month);
         }
 
         public static DateTime FirstDayOfWeek(this DateTime current, CultureInfo culture)
@@ -51,11 +52,11 @@ namespace Axle.Extensions.DateTime
         }
         public static DateTime FirstDayOfMonth(this DateTime current)
         {
-            return new System.DateTime(current.Year, current.Month, 1, 0, 0, 0, current.Kind);
+            return new DateTime(current.Year, current.Month, 1, 0, 0, 0, current.Kind);
         }
         public static DateTime FirstDayOfYear(this DateTime current)
         {
-            return new System.DateTime(current.Year, 1, 1, 0, 0, 0, current.Kind);
+            return new DateTime(current.Year, 1, 1, 0, 0, 0, current.Kind);
         }
 
         public static DateTime LastDayOfWeek(this DateTime current, CultureInfo culture)
@@ -69,12 +70,12 @@ namespace Axle.Extensions.DateTime
 
         public static DateTime LastDayOfMonth(this DateTime current)
         {
-            return new System.DateTime(current.Year, current.Month, DaysInMonth(current), 0, 0, 0, 0, current.Kind);
+            return new DateTime(current.Year, current.Month, DaysInMonth(current), 0, 0, 0, 0, current.Kind);
         }
 
         public static DateTime LastDayOfYear(this DateTime current)
         {
-            return new System.DateTime(current.Year, 12, 31, 0, 0, 0, current.Kind);
+            return new DateTime(current.Year, 12, 31, 0, 0, 0, current.Kind);
         }
 
         public static DateTime ToLocalTime(this DateTime current, DateTimeKind assumedKind)
@@ -82,7 +83,7 @@ namespace Axle.Extensions.DateTime
             var kind = current.Kind;
             return (kind == DateTimeKind.Unspecified ? assumedKind : kind) == DateTimeKind.Utc 
                 ? TimeZoneInfo.ConvertTime(current, TimeZoneInfo.Utc, TimeZoneInfo.Local) 
-                : new System.DateTime(current.Ticks, DateTimeKind.Local);
+                : new DateTime(current.Ticks, DateTimeKind.Local);
         }
         public static DateTime ToLocalTime(this DateTime current) { return ToLocalTime(current, DateTimeKind.Local); }
 
@@ -114,7 +115,7 @@ namespace Axle.Extensions.DateTime
             var destinationIsUtc = utcTimeZone.Equals(destinationTimeZone);
             if (sourceIsUtc && destinationIsUtc)
             {
-                return new System.DateTime(dateTime.Ticks, DateTimeKind.Utc);
+                return new DateTime(dateTime.Ticks, DateTimeKind.Utc);
             }
             if (dateTime.Kind == DateTimeKind.Unspecified)
             {
@@ -130,7 +131,7 @@ namespace Axle.Extensions.DateTime
                     dateTime = TimeZoneInfo.ConvertTime(dateTime, utcTimeZone, sourceTimeZone);
                 }
             }
-            return new System.DateTime(
+            return new DateTime(
                 TimeZoneInfo.ConvertTime(dateTime, sourceTimeZone, destinationTimeZone).Ticks,
                 destinationIsUtc ? DateTimeKind.Utc : DateTimeKind.Unspecified);
         }
@@ -142,7 +143,7 @@ namespace Axle.Extensions.DateTime
             return ChangeTimeZone(dateTime, sourceTimeZone, destinationTimeZone, false);
         }
 
-        public static DateTime ChangeKind(this DateTime dateTime, DateTimeKind kind) { return new System.DateTime(dateTime.Ticks, kind); }
+        public static DateTime ChangeKind(this DateTime dateTime, DateTimeKind kind) { return new DateTime(dateTime.Ticks, kind); }
 
         public static DateTime ChangeKindToLocal(this DateTime dateTime) { return ChangeKind(dateTime, DateTimeKind.Local); }
 

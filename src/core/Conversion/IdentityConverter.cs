@@ -4,12 +4,13 @@
 namespace Axle.Conversion
 {
     /// <summary>
-    /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns the object instance being passed for conversion without changing it. 
+    /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns 
+    /// the object instance being passed for conversion without changing it. 
     /// </summary>
 #if !netstandard
     [Serializable]
 #endif
-    public sealed class IdentityConverter<T> : IConverter<T, T>, ITwoWayConverter<T, T>
+    public sealed class IdentityConverter<T> : ITwoWayConverter<T, T>
     {
         public T Convert(T source) { return source; }
 

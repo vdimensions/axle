@@ -5,7 +5,8 @@ using System.Globalization;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a <see cref="decimal">decimal</see> to a valid <see cref="decimal"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of 
+    /// a <see cref="decimal">decimal</see> to a valid <see cref="decimal"/> value.
     /// </summary>
 #if !netstandard
     [Serializable]

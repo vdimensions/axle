@@ -5,7 +5,8 @@ using System.Globalization;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of an <see cref="ushort">unsigned 16-bit integer</see> to a valid <see cref="ushort"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of 
+    /// an <see cref="ushort">unsigned 16-bit integer</see> to a valid <see cref="ushort"/> value.
     /// </summary>
 #if !netstandard
     [Serializable]
