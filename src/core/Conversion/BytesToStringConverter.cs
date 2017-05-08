@@ -3,6 +3,9 @@ using System.Diagnostics;
 using System.Text;
 
 using Axle.Verification;
+#if netstandard
+using Axle.Extensions.Text.Encoding;
+#endif
 
 
 namespace Axle.Conversion
@@ -27,10 +30,17 @@ namespace Axle.Conversion
         {
             this.encoding = encoding.VerifyArgument(nameof(encoding)).IsNotNull();
         }
+#if !netstandard
         /// <summary>
         /// Creates a new <see cref="BytesToStringConverter" /> instance using the <see cref="System.Text.Encoding.Default">default encoding</see>
         /// </summary>
         public BytesToStringConverter() : this(Encoding.Default) { }
+#else
+        /// <summary>
+        /// Creates a new <see cref="BytesToStringConverter" /> instance using the <see cref="System.Text.Encoding.UTF8">UTF8 encoding</see>
+        /// </summary>
+        public BytesToStringConverter() : this(Encoding.UTF8) { }
+#endif
 
         protected override string DoConvert(byte[] source) { return encoding.GetString(source); }
 

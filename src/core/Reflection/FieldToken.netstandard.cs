@@ -9,7 +9,7 @@ namespace Axle.Reflection
         {
             accessModifier = GetAccessModifier(info);
             declaration = info.GetDeclarationType();
-            accessors = new FieldTokenAccessor[] { new FieldTokenGetAccessor(this), new FieldTokenSetAccessor(this) };
+            accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
         }
     }
 }

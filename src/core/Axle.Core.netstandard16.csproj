@@ -7,6 +7,9 @@
   </PropertyGroup>
   <Import Project="Axle.Core.netstandard.props" />
   <ItemGroup>
+    <Compile Remove="Conversion\ConversionException!netstandard.cs" />
+    <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
+    <Compile Remove="Conversion\Parsing\ParseException!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
     <Compile Remove="Environment\IEnvironment!netstandard.cs" />
@@ -33,7 +36,9 @@
     <Compile Remove="Reflection\MethodToken!netstandard.cs" />
     <Compile Remove="Reflection\PropertyToken!netstandard.cs" />
     <Compile Remove="Reflection\ReflectionExtensions!netstandard.cs" />
+    <Compile Remove="Resources\IResource.cs" />
     <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
+    <Compile Remove="Verification\ArgumentTypeMismatchException!netstandard.cs" />
     <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -42,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Globalization\" />
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Target Name="BeforeBuild">
     <!-- Ensure the correct dotnet version for this project is made present before the build process starts. -->

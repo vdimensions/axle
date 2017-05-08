@@ -3,7 +3,7 @@
   <metadata>
     <id>Axle.Core</id>
     <title>Axle.Core</title>
-    <version>1.5.0.7</version>
+    <version>1.5.0.8</version>
     <description>Axle Framework Core Library</description>
     <summary>Axle Framework Core Library</summary>
     <releaseNotes></releaseNotes>
@@ -19,10 +19,6 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <group targetFramework="net20"></group>
-      <group targetFramework="net35-Unity Full v3.5"></group>
-      <group targetFramework="net35-Unity Subset v3.5"></group>
-      <group targetFramework="net35-Unity Micro v3.5"></group>
-      <group targetFramework="net35-Unity Web v3.5"></group>
       <group targetFramework="net35"></group>
       <group targetFramework="net40-client"></group>
       <group targetFramework="net40"></group>
@@ -92,26 +88,6 @@
     <file src="bin\*\net35\Axle.Core.xml" target="lib\net35" />
     <file src="bin\*\net35\Axle.Core.pdb" target="lib\net35" />
     <file src="bin\*\net35\Axle.Core.mdb" target="lib\net35" />
-
-<!--    <file src="bin\*\net35-Unity Full v3.5\Axle.Core.dll" target="lib\net35-Unity Full v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Full v3.5\Axle.Core.xml" target="lib\net35-Unity Full v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Full v3.5\Axle.Core.pdb" target="lib\net35-Unity Full v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Full v3.5\Axle.Core.mdb" target="lib\net35-Unity Full v3.5" />-->
-<!---->
-<!--    <file src="bin\*\net35-Unity Subset v3.5\Axle.Core.dll" target="lib\net35-Unity Subset v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Subset v3.5\Axle.Core.xml" target="lib\net35-Unity Subset v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Subset v3.5\Axle.Core.pdb" target="lib\net35-Unity Subset v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Subset v3.5\Axle.Core.mdb" target="lib\net35-Unity Subset v3.5" />-->
-<!---->
-<!--    <file src="bin\*\net35-Unity Micro v3.5\Axle.Core.dll" target="lib\net35-Unity Micro v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Micro v3.5\Axle.Core.xml" target="lib\net35-Unity Micro v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Micro v3.5\Axle.Core.pdb" target="lib\net35-Unity Micro v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Micro v3.5\Axle.Core.mdb" target="lib\net35-Unity Micro v3.5" />-->
-<!---->
-<!--    <file src="bin\*\net35-Unity Web v3.5\Axle.Core.dll" target="lib\net35-Unity Web v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Web v3.5\Axle.Core.xml" target="lib\net35-Unity Web v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Web v3.5\Axle.Core.pdb" target="lib\net35-Unity Web v3.5" />-->
-<!--    <file src="bin\*\net35-Unity Web v3.5\Axle.Core.mdb" target="lib\net35-Unity Web v3.5" />-->
 
     <file src="bin\*\net30\Axle.Core.dll" target="lib\net30" />
     <file src="bin\*\net30\Axle.Core.xml" target="lib\net30" />

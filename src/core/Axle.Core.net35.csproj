@@ -223,9 +223,6 @@
   </Target>
   -->
   <ItemGroup>
-    <None Include="Extensions\IO\Stream\StreamExtensions2.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="Extensions\Boolean\" />
     <Folder Include="Extensions\StringComparer\" />
   </ItemGroup>

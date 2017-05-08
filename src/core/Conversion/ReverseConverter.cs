@@ -4,7 +4,9 @@ using Axle.Verification;
 
 namespace Axle.Conversion
 {
+#if !netstandard
     [Serializable]
+#endif
     public sealed class ReverseConverter<TS, TD> : ITwoWayConverter<TS, TD>
     {
         private readonly ITwoWayConverter<TD, TS> converter;

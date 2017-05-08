@@ -12,7 +12,11 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class CharacterParser : AbstractParser<char>
     {
+#if !netstandard
         protected override char DoParse(string value, IFormatProvider formatProvider) { return char.Parse(value); }
+#else
+        protected override char DoParse(string value, IFormatProvider formatProvider) { return value[0]; }
+#endif
 
         public override bool TryParse(string value, IFormatProvider formatProvider, out char output) { return char.TryParse(value, out output); }
     }

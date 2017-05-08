@@ -78,7 +78,9 @@ namespace Axle.Text.Formatting
         protected abstract string DoFormat(string format, T arg, IFormatProvider formatProvider);
     }
 
+#if !netstandard
     [Serializable]
+#endif
     public abstract class AbstractCustomFormatter<T, TFP> : AbstractCustomFormatter<T>, ICustomFormatter<T, TFP> 
         where TFP: class, IFormatProvider
     {
