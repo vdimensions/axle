@@ -167,13 +167,6 @@
     <Compile Include="Signal.cs" />
     <Compile Include="Signal.StaticMethods.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="paket-restore.sh" />
-    <None Include="paket-update.sh" />
-    <None Include="paket.dependencies" />
-    <None Include="paket.references" />
-    <None Include="paket.sh" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
