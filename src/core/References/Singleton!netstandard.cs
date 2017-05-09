@@ -16,7 +16,7 @@ namespace Axle.References
             var constructor = Singleton.GetSingletonConstructor(type);
             if (constructor == null)
             {
-                throw new InvalidOperationException("The class '" + type.FullName + "' has one or more public constructors and cannot be used with the singleton pattern!");
+                throw new InvalidOperationException(string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
             }
             var instance = (T) constructor.Invoke(new object[0]);
             Thread.MemoryBarrier();

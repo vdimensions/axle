@@ -44,6 +44,8 @@ namespace Axle.References
 
     public static partial class Singleton
     {
+        internal const string CandidateConstructorNotFoundMessageFormat = "The class '{0}' has one or more public constructors and cannot be used with the singleton pattern!";
+        
         public static T GetSingletonInstance<T>(Type type) { return (T) GetSingletonInstance(type); }
     }
 }
