@@ -5,5 +5,5 @@
     <AssemblyName>Axle.Core</AssemblyName>
     <AppDesignerFolder>Properties</AppDesignerFolder>
   </PropertyGroup>
-  <Import Project="../Axle.Shared.netframework.targets" />
+  <Import Project="../../Axle.Shared.netframework.targets" />
 </Project>

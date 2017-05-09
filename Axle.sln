@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35-unity-subset", "net35
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{B3912000-B34B-4240-A437-924267F555D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net40-client", "src\core\Axle.Core.net40-client.csproj", "{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net40-client", "src\core\main\Axle.Core.net40-client.csproj", "{FAB89E44-7897-445A-A8F2-4CC2B536C6D1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net45", "net45", "{A395A6A5-DBEB-4E3F-9EE3-5B12B5EB78C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net45", "src\core\Axle.Core.net45.csproj", "{D75B523D-5EA6-4070-8AF2-896A88AB0865}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net45", "src\core\main\Axle.Core.net45.csproj", "{D75B523D-5EA6-4070-8AF2-896A88AB0865}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{CAFD1B10-FDB1-4F43-89E9-19D7AD4BBA23}"
 	ProjectSection(SolutionItems) = preProject
@@ -19,19 +19,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "dist", "dist", "{CAFD1B10-F
 		tools\paket.sh = tools\paket.sh
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.dist", "src\core\Axle.Core.dist.csproj", "{D7C8BBB3-0256-46CF-B778-5EB7E423229C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.dist", "src\core\main\Axle.Core.dist.csproj", "{D7C8BBB3-0256-46CF-B778-5EB7E423229C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35", "net35", "{39C4FB8C-1CCC-43C9-9CE2-6E7AB2E5861B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net35-unity-web", "net35-unity-web", "{2B9A499E-5059-4A08-95F7-E4F7425A3701}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net35", "src\core\Axle.Core.net35.csproj", "{264E501C-B2FE-4138-BF10-297755E31243}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.net35", "src\core\main\Axle.Core.net35.csproj", "{264E501C-B2FE-4138-BF10-297755E31243}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard1.4", "netstandard1.4", "{B9255E3E-71D5-40BD-A9A9-8B223A8A2A22}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard14", "src\core\Axle.Core.netstandard14.csproj", "{05F361FD-45B2-4C4A-B1CF-436460B71376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard14", "src\core\main\Axle.Core.netstandard14.csproj", "{05F361FD-45B2-4C4A-B1CF-436460B71376}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard12", "src\core\Axle.Core.netstandard12.csproj", "{7052E29E-2A68-4367-A076-BF19CA7DAF77}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard12", "src\core\main\Axle.Core.netstandard12.csproj", "{7052E29E-2A68-4367-A076-BF19CA7DAF77}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard1.2", "netstandard1.2", "{AD4AFAF8-62D8-458F-83F4-7869321EBB41}"
 EndProject
@@ -49,17 +49,17 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard1.5", "netstanda
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "netstandard1.6", "netstandard1.6", "{F62E793A-DB91-44E1-96E8-5EFE28CBFD39}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard13", "src\core\Axle.Core.netstandard13.csproj", "{769CE07C-84CD-484F-BB0C-061F6DD0987D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard13", "src\core\main\Axle.Core.netstandard13.csproj", "{769CE07C-84CD-484F-BB0C-061F6DD0987D}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard11", "src\core\Axle.Core.netstandard11.csproj", "{DEEE1D7E-7670-4C81-A17D-682D681CAC02}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard11", "src\core\main\Axle.Core.netstandard11.csproj", "{DEEE1D7E-7670-4C81-A17D-682D681CAC02}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard10", "src\core\Axle.Core.netstandard10.csproj", "{44EBE527-9561-4DE5-B433-7802B0D1E642}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard10", "src\core\main\Axle.Core.netstandard10.csproj", "{44EBE527-9561-4DE5-B433-7802B0D1E642}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard15", "src\core\Axle.Core.netstandard15.csproj", "{98ADC985-5017-4BC6-89E5-8D14499FD8A9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard15", "src\core\main\Axle.Core.netstandard15.csproj", "{98ADC985-5017-4BC6-89E5-8D14499FD8A9}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard16", "src\core\Axle.Core.netstandard16.csproj", "{52DFF1D6-2912-4AD7-83A7-ECCF374F8A6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard16", "src\core\main\Axle.Core.netstandard16.csproj", "{52DFF1D6-2912-4AD7-83A7-ECCF374F8A6B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard20", "src\core\Axle.Core.netstandard20.csproj", "{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard20", "src\core\main\Axle.Core.netstandard20.csproj", "{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

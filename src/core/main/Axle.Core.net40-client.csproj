@@ -214,8 +214,6 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup>
-  </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>
       <Properties>

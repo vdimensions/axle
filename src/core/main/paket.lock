@@ -1,8 +1,8 @@
 NUGET
-  remote: ../../submodules/mason/dist
-    Mason.Targets.Packager (0.1.1.7)
-    Mason.Targets.Preprocessor (0.1.1.6)
-    Mason.Targets.Verman (0.1.1.7)
+  remote: ../../../submodules/mason/dist
+    Mason.Targets.Packager (0.1.1.15)
+    Mason.Targets.Preprocessor (0.1.1.12)
+    Mason.Targets.Verman (0.1.1.12)
   remote: https://www.nuget.org/api/v2
     Microsoft.NETCore.Platforms (1.1) - framework: >= netstandard15
     Microsoft.NETCore.Targets (1.1) - framework: >= netstandard15
