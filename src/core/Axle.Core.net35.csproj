@@ -9,12 +9,12 @@
     <FileAlignment>512</FileAlignment>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
   </PropertyGroup>
-  <!-- Axle Custom Properties Begin -->
+  <!-- Axle-specific properties begin -->
   <PropertyGroup>
     <FrameworkShortName>net35</FrameworkShortName>
     <CustomSymbols>net35</CustomSymbols>
   </PropertyGroup>
-  <!-- Axle Custom Properties End -->
+  <!-- Axle-specific properties end -->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -208,11 +208,11 @@
     <Compile Include="Signal.StaticMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="paket-restore.sh" />
-    <Content Include="paket-update.sh" />
-    <Content Include="paket.dependencies" />
-    <Content Include="paket.references" />
-    <Content Include="paket.sh" />
+    <None Include="paket-restore.sh" />
+    <None Include="paket-update.sh" />
+    <None Include="paket.dependencies" />
+    <None Include="paket.references" />
+    <None Include="paket.sh" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

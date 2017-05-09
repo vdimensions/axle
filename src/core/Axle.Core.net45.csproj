@@ -6,32 +6,24 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D75B523D-5EA6-4070-8AF2-896A88AB0865}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle</RootNamespace>
-    <AssemblyName>Axle.Core</AssemblyName>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FrameworkShortName>net45</FrameworkShortName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>    
   </PropertyGroup>
+  <!--Axle-specific properties begin-->
+  <PropertyGroup>
+    <FrameworkShortName>net45</FrameworkShortName>
+    <CustomSymbols>net45;net40;net35</CustomSymbols>
+  </PropertyGroup>
+  <!--Axle-specific properties end-->
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\$(FrameworkShortName)</OutputPath>
-    <DefineConstants>DEBUG;TRACE;net45;net40;net35</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\$(FrameworkShortName)\Axle.Core.XML</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\$(FrameworkShortName)</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <Import Project="Axle.Core.Common.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -176,11 +168,11 @@
     <Compile Include="Signal.StaticMethods.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="paket-restore.sh" />
-    <Content Include="paket-update.sh" />
-    <Content Include="paket.dependencies" />
-    <Content Include="paket.references" />
-    <Content Include="paket.sh" />
+    <None Include="paket-restore.sh" />
+    <None Include="paket-update.sh" />
+    <None Include="paket.dependencies" />
+    <None Include="paket.references" />
+    <None Include="paket.sh" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
