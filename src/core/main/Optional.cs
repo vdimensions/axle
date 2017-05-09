@@ -108,10 +108,17 @@ namespace Axle
 
 		public static implicit operator Optional<T> (T value) { return value == null ? Undefined : new Optional<T>(value); }
 		public static explicit operator T (Optional<T> optional) { return optional.GetValueOrDefault(); }
+
         public static string operator % (string format, Optional<T> optional)
         {
             return string.Format(format, optional.HasValue ? (object) optional.Value : optional.ToString());
         }
+        /** EXPERIMENTAL
+        public static Optional<dynamic> operator / (Optional<T> optional, Func<T, dynamic> func)
+        {
+            return optional.Next(func);
+        }
+        */
 	}
 }
 
