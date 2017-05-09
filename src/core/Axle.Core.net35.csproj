@@ -25,7 +25,7 @@
     <WarningLevel>4</WarningLevel>
     <RunCodeAnalysis>false</RunCodeAnalysis>
   </PropertyGroup>
-  <Import Project="Axle.Core.Common.targets" />
+  <Import Project="Axle.Core.netframework.targets" />
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
