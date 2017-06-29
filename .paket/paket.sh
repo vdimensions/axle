@@ -2,7 +2,7 @@
 # relative to the location of this file.
 # The purpose of this file is to allow correct cross-platform invocation of paket 
 
-EXEC='${0%/*}/../.paket/paket.exe'
+EXEC='${0%/*}s/paket.exe'
 
 if [ ! -f ${EXEC} ]; then
   if [ "$(uname)" == "Darwin" ]; then
