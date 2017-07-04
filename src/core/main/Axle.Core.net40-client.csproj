@@ -39,6 +39,7 @@
     <Compile Include="Collections\Generic\GenericEnumerable.cs" />
     <Compile Include="Collections\Generic\GenericEnumerator.cs" />
     <Compile Include="Collections\Generic\GenericList.cs" />
+    <Compile Include="DependencyInjection\IContainer.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
     <Compile Include="Environment\EnvironmentInfo!netstandard.cs" />
@@ -205,6 +206,9 @@
     <Compile Include="Text\Formatting\FormatMethod.cs" />
     <Compile Include="Text\Formatting\FormatProvider.cs" />
     <Compile Include="Text\Formatting\ICustomFormatter.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

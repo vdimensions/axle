@@ -5,6 +5,9 @@ using Axle.References;
 
 namespace Axle.Environment
 {
+    /// <summary>
+    /// A static class that enables access to the current execution environment and .NET runtime properties.
+    /// </summary>
     public static class Platform
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
