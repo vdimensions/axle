@@ -14,7 +14,7 @@ namespace Axle.DependencyInjection
 
         public static T Resolve<T>(this IContainer container, string name)
         {
-            return (T) container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(typeof(T));
+            return (T) container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(typeof(T), name.VerifyArgument(nameof(name)).IsNotNull().Value);
         }
         public static T Resolve<T>(this IContainer container)
         {
