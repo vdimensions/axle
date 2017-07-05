@@ -25,6 +25,7 @@
 *.csproj.user
 *.[Dd]ot[Ss]ettings
 *.[Dd]ot[Ss]ettings.user
+**/.DS_Store
 *.desktop
 *.fsproj.user
 *.iml
