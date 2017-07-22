@@ -10,7 +10,9 @@ namespace Axle.DependencyInjection
     /// An interface representing a dependency container.
     /// </summary>
     public interface IContainer
-    {
+    {       
         object Resolve(Type type, string name);
+
+        IContainer Parent { get; }
     }
 }
