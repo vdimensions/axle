@@ -77,6 +77,8 @@
     <Compile Include="Conversion\Parsing\UriParser.cs" />
     <Compile Include="Conversion\Parsing\VersionParser.cs" />
     <Compile Include="Conversion\ReverseConverter.cs" />
+    <Compile Include="DependencyInjection\ContainerMixin.cs" />
+    <Compile Include="DependencyInjection\IContainer.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
