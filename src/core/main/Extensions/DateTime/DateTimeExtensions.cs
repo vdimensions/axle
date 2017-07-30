@@ -33,20 +33,16 @@ namespace Axle.Extensions.DateTime
         public static DateTime FirstDayOfWeek(this DateTime current, DayOfWeek firstDayOfWeek)
         {
             var currentDayOfWeek = current.DayOfWeek;
-
             if (firstDayOfWeek == currentDayOfWeek)
             {
                 return current.Date;
             }
 
             var result = current.Date;
-            for (var i = 1; i <= 7; i++)
+            var fdw = (int) firstDayOfWeek;
+            for (var i = (int) currentDayOfWeek; i <= fdw; i--)
             {
                 result = result.AddDays(-1);
-                if (result.DayOfWeek == firstDayOfWeek)
-                {
-                    break;
-                }
             }
             return result;
         }

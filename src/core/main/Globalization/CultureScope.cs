@@ -26,7 +26,7 @@ namespace Axle.Globalization
         {
             if (culture == null)
             {
-                throw new ArgumentNullException("culture");
+                throw new ArgumentNullException(nameof(culture));
             }
             return new CultureScope(culture, culture);
         }
@@ -63,7 +63,7 @@ namespace Axle.Globalization
         {
             if (culture == null)
             {
-                throw new ArgumentNullException("culture");
+                throw new ArgumentNullException(nameof(culture));
             }
             return new CultureScope(culture, culture);
         }

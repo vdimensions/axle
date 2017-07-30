@@ -71,7 +71,7 @@ namespace Axle.Extensions.Globalization.CultureInfo
         /// </example>
         public static CultureInfo[] ExpandHierarchy(this CultureInfo culture)
         {
-            var c = culture.VerifyArgument("culture").IsNotNull().Value;
+            var c = culture.VerifyArgument(nameof(culture)).IsNotNull().Value;
             var result = new List<CultureInfo>(3) { c };
             do
             {

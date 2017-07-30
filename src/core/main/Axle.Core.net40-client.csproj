@@ -39,7 +39,11 @@
     <Compile Include="Collections\Generic\GenericEnumerable.cs" />
     <Compile Include="Collections\Generic\GenericEnumerator.cs" />
     <Compile Include="Collections\Generic\GenericList.cs" />
+    <Compile Include="DependencyInjection\Descriptors\DependencyInfo.cs" />
+    <Compile Include="DependencyInjection\Descriptors\ConstructorDependencyDescriptor.cs" />
+    <Compile Include="DependencyInjection\ContainerMixin.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
+    <Compile Include="DependencyInjection\Descriptors\PropertyDependencyDescriptor.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
     <Compile Include="Environment\EnvironmentInfo!netstandard.cs" />

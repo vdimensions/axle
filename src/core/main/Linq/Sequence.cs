@@ -38,7 +38,7 @@ namespace Axle.Linq
         {
             if (action == null)
             {
-                throw new ArgumentNullException("action");
+                throw new ArgumentNullException(nameof(action));
             }
             foreach (var item in value)
             {
@@ -95,7 +95,7 @@ namespace Axle.Linq
         /// <summary>
         /// Gets the number of elements contained in the sequence.
         /// </summary>
-        public int Count { get { return this.value == null ? 0 : value.Count(); } }
+        public int Count { get { return value?.Count() ?? 0; } }
 
         public static implicit operator TE(Sequence<TE, T> obj) { return obj.Value; }
     }

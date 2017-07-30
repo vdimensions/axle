@@ -10,7 +10,7 @@
     /// <typeparam name="TTarget">
     /// The type of the conversion result. 
     /// </typeparam>
-    public interface IConverter<TSource, TTarget>
+    public interface IConverter<in TSource, TTarget>
     {
         /// <summary>
         /// Convert the specified by the <paramref name="source"/> parameter objects to an instance of <typeparamref name="TTarget"/>.
@@ -24,8 +24,8 @@
         TTarget Convert(TSource source);
 
         /// <summary>
-        /// Attempts to covert the specified by the <paramref name="source"/> parameter instance of the <typeparamref name="TSource" /> type
-        /// to an instance of the <typeparamref name="TTarget"/> type.
+        /// Attempts to covert the specified by the <paramref name="source"/> parameter instance of the <typeparamref name="TSource" /> 
+        /// type to an instance of the <typeparamref name="TTarget"/> type.
         /// </summary>
         /// <param name="source">
         /// The source instance to be converted.
