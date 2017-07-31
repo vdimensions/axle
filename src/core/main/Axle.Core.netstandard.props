@@ -2,8 +2,7 @@
   <PropertyGroup>
     <!-- Prevent .netcore from automatically generating the AssemblyInfo.cs file -->
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-
+    
     <AssemblyName>Axle.Core</AssemblyName>
     <PackageId>Axle.Core</PackageId>
     <Authors>Virtual Dimensions</Authors>

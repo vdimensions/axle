@@ -1,10 +1,8 @@
 ﻿using System;
-
-using Axle.References;
 using Axle.Verification;
 
 
-namespace Axle.DependencyInjection.Descriptors
+namespace Axle.DependencyInjection.Sdk
 {
     public class DependencyInfo
     {
@@ -22,21 +20,5 @@ namespace Axle.DependencyInjection.Descriptors
         /// Gets the name of the dependency, or <c>String.Empty</c> if the dependency is not explicitly named.
         /// </summary>
         public string Name { get; }
-    }
-
-    public interface IDependencyDescriptor
-    {
-    }
-
-    internal sealed class DependencyDescriptor<T> : IDependencyDescriptor
-    {
-        public static DependencyDescriptor<T> Instance => Singleton<DependencyDescriptor<T>>.Instance;
-
-        private DependencyDescriptor() { }
-    }
-
-    internal static class DependencyDescriptor
-    {
-        public static IDependencyDescriptor Get<T>() { return DependencyDescriptor<T>.Instance; }
     }
 }

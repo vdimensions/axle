@@ -1,8 +1,9 @@
 using Axle.Verification;
 
-namespace Axle.DependencyInjection.Descriptors
+
+namespace Axle.DependencyInjection.Sdk
 {
-    public class PropertyDependencyDescriptor
+    public class PropertyDependencyDescriptor : IDependencyDescriptor
     {
         public PropertyDependencyDescriptor(DependencyInfo info, bool optional)
         {
