@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Threading;
 
 
 namespace Axle.References
@@ -16,16 +13,16 @@ namespace Axle.References
         {
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private static readonly T _instance = CreateInstance();
-            public static T Instance { get { return _instance; } }
+            public static T Instance => _instance;
         }
 
         private static readonly object _syncRoot = new object();
         private static readonly Singleton<T> _instance = new Singleton<T>();
-        public static Singleton<T> Instance { get { return _instance; } }
+        public static Singleton<T> Instance => _instance;
 
-        public T Value { get { return LazySingletonAllocator.Instance; } }
-        T IReference<T>.Value { get { return Value; } }
-        object IReference.Value { get { return Value; } }
+        public T Value => LazySingletonAllocator.Instance;
+        T IReference<T>.Value => Value;
+        object IReference.Value => Value;
 
         private Singleton()
         {
