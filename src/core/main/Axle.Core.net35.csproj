@@ -77,15 +77,6 @@
     <Compile Include="Conversion\Parsing\UriParser.cs" />
     <Compile Include="Conversion\Parsing\VersionParser.cs" />
     <Compile Include="Conversion\ReverseConverter.cs" />
-    <Compile Include="DependencyInjection\ContainerMixin.cs" />
-    <Compile Include="DependencyInjection\IContainer.cs" />
-    <Compile Include="DependencyInjection\Sdk\ConstructorDependencyDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\ConstructorInjectionDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\DependencyInfo.cs" />
-    <Compile Include="DependencyInjection\Sdk\IDependencyDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\InjectionDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\PropertyDependencyDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\PropertyInjectionDescriptor.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
@@ -112,6 +103,7 @@
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
     <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
     <Compile Include="Extensions\String\StringExtensions.cs" />
+    <Compile Include="Extensions\Uri\UriExtensions.cs" />
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
     <Compile Include="IO\Serialization\ISerializer.cs" />
@@ -215,6 +207,13 @@
     <Compile Include="Verification\TypeVerifier.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="Signal.StaticMethods.cs" />
+    <Compile Include="DependencyInjection\Sdk\ConstructorDependencyDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\ConstructorInjectionDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\DependencyInfo.cs" />
+    <Compile Include="DependencyInjection\Sdk\IDependencyDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\InjectionDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\PropertyDependencyDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\PropertyInjectionDescriptor.cs" />
     <Compile Include="DependencyInjection\ContainerMixin.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
   </ItemGroup>

@@ -7,7 +7,7 @@
     <ProjectGuid>{D75B523D-5EA6-4070-8AF2-896A88AB0865}</ProjectGuid>
     <OutputType>Library</OutputType>
     <FileAlignment>512</FileAlignment>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>    
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <!--Axle-specific properties begin-->
   <PropertyGroup>
@@ -39,6 +39,42 @@
     <Compile Include="Collections\Generic\GenericEnumerable.cs" />
     <Compile Include="Collections\Generic\GenericEnumerator.cs" />
     <Compile Include="Collections\Generic\GenericList.cs" />
+    <Compile Include="Conversion\AbstractConverter.cs" />
+    <Compile Include="Conversion\AbstractTwoWayConverter.cs" />
+    <Compile Include="Conversion\BytesToStringConverter.cs" />
+    <Compile Include="Conversion\ChainedConverter.cs" />
+    <Compile Include="Conversion\ConversionException!netstandard.cs" />
+    <Compile Include="Conversion\ConversionException.cs" />
+    <Compile Include="Conversion\IConverter.cs" />
+    <Compile Include="Conversion\IdentityConverter.cs" />
+    <Compile Include="Conversion\ITwoWayConverter.cs" />
+    <Compile Include="Conversion\Parsing\AbstractParser.cs" />
+    <Compile Include="Conversion\Parsing\AbstractStrictParser.cs" />
+    <Compile Include="Conversion\Parsing\BooleanParser.cs" />
+    <Compile Include="Conversion\Parsing\ByteParser.cs" />
+    <Compile Include="Conversion\Parsing\CharacterParser.cs" />
+    <Compile Include="Conversion\Parsing\ContentTypeParser.cs" />
+    <Compile Include="Conversion\Parsing\DateTimeParser.cs" />
+    <Compile Include="Conversion\Parsing\DecimalParser.cs" />
+    <Compile Include="Conversion\Parsing\DoubleParser.cs" />
+    <Compile Include="Conversion\Parsing\EnumParser.cs" />
+    <Compile Include="Conversion\Parsing\GuidParser.cs" />
+    <Compile Include="Conversion\Parsing\Int16Parser.cs" />
+    <Compile Include="Conversion\Parsing\Int32Parser.cs" />
+    <Compile Include="Conversion\Parsing\Int64Parser.cs" />
+    <Compile Include="Conversion\Parsing\IParser.cs" />
+    <Compile Include="Conversion\Parsing\IStrictParser.cs" />
+    <Compile Include="Conversion\Parsing\ParseException!netstandard.cs" />
+    <Compile Include="Conversion\Parsing\ParseException.cs" />
+    <Compile Include="Conversion\Parsing\SByteParser.cs" />
+    <Compile Include="Conversion\Parsing\SingleParser.cs" />
+    <Compile Include="Conversion\Parsing\TimeSpanParser.cs" />
+    <Compile Include="Conversion\Parsing\UInt16Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt32Parser.cs" />
+    <Compile Include="Conversion\Parsing\UInt64Parser.cs" />
+    <Compile Include="Conversion\Parsing\UriParser.cs" />
+    <Compile Include="Conversion\Parsing\VersionParser.cs" />
+    <Compile Include="Conversion\ReverseConverter.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
@@ -53,6 +89,7 @@
     <Compile Include="Environment\RuntimeExtensions.cs" />
     <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
     <Compile Include="Environment\RuntimeInfo.cs" />
+    <Compile Include="Extensions\DateTime\DateTimeExtensions.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions.cs" />
@@ -64,6 +101,7 @@
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
     <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
     <Compile Include="Extensions\String\StringExtensions.cs" />
+    <Compile Include="Extensions\Uri\UriExtensions.cs" />
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
     <Compile Include="IO\Serialization\ISerializer.cs" />

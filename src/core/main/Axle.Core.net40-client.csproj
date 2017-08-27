@@ -69,6 +69,7 @@
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
     <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
     <Compile Include="Extensions\String\StringExtensions.cs" />
+    <Compile Include="Extensions\Uri\UriExtensions.cs" />
     <Compile Include="Linq\ISequence.cs" />
     <Compile Include="Linq\Sequence.cs" />
     <Compile Include="Linq\SequenceExtensions.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="Text\Formatting\ICustomFormatter.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Extensions\Text\Encoding\" />
     <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
