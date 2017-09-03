@@ -3,22 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Axle.Reflection;
-using Axle.Verification;
 
 
 namespace Axle.DependencyInjection.Sdk
 {
     public abstract partial class AbstractDependencyDescriptorProvider : IDependencyDescriptorProvider
     {
-        protected virtual FieldDependencyDescriptor GetDescriptor(IField field)
+        protected virtual IPropertyDependencyDescriptor GetDescriptor(IField field)
         {
             return new FieldDependencyDescriptor(field, GetDependencyName(field));
         }
-        protected virtual PropertyDependencyDescriptor GetDescriptor(IProperty property)
+        protected virtual IPropertyDependencyDescriptor GetDescriptor(IProperty property)
         {
             return new PropertyDependencyDescriptor(property, GetDependencyName(property));
         }
-        protected virtual FactoryDescriptor GetDescriptor(IInvokable methodOrConstructor)
+        protected virtual IFactoryDescriptor GetDescriptor(IInvokable methodOrConstructor)
         {
             return new FactoryDescriptor(
                 methodOrConstructor,
@@ -31,8 +30,15 @@ namespace Axle.DependencyInjection.Sdk
         protected abstract string GetDependencyName(IProperty property);
         protected abstract string GetDependencyName(IParameter argument);
 
-        public abstract IEnumerable<FieldDependencyDescriptor> GetFields(Type type);
-        public abstract IEnumerable<PropertyDependencyDescriptor> GetProperties(Type type);
-        public abstract IEnumerable<FactoryDescriptor> GetFactories(Type type);
+        public abstract IEnumerable<IPropertyDependencyDescriptor> GetFields(Type type);
+        public abstract IEnumerable<IPropertyDependencyDescriptor> GetProperties(Type type);
+        public abstract IEnumerable<IFactoryDescriptor> GetFactories(Type type);
+
+        protected bool CompareMemberNames(string left, string right, IEqualityComparer<string> comparer)
+        {
+            return left.Length > 0 && right.Length > 0
+                && char.ToLower(left[0]) == char.ToLower(right[0])
+                && comparer.Equals(left.Substring(1), right.Substring(1));
+        }
     }
 }

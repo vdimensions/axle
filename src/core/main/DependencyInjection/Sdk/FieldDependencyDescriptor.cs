@@ -4,7 +4,7 @@ using Axle.Verification;
 
 namespace Axle.DependencyInjection.Sdk
 {
-    public class FieldDependencyDescriptor : IDependencyDescriptor
+    public class FieldDependencyDescriptor : IPropertyDependencyDescriptor
     {
         public FieldDependencyDescriptor(IField field, string dependencyName)
         {
@@ -15,8 +15,12 @@ namespace Axle.DependencyInjection.Sdk
                 field.Name);
         }
 
+        void IPropertyDependencyDescriptor.SetValue(object target, object value)
+        {
+            Member.SetAccessor.SetValue(target, value);
+        }
+
         public IField Member { get; }
         public DependencyInfo Info { get; }
-        public bool Optional { get; }
     }
 }

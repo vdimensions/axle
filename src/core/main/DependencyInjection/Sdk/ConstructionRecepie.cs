@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Axle.Reflection;
 using Axle.Verification;
 
 
@@ -15,9 +14,9 @@ namespace Axle.DependencyInjection.Sdk
     /// </summary>
     public class ConstructionRecepie
     {
-        private sealed class FactoryDescriptorComparer : IComparer<FactoryDescriptor>
+        private sealed class FactoryDescriptorComparer : IComparer<IFactoryDescriptor>
         {
-            public int Compare(FactoryDescriptor x, FactoryDescriptor y)
+            public int Compare(IFactoryDescriptor x, IFactoryDescriptor y)
             {
                 if (ReferenceEquals(x, y))
                 {
@@ -31,18 +30,18 @@ namespace Axle.DependencyInjection.Sdk
                 {
                     return 1;
                 }
-                var argsCountDiff = x.Arguments.Count - y.Arguments.Count;
-                if (argsCountDiff == 0)
-                {
-                    if (x.Factory is IMethod)
-                    {
-                        return 1;
-                    }
-                    if (y.Factory is IMethod)
-                    {
-                        return -1;
-                    }
-                }
+                var argsCountDiff = x.Arguments.Count(arg => !arg.Optional) - y.Arguments.Count(arg => !arg.Optional);
+                //if (argsCountDiff == 0)
+                //{
+                //    if (x.Factory is IMethod)
+                //    {
+                //        return 1;
+                //    }
+                //    if (y.Factory is IMethod)
+                //    {
+                //        return -1;
+                //    }
+                //}
                 return argsCountDiff;
             }
         }
@@ -68,7 +67,7 @@ namespace Axle.DependencyInjection.Sdk
             }
         }
 
-        private static IEnumerable<T> FilterDescriptors<T>(FactoryDescriptor descriptor, IEnumerable<T> descriptors, IDependencyDescriptorProvider dependencyDescriptorProvider)
+        private static IEnumerable<T> FilterDescriptors<T>(IFactoryDescriptor descriptor, IEnumerable<T> descriptors, IDependencyDescriptorProvider dependencyDescriptorProvider)
             where T: IDependencyDescriptor
         {
             foreach (var d in descriptors)
@@ -83,17 +82,21 @@ namespace Axle.DependencyInjection.Sdk
             }
         }
 
-        private ConstructionRecepie(Type targetType, FactoryDescriptor factory, IEnumerable<PropertyDependencyDescriptor> properties, IEnumerable<FieldDependencyDescriptor> fields)
+        private ConstructionRecepie(
+                Type targetType, 
+                IFactoryDescriptor factory, 
+                IEnumerable<IPropertyDependencyDescriptor> properties, 
+                IEnumerable<IPropertyDependencyDescriptor> fields)
         {
             TargetType = targetType.VerifyArgument(nameof(targetType)).IsNotNull();
-            Factory = factory.VerifyArgument(nameof(factory)).IsNotNull();
+            Factory = factory.VerifyArgument(nameof(factory)).IsNotNull().Value;
             Properties = properties.VerifyArgument(nameof(properties)).IsNotNull().Value;
             Fields = fields.VerifyArgument(nameof(fields)).IsNotNull().Value;
         }
 
         public Type TargetType { get; }
-        public FactoryDescriptor Factory { get; }
-        public IEnumerable<PropertyDependencyDescriptor> Properties { get; }
-        public IEnumerable<FieldDependencyDescriptor> Fields { get; }
+        public IFactoryDescriptor Factory { get; }
+        public IEnumerable<IPropertyDependencyDescriptor> Properties { get; }
+        public IEnumerable<IPropertyDependencyDescriptor> Fields { get; }
     }
 }

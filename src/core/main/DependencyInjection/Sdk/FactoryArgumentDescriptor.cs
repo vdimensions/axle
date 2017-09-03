@@ -4,7 +4,7 @@ using Axle.Verification;
 
 namespace Axle.DependencyInjection.Sdk
 {
-    public class FactoryArgumentDescriptor : IDependencyDescriptor
+    public class FactoryArgumentDescriptor : IFactoryArgumentDescriptor
     {
         public FactoryArgumentDescriptor(IParameter parameter, string dependencyName)
         {
@@ -14,7 +14,6 @@ namespace Axle.DependencyInjection.Sdk
 
         public IParameter Member { get; }
         public DependencyInfo Info { get; }
-        public string MemberName => Member.Name;
         public bool Optional => Member.IsOptional;
         public object DefaultValue => Member.DefaultValue;
     }

@@ -1,8 +1,5 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
-using Axle.Reflection;
 using Axle.Verification;
 
 
@@ -24,8 +21,7 @@ namespace Axle.DependencyInjection.Sdk
             }
             if (factoryArgumentDependency.DependencyName.Length == 0 && classMemberDependency.DependencyName.Length == 0)
             {
-                return char.ToLower(factoryArgumentDependency.MemberName[0]) == char.ToLower(classMemberDependency.MemberName[0]) &&
-                       comparer.Equals(factoryArgumentDependency.MemberName.Substring(1), classMemberDependency.MemberName.Substring(1));
+                return CompareMemberNames(factoryArgumentDependency.MemberName, classMemberDependency.MemberName, comparer);
             }
             return comparer.Equals(factoryArgumentDependency.DependencyName, classMemberDependency.DependencyName);
         }

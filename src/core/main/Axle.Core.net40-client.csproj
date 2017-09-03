@@ -51,6 +51,9 @@
     <Compile Include="DependencyInjection\Sdk\FieldDependencyDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\IDependencyDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\IDependencyDescriptorProvider.cs" />
+    <Compile Include="DependencyInjection\Sdk\IFactoryArgumentDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\IFactoryDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\IPropertyDependencyDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\PropertyDependencyDescriptor.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />

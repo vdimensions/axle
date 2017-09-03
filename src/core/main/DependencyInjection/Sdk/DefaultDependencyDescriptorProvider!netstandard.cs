@@ -26,14 +26,14 @@ namespace Axle.DependencyInjection.Sdk
             return string.Empty;
         }
 
-        public override IEnumerable<FieldDependencyDescriptor> GetFields(Type type)
+        public override IEnumerable<IPropertyDependencyDescriptor> GetFields(Type type)
         {
             return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
                 .GetFields(MemberScanOptions)
                 .Where(x => !x.IsReadOnly)
                 .Select(GetDescriptor);
         }
-        public override IEnumerable<PropertyDependencyDescriptor> GetProperties(Type type)
+        public override IEnumerable<IPropertyDependencyDescriptor> GetProperties(Type type)
         {
             return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
                 .GetProperties(MemberScanOptions)
@@ -41,7 +41,7 @@ namespace Axle.DependencyInjection.Sdk
                 .Select(GetDescriptor);
         }
 
-        public override IEnumerable<FactoryDescriptor> GetFactories(Type type)
+        public override IEnumerable<IFactoryDescriptor> GetFactories(Type type)
         {
             var introspector = new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull());
             var staticFactories = introspector.GetMethods(FactoryScanOptions)

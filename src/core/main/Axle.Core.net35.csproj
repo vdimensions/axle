@@ -85,6 +85,9 @@
     <Compile Include="DependencyInjection\Sdk\FactoryDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\FieldDependencyDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\IDependencyDescriptorProvider.cs" />
+    <Compile Include="DependencyInjection\Sdk\IFactoryArgumentDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\IFactoryDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\IPropertyDependencyDescriptor.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />

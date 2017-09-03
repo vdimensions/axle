@@ -6,9 +6,9 @@ namespace Axle.DependencyInjection.Sdk
 {
     public interface IDependencyDescriptorProvider
     {
-        IEnumerable<FieldDependencyDescriptor> GetFields(Type type);
-        IEnumerable<PropertyDependencyDescriptor> GetProperties(Type type);
-        IEnumerable<FactoryDescriptor> GetFactories(Type type);
+        IEnumerable<IPropertyDependencyDescriptor> GetFields(Type type);
+        IEnumerable<IPropertyDependencyDescriptor> GetProperties(Type type);
+        IEnumerable<IFactoryDescriptor> GetFactories(Type type);
         bool DoDependenciesConverge(DependencyInfo factoryArgumentDependency, DependencyInfo classMemberDependency);
     }
 }
