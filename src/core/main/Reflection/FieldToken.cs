@@ -15,14 +15,14 @@ namespace Axle.Reflection
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly AccessModifier accessModifier;
+        private readonly AccessModifier _accessModifier;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly DeclarationType declaration;
+        private readonly DeclarationType _declaration;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly FieldAccessor[] accessors;
+        private readonly FieldAccessor[] _accessors;
 
-        public override bool Equals(object obj) { return obj is FieldToken && base.Equals(obj); }
-        bool IEquatable<FieldToken>.Equals(FieldToken other) { return base.Equals(other); }
+        public override bool Equals(object obj) { return obj is FieldToken && Equals((FieldToken) obj); }
+        public bool Equals(FieldToken other) { return base.Equals(other); }
 
         IAccessor IAccessible.FindAccessor(AccessorType accessorType)
         {
@@ -36,11 +36,12 @@ namespace Axle.Reflection
 
         public override int GetHashCode() { return unchecked(base.GetHashCode()); }
         
-        public IGetAccessor GetAccessor { get { return accessors[0]; } }
-        public ISetAccessor SetAccessor { get { return accessors[1]; } }
-        IEnumerable<IAccessor> IAccessible.Accessors { get { return accessors; } }
-        public override AccessModifier AccessModifier { get { return accessModifier; } }
-        public override DeclarationType Declaration { get { return declaration; } }
-        public override Type MemberType { get { return ReflectedMember.FieldType; } }
+        public IGetAccessor GetAccessor => _accessors[0];
+        public ISetAccessor SetAccessor => _accessors[1];
+        public bool IsReadOnly => ReflectedMember.IsInitOnly;
+        IEnumerable<IAccessor> IAccessible.Accessors => _accessors;
+        public override AccessModifier AccessModifier => _accessModifier;
+        public override DeclarationType Declaration => _declaration;
+        public override Type MemberType => ReflectedMember.FieldType;
     }
 }

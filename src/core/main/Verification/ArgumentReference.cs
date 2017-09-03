@@ -62,13 +62,14 @@ namespace Axle.Verification
             return new ArgumentReference<TExpected>(arg.Name, (TExpected) val);
         }
 
-        internal string Name { get { return name; } }
+        internal string Name => name;
+
         /// <summary>
         /// Gets the value passed in the argument the current <see cref="ArgumentReference{T}"/> instance represents.
         /// </summary>
-        public T Value { get { return value; } }
-        T IReference<T>.Value { get { return value; } }
-        object IReference.Value { get { return value; } }
+        public T Value => value;
+        T IReference<T>.Value => value;
+        object IReference.Value => value;
 
         /// <param name="reference">
         /// The argument reference instance to be unwrapped by this operator. 

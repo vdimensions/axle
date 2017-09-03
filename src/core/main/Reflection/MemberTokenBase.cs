@@ -57,13 +57,10 @@ namespace Axle.Reflection
         }
 
 #if !netstandard
-        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer
-        {
-            get { return Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance; }
-        }
+        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer => Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance;
 #else
         private static AbstractEqualityComparer<MemberTokenBase<T>> comparer = new MethodHandleBaseEqualityComparer<MemberTokenBase<T>>();
-        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer { get { return comparer; } }
+        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer => comparer;
 #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -84,13 +81,13 @@ namespace Axle.Reflection
 
         public override int GetHashCode() { return EqualityComparer.GetHashCode(this); }
 
-        MemberInfo IReflected.ReflectedMember { get { return this.ReflectedMember; } }
-        public Type DeclaringType { get { return declaringType; } }
+        MemberInfo IReflected.ReflectedMember => ReflectedMember;
+        public Type DeclaringType => declaringType;
         public abstract Type MemberType { get; }
-        public string Name { get { return name; } }
+        public string Name => name;
         public abstract DeclarationType Declaration { get; }
         public abstract AccessModifier AccessModifier { get; }
-        public RuntimeTypeHandle TypeHandle { get { return typeHandle; } }
+        public RuntimeTypeHandle TypeHandle => typeHandle;
     }
 
     //[Maturity(CodeMaturity.Stable)]

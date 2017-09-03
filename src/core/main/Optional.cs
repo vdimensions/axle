@@ -113,7 +113,7 @@ namespace Axle
         {
             return string.Format(format, optional.HasValue ? (object) optional.Value : optional.ToString());
         }
-        /** EXPERIMENTAL
+        /* EXPERIMENTAL
         public static Optional<dynamic> operator / (Optional<T> optional, Func<T, dynamic> func)
         {
             return optional.Next(func);

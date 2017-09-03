@@ -77,6 +77,14 @@
     <Compile Include="Conversion\Parsing\UriParser.cs" />
     <Compile Include="Conversion\Parsing\VersionParser.cs" />
     <Compile Include="Conversion\ReverseConverter.cs" />
+    <Compile Include="DependencyInjection\Sdk\AbstractDependencyDescriptorProvider!netstandard.cs" />
+    <Compile Include="DependencyInjection\Sdk\AbstractDependencyDescriptorProvider.cs" />
+    <Compile Include="DependencyInjection\Sdk\ConstructionRecepie.cs" />
+    <Compile Include="DependencyInjection\Sdk\DefaultDependencyDescriptorProvider!netstandard.cs" />
+    <Compile Include="DependencyInjection\Sdk\FactoryArgumentDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\FactoryDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\FieldDependencyDescriptor.cs" />
+    <Compile Include="DependencyInjection\Sdk\IDependencyDescriptorProvider.cs" />
     <Compile Include="Environment\Endianness.cs" />
     <Compile Include="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Include="Environment\EnvironmentExtensions.cs" />
@@ -91,6 +99,7 @@
     <Compile Include="Environment\RuntimeExtensions.cs" />
     <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
     <Compile Include="Environment\RuntimeInfo.cs" />
+    <Compile Include="Extensions\DateTime\DateTimeExtensions!netstandard.cs" />
     <Compile Include="Extensions\DateTime\DateTimeExtensions.cs" />
     <Compile Include="Extensions\Globalization\CultureInfo\CultureInfoExtensions.cs" />
     <Compile Include="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
@@ -103,6 +112,7 @@
     <Compile Include="Extensions\IO\Stream\StreamExtensions.cs" />
     <Compile Include="Extensions\String\StringExtensions!netstandard.cs" />
     <Compile Include="Extensions\String\StringExtensions.cs" />
+    <Compile Include="Extensions\Uri\UriExtensions!netstandard.cs" />
     <Compile Include="Extensions\Uri\UriExtensions.cs" />
     <Compile Include="Globalization\CultureScope.cs" />
     <Compile Include="IO\Serialization\BinarySerializer.cs" />
@@ -128,6 +138,7 @@
     <Compile Include="Reflection\CastOperator.cs" />
     <Compile Include="Reflection\ConstructorToken.cs" />
     <Compile Include="Reflection\DeclarationType.cs" />
+    <Compile Include="Reflection\DefaultIntrospector!netstandard.cs" />
     <Compile Include="Reflection\EventAccessor.cs" />
     <Compile Include="Reflection\EventAddAccessor.cs" />
     <Compile Include="Reflection\EventRemoveAccessor.cs" />
@@ -151,6 +162,7 @@
     <Compile Include="Reflection\IField.cs" />
     <Compile Include="Reflection\IGenericMethod.cs" />
     <Compile Include="Reflection\IGetAccessor.cs" />
+    <Compile Include="Reflection\IIntrospector.cs" />
     <Compile Include="Reflection\IInvokable.cs" />
     <Compile Include="Reflection\IMember.cs" />
     <Compile Include="Reflection\IMethod.cs" />
@@ -163,6 +175,7 @@
     <Compile Include="Reflection\IWriteableMember.cs" />
     <Compile Include="Reflection\MemberExtensions!netstandard.cs" />
     <Compile Include="Reflection\MemberExtensions.cs" />
+    <Compile Include="Reflection\ScanOptions.cs" />
     <Compile Include="Reflection\MemberTokenBase!netstandard.cs" />
     <Compile Include="Reflection\MemberTokenBase.cs" />
     <Compile Include="Reflection\MethodBaseToken!netstandard.cs" />
@@ -207,13 +220,9 @@
     <Compile Include="Verification\TypeVerifier.cs" />
     <Compile Include="Signal.cs" />
     <Compile Include="Signal.StaticMethods.cs" />
-    <Compile Include="DependencyInjection\Sdk\ConstructorDependencyDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\ConstructorInjectionDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\DependencyInfo.cs" />
     <Compile Include="DependencyInjection\Sdk\IDependencyDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\InjectionDescriptor.cs" />
     <Compile Include="DependencyInjection\Sdk\PropertyDependencyDescriptor.cs" />
-    <Compile Include="DependencyInjection\Sdk\PropertyInjectionDescriptor.cs" />
     <Compile Include="DependencyInjection\ContainerMixin.cs" />
     <Compile Include="DependencyInjection\IContainer.cs" />
   </ItemGroup>
