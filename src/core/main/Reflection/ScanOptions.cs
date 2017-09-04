@@ -34,6 +34,21 @@ namespace Axle.Reflection
         /// </summary>
         Instance = 1 << 3,
         /// <summary>
+        /// Scan results will include matching public instance members. 
+        /// <para>
+        /// This is a shortcut for using the <c>ScanOptions.Public | ScanOptions.Instance</c> flags.
+        /// </para>
+        /// </summary>
+        PublicInstance = Public | Instance,
+        /// <summary>
+        /// Scan results will include matching public static members. 
+        /// <para>
+        /// This is a shortcut for using the <c>ScanOptions.Public | ScanOptions.Static</c> flags.
+        /// </para>
+        /// </summary>
+        PublicStatic = Public | Static,
+
+        /// <summary>
         /// Scan results will include matching public static and instance members.
         /// </summary>
         Default = Public | Static | Instance
