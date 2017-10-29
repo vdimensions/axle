@@ -13,7 +13,7 @@ namespace Axle.Extensions.Uri
     /// <summary>
     /// A static class containing common extension methods to <see cref="Uri"/> instances.
     /// </summary>
-    public static class UriExtensions
+    public static partial class UriExtensions
     {
         internal const string UriSchemeAssembly = "assembly";
         internal const string UriSchemeResource = "res";
@@ -48,7 +48,7 @@ namespace Axle.Extensions.Uri
             {
                 throw new ArgumentNullException(nameof(uri));
             }
-            return uri.IsFile || SchemeEquals(uri, System.Uri.UriSchemeFile);
+            return uri.IsFile || SchemeEquals(uri, UriSchemeFile);
         }
 
         /// <summary>
@@ -66,7 +66,7 @@ namespace Axle.Extensions.Uri
             {
                 throw new ArgumentNullException(nameof(uri));
             }
-            return SchemeEquals(uri, System.Uri.UriSchemeFtp);
+            return SchemeEquals(uri, UriSchemeFtp);
         }
 
         /// <summary>
@@ -84,7 +84,7 @@ namespace Axle.Extensions.Uri
             {
                 throw new ArgumentNullException(nameof(uri));
             }
-            return SchemeEquals(uri, System.Uri.UriSchemeHttp);
+            return SchemeEquals(uri, UriSchemeHttp);
         }
 
         /// <summary>
@@ -102,7 +102,7 @@ namespace Axle.Extensions.Uri
             {
                 throw new ArgumentNullException(nameof(uri));
             }
-            return SchemeEquals(uri, System.Uri.UriSchemeHttps);
+            return SchemeEquals(uri, UriSchemeHttps);
         }
 
         /// <summary>
@@ -313,11 +313,11 @@ namespace Axle.Extensions.Uri
             var assenblyName = uri.IsResource() ? uri.Host.TakeBeforeLast('.') : uri.Host;
             return Platform.Runtime.LoadAssembly(assenblyName);
         }
-
+        
         public static bool TryGetAssembly(this System.Uri uri, out Assembly assembly)
         {
             uri.VerifyArgument(nameof(uri)).IsNotNull();
-
+        
             if (uri.IsAbsoluteUri && uri.IsEmbeddedResource())
             {
                 assembly = Platform.Runtime.LoadAssembly(uri.Host);

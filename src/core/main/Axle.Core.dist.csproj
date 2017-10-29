@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Axle.Core.netframework.targets" />
+    <None Include="Axle.Core.netframework.targets.template" />
+    <None Include="Axle.Core.netstandard.props" />
     <None Include="Axle.Core.netstandard.props.template" />
     <None Include="Axle.Core.netstandard.targets.template" />
     <None Include="Axle.Core.netstandard.targets" />

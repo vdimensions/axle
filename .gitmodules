@@ -1,3 +1,6 @@
 [submodule "submodules/mason"]
 	path = submodules/mason
 	url = https://github.com/ivaylo5ev/mason
+[submodule "submodules/btw"]
+	path = submodules/btw
+	url = https://github.com/virtual-dimensions/btw
