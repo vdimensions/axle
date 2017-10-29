@@ -48,6 +48,13 @@
     <None Include="Axle.Core.netstandard.targets" />
     <None Include="Axle.Core.nuspec" />
     <None Include="Axle.Core.nuspec.template" />
+    <None Include="bin\Debug\netstandard1.0\Axle.Core.deps.json" />
+    <None Include="bin\Debug\netstandard1.1\Axle.Core.deps.json" />
+    <None Include="bin\Debug\netstandard1.2\Axle.Core.deps.json" />
+    <None Include="bin\Debug\netstandard1.3\Axle.Core.deps.json" />
+    <None Include="bin\Debug\netstandard1.4\Axle.Core.deps.json" />
+    <None Include="bin\Debug\netstandard1.5\Axle.Core.deps.json" />
+    <None Include="bin\Debug\netstandard1.6\Axle.Core.deps.json" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +64,36 @@
     <None Include="paket.dependencies" />
     <None Include="paket.references" />
     <None Include="paket.sh" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\net35\Axle.Core.dll" />
+    <Content Include="bin\Debug\net35\Axle.Core.pdb" />
+    <Content Include="bin\Debug\net35\Axle.Core.xml" />
+    <Content Include="bin\Debug\net40-client\Axle.Core.dll" />
+    <Content Include="bin\Debug\net40-client\Axle.Core.pdb" />
+    <Content Include="bin\Debug\net40-client\Axle.Core.xml" />
+    <Content Include="bin\Debug\net45\Axle.Core.dll" />
+    <Content Include="bin\Debug\net45\Axle.Core.pdb" />
+    <Content Include="bin\Debug\net45\Axle.Core.xml" />
+    <Content Include="bin\Debug\netstandard1.0\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.0\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.1\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.1\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.2\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.2\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.3\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.3\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.4\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.4\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.5\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.5\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.6\Axle.Core.dll" />
+    <Content Include="bin\Debug\netstandard1.6\Axle.Core.pdb" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Debug\netstandard2.0\" />
+    <Folder Include="bin\Release\net35\" />
+    <Folder Include="bin\Release\net45\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="packages\Mason.Targets.Packager\build\Mason.Targets.Packager.targets" Condition="Exists('packages\Mason.Targets.Packager\build\Mason.Targets.Packager.targets')" Label="Paket" />

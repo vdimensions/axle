@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "net40", "net40", "{B3912000-B34B-4240-A437-924267F555D8}"
 EndProject
@@ -140,6 +140,9 @@ Global
 		{98ADC985-5017-4BC6-89E5-8D14499FD8A9} = {A416B709-1B2C-441C-9BFE-26A850104FCD}
 		{52DFF1D6-2912-4AD7-83A7-ECCF374F8A6B} = {F62E793A-DB91-44E1-96E8-5EFE28CBFD39}
 		{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA} = {05E3F547-E3CB-4DF4-9E7F-A2D1E9D352C0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0

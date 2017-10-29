@@ -1,4 +1,5 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard1.6</TargetFramework>
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
@@ -7,9 +8,16 @@
   </PropertyGroup>
   <Import Project="Axle.Core.netstandard.props" />
   <ItemGroup>
+    <Compile Remove="paket-files\**" />
+    <EmbeddedResource Remove="paket-files\**" />
+    <None Remove="paket-files\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="Conversion\ConversionException!netstandard.cs" />
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="Conversion\Parsing\ParseException!netstandard.cs" />
+    <Compile Remove="DependencyInjection\Sdk\AbstractDependencyDescriptorProvider!netstandard.cs" />
+    <Compile Remove="DependencyInjection\Sdk\DefaultDependencyDescriptorProvider!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
     <Compile Remove="Environment\IEnvironment!netstandard.cs" />
@@ -29,6 +37,7 @@
     <Compile Remove="References\Singleton.netstandard.cs" />
     <Compile Remove="Reflection\AssemblyNameEqualityComparer.cs" />
     <Compile Remove="Reflection\CastOperator.cs" />
+    <Compile Remove="Reflection\DefaultIntrospector!netstandard.cs" />
     <Compile Remove="Reflection\EventToken!netstandard.cs" />
     <Compile Remove="Reflection\FieldToken!netstandard.cs" />
     <Compile Remove="Reflection\MemberExtensions!netstandard.cs" />
@@ -45,6 +54,7 @@
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
     <None Remove="Axle.Core.net35.csproj.mason.properties" />
+    <None Remove="Axle.Core.net35.csproj.paket.references" />
     <None Remove="Axle.Core.net40-client.csproj.mason.properties" />
     <None Remove="Axle.Core.net45.csproj.mason.properties" />
     <None Remove="Axle.Core.netframework.targets" />
@@ -62,6 +72,7 @@
     <None Remove="Axle.Core.netstandard20.csproj.paket.references" />
     <None Remove="Axle.netstandard15.csproj.paket.references" />
     <None Remove="Axle.netstandard16.csproj.paket.dependencies" />
+    <None Remove="paket.lock" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Globalization\" />
@@ -76,4 +87,5 @@
     <RemoveDir Directories="$(ProjectDir)\obj" />
   </Target>
   <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

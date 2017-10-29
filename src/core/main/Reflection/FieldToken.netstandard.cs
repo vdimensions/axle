@@ -7,9 +7,9 @@ namespace Axle.Reflection
     {
         public FieldToken(FieldInfo info) : base(info, info.DeclaringType, info.Name)
         {
-            accessModifier = GetAccessModifier(info);
-            declaration = info.GetDeclarationType();
-            accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
+            _accessModifier = GetAccessModifier(info);
+            _declaration = info.GetDeclarationType();
+            _accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
         }
     }
 }

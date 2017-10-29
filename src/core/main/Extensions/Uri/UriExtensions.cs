@@ -304,29 +304,6 @@ namespace Axle.Extensions.Uri
             return Resolve(uri, new System.Uri(other.VerifyArgument(nameof(other)).IsNotNull().IsNotEmpty().Value, UriKind.RelativeOrAbsolute));
         }
 
-        public static Assembly GetAssembly(this System.Uri uri)
-        {
-            uri.VerifyArgument(nameof(uri))
-                .IsNotNull()
-                .IsTrue(x => x.IsAbsoluteUri, "Provided uri is not an absolute uri.")
-                .IsTrue(x => x.IsEmbeddedResource(), $"Provided uri does not have a valid schema that suggests it is an assebly uri. Assembly uri have one of the following shcemas: {UriSchemeAssembly} or {UriSchemeResource}");
-            var assenblyName = uri.IsResource() ? uri.Host.TakeBeforeLast('.') : uri.Host;
-            return Platform.Runtime.LoadAssembly(assenblyName);
-        }
-        
-        public static bool TryGetAssembly(this System.Uri uri, out Assembly assembly)
-        {
-            uri.VerifyArgument(nameof(uri)).IsNotNull();
-        
-            if (uri.IsAbsoluteUri && uri.IsEmbeddedResource())
-            {
-                assembly = Platform.Runtime.LoadAssembly(uri.Host);
-                return true;
-            }
-            assembly = null;
-            return false;
-        }
-
 		public static IDictionary<string, string> GetQueryParameters(this System.Uri uri)
 		{
 			if (uri == null) 
@@ -344,12 +321,11 @@ namespace Axle.Extensions.Uri
 				.Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries))
 				.GroupBy(parts => parts[0], parts => parts.Length > 2 ? string.Join("=", parts, 1, parts.Length - 1) : (parts.Length > 1 ? parts[1] : ""), comparer)
-#if !net40
+                #if !net40
                 .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping.ToArray()), comparer);
-#else
+                #else
                 .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping), comparer);
-#endif
+                #endif
         }
     }
-    
 }

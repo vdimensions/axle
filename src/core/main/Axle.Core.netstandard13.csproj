@@ -10,6 +10,8 @@
     <Compile Remove="Conversion\ConversionException!netstandard.cs" />
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="Conversion\Parsing\ParseException!netstandard.cs" />
+    <Compile Remove="DependencyInjection\Sdk\AbstractDependencyDescriptorProvider!netstandard.cs" />
+    <Compile Remove="DependencyInjection\Sdk\DefaultDependencyDescriptorProvider!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
     <Compile Remove="Environment\IEnvironment!netstandard.cs" />
@@ -20,6 +22,7 @@
     <Compile Remove="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
     <Compile Remove="Extensions\String\StringExtensions!netstandard.cs" />
+    <Compile Remove="Extensions\Uri\UriExtensions!netstandard.cs" />
     <Compile Remove="Globalization\CultureScope.cs" />
     <Compile Remove="IO\Serialization\BinarySerializer.cs" />
     <Compile Remove="IO\Serialization\XmlSerializer.cs" />
@@ -29,6 +32,7 @@
     <Compile Remove="References\Singleton.netstandard.cs" />
     <Compile Remove="Reflection\AssemblyNameEqualityComparer.cs" />
     <Compile Remove="Reflection\CastOperator.cs" />
+    <Compile Remove="Reflection\DefaultIntrospector!netstandard.cs" />
     <Compile Remove="Reflection\EventToken!netstandard.cs" />
     <Compile Remove="Reflection\FieldToken!netstandard.cs" />
     <Compile Remove="Reflection\MemberExtensions!netstandard.cs" />
@@ -41,6 +45,27 @@
     <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
     <Compile Remove="Verification\ArgumentTypeMismatchException!netstandard.cs" />
     <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Axle.Core.dist.csproj.paket.references" />
+    <None Remove="Axle.Core.net35.csproj.mason.properties" />
+    <None Remove="Axle.Core.net35.csproj.paket.references" />
+    <None Remove="Axle.Core.net40-client.csproj.mason.properties" />
+    <None Remove="Axle.Core.net45.csproj.mason.properties" />
+    <None Remove="Axle.Core.netframework.targets" />
+    <None Remove="Axle.Core.netframework.targets.template" />
+    <None Remove="Axle.Core.netstandard.props" />
+    <None Remove="Axle.Core.netstandard.props.template" />
+    <None Remove="Axle.Core.netstandard.targets" />
+    <None Remove="Axle.Core.netstandard.targets.template" />
+    <None Remove="Axle.Core.netstandard10.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard11.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard12.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard14.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard15.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard16.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard20.csproj.paket.references" />
+    <None Remove="build.sh" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />

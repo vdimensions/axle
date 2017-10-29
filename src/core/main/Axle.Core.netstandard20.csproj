@@ -7,6 +7,8 @@
   </PropertyGroup>
   <Import Project="Axle.Core.netstandard.props" />
   <ItemGroup>
+    <Compile Remove="DependencyInjection\Sdk\AbstractDependencyDescriptorProvider!netstandard.cs" />
+    <Compile Remove="DependencyInjection\Sdk\DefaultDependencyDescriptorProvider!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
     <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
     <Compile Remove="Environment\IEnvironment!netstandard.cs" />
@@ -16,6 +18,7 @@
     <Compile Remove="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
     <Compile Remove="Extensions\String\StringExtensions!netstandard.cs" />
+    <Compile Remove="Extensions\Uri\UriExtensions!netstandard.cs" />
     <Compile Remove="Globalization\CultureScope.cs" />
     <Compile Remove="IO\Serialization\BinarySerializer.cs" />
     <Compile Remove="IO\Serialization\XmlSerializer.cs" />
@@ -25,6 +28,7 @@
     <Compile Remove="References\Singleton.netstandard.cs" />
     <Compile Remove="Reflection\AssemblyNameEqualityComparer.cs" />
     <Compile Remove="Reflection\CastOperator.cs" />
+    <Compile Remove="Reflection\DefaultIntrospector!netstandard.cs" />
     <Compile Remove="Reflection\EventToken!netstandard.cs" />
     <Compile Remove="Reflection\FieldToken!netstandard.cs" />
     <Compile Remove="Reflection\MemberExtensions!netstandard.cs" />

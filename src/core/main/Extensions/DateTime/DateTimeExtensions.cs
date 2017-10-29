@@ -12,15 +12,36 @@ namespace Axle.Extensions.DateTime
     public static partial class DateTimeExtensions
     {
         /// <summary>
+        /// Returns a new <see cref="System.DateTime"/> that adds the specified number of days 
+        /// to the value of <paramref name="current"/>.
+        /// </summary>
+        /// <param name="current">
+        /// The <see cref="System.DateTime"/> instance upon which this extension method is invoked.
+        /// </param>
+        /// <param name="daysToAdd">
+        /// A number of whole days. 
+        /// </param>
+        /// <returns>
+        /// An object whose value is the sum of the date and time represented by <paramref name="current"/> 
+        /// and the number of days represented by <paramref name="daysToAdd"/>.
+        /// </returns>
+        public static DateTime AddDays(this DateTime current, uint daysToAdd)
+        {
+            return current.AddDays((double) daysToAdd);
+        }
+
+        /// <summary>
         /// Returns the number of days in the specified month and year.
         /// </summary>
-        /// <param name="current">The <see cref="DateTime"/> instance upon which this extension method is invoked.</param>
+        /// <param name="current">
+        /// The <see cref="System.DateTime"/> instance upon which this extension method is invoked.
+        /// </param>
         /// <returns>
         /// Returns the number of days in the specified date's month and year. 
         /// For example, if month equals 2 for February, the return value is 28 or 29 depending upon whether year is a 
         /// leap year. 
         /// </returns>
-        /// <seealso cref="DateTime.DaysInMonth" />
+        /// <seealso cref="System.DateTime.DaysInMonth" />
         public static int DaysInMonth(this DateTime current)
         {
             return DateTime.DaysInMonth(current.Year, current.Month);
