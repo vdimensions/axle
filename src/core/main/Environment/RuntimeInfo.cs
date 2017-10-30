@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Linq;
+
 using Axle.Verification;
 
 
@@ -10,6 +10,10 @@ namespace Axle.Environment
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Version version;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly Version frameworkVersion;
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly RuntimeImplementation impl = RuntimeImplementation.Unknown;
 
         public string GetEmbeddedResourcePath(string resourceName)
         {
@@ -17,5 +21,7 @@ namespace Axle.Environment
         }
 
         public Version Version { get { return version; } }
+        public Version FrameworkVersion { get { return frameworkVersion; } }
+        public RuntimeImplementation Implementation { get { return impl; } }
     }
 }

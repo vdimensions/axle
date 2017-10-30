@@ -273,7 +273,7 @@ namespace Axle.Reflection
         public static object InvokeStatic(this IMethod @this, params object[] args)
         {
             @this.VerifyArgument("this").IsNotNull();
-            if (@this.Declaration != DeclarationType.Static)
+            if ((@this.Declaration & DeclarationType.Static) != DeclarationType.Static)
             {
                 throw new InvalidOperationException(string.Format("Cannot invoke instance method {0} as a static method.", @this.Name));
             }

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
 
+using Axle.Conversion.Parsing;
 using Axle.Extensions.String;
 
 
@@ -13,9 +14,20 @@ namespace Axle.Environment
     [Serializable]
     partial class RuntimeInfo
     {
+        private static Version GetMonoVersion()
+        {
+            var dispalayNameMethod = System.Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+            return dispalayNameMethod != null
+                ? new VersionParser().Parse(dispalayNameMethod.Invoke(null, null).ToString().TakeBeforeFirst(" ", StringComparison.OrdinalIgnoreCase).Trim())
+                : null;
+        }
+
         private RuntimeInfo()
         {
-            this.version = System.Environment.Version;
+            var monoVersion = GetMonoVersion();
+            this.frameworkVersion = System.Environment.Version;
+            this.version = monoVersion ?? frameworkVersion;
+            this.impl = monoVersion != null ? RuntimeImplementation.Mono : RuntimeImplementation.NetFramework;
         }
 
         public IEnumerable<Assembly> GetAssemblies()

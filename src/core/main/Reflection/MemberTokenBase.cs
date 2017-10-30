@@ -12,9 +12,6 @@ namespace Axle.Reflection
     //[Maturity(CodeMaturity.Stable)]
     public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
     {
-#if !netstandard
-        [Serializable]
-#endif
         protected struct AttributeInfo : IAttributeInfo
         {
             public Attribute Attribute { get; internal set; }
@@ -74,7 +71,7 @@ namespace Axle.Reflection
         private IEnumerable<IAttributeInfo> attributes;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        protected internal readonly IReentrantReadWriteLock Lock = new ReentrantReadWriteLock();
+        protected internal readonly IReadWriteLock Lock = new ReadWriteLock();
 
         public virtual bool Equals(MemberTokenBase<T> other) { return EqualityComparer.Equals(this, other); }
         public override bool Equals(object obj) { return EqualityComparer.Equals(this, obj); }

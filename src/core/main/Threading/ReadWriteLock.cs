@@ -17,15 +17,10 @@ namespace Axle.Threading
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly bool supportsRecursion;
 
-        public ReadWriteLock() : this(false) { }
-        internal ReadWriteLock(bool supportRecursion)
+        public ReadWriteLock() : this(new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion)) { }
+        internal ReadWriteLock(ReaderWriterLockSlim rls)
         {
-            #pragma warning disable 665
-            innerLock = new ReaderWriterLockSlim(
-                (supportsRecursion = supportRecursion)
-                    ? LockRecursionPolicy.SupportsRecursion 
-                    : LockRecursionPolicy.NoRecursion);
-            #pragma warning restore 665
+            innerLock = rls;
         }
 
         void IDisposable.Dispose()

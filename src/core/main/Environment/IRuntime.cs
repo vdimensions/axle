@@ -37,8 +37,20 @@ namespace Axle.Environment
         Assembly LoadAssembly(string assemblyName);
 
         /// <summary>
-        /// Gets a <see cref="System.Version"/> object that describes the major, minor, build, and revision numbers of the common language runtime.
+        /// Gets a <see cref="System.Version"/> object that describes the major, minor, build, and revision numbers of 
+        /// the current CLR implementation.
         /// </summary>
         Version Version { get; }
+
+        /// <summary>
+        /// Gets a <see cref="System.Version"/> object that describes the major, minor, build, and revision numbers of 
+        /// the common language runtime that is supported by the current CLR implementation.
+        /// </summary>
+        Version FrameworkVersion { get; }
+
+        /// <summary>
+        /// Gets a <see cref="RuntimeImplementation"/> value that describes the type of the .NET runtime that executes the current code.
+        /// </summary>
+        RuntimeImplementation Implementation { get; }
     }
 }

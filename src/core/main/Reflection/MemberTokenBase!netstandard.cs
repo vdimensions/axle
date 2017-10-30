@@ -17,18 +17,21 @@ namespace Axle.Reflection
             this.typeHandle = declaringType.TypeHandle;
         }
 
-        public virtual IEnumerable<IAttributeInfo> Attributes
+        public IEnumerable<IAttributeInfo> Attributes
         {
             get
             {
+                // IMPORTANT! Get the reflected member outside the lock to prevent recursive entrancy!
+                var reflectedMember = ReflectedMember;
+
                 return Lock.Invoke(
                     () => attributes,
                     xx => xx == null,
                     () =>
                     {
                         var comparer = EqualityComparer<Attribute>.Default;
-                        var notInherited = ReflectedMember.GetCustomAttributes(false).Cast<Attribute>();
-                        var inherited = ReflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
+                        var notInherited = reflectedMember.GetCustomAttributes(false).Cast<Attribute>();
+                        var inherited = reflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
 
                         attributes = notInherited
                             .Select(
@@ -75,7 +78,7 @@ namespace Axle.Reflection
             this.handle = handle;
         }
 
-        public override T ReflectedMember
+        public sealed override T ReflectedMember
         {
             get
             {

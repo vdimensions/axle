@@ -99,7 +99,7 @@
     <Compile Include="Environment\IRuntime.cs" />
     <Compile Include="Environment\OperatingSystemID.cs" />
     <Compile Include="Environment\Platform.cs" />
-    <Compile Include="Environment\RuntimeExtensions.cs" />
+    <Compile Include="Environment\RuntimeImplementation.cs" />
     <Compile Include="Environment\RuntimeInfo!netstandard.cs" />
     <Compile Include="Environment\RuntimeInfo.cs" />
     <Compile Include="Extensions\DateTime\DateTimeExtensions!netstandard.cs" />

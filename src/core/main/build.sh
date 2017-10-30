@@ -1,4 +1,6 @@
-./paket.sh update
+if [ -z "./packages" ]; then
+  ./paket.sh update
+fi
 
 msbuild="../../../submodules/btw/msbuild.sh"
 
