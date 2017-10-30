@@ -6,7 +6,7 @@
     <DefineConstants>netstandard</DefineConstants>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
-  <Import Project="Axle.Core.netstandard.props" />
+  <Import Project="Mason.netstandard.props" />
   <ItemGroup>
     <Compile Remove="paket-files\**" />
     <EmbeddedResource Remove="paket-files\**" />
