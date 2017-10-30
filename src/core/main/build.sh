@@ -1,3 +1,5 @@
+./paket.sh update
+
 msbuild="../../../submodules/btw/msbuild.sh"
 
 $msbuild Axle.Core.netstandard16.csproj

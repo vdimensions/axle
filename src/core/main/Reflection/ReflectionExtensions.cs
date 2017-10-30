@@ -270,12 +270,12 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType"/>
         public static bool IsSealed(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.Sealed); }
 
-        public static object InvokeStatic(this IMethod @this, object target, params object[] args)
+        public static object InvokeStatic(this IMethod @this, params object[] args)
         {
             @this.VerifyArgument("this").IsNotNull();
             if (@this.Declaration != DeclarationType.Static)
             {
-                throw new InvalidOperationException(String.Format("Cannot invoke instance method {0} as a static method.", @this.Name));
+                throw new InvalidOperationException(string.Format("Cannot invoke instance method {0} as a static method.", @this.Name));
             }
             return @this.Invoke(null, args);
         }
