@@ -1,1 +1,5 @@
 System.Runtime.Loader
+Microsoft.Extensions.DependencyModel
+
+group Legacy 
+  Microsoft.Extensions.DependencyModel

@@ -1,1 +1,2 @@
-Mason.Targets.Preprocessor
+group Build
+  Mason.Targets.Preprocessor

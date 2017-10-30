@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project>
   <PropertyGroup>
     <!-- Prevent .netcore from automatically generating the AssemblyInfo.cs file -->
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
