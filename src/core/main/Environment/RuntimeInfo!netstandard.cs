@@ -16,7 +16,7 @@ namespace Axle.Environment
     {
         private static Version GetMonoVersion()
         {
-            var dispalayNameMethod = System.Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+            var dispalayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
             return dispalayNameMethod != null
                 ? new VersionParser().Parse(dispalayNameMethod.Invoke(null, null).ToString().TakeBeforeFirst(" ", StringComparison.OrdinalIgnoreCase).Trim())
                 : null;
@@ -61,7 +61,6 @@ namespace Axle.Environment
 
             const string ext = ".dll";
             var hasExt = assemblyName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
-            Exception inner = null;
 
             ICollection<Attempt<string, Evidence, Assembly>> chain = new List<Attempt<string, Evidence, Assembly>>(4)
                 {
@@ -114,7 +113,7 @@ namespace Axle.Environment
             {
                 return result;
             }
-            throw new InvalidOperationException("Unable to load assembly, assembly name is invalid: '" + assemblyName + "'", inner);
+            throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
         }
 
         public AppDomain Domain { get { return AppDomain.CurrentDomain; } }

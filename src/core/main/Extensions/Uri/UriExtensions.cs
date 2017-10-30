@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 
-using Axle.Environment;
-using Axle.Extensions.String;
 using Axle.Verification;
 
 
@@ -304,19 +301,29 @@ namespace Axle.Extensions.Uri
             return Resolve(uri, new System.Uri(other.VerifyArgument(nameof(other)).IsNotNull().IsNotEmpty().Value, UriKind.RelativeOrAbsolute));
         }
 
+        /// <summary>
+        /// Gets a dictionary of key-value pairs representing the query parameters of the given <paramref name="uri"/>.
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="Uri"/> instance to get the query parameters from. 
+        /// </param>
+        /// <returns>
+        /// A dictionary of key-value pairs representing the query parameters of the given <paramref name="uri"/>.
+        /// </returns>
 		public static IDictionary<string, string> GetQueryParameters(this System.Uri uri)
 		{
 			if (uri == null) 
 			{
 				throw new ArgumentNullException(nameof(uri));
 			}
-			if (uri.Query.Length == 0) 
-			{
-				return new Dictionary<string, string> ();
-			}
 
 			var comparer = StringComparer.OrdinalIgnoreCase;
 
+			if (uri.Query.Length == 0) 
+			{
+				return new Dictionary<string, string>(comparer);
+			}
+            
 			return uri.Query.TrimStart('?')
 				.Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries))

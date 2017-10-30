@@ -9,7 +9,7 @@
     public enum RuntimeImplementation
     {
         /// <summary>
-        /// The CLR implementation cannot be determined.
+        /// Unrecognized CLR implementation.
         /// </summary>
         Unknown = 0,
         /// <summary>

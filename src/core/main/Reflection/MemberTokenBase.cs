@@ -135,6 +135,6 @@ namespace Axle.Reflection
 
         protected abstract T GetMember(THandle handle, RuntimeTypeHandle typeHandle, bool isGeneric);
 
-        public THandle Handle { get { return handle; } }
+        public THandle Handle => handle;
     }
 }

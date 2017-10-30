@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
@@ -9,6 +8,12 @@ using Axle.Verification;
 
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// An abstract class representing the common reflected data from a class method or constructor.
+    /// </summary>
+    /// <typeparam name="T">
+    /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member for the current <see cref="MethodBaseToken{T}"/> instance.
+    /// </typeparam>
     [Serializable]
     public abstract partial class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle> where T: MethodBase
     {

@@ -22,9 +22,15 @@ namespace Axle.Extensions.DateTime
         /// <summary>
         /// Converts a time from one time zone to another. 
         /// </summary>
-        /// <param name="dateTime">The <see cref="DateTime"/> instance upon which this extension method is invoked.</param>
-        /// <param name="sourceTimeZone">The time zone of <paramref name="dateTime"/>. </param>
-        /// <param name="destinationTimeZone">The time zone to convert <paramref name="dateTime"/> to.</param>
+        /// <param name="dateTime">
+        /// The <see cref="DateTime"/> instance upon which this extension method is invoked.
+        /// </param>
+        /// <param name="sourceTimeZone">
+        /// The time zone of the given <paramref name="dateTime"/>. 
+        /// </param>
+        /// <param name="destinationTimeZone">
+        /// The time zone to convert <paramref name="dateTime"/> to.
+        /// </param>
         /// <param name="assumeLocal">
         /// A boolean value indicating whether the provided <see cref="DateTime"/> value in the
         /// <paramref name="dateTime"/> should be treated as a local time in the <paramref name="sourceTimeZone"/>
@@ -33,7 +39,7 @@ namespace Axle.Extensions.DateTime
         /// it is treated as a date local to the timezone specified by the <paramref name="sourceTimeZone"/>.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents the date and time in the destination time zone that 
+        /// A <see cref="DateTime"/> value that represents the date and time in the destination time zone which 
         /// corresponds to the <paramref name="dateTime"/> parameter in the source time zone. 
         /// </returns>
         public static DateTime ChangeTimeZone(
@@ -67,6 +73,22 @@ namespace Axle.Extensions.DateTime
                 TimeZoneInfo.ConvertTime(dateTime, sourceTimeZone, destinationTimeZone).Ticks,
                 destinationIsUtc ? DateTimeKind.Utc : DateTimeKind.Unspecified);
         }
+        /// <summary>
+        /// Converts a time from one time zone to another. 
+        /// </summary>
+        /// <param name="dateTime">
+        /// The <see cref="DateTime"/> instance upon which this extension method is invoked.
+        /// </param>
+        /// <param name="sourceTimeZone">
+        /// The time zone of the given <paramref name="dateTime"/>. 
+        /// </param>
+        /// <param name="destinationTimeZone">
+        /// The time zone to convert <paramref name="dateTime"/> to.
+        /// </param>
+        /// <returns>
+        /// A <see cref="DateTime"/> value that represents the date and time in the destination time zone which 
+        /// corresponds to the <paramref name="dateTime"/> parameter in the source time zone. 
+        /// </returns>
         public static DateTime ChangeTimeZone(
             this DateTime dateTime,
             TimeZoneInfo sourceTimeZone,
@@ -75,6 +97,19 @@ namespace Axle.Extensions.DateTime
             return ChangeTimeZone(dateTime, sourceTimeZone, destinationTimeZone, false);
         }
 
+        /// <summary>
+        /// Converts a time to the universal time zone (UTC).
+        /// </summary>
+        /// <param name="dateTime">
+        /// The <see cref="DateTime"/> instance upon which this extension method is invoked.
+        /// </param>
+        /// <param name="sourceTimeZone">
+        /// The time zone of the given <paramref name="dateTime"/>. 
+        /// </param>
+        /// <returns>
+        /// A <see cref="DateTime"/> value that represents the date and time in the UTC time zone which 
+        /// corresponds to the <paramref name="dateTime"/> parameter. 
+        /// </returns>
         public static DateTime ToUniversalTime(this DateTime dateTime, TimeZoneInfo sourceTimeZone)
         {
             return ChangeTimeZone(dateTime, sourceTimeZone, TimeZoneInfo.Utc, true);

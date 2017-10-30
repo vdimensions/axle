@@ -17,7 +17,13 @@ namespace Axle.Environment
 
         static Platform() { }
 
+        /// <summary>
+        /// Gets an <see cref="IEnvironment"/> instance that represents the current execution environment.
+        /// </summary>
         public static IEnvironment Environment { get { return _env; } }
+        /// <summary>
+        /// Gets an instance of <see cref="IRuntime"/> that represents the current .NET runtime.
+        /// </summary>
         public static IRuntime Runtime { get { return _runtime; } }
     }
 }
