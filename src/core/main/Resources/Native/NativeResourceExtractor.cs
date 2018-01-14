@@ -26,8 +26,6 @@ namespace Axle.Resources.Native
             var resolver = new NativeResourceResolver(_type);
             switch (resolver.Resolve(resourceKey.ToString(), culture))
             {
-                case null:
-                    return null;
                 case string str:
                     return new StringResourceInfo(resourceKey, culture, str);
                 case Stream stream:
@@ -42,8 +40,9 @@ namespace Axle.Resources.Native
                     return new ImageResourceInfo(resourceKey, culture, image);
                 case Icon icon:
                     return new IconResourceInfo(resourceKey, culture, icon);
+                default:
+                    return null;
             }
-            return null;
         }
 
         public Assembly Assembly => _type.Assembly;

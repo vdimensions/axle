@@ -15,7 +15,7 @@ namespace Axle.Resources.Native
             _resourceType = resourceType.VerifyArgument(nameof(resourceType)).IsNotNull();
         }
 
-        public object Resolve(string key,  CultureInfo culture)
+        public object Resolve(string key, CultureInfo culture)
         {
             var resourceSet = new System.Resources.ResourceManager(_resourceType).GetResourceSet(culture, true, false);
             if (resourceSet == null)
