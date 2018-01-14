@@ -4,7 +4,6 @@ using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Net.Mime;
 
 using Axle.Verification;
 
@@ -15,15 +14,14 @@ namespace Axle.Resources
     {
         private readonly Image _image;
 
-        private static ContentType GetContentType(Image image)
+        private static string GetContentType(Image image)
         {
             if (image == null)
             {
                 return null;
             }
             var codec = ImageCodecInfo.GetImageDecoders().First(c => c.FormatID == image.RawFormat.Guid);
-            var mimeType = codec.MimeType;
-            return new ContentType(mimeType);
+            return codec.MimeType;
         }
 
         public ImageResourceInfo(Uri key, CultureInfo culture, Image image) : base(key, culture, GetContentType(image))

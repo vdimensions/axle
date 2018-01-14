@@ -11,20 +11,20 @@ namespace Axle.Resources
 {
     public sealed class IconResourceInfo : ResourceInfo
     {
-        private readonly Icon icon;
+        private readonly Icon _icon;
 
         public IconResourceInfo(Uri key, CultureInfo culture, Icon icon) : base(key, culture, new ContentType("image/x-icon"))
         {
-            this.icon = icon.VerifyArgument(nameof(icon)).IsNotNull();
+            _icon = icon.VerifyArgument(nameof(icon)).IsNotNull();
         }
 
         public override Stream Open()
         {
             var result = new MemoryStream();
-            icon.Save(result);
+            _icon.Save(result);
             return result;
         }
 
-        public Icon Value => icon;
+        public Icon Value => _icon;
     }
 }
