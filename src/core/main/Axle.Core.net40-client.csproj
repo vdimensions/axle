@@ -29,6 +29,7 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
@@ -117,6 +118,14 @@
     <Compile Include="Reflection\ReflectionExtensions!netstandard.cs" />
     <Compile Include="Reflection\ReflectionExtensions.cs" />
     <Compile Include="Reflection\ScanOptions.cs" />
+    <Compile Include="Resources\Native\NativeResourceExtractor.cs" />
+    <Compile Include="Resources\Native\NativeStreamResourceInfo.cs" />
+    <Compile Include="Resources\Native\NativeResourceResolver.cs" />
+    <Compile Include="Resources\IResourceExtractor.cs" />
+    <Compile Include="Resources\IconResourceInfo.cs" />
+    <Compile Include="Resources\ImageResourceInfo.cs" />
+    <Compile Include="Resources\ResourceInfo.cs" />
+    <Compile Include="Resources\StringResourceInfo.cs" />
     <Compile Include="Verification\ArgumentReference.cs" />
     <Compile Include="Verification\ArgumentReference!netstandard.cs" />
     <Compile Include="Verification\ArgumentTypeMismatchException.cs" />
@@ -230,7 +239,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Extensions\Text\Encoding\" />
-    <Folder Include="Resources\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
