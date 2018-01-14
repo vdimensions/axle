@@ -7,11 +7,11 @@ using Axle.Verification;
 
 namespace Axle.Resources.Native
 {
-    public sealed class NativeStreamResourceInfo : ResourceInfo
+    internal sealed class NativeStreamResourceInfo : ResourceInfo
     {
         private readonly NativeResourceResolver _resolver;
 
-        internal NativeStreamResourceInfo(NativeResourceResolver resolver, Uri resourceKey, CultureInfo culture) 
+        public NativeStreamResourceInfo(NativeResourceResolver resolver, Uri resourceKey, CultureInfo culture) 
             : base(resourceKey, culture, "application/octet-stream")
         {
             _resolver = resolver.VerifyArgument(nameof(resolver)).IsNotNull();

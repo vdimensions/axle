@@ -9,7 +9,7 @@ using Axle.Verification;
 
 namespace Axle.Resources.Native
 {
-    internal sealed class NativeResourceExtractor : IResourceExtractor
+    public sealed class NativeResourceExtractor : IResourceExtractor
     {
         private readonly Type _type;
 
