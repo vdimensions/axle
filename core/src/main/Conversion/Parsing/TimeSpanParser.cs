@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 
 
 namespace Axle.Conversion.Parsing
@@ -11,11 +10,13 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed partial class TimeSpanParser
     {
+        /// <inheritdoc />
         protected override TimeSpan DoParse(string value, IFormatProvider formatProvider)
         {
             return TimeSpan.Parse(value);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out TimeSpan output)
         {
             return TimeSpan.TryParse(value, out output);
