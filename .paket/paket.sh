@@ -22,4 +22,4 @@ elif [ "$(expr substr $(uname -s) 1 5)" == "Linux" ]; then
   EXEC="mono ${EXEC}";
 fi
 
-eval "${EXEC} \"$@\""
+eval "${EXEC} $@"
