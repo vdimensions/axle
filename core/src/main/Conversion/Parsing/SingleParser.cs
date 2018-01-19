@@ -14,6 +14,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class SingleParser : AbstractParser<float>
     {
+        /// <inheritdoc />
         protected override Single DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? Single.Parse(value, formatProvider) : Single.Parse(value);

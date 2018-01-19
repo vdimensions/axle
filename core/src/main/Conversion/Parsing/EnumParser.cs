@@ -9,6 +9,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class EnumParser<T> : AbstractParser<T>
     {
+        /// <inheritdoc />
         protected override T DoParse(string value, IFormatProvider formatProvider)
         {
             try

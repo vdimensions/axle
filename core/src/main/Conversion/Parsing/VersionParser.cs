@@ -13,6 +13,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class VersionParser : AbstractParser<Version>
     {
+        /// <inheritdoc />
         protected override Version DoParse(string value, IFormatProvider formatProvider)
         {
             // TOOD: Specify version format provider

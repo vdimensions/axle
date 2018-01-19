@@ -8,12 +8,13 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// a <see cref="short">16-bit integer</see> to a valid <see cref="short"/> value.
     /// </summary>
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     //[Stateless]
     public sealed class Int16Parser : AbstractParser<short>
     {
+        /// <inheritdoc />
         protected override Int16 DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? Int16.Parse(value, formatProvider) : Int16.Parse(value);

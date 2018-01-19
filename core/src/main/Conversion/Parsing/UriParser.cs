@@ -13,6 +13,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class UriParser : AbstractParser<Uri>
     {
+        /// <inheritdoc />
         protected override Uri DoParse(string value, IFormatProvider formatProvider)
         {
             return new Uri(value, UriKind.RelativeOrAbsolute);

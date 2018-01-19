@@ -14,6 +14,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class SByteParser : AbstractParser<sbyte>
     {
+        /// <inheritdoc />
         protected override SByte DoParse(string value, IFormatProvider formatProvider)
         {
             return SByte.Parse(value, formatProvider);

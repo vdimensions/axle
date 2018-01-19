@@ -13,6 +13,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class GuidParser : AbstractParser<Guid>
     {
+        /// <inheritdoc />
         protected override Guid DoParse(string value, IFormatProvider formatProvider) { return new Guid(value); }
     }
 }

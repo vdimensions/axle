@@ -14,6 +14,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class UInt64Parser : AbstractParser<UInt64>
     {
+        /// <inheritdoc />
         protected override UInt64 DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? UInt64.Parse(value, formatProvider) : UInt64.Parse(value);

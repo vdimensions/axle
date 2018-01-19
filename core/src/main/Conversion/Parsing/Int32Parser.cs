@@ -8,12 +8,13 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a 
     /// <see cref="int">32-bit integer</see> to a valid <see cref="int"/> value.
     /// </summary>
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     //[Stateless]
     public sealed class Int32Parser : AbstractParser<int>
     {
+        /// <inheritdoc />
         protected override Int32 DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? Int32.Parse(value, formatProvider) : Int32.Parse(value);

@@ -8,11 +8,12 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// a <see cref="double">double precision floating point number</see> to a valid <see cref="double"/> value.
     /// </summary>
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     public sealed class DoubleParser : AbstractParser<double>
     {
+        /// <inheritdoc />
         protected override Double DoParse(string value, IFormatProvider formatProvider)
         {
             return Double.Parse(value, NumberStyles.Any, formatProvider);

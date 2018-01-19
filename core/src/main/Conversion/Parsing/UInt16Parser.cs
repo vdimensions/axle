@@ -14,6 +14,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class UInt16Parser : AbstractParser<ushort>
     {
+        /// <inheritdoc />
         protected override UInt16 DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? UInt16.Parse(value, formatProvider) : UInt16.Parse(value);

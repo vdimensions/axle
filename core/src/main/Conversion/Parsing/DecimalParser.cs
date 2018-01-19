@@ -14,6 +14,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class DecimalParser : AbstractParser<Decimal>
     {
+        /// <inheritdoc />
         protected override Decimal DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? Decimal.Parse(value, formatProvider) : Decimal.Parse(value);

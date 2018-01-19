@@ -13,11 +13,13 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class DateTimeParser : AbstractStrictParser<DateTime>
     {
+        /// <inheritdoc />
         protected override DateTime DoParse(string value, IFormatProvider formatProvider)
         {
             return (formatProvider != null) ? DateTime.Parse(value, formatProvider) : DateTime.Parse(value);
         }
 
+        /// <inheritdoc />
         protected override DateTime DoParseExact(string value, string format, IFormatProvider formatProvider)
         {
             return DateTime.ParseExact(value, format, formatProvider);

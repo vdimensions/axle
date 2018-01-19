@@ -16,7 +16,6 @@ namespace Axle.Conversion.Parsing
             return TimeSpan.Parse(value);
         }
 
-        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out TimeSpan output)
         {
             return TimeSpan.TryParse(value, out output);

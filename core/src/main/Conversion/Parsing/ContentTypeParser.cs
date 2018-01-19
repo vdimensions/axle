@@ -14,6 +14,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class ContentTypeParser : AbstractParser<ContentType>
     {
+        /// <inheritdoc />
         protected override ContentType DoParse(string value, IFormatProvider formatProvider)
         {
             return new ContentType(value);

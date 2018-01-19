@@ -8,12 +8,13 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a 
     /// <see cref="long">64-bit integer</see> to a valid <see cref="long"/> value.
     /// </summary>
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     //[Stateless]
     public sealed class Int64Parser : AbstractParser<Int64>
     {
+        /// <inheritdoc />
         protected override Int64 DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? Int64.Parse(value, formatProvider) : Int64.Parse(value);
