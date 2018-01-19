@@ -33,13 +33,6 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
-        [DebuggerStepThrough]
-        public static ArgumentReference<Type> Is(this ArgumentReference<Type> argument, Type expectedType)
-        {
-            return IsUnchecked(
-                argument.VerifyArgument(nameof(argument)).IsNotNull().Value, 
-                expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
-        }
 #else
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
@@ -62,14 +55,14 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
+#endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is(this ArgumentReference<Type> argument, Type expectedType)
         {
             return IsUnchecked(
-                argument.VerifyArgument(nameof(argument)).IsNotNull().Value,
-                expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
+                    argument.VerifyArgument(nameof(argument)).IsNotNull().Value,
+                    expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
         }
-#endif
 
 #if !netstandard
         /// <summary>
@@ -93,13 +86,6 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
-        [DebuggerStepThrough]
-        public static ArgumentReference<Type> Is<TExpected>(this ArgumentReference<Type> argument)
-        {
-            return IsUnchecked(
-                argument.VerifyArgument(nameof(argument)).IsNotNull().Value, 
-                typeof(TExpected));
-        }
 #else
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
@@ -122,13 +108,13 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
+#endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is<TExpected>(this ArgumentReference<Type> argument)
         {
             return IsUnchecked(
-                argument.VerifyArgument(nameof(argument)).IsNotNull().Value, 
+                argument.VerifyArgument(nameof(argument)).IsNotNull().Value,
                 typeof(TExpected));
         }
-#endif
     }
 }
