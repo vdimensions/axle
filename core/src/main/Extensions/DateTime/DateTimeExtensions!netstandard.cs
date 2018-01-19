@@ -10,6 +10,25 @@ namespace Axle.Extensions.DateTime
     /// </summary>
     public static partial class DateTimeExtensions
     {
+        /// <summary>
+        /// Converts the given <see cref="DateTime"/> value to local date time.
+        /// </summary>
+        /// <param name="current">
+        /// The <see cref="DateTime"/> value to convet.
+        /// </param>
+        /// <param name="assumedKind">
+        /// A <see cref="DateTimeKind"/> value to be used as the assumed <see cref="DateTime.Kind">kind</see> of the 
+        /// <param name="current">given</param> <see cref="DateTime"/> in case its kind was set to <see cref="DateTimeKind.Unspecified"/>
+        /// </param>
+        /// <returns>
+        /// A <see cref="DateTime"/> value that represents <param name="current">a given</param> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
+        /// </returns>
+        /// <seealso cref="DateTime.Kind"/>
+        /// <seealso cref="DateTimeKind"/>
+        /// <seealso cref="TimeZone"/>
+        /// <seealso cref="ToLocalTime(System.DateTime)"/>
+        /// <seealso cref="ChangeTimeZone(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)"/>
+        /// <seealso cref="TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)"/>
         public static DateTime ToLocalTime(this DateTime current, DateTimeKind assumedKind)
         {
             var kind = current.Kind;
@@ -17,6 +36,25 @@ namespace Axle.Extensions.DateTime
                 ? TimeZoneInfo.ConvertTime(current, TimeZoneInfo.Utc, TimeZoneInfo.Local) 
                 : new DateTime(current.Ticks, DateTimeKind.Local);
         }
+        /// <summary>
+        /// Converts the given <see cref="DateTime"/> value to local date time.
+        /// <remarks>
+        /// In case the <paramref name="current"/> <see cref="DateTime.Kind"/> property is set to <see cref="DateTimeKind.Unspecified"/>,
+        /// it is assumed that the date is a local date (as if it were <see cref="DateTimeKind.Local"/>).
+        /// </remarks>
+        /// </summary>
+        /// <param name="current">
+        /// The <see cref="DateTime"/> value to convet.
+        /// </param>
+        /// <returns>
+        /// A <see cref="DateTime"/> value that represents <param name="current">a given</param> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
+        /// </returns>
+        /// <seealso cref="DateTime.Kind"/>
+        /// <seealso cref="DateTimeKind"/>
+        /// <seealso cref="TimeZone"/>
+        /// <seealso cref="ToLocalTime(System.DateTime,DateTimeKind)"/>
+        /// <seealso cref="ChangeTimeZone(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)"/>
+        /// <seealso cref="TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)"/>
         public static DateTime ToLocalTime(this DateTime current) { return ToLocalTime(current, DateTimeKind.Local); }
 
         /// <summary>

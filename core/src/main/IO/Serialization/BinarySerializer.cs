@@ -36,9 +36,11 @@ namespace Axle.IO.Serialization
             Formatter = new BinaryFormatter(selector, context);
         }
 
+        /// <inheritdoc />
         public object Deserialize(Stream stream, Type objectType) { return Formatter.Deserialize(stream); }
         public object Deserialize(Stream stream, HeaderHandler handler) { return Formatter.Deserialize(stream, handler); }
 
+        /// <inheritdoc />
         public void Serialize(object obj, Stream stream) { Formatter.Serialize(stream, obj); }
         public void Serialize(object obj, Stream stream, Header[] headers) { Formatter.Serialize(stream, obj, headers); }
 
@@ -46,6 +48,6 @@ namespace Axle.IO.Serialization
         /// Gets a reference to the <see cref="BinaryFormatter"/> instance that is used to serialize 
         /// and deserialize objects.
         /// </summary>
-        public BinaryFormatter Formatter { get; private set; }
+        public BinaryFormatter Formatter { get; }
     }
 }

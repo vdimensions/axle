@@ -42,7 +42,7 @@ namespace Axle.Extensions.IO.StreamWriter
         /// <seealso cref="SeekOrigin"/>
         public static long Seek(this StreamWriter writer, long offset, SeekOrigin origin)
         {
-            return writer.VerifyArgument("writer").IsNotNull().Value.BaseStream.Seek(offset, origin);
+            return writer.VerifyArgument(nameof(writer)).IsNotNull().Value.BaseStream.Seek(offset, origin);
         }
     }
 }

@@ -48,7 +48,6 @@ namespace Axle.IO.Serialization
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permissions
         /// </exception>
-        void Serialize(object obj, Stream stream);
         #else
         /// <summary>
         /// Serializes the provided by the <paramref name="obj"/> parameter object or graph of objects 
@@ -66,7 +65,7 @@ namespace Axle.IO.Serialization
         /// <exception cref="System.Security.SecurityException">
         /// The caller does not have the required permissions
         /// </exception>
-        void Serialize(object obj, Stream stream);
         #endif
+        void Serialize(object obj, Stream stream);
     }
 }
