@@ -1,0 +1,102 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Axle.Core</id>
+    <title>Axle.Core</title>
+    <version>1.5.0.24</version>
+    <description>Axle Framework Core Library</description>
+    <summary>Axle Framework Core Library</summary>
+    <releaseNotes></releaseNotes>
+    <tags>Axle.Core</tags>
+    <!--
+    <projectUrl>https://nuget.org/packages/Axle.Core</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+     -->
+    <authors>Virtual Dimensions</authors>
+    <owners>Virtual Dimensions</owners>
+    <copyright>Copyright © Virtual Dimensions 2013-2017</copyright>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <group targetFramework="net20"></group>
+      <group targetFramework="net35"></group>
+      <group targetFramework="net40-client"></group>
+      <group targetFramework="net40"></group>
+      <group targetFramework="net45"></group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" />
+      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
+      <frameworkAssembly assemblyName="System.Core" />
+      <frameworkAssembly assemblyName="System.Data" />
+      <frameworkAssembly assemblyName="System.Xml" />
+      <frameworkAssembly assemblyName="System.Xml.Linq" />
+    </frameworkAssemblies>
+    <references></references>
+  </metadata>
+  <files>
+    
+    <file src="bin\*\netstandard1.6\Axle.Core.deps.json" target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Core.dll"       target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Core.xml"       target="lib\netstandard1.6" />
+
+    <file src="bin\*\netstandard1.5\Axle.Core.deps.json" target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Core.dll"       target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Core.xml"       target="lib\netstandard1.5" />
+
+    <file src="bin\*\netstandard1.4\Axle.Core.deps.json" target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\Axle.Core.dll"       target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\Axle.Core.xml"       target="lib\netstandard1.4" />
+                                                     
+    <file src="bin\*\netstandard1.3\Axle.Core.deps.json" target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\Axle.Core.dll"       target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\Axle.Core.xml"       target="lib\netstandard1.3" />
+                                                     
+    <file src="bin\*\netstandard1.2\Axle.Core.deps.json" target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Core.dll"       target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Core.xml"       target="lib\netstandard1.2" />
+                                                     
+    <file src="bin\*\netstandard1.1\Axle.Core.deps.json" target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\Axle.Core.dll"       target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\Axle.Core.xml"       target="lib\netstandard1.1" />
+                                                     
+    <file src="bin\*\netstandard1.0\Axle.Core.deps.json" target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\Axle.Core.dll"       target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\Axle.Core.xml"       target="lib\netstandard1.0" />
+
+    <file src="bin\*\net46\Axle.Core.dll" target="lib\net46" />
+    <file src="bin\*\net46\Axle.Core.xml" target="lib\net46" />
+    <file src="bin\*\net46\Axle.Core.pdb" target="lib\net46" />
+    <file src="bin\*\net46\Axle.Core.mdb" target="lib\net46" />
+
+    <file src="bin\*\net45\Axle.Core.dll" target="lib\net45" />
+    <file src="bin\*\net45\Axle.Core.xml" target="lib\net45" />
+    <file src="bin\*\net45\Axle.Core.pdb" target="lib\net45" />
+    <file src="bin\*\net45\Axle.Core.mdb" target="lib\net45" />
+
+    <file src="bin\*\net40\Axle.Core.dll" target="lib\net40" />
+    <file src="bin\*\net40\Axle.Core.xml" target="lib\net40" />
+    <file src="bin\*\net40\Axle.Core.pdb" target="lib\net40" />
+    <file src="bin\*\net40\Axle.Core.mdb" target="lib\net40" />
+
+    <file src="bin\*\net40-client\Axle.Core.dll" target="lib\net40-client" />
+    <file src="bin\*\net40-client\Axle.Core.xml" target="lib\net40-client" />
+    <file src="bin\*\net40-client\Axle.Core.pdb" target="lib\net40-client" />
+    <file src="bin\*\net40-client\Axle.Core.mdb" target="lib\net40-client" />
+
+    <file src="bin\*\net35\Axle.Core.dll" target="lib\net35" />
+    <file src="bin\*\net35\Axle.Core.xml" target="lib\net35" />
+    <file src="bin\*\net35\Axle.Core.pdb" target="lib\net35" />
+    <file src="bin\*\net35\Axle.Core.mdb" target="lib\net35" />
+
+    <file src="bin\*\net30\Axle.Core.dll" target="lib\net30" />
+    <file src="bin\*\net30\Axle.Core.xml" target="lib\net30" />
+    <file src="bin\*\net30\Axle.Core.pdb" target="lib\net30" />
+    <file src="bin\*\net30\Axle.Core.mdb" target="lib\net30" />
+
+    <file src="bin\*\net20\Axle.Core.dll" target="lib\net20" />
+    <file src="bin\*\net20\Axle.Core.xml" target="lib\net20" />
+    <file src="bin\*\net20\Axle.Core.pdb" target="lib\net20" />
+    <file src="bin\*\net20\Axle.Core.mdb" target="lib\net20" />
+  </files>
+</package>

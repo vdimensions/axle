@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <!--<Import Project="$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.props" />-->
+  <Target Name="BeforeBuild">
+    <Exec Command="dotnet restore $(ProjectName)$(ProjectExt) /p:Version=1.5.0.24 /p:AssemblyVersion=1.5.0.24 /p:FileVersion=1.5.0.24 /p:PackageLicenseUrl=http://opensource.org/licenses/Apache-2.0 /p:PackageTags=Axle.Core" />
+  </Target>
+  <Target Name="AfterBuild">
+    <RemoveDir Directories="$(ProjectDir)\obj" />
+  </Target>
+</Project>
