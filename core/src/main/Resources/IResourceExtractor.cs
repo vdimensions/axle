@@ -24,7 +24,7 @@ namespace Axle.Resources
         /// </remarks>
         /// </param>
         /// <returns>
-        /// An instance of <see cref="ResourceInfo"/> representing the extracted resource. />.
+        /// An instance of <see cref="ResourceInfo"/> representing the extracted resource.
         /// </returns>
         ResourceInfo Extract(Uri resourceKey, CultureInfo culture);
     }
