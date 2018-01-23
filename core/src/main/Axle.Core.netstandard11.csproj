@@ -13,51 +13,7 @@
     <None Remove="Resources\Native\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="Conversion\ConversionException!netstandard.cs" />
-    <Compile Remove="Conversion\Parsing\CharacterParser!netstandard.cs" />
-    <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
-    <Compile Remove="Conversion\Parsing\ParseException!netstandard.cs" />
-    <Compile Remove="Conversion\Parsing\TimeSpanParser!netstandard.cs" />
-    <Compile Remove="DependencyInjection\Sdk\AbstractDependencyDescriptorProvider!netstandard.cs" />
-    <Compile Remove="DependencyInjection\Sdk\DefaultDependencyDescriptorProvider!netstandard.cs" />
-    <Compile Remove="Environment\EnvironmentExtensions!netstandard.cs" />
-    <Compile Remove="Environment\EnvironmentInfo!netstandard.cs" />
-    <Compile Remove="Environment\IEnvironment!netstandard.cs" />
-    <Compile Remove="Environment\IRuntime!netstandard.cs" />
-    <Compile Remove="Environment\Platform.cs" />
-    <Compile Remove="Environment\RuntimeInfo!netstandard.cs" />
-    <Compile Remove="Extensions\DateTime\DateTimeExtensions!netstandard.cs" />
-    <Compile Remove="Extensions\Globalization\TextInfo\TextInfoExtensions!netstandard.cs" />
-    <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
-    <Compile Remove="Extensions\String\StringExtensions!netstandard.cs" />
-    <Compile Remove="Extensions\Uri\UriExtensions!netstandard.cs" />
-    <Compile Remove="Globalization\CultureScope.cs" />
-    <Compile Remove="IO\Serialization\BinarySerializer.cs" />
-    <Compile Remove="IO\Serialization\XmlSerializer.cs" />
-    <Compile Remove="Linq\Collection.cs" />
-    <Compile Remove="References\Singleton!netstandard.cs" />
-    <Compile Remove="References\Singleton.cs" />
-    <Compile Remove="References\Singleton.netstandard.cs" />
-    <Compile Remove="Reflection\AssemblyNameEqualityComparer.cs" />
-    <Compile Remove="Reflection\CastOperator.cs" />
-    <Compile Remove="Reflection\DefaultIntrospector!netstandard.cs" />
-    <Compile Remove="Reflection\EventToken!netstandard.cs" />
-    <Compile Remove="Reflection\FieldToken!netstandard.cs" />
-    <Compile Remove="Reflection\MemberExtensions!netstandard.cs" />
-    <Compile Remove="Reflection\MemberTokenBase!netstandard.cs" />
-    <Compile Remove="Reflection\MethodBaseToken!netstandard.cs" />
-    <Compile Remove="Reflection\MethodToken!netstandard.cs" />
-    <Compile Remove="Reflection\PropertyToken!netstandard.cs" />
-    <Compile Remove="Reflection\ReflectionExtensions!netstandard.cs" />
-    <Compile Remove="Resources\IconResourceInfo.cs" />
-    <Compile Remove="Resources\ImageResourceInfo.cs" />
-    <Compile Remove="Resources\IResource.cs" />
-    <Compile Remove="Resources\IResourceExtractor.cs" />
-    <Compile Remove="Resources\ResourceInfo.cs" />
-    <Compile Remove="Resources\StringResourceInfo.cs" />
-    <Compile Remove="Verification\ArgumentReference!netstandard.cs" />
-    <Compile Remove="Verification\ArgumentTypeMismatchException!netstandard.cs" />
-    <Compile Remove="Verification\TypeVerifier!netstandard.cs" />
+    <Compile Remove="**!netstandard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
