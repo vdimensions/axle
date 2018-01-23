@@ -12,7 +12,7 @@
     <None Remove="Resources\Native\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="**!netstandard.cs" />
+    <Compile Remove="**\*!netstandard.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Globalization\" />

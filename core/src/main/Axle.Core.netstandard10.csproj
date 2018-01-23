@@ -13,7 +13,7 @@
     <None Remove="Resources\Native\**" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Remove="**!netstandard.cs" />
+    <Compile Remove="**\*!netstandard.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
