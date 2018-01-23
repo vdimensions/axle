@@ -1,30 +1,24 @@
 ﻿using System;
-using System.Drawing;
 using System.Globalization;
 using System.IO;
-using System.Reflection;
-
-using Axle.Verification;
 
 
 namespace Axle.Resources.Native
 {
-    public sealed class NativeResourceExtractor : IResourceExtractor
+    /// <summary>
+    /// The .NET's native resource extractor implementation, only strings and streamed resources.
+    /// </summary>
+    /// <remarks>
+    /// This implementation does not depend on the <see cref="System.Drawing">System.Drawing</see> assembly.
+    /// </remarks>
+    public sealed class SimpleNativeResourceExtractor : AbstractNativeResourceExtractor
     {
-        private readonly Type _type;
-
-        public NativeResourceExtractor(Type type)
+        public SimpleNativeResourceExtractor(Type type) : base(type)
         {
-            _type = type.VerifyArgument(nameof(type)).IsNotNull();
         }
 
-        /// <inheritdoc />
-        public ResourceInfo Extract(Uri resourceKey, CultureInfo culture)
+        protected override ResourceInfo ExtractResource(NativeResourceResolver resolver, Uri resourceKey, CultureInfo culture)
         {
-            resourceKey.VerifyArgument(nameof(resourceKey)).IsNotNull();
-            culture.VerifyArgument(nameof(culture)).IsNotNull();
-
-            var resolver = new NativeResourceResolver(_type);
             switch (resolver.Resolve(resourceKey.ToString(), culture))
             {
                 case string str:
@@ -37,15 +31,9 @@ namespace Axle.Resources.Native
                     var result = new NativeStreamResourceInfo(resolver, resourceKey, culture);
                     // return the resource
                     return result;
-                case Image image:
-                    return new ImageResourceInfo(resourceKey, culture, image);
-                case Icon icon:
-                    return new IconResourceInfo(resourceKey, culture, icon);
                 default:
                     return null;
             }
         }
-
-        public Assembly Assembly => _type.Assembly;
     }
 }

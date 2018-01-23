@@ -195,9 +195,14 @@
     <Compile Include="Reflection\PropertyToken.cs" />
     <Compile Include="Reflection\ReflectionExtensions!netstandard.cs" />
     <Compile Include="Reflection\ReflectionExtensions.cs" />
+    <Compile Include="Resources\EmbeddedResourceUriStreamAdapter!netstandard.cs" />
+    <Compile Include="Resources\FileSystemUriStreamAdapter.cs" />
     <Compile Include="Resources\IResourceExtractor.cs" />
+    <Compile Include="Resources\IUriStreamAdapter.cs" />
+    <Compile Include="Resources\Native\AbstractNativeResourceExtractor.cs" />
     <Compile Include="Resources\Native\NativeResourceResolver.cs" />
     <Compile Include="Resources\Native\NativeStreamResourceInfo.cs" />
+    <Compile Include="Resources\Native\SimpleNativeResourceExtractor.cs" />
     <Compile Include="Resources\ResourceInfo.cs" />
     <Compile Include="Resources\StringResourceInfo.cs" />
     <Compile Include="Text\Formatting\AbstractCustomFormatter.cs" />

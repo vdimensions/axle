@@ -6,11 +6,11 @@ using Axle.Verification;
 
 namespace Axle.Resources.Native
 {
-    internal sealed class NativeResourceResolver
+    public sealed class NativeResourceResolver
     {
         private readonly Type _resourceType;
 
-        public NativeResourceResolver(Type resourceType) 
+        internal NativeResourceResolver(Type resourceType) 
         {
             _resourceType = resourceType.VerifyArgument(nameof(resourceType)).IsNotNull();
         }

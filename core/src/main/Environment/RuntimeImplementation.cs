@@ -3,9 +3,9 @@
     /// <summary>
     /// An enumeration describing the possible type of CLR implementations.
     /// </summary>
-#if !netstandard
+    #if !netstandard
     [System.Serializable]
-#endif
+    #endif
     public enum RuntimeImplementation
     {
         /// <summary>
