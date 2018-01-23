@@ -84,8 +84,6 @@
     <Folder Include="Resources\" />
   </ItemGroup>
   <Target Name="BeforeBuild">
-    <!-- Ensure the correct dotnet version for this project is made present before the build process starts. -->
-    <Exec Command="dotnet restore $(ProjectName)$(ProjectExt)" />
   </Target>
   <Target Name="AfterBuild">
     <!-- Clean up the obj directory, as it prevents non-netstandard projects to fail during builds from Visual Studio. -->
