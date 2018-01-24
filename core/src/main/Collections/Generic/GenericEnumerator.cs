@@ -27,19 +27,23 @@ namespace Axle.Collections.Generic
             nonGenericEnumerator = enumerator;
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
-            var enumratorAsIDisposalbe = nonGenericEnumerator as IDisposable;
-            if (enumratorAsIDisposalbe != null)
+            if (nonGenericEnumerator is IDisposable enumratorAsIDisposalbe)
             {
                 enumratorAsIDisposalbe.Dispose();
             }
         }
+        /// <inheritdoc />
         public bool MoveNext() { return nonGenericEnumerator.MoveNext(); }
+        /// <inheritdoc />
         public void Reset() { nonGenericEnumerator.Reset(); }
 
-        public T Current { get { return (T) nonGenericEnumerator.Current; } }
-        object IEnumerator.Current { get { return nonGenericEnumerator.Current; } }
+        /// <inheritdoc />
+        public T Current => (T) nonGenericEnumerator.Current;
+        /// <inheritdoc />
+        object IEnumerator.Current => nonGenericEnumerator.Current;
     }
 
     #if !netstandard
@@ -59,19 +63,23 @@ namespace Axle.Collections.Generic
             this.converter = converter;
         }
 
+        /// <inheritdoc />
         public void Dispose()
         {
-            var enumratorAsIDisposalbe = innerEnumerator as IDisposable;
-            if (enumratorAsIDisposalbe != null)
+            if (innerEnumerator is IDisposable enumratorAsIDisposalbe)
             {
                 enumratorAsIDisposalbe.Dispose();
             }
             converter = null;
         }
+        /// <inheritdoc />
         public bool MoveNext() { return innerEnumerator.MoveNext(); }
+        /// <inheritdoc />
         public void Reset() { innerEnumerator.Reset(); }
 
-        public T2 Current { get { return converter(innerEnumerator.Current); } }
-        object IEnumerator.Current { get { return innerEnumerator.Current; } }
+        /// <inheritdoc />
+        public T2 Current => converter(innerEnumerator.Current);
+        /// <inheritdoc />
+        object IEnumerator.Current => innerEnumerator.Current;
     }
 }

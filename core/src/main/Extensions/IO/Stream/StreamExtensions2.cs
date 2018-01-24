@@ -60,13 +60,13 @@ namespace Axle.Extensions.IO.Stream
                 {
                     throw new ArgumentException(
                         "The provided positions array must consist of values sorted in ascending order.",
-                        "positions");
+                        nameof(positions));
                 }
                 if (positions[i] > streamLength)
                 {
                     throw new ArgumentException(
                         "The provided positions array contains values greater than the length of the target to split.",
-                        "positions");
+                        nameof(positions));
                 }
 
                 result[i-1] = new SubStream(current, positions[i-1], positions[i] - positions[i-1], true);

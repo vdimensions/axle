@@ -25,18 +25,16 @@ namespace Axle.Conversion.Parsing
             {
                 if (value.Trim().StartsWith("-"))
                 {
-                    long res;
                     var longParser = new Int64Parser();
-                    if (longParser.TryParse(value, formatProvider, out res))
+                    if (longParser.TryParse(value, formatProvider, out var res))
                     {
                         return (T) Enum.ToObject(typeof(T), res);
                     }
                 } 
                 else
                 {
-                    ulong res;
                     var ulongParser = new UInt64Parser();
-                    if (ulongParser.TryParse(value, formatProvider, out res))
+                    if (ulongParser.TryParse(value, formatProvider, out var res))
                     {
                         return (T) Enum.ToObject(typeof(T), res);
                     }

@@ -110,8 +110,7 @@ namespace Axle.Environment
                 };
 
             var noExtName = hasExt ? assemblyName.TakeBeforeLast('.') : assemblyName;
-            Assembly result = null;
-            if (chain.Any(noExtName, securityEvidence, out result))
+            if (chain.Any(noExtName, securityEvidence, out var result))
             {
                 return result;
             }
@@ -134,7 +133,7 @@ namespace Axle.Environment
                 .Select(
                     x =>
                     {
-                        var path = Path.Combine(x, string.Format("{0}/{1}.resources.dll", culture.Name, targetAssembly.GetName().Name));
+                        var path = Path.Combine(x, $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll");
                         return File.Exists(path) ? path : null;
                     })
                 .FirstOrDefault(x => x != null);

@@ -18,7 +18,7 @@ namespace Axle.Extensions.DateTime
         /// </param>
         /// <param name="assumedKind">
         /// A <see cref="DateTimeKind"/> value to be used as the assumed <see cref="DateTime.Kind">kind</see> of the 
-        /// <param name="current">given</param> <see cref="DateTime"/> in case its kind was set to <see cref="DateTimeKind.Unspecified"/>
+        /// <paramref name="current">given</paramref> <see cref="DateTime"/> in case its kind was set to <see cref="DateTimeKind.Unspecified"/>
         /// </param>
         /// <returns>
         /// A <see cref="DateTime"/> value that represents <param name="current">a given</param> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.

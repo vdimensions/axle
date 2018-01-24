@@ -1,14 +1,11 @@
-﻿using System;
-
-
-namespace Axle.Conversion
+﻿namespace Axle.Conversion
 {
     /// <summary>
     /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns 
     /// the object instance being passed for conversion without changing it. 
     /// </summary>
     #if !netstandard
-    [Serializable]
+    [System.Serializable]
     #endif
     public sealed class IdentityConverter<T> : ITwoWayConverter<T, T>
     {

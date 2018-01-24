@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net35;net40;net45;netstandard1.1;netstandard1.3</TargetFrameworks>
+    <RootNamespace>Axle</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FrameworkShortName>net35</FrameworkShortName>
+    <CustomSymbols>net35</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FrameworkShortName>net40-client</FrameworkShortName>
+    <CustomSymbols>net35;net40</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.1'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <!-- -->
+
+  <PropertyGroup>
+    <OutputPath>bin\$(Configuration)\$(FrameworkShortName)</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;$(CustomSymbols)</DefineConstants>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;$(CustomSymbols)</DefineConstants>
+  </PropertyGroup>
+
+  <Import Project="Mason.netstandard.props" />
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"> 
+    <Compile Remove="**\*.netstandard.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <Compile Remove="**\*!net40.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <Compile Remove="**\*!netstandard.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <Compile Remove="paket-files\**" />
+    <Compile Remove="Resources\Native\**" />
+    <EmbeddedResource Remove="paket-files\**" />
+    <EmbeddedResource Remove="Resources\Native\**" />
+    <None Remove="paket-files\**" />
+    <None Remove="Resources\Native\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
+    <Compile Remove="Linq\Collection.cs" />
+  </ItemGroup>
+  
+  <ItemGroup>
+    <None Remove="Axle.Core.dist.csproj.paket.references" />
+    <None Remove="Axle.Core.net35.csproj.mason.properties" />
+    <None Remove="Axle.Core.net35.csproj.paket.references" />
+    <None Remove="Axle.Core.net40-client.csproj.mason.properties" />
+    <None Remove="Axle.Core.net45.csproj.mason.properties" />
+    <None Remove="Axle.Core.netframework.targets" />
+    <None Remove="Axle.Core.netframework.targets.template" />
+    <None Remove="Axle.Core.netstandard.props" />
+    <None Remove="Axle.Core.netstandard.props.template" />
+    <None Remove="Axle.Core.netstandard.targets" />
+    <None Remove="Axle.Core.netstandard.targets.template" />
+    <None Remove="Axle.Core.netstandard10.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard11.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard12.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard13.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard14.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard15.csproj.paket.references" />
+    <None Remove="Axle.Core.netstandard20.csproj.paket.references" />
+    <None Remove="Axle.netstandard15.csproj.paket.references" />
+    <None Remove="Axle.netstandard16.csproj.paket.dependencies" />
+    <None Remove="paket.lock" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Globalization\" />
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>

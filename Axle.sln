@@ -57,6 +57,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard16", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.netstandard20", "core\src\main\Axle.Core.netstandard20.csproj", "{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core", "core\src\main\Axle.Core.csproj", "{325D4D18-991D-401D-BA06-53A25FF857AE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,10 @@ Global
 		{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{325D4D18-991D-401D-BA06-53A25FF857AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{325D4D18-991D-401D-BA06-53A25FF857AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{325D4D18-991D-401D-BA06-53A25FF857AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{325D4D18-991D-401D-BA06-53A25FF857AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -140,6 +146,7 @@ Global
 		{98ADC985-5017-4BC6-89E5-8D14499FD8A9} = {A416B709-1B2C-441C-9BFE-26A850104FCD}
 		{52DFF1D6-2912-4AD7-83A7-ECCF374F8A6B} = {F62E793A-DB91-44E1-96E8-5EFE28CBFD39}
 		{029BDFD7-76F4-4F21-A7D5-A3307CEAC8FA} = {05E3F547-E3CB-4DF4-9E7F-A2D1E9D352C0}
+		{325D4D18-991D-401D-BA06-53A25FF857AE} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

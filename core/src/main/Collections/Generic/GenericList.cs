@@ -41,12 +41,16 @@ namespace Axle.Collections.Generic
         }
         public GenericList(IList collection) : this(collection, x => (T) x) { }
 
+        /// <inheritdoc />
         public void Add(T value) { underlyingCollection.Add(value); }
 
+        /// <inheritdoc />
         public void Clear() { underlyingCollection.Clear(); }
 
+        /// <inheritdoc />
         public bool Contains(T value) { return underlyingCollection.Contains(value); }
 
+        /// <inheritdoc />
         public void CopyTo(T[] array, int index)
         {
             for (var i = 0; i < underlyingCollection.Count; i++)
@@ -55,13 +59,17 @@ namespace Axle.Collections.Generic
             }
         }
 
+        /// <inheritdoc />
         public IEnumerator<T> GetEnumerator() { return underlyingCollection.OfType<T>().GetEnumerator(); }
         IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
+        /// <inheritdoc />
         public int IndexOf(T value) { return underlyingCollection.IndexOf(value); }
 
+        /// <inheritdoc />
         public void Insert(int index, T value) { underlyingCollection.Insert(index, value); }
 
+        /// <inheritdoc />
         public bool Remove(T value)
         {
             var count = underlyingCollection.Count;
@@ -69,13 +77,16 @@ namespace Axle.Collections.Generic
             return (count + 1) == underlyingCollection.Count;
         }
 
+        /// <inheritdoc />
         public void RemoveAt(int index) { underlyingCollection.RemoveAt(index); }
 
         int ICollection<T>.Count { get { return underlyingCollection.Count; } }
+        /// <inheritdoc />
         public bool IsReadOnly { get { return underlyingCollection.IsReadOnly; } }
         public bool IsFixedSize { get { return underlyingCollection.IsFixedSize; } }
         internal IList RawCollection { get { return underlyingCollection; } }
 
+        /// <inheritdoc />
         public T this[int index]
         {
             get { return converter(underlyingCollection[index]); }

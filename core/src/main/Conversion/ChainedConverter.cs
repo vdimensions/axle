@@ -3,18 +3,30 @@
 
 namespace Axle.Conversion
 {
+    /// <summary>
+    /// A special converter implementation that chains together two <see cref="IConverter{TSource,TTarget}"/> instances.
+    /// Useful if the conversion from an instance of a given type <typeparamref name="T" /> must be converted to an intermediate
+    /// type <typeparamref name="TIntermediate"/> with one <see cref="IConverter{T,T1}">converter</see> before that conversion result 
+    /// is converted to the desired type <typeparamref name="TResult"/> with <see cref="IConverter{T1,TResult}">another converter</see>.
+    /// <para>
+    /// Multiple chained converters can be used together to cover a more complex conversion with more than one intermediate object.
+    /// </para>
+    /// </summary>
+    /// <typeparam name="T">The type of the source object to be converted. </typeparam>
+    /// <typeparam name="TIntermediate">The type of an intermediate object to convert the source object to. </typeparam>
+    /// <typeparam name="TResult">The resulting type of the conversion, produced by converting the intermediate object. </typeparam>
     #if !netstandard
     [System.Serializable]
     #endif
-    public sealed class ChainedConverter<T, T1, TResult> : AbstractConverter<T,TResult>
+    public sealed class ChainedConverter<T, TIntermediate, TResult> : AbstractConverter<T,TResult>
     {
-        private readonly IConverter<T, T1> converter1;
-        private readonly IConverter<T1, TResult> converter2;
+        private readonly IConverter<T, TIntermediate> converter1;
+        private readonly IConverter<TIntermediate, TResult> converter2;
 
-        internal ChainedConverter(IConverter<T, T1> converter1, IConverter<T1, TResult> converter2)
+        internal ChainedConverter(IConverter<T, TIntermediate> converter1, IConverter<TIntermediate, TResult> converter2)
         {
             this.converter1 = converter1.VerifyArgument(nameof(converter1)).IsNotNull().Value;
-            this.converter2 = converter2.VerifyArgument(nameof(converter1)).IsNotNull().Value;
+            this.converter2 = converter2.VerifyArgument(nameof(converter2)).IsNotNull().Value;
         }
 
         protected override TResult DoConvert(T source)

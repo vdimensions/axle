@@ -45,7 +45,7 @@ namespace Axle.Resources
         public CultureInfo Culture { get; }
 
         /// <summary>
-        /// Gets the <see cref="ContentType"/> header describing the represented resource.
+        /// Gets the <see cref="System.Net.Mime.ContentType"/> header describing the represented resource.
         /// </summary>
         /// <seealso cref="System.Net.Mime.ContentType"/>
         public ContentType ContentType { get; }
