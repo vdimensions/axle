@@ -1,45 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net35;net40;net45;netstandard1.1;netstandard1.3</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;netstandard1.1;netstandard1.5</TargetFrameworks>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
-    <FrameworkShortName>net35</FrameworkShortName>
-    <CustomSymbols>net35</CustomSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
-    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FrameworkShortName>net40-client</FrameworkShortName>
-    <CustomSymbols>net35;net40</CustomSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
-    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <CustomSymbols>netstandard</CustomSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.1'">
-    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <CustomSymbols>netstandard</CustomSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
-    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <CustomSymbols>netstandard</CustomSymbols>
-  </PropertyGroup>
-
-  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
-    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <CustomSymbols>netstandard</CustomSymbols>
-  </PropertyGroup>
-
-  <!-- -->
+  <Import Project="MultiTargetFrameworkSupport.targets" />
 
   <PropertyGroup>
     <OutputPath>bin\$(Configuration)\$(FrameworkShortName)</OutputPath>
@@ -61,27 +27,23 @@
 
   <Import Project="Mason.netstandard.props" />
 
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"> 
-    <Compile Remove="**\*.netstandard.cs" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
-    <Compile Remove="**\*!net40.cs" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
-    <Compile Remove="**\*!netstandard.cs" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+  <ItemGroup>
     <Compile Remove="paket-files\**" />
-    <Compile Remove="Resources\Native\**" />
     <EmbeddedResource Remove="paket-files\**" />
-    <EmbeddedResource Remove="Resources\Native\**" />
     <None Remove="paket-files\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <Compile Remove="Resources\Native\**" />
+    <EmbeddedResource Remove="Resources\Native\**" />
     <None Remove="Resources\Native\**" />
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />
+    <Compile Remove="Resources\IResource.cs" />
   </ItemGroup>
   
   <ItemGroup>

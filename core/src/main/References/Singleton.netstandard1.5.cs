@@ -6,7 +6,6 @@ using System.Runtime.InteropServices;
 using System.Threading;
 
 
-#if !NETSTANDARD1_0
 namespace Axle.References
 {
     partial class Singleton<T> : ISingetonReference<T> where T: class
@@ -55,4 +54,3 @@ namespace Axle.References
         }
     }
 }
-#endif

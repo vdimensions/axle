@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FrameworkShortName>net35</FrameworkShortName>
+    <CustomSymbols>net35</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FrameworkShortName>net40-client</FrameworkShortName>
+    <CustomSymbols>net35;net40</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.1'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.2'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.4'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"> 
+    <Compile Remove="**\*.netstandard.cs" />
+    <Compile Remove="**\*.netstandard*.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.0'">
+    <Compile Remove="**\*!net40.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <Compile Remove="**\*!netstandard.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*.netstandard1.1.cs" />
+    <Compile Remove="**\*.netstandard1.2.cs" />
+    <Compile Remove="**\*.netstandard1.3.cs" />
+    <Compile Remove="**\*.netstandard1.4.cs" />
+    <Compile Remove="**\*.netstandard1.5.cs" />
+    <Compile Remove="**\*.netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.1'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*!netstandard1.1.cs" />
+    <Compile Remove="**\*.netstandard1.2.cs" />
+    <Compile Remove="**\*.netstandard1.3.cs" />
+    <Compile Remove="**\*.netstandard1.4.cs" />
+    <Compile Remove="**\*.netstandard1.5.cs" />
+    <Compile Remove="**\*.netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.2'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*!netstandard1.1.cs" />
+    <Compile Remove="**\*!netstandard1.2.cs" />
+    <Compile Remove="**\*.netstandard1.3.cs" />
+    <Compile Remove="**\*.netstandard1.4.cs" />
+    <Compile Remove="**\*.netstandard1.5.cs" />
+    <Compile Remove="**\*.netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*!netstandard1.1.cs" />
+    <Compile Remove="**\*!netstandard1.2.cs" />
+    <Compile Remove="**\*!netstandard1.3.cs" />
+    <Compile Remove="**\*.netstandard1.4.cs" />
+    <Compile Remove="**\*.netstandard1.5.cs" />
+    <Compile Remove="**\*.netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.4'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*!netstandard1.1.cs" />
+    <Compile Remove="**\*!netstandard1.2.cs" />
+    <Compile Remove="**\*!netstandard1.3.cs" />
+    <Compile Remove="**\*!netstandard1.4.cs" />
+    <Compile Remove="**\*.netstandard1.5.cs" />
+    <Compile Remove="**\*.netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.5'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*!netstandard1.1.cs" />
+    <Compile Remove="**\*!netstandard1.2.cs" />
+    <Compile Remove="**\*!netstandard1.3.cs" />
+    <Compile Remove="**\*!netstandard1.4.cs" />
+    <Compile Remove="**\*!netstandard1.5.cs" />
+    <Compile Remove="**\*.netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <Compile Remove="**\*!netstandard1.0.cs" />
+    <Compile Remove="**\*!netstandard1.1.cs" />
+    <Compile Remove="**\*!netstandard1.2.cs" />
+    <Compile Remove="**\*!netstandard1.3.cs" />
+    <Compile Remove="**\*!netstandard1.4.cs" />
+    <Compile Remove="**\*!netstandard1.5.cs" />
+    <Compile Remove="**\*!netstandard1.6.cs" />
+    <Compile Remove="**\*.netstandard2.0.cs" />
+  </ItemGroup>
+</Project>

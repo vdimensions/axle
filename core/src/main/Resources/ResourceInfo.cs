@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
 using System.IO;
-using System.Net.Mime;
+//using System.Net.Mime;
 
 using Axle.Verification;
 
@@ -13,14 +13,15 @@ namespace Axle.Resources
     /// </summary>
     public abstract class ResourceInfo
     {
-        protected ResourceInfo(Uri key, CultureInfo culture, ContentType contentType)
+        //protected ResourceInfo(Uri key, CultureInfo culture, ContentType contentType)
+        protected ResourceInfo(Uri key, CultureInfo culture, string contentType)
         {
             Key = key.VerifyArgument(nameof(key)).IsNotNull();
             Culture = culture.VerifyArgument(nameof(culture)).IsNotNull();
             ContentType = contentType.VerifyArgument(nameof(contentType)).IsNotNull();
         }
-        protected ResourceInfo(Uri key, CultureInfo culture, string contentTypeName)
-            : this(key, culture, new ContentType(contentTypeName.VerifyArgument(nameof(contentTypeName)).IsNotNullOrEmpty())) { }
+        //protected ResourceInfo(Uri key, CultureInfo culture, string contentTypeName)
+        //    : this(key, culture, new ContentType(contentTypeName.VerifyArgument(nameof(contentTypeName)).IsNotNullOrEmpty())) { }
 
         /// <summary>
         /// Opens a new <see cref="Stream"/> to the represented resource's data.
@@ -44,10 +45,14 @@ namespace Axle.Resources
         /// </summary>
         public CultureInfo Culture { get; }
 
+        ///// <summary>
+        ///// Gets the <see cref="System.Net.Mime.ContentType"/> header describing the represented resource.
+        ///// </summary>
+        ///// <seealso cref="System.Net.Mime.ContentType"/>
+        //public ContentType ContentType { get; }
         /// <summary>
-        /// Gets the <see cref="System.Net.Mime.ContentType"/> header describing the represented resource.
+        /// Gets the content type header describing the represented resource.
         /// </summary>
-        /// <seealso cref="System.Net.Mime.ContentType"/>
-        public ContentType ContentType { get; }
+        public string ContentType { get; }
     }
 }

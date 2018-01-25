@@ -4,9 +4,9 @@
     /// Indicates the byte order ("endianess") in which data is stored in a computer architecture. 
     /// </summary>
     /// <seealso cref="System.BitConverter.IsLittleEndian" />
-#if !netstandard
+    #if !netstandard
     [System.Serializable]
-#endif
+    #endif
     //[Maturity(CodeMaturity.Frozen)]
     public enum Endianness : byte
     {

@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETSTANDARD1_0 ||  NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4
+#else
+using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
@@ -46,3 +48,4 @@ namespace Axle.References
         public static T GetSingletonInstance<T>(Type type) { return (T) GetSingletonInstance(type); }
     }
 }
+#endif

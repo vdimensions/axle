@@ -24,7 +24,7 @@ namespace Axle.Environment
                 : null;
         }
 
-        private RuntimeInfo()
+        internal RuntimeInfo()
         {
             var monoVersion = GetMonoVersion();
             this.frameworkVersion = System.Environment.Version;
