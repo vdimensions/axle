@@ -4,12 +4,7 @@
     <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard1.5</TargetFrameworks>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
-
   <Import Project="MultiTargetFrameworkSupport.targets" />
-
-  <PropertyGroup>
-  </PropertyGroup>
-
   <PropertyGroup>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -21,34 +16,28 @@
     <Optimize>false</Optimize>
     <DefineConstants>DEBUG;TRACE;$(CustomSymbols)</DefineConstants>
   </PropertyGroup>
-  
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;$(CustomSymbols)</DefineConstants>
   </PropertyGroup>
-
   <!-- <Import Project="Mason.netstandard.props" /> -->
-
   <ItemGroup>
     <Compile Remove="paket-files\**" />
     <EmbeddedResource Remove="paket-files\**" />
     <None Remove="paket-files\**" />
   </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
     <Compile Remove="Resources\Native\**" />
     <EmbeddedResource Remove="Resources\Native\**" />
     <None Remove="Resources\Native\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />
     <Compile Remove="Resources\IResource.cs" />
   </ItemGroup>
-  
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
     <None Remove="Axle.Core.net35.csproj.mason.properties" />
@@ -79,6 +68,6 @@
   </Target>
   <Target Name="AfterBuild">
   </Target>
-  <Import Project="packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <!-- <Import Project=".paket\Paket.Restore.targets" /> -->
 </Project>

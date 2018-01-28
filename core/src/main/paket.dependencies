@@ -1,11 +1,4 @@
-source https://www.nuget.org/api/v2
-  nuget System.Runtime.Loader
-
-group Legacy 
-  source https://www.nuget.org/api/v2
-    nuget Microsoft.Extensions.DependencyModel <= 1.0
-
-group Build
+group build
 	source ../../../submodules/mason/dist
 	  nuget Mason.Targets.Packager
 	  nuget Mason.Targets.Preprocessor

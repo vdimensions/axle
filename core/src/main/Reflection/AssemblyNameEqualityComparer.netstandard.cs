@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Reflection;
 
-using Axle.Environment;
-
 
 namespace Axle.Reflection
 {
