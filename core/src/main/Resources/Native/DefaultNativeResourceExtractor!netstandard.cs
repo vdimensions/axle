@@ -15,6 +15,12 @@ namespace Axle.Resources.Native
     /// </remarks>
     public sealed class DefaultNativeResourceExtractor : AbstractNativeResourceExtractor
     {
+        /// <summary>
+        /// Creates a new instance of the <see cref="DefaultNativeResourceExtractor"/> class.
+        /// </summary>
+        /// <param name="type">
+        /// The type that represents the .NET resource container.
+        /// </param>
         public DefaultNativeResourceExtractor(Type type) : base(type)
         {
         }

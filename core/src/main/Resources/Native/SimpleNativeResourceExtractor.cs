@@ -6,13 +6,19 @@ using System.IO;
 namespace Axle.Resources.Native
 {
     /// <summary>
-    /// The .NET's native resource extractor implementation, only strings and streamed resources.
+    /// The .NET's native resource extractor implementation, supporting only strings and streamed resources.
     /// </summary>
     /// <remarks>
     /// This implementation does not depend on the <see cref="System.Drawing">System.Drawing</see> assembly.
     /// </remarks>
     public sealed class SimpleNativeResourceExtractor : AbstractNativeResourceExtractor
     {
+        /// <summary>
+        /// Creates a new instance of the <see cref="SimpleNativeResourceExtractor"/> class.
+        /// </summary>
+        /// <param name="type">
+        /// The type that represents the .NET resource container.
+        /// </param>
         public SimpleNativeResourceExtractor(Type type) : base(type)
         {
         }

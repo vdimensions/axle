@@ -40,25 +40,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
-    <None Remove="Axle.Core.net35.csproj.mason.properties" />
-    <None Remove="Axle.Core.net35.csproj.paket.references" />
-    <None Remove="Axle.Core.net40-client.csproj.mason.properties" />
-    <None Remove="Axle.Core.net45.csproj.mason.properties" />
     <None Remove="Axle.Core.netframework.targets" />
     <None Remove="Axle.Core.netframework.targets.template" />
     <None Remove="Axle.Core.netstandard.props" />
     <None Remove="Axle.Core.netstandard.props.template" />
     <None Remove="Axle.Core.netstandard.targets" />
     <None Remove="Axle.Core.netstandard.targets.template" />
-    <None Remove="Axle.Core.netstandard10.csproj.paket.references" />
-    <None Remove="Axle.Core.netstandard11.csproj.paket.references" />
-    <None Remove="Axle.Core.netstandard12.csproj.paket.references" />
-    <None Remove="Axle.Core.netstandard13.csproj.paket.references" />
-    <None Remove="Axle.Core.netstandard14.csproj.paket.references" />
-    <None Remove="Axle.Core.netstandard15.csproj.paket.references" />
-    <None Remove="Axle.Core.netstandard20.csproj.paket.references" />
-    <None Remove="Axle.netstandard15.csproj.paket.references" />
-    <None Remove="Axle.netstandard16.csproj.paket.dependencies" />
     <None Remove="paket.lock" />
   </ItemGroup>
   <ItemGroup>

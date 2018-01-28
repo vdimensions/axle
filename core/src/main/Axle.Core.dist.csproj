@@ -29,10 +29,8 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup>
-  <ItemGroup>
-
-  </ItemGroup>
+  </PropertyGroup> 
+  
   <ItemGroup>
     <None Include="Axle.Core.netframework.targets" />
     <None Include="Axle.Core.netframework.targets.template" />
@@ -63,26 +61,33 @@
     <Content Include="bin\Debug\net35\Axle.Core.dll" />
     <Content Include="bin\Debug\net35\Axle.Core.pdb" />
     <Content Include="bin\Debug\net35\Axle.Core.xml" />
-    <Content Include="bin\Debug\net40-client\Axle.Core.dll" />
-    <Content Include="bin\Debug\net40-client\Axle.Core.pdb" />
-    <Content Include="bin\Debug\net40-client\Axle.Core.xml" />
+    <Content Include="bin\Debug\net40\Axle.Core.dll" />
+    <Content Include="bin\Debug\net40\Axle.Core.pdb" />
+    <Content Include="bin\Debug\net40\Axle.Core.xml" />
     <Content Include="bin\Debug\net45\Axle.Core.dll" />
     <Content Include="bin\Debug\net45\Axle.Core.pdb" />
     <Content Include="bin\Debug\net45\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.0\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.0\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.0\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.1\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.1\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.1\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.2\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.2\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.2\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.3\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.3\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.3\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.4\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.4\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.4\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.5\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.5\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.5\Axle.Core.xml" />
     <Content Include="bin\Debug\netstandard1.6\Axle.Core.dll" />
     <Content Include="bin\Debug\netstandard1.6\Axle.Core.pdb" />
+    <Content Include="bin\Debug\netstandard1.6\Axle.Core.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\netstandard2.0\" />
