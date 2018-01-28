@@ -7,6 +7,7 @@ using System.Reflection;
 
 using Axle.Verification;
 
+
 namespace Axle.Reflection
 {
     public class DefaultIntrospector : IIntrospector
@@ -48,19 +49,18 @@ namespace Axle.Reflection
             var expr = expression.Body as MemberExpression;
             if (expr == null)
             {
-                var unary = expression.Body as UnaryExpression;
-                if (unary != null)
+                if (expression.Body is UnaryExpression unary)
                 {
                     expr = unary.Operand as MemberExpression;
                     if (expr == null)
                     {
                         if (unary.NodeType == ExpressionType.Convert)
                         {
-                            unary = (UnaryExpression)unary.Operand;
+                            unary = (UnaryExpression) unary.Operand;
                         }
                         if (unary.NodeType == ExpressionType.ArrayLength)
                         {
-                            var m = unary.Operand.Type.GetMember("Length", BindingFlags.Instance | BindingFlags.Public);
+                            var m = unary.Operand.Type.GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
                             return m[0];
                         }
                         expr = unary.Operand as MemberExpression;
@@ -84,13 +84,15 @@ namespace Axle.Reflection
             return member;
         }
 
+        /// <inheritdoc />
         public IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var constructor = _introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
-            return new ConstructorToken(constructor);
+            return constructor != null ? new ConstructorToken(constructor) : null;
         }
 
+        /// <inheritdoc />
         public IEnumerable<IConstructor> GetConstructors(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
@@ -98,13 +100,15 @@ namespace Axle.Reflection
             return constructors.Select<ConstructorInfo, IConstructor>(x => new ConstructorToken(x)).ToArray();
         }
 
+        /// <inheritdoc />
         public IMethod GetMethod(ScanOptions scanOptions, string methodName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var method = _introspectedType.GetMethod(methodName, bindingFlags);
-            return new MethodToken(method);
+            return method != null ? new MethodToken(method) : null;
         }
 
+        /// <inheritdoc />
         public IEnumerable<IMethod> GetMethods(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
@@ -112,12 +116,14 @@ namespace Axle.Reflection
             return methods.Select<MethodInfo, IMethod>(x => new MethodToken(x)).ToArray();
         }
 
+        /// <inheritdoc />
         public IProperty GetProperty(ScanOptions scanOptions, string propertyName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var property = _introspectedType.GetProperty(propertyName, bindingFlags);
-            return new PropertyToken(property);
+            return property != null ? new PropertyToken(property) : null;
         }
+        /// <inheritdoc />
         public IProperty GetProperty(Expression<Func<object>> expression)
         {
             var prop = ExtractMember(expression) as PropertyInfo;
@@ -128,7 +134,7 @@ namespace Axle.Reflection
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
 
-
+        /// <inheritdoc />
         public IEnumerable<IProperty> GetProperties(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
@@ -138,22 +144,24 @@ namespace Axle.Reflection
             return properties.Select(x => new PropertyToken(x)).Cast<IProperty>().ToArray();
         }
 
+        /// <inheritdoc />
         public IField GetField(ScanOptions scanOptions, string fieldName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var field = _introspectedType.GetField(fieldName, bindingFlags);
-            return new FieldToken(field);
+            return field != null ? new FieldToken(field) : null;
         }
+        /// <inheritdoc />
         public IField GetField(Expression<Func<object>> expression)
         {
-            var field = ExtractMember(expression) as FieldInfo;
-            if (field != null)
+            if (ExtractMember(expression) is FieldInfo field)
             {
                 return new FieldToken(field);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
 
+        /// <inheritdoc />
         public IEnumerable<IField> GetFields(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
@@ -163,22 +171,24 @@ namespace Axle.Reflection
             return fields.Select<FieldInfo, IField>(x => new FieldToken(x)).ToArray();
         }
 
+        /// <inheritdoc />
         public IEvent GetEvent(ScanOptions scanOptions, string eventName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var @event = _introspectedType.GetEvent(eventName, bindingFlags);
-            return new EventToken(@event);
+            return @event != null ? new EventToken(@event) : null;
         }
+        /// <inheritdoc />
         public IEvent GetEvent(Expression<Func<object>> expression)
         {
-            var evt = ExtractMember(expression) as EventInfo;
-            if (evt != null)
+            if (ExtractMember(expression) is EventInfo evt)
             {
                 return new EventToken(evt);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
 
+        /// <inheritdoc />
         public IEnumerable<IEvent> GetEvents(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
@@ -188,6 +198,7 @@ namespace Axle.Reflection
             return events.Select<EventInfo, IEvent>(x => new EventToken(x)).ToArray();
         }
 
+        /// <inheritdoc />
         public IEnumerable<IMember> GetMembers(ScanOptions scanOptions)
         {
             var ctors = GetConstructors(scanOptions).Cast<IMember>();
@@ -198,6 +209,7 @@ namespace Axle.Reflection
             return ctors.Union(methods).Union(props).Union(fileds).Union(events);
         }
 
+        /// <inheritdoc />
         public Type IntrospectedType => _introspectedType;
     }
 
@@ -207,8 +219,7 @@ namespace Axle.Reflection
 
         public IProperty GetProperty(Expression<Func<T, object>> expression)
         {
-            var prop = ExtractMember(expression) as PropertyInfo;
-            if (prop != null)
+            if (ExtractMember(expression) is PropertyInfo prop)
             {
                 return new PropertyToken(prop);
             }
@@ -217,8 +228,7 @@ namespace Axle.Reflection
 
         public IField GetField(Expression<Func<T, object>> expression)
         {
-            var field = ExtractMember(expression) as FieldInfo;
-            if (field != null)
+            if (ExtractMember(expression) is FieldInfo field)
             {
                 return new FieldToken(field);
             }
@@ -228,8 +238,7 @@ namespace Axle.Reflection
 
         public IEvent GetEvent(Expression<Func<T, object>> expression)
         {
-            var evt = ExtractMember(expression) as EventInfo;
-            if (evt != null)
+            if (ExtractMember(expression) is EventInfo evt)
             {
                 return new EventToken(evt);
             }

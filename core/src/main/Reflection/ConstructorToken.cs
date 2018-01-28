@@ -4,9 +4,9 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     //[Maturity(CodeMaturity.Stable)]
     public sealed class ConstructorToken : MethodBaseToken<ConstructorInfo>, IEquatable<ConstructorToken>, IConstructor
     {

@@ -1,14 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net35;net40;net45;netstandard1.1;netstandard1.5</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard1.5</TargetFrameworks>
     <RootNamespace>Axle</RootNamespace>
   </PropertyGroup>
 
   <Import Project="MultiTargetFrameworkSupport.targets" />
 
   <PropertyGroup>
-    <OutputPath>bin\$(Configuration)\$(FrameworkShortName)</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
@@ -25,7 +28,7 @@
     <DefineConstants>TRACE;$(CustomSymbols)</DefineConstants>
   </PropertyGroup>
 
-  <Import Project="Mason.netstandard.props" />
+  <!-- <Import Project="Mason.netstandard.props" /> -->
 
   <ItemGroup>
     <Compile Remove="paket-files\**" />

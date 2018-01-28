@@ -5,9 +5,9 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     internal abstract class EventAccessor : IAccessor, IReflected<MethodInfo>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

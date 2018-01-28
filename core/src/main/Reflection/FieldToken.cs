@@ -21,7 +21,7 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly FieldAccessor[] _accessors;
 
-        public override bool Equals(object obj) { return obj is FieldToken && Equals((FieldToken) obj); }
+        public override bool Equals(object obj) { return obj is FieldToken f && Equals(f); }
         public bool Equals(FieldToken other) { return base.Equals(other); }
 
         IAccessor IAccessible.FindAccessor(AccessorType accessorType)

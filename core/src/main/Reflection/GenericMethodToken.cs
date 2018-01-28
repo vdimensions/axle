@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Axle.Reflection
 {
-#if !netstandard
+    #if !netstandard
     [Serializable]
-#endif
+    #endif
     //[Maturity(CodeMaturity.Stable)]
     public sealed class GenericMethodToken : MethodToken, IGenericMethod
     {

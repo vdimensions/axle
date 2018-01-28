@@ -11,9 +11,6 @@ namespace Axle.Globalization
     /// respective <see cref="CultureScope.Culture"/> and <see cref="CultureScope.UICulture"/> troughout its lifetine. 
     /// Upon disposing, the culture settings prior initializig the scope are rolled back.
     /// </summary>
-    #if !netstandard
-    [Serializable]
-    #endif
     public sealed class CultureScope : IDisposable
     {
         /// <summary>

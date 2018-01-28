@@ -3,7 +3,7 @@
   <metadata>
     <id>Axle.Core</id>
     <title>Axle.Core</title>
-    <version>1.5.0.25</version>
+    <version>1.5.0.26</version>
     <description>Axle Framework Core Library</description>
     <summary>Axle Framework Core Library</summary>
     <releaseNotes></releaseNotes>
@@ -23,6 +23,14 @@
       <group targetFramework="net40-client"></group>
       <group targetFramework="net40"></group>
       <group targetFramework="net45"></group>
+      <group targetFramework="netstandard1.0"></group>
+      <group targetFramework="netstandard1.1"></group>
+      <group targetFramework="netstandard1.2"></group>
+      <group targetFramework="netstandard1.3"></group>
+      <group targetFramework="netstandard1.4"></group>
+      <group targetFramework="netstandard1.5"></group>
+      <group targetFramework="netstandard1.6"></group>
+      <group targetFramework="netstandard2.0"></group>
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" />

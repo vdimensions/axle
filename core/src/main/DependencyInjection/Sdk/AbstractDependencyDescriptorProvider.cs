@@ -30,8 +30,12 @@ namespace Axle.DependencyInjection.Sdk
         protected abstract string GetDependencyName(IProperty property);
         protected abstract string GetDependencyName(IParameter argument);
 
+
+        /// <inheritdoc />
         public abstract IEnumerable<IPropertyDependencyDescriptor> GetFields(Type type);
+        /// <inheritdoc />
         public abstract IEnumerable<IPropertyDependencyDescriptor> GetProperties(Type type);
+        /// <inheritdoc />
         public abstract IEnumerable<IFactoryDescriptor> GetFactories(Type type);
 
         protected bool CompareMemberNames(string left, string right, IEqualityComparer<string> comparer)
