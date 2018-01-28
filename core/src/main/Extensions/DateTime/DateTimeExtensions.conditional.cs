@@ -5,11 +5,10 @@ namespace Axle.Extensions.DateTime
 {
     using DateTime = System.DateTime;
 
-    /// <summary>
-    /// A static class that contains extension methods for the <see cref="DateTime"/> struct
-    /// </summary>
+    
     public static partial class DateTimeExtensions
     {
+        #if !netstandard || NETSTANDARD1_5
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// </summary>
@@ -21,7 +20,7 @@ namespace Axle.Extensions.DateTime
         /// <paramref name="current">given</paramref> <see cref="DateTime"/> in case its kind was set to <see cref="DateTimeKind.Unspecified"/>
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <param name="current">a given</param> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
@@ -32,8 +31,8 @@ namespace Axle.Extensions.DateTime
         public static DateTime ToLocalTime(this DateTime current, DateTimeKind assumedKind)
         {
             var kind = current.Kind;
-            return (kind == DateTimeKind.Unspecified ? assumedKind : kind) == DateTimeKind.Utc 
-                ? TimeZoneInfo.ConvertTime(current, TimeZoneInfo.Utc, TimeZoneInfo.Local) 
+            return (kind == DateTimeKind.Unspecified ? assumedKind : kind) == DateTimeKind.Utc
+                ? TimeZoneInfo.ConvertTime(current, TimeZoneInfo.Utc, TimeZoneInfo.Local)
                 : new DateTime(current.Ticks, DateTimeKind.Local);
         }
         /// <summary>
@@ -47,7 +46,7 @@ namespace Axle.Extensions.DateTime
         /// The <see cref="DateTime"/> value to convet.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <param name="current">a given</param> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
@@ -152,5 +151,6 @@ namespace Axle.Extensions.DateTime
         {
             return ChangeTimeZone(dateTime, sourceTimeZone, TimeZoneInfo.Utc, true);
         }
+        #endif
     }
 }
