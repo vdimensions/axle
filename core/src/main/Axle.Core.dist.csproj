@@ -96,6 +96,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="**\*.cs" />
+    <Compile Remove="paket-files\**" />
+    <EmbeddedResource Remove="paket-files\**" />
+    <None Remove="paket-files\**" />
   </ItemGroup>
   <Import Project="packages\build\Mason.Targets.Packager\build\Mason.Targets.Packager.targets" Condition="Exists('packages\build\Mason.Targets.Packager\build\Mason.Targets.Packager.targets')" Label="Paket" />
   <Import Project="packages\build\Mason.Targets.Verman\build\Mason.Targets.Verman.targets" Condition="Exists('packages\build\Mason.Targets.Verman\build\Mason.Targets.Verman.targets')" Label="Paket" />

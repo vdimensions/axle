@@ -48,9 +48,7 @@
     <None Remove="Axle.Core.netstandard.targets.template" />
     <None Remove="paket.lock" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Globalization\" />
-  </ItemGroup>
+
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">

@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project>
+  <PropertyGroup Condition="'$(TargetFramework)'=='net30'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <FrameworkShortName>net30</FrameworkShortName>
+    <CustomSymbols>net30</CustomSymbols>
+  </PropertyGroup>
+  
   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
@@ -10,8 +17,15 @@
   <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <FrameworkShortName>net40-client</FrameworkShortName>
+    <FrameworkShortName>net40</FrameworkShortName>
     <CustomSymbols>net35;net40</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='net45'">
+    <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FrameworkShortName>net45</FrameworkShortName>
+    <CustomSymbols>net35;net40;net45</CustomSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.0'">
@@ -45,6 +59,11 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.6'">
+    <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
+    <CustomSymbols>netstandard</CustomSymbols>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)'=='netstandard2.0'">
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
     <CustomSymbols>netstandard</CustomSymbols>
   </PropertyGroup>
