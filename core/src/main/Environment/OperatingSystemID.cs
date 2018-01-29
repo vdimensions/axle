@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+using System;
 
 
 namespace Axle.Environment
@@ -82,9 +83,9 @@ namespace Axle.Environment
 ///   </item>
 /// </list>
 /// </summary>
-#if !netstandard
+    #if !NETSTANDARD
     [Serializable]
-#endif
+    #endif
     [Flags]
     public enum OperatingSystemID : short
     {
@@ -148,3 +149,4 @@ namespace Axle.Environment
         All = Unix|Win|Mac,
     }
 }
+#endif

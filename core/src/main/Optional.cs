@@ -40,17 +40,17 @@ namespace Axle
     /// <summary>
     /// A container object for a non-null value. The <see cref="Optional{T}.HasValue"/> property indicates whether there is a value available.
     /// </summary>
-#if !netstandard
+    #if !NETSTANDARD
     [Serializable]
-#endif
+    #endif
 	public struct Optional<T> : IEquatable<Optional<T>>, IEquatable<T>, IReference<T>
 	{
 		public static readonly Optional<T> Undefined = new Optional<T>();
 
 	    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private readonly T value;
+		private readonly T _value;
 	    [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-		private readonly bool isSet;
+		private readonly bool _isSet;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Optional{T}"/> struct.
@@ -58,23 +58,23 @@ namespace Axle
         /// <param name="value">Value.</param>
 		internal Optional(T value)
 		{
-            this.isSet = (this.value = value) != null;
+            _isSet = (_value = value) != null;
 		}
 
-		public override bool Equals(object other) { return other is Optional<T> && ((Optional<T>) other).Equals (this); }
-		public bool Equals(Optional<T> other) { return this.isSet ? other.isSet && Equals(this.value, other.value) : !other.isSet; }
-		bool IEquatable<T>.Equals(T other) { return this.isSet && Equals(this.value, other); }
+		public override bool Equals(object other) { return other is Optional<T> optional && optional.Equals (this); }
+		public bool Equals(Optional<T> other) { return _isSet ? other._isSet && Equals(_value, other._value) : !other._isSet; }
+		bool IEquatable<T>.Equals(T other) { return _isSet && Equals(_value, other); }
 
-		public override int GetHashCode() { return (this.value == null ? 0 : this.value.GetHashCode()) ^ typeof(T).GetHashCode(); }
+		public override int GetHashCode() { return (_value == null ? 0 : _value.GetHashCode()) ^ typeof(T).GetHashCode(); }
 
 		public T GetValueOrDefault() { return GetValueOrDefault (default(T)); }
-		public T GetValueOrDefault(T defaultValue) { return this.isSet ? this.value : defaultValue; }
+		public T GetValueOrDefault(T defaultValue) { return _isSet ? _value : defaultValue; }
 
-        //		public TResult TryInvoke<TResult>(Func<T, TResult> func, TResult defaultValue)
-        //		{
-        //			return isSet ? func (value) : defaultValue;
-        //		}
-        //		public TResult TryInvoke<TResult>(Func<T, TResult> func) { return TryInvoke(func, default(TResult)); }
+//		public TResult TryInvoke<TResult>(Func<T, TResult> func, TResult defaultValue)
+//		{
+//			return isSet ? func (value) : defaultValue;
+//		}
+//		public TResult TryInvoke<TResult>(Func<T, TResult> func) { return TryInvoke(func, default(TResult)); }
 
         /// <summary>
         /// Returns a <see cref="string"/> that represents the current <see cref="Axle.Optional{T}"/>.
@@ -82,7 +82,7 @@ namespace Axle
         /// <returns>
         /// A <see cref="string"/> that represents the current <see cref="Axle.Optional{T}"/>.
         /// </returns>
-        public override string ToString () { return this.isSet ? (this.value == null ? "null" : this.value.ToString()) : "[Undefined]"; }
+        public override string ToString () { return _isSet ? (_value == null ? "null" : _value.ToString()) : "[Undefined]"; }
 
         //[CanBeNull(false)]
         /// <summary>
@@ -91,18 +91,18 @@ namespace Axle
         /// <value>
         /// A reference to the underlying object represented by the current <see cref="Optional{T}"/> instance, or <c>null</c> if there is no value present.
         /// </value>
-		public T Value { get { return this.value; } }
-        object IReference.Value { get { return this.Value; } }
+		public T Value => _value;
+	    object IReference.Value => Value;
 
-        /// <summary>
+	    /// <summary>
         /// Gets a <see cref="bool"/> value indicating whether this <see cref="Optional{T}"/> instance has any value.
         /// </summary>
         /// <value>
         /// <c>true</c> if this instance has value; otherwise, <c>false</c>.
         /// </value>
-        public bool HasValue { get { return this.isSet; } }
+        public bool HasValue => _isSet;
 
-        public static bool operator false(Optional<T> optional) { return !optional.HasValue; }
+	    public static bool operator false(Optional<T> optional) { return !optional.HasValue; }
         public static bool operator true(Optional<T> optional) { return optional.HasValue; }
         public static T operator ~(Optional<T> optional) { return optional.Value; }
 

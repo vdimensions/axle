@@ -26,8 +26,7 @@ namespace Axle.Verification
             }
             finally
             {
-                var d = e as IDisposable;
-                if (d != null)
+                if (e is IDisposable d)
                 {
                     d.Dispose();
                 }

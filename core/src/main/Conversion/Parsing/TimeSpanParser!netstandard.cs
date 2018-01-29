@@ -4,7 +4,7 @@
 namespace Axle.Conversion.Parsing
 {
     [Serializable]
-#if net40
+    #if NET40_OR_NEWER
     partial class TimeSpanParser : AbstractStrictParser<TimeSpan>
     {
         /// <inheritdoc />
@@ -18,7 +18,7 @@ namespace Axle.Conversion.Parsing
             return TimeSpan.TryParseExact(value, format, formatProvider, System.Globalization.TimeSpanStyles.None, out output);
         }
     }
-#else
+    #else
     partial class TimeSpanParser : AbstractParser<TimeSpan> { }
-#endif
+    #endif
 }

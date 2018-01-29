@@ -1,10 +1,7 @@
-﻿using System;
-
-
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
-    #if !netstandard
-    [Serializable]
+    #if !NETSTANDARD
+    [System.Serializable]
     #endif
     internal sealed class PropertyGetAccessor : PropertyAccessor, IGetAccessor
     {
@@ -12,6 +9,6 @@ namespace Axle.Reflection
 
         public object GetValue(object target) { return OperationMethod.Invoke(target); }
 
-        public override AccessorType AccessorType { get { return AccessorType.Get; } }
+        public override AccessorType AccessorType => AccessorType.Get;
     }
 }

@@ -1,10 +1,7 @@
-﻿using System;
-
-
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
-    #if !netstandard
-    [Serializable]
+    #if !NETSTANDARD
+    [System.Serializable]
     #endif
     internal sealed class PropertySetAccessor : PropertyAccessor, ISetAccessor
     {
@@ -23,6 +20,6 @@ namespace Axle.Reflection
         /// <seealso cref="System.Reflection.PropertyInfo"/>
         public void SetValue(object target, object value) { OperationMethod.Invoke(target, value); }
 
-        public override AccessorType AccessorType { get { return AccessorType.Set; } }
+        public override AccessorType AccessorType => AccessorType.Set;
     }
 }

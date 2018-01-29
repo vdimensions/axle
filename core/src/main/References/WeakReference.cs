@@ -3,9 +3,9 @@
 
 namespace Axle.References
 {
-#if !netstandard
+    #if !NETSTANDARD
     [Serializable]
-#endif
+    #endif
     public class WeakReference<T> : WeakReference, 
         IWeakReference<T>, 
         IEquatable<WeakReference<T>>, 

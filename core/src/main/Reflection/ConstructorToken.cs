@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     //[Maturity(CodeMaturity.Stable)]
@@ -17,9 +17,10 @@ namespace Axle.Reflection
 
         public override int GetHashCode() { return base.GetHashCode(); }
 
+        /// <inheritdoc />
         public object Invoke(params object[] args) { return ReflectedMember.Invoke(args); }
-        object IInvokable.Invoke(object target, params object[] args) { return this.Invoke(args); }
+        object IInvokable.Invoke(object target, params object[] args) { return Invoke(args); }
 
-        public override Type MemberType { get { return DeclaringType; } }
+        public override Type MemberType => DeclaringType;
     }
 }

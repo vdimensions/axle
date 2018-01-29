@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+using System;
 using System.IO;
 
 using Axle.Extensions.Uri;
@@ -24,3 +25,4 @@ namespace Axle.Resources
         }
     }
 }
+#endif

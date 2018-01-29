@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#if netstandard
+#if NETSTANDARD
 using System.Reflection;
 #endif
 
@@ -16,19 +16,19 @@ namespace Axle
     /// see "Covariance and Contravariance in Generics".
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}" />
-#if !netstandard
-[Serializable]
-#endif
+    #if !NETSTANDARD
+    [Serializable]
+    #endif
     public abstract class AbstractEqualityComparer<T> : IEqualityComparer<T>
     {
-#if !DEBUG
+        #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
-#endif
-#if !netstandard
+        #endif
+        #if !NETSTANDARD
         private static readonly bool _isValueType = typeof (T).IsValueType;
-#else
+        #else
         private static readonly bool _isValueType = typeof (T).GetTypeInfo().IsValueType;
-#endif
+        #endif
 
         /// <summary>
         /// Determines whether the specified object instances are considered equal. 

@@ -48,7 +48,7 @@ namespace Axle.References
                 .MakeGenericType(type)
                 .GetProperty("Instance", BindingFlags.Public|BindingFlags.Static);
             var res = instanceProperty.GetGetMethod().Invoke(null, null);
-            return res != null ? ((IReference) res).Value : null;
+            return ((IReference) res)?.Value;
         }
     }
 }

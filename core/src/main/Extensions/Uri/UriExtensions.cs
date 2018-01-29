@@ -15,14 +15,14 @@ namespace Axle.Extensions.Uri
         internal const string UriSchemeAssembly = "assembly";
         internal const string UriSchemeResource = "res";
 
-        #if net45
+        #if NET45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool SchemeEquals(System.Uri uri, string scheme)
         {
             return uri.IsAbsoluteUri && SchemeEqualsAssumeAbsolute(uri, scheme);
         }
-        #if net45
+        #if NET45
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool SchemeEqualsAssumeAbsolute(System.Uri uri, string scheme)
@@ -328,10 +328,10 @@ namespace Axle.Extensions.Uri
 				.Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries))
 				.GroupBy(parts => parts[0], parts => parts.Length > 2 ? string.Join("=", parts, 1, parts.Length - 1) : (parts.Length > 1 ? parts[1] : ""), comparer)
-                #if !net40
-                .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping.ToArray()), comparer);
-                #else
+                #if NET40_OR_NEWER
                 .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping), comparer);
+                #else
+                .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping.ToArray()), comparer);
                 #endif
         }
     }

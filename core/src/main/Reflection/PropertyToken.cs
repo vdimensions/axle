@@ -43,12 +43,12 @@ namespace Axle.Reflection
             }
         }
 
-        public override PropertyInfo ReflectedMember { get { return property; } }
-        public override Type MemberType { get { return memberType; } }
-        public override DeclarationType Declaration { get { return declaration; } }
-        public override AccessModifier AccessModifier { get { return accessModifier; } }
-        IEnumerable<IAccessor> IAccessible.Accessors { get { return new IAccessor[]{GetAccessor, SetAccessor}; } }
-        public IGetAccessor GetAccessor { get { return getAccessor; } }
-        public ISetAccessor SetAccessor { get { return setAccessor; } }
+        public override PropertyInfo ReflectedMember => property;
+        public override Type MemberType => memberType;
+        public override DeclarationType Declaration => declaration;
+        public override AccessModifier AccessModifier => accessModifier;
+        IEnumerable<IAccessor> IAccessible.Accessors => new IAccessor[]{GetAccessor, SetAccessor};
+        public IGetAccessor GetAccessor => getAccessor;
+        public ISetAccessor SetAccessor => setAccessor;
     }
 }

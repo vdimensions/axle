@@ -11,7 +11,7 @@ namespace Axle.Verification
     /// <seealso cref="System.Type"/>
     public static partial class TypeVerifier
     {
-#if !netstandard
+        #if !NETSTANDARD
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
         /// can be assigned to the type specified by the <paramref name="expectedType"/> parameter. 
@@ -33,7 +33,7 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
-#else
+        #else
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
         /// can be assigned to the type specified by the <paramref name="expectedType"/> parameter. 
@@ -55,7 +55,7 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is(this ArgumentReference<Type> argument, Type expectedType)
         {
@@ -64,7 +64,7 @@ namespace Axle.Verification
                     expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
         }
 
-#if !netstandard
+        #if !NETSTANDARD
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
         /// can be assigned to the type specified by the <typeparamref name="TExpected"/> parameter. 
@@ -86,7 +86,7 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
-#else
+        #else
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
         /// can be assigned to the type specified by the <typeparamref name="TExpected"/> parameter. 
@@ -108,7 +108,7 @@ namespace Axle.Verification
         /// The argument cannot be assigned the type type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is<TExpected>(this ArgumentReference<Type> argument)
         {

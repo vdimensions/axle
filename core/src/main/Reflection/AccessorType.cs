@@ -1,6 +1,6 @@
 ﻿namespace Axle.Reflection
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [System.Serializable]
     #endif
     //[Maturity(CodeMaturity.ProofOfConcept)]

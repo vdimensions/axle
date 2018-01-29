@@ -8,12 +8,6 @@ using Axle.Verification;
 
 namespace Axle.Reflection
 {
-    /// <summary>
-    /// An abstract class representing the common reflected data from a class method or constructor.
-    /// </summary>
-    /// <typeparam name="T">
-    /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member for the current <see cref="MethodBaseToken{T}"/> instance.
-    /// </typeparam>
     [Serializable]
     public abstract partial class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle> where T: MethodBase
     {
@@ -21,7 +15,7 @@ namespace Axle.Reflection
         {
             public Parameter(ParameterInfo parameterInfo)
             {
-                this.parameterInfo = parameterInfo.VerifyArgument("parameterInfo").IsNotNull();
+                _parameterInfo = parameterInfo.VerifyArgument(nameof(parameterInfo)).IsNotNull();
                 var comparer = EqualityComparer<Attribute>.Default;
                 var notInherited = ReflectedMember.GetCustomAttributes(false).Cast<Attribute>();
                 var inherited = ReflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
@@ -50,27 +44,27 @@ namespace Axle.Reflection
                             AttributeTargets = x.AttributeUsage.ValidOn,
                             Inherited = x.Inherited
                         } as IAttributeInfo);
-                this.attributes = attr.ToArray();
+                _attributes = attr.ToArray();
 
                 if (parameterInfo.IsIn)
                 {
-                    direction &= ParameterDirection.Input;
+                    _direction &= ParameterDirection.Input;
                 }
                 if (parameterInfo.IsOut)
                 {
-                    direction &= ParameterDirection.Output;
+                    _direction &= ParameterDirection.Output;
                 }
                 if (parameterInfo.IsRetval)
                 {
-                    direction &= ParameterDirection.ReturnValue;
+                    _direction &= ParameterDirection.ReturnValue;
                 }
             }
         }
 
         protected internal MethodBaseToken(T info) : base(info, info.MethodHandle, info.DeclaringType, info.Name)
         {
-            accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
-            declaration = info.GetDeclarationType();
+            _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
+            _declaration = info.GetDeclarationType();
         }
 
         protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)

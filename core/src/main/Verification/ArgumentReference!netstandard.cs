@@ -10,7 +10,7 @@ namespace Axle.Verification
     /// </summary>
     public partial struct ArgumentReference<T>
     {
-        #if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -19,7 +19,7 @@ namespace Axle.Verification
             var actualType = Value.GetType();
             if (!expectedType.IsAssignableFrom(actualType))
             {
-                throw new ArgumentTypeMismatchException(expectedType, actualType, this.Name);
+                throw new ArgumentTypeMismatchException(expectedType, actualType, Name);
             }
             return this;
         }

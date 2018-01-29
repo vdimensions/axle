@@ -35,13 +35,13 @@ namespace Axle.Reflection
 
         public override int GetHashCode() { return unchecked(base.GetHashCode()); }
 
-        public override AccessModifier AccessModifier { get { return accessModifier; } }
-        public override DeclarationType Declaration { get { return declaration; } }
-        public override Type MemberType { get { return ReflectedMember.EventHandlerType; } }
-        public ICombineAccessor CombineAccessor { get { return combineAccessor; } }
-        public IRemoveAccessor RemoveAccessor { get { return removeAccessor; } }
+        public override AccessModifier AccessModifier => accessModifier;
+        public override DeclarationType Declaration => declaration;
+        public override Type MemberType => ReflectedMember.EventHandlerType;
+        public ICombineAccessor CombineAccessor => combineAccessor;
+        public IRemoveAccessor RemoveAccessor => removeAccessor;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        IEnumerable<IAccessor> IAccessible.Accessors { get { return new IAccessor[] { combineAccessor, removeAccessor }; } }
-        public override EventInfo ReflectedMember { get { return eventInfo; } }
+        IEnumerable<IAccessor> IAccessible.Accessors => new IAccessor[] { combineAccessor, removeAccessor };
+        public override EventInfo ReflectedMember => eventInfo;
     }
 }

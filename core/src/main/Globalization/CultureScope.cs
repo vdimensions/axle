@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+using System;
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
@@ -11,6 +12,7 @@ namespace Axle.Globalization
     /// respective <see cref="CultureScope.Culture"/> and <see cref="CultureScope.UICulture"/> troughout its lifetine. 
     /// Upon disposing, the culture settings prior initializig the scope are rolled back.
     /// </summary>
+    [Serializable]
     public sealed class CultureScope : IDisposable
     {
         /// <summary>
@@ -119,14 +121,14 @@ namespace Axle.Globalization
         /// <summary>
         /// Gets the <see cref="CultureInfo">culture</see> that the current <see cref="CultureScope">culture scope</see> was initialized with.
         /// </summary>
-        public CultureInfo Culture { get { return currentCulture; } }
+        public CultureInfo Culture => currentCulture;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly CultureInfo currentUICulture;
         /// <summary>
         /// Gets the <see cref="CultureInfo">UI culture</see> that the current <see cref="CultureScope">culture scope</see> was initialized with.
         /// </summary>
-        public CultureInfo UICulture { get { return currentUICulture; } }
+        public CultureInfo UICulture => currentUICulture;
 
         private CultureScope()
         {
@@ -177,3 +179,4 @@ namespace Axle.Globalization
         #endregion
     }
 }
+#endif

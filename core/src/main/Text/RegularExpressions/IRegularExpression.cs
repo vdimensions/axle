@@ -3,6 +3,9 @@
 
 namespace Axle.Text.RegularExpressions
 {
+    /// <summary>
+    /// An interface representing a regular expression.
+    /// </summary>
 	public interface IRegularExpression
 	{
 	    bool IsMatch(string value);
@@ -13,6 +16,6 @@ namespace Axle.Text.RegularExpressions
 
 	    string[] Split(string value);
 	    string[] Split(string value, int count);
-      string[] Split(string value, int count, int startIndex);
+        string[] Split(string value, int count, int startIndex);
 	}
 }

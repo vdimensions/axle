@@ -32,9 +32,9 @@ namespace Axle.Reflection
             return new GenericMethodToken(this, types);
         }
 
-        public override Type MemberType { get { return memberType; } }
-        public bool IsGeneric { get { return ReflectedMember.IsGenericMethod; } }
-        public bool HasGenericDefinition { get { return ReflectedMember.IsGenericMethodDefinition; } }
-        public Type ReturnType { get { return ReflectedMember.ReturnType; } }
+        public override Type MemberType => memberType;
+        public bool IsGeneric => ReflectedMember.IsGenericMethod;
+        public bool HasGenericDefinition => ReflectedMember.IsGenericMethodDefinition;
+        public Type ReturnType => ReflectedMember.ReturnType;
     }
 }

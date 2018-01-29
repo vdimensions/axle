@@ -20,11 +20,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         internal ArgumentReference(string name, T value)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            this.name = name;
+            this.name = name ?? throw new ArgumentNullException(nameof(name));
             this.value = value;
         }
 

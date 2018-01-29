@@ -6,7 +6,7 @@ using Axle.Verification;
 
 namespace Axle
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public class AdaptiveComparer<T1, T2> : IComparer<T1>

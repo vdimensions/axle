@@ -1,32 +1,31 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 
 
 namespace Axle.Reflection
 {
-    #if !netstandard
-    [Serializable]
+    #if !NETSTANDARD
+    [System.Serializable]
     #endif
     internal abstract class EventAccessor : IAccessor, IReflected<MethodInfo>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly EventToken @event;
+        private readonly EventToken _event;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected readonly MethodToken OperationMethod;
 
         protected EventAccessor(EventToken @event, MethodToken operationMethod)
         {
-            this.@event = @event;
-            this.OperationMethod = operationMethod;
+            _event = @event;
+            OperationMethod = operationMethod;
         }
 
-        DeclarationType IAccessor.Declaration { get { return OperationMethod.Declaration; } }
-        AccessModifier IAccessor.AccessModifier { get { return OperationMethod.AccessModifier; } }
-        public IMember Member { get { return @event; } }
+        DeclarationType IAccessor.Declaration => OperationMethod.Declaration;
+        AccessModifier IAccessor.AccessModifier => OperationMethod.AccessModifier;
+        public IMember Member => _event;
         public abstract AccessorType AccessorType { get; }
-        MemberInfo IReflected.ReflectedMember { get { return OperationMethod.ReflectedMember; } }
-        MethodInfo IReflected<MethodInfo>.ReflectedMember { get { return OperationMethod.ReflectedMember; } }
+        MemberInfo IReflected.ReflectedMember => OperationMethod.ReflectedMember;
+        MethodInfo IReflected<MethodInfo>.ReflectedMember => OperationMethod.ReflectedMember;
     }
 }

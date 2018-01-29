@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard1.5</TargetFrameworks>
-    <RootNamespace>Axle</RootNamespace>
+    <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard1.5;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <Import Project="MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
+    <RootNamespace>Axle</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
@@ -14,17 +14,20 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <DefineConstants>DEBUG;TRACE;$(CustomSymbols)</DefineConstants>
+    <DefineConstants>DEBUG;TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <DefineConstants>TRACE;$(CustomSymbols)</DefineConstants>
+    <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
   <!-- <Import Project="Mason.netstandard.props" /> -->
   <ItemGroup>
+    <Compile Remove="packages\**" />
     <Compile Remove="paket-files\**" />
+    <EmbeddedResource Remove="packages\**" />
     <EmbeddedResource Remove="paket-files\**" />
+    <None Remove="packages\**" />
     <None Remove="paket-files\**" />
   </ItemGroup>
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">

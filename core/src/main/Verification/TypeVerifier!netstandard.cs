@@ -6,7 +6,7 @@ namespace Axle.Verification
 {
     partial class TypeVerifier
     {
-        #if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]

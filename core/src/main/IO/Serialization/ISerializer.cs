@@ -1,6 +1,6 @@
 using System;
 using System.IO;
-#if !netstandard
+#if !NETSTANDARD
 using System.Runtime.Serialization;
 #endif
 
@@ -28,7 +28,7 @@ namespace Axle.IO.Serialization
         /// </exception>
         object Deserialize(Stream stream, Type objectType);
 
-        #if !netstandard
+        #if !NETSTANDARD
         /// <summary>
         /// Serializes the provided by the <paramref name="obj"/> parameter object or graph of objects 
         /// to the target <paramref name="stream"/>. 

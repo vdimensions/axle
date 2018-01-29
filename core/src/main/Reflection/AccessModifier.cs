@@ -1,13 +1,10 @@
-﻿using System;
-
-
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     /// <summary>
     /// An enumeration representing the possible access modifiers supported in the .NET framework.
     /// </summary>
     #if !netstandard
-    [Serializable]
+    [System.Serializable]
     #endif
     //[Maturity(CodeMaturity.Stable)]
     public enum AccessModifier

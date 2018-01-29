@@ -20,8 +20,8 @@ namespace Axle.Environment
             return resourceName.VerifyArgument(nameof(resourceName)).IsNotNull().Value.Replace(" ", "_").Replace("-", "_").Replace("\\", ".").Replace("/", ".");
         }
 
-        public Version Version { get { return version; } }
-        public Version FrameworkVersion { get { return frameworkVersion; } }
-        public RuntimeImplementation Implementation { get { return impl; } }
+        public Version Version => version;
+        public Version FrameworkVersion => frameworkVersion;
+        public RuntimeImplementation Implementation => impl;
     }
 }

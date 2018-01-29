@@ -7,7 +7,7 @@ namespace Axle.Reflection
     /// An enumeration with all the possible flags that can be used when reflecting a type member with an <see cref="IIntrospector" >introspector</see> instance
     /// </summary>
     /// <seealso cref="IIntrospector"/>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     [Flags]

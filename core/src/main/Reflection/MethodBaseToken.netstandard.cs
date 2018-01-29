@@ -12,10 +12,9 @@ namespace Axle.Reflection
     {
         internal sealed partial class Parameter
         {
-
             public Parameter(ParameterInfo parameterInfo)
             {
-                this.parameterInfo = parameterInfo.VerifyArgument("parameterInfo").IsNotNull();
+                _parameterInfo = parameterInfo.VerifyArgument(nameof(parameterInfo)).IsNotNull();
                 var comparer = EqualityComparer<Attribute>.Default;
                 var notInherited = ReflectedMember.GetCustomAttributes(false).Cast<Attribute>();
                 var inherited = ReflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
@@ -44,27 +43,27 @@ namespace Axle.Reflection
                             AttributeTargets = x.AttributeUsage.ValidOn,
                             Inherited = x.Inherited
                         } as IAttributeInfo);
-                this.attributes = attr.ToArray();
+                this._attributes = attr.ToArray();
 
                 if (parameterInfo.IsIn)
                 {
-                    direction &= ParameterDirection.Input;
+                    _direction &= ParameterDirection.Input;
                 }
                 if (parameterInfo.IsOut)
                 {
-                    direction &= ParameterDirection.Output;
+                    _direction &= ParameterDirection.Output;
                 }
                 if (parameterInfo.IsRetval)
                 {
-                    direction &= ParameterDirection.ReturnValue;
+                    _direction &= ParameterDirection.ReturnValue;
                 }
             }
         }
 
         protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
         {
-            accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
-            declaration = info.GetDeclarationType();
+            _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
+            _declaration = info.GetDeclarationType();
         }
     }
 }

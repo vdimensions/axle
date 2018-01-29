@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -22,7 +23,7 @@ namespace Axle.Reflection
                 [DebuggerBrowsable(DebuggerBrowsableState.Never)]
                 private readonly MethodInfo method;
 
-                public bool IsDefined { get { return method != null; } }
+                public bool IsDefined => method != null;
 
                 protected BaseCastOperator(string operatorName)
                 {
@@ -90,13 +91,18 @@ namespace Axle.Reflection
                 private ImplicitCastOperator() : base("op_Implicit") { }
             }
 
-            public static CastOp<T1, T2> Instance { get { return Singleton<CastOp<T1, T2>>.Instance; } }
+            public static CastOp<T1, T2> Instance => Singleton<CastOp<T1, T2>>.Instance;
 
             private CastOp() {}
 
             private static MethodInfo FindMethod(Type targetType, string methodName, Type returnType, BindingFlags bindingFlags)
             {
-                return targetType.GetMethods(bindingFlags)
+                #if !NETSTANDARD
+                return targetType
+                #elif NETSTANDARD1_5_OR_NEWER
+                return targetType.GetTypeInfo()
+                #endif
+                    .GetMethods(bindingFlags)
                     .Where(m => m.Name.Equals(methodName, StringComparison.Ordinal) && m.ReturnType.Equals(returnType))
                     .SingleOrDefault();
             }
@@ -131,7 +137,7 @@ namespace Axle.Reflection
 
             private object DoInvoke(object target)
             {
-                var castOperator = new[] { ImplicitOperator, ExplicitOperator }.Where(x => x.IsDefined).FirstOrDefault();
+                var castOperator = new[] { ImplicitOperator, ExplicitOperator }.FirstOrDefault(x => x.IsDefined);
                 if (castOperator != null)
                 {
                     return castOperator.Invoke(target);
@@ -139,10 +145,10 @@ namespace Axle.Reflection
                 throw new InvalidCastException(string.Format("{0} does not define any implicit or explicit casts to type {1}", typeof(T1).FullName, typeof(T2).FullName));
             }
 
-            bool ICastOperator.IsDefined { get { return ImplicitOperator.IsDefined || ExplicitOperator.IsDefined; } }
+            bool ICastOperator.IsDefined => ImplicitOperator.IsDefined || ExplicitOperator.IsDefined;
 
-            private ICastOperator<T1, T2> ImplicitOperator { get { return Singleton<ImplicitCastOperator>.Instance.Value; } }
-            private ICastOperator<T1, T2> ExplicitOperator { get { return Singleton<ExplicitCastOperator>.Instance.Value; } }
+            private ICastOperator<T1, T2> ImplicitOperator => Singleton<ImplicitCastOperator>.Instance.Value;
+            private ICastOperator<T1, T2> ExplicitOperator => Singleton<ExplicitCastOperator>.Instance.Value;
         }
 
         public static ICastOperator For(Type source, Type target)
@@ -154,3 +160,4 @@ namespace Axle.Reflection
         public static TResult Cast<T, TResult>(this T target) { return For<T, TResult>().Invoke(target); }
     }
 }
+#endif

@@ -26,15 +26,15 @@ namespace Axle.Verification
         /// <paramref name="argumentName"/> is <c>null</c>.
         /// </exception>
         /// <seealso cref="ArgumentReference{T}"/>
-#if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> VerifyArgument<T>(
             this T argument,
-#if !netstandard
+            #if !NETSTANDARD
             [System.ComponentModel.Localizable(false)]
-#endif
+            #endif
             string argumentName)
         {
             if (argumentName == null)
@@ -59,9 +59,9 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-#if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNotNull<T>(this ArgumentReference<T> argument, string message)
         {
@@ -83,35 +83,35 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-#if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNotNull<T>(this ArgumentReference<T> argument)
         {
             return IsNotNull(argument, null);
         }
 
-#if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNot<T>(this ArgumentReference<T> argument, T value, string message)
         {
             return IsTrue(argument, x => x.Equals(value), message);
         }
-#if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNot<T>(this ArgumentReference<T> argument, T value, IEqualityComparer<T> comparer, string message)
         {
             return IsTrue(argument, x => comparer.Equals(x, value), message);
         }
 
-#if net45
+        #if NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-#endif
+        #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsTrue<T>(this ArgumentReference<T> argument, Predicate<T> condition, string message)
         {

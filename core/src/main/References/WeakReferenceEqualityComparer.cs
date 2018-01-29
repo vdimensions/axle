@@ -14,7 +14,7 @@ namespace Axle.References
     /// <seealso cref="IEqualityComparer{T}"/>
     public sealed class WeakReferenceEqualityComparer<T> : AbstractEqualityComparer<IWeakReference<T>> where T: class 
     {
-        private readonly IEqualityComparer<T> valueComparer;
+        private readonly IEqualityComparer<T> _valueComparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="WeakReferenceEqualityComparer{T}"/> class.
@@ -24,7 +24,7 @@ namespace Axle.References
         /// </param>
         public WeakReferenceEqualityComparer(IEqualityComparer<T> valueComparer)
         {
-            this.valueComparer = valueComparer;
+            _valueComparer = valueComparer;
         }
         /// <summary>
         /// Initializes a new instance of the <see cref="WeakReferenceEqualityComparer{T}"/> class that compares the weak reference targets by reference.
@@ -35,7 +35,7 @@ namespace Axle.References
 
         protected override int DoGetHashCode(IWeakReference<T> obj)
         {
-            return obj != null ? obj.GetHashCode() : 0;
+            return obj?.GetHashCode() ?? 0;
         }
 
         protected override bool DoEquals(IWeakReference<T> x, IWeakReference<T> y)
@@ -50,7 +50,7 @@ namespace Axle.References
 
             if (! (ReferenceEquals(xTarget, null) || ReferenceEquals(yTarget, null))) 
             {
-                return valueComparer.Equals(xTarget, yTarget);
+                return _valueComparer.Equals(xTarget, yTarget);
             }
 
             return false;
@@ -60,6 +60,6 @@ namespace Axle.References
         /// Gets a reference to the <see cref="IEqualityComparer{T}"/> that is used to compare the weakreference values.
         /// </summary>
         /// <value>The value comparer.</value>
-        public IEqualityComparer<T> ValueComparer { get{ return valueComparer; } }
+        public IEqualityComparer<T> ValueComparer => _valueComparer;
     }
 }

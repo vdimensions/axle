@@ -9,7 +9,7 @@ namespace Axle.Reflection
     /// <remarks>
     /// Multiple values can be combined, as the enumeration has the <see cref="FlagsAttribute"/> specified.
     /// </remarks>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     [Flags]

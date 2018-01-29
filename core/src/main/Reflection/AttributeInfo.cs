@@ -4,27 +4,27 @@ using System.Diagnostics;
 
 namespace Axle.Reflection
 {
-    #if !netstandard    
+    #if !NETSTANDARD
     [Serializable]
     #endif
     internal sealed class AttributeInfo : IAttributeInfo
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly AttributeUsageAttribute attributeUsage;
+        private readonly AttributeUsageAttribute _attributeUsage;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Attribute attribute;
+        private readonly Attribute _attribute;
 
         public AttributeInfo(Attribute attribute, AttributeUsageAttribute attributeUsage)
         {
-            this.attribute = attribute;
-            this.attributeUsage = attributeUsage;
+            _attribute = attribute;
+            _attributeUsage = attributeUsage;
         }
 
-        internal AttributeUsageAttribute AttributeUsage { get { return attributeUsage; } }
-        Attribute IAttributeInfo.Attribute { get { return attribute; } }
-        AttributeTargets IAttributeInfo.AttributeTargets { get { return AttributeUsage.ValidOn; } }
-        bool IAttributeInfo.AllowMultiple { get { return AttributeUsage.AllowMultiple; } }
-        bool IAttributeInfo.Inherited { get { return AttributeUsage.Inherited; } }
+        internal AttributeUsageAttribute AttributeUsage => _attributeUsage;
+        Attribute IAttributeInfo.Attribute => _attribute;
+        AttributeTargets IAttributeInfo.AttributeTargets => AttributeUsage.ValidOn;
+        bool IAttributeInfo.AllowMultiple => AttributeUsage.AllowMultiple;
+        bool IAttributeInfo.Inherited => AttributeUsage.Inherited;
     }
 }

@@ -1,11 +1,8 @@
-﻿using System;
-
-
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
-#if !netstandard
-    [Serializable]
-#endif
+    #if !NETSTANDARD
+    [System.Serializable]
+    #endif
     internal sealed class FieldGetAccessor : FieldAccessor
     {
         public FieldGetAccessor(FieldToken fieldToken) : base(fieldToken, AccessorType.Get) { }

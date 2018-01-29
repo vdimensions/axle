@@ -6,23 +6,23 @@ namespace Axle.Threading
     internal sealed class UpgradeableReadLockHandle : ILockHandle
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IReadWriteLock readWriteLock;
+        private IReadWriteLock _readWriteLock;
 
         public UpgradeableReadLockHandle(IReadWriteLock readWriteLock)
         {
-            (this.readWriteLock = readWriteLock).EnterUpgradeableReadLock();
+            (_readWriteLock = readWriteLock).EnterUpgradeableReadLock();
         }
 
         public void Dispose()
         {
-            if (readWriteLock == null)
+            if (_readWriteLock == null)
             {
                 return;
             }
-            readWriteLock.ExitUpgradeableReadLock();
-            readWriteLock = null;
+            _readWriteLock.ExitUpgradeableReadLock();
+            _readWriteLock = null;
         }
 
-        ILock ILockHandle.Lock { get { return readWriteLock; } }
+        ILock ILockHandle.Lock => _readWriteLock;
     }
 }

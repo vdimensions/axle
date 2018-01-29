@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD1_0 ||  NETSTANDARD1_1 || NETSTANDARD1_2 || NETSTANDARD1_3 || NETSTANDARD1_4
-#else
+﻿#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;

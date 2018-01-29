@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+using System;
+#endif
 using System.Globalization;
 using System.Text;
 
@@ -8,7 +10,7 @@ namespace Axle.Environment
     /// <summary>
     /// An interface representing an application's execution environment and its properties.
     /// </summary>
-    public partial interface IEnvironment 
+    public interface IEnvironment 
     {
         /// <summary>
         /// Indicates the byte order ("endianness") in which data is stored in the platform's computer architecture.
@@ -44,5 +46,24 @@ namespace Axle.Environment
         /// Gets the default path separator character for the current platform. 
         /// </summary>
         char PathSeparator { get; }
+
+        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        /// <summary>
+        /// Gets an <see cref="OperatingSystem"/> object that contains the platform's OS identifier and version number.
+        /// </summary>
+        OperatingSystem OperatingSystem { get; }
+
+        /// <summary>
+        /// Gets the operating system identifier for the current platform. 
+        /// </summary>
+        OperatingSystemID OperatingSystemID { get; }
+        #endif
+
+        #if !NETSTANDARD
+        /// <summary>
+        /// Gets the timezone on the current platform.
+        /// </summary>
+        TimeZone TimeZone { get; }
+        #endif
     }
 }
