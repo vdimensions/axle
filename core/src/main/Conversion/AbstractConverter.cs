@@ -12,7 +12,7 @@ namespace Axle.Conversion
     /// <typeparam name="TD">
     /// The destination type of the conversion.
     /// </typeparam>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractConverter<TS, TD> : IConverter<TS, TD>

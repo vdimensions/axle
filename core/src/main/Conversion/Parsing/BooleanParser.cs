@@ -7,7 +7,7 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// a <see cref="bool">boolean</see> to a valid <see cref="bool"/> value.
     /// </summary>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     //[Stateless]

@@ -3,7 +3,7 @@
 
 namespace Axle.Conversion
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractTwoWayConverter<TS, TD> : AbstractConverter<TS, TD>, ITwoWayConverter<TS, TD>

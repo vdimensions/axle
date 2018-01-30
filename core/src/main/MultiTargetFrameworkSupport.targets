@@ -52,7 +52,7 @@
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.3'">
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
-    <FrameworkSymbols>netstandard;NETSTANDARD1_0_OR_NEWER;NETSTANDARD1_1_OR_NEWER;NETSTANDARD1_2_OR_NEWER;NETSTANDARD1_3_OR_NEWER</FrameworkSymbols>
+    <FrameworkSymbols>netstandard;NETSTANDARD;NETSTANDARD1_0_OR_NEWER;NETSTANDARD1_1_OR_NEWER;NETSTANDARD1_2_OR_NEWER;NETSTANDARD1_3_OR_NEWER</FrameworkSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='netstandard1.4'">

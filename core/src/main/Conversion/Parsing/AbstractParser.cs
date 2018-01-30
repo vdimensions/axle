@@ -11,7 +11,7 @@ namespace Axle.Conversion.Parsing
     /// <typeparam name="T">
     /// The type a string is to be parsed to.
     /// </typeparam>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractParser<T> : IParser<T>
@@ -21,8 +21,7 @@ namespace Axle.Conversion.Parsing
 
         bool IParser.TryParse(string value, IFormatProvider formatProvider, out object result)
         {
-            T genericResult;
-            if (TryParse(value, formatProvider, out genericResult))
+            if (TryParse(value, formatProvider, out T genericResult))
             {
                 result = genericResult;
                 return true;
@@ -32,8 +31,7 @@ namespace Axle.Conversion.Parsing
         }
         bool IParser.TryParse(string value, out object result)
         {
-            T genericResult;
-            if (TryParse(value, out genericResult))
+            if (TryParse(value, out var genericResult))
             {
                 result = genericResult;
                 return true;
@@ -139,6 +137,6 @@ namespace Axle.Conversion.Parsing
         T IConverter<string, T>.Convert(string source) { return Parse(source); }
         bool IConverter<string, T>.TryConvert(string source, out T target) { return TryParse(source, out target); }
 
-        public Type TargetType { get { return typeof(T); } }
+        public Type TargetType => typeof(T);
     }
 }

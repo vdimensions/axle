@@ -6,7 +6,7 @@ using System.Diagnostics;
 
 namespace Axle.Collections.Generic
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     internal class GenericEnumerator : GenericEnumerator<object>
@@ -14,7 +14,7 @@ namespace Axle.Collections.Generic
         public GenericEnumerator(IEnumerator enumerator) : base(enumerator) { }
     }
 
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public class GenericEnumerator<T> : IEnumerator<T>
@@ -46,7 +46,8 @@ namespace Axle.Collections.Generic
         object IEnumerator.Current => nonGenericEnumerator.Current;
     }
 
-    #if !netstandard
+    #if NETSTANDARD || NET35_OR_NEWER
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public class GenericEnumerator<T1, T2> : IEnumerator<T2>
@@ -82,4 +83,5 @@ namespace Axle.Collections.Generic
         /// <inheritdoc />
         object IEnumerator.Current => innerEnumerator.Current;
     }
+    #endif
 }

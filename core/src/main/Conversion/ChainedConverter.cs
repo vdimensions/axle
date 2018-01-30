@@ -15,36 +15,120 @@ namespace Axle.Conversion
     /// <typeparam name="T">The type of the source object to be converted. </typeparam>
     /// <typeparam name="TIntermediate">The type of an intermediate object to convert the source object to. </typeparam>
     /// <typeparam name="TResult">The resulting type of the conversion, produced by converting the intermediate object. </typeparam>
-    #if !netstandard
+    #if !NETSTANDARD
     [System.Serializable]
     #endif
     public sealed class ChainedConverter<T, TIntermediate, TResult> : AbstractConverter<T,TResult>
     {
-        private readonly IConverter<T, TIntermediate> converter1;
-        private readonly IConverter<TIntermediate, TResult> converter2;
+        private readonly IConverter<T, TIntermediate> _converter1;
+        private readonly IConverter<TIntermediate, TResult> _converter2;
 
         internal ChainedConverter(IConverter<T, TIntermediate> converter1, IConverter<TIntermediate, TResult> converter2)
         {
-            this.converter1 = converter1.VerifyArgument(nameof(converter1)).IsNotNull().Value;
-            this.converter2 = converter2.VerifyArgument(nameof(converter2)).IsNotNull().Value;
+            _converter1 = converter1.VerifyArgument(nameof(converter1)).IsNotNull().Value;
+            _converter2 = converter2.VerifyArgument(nameof(converter2)).IsNotNull().Value;
         }
 
         protected override TResult DoConvert(T source)
         {
-            return converter2.Convert(converter1.Convert(source));
+            return _converter2.Convert(_converter1.Convert(source));
         }
     }
 
+    /// <summary>
+    /// A static class providing helper methods related to the <see cref="ChainedConverter{T1,T2,T3}"/> class.
+    /// </summary>
     public static class ChainedConverter
     {
+        /// <summary>
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/> implementation.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the source object to be converted
+        /// </typeparam>
+        /// <typeparam name="T1">
+        /// A type that is the result of an intermediate covnersion.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the final converesion result
+        /// </typeparam>
+        /// <param name="converter1">
+        /// The first converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter2">
+        /// The last converter to put to the conversion chain.
+        /// </param>
+        /// <returns>
+        /// Series of converters interfaced as a single <see cref="IConverter{T,TResult}"/> implementation
+        /// </returns>
         public static IConverter<T, TResult> Create<T, T1, TResult>(IConverter<T, T1> converter1, IConverter<T1, TResult> converter2)
         {
             return new ChainedConverter<T, T1, TResult>(converter1, converter2);
         }
+        /// <summary>
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/> implementation.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the source object to be converted
+        /// </typeparam>
+        /// <typeparam name="T1">
+        /// A type that is the result of an intermediate covnersion.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// A type that is the result of an intermediate covnersion.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the final converesion result
+        /// </typeparam>
+        /// <param name="converter1">
+        /// The first converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter2">
+        /// The second converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter3">
+        /// The last converter to put to the conversion chain.
+        /// </param>
+        /// <returns>
+        /// Series of converters interfaced as a single <see cref="IConverter{T,TResult}"/> implementation
+        /// </returns>
         public static IConverter<T, TResult> Create<T, T1, T2, TResult>(IConverter<T, T1> converter1, IConverter<T1, T2> converter2, IConverter<T2, TResult> converter3)
         {
             return Create(Create(converter1, converter2), converter3);
         }
+        /// <summary>
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/> implementation.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the source object to be converted
+        /// </typeparam>
+        /// <typeparam name="T1">
+        /// A type that is the result of an intermediate covnersion.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// A type that is the result of an intermediate covnersion.
+        /// </typeparam>
+        /// <typeparam name="T3">
+        /// A type that is the result of an intermediate covnersion.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the final converesion result
+        /// </typeparam>
+        /// <param name="converter1">
+        /// The first converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter2">
+        /// The second converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter3">
+        /// The third converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter4">
+        /// The last converter to put to the conversion chain.
+        /// </param>
+        /// <returns>
+        /// Series of converters interfaced as a single <see cref="IConverter{T,TResult}"/> implementation
+        /// </returns>
         public static IConverter<T, TResult> Create<T, T1, T2, T3, TResult>(
             IConverter<T, T1> converter1, 
             IConverter<T1, T2> converter2, 

@@ -15,14 +15,14 @@ namespace Axle.Extensions.Uri
         internal const string UriSchemeAssembly = "assembly";
         internal const string UriSchemeResource = "res";
 
-        #if NET45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool SchemeEquals(System.Uri uri, string scheme)
         {
             return uri.IsAbsoluteUri && SchemeEqualsAssumeAbsolute(uri, scheme);
         }
-        #if NET45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool SchemeEqualsAssumeAbsolute(System.Uri uri, string scheme)

@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+﻿#if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
 using System;
 using System.IO;
 

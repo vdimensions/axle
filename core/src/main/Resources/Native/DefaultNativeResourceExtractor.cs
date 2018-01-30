@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NETSTANDARD
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -49,3 +50,4 @@ namespace Axle.Resources.Native
         }
     }
 }
+#endif

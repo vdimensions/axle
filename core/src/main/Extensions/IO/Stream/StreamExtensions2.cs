@@ -120,7 +120,7 @@ namespace Axle.Extensions.IO.Stream
         public static byte[] ToByteArray(this Mixin.Mixin<System.IO.Stream> @this, int bufferSize) { return ToByteArray(@this.Value, bufferSize, false); }
         public static byte[] ToByteArray(this Mixin.Mixin<System.IO.Stream> @this) { return ToByteArray(@this.Value, DefaultBufferSize, false); }
 
-        #if net45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static long WriteToUnchecked(System.IO.Stream current, System.IO.Stream target, byte[] buffer)

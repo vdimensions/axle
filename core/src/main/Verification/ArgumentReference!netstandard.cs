@@ -10,7 +10,7 @@ namespace Axle.Verification
     /// </summary>
     public partial struct ArgumentReference<T>
     {
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]

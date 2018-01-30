@@ -3,7 +3,7 @@
 
 namespace Axle.Conversion.Parsing
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractStrictParser<T> : AbstractParser<T>, IStrictParser<T>

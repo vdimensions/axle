@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 
 using Axle.Verification;
@@ -32,3 +33,4 @@ namespace Axle
         public int GetHashCode(T1 obj) { return _actualComparer.GetHashCode(_adaptFunc(obj)); }
     }
 }
+#endif

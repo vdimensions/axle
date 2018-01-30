@@ -1,3 +1,4 @@
+#if !NETSTANDARD
 using System;
 using System.Drawing;
 using System.Drawing.Imaging;
@@ -40,3 +41,4 @@ namespace Axle.Resources
         public Image Value => _image;
     }
 }
+#endif

@@ -14,22 +14,22 @@ namespace Axle.Collections.Generic
     /// </typeparam>
     /// <seealso cref="IEnumerable{T}"/>
     /// <seealso cref="IEnumerable"/>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public class GenericEnumerable<T> : IEnumerable<T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IEnumerable innerCollection;
+        private readonly IEnumerable _innerCollection;
 
         public GenericEnumerable(IEnumerable collection)
         {
-            innerCollection = collection;
+            _innerCollection = collection;
         }
 
-        public IEnumerator<T> GetEnumerator() { return new GenericEnumerator<T>(innerCollection.GetEnumerator()); }
-        IEnumerator IEnumerable.GetEnumerator() { return innerCollection.GetEnumerator(); }
+        public IEnumerator<T> GetEnumerator() { return new GenericEnumerator<T>(_innerCollection.GetEnumerator()); }
+        IEnumerator IEnumerable.GetEnumerator() { return _innerCollection.GetEnumerator(); }
 
-        internal IEnumerable RawEnumerable { get { return innerCollection; } }
+        internal IEnumerable RawEnumerable => _innerCollection;
     }
 }

@@ -1,29 +1,33 @@
-﻿using System;
-using Axle.Verification;
+﻿using Axle.Verification;
 
 
 namespace Axle.Conversion
 {
-    #if !netstandard
-    [Serializable]
+    #if !NETSTANDARD
+    [System.Serializable]
     #endif
     public sealed class ReverseConverter<TS, TD> : ITwoWayConverter<TS, TD>
     {
-        private readonly ITwoWayConverter<TD, TS> converter;
+        private readonly ITwoWayConverter<TD, TS> _converter;
 
         public ReverseConverter(ITwoWayConverter<TD, TS> converter)
         {
-            this.converter = converter.VerifyArgument(nameof(converter)).IsNotNull().Value;
+            _converter = converter.VerifyArgument(nameof(converter)).IsNotNull().Value;
         }
 
-        public TD Convert(TS source) { return converter.ConvertBack(source); }
+        /// <inheritdoc />
+        public TD Convert(TS source) { return _converter.ConvertBack(source); }
 
-        public TS ConvertBack(TD source) { return converter.Convert(source); }
+        /// <inheritdoc />
+        public TS ConvertBack(TD source) { return _converter.Convert(source); }
 
-        public IConverter<TD, TS> Invert() { return converter; }
-        
-        public bool TryConvert(TS source, out TD target) { return converter.TryConvertBack(source, out target); }
+        /// <inheritdoc />
+        public IConverter<TD, TS> Invert() { return _converter; }
 
-        public bool TryConvertBack(TD source, out TS target) { return converter.TryConvert(source, out target); }
+        /// <inheritdoc />
+        public bool TryConvert(TS source, out TD target) { return _converter.TryConvertBack(source, out target); }
+
+        /// <inheritdoc />
+        public bool TryConvertBack(TD source, out TS target) { return _converter.TryConvert(source, out target); }
     }
 }

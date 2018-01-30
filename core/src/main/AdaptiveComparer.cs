@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 
 using Axle.Verification;
@@ -30,3 +31,4 @@ namespace Axle
         public int Compare(T1 x, T1 y) { return actualComparer.Compare(adaptFunc(x), adaptFunc(y)); }
     }
 }
+#endif

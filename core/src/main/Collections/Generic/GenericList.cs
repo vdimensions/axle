@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,82 +16,81 @@ namespace Axle.Collections.Generic
     /// </typeparam>
     /// <seealso cref="IList{T}"/>
     /// <seealso cref="IList"/>
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     public sealed class GenericList<T> : IList<T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IList underlyingCollection;
+        private readonly IList _underlyingCollection;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Func<object, T> converter;
+        private readonly Func<object, T> _converter;
 
         public GenericList(IList collection, Func<object, T> converter)
         {
-            if (collection == null)
-            {
-                throw new ArgumentNullException(nameof(collection));
-            }
-            if (converter == null)
-            {
-                throw new ArgumentNullException(nameof(converter));
-            }
-            this.underlyingCollection = collection;
-            this.converter = converter;
+            _underlyingCollection = collection ?? throw new ArgumentNullException(nameof(collection));
+            _converter = converter ?? throw new ArgumentNullException(nameof(converter));
         }
         public GenericList(IList collection) : this(collection, x => (T) x) { }
 
         /// <inheritdoc />
-        public void Add(T value) { underlyingCollection.Add(value); }
+        public void Add(T value) { _underlyingCollection.Add(value); }
 
         /// <inheritdoc />
-        public void Clear() { underlyingCollection.Clear(); }
+        public void Clear() { _underlyingCollection.Clear(); }
 
         /// <inheritdoc />
-        public bool Contains(T value) { return underlyingCollection.Contains(value); }
+        public bool Contains(T value) { return _underlyingCollection.Contains(value); }
 
         /// <inheritdoc />
         public void CopyTo(T[] array, int index)
         {
-            for (var i = 0; i < underlyingCollection.Count; i++)
+            for (var i = 0; i < _underlyingCollection.Count; i++)
             {
-                array[i] = converter(underlyingCollection[i]);
+                array[i] = _converter(_underlyingCollection[i]);
             }
         }
 
         /// <inheritdoc />
-        public IEnumerator<T> GetEnumerator() { return underlyingCollection.OfType<T>().GetEnumerator(); }
+        public IEnumerator<T> GetEnumerator() { return _underlyingCollection.OfType<T>().GetEnumerator(); }
         IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
         /// <inheritdoc />
-        public int IndexOf(T value) { return underlyingCollection.IndexOf(value); }
+        public int IndexOf(T value) { return _underlyingCollection.IndexOf(value); }
 
         /// <inheritdoc />
-        public void Insert(int index, T value) { underlyingCollection.Insert(index, value); }
+        public void Insert(int index, T value) { _underlyingCollection.Insert(index, value); }
 
         /// <inheritdoc />
         public bool Remove(T value)
         {
-            var count = underlyingCollection.Count;
-            underlyingCollection.Remove(value);
-            return (count + 1) == underlyingCollection.Count;
+            var count = _underlyingCollection.Count;
+            _underlyingCollection.Remove(value);
+            return (count + 1) == _underlyingCollection.Count;
         }
 
         /// <inheritdoc />
-        public void RemoveAt(int index) { underlyingCollection.RemoveAt(index); }
+        public void RemoveAt(int index) { _underlyingCollection.RemoveAt(index); }
 
-        int ICollection<T>.Count { get { return underlyingCollection.Count; } }
+        int ICollection<T>.Count => _underlyingCollection.Count;
         /// <inheritdoc />
-        public bool IsReadOnly { get { return underlyingCollection.IsReadOnly; } }
-        public bool IsFixedSize { get { return underlyingCollection.IsFixedSize; } }
-        internal IList RawCollection { get { return underlyingCollection; } }
+        public bool IsReadOnly => _underlyingCollection.IsReadOnly;
+        /// <summary>
+        /// Gets a value indicating whether the <see cref="GenericList{T}"/> has a fixed size.
+        /// </summary>
+        /// <returns>
+        /// <c>true</c> if the <see cref="GenericList{T}"/> has a fixed size; otherwise, <c>false</c>.
+        /// </returns>
+        public bool IsFixedSize => _underlyingCollection.IsFixedSize;
+        internal IList RawCollection => _underlyingCollection;
 
         /// <inheritdoc />
         public T this[int index]
         {
-            get { return converter(underlyingCollection[index]); }
-            set { underlyingCollection[index] = value; }
+            get => _converter(_underlyingCollection[index]);
+            set => _underlyingCollection[index] = value;
         }
     }
 }
+#endif

@@ -26,7 +26,7 @@ namespace Axle.Verification
         /// <paramref name="argumentName"/> is <c>null</c>.
         /// </exception>
         /// <seealso cref="ArgumentReference{T}"/>
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -59,7 +59,7 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -83,7 +83,7 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -92,7 +92,7 @@ namespace Axle.Verification
             return IsNotNull(argument, null);
         }
 
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -100,7 +100,7 @@ namespace Axle.Verification
         {
             return IsTrue(argument, x => x.Equals(value), message);
         }
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -109,7 +109,7 @@ namespace Axle.Verification
             return IsTrue(argument, x => comparer.Equals(x, value), message);
         }
 
-        #if NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]

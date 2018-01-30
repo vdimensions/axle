@@ -8,7 +8,7 @@ namespace Axle.Extensions.DateTime
     
     public static partial class DateTimeExtensions
     {
-        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// </summary>
@@ -20,11 +20,11 @@ namespace Axle.Extensions.DateTime
         /// <paramref name="current">given</paramref> <see cref="DateTime"/> in case its kind was set to <see cref="DateTimeKind.Unspecified"/>
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
-        /// <seealso cref="TimeZone"/>
+        /// <seealso cref="TimeZoneInfo"/>
         /// <seealso cref="ToLocalTime(System.DateTime)"/>
         /// <seealso cref="ChangeTimeZone(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)"/>
         /// <seealso cref="TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)"/>
@@ -46,11 +46,11 @@ namespace Axle.Extensions.DateTime
         /// The <see cref="DateTime"/> value to convet.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZone"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
-        /// <seealso cref="TimeZone"/>
+        /// <seealso cref="TimeZoneInfo"/>
         /// <seealso cref="ToLocalTime(System.DateTime,DateTimeKind)"/>
         /// <seealso cref="ChangeTimeZone(System.DateTime,System.TimeZoneInfo,System.TimeZoneInfo)"/>
         /// <seealso cref="TimeZoneInfo.ConvertTime(System.DateTimeOffset,System.TimeZoneInfo)"/>

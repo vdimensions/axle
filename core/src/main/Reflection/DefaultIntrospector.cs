@@ -20,7 +20,7 @@ namespace Axle.Reflection
         {
             _introspectedType = introspectedType.VerifyArgument(nameof(introspectedType)).IsNotNull();
         }
-
+        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
         private static BindingFlags MemberScanOptionsToBindingFlags(ScanOptions scanOptions)
         {
             var flags = BindingFlags.Default;
@@ -44,19 +44,24 @@ namespace Axle.Reflection
 
             return flags;
         }
+        #endif
 
         private static bool MatchesScanOptions(IMember member, ScanOptions options)
         {
-            if ((options & ScanOptions.Instance) == ScanOptions.Instance && member.Declaration == DeclarationType.Static)
+            if ((options & ScanOptions.Static) != ScanOptions.Static && member.Declaration == DeclarationType.Static)
             {
                 return false;
             }
-            if ((options & ScanOptions.Static) == ScanOptions.Instance && member.Declaration == DeclarationType.Instance)
+            if ((options & ScanOptions.Instance) != ScanOptions.Instance && member.Declaration == DeclarationType.Instance)
             {
                 return false;
             }
 
-            if ((options & ScanOptions.Public) == ScanOptions.Public && member.AccessModifier != AccessModifier.Public)
+            if ((options & ScanOptions.Public) != ScanOptions.Public && member.AccessModifier == AccessModifier.Public)
+            {
+                return false;
+            }
+            if ((options & ScanOptions.NonPublic) != ScanOptions.NonPublic && (member.AccessModifier == AccessModifier.Internal || member.AccessModifier == AccessModifier.Private || member.AccessModifier == AccessModifier.Protected || member.AccessModifier == AccessModifier.ProtectedInternal))
             {
                 return false;
             }
