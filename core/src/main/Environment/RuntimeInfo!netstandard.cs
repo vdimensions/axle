@@ -6,7 +6,6 @@ using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
 
-using Axle.Conversion.Parsing;
 using Axle.Extensions.String;
 using Axle.Verification;
 
@@ -16,37 +15,6 @@ namespace Axle.Environment
     [Serializable]
     partial class RuntimeInfo
     {
-        private static Version GetMonoVersion()
-        {
-            var dispalayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
-            return dispalayNameMethod != null
-                ? new VersionParser().Parse(dispalayNameMethod.Invoke(null, null).ToString().TakeBeforeFirst(" ", StringComparison.OrdinalIgnoreCase).Trim())
-                : null;
-        }
-
-        internal RuntimeInfo()
-        {
-            var monoVersion = GetMonoVersion();
-            this.frameworkVersion = System.Environment.Version;
-            this.version = monoVersion ?? frameworkVersion;
-            this.impl = monoVersion != null ? RuntimeImplementation.Mono : RuntimeImplementation.NetFramework;
-        }
-
-        public IEnumerable<Assembly> GetAssemblies()
-        {
-            return AppDomain.CurrentDomain.GetAssemblies();
-        }
-
-        private string ResolveAssemblyName(string assemblyName)
-        {
-            return !Platform.Environment.IsWindows()
-                ? GetAssemblies()
-                      .Select(x => x.GetName().Name)
-                      .Where(x => x.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
-                      .SingleOrDefault() ?? assemblyName
-                : assemblyName;
-        }
-
         public Assembly LoadAssembly(string assemblyName) { return LoadAssembly(assemblyName, null); }
         public Assembly LoadAssembly(string assemblyName, Evidence securityEvidence)
         {
@@ -139,7 +107,5 @@ namespace Axle.Environment
                 .FirstOrDefault(x => x != null);
             return satelliteAssemblyPath != null ? LoadAssembly(Path.GetFullPath(satelliteAssemblyPath)) : null;
         }
-
-        public AppDomain Domain => AppDomain.CurrentDomain;
     }
 }

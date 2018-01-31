@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyDescription("Axle Framework Core Library")]
 
 [assembly: AssemblyCompany("Virtual Dimensions")]
-[assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2017")]
+[assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2018")]
 [assembly: AssemblyTrademark("")]
 
 [assembly: AssemblyConfiguration("")]
