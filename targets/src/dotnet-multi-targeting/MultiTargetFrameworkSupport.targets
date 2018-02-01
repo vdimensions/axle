@@ -74,6 +74,21 @@
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
     <FrameworkSymbols>netstandard;NETSTANDARD;NETSTANDARD1_0_OR_NEWER;NETSTANDARD1_1_OR_NEWER;NETSTANDARD1_2_OR_NEWER;NETSTANDARD1_3_OR_NEWER;NETSTANDARD1_4_OR_NEWER;NETSTANDARD1_5_OR_NEWER;NETSTANDARD1_6_OR_NEWER;NETSTANDARD2_0_OR_NEWER</FrameworkSymbols>
   </PropertyGroup>
+  
+  <ItemGroup>
+    <Compile Remove="packages\**" />
+    <Compile Remove="paket-files\**" />
+    <EmbeddedResource Remove="packages\**" />
+    <EmbeddedResource Remove="paket-files\**" />
+    <None Remove="packages\**" />
+    <None Remove="paket-files\**" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
+    <Compile Remove="Resources\Native\**" />
+    <EmbeddedResource Remove="Resources\Native\**" />
+    <None Remove="Resources\Native\**" />
+  </ItemGroup>
 
   <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETFramework'"> 
     <Compile Remove="**\*.netstandard.cs" />

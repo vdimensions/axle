@@ -1,0 +1,148 @@
+﻿<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>Axle.Resources.Java</id>
+    <title>Axle.Resources.Java</title>
+    <version>1.5.0.1</version>
+    <description>Axle Framework resources library to handle Java properties</description>
+    <summary>Axle Framework resources library to handle Java properties</summary>
+    <releaseNotes></releaseNotes>
+    <tags>Axle.Resources.Java</tags>
+    <!--
+    <projectUrl>https://nuget.org/packages/Axle.Resources.Java</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+     -->
+    <authors>Virtual Dimensions</authors>
+    <owners>Virtual Dimensions</owners>
+    <copyright>Copyright © Virtual Dimensions 2013-2018</copyright>
+    <licenseUrl>http://opensource.org/licenses/Apache-2.0</licenseUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <dependencies>
+      <group targetFramework="net20">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="net35">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="net40-client">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="net40">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.0">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.1">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.2">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.3">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.4">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.5">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard1.6">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+      <group targetFramework="netstandard2.0">
+        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Resources" version="1.5.0" />
+      </group>
+    </dependencies>
+    <frameworkAssemblies>
+      <frameworkAssembly assemblyName="System" />
+      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
+    </frameworkAssemblies>
+    <references></references>
+  </metadata>
+  <files>
+    <file src="bin\*\netstandard2.0\Axle.Resources.Java.deps.json" target="lib\netstandard2.0" />
+    <file src="bin\*\netstandard2.0\Axle.Resources.Java.dll"       target="lib\netstandard2.0" />
+    <file src="bin\*\netstandard2.0\Axle.Resources.Java.xml"       target="lib\netstandard2.0" />
+    
+    <file src="bin\*\netstandard1.6\Axle.Resources.Java.deps.json" target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Resources.Java.dll"       target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\Axle.Resources.Java.xml"       target="lib\netstandard1.6" />
+
+    <file src="bin\*\netstandard1.5\Axle.Resources.Java.deps.json" target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Resources.Java.dll"       target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\Axle.Resources.Java.xml"       target="lib\netstandard1.5" />
+
+    <file src="bin\*\netstandard1.4\Axle.Resources.Java.deps.json" target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\Axle.Resources.Java.dll"       target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\Axle.Resources.Java.xml"       target="lib\netstandard1.4" />
+                                                     
+    <file src="bin\*\netstandard1.3\Axle.Resources.Java.deps.json" target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\Axle.Resources.Java.dll"       target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\Axle.Resources.Java.xml"       target="lib\netstandard1.3" />
+                                                     
+    <file src="bin\*\netstandard1.2\Axle.Resources.Java.deps.json" target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Resources.Java.dll"       target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\Axle.Resources.Java.xml"       target="lib\netstandard1.2" />
+                                                     
+    <file src="bin\*\netstandard1.1\Axle.Resources.Java.deps.json" target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\Axle.Resources.Java.dll"       target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\Axle.Resources.Java.xml"       target="lib\netstandard1.1" />
+                                                     
+    <file src="bin\*\netstandard1.0\Axle.Resources.Java.deps.json" target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\Axle.Resources.Java.dll"       target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\Axle.Resources.Java.xml"       target="lib\netstandard1.0" />
+
+    <file src="bin\*\net46\Axle.Resources.Java.dll" target="lib\net46" />
+    <file src="bin\*\net46\Axle.Resources.Java.xml" target="lib\net46" />
+    <file src="bin\*\net46\Axle.Resources.Java.pdb" target="lib\net46" />
+    <file src="bin\*\net46\Axle.Resources.Java.mdb" target="lib\net46" />
+
+    <file src="bin\*\net45\Axle.Resources.Java.dll" target="lib\net45" />
+    <file src="bin\*\net45\Axle.Resources.Java.xml" target="lib\net45" />
+    <file src="bin\*\net45\Axle.Resources.Java.pdb" target="lib\net45" />
+    <file src="bin\*\net45\Axle.Resources.Java.mdb" target="lib\net45" />
+
+    <file src="bin\*\net40\Axle.Resources.Java.dll" target="lib\net40" />
+    <file src="bin\*\net40\Axle.Resources.Java.xml" target="lib\net40" />
+    <file src="bin\*\net40\Axle.Resources.Java.pdb" target="lib\net40" />
+    <file src="bin\*\net40\Axle.Resources.Java.mdb" target="lib\net40" />
+
+    <file src="bin\*\net40-client\Axle.Resources.Java.dll" target="lib\net40-client" />
+    <file src="bin\*\net40-client\Axle.Resources.Java.xml" target="lib\net40-client" />
+    <file src="bin\*\net40-client\Axle.Resources.Java.pdb" target="lib\net40-client" />
+    <file src="bin\*\net40-client\Axle.Resources.Java.mdb" target="lib\net40-client" />
+
+    <file src="bin\*\net35\Axle.Resources.Java.dll" target="lib\net35" />
+    <file src="bin\*\net35\Axle.Resources.Java.xml" target="lib\net35" />
+    <file src="bin\*\net35\Axle.Resources.Java.pdb" target="lib\net35" />
+    <file src="bin\*\net35\Axle.Resources.Java.mdb" target="lib\net35" />
+
+    <file src="bin\*\net30\Axle.Resources.Java.dll" target="lib\net30" />
+    <file src="bin\*\net30\Axle.Resources.Java.xml" target="lib\net30" />
+    <file src="bin\*\net30\Axle.Resources.Java.pdb" target="lib\net30" />
+    <file src="bin\*\net30\Axle.Resources.Java.mdb" target="lib\net30" />
+
+    <file src="bin\*\net20\Axle.Resources.Java.dll" target="lib\net20" />
+    <file src="bin\*\net20\Axle.Resources.Java.xml" target="lib\net20" />
+    <file src="bin\*\net20\Axle.Resources.Java.pdb" target="lib\net20" />
+    <file src="bin\*\net20\Axle.Resources.Java.mdb" target="lib\net20" />
+  </files>
+</package>

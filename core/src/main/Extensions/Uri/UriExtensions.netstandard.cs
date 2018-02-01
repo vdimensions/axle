@@ -2,9 +2,9 @@
 {
     static partial class UriExtensions
     {
-        internal const string UriSchemeHttp = "http";
-        internal const string UriSchemeHttps = "https";
-        internal const string UriSchemeFile = "file";
-        internal const string UriSchemeFtp = "ftp";
+        public const string UriSchemeHttp = "http";
+        public const string UriSchemeHttps = "https";
+        public const string UriSchemeFile = "file";
+        public const string UriSchemeFtp = "ftp";
     }
 }

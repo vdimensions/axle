@@ -103,8 +103,7 @@ namespace Axle.Environment
                 };
 
             var noExtName = hasExt ? assemblyName.TakeBeforeLast('.') : assemblyName;
-            Assembly result = null;
-            if (chain.Any(noExtName, out result))
+            if (chain.Any(noExtName, out Assembly result))
             {
                 return result;
             }

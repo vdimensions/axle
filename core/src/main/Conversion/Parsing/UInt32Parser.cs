@@ -8,9 +8,9 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// an <see cref="uint">unsigned 32-bit integer</see> to a valid <see cref="uint"/> value.
     /// </summary>
-#if !netstandard
+    #if !NETSTANDARD
     [Serializable]
-#endif
+    #endif
     //[Stateless]
     public sealed class UInt32Parser : AbstractParser<uint>
     {

@@ -1,13 +1,17 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+#if NETSTANDARD1_0_OR_NEWER
+using System.Reflection;
+#endif
 
 using Axle.Reflection;
+using Axle.Verification;
 
 
 namespace Axle.DependencyInjection.Sdk
 {
-    public abstract partial class AbstractDependencyDescriptorProvider : IDependencyDescriptorProvider
+    public abstract class AbstractDependencyDescriptorProvider : IDependencyDescriptorProvider
     {
         protected virtual IPropertyDependencyDescriptor GetDescriptor(IField field)
         {
@@ -43,6 +47,31 @@ namespace Axle.DependencyInjection.Sdk
             return left.Length > 0 && right.Length > 0
                 && char.ToLower(left[0]) == char.ToLower(right[0])
                 && comparer.Equals(left.Substring(1), right.Substring(1));
+        }
+
+        public virtual bool DoDependenciesConverge(
+            DependencyInfo factoryArgumentDependency, 
+            DependencyInfo classMemberDependency)
+        {
+            factoryArgumentDependency.VerifyArgument(nameof(factoryArgumentDependency)).IsNotNull();
+            classMemberDependency.VerifyArgument(nameof(classMemberDependency)).IsNotNull();
+            var comparer = StringComparer.Ordinal;
+
+            #if NETSTANDARD1_0_OR_NEWER
+            if (!factoryArgumentDependency.Type.GetTypeInfo().IsAssignableFrom(classMemberDependency.Type.GetTypeInfo()))
+            #else
+            if (!factoryArgumentDependency.Type.IsAssignableFrom(classMemberDependency.Type))
+            #endif
+            {
+                return false;
+            }
+            if (factoryArgumentDependency.DependencyName.Length == 0 && classMemberDependency.DependencyName.Length == 0)
+            {
+                //return char.ToLower(factoryArgumentDependency.MemberName[0]) == char.ToLower(classMemberDependency.MemberName[0]) &&
+                //       comparer.Equals(factoryArgumentDependency.MemberName.Substring(1), classMemberDependency.MemberName.Substring(1));
+                return CompareMemberNames(factoryArgumentDependency.MemberName, classMemberDependency.MemberName, comparer);
+            }
+            return comparer.Equals(factoryArgumentDependency.DependencyName, classMemberDependency.DependencyName);
         }
     }
 }

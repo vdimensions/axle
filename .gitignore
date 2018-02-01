@@ -16,11 +16,13 @@
 **/bin/
 **/obj/
 **/out/
+**/paket-files/
 **/packages/
 **/target/
 
 # files
 
+**/buildlog.txt
 *.cproj.user
 *.csproj.user
 *.[Dd]ot[Ss]ettings

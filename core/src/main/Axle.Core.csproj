@@ -23,19 +23,6 @@
   </PropertyGroup>
   <!-- <Import Project="Mason.netstandard.props" /> -->
   <ItemGroup>
-    <Compile Remove="packages\**" />
-    <Compile Remove="paket-files\**" />
-    <EmbeddedResource Remove="packages\**" />
-    <EmbeddedResource Remove="paket-files\**" />
-    <None Remove="packages\**" />
-    <None Remove="paket-files\**" />
-  </ItemGroup>
-  <ItemGroup Condition="'$(TargetFrameworkIdentifier)' == '.NETStandard'">
-    <Compile Remove="Resources\Native\**" />
-    <EmbeddedResource Remove="Resources\Native\**" />
-    <None Remove="Resources\Native\**" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />

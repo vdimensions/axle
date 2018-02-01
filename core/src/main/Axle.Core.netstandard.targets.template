@@ -1,9 +1,0 @@
-<Project Sdk="Microsoft.NET.Sdk">
-  <!--<Import Project="$(MSBuildSDKsPath)\Microsoft.NET.Sdk\Sdk\Sdk.props" />-->
-  <Target Name="BeforeBuild">
-    <Exec Command="dotnet restore $(ProjectName)$(ProjectExt) /p:Version=${version} /p:AssemblyVersion=${version} /p:FileVersion=${version} /p:PackageLicenseUrl=${license.url} /p:PackageTags=${tags}" />
-  </Target>
-  <Target Name="AfterBuild">
-    <RemoveDir Directories="$(ProjectDir)\obj" />
-  </Target>
-</Project>

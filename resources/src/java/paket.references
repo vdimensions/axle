@@ -1,0 +1,6 @@
+Axle.Core
+Axle.Resources
+Kajabity.Tools
+
+group build
+  Mason.Targets.Preprocessor

@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Reflection;
 using System.Security.Policy;
 
 using Axle.Extensions.String;
-using Axle.Verification;
 
 
 namespace Axle.Environment
@@ -83,29 +80,6 @@ namespace Axle.Environment
                 return result;
             }
             throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
-        }
-
-        public Assembly LoadSatelliteAssembly(Assembly targetAssembly, CultureInfo culture)
-        {
-            targetAssembly.VerifyArgument(nameof(targetAssembly)).IsNotNull();
-            culture.VerifyArgument(nameof(culture)).IsNotNull();
-
-            if (culture.Equals(CultureInfo.InvariantCulture))
-            {
-                return null;
-            }
-
-            var paths = new[] { Domain.RelativeSearchPath, Domain.BaseDirectory };
-            var satelliteAssemblyPath = paths
-                .Where(x => !string.IsNullOrEmpty(x))
-                .Select(
-                    x =>
-                    {
-                        var path = Path.Combine(x, $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll");
-                        return File.Exists(path) ? path : null;
-                    })
-                .FirstOrDefault(x => x != null);
-            return satelliteAssemblyPath != null ? LoadAssembly(Path.GetFullPath(satelliteAssemblyPath)) : null;
         }
     }
 }

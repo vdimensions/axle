@@ -8,7 +8,14 @@ namespace Axle.Conversion.Parsing
     /// <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
     /// </summary>
     //[Stateless]
-    public sealed partial class TimeSpanParser
+    #if !NETSTANDARD
+    [Serializable]
+    #endif
+    #if NET40_OR_NEWER || NETSTANDARD1_0_OR_NEWER
+    public sealed class TimeSpanParser : AbstractStrictParser<TimeSpan>
+    #else
+    public sealed class TimeSpanParser : AbstractParser<TimeSpan>
+    #endif
     {
         /// <inheritdoc />
         protected override TimeSpan DoParse(string value, IFormatProvider formatProvider)
@@ -20,5 +27,18 @@ namespace Axle.Conversion.Parsing
         {
             return TimeSpan.TryParse(value, out output);
         }
+
+        #if NET40_OR_NEWER || NETSTANDARD1_0_OR_NEWER
+        /// <inheritdoc />
+        protected override TimeSpan DoParseExact(string value, string format, IFormatProvider formatProvider)
+        {
+            return TimeSpan.ParseExact(value, format, formatProvider, System.Globalization.TimeSpanStyles.None);
+        }
+
+        public override bool TryParseExact(string value, string format, IFormatProvider formatProvider, out TimeSpan output)
+        {
+            return TimeSpan.TryParseExact(value, format, formatProvider, System.Globalization.TimeSpanStyles.None, out output);
+        }
+        #endif
     }
 }

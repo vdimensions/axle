@@ -68,6 +68,31 @@ namespace Axle.Environment
                       .SingleOrDefault() ?? assemblyName
                     : assemblyName;
         }
+
+        public Assembly LoadSatelliteAssembly(Assembly targetAssembly, System.Globalization.CultureInfo culture)
+        {
+            targetAssembly.VerifyArgument(nameof(targetAssembly)).IsNotNull();
+            culture.VerifyArgument(nameof(culture)).IsNotNull();
+
+            if (culture.Equals(System.Globalization.CultureInfo.InvariantCulture))
+            {
+                return null;
+            }
+
+            var paths = new[] { Domain.RelativeSearchPath, Domain.BaseDirectory };
+            var satelliteAssemblyPath = paths
+                .Where(x => !string.IsNullOrEmpty(x))
+                .Select(
+                    x =>
+                    {
+                        var path = System.IO.Path.Combine(x, $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll");
+                        return System.IO.File.Exists(path) ? path : null;
+                    })
+                .FirstOrDefault(x => x != null);
+            return satelliteAssemblyPath != null 
+                ? LoadAssembly(System.IO.Path.GetFullPath(satelliteAssemblyPath)) 
+                : null;
+        }
         #endif
 
         public string GetEmbeddedResourcePath(string resourceName)

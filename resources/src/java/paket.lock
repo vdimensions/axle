@@ -1,0 +1,14 @@
+NUGET
+  remote: ../../../dist
+    Axle.Core (1.5.0.63)
+    Axle.Resources (1.5.0.3)
+      Axle.Core (>= 1.5) - restriction: || (&& (>= net20) (< net35) (< netstandard1.0)) (&& (< net20) (>= netstandard1.0) (< netstandard1.1)) (&& (< net20) (>= netstandard1.1) (< netstandard1.2)) (&& (< net20) (>= netstandard1.2) (< netstandard1.3)) (&& (< net20) (>= netstandard1.3) (< netstandard1.4)) (&& (< net20) (>= netstandard1.4) (< netstandard1.5)) (&& (< net20) (>= netstandard1.5) (< netstandard1.6)) (&& (< net20) (>= netstandard1.6) (< netstandard2.0)) (&& (< net20) (>= netstandard2.0)) (&& (>= net35) (< net40) (< netstandard1.0)) (&& (>= net40) (< netstandard1.0)) (>= net45)
+  remote: https://www.nuget.org/api/v2
+    Kajabity.Tools (0.4.6248.39967)
+
+GROUP build
+NUGET
+  remote: ../../../submodules/mason/dist
+    Mason.Targets.Packager (0.1.1.26)
+    Mason.Targets.Preprocessor (0.1.1.13)
+    Mason.Targets.Verman (0.1.1.13)

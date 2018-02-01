@@ -3,7 +3,7 @@
 
 namespace Axle.Conversion.Parsing
 {
-    #if !netstandard
+    #if !NETSTANDARD
     [Serializable]
     #endif
     //[Stateless]

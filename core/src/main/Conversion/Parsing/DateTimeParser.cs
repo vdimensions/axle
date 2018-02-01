@@ -16,7 +16,7 @@ namespace Axle.Conversion.Parsing
         /// <inheritdoc />
         protected override DateTime DoParse(string value, IFormatProvider formatProvider)
         {
-            return (formatProvider != null) ? DateTime.Parse(value, formatProvider) : DateTime.Parse(value);
+            return formatProvider != null ? DateTime.Parse(value, formatProvider) : DateTime.Parse(value);
         }
 
         /// <inheritdoc />

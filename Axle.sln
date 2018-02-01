@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26730.12
+VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.dist", "core\src\main\Axle.Core.dist.csproj", "{D7C8BBB3-0256-46CF-B778-5EB7E423229C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.dist", "core\src\main\Axle.Core.dist.csproj", "{D7C8BBB3-0256-46CF-B778-5EB7E423229C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}"
 EndProject
@@ -13,6 +13,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{CE683FA5-9
 	ProjectSection(SolutionItems) = preProject
 		mason.properties = mason.properties
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{ECC0AFD7-5709-4003-81DF-196F9BC3D158}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources", "resources\src\main\Axle.Resources.csproj", "{0952B72D-9D69-4439-885F-096ED969E9E5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.dist", "resources\src\main\Axle.Resources.dist.csproj", "{2DE11DC0-1123-4A33-8D10-5665ADEACF06}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.Java", "resources\src\java\Axle.Resources.Java.csproj", "{5D89911E-F70B-4C08-9659-119104318881}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -28,6 +36,18 @@ Global
 		{325D4D18-991D-401D-BA06-53A25FF857AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{325D4D18-991D-401D-BA06-53A25FF857AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{325D4D18-991D-401D-BA06-53A25FF857AE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0952B72D-9D69-4439-885F-096ED969E9E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0952B72D-9D69-4439-885F-096ED969E9E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0952B72D-9D69-4439-885F-096ED969E9E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0952B72D-9D69-4439-885F-096ED969E9E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DE11DC0-1123-4A33-8D10-5665ADEACF06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DE11DC0-1123-4A33-8D10-5665ADEACF06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DE11DC0-1123-4A33-8D10-5665ADEACF06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DE11DC0-1123-4A33-8D10-5665ADEACF06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D89911E-F70B-4C08-9659-119104318881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D89911E-F70B-4C08-9659-119104318881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D89911E-F70B-4C08-9659-119104318881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D89911E-F70B-4C08-9659-119104318881}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -35,6 +55,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D7C8BBB3-0256-46CF-B778-5EB7E423229C} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 		{325D4D18-991D-401D-BA06-53A25FF857AE} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
+		{0952B72D-9D69-4439-885F-096ED969E9E5} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
+		{2DE11DC0-1123-4A33-8D10-5665ADEACF06} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
+		{5D89911E-F70B-4C08-9659-119104318881} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

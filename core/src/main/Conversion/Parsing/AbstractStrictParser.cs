@@ -15,8 +15,7 @@ namespace Axle.Conversion.Parsing
 
         bool IStrictParser.TryParseExact(string value, string format, IFormatProvider formatProvider, out object result)
         {
-            T res;
-            if (this.TryParseExact(value, format, formatProvider, out res))
+            if (this.TryParseExact(value, format, formatProvider, out var res))
             {
                 result = res;
                 return true;

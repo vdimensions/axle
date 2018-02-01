@@ -7,8 +7,23 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a <see cref="char">character</see> to a valid <see cref="char"/> value.
     /// </summary>
     //[Stateless]
-    public sealed partial class CharacterParser : AbstractParser<char>
+    #if !NETSTANDARD
+    [Serializable]
+    #endif
+    public sealed class CharacterParser : AbstractParser<char>
     {
+        /// <inheritdoc />
+        #if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
+        protected override char DoParse(string value, IFormatProvider formatProvider) { return char.Parse(value); }
+        #elif NETSTANDARD1_0_OR_NEWER
+        protected override char DoParse(string value, IFormatProvider formatProvider)
+        {
+            return char.TryParse(value, out char res) 
+                ? res 
+                : throw new ParseException($"Could not parse value {value} into a valid character. ");
+        }
+        #endif
+
         /// <summary>
         /// Converts the specified string representation of a logical value to its <see cref="char"/> equivalent. 
         /// A return value indicates whether the conversion succeeded or failed.

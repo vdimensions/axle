@@ -1,7 +1,8 @@
 ﻿using System.Diagnostics;
 
+#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
 using Axle.References;
-
+#endif
 
 namespace Axle.Environment
 {

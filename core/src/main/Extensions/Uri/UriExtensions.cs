@@ -12,8 +12,8 @@ namespace Axle.Extensions.Uri
     /// </summary>
     public static partial class UriExtensions
     {
-        internal const string UriSchemeAssembly = "assembly";
-        internal const string UriSchemeResource = "res";
+        public const string UriSchemeAssembly = "assembly";
+        public const string UriSchemeResource = "res";
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

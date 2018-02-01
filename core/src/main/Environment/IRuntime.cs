@@ -36,6 +36,28 @@ namespace Axle.Environment
         /// </returns>
         Assembly LoadAssembly(string assemblyName);
 
+        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        /// <summary>
+        /// Loads a satellite assembly to the specified <paramref name="targetAssembly">target</paramref> assembly and <paramref name="culture"/>.
+        /// </summary>
+        /// <param name="targetAssembly">
+        /// The target <see cref="Assembly"/> to search for related satellite assemblies.
+        /// </param>
+        /// <param name="culture">
+        /// A <see cref="System.Globalization.CultureInfo"/> object specifying the culture for the requested satellite assembly.
+        /// </param>
+        /// <returns>
+        /// A satellite assembly to the specified <paramref name="targetAssembly">target</paramref> assembly and <paramref name="culture"/>.
+        /// This method can return <c>null</c> in case a satellite assembly was not found for the given cutlure.
+        /// In case the passed in <paramref name="culture"/> object represents the <see cref="System.Globalization.CultureInfo.InvariantCulture">invariant culture</see>
+        /// then this method also returns <c>null</c>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either the <paramref name="targetAssembly"/> or <paramref name="culture"/> parameter is <c>null</c>.
+        /// </exception>
+        Assembly LoadSatelliteAssembly(Assembly targetAssembly, System.Globalization.CultureInfo culture);
+        #endif
+
         /// <summary>
         /// Gets a <see cref="System.Version"/> object that describes the major, minor, build, and revision numbers of 
         /// the current CLR implementation.
@@ -52,5 +74,12 @@ namespace Axle.Environment
         /// Gets a <see cref="RuntimeImplementation"/> value that describes the type of the .NET runtime that executes the current code.
         /// </summary>
         RuntimeImplementation Implementation { get; }
+
+        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        /// <summary>
+        /// Returns a reference to the <see cref="AppDomain"/> instance hosting the current .NET runtime. 
+        /// </summary>
+        AppDomain Domain { get; }
+        #endif
     }
 }
