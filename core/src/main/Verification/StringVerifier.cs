@@ -11,6 +11,9 @@ namespace Axle.Verification
     /// <seealso cref="string"/>
     public static class StringVerifier
     {
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static ArgumentReference<string> UncheckedIsNotEmpty(ArgumentReference<string> argument, string message)
         {
             if (argument.Value.Length == 0)

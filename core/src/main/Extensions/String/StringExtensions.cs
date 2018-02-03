@@ -466,6 +466,9 @@ namespace Axle.Extensions.String
         }
         #endregion
 
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static string CutFromIndex(
             Func<string, string, StringComparison, int> searchFunc,
             string stringToTrim,
@@ -480,6 +483,9 @@ namespace Axle.Extensions.String
             }
             return trimEnd ? stringToTrim.Substring(0, index) : stringToTrim.Substring(index + stringToSearch.Length);
         }
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static string CutFromIndex(Func<string, char, int> searchFunc, string stringToTrim, char charToSearch, bool trimEnd)
         {
             var index = searchFunc(stringToTrim, charToSearch);
@@ -728,7 +734,14 @@ namespace Axle.Extensions.String
         }
         #endregion // CutEnd(...)
 
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static string JoinInternal(string[] values, string separator) { return string.Join(separator, values); }
+
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static string JoinInternal(IEnumerable<string> values, string separator)
         {
             return string.Join(separator, values.ToArray());

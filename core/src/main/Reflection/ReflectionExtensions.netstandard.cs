@@ -6,6 +6,9 @@ namespace Axle.Reflection
 {
     partial class ReflectionExtensions
     {
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static bool IsOverrideUnchecked(MethodInfo mi)
         {
             return mi.GetRuntimeBaseDefinition().DeclaringType != mi.DeclaringType;

@@ -11,6 +11,9 @@ namespace Axle.Reflection
     /// </summary>
     public static partial class ReflectionExtensions
     {
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         internal static DeclarationType GetDeclarationType(bool isStatic, bool isAbstract, bool isVirtual, bool isOverride, bool isHideBySig, bool isSealed)
         {
             var declarationType = DeclarationType.None;

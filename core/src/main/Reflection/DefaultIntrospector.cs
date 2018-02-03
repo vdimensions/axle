@@ -21,6 +21,9 @@ namespace Axle.Reflection
             _introspectedType = introspectedType.VerifyArgument(nameof(introspectedType)).IsNotNull();
         }
         #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static BindingFlags MemberScanOptionsToBindingFlags(ScanOptions scanOptions)
         {
             var flags = BindingFlags.Default;
@@ -46,6 +49,9 @@ namespace Axle.Reflection
         }
         #endif
 
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static bool MatchesScanOptions(IMember member, ScanOptions options)
         {
             if ((options & ScanOptions.Static) != ScanOptions.Static && member.Declaration == DeclarationType.Static)

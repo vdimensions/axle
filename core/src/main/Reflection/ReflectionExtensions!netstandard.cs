@@ -6,6 +6,9 @@ namespace Axle.Reflection
 {
     partial class ReflectionExtensions
     {
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         internal static BindingFlags GetFlagsUnsafe(this MethodBase member)
         {
             var result = new BindingFlags();
@@ -24,6 +27,9 @@ namespace Axle.Reflection
             return result;
         }
 
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static bool IsOverrideUnchecked(MethodInfo mi)
         {
             return mi.GetBaseDefinition().DeclaringType != mi.DeclaringType;

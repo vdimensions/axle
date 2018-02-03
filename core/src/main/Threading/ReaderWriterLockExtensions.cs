@@ -400,6 +400,9 @@ namespace Axle.Threading
             #endregion
 
             #region CreateReadLockHandle(...)
+            #if NETSTANDARD || NET45_OR_NEWER
+            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            #endif
             public static ILockHandle CreateReadLockHandle(this IReadWriteLock @this)
             {
                 return new ReadLockHandle(@this);
@@ -407,6 +410,9 @@ namespace Axle.Threading
             #endregion
 
             #region CreateUpgradeableReadLockHandle(...)
+            #if NETSTANDARD || NET45_OR_NEWER
+            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            #endif
             public static ILockHandle CreateUpgradeableReadLockHandle(this IReadWriteLock @this)
             {
                 return new UpgradeableReadLockHandle(@this);
@@ -414,6 +420,9 @@ namespace Axle.Threading
             #endregion
 
             #region CreateWriteLockHandle(...)
+            #if NETSTANDARD || NET45_OR_NEWER
+            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            #endif
             public static ILockHandle CreateWriteLockHandle(this IReadWriteLock @this)
             {
                 return new WriteLockHandle(@this);

@@ -56,6 +56,9 @@ namespace Axle.Text.Formatting
         {
             ReplaceFormatInternal(sb, format, arg, formatProvider);
         }
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         internal void ReplaceFormatInternal(StringBuilder sb, string format, T arg, IFormatProvider formatProvider)
         {
             sb.Replace(format, DoFormat(format, arg, formatProvider));
