@@ -26,6 +26,7 @@ namespace Axle.Reflection
             }
             if (this is GenericMethodToken)
             {
+                // TODO: WHY NOT?
                 throw new InvalidOperationException(
                     "This method is already generic. Cannot make a generic method out of a generic method. Perhaps you need a cast to `IGenericMethod` instead?");
             }

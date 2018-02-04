@@ -1,6 +1,5 @@
 ﻿namespace Axle.Reflection
 {
-    //[Maturity(CodeMaturity.Stable)]
     public abstract partial class MemberTokenBase<T>
     {
         #if !NETSTANDARD
@@ -14,9 +13,12 @@
 
             protected override bool DoEquals(TT x, TT y) { return x.ReflectedMember.Equals(y.ReflectedMember); }
         }
-        
+
         #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
-        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer => Axle.References.Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance;
+        private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer
+        {
+            get { return Axle.References.Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance; }
+        }
         #else
         private static AbstractEqualityComparer<MemberTokenBase<T>> comparer = new MethodHandleBaseEqualityComparer<MemberTokenBase<T>>();
         private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer => comparer;
