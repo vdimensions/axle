@@ -19,7 +19,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <group targetFramework="net20">
-        <dependency id="Axle.Core" version="1.5.0" />
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
       <group targetFramework="net35">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
@@ -101,39 +101,39 @@
     <file src="bin\*\netstandard1.0\${id}.dll"       target="lib\netstandard1.0" />
     <file src="bin\*\netstandard1.0\${id}.xml"       target="lib\netstandard1.0" />
 
-    <file src="bin\*\net46\${id}.dll" target="lib\net46" />
-    <file src="bin\*\net46\${id}.xml" target="lib\net46" />
-    <file src="bin\*\net46\${id}.pdb" target="lib\net46" />
-    <file src="bin\*\net46\${id}.mdb" target="lib\net46" />
+    <file src="bin\*\net46\${id}.dll"                target="lib\net46" />
+    <file src="bin\*\net46\${id}.xml"                target="lib\net46" />
+    <file src="bin\*\net46\${id}.pdb"                target="lib\net46" />
+    <file src="bin\*\net46\${id}.dll.mdb"            target="lib\net46" />
+                                                     
+    <file src="bin\*\net45\${id}.dll"                target="lib\net45" />
+    <file src="bin\*\net45\${id}.xml"                target="lib\net45" />
+    <file src="bin\*\net45\${id}.pdb"                target="lib\net45" />
+    <file src="bin\*\net45\${id}.dll.mdb"            target="lib\net45" />
+                                                     
+    <file src="bin\*\net40\${id}.dll"                target="lib\net40" />
+    <file src="bin\*\net40\${id}.xml"                target="lib\net40" />
+    <file src="bin\*\net40\${id}.pdb"                target="lib\net40" />
+    <file src="bin\*\net40\${id}.dll.mdb"            target="lib\net40" />
+                                                     
+    <file src="bin\*\net40-client\${id}.dll"         target="lib\net40-client" />
+    <file src="bin\*\net40-client\${id}.xml"         target="lib\net40-client" />
+    <file src="bin\*\net40-client\${id}.pdb"         target="lib\net40-client" />
+    <file src="bin\*\net40-client\${id}.dll.mdb"     target="lib\net40-client" />
 
-    <file src="bin\*\net45\${id}.dll" target="lib\net45" />
-    <file src="bin\*\net45\${id}.xml" target="lib\net45" />
-    <file src="bin\*\net45\${id}.pdb" target="lib\net45" />
-    <file src="bin\*\net45\${id}.mdb" target="lib\net45" />
-
-    <file src="bin\*\net40\${id}.dll" target="lib\net40" />
-    <file src="bin\*\net40\${id}.xml" target="lib\net40" />
-    <file src="bin\*\net40\${id}.pdb" target="lib\net40" />
-    <file src="bin\*\net40\${id}.mdb" target="lib\net40" />
-
-    <file src="bin\*\net40-client\${id}.dll" target="lib\net40-client" />
-    <file src="bin\*\net40-client\${id}.xml" target="lib\net40-client" />
-    <file src="bin\*\net40-client\${id}.pdb" target="lib\net40-client" />
-    <file src="bin\*\net40-client\${id}.mdb" target="lib\net40-client" />
-
-    <file src="bin\*\net35\${id}.dll" target="lib\net35" />
-    <file src="bin\*\net35\${id}.xml" target="lib\net35" />
-    <file src="bin\*\net35\${id}.pdb" target="lib\net35" />
-    <file src="bin\*\net35\${id}.mdb" target="lib\net35" />
-
-    <file src="bin\*\net30\${id}.dll" target="lib\net30" />
-    <file src="bin\*\net30\${id}.xml" target="lib\net30" />
-    <file src="bin\*\net30\${id}.pdb" target="lib\net30" />
-    <file src="bin\*\net30\${id}.mdb" target="lib\net30" />
-
-    <file src="bin\*\net20\${id}.dll" target="lib\net20" />
-    <file src="bin\*\net20\${id}.xml" target="lib\net20" />
-    <file src="bin\*\net20\${id}.pdb" target="lib\net20" />
-    <file src="bin\*\net20\${id}.mdb" target="lib\net20" />
+    <file src="bin\*\net35\${id}.dll"                target="lib\net35" />
+    <file src="bin\*\net35\${id}.xml"                target="lib\net35" />
+    <file src="bin\*\net35\${id}.pdb"                target="lib\net35" />
+    <file src="bin\*\net35\${id}.dll.mdb"            target="lib\net35" />
+                                                     
+    <file src="bin\*\net30\${id}.dll"                target="lib\net30" />
+    <file src="bin\*\net30\${id}.xml"                target="lib\net30" />
+    <file src="bin\*\net30\${id}.pdb"                target="lib\net30" />
+    <file src="bin\*\net30\${id}.dll.mdb"            target="lib\net30" />
+                                                     
+    <file src="bin\*\net20\${id}.dll"                target="lib\net20" />
+    <file src="bin\*\net20\${id}.xml"                target="lib\net20" />
+    <file src="bin\*\net20\${id}.pdb"                target="lib\net20" />
+    <file src="bin\*\net20\${id}.dll.mdb"            target="lib\net20" />
   </files>
 </package>

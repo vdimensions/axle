@@ -1,10 +1,30 @@
-if [ -z "./packages" ]; then
-  ./paket.sh update
+msbuild="../../../submodules/btw/msbuild.sh"
+paket='.paket/paket.sh'
+project='Axle.Resources'
+
+$paket update
+if [ $? -ne 0 ]; then
+  read -rsp "Press [Enter] to quit"
+  echo ""
+  exit
 fi
 
-msbuild="../../../submodules/btw/msbuild.sh"
-
-# clean-up obj directory to remove .net standard/core files (project.json) which cause issues with legacy framework version builds
 rm -rf obj/
-dotnet restore Axle.Resources.csproj
-$msbuild Axle.Resources.csproj > buildlog.txt
+dotnet restore $project.csproj
+if [ $? -ne 0 ]; then
+  read -rsp "Press [Enter] to quit"
+  echo ""
+  exit
+fi
+$msbuild $project.csproj
+if [ $? -ne 0 ]; then
+  read -rsp "Press [Enter] to quit"
+  echo ""
+  exit
+fi
+$msbuild $project.dist.csproj
+if [ $? -ne 0 ]; then
+  read -rsp "Press [Enter] to quit"
+  echo ""
+  exit
+fi

@@ -38,11 +38,11 @@
     <None Remove="Axle.Core.netstandard.targets.template" />
     <None Remove="paket.lock" />
   </ItemGroup>
-
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
   <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
   <!-- <Import Project=".paket\Paket.Restore.targets" /> -->
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

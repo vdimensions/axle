@@ -14,10 +14,10 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-#if !NETSTANDARD1_0
+#if !NETSTANDARD || NETSTANDARD1_1_OR_NEWER
 [assembly: Guid("D06FB3C7-A7B2-472A-8D2F-AC2AD383BF3D")]
 #endif
 
-[assembly: AssemblyVersion("1.5.0.3")]
-[assembly: AssemblyFileVersion("1.5.0.3")]
-[assembly: AssemblyInformationalVersion("1.5.0.3")]
+[assembly: AssemblyVersion("1.5.0.4")]
+[assembly: AssemblyFileVersion("1.5.0.4")]
+[assembly: AssemblyInformationalVersion("1.5.0.4")]

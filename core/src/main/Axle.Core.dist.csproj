@@ -29,8 +29,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-  </PropertyGroup> 
-  
+  </PropertyGroup>
   <ItemGroup>
     <None Include="Axle.Core.nuspec" />
     <None Include="Axle.Core.nuspec.template" />
@@ -96,4 +95,5 @@
   </ItemGroup>
   <Import Project="packages\build\Mason.Targets.Packager\build\Mason.Targets.Packager.targets" Condition="Exists('packages\build\Mason.Targets.Packager\build\Mason.Targets.Packager.targets')" Label="Paket" />
   <Import Project="packages\build\Mason.Targets.Verman\build\Mason.Targets.Verman.targets" Condition="Exists('packages\build\Mason.Targets.Verman\build\Mason.Targets.Verman.targets')" Label="Paket" />
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

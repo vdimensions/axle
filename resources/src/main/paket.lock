@@ -1,6 +1,6 @@
 NUGET
   remote: ../../../dist
-    Axle.Core (1.5.0.63)
+    Axle.Core (1.5.0.65)
 
 GROUP build
 NUGET
