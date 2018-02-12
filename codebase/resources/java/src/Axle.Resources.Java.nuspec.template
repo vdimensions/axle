@@ -18,57 +18,65 @@
     <licenseUrl>${license.url}</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <group targetFramework="net20">
+      <group targetFramework="netstandard2.0">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
         <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="net35">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="net40-client">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="net40">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="net45">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.0">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.1">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.2">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.3">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.4">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.5">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
       </group>
       <group targetFramework="netstandard1.6">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
         <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
       </group>
-      <group targetFramework="netstandard2.0">
+      <group targetFramework="netstandard1.5">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
         <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="netstandard1.4">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="netstandard1.3">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="netstandard1.2">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="netstandard1.1">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="netstandard1.0">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="net40">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="net35">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
+      </group>
+      <group targetFramework="net20">
+        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
+        <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
       </group>
     </dependencies>
     <frameworkAssemblies>

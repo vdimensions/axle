@@ -2,8 +2,11 @@ source ../../../../dist
   nuget Axle.Core
 	nuget Axle.Resources
 
+source ../../../../dist/third-parties
+  nuget Kajabity.Tools.Java content: none
+
 source https://nuget.org/api/v2
-  nuget Kajabity.Tools
+  nuget NetStandard.Library
 
 group build
 	source ../../../../submodules/mason/dist

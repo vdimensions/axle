@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net40;net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
@@ -29,10 +29,6 @@
     <None Remove="Axle.Resources.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
   <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
