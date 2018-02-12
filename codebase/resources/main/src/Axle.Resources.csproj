@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net35;net40;net45;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+  <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
+  <PropertyGroup>
+    <ProjectGuid>0952b72d-9d69-4439-885f-096ed969e9e5</ProjectGuid>
+    <RootNamespace>Axle.Resources</RootNamespace>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <DefineConstants>DEBUG;TRACE;$(FrameworkSymbols)</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- <PackageReference Include="Axle.Core" /> -->
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="Resources\IResource.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Axle.Resources.dist.csproj.paket.references" />
+    <None Remove="paket.lock" />
+  </ItemGroup>
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>
