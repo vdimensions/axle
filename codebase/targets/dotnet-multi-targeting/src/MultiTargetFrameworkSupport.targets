@@ -5,6 +5,7 @@
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FrameworkShortName>net20</FrameworkShortName>
     <FrameworkSymbols>net20;NET20_OR_NEWER</FrameworkSymbols>
+    <FrameworkPathOverride>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net30'">
@@ -12,6 +13,7 @@
     <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
     <FrameworkShortName>net30</FrameworkShortName>
     <FrameworkSymbols>net30;NET20_OR_NEWER;NET30_OR_NEWER</FrameworkSymbols>
+    <FrameworkPathOverride>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
   </PropertyGroup>
   
   <PropertyGroup Condition="'$(TargetFramework)'=='net35'">
@@ -19,6 +21,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FrameworkShortName>net35</FrameworkShortName>
     <FrameworkSymbols>net35;NET20_OR_NEWER;NET30_OR_NEWER;NET35_OR_NEWER</FrameworkSymbols>
+    <FrameworkPathOverride>$(MSBuildProgramFiles32)\Reference Assemblies\Microsoft\Framework\.NETFramework\v3.5\Profile\Client</FrameworkPathOverride>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)'=='net40'">
