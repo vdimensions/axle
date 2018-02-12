@@ -56,14 +56,12 @@ namespace Axle.Resources.Extraction
 
         public ResourceInfo Extract(string name, CultureInfo culture)
         {
-            return _next == null ? null : Extract(name, culture, Next);
+            return _next == null ? null : Extract(name, culture, _next);
         }
 
         public virtual ResourceInfo Extract(string name, CultureInfo culture, IResourceExtractor nextInChain)
         {
             return nextInChain.Extract(name, culture);
         }
-
-        protected IResourceExtractor Next => _next;
     }
 }
