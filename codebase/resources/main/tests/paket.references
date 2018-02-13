@@ -1,0 +1,5 @@
+Axle.Core
+Axle.Resources
+
+group test
+  NUnit

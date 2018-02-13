@@ -12,7 +12,7 @@ using Axle.Verification;
 
 namespace Axle.Resources
 {
-    internal abstract class ResourceManager
+    public abstract class ResourceManager
     {
         private IEnumerable<IResourceExtractor> GetExtractors(string bundle)
         {
@@ -51,8 +51,8 @@ namespace Axle.Resources
 
         protected abstract IResourceExtractor GetExtractor(Uri path);
 
-        public IResourceBundleRegistry Bundles { get; }
-        public IResourceMarshallerRegistry Marshallers { get; }
+        public abstract IResourceBundleRegistry Bundles { get; }
+        public abstract IResourceMarshallerRegistry Marshallers { get; }
     }
 }
 #endif

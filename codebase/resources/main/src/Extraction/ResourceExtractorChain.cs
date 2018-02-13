@@ -29,28 +29,28 @@ namespace Axle.Resources.Extraction
             }
         }
 
-        private IResourceExtractor _next;
+        private readonly IResourceExtractor _next;
 
         public ResourceExtractorChain(IEnumerable<IResourceExtractor> extractors) : this(
                 extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value.ToArray()) { }
         public ResourceExtractorChain(params IResourceExtractor[] extractors)
         {
-            if (extractors.Length == 0)
+            switch (extractors.Length)
             {
-                _next = null;
-            }
-            else if (extractors.Length == 1)
-            {
-                _next = extractors[0];
-            }
-            else
-            {
-                var collapsed = extractors[extractors.Length - 1];
-                for (var i = extractors.Length - 2; i >= 0; i--)
-                {
-                    collapsed = new ChainCompositeResourceExtractor(collapsed, extractors[i]);
-                }
-                _next = collapsed;
+                case 0:
+                    _next = null;
+                    break;
+                case 1:
+                    _next = extractors[0];
+                    break;
+                default:
+                    var collapsed = extractors[extractors.Length - 1];
+                    for (var i = extractors.Length - 2; i >= 0; i--)
+                    {
+                        collapsed = new ChainCompositeResourceExtractor(collapsed, extractors[i]);
+                    }
+                    _next = collapsed;
+                    break;
             }
         }
 
