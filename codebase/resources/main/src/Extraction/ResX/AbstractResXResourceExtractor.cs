@@ -12,11 +12,9 @@ namespace Axle.Resources.Extraction.ResX
     /// that handle the native .NET resource objects.
     /// </summary>
     /// <seealso cref="IResourceExtractor "/>
-    public abstract class AbstractResXResourceExtractor : IResourceExtractor
+    public abstract class AbstractResXResourceExtractor : AbstractResourceExtractor
     {
         private readonly Type _type;
-        [Obsolete]
-        protected readonly Uri BaseUri;
 
         /// <summary>
         /// Creates a new instance of the current <see cref="AbstractResXResourceExtractor"/> implementation.
@@ -30,17 +28,12 @@ namespace Axle.Resources.Extraction.ResX
         }
 
         /// <inheritdoc />
-        public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
+        protected sealed override ResourceInfo Extract(Uri location, CultureInfo culture, string name)
         {
-            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
-            culture.VerifyArgument(nameof(culture)).IsNotNull();
-
-            var resolver = new ResXResourceResolver(_type);
-
-            return TryExtractResource(resolver, location, name, culture, out resource);
+            return ExtractResource(location, culture, new ResXResourceResolver(_type), name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
         }
 
-        protected abstract bool TryExtractResource(ResXResourceResolver resolver, Uri location, string name, CultureInfo culture, out ResourceInfo resource);
+        protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, ResXResourceResolver resolver, string name);
 
         public System.Reflection.Assembly Assembly => _type.Assembly;
     }

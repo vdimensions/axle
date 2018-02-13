@@ -1,7 +1,4 @@
 ﻿#if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
-using System;
-using System.Globalization;
-
 using Axle.Resources.Extraction;
 using Axle.Verification;
 
@@ -21,18 +18,17 @@ namespace Axle.Resources
                 _originalExtractor = originalExtractor;
             }
 
-            public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
+            public ResourceInfo Extract(ResourceExtractionContext context, string name)
             {
+                context.VerifyArgument(nameof(context)).IsNotNull();
                 name.VerifyArgument(nameof(name)).IsNotNull();
 
-                if (_originalExtractor.TryExtract(location, name, culture, out resource))
+                var resource = _originalExtractor.Extract(context, name);
+                if (resource != null)
                 {
                     resource.Bundle = _bundle;
-                    return true;
                 }
-
-                resource = null;
-                return false;
+                return resource;
             }
         }
     }

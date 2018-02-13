@@ -16,8 +16,7 @@ namespace Axle.Resources
     {
         private readonly Icon _icon;
 
-        public IconResourceInfo(Uri location, string name, CultureInfo culture, Icon icon) 
-            : base(location, name, culture, "image/x-icon")
+        public IconResourceInfo(string name, CultureInfo culture, Icon icon) : base(name, culture, "image/x-icon")
         {
             _icon = icon.VerifyArgument(nameof(icon)).IsNotNull();
         }

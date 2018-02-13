@@ -1,4 +1,3 @@
-using System;
 using System.Globalization;
 using System.IO;
 
@@ -19,7 +18,7 @@ namespace Axle.Resources
         /// <summary>
         /// Creates a new instance of the <seealso cref="TextResourceInfo"/> class.
         /// </summary>
-        public TextResourceInfo(Uri location, string name, CultureInfo culture, string value) : base(location, name, culture, "text/plain")
+        public TextResourceInfo(string name, CultureInfo culture, string value) : base(name, culture, "text/plain")
         {
             _value = value.VerifyArgument(nameof(value)).IsNotNull();
         }

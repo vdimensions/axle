@@ -26,25 +26,21 @@ namespace Axle.Resources.Extraction.ResX
         {
         }
 
-        protected override bool TryExtractResource(ResXResourceResolver resolver, Uri location, string name, CultureInfo culture, out ResourceInfo resource)
+        protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, ResXResourceResolver resolver, string name)
         {
             location = location.Resolve($"./{name}");
             switch (resolver.Resolve(location, culture))
             {
                 case string str:
-                    resource = new TextResourceInfo(location, name, culture, str);
-                    return true;
+                    return new TextResourceInfo(name, culture, str);
                 case Stream stream:
                     // We do not need the actual stream here, we only used it to determine the resource type.
                     stream.Dispose();
                     // Create a resource representation that will always open a fresh stream when the underlying data is requested.
                     // This will avoid issues when the resource is latter being marshalled to another form.
-                    resource = new ResXStreamResourceInfo(resolver, location, name, culture);
-                    // return the resource
-                    return true;
+                    return new ResXStreamResourceInfo(resolver, location, name, culture);
                 default:
-                    resource = null;
-                    return false;
+                    return null;
             }
         }
     }

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Globalization;
+﻿using System.Collections.Generic;
 using System.Linq;
 
 using Axle.Verification;
@@ -20,20 +18,20 @@ namespace Axle.Resources.Extraction
                 _b = b;
             }
 
-            public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
+            public ResourceInfo Extract(ResourceExtractionContext context, string name)
             {
                 if (_a is IResourceExtractorChain c)
                 {
-                    return c.TryExtract(location, name, culture, _b, out resource);
+                    return c.Extract(context, name, _b);
                 }
-                return _a.TryExtract(location, name, culture, out resource) || _b.TryExtract(location, name, culture, out resource);
+                return _a.Extract(context, name) ?? _b.Extract(context, name);
             }
         }
 
         private readonly IResourceExtractor _next;
 
-        public ResourceExtractorChain(IEnumerable<IResourceExtractor> extractors) : this(
-                extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value.ToArray()) { }
+        public ResourceExtractorChain(IEnumerable<IResourceExtractor> extractors) 
+            : this(extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value.ToArray()) { }
         public ResourceExtractorChain(params IResourceExtractor[] extractors)
         {
             switch (extractors.Length)
@@ -55,14 +53,45 @@ namespace Axle.Resources.Extraction
             }
         }
 
-        public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
+        //protected virtual ResourceInfo DoExtract(ResourceExtractionContext contex, string name, IResourceExtractor nextInChain) => null;
+
+        public ResourceInfo Extract(ResourceExtractionContext context, string name) => _next != null ? Extract(context, name, _next) : null;
+        public virtual ResourceInfo Extract(ResourceExtractionContext context, string name, IResourceExtractor nextInChain)
         {
-            resource = null;
-            return _next != null && TryExtract(location, name, culture, _next, out resource);
-        }
-        public virtual bool TryExtract(Uri location, string name, CultureInfo culture, IResourceExtractor nextInChain, out ResourceInfo resource)
-        {
-            return nextInChain.TryExtract(location, name, culture, out resource);
+            //var items = context.Extract(
+            //    name,
+            //    (location, culture, n) =>
+            //    {
+            //        //var currentResult = DoExtract(context, n, nextInChain);
+            //        //if (currentResult != null)
+            //        //{
+            //        //    return currentResult;
+            //        //}
+            //        var tmpContext = new ResourceExtractionContext(
+            //            context.Bundle,
+            //            context.LookupLocations.Except(new[]{location}), 
+            //            culture);
+            //        return nextInChain.Extract(tmpContext, n);
+            //    });
+            //return items.SingleOrDefault();
+            return nextInChain.Extract(context, name);
         }
     }
 }
+/**
+ *  |______________
+ *  | ?GreetingText
+ *  V
+ * [chain]->[properties]->[embedded resources]->[resx]->[filesystem]
+ * [en-us]           (1)
+ *                    |_________________
+ *                    | ?some.properties
+ *                    V
+ *               [chain]->[embedded resources]->[resx]->[filesystem]
+ *               [en-us]                   (3)      4            (5) 
+ *          -----------------------------------------------------------
+ *    [en]->[properties]->[embedded resources]->[resx]->[filesystem]
+ *      []          
+ *                 
+ *                 
+ */

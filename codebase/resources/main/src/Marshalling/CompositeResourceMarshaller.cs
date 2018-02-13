@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
 
 using Axle.Resources.Extraction;
 using Axle.Verification;
@@ -18,11 +17,11 @@ namespace Axle.Resources.Marshalling
         }
         public CompositeResourceMarshaller(params IResourceMarshaller[] extractors) : this(extractors as IEnumerable<IResourceMarshaller>) { }
 
-        public bool TryUnmarshal(IResourceExtractor extractor, string name, CultureInfo culture, Type targetType, out object result)
+        public bool TryUnmarshal(ResourceExtractionContext context, IResourceExtractor extractor, string name, Type targetType, out object result)
         {
             foreach (var resourceMarshaller in _extractors)
             {
-                if (resourceMarshaller.TryUnmarshal(extractor, name, culture, targetType, out result))
+                if (resourceMarshaller.TryUnmarshal(context, extractor, name, targetType, out result))
                 {
                     return true;
                 }

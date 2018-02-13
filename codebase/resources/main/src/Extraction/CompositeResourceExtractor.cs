@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
+using System.Linq;
 
 using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction
 {
+    [Obsolete("Not used")]
     internal sealed class CompositeResourceExtractor : IResourceExtractor
     {
         private readonly IEnumerable<IResourceExtractor> _extractors;
@@ -16,17 +17,6 @@ namespace Axle.Resources.Extraction
             _extractors = extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value;
         }
 
-        public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
-        {
-            foreach (var e in _extractors)
-            {
-                if (e.TryExtract(location, name, culture, out resource))
-                {
-                    return true;
-                }
-            }
-            resource = null;
-            return false;
-        }
+        public ResourceInfo Extract(ResourceExtractionContext context, string name) => _extractors.Select(x => x.Extract(context, name)).SingleOrDefault();
     }
 }

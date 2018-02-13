@@ -28,8 +28,7 @@ namespace Axle.Resources
             return codec.MimeType;
         }
 
-        public ImageResourceInfo(Uri location, string name, CultureInfo culture, Image image) 
-            : base(location, name, culture, GetContentType(image))
+        public ImageResourceInfo(string name, CultureInfo culture, Image image) : base(name, culture, GetContentType(image))
         {
             _image = image.VerifyArgument(nameof(image)).IsNotNull();
         }

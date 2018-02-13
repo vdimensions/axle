@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.IO;
 //using System.Net.Mime;
 
@@ -14,9 +13,8 @@ namespace Axle.Resources
     public abstract class ResourceInfo
     {
         //protected ResourceInfo(Uri location, CultureInfo culture, ContentType contentType)
-        protected ResourceInfo(Uri location, string name, CultureInfo culture, string contentType)
+        protected ResourceInfo(string name, CultureInfo culture, string contentType)
         {
-            Location = location.VerifyArgument(nameof(location)).IsNotNull();
             Name = name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
             Culture = culture.VerifyArgument(nameof(culture)).IsNotNull();
             ContentType = contentType.VerifyArgument(nameof(contentType)).IsNotNull();
@@ -31,12 +29,6 @@ namespace Axle.Resources
         /// A new <see cref="Stream"/> instance that represents the resource's data.
         /// </returns>
         public abstract Stream Open();
-
-        /// <summary>
-        /// An <see cref="Uri"/> that unuquely identifies the resource object represented by this <see cref="ResourceInfo"/> instance.
-        /// </summary>
-        /// <seealso cref="System.Uri"/>
-        public Uri Location { get; }
 
         /// <summary>
         /// Gets a <see cref="string"/> value that indicates the resource bundle containing the current resource object.

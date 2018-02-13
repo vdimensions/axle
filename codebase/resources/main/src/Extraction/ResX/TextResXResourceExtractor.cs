@@ -2,7 +2,6 @@
 using System;
 using System.Globalization;
 
-using Axle.Extensions.Uri;
 using Axle.Verification;
 
 
@@ -11,10 +10,9 @@ namespace Axle.Resources.Extraction.ResX
     /// <summary>
     /// The .NET's native resource extractor implementation, supporting only text resources.
     /// </summary>
-    public sealed class TextResXResourceExtractor : IResourceExtractor
+    public sealed class TextResXResourceExtractor : AbstractResourceExtractor
     {
         private readonly Type _type;
-        private readonly Uri _baseUri;
 
         /// <summary>
         /// Creates a new instance of the <see cref="TextResXResourceExtractor"/> class.
@@ -27,17 +25,10 @@ namespace Axle.Resources.Extraction.ResX
             _type = type.VerifyArgument(nameof(type)).IsNotNull();
         }
 
-        public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
+        protected override ResourceInfo Extract(Uri location, CultureInfo culture, string name)
         {
-            location = location.Resolve($"./{name}");
             var val = new System.Resources.ResourceManager(_type).GetString(name, culture);
-            if (val == null)
-            {
-                resource = null;
-                return false;
-            }
-            resource = new TextResourceInfo(location, name, culture, val);
-            return true;
+            return val == null ? null : new TextResourceInfo(name, culture, val);
         }
     }
 }

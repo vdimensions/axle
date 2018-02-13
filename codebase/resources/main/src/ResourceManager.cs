@@ -22,21 +22,17 @@ namespace Axle.Resources
         public ResourceInfo Resolve(string bundle, string name, CultureInfo culture)
         {
             bundle.VerifyArgument(nameof(bundle)).IsNotNull();
-            var bundleExtractor = new BundleResourceExtractor(bundle.VerifyArgument(nameof(bundle)).IsNotNull(), new ResourceExtractorChain(Extractors));
-            foreach (var location in Bundles[bundle])
-            {
-                if (bundleExtractor.TryExtract(location, name, culture, out var result))
-                {
-                    return result;
-                }
-            }
-            return null;
+            var bundleExtractor = new BundleResourceExtractor(bundle, new ResourceExtractorChain(Extractors));
+            var context = new ResourceExtractionContext(bundle, Bundles[bundle].ToArray(), culture);
+            return bundleExtractor.Extract(context, name);
         }
         public T Resolve<T>(string bundle, string name, CultureInfo culture)
         {
-            var bundleExtractor = new BundleResourceExtractor(bundle.VerifyArgument(nameof(bundle)).IsNotNull(), new ResourceExtractorChain(Extractors));
+            bundle.VerifyArgument(nameof(bundle)).IsNotNull();
+            var bundleExtractor = new BundleResourceExtractor(bundle, new ResourceExtractorChain(Extractors));
+            var context = new ResourceExtractionContext(bundle, Bundles[bundle].ToArray(), culture);
             var unmarshalled = (Marshallers ?? Enumerable.Empty<IResourceMarshaller>())
-                .Select(x => x.TryUnmarshal(bundleExtractor, name, culture, typeof(T), out var result) ? result : null)
+                .Select(x => x.TryUnmarshal(context, bundleExtractor, name, typeof(T), out var result) ? result : null)
                 .FirstOrDefault();
             return unmarshalled is T res ? res : throw new ResourceMarshallingException(name);
         }
