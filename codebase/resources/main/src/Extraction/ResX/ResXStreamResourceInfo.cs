@@ -6,7 +6,7 @@ using System.IO;
 using Axle.Verification;
 
 
-namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction.ResX
 {
     internal sealed class ResXStreamResourceInfo : ResourceInfo
     {

@@ -5,7 +5,7 @@ using System.Globalization;
 using Axle.Verification;
 
 
-namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction.ResX
 {
     public sealed class ResXResourceResolver
     {

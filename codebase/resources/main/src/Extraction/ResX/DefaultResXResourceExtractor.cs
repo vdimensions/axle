@@ -7,7 +7,7 @@ using System.IO;
 using Axle.Extensions.Uri;
 
 
-namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction.ResX
 {
     /// <summary>
     /// The .NET's native resource extractor implementation, supporting all resource types capable of being stored in a .resx file.

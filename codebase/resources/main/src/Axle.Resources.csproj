@@ -23,9 +23,7 @@
     <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <!-- <PackageReference Include="Axle.Core" /> -->
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Remove="Marshalling\ResourceMarshallerChain.cs" />
     <Compile Remove="Resources\IResource.cs" />
   </ItemGroup>
   <ItemGroup>

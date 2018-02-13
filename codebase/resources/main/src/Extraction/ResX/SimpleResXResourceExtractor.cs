@@ -6,7 +6,7 @@ using System.IO;
 using Axle.Extensions.Uri;
 
 
-namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction.ResX
 {
     /// <summary>
     /// The .NET's native resource extractor implementation, supporting only strings and streamed resources.

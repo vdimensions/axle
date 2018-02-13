@@ -9,7 +9,7 @@ namespace Axle.Resources.Tests
         [Test]
         public void TestMethod()
         {
-            var resourceManager;
+            //var resourceManager;
 
 
             // TODO: Add your test code here

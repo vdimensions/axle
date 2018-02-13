@@ -37,12 +37,9 @@ namespace Axle.Collections
             public TimestampDictionary(IEqualityComparer<TKey> comparer) : this(
                     new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
 
-            private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate()
-            {
-                return _collection
-                    .OrderBy(x => x.Key, new ChronologicalKeyComparer<TKey>())
-                    .Select(x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
-            }
+            private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate() => _collection
+                                                                           .OrderBy(x => x.Key, new ChronologicalKeyComparer<TKey>())
+                                                                           .Select(x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
 
             #region Implementation of IEnumerable<KeyValuePair<TKey,TValue>>
             IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() { return Enumerate().GetEnumerator(); }
@@ -75,41 +72,21 @@ namespace Axle.Collections
                 return _collection.Remove(kvp);
             }
 
-            bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly { get { return _collection.IsReadOnly; } }
+            bool ICollection<KeyValuePair<TKey, TValue>>.IsReadOnly => _collection.IsReadOnly;
             #endregion
 
             #region Implementation of IDictionary<TKey,TValue>
-            public bool ContainsKey(TKey key)
-            {
-                var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
-                return ContainsKey(k);
-            }
+            public bool ContainsKey(TKey key) => ContainsKey(new ChronologicalKey<TKey>(key, DateTime.UtcNow));
 
-            public void Add(TKey key, TValue value)
-            {
-                var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
-                Add(k, value);
-            }
+            public void Add(TKey key, TValue value) => Add(new ChronologicalKey<TKey>(key, DateTime.UtcNow), value);
 
-            public bool Remove(TKey key)
-            {
-                var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
-                return Remove(k);
-            }
+            public bool Remove(TKey key) => Remove(new ChronologicalKey<TKey>(key, DateTime.UtcNow));
 
-            public bool TryGetValue(TKey key, out TValue value)
-            {
-                var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
-                return TryGetValue(k, out value);
-            }
+            public bool TryGetValue(TKey key, out TValue value) => TryGetValue(new ChronologicalKey<TKey>(key, DateTime.UtcNow), out value);
 
             public TValue this[TKey key]
             {
-                get
-                {
-                    var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
-                    return base[k];
-                }
+                get => base[new ChronologicalKey<TKey>(key, DateTime.UtcNow)];
                 set
                 {
                     var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
@@ -119,10 +96,10 @@ namespace Axle.Collections
             }
 
             new private ICollection<TKey> Keys { get { return Enumerate().Select(key => key.Key).ToArray(); } }
-            ICollection<TKey> IDictionary<TKey, TValue>.Keys { get { return this.Keys; } }
+            ICollection<TKey> IDictionary<TKey, TValue>.Keys => Keys;
 
-            new private ICollection<TValue> Values { get { return Enumerate().Select(x => x.Value).ToArray(); } }
-            ICollection<TValue> IDictionary<TKey, TValue>.Values { get { return this.Values; } }
+            new private ICollection<TValue> Values => Enumerate().Select(x => x.Value).ToArray();
+            ICollection<TValue> IDictionary<TKey, TValue>.Values => Values;
             #endregion
         }
 

@@ -5,7 +5,7 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
-    public class BundleResourceExtractor : IResourceExtractor
+    internal class BundleResourceExtractor : IResourceExtractor
     {
         private readonly string _bundle;
         private readonly IResourceExtractor _extractor;

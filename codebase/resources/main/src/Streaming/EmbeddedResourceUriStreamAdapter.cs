@@ -92,7 +92,7 @@ namespace Axle.Resources.Streaming
             var actualAssembly = culture.Equals(CultureInfo.InvariantCulture) ? assembly : runtime.LoadSatelliteAssembly(assembly, culture);
             return actualAssembly == null
                 ? null
-                : LoadEmbeddedResource(runtime, actualAssembly, uri.PathAndQuery.Substring(1).TakeBeforeFirst('?'));
+                : LoadEmbeddedResource(runtime, actualAssembly, uri.PathAndQuery.TakeBeforeFirst('?').Substring(1));
         }
     }
 }

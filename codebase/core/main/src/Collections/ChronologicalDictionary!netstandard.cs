@@ -15,10 +15,7 @@ namespace Axle.Collections
                 _collection = this;
             }
 
-            void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
-            {
-                GetObjectData(info, context);
-            }
+            void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectData(info, context);
         }
     }
 }

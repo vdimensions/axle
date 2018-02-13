@@ -14,6 +14,14 @@ namespace Axle.Resources
 {
     public abstract class ResourceManager
     {
+        protected ResourceManager(IResourceBundleRegistry bundles, IResourceMarshallerRegistry marshallers)
+        {
+            Bundles = bundles.VerifyArgument(nameof(bundles)).IsNotNull().Value;
+            Marshallers = marshallers.VerifyArgument(nameof(marshallers)).IsNotNull().Value;
+        }
+        protected ResourceManager() 
+            : this(new DefaultResourceBundleRegistry(), null) { }
+
         private IEnumerable<IResourceExtractor> GetExtractors(string bundle)
         {
             foreach (var location in Bundles[bundle])
@@ -43,16 +51,19 @@ namespace Axle.Resources
         public T Resolve<T>(string bundle, string name, CultureInfo culture)
         {
             var extractor = new BundleResourceExtractor(bundle, new ResourceExtractorChain(GetExtractors(bundle)));
-            var unmarshalled = Marshallers
+            var unmarshalled = (Marshallers ?? Enumerable.Empty<IResourceMarshaller>())
                 .Select(x => x.TryUnmarshal(extractor, name, culture, typeof(T), out var result) ? result : null)
                 .FirstOrDefault();
             return unmarshalled is T res ? res : throw new ResourceMarshallingException(name);
         }
 
-        protected abstract IResourceExtractor GetExtractor(Uri path);
+        protected virtual IResourceExtractor GetExtractor(Uri path)
+        {
+            return new DefaultUriResourceExtractor(path);
+        }
 
-        public abstract IResourceBundleRegistry Bundles { get; }
-        public abstract IResourceMarshallerRegistry Marshallers { get; }
+        public IResourceBundleRegistry Bundles { get; }
+        public IResourceMarshallerRegistry Marshallers { get; }
     }
 }
 #endif
