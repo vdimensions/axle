@@ -25,10 +25,10 @@ namespace Axle.Resources
         //    : this(location, culture, new ContentType(contentTypeName.VerifyArgument(nameof(contentTypeName)).IsNotNullOrEmpty())) { }
 
         /// <summary>
-        /// Opens a new <see cref="Stream"/> to the represented resource's data.
+        /// Opens a new <see cref="Stream"/> to read current <see cref="ResourceInfo"/> implementation data.
         /// </summary>
         /// <returns>
-        /// A new <see cref="Stream"/> to the represented resource's data.
+        /// A new <see cref="Stream"/> instance that represents the resource's data.
         /// </returns>
         public abstract Stream Open();
 

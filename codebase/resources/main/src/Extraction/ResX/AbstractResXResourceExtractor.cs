@@ -15,6 +15,7 @@ namespace Axle.Resources.Extraction.ResX
     public abstract class AbstractResXResourceExtractor : IResourceExtractor
     {
         private readonly Type _type;
+        [Obsolete]
         protected readonly Uri BaseUri;
 
         /// <summary>
@@ -23,25 +24,24 @@ namespace Axle.Resources.Extraction.ResX
         /// <param name="type">
         /// The type that represents the .NET resource container.
         /// </param>
-        protected AbstractResXResourceExtractor(Type type, Uri baseUri)
+        protected AbstractResXResourceExtractor(Type type)
         {
             _type = type.VerifyArgument(nameof(type)).IsNotNull();
-            BaseUri = baseUri.VerifyArgument(nameof(baseUri)).IsNotNull();
         }
 
         /// <inheritdoc />
-        public ResourceInfo Extract(string name, CultureInfo culture)
+        public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
         {
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
             culture.VerifyArgument(nameof(culture)).IsNotNull();
 
             var resolver = new ResXResourceResolver(_type);
 
-            return ExtractResource(resolver, name, culture);
+            return TryExtractResource(resolver, location, name, culture, out resource);
         }
 
-        protected abstract ResourceInfo ExtractResource(ResXResourceResolver resolver, string name, CultureInfo culture);
-        
+        protected abstract bool TryExtractResource(ResXResourceResolver resolver, Uri location, string name, CultureInfo culture, out ResourceInfo resource);
+
         public System.Reflection.Assembly Assembly => _type.Assembly;
     }
 }

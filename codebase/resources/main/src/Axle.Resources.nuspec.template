@@ -18,54 +18,47 @@
     <licenseUrl>${license.url}</licenseUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
-      <group targetFramework="net20">
+      <group targetFramework="netstandard2.0">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
-      <group targetFramework="net35">
+      <group targetFramework="netstandard1.6">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="System.Resources.ResourceManager" version="4.3.0"/>
       </group>
-      <group targetFramework="net40-client">
+      <group targetFramework="netstandard1.5">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="System.Resources.ResourceManager" version="4.3.0"/>
       </group>
-      <group targetFramework="net40">
+      <group targetFramework="netstandard1.4">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="System.Resources.ResourceManager" version="4.3.0"/>
       </group>
-      <group targetFramework="net45">
+      <group targetFramework="netstandard1.3">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="System.Resources.ResourceManager" version="4.3.0"/>
       </group>
-      <group targetFramework="netstandard1.0">
+      <group targetFramework="netstandard1.2">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
       <group targetFramework="netstandard1.1">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
-      <group targetFramework="netstandard1.2">
+      <group targetFramework="netstandard1.0">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
-      <group targetFramework="netstandard1.3">
+      <group targetFramework="net45">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
-      <group targetFramework="netstandard1.4">
+      <group targetFramework="net40">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
-      <group targetFramework="netstandard1.5">
+      <group targetFramework="net35">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
-      <group targetFramework="netstandard1.6">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard2.0">
+      <group targetFramework="net20">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
       </group>
     </dependencies>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System" />
-      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
-      <frameworkAssembly assemblyName="System.Core" />
-      <frameworkAssembly assemblyName="System.Data" />
-      <frameworkAssembly assemblyName="System.Xml" />
-      <frameworkAssembly assemblyName="System.Xml.Linq" />
-    </frameworkAssemblies>
     <references></references>
   </metadata>
   <files>

@@ -23,16 +23,13 @@
 # files
 
 **/buildlog.txt
-*.cproj.user
-*.csproj.user
 *.[Dd]ot[Ss]ettings
 *.[Dd]ot[Ss]ettings.user
 **/.DS_Store
 *.desktop
-*.fsproj.user
 *.iml
 *.lnk
-*.nproj.user
+*.*proj.user
 *.nupkg
 *.[Oo]pen[Cc]over.[Ss]ettings
 *.opensdf

@@ -8,13 +8,17 @@ using Axle.Verification;
 
 namespace Axle.Resources.Streaming
 {
+    /// <summary>
+    /// An implementation of <see cref="IUriStreamAdapter"/> that can handle filesystem locations.
+    /// </summary>
     public sealed class FileSystemUriStreamAdapter : IUriStreamAdapter
     {
-        public bool CanHandle(Uri uri)
+        internal bool CanHandle(Uri uri)
         {
             return uri != null && uri.IsFile();
         }
 
+        /// <inheritdoc />
         public Stream GetStream(Uri uri)
         {
             uri.VerifyArgument(nameof(uri))

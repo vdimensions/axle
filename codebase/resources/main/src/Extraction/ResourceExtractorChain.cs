@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 
@@ -19,13 +20,13 @@ namespace Axle.Resources.Extraction
                 _b = b;
             }
 
-            public ResourceInfo Extract(string name, CultureInfo culture)
+            public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
             {
                 if (_a is IResourceExtractorChain c)
                 {
-                    return c.Extract(name, culture, _b);
+                    return c.TryExtract(location, name, culture, _b, out resource);
                 }
-                return _a.Extract(name, culture) ?? _b.Extract(name, culture);
+                return _a.TryExtract(location, name, culture, out resource) || _b.TryExtract(location, name, culture, out resource);
             }
         }
 
@@ -54,14 +55,14 @@ namespace Axle.Resources.Extraction
             }
         }
 
-        public ResourceInfo Extract(string name, CultureInfo culture)
+        public bool TryExtract(Uri location, string name, CultureInfo culture, out ResourceInfo resource)
         {
-            return _next == null ? null : Extract(name, culture, _next);
+            resource = null;
+            return _next != null && TryExtract(location, name, culture, _next, out resource);
         }
-
-        public virtual ResourceInfo Extract(string name, CultureInfo culture, IResourceExtractor nextInChain)
+        public virtual bool TryExtract(Uri location, string name, CultureInfo culture, IResourceExtractor nextInChain, out ResourceInfo resource)
         {
-            return nextInChain.Extract(name, culture);
+            return nextInChain.TryExtract(location, name, culture, out resource);
         }
     }
 }

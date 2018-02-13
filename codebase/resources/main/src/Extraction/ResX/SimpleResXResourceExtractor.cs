@@ -22,27 +22,29 @@ namespace Axle.Resources.Extraction.ResX
         /// <param name="type">
         /// The type that represents the .NET resource container.
         /// </param>
-        public SimpleResXResourceExtractor(Type type, Uri baseUri) : base(type, baseUri)
+        public SimpleResXResourceExtractor(Type type) : base(type)
         {
         }
 
-        protected override ResourceInfo ExtractResource(ResXResourceResolver resolver, string name, CultureInfo culture)
+        protected override bool TryExtractResource(ResXResourceResolver resolver, Uri location, string name, CultureInfo culture, out ResourceInfo resource)
         {
-            var location = BaseUri.Resolve($"./{name}");
+            location = location.Resolve($"./{name}");
             switch (resolver.Resolve(location, culture))
             {
                 case string str:
-                    return new TextResourceInfo(BaseUri, name, culture, str);
+                    resource = new TextResourceInfo(location, name, culture, str);
+                    return true;
                 case Stream stream:
                     // We do not need the actual stream here, we only used it to determine the resource type.
                     stream.Dispose();
                     // Create a resource representation that will always open a fresh stream when the underlying data is requested.
                     // This will avoid issues when the resource is latter being marshalled to another form.
-                    var result = new ResXStreamResourceInfo(resolver, BaseUri,  name, culture);
+                    resource = new ResXStreamResourceInfo(resolver, location, name, culture);
                     // return the resource
-                    return result;
+                    return true;
                 default:
-                    return null;
+                    resource = null;
+                    return false;
             }
         }
     }

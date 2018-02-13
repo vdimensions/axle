@@ -1,10 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 namespace Axle.Resources.Bundling
 {
-    public interface IResourceBundleContentRegistry : IEnumerable<IResourceLocation>
+    public interface IResourceBundleContentRegistry : IEnumerable<Uri>
     {
-        IResourceBundleContentRegistry Register(IResourceLocation location);
+        IResourceBundleContentRegistry Register(Uri location);
     }
 }

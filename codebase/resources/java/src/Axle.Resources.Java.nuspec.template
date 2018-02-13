@@ -79,10 +79,6 @@
         <dependency id="Kajabity.Tools.Java" version="${kajabity.version}" />
       </group>
     </dependencies>
-    <frameworkAssemblies>
-      <frameworkAssembly assemblyName="System" />
-      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
-    </frameworkAssemblies>
     <references></references>
   </metadata>
   <files>
@@ -127,9 +123,9 @@
     <file src="bin\*\netstandard1.0\${id}.xml"       target="lib\netstandard1.0" />
 
     <file src="bin\*\net46\${id}.dll"                target="lib\net46" />
-    <file src="bin\*\net46\${id}.xml"                target="lib\net46" />
     <file src="bin\*\net46\${id}.pdb"                target="lib\net46" />
-    <file src="bin\*\net46\${id}.mdb"                target="lib\net46" />
+    <file src="bin\*\net46\${id}.dll.mdb"            target="lib\net46" />
+    <file src="bin\*\net46\${id}.xml"                target="lib\net46" />
 
     <file src="bin\*\net45\${id}.dll"                target="lib\net45" />
     <file src="bin\*\net45\${id}.pdb"                target="lib\net45" />
@@ -142,9 +138,9 @@
     <file src="bin\*\net40\${id}.xml"                target="lib\net40" />
 
     <file src="bin\*\net35\${id}.dll"                target="lib\net35" />
-    <file src="bin\*\net35\${id}.xml"                target="lib\net35" />
     <file src="bin\*\net35\${id}.pdb"                target="lib\net35" />
     <file src="bin\*\net35\${id}.dll.mdb"            target="lib\net35" />
+    <file src="bin\*\net35\${id}.xml"                target="lib\net35" />
 
     <file src="bin\*\net30\${id}.dll"                target="lib\net30" />
     <file src="bin\*\net30\${id}.pdb"                target="lib\net30" />

@@ -1,6 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
-using System;
-using System.Collections.Generic;
+﻿#if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
 using System.Globalization;
 using System.Linq;
 
@@ -12,57 +10,39 @@ using Axle.Verification;
 
 namespace Axle.Resources
 {
-    public abstract class ResourceManager
+    public abstract partial class ResourceManager
     {
-        protected ResourceManager(IResourceBundleRegistry bundles, IResourceMarshallerRegistry marshallers)
+        protected ResourceManager(IResourceBundleRegistry bundles, IResourceExtractorRegistry extractors, IResourceMarshallerRegistry marshallers)
         {
             Bundles = bundles.VerifyArgument(nameof(bundles)).IsNotNull().Value;
+            Extractors = extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value;
             Marshallers = marshallers.VerifyArgument(nameof(marshallers)).IsNotNull().Value;
-        }
-        protected ResourceManager() 
-            : this(new DefaultResourceBundleRegistry(), null) { }
-
-        private IEnumerable<IResourceExtractor> GetExtractors(string bundle)
-        {
-            foreach (var location in Bundles[bundle])
-            {
-                yield return GetExtractor(location.Path);
-            }
-        }
-
-        [Obsolete]
-        public IEnumerable<ResourceInfo> ResolveAll(string bundle, string name, CultureInfo culture)
-        {
-            bundle.VerifyArgument(nameof(bundle)).IsNotNull();
-            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
-
-            foreach (var extractor in GetExtractors(bundle))
-            {
-                var res = extractor.Extract(name, culture);
-                res.Bundle = bundle;
-                yield return res;
-            }
         }
 
         public ResourceInfo Resolve(string bundle, string name, CultureInfo culture)
         {
-            return new BundleResourceExtractor(bundle, new ResourceExtractorChain(GetExtractors(bundle))).Extract(name, culture);
+            bundle.VerifyArgument(nameof(bundle)).IsNotNull();
+            var bundleExtractor = new BundleResourceExtractor(bundle.VerifyArgument(nameof(bundle)).IsNotNull(), new ResourceExtractorChain(Extractors));
+            foreach (var location in Bundles[bundle])
+            {
+                if (bundleExtractor.TryExtract(location, name, culture, out var result))
+                {
+                    return result;
+                }
+            }
+            return null;
         }
         public T Resolve<T>(string bundle, string name, CultureInfo culture)
         {
-            var extractor = new BundleResourceExtractor(bundle, new ResourceExtractorChain(GetExtractors(bundle)));
+            var bundleExtractor = new BundleResourceExtractor(bundle.VerifyArgument(nameof(bundle)).IsNotNull(), new ResourceExtractorChain(Extractors));
             var unmarshalled = (Marshallers ?? Enumerable.Empty<IResourceMarshaller>())
-                .Select(x => x.TryUnmarshal(extractor, name, culture, typeof(T), out var result) ? result : null)
+                .Select(x => x.TryUnmarshal(bundleExtractor, name, culture, typeof(T), out var result) ? result : null)
                 .FirstOrDefault();
             return unmarshalled is T res ? res : throw new ResourceMarshallingException(name);
         }
 
-        protected virtual IResourceExtractor GetExtractor(Uri path)
-        {
-            return new DefaultUriResourceExtractor(path);
-        }
-
         public IResourceBundleRegistry Bundles { get; }
+        public IResourceExtractorRegistry Extractors { get; }
         public IResourceMarshallerRegistry Marshallers { get; }
     }
 }

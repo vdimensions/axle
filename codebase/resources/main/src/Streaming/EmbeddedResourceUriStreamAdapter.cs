@@ -14,6 +14,9 @@ using Axle.Verification;
 
 namespace Axle.Resources.Streaming
 {
+    /// <summary>
+    /// An implementation of <see cref="IUriStreamAdapter"/> that deals with embedded resources.
+    /// </summary>
     public sealed class EmbeddedResourceUriStreamAdapter : IUriStreamAdapter
     {
         internal static Assembly GetAssembly(IRuntime runtime, Uri uri)
@@ -73,12 +76,12 @@ namespace Axle.Resources.Streaming
             return stream;
         }
 
-
-        public bool CanHandle(Uri uri)
+        internal bool CanHandle(Uri uri)
         {
             return uri != null && uri.IsEmbeddedResource();
         }
 
+        /// <inheritdoc />
         public Stream GetStream(Uri uri)
         {
             uri.VerifyArgument(nameof(uri))

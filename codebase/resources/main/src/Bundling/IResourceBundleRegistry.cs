@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 
 namespace Axle.Resources.Bundling
@@ -7,6 +8,6 @@ namespace Axle.Resources.Bundling
     {
         IResourceBundleContentRegistry Configure(string bundle);
 
-        IResourceBundleContentRegistry this[string bundle] { get; }
+        IEnumerable<Uri> this[string bundle] { get; }
     }
 }

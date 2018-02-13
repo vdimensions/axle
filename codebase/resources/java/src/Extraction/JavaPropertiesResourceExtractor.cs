@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
 using System.Text;
 
 using Axle.Extensions.String;
@@ -11,16 +10,13 @@ using Axle.Verification;
 
 namespace Axle.Resources.Java.Extraction
 {
-	using JavaProperties = global::Kajabity.Tools.Java.JavaProperties;
+	using JavaProperties = Kajabity.Tools.Java.JavaProperties;
 
     internal sealed class JavaPropertiesResourceExtractor : ResourceExtractorChain
     {
         const string PropertiesExt = ".properties";
 
-        private readonly string _propertiesFileName;
-        private readonly string _propertyPrefix;
-
-        public JavaPropertiesResourceExtractor(Uri baseUri)
+        private void GetPropertiesFileData(Uri baseUri, out Uri _propertiesFileLocation, out string propertyFileName, out string _propertyPrefix)
         {
             var location = baseUri;
 
@@ -50,60 +46,55 @@ namespace Axle.Resources.Java.Extraction
                 throw new InvalidOperationException("Invalid properties file location");
             }
 
-            _propertiesFileName = propertiesName;
+            _propertiesFileLocation = new Axle.Conversion.Parsing.UriParser().Parse(propertyFileLocationBuilder.ToString());
+            propertyFileName = propertiesName;
             _propertyPrefix = locationRemainderBuilder.ToString();
         }
 
-        public override ResourceInfo Extract(string name, CultureInfo culture, IResourceExtractor nextInChain)
+        public override bool TryExtract(Uri location, string name, CultureInfo culture, IResourceExtractor nextInChain, out ResourceInfo resource)
         {
-            if (name.Equals(_propertiesFileName, StringComparison.OrdinalIgnoreCase))
-            {
-                return null;
-            }
+            resource = null;
+            GetPropertiesFileData(location, out var _propertiesFileUri, out var _propertiesFileName, out var _propertyPrefix);
 
             culture.VerifyArgument(nameof(culture)).IsNotNull();
-            var properties = new[]{ nextInChain.Extract($"{_propertiesFileName}", culture)}
-                .Select(
-                    x =>
-                    {
-                        var stream = x.Open();
-                        if (stream == null)
-                        {
-                            return null;
-                        }
-
-                        var utf8 = Encoding.UTF8;
-                        try
-                        {
-                            var propertiesFile = new JavaProperties();
-                            using (stream)
-                            {
-                                propertiesFile.Load(stream, utf8);
-                            }
-                            return propertiesFile;
-                        }
-                        catch
-                        {
-                            return null;
-                        }
-                    })
-                .Where(x => x != null);
-            var prop = properties.Reverse().Aggregate(
-                new Dictionary<string, object>(StringComparer.Ordinal),
-                (agg, x) =>
-                {
-                    foreach (string key in x.Keys)
-                    {
-                        agg[key] = x.GetProperty(key);
-                    }
-                    return agg;
-                });
-            var propertyResourceKey = $"{_propertyPrefix}{name}";
-            if (!prop.ContainsKey(propertyResourceKey))
+            if (!nextInChain.TryExtract(_propertiesFileUri, _propertiesFileName, culture, out var propertiesResource))
             {
-                return null;
+                return false;
             }
-            return new TextResourceInfo(new Uri(_propertiesFileName, UriKind.RelativeOrAbsolute), name, culture, prop[propertyResourceKey].ToString());
+
+            var stream = propertiesResource.Open();
+            if (stream == null)
+            {
+                return false;
+            }
+
+            var utf8 = Encoding.UTF8;
+            try
+            {
+                var propertiesFile = new JavaProperties();
+                using (stream)
+                {
+                    propertiesFile.Load(stream, utf8);
+                }
+
+                var prop = new Dictionary<string, object>(StringComparer.Ordinal);
+                foreach (string key in propertiesFile.Keys)
+                {
+                    prop[key] = propertiesFile.GetProperty(key);
+                }
+
+                var propertyResourceKey = $"{_propertyPrefix}{name}";
+                if (!prop.ContainsKey(propertyResourceKey))
+                {
+                    return false;
+                }
+                resource = new TextResourceInfo(new Uri(_propertiesFileName, UriKind.RelativeOrAbsolute), name, culture, prop[propertyResourceKey].ToString());
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 }

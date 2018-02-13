@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 
 
 namespace Axle.Resources.Extraction
@@ -13,6 +14,9 @@ namespace Axle.Resources.Extraction
         /// <summary>
         /// Attempts to locate a raw resource based on the provided parameters.
         /// </summary>
+        /// <param name="location">
+        /// A <see cref="Uri"/> pointing to the resource location base.
+        /// </param>
         /// <param name="name">
         /// A <see cref="string"/> object used to identify the requested resource.
         /// </param>
@@ -25,12 +29,15 @@ namespace Axle.Resources.Extraction
         /// </param>
         /// <param name="nextInChain">
         /// A reference to the preceding resource extraction chain. This allows calling its
-        /// own <see cref="IResourceExtractor.Extract"/> method as part of the extraction logic
+        /// own <see cref="IResourceExtractor.TryExtract"/> method as part of the extraction logic
         /// within the current <see cref="IResourceExtractorChain"/> implementation.
         /// </param>
-        /// <returns>
+        /// <param name="resource">
         /// An instance of <see cref="ResourceInfo"/> representing the extracted resource.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if a <see cref="ResourceInfo"/> object was successfully extracted by the extractor; <c>false</c> otherwise.
         /// </returns>
-        ResourceInfo Extract(string name, CultureInfo culture, IResourceExtractor nextInChain);
+        bool TryExtract(Uri location, string name, CultureInfo culture, IResourceExtractor nextInChain, out ResourceInfo resource);
     }
 }

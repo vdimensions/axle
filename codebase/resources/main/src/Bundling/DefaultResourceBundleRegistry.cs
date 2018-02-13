@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 using Axle.Collections;
 
@@ -11,17 +12,17 @@ namespace Axle.Resources.Bundling
     {
         private sealed class BundleContentRegistry : IResourceBundleContentRegistry
         {
-            private readonly LinkedList<IResourceLocation> _locations;
+            private readonly LinkedList<Uri> _locations;
 
             public BundleContentRegistry()
             {
-                _locations = new LinkedList<IResourceLocation>();
+                _locations = new LinkedList<Uri>();
             }
 
-            public IEnumerator<IResourceLocation> GetEnumerator() => _locations.GetEnumerator();
+            public IEnumerator<Uri> GetEnumerator() => _locations.GetEnumerator();
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public IResourceBundleContentRegistry Register(IResourceLocation location)
+            public IResourceBundleContentRegistry Register(Uri location)
             {
                 _locations.AddLast(location);
                 return this;
@@ -49,6 +50,6 @@ namespace Axle.Resources.Bundling
         public IEnumerator<IResourceBundleContentRegistry> GetEnumerator() => _perBundleContent.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public IResourceBundleContentRegistry this[string bundle] => _perBundleContent.TryGetValue(bundle, out var result) ? result : null;
+        public IEnumerable<Uri> this[string bundle] => _perBundleContent.TryGetValue(bundle, out var result) ? result : Enumerable.Empty<Uri>();
     }
 }
