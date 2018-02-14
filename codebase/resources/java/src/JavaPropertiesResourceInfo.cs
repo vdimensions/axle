@@ -7,16 +7,34 @@ using Kajabity.Tools.Java;
 
 namespace Axle.Resources.Java
 {
+    /// <summary>
+    /// A class representing a Java properties file as a resource.
+    /// </summary>
     public class JavaPropertiesResourceInfo : ResourceInfo
     {
-        private Dictionary<string, string> _data;
+        /// <summary>
+        /// Gets the content (MIME) type of the java properties file.
+        /// </summary>
+        public const string MimeType = "text/x-java-properties";
 
-        internal JavaPropertiesResourceInfo(string name, CultureInfo culture, string contentType, Dictionary<string, string> data) 
-            : base(name, culture, contentType)
+        /// <summary>
+        /// Gets the file extension for a Java properties file.
+        /// </summary>
+        public const string FileExtension = ".properties";
+
+        private readonly Dictionary<string, string> _data;
+
+        internal JavaPropertiesResourceInfo(string name, CultureInfo culture, Dictionary<string, string> data) : base(name, culture, MimeType)
         {
             _data = data;
         }
 
+        /// <summary>
+        /// Opens a <see cref="Stream">stream</see> object for reading the contents of the properties file.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="Stream">stream</see> object for reading the contents of the properties file.
+        /// </returns>
         public override Stream Open()
         {
             var result = new MemoryStream();
@@ -26,6 +44,9 @@ namespace Axle.Resources.Java
             return result;
         }
 
+        /// <summary>
+        /// Gets a <see cref="IDictionary{TKey,TValue}"/> representing the contents of the properties file.
+        /// </summary>
         public IDictionary<string, string> Data => _data;
     }
 }

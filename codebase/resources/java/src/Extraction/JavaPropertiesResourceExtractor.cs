@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Text;
 
 using Axle.Resources.Extraction;
@@ -10,44 +9,44 @@ using Kajabity.Tools.Java;
 
 namespace Axle.Resources.Java.Extraction
 {
-    public sealed class JavaPropertiesResourceExtractor : ResourceExtractorChain
+    /// <summary>
+    /// A <see cref="IResourceExtractor"/> implementations capable of creating Java properties files.
+    /// </summary>
+    public sealed class JavaPropertiesFileExtractor : ResourceExtractorChain
     {
-        private const string PropertiesMimeType = "text/x-java-properties";
+        /// <summary>
+        /// Creates a new instance of the <see cref="JavaPropertiesFileExtractor"/> class.
+        /// </summary>
+        public JavaPropertiesFileExtractor() : base() { }
 
-        public JavaPropertiesResourceExtractor() : base() { }
-
+        /// <inheritdoc />
+        /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>
         public override ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
         {
             var utf8 = Encoding.UTF8;
             var finalProperties = new Dictionary<string, string>(StringComparer.Ordinal);
-            foreach (var localContext in context.Split(ResourceContextSplitStrategy.ByCultureThenLocation).Reverse())
+            foreach (var localContext in context.Split(ResourceContextSplitStrategy.ByLocation))
             {
-                var propertiesResource = nextInChain.Extract(localContext, name);
-                var stream = propertiesResource?.Open();
-                if (stream == null)
+                using (var stream = nextInChain.Extract(localContext, name)?.Open())
                 {
-                    continue;
-                }
-                try
-                {
+                    if (stream == null)
+                    {
+                        continue;
+                    }
                     var propertiesFile = new JavaProperties();
                     propertiesFile.Load(stream, utf8);
                     foreach (var key in propertiesFile.Keys)
                     {
+                        if (finalProperties.ContainsKey(key))
+                        {
+                            continue;
+                        }
                         finalProperties[key] = propertiesFile[key];
                     }
                 }
-                catch
-                {
-                    continue;
-                }
-                finally
-                {
-                    stream.Dispose();
-                }
             }
 
-            return new JavaPropertiesResourceInfo(name, context.Culture, PropertiesMimeType, finalProperties);
+            return new JavaPropertiesResourceInfo(name, context.Culture, finalProperties);
         }
     }
 }

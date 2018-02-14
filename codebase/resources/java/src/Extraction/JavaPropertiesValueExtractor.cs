@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 using Axle.Resources.Extraction;
 using Axle.Extensions.String;
@@ -10,55 +9,31 @@ using Kajabity.Tools.Java;
 
 namespace Axle.Resources.Java.Extraction
 {
+    /// <summary>
+    /// A <see cref="IResourceExtractor"/> implementation that can access the values defined in a Java properties file.
+    /// </summary>
     public sealed class JavaPropertiesValueExtractor : ResourceExtractorChain
     {
-        private const string PropertiesExt = ".properties";
-
+        /// <summary>
+        /// Creates a new instance of the <see cref="JavaPropertiesValueExtractor"/> class.
+        /// </summary>
         public JavaPropertiesValueExtractor() : base() { }
 
         private bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
         {
             propertyFileName = keyPrefix = null;
-
+            const string ext = JavaPropertiesResourceInfo.FileExtension;
             var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterFirst(PropertiesExt);
+            keyPrefix = locStr.TakeAfterFirst(ext);
             propertyFileName = locStr.TakeBeforeFirst(keyPrefix);
 
-            return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(PropertiesExt, StringComparison.OrdinalIgnoreCase);
-
-            //var fragments = location.ToString().Split(StringSplitOptions.None, '/');
-            //if (fragments.Length < 1)
-            //{
-            //    return false;
-            //}
-            //
-            //
-            //
-            //string propertiesName = null;
-            //var propertyFileLocationBuilder = new StringBuilder(fragments[0]);
-            //var locationRemainderBuilder = new StringBuilder();
-            //var sb = propertyFileLocationBuilder;
-            //for (var i = 1; i < fragments.Length; i++)
-            //{
-            //    sb.Append("/");
-            //    var fragment = fragments[i];
-            //    if (propertiesName == null && fragment.EndsWith(PropertiesExt, StringComparison.OrdinalIgnoreCase))
-            //    {
-            //        propertiesName = fragment;
-            //        sb = locationRemainderBuilder;
-            //        continue;
-            //    }
-            //    sb.Append(fragment);
-            //}
-            //if (propertiesName == null)
-            //{
-            //    return false;
-            //}
-            //
-            //keyPrefix = locationRemainderBuilder.ToString();
-            //return true;
+            return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }
 
+        /// <inheritdoc />
+        /// <summary>
+        /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java properties file. 
+        /// </summary>
         public override ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
         {
             foreach (var location in context.LookupLocations)
@@ -74,17 +49,14 @@ namespace Axle.Resources.Java.Extraction
                             props = jp.Data;
                             break;
                         default:
-                            var stream = propertyResource?.Open();
-                            if (stream != null)
+                            using (var stream = propertyResource?.Open())
                             {
-                                try
+                                if (stream != null)
                                 {
                                     var jp = new JavaProperties();
                                     jp.Load(stream);
                                     props = jp;
                                 }
-                                catch { }
-                                finally { stream.Dispose(); }
                             }
                             break;
                     }

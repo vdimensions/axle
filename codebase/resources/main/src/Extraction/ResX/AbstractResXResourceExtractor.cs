@@ -36,7 +36,7 @@ namespace Axle.Resources.Extraction.ResX
             try
             {
                 type = assembly?.GetType(pq.TakeBeforeFirst('/'));
-                prefix = pq.TakeAfterFirst('/').TrimEnd('/');
+                prefix = pq.TakeAfterFirst('/');
                 return type != null;
             }
             catch
