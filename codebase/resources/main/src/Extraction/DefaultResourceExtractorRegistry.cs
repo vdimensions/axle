@@ -8,14 +8,14 @@ namespace Axle.Resources.Extraction
 {
     public sealed class DefaultResourceExtractorRegistry : IResourceExtractorRegistry
     {
-        private readonly IList<IResourceExtractor> _extractors = new List<IResourceExtractor>();
+        private readonly LinkedList<IResourceExtractor> _extractors = new LinkedList<IResourceExtractor>();
 
         public IEnumerator<IResourceExtractor> GetEnumerator() { return _extractors.GetEnumerator(); }
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public IResourceExtractorRegistry Register(IResourceExtractor extractor)
         {
-            _extractors.Add(extractor.VerifyArgument(nameof(extractor)).IsNotNull().Value);
+            _extractors.AddFirst(extractor.VerifyArgument(nameof(extractor)).IsNotNull().Value);
             return this;
         }
     }

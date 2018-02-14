@@ -18,7 +18,7 @@ namespace Axle.Resources.Extraction
                 _b = b;
             }
 
-            public ResourceInfo Extract(ResourceExtractionContext context, string name)
+            public ResourceInfo Extract(ResourceContext context, string name)
             {
                 if (_a is IResourceExtractorChain c)
                 {
@@ -46,17 +46,17 @@ namespace Axle.Resources.Extraction
                     var collapsed = extractors[extractors.Length - 1];
                     for (var i = extractors.Length - 2; i >= 0; i--)
                     {
-                        collapsed = new ChainCompositeResourceExtractor(collapsed, extractors[i]);
+                        collapsed = new ChainCompositeResourceExtractor(extractors[i], collapsed);
                     }
                     _next = collapsed;
                     break;
             }
         }
 
-        //protected virtual ResourceInfo DoExtract(ResourceExtractionContext contex, string name, IResourceExtractor nextInChain) => null;
+        //protected virtual ResourceInfo DoExtract(ResourceContext contex, string name, IResourceExtractor nextInChain) => null;
 
-        public ResourceInfo Extract(ResourceExtractionContext context, string name) => _next != null ? Extract(context, name, _next) : null;
-        public virtual ResourceInfo Extract(ResourceExtractionContext context, string name, IResourceExtractor nextInChain)
+        public ResourceInfo Extract(ResourceContext context, string name) => _next != null ? Extract(context, name, _next) : null;
+        public virtual ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
         {
             //var items = context.Extract(
             //    name,
@@ -67,7 +67,7 @@ namespace Axle.Resources.Extraction
             //        //{
             //        //    return currentResult;
             //        //}
-            //        var tmpContext = new ResourceExtractionContext(
+            //        var tmpContext = new ResourceContext(
             //            context.Bundle,
             //            context.LookupLocations.Except(new[]{location}), 
             //            culture);

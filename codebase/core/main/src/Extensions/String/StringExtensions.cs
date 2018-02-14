@@ -479,7 +479,7 @@ namespace Axle.Extensions.String
             var index = searchFunc(stringToTrim, stringToSearch, comparison);
             if (index < 0)
             {
-                return stringToTrim;
+                return string.Empty;// stringToTrim;
             }
             return trimEnd ? stringToTrim.Substring(0, index) : stringToTrim.Substring(index + stringToSearch.Length);
         }
@@ -491,7 +491,7 @@ namespace Axle.Extensions.String
             var index = searchFunc(stringToTrim, charToSearch);
             if (index < 0)
             {
-                return stringToTrim;
+                return string.Empty;//stringToTrim;
             }
             return trimEnd ? stringToTrim.Substring(0, index) : stringToTrim.Substring(index);
         }
@@ -507,7 +507,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(stringToSearch));
             }
-            return CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, stringToSearch, comparison, true);
+            return candidate.Length > 0 ? candidate : str;
         }
         public static string TakeBeforeFirst(this string str, string stringToSearch, int startIndex, StringComparison comparison)
         {
@@ -519,7 +520,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(stringToSearch));
             }
-            return CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, stringToSearch, comparison, true);
+            return candidate.Length > 0 ? candidate : str;
         }
 
         public static string TakeBeforeFirst(this string str, string stringToSearch)
@@ -536,7 +538,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.IndexOf(y, 0), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.IndexOf(y, 0), str, charToSearch, true);
+            return candidate.Length > 0 ? candidate : str;
         }
         public static string TakeBeforeFirst(this string str, char charToSearch, int startIndex)
         {
@@ -544,7 +547,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, charToSearch, true);
+            return candidate.Length > 0 ? candidate : str;
         }
         #endregion
 
@@ -559,7 +563,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(stringToSearch));
             }
-            return CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, stringToSearch, comparison, true);
+            return candidate.Length > 0 ? candidate : str;
         }
         public static string TakeBeforeLast(this string str, string stringToSearch, int startIndex, StringComparison comparison)
         {
@@ -571,7 +576,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(stringToSearch));
             }
-            return CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, stringToSearch, comparison, true);
+            return candidate.Length > 0 ? candidate : str;
         }
 
         public static string TakeBeforeLast(this string str, string stringToSearch)
@@ -588,7 +594,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.LastIndexOf(y), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.LastIndexOf(y), str, charToSearch, true);
+            return candidate.Length > 0 ? candidate : str;
         }
         public static string TakeBeforeLast(this string str, char charToSearch, int startIndex)
         {
@@ -596,7 +603,8 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, charToSearch, true);
+            return candidate.Length > 0 ? candidate : str;
         }
         #endregion
 

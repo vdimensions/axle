@@ -1,7 +1,8 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
 using System;
 using System.Globalization;
 
+using Axle.Extensions.String;
 using Axle.Verification;
 
 
@@ -14,28 +15,47 @@ namespace Axle.Resources.Extraction.ResX
     /// <seealso cref="IResourceExtractor "/>
     public abstract class AbstractResXResourceExtractor : AbstractResourceExtractor
     {
-        private readonly Type _type;
+        private const string UriSchemeResX = "resx";
 
         /// <summary>
         /// Creates a new instance of the current <see cref="AbstractResXResourceExtractor"/> implementation.
         /// </summary>
-        /// <param name="type">
-        /// The type that represents the .NET resource container.
-        /// </param>
-        protected AbstractResXResourceExtractor(Type type)
+        protected AbstractResXResourceExtractor() : base(ResourceContextSplitStrategy.ByLocationThenCulture) { }
+        protected AbstractResXResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy) { }
+
+        private bool TryGetResXType(Uri location, out Type type, out string prefix)
         {
-            _type = type.VerifyArgument(nameof(type)).IsNotNull();
+            type = null;
+            prefix = string.Empty;
+            if (!location.IsAbsoluteUri || !location.Scheme.Equals(UriSchemeResX, StringComparison.OrdinalIgnoreCase))
+            {
+                return false;
+            }
+            var assembly = Axle.Environment.Platform.Runtime.LoadAssembly(location.Host);
+            var pq = location.PathAndQuery.TrimStart('/');
+            try
+            {
+                type = assembly?.GetType(pq.TakeBeforeFirst('/'));
+                prefix = pq.TakeAfterFirst('/').TrimEnd('/');
+                return type != null;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc />
         protected sealed override ResourceInfo Extract(Uri location, CultureInfo culture, string name)
         {
-            return ExtractResource(location, culture, new ResXResourceResolver(_type), name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+            if (TryGetResXType(location, out var type, out var prefix))
+            {
+                return ExtractResource(new Uri($"{prefix}/", UriKind.Relative), culture, type, name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+            }
+            return null;
         }
 
-        protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, ResXResourceResolver resolver, string name);
-
-        public System.Reflection.Assembly Assembly => _type.Assembly;
+        protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
     }
 }
 #endif

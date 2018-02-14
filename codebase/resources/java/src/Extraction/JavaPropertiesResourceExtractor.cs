@@ -16,11 +16,11 @@ namespace Axle.Resources.Java.Extraction
 
         public JavaPropertiesResourceExtractor() : base() { }
 
-        public override ResourceInfo Extract(ResourceExtractionContext context, string name, IResourceExtractor nextInChain)
+        public override ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
         {
             var utf8 = Encoding.UTF8;
             var finalProperties = new Dictionary<string, string>(StringComparer.Ordinal);
-            foreach (var localContext in context.Split().Reverse())
+            foreach (var localContext in context.Split(ResourceContextSplitStrategy.ByCultureThenLocation).Reverse())
             {
                 var propertiesResource = nextInChain.Extract(localContext, name);
                 var stream = propertiesResource?.Open();

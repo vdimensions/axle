@@ -16,21 +16,21 @@ namespace Axle.Resources
         {
             Bundles = bundles.VerifyArgument(nameof(bundles)).IsNotNull().Value;
             Extractors = extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value;
-            Marshallers = marshallers.VerifyArgument(nameof(marshallers)).IsNotNull().Value;
+            Marshallers = marshallers;//.VerifyArgument(nameof(marshallers)).IsNotNull().Value;
         }
 
         public ResourceInfo Resolve(string bundle, string name, CultureInfo culture)
         {
             bundle.VerifyArgument(nameof(bundle)).IsNotNull();
             var bundleExtractor = new BundleResourceExtractor(bundle, new ResourceExtractorChain(Extractors));
-            var context = new ResourceExtractionContext(bundle, Bundles[bundle].ToArray(), culture);
+            var context = new ResourceContext(bundle, Bundles[bundle].ToArray(), culture);
             return bundleExtractor.Extract(context, name);
         }
         public T Resolve<T>(string bundle, string name, CultureInfo culture)
         {
             bundle.VerifyArgument(nameof(bundle)).IsNotNull();
             var bundleExtractor = new BundleResourceExtractor(bundle, new ResourceExtractorChain(Extractors));
-            var context = new ResourceExtractionContext(bundle, Bundles[bundle].ToArray(), culture);
+            var context = new ResourceContext(bundle, Bundles[bundle].ToArray(), culture);
             var unmarshalled = (Marshallers ?? Enumerable.Empty<IResourceMarshaller>())
                 .Select(x => x.TryUnmarshal(context, bundleExtractor, name, typeof(T), out var result) ? result : null)
                 .FirstOrDefault();

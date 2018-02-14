@@ -1,0 +1,15 @@
+framework: net45
+
+source ../../../../dist
+  nuget Axle.Core framework: net45
+  nuget Axle.Resources framework: net45
+  nuget Axle.Resources.Java framework: net45
+
+source ../../../../dist/third-parties
+source https://nuget.org/api/v2
+  nuget Kajabity.Tools.Java content: none
+                            framework: net45
+
+group test
+  source https://nuget.org/api/v2
+    nuget NUnit 3.6.1 framework: net45

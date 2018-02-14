@@ -17,7 +17,7 @@ namespace Axle.Resources.Marshalling
         }
         public CompositeResourceMarshaller(params IResourceMarshaller[] extractors) : this(extractors as IEnumerable<IResourceMarshaller>) { }
 
-        public bool TryUnmarshal(ResourceExtractionContext context, IResourceExtractor extractor, string name, Type targetType, out object result)
+        public bool TryUnmarshal(ResourceContext context, IResourceExtractor extractor, string name, Type targetType, out object result)
         {
             foreach (var resourceMarshaller in _extractors)
             {

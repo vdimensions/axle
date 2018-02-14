@@ -14,6 +14,6 @@ namespace Axle.Resources.Marshalling
         /// <summary>
         /// Attempts to unmarshall a resource.
         /// </summary>
-        bool TryUnmarshal(ResourceExtractionContext context, IResourceExtractor extractor, string name, Type targetType, out object result);
+        bool TryUnmarshal(ResourceContext context, IResourceExtractor extractor, string name, Type targetType, out object result);
     }
 }

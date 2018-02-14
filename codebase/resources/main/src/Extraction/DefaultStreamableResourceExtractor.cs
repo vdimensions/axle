@@ -1,20 +1,20 @@
 ﻿using System;
 
-using Axle.Resources.Streaming;
+using Axle.Resources.Extraction.Streaming;
 
 
 namespace Axle.Resources.Extraction
 {
     public class DefaultStreamableResourceExtractor : AbstractStreamableResourceExtractor
     {
+        public DefaultStreamableResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
+        {
+        }
+
         protected override bool TryGetStreamAdapter(Uri location, out IUriStreamAdapter adapter)
         {
             #if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
-            // TODO: ResX
-            #endif
-
-            #if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
-            if (location.IsFile)
+            if (location.IsAbsoluteUri && location.IsFile)
             {
                 adapter = new FileSystemUriStreamAdapter();
                 return true;
@@ -22,7 +22,7 @@ namespace Axle.Resources.Extraction
             #endif
 
             #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
-            if (Axle.Extensions.Uri.UriExtensions.IsEmbeddedResource(location))
+            if (location.IsAbsoluteUri && Axle.Extensions.Uri.UriExtensions.IsEmbeddedResource(location))
             {
                 adapter = new EmbeddedResourceUriStreamAdapter();
                 return true;

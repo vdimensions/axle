@@ -10,7 +10,7 @@
         /// Attempts to locate a raw resource based on the provided parameters.
         /// </summary>
         /// <param name="context">
-        /// A <see cref="ResourceExtractionContext"/> instance that represents the context
+        /// A <see cref="ResourceContext"/> instance that represents the context
         /// of the current resource extraction.
         /// </param>
         /// <param name="name">
@@ -19,7 +19,7 @@
         /// <returns>
         /// An instance of <see cref="ResourceInfo"/> representing the extracted resource.
         /// </returns>
-        /// <seealso cref="ResourceExtractionContext"/>
-        ResourceInfo Extract(ResourceExtractionContext context, string name);
+        /// <seealso cref="ResourceContext"/>
+        ResourceInfo Extract(ResourceContext context, string name);
     }
 }

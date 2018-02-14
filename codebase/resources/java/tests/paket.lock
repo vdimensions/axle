@@ -4,6 +4,11 @@ NUGET
     Axle.Core (1.5.0.70)
     Axle.Resources (1.5.0.30)
       Axle.Core (>= 1.5)
+    Axle.Resources.Java (1.5.0.7)
+      Axle.Core (>= 1.5)
+      Axle.Resources (>= 1.5)
+      Kajabity.Tools.Java (>= 0.2)
+    Kajabity.Tools.Java (0.2.6617.28136) - content: none
 
 GROUP test
 NUGET

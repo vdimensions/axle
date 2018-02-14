@@ -20,37 +20,46 @@ namespace Axle.Resources.Java.Extraction
         {
             propertyFileName = keyPrefix = null;
 
-            var fragments = location.ToString().Split(StringSplitOptions.None, '/');
-            if (fragments.Length < 1)
-            {
-                return false;
-            }
-            string propertiesName = null;
-            var propertyFileLocationBuilder = new StringBuilder(fragments[0]);
-            var locationRemainderBuilder = new StringBuilder();
-            var sb = propertyFileLocationBuilder;
-            for (var i = 1; i < fragments.Length; i++)
-            {
-                sb.Append("/");
-                var fragment = fragments[i];
-                if (propertiesName == null && fragment.EndsWith(PropertiesExt, StringComparison.OrdinalIgnoreCase))
-                {
-                    propertiesName = fragment;
-                    sb = locationRemainderBuilder;
-                    continue;
-                }
-                sb.Append(fragment);
-            }
-            if (propertiesName == null)
-            {
-                return false;
-            }
+            var locStr = location.ToString();
+            keyPrefix = locStr.TakeAfterFirst(PropertiesExt);
+            propertyFileName = locStr.TakeBeforeFirst(keyPrefix);
 
-            keyPrefix = locationRemainderBuilder.ToString();
-            return true;
+            return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(PropertiesExt, StringComparison.OrdinalIgnoreCase);
+
+            //var fragments = location.ToString().Split(StringSplitOptions.None, '/');
+            //if (fragments.Length < 1)
+            //{
+            //    return false;
+            //}
+            //
+            //
+            //
+            //string propertiesName = null;
+            //var propertyFileLocationBuilder = new StringBuilder(fragments[0]);
+            //var locationRemainderBuilder = new StringBuilder();
+            //var sb = propertyFileLocationBuilder;
+            //for (var i = 1; i < fragments.Length; i++)
+            //{
+            //    sb.Append("/");
+            //    var fragment = fragments[i];
+            //    if (propertiesName == null && fragment.EndsWith(PropertiesExt, StringComparison.OrdinalIgnoreCase))
+            //    {
+            //        propertiesName = fragment;
+            //        sb = locationRemainderBuilder;
+            //        continue;
+            //    }
+            //    sb.Append(fragment);
+            //}
+            //if (propertiesName == null)
+            //{
+            //    return false;
+            //}
+            //
+            //keyPrefix = locationRemainderBuilder.ToString();
+            //return true;
         }
 
-        public override ResourceInfo Extract(ResourceExtractionContext context, string name, IResourceExtractor nextInChain)
+        public override ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
         {
             foreach (var location in context.LookupLocations)
             {

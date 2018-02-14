@@ -12,7 +12,7 @@ using Axle.Globalization;
 using Axle.Verification;
 
 
-namespace Axle.Resources.Streaming
+namespace Axle.Resources.Extraction.Streaming
 {
     /// <summary>
     /// An implementation of <see cref="IUriStreamAdapter"/> that deals with embedded resources.

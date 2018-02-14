@@ -25,7 +25,7 @@ namespace Axle.Resources.Extraction.ResX
             }
             using (resourceSet)
             {
-                return resourceSet.GetObject(location.ToString());
+                return resourceSet.GetObject(location.ToString().TrimStart('/'));
             }
         }
     }

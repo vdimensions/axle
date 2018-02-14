@@ -18,7 +18,7 @@ namespace Axle.Resources
                 _originalExtractor = originalExtractor;
             }
 
-            public ResourceInfo Extract(ResourceExtractionContext context, string name)
+            public ResourceInfo Extract(ResourceContext context, string name)
             {
                 context.VerifyArgument(nameof(context)).IsNotNull();
                 name.VerifyArgument(nameof(name)).IsNotNull();

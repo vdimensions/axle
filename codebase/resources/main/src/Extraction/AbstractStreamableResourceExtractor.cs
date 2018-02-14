@@ -2,7 +2,8 @@
 using System.Globalization;
 using System.IO;
 
-using Axle.Resources.Streaming;
+using Axle.Extensions.Uri;
+using Axle.Resources.Extraction.Streaming;
 
 
 namespace Axle.Resources.Extraction
@@ -17,12 +18,16 @@ namespace Axle.Resources.Extraction
             public UriStreamAdapterResourceInfo(Uri location, string name, CultureInfo culture, IUriStreamAdapter adapter)
                 : base(name, culture, "application/octet-stream")
             {
-                _location = location;
+                _location = location.Resolve(name);
                 _adapter = adapter;
             }
 
             /// <inheritdoc />
-            public override Stream Open() => _location == null ? _adapter.GetStream(_location) : null;
+            public override Stream Open() => _location != null ? _adapter.GetStream(_location) : null;
+        }
+
+        protected AbstractStreamableResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
+        {
         }
 
         protected abstract bool TryGetStreamAdapter(Uri location, out IUriStreamAdapter adapter);

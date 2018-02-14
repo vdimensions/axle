@@ -2,7 +2,7 @@
 using System.IO;
 
 
-namespace Axle.Resources.Streaming
+namespace Axle.Resources.Extraction.Streaming
 {
     /// <summary>
     /// An interface that is used to obtain a <see cref="Stream">data stream</see> from an <see cref="Uri"/>. 

@@ -21,17 +21,14 @@ namespace Axle.Resources.Extraction.ResX
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResXResourceExtractor"/> class.
         /// </summary>
-        /// <param name="type">
-        /// The type that represents the .NET resource container.
-        /// </param>
-        public DefaultResXResourceExtractor(Type type) : base(type)
-        {
-        }
+        public DefaultResXResourceExtractor() { }
+        public DefaultResXResourceExtractor(ResourceContextSplitStrategy splitStrategy) : base(splitStrategy) { }
 
         /// <inheritdoc />
-        protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, ResXResourceResolver resolver, string name)
+        protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
-            location = location.Resolve($"./{name}");
+            location = location.Resolve($"{name}");
+            var resolver = new ResXResourceResolver(resxType);
             switch (resolver.Resolve(location, culture))
             {
                 case string str:

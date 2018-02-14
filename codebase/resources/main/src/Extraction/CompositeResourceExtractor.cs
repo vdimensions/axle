@@ -17,6 +17,6 @@ namespace Axle.Resources.Extraction
             _extractors = extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value;
         }
 
-        public ResourceInfo Extract(ResourceExtractionContext context, string name) => _extractors.Select(x => x.Extract(context, name)).SingleOrDefault();
+        public ResourceInfo Extract(ResourceContext context, string name) => _extractors.Select(x => x.Extract(context, name)).SingleOrDefault();
     }
 }

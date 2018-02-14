@@ -6,7 +6,7 @@ using Axle.Extensions.Uri;
 using Axle.Verification;
 
 
-namespace Axle.Resources.Streaming
+namespace Axle.Resources.Extraction.Streaming
 {
     /// <summary>
     /// An implementation of <see cref="IUriStreamAdapter"/> that can handle filesystem locations.
@@ -25,6 +25,11 @@ namespace Axle.Resources.Streaming
                .IsNotNull()
                .IsTrue(u => u.IsAbsoluteUri, string.Format("The provided uri `{0}` must be absolute. ", uri)) 
                .IsTrue(CanHandle, string.Format("The provided uri `{0}` is not a valid file uri. ", uri));
+            var location = uri.AbsolutePath;
+            if (!File.Exists(location))
+            {
+                return null;
+            }
             return new FileStream(uri.AbsolutePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
         }
     }

@@ -1,0 +1,6 @@
+Axle.Core
+Axle.Resources
+Axle.Resources.Java
+
+group test
+  NUnit
