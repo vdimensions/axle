@@ -38,8 +38,7 @@ namespace Axle.Resources.Java
         public override Stream Open()
         {
             var result = new MemoryStream();
-            var writer = new JavaPropertyWriter(_data);
-            writer.Write(result, null);
+            new JavaPropertyWriter(_data).Write(result, null);
             result.Seek(0, SeekOrigin.Begin);
             return result;
         }
