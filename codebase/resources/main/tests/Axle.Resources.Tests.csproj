@@ -55,6 +55,15 @@
     <None Include="paket.references" />
     <None Include="paket.sh" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedText.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedText2.en.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="EmbeddedText2.bg.txt" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

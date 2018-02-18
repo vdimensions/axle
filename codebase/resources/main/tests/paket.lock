@@ -2,7 +2,7 @@ RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
     Axle.Core (1.5.0.70)
-    Axle.Resources (1.5.0.30)
+    Axle.Resources (1.5.0.39)
       Axle.Core (>= 1.5)
 
 GROUP test

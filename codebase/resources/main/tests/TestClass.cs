@@ -39,6 +39,28 @@ namespace Axle.Resources.Tests
         }
 
         [Test]
+        public void TestEmbeddedResourceAccess()
+        {
+            var parser = new UriParser();
+            var resourceManager = new DefaultResourceManager();
+            resourceManager.Bundles
+                .Configure("testBundle")
+                .Register(parser.Parse("assembly://Axle.Resources.Tests/"));
+
+            var fileResource = resourceManager.Resolve("testBundle", "EmbeddedText.txt", CultureInfo.CurrentCulture);
+
+            Assert.IsNotNull(fileResource, "Unable to find EmbeddedText.txt");
+            Assert.AreEqual("testBundle", fileResource.Bundle);
+
+            using (var stream = fileResource.Open())
+            {
+                var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
+                Assert.IsNotNull(data);
+                Console.Write(data);
+            }
+        }
+
+        [Test]
         public void TestResXResourceAccess()
         {
             var parser = new UriParser();

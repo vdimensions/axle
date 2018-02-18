@@ -8,7 +8,6 @@ using System.Reflection;
 using Axle.Environment;
 using Axle.Extensions.String;
 using Axle.Extensions.Uri;
-using Axle.Globalization;
 using Axle.Verification;
 
 
@@ -29,21 +28,6 @@ namespace Axle.Resources.Extraction.Streaming
             return runtime.LoadAssembly(assenblyName);
         }
 
-        internal static bool TryGetAssembly(IRuntime runtime, Uri uri, out Assembly assembly)
-        {
-            uri.VerifyArgument(nameof(uri)).IsNotNull();
-
-            if (uri.IsAbsoluteUri && uri.IsEmbeddedResource())
-            {
-                var assenblyName = uri.IsResource() ? uri.Host.TakeBeforeLast('.') : uri.Host;
-                assembly = runtime.LoadAssembly(assenblyName);
-                return true;
-            }
-            assembly = null;
-            return false;
-        }
-
-        // TODO: make this a method to IRuntime
         internal static Stream LoadEmbeddedResource(IRuntime runtime, Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
@@ -71,9 +55,44 @@ namespace Axle.Resources.Extraction.Streaming
                             var mrn = rootNamespace.Length > 0 ? $"{rootNamespace}.{escapedResourceName}" : escapedResourceName;
                             return asm.GetManifestResourceStream(mrn);
                         })
-                    .Where(x => x != null)
-                    .FirstOrDefault();
+                    .FirstOrDefault(x => x != null);
             return stream;
+        }
+
+        internal static bool CheckEmbeddedResourceName(IRuntime runtime, Assembly asm, string resourceName)
+        {
+            const string satelliteAssemblySuffix = ".resources";
+            var assemblyName = asm.VerifyArgument(nameof(asm)).IsNotNull().Value.GetName().Name.CutEnd(satelliteAssemblySuffix);
+            var escapedResourceName = runtime.GetEmbeddedResourcePath(resourceName);
+            var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
+            return asm.GetManifestResourceNames().Any(x => StringComparer.Ordinal.Equals(manifestResourceName, x));
+        }
+
+        public static bool TryCreate(Uri uri, CultureInfo culture, string name, out EmbeddedResourceUriStreamAdapter adapter)
+        {
+            var runtime = Platform.Runtime;
+            var assembly = GetAssembly(runtime, uri);
+            var actualAssembly = culture.Equals(CultureInfo.InvariantCulture) ? assembly : runtime.LoadSatelliteAssembly(assembly, culture);
+            /*
+             * Only create adapter if there is a satellite assembly when the culture is not invariant.
+             * Also, never create an adapter if the assembly does not contain the requested resource.
+             */
+            if (actualAssembly != null && CheckEmbeddedResourceName(runtime, actualAssembly, name))
+            {
+                adapter = new EmbeddedResourceUriStreamAdapter(actualAssembly, runtime);
+                return true;
+            }
+            adapter = null;
+            return false;
+        }
+
+        private readonly Assembly _assembly;
+        private readonly IRuntime _runtime;
+
+        private EmbeddedResourceUriStreamAdapter(Assembly assembly, IRuntime runtime)
+        {
+            _assembly = assembly;
+            _runtime = runtime;
         }
 
         internal bool CanHandle(Uri uri)
@@ -89,13 +108,7 @@ namespace Axle.Resources.Extraction.Streaming
                .IsTrue(u => u.IsAbsoluteUri, string.Format("The provided uri `{0}` must be absolute. ", uri))
                .IsTrue(CanHandle, string.Format("The provided uri `{0}` is not a valid embedded resource location. ", uri));
 
-            var runtime = Platform.Runtime;
-            var assembly = GetAssembly(runtime, uri);
-            var culture = CultureScope.CurrentUICulture;
-            var actualAssembly = culture.Equals(CultureInfo.InvariantCulture) ? assembly : runtime.LoadSatelliteAssembly(assembly, culture);
-            return actualAssembly == null
-                ? null
-                : LoadEmbeddedResource(runtime, actualAssembly, uri.PathAndQuery.TakeBeforeFirst('?').Substring(1));
+            return LoadEmbeddedResource(_runtime, _assembly, uri.PathAndQuery.TakeBeforeFirst('?').Substring(1));
         }
     }
 }

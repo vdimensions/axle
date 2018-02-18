@@ -23,19 +23,22 @@ namespace Axle.Resources.Extraction
             }
 
             /// <inheritdoc />
-            public override Stream Open() => _location != null ? _adapter.GetStream(_location) : null;
+            public override Stream Open()
+            {
+                return _location != null ? _adapter.GetStream(_location) : null;
+            }
         }
 
         protected AbstractStreamableResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
         {
         }
 
-        protected abstract bool TryGetStreamAdapter(Uri location, out IUriStreamAdapter adapter);
+        protected abstract bool TryGetStreamAdapter(Uri location, CultureInfo culture, string name, out IUriStreamAdapter adapter);
 
-        protected sealed override ResourceInfo Extract(Uri location, CultureInfo culture, string s)
+        protected sealed override ResourceInfo Extract(Uri location, CultureInfo culture, string name)
         {
-            return TryGetStreamAdapter(location, out var adapter)
-                ? new UriStreamAdapterResourceInfo(location, s, culture, adapter)
+            return TryGetStreamAdapter(location, culture, name, out var adapter)
+                ? new UriStreamAdapterResourceInfo(location, name, culture, adapter)
                 : null;
         }
     }
