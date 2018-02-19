@@ -5,7 +5,7 @@
     /// A chained extractor can use the preceding extractors to obtain other resource objects as part of its own 
     /// extraction implementation.
     /// </summary>
-    public interface IResourceExtractorChain : IResourceExtractor
+    public interface IResourceExtractionChain : IResourceExtractor
     {
         /// <summary>
         /// Attempts to locate a raw resource based on the provided parameters.
@@ -20,7 +20,7 @@
         /// <param name="nextInChain">
         /// A reference to the preceding resource extraction chain. This allows calling its
         /// own <see cref="IResourceExtractor.Extract"/> method as part of the extraction logic
-        /// within the current <see cref="IResourceExtractorChain"/> implementation.
+        /// within the current <see cref="IResourceExtractionChain"/> implementation.
         /// </param>
         /// <returns>
         /// An instance of <see cref="ResourceInfo"/> representing the extracted resource.

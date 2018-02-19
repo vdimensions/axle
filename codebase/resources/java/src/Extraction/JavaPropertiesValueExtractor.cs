@@ -12,7 +12,7 @@ namespace Axle.Resources.Java.Extraction
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementation that can access the values defined in a Java properties file.
     /// </summary>
-    public sealed class JavaPropertiesValueExtractor : ResourceExtractorChain
+    public sealed class JavaPropertiesValueExtractor : IResourceExtractor
     {
         /// <summary>
         /// Creates a new instance of the <see cref="JavaPropertiesValueExtractor"/> class.
@@ -34,40 +34,39 @@ namespace Axle.Resources.Java.Extraction
         /// <summary>
         /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java properties file. 
         /// </summary>
-        public override ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
+        public ResourceInfo Extract(ResourceContext context, string name)
         {
-            foreach (var location in context.LookupLocations)
+            if (GetPropertiesFileData(context.Location, out var propertyFileName, out var keyPrefix))
             {
-                if (GetPropertiesFileData(location, out var propertyFileName, out var keyPrefix))
-                {
-                    IDictionary<string, string> props = null;
-                    // TODO: context.Except
-                    var propertyResource = nextInChain.Extract(context, propertyFileName);
-                    switch (propertyResource)
-                    {
-                        case JavaPropertiesResourceInfo jp:
-                            props = jp.Data;
-                            break;
-                        default:
-                            using (var stream = propertyResource?.Open())
-                            {
-                                if (stream != null)
-                                {
-                                    var jp = new JavaProperties();
-                                    jp.Load(stream);
-                                    props = jp;
-                                }
-                            }
-                            break;
-                    }
+                IDictionary<string, string> props = null;
 
-                    string result = null;
-                    if (props?.TryGetValue($"{keyPrefix}{name}", out result) ?? false)
-                    {
-                        return new TextResourceInfo(name, context.Culture, result);
-                    }
+                // TODO: context.Except
+                var propertyResource = context.ExtractionChain.Extract(propertyFileName);
+                switch (propertyResource)
+                {
+                    case JavaPropertiesResourceInfo jp:
+                        props = jp.Data;
+                        break;
+                    default:
+                        using (var stream = propertyResource?.Open())
+                        {
+                            if (stream != null)
+                            {
+                                var jp = new JavaProperties();
+                                jp.Load(stream);
+                                props = jp;
+                            }
+                        }
+
+                        break;
+                }
+
+                if (props != null && props.TryGetValue($"{keyPrefix}{name}", out var result))
+                {
+                    return new TextResourceInfo(name, context.Culture, result);
                 }
             }
+
             return null;
         }
     }

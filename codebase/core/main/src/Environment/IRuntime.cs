@@ -10,18 +10,6 @@ namespace Axle.Environment
 	/// </summary>
     public partial interface IRuntime
     {
-        /// <summary>
-        /// Converts the provided by the <paramref name="resourceName"/> parameter string to
-        /// a valid path for an embedded resource.
-        /// </summary>
-        /// <param name="resourceName">
-        /// The resource name to be converted to an embedment path.
-        /// </param>
-        /// <returns>
-        /// A valid embedded resource path.
-        /// </returns>
-        string GetEmbeddedResourcePath(string resourceName);
-
         IEnumerable<Assembly> GetAssemblies();
 
         /// <summary>

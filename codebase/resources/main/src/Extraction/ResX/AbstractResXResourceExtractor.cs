@@ -20,8 +20,7 @@ namespace Axle.Resources.Extraction.ResX
         /// <summary>
         /// Creates a new instance of the current <see cref="AbstractResXResourceExtractor"/> implementation.
         /// </summary>
-        protected AbstractResXResourceExtractor() : base(ResourceContextSplitStrategy.ByLocationThenCulture) { }
-        protected AbstractResXResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy) { }
+        protected AbstractResXResourceExtractor() : base() { }
 
         private bool TryGetResXType(Uri location, out Type type, out string prefix)
         {
@@ -46,8 +45,10 @@ namespace Axle.Resources.Extraction.ResX
         }
 
         /// <inheritdoc />
-        protected sealed override ResourceInfo Extract(Uri location, CultureInfo culture, string name)
+        protected sealed override ResourceInfo DoExtract(ResourceContext context, string name)
         {
+            var location = context.Location;
+            var culture = context.Culture;
             if (TryGetResXType(location, out var type, out var prefix))
             {
                 return ExtractResource(new Uri($"{prefix}/", UriKind.Relative), culture, type, name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());

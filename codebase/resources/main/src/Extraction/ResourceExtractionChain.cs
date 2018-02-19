@@ -6,13 +6,13 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
-    public class ResourceExtractorChain : IResourceExtractorChain
+    public class ResourceExtractionChain : IResourceExtractionChain
     {
-        private sealed class ChainCompositeResourceExtractor : IResourceExtractor
+        private sealed class ResourceExtractionChainLink : IResourceExtractor
         {
             private readonly IResourceExtractor _a, _b;
 
-            public ChainCompositeResourceExtractor(IResourceExtractor a, IResourceExtractor b)
+            public ResourceExtractionChainLink(IResourceExtractor a, IResourceExtractor b)
             {
                 _a = a;
                 _b = b;
@@ -20,7 +20,7 @@ namespace Axle.Resources.Extraction
 
             public ResourceInfo Extract(ResourceContext context, string name)
             {
-                if (_a is IResourceExtractorChain c)
+                if (_a is IResourceExtractionChain c)
                 {
                     return c.Extract(context, name, _b);
                 }
@@ -30,9 +30,9 @@ namespace Axle.Resources.Extraction
 
         private readonly IResourceExtractor _next;
 
-        public ResourceExtractorChain(IEnumerable<IResourceExtractor> extractors) 
+        public ResourceExtractionChain(IEnumerable<IResourceExtractor> extractors) 
             : this(extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value.ToArray()) { }
-        public ResourceExtractorChain(params IResourceExtractor[] extractors)
+        public ResourceExtractionChain(params IResourceExtractor[] extractors)
         {
             switch (extractors.Length)
             {
@@ -46,7 +46,7 @@ namespace Axle.Resources.Extraction
                     var collapsed = extractors[extractors.Length - 1];
                     for (var i = extractors.Length - 2; i >= 0; i--)
                     {
-                        collapsed = new ChainCompositeResourceExtractor(extractors[i], collapsed);
+                        collapsed = new ResourceExtractionChainLink(extractors[i], collapsed);
                     }
                     _next = collapsed;
                     break;

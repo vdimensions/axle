@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Globalization;
 
-using Axle.Resources.Extraction.Streaming;
 
-
-namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction.Embedded
 {
     public class EmbeddedResourceExtractor : AbstractStreamableResourceExtractor
     {
-        public EmbeddedResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy) { }
+        //public EmbeddedResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy) { }
 
         protected override bool TryGetStreamAdapter(Uri location, CultureInfo culture, string name, out IUriStreamAdapter adapter)
         {

@@ -20,11 +20,10 @@ namespace Axle.Resources.Extraction.ResX
         /// Creates a new instance of the <see cref="SimpleResXResourceExtractor"/> class.
         /// </summary>
         public SimpleResXResourceExtractor() : base() { }
-        public SimpleResXResourceExtractor(ResourceContextSplitStrategy splitStrategy) : base(splitStrategy) { }
 
         protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
-            location = location.Resolve($"{name}");
+            location = location.Resolve(name);
             var resolver = new ResXResourceResolver(resxType);
             switch (resolver.Resolve(location, culture))
             {

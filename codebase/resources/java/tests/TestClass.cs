@@ -24,10 +24,10 @@ namespace Axle.Resources.Java.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                            .Configure("testBundle")
-                               .Register(parser.Parse("file:///C:/Users/Ivaylo/Desktop/"))
-                               .Register(parser.Parse("TestMessages.properties"));
+                               .Register(parser.Parse("TestMessages.properties"))
+                               .Register(parser.Parse("file:///C:/Users/Ivaylo/Desktop/"));
             resourceManager.Extractors
-                           .Register(new JavaPropertiesResourceExtractor())
+                           .Register(new JavaPropertiesFileExtractor())
                            .Register(new JavaPropertiesValueExtractor());
 
             var resxResource = resourceManager.Resolve("testBundle", "Greeting", CultureInfo.CurrentCulture);

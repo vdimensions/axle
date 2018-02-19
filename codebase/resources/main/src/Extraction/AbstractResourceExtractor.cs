@@ -1,25 +1,28 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction
 {
-    public abstract class AbstractResourceExtractor : AbstractAggregateResourceExtractor
+    public abstract class AbstractResourceExtractor : AbstractResourceExtractor<ResourceInfo>
     {
-        protected AbstractResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
+        protected AbstractResourceExtractor()
         {
-        }
-
-        /// <inheritdoc />
-        protected sealed override ResourceInfo Aggregate(IEnumerable<ResourceInfo> resources) => resources.FirstOrDefault();
+        }        
     }
-    public abstract class AbstractResourceExtractor<T> : AbstractAggregateResourceExtractor<T> where T: ResourceInfo
+    public abstract class AbstractResourceExtractor<T> : IResourceExtractor where T: ResourceInfo
     {
-        protected AbstractResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
+        protected AbstractResourceExtractor()
         {
         }
 
-        /// <inheritdoc />
-        protected sealed override T Aggregate(IEnumerable<T> resources) => resources.FirstOrDefault();
+        public ResourceInfo Extract(ResourceContext context, string name)
+        {
+            return DoExtract(context.VerifyArgument(nameof(context)).IsNotNull(), name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+        }
+
+        protected virtual T DoExtract(ResourceContext context, string name)
+        {
+            return (T) context.ExtractionChain.Extract(name);
+        }
     }
 }

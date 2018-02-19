@@ -1,77 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-
-using Axle.Extensions.Globalization.CultureInfo;
+using System.Linq;
 
 
 namespace Axle.Resources.Extraction
 {
-    public sealed class ResourceContext
+    public sealed partial class ResourceContext
     {
-        private readonly string _bundle;
         private readonly Uri[] _locations;
-        private readonly CultureInfo _culture;
+        private readonly int _currentLocationIndex;
 
-        internal ResourceContext(string bundle, Uri[] locations, CultureInfo culture)
+        internal ResourceContext(string bundle, Uri[] locations, CultureInfo culture, IResourceExtractor[] extractors)
+            : this(bundle, locations, -1, culture, extractors) { }
+        private ResourceContext(
+                string bundle, 
+                Uri[] locations, 
+                int currentLocationIndex, 
+                CultureInfo culture, 
+                IResourceExtractor[] extractors)
         {
-            _bundle = bundle;
+            Bundle = bundle;
             _locations = locations;
-            _culture = culture;
+            _currentLocationIndex = currentLocationIndex;
+            Culture = culture;
+
+            var subContexts = GetSubContexts(extractors).ToArray();
+            ExtractionChain = new ContextExtractionChain(subContexts, extractors);
         }
 
-        /// <summary>
-        /// Splits the current <see cref="ResourceContext"/> instance into multiple <see cref="ResourceContext"/> instances
-        /// using a specificed <paramref name="strategy"/>.
-        /// </summary>
-        /// <param name="strategy">
-        /// One of the values of the <see cref="ResourceContextSplitStrategy"/> enumeration.
-        /// </param>
-        /// <returns>
-        /// A collection of <see cref="ResourceContext"/> instances, that determines the order of resolution for composite resources.
-        /// </returns>
-        public IEnumerable<ResourceContext> Split(ResourceContextSplitStrategy strategy)
+        private IEnumerable<ResourceContext> GetSubContexts(IResourceExtractor[] extractors)
         {
-            switch (strategy)
+            for (var i = _currentLocationIndex + 1; i < _locations.Length; i++)
             {
-                case ResourceContextSplitStrategy.ByLocation:
-                    if (_locations.Length <= 1)
-                    {
-                        yield return this;
-                    }
-                    else
-                    {
-                        foreach (var location in _locations)
-                        {
-                            yield return new ResourceContext(Bundle, new[] { location }, Culture);
-                        }
-                    }
-                    break;
-                case ResourceContextSplitStrategy.ByCulture:
-                    foreach (var c in _culture.ExpandHierarchy())
-                    {
-                        yield return new ResourceContext(Bundle, _locations, c);
-                    }
-                    break;
-                case ResourceContextSplitStrategy.ByCultureThenLocation:
-                    foreach (var c in _culture.ExpandHierarchy())
-                    foreach (var location in _locations)
-                    {
-                        yield return new ResourceContext(Bundle, new[] { location }, c);
-                    }
-                    break;
-                case ResourceContextSplitStrategy.ByLocationThenCulture:
-                    foreach (var location in _locations)
-                    foreach (var c in _culture.ExpandHierarchy())
-                    {
-                        yield return new ResourceContext(Bundle, new[] { location }, c);
-                    }
-                    break;
+                yield return new ResourceContext(Bundle, _locations, i, Culture, extractors);
             }
         }
 
-        public string Bundle => _bundle;
-        public IEnumerable<Uri> LookupLocations => _locations;
-        public CultureInfo Culture => _culture;
+        public string Bundle { get; }
+        public Uri Location => _currentLocationIndex < 0 ? null :_locations[_currentLocationIndex];
+        //public IEnumerable<Uri> LookupLocations => _locations;
+        public CultureInfo Culture { get; }
+        public IContextExtractionChain ExtractionChain { get; }
     }
 }

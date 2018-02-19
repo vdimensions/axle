@@ -3,7 +3,7 @@ using System.Globalization;
 using System.IO;
 
 using Axle.Extensions.Uri;
-using Axle.Resources.Extraction.Streaming;
+using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction
@@ -29,17 +29,15 @@ namespace Axle.Resources.Extraction
             }
         }
 
-        protected AbstractStreamableResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
-        {
-        }
-
         protected abstract bool TryGetStreamAdapter(Uri location, CultureInfo culture, string name, out IUriStreamAdapter adapter);
 
-        protected sealed override ResourceInfo Extract(Uri location, CultureInfo culture, string name)
+        protected override ResourceInfo DoExtract(ResourceContext context, string name)
         {
+            var location = context.Location;
+            var culture = context.Culture;
             return TryGetStreamAdapter(location, culture, name, out var adapter)
-                ? new UriStreamAdapterResourceInfo(location, name, culture, adapter)
-                : null;
+                    ? new UriStreamAdapterResourceInfo(location, name, culture, adapter)
+                    : null;
         }
     }
 }

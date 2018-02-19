@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Globalization;
 
-using Axle.Resources.Extraction.Streaming;
 
-
-namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction.FileSystem
 {
     public class FileSystemResourceExtractor : AbstractStreamableResourceExtractor
     {
-        public FileSystemResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
-        {
-        }
+        //public FileSystemResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
+        //{
+        //}
 
         protected override bool TryGetStreamAdapter(Uri location, CultureInfo culture, string name, out IUriStreamAdapter adapter)
         {

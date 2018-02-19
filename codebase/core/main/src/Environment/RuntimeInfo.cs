@@ -24,19 +24,19 @@ namespace Axle.Environment
         #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Version version;
+        private readonly Version _version;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Version frameworkVersion;
+        private readonly Version _frameworkVersion;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly RuntimeImplementation impl = RuntimeImplementation.Unknown;
+        private readonly RuntimeImplementation _impl = RuntimeImplementation.Unknown;
 
         #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
         internal RuntimeInfo()
         {
             var monoVersion = GetMonoVersion();
-            this.frameworkVersion = System.Environment.Version;
-            this.version = monoVersion ?? frameworkVersion;
-            this.impl = monoVersion != null ? RuntimeImplementation.Mono : RuntimeImplementation.NetFramework;
+            _frameworkVersion = System.Environment.Version;
+            _version = monoVersion ?? _frameworkVersion;
+            _impl = monoVersion != null ? RuntimeImplementation.Mono : RuntimeImplementation.NetFramework;
         }
         #endif
 
@@ -95,14 +95,9 @@ namespace Axle.Environment
         }
         #endif
 
-        public string GetEmbeddedResourcePath(string resourceName)
-        {
-            return resourceName.VerifyArgument(nameof(resourceName)).IsNotNull().Value.Replace(" ", "_").Replace("-", "_").Replace("\\", ".").Replace("/", ".");
-        }
-
-        public Version Version => version;
-        public Version FrameworkVersion => frameworkVersion;
-        public RuntimeImplementation Implementation => impl;
+        public Version Version => _version;
+        public Version FrameworkVersion => _frameworkVersion;
+        public RuntimeImplementation Implementation => _impl;
 
         #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
         public AppDomain Domain => AppDomain.CurrentDomain;

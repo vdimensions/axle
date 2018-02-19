@@ -6,7 +6,7 @@ using Axle.Extensions.Uri;
 using Axle.Verification;
 
 
-namespace Axle.Resources.Extraction.Streaming
+namespace Axle.Resources.Extraction.FileSystem
 {
     /// <summary>
     /// An implementation of <see cref="IUriStreamAdapter"/> that can handle filesystem locations.

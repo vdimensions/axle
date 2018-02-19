@@ -29,6 +29,7 @@ namespace Axle.Resources.Tests
 
             Assert.IsNotNull(fileResource, "Unable to find LL2H.txt");
             Assert.AreEqual("testBundle", fileResource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Culture);
 
             using (var stream = fileResource.Open())
             {
@@ -51,6 +52,7 @@ namespace Axle.Resources.Tests
 
             Assert.IsNotNull(fileResource, "Unable to find EmbeddedText.txt");
             Assert.AreEqual("testBundle", fileResource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Culture);
 
             using (var stream = fileResource.Open())
             {

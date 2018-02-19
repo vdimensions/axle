@@ -12,7 +12,7 @@ namespace Axle.Resources.Java.Extraction
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementations capable of creating Java properties files.
     /// </summary>
-    public sealed class JavaPropertiesFileExtractor : ResourceExtractorChain
+    public sealed class JavaPropertiesFileExtractor : IResourceExtractor
     {
         /// <summary>
         /// Creates a new instance of the <see cref="JavaPropertiesFileExtractor"/> class.
@@ -21,28 +21,28 @@ namespace Axle.Resources.Java.Extraction
 
         /// <inheritdoc />
         /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>
-        public override ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
+        public ResourceInfo Extract(ResourceContext context, string name)
         {
             var utf8 = Encoding.UTF8;
             var finalProperties = new Dictionary<string, string>(StringComparer.Ordinal);
-            foreach (var localContext in context.Split(ResourceContextSplitStrategy.ByLocation))
+            var propertiesFileStream = context.ExtractionChain.Extract(name);
+            using (var stream = propertiesFileStream?.Open())
             {
-                using (var stream = nextInChain.Extract(localContext, name)?.Open())
+                if (stream == null)
                 {
-                    if (stream == null)
+                    return null;
+                }
+
+                var propertiesFile = new JavaProperties();
+                propertiesFile.Load(stream, utf8);
+                foreach (var key in propertiesFile.Keys)
+                {
+                    if (finalProperties.ContainsKey(key))
                     {
                         continue;
                     }
-                    var propertiesFile = new JavaProperties();
-                    propertiesFile.Load(stream, utf8);
-                    foreach (var key in propertiesFile.Keys)
-                    {
-                        if (finalProperties.ContainsKey(key))
-                        {
-                            continue;
-                        }
-                        finalProperties[key] = propertiesFile[key];
-                    }
+
+                    finalProperties[key] = propertiesFile[key];
                 }
             }
 

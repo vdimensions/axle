@@ -9,7 +9,7 @@ if [ $? -ne 0 ]; then
   exit
 fi
 
-rm -rf obj/
+#rm -rf obj/
 dotnet restore $project.csproj
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"

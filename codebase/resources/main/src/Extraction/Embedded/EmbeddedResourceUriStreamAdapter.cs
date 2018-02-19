@@ -11,28 +11,43 @@ using Axle.Extensions.Uri;
 using Axle.Verification;
 
 
-namespace Axle.Resources.Extraction.Streaming
+namespace Axle.Resources.Extraction.Embedded
 {
     /// <summary>
     /// An implementation of <see cref="IUriStreamAdapter"/> that deals with embedded resources.
     /// </summary>
-    public sealed class EmbeddedResourceUriStreamAdapter : IUriStreamAdapter
+    internal sealed class EmbeddedResourceUriStreamAdapter : IUriStreamAdapter
     {
-        internal static Assembly GetAssembly(IRuntime runtime, Uri uri)
+        private static Assembly GetAssembly(IRuntime runtime, Uri uri)
         {
             uri.VerifyArgument(nameof(uri))
                 .IsNotNull()
                 .IsTrue(x => x.IsAbsoluteUri, "Provided uri is not an absolute uri.")
                 .IsTrue(x => x.IsEmbeddedResource(), $"Provided uri does not have a valid schema that suggests it is an assebly uri. Assembly uri have one of the following shcemas: {UriExtensions.UriSchemeAssembly} or {UriExtensions.UriSchemeResource}");
-            var assenblyName = uri.IsResource() ? uri.Host.TakeBeforeLast('.') : uri.Host;
+            var assenblyName = uri.IsResource() ? uri.Host.TakeBeforeLast(".dll").TakeBeforeLast(".exe") : uri.Host;
             return runtime.LoadAssembly(assenblyName);
         }
 
-        internal static Stream LoadEmbeddedResource(IRuntime runtime, Assembly asm, string resourceName)
+        /// <summary>
+        /// Converts the provided by the <paramref name="resourceName"/> parameter string to
+        /// a valid path for an embedded resource.
+        /// </summary>
+        /// <param name="resourceName">
+        /// The resource name to be converted to an embedment path.
+        /// </param>
+        /// <returns>
+        /// A valid embedded resource path.
+        /// </returns>
+        private static string GetEmbeddedResourcePath(string resourceName)
+        {
+            return resourceName.VerifyArgument(nameof(resourceName)).IsNotNull().Value.Replace(" ", "_").Replace("-", "_").Replace("\\", ".").Replace("/", ".");
+        }
+
+        private static Stream LoadEmbeddedResource(Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
             var assemblyName = asm.VerifyArgument(nameof(asm)).IsNotNull().Value.GetName().Name.CutEnd(satelliteAssemblySuffix);
-            var escapedResourceName = runtime.GetEmbeddedResourcePath(resourceName);
+            var escapedResourceName = GetEmbeddedResourcePath(resourceName);
             var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             /***
              * In case we have a root namespace of the project different from the assembly name,
@@ -59,16 +74,16 @@ namespace Axle.Resources.Extraction.Streaming
             return stream;
         }
 
-        internal static bool CheckEmbeddedResourceName(IRuntime runtime, Assembly asm, string resourceName)
+        private static bool ContainsEmbeddedResource(Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
             var assemblyName = asm.VerifyArgument(nameof(asm)).IsNotNull().Value.GetName().Name.CutEnd(satelliteAssemblySuffix);
-            var escapedResourceName = runtime.GetEmbeddedResourcePath(resourceName);
+            var escapedResourceName = GetEmbeddedResourcePath(resourceName);
             var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             return asm.GetManifestResourceNames().Any(x => StringComparer.Ordinal.Equals(manifestResourceName, x));
         }
 
-        public static bool TryCreate(Uri uri, CultureInfo culture, string name, out EmbeddedResourceUriStreamAdapter adapter)
+        internal static bool TryCreate(Uri uri, CultureInfo culture, string name, out EmbeddedResourceUriStreamAdapter adapter)
         {
             var runtime = Platform.Runtime;
             var assembly = GetAssembly(runtime, uri);
@@ -77,9 +92,9 @@ namespace Axle.Resources.Extraction.Streaming
              * Only create adapter if there is a satellite assembly when the culture is not invariant.
              * Also, never create an adapter if the assembly does not contain the requested resource.
              */
-            if (actualAssembly != null && CheckEmbeddedResourceName(runtime, actualAssembly, name))
+            if (actualAssembly != null && ContainsEmbeddedResource(actualAssembly, name))
             {
-                adapter = new EmbeddedResourceUriStreamAdapter(actualAssembly, runtime);
+                adapter = new EmbeddedResourceUriStreamAdapter(actualAssembly);
                 return true;
             }
             adapter = null;
@@ -87,12 +102,10 @@ namespace Axle.Resources.Extraction.Streaming
         }
 
         private readonly Assembly _assembly;
-        private readonly IRuntime _runtime;
 
-        private EmbeddedResourceUriStreamAdapter(Assembly assembly, IRuntime runtime)
+        private EmbeddedResourceUriStreamAdapter(Assembly assembly)
         {
             _assembly = assembly;
-            _runtime = runtime;
         }
 
         internal bool CanHandle(Uri uri)
@@ -108,7 +121,7 @@ namespace Axle.Resources.Extraction.Streaming
                .IsTrue(u => u.IsAbsoluteUri, string.Format("The provided uri `{0}` must be absolute. ", uri))
                .IsTrue(CanHandle, string.Format("The provided uri `{0}` is not a valid embedded resource location. ", uri));
 
-            return LoadEmbeddedResource(_runtime, _assembly, uri.PathAndQuery.TakeBeforeFirst('?').Substring(1));
+            return LoadEmbeddedResource(_assembly, uri.PathAndQuery.TakeBeforeFirst('?').Substring(1));
         }
     }
 }

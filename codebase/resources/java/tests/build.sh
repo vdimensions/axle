@@ -22,9 +22,3 @@ if [ $? -ne 0 ]; then
   echo ""
   exit
 fi
-$msbuild $project.dist.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi

@@ -16,11 +16,10 @@ namespace Axle.Resources.Extraction.ResX
         /// Creates a new instance of the <see cref="TextResXResourceExtractor"/> class.
         /// </summary>
         public TextResXResourceExtractor() { }
-        public TextResXResourceExtractor(ResourceContextSplitStrategy splitStrategy) : base(splitStrategy) { }
 
         protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
-            var lookupName = location.Resolve($"{name}").ToString().TrimStart('/');
+            var lookupName = location.Resolve(name).ToString().TrimStart('/');
             var val = new System.Resources.ResourceManager(resxType).GetString(lookupName, culture);
             return val == null ? null : new TextResourceInfo(name, culture, val);
         }
