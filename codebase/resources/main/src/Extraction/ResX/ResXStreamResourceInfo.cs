@@ -13,7 +13,7 @@ namespace Axle.Resources.Extraction.ResX
         private readonly Uri _location;
         private readonly ResXResourceResolver _resolver;
 
-        public ResXStreamResourceInfo(ResXResourceResolver resolver, Uri location, string name, CultureInfo culture) 
+        internal ResXStreamResourceInfo(ResXResourceResolver resolver, Uri location, string name, CultureInfo culture) 
             : base(name, culture, "application/octet-stream")
         {
             _location = location.VerifyArgument(nameof(location)).IsNotNull();

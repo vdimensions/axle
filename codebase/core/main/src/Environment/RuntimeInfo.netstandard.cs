@@ -17,7 +17,7 @@ namespace Axle.Environment
         public IEnumerable<Assembly> GetReferencingAssemblies(string assemblyName)
         {
             var assemblies = new List<Assembly>();
-#if NETSTANDARD1_6
+            #if NETSTANDARD1_6
             //foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
 
             //var dependencies = AssemblyLoadContext.Default.GetLoadedAssemblies();
@@ -30,16 +30,16 @@ namespace Axle.Environment
             //        assemblies.Add(assembly);
             //    }
             //}
-#endif
+            #endif
             return assemblies.ToArray();
         }
-#if NETSTANDARD1_6
+        #if NETSTANDARD1_6
         private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string assemblyName)
         {
             var cmp = StringComparison.OrdinalIgnoreCase;
             return compilationLibrary.Name.Equals(assemblyName, cmp) || compilationLibrary.Dependencies.Any(d => d.Name.StartsWith(assemblyName, cmp));
         }
-#endif
+        #endif
 
         public Assembly LoadAssembly(string assemblyName)
         {

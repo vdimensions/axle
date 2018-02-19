@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="short"/> and <see cref="double"/>.
     /// </summary>
-    public class Int16ToDoubleConverter : AbstractTwoWayConverter<short, double>
+    public sealed class Int16ToDoubleConverter : AbstractTwoWayConverter<short, double>
     {
-        protected override double DoConvert(short source) { return source; }
+        /// <inheritdoc />
+        protected override double DoConvert(short source) => source;
 
-        protected override short DoConvertBack(double source) { return (short) source; }
+        /// <inheritdoc />
+        protected override short DoConvertBack(double source) => (short) source;
     }
 }

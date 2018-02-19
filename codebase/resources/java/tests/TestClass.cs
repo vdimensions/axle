@@ -34,6 +34,7 @@ namespace Axle.Resources.Java.Tests
 
             Assert.IsNotNull(resxResource, "Unable to find Greeting message");
             Assert.AreEqual("testBundle", resxResource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resxResource.Culture);
 
             using (var stream = resxResource.Open())
             {

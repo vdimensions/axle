@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="byte"/> and <see cref="decimal"/>.
     /// </summary>
-    public class ByteToDecimalConverter : AbstractTwoWayConverter<byte, decimal>
+    public sealed class ByteToDecimalConverter : AbstractTwoWayConverter<byte, decimal>
     {
-        protected override decimal DoConvert(byte source) { return source; }
+        /// <inheritdoc />
+        protected override decimal DoConvert(byte source) => source;
 
-        protected override byte DoConvertBack(decimal source) { return (byte) source; }
+        /// <inheritdoc />
+        protected override byte DoConvertBack(decimal source) => (byte) source;
     }
 }

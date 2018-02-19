@@ -82,13 +82,8 @@ namespace Axle.Environment
             var paths = new[] { Domain.RelativeSearchPath, Domain.BaseDirectory };
             var satelliteAssemblyPath = paths
                 .Where(x => !string.IsNullOrEmpty(x))
-                .Select(
-                    x =>
-                    {
-                        var path = System.IO.Path.Combine(x, $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll");
-                        return System.IO.File.Exists(path) ? path : null;
-                    })
-                .FirstOrDefault(x => x != null);
+                .Select(x => System.IO.Path.Combine(x, $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll"))
+                .FirstOrDefault(System.IO.File.Exists);
             return satelliteAssemblyPath != null 
                 ? LoadAssembly(System.IO.Path.GetFullPath(satelliteAssemblyPath)) 
                 : null;

@@ -4,7 +4,7 @@
     [System.Serializable]
     #endif
     //[Maturity(CodeMaturity.ProofOfConcept)]
-    public enum AccessorType
+    public enum AccessorType : byte
     {
         Get, 
         Set, 

@@ -14,39 +14,33 @@ namespace Axle.Resources.Java.Extraction
     /// </summary>
     public sealed class JavaPropertiesFileExtractor : IResourceExtractor
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="JavaPropertiesFileExtractor"/> class.
-        /// </summary>
-        public JavaPropertiesFileExtractor() : base() { }
-
         /// <inheritdoc />
         /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>
         public ResourceInfo Extract(ResourceContext context, string name)
         {
             var utf8 = Encoding.UTF8;
             var finalProperties = new Dictionary<string, string>(StringComparer.Ordinal);
-            var propertiesFileStream = context.ExtractionChain.Extract(name);
-            using (var stream = propertiesFileStream?.Open())
+            foreach (var propertiesFileResourceInfo in context.ExtractionChain.ExtractAll(name))
             {
-                if (stream == null)
+                using (var stream = propertiesFileResourceInfo?.Open())
                 {
-                    return null;
-                }
-
-                var propertiesFile = new JavaProperties();
-                propertiesFile.Load(stream, utf8);
-                foreach (var key in propertiesFile.Keys)
-                {
-                    if (finalProperties.ContainsKey(key))
+                    if (stream == null)
                     {
                         continue;
                     }
 
-                    finalProperties[key] = propertiesFile[key];
+                    var propertiesFile = new JavaProperties();
+                    propertiesFile.Load(stream, utf8);
+                    foreach (var key in propertiesFile.Keys)
+                    {
+                        if (!finalProperties.ContainsKey(key))
+                        {
+                            finalProperties[key] = propertiesFile[key];
+                        }                        
+                    }
                 }
             }
-
-            return new JavaPropertiesResourceInfo(name, context.Culture, finalProperties);
+            return finalProperties.Count == 0 ? null : new JavaPropertiesResourceInfo(name, context.Culture, finalProperties);
         }
     }
 }

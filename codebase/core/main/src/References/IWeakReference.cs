@@ -13,10 +13,10 @@ namespace Axle.References
     public interface IWeakReference<T> : IReference<T> where T: class
     {
         /// <summary>
-        /// Gets or sets the object (the <see cref="Value">target</see>) referenced by the current <see cref="WeakReference{T}">weak reference</see> instance. 
+        /// Gets or sets the object (the <see cref="Value">target</see>) referenced by the current <see cref="IWeakReference{T}">weak reference</see> instance. 
         /// </summary>
         /// <returns>
-        /// <c>null</c> if the object referenced by the current <see cref="WeakReference{T}">weak reference</see> instance has been 
+        /// <c>null</c> if the object referenced by the current <see cref="IWeakReference{T}">weak reference</see> instance has been 
         /// garbage collected; otherwise, a reference to the object referenced by the current <see cref="InvalidOperationException">weak reference</see> 
         /// instance. 
         /// </returns>

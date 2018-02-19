@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="int"/> and <see cref="float"/>.
     /// </summary>
-    public class Int32ToSingleConverter : AbstractTwoWayConverter<int, float>
+    public sealed class Int32ToSingleConverter : AbstractTwoWayConverter<int, float>
     {
-        protected override float DoConvert(int source) { return source; }
+        /// <inheritdoc />
+        protected override float DoConvert(int source) => source;
 
-        protected override int DoConvertBack(float source) { return (int) source; }
+        /// <inheritdoc />
+        protected override int DoConvertBack(float source) => (int) source;
     }
 }

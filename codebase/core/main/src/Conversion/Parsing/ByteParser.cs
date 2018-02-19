@@ -13,6 +13,7 @@ namespace Axle.Conversion.Parsing
     #endif
     public sealed class ByteParser : AbstractParser<byte>
     {
+        /// <inheritdoc />
         protected override Byte DoParse(string value, IFormatProvider formatProvider)
         {
             return formatProvider != null ? Byte.Parse(value, formatProvider) : Byte.Parse(value);

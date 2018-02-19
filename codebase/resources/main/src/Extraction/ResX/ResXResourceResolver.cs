@@ -7,7 +7,7 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction.ResX
 {
-    public sealed class ResXResourceResolver
+    internal sealed class ResXResourceResolver
     {
         private readonly Type _resourceType;
 

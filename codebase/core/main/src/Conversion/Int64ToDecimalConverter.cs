@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="long"/> and <see cref="decimal"/>.
     /// </summary>
-    public class Int64ToDecimalConverter : AbstractTwoWayConverter<long, decimal>
+    public sealed class Int64ToDecimalConverter : AbstractTwoWayConverter<long, decimal>
     {
-        protected override decimal DoConvert(long source) { return source; }
+        /// <inheritdoc />
+        protected override decimal DoConvert(long source) => source;
 
-        protected override long DoConvertBack(decimal source) { return (long) source; }
+        /// <inheritdoc />
+        protected override long DoConvertBack(decimal source) => (long) source;
     }
 }

@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="uint"/> and <see cref="double"/>.
     /// </summary>
-    public class UInt32ToDoubleConverter : AbstractTwoWayConverter<uint, double>
+    public sealed class UInt32ToDoubleConverter : AbstractTwoWayConverter<uint, double>
     {
-        protected override double DoConvert(uint source) { return source; }
+        /// <inheritdoc />
+        protected override double DoConvert(uint source) => source;
 
-        protected override uint DoConvertBack(double source) { return (uint) source; }
+        /// <inheritdoc />
+        protected override uint DoConvertBack(double source) => (uint) source;
     }
 }

@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="ulong"/> and <see cref="float"/>.
     /// </summary>
-    public class UInt64ToSingleConverter : AbstractTwoWayConverter<ulong, float>
+    public sealed class UInt64ToSingleConverter : AbstractTwoWayConverter<ulong, float>
     {
-        protected override float DoConvert(ulong source) { return source; }
+        /// <inheritdoc />
+        protected override float DoConvert(ulong source) => source;
 
-        protected override ulong DoConvertBack(float source) { return (ulong) source; }
+        /// <inheritdoc />
+        protected override ulong DoConvertBack(float source) => (ulong) source;
     }
 }

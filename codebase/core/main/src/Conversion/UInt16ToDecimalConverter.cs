@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="ushort"/> and <see cref="decimal"/>.
     /// </summary>
-    public class UInt16ToDecimalConverter : AbstractTwoWayConverter<ushort, decimal>
+    public sealed class UInt16ToDecimalConverter : AbstractTwoWayConverter<ushort, decimal>
     {
-        protected override decimal DoConvert(ushort source) { return source; }
+        /// <inheritdoc />
+        protected override decimal DoConvert(ushort source) => source;
 
-        protected override ushort DoConvertBack(decimal source) { return (ushort) source; }
+        /// <inheritdoc />
+        protected override ushort DoConvertBack(decimal source) => (ushort) source;
     }
 }

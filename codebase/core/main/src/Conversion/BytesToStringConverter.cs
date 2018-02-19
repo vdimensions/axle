@@ -41,9 +41,11 @@ namespace Axle.Conversion
         public BytesToStringConverter() : this(Encoding.UTF8) { }
         #endif
 
-        protected override string DoConvert(byte[] source) { return _encoding.GetString(source); }
+        /// <inheritdoc />
+        protected override string DoConvert(byte[] source) => _encoding.GetString(source.VerifyArgument(nameof(source)).IsNotNull());
 
-        protected override byte[] DoConvertBack(string source) { return _encoding.GetBytes(source); }
+        /// <inheritdoc />
+        protected override byte[] DoConvertBack(string source) => _encoding.GetBytes(source.VerifyArgument(nameof(source)).IsNotNull());
 
         /// <summary>
         /// Gets the <see cref="System.Text.Encoding" /> instance used to convert string instances to bytes and vice-versa.

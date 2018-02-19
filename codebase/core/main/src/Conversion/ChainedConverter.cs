@@ -29,10 +29,8 @@ namespace Axle.Conversion
             _converter2 = converter2.VerifyArgument(nameof(converter2)).IsNotNull().Value;
         }
 
-        protected override TResult DoConvert(T source)
-        {
-            return _converter2.Convert(_converter1.Convert(source));
-        }
+        /// <inheritdoc />
+        protected override TResult DoConvert(T source) => _converter2.Convert(_converter1.Convert(source));
     }
 
     /// <summary>

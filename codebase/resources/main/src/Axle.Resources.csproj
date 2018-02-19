@@ -23,11 +23,8 @@
     <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Extraction\AbstractAggregateResourceExtractor.cs" />
     <Compile Remove="Extraction\IResourceExtractionChain.cs" />
-    <Compile Remove="Extraction\ResourceContextSplitStrategy.cs" />
     <Compile Remove="Extraction\ResourceExtractionChain.cs" />
-    <Compile Remove="Marshalling\ResourceMarshallerChain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Resources.dist.csproj.paket.references" />

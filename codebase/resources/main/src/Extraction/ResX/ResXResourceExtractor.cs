@@ -3,8 +3,14 @@
 
 namespace Axle.Resources.Extraction.ResX
 {
+    /// <summary>
+    /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable
+    /// of handling the .NET's resx resource format.
+    /// </summary>
+    /// <inheritdoc />
     public sealed class ResXResourceExtractor : IResourceExtractor
     {
+        /// <inheritdoc />
         public ResourceInfo Extract(ResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();

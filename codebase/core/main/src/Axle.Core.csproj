@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net35;net40;net45;netstandard1.0;netstandard1.3;netstandard1.5;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.5;netstandard1.3;netstandard1.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
@@ -31,12 +31,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
-    <None Remove="Axle.Core.netframework.targets" />
-    <None Remove="Axle.Core.netframework.targets.template" />
-    <None Remove="Axle.Core.netstandard.props" />
-    <None Remove="Axle.Core.netstandard.props.template" />
-    <None Remove="Axle.Core.netstandard.targets" />
-    <None Remove="Axle.Core.netstandard.targets.template" />
     <None Remove="paket.lock" />
   </ItemGroup>
   <Target Name="BeforeBuild">

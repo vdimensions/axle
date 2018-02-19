@@ -7,7 +7,7 @@
     [System.Serializable]
     #endif
     //[Maturity(CodeMaturity.Stable)]
-    public enum AccessModifier
+    public enum AccessModifier : byte
     {
         /// <summary>
         /// An access modifier for publicly accessible members (<c>public</c>).

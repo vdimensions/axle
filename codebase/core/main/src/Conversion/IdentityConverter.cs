@@ -10,13 +10,13 @@
     public sealed class IdentityConverter<T> : ITwoWayConverter<T, T>
     {
         /// <inheritdoc />
-        public T Convert(T source) { return source; }
+        public T Convert(T source) => source;
 
         /// <inheritdoc />
-        public T ConvertBack(T target) { return target; }
+        public T ConvertBack(T target) => target;
 
         /// <inheritdoc />
-        public IConverter<T, T> Invert() { return this; }
+        public IConverter<T, T> Invert() => this;
 
         /// <inheritdoc />
         /// <remarks>
@@ -29,7 +29,7 @@
         }
 
         /// <inheritdoc />
-        public bool TryConvertBack(T source, out T target)  { return TryConvert(source, out target); }
+        public bool TryConvertBack(T source, out T target) => TryConvert(source, out target);
     }
 }
 

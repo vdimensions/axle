@@ -16,13 +16,8 @@ namespace Axle.Resources.Extraction.ResX
     /// This implementation depends on the <see cref="System.Drawing">System.Drawing</see> assembly in order to support 
     /// the <see cref="Image"/> and <see cref="Icon"/> objects.
     /// </remarks>
-    public sealed class CompleteResXResourceExtractor : AbstractResXResourceExtractor
+    internal sealed class CompleteResXResourceExtractor : AbstractResXResourceExtractor
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="CompleteResXResourceExtractor"/> class.
-        /// </summary>
-        public CompleteResXResourceExtractor() { }
-
         /// <inheritdoc />
         protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {

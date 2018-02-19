@@ -35,7 +35,7 @@ namespace Axle.Conversion
             }
         }
 
-        public IConverter<TD, TS> Invert() { return new ReverseConverter<TD, TS>(this); }
+        public IConverter<TD, TS> Invert() => new ReverseConverter<TD, TS>(this);
 
         public virtual bool TryConvertBack(TD value, out TS result)
         {

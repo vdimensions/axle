@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="ushort"/> and <see cref="double"/>.
     /// </summary>
-    public class UInt16ToDoubleConverter : AbstractTwoWayConverter<ushort, double>
+    public sealed class UInt16ToDoubleConverter : AbstractTwoWayConverter<ushort, double>
     {
-        protected override double DoConvert(ushort source) { return source; }
+        /// <inheritdoc />
+        protected override double DoConvert(ushort source) => source;
 
-        protected override ushort DoConvertBack(double source) { return (ushort) source; }
+        /// <inheritdoc />
+        protected override ushort DoConvertBack(double source) => (ushort) source;
     }
 }

@@ -12,6 +12,18 @@ namespace Axle.Resources
     /// </summary>
     public abstract class ResourceInfo
     {
+        /// <summary>
+        /// Creates a new instance of the current <see cref="ResourceInfo"/> implementation.
+        /// </summary>
+        /// <param name="name">
+        /// The unque name of the resource within the current resource bundle. 
+        /// </param>
+        /// <param name="culture">
+        /// The <see cref="CultureInfo"/> representing the resource's culture.
+        /// </param>
+        /// <param name="contentType">
+        /// A content type header describing the resource's MIME type.
+        /// </param>
         //protected ResourceInfo(Uri location, CultureInfo culture, ContentType contentType)
         protected ResourceInfo(string name, CultureInfo culture, string contentType)
         {
@@ -23,10 +35,10 @@ namespace Axle.Resources
         //    : this(location, culture, new ContentType(contentTypeName.VerifyArgument(nameof(contentTypeName)).IsNotNullOrEmpty())) { }
 
         /// <summary>
-        /// Opens a new <see cref="Stream"/> to read current <see cref="ResourceInfo"/> implementation data.
+        /// Opens a new <see cref="Stream"/> to read the current <see cref="ResourceInfo"/> implementation data.
         /// </summary>
         /// <returns>
-        /// A new <see cref="Stream"/> instance that represents the resource's data.
+        /// A new <see cref="Stream"/> instance to read the resource's data.
         /// </returns>
         public abstract Stream Open();
 

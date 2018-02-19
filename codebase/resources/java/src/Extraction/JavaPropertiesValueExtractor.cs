@@ -14,11 +14,6 @@ namespace Axle.Resources.Java.Extraction
     /// </summary>
     public sealed class JavaPropertiesValueExtractor : IResourceExtractor
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="JavaPropertiesValueExtractor"/> class.
-        /// </summary>
-        public JavaPropertiesValueExtractor() : base() { }
-
         private bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
         {
             propertyFileName = keyPrefix = null;
@@ -39,8 +34,6 @@ namespace Axle.Resources.Java.Extraction
             if (GetPropertiesFileData(context.Location, out var propertyFileName, out var keyPrefix))
             {
                 IDictionary<string, string> props = null;
-
-                // TODO: context.Except
                 var propertyResource = context.ExtractionChain.Extract(propertyFileName);
                 switch (propertyResource)
                 {
@@ -49,15 +42,12 @@ namespace Axle.Resources.Java.Extraction
                         break;
                     default:
                         using (var stream = propertyResource?.Open())
+                        if (stream != null)
                         {
-                            if (stream != null)
-                            {
-                                var jp = new JavaProperties();
-                                jp.Load(stream);
-                                props = jp;
-                            }
+                            var jp = new JavaProperties();
+                            jp.Load(stream);
+                            props = jp;
                         }
-
                         break;
                 }
 

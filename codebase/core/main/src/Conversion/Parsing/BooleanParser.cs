@@ -13,6 +13,7 @@ namespace Axle.Conversion.Parsing
     //[Stateless]
     public sealed class BooleanParser : AbstractParser<bool>
     {
+        /// <inheritdoc />
         protected override bool DoParse(string value, IFormatProvider formatProvider)
         {
             return bool.Parse(value);

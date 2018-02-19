@@ -3,6 +3,7 @@
 
 namespace Axle.References
 {
+    /// <inheritdoc cref="WeakReference" />
     #if !NETSTANDARD
     [Serializable]
     #endif
@@ -22,6 +23,7 @@ namespace Axle.References
 
             return !(ReferenceEquals(xTarget, null) || ReferenceEquals(yTarget, null)) && (ReferenceEquals(xTarget, yTarget) || Equals(xTarget, yTarget));
         }
+
         public override bool Equals(object obj)
         {
             return !ReferenceEquals(null, obj) && (ReferenceEquals(this, obj) || DoEquals(obj as WeakReference<T>));
@@ -35,14 +37,15 @@ namespace Axle.References
             return !ReferenceEquals(null, other) && (ReferenceEquals(this, other) || DoEquals(other));
         }
 
-        public override int GetHashCode() { return base.GetHashCode(); }
+        public override int GetHashCode() => base.GetHashCode();
 
+        /// <inheritdoc cref="IWeakReference{T}.Value" />
         public T Value
         {
-            get { return (T) base.Target; }
-            set { base.Target = value; }
+            get => (T) Target;
+            set => Target = value;
         }
-        T IReference<T>.Value { get { return Value; } }
-        object IReference.Value { get { return Value; } }
+        T IReference<T>.Value => Value;
+        object IReference.Value => Value;
     }
 }

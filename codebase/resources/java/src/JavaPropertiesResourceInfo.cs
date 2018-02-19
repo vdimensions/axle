@@ -46,6 +46,7 @@ namespace Axle.Resources.Java
         /// <summary>
         /// Gets a <see cref="IDictionary{TKey,TValue}"/> representing the contents of the properties file.
         /// </summary>
+        //TODO: make the data read-only
         public IDictionary<string, string> Data => _data;
     }
 }

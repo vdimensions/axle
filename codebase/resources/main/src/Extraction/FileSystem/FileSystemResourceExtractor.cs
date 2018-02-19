@@ -1,29 +1,33 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
+using System.IO;
+
+using Axle.Extensions.Uri;
+using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction.FileSystem
 {
-    public class FileSystemResourceExtractor : AbstractStreamableResourceExtractor
+    /// <summary>
+    /// An implementation of the <see cref="IResourceExtractor"/> that reads resources from the file system.
+    /// </summary>
+    public class FileSystemResourceExtractor : IResourceExtractor
     {
-        //public FileSystemResourceExtractor(ResourceContextSplitStrategy splitrStrategy) : base(splitrStrategy)
-        //{
-        //}
-
-        protected override bool TryGetStreamAdapter(Uri location, CultureInfo culture, string name, out IUriStreamAdapter adapter)
+        /// <inheritdoc />
+        public ResourceInfo Extract(ResourceContext context, string name)
         {
+            context.VerifyArgument(nameof(context)).IsNotNull();
+            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
+
             #if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
-            if (location.IsAbsoluteUri && location.IsFile && CultureInfo.InvariantCulture.Equals(culture))
+            var location = context.Location.Resolve(name);
+            var culture = context.Culture;
+            if (CultureInfo.InvariantCulture.Equals(culture) && File.Exists(location.AbsolutePath))
             {
-                // Filesystem resources are considered culture-invariant.
-                //
-                adapter = new FileSystemUriStreamAdapter();
-                return true;
+                return new FileSystemResourceInfo(location, name, culture);
             }
             #endif
 
-            adapter = null;
-            return false;
+            return null;
         }
     }
 }

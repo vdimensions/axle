@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="ulong"/> and <see cref="double"/>.
     /// </summary>
-    public class UInt64ToDoubleConverter : AbstractTwoWayConverter<ulong, double>
+    public sealed class UInt64ToDoubleConverter : AbstractTwoWayConverter<ulong, double>
     {
-        protected override double DoConvert(ulong source) { return source; }
+        /// <inheritdoc />
+        protected override double DoConvert(ulong source) => source;
 
-        protected override ulong DoConvertBack(double source) { return (ulong) source; }
+        /// <inheritdoc />
+        protected override ulong DoConvertBack(double source) => (ulong) source;
     }
 }

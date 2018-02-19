@@ -7,7 +7,7 @@
     public interface IResourceExtractor
     {
         /// <summary>
-        /// Attempts to locate a raw resource based on the provided parameters.
+        /// Attempts to locate a resource based on the provided parameters.
         /// </summary>
         /// <param name="context">
         /// A <see cref="ResourceContext"/> instance that represents the context

@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="long"/> and <see cref="float"/>.
     /// </summary>
-    public class Int64ToSingleConverter : AbstractTwoWayConverter<long, float>
+    public sealed class Int64ToSingleConverter : AbstractTwoWayConverter<long, float>
     {
-        protected override float DoConvert(long source) { return source; }
+        /// <inheritdoc />
+        protected override float DoConvert(long source) => source;
 
-        protected override long DoConvertBack(float source) { return (long) source; }
+        /// <inheritdoc />
+        protected override long DoConvertBack(float source) => (long) source;
     }
 }

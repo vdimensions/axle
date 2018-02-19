@@ -3,18 +3,13 @@
 
 namespace Axle.Resources.Extraction
 {
-    public abstract class AbstractResourceExtractor : AbstractResourceExtractor<ResourceInfo>
-    {
-        protected AbstractResourceExtractor()
-        {
-        }        
-    }
+    /// <inheritdoc />
+    public abstract class AbstractResourceExtractor : AbstractResourceExtractor<ResourceInfo> { }
+
+    /// <inheritdoc />
     public abstract class AbstractResourceExtractor<T> : IResourceExtractor where T: ResourceInfo
     {
-        protected AbstractResourceExtractor()
-        {
-        }
-
+        /// <inheritdoc />
         public ResourceInfo Extract(ResourceContext context, string name)
         {
             return DoExtract(context.VerifyArgument(nameof(context)).IsNotNull(), name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());

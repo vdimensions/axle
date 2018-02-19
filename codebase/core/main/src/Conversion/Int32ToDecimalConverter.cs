@@ -3,10 +3,12 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="int"/> and <see cref="decimal"/>.
     /// </summary>
-    public class Int32ToDecimalConverter : AbstractTwoWayConverter<int, decimal>
+    public sealed class Int32ToDecimalConverter : AbstractTwoWayConverter<int, decimal>
     {
-        protected override decimal DoConvert(int source) { return source; }
+        /// <inheritdoc />
+        protected override decimal DoConvert(int source) => source;
 
-        protected override int DoConvertBack(decimal source) { return (int) source; }
+        /// <inheritdoc />
+        protected override int DoConvertBack(decimal source) => (int) source;
     }
 }

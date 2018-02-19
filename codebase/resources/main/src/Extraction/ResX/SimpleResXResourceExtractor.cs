@@ -14,13 +14,8 @@ namespace Axle.Resources.Extraction.ResX
     /// <remarks>
     /// This implementation does not depend on the <see cref="System.Drawing">System.Drawing</see> assembly.
     /// </remarks>
-    public sealed class SimpleResXResourceExtractor : AbstractResXResourceExtractor
+    internal sealed class SimpleResXResourceExtractor : AbstractResXResourceExtractor
     {
-        /// <summary>
-        /// Creates a new instance of the <see cref="SimpleResXResourceExtractor"/> class.
-        /// </summary>
-        public SimpleResXResourceExtractor() : base() { }
-
         protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
             location = location.Resolve(name);

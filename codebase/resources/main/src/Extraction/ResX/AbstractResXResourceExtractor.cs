@@ -13,16 +13,11 @@ namespace Axle.Resources.Extraction.ResX
     /// that handle the native .NET resource objects.
     /// </summary>
     /// <seealso cref="IResourceExtractor "/>
-    public abstract class AbstractResXResourceExtractor : AbstractResourceExtractor
+    internal abstract class AbstractResXResourceExtractor : AbstractResourceExtractor
     {
         private const string UriSchemeResX = "resx";
 
-        /// <summary>
-        /// Creates a new instance of the current <see cref="AbstractResXResourceExtractor"/> implementation.
-        /// </summary>
-        protected AbstractResXResourceExtractor() : base() { }
-
-        private bool TryGetResXType(Uri location, out Type type, out string prefix)
+        private static bool TryGetResXType(Uri location, out Type type, out string prefix)
         {
             type = null;
             prefix = string.Empty;
@@ -43,6 +38,11 @@ namespace Axle.Resources.Extraction.ResX
                 return false;
             }
         }
+
+        /// <summary>
+        /// Creates a new instance of the current <see cref="AbstractResXResourceExtractor"/> implementation.
+        /// </summary>
+        protected AbstractResXResourceExtractor() : base() { }
 
         /// <inheritdoc />
         protected sealed override ResourceInfo DoExtract(ResourceContext context, string name)
