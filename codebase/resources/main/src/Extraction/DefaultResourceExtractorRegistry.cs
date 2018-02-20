@@ -10,9 +10,12 @@ namespace Axle.Resources.Extraction
     {
         private readonly LinkedList<IResourceExtractor> _extractors = new LinkedList<IResourceExtractor>();
 
+        /// <inheritdoc />
         public IEnumerator<IResourceExtractor> GetEnumerator() { return _extractors.GetEnumerator(); }
+        /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        /// <inheritdoc />
         public IResourceExtractorRegistry Register(IResourceExtractor extractor)
         {
             _extractors.AddFirst(extractor.VerifyArgument(nameof(extractor)).IsNotNull().Value);

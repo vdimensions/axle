@@ -1,5 +1,4 @@
 #if !NETSTANDARD
-using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -27,7 +26,18 @@ namespace Axle.Resources
             var codec = ImageCodecInfo.GetImageDecoders().First(c => c.FormatID == image.RawFormat.Guid);
             return codec.MimeType;
         }
-
+        /// <summary>
+        /// Creates a new instance of the <see cref="ImageResourceInfo" /> class.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the resource.
+        /// </param>
+        /// <param name="culture">
+        /// The <see cref="CultureInfo"/> for which the resource was requested. 
+        /// </param>
+        /// <param name="image">
+        /// The actual <see cref="Image">image</see> object represented by the current <see cref="ImageResourceInfo"/> instance.
+        /// </param>
         public ImageResourceInfo(string name, CultureInfo culture, Image image) : base(name, culture, GetContentType(image))
         {
             _image = image.VerifyArgument(nameof(image)).IsNotNull();

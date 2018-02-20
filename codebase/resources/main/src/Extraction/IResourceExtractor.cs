@@ -3,7 +3,6 @@
     /// <summary>
     /// An interface representing a resource extractor; that is, an object responsible for locating raw resources before being unmarshalled.
     /// </summary>
-    /// <seealso cref="Axle.Resources.Marshalling.IResourceMarshaller"/>
     public interface IResourceExtractor
     {
         /// <summary>

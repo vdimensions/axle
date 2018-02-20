@@ -29,6 +29,9 @@ namespace Axle.Resources
             return new MemoryStream(new BytesToStringConverter(Culture.TextInfo.GetEncoding()).ConvertBack(_value));
         }
 
+        /// <summary>
+        /// Gets the text value that the current <see cref="TextResourceInfo"/> instance represents.
+        /// </summary>
         public string Value => _value;
     }
 }

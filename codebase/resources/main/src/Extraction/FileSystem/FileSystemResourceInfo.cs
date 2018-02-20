@@ -27,7 +27,18 @@ namespace Axle.Resources.Extraction.FileSystem
         /// <inheritdoc />
         public override Stream Open()
         {
-            return new FileStream(_location.AbsolutePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            if (!File.Exists(_location.AbsolutePath))
+            {
+                throw new ResourceNotFoundException(Name, Bundle, Culture);
+            }
+            try
+            {
+                return new FileStream(_location.AbsolutePath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+            }
+            catch (Exception e)
+            {
+                throw new ResourceLoadException(Name, Bundle, Culture, e);
+            }
         }
     }
 }

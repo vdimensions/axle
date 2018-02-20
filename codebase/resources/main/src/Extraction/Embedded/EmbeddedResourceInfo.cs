@@ -18,8 +18,6 @@ namespace Axle.Resources.Extraction.Embedded
     /// </summary>
     public sealed class EmbeddedResourceInfo : ResourceInfo
     {
-        private readonly Assembly _assembly;
-
         /// <summary>
         /// Converts the provided by the <paramref name="resourceName"/> parameter string to
         /// a valid path for an embedded resource.
@@ -38,16 +36,19 @@ namespace Axle.Resources.Extraction.Embedded
         internal static bool ContainsEmbeddedResource(Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
-            var assemblyName = asm.VerifyArgument(nameof(asm)).IsNotNull().Value.GetName().Name.CutEnd(satelliteAssemblySuffix);
+            var assemblyName = asm.GetName().Name.CutEnd(satelliteAssemblySuffix);
             var escapedResourceName = GetEmbeddedResourcePath(resourceName);
             var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             return asm.GetManifestResourceNames().Any(x => StringComparer.Ordinal.Equals(manifestResourceName, x));
         }
 
-        internal static Stream LoadEmbeddedResource(Assembly asm, string resourceName)
+        /// <exception cref="FileLoadException"></exception>
+        /// <exception cref="FileNotFoundException"></exception>
+        /// <exception cref="BadImageFormatException"></exception>
+        private static Stream LoadEmbeddedResource(Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
-            var assemblyName = asm.VerifyArgument(nameof(asm)).IsNotNull().Value.GetName().Name.CutEnd(satelliteAssemblySuffix);
+            var assemblyName = asm.GetName().Name.CutEnd(satelliteAssemblySuffix);
             var escapedResourceName = GetEmbeddedResourcePath(resourceName);
             var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             /***
@@ -59,21 +60,16 @@ namespace Axle.Resources.Extraction.Embedded
              * 
              * The namesepaces will be tested sorted by length.
              */
-            var stream =
-                asm.GetManifestResourceStream(manifestResourceName)
-                ?? asm.GetTypes()
-                    .Where(type => type.IsPublic && !type.IsNested)
-                    .Select(type => type.Namespace ?? string.Empty)
-                    .OrderBy(ns => ns.Length)
-                    .Select(
-                        rootNamespace =>
-                        {
-                            var mrn = rootNamespace.Length > 0 ? $"{rootNamespace}.{escapedResourceName}" : escapedResourceName;
-                            return asm.GetManifestResourceStream(mrn);
-                        })
-                    .FirstOrDefault(x => x != null);
+            var stream = asm.GetManifestResourceStream(manifestResourceName) ?? asm.GetTypes()
+                .Where(type => type.IsPublic && !type.IsNested)
+                .Select(type => type.Namespace ?? string.Empty)
+                .OrderBy(ns => ns.Length)
+                .Select(ns => asm.GetManifestResourceStream(ns.Length > 0 ? $"{ns}.{escapedResourceName}" : escapedResourceName))
+                .FirstOrDefault(x => x != null);
             return stream;
         }
+
+        private readonly Assembly _assembly;
 
         internal EmbeddedResourceInfo(Assembly assembly, string name, CultureInfo culture) : base(name, culture, "application/octet-stream")
         {
@@ -81,7 +77,21 @@ namespace Axle.Resources.Extraction.Embedded
         }
 
         /// <inheritdoc />
-        public override Stream Open() => LoadEmbeddedResource(_assembly, Name);
+        public override Stream Open()
+        {
+            try
+            {
+                return LoadEmbeddedResource(_assembly, Name);
+            }
+            catch (FileNotFoundException e)
+            {
+                throw new ResourceNotFoundException(Name, Bundle, Culture, e);
+            }
+            catch (Exception e)
+            {
+                throw new ResourceLoadException(Name, Bundle, Culture, e);
+            }
+        }
     }
 }
 #endif

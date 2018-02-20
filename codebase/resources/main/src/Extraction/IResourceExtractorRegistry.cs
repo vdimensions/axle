@@ -4,7 +4,7 @@
 namespace Axle.Resources.Extraction
 {
     /// <summary>
-    /// An interface for a resource registry; that is, an object which is used
+    /// An interface for a resource extractor registry; that is, an object which is used
     /// to store instances of <see cref="T:Axle.Resources.Extraction.IResourceExtractor" /> to latter be used 
     /// by a <see cref="T:Axle.Resources.ResourceManager" /> implementation.
     /// </summary>

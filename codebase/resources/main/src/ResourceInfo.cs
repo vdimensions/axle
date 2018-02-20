@@ -19,7 +19,7 @@ namespace Axle.Resources
         /// The unque name of the resource within the current resource bundle. 
         /// </param>
         /// <param name="culture">
-        /// The <see cref="CultureInfo"/> representing the resource's culture.
+        /// The <see cref="CultureInfo"/> for which the resource was requested. 
         /// </param>
         /// <param name="contentType">
         /// A content type header describing the resource's MIME type.
@@ -40,6 +40,15 @@ namespace Axle.Resources
         /// <returns>
         /// A new <see cref="Stream"/> instance to read the resource's data.
         /// </returns>
+        /// <exception cref="ResourceNotFoundException">
+        /// Thrown if the represented resource can no longer be located. 
+        /// For example, if the current <see cref="ResourceInfo"/> instance 
+        /// represents a file, which is deleted at some point, then this 
+        /// exception will be thrown if the resource is requested after the deletion.
+        /// </exception>
+        /// <exception cref="ResourceLoadException">
+        /// Thrown if an error occus while loading the resource stream.
+        /// </exception>
         public abstract Stream Open();
 
         /// <summary>

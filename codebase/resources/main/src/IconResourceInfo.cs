@@ -1,5 +1,4 @@
 #if !NETSTANDARD
-using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -14,9 +13,26 @@ namespace Axle.Resources
     /// </summary>
     public sealed class IconResourceInfo : ResourceInfo
     {
+        /// <summary>
+        /// The standard MIME type used for icon objects.
+        /// </summary>
+        new public const string ContentType = "image/x-icon";
+
         private readonly Icon _icon;
 
-        public IconResourceInfo(string name, CultureInfo culture, Icon icon) : base(name, culture, "image/x-icon")
+        /// <summary>
+        /// Creates a new instance of the <see cref="IconResourceInfo" /> class.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the resource.
+        /// </param>
+        /// <param name="culture">
+        /// The <see cref="CultureInfo"/> for which the resource was requested. 
+        /// </param>
+        /// <param name="icon">
+        /// The actual <see cref="Icon">icon</see> object represented by the current <see cref="IconResourceInfo"/> instance.
+        /// </param>
+        public IconResourceInfo(string name, CultureInfo culture, Icon icon) : base(name, culture, ContentType)
         {
             _icon = icon.VerifyArgument(nameof(icon)).IsNotNull();
         }

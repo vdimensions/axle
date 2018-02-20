@@ -8,13 +8,16 @@ using Axle.Collections;
 
 namespace Axle.Resources.Bundling
 {
+    /// <summary>
+    /// The default implementation of the <see cref="IResourceBundleRegistry"/> interface.
+    /// </summary>
     public sealed class DefaultResourceBundleRegistry : IResourceBundleRegistry
     {
-        private sealed class BundleContentRegistry : IResourceBundleContentRegistry
+        private sealed class BundleContent : IResourceBundleContent
         {
             private readonly LinkedList<Uri> _locations;
 
-            public BundleContentRegistry()
+            public BundleContent()
             {
                 _locations = new LinkedList<Uri>();
             }
@@ -22,34 +25,48 @@ namespace Axle.Resources.Bundling
             public IEnumerator<Uri> GetEnumerator() => _locations.GetEnumerator();
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-            public IResourceBundleContentRegistry Register(Uri location)
+            public IResourceBundleContent Register(Uri location)
             {
                 _locations.AddLast(location);
                 return this;
             }
         }
 
-        private readonly IDictionary<string, IResourceBundleContentRegistry> _perBundleContent;
+        private readonly IDictionary<string, IResourceBundleContent> _perBundleContent;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class.
+        /// </summary>
+        /// <param name="caseSensitiveBundleNames">
+        /// A <see cref="bool">boolean</see> value specifying whether the resource bundle names should be case-sensitive.
+        /// </param>
         public DefaultResourceBundleRegistry(bool caseSensitiveBundleNames)
         {
             var comparer = caseSensitiveBundleNames ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
-            _perBundleContent = new ChronologicalDictionary<string, IResourceBundleContentRegistry>(comparer);
+            _perBundleContent = new ChronologicalDictionary<string, IResourceBundleContent>(comparer);
         }
+        /// <summary>
+        /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class that is case-insensitive towards the resource bundle names.
+        /// </summary>
         public DefaultResourceBundleRegistry() : this(false) { }
 
-        public IResourceBundleContentRegistry Configure(string bundle)
+        /// <inheritdoc />
+        public IResourceBundleContent Configure(string bundle)
         {
             if (!_perBundleContent.TryGetValue(bundle, out var contentRegistry))
             {
-                _perBundleContent.Add(bundle, contentRegistry = new BundleContentRegistry());
+                _perBundleContent.Add(bundle, contentRegistry = new BundleContent());
             }
             return contentRegistry;
         }
 
-        public IEnumerator<IResourceBundleContentRegistry> GetEnumerator() => _perBundleContent.Values.GetEnumerator();
+        /// <inheritdoc />
+        public IEnumerator<IResourceBundleContent> GetEnumerator() => _perBundleContent.Values.GetEnumerator();
+
+        /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
+        /// <inheritdoc />
         public IEnumerable<Uri> this[string bundle] => _perBundleContent.TryGetValue(bundle, out var result) ? result : Enumerable.Empty<Uri>();
     }
 }

@@ -1,6 +1,6 @@
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.0.70)
+    Axle.Core (1.5.0.71)
   remote: https://www.nuget.org/api/v2
     Microsoft.NETCore.Platforms (2.0.1) - restriction: || (== netstandard1.3) (== netstandard1.4) (== netstandard1.5) (== netstandard1.6)
     Microsoft.NETCore.Targets (2.0) - restriction: || (== netstandard1.3) (== netstandard1.4) (== netstandard1.5) (== netstandard1.6)
