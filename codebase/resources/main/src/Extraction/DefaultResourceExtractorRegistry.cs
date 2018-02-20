@@ -6,6 +6,9 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
+    /// <summary>
+    /// The default implementation of the <see cref="IResourceExtractorRegistry"/> interface.
+    /// </summary>
     public sealed class DefaultResourceExtractorRegistry : IResourceExtractorRegistry
     {
         private readonly LinkedList<IResourceExtractor> _extractors = new LinkedList<IResourceExtractor>();

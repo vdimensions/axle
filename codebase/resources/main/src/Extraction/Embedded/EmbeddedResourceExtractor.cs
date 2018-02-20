@@ -12,7 +12,9 @@ namespace Axle.Resources.Extraction.Embedded
     /// <summary>
     /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded resources.
     /// </summary>
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     /// <seealso cref="EmbeddedResourceInfo"/>
+    #endif
     public class EmbeddedResourceExtractor : IResourceExtractor
     {
         private static Assembly GetAssembly(IRuntime runtime, Uri uri)

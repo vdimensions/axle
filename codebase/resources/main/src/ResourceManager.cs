@@ -17,6 +17,16 @@ namespace Axle.Resources
     /// </summary>
     public abstract class ResourceManager
     {
+        /// <summary>
+        /// Creates a new instance of the current <see cref="ResourceManager"/> implementation with the provided
+        /// <paramref name="bundles"/> and <paramref name="extractors"/>.
+        /// </summary>
+        /// <param name="bundles">
+        /// The <see cref="IResourceBundleRegistry"/> instance to be used by the current <see cref="ResourceManager"/> implementation.
+        /// </param>
+        /// <param name="extractors">
+        /// The <see cref="IResourceExtractorRegistry"/> instance to be used by the current <see cref="ResourceManager"/> implementation.
+        /// </param>
         protected ResourceManager(IResourceBundleRegistry bundles, IResourceExtractorRegistry extractors)
         {
             Bundles = bundles.VerifyArgument(nameof(bundles)).IsNotNull().Value;

@@ -16,7 +16,7 @@
         /// A <see cref="string"/> object used to identify the requested resource.
         /// </param>
         /// <returns>
-        /// An instance of <see cref="ResourceInfo"/> representing the extracted resource.
+        /// A <see cref="ResourceInfo"/> instance representing the extracted resource, or <c>null</c> if the resource was not found. 
         /// </returns>
         /// <seealso cref="ResourceContext"/>
         ResourceInfo Extract(ResourceContext context, string name);
