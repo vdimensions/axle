@@ -30,6 +30,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "java", "java", "{4928D171-9
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Resources.Java.Tests", "codebase\resources\java\tests\Axle.Resources.Java.Tests.csproj", "{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security-cryptography", "security-cryptography", "{6706277F-4174-433D-B3F3-57E0C6E15402}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.Cryptography", "codebase\security-cryptography\main\src\Axle.Security.Cryptography.csproj", "{AB4D08D0-AE39-4992-96DA-FDD3676E806B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -64,6 +68,10 @@ Global
 		{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -78,6 +86,7 @@ Global
 		{C5536927-E8B3-4BE9-B549-30AE253E4B35} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
 		{4928D171-9607-4B25-869B-DBAE125A8D31} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
 		{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0} = {4928D171-9607-4B25-869B-DBAE125A8D31}
+		{AB4D08D0-AE39-4992-96DA-FDD3676E806B} = {6706277F-4174-433D-B3F3-57E0C6E15402}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}
