@@ -1,6 +1,8 @@
 using System;
 using System.Diagnostics;
+#if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
 using System.Threading;
+#endif
 
 
 namespace Axle.Logging
@@ -13,12 +15,16 @@ namespace Axle.Logging
     #endif
     public sealed class LogEntry : ILogEntry
     {
+        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
         private static string ThreadName(Thread t) => t.Name ?? $"Thread-{t.ManagedThreadId}";
+        #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DateTime _timestamp;
+        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _threadID;
+        #endif
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly LogSeverity _severity;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -28,6 +34,7 @@ namespace Axle.Logging
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Exception _exception;
 
+        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
         public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, string message) 
             : this(timestamp,threadID, severity, type, message, null) { }
         public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, Exception exception) 
@@ -48,27 +55,55 @@ namespace Axle.Logging
             }
             _exception = exception;
         }
-        public LogEntry(LogSeverity severity, Type type, string message)
-            : this(DateTime.Now, ThreadName(Thread.CurrentThread), severity, type, message, null) { }
-        public LogEntry(LogSeverity severity, Type type, string message, Exception exception)
-            : this(DateTime.Now, ThreadName(Thread.CurrentThread), severity, type, message, exception) { }
-        public LogEntry(LogSeverity severity, Type type, Exception exception)
-            : this(DateTime.Now, ThreadName(Thread.CurrentThread), severity, type, exception.Message, exception) { }
+
+        public LogEntry(string threadID, LogSeverity severity, Type type, string message)
+            : this(DateTime.Now, threadID, severity, type, message, null) { }
+        public LogEntry(string threadID, LogSeverity severity, Type type, string message, Exception exception)
+            : this(DateTime.Now, threadID, severity, type, message, exception) { }
+        public LogEntry(string threadID, LogSeverity severity, Type type, Exception exception)
+            : this(DateTime.Now, threadID, severity, type, exception.Message, exception) { }
+
+        public LogEntry(LogSeverity severity, Type type, string message) : this(ThreadName(Thread.CurrentThread), severity, type, message, null) { }
+        public LogEntry(LogSeverity severity, Type type, string message, Exception exception) : this(ThreadName(Thread.CurrentThread), severity, type, message, exception) { }
+        public LogEntry(LogSeverity severity, Type type, Exception exception) : this(ThreadName(Thread.CurrentThread), severity, type, exception.Message, exception) { }
+        #else
+        public LogEntry(DateTime timestamp, LogSeverity severity, Type type, string message) : this(timestamp, severity, type, message, null) { }
+        public LogEntry(DateTime timestamp, LogSeverity severity, Type type, Exception exception) : this(timestamp, severity, type, exception.Message, exception) { }
+        public LogEntry(DateTime timestamp, LogSeverity severity, Type type, string message, Exception exception)
+        {
+            _timestamp = timestamp;
+            _severity = severity;
+            _type = type;
+            if (exception != null && string.IsNullOrEmpty(message))
+            {
+                _message = exception.Message;
+            }
+            else
+            {
+                _message = message;
+            }
+            _exception = exception;
+        }
+
+        public LogEntry(LogSeverity severity, Type type, string message) : this(DateTime.Now, severity, type, message, null) { }
+        public LogEntry(LogSeverity severity, Type type, string message, Exception exception) : this(DateTime.Now, severity, type, message, exception) { }
+        public LogEntry(LogSeverity severity, Type type, Exception exception) : this(DateTime.Now, severity, type, exception.Message, exception) { }
+        #endif
 
         public override string ToString()
         {
-            var messageToWrite = _exception == null ? _message : string.Format("{0}\n{1}", _message, _exception.StackTrace);
-            return string.Format(
-                "{0:yyyy-MM-dd HH:mm:ss} {1} [{2}] {3}: {4}", 
-                _timestamp, 
-                _threadID, 
-                _severity, 
-                _type.FullName, 
-                messageToWrite);
+            var messageToWrite = _exception == null ? _message : $"{_message}\n{_exception.StackTrace}";
+            #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+            return $"{_timestamp:yyyy-MM-dd HH:mm:ss} {_threadID} [{_severity}] {_type.FullName}: {messageToWrite}";
+            #else
+            return $"{_timestamp:yyyy-MM-dd HH:mm:ss} [{_severity}] {_type.FullName}: {messageToWrite}";
+            #endif
         }
 
         public DateTime Timestamp => _timestamp;
+        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
         public string ThreadID => _threadID;
+        #endif
         public LogSeverity Severity => _severity;
         public Type Type => _type;
         public string Message => _message;

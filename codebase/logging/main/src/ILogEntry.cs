@@ -12,10 +12,12 @@ namespace Axle.Logging
         /// The exact date and time of the occurence of the application event.
         /// </summary>
         DateTime Timestamp { get; }
+        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
         /// <summary>
         /// The name of the thead where the application event occured.
         /// </summary>
         string ThreadID { get; }
+        #endif
         /// <summary>
         /// The <see cref="LogSeverity">severity</see> of the application event.
         /// </summary>

@@ -1,8 +1,9 @@
 source ../../../../dist
   nuget Axle.Core
+  nuget Axle.Logging
 
 source https://nuget.org/api/v2
-  nuget System.Threading.Thread framework: netstandard1.6
+  nuget log4net
 
 group build
 	source ../../../../submodules/mason/dist

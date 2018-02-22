@@ -1,5 +1,6 @@
 Axle.Core
-System.Threading.Thread
+Axle.Logging
+log4net
 
 group build
   Mason.Targets.Preprocessor

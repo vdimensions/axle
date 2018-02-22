@@ -20,40 +20,63 @@
     <dependencies>
       <group targetFramework="netstandard2.0">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.6">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
-        <dependency id="System.Threading.Thread" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.5">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.4">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.3">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.2">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.1">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="netstandard1.0">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="net45">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="net40">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="net35">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
       <group targetFramework="net20">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Logging" version="${axle.dependency.version}" />
+        <dependency id="log4net" version="${log4net.version}" />
       </group>
     </dependencies>
     <references></references>
