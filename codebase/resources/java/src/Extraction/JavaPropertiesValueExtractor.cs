@@ -18,9 +18,10 @@ namespace Axle.Resources.Java.Extraction
         {
             propertyFileName = keyPrefix = null;
             const string ext = JavaPropertiesResourceInfo.FileExtension;
+            const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
             var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterFirst(ext);
-            propertyFileName = locStr.TakeBeforeFirst(keyPrefix);
+            keyPrefix = locStr.TakeAfterFirst(ext, cmp);
+            propertyFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
 
             return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }

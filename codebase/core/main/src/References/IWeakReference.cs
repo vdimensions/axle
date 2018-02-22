@@ -13,6 +13,17 @@ namespace Axle.References
     public interface IWeakReference<T> : IReference<T> where T: class
     {
         /// <summary>
+        /// Tries to retrieve the target object that is referenced by the current <see cref="IWeakReference{T}"/> object.
+        /// </summary>
+        /// <param name="target">
+        /// When this method returns, contains the target object, if it is available. This parameter is treated as uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the target was retrieved; <c>false</c> otherwise.
+        /// </returns>
+        bool TryGetTarget(out T target);
+
+        /// <summary>
         /// Gets or sets the object (the <see cref="Value">target</see>) referenced by the current <see cref="IWeakReference{T}">weak reference</see> instance. 
         /// </summary>
         /// <returns>
@@ -28,11 +39,11 @@ namespace Axle.References
         new T Value { get; set; }
 
         /// <summary>
-        /// Gets an indication whether the object referenced by the current <see cref="WeakReference{T}">weak reference</see> 
+        /// Gets an indication whether the object referenced by the current <see cref="IWeakReference{T}">weak reference</see> 
         /// instance has been garbage collected.
         /// </summary>
         /// <returns>
-        /// <c>true</c> if the object referenced by the current <see cref="WeakReference{T}">weak reference</see> instance has not been 
+        /// <c>true</c> if the object referenced by the current <see cref="IWeakReference{T}">weak reference</see> instance has not been 
         /// garbage collected and is still accessible; otherwise, <c>false</c>. 
         /// </returns>
         /// <seealso cref="WeakReference.IsAlive"/>

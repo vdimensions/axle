@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
+using Axle.References;
 using Axle.Threading;
 using Axle.Threading.ReaderWriterLock;
 
@@ -146,11 +147,11 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly THandle handle;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Axle.References.WeakReference<T> memberRef;
+        private readonly WeakRef<T> memberRef;
 
         protected MemberTokenBase(T member, THandle handle, Type declaringType, string name) : base(member, declaringType, name)
         {
-            this.memberRef = new Axle.References.WeakReference<T>(member);
+            this.memberRef = new WeakRef<T>(member);
             this.handle = handle;
         }
 

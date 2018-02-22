@@ -413,20 +413,16 @@ namespace Axle.Threading
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
-            public static ILockHandle CreateUpgradeableReadLockHandle(this IReadWriteLock @this)
-            {
-                return new UpgradeableReadLockHandle(@this);
-            }
+            public static ILockHandle CreateUpgradeableReadLockHandle(this IReadWriteLock @this) => new UpgradeableReadLockHandle(@this);
+
             #endregion
 
             #region CreateWriteLockHandle(...)
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
-            public static ILockHandle CreateWriteLockHandle(this IReadWriteLock @this)
-            {
-                return new WriteLockHandle(@this);
-            }
+            public static ILockHandle CreateWriteLockHandle(this IReadWriteLock @this) => new WriteLockHandle(@this);
+
             #endregion
 
             public static void Invoke(this IReadWriteLock @this, Func<bool> isLockNeeded, Action writeAction)

@@ -19,7 +19,8 @@ namespace Axle.Resources.Extraction.Embedded
     {
         private static Assembly GetAssembly(IRuntime runtime, Uri uri)
         {
-            var assenblyName = uri.IsResource() ? uri.Host.TakeBeforeLast(".dll").TakeBeforeLast(".exe") : uri.Host;
+            var cmp = StringComparison.OrdinalIgnoreCase;
+            var assenblyName = uri.IsResource() ? uri.Host.TrimEnd(".dll", cmp).TrimEnd(".exe", cmp) : uri.Host;
             return runtime.LoadAssembly(assenblyName);
         }
 

@@ -497,250 +497,824 @@ namespace Axle.Extensions.String
         }
 
         #region TakeBeforeFirst(...)
-        public static string TakeBeforeFirst(this string str, string stringToSearch, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeBeforeFirst(this string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
-        public static string TakeBeforeFirst(this string str, string stringToSearch, int startIndex, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeBeforeFirst(this string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
-
-        public static string TakeBeforeFirst(this string str, string stringToSearch)
+        /// <summary>
+        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeBeforeFirst(this string str, string value, int startIndex)
         {
-            return TakeBeforeFirst(str, stringToSearch, StringComparison.CurrentCulture);
+            return TakeBeforeFirst(str, value, startIndex, StringComparison.CurrentCulture);
         }
-        public static string TakeBeforeFirst(this string str, string stringToSearch, int startIndex)
+        /// <summary>
+        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeBeforeFirst(this string str, string value)
         {
-            return TakeBeforeFirst(str, stringToSearch, startIndex, StringComparison.CurrentCulture);
+            return TakeBeforeFirst(str, value, StringComparison.CurrentCulture);
         }
-        public static string TakeBeforeFirst(this string str, char charToSearch)
+        /// <summary>
+        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeBeforeFirst(this string str, char value, int startIndex)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            var candidate = CutFromIndex((x, y) => x.IndexOf(y, 0), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
-        public static string TakeBeforeFirst(this string str, char charToSearch, int startIndex)
+        /// <summary>
+        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeBeforeFirst(this string str, char value)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            var candidate = CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.IndexOf(y, 0), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
         #endregion
 
         #region TakeBeforeLast(...)
-        public static string TakeBeforeLast(this string str, string stringToSearch, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeBeforeLast(this string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
-        public static string TakeBeforeLast(this string str, string stringToSearch, int startIndex, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeBeforeLast(this string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, stringToSearch, comparison, true);
+            var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
-
-        public static string TakeBeforeLast(this string str, string stringToSearch)
+        /// <summary>
+        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeBeforeLast(this string str, string value, int startIndex)
         {
-            return TakeBeforeLast(str, stringToSearch, StringComparison.CurrentCulture);
+            return TakeBeforeLast(str, value, startIndex, StringComparison.CurrentCulture);
         }
-        public static string TakeBeforeLast(this string str, string stringToSearch, int startIndex)
+        /// <summary>
+        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeBeforeLast(this string str, string value)
         {
-            return TakeBeforeLast(str, stringToSearch, startIndex, StringComparison.CurrentCulture);
+            return TakeBeforeLast(str, value, StringComparison.CurrentCulture);
         }
-        public static string TakeBeforeLast(this string str, char charToSearch)
+        /// <summary>
+        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="char"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeBeforeLast(this string str, char value, int startIndex)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            var candidate = CutFromIndex((x, y) => x.LastIndexOf(y), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
-        public static string TakeBeforeLast(this string str, char charToSearch, int startIndex)
+        /// <summary>
+        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="char"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// the original string if the <paramref name="value"/> was not found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeBeforeLast(this string str, char value)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            var candidate = CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, charToSearch, true);
+            var candidate = CutFromIndex((x, y) => x.LastIndexOf(y), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
         #endregion
 
         #region TakeAfterFirst(...)
-        public static string TakeAfterFirst(this string str, string stringToSearch, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeAfterFirst(this string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            return CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, stringToSearch, comparison, false);
+            return CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, false);
         }
-        public static string TakeAfterFirst(this string str, string stringToSearch, int startIndex, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeAfterFirst(this string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            return CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, stringToSearch, comparison, false);
+            return CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, false);
         }
-        public static string TakeAfterFirst(this string str, string stringToSearch)
+        /// <summary>
+        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeAfterFirst(this string str, string value)
         {
-            return TakeAfterFirst(str, stringToSearch, StringComparison.CurrentCulture);
+            return TakeAfterFirst(str, value, StringComparison.CurrentCulture);
         }
-        public static string TakeAfterFirst(this string str, int startIndex, string stringToSearch)
+        /// <summary>
+        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeAfterFirst(this string str, string value, int startIndex)
         {
-            return TakeAfterFirst(str, stringToSearch, startIndex, StringComparison.CurrentCulture);
+            return TakeAfterFirst(str, value, startIndex, StringComparison.CurrentCulture);
         }
-        public static string TakeAfterFirst(this string str, char charToSearch)
+        /// <summary>
+        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="char"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeAfterFirst(this string str, char value)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.IndexOf(y, 0), str, charToSearch, false);
+            return CutFromIndex((x, y) => x.IndexOf(y, 0), str, value, false);
         }
-        public static string TakeAfterFirst(this string str, char charToSearch, int startIndex)
+        /// <summary>
+        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="char"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeAfterFirst(this string str, char value, int startIndex)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, charToSearch, false);
+            return CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, value, false);
         }
         #endregion
 
         #region TakeAfterLast(...)
-        public static string TakeAfterLast(this string str, string stringToSearch, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeAfterLast(this string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            return CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, stringToSearch, comparison, false);
+            return CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, false);
         }
-        public static string TakeAfterLast(this string str, string stringToSearch, int startIndex, StringComparison comparison)
+        /// <summary>
+        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TakeAfterLast(this string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            if (stringToSearch == null)
+            if (value == null)
             {
-                throw new ArgumentNullException(nameof(stringToSearch));
+                throw new ArgumentNullException(nameof(value));
             }
-            return CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, stringToSearch, comparison, false);
+            return CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, false);
         }
-        public static string TakeAfterLast(this string str, string stringToSearch)
+        /// <summary>
+        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeAfterLast(this string str, string value)
         {
-            return TakeAfterLast(str, stringToSearch, StringComparison.CurrentCulture);
+            return TakeAfterLast(str, value, StringComparison.CurrentCulture);
         }
-        public static string TakeAfterLast(this string str, int startIndex, string stringToSearch)
+        /// <summary>
+        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="string"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeAfterLast(this string str, string value, int startIndex)
         {
-            return TakeAfterLast(str, stringToSearch, startIndex, StringComparison.CurrentCulture);
+            return TakeAfterLast(str, value, startIndex, StringComparison.CurrentCulture);
         }
-        public static string TakeAfterLast(this string str, char charToSearch)
+        /// <summary>
+        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="char"/> value to cut the string by.
+        /// </param>
+        /// <param name="startIndex">
+        /// The index to start the searching from.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="IndexOutOfRangeException">
+        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// or is less than zero.
+        /// </exception>
+        public static string TakeAfterLast(this string str, char value, int startIndex)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.LastIndexOf(y), str, charToSearch, false);
+            return CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, value, false);
         }
-        public static string TakeAfterLast(this string str, char charToSearch, int startIndex)
+        /// <summary>
+        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The <see cref="char"/> value to cut the string by.
+        /// </param>
+        /// <returns>
+        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
+        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TakeAfterLast(this string str, char value)
         {
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
             }
-            return CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, charToSearch, false);
+            return CutFromIndex((x, y) => x.LastIndexOf(y), str, value, false);
         }
         #endregion
 
-        #region CutStart(...)
-        public static string CutStart(this string str, string stringToSearch, StringComparison comparison)
+        #region TrimStart(...)
+        /// <summary>
+        /// Removes the leading occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The string value to be cut.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The string without the passed <paramref name="value"/> at the end, if found; otherwise the original string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TrimStart(this string str, string value, StringComparison comparison)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.StartsWith(stringToSearch, comparison)
-                ? str.TakeAfterFirst(stringToSearch, 0, comparison)
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.StartsWith(value, comparison)
+                ? str.TakeAfterFirst(value, 0, comparison)
                 : str;
         }
-        public static string CutStart(this string str, string stringToSearch) { return CutStart(str, stringToSearch, StringComparison.CurrentCulture); }
-        public static string CutStart(this string str, char charToSearch)
-        {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Length > 0 && str[0] == charToSearch
-                ? str.Substring(1)
-                : str;
-        }
-        #endregion // CutStart(...)
+        /// <summary>
+        /// Removes the leading occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The string value to be cut.
+        /// </param>
+        /// <returns>
+        /// The string without the passed <paramref name="value"/> at the end, if found; otherwise the original string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TrimStart(this string str, string value) { return TrimStart(str, value, StringComparison.CurrentCulture); }
+        #endregion // TrimStart(...)
 
-        #region CutEnd(...)
-        public static string CutEnd(this string str, string stringToSearch, StringComparison comparison)
+        #region TrimEnd(...)
+        /// <summary>
+        /// Removes the trailing occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The string value to be cut.
+        /// </param>
+        /// <param name="comparison">
+        /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
+        /// </param>
+        /// <returns>
+        /// The string without the passed <paramref name="value"/> at the end, if found; otherwise the original string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
+        /// </exception>
+        public static string TrimEnd(this string str, string value, StringComparison comparison)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.EndsWith(stringToSearch, comparison)
-                ? str.TakeBeforeLast(stringToSearch, comparison)
+            return str.VerifyArgument(nameof(str)).IsNotNull().Value.EndsWith(value, comparison)
+                ? str.TakeBeforeLast(value, comparison)
                 : str;
         }
-        public static string CutEnd(this string str, string stringToSearch) { return CutEnd(str, stringToSearch, StringComparison.CurrentCulture); }
-        public static string CutEnd(this string str, char charToSearch)
-        {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Length > 0 && str[str.Length - 1] == charToSearch
-                ? str.Substring(0, str.Length - 1)
-                : str;
-        }
-        #endregion // CutEnd(...)
+        /// <summary>
+        /// Removes the trailing occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// </summary>
+        /// <param name="str">
+        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// </param>
+        /// <param name="value">
+        /// The string value to be cut.
+        /// </param>
+        /// <returns>
+        /// The string without the passed <paramref name="value"/> at the end, if found; otherwise the original string.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
+        /// </exception>
+        public static string TrimEnd(this string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
+        #endregion // TrimEnd(...)
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

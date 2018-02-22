@@ -36,7 +36,7 @@ namespace Axle.Resources.Extraction.Embedded
         internal static bool ContainsEmbeddedResource(Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
-            var assemblyName = asm.GetName().Name.CutEnd(satelliteAssemblySuffix);
+            var assemblyName = asm.GetName().Name.TrimEnd(satelliteAssemblySuffix);
             var escapedResourceName = GetEmbeddedResourcePath(resourceName);
             var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             return asm.GetManifestResourceNames().Any(x => StringComparer.Ordinal.Equals(manifestResourceName, x));
@@ -48,7 +48,7 @@ namespace Axle.Resources.Extraction.Embedded
         private static Stream LoadEmbeddedResource(Assembly asm, string resourceName)
         {
             const string satelliteAssemblySuffix = ".resources";
-            var assemblyName = asm.GetName().Name.CutEnd(satelliteAssemblySuffix);
+            var assemblyName = asm.GetName().Name.TrimEnd(satelliteAssemblySuffix);
             var escapedResourceName = GetEmbeddedResourcePath(resourceName);
             var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             /***
