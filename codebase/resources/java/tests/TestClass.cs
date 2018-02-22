@@ -4,6 +4,7 @@ using System.Text;
 
 using Axle.Conversion;
 using Axle.Extensions.IO.Stream;
+using Axle.Resources.Extraction;
 using Axle.Resources.Java.Extraction;
 
 using NUnit.Framework;
@@ -26,9 +27,7 @@ namespace Axle.Resources.Java.Tests
                            .Configure("testBundle")
                                .Register(parser.Parse("TestMessages.properties"))
                                .Register(parser.Parse("file:///C:/Users/Ivaylo/Desktop/"));
-            resourceManager.Extractors
-                           .Register(new JavaPropertiesFileExtractor())
-                           .Register(new JavaPropertiesValueExtractor());
+            resourceManager.Extractors.Register(new JavaPropertiesExtractor());
 
             var resxResource = resourceManager.Resolve("testBundle", "Greeting", CultureInfo.CurrentCulture);
 

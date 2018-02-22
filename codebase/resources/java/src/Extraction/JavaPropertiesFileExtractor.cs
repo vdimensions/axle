@@ -12,7 +12,7 @@ namespace Axle.Resources.Java.Extraction
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementations capable of creating Java properties files.
     /// </summary>
-    public sealed class JavaPropertiesFileExtractor : IResourceExtractor
+    internal sealed class JavaPropertiesFileExtractor : IResourceExtractor
     {
         /// <inheritdoc />
         /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>

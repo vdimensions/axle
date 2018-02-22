@@ -6,4 +6,4 @@ source ../../../../dist
 
 group test
   source https://nuget.org/api/v2
-    nuget NUnit 3.6.1 framework: net45
+    nuget NUnit >= 3.6.1 framework: net45

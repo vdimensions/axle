@@ -12,7 +12,7 @@ namespace Axle.Resources.Java.Extraction
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementation that can access the values defined in a Java properties file.
     /// </summary>
-    public sealed class JavaPropertiesValueExtractor : IResourceExtractor
+    internal sealed class JavaPropertiesValueExtractor : IResourceExtractor
     {
         private bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
         {

@@ -14,7 +14,7 @@ namespace Axle.Resources.Extraction
         private readonly LinkedList<IResourceExtractor> _extractors = new LinkedList<IResourceExtractor>();
 
         /// <inheritdoc />
-        public IEnumerator<IResourceExtractor> GetEnumerator() { return _extractors.GetEnumerator(); }
+        public IEnumerator<IResourceExtractor> GetEnumerator() => _extractors.GetEnumerator();
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 

@@ -22,8 +22,7 @@ namespace Axle.Resources
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.
         /// </summary>
-        public DefaultResourceManager()
-            : base(new DefaultResourceBundleRegistry(), new DefaultResourceExtractorRegistry())
+        public DefaultResourceManager() : base(new DefaultResourceBundleRegistry(), new DefaultResourceExtractorRegistry())
         {
             Extractors
                 .Register(new EmbeddedResourceExtractor())
