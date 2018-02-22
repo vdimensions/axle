@@ -24,11 +24,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Remove="Algorithms\Sdk\BaseXXEncryptionAlgorithm.cs" />
-    <Compile Remove="Extraction\IResourceExtractionChain.cs" />
-    <Compile Remove="Extraction\ResourceExtractionChain.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Axle.Resources.dist.csproj.paket.references" />
+    <None Remove="Axle.Security.Cryptograpthy.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
   <Target Name="BeforeBuild">

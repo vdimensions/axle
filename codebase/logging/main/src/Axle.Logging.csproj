@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
-    <ProjectGuid>0952b72d-9d69-4439-885f-096ed969e9e5</ProjectGuid>
+    <ProjectGuid>EA51413A-58E8-4903-AEA7-CD0BF79462F9</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -23,11 +23,7 @@
     <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Extraction\IResourceExtractionChain.cs" />
-    <Compile Remove="Extraction\ResourceExtractionChain.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Axle.Resources.dist.csproj.paket.references" />
+    <None Remove="Axle.Logging.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
   <Target Name="BeforeBuild">
