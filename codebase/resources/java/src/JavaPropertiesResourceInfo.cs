@@ -23,10 +23,15 @@ namespace Axle.Resources.Java
         public const string FileExtension = ".properties";
 
         private readonly Dictionary<string, string> _data;
+        private readonly ResourceInfo _originalResource;
 
         internal JavaPropertiesResourceInfo(string name, CultureInfo culture, Dictionary<string, string> data) : base(name, culture, MimeType)
         {
             _data = data;
+        }
+        internal JavaPropertiesResourceInfo(string name, CultureInfo culture, Dictionary<string, string> data, ResourceInfo originalResource) : this(name, culture, data)
+        {
+            _originalResource = originalResource;
         }
 
         /// <summary>
@@ -37,6 +42,16 @@ namespace Axle.Resources.Java
         /// </returns>
         public override Stream Open()
         {
+            try
+            {
+                var stream = _originalResource?.Open();
+                if (stream != null)
+                {
+                    return stream;
+                }
+            }
+            catch { }
+
             var result = new MemoryStream();
             new JavaPropertyWriter(_data).Write(result, null);
             result.Seek(0, SeekOrigin.Begin);

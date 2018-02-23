@@ -6,7 +6,7 @@
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
     <ProjectGuid>5D89911E-F70B-4C08-9659-119104318881</ProjectGuid>
-    <RootNamespace>Axle.Resources.Java</RootNamespace>
+    <RootNamespace>$(AssemblyName)</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
