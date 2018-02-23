@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Axle.Resources.Java")]
-[assembly: AssemblyProduct("Axle.Resources.Java")]
-[assembly: AssemblyDescription("Axle Framework resources library to handle Java properties")]
+[assembly: AssemblyTitle("Axle.Resources.Yaml")]
+[assembly: AssemblyProduct("Axle.Resources.Yaml")]
+[assembly: AssemblyDescription("Axle Framework resources library to handle yaml files")]
 
 [assembly: AssemblyCompany("Virtual Dimensions")]
 [assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2018")]
@@ -15,9 +15,9 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 #if !NETSTANDARD || NETSTANDARD1_1_OR_NEWER
-[assembly: Guid("5D89911E-F70B-4C08-9659-119104318881")]
+[assembly: Guid("F3F97266-80F8-4C54-8CBC-1D72A5042E19")]
 #endif
 
-[assembly: AssemblyVersion("1.5.0.16")]
-[assembly: AssemblyFileVersion("1.5.0.16")]
-[assembly: AssemblyInformationalVersion("1.5.0.16")]
+[assembly: AssemblyVersion("1.5.0.2")]
+[assembly: AssemblyFileVersion("1.5.0.2")]
+[assembly: AssemblyInformationalVersion("1.5.0.2")]

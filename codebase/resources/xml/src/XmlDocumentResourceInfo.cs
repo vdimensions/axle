@@ -1,32 +1,32 @@
+#if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
 using System.Globalization;
-using System.IO;
 using System.Xml;
 
 
 namespace Axle.Resources.Xml
 {
+    /// <summary>
+    /// A class that represents a XML resources using <see cref="XmlDocument"/>.
+    /// </summary>
     public sealed class XmlDocumentResourceInfo : XmlResourceInfo
     {
         internal XmlDocumentResourceInfo(string name, CultureInfo culture, XmlDocument value) : base(name, culture)
         {
             Value = value;
         }
-        internal XmlDocumentResourceInfo(string name, CultureInfo culture, XmlDocument value, ResourceInfo originalResource) : base(name, culture, originalResource)
+        internal XmlDocumentResourceInfo(string name, CultureInfo culture, XmlDocument value, ResourceInfo originalResource) 
+            : base(name, culture, originalResource)
         {
             Value = value;
         }
 
-        protected override Stream DoOpen()
-        {
-            var stream = new MemoryStream();
-            using (var writer = XmlWriter.Create(stream, new XmlWriterSettings { CloseOutput = false }))
-            {
-                Value.WriteTo(writer);
-            }
-            stream.Seek(0, SeekOrigin.Begin);
-            return stream;
-        }
+        /// <inheritdoc />
+        protected override void WriteTo(XmlWriter writer) => Value.WriteTo(writer);
 
+        /// <summary>
+        /// Gets a reference to the <see cref="XmlDocument"/> instance representing the current XML resource.
+        /// </summary>
         public XmlDocument Value { get; }
     }
 }
+#endif

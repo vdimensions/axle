@@ -1,6 +1,6 @@
 Axle.Core
 Axle.Resources
-System.Xml.XmlDocument
+YamlDotNet
 
 group build
   Mason.Targets.Preprocessor

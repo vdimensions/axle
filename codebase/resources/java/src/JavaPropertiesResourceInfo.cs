@@ -13,7 +13,7 @@ namespace Axle.Resources.Java
     public class JavaPropertiesResourceInfo : ResourceInfo
     {
         /// <summary>
-        /// Gets the content (MIME) type of the java properties file.
+        /// Gets the content (MIME) type of a java properties file.
         /// </summary>
         public const string MimeType = "text/x-java-properties";
 
@@ -42,6 +42,7 @@ namespace Axle.Resources.Java
         /// </returns>
         public override Stream Open()
         {
+            // ReSharper disable EmptyGeneralCatchClause
             try
             {
                 var stream = _originalResource?.Open();
@@ -51,6 +52,7 @@ namespace Axle.Resources.Java
                 }
             }
             catch { }
+            // ReSharper restore EmptyGeneralCatchClause
 
             var result = new MemoryStream();
             new JavaPropertyWriter(_data).Write(result, null);

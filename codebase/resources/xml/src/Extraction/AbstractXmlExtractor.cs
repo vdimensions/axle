@@ -1,30 +1,57 @@
 ﻿using System;
 
-using Axle.Extensions.String;
 using Axle.Resources.Extraction;
 
 
 namespace Axle.Resources.Xml.Extraction
 {
+    #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
     /// <summary>
     /// An abstract class to serve as a base for creating XML resource marshaller implementations.
     /// <para>
-    /// Known implementations of this class are the  <see cref="XDocumentExtractor" /> and <see cref="XmlDocumentExtractor"/>
+    /// Known implementations of this class are the <see cref="XDocumentExtractor" /> and <see cref="XmlDocumentExtractor"/>.
     /// </para>
     /// </summary>
-    /// <typeparam name="TXml">
+    /// <typeparam name="TX">
     /// The type representing the XML document from the unmarshalled resource.
     /// </typeparam>
     /// <seealso cref="XDocumentExtractor"/>
     /// <seealso cref="XmlDocumentExtractor"/>
-    public abstract class AbstractXmlExtractor<TXml> : IResourceExtractor where TXml: XmlResourceInfo
+    #else
+    /// <summary>
+    /// An abstract class to serve as a base for creating XML resource marshaller implementations.
+    /// <para>
+    /// Known implementations of this class is the <see cref="XDocumentExtractor" />.
+    /// </para>
+    /// </summary>
+    /// <typeparam name="TX">
+    /// The type representing the XML document from the unmarshalled resource.
+    /// </typeparam>
+    /// <seealso cref="XDocumentExtractor"/>
+    #endif
+    public abstract class AbstractXmlExtractor<TX> : IResourceExtractor where TX: XmlResourceInfo
     {
-        protected abstract TXml Extract(ResourceContext context, string name, ResourceInfo xml);
+        /// <summary>
+        /// Extracts a <typeparamref name="TX"/> representation of an XML resource.
+        /// </summary>
+        /// <param name="context">
+        /// The <see cref="ResourceContext"/> used for the extraction. 
+        /// </param>
+        /// <param name="name">
+        /// A <see cref="string"/> object used to identify the requested resource. 
+        /// </param>
+        /// <param name="resource">
+        /// The original <see cref="ResourceInfo"/> object that will be used to stream the underlying XML.
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="TX"/> representing the XML resource. 
+        /// </returns>
+        protected abstract TX Extract(ResourceContext context, string name, ResourceInfo resource);
 
+        /// <inheritdoc />
         public ResourceInfo Extract(ResourceContext context, string name)
         {
-            var xmlName = $"{name.TrimEnd(XmlResourceInfo.FileExtension, StringComparison.OrdinalIgnoreCase)}{XmlResourceInfo.FileExtension}";
-            var xmlResource = context.ExtractionChain.Extract(xmlName);
+            var xmlResource = context.ExtractionChain.Extract(name);
             try
             {
                 return xmlResource != null ? Extract(context, name, xmlResource) : null;

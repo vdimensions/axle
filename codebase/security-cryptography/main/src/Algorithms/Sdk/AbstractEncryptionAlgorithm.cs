@@ -20,9 +20,8 @@ namespace Axle.Security.Cryptography.Algorithms.Sdk
         public abstract ICryptoTransform CreateEncryptor();
         public abstract ICryptoTransform CreateDecryptor();
 
-        void IDisposable.Dispose() { Dispose(true); }
-        public void Dispose() { Dispose(true);}
-
+        void IDisposable.Dispose() => Dispose(true);
+        public void Dispose() => Dispose(true);
         protected virtual void Dispose(bool disposing) { }
 
         public virtual string Encrypt(string value, Encoding encoding)

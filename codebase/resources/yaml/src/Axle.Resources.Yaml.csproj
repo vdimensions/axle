@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>net35;net40;net45;netstandard2.0;netstandard1.3</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
-    <ProjectGuid>5D89911E-F70B-4C08-9659-119104318881</ProjectGuid>
+    <ProjectGuid>F3F97266-80F8-4C54-8CBC-1D72A5042E19</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>

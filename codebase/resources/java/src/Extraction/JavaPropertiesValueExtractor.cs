@@ -4,8 +4,6 @@ using System.Collections.Generic;
 using Axle.Resources.Extraction;
 using Axle.Extensions.String;
 
-using Kajabity.Tools.Java;
-
 
 namespace Axle.Resources.Java.Extraction
 {
@@ -14,7 +12,7 @@ namespace Axle.Resources.Java.Extraction
     /// </summary>
     internal sealed class JavaPropertiesValueExtractor : IResourceExtractor
     {
-        private bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
+        private static bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
         {
             propertyFileName = keyPrefix = null;
             const string ext = JavaPropertiesResourceInfo.FileExtension;
@@ -45,9 +43,7 @@ namespace Axle.Resources.Java.Extraction
                         using (var stream = propertyResource?.Open())
                         if (stream != null)
                         {
-                            var jp = new JavaProperties();
-                            jp.Load(stream);
-                            props = jp;
+                            JavaPropertiesFileExtractor.ReadData(stream, props = new Dictionary<string, string>(JavaPropertiesFileExtractor.KeyComparer));
                         }
                         break;
                 }
