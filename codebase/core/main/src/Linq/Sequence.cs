@@ -91,15 +91,15 @@ namespace Axle.Linq
         /// </returns>
         public Optional<T> Single() { return Optional.From(this.SingleOrDefault()); }
 
-        public TE Value { get { return value; } }
-        object IReference.Value { get { return Value; } }
-        public bool IsReadOnly { get { return isReadOnly; } }
-        public bool IsParallel { get { return isParallel; } }
-        public bool IsFixedSize { get { return typeof(TE).IsArray; } }
+        public TE Value => value;
+        object IReference.Value => Value;
+        public bool IsReadOnly => isReadOnly;
+        public bool IsParallel => isParallel;
+        public bool IsFixedSize => typeof(TE).IsArray;
         /// <summary>
         /// Gets the number of elements contained in the sequence.
         /// </summary>
-        public int Count { get { return value?.Count() ?? 0; } }
+        public int Count => value?.Count() ?? 0;
 
         public static implicit operator TE(Sequence<TE, T> obj) { return obj.Value; }
     }
