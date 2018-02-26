@@ -126,7 +126,8 @@ namespace Axle.Reflection
         {
             #if !NETSTANDARD
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            var constructor = _introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
+            var constructor = _introspectedType.GetConstructor(argumentTypes) 
+                           ?? _introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
             return constructor != null ? new ConstructorToken(constructor) : null;
             #elif NETSTANDARD1_5_OR_NEWER
             var constructor = _introspectedType.GetTypeInfo().GetConstructor(argumentTypes);
