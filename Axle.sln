@@ -44,12 +44,20 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log4net", "log4net", "{D233
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Logging.Log4net", "codebase\logging\log4net\src\Axle.Logging.Log4net.csproj", "{91679D15-77CB-4F66-8145-7085303A105F}"
 EndProject
-
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "caching", "caching", "{13D7D1D3-733D-46E8-AFD1-D1BE3E0A1640}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Caching", "codebase\caching\main\src\Axle.Caching.csproj", "{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6}"
 EndProject
-
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "yaml", "yaml", "{766C9667-99B8-4469-9FB6-2A15025B6E25}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{DD874AFF-58C6-4D1C-8D4B-429FDCC3CFD5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.Xml", "I:\Projects\VDimensions\projects\axle\codebase\resources\xml\src\Axle.Resources.Xml.csproj", "{3DE1EA18-A956-49C5-9D41-6FC5DB175A71}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.Yaml", "I:\Projects\VDimensions\projects\axle\codebase\resources\yaml\src\Axle.Resources.Yaml.csproj", "{F3F97266-80F8-4C54-8CBC-1D72A5042E19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Resources.Yaml.Tests", "I:\Projects\VDimensions\projects\axle\codebase\resources\yaml\tests\Axle.Resources.Yaml.Tests.csproj", "{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +108,18 @@ Global
 		{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DE1EA18-A956-49C5-9D41-6FC5DB175A71}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DE1EA18-A956-49C5-9D41-6FC5DB175A71}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DE1EA18-A956-49C5-9D41-6FC5DB175A71}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DE1EA18-A956-49C5-9D41-6FC5DB175A71}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3F97266-80F8-4C54-8CBC-1D72A5042E19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3F97266-80F8-4C54-8CBC-1D72A5042E19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3F97266-80F8-4C54-8CBC-1D72A5042E19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3F97266-80F8-4C54-8CBC-1D72A5042E19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -120,6 +140,11 @@ Global
 		{D233A35D-37CF-48C1-BCFB-B7A90F82D826} = {D70A7D36-32CB-4359-8210-D3F6DEC3D04A}
 		{91679D15-77CB-4F66-8145-7085303A105F} = {D233A35D-37CF-48C1-BCFB-B7A90F82D826}
 		{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6} = {13D7D1D3-733D-46E8-AFD1-D1BE3E0A1640}
+		{766C9667-99B8-4469-9FB6-2A15025B6E25} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
+		{DD874AFF-58C6-4D1C-8D4B-429FDCC3CFD5} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
+		{3DE1EA18-A956-49C5-9D41-6FC5DB175A71} = {DD874AFF-58C6-4D1C-8D4B-429FDCC3CFD5}
+		{F3F97266-80F8-4C54-8CBC-1D72A5042E19} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
+		{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

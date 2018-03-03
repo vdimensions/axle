@@ -48,13 +48,14 @@ namespace Axle.Resources.Extraction.Embedded
                 var actualAssembly = culture.Equals(System.Globalization.CultureInfo.InvariantCulture)
                     ? assembly
                     : runtime.LoadSatelliteAssembly(assembly, culture);
+                var actualName = $"{location.AbsolutePath.TrimStart('/')}{name}";
                 /*
                  * Only create resource if there is a satellite assembly when the culture is not invariant.
                  * Also, never create an adapter if the assembly does not contain the requested resource.
                  */
-                if (actualAssembly != null && EmbeddedResourceInfo.ContainsEmbeddedResource(actualAssembly, name))
+                if (actualAssembly != null && EmbeddedResourceInfo.ContainsEmbeddedResource(actualAssembly, actualName))
                 {
-                    return new EmbeddedResourceInfo(actualAssembly, name, culture);
+                    return new EmbeddedResourceInfo(actualAssembly, name, actualName, culture);
                 }
             }
             #endif

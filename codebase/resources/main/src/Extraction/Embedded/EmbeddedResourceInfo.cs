@@ -70,10 +70,12 @@ namespace Axle.Resources.Extraction.Embedded
         }
 
         private readonly Assembly _assembly;
+        private readonly string _actualName;
 
-        internal EmbeddedResourceInfo(Assembly assembly, string name, CultureInfo culture) : base(name, culture, "application/octet-stream")
+        internal EmbeddedResourceInfo(Assembly assembly, string name, string actualName, CultureInfo culture) : base(name, culture, "application/octet-stream")
         {
             _assembly = assembly.VerifyArgument(nameof(assembly)).IsNotNull();
+            _actualName = actualName.VerifyArgument(nameof(actualName)).IsNotNullOrEmpty();
         }
 
         /// <inheritdoc />
@@ -81,7 +83,7 @@ namespace Axle.Resources.Extraction.Embedded
         {
             try
             {
-                return LoadEmbeddedResource(_assembly, Name);
+                return LoadEmbeddedResource(_assembly, _actualName);
             }
             catch (FileNotFoundException e)
             {

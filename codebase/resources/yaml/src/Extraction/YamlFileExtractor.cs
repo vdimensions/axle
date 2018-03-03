@@ -6,6 +6,7 @@ using System.Text;
 
 using Axle.Resources.Extraction;
 
+using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
 
@@ -29,8 +30,21 @@ namespace Axle.Resources.Yaml.Extraction
         internal static IEnumerable<IDictionary<string, string>> ReadYaml(Stream stream, Encoding encoding)
         {
             var deserializer = new Deserializer();
-            var result = deserializer.Deserialize<List<Dictionary<string, string>>>(new StreamReader(stream, encoding, true));
-            return result.Cast<IDictionary<string, string>>();
+            try
+            {
+                var result = deserializer.Deserialize<Dictionary<string, string>>(new StreamReader(stream, encoding, true));
+                return new[] {result};
+            }
+            catch (YamlException e)
+            {
+                if (e.Message.Contains("Expected 'MappingStart', got 'SequenceStart'"))
+                {
+                    stream.Seek(0, SeekOrigin.Begin);
+                    var result = deserializer.Deserialize<List<Dictionary<string, string>>>(new StreamReader(stream, encoding, true));
+                    return result.Cast<IDictionary<string, string>>();
+                }
+            }
+            return null;
         }
 
         public ResourceInfo Extract(ResourceContext context, string name)

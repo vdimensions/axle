@@ -5,13 +5,13 @@ using System.Text;
 using Axle.Conversion;
 using Axle.Extensions.IO.Stream;
 using Axle.Resources.Extraction;
-using Axle.Resources.Java.Extraction;
+using Axle.Resources.Yaml.Extraction;
 
 using NUnit.Framework;
 
 
 
-namespace Axle.Resources.Java.Tests
+namespace Axle.Resources.Yaml.Tests
 {
     using UriParser = Axle.Conversion.Parsing.UriParser;
 
@@ -25,9 +25,9 @@ namespace Axle.Resources.Java.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                            .Configure("testBundle")
-                               .Register(parser.Parse("Messages.properties"))
-                               .Register(parser.Parse("assembly://Axle.Resources.Java.Tests/Properties/"));
-            resourceManager.Extractors.Register(new JavaPropertiesExtractor());
+                               .Register(parser.Parse("Messages.yml"))
+                               .Register(parser.Parse("assembly://Axle.Resources.Yaml.Tests/Properties/"));
+            resourceManager.Extractors.Register(new YamlExtractor());
 
             var resxResource = resourceManager.Resolve("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
