@@ -7,6 +7,9 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
+    #if !NETSTANDARD
+    [Serializable]
+    #endif
     internal sealed class NpgsqlTimestampConverter : NpgsqlDbTypeConverter<DateTime?, NpgsqlDateTime?>
     {
         public NpgsqlTimestampConverter() : base(DbType.DateTime, NpgsqlDbType.Timestamp, true) { }

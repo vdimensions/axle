@@ -5,6 +5,9 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
+    #if !NETSTANDARD
+    [System.Serializable]
+    #endif
     internal abstract class NpgsqlSameTypeConverter<T> : NpgsqlDbTypeConverter<T, T>
     {
         protected NpgsqlSameTypeConverter(DbType dbType, NpgsqlDbType npgsqlDbType, bool registerAbstractDbType) : base(dbType, npgsqlDbType, registerAbstractDbType) { }

@@ -6,7 +6,7 @@ using Axle.Data.Common.Conversion;
 #if NETSTANDARD
 using SqliteType = Microsoft.Data.Sqlite.SqliteType;
 #else
-using SqliteType = Axle.Data.Sqlite.SQLiteColumnType;
+using SqliteType = Axle.Data.Sqlite.SqliteType;
 #endif
 
 namespace Axle.Data.Sqlite.Conversion

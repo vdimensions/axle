@@ -7,6 +7,9 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
+    #if !NETSTANDARD
+    [Serializable]
+    #endif
     internal sealed class NpgsqlTimeSpanConverter : NpgsqlDbTypeConverter<TimeSpan?, NpgsqlTimeSpan?>
     {
         public NpgsqlTimeSpanConverter() : base(DbType.DateTimeOffset, NpgsqlDbType.Interval, true) { }

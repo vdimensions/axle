@@ -1,5 +1,4 @@
 ﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
-using System;
 using System.Data;
 using System.Data.Odbc;
 
@@ -8,18 +7,21 @@ using Axle.Data.Common;
 
 namespace Axle.Data.Odbc
 {
-    [Serializable]
+    #if !NETSTANDARD
+    [System.Serializable]
+    #endif
     public sealed class OdbcServiceProvider : DbServiceProvider<
-            OdbcConnection,
-            OdbcTransaction,
-            OdbcCommand,
-            OdbcDataAdapter,
-            OdbcDataReader,
-            OdbcParameter,
-            OdbcType>//,
-        //IDbParameterValueSetter<SqlDbType>
+        OdbcConnection,
+        OdbcTransaction,
+        OdbcCommand,
+        OdbcDataAdapter,
+        OdbcDataReader,
+        OdbcParameter,
+        OdbcType>
     {
         public const string Name = "System.Data.Odbc";
+
+        private readonly OdbcParameterValueSetter _parameterValueSetter = new OdbcParameterValueSetter();
 
         public OdbcServiceProvider(string dialect) : base(Name, dialect) { }
         
@@ -75,6 +77,8 @@ namespace Axle.Data.Odbc
                 ? new OdbcParameter { ParameterName = name, DbType = type.Value, Size = size ?? -1, Direction = direction }
                 : new OdbcParameter { ParameterName = name, Size = size ?? -1, Direction = direction };
         }
+
+        protected override IDbParameterValueSetter<OdbcParameter, OdbcType> ParameterValueSetter => _parameterValueSetter;
     }
 }
 #endif

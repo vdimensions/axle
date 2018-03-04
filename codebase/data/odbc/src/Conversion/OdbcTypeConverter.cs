@@ -9,18 +9,22 @@ using Axle.Data.Common.Conversion;
 
 namespace Axle.Data.Odbc.Conversion
 {
-    [Serializable]
+    #if !NETSTANDARD
+    [System.Serializable]
+    #endif
     internal abstract class OdbcTypeConverter<T1, T2> : DbTypeConverter<T1, T2>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly OdbcType _odbcType;
 
-        protected OdbcTypeConverter(DbType dbType, OdbcType odbcType) : base(dbType)
+        protected OdbcTypeConverter(DbType dbType, OdbcType odbcType, bool registerAbstractDbType) : base(dbType)
         {
             _odbcType = odbcType;
+            RegisterAbstractDbType = registerAbstractDbType;
         }
 
         public OdbcType OdbcType => _odbcType;
+        internal bool RegisterAbstractDbType { get; }
     }
 }
 #endif

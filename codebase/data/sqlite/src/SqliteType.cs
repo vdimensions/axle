@@ -2,16 +2,11 @@
 namespace Axle.Data.Sqlite
 {
     /// <summary>
-    /// Taken as is from the original System.Data.SQLite.Core library, where the type is left internal.
+    /// Taken as is from Faithlife/System.Data.SQLite library, where the type is left internal.
     /// see: https://github.com/Faithlife/System.Data.SQLite/blob/master/src/System.Data.SQLite/SQLiteColumnType.cs
     /// </summary>
-    public enum SQLiteColumnType
+    public enum SqliteType
     {
-        /// <summary>
-        /// Not used
-        /// </summary>
-        None = 0,
-        
         /// <summary>
         /// All integers in SQLite default to Int64
         /// </summary>
@@ -30,12 +25,7 @@ namespace Axle.Data.Sqlite
         /// <summary>
         /// Typically blob types are only seen when returned from a function
         /// </summary>
-        Blob = 4,
-        
-        /// <summary>
-        /// Null types can be returned from functions
-        /// </summary>
-        Null = 5,
+        Blob = 4
     }
 }
 #endif

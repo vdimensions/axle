@@ -20,8 +20,7 @@ namespace Axle.Data.Npgsql
         #endif
         NpgsqlDataReader,
         NpgsqlParameter,
-        NpgsqlDbType>/*,
-        IDbParameterValueSetter<NpgsqlDbType>*/
+        NpgsqlDbType>
     {
         public const string Name = "Npgsql";
         public const string Dialect = "PostgreSQL";

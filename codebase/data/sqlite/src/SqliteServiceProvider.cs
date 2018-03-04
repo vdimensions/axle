@@ -7,7 +7,7 @@ using SqliteCommand     = System.Data.SQLite.SQLiteCommand;
 using SqliteDataAdapter = System.Data.SQLite.SQLiteDataAdapter;
 using SqliteDataReader  = System.Data.SQLite.SQLiteDataReader;
 using SqliteParameter   = System.Data.SQLite.SQLiteParameter;
-using SqliteType        = Axle.Data.Sqlite.SQLiteColumnType;
+using SqliteType        = Axle.Data.Sqlite.SqliteType;
 #else
 using Microsoft.Data.Sqlite;
 
@@ -29,8 +29,7 @@ namespace Axle.Data.Sqlite
             SqliteDataAdapter,
             SqliteDataReader,
             SqliteParameter,
-            SqliteType>/*,
-        IDbParameterValueSetter<SQLiteType>*/
+            SqliteType>
     {
 
         private static DbType SqliteType2DbType(SqliteType type)

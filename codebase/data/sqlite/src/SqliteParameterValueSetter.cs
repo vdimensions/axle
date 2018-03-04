@@ -7,7 +7,7 @@ using Axle.Data.Sqlite.Conversion;
 
 #if !NETSTANDARD
 using SqliteParameter = System.Data.SQLite.SQLiteParameter;
-using SqliteType      = Axle.Data.Sqlite.SQLiteColumnType;
+using SqliteType      = Axle.Data.Sqlite.SqliteType;
 #else
 using SqliteParameter = Microsoft.Data.Sqlite.SqliteParameter;
 using SqliteType      = Microsoft.Data.Sqlite.SqliteType;
