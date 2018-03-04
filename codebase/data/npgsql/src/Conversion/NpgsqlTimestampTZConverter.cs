@@ -9,7 +9,7 @@ namespace Axle.Data.Npgsql.Conversion
 {
     internal sealed class NpgsqlTimestampTZConverter : NpgsqlDbTypeConverter<DateTime?, NpgsqlDateTime?>
     {
-        public NpgsqlTimestampTZConverter() : base(DbType.DateTime, NpgsqlDbType.TimestampTZ) { }
+        public NpgsqlTimestampTZConverter() : base(DbType.DateTime, NpgsqlDbType.TimestampTZ, false) { }
 
         protected override DateTime? GetNotNullSourceValue(NpgsqlDateTime? value) => value.Value.ToDateTime();
         protected override NpgsqlDateTime? GetNotNullDestinationValue(DateTime? value) => new NpgsqlDateTime(value.Value);

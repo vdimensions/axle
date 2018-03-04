@@ -9,15 +9,15 @@ using SqliteType = Axle.Data.Sqlite.SQLiteColumnType;
 
 namespace Axle.Data.Sqlite.Conversion
 {
-    #if !NETSTANDARD
+#if !NETSTANDARD
     [System.Serializable]
     #endif
-    internal sealed class SqliteDecimalConverter : SqliteDbTypeConverter<decimal?>
+    internal sealed class SqliteDecimalConverter : SqliteSameTypeConverter<decimal?>
     {
         #if NETSTANDARD
-        public SqliteDecimalConverter() : base(DbType.Decimal, SqliteType.Real) { }
+        public SqliteDecimalConverter() : base(DbType.Decimal, SqliteType.Real, false) { }
         #else
-        public SqliteDecimalConverter() : base(DbType.Double, SqliteType.Double) { }
+        public SqliteDecimalConverter() : base(DbType.Double, SqliteType.Double, false) { }
         #endif
     }
 }

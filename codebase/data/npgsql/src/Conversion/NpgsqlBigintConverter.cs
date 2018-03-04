@@ -7,6 +7,6 @@ namespace Axle.Data.Npgsql.Conversion
 {
     internal sealed class NpgsqlBigintConverter : NpgsqlSameTypeConverter<long?>
     {
-        public NpgsqlBigintConverter() : base(DbType.Int64, NpgsqlDbType.Bigint) { }
+        public NpgsqlBigintConverter() : base(DbType.Int64, NpgsqlDbType.Bigint, true) { }
     }
 }

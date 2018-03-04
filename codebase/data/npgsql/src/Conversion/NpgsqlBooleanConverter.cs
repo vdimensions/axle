@@ -7,6 +7,6 @@ namespace Axle.Data.Npgsql.Conversion
 {
     internal sealed class NpgsqlBooleanConverter : NpgsqlSameTypeConverter<bool?>
     {
-        public NpgsqlBooleanConverter() : base(DbType.Boolean, NpgsqlDbType.Boolean) { }
+        public NpgsqlBooleanConverter() : base(DbType.Boolean, NpgsqlDbType.Boolean, true) { }
     }
 }

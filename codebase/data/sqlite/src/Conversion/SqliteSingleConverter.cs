@@ -12,12 +12,12 @@ namespace Axle.Data.Sqlite.Conversion
     #if !NETSTANDARD
     [System.Serializable]
     #endif
-    internal sealed class SqliteSingleConverter : SqliteDbTypeConverter<float?>
+    internal sealed class SqliteSingleConverter : SqliteSameTypeConverter<float?>
     {
         #if NETSTANDARD
-        public SqliteSingleConverter() : base(DbType.Double, SqliteType.Real) { }
+        public SqliteSingleConverter() : base(DbType.Single, SqliteType.Real, false) { }
         #else
-        public SqliteSingleConverter() : base(DbType.Double, SqliteType.Double) { }
+        public SqliteSingleConverter() : base(DbType.Single, SqliteType.Double, false) { }
         #endif
     }
 }

@@ -48,7 +48,17 @@ namespace Axle.Data.Npgsql
             //RegisterConverter(new NpgsqlBinaryConverter());
         }
 
-        private void RegisterConverter<T1, T2>(NpgsqlDbTypeConverter<T1, T2> converter) => RegisterConverter(converter, converter.NpgsqlType);
+        private void RegisterConverter<T1, T2>(NpgsqlDbTypeConverter<T1, T2> converter)
+        {
+            if (converter.RegisterAbstractDbType)
+            {
+                RegisterConverter(converter, converter.NpgsqlType, converter.DbType);
+            }
+            else
+            {
+                RegisterConverter(converter, converter.NpgsqlType);
+            }
+        }
 
         protected override void SetValue(NpgsqlParameter parameter, DbType type, object value, IDbValueConverter converter)
         {

@@ -14,23 +14,24 @@ namespace Axle.Data.Sqlite.Conversion
     #if !NETSTANDARD
     [System.Serializable]
     #endif
-    internal abstract class SqliteDbTypeConverter<T> : DbTypeConverter<T, T>
+    internal abstract class SqliteDbTypeConverter<T1, T2> : DbTypeConverter<T1, T2>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly SqliteType _sqliteType;
 
-        protected SqliteDbTypeConverter(DbType dbType, SqliteType sqlType) : base(dbType)
+        private readonly bool _registerAbstractDbType;
+
+        protected SqliteDbTypeConverter(DbType dbType, SqliteType sqlType, bool registerAbstractDbType) : base(dbType)
         {
             _sqliteType = sqlType;
+            _registerAbstractDbType = registerAbstractDbType;
         }
-
-        protected override T GetNotNullSourceValue(T value) => value;
-        protected override T GetNotNullDestinationValue(T value) => value;
 
         public SqliteType SqliteType => _sqliteType;
 
-        protected virtual T NullEquivalent => default(T);
-        protected override T SourceNullEquivalent => NullEquivalent;
-        protected override T DestinationNullEquivalent => NullEquivalent;
+        protected override T1 SourceNullEquivalent => default(T1);
+        protected override T2 DestinationNullEquivalent => default(T2);
+
+        internal bool RegisterAbstractDbType => _registerAbstractDbType;
     }
 }

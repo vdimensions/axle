@@ -12,8 +12,8 @@ namespace Axle.Data.Sqlite.Conversion
     #if !NETSTANDARD
     [System.Serializable]
     #endif
-    internal sealed class SqliteInt64Converter : SqliteSameTypeConverter<long?>
+    internal sealed class SqliteInt32Converter : SqliteSameTypeConverter<int?>
     {
-        public SqliteInt64Converter() : base(DbType.Int64, SqliteType.Integer, true) { }
+        public SqliteInt32Converter() : base(DbType.Int32, SqliteType.Integer, false) { }
     }
 }

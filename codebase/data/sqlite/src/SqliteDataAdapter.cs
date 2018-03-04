@@ -16,18 +16,18 @@ namespace Axle.Data.Sqlite
     /// <summary>
     /// SQLite implementation of DbDataAdapter.
     /// 
-    /// Since this class is not provided in Microsoft.Data.Sqlite , I've taken it from 
-    /// System.Data.SQLite's code from https://github.com/OpenDataSpace/System.Data.SQLite
-    /// and did some minor cleanup.
+    /// Since this class is not provided in Microsoft.Data.Sqlite, it has been taken from 
+    /// System.Data.SQLite's code at https://github.com/OpenDataSpace/System.Data.SQLite
+    /// with some minor cleanup.
     /// 
-    /// The original file is written by Robert Simpson (robert@blackcastlesoft.com)
+    /// The original code is written by Robert Simpson (robert@blackcastlesoft.com)
     /// </summary>
     public sealed class SqliteDataAdapter : DbDataAdapter
     {
         private readonly bool _disposeSelect = true;
 
-        private static readonly object _updatingEventPH = new object();
-        private static readonly object _updatedEventPH = new object();
+        private static readonly object _UpdatingEventKey = new object();
+        private static readonly object _UpdatedEventKey = new object();
 
         #region Public Constructors
         /// <overloads>
@@ -88,7 +88,8 @@ namespace Axle.Data.Sqlite
 
         #region IDisposable "Pattern" Members
         private bool _disposed;
-        private void CheckDisposed() /* throw */
+
+        private void CheckDisposed()
         {
             if (_disposed)
             {
@@ -100,34 +101,36 @@ namespace Axle.Data.Sqlite
         {
             try
             {
-                if (!_disposed)
+                if (_disposed)
                 {
-                    if (disposing)
-                    {
-                        if (_disposeSelect && SelectCommand != null)
-                        {
-                            SelectCommand.Dispose();
-                            SelectCommand = null;
-                        }
+                    return;
+                }
+                if (!disposing)
+                {
+                    return;
+                }
+                if (_disposeSelect && SelectCommand != null)
+                {
+                    SelectCommand.Dispose();
+                    SelectCommand = null;
+                }
 
-                        if (InsertCommand != null)
-                        {
-                            InsertCommand.Dispose();
-                            InsertCommand = null;
-                        }
+                if (InsertCommand != null)
+                {
+                    InsertCommand.Dispose();
+                    InsertCommand = null;
+                }
 
-                        if (UpdateCommand != null)
-                        {
-                            UpdateCommand.Dispose();
-                            UpdateCommand = null;
-                        }
+                if (UpdateCommand != null)
+                {
+                    UpdateCommand.Dispose();
+                    UpdateCommand = null;
+                }
 
-                        if (DeleteCommand != null)
-                        {
-                            DeleteCommand.Dispose();
-                            DeleteCommand = null;
-                        }
-                    }
+                if (DeleteCommand != null)
+                {
+                    DeleteCommand.Dispose();
+                    DeleteCommand = null;
                 }
             }
             finally
@@ -147,23 +150,20 @@ namespace Axle.Data.Sqlite
             {
                 CheckDisposed();
 
-                #if !PLATFORM_COMPACTFRAMEWORK
-                var previous = (EventHandler<RowUpdatingEventArgs>) Events[_updatingEventPH];
+                var previous = UpdatingEvent;
                 if (previous != null && value.Target is DbCommandBuilder)
                 {
                     var handler = (EventHandler<RowUpdatingEventArgs>)FindBuilder(previous);
                     if (handler != null)
                     {
-                        Events.RemoveHandler(_updatingEventPH, handler);
+                        Events.RemoveHandler(_UpdatingEventKey, handler);
                     }
                 }
-                #endif
-                Events.AddHandler(_updatingEventPH, value);
+                Events.AddHandler(_UpdatingEventKey, value);
             }
-            remove { CheckDisposed(); Events.RemoveHandler(_updatingEventPH, value); }
+            remove { CheckDisposed(); Events.RemoveHandler(_UpdatingEventKey, value); }
         }
 
-        #if !PLATFORM_COMPACTFRAMEWORK
         internal static Delegate FindBuilder(MulticastDelegate mcd)
         {
             if (mcd != null)
@@ -179,36 +179,30 @@ namespace Axle.Data.Sqlite
             }
             return null;
         }
-        #endif
 
         /// <summary>
         /// Row updated event handler
         /// </summary>
         public event EventHandler<RowUpdatedEventArgs> RowUpdated
         {
-            add { CheckDisposed(); Events.AddHandler(_updatedEventPH, value); }
-            remove { CheckDisposed(); Events.RemoveHandler(_updatedEventPH, value); }
+            add { CheckDisposed(); Events.AddHandler(_UpdatedEventKey, value); }
+            remove { CheckDisposed(); Events.RemoveHandler(_UpdatedEventKey, value); }
         }
 
         /// <summary>
         /// Raised by the underlying DbDataAdapter when a row is being updated
         /// </summary>
         /// <param name="value">The event's specifics</param>
-        protected override void OnRowUpdating(RowUpdatingEventArgs value)
-        {
-            var handler = Events[_updatingEventPH] as EventHandler<RowUpdatingEventArgs>;
-            handler?.Invoke(this, value);
-        }
+        protected override void OnRowUpdating(RowUpdatingEventArgs value) => UpdatingEvent?.Invoke(this, value);
 
         /// <summary>
         /// Raised by DbDataAdapter after a row is updated
         /// </summary>
         /// <param name="value">The event's specifics</param>
-        protected override void OnRowUpdated(RowUpdatedEventArgs value)
-        {
-            var handler = base.Events[_updatedEventPH] as EventHandler<RowUpdatedEventArgs>;
-            handler?.Invoke(this, value);
-        }
+        protected override void OnRowUpdated(RowUpdatedEventArgs value) => UpdatedEvent?.Invoke(this, value);
+
+        private EventHandler<RowUpdatedEventArgs> UpdatedEvent => Events[_UpdatedEventKey] as EventHandler<RowUpdatedEventArgs>;
+        private EventHandler<RowUpdatingEventArgs> UpdatingEvent => Events[_UpdatingEventKey] as EventHandler<RowUpdatingEventArgs>;
 
         /// <summary>
         /// Gets/sets the select command for this DataAdapter

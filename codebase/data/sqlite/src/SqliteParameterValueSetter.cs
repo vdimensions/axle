@@ -33,16 +33,31 @@ namespace Axle.Data.Sqlite
 
         public SqliteParameterValueSetter() : base(new SqliteDbTypeEqualityComparer())
         {
+            RegisterConverter(new SqliteInt16Converter());
+            RegisterConverter(new SqliteInt32Converter());
             RegisterConverter(new SqliteInt64Converter());
+            RegisterConverter(new SqliteSingleConverter());
+            RegisterConverter(new SqliteDoubleConverter());
             RegisterConverter(new SqliteDecimalConverter());
             RegisterConverter(new SqliteTextConverter());
         }
 
-        private void RegisterConverter<T>(SqliteDbTypeConverter<T> converter) => RegisterConverter(converter, converter.SqliteType);
+        private void RegisterConverter<T1, T2>(SqliteDbTypeConverter<T1, T2> converter)
+        {
+            if (converter.RegisterAbstractDbType)
+            {
+                RegisterConverter(converter, converter.SqliteType, converter.DbType);
+            }
+            else
+            {
+                RegisterConverter(converter, converter.SqliteType);
+            }
+        }
 
         protected override void SetValue(SqliteParameter parameter, DbType type, object value, IDbValueConverter converter)
         {
             parameter.Value = converter.Convert(value);
+            parameter.ResetDbType();
         }
 
         protected override void SetValue(SqliteParameter parameter, SqliteType type, object value, IDbValueConverter converter)

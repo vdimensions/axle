@@ -12,8 +12,8 @@ namespace Axle.Data.Sqlite.Conversion
     #if !NETSTANDARD
     [System.Serializable]
     #endif
-    internal sealed class SqliteTextConverter : SqliteDbTypeConverter<string>
+    internal sealed class SqliteTextConverter : SqliteSameTypeConverter<string>
     {
-        public SqliteTextConverter() : base(DbType.AnsiString, SqliteType.Text) { }
+        public SqliteTextConverter() : base(DbType.String, SqliteType.Text, true) { }
     }
 }

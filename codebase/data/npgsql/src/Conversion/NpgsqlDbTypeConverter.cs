@@ -16,11 +16,13 @@ namespace Axle.Data.Npgsql.Conversion
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly NpgsqlDbType _npgsqlType;
 
-        protected NpgsqlDbTypeConverter(DbType dbType, NpgsqlDbType npgsqlType) : base(dbType)
+        protected NpgsqlDbTypeConverter(DbType dbType, NpgsqlDbType npgsqlType, bool registerAbstractDbType) : base(dbType)
         {
             _npgsqlType = npgsqlType;
+            RegisterAbstractDbType = registerAbstractDbType;
         }
 
         public NpgsqlDbType NpgsqlType => _npgsqlType;
+        internal bool RegisterAbstractDbType { get; }
     }
 }

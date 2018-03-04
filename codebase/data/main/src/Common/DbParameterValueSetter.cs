@@ -34,14 +34,8 @@ namespace Axle.Data.Common
             _tdbTypeConverters = new Dictionary<TDbType, IDbValueConverter>(comparer.VerifyArgument(nameof(comparer)).IsNotNull().Value);
         }
 
-        protected void RegisterConverter(IDbValueConverter converter, DbType dbType)
-        {
-            _dbTypeConverters[dbType] = converter;
-        }
-        protected void RegisterConverter(IDbValueConverter converter, TDbType dbType)
-        {
-            RegisterConverter(converter, dbType, converter.DbType);
-        }
+        protected void RegisterConverter(IDbValueConverter converter, DbType dbType) => _dbTypeConverters[dbType] = converter;
+        protected void RegisterConverter(IDbValueConverter converter, TDbType dbType) => _tdbTypeConverters[dbType] = converter;
         protected void RegisterConverter(IDbValueConverter converter, TDbType tdbType, DbType dbType)
         {
             _dbTypeConverters[dbType] = _tdbTypeConverters[tdbType] = converter;

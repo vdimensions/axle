@@ -9,7 +9,7 @@ namespace Axle.Data.Npgsql.Conversion
 {
     internal sealed class NpgsqlTimeSpanConverter : NpgsqlDbTypeConverter<TimeSpan?, NpgsqlTimeSpan?>
     {
-        public NpgsqlTimeSpanConverter() : base(DbType.DateTimeOffset, NpgsqlDbType.Interval) { }
+        public NpgsqlTimeSpanConverter() : base(DbType.DateTimeOffset, NpgsqlDbType.Interval, true) { }
 
         protected override TimeSpan? GetNotNullSourceValue(NpgsqlTimeSpan? value) => value.Value.Time;
         protected override NpgsqlTimeSpan? GetNotNullDestinationValue(TimeSpan? value) => new NpgsqlTimeSpan(value.Value);
