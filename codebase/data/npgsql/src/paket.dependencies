@@ -1,8 +1,17 @@
 source ../../../../dist
   nuget Axle.Core
+  nuget Axle.Data
+
+source https://nuget.org/api/v2
+  nuget Npgsql >= 3.1 framework: net45, netstandard1.3, netstandard2.0
+  nuget System.Data.Common >= 4.3 framework: netstandard1.3, netstandard2.0
+
+group legacy
+  source https://nuget.org/api/v2
+    nuget Npgsql < 3 framework: net35, net40
 
 group build
-	source ../../../../submodules/mason/dist
-	  nuget Mason.Targets.Packager
-	  nuget Mason.Targets.Preprocessor
-	  nuget Mason.Targets.Verman
+  source ../../../../submodules/mason/dist
+    nuget Mason.Targets.Packager
+    nuget Mason.Targets.Preprocessor
+    nuget Mason.Targets.Verman

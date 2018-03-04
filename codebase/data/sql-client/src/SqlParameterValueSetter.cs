@@ -45,10 +45,7 @@ namespace Axle.Data.SqlClient
             RegisterConverter(new SqlBinaryConverter());
         }
 
-        private void RegisterConverter<T1, T2>(SqlDbTypeConverter<T1, T2> converter)
-        {
-            RegisterConverter(converter, converter.SqlType);
-        }
+        private void RegisterConverter<T1, T2>(SqlDbTypeConverter<T1, T2> converter) => RegisterConverter(converter, converter.SqlType);
 
         protected override void SetValue(SqlParameter parameter, DbType type, object value, IDbValueConverter converter)
         {

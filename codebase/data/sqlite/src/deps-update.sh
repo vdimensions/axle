@@ -1,4 +1,4 @@
-project='Axle.Data.Npgsql'
+project='Axle.Data.Sqlite'
 
 ./paket.sh update
 if [ $? -ne 0 ]; then

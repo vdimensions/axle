@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Axle.Data.Npgsql")]
-[assembly: AssemblyProduct("Axle.Data.Npgsql")]
-[assembly: AssemblyDescription("Axle framework's PostgreSQL data module")]
+[assembly: AssemblyTitle("Axle.Data.Sqlite")]
+[assembly: AssemblyProduct("Axle.Data.Sqlite")]
+[assembly: AssemblyDescription("Axle framework's SQLite data module")]
 
 [assembly: AssemblyCompany("Virtual Dimensions")]
 [assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2018")]
@@ -15,9 +15,9 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 #if !NETSTANDARD || NETSTANDARD1_1_OR_NEWER
-[assembly: Guid("BEBAE308-F02E-479E-90A0-6D88E2D3EFD9")]
+[assembly: Guid("879FE3A1-6FF7-466D-91FA-4DB67AE5E66A")]
 #endif
 
-[assembly: AssemblyVersion("1.5.0.2")]
-[assembly: AssemblyFileVersion("1.5.0.2")]
-[assembly: AssemblyInformationalVersion("1.5.0.2")]
+[assembly: AssemblyVersion("1.5.0.5")]
+[assembly: AssemblyFileVersion("1.5.0.5")]
+[assembly: AssemblyInformationalVersion("1.5.0.5")]

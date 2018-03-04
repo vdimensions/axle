@@ -1,10 +1,10 @@
 Axle.Core
 Axle.Data
-Npgsql
 System.Data.Common
+Microsoft.Data.Sqlite
 
-group legacy
-  Npgsql
-  
+group netXX
+  System.Data.SQLite.Core
+
 group build
   Mason.Targets.Preprocessor

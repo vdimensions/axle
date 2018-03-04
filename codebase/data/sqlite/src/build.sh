@@ -1,6 +1,6 @@
 msbuild="../../../../submodules/btw/msbuild.sh"
 paket='.paket/paket.sh'
-project='Axle.Data.Npgsql'
+project='Axle.Data.Sqlite'
 
 $paket update
 if [ $? -ne 0 ]; then

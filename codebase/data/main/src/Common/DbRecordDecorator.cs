@@ -7,11 +7,11 @@ using Axle.Verification;
 
 namespace Axle.Data.Common
 {
-    public class DbRecordDecorator : IDbRecord
+    public abstract class DbRecordDecorator : IDbRecord
     {
         protected readonly IDbRecord Target;
 
-        public DbRecordDecorator(IDbRecord target)
+        protected DbRecordDecorator(IDbRecord target)
         {
             Target = target.VerifyArgument(nameof(target)).IsNotNull().Value;
         }

@@ -6,7 +6,7 @@ using System.Data;
 using Axle.Verification;
 
 
-namespace Axle.Data
+namespace Axle.Data.Common
 {
     internal sealed class DataRecordAdapter : IDbRecord
     {
@@ -92,7 +92,7 @@ namespace Axle.Data
             {
                 try
                 {
-                    return _target[name];
+                    return _target[name.VerifyArgument(nameof(name)).IsNotNull()];
                 }
                 catch (IndexOutOfRangeException)
                 {
