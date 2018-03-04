@@ -93,5 +93,15 @@
     <file src="bin\*\net45\${id}.pdb"                target="lib\net45" />
     <file src="bin\*\net45\${id}.dll.mdb"            target="lib\net45" />
     <file src="bin\*\net45\${id}.xml"                target="lib\net45" />
+
+    <file src="bin\*\net40\${id}.dll"                target="lib\net40" />
+    <file src="bin\*\net40\${id}.pdb"                target="lib\net40" />
+    <file src="bin\*\net40\${id}.dll.mdb"            target="lib\net40" />
+    <file src="bin\*\net40\${id}.xml"                target="lib\net40" />
+
+    <file src="bin\*\net35\${id}.dll"                target="lib\net35" />
+    <file src="bin\*\net35\${id}.pdb"                target="lib\net35" />
+    <file src="bin\*\net35\${id}.dll.mdb"            target="lib\net35" />
+    <file src="bin\*\net35\${id}.xml"                target="lib\net35" />
   </files>
 </package>
