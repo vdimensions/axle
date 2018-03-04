@@ -1,0 +1,22 @@
+﻿using System.Data;
+using System.Data.SqlTypes;
+
+
+namespace Axle.Data.SqlClient.Conversion
+{
+    #if !NETSTANDARD
+    [System.Serializable]
+    #endif
+    internal sealed class SqlMoneyConverter : SqlDbTypeConverter<decimal?, SqlMoney>
+    {
+        public SqlMoneyConverter() : base(DbType.Currency, SqlDbType.Money) { }
+
+        protected override SqlMoney GetNotNullValue(decimal? value) => new SqlMoney(value.Value);
+        protected override decimal? GetNotNullValue(SqlMoney value) => value.Value;
+
+        protected override bool IsNull(SqlMoney value) => value.IsNull;
+
+        protected override decimal? SourceNullEquivalent => null;
+        protected override SqlMoney DestinationNullEquivalent => SqlMoney.Null;
+    }
+}

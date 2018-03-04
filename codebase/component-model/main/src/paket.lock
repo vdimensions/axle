@@ -1,0 +1,10 @@
+NUGET
+  remote: ../../../../dist
+    Axle.Core (1.5.0.74)
+
+GROUP build
+NUGET
+  remote: ../../../../submodules/mason/dist
+    Mason.Targets.Packager (0.1.1.26)
+    Mason.Targets.Preprocessor (0.1.1.13)
+    Mason.Targets.Verman (0.1.1.13)

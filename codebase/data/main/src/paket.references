@@ -1,0 +1,5 @@
+Axle.Core
+System.Data.Common
+
+group build
+  Mason.Targets.Preprocessor

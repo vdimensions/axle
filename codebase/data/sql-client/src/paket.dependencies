@@ -1,0 +1,13 @@
+source ../../../../dist
+  nuget Axle.Core
+	nuget Axle.Data
+
+source https://nuget.org/api/v2
+  nuget System.Data.Common framework: netstandard1.2, netstandard1.6, netstandard2.0
+  nuget System.Data.SqlClient framework: netstandard1.2, netstandard1.6, netstandard2.0
+
+group build
+	source ../../../../submodules/mason/dist
+	  nuget Mason.Targets.Packager
+	  nuget Mason.Targets.Preprocessor
+	  nuget Mason.Targets.Verman

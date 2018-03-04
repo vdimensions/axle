@@ -58,6 +58,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.Yaml", "I:\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Resources.Yaml.Tests", "I:\Projects\VDimensions\projects\axle\codebase\resources\yaml\tests\Axle.Resources.Yaml.Tests.csproj", "{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "data", "data", "{67B8EC37-9671-4762-B363-333E6ED87FFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "component-model", "component-model", "{098CB474-B887-4DE9-B5E8-FD9C08E4462D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
