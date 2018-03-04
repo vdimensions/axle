@@ -99,14 +99,7 @@ namespace Axle.Data.Sqlite
             return command;
         }
 
-        protected override SqliteDataAdapter CreateDataAdapter(SqliteCommand command)
-        {
-            #if NETSTANDARD
-            throw new NotSupportedException();
-            #else
-            return new SqliteDataAdapter(command);
-            #endif
-        }
+        protected override SqliteDataAdapter CreateDataAdapter(SqliteCommand command) => new SqliteDataAdapter(command);
 
         protected override SqliteDataReader CreateDataReader(SqliteCommand command, CommandBehavior? behavior)
         {
