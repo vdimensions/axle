@@ -20,14 +20,14 @@ namespace Axle.Data.Common.Conversion
             _dbType = dbType;
         }
 
-        protected abstract T2 GetNotNullValue(T1 value);
-        protected abstract T1 GetNotNullValue(T2 value);
+        protected abstract T1 GetNotNullSourceValue(T2 value);
+        protected abstract T2 GetNotNullDestinationValue(T1 value);
 
         protected virtual bool IsStub(T1 value) => Equals(value, SourceNullEquivalent);
         protected virtual bool IsNull(T2 value) => Equals(value, DestinationNullEquivalent);
 
-        protected sealed override T2 DoConvert(T1 source) => !IsStub(source) ? GetNotNullValue(source) : DestinationNullEquivalent;
-        protected sealed override T1 DoConvertBack(T2 source) => IsNull(source) ? SourceNullEquivalent : GetNotNullValue(source);
+        protected sealed override T2 DoConvert(T1 source) => !IsStub(source) ? GetNotNullDestinationValue(source) : DestinationNullEquivalent;
+        protected sealed override T1 DoConvertBack(T2 source) => IsNull(source) ? SourceNullEquivalent : GetNotNullSourceValue(source);
 
         protected abstract T1 SourceNullEquivalent { get; }
         protected abstract T2 DestinationNullEquivalent { get; }

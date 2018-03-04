@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Data;
@@ -7,9 +8,19 @@ using System.Linq;
 using Axle.Verification;
 
 
-namespace Axle.Data
+namespace Axle.Data.Common
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER
+    internal static class DataRowExtensions
+    {
+        internal static T Field<T>(this DataRow row, int columnIndex) => (T) GetData(row, columnIndex);
+        internal static T Field<T>(this DataRow row, string columnName) => (T) GetData(row, columnName);
+
+        private static object GetData(DataRow row, int columnIndex) { return row[columnIndex]; }
+        private static object GetData(DataRow row, string columnName) { return row[columnName]; }
+    }
+    #endif
+
     internal sealed class DataRowAdapter : IDbRecord
     {
         private readonly DataRow _target;
@@ -83,5 +94,5 @@ namespace Axle.Data
             }
         }
     }
-    #endif
 }
+#endif

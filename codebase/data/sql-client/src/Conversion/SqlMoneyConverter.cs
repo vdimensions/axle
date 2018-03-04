@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlMoneyConverter() : base(DbType.Currency, SqlDbType.Money) { }
 
-        protected override SqlMoney GetNotNullValue(decimal? value) => new SqlMoney(value.Value);
-        protected override decimal? GetNotNullValue(SqlMoney value) => value.Value;
+        protected override SqlMoney GetNotNullDestinationValue(decimal? value) => new SqlMoney(value.Value);
+        protected override decimal? GetNotNullSourceValue(SqlMoney value) => value.Value;
 
         protected override bool IsNull(SqlMoney value) => value.IsNull;
 

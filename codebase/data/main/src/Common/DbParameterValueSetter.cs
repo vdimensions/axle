@@ -61,8 +61,11 @@ namespace Axle.Data.Common
             value.VerifyArgument(nameof(value)).IsNotNull();
             if (_tdbTypeConverters.TryGetValue(type, out var converter))
             {
-                SetValue(parameter, type, value, converter);
+                /*
+                 * We set the dbtype first, to allow the implementation of set value to override it whenever necessary
+                 */
                 parameter.DbType = converter.DbType;
+                SetValue(parameter, type, value, converter);
             }
             else
             {

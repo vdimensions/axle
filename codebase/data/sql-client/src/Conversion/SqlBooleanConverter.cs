@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlBooleanConverter() : base(DbType.Boolean, SqlDbType.Bit) { }
 
-        protected override SqlBoolean GetNotNullValue(bool? value) => new SqlBoolean(value.Value);
-        protected override bool? GetNotNullValue(SqlBoolean value) => value.Value;
+        protected override bool? GetNotNullSourceValue(SqlBoolean value) => value.Value;
+        protected override SqlBoolean GetNotNullDestinationValue(bool? value) => new SqlBoolean(value.Value);
 
         protected override bool IsNull(SqlBoolean value) => value.IsNull;
 

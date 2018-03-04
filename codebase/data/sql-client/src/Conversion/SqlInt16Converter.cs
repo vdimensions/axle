@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlInt16Converter() : base(DbType.Int16, SqlDbType.SmallInt) { }
 
-        protected override SqlInt16 GetNotNullValue(short? value) => new SqlInt16(value.Value);
-        protected override short? GetNotNullValue(SqlInt16 value) => value.Value;
+        protected override short? GetNotNullSourceValue(SqlInt16 value) => value.Value;
+        protected override SqlInt16 GetNotNullDestinationValue(short? value) => new SqlInt16(value.Value);
 
         protected override bool IsNull(SqlInt16 value) => value.IsNull;
 

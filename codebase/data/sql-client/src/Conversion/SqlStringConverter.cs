@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlStringConverter() : base(DbType.String, SqlDbType.NVarChar) { }
 
-        protected override SqlString GetNotNullValue(string value) => new SqlString(value);
-        protected override string GetNotNullValue(SqlString value) => value.Value;
+        protected override string GetNotNullSourceValue(SqlString value) => value.Value;
+        protected override SqlString GetNotNullDestinationValue(string value) => new SqlString(value);
 
         protected override bool IsNull(SqlString value) => value.IsNull;
 

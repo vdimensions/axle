@@ -12,8 +12,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlDateTimeConverter() : base(DbType.DateTime, SqlDbType.DateTime) { }
 
-        protected override SqlDateTime GetNotNullValue(DateTime? value) => new SqlDateTime(value.Value);
-        protected override DateTime? GetNotNullValue(SqlDateTime value) => value.Value;
+        protected override SqlDateTime GetNotNullDestinationValue(DateTime? value) => new SqlDateTime(value.Value);
+        protected override DateTime? GetNotNullSourceValue(SqlDateTime value) => value.Value;
 
         protected override bool IsNull(SqlDateTime value) => value.IsNull;
 

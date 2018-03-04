@@ -15,14 +15,5 @@ namespace Axle.Data.Sqlite.Conversion
     internal sealed class SqliteInt64Converter : SqliteDbTypeConverter<long?>
     {
         public SqliteInt64Converter() : base(DbType.Int64, SqliteType.Integer) { }
-
-        protected override long? GetNotNullValue(object value)
-        {
-            if (value is long number)
-            {
-                return number;
-            }
-            return base.GetNotNullValue(value);
-        }
     }
 }

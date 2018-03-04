@@ -19,14 +19,5 @@ namespace Axle.Data.Sqlite.Conversion
         #else
         public SqliteDecimalConverter() : base(DbType.Double, SqliteType.Double) { }
         #endif
-
-        protected override decimal? GetNotNullValue(object value)
-        {
-            if (value is decimal number)
-            {
-                return number;
-            }
-            return base.GetNotNullValue(value);
-        }
     }
 }

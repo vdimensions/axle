@@ -14,7 +14,7 @@ namespace Axle.Data.Sqlite.Conversion
     #if !NETSTANDARD
     [System.Serializable]
     #endif
-    internal abstract class SqliteDbTypeConverter<T> : DbTypeConverter<T, object>
+    internal abstract class SqliteDbTypeConverter<T> : DbTypeConverter<T, T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly SqliteType _sqliteType;
@@ -24,19 +24,13 @@ namespace Axle.Data.Sqlite.Conversion
             _sqliteType = sqlType;
         }
 
-        protected override object GetNotNullValue(T value) => value;
-        protected override T GetNotNullValue(object value)
-        {
-            if (value is T result)
-            {
-                return result;
-            }
-            throw new System.ArgumentNullException(nameof(value));
-        }
+        protected override T GetNotNullSourceValue(T value) => value;
+        protected override T GetNotNullDestinationValue(T value) => value;
 
         public SqliteType SqliteType => _sqliteType;
 
-        protected override T SourceNullEquivalent => default(T);
-        protected override object DestinationNullEquivalent => null;
+        protected virtual T NullEquivalent => default(T);
+        protected override T SourceNullEquivalent => NullEquivalent;
+        protected override T DestinationNullEquivalent => NullEquivalent;
     }
 }

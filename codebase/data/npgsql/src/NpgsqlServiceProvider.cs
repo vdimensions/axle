@@ -26,6 +26,8 @@ namespace Axle.Data.Npgsql
         public const string Name = "Npgsql";
         public const string Dialect = "PostgreSQL";
 
+        private readonly IDbParameterValueSetter<NpgsqlParameter, NpgsqlDbType> _parameterValueSetter = new NpgsqlParameterValueSetter();
+
         internal NpgsqlServiceProvider() : this(Name) { }
         internal NpgsqlServiceProvider(string name) : base(name, Dialect) { }
 
@@ -77,5 +79,7 @@ namespace Axle.Data.Npgsql
                 ? new NpgsqlParameter { ParameterName = name, DbType = type.Value, Size = size ?? -1, Direction = direction }
                 : new NpgsqlParameter { ParameterName = name, Size = size ?? -1, Direction = direction };
         }
+
+        protected override IDbParameterValueSetter<NpgsqlParameter, NpgsqlDbType> ParameterValueSetter => _parameterValueSetter;
     }
 }

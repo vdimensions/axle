@@ -12,8 +12,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlGuidConverter() : base(DbType.Guid, SqlDbType.UniqueIdentifier) { }
 
-        protected override SqlGuid GetNotNullValue(Guid? value) => new SqlGuid(value.Value);
-        protected override Guid? GetNotNullValue(SqlGuid value) => value.Value;
+        protected override SqlGuid GetNotNullDestinationValue(Guid? value) => new SqlGuid(value.Value);
+        protected override Guid? GetNotNullSourceValue(SqlGuid value) => value.Value;
 
         protected override bool IsNull(SqlGuid value) => value.IsNull;
 

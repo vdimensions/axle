@@ -19,14 +19,5 @@ namespace Axle.Data.Sqlite.Conversion
         #else
         public SqliteSingleConverter() : base(DbType.Double, SqliteType.Double) { }
         #endif
-
-        protected override float? GetNotNullValue(object value)
-        {
-            if (value is float number)
-            {
-                return number;
-            }
-            return base.GetNotNullValue(value);
-        }
     }
 }

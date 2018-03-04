@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlDecimalConverter() : base(DbType.Decimal, SqlDbType.Decimal) { }
 
-        protected override SqlDecimal GetNotNullValue(decimal? value) => new SqlDecimal(value.Value);
-        protected override decimal? GetNotNullValue(SqlDecimal value) => value.Value;
+        protected override SqlDecimal GetNotNullDestinationValue(decimal? value) => new SqlDecimal(value.Value);
+        protected override decimal? GetNotNullSourceValue(SqlDecimal value) => value.Value;
 
         protected override bool IsNull(SqlDecimal value) => value.IsNull;
 

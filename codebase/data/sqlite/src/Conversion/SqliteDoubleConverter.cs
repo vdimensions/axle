@@ -19,14 +19,5 @@ namespace Axle.Data.Sqlite.Conversion
         #else
         public SqliteDoubleConverter() : base(DbType.Double, SqliteType.Double) { }
         #endif
-
-        protected override double? GetNotNullValue(object value)
-        {
-            if (value is double number)
-            {
-                return number;
-            }
-            return base.GetNotNullValue(value);
-        }
     }
 }

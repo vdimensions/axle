@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlSingleConverter() : base(DbType.Single, SqlDbType.Real) { }
 
-        protected override SqlSingle GetNotNullValue(float? value) => value.Value;
-        protected override float? GetNotNullValue(SqlSingle value) => value.Value;
+        protected override float? GetNotNullSourceValue(SqlSingle value) => value.Value;
+        protected override SqlSingle GetNotNullDestinationValue(float? value) => value.Value;
 
         protected override bool IsNull(SqlSingle value) => value.IsNull;
 

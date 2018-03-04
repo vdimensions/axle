@@ -67,6 +67,8 @@ namespace Axle.Data.Sqlite
 
         public static SqliteServiceProvider Instance => Singleton<SqliteServiceProvider>.Instance;
 
+        private readonly IDbParameterValueSetter<SqliteParameter, SqliteType> _parameterValueSetter = new SqliteParameterValueSetter();
+
         private SqliteServiceProvider() : base(Name, Dialect) { }
 
         protected override SqliteConnection CreateConnection(string connectionString)
@@ -119,7 +121,7 @@ namespace Axle.Data.Sqlite
                 : new SqliteParameter { ParameterName = name, Size = size ?? -1, Direction = direction };
         }
 
-        protected override IDbParameterValueSetter<SqliteParameter, SqliteType> ParameterValueSetter => new SqliteParameterValueSetter();
+        protected override IDbParameterValueSetter<SqliteParameter, SqliteType> ParameterValueSetter => _parameterValueSetter;
     }
     
 }

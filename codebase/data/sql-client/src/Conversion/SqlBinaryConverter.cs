@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlBinaryConverter() : base(DbType.Binary, SqlDbType.VarBinary) { }
 
-        protected override SqlBinary GetNotNullValue(byte[] value) => new SqlBinary(value);
-        protected override byte[] GetNotNullValue(SqlBinary value) => value.Value;
+        protected override byte[] GetNotNullSourceValue(SqlBinary value) => value.Value;
+        protected override SqlBinary GetNotNullDestinationValue(byte[] value) => new SqlBinary(value);
 
         protected override bool IsNull(SqlBinary value) => value.IsNull;
 

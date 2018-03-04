@@ -1,4 +1,6 @@
 ﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+using System.Linq;
+
 using Axle.Data.Extensions.DataTable;
 
 
@@ -11,14 +13,7 @@ namespace Axle.Data.Extensions.DataSet
     {
         public static bool IsEmpty(this DataSet dataSet)
         {
-            foreach (DataTable table in dataSet.Tables)
-            {
-                if (!table.IsEmpty())
-                {
-                    return false;
-                }
-            }
-            return true;
+            return dataSet.Tables.Cast<DataTable>().All(table => table.IsEmpty());
         }
     }
 }

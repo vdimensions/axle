@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlInt32Converter() : base(DbType.Int32, SqlDbType.Int) { }
 
-        protected override SqlInt32 GetNotNullValue(int? value) => new SqlInt32(value.Value);
-        protected override int? GetNotNullValue(SqlInt32 value) => value.Value;
+        protected override int? GetNotNullSourceValue(SqlInt32 value) => value.Value;
+        protected override SqlInt32 GetNotNullDestinationValue(int? value) => new SqlInt32(value.Value);
 
         protected override bool IsNull(SqlInt32 value) => value.IsNull;
 

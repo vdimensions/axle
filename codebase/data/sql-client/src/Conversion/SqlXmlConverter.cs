@@ -13,7 +13,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlXmlConverter() : base(DbType.Xml, SqlDbType.Xml) { }
 
-        protected override SqlXml GetNotNullValue(string value)
+        protected override string GetNotNullSourceValue(SqlXml value) => value.Value;
+        protected override SqlXml GetNotNullDestinationValue(string value)
         {
             var b = Encoding.UTF8.GetBytes(value);
             var stream = new MemoryStream();
@@ -21,7 +22,6 @@ namespace Axle.Data.SqlClient.Conversion
             stream.Flush();
             return new SqlXml(stream);
         }
-        protected override string GetNotNullValue(SqlXml value) => value.Value;
 
         protected override bool IsNull(SqlXml value) => value.IsNull;
 

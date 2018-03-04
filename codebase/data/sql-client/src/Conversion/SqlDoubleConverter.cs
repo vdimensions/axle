@@ -11,8 +11,8 @@ namespace Axle.Data.SqlClient.Conversion
     {
         public SqlDoubleConverter() : base(DbType.Double, SqlDbType.Float) { }
 
-        protected override SqlDouble GetNotNullValue(double? value) => new SqlDouble(value.Value);
-        protected override double? GetNotNullValue(SqlDouble value) => value.Value;
+        protected override SqlDouble GetNotNullDestinationValue(double? value) => new SqlDouble(value.Value);
+        protected override double? GetNotNullSourceValue(SqlDouble value) => value.Value;
 
         protected override bool IsNull(SqlDouble value) => value.IsNull;
 
