@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Axle.Reflection
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     internal sealed class AttributeInfo : IAttributeInfo

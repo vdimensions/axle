@@ -3,7 +3,7 @@
 
 namespace Axle.Reflection
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     internal sealed class EventAddAccessor : EventAccessor, ICombineAccessor

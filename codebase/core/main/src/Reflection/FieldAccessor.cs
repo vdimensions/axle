@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [System.Serializable]
     #endif
     internal abstract class FieldAccessor : IGetAccessor, ISetAccessor, IReflected<FieldInfo>
@@ -16,8 +16,8 @@ namespace Axle.Reflection
 
         protected FieldAccessor(FieldToken fieldToken, AccessorType accessorType)
         {
-            this._fieldToken = fieldToken;
-            this._accessorType = accessorType;
+            _fieldToken = fieldToken;
+            _accessorType = accessorType;
         }
 
         object IGetAccessor.GetValue(object target) { return _fieldToken.ReflectedMember.GetValue(target); }

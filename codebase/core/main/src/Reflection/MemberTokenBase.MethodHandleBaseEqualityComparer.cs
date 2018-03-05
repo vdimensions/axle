@@ -2,7 +2,7 @@
 {
     public abstract partial class MemberTokenBase<T>
     {
-        #if !NETSTANDARD
+        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
         [System.Serializable]
         #endif
         private class MethodHandleBaseEqualityComparer<TT> : AbstractEqualityComparer<TT> where TT: MemberTokenBase<T>

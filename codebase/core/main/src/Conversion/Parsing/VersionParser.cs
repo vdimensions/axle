@@ -8,9 +8,8 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="byte">version number</see> to a valid <see cref="Version"/> value.
     /// </summary>
     #if !NETSTANDARD
-    [Serializable]
+    [System.Serializable]
     #endif
-    //[Stateless]
     public sealed class VersionParser : AbstractParser<Version>
     {
         /// <inheritdoc />

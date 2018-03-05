@@ -3,7 +3,7 @@
 
 namespace Axle.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [System.Serializable]
     #endif
     public sealed class ReverseConverter<TS, TD> : ITwoWayConverter<TS, TD>

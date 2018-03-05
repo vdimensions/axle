@@ -7,7 +7,7 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     internal sealed class NpgsqlTimeSpanConverter : NpgsqlDbTypeConverter<TimeSpan?, NpgsqlTimeSpan?>

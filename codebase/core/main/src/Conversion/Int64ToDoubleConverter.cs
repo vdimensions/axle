@@ -3,6 +3,9 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="long"/> and <see cref="double"/>.
     /// </summary>
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
+    #endif
     public sealed class Int64ToDoubleConverter : AbstractTwoWayConverter<long, double>
     {
         /// <inheritdoc />

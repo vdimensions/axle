@@ -8,10 +8,9 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// a <see cref="float">single precision floating point number</see> to a valid <see cref="float"/> value.
     /// </summary>
-    #if !NETSTANDARD
-    [Serializable]
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
     #endif
-    //[Stateless]
     public sealed class SingleParser : AbstractParser<float>
     {
         /// <inheritdoc />

@@ -3,8 +3,8 @@
 
 namespace Axle.Conversion.Parsing
 {
-    #if !NETSTANDARD
-    [Serializable]
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
     #endif
     public abstract class AbstractStrictParser<T> : AbstractParser<T>, IStrictParser<T>
     {

@@ -3,6 +3,9 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="int"/> and <see cref="decimal"/>.
     /// </summary>
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
+    #endif
     public sealed class Int32ToDecimalConverter : AbstractTwoWayConverter<int, decimal>
     {
         /// <inheritdoc />

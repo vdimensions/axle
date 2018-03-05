@@ -7,10 +7,9 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// a <see cref="DateTime">time instant</see> to a valid <see cref="DateTime"/> value.
     /// </summary>
-    #if !NETSTANDARD
-    [Serializable]
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
     #endif
-    //[Stateless]
     public sealed class DateTimeParser : AbstractStrictParser<DateTime>
     {
         /// <inheritdoc />

@@ -4,7 +4,7 @@
 namespace Axle.References
 {
     /// <inheritdoc cref="IWeakReference{T}"/>
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public class WeakRef<T> : IWeakReference<T>, IEquatable<WeakRef<T>>, IEquatable<IWeakReference<T>> where T: class

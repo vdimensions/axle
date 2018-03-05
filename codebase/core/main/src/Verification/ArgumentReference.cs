@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
+#if NETSTANDARD
+using System.Reflection;
+#endif
 
 using Axle.References;
 
@@ -10,7 +13,7 @@ namespace Axle.Verification
     /// A struct that represents a reference to an argument for a method or constructor. 
     /// The argument reference is usually represented by its name (as defined in the respective method/constructor) and the value passed to it. 
     /// </summary>
-    public partial struct ArgumentReference<T> : IReference<T>
+    public struct ArgumentReference<T> : IReference<T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string name;
@@ -23,6 +26,32 @@ namespace Axle.Verification
             this.name = name ?? throw new ArgumentNullException(nameof(name));
             this.value = value;
         }
+
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        [DebuggerStepThrough]
+        #if NETSTANDARD
+        private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
+        {
+            var actualType = Value.GetType();
+            if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType.GetTypeInfo()))
+            {
+                throw new ArgumentTypeMismatchException(expectedType, actualType, Name);
+            }
+            return this;
+        }
+        #else
+        private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
+        {
+            var actualType = Value.GetType();
+            if (!expectedType.IsAssignableFrom(actualType))
+            {
+                throw new ArgumentTypeMismatchException(expectedType, actualType, Name);
+            }
+            return this;
+        }
+        #endif
 
         /// <summary>
         /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by 

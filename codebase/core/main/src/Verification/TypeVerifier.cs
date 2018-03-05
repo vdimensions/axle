@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Diagnostics;
-
+#if NETSTANDARD
+using System.Reflection;
+#endif
 
 namespace Axle.Verification
 {
@@ -9,7 +11,7 @@ namespace Axle.Verification
     /// of type <see cref="System.Type" />.
     /// </summary>
     /// <seealso cref="System.Type"/>
-    public static partial class TypeVerifier
+    public static class TypeVerifier
     {
         #if !NETSTANDARD
         /// <summary>
@@ -59,9 +61,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is(this ArgumentReference<Type> argument, Type expectedType)
         {
-            return IsUnchecked(
-                    argument.VerifyArgument(nameof(argument)).IsNotNull().Value,
-                    expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
+            return IsUnchecked(argument.VerifyArgument(nameof(argument)).IsNotNull().Value, expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
         }
 
         #if !NETSTANDARD
@@ -112,9 +112,34 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is<TExpected>(this ArgumentReference<Type> argument)
         {
-            return IsUnchecked(
-                argument.VerifyArgument(nameof(argument)).IsNotNull().Value,
-                typeof(TExpected));
+            return IsUnchecked(argument.VerifyArgument(nameof(argument)).IsNotNull().Value, typeof(TExpected));
         }
+
+
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        [DebuggerStepThrough]
+        #if NETSTANDARD
+        private static ArgumentReference<Type> IsUnchecked(this ArgumentReference<Type> argument, Type expectedType)
+        {
+            var actualType = argument.Value;
+            if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType.GetTypeInfo()))
+            {
+                throw new ArgumentTypeMismatchException(expectedType, actualType, argument.Name);
+            }
+            return argument;
+        }
+        #else
+        private static ArgumentReference<Type> IsUnchecked(this ArgumentReference<Type> argument, Type expectedType)
+        {
+            var actualType = argument.Value;
+            if (!expectedType.IsAssignableFrom(actualType))
+            {
+                throw new ArgumentTypeMismatchException(expectedType, actualType, argument.Name);
+            }
+            return argument;
+        }
+        #endif
     }
 }

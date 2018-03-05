@@ -2,7 +2,7 @@ using System.Globalization;
 using System.IO;
 
 using Axle.Conversion;
-using Axle.Extensions.Globalization.TextInfo;
+using Axle.Globalization.Extensions.TextInfo;
 using Axle.Verification;
 
 

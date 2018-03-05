@@ -11,8 +11,10 @@ using Axle.Threading.ReaderWriterLock;
 
 namespace Axle.Reflection
 {
-    //[Maturity(CodeMaturity.Stable)]
-    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    [Serializable]
+    #endif
+	public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
     {
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -39,23 +41,32 @@ namespace Axle.Reflection
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Type declaringType;
+        private readonly Type _declaringType;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly RuntimeTypeHandle typeHandle;
+        private readonly RuntimeTypeHandle _typeHandle;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string name;
+        private readonly string _name;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IEnumerable<IAttributeInfo> attributes;
+        private IEnumerable<IAttributeInfo> _attributes;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected internal readonly IReadWriteLock Lock = new ReadWriteLock();
 
+        #if !NETSTANDARD
+        protected MemberTokenBase(Type declaringType, string name)
+        {
+            _name = name;
+            _declaringType = declaringType;
+            _typeHandle = declaringType.TypeHandle;
+        }
+        #endif
+
         protected MemberTokenBase(T member, Type declaringType, string name)
         {
-            this.name = name;
-            this.declaringType = declaringType;
-            this.typeHandle = declaringType.TypeHandle;
+            _name = name;
+            _declaringType = declaringType;
+            _typeHandle = declaringType.TypeHandle;
             #if NETSTANDARD
             this.ReflectedMember = member;
             #endif
@@ -67,12 +78,12 @@ namespace Axle.Reflection
         public override int GetHashCode() { return EqualityComparer.GetHashCode(this); }
 
         MemberInfo IReflected.ReflectedMember => ReflectedMember;
-        public Type DeclaringType => declaringType;
+        public Type DeclaringType => _declaringType;
         public abstract Type MemberType { get; }
-        public string Name => name;
+        public string Name => _name;
         public abstract DeclarationType Declaration { get; }
         public abstract AccessModifier AccessModifier { get; }
-        public RuntimeTypeHandle TypeHandle => typeHandle;
+        public RuntimeTypeHandle TypeHandle => _typeHandle;
 
         public IEnumerable<IAttributeInfo> Attributes
         {
@@ -82,7 +93,7 @@ namespace Axle.Reflection
                 var reflectedMember = ReflectedMember;
 
                 return Lock.Invoke(
-                    () => attributes,
+                    () => _attributes,
                     xx => xx == null,
                     () =>
                     {
@@ -90,7 +101,7 @@ namespace Axle.Reflection
                         var notInherited = reflectedMember.GetCustomAttributes(false).Cast<Attribute>();
                         var inherited = reflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
 
-                        attributes = notInherited
+                        _attributes = notInherited
                             .Select(
                                 x => new
                                 {
@@ -126,7 +137,7 @@ namespace Axle.Reflection
                                     AttributeTargets = x.AttributeUsage.ValidOn,
                                     Inherited = x.Inherited
                                 } as IAttributeInfo);
-                        return attributes.ToArray();
+                        return _attributes.ToArray();
                     }) ?? new IAttributeInfo[0];
             }
         }
@@ -138,21 +149,23 @@ namespace Axle.Reflection
         #endif
     }
 
-    //[Maturity(CodeMaturity.Stable)]
-    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    [Serializable]
+    #endif
+	public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
         where THandle: struct
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly THandle handle;
+        private readonly THandle _handle;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly WeakRef<T> memberRef;
+        private readonly WeakRef<T> _memberRef;
 
         protected MemberTokenBase(T member, THandle handle, Type declaringType, string name) : base(member, declaringType, name)
         {
-            this.memberRef = new WeakRef<T>(member);
-            this.handle = handle;
+            _memberRef = new WeakRef<T>(member);
+            _handle = handle;
         }
 
         public virtual bool Equals(MemberTokenBase<T, THandle> other) { return EqualityComparer.Equals(this, other); }
@@ -162,7 +175,7 @@ namespace Axle.Reflection
 
         protected abstract T GetMember(THandle handle, RuntimeTypeHandle typeHandle, bool isGeneric);
 
-        public THandle Handle => handle;
+        public THandle Handle => _handle;
 
         public sealed override T ReflectedMember
         {
@@ -170,12 +183,12 @@ namespace Axle.Reflection
             {
                 T item = null;
                 Lock.Invoke(
-                    () => item = memberRef.Value,
-                    xx => xx == null || !memberRef.IsAlive,
+                    () => item = _memberRef.Value,
+                    xx => xx == null || !_memberRef.IsAlive,
                     #if !NETSTANDARD
-                    () => memberRef.Value = item = GetMember(handle, TypeHandle, DeclaringType.IsGenericType));
+                    () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
                     #else
-                    () => memberRef.Value = item = GetMember(handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType));
+                    () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType));
                     #endif
                 return item;
             }

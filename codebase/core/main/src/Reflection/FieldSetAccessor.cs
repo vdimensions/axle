@@ -1,11 +1,8 @@
-﻿using System;
-
-
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
-#if !netstandard
-    [Serializable]
-#endif
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
+    #endif
     internal sealed class FieldSetAccessor : FieldAccessor
     {
         public FieldSetAccessor(FieldToken fieldToken) : base(fieldToken, AccessorType.Set) { }

@@ -9,7 +9,7 @@ using Axle.Security.Cryptography.Algorithms.Sdk;
 
 namespace Axle.Security.Cryptography.Algorithms.Symmetric.Sdk
 {
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractSymmetricHashAlgorithm : AbstractCryptographicAlgorithm, ISymmetricHashAlgorithm

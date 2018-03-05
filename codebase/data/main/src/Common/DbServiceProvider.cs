@@ -30,7 +30,7 @@ namespace Axle.Data.Common
     /// <typeparam name="TDbParameter"></typeparam>
     /// <typeparam name="TDbType"></typeparam>
     #endif
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class DbServiceProvider<

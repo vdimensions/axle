@@ -3,6 +3,9 @@
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="ushort"/> and <see cref="decimal"/>.
     /// </summary>
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
+    #endif
     public sealed class UInt16ToDecimalConverter : AbstractTwoWayConverter<ushort, decimal>
     {
         /// <inheritdoc />

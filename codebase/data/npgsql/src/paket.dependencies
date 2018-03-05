@@ -5,6 +5,7 @@ source ../../../../dist
 source https://nuget.org/api/v2
   nuget Npgsql >= 3.1 framework: net45, netstandard1.3, netstandard2.0
   nuget System.Data.Common >= 4.3 framework: netstandard1.3, netstandard2.0
+  nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
 
 group legacy
   source https://nuget.org/api/v2

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-#if !NETSTANDARD
+#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
 using System.Runtime.Serialization;
 #endif
 
@@ -10,7 +10,7 @@ namespace Axle.Resources
     /// <summary>
     /// Represents an error that occurs if a certain resource cannot be found.
     /// </summary>
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public sealed class ResourceNotFoundException : ResourceException
@@ -72,7 +72,7 @@ namespace Axle.Resources
         public ResourceNotFoundException(string resourceName, string bundleName, CultureInfo culture, Exception inner) : this(
                 string.Format("Unable to locate resource '{0}' in bundle '{1}' for culture '{2}'.",  resourceName, bundleName, culture.DisplayName), 
                 inner) { }
-        #if !NETSTANDARD
+        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceNotFoundException"/> class with serialized data.
         /// </summary>

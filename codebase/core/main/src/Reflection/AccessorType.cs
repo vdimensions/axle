@@ -1,9 +1,8 @@
 ﻿namespace Axle.Reflection
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [System.Serializable]
     #endif
-    //[Maturity(CodeMaturity.ProofOfConcept)]
     public enum AccessorType : byte
     {
         Get, 

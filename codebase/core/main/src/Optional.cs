@@ -40,7 +40,7 @@ namespace Axle
     /// <summary>
     /// A container object for a non-null value. The <see cref="Optional{T}.HasValue"/> property indicates whether there is a value available.
     /// </summary>
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
 	public struct Optional<T> : IEquatable<Optional<T>>, IEquatable<T>, IReference<T>

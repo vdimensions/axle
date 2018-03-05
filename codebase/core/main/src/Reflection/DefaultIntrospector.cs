@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,7 +20,7 @@ namespace Axle.Reflection
         {
             _introspectedType = introspectedType.VerifyArgument(nameof(introspectedType)).IsNotNull();
         }
-        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif

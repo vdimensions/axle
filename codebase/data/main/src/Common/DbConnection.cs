@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 
 using Axle.Collections;
-using Axle.Extensions.Collections;
+using Axle.Collections.Extensions;
 
 
 namespace Axle.Data.Common

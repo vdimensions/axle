@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 
-using Axle.Extensions.Globalization.CultureInfo;
+using Axle.Globalization.Extensions.CultureInfo;
 using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 using Axle.Verification;

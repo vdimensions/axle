@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-#if NETSTANDARD1_6
+#if NETSTANDARD1_7
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyModel;
 #endif
@@ -17,7 +17,7 @@ namespace Axle.Environment
         public IEnumerable<Assembly> GetReferencingAssemblies(string assemblyName)
         {
             var assemblies = new List<Assembly>();
-            #if NETSTANDARD1_6
+            #if NETSTANDARD1_7
             //foreach (CompilationLibrary compilationLibrary in DependencyContext.Default.CompileLibraries)
 
             //var dependencies = AssemblyLoadContext.Default.GetLoadedAssemblies();
@@ -33,7 +33,7 @@ namespace Axle.Environment
             #endif
             return assemblies.ToArray();
         }
-        #if NETSTANDARD1_6
+        #if NETSTANDARD1_7
         private static bool IsCandidateCompilationLibrary(RuntimeLibrary compilationLibrary, string assemblyName)
         {
             var cmp = StringComparison.OrdinalIgnoreCase;

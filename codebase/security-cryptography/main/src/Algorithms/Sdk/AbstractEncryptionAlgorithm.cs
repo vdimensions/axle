@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Axle.Security.Cryptography.Algorithms.Sdk
 {
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractEncryptionAlgorithm : IEncryptionAlgorithm, IDisposable

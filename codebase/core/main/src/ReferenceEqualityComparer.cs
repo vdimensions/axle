@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 namespace Axle
@@ -14,13 +13,13 @@ namespace Axle
     /// The type of objects to compare.
     /// </typeparam>
     /// <seealso cref="object.ReferenceEquals(object, object)"/>
-    #if !NETSTANDARD
-    [Serializable]
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
     #endif
     public sealed class ReferenceEqualityComparer<T> : IEqualityComparer<T> where T: class
     {
-        bool IEqualityComparer<T>.Equals(T x, T y) { return ReferenceEquals(x, y); }
+        bool IEqualityComparer<T>.Equals(T x, T y) => ReferenceEquals(x, y);
 
-        int IEqualityComparer<T>.GetHashCode(T obj) { return obj.GetHashCode(); }
+        int IEqualityComparer<T>.GetHashCode(T obj) => obj.GetHashCode();
     }
 }

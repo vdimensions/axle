@@ -6,14 +6,16 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    //[Maturity(CodeMaturity.Stable)]
-    public partial class FieldToken : IEquatable<FieldToken>, IField
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [Serializable]
+    #endif
+    #if NETSTANDARD
+    public class FieldToken : MemberTokenBase<FieldInfo>,
+    #else
+	public class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
+    #endif
+        IEquatable<FieldToken>, IField
     {
-        public static AccessModifier GetAccessModifier(FieldInfo fieldInfo)
-        {
-            return GetAccessModifier(fieldInfo.IsPublic, fieldInfo.IsAssembly, fieldInfo.IsFamily, fieldInfo.IsPrivate);
-        }
-
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly AccessModifier _accessModifier;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -21,8 +23,31 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly FieldAccessor[] _accessors;
 
-        public override bool Equals(object obj) { return obj is FieldToken f && Equals(f); }
-        public bool Equals(FieldToken other) { return base.Equals(other); }
+        #if NETSTANDARD
+        public FieldToken(FieldInfo info) : base(info, info.DeclaringType, info.Name)
+        #else
+        public FieldToken(FieldInfo info) : base(info, info.FieldHandle, info.DeclaringType, info.Name)
+        #endif
+        {
+            _accessModifier = GetAccessModifier(info);
+            _declaration = info.GetDeclarationType();
+            _accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
+        }
+
+        #if !NETSTANDARD
+        protected override FieldInfo GetMember(RuntimeFieldHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)
+        {
+            return isGeneric ? FieldInfo.GetFieldFromHandle(handle, typeHandle) : FieldInfo.GetFieldFromHandle(handle);
+        }
+        #endif
+
+        public static AccessModifier GetAccessModifier(FieldInfo fieldInfo)
+        {
+            return GetAccessModifier(fieldInfo.IsPublic, fieldInfo.IsAssembly, fieldInfo.IsFamily, fieldInfo.IsPrivate);
+        }
+
+        public override bool Equals(object obj) => obj is FieldToken f && Equals(f);
+        public bool Equals(FieldToken other) => base.Equals(other);
 
         IAccessor IAccessible.FindAccessor(AccessorType accessorType)
         {
@@ -34,8 +59,8 @@ namespace Axle.Reflection
             }
         }
 
-        public override int GetHashCode() { return unchecked(base.GetHashCode()); }
-        
+        public override int GetHashCode() => base.GetHashCode();
+
         public IGetAccessor GetAccessor => _accessors[0];
         public ISetAccessor SetAccessor => _accessors[1];
         public bool IsReadOnly => ReflectedMember.IsInitOnly;

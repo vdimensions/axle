@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [System.Serializable]
     #endif
     internal abstract class EventAccessor : IAccessor, IReflected<MethodInfo>

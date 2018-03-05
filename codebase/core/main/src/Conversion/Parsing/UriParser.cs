@@ -7,10 +7,9 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// an <see cref="Uri">uniform resource identifier</see> to a valid <see cref="Uri"/> instance.
     /// </summary>
-    #if !NETSTANDARD
-    [Serializable]
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
     #endif
-    //[Stateless]
     public sealed class UriParser : AbstractParser<Uri>
     {
         /// <inheritdoc />

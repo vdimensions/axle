@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Axle.Collections
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     internal sealed class ChronologicalKeyComparer<TKey> : IComparer<ChronologicalKey<TKey>>

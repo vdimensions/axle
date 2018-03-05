@@ -21,8 +21,10 @@ using Axle.References;
 
 namespace Axle.Data.Sqlite
 {
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
-    public sealed class SqliteServiceProvider : DbServiceProvider<
+    #endif
+	public sealed class SqliteServiceProvider : DbServiceProvider<
             SqliteConnection,
             SqliteTransaction,
             SqliteCommand,

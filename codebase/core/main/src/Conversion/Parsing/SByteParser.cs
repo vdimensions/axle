@@ -8,10 +8,9 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// a <see cref="sbyte">signed byte</see> to a valid <see cref="sbyte"/> value.
     /// </summary>
-    #if !NETSTANDARD
-    [Serializable]
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [System.Serializable]
     #endif
-    //[Stateless]
     public sealed class SByteParser : AbstractParser<sbyte>
     {
         /// <inheritdoc />

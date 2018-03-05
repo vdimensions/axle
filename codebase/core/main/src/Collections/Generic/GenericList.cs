@@ -16,7 +16,7 @@ namespace Axle.Collections.Generic
     /// </typeparam>
     /// <seealso cref="IList{T}"/>
     /// <seealso cref="IList"/>
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public sealed class GenericList<T> : IList<T>, IList

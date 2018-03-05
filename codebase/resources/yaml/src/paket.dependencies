@@ -5,6 +5,7 @@ source ../../../../dist
 source https://nuget.org/api/v2
   nuget NetStandard.Library framework: netstandard1.0, netstandard1.1
 	nuget System.Resources.ResourceManager framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6
+	nuget System.Xml.XmlSerializer framework: netstandard1.6
   nuget YamlDotNet >= 4.3 content: none
 
 group build

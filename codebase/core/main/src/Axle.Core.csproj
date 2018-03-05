@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.5;netstandard1.3;netstandard1.0;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;netstandard1.3;netstandard1.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
@@ -22,10 +22,9 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
-  <!-- <Import Project="Mason.netstandard.props" /> -->
   <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
-    <Compile Remove="Extensions\IO\Stream\StreamExtensions2.cs" />
+    <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />
     <Compile Remove="Resources\IResource.cs" />
   </ItemGroup>
@@ -38,6 +37,5 @@
   <Target Name="AfterBuild">
   </Target>
   <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
-  <!-- <Import Project=".paket\Paket.Restore.targets" /> -->
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

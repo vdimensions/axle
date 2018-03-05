@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Axle.Text.Formatting
 {
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractCustomFormatter<T> : ICustomFormatter<T>
@@ -14,7 +14,7 @@ namespace Axle.Text.Formatting
         #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         #endif
-        private readonly IList<string> customFormats;
+        private readonly IList<string> _customFormats;
 
         protected AbstractCustomFormatter() : this(null) { }
         protected AbstractCustomFormatter(params string[] customFormats) : this(customFormats as IEnumerable<string>) { }
@@ -22,20 +22,20 @@ namespace Axle.Text.Formatting
         {
             if (customFormats != null)
             {
-                this.customFormats = customFormats.OrderByDescending(x => x.Length).ToArray();
+                _customFormats = customFormats.OrderByDescending(x => x.Length).ToArray();
             }
         }
 
         internal bool TryFormatChunks(string format, T arg, IFormatProvider formatProvider, out string result)
         {
-            if (string.IsNullOrEmpty(format) || customFormats == null || customFormats.Count == 0)
+            if (string.IsNullOrEmpty(format) || _customFormats == null || _customFormats.Count == 0)
             {
                 result = null;
                 return false;
             }
 
             var sb = new StringBuilder(format);
-            foreach (var f in customFormats)
+            foreach (var f in _customFormats)
             {
                 ReplaceFormat(sb, f, arg, formatProvider);
             }
@@ -71,8 +71,7 @@ namespace Axle.Text.Formatting
         }
         public string Format(string format, T arg, IFormatProvider formatProvider)
         {
-            string result;
-            if (!TryFormatChunks(format, arg, formatProvider, out result))
+            if (!TryFormatChunks(format, arg, formatProvider, out var result))
             {
                 result = DoFormat(format, arg, formatProvider);
             }
@@ -81,7 +80,7 @@ namespace Axle.Text.Formatting
         protected abstract string DoFormat(string format, T arg, IFormatProvider formatProvider);
     }
 
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractCustomFormatter<T, TFP> : AbstractCustomFormatter<T>, ICustomFormatter<T, TFP> 
@@ -93,8 +92,7 @@ namespace Axle.Text.Formatting
 
         public string Format(string formatString, T arg, TFP formatProvider)
         {
-            string result;
-            if (!TryFormatChunks(formatString, arg, formatProvider, out result))
+            if (!TryFormatChunks(formatString, arg, formatProvider, out var result))
             {
                 result = DoFormat(formatString, arg, formatProvider);
             }

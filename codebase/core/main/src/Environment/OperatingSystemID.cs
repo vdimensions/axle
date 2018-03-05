@@ -83,7 +83,7 @@ namespace Axle.Environment
 ///   </item>
 /// </list>
 /// </summary>
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     [Flags]

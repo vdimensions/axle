@@ -4,6 +4,8 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
+using Axle.Verification;
+
 
 namespace Axle.Reflection
 {
@@ -13,9 +15,20 @@ namespace Axle.Reflection
     /// <typeparam name="T">
     /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member for the current <see cref="MethodBaseToken{T}"/> instance.
     /// </typeparam>
-    public abstract partial class MethodBaseToken<T> : IEquatable<MethodBaseToken<T>>
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    [Serializable]
+    #endif
+    #if NETSTANDARD
+    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>> 
+    #else
+	public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>> 
+    #endif
+        where T: MethodBase
     {
-        internal sealed partial class Parameter : IParameter
+        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        [Serializable]
+        #endif
+        internal sealed class Parameter : IParameter
         {
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private readonly ParameterInfo _parameterInfo;
@@ -23,6 +36,61 @@ namespace Axle.Reflection
             private readonly IEnumerable<IAttributeInfo> _attributes;
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private readonly ParameterDirection _direction;
+
+            public Parameter(ParameterInfo parameterInfo)
+            {
+                _parameterInfo = parameterInfo.VerifyArgument(nameof(parameterInfo)).IsNotNull();
+                var comparer = EqualityComparer<Attribute>.Default;
+                var notInherited = ReflectedMember.GetCustomAttributes(false).Cast<Attribute>();
+                var inherited = ReflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
+
+                var attr = notInherited
+                    .Select(
+                        x => new
+                        {
+                            Attribute = x,
+                            Inherited = false,
+                            #if NETSTANDARD
+                            AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                            #else
+                            AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                            #endif
+                        })
+                    .Union(
+                        inherited.Select(
+                            x => new
+                            {
+                                Attribute = x,
+                                Inherited = true,
+                                #if NETSTANDARD
+                                AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                                #else
+                                AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                                #endif
+                            }))
+                    .Select(
+                        x => new AttributeInfo
+                        {
+                            Attribute = x.Attribute,
+                            AllowMultiple = x.AttributeUsage.AllowMultiple,
+                            AttributeTargets = x.AttributeUsage.ValidOn,
+                            Inherited = x.Inherited
+                        } as IAttributeInfo);
+                _attributes = attr.ToArray();
+
+                if (parameterInfo.IsIn)
+                {
+                    _direction &= ParameterDirection.Input;
+                }
+                if (parameterInfo.IsOut)
+                {
+                    _direction &= ParameterDirection.Output;
+                }
+                if (parameterInfo.IsRetval)
+                {
+                    _direction &= ParameterDirection.ReturnValue;
+                }
+            }
 
             public string Name => _parameterInfo.Name;
             public Type Type => _parameterInfo.ParameterType;
@@ -32,6 +100,27 @@ namespace Axle.Reflection
             public IEnumerable<IAttributeInfo> Attributes => _attributes;
             public ParameterDirection Direction => _direction;
         }
+
+        #if NETSTANDARD
+        protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
+        {
+            _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
+            _declaration = info.GetDeclarationType();
+        }
+        #else
+        protected internal MethodBaseToken(T info) : base(info, info.MethodHandle, info.DeclaringType, info.Name)
+        {
+            _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
+            _declaration = info.GetDeclarationType();
+        }
+        #endif
+
+        #if !NETSTANDARD
+        protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)
+        {
+            return (T)(isGeneric ? MethodBase.GetMethodFromHandle(handle, typeHandle) : MethodBase.GetMethodFromHandle(handle));
+        }
+        #endif
 
         public static AccessModifier GetAccessModifier(MethodBase methodBase)
         {
@@ -49,7 +138,7 @@ namespace Axle.Reflection
             return reflectedParameters.Select(x => new Parameter(x)).Cast<IParameter>().ToArray();
         }
 
-        public bool Equals(MethodBaseToken<T> other) { return base.Equals(other); }
+        public bool Equals(MethodBaseToken<T> other) => base.Equals(other);
 
         public override AccessModifier AccessModifier => _accessModifier;
         public override DeclarationType Declaration => _declaration;

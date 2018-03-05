@@ -2,8 +2,9 @@
 using System.Text;
 
 using Axle.Verification;
-#if NETSTANDARD
-using Axle.Extensions.Text.Encoding;
+
+#if NETSTANDARD1_0
+using Axle.Text.Extensions.Encoding;
 #endif
 
 
@@ -13,7 +14,7 @@ namespace Axle.Conversion
     /// A converter class that can turn a byte sequence to a <see cref="string">string</see> representation, using a specified 
     /// <see cref="System.Text.Encoding"/>
     /// </summary>
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [System.Serializable]
     #endif
     public sealed class BytesToStringConverter : AbstractTwoWayConverter<byte[], string>

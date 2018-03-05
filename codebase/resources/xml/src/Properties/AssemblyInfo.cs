@@ -18,6 +18,6 @@ using System.Runtime.InteropServices;
 [assembly: Guid("3DE1EA18-A956-49C5-9D41-6FC5DB175A71")]
 #endif
 
-[assembly: AssemblyVersion("1.5.0.1")]
-[assembly: AssemblyFileVersion("1.5.0.1")]
-[assembly: AssemblyInformationalVersion("1.5.0.1")]
+[assembly: AssemblyVersion("1.5.1.1")]
+[assembly: AssemblyFileVersion("1.5.1.1")]
+[assembly: AssemblyInformationalVersion("1.5.1.1")]

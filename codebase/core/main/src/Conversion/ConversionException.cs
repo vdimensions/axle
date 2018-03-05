@@ -1,4 +1,7 @@
 ﻿using System;
+#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+using System.Runtime.Serialization;
+#endif
 
 using Axle.Verification;
 
@@ -10,7 +13,10 @@ namespace Axle.Conversion
     /// </summary>
     /// <seealso cref="IConverter{TSource,TTarget}"/>
     /// <seealso cref="ITwoWayConverter{TSource,TTarget}"/>
-    public partial class ConversionException : Exception
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [Serializable]
+    #endif
+	public class ConversionException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConversionException"/> class.
@@ -77,5 +83,9 @@ namespace Axle.Conversion
                 sourceType.VerifyArgument(nameof(sourceType)).IsNotNull().Value.FullName, 
                 destinationType.VerifyArgument(nameof(destinationType)).IsNotNull().Value.FullName), 
             inner) {}
+
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+	    protected ConversionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        #endif
     }
 }

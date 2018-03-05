@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+using System.Runtime.Serialization;
+#endif
 
 using Axle.Collections.Sdk;
 
@@ -14,12 +17,20 @@ namespace Axle.Collections
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     /// <remarks>This class cannot be inherited.</remarks>
-    public sealed partial class ChronologicalDictionary<TKey, TValue> : DictionaryProxy<TKey, TValue>
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [Serializable]
+    #endif
+    public sealed class ChronologicalDictionary<TKey, TValue> : DictionaryDecorator<TKey, TValue>
     {
-        private sealed partial class TimestampDictionary : Dictionary<ChronologicalKey<TKey>, TValue>, IDictionary<TKey, TValue>
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        [Serializable]
+        private sealed class TimestampDictionary : Dictionary<ChronologicalKey<TKey>, TValue>, IDictionary<TKey, TValue>, ISerializable
+        #else
+        private sealed class TimestampDictionary : Dictionary<ChronologicalKey<TKey>, TValue>, IDictionary<TKey, TValue>
+        #endif
         {
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-            #if !NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
             [NonSerialized]
             #endif
             private readonly ICollection<KeyValuePair<ChronologicalKey<TKey>, TValue>> _collection;
@@ -36,7 +47,15 @@ namespace Axle.Collections
                     new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
             public TimestampDictionary(IEqualityComparer<TKey> comparer) : this(
                     new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
+            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            internal TimestampDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+            {
+                _collection = this;
+            }
 
+            void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectData(info, context);
+            #endif            
+            
             private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate() => _collection
                                                                            .OrderBy(x => x.Key, new ChronologicalKeyComparer<TKey>())
                                                                            .Select(x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));

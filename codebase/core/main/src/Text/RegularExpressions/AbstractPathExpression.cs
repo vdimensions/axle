@@ -6,7 +6,7 @@ using Axle.Verification;
 
 namespace Axle.Text.RegularExpressions
 {
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractPathExpression : IPathExpression
@@ -27,24 +27,24 @@ namespace Axle.Text.RegularExpressions
             // ReSharper restore LoopCanBeConvertedToQuery
         }
 
-        private readonly IRegularExpression Target;
+        private readonly IRegularExpression _target;
 
         private AbstractPathExpression(IRegularExpression target)
         {
-            Target = target.VerifyArgument(nameof(target)).IsNotNull().Value;
+            _target = target.VerifyArgument(nameof(target)).IsNotNull().Value;
         }
         protected AbstractPathExpression(string pattern, Func<string, RegexOptions, Regex> regexFactory) 
             : this(new RegularExpression(regexFactory(pattern, RegExOptions))) { }
 
-        public bool IsMatch(string value) => Target.IsMatch(value);
-        public bool IsMatch(string value, int startIndex) => Target.IsMatch(value, startIndex);
+        public bool IsMatch(string value) => _target.IsMatch(value);
+        public bool IsMatch(string value, int startIndex) => _target.IsMatch(value, startIndex);
 
-        public Match[] Match(string value) => Target.Match(value);
-        public Match[] Match(string value, int startIndex) => Target.Match(value, startIndex);
+        public Match[] Match(string value) => _target.Match(value);
+        public Match[] Match(string value, int startIndex) => _target.Match(value, startIndex);
 
-        public string[] Split(string value) => Target.Split(value);
-        public string[] Split(string value, int count) => Target.Split(value, count);
-        public string[] Split(string value, int count, int startIndex) => Target.Split(value, count, startIndex);
+        public string[] Split(string value) => _target.Split(value);
+        public string[] Split(string value, int count) => _target.Split(value, count);
+        public string[] Split(string value, int count, int startIndex) => _target.Split(value, count, startIndex);
 
         public override string ToString() => Pattern;
 

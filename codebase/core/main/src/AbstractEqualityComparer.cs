@@ -16,7 +16,7 @@ namespace Axle
     /// see "Covariance and Contravariance in Generics".
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}" />
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractEqualityComparer<T> : IEqualityComparer<T>

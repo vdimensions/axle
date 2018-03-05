@@ -10,7 +10,7 @@ namespace Axle.Logging
     /// <summary>
     /// The default <see cref="ILogEntry"/> implementation provided by the Axle Framework.
     /// </summary>
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public sealed class LogEntry : ILogEntry

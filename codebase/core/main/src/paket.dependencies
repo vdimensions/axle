@@ -1,3 +1,6 @@
+source https://nuget.org/api/v2
+  nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
+
 group build
 	source ../../../../submodules/mason/dist
 	  nuget Mason.Targets.Packager

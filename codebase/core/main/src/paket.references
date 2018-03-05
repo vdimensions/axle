@@ -1,2 +1,4 @@
+System.Xml.XmlSerializer
+
 group build
   Mason.Targets.Preprocessor

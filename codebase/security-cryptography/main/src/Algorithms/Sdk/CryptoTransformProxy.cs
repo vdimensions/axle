@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 
 namespace Axle.Security.Cryptography.Algorithms.Sdk
 {
-    #if !NETSTANDARD
+    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
     [Serializable]
     #endif
     public class CryptoTransformProxy : /*Proxy<ICryptoTransform>, */ICryptoTransform
