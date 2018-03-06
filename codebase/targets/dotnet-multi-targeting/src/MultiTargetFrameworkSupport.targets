@@ -77,6 +77,10 @@
     <TargetFrameworkIdentifier>.NETStandard</TargetFrameworkIdentifier>
     <FrameworkSymbols>netstandard;NETSTANDARD;NETSTANDARD1_0_OR_NEWER;NETSTANDARD1_1_OR_NEWER;NETSTANDARD1_2_OR_NEWER;NETSTANDARD1_3_OR_NEWER;NETSTANDARD1_4_OR_NEWER;NETSTANDARD1_5_OR_NEWER;NETSTANDARD1_6_OR_NEWER;NETSTANDARD2_0_OR_NEWER</FrameworkSymbols>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <DefineConstants>$(DefineConstants);$(FrameworkSymbols)</DefineConstants>
+  </PropertyGroup>
   
   <ItemGroup>
     <Compile Remove="packages\**" />
