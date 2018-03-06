@@ -16,7 +16,7 @@ namespace Axle
     /// see "Covariance and Contravariance in Generics".
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}" />
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractEqualityComparer<T> : IEqualityComparer<T>
@@ -24,10 +24,10 @@ namespace Axle
         #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         #endif
-        #if !NETSTANDARD
-        private static readonly bool _isValueType = typeof (T).IsValueType;
+        #if NETSTANDARD
+        private static readonly bool _IsValueType = typeof(T).GetTypeInfo().IsValueType;
         #else
-        private static readonly bool _isValueType = typeof (T).GetTypeInfo().IsValueType;
+        private static readonly bool _IsValueType = typeof(T).IsValueType;
         #endif
 
         /// <summary>
@@ -47,7 +47,7 @@ namespace Axle
                     ? false 
                     : ReferenceEquals(x, y) || (
                         x is T 
-                            ? (y is T ? this.DoEquals((T) x, (T) y) : y.Equals(x))
+                            ? (y is T ? DoEquals((T) x, (T) y) : y.Equals(x))
                             : (y is T ? x.Equals(y) : object.Equals(x, y)));
         }
 
@@ -62,12 +62,12 @@ namespace Axle
         /// </param>
         public bool Equals(T x, T y)
         {
-            return _isValueType
-                ? this.DoEquals(x, y)
+            return _IsValueType
+                ? DoEquals(x, y)
                 : !ReferenceEquals(x, null)
                     ? ReferenceEquals(y, null)
                         ? false
-                        : ReferenceEquals(x, y) || this.DoEquals(x, y)
+                        : ReferenceEquals(x, y) || DoEquals(x, y)
                     : ReferenceEquals(y, null);
         }
 
@@ -117,8 +117,8 @@ namespace Axle
             }
 
             return appendTypeHashCode 
-                ? unchecked(this.DoGetHashCode(obj)^GetType().GetHashCode()) 
-				: unchecked(this.DoGetHashCode(obj));
+                ? DoGetHashCode(obj)^GetType().GetHashCode() 
+				: DoGetHashCode(obj);
         }
 
         /// <summary>
@@ -130,7 +130,9 @@ namespace Axle
         /// <returns>
         /// <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, <c>false</c>.
         /// </returns>
-        public override bool Equals(object obj) { return base.Equals(obj); }
+        // ReSharper disable BaseObjectEqualsIsObjectEquals
+        public override bool Equals(object obj) => base.Equals(obj);
+        // ReSharper restore BaseObjectEqualsIsObjectEquals
 
         /// <summary>
         /// Serves as a hash function for a particular type. 
@@ -138,7 +140,9 @@ namespace Axle
         /// <returns>
         /// A hash code for the current <see cref="T:System.Object" />.
         /// </returns>
-        public override int GetHashCode() { return base.GetHashCode(); }
+        // ReSharper disable BaseObjectGetHashCodeCallInGetHashCode
+        public override int GetHashCode() => base.GetHashCode();
+        // ReSharper restore BaseObjectGetHashCodeCallInGetHashCode
 
         /// <summary>
         /// When overridden in a derived class, determines if the two <typeparamref name="T" /> instances are equal.

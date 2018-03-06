@@ -26,6 +26,9 @@
     <None Remove="Axle.Logging.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Auditing\" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">

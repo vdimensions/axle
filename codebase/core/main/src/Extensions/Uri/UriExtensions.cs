@@ -7,13 +7,51 @@ using Axle.Verification;
 
 namespace Axle.Extensions.Uri
 {
+    using StringComparison = System.StringComparison;
+
     /// <summary>
     /// A static class containing common extension methods to <see cref="Uri"/> instances.
     /// </summary>
-    public static partial class UriExtensions
+    public static class UriExtensions
     {
         public const string UriSchemeAssembly = "assembly";
         public const string UriSchemeResource = "res";
+
+        /// <summary>
+        /// The uri scheme for the http protocol.
+        /// </summary>
+        #if NETSTANDARD
+        public const string UriSchemeHttp = "http";
+        #else
+        public static readonly string UriSchemeHttp = System.Uri.UriSchemeHttp;
+        #endif
+
+        /// <summary>
+        /// The uri scheme for the https (secure http) protocol.
+        /// </summary>
+        #if NETSTANDARD
+        public const string UriSchemeHttps = "https";
+        #else
+        public static readonly string UriSchemeHttps = System.Uri.UriSchemeHttps;
+        #endif
+
+        /// <summary>
+        /// The uri scheme for a file system location.
+        /// </summary>
+        #if NETSTANDARD
+        public const string UriSchemeFile = "file";
+        #else
+        public static readonly string UriSchemeFile = System.Uri.UriSchemeFile;
+        #endif
+
+        /// <summary>
+        /// The uri scheme for ftp location.
+        /// </summary>
+        #if NETSTANDARD
+        public const string UriSchemeFtp = "ftp";
+        #else
+        public static readonly string UriSchemeFtp = System.Uri.UriSchemeFtp;
+        #endif
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -31,12 +69,12 @@ namespace Axle.Extensions.Uri
         }
 
         /// <summary>
-        /// Determines if a given <see cref="System.Uri">URI</see> references a file on the filesystem. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be <c>file://</c>
+        /// Determines if a given <see cref="System.Uri">URI</see> references a file on the file system. 
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be <c>file://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
         /// <returns>
-        /// <c>true</c> if the given <see cref="System.Uri">URI</see> references a file on the filesystem; 
+        /// <c>true</c> if the given <see cref="System.Uri">URI</see> references a file on the file system; 
         /// <c>false</c> otherwise.
         /// </returns>
         public static bool IsFile(this System.Uri uri)
@@ -50,7 +88,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Determines if a given <see cref="System.Uri">URI</see> references a resource over FTP connection. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be <c>ftp://</c>
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be <c>ftp://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
         /// <returns>
@@ -68,7 +106,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Determines if a given <see cref="System.Uri">URI</see> references a resource over HTTP connection. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be <c>http://</c>
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be <c>http://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
         /// <returns>
@@ -86,7 +124,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Determines if a given <see cref="System.Uri">URI</see> references a resource over HTTPS connection. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be <c>https://</c>
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be <c>https://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
         /// <returns>
@@ -104,7 +142,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Determines if a given <see cref="System.Uri">URI</see> references an embedded resource. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be <c>res://</c>
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be <c>res://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
         /// <returns>
@@ -122,7 +160,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Determines if a given <see cref="System.Uri">URI</see> references an embedded resource. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be <c>assembly://</c>
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be <c>assembly://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
         /// <returns>
@@ -140,7 +178,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Determines if a given <see cref="System.Uri">URI</see> references an embedded resource. 
-        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expexting it to be 
+        /// The check is done against the <see cref="System.Uri">URI</see>'s scheme, expecting it to be 
         /// <c>assembly://</c> or <c>res://</c>
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> to check.</param>
@@ -281,6 +319,7 @@ namespace Axle.Extensions.Uri
             }
             return new System.Uri(val + oth, UriKind.Relative);
         }
+
         /// <summary>
         /// Resolves an absolute <see cref="System.Uri">URI</see> instance based on the combination of a base 
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.

@@ -2,9 +2,9 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle("Axle.Data")]
-[assembly: AssemblyProduct("Axle.Data")]
-[assembly: AssemblyDescription("Axle framework's data access library")]
+[assembly: AssemblyTitle("Axle.Configuration")]
+[assembly: AssemblyProduct("Axle.Configuration")]
+[assembly: AssemblyDescription("Axle framework's configuration module")]
 
 [assembly: AssemblyCompany("Virtual Dimensions")]
 [assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2018")]
@@ -15,9 +15,9 @@ using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 #if !NETSTANDARD || NETSTANDARD1_1_OR_NEWER
-[assembly: Guid("1DA50E5B-0778-4E5D-8BF5-08AE4C645647")]
+[assembly: Guid("161ADF9F-4E70-4968-971A-788057564219")]
 #endif
 
-[assembly: AssemblyVersion("1.5.0.1")]
-[assembly: AssemblyFileVersion("1.5.0.1")]
-[assembly: AssemblyInformationalVersion("1.5.0.1")]
+[assembly: AssemblyVersion("1.5.1.3")]
+[assembly: AssemblyFileVersion("1.5.1.3")]
+[assembly: AssemblyInformationalVersion("1.5.1.3")]

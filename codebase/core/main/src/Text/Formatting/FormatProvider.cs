@@ -21,14 +21,15 @@ namespace Axle.Text.Formatting
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly ICustomFormatter customFormatter;
+        private readonly ICustomFormatter _customFormatter;
 
         public FormatProvider(ICustomFormatter formatter)
         {
-            customFormatter = formatter.VerifyArgument(nameof(formatter)).IsNotNull().Value;
+            _customFormatter = formatter.VerifyArgument(nameof(formatter)).IsNotNull().Value;
         }
 
-        public object GetFormat(Type formatType) { return SupportFormatter(formatType) ? this : null; }
+        /// <inheritdoc />
+        public object GetFormat(Type formatType) => SupportFormatter(formatType) ? this : null;
 
         protected virtual bool SupportFormatter(Type formatType)
         {
@@ -36,9 +37,10 @@ namespace Axle.Text.Formatting
         }
 
         #region Implementation of ICustomFormatter
+        /// <inheritdoc />
         string ICustomFormatter.Format(string format, object arg, IFormatProvider formatProvider)
         {
-            return customFormatter.Format(format, arg, formatProvider);
+            return _customFormatter.Format(format, arg, formatProvider);
         }
         #endregion
     }

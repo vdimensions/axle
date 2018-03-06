@@ -6,17 +6,13 @@ namespace Axle.Configuration.Sdk
 {
     public class GenericConfigurationElementParser<T> : AbstractConfigurationElementParser<T> where T: ConfigurationElement, new()
     {
-        private readonly string name;
+        private readonly string _name;
 
         public GenericConfigurationElementParser(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            this.name = name;
+            _name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
-        public override bool Accept(string elementName) { return elementName.Equals(name); }
+        public override bool Accept(string elementName) => elementName.Equals(_name);
     }
 }

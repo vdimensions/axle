@@ -2,10 +2,10 @@
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Linq;
 
-using Axle.Conversion;
+using Axle.Builder;
 using Axle.Conversion.Parsing;
-using Axle.Extensions.Mixin;
 
 
 namespace Axle.Configuration.Sdk
@@ -13,14 +13,8 @@ namespace Axle.Configuration.Sdk
     [Serializable]
     public sealed class ConfigurationPropertyBuilder : IFluentBuilder<ConfigurationProperty>
 	{
-        public static ConfigurationPropertyBuilder Create(string name)
-        {
-            return new ConfigurationPropertyBuilder(name);
-        }
-        public static ConfigurationPropertyBuilder Create(string name, Type type)
-        {
-            return Create(name).OfType(type);
-        }
+        public static ConfigurationPropertyBuilder Create(string name) => new ConfigurationPropertyBuilder(name);
+	    public static ConfigurationPropertyBuilder Create(string name, Type type) => Create(name).OfType(type);
 
 	    private readonly string _name;
 	    private Type _type;
@@ -32,20 +26,12 @@ namespace Axle.Configuration.Sdk
 
         public ConfigurationPropertyBuilder(string name)
         {
-            if (name == null)
-            {
-                throw new ArgumentNullException(nameof(name));
-            }
-            _name = name;
+            _name = name ?? throw new ArgumentNullException(nameof(name));
         }
 
         public ConfigurationPropertyBuilder OfType(Type type)
         {
-            if (type == null)
-            {
-                throw new ArgumentNullException(nameof(type));
-            }
-            _type = type;
+            _type = type ?? throw new ArgumentNullException(nameof(type));
             if (type.IsEnum && _typeConverter == null)
             {
                 _typeConverter = (TypeConverter) Activator.CreateInstance(typeof(EnumNameConverter<>).MakeGenericType(type));
@@ -76,27 +62,20 @@ namespace Axle.Configuration.Sdk
             return this;
         }
 
-        #if net45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        internal ConfigurationPropertyBuilder SetFlag(ConfigurationPropertyOptions flag, bool? set)
+        internal ConfigurationPropertyBuilder SetFlag(ConfigurationPropertyOptions flag, bool? isSet)
         {
-            if (set.HasValue)
+            if (isSet.HasValue)
             {
-                if (!_options.HasValue)
+                if (!_options.HasValue && isSet.Value)
                 {
-                    if (set.Value)
-                    {
-                        _options = flag;
-                    }
-                    else
-                    {
-                        _options = ~flag;
-                    }
+                    _options = flag;
                 }
                 else
                 {
-                    if (set.Value)
+                    if (isSet.Value)
                     {
                         _options |= flag;
                     }
@@ -111,12 +90,9 @@ namespace Axle.Configuration.Sdk
         }
         
         public ConfigurationPropertyBuilder IsKey() => IsKey(true);
-	    public ConfigurationPropertyBuilder IsKey(bool isKey)
-        {
-            return SetFlag(ConfigurationPropertyOptions.IsKey, isKey);
-        }
+	    public ConfigurationPropertyBuilder IsKey(bool isKey) => SetFlag(ConfigurationPropertyOptions.IsKey, isKey);
 
-        public ConfigurationPropertyBuilder IsRequired() => IsRequired(true);
+	    public ConfigurationPropertyBuilder IsRequired() => IsRequired(true);
 	    public ConfigurationPropertyBuilder IsRequired(bool isRequired) => SetFlag(ConfigurationPropertyOptions.IsRequired, isRequired);
 
 	    public ConfigurationPropertyBuilder ConvertWith(TypeConverter typeConverter)
@@ -150,14 +126,16 @@ namespace Axle.Configuration.Sdk
                 _options ?? ConfigurationPropertyOptions.None,
                 _description);
         }
-        public ConfigurationProperty[] BuildMany(int count) { return new Mixin<IFluentBuilder<ConfigurationProperty>>().BuildMany(count); }
 
-        public static implicit operator ConfigurationProperty(ConfigurationPropertyBuilder builder) { return builder.Build(); }
+	    public ConfigurationProperty[] BuildMany(int count) => Enumerable.Repeat(0, count).Select(_ => Build()).ToArray();
+
+	    public static implicit operator ConfigurationProperty(ConfigurationPropertyBuilder builder) => builder.Build();
 	}
 
+    [Serializable]
     public sealed class ConfigurationPropertyBuilder<T> : IFluentBuilder<ConfigurationProperty>
     {
-        #if net45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private ConfigurationPropertyBuilder<T> Create(ConfigurationPropertyBuilder innerBuilder) => new ConfigurationPropertyBuilder<T>(innerBuilder);
@@ -177,33 +155,30 @@ namespace Axle.Configuration.Sdk
 			_innerBuilder.UseDefaultValue(defaultValue);
             return this;
         }
-        public ConfigurationPropertyBuilder<T> UseDefaultValue() { return Create(_innerBuilder.UseDefaultValue<T>()); }
+        public ConfigurationPropertyBuilder<T> UseDefaultValue() => Create(_innerBuilder.UseDefaultValue<T>());
 
-        public ConfigurationPropertyBuilder<T> UsingOptions(ConfigurationPropertyOptions options) { return SetFlag(options, true); }
+        public ConfigurationPropertyBuilder<T> UsingOptions(ConfigurationPropertyOptions options) => SetFlag(options, true);
 
-        #if net45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private ConfigurationPropertyBuilder<T> SetFlag(ConfigurationPropertyOptions flag, bool? set) { return Create(_innerBuilder.SetFlag(flag, set)); }
+        private ConfigurationPropertyBuilder<T> SetFlag(ConfigurationPropertyOptions flag, bool? set) => Create(_innerBuilder.SetFlag(flag, set));
 
-        public ConfigurationPropertyBuilder<T> IsKey() { return IsKey(true); }
-        public ConfigurationPropertyBuilder<T> IsKey(bool isKey) { return SetFlag(ConfigurationPropertyOptions.IsKey, isKey); }
+        public ConfigurationPropertyBuilder<T> IsKey() => IsKey(true);
+        public ConfigurationPropertyBuilder<T> IsKey(bool isKey) => SetFlag(ConfigurationPropertyOptions.IsKey, isKey);
 
-        public ConfigurationPropertyBuilder<T> IsRequired() { return IsRequired(true); }
-        public ConfigurationPropertyBuilder<T> IsRequired(bool isRequired) { return SetFlag(ConfigurationPropertyOptions.IsRequired, isRequired); }
+        public ConfigurationPropertyBuilder<T> IsRequired() => IsRequired(true);
+        public ConfigurationPropertyBuilder<T> IsRequired(bool isRequired) => SetFlag(ConfigurationPropertyOptions.IsRequired, isRequired);
 
-        public ConfigurationPropertyBuilder<T> ConvertWith(TypeConverter typeConverter) { return Create(_innerBuilder.ConvertWith(typeConverter)); }
+        public ConfigurationPropertyBuilder<T> ConvertWith(TypeConverter typeConverter) => Create(_innerBuilder.ConvertWith(typeConverter));
         public ConfigurationPropertyBuilder<T> ConvertWith<TConverter>() where TConverter: TypeConverter, new()
         {
             return Create(_innerBuilder.ConvertWith<TConverter>());
         }
-        public ConfigurationPropertyBuilder<T> ParseWith<TParser>() where TParser: IParser<T>, new() { return ConvertWith(new GenericConverter<T, TParser>()); }
+        public ConfigurationPropertyBuilder<T> ParseWith<TParser>() where TParser: IParser<T>, new() => ConvertWith(new GenericConverter<T, TParser>());
 
-        public ConfigurationPropertyBuilder<T> ValidateWith(ConfigurationValidatorBase validator) { return Create(_innerBuilder.ValidateWith(validator)); }
-        public ConfigurationPropertyBuilder<T> ValidateWith<TVal>() where TVal: ConfigurationValidatorBase, new()
-        {
-            return ValidateWith(new TVal());
-        }
+        public ConfigurationPropertyBuilder<T> ValidateWith(ConfigurationValidatorBase validator) => Create(_innerBuilder.ValidateWith(validator));
+        public ConfigurationPropertyBuilder<T> ValidateWith<TVal>() where TVal: ConfigurationValidatorBase, new() => ValidateWith(new TVal());
 
         public ConfigurationPropertyBuilder<T> DescribeAs(string description) => Create(_innerBuilder.SetDescription(description));
 

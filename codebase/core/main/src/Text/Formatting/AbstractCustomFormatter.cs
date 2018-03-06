@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Axle.Text.Formatting
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractCustomFormatter<T> : ICustomFormatter<T>
@@ -56,6 +56,7 @@ namespace Axle.Text.Formatting
         {
             ReplaceFormatInternal(sb, format, arg, formatProvider);
         }
+
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -64,11 +65,14 @@ namespace Axle.Text.Formatting
             sb.Replace(format, DoFormat(format, arg, formatProvider));
         }
 
+        /// <inheritdoc />
         public string Format(string format, object arg, IFormatProvider formatProvider)
         {
             var typedArg = (T) arg;
             return Format(format, typedArg, formatProvider);
         }
+
+        /// <inheritdoc />
         public string Format(string format, T arg, IFormatProvider formatProvider)
         {
             if (!TryFormatChunks(format, arg, formatProvider, out var result))
@@ -80,7 +84,7 @@ namespace Axle.Text.Formatting
         protected abstract string DoFormat(string format, T arg, IFormatProvider formatProvider);
     }
 
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractCustomFormatter<T, TFP> : AbstractCustomFormatter<T>, ICustomFormatter<T, TFP> 
@@ -90,6 +94,7 @@ namespace Axle.Text.Formatting
         protected AbstractCustomFormatter(params string[] customFormats) : base(customFormats) { }
         protected AbstractCustomFormatter(IEnumerable<string> customFormats) : base(customFormats) { }
 
+        /// <inheritdoc />
         public string Format(string formatString, T arg, TFP formatProvider)
         {
             if (!TryFormatChunks(formatString, arg, formatProvider, out var result))

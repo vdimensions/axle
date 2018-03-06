@@ -3,7 +3,7 @@
 
 namespace Axle.Security.Authentication.Sdk
 {
-    public abstract class AuthenticatorBase : IAuthenticator
+    public abstract class AbstractAuthenticator : IAuthenticator
     {
         private readonly object syncRoot = new object();
 
@@ -31,7 +31,7 @@ namespace Axle.Security.Authentication.Sdk
             }
         }
 
-        protected AuthenticatorBase() { }
+        protected AbstractAuthenticator() { }
 
         protected abstract IAccount GetAuthenticatedUser();
 

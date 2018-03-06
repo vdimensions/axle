@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Axle.Extensions.EqualityComparer;
+using Axle.Collections.Generic.Extensions;
 using Axle.Extensions.String;
 using Axle.Security.Authentication;
 

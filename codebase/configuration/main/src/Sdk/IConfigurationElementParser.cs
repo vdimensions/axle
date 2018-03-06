@@ -28,10 +28,11 @@ namespace Axle.Configuration.Sdk
         /// </summary>
         /// <param name="reader">The <see cref="System.Xml.XmlReader"/> that reads from the configuration file</param>
         /// <param name="serializeCollectionKey">true to serialize only the collection key properties; otherwise, false.</param>
-        /// <returns>A succesfully parsed configuration element instance.</returns>
+        /// <returns>A successfully parsed configuration element instance.</returns>
         /// <see also="System.Xml.XmlReader"/>
         ConfigurationElement Parse(XmlReader reader, bool serializeCollectionKey);
     }
+
     /// <summary>
     /// A generic interface for custom configuration element parsers. 
     /// A configuration element parser is used to create the appropriate configuration element instance in case where a
@@ -51,7 +52,7 @@ namespace Axle.Configuration.Sdk
         /// </summary>
         /// <param name="reader">The <see cref="System.Xml.XmlReader"/> that reads from the configuration file</param>
         /// <param name="serializeCollectionKey">true to serialize only the collection key properties; otherwise, false.</param>
-        /// <returns>A succesfully parsed configuration element instance.</returns>
+        /// <returns>A successfully parsed configuration element instance.</returns>
         /// <see also="System.Xml.XmlReader"/>
         new T Parse(XmlReader reader, bool serializeCollectionKey);
     }

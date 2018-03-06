@@ -1,8 +1,6 @@
 using System;
-#if !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using System.Globalization;
-#endif
-#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
 using System.Text;
 #endif
 
@@ -11,7 +9,10 @@ namespace Axle.Environment
 {
     internal sealed class EnvironmentInfo : IEnvironment
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         internal static OperatingSystemID GetOSID(OperatingSystem os)
         {
             switch (os.Platform)
@@ -36,23 +37,21 @@ namespace Axle.Environment
         }
         #endif
 
-        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         private EnvironmentInfo()
         #else
         internal EnvironmentInfo()
         #endif
         {
-            this.Endianness = BitConverter.IsLittleEndian ? Endianness.LittleEndian : Endianness.BigEndian;
-            this.ProcessorCount = System.Environment.ProcessorCount;
-            this.NewLine = System.Environment.NewLine;
-            #if !NETSTANDARD
-            this.Culture = CultureInfo.InstalledUICulture;
-            #endif
-            #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
-            this.DefaultEncoding = Encoding.Default;
-            this.MachineName = System.Environment.MachineName;
-            this.OperatingSystem = System.Environment.OSVersion;
-            this.PathSeparator = System.IO.Path.PathSeparator;
+            Endianness = BitConverter.IsLittleEndian ? Endianness.LittleEndian : Endianness.BigEndian;
+            ProcessorCount = System.Environment.ProcessorCount;
+            NewLine = System.Environment.NewLine;
+            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            Culture = CultureInfo.InstalledUICulture;
+            DefaultEncoding = Encoding.Default;
+            MachineName = System.Environment.MachineName;
+            OperatingSystem = System.Environment.OSVersion;
+            PathSeparator = System.IO.Path.PathSeparator;
             #endif
         }
 
@@ -60,11 +59,8 @@ namespace Axle.Environment
         public int ProcessorCount { get; }
         public string NewLine { get; }
 
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         public CultureInfo Culture { get; }
-        #endif
-
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
         public Encoding DefaultEncoding { get; }
         public char PathSeparator { get; }
         public string MachineName { get; }

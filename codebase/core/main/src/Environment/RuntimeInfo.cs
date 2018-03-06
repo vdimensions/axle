@@ -11,9 +11,12 @@ using Axle.Verification;
 
 namespace Axle.Environment
 {
-    internal sealed partial class RuntimeInfo : IRuntime
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    [Serializable]
+    #endif
+	internal sealed partial class RuntimeInfo : IRuntime
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         private static Version GetMonoVersion()
         {
             var dispalayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
@@ -42,7 +45,7 @@ namespace Axle.Environment
 
         public IEnumerable<Assembly> GetAssemblies()
         {
-            #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
             return AppDomain.CurrentDomain.GetAssemblies();
             #else
             var assemblies = new List<Assembly>();
@@ -58,15 +61,15 @@ namespace Axle.Environment
             #endif
         }
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         private string ResolveAssemblyName(string assemblyName)
         {
             return !Platform.Environment.IsWindows()
-                    ? GetAssemblies()
-                      .Select(x => x.GetName().Name)
-                      .Where(x => x.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
-                      .SingleOrDefault() ?? assemblyName
-                    : assemblyName;
+                ? GetAssemblies()
+                    .Select(x => x.GetName().Name)
+                    .Where(x => x.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
+                    .SingleOrDefault() ?? assemblyName
+                : assemblyName;
         }
 
         public Assembly LoadSatelliteAssembly(Assembly targetAssembly, System.Globalization.CultureInfo culture)

@@ -31,7 +31,7 @@ namespace Axle.Configuration.Sdk
 
             public override int GetHashCode() { return _originalElementKey.GetHashCode()^_operation.GetHashCode(); }
 
-            #if net45
+            #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
             private bool DoEquals(ElementKey other) { return _operation == other._operation && Equals(_originalElementKey, other._originalElementKey); }

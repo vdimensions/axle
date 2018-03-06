@@ -8,12 +8,13 @@ namespace Axle.Extensions.DateTime
     
     public static partial class DateTimeExtensions
     {
-#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// </summary>
         /// <param name="current">
-        /// The <see cref="DateTime"/> value to convet.
+        /// The <see cref="DateTime"/> value to convert.
         /// </param>
         /// <param name="assumedKind">
         /// A <see cref="DateTimeKind"/> value to be used as the assumed <see cref="DateTime.Kind">kind</see> of the 
@@ -35,6 +36,7 @@ namespace Axle.Extensions.DateTime
                 ? TimeZoneInfo.ConvertTime(current, TimeZoneInfo.Utc, TimeZoneInfo.Local)
                 : new DateTime(current.Ticks, DateTimeKind.Local);
         }
+
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// <remarks>
@@ -43,7 +45,7 @@ namespace Axle.Extensions.DateTime
         /// </remarks>
         /// </summary>
         /// <param name="current">
-        /// The <see cref="DateTime"/> value to convet.
+        /// The <see cref="DateTime"/> value to convert.
         /// </param>
         /// <returns>
         /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
@@ -110,6 +112,7 @@ namespace Axle.Extensions.DateTime
                 TimeZoneInfo.ConvertTime(dateTime, sourceTimeZone, destinationTimeZone).Ticks,
                 destinationIsUtc ? DateTimeKind.Utc : DateTimeKind.Unspecified);
         }
+
         /// <summary>
         /// Converts a time from one time zone to another. 
         /// </summary>

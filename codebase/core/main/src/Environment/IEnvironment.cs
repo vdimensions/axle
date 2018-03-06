@@ -1,8 +1,6 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using System;
 using System.Text;
-#endif
-#if !NETSTANDARD
 using System.Globalization;
 #endif
 
@@ -29,15 +27,13 @@ namespace Axle.Environment
         /// </summary>
         string NewLine { get; }
 
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+
         /// <summary>
         /// Gets the <see cref="CultureInfo"/> that represents the culture installed with the current operating system.
         /// </summary>
-        [Obsolete("Use `CultureInfo.InstalledUICulture` instead")]
         CultureInfo Culture { get; }
-        #endif
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
         /// <summary>
         /// Gets an encoding for the platform operating system's ANSI code page.
         /// </summary>

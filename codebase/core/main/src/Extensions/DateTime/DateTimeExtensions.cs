@@ -7,7 +7,7 @@ namespace Axle.Extensions.DateTime
     using DateTime = System.DateTime;
 
     /// <summary>
-    /// A static class that contains extension methods for the <see cref="DateTime"/> struct
+    /// A static class that contains extension methods for the <see cref="DateTime"/> <see langword="struct"/>
     /// </summary>
     public static partial class DateTimeExtensions
     {
@@ -35,7 +35,7 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DateTime"/> value from the same week to get the first day of week from.
         /// </param>
         /// <param name="culture">
-        /// A <see cref="CultureInfo"/> instance representing the cutlure to obtain date-time settings from.
+        /// A <see cref="CultureInfo"/> instance representing the culture to obtain date-time settings from.
         /// </param>
         /// <returns>
         /// A <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/> date time is in.
@@ -46,6 +46,7 @@ namespace Axle.Extensions.DateTime
         {
             return FirstDayOfWeek(current, culture.DateTimeFormat.FirstDayOfWeek);
         }
+
         /// <summary>
         /// Returns a <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/> date time is in.
         /// </summary>
@@ -114,7 +115,7 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DateTime"/> value from the same week to get the last day of week from.
         /// </param>
         /// <param name="culture">
-        /// A <see cref="CultureInfo"/> instance representing the cutlure to obtain date-time settings from.
+        /// A <see cref="CultureInfo"/> instance representing the culture to obtain date-time settings from.
         /// </param>
         /// <returns>
         /// A <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/> date time is in.
@@ -125,6 +126,7 @@ namespace Axle.Extensions.DateTime
         {
             return LastDayOfWeek(current, culture.DateTimeFormat.FirstDayOfWeek);
         }
+
         /// <summary>
         /// Returns a <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/> date time is in.
         /// </summary>

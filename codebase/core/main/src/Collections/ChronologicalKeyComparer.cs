@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 namespace Axle.Collections
 {
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [Serializable]
+    [System.Serializable]
     #endif
     internal sealed class ChronologicalKeyComparer<TKey> : IComparer<ChronologicalKey<TKey>>
     {

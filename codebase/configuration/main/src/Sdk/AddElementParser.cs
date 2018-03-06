@@ -16,7 +16,6 @@ namespace Axle.Configuration.Sdk
     /// <seealso cref="AbstractAddRemoveElementCollection{TAdd,TRemove,T}"/>
     /// <seealso cref="IConfigurationElementParser"/>
     /// <seealso cref="ConfigurationElement"/>
-    //[Maturity(CodeMaturity.Stable)]
     public class AddElementParser<T> : AbstractConfigurationElementParser<T> where T: ConfigurationElement, new()
     {
         public sealed override bool Accept(string elementName)

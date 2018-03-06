@@ -10,24 +10,23 @@ using Axle.Security.Authorization;
 
 namespace Axle.Security
 {
-    //[Maturity(CodeMaturity.Stable)]
     public sealed class SecurityManager
     {
         /// <summary>
         /// The sole instance of the <see cref="SecurityManager" /> class.
         /// </summary>
-        public static SecurityManager Instance { get { return Singleton<SecurityManager>.Instance; } }
+        public static SecurityManager Instance => Singleton<SecurityManager>.Instance;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IAuthenticator authenticator;
+        private readonly IAuthenticator _authenticator;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IAuthorizer authorizer;
+        private readonly IAuthorizer _authorizer;
 
         private SecurityManager()
         {
-            authenticator = new Authenticator();
-            authorizer = new Authorizer();
+            _authenticator = new Authenticator();
+            _authorizer = new Authorizer();
         }
 
         /// <summary>
@@ -38,7 +37,8 @@ namespace Axle.Security
         /// </returns>
         /// <seealso cref="IAuthenticator.IsGuest"/>
         /// <seealso cref="IAuthenticator"/>
-        public bool IsAnonymous { get { return authenticator.IsGuest; } }
+        public bool IsAnonymous => _authenticator.IsGuest;
+
         /// <summary>
         /// Gets a reference to the current principal.
         /// </summary>
@@ -47,7 +47,8 @@ namespace Axle.Security
         /// authenticated principal.
         /// </returns>
         /// <seealso cref="IPrincipal" />
-        public IPrincipal CurrentPrincipal { get { return authenticator.CurrentUser; } }
+        public IPrincipal CurrentPrincipal => _authenticator.CurrentUser;
+
         /// <summary>
         /// Gets a reference to the currently authenticated principal. 
         /// </summary>
@@ -55,78 +56,78 @@ namespace Axle.Security
         /// A reference to the currently authenticated user.
         /// </returns>
         /// <seealso cref="IPrincipal" />
-        public IPrincipal AuthenticatedPrincipal { get { return authenticator.AuthenticatedUser; } }
+        public IPrincipal AuthenticatedPrincipal => _authenticator.AuthenticatedUser;
 
-        public bool IsOwnerOf(IAccessLevelEntry accessLevelEntry) { return IsOwnerOf(accessLevelEntry.Owner); }
-        public bool IsOwnerOf(string principal) { return !IsAnonymous && CurrentPrincipal.Name.Equals(principal, StringComparison.Ordinal); }
+        public bool IsOwnerOf(IAccessLevelEntry accessLevelEntry) => IsOwnerOf(accessLevelEntry.Owner);
+        public bool IsOwnerOf(string principal) => !IsAnonymous && CurrentPrincipal.Name.Equals(principal, StringComparison.Ordinal);
 
-        public bool IsRelatedToPrincipal(string principal) { return authorizer.ArePrincipalsRelated(CurrentPrincipal.Name, principal); }
-        public bool IsRelatedToPrincipal(IPrincipal principal) { return authorizer.ArePrincipalsRelated(CurrentPrincipal, principal); }
+        public bool IsRelatedToPrincipal(string principal) => _authorizer.ArePrincipalsRelated(CurrentPrincipal.Name, principal);
+        public bool IsRelatedToPrincipal(IPrincipal principal) => _authorizer.ArePrincipalsRelated(CurrentPrincipal, principal);
 
         public void DemandAccess(IAccessLevelEntry accessLevelEntry, IEnumerable<IAccessRight> accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public void DemandAccess(IAccessLevelEntry accessLevelEntry, IEnumerable<string> accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public void DemandAccess(string accessLevel, IEnumerable<IAccessRight> accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
         }
         public void DemandAccess(string accessLevel, IEnumerable<string> accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
         }
         public void DemandAccess(IAccessLevelEntry accessLevelEntry, params IAccessRight[] accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public void DemandAccess(IAccessLevelEntry accessLevelEntry, params string[] accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public void DemandAccess(string accessLevel, params IAccessRight[] accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
         }
         public void DemandAccess(string accessLevel, params string[] accessRights)
         {
-            authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
+            _authorizer.DemandAccess(CurrentPrincipal, accessLevel, accessRights);
         }
 
         public bool HasAccess(IAccessLevelEntry accessLevelEntry, IEnumerable<IAccessRight> accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public bool HasAccess(IAccessLevelEntry accessLevelEntry, IEnumerable<string> accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public bool HasAccess(string accessLevel, IEnumerable<IAccessRight> accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
         }
         public bool HasAccess(string accessLevel, IEnumerable<string> accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
         }
         public bool HasAccess(IAccessLevelEntry accessLevelEntry, params IAccessRight[] accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public bool HasAccess(IAccessLevelEntry accessLevelEntry, params string[] accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevelEntry, accessRights);
         }
         public bool HasAccess(string accessLevel, params IAccessRight[] accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
         }
         public bool HasAccess(string accessLevel, params string[] accessRights)
         {
-            return authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
+            return _authorizer.HasAccess(CurrentPrincipal, accessLevel, accessRights);
         }
 
         /// <summary>
@@ -136,13 +137,13 @@ namespace Axle.Security
         /// An authentication token object that represents the authenticating user's credentials.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="authToken"/> is <c>null</c>.
+        /// <paramref name="authToken"/> is public <see langword="null"/>.
         /// </exception>
         /// <exception cref="AuthenticationException">
         /// Invalid user credentials have been passed.
         /// </exception>
-        public void SignIn(IAuthenticationToken authToken) { authenticator.SignIn(authToken); }
+        public void SignIn(IAuthenticationToken authToken) => _authenticator.SignIn(authToken);
 
-        public void SignOut() { authenticator.SignOut(); }
+        public void SignOut() => _authenticator.SignOut();
     }
 }

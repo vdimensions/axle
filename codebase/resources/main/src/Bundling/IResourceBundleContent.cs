@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 
+using Axle.Resources.Extraction;
+
 
 namespace Axle.Resources.Bundling
 {
@@ -24,5 +26,7 @@ namespace Axle.Resources.Bundling
         /// <paramref name="location"/> is <c>null</c>.
         /// </exception>
         IResourceBundleContent Register(Uri location);
+
+        IResourceExtractorRegistry Extractors { get; }
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 using Axle.Collections;
+using Axle.Resources.Extraction;
 
 
 namespace Axle.Resources.Bundling
@@ -16,10 +17,12 @@ namespace Axle.Resources.Bundling
         private sealed class BundleContent : IResourceBundleContent
         {
             private readonly LinkedList<Uri> _locations;
+            private readonly DefaultResourceExtractorRegistry _extractors;
 
             public BundleContent()
             {
                 _locations = new LinkedList<Uri>();
+                _extractors = new DefaultResourceExtractorRegistry();
             }
 
             public IEnumerator<Uri> GetEnumerator() => _locations.GetEnumerator();
@@ -30,6 +33,8 @@ namespace Axle.Resources.Bundling
                 _locations.AddLast(location);
                 return this;
             }
+
+            public IResourceExtractorRegistry Extractors => _extractors;
         }
 
         private readonly IDictionary<string, IResourceBundleContent> _perBundleContent;
@@ -45,6 +50,7 @@ namespace Axle.Resources.Bundling
             var comparer = caseSensitiveBundleNames ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
             _perBundleContent = new ChronologicalDictionary<string, IResourceBundleContent>(comparer);
         }
+
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class that is case-insensitive towards the resource bundle names.
         /// </summary>

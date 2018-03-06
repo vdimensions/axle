@@ -29,7 +29,7 @@ namespace Axle.Configuration.Sdk
 
         protected virtual void RegisterProperties(ConfigurationPropertyCollection properties) { }
 
-        #if net45
+        #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         protected T Resolve<T>(ConfigurationProperty property)

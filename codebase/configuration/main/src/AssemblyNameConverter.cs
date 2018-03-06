@@ -9,7 +9,5 @@ namespace Axle.Configuration
     /// <summary>
     /// A configuration converter class that can handle <see cref="Assembly" /> instances.
     /// </summary>
-    public sealed class AssemblyNameConverter : GenericConverter<Assembly, AssemblyParser>
-    {
-    }
+    public sealed class AssemblyNameConverter : GenericConverter<Assembly, AssemblyParser> { }
 }

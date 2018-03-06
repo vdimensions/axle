@@ -9,10 +9,7 @@ using Axle.Extensions.String;
 
 namespace Axle.Environment
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
-    [Serializable]
-    #endif
-	partial class RuntimeInfo
+    partial class RuntimeInfo
     {
         public Assembly LoadAssembly(string assemblyName) { return LoadAssembly(assemblyName, null); }
         public Assembly LoadAssembly(string assemblyName, Evidence securityEvidence)

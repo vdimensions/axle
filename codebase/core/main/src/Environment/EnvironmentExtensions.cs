@@ -3,21 +3,30 @@
 
 namespace Axle.Environment
 {
-    public static partial class EnvironmentExtensions
+    public static class EnvironmentExtensions
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static bool IsOSInternal(IEnvironment environment, OperatingSystemID osID)
         {
             return (environment.OperatingSystemID & osID) == osID;
         }
 
-        public static bool IsMac(this IEnvironment environment) { return IsOS(environment, OperatingSystemID.Mac); }
+        public static bool IsMac(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Mac);
+
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static bool IsOS(this IEnvironment environment, OperatingSystemID osID)
         {
-            return IsOSInternal(environment.VerifyArgument(nameof(environment)).IsNotNull().Value, osID);
+            environment.VerifyArgument(nameof(environment)).IsNotNull();
+            return IsOSInternal(environment, osID);
         }
-        public static bool IsUnix(this IEnvironment environment) { return IsOS(environment, OperatingSystemID.Unix); }
-        public static bool IsWindows(this IEnvironment environment) { return IsOS(environment, OperatingSystemID.Windows); }
+        public static bool IsUnix(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Unix);
+
+        public static bool IsWindows(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Windows);
         #endif
     }
 }

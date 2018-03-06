@@ -7,6 +7,8 @@ using Axle.Verification;
 
 namespace Axle.Extensions.String
 {
+    using StringComparison = System.StringComparison;
+
     /// <summary>
     /// A static class containing common extension methods to <see cref="String"/> instances.
     /// </summary>
@@ -46,6 +48,7 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, comparison) >= 0;
         }
+
         /// <summary>
         /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
@@ -74,6 +77,7 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value) >= 0;
         }
+
         /// <summary>
         /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
@@ -113,6 +117,7 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex, comparison) >= 0;
         }
+
         /// <summary>
         /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
@@ -145,6 +150,7 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex) >= 0;
         }
+
         /// <summary>
         /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
@@ -191,6 +197,7 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex, count, comparison) >= 0;
         }
+
         /// <summary>
         /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
@@ -230,7 +237,7 @@ namespace Axle.Extensions.String
             }
             return str.IndexOf(value, startIndex, count) >= 0;
         }
-        #endregion
+        #endregion Contains(...)
 
         /// <summary>
         /// Checks if the target <see cref="string"/> is an empty string.
@@ -265,11 +272,11 @@ namespace Axle.Extensions.String
         public static bool IsNullOrEmpty(this string str) { return string.IsNullOrEmpty(str); }
 
         /// <summary>
-        /// Creates a <see cref="string"/> using all the chracters from a target string instance, but in a reversed order.
+        /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed order.
         /// </summary>
-        /// <param name="str">The <see cref="string">string instance</see> upon which str extension method is called upon.</param>
+        /// <param name="str">The <see cref="string">string instance</see> upon which the extension method is called upon.</param>
         /// <returns>
-        /// A new string instance using all the chracters from a target string instance, but in a reversed order.
+        /// A new string instance using all the characters from a target string instance, but in a reversed order.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>.
@@ -310,6 +317,7 @@ namespace Axle.Extensions.String
         {
             return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(new[] { separator }, options);
         }
+
         /// <summary>
         /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
         /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter. 
@@ -340,6 +348,7 @@ namespace Axle.Extensions.String
         {
             return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, options);
         }
+
         /// <summary>
         /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
         /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter. 
@@ -376,6 +385,7 @@ namespace Axle.Extensions.String
         {
             return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, count, options);
         }
+
         /// <summary>
         /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
         /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
@@ -406,6 +416,7 @@ namespace Axle.Extensions.String
         {
             return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, options);
         }
+
         /// <summary>
         /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
         /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
@@ -442,6 +453,7 @@ namespace Axle.Extensions.String
         {
             return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, count, options);
         }
+
         /// <summary>
         /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
         /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
@@ -464,7 +476,7 @@ namespace Axle.Extensions.String
         {
             return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, StringSplitOptions.None);
         }
-        #endregion
+        #endregion Split(...)
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -498,7 +510,7 @@ namespace Axle.Extensions.String
 
         #region TakeBeforeFirst(...)
         /// <summary>
-        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -513,14 +525,14 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
@@ -539,8 +551,9 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -552,7 +565,7 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -574,8 +587,9 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -587,22 +601,23 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeFirst(this string str, string value, int startIndex)
         {
             return TakeBeforeFirst(str, value, startIndex, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -611,7 +626,7 @@ namespace Axle.Extensions.String
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -621,8 +636,9 @@ namespace Axle.Extensions.String
         {
             return TakeBeforeFirst(str, value, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -634,14 +650,14 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeFirst(this string str, char value, int startIndex)
@@ -653,8 +669,9 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -663,7 +680,7 @@ namespace Axle.Extensions.String
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the first occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -678,11 +695,11 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y) => x.IndexOf(y, 0), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
-        #endregion
+        #endregion TakeBeforeFirst(...)
 
         #region TakeBeforeLast(...)
         /// <summary>
-        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -697,14 +714,14 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
@@ -723,8 +740,9 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -736,7 +754,7 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -758,8 +776,9 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -771,22 +790,23 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeLast(this string str, string value, int startIndex)
         {
             return TakeBeforeLast(str, value, startIndex, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -795,7 +815,7 @@ namespace Axle.Extensions.String
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -805,8 +825,9 @@ namespace Axle.Extensions.String
         {
             return TakeBeforeLast(str, value, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -818,14 +839,14 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeLast(this string str, char value, int startIndex)
@@ -837,8 +858,9 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
+
         /// <summary>
-        /// Takes the part of a string that precedes the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -847,7 +869,7 @@ namespace Axle.Extensions.String
         /// The <see cref="char"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that prevedes the last occurence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -862,11 +884,11 @@ namespace Axle.Extensions.String
             var candidate = CutFromIndex((x, y) => x.LastIndexOf(y), str, value, true);
             return candidate.Length > 0 ? candidate : str;
         }
-        #endregion
+        #endregion TakeBeforeLast(...)
 
         #region TakeAfterFirst(...)
         /// <summary>
-        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -881,14 +903,14 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
@@ -906,8 +928,9 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, false);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -919,8 +942,8 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
@@ -940,8 +963,9 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, false);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -950,8 +974,8 @@ namespace Axle.Extensions.String
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
@@ -960,8 +984,9 @@ namespace Axle.Extensions.String
         {
             return TakeAfterFirst(str, value, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -973,22 +998,23 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterFirst(this string str, string value, int startIndex)
         {
             return TakeAfterFirst(str, value, startIndex, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -997,8 +1023,8 @@ namespace Axle.Extensions.String
         /// The <see cref="char"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
@@ -1011,8 +1037,9 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y) => x.IndexOf(y, 0), str, value, false);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the first occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1024,14 +1051,14 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterFirst(this string str, char value, int startIndex)
@@ -1042,11 +1069,11 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y) => x.IndexOf(x, y, startIndex), str, value, false);
         }
-        #endregion
+        #endregion TakeAfterFirst(...)
 
         #region TakeAfterLast(...)
         /// <summary>
-        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1061,14 +1088,14 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
@@ -1086,8 +1113,9 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, false);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1099,8 +1127,8 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
@@ -1120,8 +1148,9 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, false);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1130,8 +1159,8 @@ namespace Axle.Extensions.String
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
@@ -1140,8 +1169,9 @@ namespace Axle.Extensions.String
         {
             return TakeAfterLast(str, value, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1153,22 +1183,23 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterLast(this string str, string value, int startIndex)
         {
             return TakeAfterLast(str, value, startIndex, StringComparison.CurrentCulture);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1180,14 +1211,14 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the lenght of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterLast(this string str, char value, int startIndex)
@@ -1198,8 +1229,9 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y) => x.LastIndexOf(x, y, startIndex), str, value, false);
         }
+
         /// <summary>
-        /// Takes the part of a string that follows the last occurence of a given <paramref name="value"/>.
+        /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1208,8 +1240,8 @@ namespace Axle.Extensions.String
         /// The <see cref="char"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurence of a given <paramref name="value"/>, or 
-        /// <see cref="String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
@@ -1222,11 +1254,11 @@ namespace Axle.Extensions.String
             }
             return CutFromIndex((x, y) => x.LastIndexOf(y), str, value, false);
         }
-        #endregion
+        #endregion TakeAfterLast(...)
 
         #region TrimStart(...)
         /// <summary>
-        /// Removes the leading occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// Removes the leading occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1252,8 +1284,9 @@ namespace Axle.Extensions.String
                 ? str.TakeAfterFirst(value, 0, comparison)
                 : str;
         }
+
         /// <summary>
-        /// Removes the leading occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// Removes the leading occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1268,11 +1301,11 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TrimStart(this string str, string value) { return TrimStart(str, value, StringComparison.CurrentCulture); }
-        #endregion // TrimStart(...)
+        #endregion TrimStart(...)
 
         #region TrimEnd(...)
         /// <summary>
-        /// Removes the trailing occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// Removes the trailing occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1298,8 +1331,9 @@ namespace Axle.Extensions.String
                 ? str.TakeBeforeLast(value, comparison)
                 : str;
         }
+
         /// <summary>
-        /// Removes the trailing occurence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
+        /// Removes the trailing occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance this extension method is called on. 
@@ -1314,7 +1348,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TrimEnd(this string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
-        #endregion // TrimEnd(...)
+        #endregion TrimEnd(...)
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
