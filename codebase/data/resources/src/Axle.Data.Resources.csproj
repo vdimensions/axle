@@ -5,7 +5,7 @@
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
-    <ProjectGuid>8DBBA160-18F0-4268-890F-6D1C26AA0746</ProjectGuid>
+    <ProjectGuid>6df3050d-0ead-4f70-9e84-ee78a8b23ca2</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -22,9 +22,6 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Logging.dist.csproj.paket.references" />
     <None Remove="paket.lock" />

@@ -1,4 +1,5 @@
 Axle.Core
+System.Configuration.ConfigurationManager 
 
 group build
   Mason.Targets.Preprocessor

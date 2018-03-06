@@ -4,7 +4,7 @@
 namespace Axle.Configuration
 {
     /// <summary>
-    /// An interface reperesenting the system configuration.
+    /// An interface representing the system configuration.
     /// </summary>
     public interface IConfiguration
     {

@@ -22,6 +22,7 @@
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
         <dependency id="Axle.Resources" version="${axle.dependency.version}" />
         <dependency id="Axle.Data" version="${axle.dependency.version}" />
+        <dependency id="System.Configuration.ConfigurationManager " version="system.configuration.configurationmanager.version" />
       </group>
       <group targetFramework="netstandard1.6">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />

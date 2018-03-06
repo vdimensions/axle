@@ -22,9 +22,6 @@
     <Optimize>true</Optimize>
     <DefineConstants>TRACE;$(FrameworkSymbols)</DefineConstants>
   </PropertyGroup>
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Logging.dist.csproj.paket.references" />
     <None Remove="paket.lock" />

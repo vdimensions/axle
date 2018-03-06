@@ -11,7 +11,7 @@ namespace Axle.Environment
         /// <paramref name="assemblyName"/>and <paramref name="securityEvidence"/> parameters. 
         /// </summary>
         /// <param name="assemblyName">
-        /// The name of the assebly to be loaded. 
+        /// The name of the assembly to be loaded. 
         /// </param>
         /// <param name="securityEvidence">
         /// The <see cref="Evidence"/> object to use when loading the assembly.  
