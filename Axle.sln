@@ -37,9 +37,9 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Resources.Yaml.Tests", "I:\Projects\VDimensions\projects\axle\codebase\resources\yaml\tests\Axle.Resources.Yaml.Tests.csproj", "{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}"
 EndProject
 ### SECURITY ###############################################
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security-cryptography", "security-cryptography", "{6706277F-4174-433D-B3F3-57E0C6E15402}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security", "security", "{6706277F-4174-433D-B3F3-57E0C6E15402}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.Cryptography", "codebase\security-cryptography\main\src\Axle.Security.Cryptography.csproj", "{AB4D08D0-AE39-4992-96DA-FDD3676E806B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.Cryptography", "codebase\security\cryptography\src\Axle.Security.Cryptography.csproj", "{AB4D08D0-AE39-4992-96DA-FDD3676E806B}"
 EndProject
 ### LOGGING ################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging", "logging", "{D70A7D36-32CB-4359-8210-D3F6DEC3D04A}"

@@ -7,7 +7,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Axle</RootNamespace>
-    <AssemblyName>Axle.Resources.dist</AssemblyName>
+    <AssemblyName>Axle.Logging.dist</AssemblyName>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFramework>net40</TargetFramework>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
@@ -31,19 +31,19 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <None Include="Axle.Resources.nuspec" />
-    <None Include="Axle.Resources.nuspec.template" />
-    <None Include="bin\Debug\netstandard1.0\Axle.Resources.deps.json" />
-    <None Include="bin\Debug\netstandard1.1\Axle.Resources.deps.json" />
-    <None Include="bin\Debug\netstandard1.2\Axle.Resources.deps.json" />
-    <None Include="bin\Debug\netstandard1.3\Axle.Resources.deps.json" />
-    <None Include="bin\Debug\netstandard1.4\Axle.Resources.deps.json" />
-    <None Include="bin\Debug\netstandard1.5\Axle.Resources.deps.json" />
-    <None Include="bin\Debug\netstandard1.6\Axle.Resources.deps.json" />
+    <None Include="Axle.Logging.nuspec" />
+    <None Include="Axle.Logging.nuspec.template" />
+    <None Include="bin\Debug\netstandard1.0\Axle.Logging.deps.json" />
+    <None Include="bin\Debug\netstandard1.1\Axle.Logging.deps.json" />
+    <None Include="bin\Debug\netstandard1.2\Axle.Logging.deps.json" />
+    <None Include="bin\Debug\netstandard1.3\Axle.Logging.deps.json" />
+    <None Include="bin\Debug\netstandard1.4\Axle.Logging.deps.json" />
+    <None Include="bin\Debug\netstandard1.5\Axle.Logging.deps.json" />
+    <None Include="bin\Debug\netstandard1.6\Axle.Logging.deps.json" />
     <None Include="Properties\AssemblyInfo.cs.template" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Axle.Resources.dist.csproj.paket.references" />
+    <None Include="Axle.Logging.dist.csproj.paket.references" />
     <None Include="mason.properties" />
     <None Include="paket-update.sh" />
     <None Include="paket.dependencies" />
@@ -51,36 +51,36 @@
     <None Include="paket.sh" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\net35\Axle.Resources.dll" />
-    <Content Include="bin\Debug\net35\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\net35\Axle.Resources.xml" />
-    <Content Include="bin\Debug\net40\Axle.Resources.dll" />
-    <Content Include="bin\Debug\net40\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\net40\Axle.Resources.xml" />
-    <Content Include="bin\Debug\net45\Axle.Resources.dll" />
-    <Content Include="bin\Debug\net45\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\net45\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.0\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.0\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.0\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.1\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.1\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.1\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.2\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.2\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.2\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.3\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.3\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.3\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.4\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.4\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.4\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.5\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.5\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.5\Axle.Resources.xml" />
-    <Content Include="bin\Debug\netstandard1.6\Axle.Resources.dll" />
-    <Content Include="bin\Debug\netstandard1.6\Axle.Resources.pdb" />
-    <Content Include="bin\Debug\netstandard1.6\Axle.Resources.xml" />
+    <Content Include="bin\Debug\net35\Axle.Logging.dll" />
+    <Content Include="bin\Debug\net35\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\net35\Axle.Logging.xml" />
+    <Content Include="bin\Debug\net40\Axle.Logging.dll" />
+    <Content Include="bin\Debug\net40\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\net40\Axle.Logging.xml" />
+    <Content Include="bin\Debug\net45\Axle.Logging.dll" />
+    <Content Include="bin\Debug\net45\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\net45\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.0\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.0\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.0\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.1\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.1\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.1\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.2\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.2\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.2\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.3\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.3\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.3\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.4\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.4\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.4\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.5\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.5\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.5\Axle.Logging.xml" />
+    <Content Include="bin\Debug\netstandard1.6\Axle.Logging.dll" />
+    <Content Include="bin\Debug\netstandard1.6\Axle.Logging.pdb" />
+    <Content Include="bin\Debug\netstandard1.6\Axle.Logging.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Debug\netstandard2.0\" />
