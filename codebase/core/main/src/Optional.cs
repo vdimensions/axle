@@ -53,7 +53,7 @@ namespace Axle
 		private readonly bool _isSet;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Optional{T}"/> struct.
+        /// Initializes a new instance of the <see cref="Optional{T}"/> <see langword="struct"/>.
         /// </summary>
         /// <param name="value">Value.</param>
 		internal Optional(T value)

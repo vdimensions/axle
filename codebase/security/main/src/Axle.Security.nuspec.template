@@ -23,24 +23,7 @@
       </group>
       <group targetFramework="netstandard1.6">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.5">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.4">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.3">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.2">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.1">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      </group>
-      <group targetFramework="netstandard1.0">
-        <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="System.Net.Security" version="${system.net.security.version}" />
       </group>
       <group targetFramework="net45">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />

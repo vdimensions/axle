@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 
-using Axle.Collections.Generic.Extensions;
-using Axle.Extensions.String;
+using Axle.Collections.Generic.Extensions.EqualityComparer;
 using Axle.Security.Authentication;
 
 
 namespace Axle.Security.Authorization.Sdk
 {
-    //[Maturity(CodeMaturity.Stable)]
-    public abstract class AuthorizerBase : IAuthorizer
+    public abstract class AbstractAuthorizer : IAuthorizer
     {
         protected abstract IEnumerable<IAccessPolicy> GetAccessPolicies(string accessLevel, IEnumerable<IAccessRight> accessRights);
         protected abstract IEnumerable<IAccessPolicy> GetParentPolicies(IAccessPolicy accessPolicy);
@@ -88,11 +86,11 @@ namespace Axle.Security.Authorization.Sdk
         {
             if (principal1 == null)
             {
-                throw new ArgumentNullException("principal1");
+                throw new ArgumentNullException(nameof(principal1));
             }
             if (principal2 == null)
             {
-                throw new ArgumentNullException("principal2");
+                throw new ArgumentNullException(nameof(principal2));
             }
             var comparer = StringComparer.Ordinal;
             return comparer.Equals(principal1.Name, principal2.Name)
@@ -136,13 +134,13 @@ namespace Axle.Security.Authorization.Sdk
         {
             if (principal == null)
             {
-                throw new ArgumentNullException("principal");
+                throw new ArgumentNullException(nameof(principal));
             }
             if (accessLevelEntry == null)
             {
-                throw new ArgumentNullException("accessLevelEntry");
+                throw new ArgumentNullException(nameof(accessLevelEntry));
             }
-            return principal.Name.EqualsOrdinal(accessLevelEntry.Owner) 
+            return principal.Name.Equals(accessLevelEntry.Owner, StringComparison.Ordinal) 
                 || DoHasAccess(principal.Name, accessLevelEntry.AccessLevel, accessRights);
         }
         [Obsolete]
@@ -150,24 +148,24 @@ namespace Axle.Security.Authorization.Sdk
         {
             if (principal == null)
             {
-                throw new ArgumentNullException("principal");
+                throw new ArgumentNullException(nameof(principal));
             }
             if (accessLevelEntry == null)
             {
-                throw new ArgumentNullException("accessLevelEntry");
+                throw new ArgumentNullException(nameof(accessLevelEntry));
             }
-            return principal.Name.EqualsOrdinal(accessLevelEntry.Owner) 
+            return principal.Name.Equals(accessLevelEntry.Owner, StringComparison.Ordinal) 
                 || DoHasAccess(principal.Name, accessLevelEntry.AccessLevel, accessRights.Select(GetAccessRight));
         }
         public bool HasAccess(IPrincipal principal, string accessLevel, IEnumerable<IAccessRight> accessRights)
         {
             if (principal == null)
             {
-                throw new ArgumentNullException("principal");
+                throw new ArgumentNullException(nameof(principal));
             }
             if (accessLevel == null)
             {
-                throw new ArgumentNullException("accessLevel");
+                throw new ArgumentNullException(nameof(accessLevel));
             } 
             return DoHasAccess(principal.Name, accessLevel, accessRights);
         }
@@ -176,11 +174,11 @@ namespace Axle.Security.Authorization.Sdk
         {
             if (principal == null)
             {
-                throw new ArgumentNullException("principal");
+                throw new ArgumentNullException(nameof(principal));
             }
             if (accessLevel == null)
             {
-                throw new ArgumentNullException("accessLevel");
+                throw new ArgumentNullException(nameof(accessLevel));
             }
             return DoHasAccess(principal.Name, accessLevel, accessRights.Select(GetAccessRight));
         }

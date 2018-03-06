@@ -3,19 +3,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Authentication;
 
-using Axle.References;
 using Axle.Security.Authentication;
 using Axle.Security.Authorization;
 
 
 namespace Axle.Security
 {
-    public sealed class SecurityManager
+    public abstract class AbstractSecurityManager
     {
-        /// <summary>
-        /// The sole instance of the <see cref="SecurityManager" /> class.
-        /// </summary>
-        public static SecurityManager Instance => Singleton<SecurityManager>.Instance;
+        ///// <summary>
+        ///// The sole instance of the <see cref="AbstractSecurityManager" /> class.
+        ///// </summary>
+        //public static AbstractSecurityManager Instance => Singleton<AbstractSecurityManager>.Instance;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IAuthenticator _authenticator;
@@ -23,10 +22,10 @@ namespace Axle.Security
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IAuthorizer _authorizer;
 
-        private SecurityManager()
+        protected AbstractSecurityManager(IAuthenticator authenticator, IAuthorizer authorizer)
         {
-            _authenticator = new Authenticator();
-            _authorizer = new Authorizer();
+            _authenticator = authenticator;
+            _authorizer = authorizer;
         }
 
         /// <summary>

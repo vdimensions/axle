@@ -1,4 +1,5 @@
 Axle.Core
+System.Net.Security
 
 group build
   Mason.Targets.Preprocessor
