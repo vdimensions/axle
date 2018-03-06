@@ -27,9 +27,11 @@ namespace Axle
             _actualComparer = comparer.VerifyArgument(nameof(comparer)).IsNotNull().Value;
         }
         public AdaptiveEqualityComparer(Func<T1, T2> adaptFunc) : this(adaptFunc, EqualityComparer<T2>.Default) { }
-        
+
+        /// <inheritdoc />
         public bool Equals(T1 x, T1 y) { return _actualComparer.Equals(_adaptFunc(x), _adaptFunc(y)); }
-        
+
+        /// <inheritdoc />
         public int GetHashCode(T1 obj) { return _actualComparer.GetHashCode(_adaptFunc(obj)); }
     }
 }

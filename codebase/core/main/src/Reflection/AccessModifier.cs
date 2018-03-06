@@ -9,23 +9,27 @@
     public enum AccessModifier : byte
     {
         /// <summary>
-        /// An access modifier for publicly accessible members (<c>public</c>).
+        /// An access modifier for reflected members with <see langword="public"/> access.
         /// </summary>
         Public,
+
         /// <summary>
-        /// An access modifier for reflected members with <c>private</c> access.
+        /// An access modifier for reflected members with <see langword="private"/> access.
         /// </summary>
         Private,
+
         /// <summary>
-        /// An access modifier for reflected members with <c>protected</c> access.
+        /// An access modifier for reflected members with <see langword="protected"/> access.
         /// </summary>
         Protected,
+
         /// <summary>
-        /// An access modifier for reflected members with <c>internal</c> access.
+        /// An access modifier for reflected members with <see langword="internal"/> access.
         /// </summary>
         Internal,
+
         /// <summary>
-        /// An access modifier for reflected members with <c>protected internal</c> access.
+        /// An access modifier for reflected members with <see langword="protected internal"/> access.
         /// </summary>
         ProtectedInternal
     }

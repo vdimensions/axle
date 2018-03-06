@@ -27,6 +27,7 @@ namespace Axle.Threading
         /// </param>
         /// <seealso cref="System.Threading.Timeout.Infinite"/>
         bool TryEnter(int millisecondsTimeout);
+
         /// <summary>
         /// Attempts to acquire an exclusive lock. 
         /// </summary>

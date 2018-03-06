@@ -68,49 +68,40 @@ namespace Axle
         }
         public static TResult Invoke<T, TResult>(this Attempt<T, TResult> attempt, T arg, TResult defaultValue)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull ().Value.Invoke (arg, out result) ? result : defaultValue;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg, out TResult result) ? result : defaultValue;
         }
         public static TResult Invoke<T1, T2, TResult>(this Attempt<T1, T2, TResult> attempt, T1 arg1, T2 arg2, TResult defaultValue)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, out result) ? result : defaultValue;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, out TResult result) ? result : defaultValue;
         }
         public static TResult Invoke<T1, T2, T3, TResult>(this Attempt<T1, T2, T3, TResult> attempt, T1 arg1, T2 arg2, T3 arg3, TResult defaultValue)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, out result) ? result : defaultValue;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, out TResult result) ? result : defaultValue;
         }
         public static TResult Invoke<T1, T2, T3, T4, TResult>(this Attempt<T1, T2, T3, T4, TResult> attempt, T1 arg1, T2 arg2, T3 arg3, T4 arg4, TResult defaultValue)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, arg4, out result) ? result : defaultValue;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, arg4, out TResult result) ? result : defaultValue;
         }
 
         public static Optional<TResult> Invoke<TResult>(this Attempt<TResult> attempt)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(out result) ? Optional.From(result) : Optional<TResult>.Undefined;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(out TResult result) ? Optional.From(result) : Optional<TResult>.Undefined;
         }
         public static Optional<TResult> Invoke<T, TResult>(this Attempt<T, TResult> attempt, T arg)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg, out result) ? Optional.From(result) : Optional<TResult>.Undefined;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg, out TResult result) ? Optional.From(result) : Optional<TResult>.Undefined;
         }
         public static Optional<TResult> Invoke<T1, T2, TResult>(this Attempt<T1, T2, TResult> attempt, T1 arg1, T2 arg2)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, out result) ? Optional.From(result) : Optional<TResult>.Undefined;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, out TResult result) ? Optional.From(result) : Optional<TResult>.Undefined;
         }
         public static Optional<TResult> Invoke<T1, T2, T3, TResult>(this Attempt<T1, T2, T3, TResult> attempt, T1 arg1, T2 arg2, T3 arg3)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, out result) ? Optional.From(result) : Optional<TResult>.Undefined;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, out TResult result) ? Optional.From(result) : Optional<TResult>.Undefined;
         }
         public static Optional<TResult> Invoke<T1, T2, T3, T4, TResult>(this Attempt<T1, T2, T3, T4, TResult> attempt, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
         {
-            TResult result;
-            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, arg4, out result) ? Optional.From(result) : Optional<TResult>.Undefined;
+            return attempt.VerifyArgument(nameof(attempt)).IsNotNull().Value.Invoke(arg1, arg2, arg3, arg4, out TResult result) ? Optional.From(result) : Optional<TResult>.Undefined;
         }
 
         public static Optional<TResult> Invoke<TResult>(this IEnumerable<Attempt<TResult>> attempts)

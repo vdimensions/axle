@@ -1,5 +1,5 @@
 ﻿/*
-   Copyright 2014-2017 Vitual Dimensions
+   Copyright 2014-2017 Virtual Dimensions
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
@@ -25,12 +25,13 @@ namespace Axle
     /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/> delegate.
     /// </typeparam>
     /// <param name="result">
-    /// An output parameter to contain the result of the attempt it it was successful.
+    /// An output parameter to contain the result of the attempt if it was successful.
     /// </param>
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
     public delegate bool Attempt<TResult>(out TResult result);
+
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
     /// Therefore, the action's result is passed as an output parameter instead of a return value.
@@ -46,12 +47,13 @@ namespace Axle
     /// The argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.
     /// </param>
     /// <param name="result">
-    /// An output parameter to contain the result of the attempt it it was successful.
+    /// An output parameter to contain the result of the attempt if it was successful.
     /// </param>
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
     public delegate bool Attempt<T, TResult>(T arg, out TResult result);
+
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
     /// Therefore, the action's result is passed as an output parameter instead of a return value.
@@ -73,12 +75,13 @@ namespace Axle
     /// The second argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.
     /// </param>
     /// <param name="result">
-    /// An output parameter to contain the result of the attempt it it was successful.
+    /// An output parameter to contain the result of the attempt if it was successful.
     /// </param>
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
     public delegate bool Attempt<T1, T2, TResult>(T1 arg1, T2 arg2, out TResult result);
+
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
     /// Therefore, the action's result is passed as an output parameter instead of a return value.
@@ -106,12 +109,13 @@ namespace Axle
     /// The third argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.
     /// </param>
     /// <param name="result">
-    /// An output parameter to contain the result of the attempt it it was successful.
+    /// An output parameter to contain the result of the attempt if it was successful.
     /// </param>
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
     public delegate bool Attempt<T1, T2, T3, TResult>(T1 arg1, T2 arg2, T3 arg3, out TResult result);
+
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
     /// Therefore, the action's result is passed as an output parameter instead of a return value.
@@ -145,7 +149,7 @@ namespace Axle
     /// The fourth argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.
     /// </param>
     /// <param name="result">
-    /// An output parameter to contain the result of the attempt it it was successful.
+    /// An output parameter to contain the result of the attempt if it was successful.
     /// </param>
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.

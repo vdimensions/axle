@@ -15,20 +15,20 @@ namespace Axle
         #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         #endif
-        private readonly Func<T1, T2> adaptFunc;
+        private readonly Func<T1, T2> _adaptFunc;
         #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         #endif
-        private readonly IComparer<T2> actualComparer;
+        private readonly IComparer<T2> _actualComparer;
         
         public AdaptiveComparer(Func<T1, T2> adaptFunc, IComparer<T2> comparer)
         {
-            this.adaptFunc = adaptFunc.VerifyArgument(nameof(adaptFunc)).IsNotNull();
-            this.actualComparer = comparer.VerifyArgument(nameof(comparer)).IsNotNull().Value;
+            _adaptFunc = adaptFunc.VerifyArgument(nameof(adaptFunc)).IsNotNull();
+            _actualComparer = comparer.VerifyArgument(nameof(comparer)).IsNotNull().Value;
         }
         public AdaptiveComparer(Func<T1, T2> adaptFunc) : this(adaptFunc, Comparer<T2>.Default){}
 
-        public int Compare(T1 x, T1 y) { return actualComparer.Compare(adaptFunc(x), adaptFunc(y)); }
+        public int Compare(T1 x, T1 y) { return _actualComparer.Compare(_adaptFunc(x), _adaptFunc(y)); }
     }
 }
 #endif

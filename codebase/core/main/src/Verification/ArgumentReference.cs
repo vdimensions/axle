@@ -10,7 +10,7 @@ using Axle.References;
 namespace Axle.Verification
 {
     /// <summary>
-    /// A struct that represents a reference to an argument for a method or constructor. 
+    /// A <see langword="struct"/> that represents a reference to an argument for a method or constructor. 
     /// The argument reference is usually represented by its name (as defined in the respective method/constructor) and the value passed to it. 
     /// </summary>
     public struct ArgumentReference<T> : IReference<T>
@@ -93,7 +93,11 @@ namespace Axle.Verification
         /// Gets the value passed in the argument the current <see cref="ArgumentReference{T}"/> instance represents.
         /// </summary>
         public T Value => value;
+
+        /// <inheritdoc cref="IReference{T}.Value"/>
         T IReference<T>.Value => value;
+
+        /// <inheritdoc cref="IReference.Value"/>
         object IReference.Value => value;
 
         /// <param name="reference">
