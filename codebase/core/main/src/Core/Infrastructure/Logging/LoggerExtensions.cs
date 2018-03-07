@@ -3,7 +3,7 @@ using System;
 using Axle.Verification;
 
 
-namespace Axle.Logging
+namespace Axle.Core.Infrastructure.Logging
 {
     /// <summary>
     /// A static class to act as a mixin to the <see cref="ILogger"/> interface. 

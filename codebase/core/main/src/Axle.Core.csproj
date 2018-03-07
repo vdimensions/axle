@@ -23,15 +23,23 @@
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
+  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
+    <Reference Remove="System.Data" />
+    <Reference Remove="System.Xml" />
+    <Reference Remove="System.Xml.Linq" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />
-    <Compile Remove="Resources\IResource.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Core\Infrastructure\DependencyInjection\" />
+    <Folder Include="Core\Modulairty\" />
   </ItemGroup>
   <Target Name="BeforeBuild">
   </Target>

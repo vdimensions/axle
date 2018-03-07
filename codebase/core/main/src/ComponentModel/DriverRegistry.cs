@@ -7,6 +7,7 @@ using Axle.Verification;
 
 namespace Axle.ComponentModel
 {
+    // ReSharper disable once ClassCannotBeInstantiated
     internal sealed class DriverRegistry
     {
         #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD

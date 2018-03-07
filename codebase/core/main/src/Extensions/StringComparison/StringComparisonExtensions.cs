@@ -4,9 +4,9 @@
 namespace Axle.Extensions.StringComparison
 {
     /// <summary>
-    /// A static class containing common extension methods to <see cref="StringComparer"/> instances.
+    /// A static class containing common extension methods to <see cref="StringComparison"/> instances.
     /// </summary>
-    public static class StringComparerExtensions
+    public static class StringComparisonExtensions
     {
         /// <summary>
         /// Gets the respective <see cref="StringComparer"/> implementation corresponding to 

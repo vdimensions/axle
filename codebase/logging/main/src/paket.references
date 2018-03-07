@@ -1,5 +1,0 @@
-Axle.Core
-System.Threading.Thread
-
-group build
-  Mason.Targets.Preprocessor

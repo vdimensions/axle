@@ -20,7 +20,9 @@
     <dependencies>
       <group targetFramework="netstandard2.0"></group>
       <group targetFramework="netstandard1.6">
-        <dependency id="System.Xml.XmlSerializer" version="4.0.10" />
+        <dependency id="System.Diagnostics.TraceSource" version="${system.diagnostics.tracesource.version}" />
+        <dependency id="System.Threading.Thread" version="${system.threading.thread.version}" />
+        <dependency id="System.Xml.XmlSerializer" version="${system.xml.xmlserializer.version}" />
       </group>
       <group targetFramework="netstandard1.5"></group>
       <group targetFramework="netstandard1.4"></group>
@@ -35,11 +37,7 @@
     </dependencies>
     <frameworkAssemblies>
       <frameworkAssembly assemblyName="System" />
-      <!--<frameworkAssembly assemblyName="System.Configuration" />-->
       <frameworkAssembly assemblyName="System.Core" />
-      <frameworkAssembly assemblyName="System.Data" />
-      <frameworkAssembly assemblyName="System.Xml" />
-      <frameworkAssembly assemblyName="System.Xml.Linq" />
     </frameworkAssemblies>
     <references></references>
   </metadata>

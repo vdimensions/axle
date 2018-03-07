@@ -1,16 +1,17 @@
 using System;
 using System.Diagnostics;
-#if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+
+#if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
 using System.Threading;
 #endif
 
 
-namespace Axle.Logging
+namespace Axle.Core.Infrastructure.Logging
 {
     /// <summary>
     /// The default <see cref="ILogEntry"/> implementation provided by the Axle Framework.
     /// </summary>
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public sealed class LogEntry : ILogEntry
@@ -93,7 +94,7 @@ namespace Axle.Logging
         public override string ToString()
         {
             var messageToWrite = _exception == null ? _message : $"{_message}\n{_exception.StackTrace}";
-            #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+            #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
             return $"{_timestamp:yyyy-MM-dd HH:mm:ss} {_threadID} [{_severity}] {_type.FullName}: {messageToWrite}";
             #else
             return $"{_timestamp:yyyy-MM-dd HH:mm:ss} [{_severity}] {_type.FullName}: {messageToWrite}";
@@ -101,7 +102,7 @@ namespace Axle.Logging
         }
 
         public DateTime Timestamp => _timestamp;
-        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
         public string ThreadID => _threadID;
         #endif
         public LogSeverity Severity => _severity;

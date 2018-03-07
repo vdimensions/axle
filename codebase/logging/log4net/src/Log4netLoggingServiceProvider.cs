@@ -1,5 +1,7 @@
 ﻿using System;
 
+using Axle.Core.Infrastructure.Logging;
+
 
 namespace Axle.Logging.Log4net
 {
@@ -14,6 +16,6 @@ namespace Axle.Logging.Log4net
             }
             return new Log4netLogger(targetType);
         }
-        public ILogger Create<T>() { return Create(typeof(T)); }
+        public ILogger Create<T>() => Create(typeof(T));
     }
 }

@@ -1,9 +1,13 @@
+framework: net40, net45, netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6, netstandard2.0 
+
 source ../../../../dist
   nuget Axle.Core
-  nuget Axle.Logging
 
 source https://nuget.org/api/v2
   nuget log4net
+  nuget System.Diagnostics.TraceSource >= 4.0 framework: netstandard1.6
+  nuget System.Threading.Thread >= 4.0 framework: netstandard1.6
+  nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
 
 group build
 	source ../../../../submodules/mason/dist

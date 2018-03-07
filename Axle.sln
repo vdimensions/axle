@@ -44,10 +44,6 @@ EndProject
 ### LOGGING ################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging", "logging", "{D70A7D36-32CB-4359-8210-D3F6DEC3D04A}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "main", "main", "{2509012F-990E-4261-8A97-659DF2217F1C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Logging", "codebase\logging\main\src\Axle.Logging.csproj", "{EA51413A-58E8-4903-AEA7-CD0BF79462F9}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log4net", "log4net", "{D233A35D-37CF-48C1-BCFB-B7A90F82D826}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Logging.Log4net", "codebase\logging\log4net\src\Axle.Logging.Log4net.csproj", "{91679D15-77CB-4F66-8145-7085303A105F}"

@@ -3,6 +3,9 @@ NUGET
   remote: https://www.nuget.org/api/v2
     Microsoft.NETCore.Platforms (2.0.1) - restriction: == netstandard1.6
     Microsoft.NETCore.Targets (2.0) - restriction: == netstandard1.6
+    runtime.native.System (4.3) - restriction: == netstandard1.6
+      Microsoft.NETCore.Platforms (>= 1.1)
+      Microsoft.NETCore.Targets (>= 1.1)
     System.Collections (4.3) - restriction: == netstandard1.6
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
@@ -11,6 +14,16 @@ NUGET
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Runtime (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+    System.Diagnostics.TraceSource (4.3) - restriction: == netstandard1.6
+      Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      runtime.native.System (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Collections (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Diagnostics.Debug (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Globalization (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Runtime (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Runtime.Extensions (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+      System.Threading (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
     System.Globalization (4.3) - restriction: == netstandard1.6
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
@@ -118,6 +131,8 @@ NUGET
       System.Collections (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
       System.Runtime (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
       System.Threading.Tasks (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
+    System.Threading.Thread (4.3) - restriction: == netstandard1.6
+      System.Runtime (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
     System.Xml.ReaderWriter (4.3.1) - restriction: == netstandard1.6
       System.Collections (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== netstandard1.0) (>= netstandard1.3)) (&& (== netstandard1.0) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Diagnostics.Debug (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== netstandard1.0) (>= netstandard1.3)) (&& (== netstandard1.0) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)

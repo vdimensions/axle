@@ -1,0 +1,10 @@
+Application bootstrapping order:
+
+1. Infrastructure components
+- Reflection Provider
+- DI Provider
+- Logging Provider
+- Configuration Provider
+- Resources Provider
+
+2. Modularity Boostrap
