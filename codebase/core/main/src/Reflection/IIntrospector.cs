@@ -5,6 +5,9 @@ using System.Linq.Expressions;
 
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// An interface for an introspector; that is, an utility to provide reflection information on members of a given type.
+    /// </summary>
     public interface IIntrospector
     {
         IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);

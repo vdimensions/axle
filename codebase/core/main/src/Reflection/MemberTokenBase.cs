@@ -11,7 +11,7 @@ using Axle.Threading.ReaderWriterLock;
 
 namespace Axle.Reflection
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
 	public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
@@ -89,7 +89,7 @@ namespace Axle.Reflection
         {
             get
             {
-                // IMPORTANT! Get the reflected member outside the lock to prevent recursive entrancy!
+                // IMPORTANT! Get the reflected member outside the lock to prevent recursive entrance!
                 var reflectedMember = ReflectedMember;
 
                 return Lock.Invoke(
@@ -107,10 +107,10 @@ namespace Axle.Reflection
                                 {
                                     Attribute = x,
                                     Inherited = false,
-                                    #if !NETSTANDARD
-                                    AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                    #else
+                                    #if NETSTANDARD || NET45_OR_NEWER
                                     AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
+                                    #else
+                                    AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
                                     #endif
                                     .Cast<AttributeUsageAttribute>()
                                     .Single()
@@ -121,10 +121,10 @@ namespace Axle.Reflection
                                     {
                                         Attribute = x,
                                         Inherited = true,
-                                        #if !NETSTANDARD
-                                        AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                        #else
+                                        #if NETSTANDARD || NET45_OR_NEWER
                                         AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
+                                        #else
+                                        AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
                                         #endif
                                         .Cast<AttributeUsageAttribute>()
                                         .Single()
@@ -142,14 +142,14 @@ namespace Axle.Reflection
             }
         }
 
-        #if !NETSTANDARD
-        public abstract T ReflectedMember { get; }
-        #else
+        #if NETSTANDARD
         public virtual T ReflectedMember { get; }
+        #else
+        public abstract T ReflectedMember { get; }
         #endif
     }
 
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
 	public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
@@ -185,10 +185,10 @@ namespace Axle.Reflection
                 Lock.Invoke(
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
-                    #if !NETSTANDARD
-                    () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
-                    #else
+                    #if NETSTANDARD || NET45_OR_NEWER
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType));
+                    #else
+                    () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
                     #endif
                 return item;
             }

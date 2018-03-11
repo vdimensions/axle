@@ -9,7 +9,6 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
-    //[Maturity(CodeMaturity.Stable)]
     public sealed class GenericMethodToken : MethodToken, IGenericMethod
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

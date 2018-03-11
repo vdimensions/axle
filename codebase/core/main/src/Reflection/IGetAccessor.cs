@@ -6,7 +6,6 @@
     /// <seealso cref="AccessorType.Get">AccessorType.Get</seealso>
     /// <seealso cref="ISetAccessor" />
     /// <seealso cref="IAccessor" />
-    //[Maturity(CodeMaturity.Stable)]
     public interface IGetAccessor : IAccessor
     {
         /// <summary>

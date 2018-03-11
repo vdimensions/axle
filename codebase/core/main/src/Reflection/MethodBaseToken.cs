@@ -15,7 +15,7 @@ namespace Axle.Reflection
     /// <typeparam name="T">
     /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member for the current <see cref="MethodBaseToken{T}"/> instance.
     /// </typeparam>
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     #if NETSTANDARD
@@ -25,7 +25,7 @@ namespace Axle.Reflection
     #endif
         where T: MethodBase
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         [Serializable]
         #endif
         internal sealed class Parameter : IParameter
@@ -50,10 +50,10 @@ namespace Axle.Reflection
                         {
                             Attribute = x,
                             Inherited = false,
-                            #if NETSTANDARD
-                            AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                            #if NETSTANDARD || NET45_OR_NEWER
+                            AttributeUsage = x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
                             #else
-                            AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                            AttributeUsage = x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
                             #endif
                         })
                     .Union(
@@ -62,10 +62,10 @@ namespace Axle.Reflection
                             {
                                 Attribute = x,
                                 Inherited = true,
-                                #if NETSTANDARD
-                                AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                                #if NETSTANDARD || NET45_OR_NEWER
+                                AttributeUsage = x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
                                 #else
-                                AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false)).Cast<AttributeUsageAttribute>().Single()
+                                AttributeUsage = x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
                                 #endif
                             }))
                     .Select(
@@ -103,17 +103,13 @@ namespace Axle.Reflection
 
         #if NETSTANDARD
         protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
-        {
-            _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
-            _declaration = info.GetDeclarationType();
-        }
         #else
         protected internal MethodBaseToken(T info) : base(info, info.MethodHandle, info.DeclaringType, info.Name)
+        #endif
         {
             _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
             _declaration = info.GetDeclarationType();
         }
-        #endif
 
         #if !NETSTANDARD
         protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)

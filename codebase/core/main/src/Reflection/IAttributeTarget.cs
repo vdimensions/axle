@@ -9,7 +9,6 @@ namespace Axle.Reflection
     /// </summary>
     /// <seealso cref="Attribute"/>
     /// <seealso cref="IAttributeInfo"/>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IAttributeTarget
     {
         /// <summary>

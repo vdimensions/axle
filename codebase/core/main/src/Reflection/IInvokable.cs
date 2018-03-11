@@ -3,7 +3,6 @@
     /// <summary>
     /// An interface that represents a reflected member (usually a method or constructor) that can be invoked trough reflection.
     /// </summary>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IInvokable
     {
         /// <summary>

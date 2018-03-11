@@ -26,7 +26,7 @@ namespace Axle.Reflection
         public EventToken(EventInfo info) : base(info, info.DeclaringType, info.Name)
         {
             _eventInfo = info;
-            #if NETSTANDARD
+            #if NETSTANDARD || NET45_OR_NEWER
             var am = info.AddMethod;
             var rm = info.RemoveMethod;
             #else

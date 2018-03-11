@@ -1,6 +1,6 @@
 ﻿namespace Axle.Reflection
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [System.Serializable]
     #endif
     internal sealed class PropertySetAccessor : PropertyAccessor, ISetAccessor

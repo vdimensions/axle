@@ -97,10 +97,10 @@ namespace Axle.Reflection
 
             private static MethodInfo FindMethod(Type targetType, string methodName, Type returnType, BindingFlags bindingFlags)
             {
-                #if !NETSTANDARD
-                return targetType
-                #elif NETSTANDARD1_5_OR_NEWER
+                #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
                 return targetType.GetTypeInfo()
+                #else
+                return targetType
                 #endif
                     .GetMethods(bindingFlags)
                     .Where(m => m.Name.Equals(methodName, StringComparison.Ordinal) && m.ReturnType.Equals(returnType))

@@ -2,7 +2,7 @@
 {
     public abstract partial class MemberTokenBase<T>
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         [System.Serializable]
         #endif
         private class MethodHandleBaseEqualityComparer<TT> : AbstractEqualityComparer<TT> where TT: MemberTokenBase<T>
@@ -14,7 +14,7 @@
             protected override bool DoEquals(TT x, TT y) { return x.ReflectedMember.Equals(y.ReflectedMember); }
         }
 
-        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer
         {
             get { return Axle.References.Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance; }
@@ -27,7 +27,7 @@
 
     public abstract partial class MemberTokenBase<T, THandle>
     {
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         [System.Serializable]
         #endif
         private sealed class MethodHandleBaseEqualityComparer : AbstractEqualityComparer<MemberTokenBase<T, THandle>>
@@ -45,7 +45,7 @@
             }
         }
 
-        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         private static AbstractEqualityComparer<MemberTokenBase<T, THandle>> EqualityComparer
         {
             get { return Axle.References.Singleton<MethodHandleBaseEqualityComparer>.Instance; }

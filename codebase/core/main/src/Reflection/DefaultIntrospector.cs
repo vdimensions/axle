@@ -91,10 +91,10 @@ namespace Axle.Reflection
                         }
                         if (unary.NodeType == ExpressionType.ArrayLength)
                         {
-                            #if !NETSTANDARD
-                            var m = unary.Operand.Type.GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #elif NETSTANDARD1_5_OR_NEWER
+                            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
                             var m = unary.Operand.Type.GetTypeInfo().GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
+                            #else
+                            var m = unary.Operand.Type.GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
                             #endif
                             return m[0];
                         }
@@ -114,7 +114,7 @@ namespace Axle.Reflection
             if (type != member.ReflectedType && !(
                 type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
             {
-				throw new ArgumentException(string.Format("Expresion '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
+				throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
             }
             #endif
 
@@ -140,12 +140,11 @@ namespace Axle.Reflection
         public IEnumerable<IConstructor> GetConstructors(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var constructors = _introspectedType
-            #elif NETSTANDARD1_5_OR_NEWER
-            var constructors = _introspectedType.GetTypeInfo()
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            var constructors = _introspectedType.GetTypeInfo().GetConstructors(bindingFlags);
+            #elif !NETSTANDARD
+            var constructors = _introspectedType.GetConstructors(bindingFlags);
             #endif
-                    .GetConstructors(bindingFlags);
             return constructors.Select<ConstructorInfo, IConstructor>(x => new ConstructorToken(x)).ToArray();
         }
 
@@ -153,10 +152,10 @@ namespace Axle.Reflection
         public IMethod GetMethod(ScanOptions scanOptions, string methodName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var method = _introspectedType.GetMethod(methodName, bindingFlags);
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var method = _introspectedType.GetTypeInfo().GetMethod(methodName, bindingFlags);
+            #else
+            var method = _introspectedType.GetMethod(methodName, bindingFlags);
             #endif
             return method != null ? new MethodToken(method) : null;
         }
@@ -165,10 +164,10 @@ namespace Axle.Reflection
         public IEnumerable<IMethod> GetMethods(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var methods = _introspectedType.GetMethods(bindingFlags);
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var methods = _introspectedType.GetTypeInfo().GetMethods(bindingFlags);
+            #else
+            var methods = _introspectedType.GetMethods(bindingFlags);
             #endif
             return methods.Select<MethodInfo, IMethod>(x => new MethodToken(x)).ToArray();
         }
@@ -177,13 +176,14 @@ namespace Axle.Reflection
         public IProperty GetProperty(ScanOptions scanOptions, string propertyName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var property = _introspectedType.GetProperty(propertyName, bindingFlags);
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var property = _introspectedType.GetTypeInfo().GetProperty(propertyName, bindingFlags);
+            #else
+            var property = _introspectedType.GetProperty(propertyName, bindingFlags);
             #endif
             return property != null ? new PropertyToken(property) : null;
         }
+
         /// <inheritdoc />
         public IProperty GetProperty(Expression<Func<object>> expression)
         {
@@ -198,10 +198,10 @@ namespace Axle.Reflection
         public IEnumerable<IProperty> GetProperties(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var properties = _introspectedType
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var properties = _introspectedType.GetTypeInfo()
+            #else
+            var properties = _introspectedType
             #endif
                 .GetProperties(bindingFlags)
                 .GroupBy(x => x.Name)
@@ -213,13 +213,14 @@ namespace Axle.Reflection
         public IField GetField(ScanOptions scanOptions, string fieldName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var field = _introspectedType.GetField(fieldName, bindingFlags);
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var field = _introspectedType.GetTypeInfo().GetField(fieldName, bindingFlags);
+            #else
+            var field = _introspectedType.GetField(fieldName, bindingFlags);
             #endif
             return field != null ? new FieldToken(field) : null;
         }
+
         /// <inheritdoc />
         public IField GetField(Expression<Func<object>> expression)
         {
@@ -234,10 +235,10 @@ namespace Axle.Reflection
         public IEnumerable<IField> GetFields(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var fields = _introspectedType
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var fields = _introspectedType.GetTypeInfo()
+            #else
+            var fields = _introspectedType
             #endif
                 .GetFields(bindingFlags)
                 .GroupBy(x => x.Name)
@@ -249,10 +250,10 @@ namespace Axle.Reflection
         public IEvent GetEvent(ScanOptions scanOptions, string eventName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var @event = _introspectedType.GetEvent(eventName, bindingFlags);
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var @event = _introspectedType.GetTypeInfo().GetEvent(eventName, bindingFlags);
+            #else
+            var @event = _introspectedType.GetEvent(eventName, bindingFlags);
             #endif
             return @event != null ? new EventToken(@event) : null;
         }
@@ -270,10 +271,10 @@ namespace Axle.Reflection
         public IEnumerable<IEvent> GetEvents(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if !NETSTANDARD
-            var events = _introspectedType
-            #elif NETSTANDARD1_5_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var events = _introspectedType.GetTypeInfo()
+            #else
+            var events = _introspectedType
             #endif
                 .GetEvents(bindingFlags)
                 .GroupBy(x => x.Name)

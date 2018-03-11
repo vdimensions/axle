@@ -6,7 +6,6 @@ namespace Axle.Reflection
     /// <summary>
     /// An interface representing a reflected attribute. Allows querying of reflected metadata.
     /// </summary>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IAttributeInfo
     {
         /// <summary>

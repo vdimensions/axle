@@ -7,7 +7,6 @@ namespace Axle.Reflection
     /// An interface representing a reflected member; that is, a type member obtained via reflection.
     /// </summary>
     /// <seealso cref="MemberInfo"/>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IReflected
     {
         /// <summary>
@@ -23,7 +22,6 @@ namespace Axle.Reflection
     /// The actual type of the reflected member.
     /// </typeparam>
     /// <seealso cref="IReflected"/>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IReflected<T> : IReflected where T: MemberInfo
     {
         /// <summary>

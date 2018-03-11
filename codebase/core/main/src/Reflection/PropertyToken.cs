@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
 	public class PropertyToken : MemberTokenBase<PropertyInfo>, IProperty, IEquatable<PropertyToken>
@@ -27,7 +27,7 @@ namespace Axle.Reflection
         public PropertyToken(PropertyInfo propertyInfo) : base(propertyInfo, propertyInfo.DeclaringType, propertyInfo.Name)
         {
             _property = propertyInfo;
-            #if NETSTANDARD
+            #if NETSTANDARD || NET45_OR_NEWER
             var gm = propertyInfo.GetMethod;
             var sm = propertyInfo.SetMethod;
             #else

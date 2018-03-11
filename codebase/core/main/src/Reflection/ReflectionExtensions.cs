@@ -9,7 +9,7 @@ namespace Axle.Reflection
     /// <summary>
     /// A static class that contains extension methods to aid the .NET's reflection API.
     /// </summary>
-    public static partial class ReflectionExtensions
+    public static class ReflectionExtensions
     {
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -64,6 +64,7 @@ namespace Axle.Reflection
             }
             return IsOverrideUnchecked(method);
         }
+
         /// <summary>
         /// Determines if a specified <paramref name="method"/> overrides a corresponding method from a base class.
         /// </summary>
@@ -79,8 +80,7 @@ namespace Axle.Reflection
             {
                 throw new ArgumentNullException(nameof(method));
             }
-            var mi = method as MethodInfo;
-            return mi != null && IsOverrideUnchecked(mi);
+            return method is MethodInfo mi && IsOverrideUnchecked(mi);
         }
 
         internal static DeclarationType GetDeclarationTypeUnchecked(MethodInfo gm, MethodInfo sm)
@@ -99,6 +99,7 @@ namespace Axle.Reflection
                 isHideBySig,
                 isSealed);
         }
+
         /// <summary>
         /// Determines the <see cref="DeclarationType"/> of the specified <paramref name="methodBase"/>.
         /// </summary>
@@ -127,6 +128,7 @@ namespace Axle.Reflection
                 isNotConstructor && methodBase.IsHideBySig,
                 methodBase.IsFinal);
         }
+
         /// <summary>
         /// Determines the <see cref="DeclarationType"/> of the specified <paramref name="field"/>.
         /// </summary>
@@ -154,6 +156,7 @@ namespace Axle.Reflection
                 false,
                 field.IsLiteral);
         }
+
         /// <summary>
         /// Determines the <see cref="DeclarationType"/> of the specified <paramref name="member"/>.
         /// </summary>
@@ -169,31 +172,21 @@ namespace Axle.Reflection
         /// <seealso cref="MemberInfo"/>
         public static DeclarationType GetDeclarationType(this MemberInfo member)
         {
-            if (member == null)
+            switch (member)
             {
-                throw new ArgumentNullException(nameof(member));
+                case null:
+                    throw new ArgumentNullException(nameof(member));
+                case MethodBase method:
+                    return GetDeclarationType(method);
+                case PropertyInfo property:
+                    return GetDeclarationType(property);
+                case FieldInfo field:
+                    return GetDeclarationType(field);
+                case EventInfo evt:
+                    return GetDeclarationType(evt);
+                default:
+                    throw new ArgumentException("Cannot determine member's declaration type", nameof(member));
             }
-            var method = member as MethodBase;
-            if (method != null)
-            {
-                return GetDeclarationType(method);
-            }
-            var property = member as PropertyInfo;
-            if (property != null)
-            {
-                return GetDeclarationType(property);
-            }
-            var field = member as FieldInfo;
-            if (field != null)
-            {
-                return GetDeclarationType(field);
-            }
-            var evt = member as EventInfo;
-            if (evt != null)
-            {
-                return GetDeclarationType(evt);
-            }
-            throw new ArgumentException("Cannot determine member's declaration type", nameof(member));
         }
 
         private static bool DeclarationTypeFlagCompare(DeclarationType all, DeclarationType flag)
@@ -211,7 +204,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <seealso cref="DeclarationType.Instance"/>
         /// <seealso cref="DeclarationType"/>
-        public static bool IsInstance(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.Instance); }
+        public static bool IsInstance(this DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Instance);
 
         /// <summary>
         /// Determines if a <see cref="DeclarationType"/> value contains the <see cref="DeclarationType.Static"/> flag.
@@ -223,7 +216,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <seealso cref="DeclarationType.Static"/>
         /// <seealso cref="DeclarationType"/>
-        public static bool IsStatic(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.Static); }
+        public static bool IsStatic(this DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Static);
 
         /// <summary>
         /// Determines if a <see cref="DeclarationType"/> value contains the <see cref="DeclarationType.Abstract"/> flag.
@@ -235,7 +228,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <seealso cref="DeclarationType.Abstract"/>
         /// <seealso cref="DeclarationType"/>
-        public static bool IsAbstract(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.Abstract); }
+        public static bool IsAbstract(this DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Abstract);
 
         /// <summary>
         /// Determines if a <see cref="DeclarationType"/> value contains the <see cref="DeclarationType.Override"/> flag.
@@ -247,7 +240,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <seealso cref="DeclarationType.Override"/>
         /// <seealso cref="DeclarationType"/>
-        public static bool IsOverride(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.Override); }
+        public static bool IsOverride(this DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Override);
 
         /// <summary>
         /// Determines if a <see cref="DeclarationType"/> value contains the <see cref="DeclarationType.HideBySig"/> flag.
@@ -259,7 +252,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <seealso cref="DeclarationType.HideBySig"/>
         /// <seealso cref="DeclarationType"/>
-        public static bool IsHideBySig(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.HideBySig); }
+        public static bool IsHideBySig(this DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.HideBySig);
 
         /// <summary>
         /// Determines if a <see cref="DeclarationType"/> value contains the <see cref="DeclarationType.Sealed"/> flag.
@@ -271,7 +264,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <seealso cref="DeclarationType.Sealed"/>
         /// <seealso cref="DeclarationType"/>
-        public static bool IsSealed(this DeclarationType declaration) { return DeclarationTypeFlagCompare(declaration, DeclarationType.Sealed); }
+        public static bool IsSealed(this DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Sealed);
 
         public static object InvokeStatic(this IMethod @this, params object[] args)
         {
@@ -283,7 +276,7 @@ namespace Axle.Reflection
             return @this.Invoke(null, args);
         }
 
-        #if !NETSTANDARD
+        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -308,11 +301,9 @@ namespace Axle.Reflection
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        #if !NETSTANDARD
-        private static bool IsOverrideUnchecked(MethodInfo mi) => mi.GetBaseDefinition().DeclaringType != mi.DeclaringType;
-        #else
         private static bool IsOverrideUnchecked(MethodInfo mi) => mi.GetRuntimeBaseDefinition().DeclaringType != mi.DeclaringType;
+        #else
+        private static bool IsOverrideUnchecked(MethodInfo mi) => mi.GetBaseDefinition().DeclaringType != mi.DeclaringType;
         #endif
 
         /// <summary>
@@ -326,31 +317,21 @@ namespace Axle.Reflection
         /// <exception cref="ArgumentNullException"><paramref name="property"/> is <c>null</c></exception>
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="PropertyInfo"/>
-        #if !NETSTANDARD
         public static DeclarationType GetDeclarationType(this PropertyInfo property)
         {
             if (property == null)
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            var gm = property.GetGetMethod(true);
-            var sm = property.GetSetMethod(true);
-
-            return GetDeclarationTypeUnchecked(gm, sm);
-        }
-        #else
-        public static DeclarationType GetDeclarationType(this PropertyInfo property)
-        {
-            if (property == null)
-            {
-                throw new ArgumentNullException(nameof(property));
-            }
+            #if NETSTANDARD || NET45_OR_NEWER
             var gm = property.GetMethod;
             var sm = property.SetMethod;
-
+            #else
+            var gm = property.GetGetMethod(true);
+            var sm = property.GetSetMethod(true);
+            #endif
             return GetDeclarationTypeUnchecked(gm, sm);
         }
-        #endif
 
         /// <summary>
         /// Determines the <see cref="DeclarationType"/> of the specified <paramref name="eventInfo"/>.
@@ -365,30 +346,20 @@ namespace Axle.Reflection
         /// <exception cref="ArgumentNullException"><paramref name="eventInfo"/> is <c>null</c></exception>
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="EventInfo"/>
-        #if !NETSTANDARD
         public static DeclarationType GetDeclarationType(this EventInfo eventInfo)
         {
             if (eventInfo == null)
             {
                 throw new ArgumentNullException(nameof(eventInfo));
             }
-            var am = eventInfo.GetAddMethod(true);
-            var rm = eventInfo.GetRemoveMethod(true);
-
-            return GetDeclarationTypeUnchecked(am, rm);
-        }
-        #else
-        public static DeclarationType GetDeclarationType(this EventInfo eventInfo)
-        {
-            if (eventInfo == null)
-            {
-                throw new ArgumentNullException(nameof(eventInfo));
-            }
+            #if NETSTANDARD || NET45_OR_NEWER
             var am = eventInfo.AddMethod;
             var rm = eventInfo.RemoveMethod;
-
+            #else
+            var am = eventInfo.GetAddMethod(true);
+            var rm = eventInfo.GetRemoveMethod(true);
+            #endif
             return GetDeclarationTypeUnchecked(am, rm);
         }
-        #endif
     }
 }

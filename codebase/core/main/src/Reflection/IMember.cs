@@ -14,7 +14,6 @@ namespace Axle.Reflection
     /// <seealso cref="IEvent"/>
     /// <seealso cref="IReadableMember"/>
     /// <seealso cref="IWriteableMember"/>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IMember
     {
         /// <summary>

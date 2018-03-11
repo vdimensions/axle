@@ -12,7 +12,6 @@ namespace Axle.Reflection
     /// <seealso cref="IMember"/>
     /// <seealso cref="IAttributeTarget"/>
     /// <seealso cref="MethodInfo"/>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IMethod : IMember, IReflected<MethodInfo>, IInvokable, IAttributeTarget
     {
         /// <summary>

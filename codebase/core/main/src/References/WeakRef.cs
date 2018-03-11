@@ -66,8 +66,10 @@ namespace Axle.References
                 #endif
             }
         }
+
         /// <inheritdoc cref="IWeakReference{T}.Value" />
         T IReference<T>.Value => Value;
+
         /// <inheritdoc cref="IWeakReference{T}.Value" />
         object IReference.Value => Value;
 
@@ -82,6 +84,7 @@ namespace Axle.References
                 #endif
             }
         }
+
         /// <inheritdoc cref="IWeakReference{T}.IsAlive" />
         bool IWeakReference<T>.IsAlive => IsAlive;
     }

@@ -1,14 +1,31 @@
-﻿#if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
 using System;
 using System.Diagnostics;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 
 
 namespace Axle.References
 {
     [ComVisible(false)]
-    public sealed partial class Singleton<T> : ISingetonReference<T> where T: class
+    public sealed class Singleton<T> : ISingetonReference<T> where T: class
     {
+        internal static T CreateInstance()
+        {
+            var type = typeof(T);
+            var constructor = Singleton.GetSingletonConstructor(type);
+            if (constructor == null)
+            {
+                throw new InvalidOperationException(string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
+            }
+            var instance = (T) constructor.Invoke(new object[0]);
+            #if  NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            System.Threading.Thread.MemoryBarrier();
+            #endif
+            return instance;
+        }
+
         // The allocator will cause lazy initialization when first accessed by the runtime.
         private static class LazySingletonAllocator
         {
@@ -40,10 +57,45 @@ namespace Axle.References
         public static implicit operator T(Singleton<T> singleton) { return singleton.Value; }
     }
 
-    public static partial class Singleton
+    public static class Singleton
     {
         internal const string CandidateConstructorNotFoundMessageFormat = "The class '{0}' has one or more public constructors and cannot be used with the singleton pattern!";
         
+        internal static ConstructorInfo GetSingletonConstructor(Type type)
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            var constructors = type.GetTypeInfo().GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            #else
+            var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            #endif
+            var hasPublicConstructors = constructors.Any(x => x.IsPublic);
+            ConstructorInfo constructor = null;
+            if (!hasPublicConstructors)
+            {
+                constructor = constructors.Where(x => x.GetParameters().Length == 0).SingleOrDefault();
+            }
+            return constructor;
+        }
+
+        public static object GetSingletonInstance(Type type)
+        {
+            var constructor = GetSingletonConstructor(type);
+            if (constructor == null)
+            {
+                // type cannot be instantiated via singleton
+                return null;
+            }
+            var instanceProperty = typeof(Singleton<>)
+                .MakeGenericType(type)
+                #if NETSTANDARD || NET45_OR_NEWER
+                .GetTypeInfo()
+                #else
+                #endif
+                .GetProperty(nameof(Singleton<object>.Instance), BindingFlags.Public|BindingFlags.Static);
+            var res = instanceProperty?.GetGetMethod().Invoke(null, null);
+            return ((IReference) res)?.Value;
+        }
+
         public static T GetSingletonInstance<T>(Type type) { return (T) GetSingletonInstance(type); }
     }
 }

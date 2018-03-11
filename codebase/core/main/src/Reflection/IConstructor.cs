@@ -4,7 +4,6 @@
     /// An interface representing a reflected constructor.
     /// </summary>
     /// <seealso cref="System.Reflection.ConstructorInfo"/>
-    //[Maturity(CodeMaturity.Stable)]
     public interface IConstructor : IInvokable, IMember, IAttributeTarget
     {
         /// <summary>

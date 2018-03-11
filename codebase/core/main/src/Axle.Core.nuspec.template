@@ -32,7 +32,9 @@
       <group targetFramework="netstandard1.0"></group>
       <group targetFramework="net45"></group>
       <group targetFramework="net40"></group>
-      <group targetFramework="net35"></group>
+      <group targetFramework="net35">
+        <dependency id="System.Threading.Tasks.Unofficial" version="${system.threading.tasks.unofficial.version}" />
+      </group>
       <group targetFramework="net20"></group>
     </dependencies>
     <frameworkAssemblies>

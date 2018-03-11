@@ -5,8 +5,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    //[Maturity(CodeMaturity.Stable)]
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
 	public class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod
@@ -20,17 +19,14 @@ namespace Axle.Reflection
         /// <param name="info">
         /// A <see cref="MethodInfo"/> object containing the reflected information for the represented method.
         /// </param>
-        #if NETSTANDARD
         public MethodToken(MethodInfo info) : base(info)
         {
+            #if NETSTANDARD
             _memberType = (ReflectedMember = info).ReturnType;
-        }
-        #else
-        public MethodToken(MethodInfo info) : base(info)
-        {
+            #else
             _memberType = info.ReturnType;
+            #endif
         }
-        #endif
 
         public bool Equals(MethodToken other) { return base.Equals(other); }
         public override bool Equals(object obj) { return obj is MethodToken && base.Equals(obj); }
