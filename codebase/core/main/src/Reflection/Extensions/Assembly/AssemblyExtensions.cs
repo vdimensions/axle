@@ -1,11 +1,11 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using System;
 using System.Globalization;
 
 using Axle.Environment;
 
 
-namespace Axle.Extensions.Reflection.Assembly
+namespace Axle.Reflection.Extensions.Assembly
 {
     using Assembly = System.Reflection.Assembly;
 
@@ -22,7 +22,7 @@ namespace Axle.Extensions.Reflection.Assembly
         /// </param>
         /// <returns>
         /// A satellite assembly to the specified <paramref name="assembly">target</paramref> assembly and <paramref name="culture"/>.
-        /// This method can return <c>null</c> in case a satellite assembly was not found for the given cutlure.
+        /// This method can return <c>null</c> in case a satellite assembly was not found for the given culture.
         /// In case the passed in <paramref name="culture"/> object represents the <see cref="System.Globalization.CultureInfo.InvariantCulture">invariant culture</see>
         /// then this method also returns <c>null</c>
         /// </returns>

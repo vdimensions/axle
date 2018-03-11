@@ -27,7 +27,7 @@
         Trace = Info,
 
         /// <summary>
-        /// The entry represens a warning. Usually, a warning is an error event that normally should not occur, but the application has a way to work it 
+        /// The entry represents a warning. Usually, a warning is an error event that normally should not occur, but the application has a way to work it 
         /// around and continue to operate.
         /// </summary>
         Warning = 3,

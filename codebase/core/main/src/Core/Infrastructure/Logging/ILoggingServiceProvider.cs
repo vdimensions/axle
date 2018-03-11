@@ -19,6 +19,7 @@ namespace Axle.Core.Infrastructure.Logging
         /// <paramref name="targetType"/> is <c>null</c>.
         /// </exception>
         ILogger Create(Type targetType);
+
         /// <summary>
         /// Creates an <see cref="ILogger"/> instance attached to the specified type <typeparamref name="T"/>.
         /// </summary>

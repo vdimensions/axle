@@ -7,7 +7,7 @@ namespace Axle.Core.Infrastructure.Logging
 {
     /// <summary>
     /// A static class to act as a mixin to the <see cref="ILogger"/> interface. 
-    /// Provides conventient overloads for logging methods based on the default behavior defined by the <see cref="ILogger"/> interface.
+    /// Provides convenient overloads for logging methods based on the default behavior defined by the <see cref="ILogger"/> interface.
     /// </summary>
     public static class LoggerExtensions
     {

@@ -42,6 +42,7 @@ namespace Axle.Resources.Extraction
                 registry.VerifyArgument(nameof(registry)).IsNotNull().Value, 
                 extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value);
         }
+
         /// <summary>
         /// Stores the provided <see cref="IResourceExtractor"/>.
         /// </summary>

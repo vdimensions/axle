@@ -26,6 +26,9 @@
     <None Remove="Axle.ComponentModel.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="DependencyInjection\" />
+  </ItemGroup>
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">

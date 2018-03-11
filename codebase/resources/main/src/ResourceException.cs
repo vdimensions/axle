@@ -1,5 +1,5 @@
 ﻿using System;
-#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using System.Runtime.Serialization;
 #endif
 
@@ -9,7 +9,7 @@ namespace Axle.Resources
     /// <summary>
     /// Represents errors that occur while working with resources.
     /// </summary>
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public class ResourceException : Exception
@@ -18,6 +18,7 @@ namespace Axle.Resources
         /// Creates a new instance of the <see cref="ResourceException"/> class.
         /// </summary>
         public ResourceException() { }
+
         /// <summary>
         /// Creates a new instance of the <see cref="ResourceException"/> class with a specified error <paramref name="message"/>.
         /// </summary>
@@ -25,6 +26,7 @@ namespace Axle.Resources
         /// The message that describes the error.
         /// </param>
         public ResourceException(string message) : base(message) { }
+
         /// <summary>
         /// Creates a new instance of the <see cref="ResourceException"/> class with a specified error <paramref name="message"/>
         /// and a reference to the <paramref name="inner"/> exception that is the cause of the current exception.
@@ -37,7 +39,9 @@ namespace Axle.Resources
         /// if no inner exception is specified.
         /// </param>
         public ResourceException(string message, Exception inner) : base(message, inner) { }
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceException"/> class with serialized data.
         /// </summary>

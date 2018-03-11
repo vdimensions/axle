@@ -16,7 +16,7 @@ namespace Axle.Resources
         /// Creates a new instance of the current <see cref="ResourceInfo"/> implementation.
         /// </summary>
         /// <param name="name">
-        /// The unque name of the resource within the current resource bundle. 
+        /// The unique name of the resource within the current resource bundle. 
         /// </param>
         /// <param name="culture">
         /// The <see cref="CultureInfo"/> for which the resource was requested. 
@@ -47,7 +47,7 @@ namespace Axle.Resources
         /// exception will be thrown if the resource is requested after the deletion.
         /// </exception>
         /// <exception cref="ResourceLoadException">
-        /// Thrown if an error occus while loading the resource stream.
+        /// Thrown if an error occurs while loading the resource stream.
         /// </exception>
         public abstract Stream Open();
 

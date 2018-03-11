@@ -58,7 +58,7 @@ namespace Axle.Resources.Extraction.Embedded
              * The following code will list all namespaces, composed by the 
              * namespaces of all public non-nested types from the assembly.
              * 
-             * The namesepaces will be tested sorted by length.
+             * The namespaces will be tested sorted by length.
              */
             var stream = asm.GetManifestResourceStream(manifestResourceName) ?? asm.GetTypes()
                 .Where(type => type.IsPublic && !type.IsNested)

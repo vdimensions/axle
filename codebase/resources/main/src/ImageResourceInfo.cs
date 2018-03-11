@@ -26,6 +26,7 @@ namespace Axle.Resources
             var codec = ImageCodecInfo.GetImageDecoders().First(c => c.FormatID == image.RawFormat.Guid);
             return codec.MimeType;
         }
+
         /// <summary>
         /// Creates a new instance of the <see cref="ImageResourceInfo" /> class.
         /// </summary>

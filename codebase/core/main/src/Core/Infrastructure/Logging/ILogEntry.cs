@@ -9,13 +9,14 @@ namespace Axle.Core.Infrastructure.Logging
     public interface ILogEntry
     {
         /// <summary>
-        /// The exact date and time of the occurence of the application event.
+        /// The exact date and time of the occurrence of the application event.
         /// </summary>
         DateTime Timestamp { get; }
 
         #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+
         /// <summary>
-        /// The name of the thead where the application event occured.
+        /// The name of the thread where the application event occurred.
         /// </summary>
         string ThreadID { get; }
         #endif

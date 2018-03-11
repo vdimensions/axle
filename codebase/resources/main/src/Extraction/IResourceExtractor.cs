@@ -1,7 +1,7 @@
 ﻿namespace Axle.Resources.Extraction
 {
     /// <summary>
-    /// An interface representing a resource extractor; that is, an object responsible for locating raw resources before being unmarshalled.
+    /// An interface representing a resource extractor; that is, an object responsible for locating raw resources before being unmarshaled.
     /// </summary>
     public interface IResourceExtractor
     {

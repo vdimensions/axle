@@ -1,12 +1,17 @@
+framework net35, net40, net45, netstandard1.3, netstandard2.0
+
 source ../../../../dist
   nuget Axle.Core
 
 source https://nuget.org/api/v2
+  nuget System.Diagnostics.TraceSource framework: netstandard1.6
   nuget System.Resources.ResourceManager framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6
-	nuget System.Xml.XmlSerializer framework: netstandard1.6
+  nuget System.Threading.Tasks.Unofficial >= 3.1 framework: net35
+  nuget System.Threading.Thread framework: netstandard1.6
+  nuget System.Xml.XmlSerializer framework: netstandard1.6
 	
 group build
-	source ../../../../submodules/mason/dist
-	  nuget Mason.Targets.Packager
-	  nuget Mason.Targets.Preprocessor
-	  nuget Mason.Targets.Verman
+  source ../../../../submodules/mason/dist
+    nuget Mason.Targets.Packager
+    nuget Mason.Targets.Preprocessor
+    nuget Mason.Targets.Verman

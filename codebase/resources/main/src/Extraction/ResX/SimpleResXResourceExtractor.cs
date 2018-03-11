@@ -28,7 +28,7 @@ namespace Axle.Resources.Extraction.ResX
                     // We do not need the actual stream here, we only used it to determine the resource type.
                     stream.Dispose();
                     // Create a resource representation that will always open a fresh stream when the underlying data is requested.
-                    // This will avoid issues when the resource is latter being marshalled to another form.
+                    // This will avoid issues when the resource is latter being marshaled to another form.
                     return new ResXStreamResourceInfo(resolver, location, name, culture);
                 default:
                     return null;

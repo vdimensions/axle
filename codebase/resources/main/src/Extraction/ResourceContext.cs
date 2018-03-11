@@ -59,7 +59,7 @@ namespace Axle.Resources.Extraction
         /// <summary>
         /// Gets the <see cref="ContextExtractionChain"/> associated with the current <see cref="ResourceContext"/> instance.
         /// The extraction chain can be accessed during resource extraction to obtain any additional resources that may be required to 
-        /// costruct the final resource.
+        /// construct the final resource.
         /// </summary>
         public ContextExtractionChain ExtractionChain { get; }
     }
