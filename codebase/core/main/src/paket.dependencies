@@ -1,8 +1,10 @@
 framework net35, net40, net45, netstandard1.0, netstandard1.3, netstandard1.5, netstandard1.6, netstandard2.0
 
+source ../../../../dist/third-parties
+  nuget System.Threading.Tasks.Unofficial >= 3.1 framework: net35
+  
 source https://nuget.org/api/v2
   nuget System.Diagnostics.TraceSource >= 4.0 framework: netstandard1.6
-  nuget System.Threading.Tasks.Unofficial >= 3.1 framework: net35
   nuget System.Threading.Thread >= 4.0 framework: netstandard1.6
   nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
 
