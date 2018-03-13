@@ -131,7 +131,6 @@ NUGET
       System.Collections (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
       System.Runtime (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
       System.Threading.Tasks (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
-    System.Threading.Tasks.Unofficial (3.1) - restriction: == net35
     System.Threading.Thread (4.3) - restriction: == netstandard1.6
       System.Runtime (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (&& (== net45) (>= netstandard1.3)) (&& (== netstandard1.0) (>= netstandard1.3)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
     System.Xml.ReaderWriter (4.3.1) - restriction: == netstandard1.6
@@ -179,6 +178,8 @@ NUGET
       System.Threading (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== netstandard1.0) (>= netstandard1.3)) (&& (== netstandard1.0) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Xml.ReaderWriter (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Xml.XmlDocument (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== netstandard1.0) (>= netstandard1.3)) (&& (== netstandard1.0) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+  remote: ../../../../dist/third-parties
+    System.Threading.Tasks.Unofficial (3.1.1) - restriction: == net35
 
 GROUP build
 NUGET
