@@ -9,21 +9,27 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="decimal">decimal</see> to a valid <see cref="decimal"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class DecimalParser : AbstractParser<Decimal>
     {
+        private readonly CultureInfo _fallbackFormatProvider;
+
+        public DecimalParser() { }
+        public DecimalParser(CultureInfo fallbackFormatProvider)
+        {
+            _fallbackFormatProvider = fallbackFormatProvider;
+        }
+
         /// <inheritdoc />
         protected override Decimal DoParse(string value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? Decimal.Parse(value, formatProvider) : Decimal.Parse(value);
+            return Decimal.Parse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider);
         }
 
         public override bool TryParse(string value, IFormatProvider formatProvider, out Decimal output)
         {
-            return formatProvider != null
-                ? Decimal.TryParse(value, NumberStyles.Any, formatProvider, out output)
-                : Decimal.TryParse(value, out output);
+            return Decimal.TryParse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider, out output);
         }
     }
 }

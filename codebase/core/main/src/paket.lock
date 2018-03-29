@@ -179,7 +179,7 @@ NUGET
       System.Xml.ReaderWriter (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Xml.XmlDocument (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== netstandard1.0) (>= netstandard1.3)) (&& (== netstandard1.0) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
   remote: ../../../../dist/third-parties
-    System.Threading.Tasks.Unofficial (3.1.1) - restriction: == net35
+    System.Threading.Tasks.Unofficial (3.1.0) - restriction: == net35
 
 GROUP build
 NUGET

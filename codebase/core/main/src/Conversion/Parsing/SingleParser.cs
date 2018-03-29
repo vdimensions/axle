@@ -9,21 +9,27 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="float">single precision floating point number</see> to a valid <see cref="float"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class SingleParser : AbstractParser<float>
     {
+        private readonly CultureInfo _fallbackFormatProvider;
+
+        public SingleParser() { }
+        public SingleParser(CultureInfo fallbackFormatProvider)
+        {
+            _fallbackFormatProvider = fallbackFormatProvider;
+        }
+
         /// <inheritdoc />
         protected override Single DoParse(string value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? Single.Parse(value, formatProvider) : Single.Parse(value);
+            return Single.Parse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider);
         }
 
         public override bool TryParse(string value, IFormatProvider formatProvider, out Single output)
         {
-            return formatProvider != null
-                ? Single.TryParse(value, NumberStyles.Any, formatProvider, out output)
-                : Single.TryParse(value, out output);
+            return Single.TryParse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider, out output);
         }
     }
 }
