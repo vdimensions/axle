@@ -1,6 +1,9 @@
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+
+using Axle.Resources.Java.Extraction;
 
 using Kajabity.Tools.Java;
 
@@ -60,10 +63,23 @@ namespace Axle.Resources.Java
             return result;
         }
 
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(IDictionary<string, string>))
+            {
+                result = Data;
+                return true;
+            }
+            
+            // TODO: implement java properties (de)serializer and use it here as well.
+
+            return base.TryResolve(targetType, out result);
+        }
+
         /// <summary>
         /// Gets a <see cref="IDictionary{TKey,TValue}"/> representing the contents of the properties file.
         /// </summary>
         //TODO: make the data read-only
-        public IDictionary<string, string> Data => _data;
+        public IDictionary<string, string> Data => new Dictionary<string, string>(_data, JavaPropertiesFileExtractor.KeyComparer);
     }
 }

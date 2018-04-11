@@ -29,7 +29,7 @@ namespace Axle.Resources.Xml.Extraction
     /// </typeparam>
     /// <seealso cref="XDocumentExtractor"/>
     #endif
-    public abstract class AbstractXmlExtractor<TX> : IResourceExtractor where TX: XmlResourceInfo
+    public abstract class AbstractXmlExtractor<TX> : AbstractResourceExtractor where TX: XmlResourceInfo
     {
         /// <summary>
         /// Extracts a <typeparamref name="TX"/> representation of an XML resource.
@@ -46,15 +46,15 @@ namespace Axle.Resources.Xml.Extraction
         /// <returns>
         /// An instance of <typeparamref name="TX"/> representing the XML resource. 
         /// </returns>
-        protected abstract TX Extract(ResourceContext context, string name, ResourceInfo resource);
+        protected abstract TX ExtractXml(ResourceContext context, string name, ResourceInfo resource);
 
         /// <inheritdoc />
-        public ResourceInfo Extract(ResourceContext context, string name)
+        protected sealed override ResourceInfo DoExtract(ResourceContext context, string name)
         {
             var xmlResource = context.ExtractionChain.Extract(name);
             try
             {
-                return xmlResource != null ? Extract(context, name, xmlResource) : null;
+                return xmlResource != null ? ExtractXml(context, name, xmlResource) : null;
             }
             catch (Exception e)
             {

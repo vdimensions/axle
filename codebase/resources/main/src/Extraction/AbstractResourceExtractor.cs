@@ -1,4 +1,6 @@
-﻿using Axle.Verification;
+﻿using System.Threading.Tasks;
+
+using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction
@@ -10,6 +12,24 @@ namespace Axle.Resources.Extraction
         public ResourceInfo Extract(ResourceContext context, string name)
         {
             return DoExtract(context.VerifyArgument(nameof(context)).IsNotNull(), name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+        }
+
+        /// <inheritdoc />
+        #if NETSTANDARD || NET45_OR_NEWER
+        public async Task<ResourceInfo> ExtractAsync(ResourceContext context, string name)
+        #elif NET35_OR_NEWER
+        public Task<ResourceInfo> ExtractAsync(ResourceContext context, string name)
+        #endif
+        {
+            context.VerifyArgument(nameof(context)).IsNotNull();
+            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
+            #if NETSTANDARD || NET45_OR_NEWER
+            return await Task.Run(() => DoExtract(context, name));
+            #elif NET40
+            return Task.Factory.StartNew(() => DoExtract(context, name));
+            #else
+            return Task.Run(() => DoExtract(context, name));
+            #endif
         }
 
         /// <summary>

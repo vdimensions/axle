@@ -13,7 +13,7 @@ namespace Axle.Resources.Java.Extraction
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementations capable of creating Java properties files.
     /// </summary>
-    internal sealed class JavaPropertiesFileExtractor : IResourceExtractor
+    internal sealed class JavaPropertiesFileExtractor : AbstractResourceExtractor
     {
         internal static IEqualityComparer<string> KeyComparer => StringComparer.Ordinal;
 
@@ -33,7 +33,7 @@ namespace Axle.Resources.Java.Extraction
 
         /// <inheritdoc />
         /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>
-        public ResourceInfo Extract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(ResourceContext context, string name)
         {
             var finalProperties = new Dictionary<string, string>(KeyComparer);
             foreach (var propertiesFileResourceInfo in context.ExtractionChain.ExtractAll(name))

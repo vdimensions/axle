@@ -12,7 +12,7 @@ using YamlDotNet.Serialization;
 
 namespace Axle.Resources.Yaml.Extraction
 {
-    internal sealed class YamlFileExtractor : IResourceExtractor
+    internal sealed class YamlFileExtractor : AbstractResourceExtractor
     {
         internal static IEqualityComparer<string> KeyComparer => StringComparer.Ordinal;
 
@@ -47,7 +47,7 @@ namespace Axle.Resources.Yaml.Extraction
             return null;
         }
 
-        public ResourceInfo Extract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(ResourceContext context, string name)
         {
             var finalProperties = new List<IDictionary<string, string>>();
             foreach (var propertiesFileResourceInfo in context.ExtractionChain.ExtractAll(name))

@@ -8,10 +8,9 @@ namespace Axle.Resources.Extraction.ResX
     /// of handling the .NET's resx resource format.
     /// </summary>
     /// <inheritdoc />
-    public sealed class ResXResourceExtractor : IResourceExtractor
+    public sealed class ResXResourceExtractor : AbstractResourceExtractor
     {
-        /// <inheritdoc />
-        public ResourceInfo Extract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(ResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();

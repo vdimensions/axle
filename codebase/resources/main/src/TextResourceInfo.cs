@@ -1,8 +1,12 @@
+using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Text;
 
 using Axle.Conversion;
 using Axle.Globalization.Extensions.TextInfo;
+using Axle.Reflection.Extensions.Type;
 using Axle.Verification;
 
 
@@ -27,6 +31,33 @@ namespace Axle.Resources
         public override Stream Open()
         {
             return new MemoryStream(new BytesToStringConverter(Culture.TextInfo.GetEncoding()).ConvertBack(_value));
+        }
+
+        /// <inheritdoc />
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(string))
+            {
+                result = _value;
+                return true;
+            }
+            if (targetType == typeof(StringBuilder))
+            {
+                result = new StringBuilder(_value);
+                return true;
+            }
+            if (targetType == typeof(TextReader) || targetType == typeof(StringReader))
+            {
+                result = new StringReader(_value);
+                return true;
+            }
+            if (targetType.ExtendsOrImplements<IEnumerable<char>>())
+            {
+                result = _value.ToCharArray();
+                return true;
+            }
+
+            return base.TryResolve(targetType, out result);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 #if !NETSTANDARD
+using System;
 using System.Drawing;
 using System.Globalization;
 using System.IO;
@@ -43,6 +44,16 @@ namespace Axle.Resources
             var result = new MemoryStream();
             _icon.Save(result);
             return result;
+        }
+
+        /// <inheritdoc />
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(Image))
+            {
+                return (result = _icon) != null;
+            }
+            return base.TryResolve(targetType, out result);
         }
 
         /// <summary>

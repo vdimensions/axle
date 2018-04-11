@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
+﻿#if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
 using System.Globalization;
 using System.Linq;
 
@@ -45,8 +45,10 @@ namespace Axle.Resources
         /// <param name="culture">
         /// A <see cref="CultureInfo"/> instance representing the culture for which the resource is being requested.
         /// </param>
-        /// <returns></returns>
-        public ResourceInfo Resolve(string bundle, string name, CultureInfo culture)
+        /// <returns>
+        /// An instance of <see cref="ResourceInfo"/> that represents the loaded resource object.
+        /// </returns>
+        public ResourceInfo Load(string bundle, string name, CultureInfo culture)
         {
             bundle.VerifyArgument(nameof(bundle)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
@@ -64,6 +66,34 @@ namespace Axle.Resources
                 }
             }
             return null;
+        }
+
+        /// <summary>
+        /// Attempts to resolve a resource object based on the provided parameters.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the object that is represented by the loaded resource.
+        /// </typeparam>
+        /// <param name="bundle">
+        /// The name of the resource bundle where the resource is contained.
+        /// </param>
+        /// <param name="name">
+        /// The name of the resource to locate.
+        /// </param>
+        /// <param name="culture">
+        /// A <see cref="CultureInfo"/> instance representing the culture for which the resource is being requested.
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="T"/>, which is resolved from the loaded resource.
+        /// </returns>
+        public T Load<T>(string bundle, string name, CultureInfo culture)
+        {
+            var resource = Load(bundle, name, culture);
+            if (resource != null && resource.TryResolve<T>(out var instance))
+            {
+                return instance;
+            }
+            return default(T);
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
-#if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+#if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+using System;
 using System.Globalization;
 using System.Xml;
 
@@ -18,6 +19,17 @@ namespace Axle.Resources.Xml
             : base(name, culture, originalResource)
         {
             Value = value;
+        }
+
+        /// <inheritdoc />
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(XmlDocument))
+            {
+                result = Value;
+                return true;
+            }
+            return base.TryResolve(targetType, out result);
         }
 
         /// <inheritdoc />

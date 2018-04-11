@@ -1,4 +1,5 @@
 #if !NETSTANDARD
+using System;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.Globalization;
@@ -50,6 +51,16 @@ namespace Axle.Resources
             var result = new MemoryStream();
             _image.Save(result, _image.RawFormat);
             return result;
+        }
+
+        /// <inheritdoc />
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(Image))
+            {
+                return (result = _image) != null;
+            }
+            return base.TryResolve(targetType, out result);
         }
 
         /// <summary>

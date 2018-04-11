@@ -1,5 +1,9 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.IO;
+
+using Axle.IO.Serialization;
+
 //using System.Net.Mime;
 
 using Axle.Verification;
@@ -50,6 +54,78 @@ namespace Axle.Resources
         /// Thrown if an error occurs while loading the resource stream.
         /// </exception>
         public abstract Stream Open();
+
+        /// <summary>
+        /// Returns an object instance that is represented by the current <see cref="ResourceInfo"/> implementation.
+        /// </summary>
+        /// <returns>
+        /// An object instance that is represented by the current <see cref="ResourceInfo"/> implementation.
+        /// </returns>
+        public object Resolve(Type targetType)
+        {
+            if (targetType == null)
+            {
+                throw new ArgumentNullException(nameof(targetType));
+            }
+
+            if (TryResolve(targetType, out var instance))
+            {
+                return instance;
+            }
+
+            throw new NotSupportedException($"Cannot convert the current resource representation to an instance of {targetType?.AssemblyQualifiedName}");
+        }
+
+        public T Resolve<T>() => (T) Resolve(typeof(T));
+
+        public virtual bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(Stream))
+            {
+                result = Open();
+                return true;
+            }
+
+            if (targetType == typeof(BinaryReader))
+            {
+                result = new BinaryReader(Open());
+                return true;
+            }
+
+            if (targetType == typeof(TextReader) || targetType == typeof(StreamReader))
+            {
+                result = new StreamReader(Open());
+                return true;
+            }
+
+            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            var serializer = new BinarySerializer();
+            try
+            {
+                using (var stream = Open())
+                {
+                    result = serializer.Deserialize(stream, targetType);
+                }
+                return true;
+            }
+            catch { }
+            #endif
+
+            result = null;
+            return false;
+        }
+
+        public bool TryResolve<T>(out T result)
+        {
+            if (TryResolve(typeof(T), out var r))
+            {
+                result = (T) r;
+                return true;
+            }
+
+            result = default(T);
+            return false;
+        }
 
         /// <summary>
         /// Gets a <see cref="string"/> value that indicates the resource bundle containing the current resource object.

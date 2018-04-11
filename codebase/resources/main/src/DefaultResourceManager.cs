@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
+﻿#if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
 using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 using Axle.Resources.Extraction.Embedded;

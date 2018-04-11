@@ -1,3 +1,4 @@
+using System;
 using System.Globalization;
 using System.Xml;
 using System.Xml.Linq;
@@ -18,6 +19,17 @@ namespace Axle.Resources.Xml
             : base(name, culture, originalResource)
         {
             Value = value;
+        }
+
+        /// <inheritdoc />
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            if (targetType == typeof(XDocument))
+            {
+                result = Value;
+                return true;
+            }
+            return base.TryResolve(targetType, out result);
         }
 
         /// <inheritdoc />

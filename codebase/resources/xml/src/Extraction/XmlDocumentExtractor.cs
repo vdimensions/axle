@@ -12,7 +12,7 @@ namespace Axle.Resources.Xml.Extraction
     public class XmlDocumentExtractor : AbstractXmlExtractor<XmlDocumentResourceInfo>
     {
         /// <inheritdoc />
-        protected override XmlDocumentResourceInfo Extract(ResourceContext context, string name, ResourceInfo resource)
+        protected override XmlDocumentResourceInfo ExtractXml(ResourceContext context, string name, ResourceInfo resource)
         {
             var xml = new XmlDocument();
             switch (resource)

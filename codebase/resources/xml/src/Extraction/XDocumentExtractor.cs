@@ -27,7 +27,7 @@ namespace Axle.Resources.Xml.Extraction
         public XDocumentExtractor(LoadOptions options) { _loadOptions = options; }
 
         /// <inheritdoc />
-        protected override XDocumentResourceInfo Extract(ResourceContext context, string name, ResourceInfo resource)
+        protected override XDocumentResourceInfo ExtractXml(ResourceContext context, string name, ResourceInfo resource)
         {
             XDocument xml;
             switch (resource)

@@ -20,11 +20,7 @@ namespace Axle.Resources.Extraction.ResX
             _resolver = resolver.VerifyArgument(nameof(resolver)).IsNotNull();
         }
 
-        /// <inheritdoc />
-        public override Stream Open()
-        {
-            return _resolver.Resolve(_location, Culture) as Stream;
-        }
+        public override Stream Open() => _resolver.Resolve(_location, Culture) as Stream;
     }
 }
 #endif

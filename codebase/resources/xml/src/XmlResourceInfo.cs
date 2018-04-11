@@ -1,6 +1,9 @@
+using System;
 using System.Globalization;
 using System.IO;
 using System.Xml;
+
+using Axle.IO.Serialization;
 
 
 namespace Axle.Resources.Xml
@@ -75,6 +78,31 @@ namespace Axle.Resources.Xml
             stream.Seek(0, SeekOrigin.Begin);
             return stream;
         }
+
+        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        public override bool TryResolve(Type targetType, out object result)
+        {
+            var serializer = new XmlSerializer();
+            try
+            {
+                using (var stream = Open())
+                {
+                    result = serializer.Deserialize(stream, targetType);
+                }
+
+                return true;
+            }
+            catch
+            {
+                if (base.TryResolve(targetType, out result))
+                {
+                    return true;
+                }
+                result = null;
+                return false;
+            }            
+        }
+        #endif
 
         /// <summary>
         /// Write the represented XML document to an <see cref="XmlWriter"/>.

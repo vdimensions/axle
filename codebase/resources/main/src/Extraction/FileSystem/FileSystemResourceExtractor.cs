@@ -10,10 +10,9 @@ namespace Axle.Resources.Extraction.FileSystem
     /// <summary>
     /// An implementation of the <see cref="IResourceExtractor"/> that reads resources from the file system.
     /// </summary>
-    public class FileSystemResourceExtractor : IResourceExtractor
+    public class FileSystemResourceExtractor : AbstractResourceExtractor
     {
-        /// <inheritdoc />
-        public ResourceInfo Extract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(ResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();

@@ -8,7 +8,7 @@ using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Yaml.Extraction
 {
-    internal sealed class YamlValueExtractor : IResourceExtractor
+    internal sealed class YamlValueExtractor : AbstractResourceExtractor
     {
         private static bool GetYamlFileData(Uri location, out string yamlFileName, out string keyPrefix)
         {
@@ -22,7 +22,7 @@ namespace Axle.Resources.Yaml.Extraction
             return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }
 
-        public ResourceInfo Extract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(ResourceContext context, string name)
         {
             if (!GetYamlFileData(context.Location, out var fileName, out var keyPrefix))
             {

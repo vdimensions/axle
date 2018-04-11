@@ -1,9 +1,9 @@
 RESTRICTION: || (== net35) (== net40) (== net45) (== netstandard1.3) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.15)
+    Axle.Core (1.5.1.17)
       System.Threading.Tasks.Unofficial (>= 3.1) - restriction: || (== net35) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard1.3) (>= net35) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))
-    System.Threading.Tasks.Unofficial (3.1.1) - restriction: == net35
+    System.Threading.Tasks.Unofficial (3.1.0) - restriction: == net35
   remote: https://www.nuget.org/api/v2
     Microsoft.NETCore.Platforms (2.0.1) - restriction: || (&& (== net35) (== netstandard1.4)) (&& (== net35) (== netstandard1.5)) (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.4)) (&& (== net40) (== netstandard1.5)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6)) (== netstandard1.3) (&& (== netstandard1.4) (== netstandard2.0)) (&& (== netstandard1.5) (== netstandard2.0)) (&& (== netstandard1.6) (== netstandard2.0))
     Microsoft.NETCore.Targets (2.0) - restriction: || (&& (== net35) (== netstandard1.4)) (&& (== net35) (== netstandard1.5)) (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.4)) (&& (== net40) (== netstandard1.5)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6)) (== netstandard1.3) (&& (== netstandard1.4) (== netstandard2.0)) (&& (== netstandard1.5) (== netstandard2.0)) (&& (== netstandard1.6) (== netstandard2.0))
