@@ -17,7 +17,7 @@
         #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer
         {
-            get { return Axle.References.Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance; }
+            get => Axle.References.Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance;
         }
         #else
         private static AbstractEqualityComparer<MemberTokenBase<T>> comparer = new MethodHandleBaseEqualityComparer<MemberTokenBase<T>>();
@@ -48,7 +48,7 @@
         #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
         private static AbstractEqualityComparer<MemberTokenBase<T, THandle>> EqualityComparer
         {
-            get { return Axle.References.Singleton<MethodHandleBaseEqualityComparer>.Instance; }
+            get => Axle.References.Singleton<MethodHandleBaseEqualityComparer>.Instance;
         }
         #else
         private static readonly AbstractEqualityComparer<MemberTokenBase<T, THandle>> comparer = new MethodHandleBaseEqualityComparer();

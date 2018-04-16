@@ -45,10 +45,10 @@ namespace Axle.Conversion
         /// The type of the source object to be converted
         /// </typeparam>
         /// <typeparam name="T1">
-        /// A type that is the result of an intermediate covnersion.
+        /// A type that is the result of an intermediate conversion.
         /// </typeparam>
         /// <typeparam name="TResult">
-        /// The type of the final converesion result
+        /// The type of the final conversion result
         /// </typeparam>
         /// <param name="converter1">
         /// The first converter to put to the conversion chain.
@@ -70,13 +70,13 @@ namespace Axle.Conversion
         /// The type of the source object to be converted
         /// </typeparam>
         /// <typeparam name="T1">
-        /// A type that is the result of an intermediate covnersion.
+        /// A type that is the result of an intermediate conversion.
         /// </typeparam>
         /// <typeparam name="T2">
-        /// A type that is the result of an intermediate covnersion.
+        /// A type that is the result of an intermediate conversion.
         /// </typeparam>
         /// <typeparam name="TResult">
-        /// The type of the final converesion result
+        /// The type of the final conversion result
         /// </typeparam>
         /// <param name="converter1">
         /// The first converter to put to the conversion chain.
@@ -101,16 +101,16 @@ namespace Axle.Conversion
         /// The type of the source object to be converted
         /// </typeparam>
         /// <typeparam name="T1">
-        /// A type that is the result of an intermediate covnersion.
+        /// A type that is the result of an intermediate conversion.
         /// </typeparam>
         /// <typeparam name="T2">
-        /// A type that is the result of an intermediate covnersion.
+        /// A type that is the result of an intermediate conversion.
         /// </typeparam>
         /// <typeparam name="T3">
-        /// A type that is the result of an intermediate covnersion.
+        /// A type that is the result of an intermediate conversion.
         /// </typeparam>
         /// <typeparam name="TResult">
-        /// The type of the final converesion result
+        /// The type of the final conversion result
         /// </typeparam>
         /// <param name="converter1">
         /// The first converter to put to the conversion chain.

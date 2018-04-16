@@ -9,7 +9,7 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="short">16-bit integer</see> to a valid <see cref="short"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class Int16Parser : AbstractParser<short>
     {

@@ -1,6 +1,6 @@
 ﻿namespace Axle.Threading
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     /// <summary>
     /// An interface that provides the basis of a reentrant reader-writer lock.
     /// </summary>

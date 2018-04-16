@@ -2,7 +2,7 @@
 {
     /// <summary>
     /// An interface for a converter object, that is, a class which is used to convert 
-    /// object instancess of one type to instances of another type.
+    /// object instances of one type to instances of another type.
     /// </summary>
     /// <typeparam name="TSource">
     /// The type of the object to be converted. 

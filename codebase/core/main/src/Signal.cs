@@ -6,7 +6,7 @@ using Axle.Verification;
 namespace Axle
 {
     /// <summary>
-    /// A class that represents a signal object; that is, a wrapper arround a delegate (usually of type <see cref="Action"/>), 
+    /// A class that represents a signal object; that is, a wrapper around a delegate (usually of type <see cref="Action"/>), 
     /// which enables special event subscription options around that delegate.
     /// </summary>
     public partial class Signal : IDisposable
@@ -25,6 +25,7 @@ namespace Axle
             signal.Subscribe(action);
             return signal;
         }
+
         /// <summary>
         /// An operator that acts as a shortcut to the <see cref="Signal.Unsubscribe(Action)"/> method.
         /// </summary>
@@ -39,6 +40,7 @@ namespace Axle
             signal.Unsubscribe(action);
             return signal;
         }
+
         /// <summary>
         /// An operator that acts as a shortcut to the <see cref="Signal.SubscribeOnce(Action)"/> method.
         /// </summary>
@@ -54,13 +56,13 @@ namespace Axle
             return signal;
         }
 
-        private readonly Func<Action> dereference;
-        private readonly Func<Action, Action> update;
+        private readonly Func<Action> _dereference;
+        private readonly Func<Action, Action> _update;
 
         private Signal(Func<Action> dereference, Func<Action, Action> update)
         {
-            this.dereference = dereference;
-            this.update = update;
+            _dereference = dereference;
+            _update = update;
         }
 
         /// <summary>
@@ -73,7 +75,7 @@ namespace Axle
         {
             if (action != null)
             {
-                update(dereference() + action);
+                _update(_dereference() + action);
             }
         }
 
@@ -88,7 +90,7 @@ namespace Axle
         {
             if (action != null)
             {
-                // TODO: keep a map between the original action and the actual wrapper action, so that unsubscription will work for subscribe once calls
+                // TODO: keep a map between the original action and the actual wrapper action, so that un-subscription will work for subscribe once calls
                 var realAction = new Action[] { null };
                 realAction[0] = () =>
                 {
@@ -98,10 +100,10 @@ namespace Axle
                     }
                     finally
                     {
-                        update(dereference() - realAction[0]);
+                        _update(_dereference() - realAction[0]);
                     }
                 };
-                update(dereference() + realAction[0]);
+                _update(_dereference() + realAction[0]);
             }
         }
 
@@ -120,10 +122,10 @@ namespace Axle
         /// </exception>
         public void SubscribeWhile(Action action, Func<bool> predicate)
         {
-            predicate.VerifyArgument("predicate").IsNotNull();
+            predicate.VerifyArgument(nameof(predicate)).IsNotNull();
             if (action != null)
             {
-                // TODO: keep a map between the original action and the actual wrapper action, so that unsubscription will work for subscribe once calls
+                // TODO: keep a map between the original action and the actual wrapper action, so that un-subscription will work for subscribe once calls
                 var realAction = new Action[] { null };
                 realAction[0] = () =>
                 {
@@ -135,11 +137,11 @@ namespace Axle
                     {
                         if (!predicate())
                         {
-                            update(dereference() - realAction[0]);
+                            _update(_dereference() - realAction[0]);
                         }
                     }
                 };
-                update(dereference() + realAction[0]);
+                _update(_dereference() + realAction[0]);
             }
         }
 
@@ -153,18 +155,19 @@ namespace Axle
         {
             if (action != null)
             {
-                update(dereference() - action);
+                _update(_dereference() - action);
             }
         }
 
         internal void Dispose(bool disposing)
         {
-            update(null);
+            _update(null);
         }
-        void IDisposable.Dispose() { Dispose(true); }
+        void IDisposable.Dispose() => Dispose(true);
     }
+
     /// <summary>
-    /// A class that represents a signal object; that is, a wrapper arround a delegate (usually of type <see cref="Action{T}"/>), 
+    /// A class that represents a signal object; that is, a wrapper around a delegate (usually of type <see cref="Action{T}"/>), 
     /// which enables special event subscription options around that delegate.
     /// </summary>
     public class Signal<T> : IDisposable
@@ -183,6 +186,7 @@ namespace Axle
             signal.Subscribe(action);
             return signal;
         }
+
         /// <summary>
         /// An operator that acts as a shortcut to the <see cref="Signal{T}.Unsubscribe(Action{T})"/> method.
         /// </summary>
@@ -197,6 +201,7 @@ namespace Axle
             signal.Unsubscribe(action);
             return signal;
         }
+
         /// <summary>
         /// An operator that acts as a shortcut to the <see cref="Signal{T}.SubscribeOnce(Action{T})"/> method.
         /// </summary>
@@ -211,13 +216,14 @@ namespace Axle
             signal.SubscribeOnce(action);
             return signal;
         }
-        private readonly Func<Action<T>> dereference;
-        private readonly Func<Action<T>, Action<T>> update;
+
+        private readonly Func<Action<T>> _dereference;
+        private readonly Func<Action<T>, Action<T>> _update;
 
         internal Signal(Func<Action<T>> trigger, Func<Action<T>, Action<T>> updateFn)
         {
-            this.dereference = trigger;
-            this.update = updateFn;
+            _dereference = trigger;
+            _update = updateFn;
         }
 
         /// <summary>
@@ -230,9 +236,10 @@ namespace Axle
         {
             if (action != null)
             {
-                update(dereference() + action);
+                _update(_dereference() + action);
             }
         }
+
         /// <summary>
         /// Adds the provided by the <paramref name="action"/> delegate as a subscriber to the current <see cref="Signal{T}"/> instance.
         /// The delegate will be executed only once when the signal is triggered. 
@@ -245,7 +252,7 @@ namespace Axle
             if (action != null)
             {
                 var realAction = new Action<T>[] { null };
-                realAction[0] = (t) =>
+                realAction[0] = t =>
                 {
                     try
                     {
@@ -253,10 +260,10 @@ namespace Axle
                     }
                     finally
                     {
-                        update(dereference() - realAction[0]);
+                        _update(_dereference() - realAction[0]);
                     }
                 };
-                update(dereference() + realAction[0]);
+                _update(_dereference() + realAction[0]);
             }
         }
 
@@ -275,7 +282,7 @@ namespace Axle
         /// </exception>
         public void SubscribeWhile(Action<T> action, Func<T, bool> predicate)
         {
-            predicate.VerifyArgument("predicate").IsNotNull();
+            predicate.VerifyArgument(nameof(predicate)).IsNotNull();
             if (action != null)
             {
                 var realAction = new Action<T>[] { null };
@@ -289,11 +296,11 @@ namespace Axle
                     {
                         if (!predicate(t))
                         {
-                            update(dereference() - realAction[0]);
+                            _update(_dereference() - realAction[0]);
                         }
                     }
                 };
-                update(dereference() + realAction[0]);
+                _update(_dereference() + realAction[0]);
             }
         }
 
@@ -307,19 +314,19 @@ namespace Axle
         {
             if (action != null)
             {
-                update(dereference() - action);
+                _update(_dereference() - action);
             }
         }
 
         internal void Dispose(bool disposing)
         {
-            update(null);
+            _update(null);
         }
-        void IDisposable.Dispose() { Dispose(true); }
+        void IDisposable.Dispose() => Dispose(true);
     }
 
     /// <summary>
-    /// A class that represents a signal object; that is, a wrapper arround a delegate (usually of type <see cref="Action{T1,T2}"/>), 
+    /// A class that represents a signal object; that is, a wrapper around a delegate (usually of type <see cref="Action{T1,T2}"/>), 
     /// which enables special event subscription options around that delegate.
     /// </summary>
     public class Signal<T1, T2> : IDisposable
@@ -338,6 +345,7 @@ namespace Axle
             signal.Subscribe(action);
             return signal;
         }
+
         /// <summary>
         /// An operator that acts as a shortcut to the <see cref="Signal{T1, T2}.Unsubscribe(Action{T1,T2})"/> method.
         /// </summary>
@@ -352,6 +360,7 @@ namespace Axle
             signal.Unsubscribe(action);
             return signal;
         }
+
         /// <summary>
         /// An operator that acts as a shortcut to the <see cref="Signal{T1, T2}.SubscribeOnce(Action{T1, T2})"/> method.
         /// </summary>
@@ -367,13 +376,13 @@ namespace Axle
             return signal;
         }
 
-        private readonly Func<Action<T1, T2>> defererence;
-        private readonly Func<Action<T1, T2>, Action<T1, T2>> update;
+        private readonly Func<Action<T1, T2>> _defererence;
+        private readonly Func<Action<T1, T2>, Action<T1, T2>> _update;
 
         internal Signal(Func<Action<T1, T2>> trigger, Func<Action<T1, T2>, Action<T1, T2>> updateFn)
         {
-            this.defererence = trigger;
-            this.update = updateFn;
+            _defererence = trigger;
+            _update = updateFn;
         }
 
         /// <summary>
@@ -386,7 +395,7 @@ namespace Axle
         {
             if (action != null)
             {
-                update(defererence() + action);
+                _update(_defererence() + action);
             }
         }
 
@@ -410,12 +419,13 @@ namespace Axle
                     }
                     finally
                     {
-                        update(defererence() - realAction[0]);
+                        _update(_defererence() - realAction[0]);
                     }
                 };
-                update(defererence() + realAction[0]);
+                _update(_defererence() + realAction[0]);
             }
         }
+
         /// <summary>
         /// Adds the provided by the <paramref name="action"/> delegate as a subscriber to the current <see cref="Signal{T1, T1}"/> instance.
         /// The delegate will be executed on each signal trigger as long as the provided by the <paramref name="predicate"/> evaluates to <c>true</c>. 
@@ -431,7 +441,7 @@ namespace Axle
         /// </exception>
         public void SubscribeWhile(Action<T1, T2> action, Func<T1, T2, bool> predicate)
         {
-            predicate.VerifyArgument("predicate").IsNotNull();
+            predicate.VerifyArgument(nameof(predicate)).IsNotNull();
             if (action != null)
             {
                 var realAction = new Action<T1, T2>[] { null };
@@ -445,11 +455,11 @@ namespace Axle
                     {
                         if (!predicate(t1, t2))
                         {
-                            update(defererence() - realAction[0]);
+                            _update(_defererence() - realAction[0]);
                         }
                     }
                 };
-                update(defererence() + realAction[0]);
+                _update(_defererence() + realAction[0]);
             }
         }
 
@@ -463,14 +473,14 @@ namespace Axle
         {
             if (action != null)
             {
-                update(defererence() - action);
+                _update(_defererence() - action);
             }
         }
 
         internal void Dispose(bool disposing)
         {
-            update(null);
+            _update(null);
         }
-        void IDisposable.Dispose() { Dispose(true); }
+        void IDisposable.Dispose() => Dispose(true);
     }
 }

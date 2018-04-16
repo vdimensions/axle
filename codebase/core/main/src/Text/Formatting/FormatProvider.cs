@@ -6,7 +6,7 @@ using Axle.Verification;
 
 namespace Axle.Text.Formatting
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public class FormatProvider : IFormatProvider, ICustomFormatter

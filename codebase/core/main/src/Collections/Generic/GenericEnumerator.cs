@@ -61,7 +61,7 @@ namespace Axle.Collections.Generic
         public GenericEnumerator(IEnumerator<T1> enumerator, Func<T1, T2> converter)
         {
             _innerEnumerator = enumerator;
-            this._converter = converter;
+            _converter = converter;
         }
 
         /// <inheritdoc />

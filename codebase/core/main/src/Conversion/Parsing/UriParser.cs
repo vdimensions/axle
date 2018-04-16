@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// an <see cref="Uri">uniform resource identifier</see> to a valid <see cref="Uri"/> instance.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class UriParser : AbstractParser<Uri>
     {

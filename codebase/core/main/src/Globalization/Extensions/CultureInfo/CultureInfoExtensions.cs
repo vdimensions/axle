@@ -14,7 +14,7 @@ namespace Axle.Globalization.Extensions.CultureInfo
     {
         /// <summary>
         /// Returns a collection of <see cref="CultureInfo" /> instances that include the current culture and all parent cultures.
-        /// The cultures are odrered by their level of relation, starting from the culture specified by the <paramref name="culture"/> parameter
+        /// The cultures are ordered by their level of relation, starting from the culture specified by the <paramref name="culture"/> parameter
         /// and continuing with its parent culture. The resulting list should represent the natural culture fallback order that occurs during localization.
         /// </summary>
         /// <param name="culture">The <see cref="CultureInfo">culture</see> instance to expand.</param>

@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// </summary>
     //[Stateless]
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class CharacterParser : AbstractParser<char>
     {

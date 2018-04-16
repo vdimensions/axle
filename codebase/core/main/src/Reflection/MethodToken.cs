@@ -37,7 +37,7 @@ namespace Axle.Reflection
 
         public IGenericMethod MakeGeneric(params Type[] types)
         {
-            if (!this.HasGenericDefinition)
+            if (!HasGenericDefinition)
             {
                 throw new InvalidOperationException("Cannot make a generic method - method does not accept type parameters.");
             }

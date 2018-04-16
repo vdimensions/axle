@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 
 namespace Axle.References
@@ -20,7 +19,7 @@ namespace Axle.References
         /// Initializes a new instance of the <see cref="WeakReferenceEqualityComparer{T}"/> class.
         /// </summary>
         /// <param name="valueComparer">
-        /// The <see cref="IEqualityComparer{T}"/> that is used to compare the weakreference values.
+        /// The <see cref="IEqualityComparer{T}"/> that is used to compare the weak reference values.
         /// </param>
         public WeakReferenceEqualityComparer(IEqualityComparer<T> valueComparer)
         {

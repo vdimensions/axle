@@ -27,8 +27,8 @@ namespace Axle.Collections.Generic
             _innerCollection = collection;
         }
 
-        public IEnumerator<T> GetEnumerator() { return new GenericEnumerator<T>(_innerCollection.GetEnumerator()); }
-        IEnumerator IEnumerable.GetEnumerator() { return _innerCollection.GetEnumerator(); }
+        public IEnumerator<T> GetEnumerator() => new GenericEnumerator<T>(_innerCollection.GetEnumerator());
+        IEnumerator IEnumerable.GetEnumerator() => _innerCollection.GetEnumerator();
 
         internal IEnumerable RawEnumerable => _innerCollection;
     }

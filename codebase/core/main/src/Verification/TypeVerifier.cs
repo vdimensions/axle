@@ -32,7 +32,7 @@ namespace Axle.Verification
         /// <paramref name="argument"/> OR <paramref name="expectedType"/> is <c>null</c>.
         /// </exception> 
         /// <exception cref="ArgumentTypeMismatchException">
-        /// The argument cannot be assigned the type type specified by the <paramref name="expectedType"/> parameter.
+        /// The argument cannot be assigned to the type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
         #else
@@ -54,7 +54,7 @@ namespace Axle.Verification
         /// <paramref name="argument"/> OR <paramref name="expectedType"/> is <c>null</c>.
         /// </exception> 
         /// <exception cref="ArgumentTypeMismatchException">
-        /// The argument cannot be assigned the type type specified by the <paramref name="expectedType"/> parameter.
+        /// The argument cannot be assigned to the type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
         #endif
@@ -83,7 +83,7 @@ namespace Axle.Verification
         /// <paramref name="argument"/> is <c>null</c>.
         /// </exception> 
         /// <exception cref="ArgumentTypeMismatchException">
-        /// The argument cannot be assigned the type type specified by the <typeparamref name="TExpected"/> parameter.
+        /// The argument cannot be assigned to the type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
         /// <seealso cref="Type.IsAssignableFrom(Type)" />
         #else
@@ -105,7 +105,7 @@ namespace Axle.Verification
         /// <paramref name="argument"/> is <c>null</c>.
         /// </exception> 
         /// <exception cref="ArgumentTypeMismatchException">
-        /// The argument cannot be assigned the type type specified by the <typeparamref name="TExpected"/> parameter.
+        /// The argument cannot be assigned to the type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
         #endif

@@ -16,7 +16,7 @@ namespace Axle.Collections.Extensions.Array
         /// Creates an array of specific type out of an object array.
         /// </summary>
         /// <param name="array">
-        /// The source array to be covnerted. 
+        /// The source array to be converted. 
         /// </param>
         /// <param name="type">
         /// The destination type of the resulting array.

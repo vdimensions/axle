@@ -9,7 +9,7 @@ namespace Axle.Conversion.Parsing
     /// <see cref="int">32-bit integer</see> to a valid <see cref="int"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class Int32Parser : AbstractParser<int>
     {

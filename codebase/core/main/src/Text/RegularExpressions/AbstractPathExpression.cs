@@ -6,7 +6,7 @@ using Axle.Verification;
 
 namespace Axle.Text.RegularExpressions
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public abstract class AbstractPathExpression : IPathExpression

@@ -9,7 +9,7 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="sbyte">signed byte</see> to a valid <see cref="sbyte"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class SByteParser : AbstractParser<sbyte>
     {

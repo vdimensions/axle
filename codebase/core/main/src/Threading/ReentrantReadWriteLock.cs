@@ -3,7 +3,7 @@
 
 namespace Axle.Threading
 {
-    /// <inheritdoc cref="ReadWriteLock />
+    /// <inheritdoc cref="ReadWriteLock" />
     public sealed class ReentrantReadWriteLock : ReadWriteLock, IReentrantReadWriteLock
     {
         // IMPORTANT: Earlier mono versions throw NotSupportedExcception for other than `NoRecursion` policies

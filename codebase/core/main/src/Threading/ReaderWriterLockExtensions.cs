@@ -397,25 +397,24 @@ namespace Axle.Threading
                     @this.ExitWriteLock();
                 }
             }
-            #endregion
+            #endregion TryWrite
 
             #region CreateReadLockHandle(...)
-            #if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
             public static ILockHandle CreateReadLockHandle(this IReadWriteLock @this)
             {
                 return new ReadLockHandle(@this);
             }
-            #endregion
+            #endregion CreateReadLockHandle(...)
 
             #region CreateUpgradeableReadLockHandle(...)
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
             public static ILockHandle CreateUpgradeableReadLockHandle(this IReadWriteLock @this) => new UpgradeableReadLockHandle(@this);
-
-            #endregion
+            #endregion CreateUpgradeableReadLockHandle(...)
 
             #region CreateWriteLockHandle(...)
             #if NETSTANDARD || NET45_OR_NEWER

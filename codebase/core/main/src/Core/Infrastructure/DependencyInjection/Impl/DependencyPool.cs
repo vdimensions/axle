@@ -3,55 +3,66 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+#if NETSTANDARD || NET45_OR_NEWER
+using System.Reflection;
+#endif
 
 
 namespace Axle.Core.Infrastructure.DependencyInjection.Impl
 {
     internal sealed class DependencyPool
     {
-//        private static IEnumerable<IDependencyReference> GetDependencies(IEnumerable<KeyValuePair<Type, ConcurrentDictionary<string, Resolvable>>> d)
-//        {
-//            return d
-//                .SelectMany(x => x.Value.Select(y => new { Type = x.Key, Name = y.Key, Data = y.Value }))
-//                .Select(y => new DependencyReference(y.Type, y.Name, y.Data))
-//                .ToArray();
-//        }
-//
+        private static IEnumerable<IDependencyReference> GetDependencies(IEnumerable<KeyValuePair<Type, ConcurrentDictionary<string, Resolvable>>> d)
+        {
+            #warning operations below jeopardize concurrent access effectiveness
+            return d
+                .SelectMany(x => x.Value.Select(y => new { Type = x.Key, Name = y.Key, Data = y.Value }))
+                .Select(y => new DependencyReference(y.Type, y.Name, y.Data as IResolvable)) //TODO: remove cast
+                .ToArray();
+        }
+
 //        private readonly IProxyManager proxyManager;
-//        private readonly ConcurrentDictionary<Type, ConcurrentDictionary<string, Resolvable>> data = new ConcurrentDictionary<Type, ConcurrentDictionary<string, Resolvable>>();
+        private readonly ConcurrentDictionary<Type, ConcurrentDictionary<string, Resolvable>> data = new ConcurrentDictionary<Type, ConcurrentDictionary<string, Resolvable>>();
 //
 //        public DependencyPool(IProxyManager proxyManager)
 //        {
 //            this.proxyManager = proxyManager;
 //        }
 //
-//        public void Dispose() { data.Clear(); }
+        public void Dispose() { data.Clear(); }
 //
-//        public IEnumerable<IDependencyReference> GetDependencies() { return GetDependencies(data); }
-//        public IEnumerable<IDependencyReference> GetDependencies(Type type) { return GetDependencies(data.Where(x => type.IsAssignableFrom(x.Key))); }
-//
-//        public void RegisterSingleton(Type type, string name, params string[] aliases) { Register(type, name, true, aliases); }
-//
-//        public void RegisterPrototype(Type type, string name, params string[] aliases) { Register(type, name, false, aliases); }
-//
-//        private void Register(Type type, string name, bool asSingleton, params string[] aliases)
-//        {
-//            var comparer = StringComparer.Ordinal;
-//            var dict = data.GetOrAdd(type, t => new ConcurrentDictionary<string, Resolvable>(StringComparer.Ordinal));
-//            var item = new Resolvable(type, proxyManager, asSingleton);
-//            if (!dict.TryAdd(name, item))
-//            {
-//                throw new DuplicateDependencyDefinitionException(
-//                    string.Format("Dependency {0}of type {1} is already registered.", name == null ? string.Empty : string.Format("'{0}' ", name), name));
-//            }
-//            foreach (var alias in aliases.Except(new[]{string.Empty, name}, comparer))
-//            {
-//                if (!dict.TryAdd(alias, item))
-//                {
-//                    throw new DuplicateDependencyDefinitionException(string.Format("Dependency '{0}' of type {1} is already registered.", alias, alias));
-//                }
-//            }
-//        }
+        public IEnumerable<IDependencyReference> GetDependencies() => GetDependencies(data);
+        public IEnumerable<IDependencyReference> GetDependencies(Type type)
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            return GetDependencies(data.Where(x => type.GetTypeInfo().IsAssignableFrom(x.Key.GetTypeInfo())));
+            #else
+            return GetDependencies(data.Where(x => type.IsAssignableFrom(x.Key)));
+            #endif
+        }
+
+        public void RegisterSingleton(Type type, string name, params string[] aliases) => Register(type, name, true, aliases);
+
+        public void RegisterPrototype(Type type, string name, params string[] aliases) => Register(type, name, false, aliases);
+
+        private void Register(Type type, string name, bool asSingleton, params string[] aliases)
+        {
+            var comparer = StringComparer.Ordinal;
+            var dict = data.GetOrAdd(type, t => new ConcurrentDictionary<string, Resolvable>(StringComparer.Ordinal));
+            var item = null as Resolvable;//new Resolvable(type, proxyManager, asSingleton); // TODO
+            if (!dict.TryAdd(name, item))
+            {
+                throw new DuplicateDependencyDefinitionException(
+                    string.Format("Dependency {0}of type {1} is already registered.", name == null ? string.Empty : $"'{name}' ", name));
+            }
+            foreach (var alias in aliases.Except(new[]{string.Empty, name}, comparer))
+            {
+                if (!dict.TryAdd(alias, item))
+                {
+                    throw new DuplicateDependencyDefinitionException(string.Format("A dependency '{0}' of type {1} is already registered.", alias, alias));
+                }
+            }
+        }
 //
 //        public void RegisterInstance(object instance, string name, params string[] aliases)
 //        {

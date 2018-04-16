@@ -17,13 +17,13 @@ namespace Axle.Collections.Extensions.List
         /// Converts a given <see cref="IList"/> instance to its generic <see cref="IList{T}"/> equivalent.
         /// </summary>
         /// <param name="list">
-        /// The <see cref="IList"/> instance to be covnerted.
+        /// The <see cref="IList"/> instance to be converted.
         /// </param>
         /// <param name="type">
         /// The type to be used as generic type argument for the generic list.
         /// </param>
         /// <returns>
-        /// A new <see cref="IList"/> instance that represens a generic <see cref="IList{T}"/> with the generic type being the one
+        /// A new <see cref="IList"/> instance that represents a generic <see cref="IList{T}"/> with the generic type being the one
         /// provided by the <paramref name="type"/> parameter.
         /// </returns>
         public static IList MakeGeneric(this IList list, Type type)

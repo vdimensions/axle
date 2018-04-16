@@ -9,7 +9,7 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="byte">byte</see> to a valid <see cref="byte"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class ByteParser : AbstractParser<byte>
     {

@@ -14,7 +14,7 @@ namespace Axle.Text.RegularExpressions
     /// An implementation of the <see cref="IPathExpression" /> interface that is used to match paths for
     /// assemblies or embedded resources inside assemblies.
     /// </summary>
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     public sealed class AssemblyPathExpression : AbstractPathExpression
@@ -25,6 +25,7 @@ namespace Axle.Text.RegularExpressions
             {@"/", @"."},
             {@" ", @"_"}
         };
+
         private const string AntSingleAsteriskWinRegex = @"(?<=[\.]{0,1})(?:[^\.]+)(?=[\.]{0,1})";
         private const string AntDoubleAsteriskRegex = @"(?:.{0,})";
 

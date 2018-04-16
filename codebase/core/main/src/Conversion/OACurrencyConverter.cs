@@ -1,4 +1,4 @@
-﻿#if NET40_OR_NEWER || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NET40_OR_NEWER
 namespace Axle.Conversion
 {
     /// <summary>

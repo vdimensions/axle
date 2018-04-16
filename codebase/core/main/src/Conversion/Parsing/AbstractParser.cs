@@ -12,7 +12,7 @@ namespace Axle.Conversion.Parsing
     /// The type a string is to be parsed to.
     /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public abstract class AbstractParser<T> : IParser<T>
     {

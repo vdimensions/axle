@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="DateTime">time instant</see> to a valid <see cref="DateTime"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class DateTimeParser : AbstractStrictParser<DateTime>
     {

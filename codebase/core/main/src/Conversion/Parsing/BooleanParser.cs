@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// a <see cref="bool">boolean</see> to a valid <see cref="bool"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [System.Serializable]
+    [Serializable]
     #endif
     public sealed class BooleanParser : AbstractParser<bool>
     {

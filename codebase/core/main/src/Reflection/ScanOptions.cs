@@ -7,7 +7,7 @@ namespace Axle.Reflection
     /// An enumeration with all the possible flags that can be used when reflecting a type member with an <see cref="IIntrospector" >introspector</see> instance
     /// </summary>
     /// <seealso cref="IIntrospector"/>
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
     [Flags]
@@ -17,22 +17,27 @@ namespace Axle.Reflection
         /// Scan results will include nothing.
         /// </summary>
         None = 0,
+
         /// <summary>
         /// Scan results will include matching public members.
         /// </summary>
         Public = 1,
+
         /// <summary>
         /// Scan results will include matching non-public members.
         /// </summary>
         NonPublic = 1 << 1,
+
         /// <summary>
         /// Scan results will include matching static members.
         /// </summary>
         Static = 1 << 2,
+
         /// <summary>
         /// Scan results will include matching instance members.
         /// </summary>
         Instance = 1 << 3,
+
         /// <summary>
         /// Scan results will include matching public instance members. 
         /// <para>
@@ -40,6 +45,7 @@ namespace Axle.Reflection
         /// </para>
         /// </summary>
         PublicInstance = Public | Instance,
+
         /// <summary>
         /// Scan results will include matching public static members. 
         /// <para>

@@ -18,7 +18,7 @@ namespace Axle.Threading
         private readonly bool _supportsRecursion;
 
         /// <summary>
-        /// Creaates a new instance of the <see cref="ReadWriteLock"/> class without specifying lock recursion.
+        /// Creates a new instance of the <see cref="ReadWriteLock"/> class without specifying lock recursion.
         /// </summary>
         public ReadWriteLock() : this(new ReaderWriterLockSlim(LockRecursionPolicy.NoRecursion)) { }
         internal ReadWriteLock(ReaderWriterLockSlim rls)

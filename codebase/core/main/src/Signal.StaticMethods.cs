@@ -8,7 +8,7 @@ namespace Axle
         /// Creates a new instance of the <see cref="Signal"/> class using the specified action object.
         /// </summary>
         /// <param name="dereference">
-        /// A function that dereferences the singal's underlying delegate for the signal's internal processing. 
+        /// A function that dereferences the signal's underlying delegate for the signal's internal processing. 
         /// </param>
         /// <param name="update">
         /// A function that updates the underlying signal reference. Used for the signal's internal processing. 
@@ -22,7 +22,7 @@ namespace Axle
         /// Creates a new instance of the <see cref="Signal"/> class using the specified action object.
         /// </summary>
         /// <param name="dereference">
-        /// A function that dereferences the singal's underlying delegate for the signal's internal processing. 
+        /// A function that dereferences the signal's underlying delegate for the signal's internal processing. 
         /// </param>
         /// <param name="update">
         /// A function that updates the underlying signal reference. Used for the signal's internal processing. 
@@ -36,7 +36,7 @@ namespace Axle
         /// Creates a new instance of the <see cref="Signal"/> class using the specified action object.
         /// </summary>
         /// <param name="dereference">
-        /// A function that dereferences the singal's underlying delegate for the signal's internal processing. 
+        /// A function that dereferences the signal's underlying delegate for the signal's internal processing. 
         /// </param>
         /// <param name="update">
         /// A function that updates the underlying signal reference. Used for the signal's internal processing. 

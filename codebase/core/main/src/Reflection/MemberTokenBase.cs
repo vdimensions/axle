@@ -68,7 +68,7 @@ namespace Axle.Reflection
             _declaringType = declaringType;
             _typeHandle = declaringType.TypeHandle;
             #if NETSTANDARD
-            this.ReflectedMember = member;
+            ReflectedMember = member;
             #endif
         }
 

@@ -30,7 +30,7 @@ namespace Axle.Conversion
         {
             _encoding = encoding.VerifyArgument(nameof(encoding)).IsNotNull();
         }
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         /// <summary>
         /// Creates a new <see cref="BytesToStringConverter" /> instance using the <see cref="System.Text.Encoding.Default">default encoding</see>
         /// </summary>

@@ -8,7 +8,7 @@ namespace Axle.Extensions.DateTime
     
     public static partial class DateTimeExtensions
     {
-        #if !NETSTANDARD || NETSTANDARD1_5_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
 
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
