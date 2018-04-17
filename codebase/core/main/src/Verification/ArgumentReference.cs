@@ -15,16 +15,21 @@ namespace Axle.Verification
     /// </summary>
     public struct ArgumentReference<T> : IReference<T>
     {
+        /// <param name="reference">
+        /// The argument reference instance to be unwrapped by this operator. 
+        /// </param>
+        public static implicit operator T(ArgumentReference<T> reference) => reference._value;
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string name;
+        private readonly string _name;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly T value;
+        private readonly T _value;
 
         [DebuggerStepThrough]
         internal ArgumentReference(string name, T value)
         {
-            this.name = name ?? throw new ArgumentNullException(nameof(name));
-            this.value = value;
+            _name = name ?? throw new ArgumentNullException(nameof(name));
+            _value = value;
         }
 
         #if NETSTANDARD || NET45_OR_NEWER
@@ -87,22 +92,17 @@ namespace Axle.Verification
             return new ArgumentReference<TExpected>(arg.Name, (TExpected) val);
         }
 
-        internal string Name => name;
+        internal string Name => _name;
 
         /// <summary>
         /// Gets the value passed in the argument the current <see cref="ArgumentReference{T}"/> instance represents.
         /// </summary>
-        public T Value => value;
+        public T Value => _value;
 
         /// <inheritdoc cref="IReference{T}.Value"/>
-        T IReference<T>.Value => value;
+        T IReference<T>.Value => _value;
 
         /// <inheritdoc cref="IReference.Value"/>
-        object IReference.Value => value;
-
-        /// <param name="reference">
-        /// The argument reference instance to be unwrapped by this operator. 
-        /// </param>
-        public static implicit operator T(ArgumentReference<T> reference) { return reference.value; }
+        object IReference.Value => _value;
     }
 }

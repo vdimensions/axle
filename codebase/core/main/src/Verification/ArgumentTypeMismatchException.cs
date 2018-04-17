@@ -1,5 +1,5 @@
 ﻿using System;
-#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using System.Runtime.Serialization;
 #endif
 

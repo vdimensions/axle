@@ -80,6 +80,7 @@ namespace Axle.Threading
         /// <see cref="System.Threading.Timeout.Infinite"/> (<c>-1</c>), which is the only negative value allowed. 
         /// </exception>
         bool TryEnterReadLock(int millisecondsTimeout);
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in read mode, with an optional time-out.
         /// </summary>
@@ -95,6 +96,23 @@ namespace Axle.Threading
         /// -or-
         /// The value of <paramref name="timeout"/> is greater than <see cref="System.Int32.MaxValue"/> milliseconds. 
         /// </exception>
+        #else
+        /// <summary>
+        /// Tries to enter the lock in read mode, with an optional time-out.
+        /// </summary>
+        /// <param name="timeout">
+        /// The interval to wait, or <c>-1</c> milliseconds to wait indefinitely. 
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The value of <paramref name="timeout"/> is negative, but it is not equal to <c>-1</c> milliseconds, 
+        /// which is the only negative value allowed.
+        /// -or-
+        /// The value of <paramref name="timeout"/> is greater than <see cref="System.Int32.MaxValue"/> milliseconds. 
+        /// </exception>
+        #endif
         bool TryEnterReadLock(TimeSpan timeout);
 
         /// <summary>
@@ -111,6 +129,7 @@ namespace Axle.Threading
         /// <see cref="System.Threading.Timeout.Infinite"/> (<c>-1</c>), which is the only negative value allowed. 
         /// </exception>
         bool TryEnterUpgradeableReadLock(int millisecondsTimeout);
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in upgradeable mode, with an optional time-out.
         /// </summary>
@@ -126,6 +145,23 @@ namespace Axle.Threading
         /// -or-
         /// The value of <paramref name="timeout"/> is greater than <see cref="System.Int32.MaxValue"/> milliseconds. 
         /// </exception>
+        #else
+        /// <summary>
+        /// Tries to enter the lock in upgradeable mode, with an optional time-out.
+        /// </summary>
+        /// <param name="timeout">
+        /// The interval to wait, or <c>-1</c> milliseconds to wait indefinitely. 
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The value of <paramref name="timeout"/> is negative, but it is not equal to <c>-1</c> milliseconds, 
+        /// which is the only negative value allowed.
+        /// -or-
+        /// The value of <paramref name="timeout"/> is greater than <see cref="System.Int32.MaxValue"/> milliseconds. 
+        /// </exception>
+        #endif
         bool TryEnterUpgradeableReadLock(TimeSpan timeout);
 
         /// <summary>
@@ -142,6 +178,7 @@ namespace Axle.Threading
         /// <see cref="System.Threading.Timeout.Infinite"/> (<c>-1</c>), which is the only negative value allowed. 
         /// </exception>
         bool TryEnterWriteLock(int millisecondsTimeout);
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in write mode, with an optional time-out.
         /// </summary>
@@ -157,6 +194,23 @@ namespace Axle.Threading
         /// -or-
         /// The value of <paramref name="timeout"/> is greater than <see cref="System.Int32.MaxValue"/> milliseconds. 
         /// </exception>
+        #else
+        /// <summary>
+        /// Tries to enter the lock in write mode, with an optional time-out.
+        /// </summary>
+        /// <param name="timeout">
+        /// The interval to wait, or <c>-1</c> milliseconds to wait indefinitely. 
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
+        /// </returns>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// The value of <paramref name="timeout"/> is negative, but it is not equal to <c>-1</c> milliseconds, 
+        /// which is the only negative value allowed.
+        /// -or-
+        /// The value of <paramref name="timeout"/> is greater than <see cref="System.Int32.MaxValue"/> milliseconds. 
+        /// </exception>
+        #endif
         bool TryEnterWriteLock(TimeSpan timeout);
     }
 }

@@ -5,6 +5,9 @@ using System.Diagnostics;
 
 namespace Axle.Verification
 {
+    /// <summary>
+    /// A class containing general purpose extension methods to the <see cref="ArgumentReference{T}"/> type.
+    /// </summary>
     public static class Verifier
     {
         /// <summary>
@@ -92,6 +95,29 @@ namespace Axle.Verification
             return IsNotNull(argument, null);
         }
 
+        /// <summary>
+        /// Ensures the specified argument is equal to a given <paramref name="value"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the verified argument.</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="value">
+        /// A value the current argument is expected to be equal to.
+        /// </param>
+        /// <param name="message">
+        /// An error message to be passed to the exception in case the verification fails.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when <paramref name="message"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the verified argument is not equal to the given <paramref name="value"/>.
+        /// </exception>
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -100,15 +126,69 @@ namespace Axle.Verification
         {
             return IsTrue(argument, x => x.Equals(value), message);
         }
+
+        /// <summary>
+        /// Ensures the specified argument is equal to a given <paramref name="value"/>.
+        /// </summary>
+        /// <typeparam name="T">Type of the verified argument.</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="value">
+        /// A value the current argument is expected to be equal to.
+        /// </param>
+        /// <param name="comparer">
+        /// An reference to the <see cref="IEqualityComparer{T}"/> instance that will be used to determine the equality.
+        /// </param>
+        /// <param name="message">
+        /// An error message to be passed to the exception in case the verification fails.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown when either <paramref name="comparer"/> or <paramref name="message"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the verified argument is not equal to the given <paramref name="value"/>.
+        /// </exception>
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNot<T>(this ArgumentReference<T> argument, T value, IEqualityComparer<T> comparer, string message)
         {
+            if (comparer == null)
+            {
+                throw new ArgumentNullException(nameof(comparer));
+            }
             return IsTrue(argument, x => comparer.Equals(x, value), message);
         }
 
+        /// <summary>
+        /// Ensures the specified argument conforms to a custom condition, provided by the <paramref name="condition"/> parameter.
+        /// </summary>
+        /// <typeparam name="T">Type of the verified argument.</typeparam>
+        /// <param name="argument">
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
+        /// which is being verified. 
+        /// </param>
+        /// <param name="condition">
+        /// A delegate representing the verification condition to pass.
+        /// </param>
+        /// <param name="message">
+        /// An error message to be passed to the exception in case the verification fails.
+        /// </param>
+        /// <returns>
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Thrown if either <paramref name="condition"/> or <paramref name="message"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// Thrown when the specified verification <paramref name="condition"/> returns <c>false</c> for the verified argument.
+        /// </exception>
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
