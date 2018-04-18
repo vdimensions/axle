@@ -1,4 +1,4 @@
-using System;
+#if NETSTANDARD || NET35_OR_NEWER
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -15,7 +15,7 @@ namespace Axle.Collections.Generic
     /// <seealso cref="IEnumerable{T}"/>
     /// <seealso cref="IEnumerable"/>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-    [Serializable]
+    [System.Serializable]
     #endif
     public class GenericEnumerable<T> : IEnumerable<T>
     {
@@ -33,3 +33,4 @@ namespace Axle.Collections.Generic
         internal IEnumerable RawEnumerable => _innerCollection;
     }
 }
+#endif

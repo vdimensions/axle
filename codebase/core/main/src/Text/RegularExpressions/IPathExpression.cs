@@ -3,6 +3,7 @@
     /// <summary>
     /// A regular expressions designed for matching paths.
     /// </summary>
+    /// <seealso cref="IRegularExpression"/>
     public interface IPathExpression : IRegularExpression
     {
         /// <summary>

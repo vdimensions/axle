@@ -584,10 +584,31 @@ namespace Axle.Threading
             }
             #endregion Write(...)
 
-            #region TryRead
-            public static bool TryRead<T>(this IReadWriteLock @this, int millisecondsTimeout, Func<T> func, out T result)
+            #region TryRead(...)
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// </summary>
+            /// <typeparam name="T">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a read lock.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryRead<T>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T> func, out T result)
             {
-                if (!@this.TryEnterReadLock(millisecondsTimeout))
+                if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
                     result = default(T);
                     return false;
@@ -599,115 +620,40 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @this.ExitReadLock();
+                    @lock.ExitReadLock();
                 }
             }
-            public static bool TryRead<T, TResult>(this IReadWriteLock @this, int millisecondsTimeout, Func<T, TResult> func, T arg, out TResult result)
-            {
-                if (!@this.TryEnterReadLock(millisecondsTimeout))
-                {
-                    result = default(TResult);
-                    return false;
-                }
-                try
-                {
-                    result = func(arg);
-                    return true;
-                }
-                finally
-                {
-                    @this.ExitReadLock();
-                }
-            }
-            public static bool TryRead<T1, T2, TResult>(this IReadWriteLock @this, int millisecondsTimeout, Func<T1, T2, TResult> func, T1 arg1, T2 arg2, out TResult result)
-            {
-                if (!@this.TryEnterReadLock(millisecondsTimeout))
-                {
-                    result = default(TResult);
-                    return false;
-                }
-                try
-                {
-                    result = func(arg1, arg2);
-                    return true;
-                }
-                finally
-                {
-                    @this.ExitReadLock();
-                }
-            }
-            public static bool TryRead<T1, T2, T3, TResult>(
-                this IReadWriteLock @this,
-                int millisecondsTimeout,
-                Func<T1, T2, T3, TResult> func,
-                T1 arg1,
-                T2 arg2,
-                T3 arg3,
-                out TResult result)
-            {
-                if (!@this.TryEnterReadLock(millisecondsTimeout))
-                {
-                    result = default(TResult);
-                    return false;
-                }
-                try
-                {
-                    result = func(arg1, arg2, arg3);
-                    return true;
-                }
-                finally
-                {
-                    @this.ExitReadLock();
-                }
-            }
-            public static bool TryRead<T1, T2, T3, T4, TResult>(
-                this IReadWriteLock @this,
-                int millisecondsTimeout,
-                Func<T1, T2, T3, T4, TResult> func,
-                T1 arg1,
-                T2 arg2,
-                T3 arg3,
-                T4 arg4,
-                out TResult result)
-            {
-                if (!@this.TryEnterReadLock(millisecondsTimeout))
-                {
-                    result = default(TResult);
-                    return false;
-                }
-                try
-                {
-                    result = func(arg1, arg2, arg3, arg4);
-                    return true;
-                }
-                finally
-                {
-                    @this.ExitReadLock();
-                }
-            }
-            #endregion
 
-            #region TryWrite
-            public static bool TryWrite<T>(this IReadWriteLock @this, int millisecondsTimeout, Func<T> func, out T result)
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// </summary>
+            /// <typeparam name="T">
+            /// The type of the sole parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a read lock.
+            /// </param>
+            /// <param name="arg">
+            /// The sole parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryRead<T, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T, TResult> func, T arg, out TResult result)
             {
-                if (!@this.TryEnterWriteLock(millisecondsTimeout))
-                {
-                    result = default(T);
-                    return false;
-                }
-                try
-                {
-                    result = func();
-                    return true;
-                }
-                finally
-                {
-                    @this.ExitWriteLock();
-                }
-            }
-            public static bool TryWrite<T, TResult>(this IReadWriteLock @this, int millisecondsTimeout, Func<T, TResult> func, T arg, out TResult result)
-            {
-                if (!@this.TryEnterWriteLock(millisecondsTimeout))
+                if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -719,12 +665,46 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @this.ExitWriteLock();
+                    @lock.ExitReadLock();
                 }
             }
-            public static bool TryWrite<T1, T2, TResult>(this IReadWriteLock @this, int millisecondsTimeout, Func<T1, T2, TResult> func, T1 arg1, T2 arg2, out TResult result)
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// </summary>
+            /// <typeparam name="T1">
+            /// The type of the first parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T2">
+            /// The type of the second parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a read lock.
+            /// </param>
+            /// <param name="arg1">
+            /// The first parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg2">
+            /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryRead<T1, T2, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T1, T2, TResult> func, T1 arg1, T2 arg2, out TResult result)
             {
-                if (!@this.TryEnterWriteLock(millisecondsTimeout))
+                if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -736,11 +716,51 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @this.ExitWriteLock();
+                    @lock.ExitReadLock();
                 }
             }
-            public static bool TryWrite<T1, T2, T3, TResult>(
-                this IReadWriteLock @this,
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// </summary>
+            /// <typeparam name="T1">
+            /// The type of the first parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T2">
+            /// The type of the second parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T3">
+            /// The type of the third parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a read lock.
+            /// </param>
+            /// <param name="arg1">
+            /// The first parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg2">
+            /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg3">
+            /// The third parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryRead<T1, T2, T3, TResult>(
+                this IReadWriteLock @lock,
                 int millisecondsTimeout,
                 Func<T1, T2, T3, TResult> func,
                 T1 arg1,
@@ -748,7 +768,7 @@ namespace Axle.Threading
                 T3 arg3,
                 out TResult result)
             {
-                if (!@this.TryEnterWriteLock(millisecondsTimeout))
+                if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -760,11 +780,57 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @this.ExitWriteLock();
+                    @lock.ExitReadLock();
                 }
             }
-            public static bool TryWrite<T1, T2, T3, T4, TResult>(
-                this IReadWriteLock @this,
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// </summary>
+            /// <typeparam name="T1">
+            /// The type of the first parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T2">
+            /// The type of the second parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T3">
+            /// The type of the third parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T4">
+            /// The type of the fourth parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a read lock.
+            /// </param>
+            /// <param name="arg1">
+            /// The first parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg2">
+            /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg3">
+            /// The third parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg4">
+            /// The fourth parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryRead<T1, T2, T3, T4, TResult>(
+                this IReadWriteLock @lock,
                 int millisecondsTimeout,
                 Func<T1, T2, T3, T4, TResult> func,
                 T1 arg1,
@@ -773,7 +839,7 @@ namespace Axle.Threading
                 T4 arg4,
                 out TResult result)
             {
-                if (!@this.TryEnterWriteLock(millisecondsTimeout))
+                if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -785,10 +851,282 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @this.ExitWriteLock();
+                    @lock.ExitReadLock();
                 }
             }
-            #endregion TryWrite
+            #endregion TryRead(...)
+
+            #region TryWrite(...)
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// </summary>
+            /// <typeparam name="T">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a write lock.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryWrite<T>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T> func, out T result)
+            {
+                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                {
+                    result = default(T);
+                    return false;
+                }
+                try
+                {
+                    result = func();
+                    return true;
+                }
+                finally
+                {
+                    @lock.ExitWriteLock();
+                }
+            }
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// </summary>
+            /// <typeparam name="T">
+            /// The type of the sole parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a write lock.
+            /// </param>
+            /// <param name="arg">
+            /// The sole parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryWrite<T, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T, TResult> func, T arg, out TResult result)
+            {
+                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                {
+                    result = default(TResult);
+                    return false;
+                }
+                try
+                {
+                    result = func(arg);
+                    return true;
+                }
+                finally
+                {
+                    @lock.ExitWriteLock();
+                }
+            }
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// </summary>
+            /// <typeparam name="T1">
+            /// The type of the first parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T2">
+            /// The type of the second parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a write lock.
+            /// </param>
+            /// <param name="arg1">
+            /// The first parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg2">
+            /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryWrite<T1, T2, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T1, T2, TResult> func, T1 arg1, T2 arg2, out TResult result)
+            {
+                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                {
+                    result = default(TResult);
+                    return false;
+                }
+                try
+                {
+                    result = func(arg1, arg2);
+                    return true;
+                }
+                finally
+                {
+                    @lock.ExitWriteLock();
+                }
+            }
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// </summary>
+            /// <typeparam name="T1">
+            /// The type of the first parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T2">
+            /// The type of the second parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T3">
+            /// The type of the third parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a write lock.
+            /// </param>
+            /// <param name="arg1">
+            /// The first parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg2">
+            /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg3">
+            /// The third parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryWrite<T1, T2, T3, TResult>(
+                this IReadWriteLock @lock,
+                int millisecondsTimeout,
+                Func<T1, T2, T3, TResult> func,
+                T1 arg1,
+                T2 arg2,
+                T3 arg3,
+                out TResult result)
+            {
+                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                {
+                    result = default(TResult);
+                    return false;
+                }
+                try
+                {
+                    result = func(arg1, arg2, arg3);
+                    return true;
+                }
+                finally
+                {
+                    @lock.ExitWriteLock();
+                }
+            }
+
+            /// <summary>
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// </summary>
+            /// <typeparam name="T1">
+            /// The type of the first parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T2">
+            /// The type of the second parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T3">
+            /// The type of the third parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="T4">
+            /// The type of the fourth parameter to the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <typeparam name="TResult">
+            /// The return type of the <paramref name="func"/> delegate.
+            /// </typeparam>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanincs.
+            /// </param>
+            /// <param name="millisecondsTimeout">
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely. 
+            /// </param>
+            /// <param name="func">
+            /// The function to be executed inside a write lock.
+            /// </param>
+            /// <param name="arg1">
+            /// The first parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg2">
+            /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg3">
+            /// The third parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="arg4">
+            /// The fourth parameter to pass to the <paramref name="func"/> delegate upon invocation.
+            /// </param>
+            /// <param name="result">
+            /// The resulting object from the invocation of the <paramref name="func"/> delegate upon.
+            /// </param>
+            /// <returns>
+            /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise. 
+            /// </returns>
+            public static bool TryWrite<T1, T2, T3, T4, TResult>(
+                this IReadWriteLock @lock,
+                int millisecondsTimeout,
+                Func<T1, T2, T3, T4, TResult> func,
+                T1 arg1,
+                T2 arg2,
+                T3 arg3,
+                T4 arg4,
+                out TResult result)
+            {
+                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                {
+                    result = default(TResult);
+                    return false;
+                }
+                try
+                {
+                    result = func(arg1, arg2, arg3, arg4);
+                    return true;
+                }
+                finally
+                {
+                    @lock.ExitWriteLock();
+                }
+            }
+            #endregion TryWrite(...)
 
             #region CreateReadLockHandle(...)
 #if NETSTANDARD || NET45_OR_NEWER
@@ -812,7 +1150,6 @@ namespace Axle.Threading
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
             public static ILockHandle CreateWriteLockHandle(this IReadWriteLock @this) => new WriteLockHandle(@this);
-
             #endregion
 
             public static void Invoke(this IReadWriteLock @this, Func<bool> isLockNeeded, Action writeAction)

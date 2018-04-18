@@ -10,7 +10,7 @@ namespace Axle.Core
         public static void Run(params string[] args)
         {
             // 1. Discover infrastructure component candidates
-            // 2. Prepare infrastrucutre providers
+            // 2. Prepare infrastrucutre providers (logging, configuration, DI)
             // 3. Initialize modularity
         }
     }

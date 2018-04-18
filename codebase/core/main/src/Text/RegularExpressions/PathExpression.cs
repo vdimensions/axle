@@ -10,7 +10,7 @@ namespace Axle.Text.RegularExpressions
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
-    public sealed class PathExpression : AbstractPathExpression, IPathExpression
+    public sealed class PathExpression : AbstractPathExpression
     {
         private const string AntSingleAsteriskWinRegex = @"(?:(?<=[\\]{0,1})(?:[^\\]+)(?=[\\]{0,1}))";
         private const string AntSingleAsteriskUnixRegex = @"(?<=[/]{0,1})(?:[^/]+)(?=[/]{0,1})";

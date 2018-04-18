@@ -36,15 +36,15 @@ namespace Axle.Text.RegularExpressions
         protected AbstractPathExpression(string pattern, Func<string, RegexOptions, Regex> regexFactory) 
             : this(new RegularExpression(regexFactory(pattern, RegExOptions))) { }
 
-        public bool IsMatch(string value) => _target.IsMatch(value);
-        public bool IsMatch(string value, int startIndex) => _target.IsMatch(value, startIndex);
+        public bool IsMatch(string input) => _target.IsMatch(input);
+        public bool IsMatch(string input, int startIndex) => _target.IsMatch(input, startIndex);
 
-        public Match[] Match(string value) => _target.Match(value);
-        public Match[] Match(string value, int startIndex) => _target.Match(value, startIndex);
+        public Match[] Match(string input) => _target.Match(input);
+        public Match[] Match(string input, int startIndex) => _target.Match(input, startIndex);
 
-        public string[] Split(string value) => _target.Split(value);
-        public string[] Split(string value, int count) => _target.Split(value, count);
-        public string[] Split(string value, int count, int startIndex) => _target.Split(value, count, startIndex);
+        public string[] Split(string input) => _target.Split(input);
+        public string[] Split(string input, int count) => _target.Split(input, count);
+        public string[] Split(string input, int count, int startIndex) => _target.Split(input, count, startIndex);
 
         public override string ToString() => Pattern;
 

@@ -20,15 +20,22 @@ namespace Axle.Text.RegularExpressions
         public RegularExpression(string patterm, RegexOptions options) : this(new Regex(patterm, options)) {}
         public RegularExpression(string patterm) : this(new Regex(patterm)) { }
 
-        public bool IsMatch(string value) => _regex.IsMatch(value);
-        public bool IsMatch(string value, int startIndex) => _regex.IsMatch(value, startIndex);
+        /// <inheritdoc />
+        public bool IsMatch(string input) => _regex.IsMatch(input);
+        /// <inheritdoc />
+        public bool IsMatch(string input, int startIndex) => _regex.IsMatch(input, startIndex);
 
-        public Match[] Match(string value) => _regex.Matches(value).Cast<Match>().ToArray();
-        public Match[] Match(string value, int startIndex) => _regex.Matches(value, startIndex).Cast<Match>().ToArray();
+        /// <inheritdoc />
+        public Match[] Match(string input) => _regex.Matches(input).Cast<Match>().ToArray();
+        /// <inheritdoc />
+        public Match[] Match(string input, int startIndex) => _regex.Matches(input, startIndex).Cast<Match>().ToArray();
 
-        public string[] Split(string value) => _regex.Split(value);
-        public string[] Split(string value, int count) => _regex.Split(value, count);
-        public string[] Split(string value, int count, int startIndex) => _regex.Split(value, count, startIndex);
+        /// <inheritdoc />
+        public string[] Split(string input) => _regex.Split(input);
+        /// <inheritdoc />
+        public string[] Split(string input, int count) => _regex.Split(input, count);
+        /// <inheritdoc />
+        public string[] Split(string input, int count, int startIndex) => _regex.Split(input, count, startIndex);
 
         /// <summary>
         /// Converts an instance of <see cref="RegularExpression"/> to the corresponding <see cref="Regex" /> equivalent
