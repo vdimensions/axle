@@ -51,9 +51,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
                 && comparer.Equals(left.Substring(1), right.Substring(1));
         }
 
-        public virtual bool DoDependenciesConverge(
-            DependencyInfo factoryArgumentDependency, 
-            DependencyInfo classMemberDependency)
+        public virtual bool DoDependenciesConverge(DependencyInfo factoryArgumentDependency, DependencyInfo classMemberDependency)
         {
             factoryArgumentDependency.VerifyArgument(nameof(factoryArgumentDependency)).IsNotNull();
             classMemberDependency.VerifyArgument(nameof(classMemberDependency)).IsNotNull();

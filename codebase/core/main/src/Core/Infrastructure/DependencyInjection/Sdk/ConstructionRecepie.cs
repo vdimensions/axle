@@ -95,6 +95,72 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
             Fields = fields.VerifyArgument(nameof(fields)).IsNotNull().Value;
         }
 
+
+        private object ResolveArgument(IDependencyResolver resolver, IFactoryArgumentDescriptor arg)
+        {
+            try
+            {
+                return resolver.Resolve(arg.Info);
+            }
+            catch  (Exception e)
+            {
+                if (arg.Optional)
+                {
+                    return arg.DefaultValue;
+                }
+
+                switch (e)
+                {
+                    case DependencyResolutionException _:
+                        throw;
+                    default:
+                        throw new DependencyResolutionException(arg.Info.Type, e);
+                }
+            }
+        }
+        private object ResolveProperty(IDependencyResolver resolver, IPropertyDependencyDescriptor prop)
+        {
+            try
+            {
+                return resolver.Resolve(prop.Info);
+            }
+            catch (Exception e)
+            {
+                if (prop.DefaultValue != null)
+                {
+                    return prop.DefaultValue;
+                }
+
+                switch (e)
+                {
+                    case DependencyResolutionException _:
+                        throw;
+                    default:
+                        throw new DependencyResolutionException(prop.Info.Type, e);
+                }
+            }
+        }
+
+        public object Complete(IDependencyResolver resolver)
+        {
+            try
+            {
+                var arguments = Factory.Arguments.Select((arg, ix) => ResolveArgument(resolver, arg)).ToArray();
+                var instance = Factory.CreateInstance(arguments);
+                var properties = Fields.Union(Properties).Select(f => new {Prop = f, Value = ResolveProperty(resolver, f)});
+                foreach (var property in properties)
+                {
+                    property.Prop.SetValue(instance, property.Value);
+                }
+
+                return instance;
+            }
+            catch (Exception e)
+            {
+                throw new DependencyResolutionException(TargetType, e);
+            }
+        }
+
         public Type TargetType { get; }
         public IFactoryDescriptor Factory { get; }
         public IEnumerable<IPropertyDependencyDescriptor> Properties { get; }

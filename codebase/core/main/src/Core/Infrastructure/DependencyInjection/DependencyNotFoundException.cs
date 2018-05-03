@@ -16,9 +16,18 @@ namespace Axle.Core.Infrastructure.DependencyInjection
         public DependencyNotFoundException() { }
         public DependencyNotFoundException(string message) : base(message) { }
         public DependencyNotFoundException(string message, Exception inner) : base(message, inner) { }
+        public DependencyNotFoundException(Type type, string name) : this(type, name, null) { }
+        public DependencyNotFoundException(Type type, string name, Exception inner) : base(
+                type,
+                string.Format(
+                    "Unable to resolve dependency {0}of type {1}. ",
+                    string.IsNullOrEmpty(name) ? string.Empty : string.Format("'{0}' ", name),
+                    type.FullName),
+                inner)
+        { }
+        [Obsolete]
         public DependencyNotFoundException(Type type, string name, IDependency dependency, Exception inner) : base(
             type, 
-            name, 
             string.Format(
                 "Unable to resolve dependency {0}of type {1}. Could not find suitable candidate to inject for dependency '{2}' of type {3}.", 
                 string.IsNullOrEmpty(name) ? string.Empty : string.Format("'{0}' ", name), 
