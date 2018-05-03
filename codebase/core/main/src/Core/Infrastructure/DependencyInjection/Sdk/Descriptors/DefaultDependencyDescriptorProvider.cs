@@ -34,6 +34,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
         {
             return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
                 .GetFields(MemberScanOptions)
+                .Where(x => x.AccessModifier != AccessModifier.Private)
                 .Where(x => !x.IsReadOnly)
                 .Select(GetDescriptor);
         }
@@ -41,6 +42,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
         {
             return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
                 .GetProperties(MemberScanOptions)
+                .Where(x => x.AccessModifier != AccessModifier.Private)
                 .Where(x => x.SetAccessor != null)
                 .Select(GetDescriptor);
         }
