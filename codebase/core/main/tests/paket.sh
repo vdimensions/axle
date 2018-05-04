@@ -1,2 +1,2 @@
-PAKET='../../../.paket/paket.sh'
+PAKET='.paket/paket.sh'
 $PAKET $@
