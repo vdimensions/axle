@@ -11,7 +11,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
 {
     internal sealed class DependencyMap : IDisposable
     {
-        public abstract class DependencyState
+        internal abstract class DependencyState
         {
             private readonly string _name;
 
@@ -55,7 +55,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
 
             public override object Resolve() => _recepies.Select(r => r.Complete(_resolver)).FirstOrDefault();
 
-            public override Type Type { get; }
+            public sealed override Type Type { get; }
         }
 
         internal sealed class PrototypeDependencyState : ConstructibleDependencyState
@@ -123,6 +123,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
         {
             if (!_states.TryGetValue(name, out var candidates))
             {
+                // TODO: assume prototyping
                 throw new DependencyNotFoundException(type, name);
             }
 
@@ -141,95 +142,5 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
 
         public void Dispose() => _states.Clear();
         void IDisposable.Dispose() => Dispose();
-    }
-
-    public class AbstractContainer : IContainer
-    {
-        private class ParentLookupDependencyResolver : IDependencyResolver
-        {
-            private readonly DependencyMap _map;
-            private readonly IContainer _parentContainer;
-
-            public ParentLookupDependencyResolver(DependencyMap map, IContainer parentContainer)
-            {
-                _map = map;
-                _parentContainer = parentContainer;
-            }
-
-            public object Resolve(DependencyInfo dependency)
-            {
-                try
-                {
-                    if (!string.IsNullOrEmpty(dependency.DependencyName))
-                    {
-                        return _map.Resolve(dependency.DependencyName, dependency.Type);
-                    }
-
-                    try
-                    {
-                        return _map.Resolve(dependency.MemberName, dependency.Type);
-                    }
-                    catch (DependencyNotFoundException)
-                    {
-                        return _map.Resolve(string.Empty, dependency.Type);
-                    }
-                }
-                catch (DependencyResolutionException)
-                {
-                    if (_parentContainer == null)
-                    {
-                        throw;
-                    }
-
-                    if (!string.IsNullOrEmpty(dependency.DependencyName))
-                    {
-                        return _parentContainer.Resolve(dependency.Type, dependency.DependencyName);
-                    }
-
-                    try
-                    {
-                        return _parentContainer.Resolve(dependency.Type, dependency.MemberName);
-                    }
-                    catch (DependencyNotFoundException)
-                    {
-                        return _parentContainer.Resolve(dependency.Type, string.Empty);
-                    }
-                }
-            }
-        }
-
-        private readonly DependencyMap _dependencyMap = new DependencyMap();
-        private readonly IDependencyDescriptorProvider _dependencyDescriptorProvider;
-
-        public AbstractContainer(IContainer parent, IDependencyDescriptorProvider dependencyDescriptorProvider)
-        {
-            Parent = parent;
-            _dependencyDescriptorProvider = dependencyDescriptorProvider;
-        }
-
-        public IContainer RegisterInstance(object instance, string name, params string[] aliases)
-        {
-            _dependencyMap.RegisterConstant(name, instance);
-            foreach (var alias in aliases)
-            {
-                _dependencyMap.RegisterConstant(alias, instance);
-            }
-            return this;
-        }
-
-        public IContainer RegisterType(Type type, string name, params string[] aliases)
-        {
-            var resolver = new ParentLookupDependencyResolver(_dependencyMap, Parent);
-            _dependencyMap.RegisterSingletion(name, type, _dependencyDescriptorProvider, resolver);
-            foreach (var alias in aliases)
-            {
-                _dependencyMap.RegisterSingletion(alias, type, _dependencyDescriptorProvider, resolver);
-            }
-            return this;
-        }
-
-        public object Resolve(Type type, string name) => _dependencyMap.Resolve(name, type);
-
-        public IContainer Parent { get; }
     }
 }

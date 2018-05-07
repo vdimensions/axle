@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Diagnostics;
 
 using Axle.Core.Infrastructure.DependencyInjection;
+using Axle.Core.Infrastructure.DependencyInjection.Descriptors;
+using Axle.Core.Infrastructure.DependencyInjection.Sdk;
 using Axle.Verification;
 
 
 namespace Axle.Core.Infrastructure.DependencyInjection
 {
-    public partial class Container : IDisposable
+    public partial class Container : AbstractContainer, IDisposable
     {
 //        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
 //        private readonly IKernel kernel;
@@ -163,5 +165,12 @@ namespace Axle.Core.Infrastructure.DependencyInjection
 //
 //        public Container Parent { get { return parent; } }
 //        public Container Root { get { return root; } }
+
+        public Container(IContainer parent) : base(parent)
+        {
+            DependencyDescriptorProvider = new DefaultDependencyDescriptorProvider();
+        }
+
+        protected override IDependencyDescriptorProvider DependencyDescriptorProvider { get; }
     }
 }

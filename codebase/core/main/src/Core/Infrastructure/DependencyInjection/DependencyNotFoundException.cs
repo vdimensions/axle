@@ -14,17 +14,12 @@ namespace Axle.Core.Infrastructure.DependencyInjection
     public class DependencyNotFoundException : DependencyResolutionException
     {
         public DependencyNotFoundException() { }
+        [Obsolete]
         public DependencyNotFoundException(string message) : base(message) { }
+        [Obsolete]
         public DependencyNotFoundException(string message, Exception inner) : base(message, inner) { }
         public DependencyNotFoundException(Type type, string name) : this(type, name, null) { }
-        public DependencyNotFoundException(Type type, string name, Exception inner) : base(
-                type,
-                string.Format(
-                    "Unable to resolve dependency {0}of type {1}. ",
-                    string.IsNullOrEmpty(name) ? string.Empty : string.Format("'{0}' ", name),
-                    type.FullName),
-                inner)
-        { }
+        public DependencyNotFoundException(Type type, string name, Exception inner) : base(type, name, "Could not find suitable candidate to inject.", inner) { }
         [Obsolete]
         public DependencyNotFoundException(Type type, string name, IDependency dependency, Exception inner) : base(
             type, 

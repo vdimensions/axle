@@ -30,17 +30,18 @@ namespace Axle.Core.Infrastructure.DependencyInjection
         {
             _isRecoverable = isRecoverable;
         }
-        public DependencyResolutionException(Type type, Exception inner) : this(type, null, inner) { }
-        public DependencyResolutionException(Type type, Exception inner, bool isRecoverable) : this(type, null, inner)
+        public DependencyResolutionException(Type type, string name, Exception inner) : this(type, name, null, inner) { }
+        public DependencyResolutionException(Type type, string name, Exception inner, bool isRecoverable) : this(type, name, null, inner)
         {
             _isRecoverable = isRecoverable;
         }
-        public DependencyResolutionException(Type type, string message, Exception inner) : this(type, message, inner, true) { }
-        public DependencyResolutionException(Type type, string message, Exception inner, bool isRecoverable) : this(
+        public DependencyResolutionException(Type type, string name, string message, Exception inner) : this(type, name, message, inner, true) { }
+        public DependencyResolutionException(Type type, string name, string message, Exception inner, bool isRecoverable) : this(
             string.Format(
-                "Unable to resolve dependency of type {0}{1}",
-                type.VerifyArgument("type").Value.FullName,
-                message == null ? string.Empty : string.Format(". {0}", message)), 
+                "Unable to resolve dependency {0}of type {1}{2}",
+                string.IsNullOrEmpty(name) ? string.Empty : $"'{name}' ",
+                type.VerifyArgument(nameof(type)).Value.FullName,
+                message == null ? string.Empty : $". {message}"), 
             inner)
         {
             _isRecoverable = isRecoverable;

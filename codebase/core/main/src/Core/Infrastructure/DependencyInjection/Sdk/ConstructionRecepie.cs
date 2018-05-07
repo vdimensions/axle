@@ -109,13 +109,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
                     return arg.DefaultValue;
                 }
 
-                switch (e)
-                {
-                    case DependencyResolutionException _:
-                        throw;
-                    default:
-                        throw new DependencyResolutionException(arg.Info.Type, e);
-                }
+                throw new DependencyConstructionException(arg.Info.Type, arg.Info.MemberName, e);
             }
         }
         private object ResolveProperty(IDependencyResolver resolver, IPropertyDependencyDescriptor prop)
@@ -131,34 +125,37 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
                     return prop.DefaultValue;
                 }
 
-                switch (e)
-                {
-                    case DependencyResolutionException _:
-                        throw;
-                    default:
-                        throw new DependencyResolutionException(prop.Info.Type, e);
-                }
+                throw new DependencyPropertyException(prop.Info.Type, prop.Info.MemberName, e);
             }
         }
 
         public object Complete(IDependencyResolver resolver)
         {
+            var arguments = Factory.Arguments.Select((arg, ix) => ResolveArgument(resolver, arg)).ToArray();
+            object instance = null;
             try
             {
-                var arguments = Factory.Arguments.Select((arg, ix) => ResolveArgument(resolver, arg)).ToArray();
-                var instance = Factory.CreateInstance(arguments);
-                var properties = Fields.Union(Properties).Select(f => new {Prop = f, Value = ResolveProperty(resolver, f)});
-                foreach (var property in properties)
-                {
-                    property.Prop.SetValue(instance, property.Value);
-                }
-
-                return instance;
+                instance = Factory.CreateInstance(arguments);
             }
             catch (Exception e)
             {
-                throw new DependencyResolutionException(TargetType, e);
+                throw new DependencyConstructionException(TargetType, e);
             }
+
+            var properties = Fields.Union(Properties).Select(f => new { Prop = f, Value = ResolveProperty(resolver, f) });
+            foreach (var property in properties)
+            {
+                try
+                {
+                    property.Prop.SetValue(instance, property.Value);
+                }
+                catch (Exception e)
+                {
+                    throw new DependencyPropertyException(TargetType, property.Prop.Info.MemberName, "An error has occured while invoking setter, see inner exception for more details. ", e);
+                }
+            }
+
+            return instance;
         }
 
         public Type TargetType { get; }
