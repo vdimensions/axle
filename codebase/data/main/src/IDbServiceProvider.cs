@@ -9,6 +9,8 @@ namespace Axle.Data
         //IDataConnection CreateConnection(string connectionString);
         //IDataConnection CreateConnection(ConnectionStringSettings connectionString);
 
+        IDbConnection CreateConnection(string connectionString);
+
         IDbTransaction CreateTransaction(IDbConnection connection, IsolationLevel? isolationLevel);
 
         IDbCommand CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction);

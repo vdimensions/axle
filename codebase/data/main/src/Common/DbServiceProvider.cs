@@ -63,7 +63,7 @@ namespace Axle.Data.Common
             _providerName = providerName.VerifyArgument(nameof(providerName)).IsNotNullOrEmpty();
             _dialectName = dialectName.VerifyArgument(nameof(dialectName)).IsNotNull();
         }
-        
+
         #region Connection
         //IDataConnection IDbServiceProvider.CreateConnection(string connectionString)
         //{
@@ -75,6 +75,7 @@ namespace Axle.Data.Common
         //        this, 
         //        CreateConnection(connectionString.ConnectionString));
         //}
+        IDbConnection IDbServiceProvider.CreateConnection(string connectionString) => CreateConnection(connectionString);
         protected abstract TDbConnection CreateConnection(string connectionString);
         #endregion
 
