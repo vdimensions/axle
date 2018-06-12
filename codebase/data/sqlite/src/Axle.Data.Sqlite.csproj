@@ -24,7 +24,6 @@
   </PropertyGroup>
   <ItemGroup>
     <None Remove="Axle.Logging.dist.csproj.paket.references" />
-    <None Remove="paket.lock" />
   </ItemGroup>
   <Target Name="BeforeBuild">
   </Target>

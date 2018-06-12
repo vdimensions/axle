@@ -4,6 +4,9 @@ source ../../../../dist
 
 source https://nuget.org/api/v2
   nuget Microsoft.Data.Sqlite >= 2.0 framework: netstandard2.0
+  nuget SQLitePCLRaw.bundle_green framework: netstandard2.0
+  nuget Microsoft.Data.Sqlite.Core framework: netstandard2.0
+  nuget SQLitePCLRaw.core framework: netstandard2.0
   nuget System.Data.Common >= 4.3 framework: netstandard2.0
   nuget System.Diagnostics.TraceSource >= 4.0 framework: netstandard1.6
   nuget System.Threading.Thread >= 4.0 framework: netstandard1.6

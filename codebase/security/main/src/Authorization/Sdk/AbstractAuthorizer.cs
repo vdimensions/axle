@@ -79,7 +79,7 @@ namespace Axle.Security.Authorization.Sdk
         {
             var expandedPrincipals = ExpandPrincipals(principal);
             var rules = ExpandPolicies(accessLevel, accessRights).ToArray();
-            return rules.Length == 0 ? false : ValidateRules(expandedPrincipals, rules);
+            return rules.Length != 0 && ValidateRules(expandedPrincipals, rules);
         }
 
         public virtual bool ArePrincipalsRelated(IPrincipal principal1, IPrincipal principal2)

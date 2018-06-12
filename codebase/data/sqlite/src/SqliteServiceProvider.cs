@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.IO;
 #if !NETSTANDARD
 using SqliteConnection  = System.Data.SQLite.SQLiteConnection;
 using SqliteTransaction = System.Data.SQLite.SQLiteTransaction;
@@ -71,6 +72,16 @@ namespace Axle.Data.Sqlite
         private readonly IDbParameterValueSetter<SqliteParameter, SqliteType> _parameterValueSetter = new SqliteParameterValueSetter();
 
         private SqliteServiceProvider() : base(Name, Dialect) { }
+
+        public FileInfo CreateFile(string path)
+        {
+            #if !NETSTANDARD
+            SqliteConnection.CreateFile(path);
+            #else
+            using (var fs = File.Create(path, 0, FileOptions.WriteThrough)) { }
+            #endif
+            return new FileInfo(path);
+        }
 
         protected override SqliteConnection CreateConnection(string connectionString)
         {
