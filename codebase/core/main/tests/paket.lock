@@ -1,10 +1,10 @@
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.19)
+    Axle.Core (1.5.1.20)
   remote: https://www.nuget.org/api/v2
-    Microsoft.NETCore.Platforms (2.0.2)
-    NETStandard.Library (2.0.2)
+    Microsoft.NETCore.Platforms (2.1)
+    NETStandard.Library (2.0.3)
       Microsoft.NETCore.Platforms (>= 1.1)
       System.Runtime.InteropServices.RuntimeInformation (>= 4.3)
     System.Runtime.InteropServices.RuntimeInformation (4.3)

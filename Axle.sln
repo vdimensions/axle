@@ -8,14 +8,14 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".sln", ".sln", "{CE683FA5-9
 		mason.properties = mason.properties
 	EndProjectSection
 EndProject
-### CORE ###################################################
+### DATA ###################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core.dist", "codebase\core\main\src\Axle.Core.dist.csproj", "{D7C8BBB3-0256-46CF-B778-5EB7E423229C}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core", "codebase\core\main\src\Axle.Core.csproj", "{43919C97-BCFD-4802-95D7-76435E066962}"
 EndProject
-#### RESOURCES #############################################
+### DATA ###################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "resources", "resources", "{ECC0AFD7-5709-4003-81DF-196F9BC3D158}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{766C9667-99B8-4469-9FB6-2A15025B6E25}"
@@ -36,24 +36,24 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.Yaml", "I:\P
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Resources.Yaml.Tests", "I:\Projects\VDimensions\projects\axle\codebase\resources\yaml\tests\Axle.Resources.Yaml.Tests.csproj", "{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}"
 EndProject
-### SECURITY ###############################################
+### DATA ###################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security", "security", "{6706277F-4174-433D-B3F3-57E0C6E15402}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.Cryptography", "codebase\security\cryptography\src\Axle.Security.Cryptography.csproj", "{AB4D08D0-AE39-4992-96DA-FDD3676E806B}"
 EndProject
-### LOGGING ################################################
+### DATA ###################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging", "logging", "{D70A7D36-32CB-4359-8210-D3F6DEC3D04A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "log4net", "log4net", "{D233A35D-37CF-48C1-BCFB-B7A90F82D826}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Logging.Log4net", "codebase\logging\log4net\src\Axle.Logging.Log4net.csproj", "{91679D15-77CB-4F66-8145-7085303A105F}"
 EndProject
-### CACHING ################################################
+### DATA ###################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "caching", "caching", "{13D7D1D3-733D-46E8-AFD1-D1BE3E0A1640}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Caching", "codebase\caching\main\src\Axle.Caching.csproj", "{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6}"
 EndProject
-### COMPONENT MODEL ########################################
+### DATA ###################################################
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "component-model", "component-model", "{098CB474-B887-4DE9-B5E8-FD9C08E4462D}"
 EndProject
 ### DATA ###################################################
@@ -76,6 +76,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FBBEBC56-CADC-4DE3-A75B-B373C1A7382F}"
 EndProject
 ############################################################
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Core.Tests", "codebase\core\main\tests\Axle.Core.Tests.csproj", "{0562EAB0-074F-40AD-A49D-812C80FFB316}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -126,10 +128,6 @@ Global
 		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB4D08D0-AE39-4992-96DA-FDD3676E806B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{EA51413A-58E8-4903-AEA7-CD0BF79462F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{EA51413A-58E8-4903-AEA7-CD0BF79462F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{EA51413A-58E8-4903-AEA7-CD0BF79462F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{EA51413A-58E8-4903-AEA7-CD0BF79462F9}.Release|Any CPU.Build.0 = Release|Any CPU
 		{91679D15-77CB-4F66-8145-7085303A105F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91679D15-77CB-4F66-8145-7085303A105F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91679D15-77CB-4F66-8145-7085303A105F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -166,6 +164,10 @@ Global
 		{879FE3A1-6FF7-466D-91FA-4DB67AE5E66A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{879FE3A1-6FF7-466D-91FA-4DB67AE5E66A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{879FE3A1-6FF7-466D-91FA-4DB67AE5E66A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0562EAB0-074F-40AD-A49D-812C80FFB316}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0562EAB0-074F-40AD-A49D-812C80FFB316}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0562EAB0-074F-40AD-A49D-812C80FFB316}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0562EAB0-074F-40AD-A49D-812C80FFB316}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -173,18 +175,16 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{D7C8BBB3-0256-46CF-B778-5EB7E423229C} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 		{43919C97-BCFD-4802-95D7-76435E066962} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
+		{766C9667-99B8-4469-9FB6-2A15025B6E25} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
 		{0952B72D-9D69-4439-885F-096ED969E9E5} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
 		{2DE11DC0-1123-4A33-8D10-5665ADEACF06} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
 		{8EDF4429-251A-416D-BB68-93F227191BCF} = {FBBEBC56-CADC-4DE3-A75B-B373C1A7382F}
 		{5D89911E-F70B-4C08-9659-119104318881} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
 		{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0} = {FBBEBC56-CADC-4DE3-A75B-B373C1A7382F}
 		{3DE1EA18-A956-49C5-9D41-6FC5DB175A71} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
-		{766C9667-99B8-4469-9FB6-2A15025B6E25} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
 		{F3F97266-80F8-4C54-8CBC-1D72A5042E19} = {766C9667-99B8-4469-9FB6-2A15025B6E25}
 		{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B} = {FBBEBC56-CADC-4DE3-A75B-B373C1A7382F}
 		{AB4D08D0-AE39-4992-96DA-FDD3676E806B} = {6706277F-4174-433D-B3F3-57E0C6E15402}
-		{2509012F-990E-4261-8A97-659DF2217F1C} = {D70A7D36-32CB-4359-8210-D3F6DEC3D04A}
-		{EA51413A-58E8-4903-AEA7-CD0BF79462F9} = {2509012F-990E-4261-8A97-659DF2217F1C}
 		{D233A35D-37CF-48C1-BCFB-B7A90F82D826} = {D70A7D36-32CB-4359-8210-D3F6DEC3D04A}
 		{91679D15-77CB-4F66-8145-7085303A105F} = {D233A35D-37CF-48C1-BCFB-B7A90F82D826}
 		{DF3B43F1-D3EB-4C7C-8422-B6B343629CF6} = {13D7D1D3-733D-46E8-AFD1-D1BE3E0A1640}
@@ -196,6 +196,7 @@ Global
 		{82EE9E10-E6CE-485F-A943-BA33E303035E} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
 		{879FE3A1-6FF7-466D-91FA-4DB67AE5E66A} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
 		{FBBEBC56-CADC-4DE3-A75B-B373C1A7382F} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
+		{0562EAB0-074F-40AD-A49D-812C80FFB316} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

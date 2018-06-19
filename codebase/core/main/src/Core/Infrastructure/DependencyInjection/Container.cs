@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -174,3 +175,4 @@ namespace Axle.Core.Infrastructure.DependencyInjection
         protected override IDependencyDescriptorProvider DependencyDescriptorProvider { get; }
     }
 }
+#endif

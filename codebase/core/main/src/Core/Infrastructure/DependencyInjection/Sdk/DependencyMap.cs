@@ -1,7 +1,9 @@
-﻿using System;
+﻿#if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 using Axle.Core.Infrastructure.DependencyInjection.Descriptors;
 using Axle.Verification;
@@ -126,8 +128,11 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
                 // TODO: assume prototyping
                 throw new DependencyNotFoundException(type, name);
             }
-
+            #if NETSTANDARD || NET45_OR_NEWER
+            var filtered = candidates.Where(c => type.GetTypeInfo().IsAssignableFrom(c.Type.GetTypeInfo())).ToArray();
+            #else
             var filtered = candidates.Where(c => type.IsAssignableFrom(c.Type)).ToArray();
+            #endif
             switch (filtered.Length)
             {
                 case 1:
@@ -144,3 +149,4 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
         void IDisposable.Dispose() => Dispose();
     }
 }
+#endif

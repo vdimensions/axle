@@ -1,4 +1,5 @@
-﻿namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
+﻿#if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
 {
     public abstract partial class AbstractContainer
     {
@@ -56,3 +57,4 @@
         }
     }
 }
+#endif
