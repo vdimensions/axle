@@ -1,4 +1,4 @@
-namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
+namespace Axle.Core.DependencyInjection.Descriptors
 {
     public interface IDependencyDescriptor
     {

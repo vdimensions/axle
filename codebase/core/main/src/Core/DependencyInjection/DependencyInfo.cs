@@ -3,13 +3,13 @@
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection
+namespace Axle.Core.DependencyInjection
 {
     /// <summary>
     /// A class that describes a dependency which needs to be satisfied by a 
     /// <see cref="IContainer">dependency container</see> during object construction.
     /// </summary>
-    public class DependencyInfo
+    public sealed class DependencyInfo
     {
         public DependencyInfo(Type type, string dependencyName, string memberName)
         {

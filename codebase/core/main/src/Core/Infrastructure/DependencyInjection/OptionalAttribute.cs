@@ -2,19 +2,17 @@
 using System.ComponentModel;
 using System.Diagnostics;
 
-using Axle.Core.Infrastructure.DependencyInjection.Sdk;
-
 
 namespace Axle.Core.Infrastructure.DependencyInjection
 {
     /// <summary>
     /// An attribute that is used in conjunction with the <see cref="InjectAttribute">inject attribute</see>. Marks a
-    /// property or a constructor argument as optional, which would instruct a <see cref="Axle.Application.IoC.Container">dependency container</see> 
+    /// property or a constructor argument as optional, which would instruct a <see cref="Container">dependency container</see> 
     /// to proceed with dependency resolution if a value for the annotated target cannot be supplied.
     /// </summary>
     /// <seealso cref="InjectAttribute"/>
     /// <seealso cref="IDependency"/>
-    /// <seealso cref="Axle.Application.IoC.Container"/>
+    /// <seealso cref="Container"/>
     [AttributeUsage(AttributeTargets.Property|AttributeTargets.Field, Inherited = true, AllowMultiple = false)]
     public sealed class OptionalAttribute : Attribute
     {

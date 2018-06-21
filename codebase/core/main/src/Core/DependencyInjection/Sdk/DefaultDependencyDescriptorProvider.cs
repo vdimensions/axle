@@ -6,11 +6,12 @@ using System.Linq;
 using System.Reflection;
 #endif
 
+using Axle.Core.DependencyInjection.Descriptors;
 using Axle.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
+namespace Axle.Core.DependencyInjection.Sdk
 {
     public class DefaultDependencyDescriptorProvider : AbstractDependencyDescriptorProvider
     {

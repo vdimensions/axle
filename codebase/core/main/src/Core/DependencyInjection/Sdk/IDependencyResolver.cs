@@ -1,4 +1,4 @@
-namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
+namespace Axle.Core.DependencyInjection.Sdk
 {
     public interface IDependencyResolver
     {

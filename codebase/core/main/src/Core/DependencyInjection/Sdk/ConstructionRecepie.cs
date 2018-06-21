@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Axle.Core.Infrastructure.DependencyInjection.Descriptors;
+using Axle.Core.DependencyInjection.Descriptors;
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
+namespace Axle.Core.DependencyInjection.Sdk
 {
     /// <summary>
     /// A class representing a construction recepie; that is the constructor/factory method, 
@@ -142,7 +142,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
                 throw new DependencyConstructionException(TargetType, e);
             }
 
-            var properties = Fields.Union(Properties).Select(f => new { Prop = f, Value = ResolveProperty(resolver, f) });
+            var properties = Fields.Union(Properties).Select(x => new { Prop = x, Value = ResolveProperty(resolver, x) });
             foreach (var property in properties)
             {
                 try
@@ -151,7 +151,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
                 }
                 catch (Exception e)
                 {
-                    throw new DependencyPropertyException(TargetType, property.Prop.Info.MemberName, "An error has occured while invoking setter, see inner exception for more details. ", e);
+                    throw new DependencyPropertyException(TargetType, property.Prop.Info.MemberName, "An error has occurred while invoking a member's setter, see inner exception for more details. ", e);
                 }
             }
 

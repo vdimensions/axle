@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-using Axle.Core.Infrastructure.DependencyInjection;
+﻿using Axle.Core.DependencyInjection;
 
 using NUnit.Framework;
 
@@ -12,7 +6,7 @@ using NUnit.Framework;
 namespace Axle.Core.Tests
 {
     [TestFixture]
-    public class DITest
+    public class DITests
     {
         private class Person
         {
@@ -24,6 +18,13 @@ namespace Axle.Core.Tests
             public string Name { get; }
         }
 
+        private class Vip : Person
+        {
+            public Vip(string name) : base(name)
+            {
+            }
+        }
+
         [Test]
         public void TestContainerInstantiation()
         {
@@ -32,16 +33,68 @@ namespace Axle.Core.Tests
             Assert.IsNull(c.Parent);
         }
 
-
         [Test]
-        public void TestContainerDI()
+        public void TestDependencyResolution()
         {
+            const string name = "World";
+
             var c = new Container(null);
-            c.RegisterInstance("World");
+            c.RegisterInstance(name);
             c.RegisterType<Person>();
 
             var p = c.Resolve<Person>();
-            Assert.AreEqual("World", p.Name);
+            Assert.AreEqual(name, p.Name);
+
+            var p2 = c.Resolve<Person>();
+
+            Assert.AreSame(p, p2);
+        }
+
+        [Test]
+        public void TestParentClassDependencyResolution()
+        {
+            const string name = "World";
+
+            var c = new Container(null);
+            c.RegisterInstance(name);
+            c.RegisterType<Vip>();
+
+            var p = c.Resolve<Person>();
+            Assert.AreEqual(name, p.Name);
+
+            var p2 = c.Resolve<Person>();
+
+            Assert.AreSame(p, p2);
+        }
+
+        [Test]
+        public void TestAmbiguousDependencyError()
+        {
+            Assert.Throws<AmbiguousDependencyException>(
+                () =>
+                {
+                    const string name = "World";
+
+                    var c = new Container(null);
+                    c.RegisterInstance(name);
+                    c.RegisterType<Person>();
+                    c.RegisterType<Vip>();
+
+                    c.Resolve<Person>();
+                });
+        }
+
+        [Test]
+        public void TestDuplicateDependencyError()
+        {
+            Assert.Throws<DuplicateDependencyDefinitionException>(
+                () =>
+                {
+                    const string name = "World";
+                    var c = new Container(null);
+                    c.RegisterInstance(name);
+                    c.RegisterInstance(name);
+                });
         }
     }
 }

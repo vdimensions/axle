@@ -18,8 +18,8 @@ using System.Runtime.InteropServices;
 [assembly: Guid("43919C97-BCFD-4802-95D7-76435E066962")]
 #endif
 
-[assembly: AssemblyVersion("1.5.1.20")]
-[assembly: AssemblyFileVersion("1.5.1.20")]
-[assembly: AssemblyInformationalVersion("1.5.1.20")]
+[assembly: AssemblyVersion("1.5.1.22")]
+[assembly: AssemblyFileVersion("1.5.1.22")]
+[assembly: AssemblyInformationalVersion("1.5.1.22")]
 
 [assembly: InternalsVisibleTo("Axle.Core.Tests")]

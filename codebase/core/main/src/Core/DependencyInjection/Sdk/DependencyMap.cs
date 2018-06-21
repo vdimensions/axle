@@ -3,29 +3,28 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+#if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
+#endif
 
-using Axle.Core.Infrastructure.DependencyInjection.Descriptors;
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
+namespace Axle.Core.DependencyInjection.Sdk
 {
     internal sealed class DependencyMap : IDisposable
     {
         internal abstract class DependencyState
         {
-            private readonly string _name;
-
             protected DependencyState(string name)
             {
-                _name = name.VerifyArgument(nameof(name)).IsNotNull();
+                Name = name.VerifyArgument(nameof(name)).IsNotNull();
             }
 
             public abstract object Resolve();
 
             public abstract Type Type { get; }
-            public string Name => _name;
+            public string Name { get; }
         }
 
         internal sealed class ConstantDependencyState : DependencyState
@@ -47,11 +46,11 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
             private readonly IEnumerable<ConstructionRecepie> _recepies;
             private readonly IDependencyResolver _resolver;
 
-            protected ConstructibleDependencyState(string name, Type type, IEnumerable<ConstructionRecepie> recepie, IDependencyResolver resolver) 
+            protected ConstructibleDependencyState(string name, Type type, IEnumerable<ConstructionRecepie> recepies, IDependencyResolver resolver) 
                 : base(name)
             {
                 Type = type;
-                _recepies = recepie.VerifyArgument(nameof(recepie)).IsNotNull().Value;
+                _recepies = recepies.VerifyArgument(nameof(recepies)).IsNotNull().Value;
                 _resolver = resolver.VerifyArgument(nameof(resolver)).IsNotNull().Value;
             }
 
@@ -78,6 +77,9 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
 
         private readonly ConcurrentDictionary<string, DependencyState[]> _states;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="DependencyMap"/> class.
+        /// </summary>
         public DependencyMap()
         {
             _states = new ConcurrentDictionary<string, DependencyState[]>(StringComparer.Ordinal);
@@ -89,8 +91,15 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
             _states.AddOrUpdate(
                     name.VerifyArgument(nameof(name)),
                     x => new[] { state },
-                    // TODO: repeating values for the same name should not be allowed!
-                    (x, oldState) => oldState.Union(new[] { state }).ToArray());
+                    (x, oldState) =>
+                    {
+                        if (oldState.Any(os => state.Type == os.Type))
+                        {
+                            // Repeating type values for the same name should not be allowed!
+                            throw new DuplicateDependencyDefinitionException(state.Type, name);
+                        }
+                        return oldState.Union(new[] {state}).ToArray();
+                    });
         }
 
         public void RegisterConstant(string name, object value) => Register(name, new ConstantDependencyState(name, value));
@@ -121,6 +130,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
             RegisterConstructible(name, type, ddp, resolver, (a, b, c, d) => new PrototypeDependencyState(a, b, c, d));
         }
 
+
         public object Resolve(string name, Type type)
         {
             if (!_states.TryGetValue(name, out var candidates))
@@ -140,8 +150,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
                 case 0:
                     throw new DependencyNotFoundException(type, name);
                 default:
-                    // TODO: message for ambiguious candidates
-                    throw new DependencyResolutionException();
+                    throw new AmbiguousDependencyException(type, name, filtered.Select(x => new DependencyCandidate(x.Type, x.Name)));
             }
         }
 

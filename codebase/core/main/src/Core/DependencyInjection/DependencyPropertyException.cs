@@ -6,7 +6,7 @@ using System.Runtime.Serialization;
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection
+namespace Axle.Core.DependencyInjection
 {
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]

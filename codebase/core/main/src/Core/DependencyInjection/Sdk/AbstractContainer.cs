@@ -1,10 +1,8 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
 using System;
 
-using Axle.Core.Infrastructure.DependencyInjection.Descriptors;
 
-
-namespace Axle.Core.Infrastructure.DependencyInjection.Sdk
+namespace Axle.Core.DependencyInjection.Sdk
 {
     public abstract partial class AbstractContainer : IContainer
     {

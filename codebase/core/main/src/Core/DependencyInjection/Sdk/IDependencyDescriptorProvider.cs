@@ -1,8 +1,10 @@
 using System;
 using System.Collections.Generic;
 
+using Axle.Core.DependencyInjection.Descriptors;
 
-namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
+
+namespace Axle.Core.DependencyInjection.Sdk
 {
     public interface IDependencyDescriptorProvider
     {

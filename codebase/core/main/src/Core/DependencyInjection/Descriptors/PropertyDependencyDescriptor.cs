@@ -5,7 +5,7 @@ using Axle.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
+namespace Axle.Core.DependencyInjection.Descriptors
 {
     public class PropertyDependencyDescriptor : IPropertyDependencyDescriptor
     {

@@ -1,16 +1,22 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
 
+using Axle.Core.DependencyInjection.Descriptors;
 using Axle.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
+namespace Axle.Core.DependencyInjection.Sdk
 {
+    /// <summary>
+    /// An abstract class to serve as a base for custom <see cref="IDependencyDescriptorProvider"/> implementations.
+    /// </summary>
+    /// <seealso cref="IDependencyDescriptorProvider"/>
     public abstract class AbstractDependencyDescriptorProvider : IDependencyDescriptorProvider
     {
         protected virtual IPropertyDependencyDescriptor GetDescriptor(IField field)
@@ -26,7 +32,7 @@ namespace Axle.Core.Infrastructure.DependencyInjection.Descriptors
             return new FactoryDescriptor(
                 methodOrConstructor,
                 methodOrConstructor.GetParameters()
-                    .Select(y => new FactoryArgumentDescriptor(y, GetDependencyName(y)))
+                    .Select(y => new FactoryArgumentDescriptor(y, GetDependencyName(y)) as IFactoryArgumentDescriptor)
                     .ToArray());
         }
 

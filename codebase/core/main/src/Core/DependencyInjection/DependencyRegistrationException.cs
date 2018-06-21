@@ -4,7 +4,7 @@ using System.Runtime.Serialization;
 #endif
 
 
-namespace Axle.Core.Infrastructure.DependencyInjection
+namespace Axle.Core.DependencyInjection
 {
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
