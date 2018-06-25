@@ -37,9 +37,6 @@
     <None Remove="Axle.Core.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Core\Modularity\" />
-  </ItemGroup>
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
