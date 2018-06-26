@@ -24,7 +24,7 @@ namespace Axle.Environment
         /// </returns>
         Assembly LoadAssembly(string assemblyName);
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         /// <summary>
         /// Loads a satellite assembly to the specified <paramref name="targetAssembly">target</paramref> assembly and <paramref name="culture"/>.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Axle.Environment
         /// </summary>
         RuntimeImplementation Implementation { get; }
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         /// <summary>
         /// Returns a reference to the <see cref="AppDomain"/> instance hosting the current .NET runtime. 
         /// </summary>

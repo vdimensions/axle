@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Axle.Core.Modularity;
 
 
 namespace Axle.Core
 {
-    public static class Application
+    public class Application
     {
         public static void Run(params string[] args)
         {
@@ -13,5 +11,17 @@ namespace Axle.Core
             // 2. Prepare infrastructure providers (logging, configuration, DI)
             // 3. Initialize modularity
         }
+
+        public Application(ILoggingServiceProvider loggingService, IDependencyContainerProvider dependencyContainerProvider, IReflectionProvider reflectionProvider)
+        {
+            LoggingService = loggingService;
+            DependencyContainerProvider = dependencyContainerProvider;
+            ReflectionProvider = reflectionProvider;
+        }
+
+        public ILoggingServiceProvider LoggingService { get; }
+        public IDependencyContainerProvider DependencyContainerProvider { get; }
+        public IReflectionProvider ReflectionProvider { get; }
+        // TODO: configuration provider
     }
 }

@@ -269,7 +269,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="string.Empty"/>
         /// <seealso cref="string.IsNullOrEmpty(string)"/>
         /// <seealso cref="IsEmpty(string)"/>
-        public static bool IsNullOrEmpty(this string str) { return string.IsNullOrEmpty(str); }
+        public static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);
 
         /// <summary>
         /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed order.
@@ -1349,6 +1349,22 @@ namespace Axle.Extensions.String
         /// </exception>
         public static string TrimEnd(this string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
         #endregion TrimEnd(...)
+
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        /// <summary>
+        /// Retrieves the system's reference for the specified string. 
+        /// </summary>
+        /// <param name="str">A <see cref="string"/> to search for in the intern pool.</param>
+        /// <returns>
+        /// The system's reference to <paramref name="str"/>, if it is interned; otherwise, a new reference to a 
+        /// <see cref="string"/> with the value of <paramref name="str"/>.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// <paramref name="str"/> is <c>null</c>.
+        /// </exception>
+        /// <seealso cref="string.Intern(string)"/>
+        public static string Intern(this string str) { return string.Intern(str.VerifyArgument(nameof(str)).IsNotNull()); }
+        #endif
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

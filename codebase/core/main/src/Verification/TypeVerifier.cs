@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-#if NETSTANDARD
+#if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -141,5 +141,24 @@ namespace Axle.Verification
             return argument;
         }
         #endif
+
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        [DebuggerStepThrough]
+        public static ArgumentReference<Type> IsNotAbstract(this ArgumentReference<Type> argument)
+        {
+            var actualType = argument.IsNotNull().Value;
+            #if NETSTANDARD || NET45_OR_NEWER
+            var actualTypeInfo = actualType.GetTypeInfo();
+            if (actualTypeInfo.IsInterface || actualTypeInfo.IsAbstract)
+            #else
+            if (actualType.IsInterface || actualType.IsAbstract)
+            #endif
+            {
+                throw new ArgumentException("The provided type must not be an abstract class or an interface.", argument.Name);
+            }
+            return argument;
+        }
     }
 }

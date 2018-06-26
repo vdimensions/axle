@@ -33,7 +33,7 @@ namespace Axle.Environment
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly RuntimeImplementation _impl = RuntimeImplementation.Unknown;
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         internal RuntimeInfo()
         {
             var monoVersion = GetMonoVersion();
@@ -97,7 +97,7 @@ namespace Axle.Environment
         public Version FrameworkVersion => _frameworkVersion;
         public RuntimeImplementation Implementation => _impl;
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         public AppDomain Domain => AppDomain.CurrentDomain;
         #endif
     }
