@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
+using Axle.Reflection.Extensions;
 using Axle.Verification;
 
 
@@ -40,43 +41,7 @@ namespace Axle.Reflection
             public Parameter(ParameterInfo parameterInfo)
             {
                 _parameterInfo = parameterInfo.VerifyArgument(nameof(parameterInfo)).IsNotNull();
-                var comparer = EqualityComparer<Attribute>.Default;
-                var notInherited = ReflectedMember.GetCustomAttributes(false).Cast<Attribute>();
-                var inherited = ReflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
-
-                var attr = notInherited
-                    .Select(
-                        x => new
-                        {
-                            Attribute = x,
-                            Inherited = false,
-                            #if NETSTANDARD || NET45_OR_NEWER
-                            AttributeUsage = x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                            #else
-                            AttributeUsage = x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                            #endif
-                        })
-                    .Union(
-                        inherited.Select(
-                            x => new
-                            {
-                                Attribute = x,
-                                Inherited = true,
-                                #if NETSTANDARD || NET45_OR_NEWER
-                                AttributeUsage = x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                                #else
-                                AttributeUsage = x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                                #endif
-                            }))
-                    .Select(
-                        x => new AttributeInfo
-                        {
-                            Attribute = x.Attribute,
-                            AllowMultiple = x.AttributeUsage.AllowMultiple,
-                            AttributeTargets = x.AttributeUsage.ValidOn,
-                            Inherited = x.Inherited
-                        } as IAttributeInfo);
-                _attributes = attr.ToArray();
+                _attributes = ReflectedMember.GetEffectiveAttributes();
 
                 if (parameterInfo.IsIn)
                 {

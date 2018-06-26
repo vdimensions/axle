@@ -15,9 +15,9 @@ namespace Axle.Text.Formatting
         {
             return new FormatProvider(formatter);
         }
-        public static FormatProvider Create<TCF>() where TCF: ICustomFormatter, new()
+        public static FormatProvider Create<TF>() where TF: ICustomFormatter, new()
         {
-            return new FormatProvider(new TCF());
+            return new FormatProvider(new TF());
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 
 using Axle.References;
+using Axle.Reflection.Extensions;
 using Axle.Threading;
 using Axle.Threading.ReaderWriterLock;
 
@@ -95,50 +95,7 @@ namespace Axle.Reflection
                 return Lock.Invoke(
                     () => _attributes,
                     xx => xx == null,
-                    () =>
-                    {
-                        var comparer = EqualityComparer<Attribute>.Default;
-                        var notInherited = reflectedMember.GetCustomAttributes(false).Cast<Attribute>();
-                        var inherited = reflectedMember.GetCustomAttributes(true).Cast<Attribute>().Except(notInherited, comparer);
-
-                        _attributes = notInherited
-                            .Select(
-                                x => new
-                                {
-                                    Attribute = x,
-                                    Inherited = false,
-                                    #if NETSTANDARD || NET45_OR_NEWER
-                                    AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                    #else
-                                    AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                    #endif
-                                    .Cast<AttributeUsageAttribute>()
-                                    .Single()
-                                })
-                            .Union(
-                                inherited.Select(
-                                    x => new
-                                    {
-                                        Attribute = x,
-                                        Inherited = true,
-                                        #if NETSTANDARD || NET45_OR_NEWER
-                                        AttributeUsage = (x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                        #else
-                                        AttributeUsage = (x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false))
-                                        #endif
-                                        .Cast<AttributeUsageAttribute>()
-                                        .Single()
-                                    }))
-                            .Select(
-                                x => new AttributeInfo
-                                {
-                                    Attribute = x.Attribute,
-                                    AllowMultiple = x.AttributeUsage.AllowMultiple,
-                                    AttributeTargets = x.AttributeUsage.ValidOn,
-                                    Inherited = x.Inherited
-                                } as IAttributeInfo);
-                        return _attributes.ToArray();
-                    }) ?? new IAttributeInfo[0];
+                    () => _attributes = reflectedMember.GetEffectiveAttributes()) ?? new IAttributeInfo[0];
             }
         }
 

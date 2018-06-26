@@ -10,6 +10,9 @@ namespace Axle.Reflection
     /// </summary>
     public interface IIntrospector
     {
+        IEnumerable<IAttributeInfo> GetAttributes();
+        IEnumerable<IAttributeInfo> GetAttributes(Type attributeType);
+
         IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);
 
         IEnumerable<IConstructor> GetConstructors(ScanOptions scanOptions);

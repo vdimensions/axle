@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
+using Axle.Reflection.Extensions;
 using Axle.Verification;
 
 
@@ -51,7 +52,6 @@ namespace Axle.Reflection
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
         private static bool MatchesScanOptions(IMember member, ScanOptions options)
         {
             if ((options & ScanOptions.Static) != ScanOptions.Static && member.Declaration == DeclarationType.Static)
@@ -74,6 +74,7 @@ namespace Axle.Reflection
 
             return true;
         }
+        #endif
 
         protected static MemberInfo ExtractMember<T>(Expression<T> expression)
         {
@@ -119,6 +120,24 @@ namespace Axle.Reflection
             #endif
 
             return member;
+        }
+
+        /// <inheritdoc />
+        public IEnumerable<IAttributeInfo> GetAttributes()
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            return IntrospectedType.GetTypeInfo().GetEffectiveAttributes();
+            #else
+            return IntrospectedType.GetEffectiveAttributes();
+            #endif
+        }
+        public IEnumerable<IAttributeInfo> GetAttributes(Type attributeType)
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            return IntrospectedType.GetTypeInfo().GetEffectiveAttributes(attributeType);
+            #else
+            return IntrospectedType.GetEffectiveAttributes(attributeType);
+            #endif
         }
 
         /// <inheritdoc />
