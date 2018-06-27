@@ -1,28 +1,96 @@
-﻿using Axle.Application.Modularity;
-using Axle.Core;
+﻿using System;
+
+using Axle.Application.DependencyInjection;
+using Axle.Application.Logging;
+using Axle.Application.Modularity;
+using Axle.Verification;
 
 
 namespace Axle.Application
 {
-    public class App
+    public sealed class App : IDisposable
     {
-        public static void Run(params string[] args)
+        private readonly object _syncRoot = new object();
+
+        private ILoggingServiceProvider _loggingService;
+        private IDependencyContainerProvider _dependencyContainerProvider;
+        private IModuleCatalog _moduleCatalog;
+        private IContainer _appContainer;
+
+        public App()
         {
-            // 1. Discover infrastructure component candidates
-            // 2. Prepare infrastructure providers (logging, configuration, DI)
-            // 3. Initialize modularity
+            LoggingService = new DefaultLoggingServiceProvider();
+            DependencyContainerProvider = new DefaultDependencyContainerProvider();
+            ModuleCatalog = new DefaultModuleCatalog();
         }
 
-        public App(ILoggingServiceProvider loggingService, IDependencyContainerProvider dependencyContainerProvider, IReflectionProvider reflectionProvider)
+        public void Run(params string[] args)
         {
-            LoggingService = loggingService;
-            DependencyContainerProvider = dependencyContainerProvider;
-            ReflectionProvider = reflectionProvider;
+            lock (_syncRoot)
+            {
+                if (_appContainer == null)
+                {
+                    _appContainer = Modules.Launch(ModuleCatalog, DependencyContainerProvider);
+                }
+            }
         }
 
-        public ILoggingServiceProvider LoggingService { get; }
-        public IDependencyContainerProvider DependencyContainerProvider { get; }
-        public IReflectionProvider ReflectionProvider { get; }
-        // TODO: configuration provider
+        private void CheckIfStarted()
+        {
+            lock (_syncRoot)
+                if (_appContainer != null)
+                {
+                    throw new InvalidOperationException("Application already started");
+                }
+        }
+
+        public void ShutDown()
+        {
+            lock (_syncRoot)
+            {
+                _appContainer?.Dispose();
+            }
+        }
+
+        void IDisposable.Dispose() => ShutDown();
+
+        public ILoggingServiceProvider LoggingService
+        {
+            get => _loggingService;
+            set
+            {
+                lock (_syncRoot)
+                {
+                    CheckIfStarted();
+                    _loggingService = value.VerifyArgument(nameof(value)).IsNotNull().Value;
+                }
+            }
+        }
+
+        public IDependencyContainerProvider DependencyContainerProvider
+        {
+            get => _dependencyContainerProvider;
+            set
+            {
+                lock (_syncRoot)
+                {
+                    CheckIfStarted();
+                    _dependencyContainerProvider = value.VerifyArgument(nameof(value)).IsNotNull().Value;
+                }
+            }
+        }
+
+        public IModuleCatalog ModuleCatalog
+        {
+            get => _moduleCatalog;
+            set
+            {
+                lock (_syncRoot)
+                {
+                    CheckIfStarted();
+                    _moduleCatalog = value.VerifyArgument(nameof(value)).IsNotNull().Value;
+                }
+            }
+        }
     }
 }

@@ -5,14 +5,15 @@
 
 namespace Axle.Application.Modularity
 {
-    public interface IReflectionProvider
+    public interface IModuleCatalog
     {
         Type[] DiscoverModuleTypes();
         string GetModuleName(Type moduleType);
-        ModuleMethod GetInitMethod(Type moduleType);
-        ModuleNotifyMethod[] GetDependencyInitializedMethods(Type moduleType);
-        ModuleMethod GetDependenciesReadyMethodMethod(Type moduleType);
-        ModuleEntryMethod GetEntryPointMethod(Type moduleType);
         Type[] GetRequiredModules(Type moduleType);
+        ModuleMethod GetInitMethod(Type moduleType);
+        ModuleCallback[] GetDependencyInitializedMethods(Type moduleType);
+        ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType);
+        ModuleMethod GetReadyMethod(Type moduleType);
+        ModuleEntryMethod GetEntryPointMethod(Type moduleType);
     }
 }

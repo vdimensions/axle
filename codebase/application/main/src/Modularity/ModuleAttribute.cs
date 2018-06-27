@@ -10,6 +10,7 @@ namespace Axle.Application.Modularity
         {
             Name = name;
         }
+        public ModuleAttribute() : this(string.Empty) { }
 
         public string Name { get; }
     }

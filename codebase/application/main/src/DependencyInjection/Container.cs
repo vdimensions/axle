@@ -8,17 +8,6 @@ namespace Axle.Application.DependencyInjection
 {
     public class Container : AbstractContainer, IDisposable
     {
-        private void Dispose(bool disposing)
-        {
-            if (!disposing)
-            {
-                return;
-            }
-        }
-
-        public void Dispose() => Dispose(true);
-        void IDisposable.Dispose() => Dispose(true);
-
         public Container(IContainer parent) : base(parent)
         {
             DependencyDescriptorProvider = new DefaultDependencyDescriptorProvider();

@@ -4,9 +4,9 @@
 namespace Axle.Application.Modularity
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class DependsOnModuleAttribute : Attribute
+    public class RequiresAttribute : Attribute
     {
-        public DependsOnModuleAttribute(Type moduleType)
+        public RequiresAttribute(Type moduleType)
         {
             ModuleType = moduleType;
         }

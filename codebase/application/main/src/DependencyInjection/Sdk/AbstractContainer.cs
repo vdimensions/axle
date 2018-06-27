@@ -13,6 +13,17 @@ namespace Axle.Application.DependencyInjection.Sdk
             Parent = parent;
         }
 
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!disposing)
+            {
+                return;
+            }
+        }
+
+        public void Dispose() => Dispose(true);
+        void IDisposable.Dispose() => Dispose(true);
+
         public IContainer RegisterInstance(object instance, string name, params string[] aliases)
         {
             _dependencyMap.RegisterConstant(name, instance);

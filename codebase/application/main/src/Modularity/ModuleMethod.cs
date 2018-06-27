@@ -12,7 +12,7 @@ namespace Axle.Application.Modularity
             _invokable = invokable;
         }
 
-        public void Invoke(object module, IModuleExporter exporter)
+        public void Invoke(object module, ModuleExporter exporter)
         {
             if (_invokable.GetParameters().Length == 0)
             {

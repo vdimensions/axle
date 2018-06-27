@@ -7,7 +7,7 @@ using Axle.Reflection;
 
 namespace Axle.Application.Modularity
 {
-    public sealed class DefaultReflectionProvider : IReflectionProvider
+    internal sealed class DefaultModuleCatalog : IModuleCatalog
     {
         private ScanOptions memberScanOptions = ScanOptions.Instance|ScanOptions.NonPublic|ScanOptions.Public;
 
@@ -15,12 +15,11 @@ namespace Axle.Application.Modularity
         {
             return Platform.Runtime.GetAssemblies()
                                    .SelectMany(x => x.GetTypes())
-                                    #if NETSTANDARD1_5
-                                   .Where(t => t.GetTypeInfo().GetCustomAttributes(typeof(ModuleInitMethodAttribute), false).Any())
-                                    #else
+                                   #if NETSTANDARD1_5
+                                   .Select(t => t.GetTypeInfo())
+                                   #endif
                                    .Where(t => !t.IsAbstract && !t.IsInterface)
-                                   .Where(t => t.GetCustomAttributes(typeof(ModuleInitMethodAttribute), false).Any())
-                                    #endif
+                                   .Where(t => t.GetCustomAttributes(typeof(ModuleInitAttribute), false).Any())
                                    .ToArray();
         }
 
@@ -36,24 +35,35 @@ namespace Axle.Application.Modularity
         {
             var introspector = new DefaultIntrospector(moduleType);
             var m = introspector.GetMethods(memberScanOptions)
-                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleInitMethodAttribute));
+                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleInitAttribute));
             return new ModuleMethod(m);
         }
 
-        public ModuleNotifyMethod[] GetDependencyInitializedMethods(Type moduleType)
+        public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
             return introspector.GetMethods(memberScanOptions)
-                                .Where(x => x.Attributes.Any(a => a.Attribute is ModuleOnDependencyInitializedAttribute))
-                                .Select(m => new ModuleNotifyMethod(m))
-                               .ToArray();
+                                .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyInitializedAttribute).SingleOrDefault() })
+                                .Where(x => x.Attribute != null)
+                                .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority))
+                                .ToArray();
         }
 
-        public ModuleMethod GetDependenciesReadyMethodMethod(Type moduleType)
+        public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
+        {
+            var introspector = new DefaultIntrospector(moduleType);
+            return introspector.GetMethods(memberScanOptions)
+                .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyTerminatedAttribute).SingleOrDefault() })
+                .Where(x => x.Attribute != null)
+                .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority))
+                .ToArray();
+        }
+
+        public ModuleMethod GetReadyMethod(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
             var m = introspector.GetMethods(memberScanOptions)
-                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleOnDependenciesReadyAttribute));
+                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleReadyAttribute));
             return new ModuleMethod(m);
         }
 
@@ -68,8 +78,8 @@ namespace Axle.Application.Modularity
         public Type[] GetRequiredModules(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
-            return introspector.GetAttributes(typeof(DependsOnModuleAttribute))
-                               .Select(x => ((DependsOnModuleAttribute) x.Attribute).ModuleType)
+            return introspector.GetAttributes(typeof(RequiresAttribute))
+                               .Select(x => ((RequiresAttribute) x.Attribute).ModuleType)
                                .ToArray();
         }
     }

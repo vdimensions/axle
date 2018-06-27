@@ -9,49 +9,49 @@ using Axle.Extensions.String;
 
 namespace Axle.Application.Modularity
 {
-    public class ModuleCatalog
+    public static class Modules
     {
-        private class ModuleExporter : IModuleExporter
+        private sealed class ContainerExporter : ModuleExporter
         {
             private readonly IContainer _container;
 
-            public ModuleExporter(IContainer container)
+            public ContainerExporter(IContainer container)
             {
                 _container = container;
             }
 
-            public IModuleExporter Export<T>(T instance, string name)
+            public override ModuleExporter Export<T>(T instance, string name)
             {
                 _container.RegisterInstance(instance, name);
                 return this;
             }
 
-            public IModuleExporter Export<T>(T instance)
+            public override ModuleExporter Export<T>(T instance)
             {
                 _container.RegisterInstance(instance);
                 return this;
             }
         }
 
-        private class ModuleMetadata
+        private sealed class ModuleMetadata
         {
-            public ModuleMetadata(ModuleInfo moduleInfo)
+            public ModuleMetadata(ModuleInfo moduleInfo, object instance)
             {
                 ModuleInfo = moduleInfo;
-            }
-            private ModuleMetadata(ModuleInfo moduleInfo, object instance, int notifiers) : this(moduleInfo)
-            {
                 ModuleInstance = instance;
-                PotentialNotifiers = notifiers;
+            }
+            private ModuleMetadata(ModuleInfo moduleInfo, object instance, int notifiers) : this(moduleInfo, instance)
+            {
+                RemainingNotifiers = notifiers;
             }
 
-            public ModuleMetadata SetInstance(object instance) => new ModuleMetadata(ModuleInfo, instance, PotentialNotifiers);
-            public ModuleMetadata AddNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, PotentialNotifiers + 1);
-            public ModuleMetadata RemoveNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, PotentialNotifiers - 1);
+            public ModuleMetadata AddNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, RemainingNotifiers + 1);
+            public ModuleMetadata RemoveNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, RemainingNotifiers - 1);
+            public ModuleMetadata UpdateInstance(object moduleInstance) => new ModuleMetadata(ModuleInfo, moduleInstance, RemainingNotifiers);
 
             public ModuleInfo ModuleInfo { get; }
-            public object ModuleInstance { get; } = null;
-            public int PotentialNotifiers { get; } = 0;
+            public object ModuleInstance { get; }
+            public int RemainingNotifiers { get; } = 0;
         }
         
         /// <summary>
@@ -118,63 +118,87 @@ namespace Axle.Application.Modularity
             return modulesWithRank.Values.OrderBy(x => x.Item2).GroupBy(x => x.Item2, x => x.Item1);
         }
 
-        public IContainer LaunchModules(IReflectionProvider reflectionProvider, IDependencyContainerProvider containerProvier)
+        public static IContainer Launch(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier)
         {
             var modules = new ConcurrentDictionary<Type, ModuleMetadata>();
-            var moduleInfos = reflectionProvider.GetModules();
+            var moduleInfos = moduleCatalog.GetModules();
+
+            //
+            // Establish metadata for modules expecting callbacks
+            //
             foreach (var m in moduleInfos)
             foreach (var rm in m.RequiredModules)
             {
-                modules.AddOrUpdate(rm.Type, _ => new ModuleMetadata(rm), (a, b) => b.AddNotifier());
+                modules.AddOrUpdate(
+                    rm.Type, 
+                    //_ => throw new InvalidOperationException($"Module `{rm.Type}` should have already been instantiated, but it was not."), 
+                    _ => new ModuleMetadata(rm, null), 
+                    (a, b) => b.AddNotifier());
             }
 
             var rankedModules = RankModules(moduleInfos).ToArray();
             var rootContainer = containerProvier.Create();
-            var rootExporter = new ModuleExporter(rootContainer);
+            var rootExporter = new ContainerExporter(rootContainer);
 
-            //var deps = new ConcurrentDictionary<Type, IEnumerable<ModuleMetadata>>();
             foreach (var rankGroup in rankedModules)
             foreach (var moduleInfo in rankGroup)
             {
+                var moduleType = moduleInfo.Type;
+                var requiredModules = moduleInfo.RequiredModules.ToArray();
+
                 using (var moduleContainer = containerProvier.Create(rootContainer))
                 {
-                    var moduleType = moduleInfo.Type;
-                    moduleContainer.RegisterInstance(moduleInfo);
-                    moduleContainer.RegisterInstance(moduleInfo.Name);
-                    moduleContainer.RegisterType(moduleType);
-                    // TODO: register configuration
+                    moduleContainer.RegisterInstance(moduleInfo).RegisterType(moduleType);
+
+                    //
+                    // Make all required modules injectable
+                    //
+                    foreach (var rm in requiredModules)
+                    {
+                        if (modules.TryGetValue(rm.Type, out var rmm))
+                        {
+                            moduleContainer.RegisterInstance(rmm.ModuleInstance);
+                        }
+                    }
+
+                    // TODO: register configuration objects
 
                     var moduleInstance = moduleContainer.Resolve(moduleType);
-                    modules.AddOrUpdate(moduleType, new ModuleMetadata(moduleInfo).SetInstance(moduleInstance), (_, m) => m.SetInstance(moduleInstance));
-                }
-            }
-
-            foreach (var mm in modules.Values.ToList())
-            {
-                try
-                {
-                    mm.ModuleInfo.InitMethod.Invoke(mm.ModuleInstance, rootExporter);
-                    if (mm.PotentialNotifiers == 0)
+                    var mm = modules.AddOrUpdate(
+                        moduleType, 
+                        new ModuleMetadata(moduleInfo, moduleInstance), 
+                        (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance));
+                    
+                    try
                     {
-                        mm.ModuleInfo.OnDependenciesReadyMethod.Invoke(mm.ModuleInstance, rootExporter);
-                    }
-                    var requiredMethods = mm.ModuleInfo.RequiredModules.ToArray();
-                    if (requiredMethods.Length > 0)
-                    {
-                        foreach (var rm in requiredMethods)
+                        mm.ModuleInfo.InitMethod.Invoke(mm.ModuleInstance, rootExporter);
+                        if (mm.RemainingNotifiers == 0)
                         {
-                            if (modules.TryGetValue(rm.Type, out var rmm))
+                            mm.ModuleInfo.ReadyMethod.Invoke(mm.ModuleInstance, rootExporter);
+                            //
+                            // mm.RemainingNotifiers will become negative, indicating the ready method is already called
+                            // 
+                            mm = modules.AddOrUpdate(moduleType, mm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
+                        }
+                        
+                        if (requiredModules.Length > 0)
+                        {
+                            foreach (var rm in requiredModules)
                             {
-                                foreach (var notifyMethiod in rmm.ModuleInfo.OnDependencyInitializedMethods)
+                                if (!modules.TryGetValue(rm.Type, out var rmm))
                                 {
-                                    if (!notifyMethiod.ArgumentType.IsInstanceOfType(mm.ModuleInstance))
+                                    continue;
+                                }
+                                foreach (var callback in rmm.ModuleInfo.DependencyInitializedMethods)
+                                {
+                                    if (!callback.ArgumentType.IsInstanceOfType(mm.ModuleInstance))
                                     {
                                         continue;
                                     }
 
                                     try
                                     {
-                                        notifyMethiod.Invoke(rmm.ModuleInstance, mm.ModuleInstance);
+                                        callback.Invoke(rmm.ModuleInstance, mm.ModuleInstance);
                                     }
                                     catch (Exception e)
                                     {
@@ -182,31 +206,37 @@ namespace Axle.Application.Modularity
                                         throw;
                                     }
                                 }
-                                rmm = modules.AddOrUpdate(rm.Type, _ => rmm, (_, m) => m.RemoveNotifier());
-                                if (rmm.PotentialNotifiers == 0)
+                                rmm = modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
+                                if (rmm.RemainingNotifiers != 0)
                                 {
-                                    try
-                                    {
-                                        rmm.ModuleInfo.OnDependenciesReadyMethod.Invoke(rmm.ModuleInstance, rootExporter);
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        // TODO: wrap exception
-                                        throw;
-                                    }
+                                    continue;
+                                }
+                                try
+                                {
+                                    rmm.ModuleInfo.ReadyMethod.Invoke(rmm.ModuleInstance, rootExporter);
+                                    //
+                                    // Ensure that rmm.RemainingNotifiers is negative to guarantee a single ready call.
+                                    //
+                                    rmm = modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
+                                }
+                                catch (Exception e)
+                                {
+                                    // TODO: wrap exception
+                                    throw;
                                 }
                             }
                         }
                     }
-                }
-                catch
-                {
-                    if (mm.ModuleInstance is IDisposable disposable)
+                    catch
                     {
-                        disposable.Dispose();
+                        // TODO: termination
+                        if (mm.ModuleInstance is IDisposable disposable)
+                        {
+                            disposable.Dispose();
+                        }
+                        // TODO: throw proper exception
+                        throw;
                     }
-                    // TODO: throw proper exception
-                    throw;
                 }
             }
 
