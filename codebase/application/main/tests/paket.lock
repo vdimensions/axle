@@ -1,0 +1,17 @@
+RESTRICTION: == net45
+NUGET
+  remote: ../../../../dist
+    Axle.Application (1.5.1.10)
+      Axle.Core (>= 1.5.1)
+    Axle.Core (1.5.1.24)
+  remote: https://www.nuget.org/api/v2
+    Microsoft.NETCore.Platforms (2.1)
+    NETStandard.Library (2.0.3)
+      Microsoft.NETCore.Platforms (>= 1.1)
+      System.Runtime.InteropServices.RuntimeInformation (>= 4.3)
+    System.Runtime.InteropServices.RuntimeInformation (4.3)
+
+GROUP test
+NUGET
+  remote: https://www.nuget.org/api/v2
+    NUnit (3.10.1) - restriction: == net45

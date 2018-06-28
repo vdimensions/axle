@@ -1,4 +1,5 @@
 ﻿using Axle.Reflection;
+using Axle.Verification;
 
 
 namespace Axle.Application.Modularity
@@ -6,21 +7,23 @@ namespace Axle.Application.Modularity
     public sealed class ModuleMethod
     {
         private readonly IInvokable _invokable;
+        private readonly bool _hasParams;
 
         internal ModuleMethod(IInvokable invokable)
         {
-            _invokable = invokable;
+            _invokable = invokable.VerifyArgument(nameof(invokable)).IsNotNull().Value;
+            _hasParams = invokable.GetParameters().Length > 0;
         }
 
         public void Invoke(object module, ModuleExporter exporter)
         {
-            if (_invokable.GetParameters().Length == 0)
+            if (_hasParams)
             {
-                _invokable.Invoke(module);
+                _invokable.Invoke(module, exporter);
             }
             else
             {
-                _invokable.Invoke(module, exporter);
+                _invokable.Invoke(module);
             }
         }
     }

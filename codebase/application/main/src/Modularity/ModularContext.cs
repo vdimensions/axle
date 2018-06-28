@@ -2,6 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 
 using Axle.Application.DependencyInjection;
 using Axle.Extensions.String;
@@ -9,7 +10,7 @@ using Axle.Extensions.String;
 
 namespace Axle.Application.Modularity
 {
-    public static class Modules
+    public class ModularContext
     {
         private sealed class ContainerExporter : ModuleExporter
         {
@@ -53,7 +54,7 @@ namespace Axle.Application.Modularity
             public object ModuleInstance { get; }
             public int RemainingNotifiers { get; } = 0;
         }
-        
+
         /// <summary>
         /// Creates a list of modules, grouped by and sorted by a rank integer. The rank determines
         /// the order for bootstrapping the modules -- those with lower rank will be bootstrapped earlier. 
@@ -118,10 +119,21 @@ namespace Axle.Application.Modularity
             return modulesWithRank.Values.OrderBy(x => x.Item2).GroupBy(x => x.Item2, x => x.Item1);
         }
 
-        public static IContainer Launch(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier)
+        private readonly ConcurrentDictionary<Type, ModuleMetadata> _modules = new ConcurrentDictionary<Type, ModuleMetadata>();
+        private readonly IModuleCatalog _moduleCatalog;
+        private readonly IDependencyContainerProvider _containerProvier;
+
+        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier)
+        {
+            _moduleCatalog = moduleCatalog;
+            _containerProvier = containerProvier;
+        }
+        public ModularContext() : this(new DefaultModuleCatalog(), new DefaultDependencyContainerProvider()) { }
+
+        public IContainer Launch(params Type[] moduleTypes)
         {
             var modules = new ConcurrentDictionary<Type, ModuleMetadata>();
-            var moduleInfos = moduleCatalog.GetModules();
+            var moduleInfos = _moduleCatalog.GetModules(moduleTypes);
 
             //
             // Establish metadata for modules expecting callbacks
@@ -131,13 +143,12 @@ namespace Axle.Application.Modularity
             {
                 modules.AddOrUpdate(
                     rm.Type, 
-                    //_ => throw new InvalidOperationException($"Module `{rm.Type}` should have already been instantiated, but it was not."), 
-                    _ => new ModuleMetadata(rm, null), 
+                    _ => new ModuleMetadata(rm, null).AddNotifier(), 
                     (a, b) => b.AddNotifier());
             }
 
             var rankedModules = RankModules(moduleInfos).ToArray();
-            var rootContainer = containerProvier.Create();
+            var rootContainer = _containerProvier.Create();
             var rootExporter = new ContainerExporter(rootContainer);
 
             foreach (var rankGroup in rankedModules)
@@ -146,7 +157,7 @@ namespace Axle.Application.Modularity
                 var moduleType = moduleInfo.Type;
                 var requiredModules = moduleInfo.RequiredModules.ToArray();
 
-                using (var moduleContainer = containerProvier.Create(rootContainer))
+                using (var moduleContainer = _containerProvier.Create(rootContainer))
                 {
                     moduleContainer.RegisterInstance(moduleInfo).RegisterType(moduleType);
 
@@ -171,16 +182,7 @@ namespace Axle.Application.Modularity
                     
                     try
                     {
-                        mm.ModuleInfo.InitMethod.Invoke(mm.ModuleInstance, rootExporter);
-                        if (mm.RemainingNotifiers == 0)
-                        {
-                            mm.ModuleInfo.ReadyMethod.Invoke(mm.ModuleInstance, rootExporter);
-                            //
-                            // mm.RemainingNotifiers will become negative, indicating the ready method is already called
-                            // 
-                            mm = modules.AddOrUpdate(moduleType, mm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
-                        }
-                        
+                        mm.ModuleInfo.InitMethod?.Invoke(mm.ModuleInstance, rootExporter);
                         if (requiredModules.Length > 0)
                         {
                             foreach (var rm in requiredModules)
@@ -191,7 +193,11 @@ namespace Axle.Application.Modularity
                                 }
                                 foreach (var callback in rmm.ModuleInfo.DependencyInitializedMethods)
                                 {
+                                    #if NETSTANDARD || NET45_OR_NEWER
+                                    if (!callback.ArgumentType.GetTypeInfo().IsInstanceOfType(mm.ModuleInstance))
+                                    #else
                                     if (!callback.ArgumentType.IsInstanceOfType(mm.ModuleInstance))
+                                    #endif
                                     {
                                         continue;
                                     }
@@ -225,6 +231,15 @@ namespace Axle.Application.Modularity
                                     throw;
                                 }
                             }
+                        }
+
+                        if (mm.RemainingNotifiers == 0)
+                        {
+                            mm.ModuleInfo.ReadyMethod?.Invoke(mm.ModuleInstance, rootExporter);
+                            //
+                            // mm.RemainingNotifiers will become negative, indicating the ready method is already called
+                            // 
+                            mm = modules.AddOrUpdate(moduleType, _ => mm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
                         }
                     }
                     catch

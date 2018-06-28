@@ -9,10 +9,12 @@ namespace Axle.Application.Modularity
 {
     public static class ModuleCatalogExtensions
     {
+        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog)
         {
             return GetModules(moduleCatalog, moduleCatalog.DiscoverModuleTypes());
         }
+        #endif
         public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, params Type[] types)
         {
             moduleCatalog.VerifyArgument(nameof(moduleCatalog)).IsNotNull();

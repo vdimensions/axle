@@ -20,7 +20,7 @@ namespace Axle.Application.Modularity
 
         public void Invoke(object module, object arg)
         {
-            _invokable.Invoke(arg);
+            _invokable.Invoke(module, arg);
         }
 
         public int Priority { get; }

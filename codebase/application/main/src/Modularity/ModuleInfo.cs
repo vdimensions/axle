@@ -32,7 +32,11 @@ namespace Axle.Application.Modularity
 
         public string Name { get; }
         public Type Type { get; }
+        #if NETSTANDARD || NET45_OR_NEWER
+        public Assembly Assembly => Type.GetTypeInfo().Assembly;
+        #else
         public Assembly Assembly => Type.Assembly;
+        #endif
         public ModuleMethod InitMethod { get; }
         public ModuleCallback[] DependencyInitializedMethods { get; }
         public ModuleCallback[] DependencyTerminatedMethods { get; }

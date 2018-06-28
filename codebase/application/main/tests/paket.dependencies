@@ -1,0 +1,12 @@
+framework: net45
+
+source ../../../../dist
+  nuget Axle.Core
+  nuget Axle.Application
+
+source https://nuget.org/api/v2
+  nuget NETStandard.Library
+
+group test
+  source https://nuget.org/api/v2
+    nuget NUnit >= 3.6.1 framework: net45
