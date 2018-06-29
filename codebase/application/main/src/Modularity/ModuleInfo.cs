@@ -42,6 +42,6 @@ namespace Axle.Application.Modularity
         public ModuleCallback[] DependencyTerminatedMethods { get; }
         public ModuleMethod ReadyMethod { get; }
         public ModuleEntryMethod EntryPointMethod { get; }
-        public IEnumerable<ModuleInfo> RequiredModules { get; }
+        public ModuleInfo[] RequiredModules { get; }
     }
 }

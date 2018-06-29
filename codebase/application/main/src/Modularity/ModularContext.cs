@@ -80,15 +80,18 @@ namespace Axle.Application.Modularity
                     // The remaining (unranked) modules count did not change for an iteration. This is a signal for a circular dependency.
                     //
                     throw new InvalidOperationException(
-                            string.Format("A circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.Name))));
+                        string.Format(
+                            @"A circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.Name))));
                 }
                 remainingCount = modulesToLaunch.Count;
                 var modulesOfCurrentRank = new List<ModuleInfo>(modulesToLaunch.Count);
-                foreach (var moduleInfo in modulesToLaunch)
+                for (var i = 0; i < modulesToLaunch.Count; i++)
                 {
+                    var moduleInfo = modulesToLaunch[i];
                     var rank = 0;
-                    foreach (var moduleDependency in moduleInfo.RequiredModules)
+                    for (var j = 0; j < moduleInfo.RequiredModules.Length; j++)
                     {
+                        var moduleDependency = moduleInfo.RequiredModules[j];
                         if (modulesWithRank.TryGetValue(moduleDependency.Name, out var parentRank))
                         {
                             rank = Math.Max(rank, parentRank.Item2);
@@ -101,12 +104,14 @@ namespace Axle.Application.Modularity
                             break;
                         }
                     }
+
                     if (rank < 0)
                     {   //
                         // The module has dependencies which are not ranked yet, meaning it must survive another iteration to determine rank.
                         //
                         continue;
                     }
+
                     //
                     // The module has no unranked dependencies, so its rank is determined as the highest rank of its existing dependencies plus one.
                     // Modules with no dependencies will have a rank of 1.
@@ -114,12 +119,13 @@ namespace Axle.Application.Modularity
                     modulesOfCurrentRank.Add(moduleInfo);
                     modulesWithRank[moduleInfo.Name] = Tuple.Create(moduleInfo, rank + 1);
                 }
+
                 modulesOfCurrentRank.ForEach(x => modulesToLaunch.Remove(x));
             }
             return modulesWithRank.Values.OrderBy(x => x.Item2).GroupBy(x => x.Item2, x => x.Item1);
         }
 
-        private readonly ConcurrentDictionary<Type, ModuleMetadata> _modules = new ConcurrentDictionary<Type, ModuleMetadata>();
+        private readonly ConcurrentDictionary<Type, ModuleMetadata[]> _moduleDependencies = new ConcurrentDictionary<Type, ModuleMetadata[]>();
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvier;
 
@@ -138,21 +144,22 @@ namespace Axle.Application.Modularity
             //
             // Establish metadata for modules expecting callbacks
             //
-            foreach (var m in moduleInfos)
-            foreach (var rm in m.RequiredModules)
+            for (var i = 0; i < moduleInfos.Length; i++)
+            for (var j = 0; j < moduleInfos[i].RequiredModules.Length; j++)
             {
+                var rm = moduleInfos[i].RequiredModules[j];
                 modules.AddOrUpdate(
-                    rm.Type, 
-                    _ => new ModuleMetadata(rm, null).AddNotifier(), 
-                    (a, b) => b.AddNotifier());
+                        rm.Type,
+                        _ => new ModuleMetadata(rm, null).AddNotifier(),
+                        (a, b) => b.AddNotifier());
             }
 
             var rankedModules = RankModules(moduleInfos).ToArray();
             var rootContainer = _containerProvier.Create();
             var rootExporter = new ContainerExporter(rootContainer);
 
-            foreach (var rankGroup in rankedModules)
-            foreach (var moduleInfo in rankGroup)
+            for (var i = 0; i < rankedModules.Length; i++)
+            foreach (var moduleInfo in rankedModules[i])
             {
                 var moduleType = moduleInfo.Type;
                 var requiredModules = moduleInfo.RequiredModules.ToArray();
@@ -164,8 +171,9 @@ namespace Axle.Application.Modularity
                     //
                     // Make all required modules injectable
                     //
-                    foreach (var rm in requiredModules)
+                    for (var k = 0; k < requiredModules.Length; k++)
                     {
+                        var rm = requiredModules[k];
                         if (modules.TryGetValue(rm.Type, out var rmm))
                         {
                             moduleContainer.RegisterInstance(rmm.ModuleInstance);
@@ -176,23 +184,26 @@ namespace Axle.Application.Modularity
 
                     var moduleInstance = moduleContainer.Resolve(moduleType);
                     var mm = modules.AddOrUpdate(
-                        moduleType, 
-                        new ModuleMetadata(moduleInfo, moduleInstance), 
-                        (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance));
-                    
+                            moduleType,
+                            new ModuleMetadata(moduleInfo, moduleInstance),
+                            (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance));
+
                     try
                     {
                         mm.ModuleInfo.InitMethod?.Invoke(mm.ModuleInstance, rootExporter);
                         if (requiredModules.Length > 0)
                         {
-                            foreach (var rm in requiredModules)
+                            for (var k = 0; k < requiredModules.Length; k++)
                             {
+                                var rm = requiredModules[k];
                                 if (!modules.TryGetValue(rm.Type, out var rmm))
                                 {
                                     continue;
                                 }
-                                foreach (var callback in rmm.ModuleInfo.DependencyInitializedMethods)
+
+                                for (var l = 0; l < rmm.ModuleInfo.DependencyInitializedMethods.Length; l++)
                                 {
+                                    var callback = rmm.ModuleInfo.DependencyInitializedMethods[l];
                                     #if NETSTANDARD || NET45_OR_NEWER
                                     if (!callback.ArgumentType.GetTypeInfo().IsInstanceOfType(mm.ModuleInstance))
                                     #else
@@ -212,18 +223,20 @@ namespace Axle.Application.Modularity
                                         throw;
                                     }
                                 }
+
                                 rmm = modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
                                 if (rmm.RemainingNotifiers != 0)
                                 {
                                     continue;
                                 }
+
                                 try
                                 {
                                     rmm.ModuleInfo.ReadyMethod.Invoke(rmm.ModuleInstance, rootExporter);
                                     //
                                     // Ensure that rmm.RemainingNotifiers is negative to guarantee a single ready call.
                                     //
-                                    rmm = modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
+                                    modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
                                 }
                                 catch (Exception e)
                                 {
@@ -249,6 +262,7 @@ namespace Axle.Application.Modularity
                         {
                             disposable.Dispose();
                         }
+
                         // TODO: throw proper exception
                         throw;
                     }

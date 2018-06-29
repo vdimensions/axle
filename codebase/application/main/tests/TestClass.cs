@@ -19,9 +19,15 @@ namespace Axle.Application.Tests
             }
 
             [ModuleDependencyInitialized]
-            public void NotidyInit(object x)
+            public void OnDependencyInitialized(object x)
             {
                 Console.WriteLine($"{x.GetType().Name} notifies {GetType().Name} for being initialized");
+            }
+
+            [ModuleDependencyTerminated]
+            public void OnDependencyTerminated(object x)
+            {
+                Console.WriteLine($"{x.GetType().Name} notifies {GetType().Name} for getting terminated");
             }
 
             [ModuleReady]
@@ -33,8 +39,10 @@ namespace Axle.Application.Tests
 
         [Module]
         public class A : AbstractModule { }
+
         [Module]
         public class B : AbstractModule { }
+
         [Module]
         public class C : AbstractModule { }
 
@@ -57,7 +65,7 @@ namespace Axle.Application.Tests
         public void TestMethod()
         {
             var c = new ModularContext();
-            c.Launch(typeof(A), typeof(B), typeof(C), typeof(AB), typeof(AC), typeof(BC));
+            c.Launch(typeof(AB), typeof(AC), typeof(BC));
         }
     }
 }

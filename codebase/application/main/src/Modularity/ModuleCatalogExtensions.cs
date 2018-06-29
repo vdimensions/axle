@@ -15,10 +15,20 @@ namespace Axle.Application.Modularity
             return GetModules(moduleCatalog, moduleCatalog.DiscoverModuleTypes());
         }
         #endif
+
         public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, params Type[] types)
         {
             moduleCatalog.VerifyArgument(nameof(moduleCatalog)).IsNotNull();
             return ExtractModules(moduleCatalog, types, new Dictionary<Type, ModuleInfo>()).ToArray();
+        }
+
+        private static void ExpandModules(IModuleCatalog catalog, Type moduleType, HashSet<Type> types)
+        {
+            types.Add(moduleType);
+            foreach (var type in catalog.GetRequiredModules(moduleType))
+            {
+                ExpandModules(catalog, type, types);
+            }
         }
 
         private static IEnumerable<ModuleInfo> ExtractModules(
@@ -26,9 +36,14 @@ namespace Axle.Application.Modularity
                 IEnumerable<Type> types, 
                 IDictionary<Type, ModuleInfo> knownModules)
         {
+            var allModuleTypes = new HashSet<Type>();
             foreach (var type in types)
             {
-                var requiredModuleTypes = moduleCatalog.GetRequiredModules(type);
+                ExpandModules(moduleCatalog, type, allModuleTypes);
+            }
+            foreach (var moduleType in allModuleTypes)
+            {
+                var requiredModuleTypes = moduleCatalog.GetRequiredModules(moduleType);
                 var requiredModules = requiredModuleTypes
                         .Select(
                             t =>
@@ -42,13 +57,13 @@ namespace Axle.Application.Modularity
                             })
                         .ToArray();
                 var module = new ModuleInfo(
-                        type,
-                        moduleCatalog.GetModuleName(type),
-                        moduleCatalog.GetInitMethod(type),
-                        moduleCatalog.GetDependencyInitializedMethods(type),
-                        moduleCatalog.GetDependencyTerminatedMethods(type),
-                        moduleCatalog.GetReadyMethod(type),
-                        moduleCatalog.GetEntryPointMethod(type),
+                        moduleType,
+                        moduleCatalog.GetModuleName(moduleType),
+                        moduleCatalog.GetInitMethod(moduleType),
+                        moduleCatalog.GetDependencyInitializedMethods(moduleType),
+                        moduleCatalog.GetDependencyTerminatedMethods(moduleType),
+                        moduleCatalog.GetReadyMethod(moduleType),
+                        moduleCatalog.GetEntryPointMethod(moduleType),
                         requiredModules);
                 yield return module;
             }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using Axle.Environment;
 #endif
@@ -30,8 +32,8 @@ namespace Axle.Application.Modularity
         {
             var introspector = new DefaultIntrospector(moduleType);
             var name = introspector.GetAttributes(typeof(ModuleAttribute))
-                               .Select(x => ((ModuleAttribute) x.Attribute).Name)
-                               .SingleOrDefault() ?? string.Empty;
+                                   .Select(x => ((ModuleAttribute) x.Attribute).Name)
+                                   .SingleOrDefault() ?? string.Empty;
             return string.IsNullOrEmpty(name) ? moduleType.FullName : name;
         }
 
@@ -45,22 +47,26 @@ namespace Axle.Application.Modularity
 
         public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
-            return introspector.GetMethods(MemberScanOptions)
-                               .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyInitializedAttribute).SingleOrDefault(a => a != null) })
-                               .Where(x => x.Attribute != null)
-                               .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority))
-                               .ToArray();
+            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
+            return introspectors
+                   .SelectMany(i =>
+                       i.GetMethods(MemberScanOptions)
+                        .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyInitializedAttribute).SingleOrDefault(a => a != null) })
+                        .Where(x => x.Attribute != null)
+                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority)))
+                   .ToArray();
         }
 
         public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
-            return introspector.GetMethods(MemberScanOptions)
-                               .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyTerminatedAttribute).SingleOrDefault(a => a != null) })
-                               .Where(x => x.Attribute != null)
-                               .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority))
-                               .ToArray();
+            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
+            return introspectors
+                   .SelectMany(i => 
+                       i.GetMethods(MemberScanOptions)
+                        .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyTerminatedAttribute).SingleOrDefault(a => a != null) })
+                        .Where(x => x.Attribute != null)
+                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority)))
+                   .ToArray();
         }
 
         public ModuleMethod GetReadyMethod(Type moduleType)
@@ -81,10 +87,26 @@ namespace Axle.Application.Modularity
 
         public Type[] GetRequiredModules(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
-            return introspector.GetAttributes(typeof(RequiresAttribute))
-                               .Select(x => ((RequiresAttribute) x.Attribute).ModuleType)
-                               .ToArray();
+            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
+            return introspectors.SelectMany(i => i.GetAttributes(typeof(RequiresAttribute)).Select(x => ((RequiresAttribute) x.Attribute).ModuleType))
+                                .ToArray();
+        }
+
+        private IEnumerable<Type> TypeAndInterfaces(Type type, HashSet<Type> types)
+        {
+            if (types.Add(type))
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                var interfaces = type.GetTypeInfo().GetInterfaces();
+                #else
+                var interfaces = type.GetInterfaces();
+                #endif
+                for (var i = 0; i < interfaces.Length; i++)
+                {
+                    TypeAndInterfaces(interfaces[i], types);
+                }
+            }
+            return types;
         }
     }
 }
