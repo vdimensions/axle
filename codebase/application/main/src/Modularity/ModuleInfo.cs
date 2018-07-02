@@ -12,7 +12,6 @@ namespace Axle.Application.Modularity
     {
         internal ModuleInfo(
             Type type, 
-            string name, 
             ModuleMethod initMethod, 
             IEnumerable<ModuleCallback> initCallbacks, 
             IEnumerable<ModuleCallback> terminateCallbacks, 
@@ -21,7 +20,6 @@ namespace Axle.Application.Modularity
             params ModuleInfo[] requiredModules)
         {
             Type = type.VerifyArgument(nameof(type)).IsNotAbstract();
-            Name = name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
             InitMethod = initMethod;
             DependencyInitializedMethods = initCallbacks.OrderBy(x => x.Priority).ToArray();
             DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
@@ -30,7 +28,6 @@ namespace Axle.Application.Modularity
             RequiredModules = requiredModules;
         }
 
-        public string Name { get; }
         public Type Type { get; }
         #if NETSTANDARD || NET45_OR_NEWER
         public Assembly Assembly => Type.GetTypeInfo().Assembly;

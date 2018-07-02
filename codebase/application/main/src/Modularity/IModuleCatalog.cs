@@ -11,7 +11,6 @@ namespace Axle.Application.Modularity
         Type[] DiscoverModuleTypes();
         #endif
 
-        string GetModuleName(Type moduleType);
         Type[] GetRequiredModules(Type moduleType);
         ModuleMethod GetInitMethod(Type moduleType);
         ModuleCallback[] GetDependencyInitializedMethods(Type moduleType);

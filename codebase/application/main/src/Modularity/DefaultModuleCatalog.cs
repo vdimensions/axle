@@ -23,19 +23,10 @@ namespace Axle.Application.Modularity
                                    .Select(t => t.GetTypeInfo())
                                     #endif
                                    .Where(t => !t.IsAbstract && !t.IsInterface)
-                                   .Where(t => t.GetCustomAttributes(typeof(ModuleInitAttribute), false).Any())
+                                   .Where(t => t.GetCustomAttributes(typeof(ModuleAttribute), false).Any())
                                    .ToArray();
         }
         #endif
-
-        public string GetModuleName(Type moduleType)
-        {
-            var introspector = new DefaultIntrospector(moduleType);
-            var name = introspector.GetAttributes(typeof(ModuleAttribute))
-                                   .Select(x => ((ModuleAttribute) x.Attribute).Name)
-                                   .SingleOrDefault() ?? string.Empty;
-            return string.IsNullOrEmpty(name) ? moduleType.FullName : name;
-        }
 
         public ModuleMethod GetInitMethod(Type moduleType)
         {

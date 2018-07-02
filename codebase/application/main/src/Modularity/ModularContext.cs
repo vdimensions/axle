@@ -69,8 +69,7 @@ namespace Axle.Application.Modularity
         /// </returns>
         private static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(IEnumerable<ModuleInfo> moduleCatalog)
         {
-            var stringComparer = StringComparer.Ordinal;
-            IDictionary<string, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<string, Tuple<ModuleInfo, int>>(stringComparer);
+            IDictionary<Type, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<Type, Tuple<ModuleInfo, int>>();
             var modulesToLaunch = moduleCatalog.ToList();
             var remainingCount = int.MaxValue;
             while (modulesToLaunch.Count > 0)
@@ -81,7 +80,7 @@ namespace Axle.Application.Modularity
                     //
                     throw new InvalidOperationException(
                         string.Format(
-                            @"A circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.Name))));
+                            @"A circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
                 }
                 remainingCount = modulesToLaunch.Count;
                 var modulesOfCurrentRank = new List<ModuleInfo>(modulesToLaunch.Count);
@@ -92,7 +91,7 @@ namespace Axle.Application.Modularity
                     for (var j = 0; j < moduleInfo.RequiredModules.Length; j++)
                     {
                         var moduleDependency = moduleInfo.RequiredModules[j];
-                        if (modulesWithRank.TryGetValue(moduleDependency.Name, out var parentRank))
+                        if (modulesWithRank.TryGetValue(moduleDependency.Type, out var parentRank))
                         {
                             rank = Math.Max(rank, parentRank.Item2);
                         }
@@ -117,7 +116,7 @@ namespace Axle.Application.Modularity
                     // Modules with no dependencies will have a rank of 1.
                     //
                     modulesOfCurrentRank.Add(moduleInfo);
-                    modulesWithRank[moduleInfo.Name] = Tuple.Create(moduleInfo, rank + 1);
+                    modulesWithRank[moduleInfo.Type] = Tuple.Create(moduleInfo, rank + 1);
                 }
 
                 modulesOfCurrentRank.ForEach(x => modulesToLaunch.Remove(x));
@@ -257,7 +256,8 @@ namespace Axle.Application.Modularity
                     }
                     catch
                     {
-                        // TODO: termination
+                        // TODO: termination method execution
+
                         if (mm.ModuleInstance is IDisposable disposable)
                         {
                             disposable.Dispose();

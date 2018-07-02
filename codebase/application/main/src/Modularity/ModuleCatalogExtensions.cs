@@ -58,7 +58,6 @@ namespace Axle.Application.Modularity
                         .ToArray();
                 var module = new ModuleInfo(
                         moduleType,
-                        moduleCatalog.GetModuleName(moduleType),
                         moduleCatalog.GetInitMethod(moduleType),
                         moduleCatalog.GetDependencyInitializedMethods(moduleType),
                         moduleCatalog.GetDependencyTerminatedMethods(moduleType),
