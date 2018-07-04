@@ -36,23 +36,25 @@ namespace Axle.Application.Modularity
 
         private sealed class ModuleMetadata
         {
-            public ModuleMetadata(ModuleInfo moduleInfo, object instance)
+            public ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container)
             {
                 ModuleInfo = moduleInfo;
                 ModuleInstance = instance;
+                Container = container;
             }
-            private ModuleMetadata(ModuleInfo moduleInfo, object instance, int notifiers) : this(moduleInfo, instance)
+            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, int notifiers) : this(moduleInfo, instance, container)
             {
                 RemainingNotifiers = notifiers;
             }
 
-            public ModuleMetadata AddNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, RemainingNotifiers + 1);
-            public ModuleMetadata RemoveNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, RemainingNotifiers - 1);
-            public ModuleMetadata UpdateInstance(object moduleInstance) => new ModuleMetadata(ModuleInfo, moduleInstance, RemainingNotifiers);
+            public ModuleMetadata AddNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, RemainingNotifiers + 1);
+            public ModuleMetadata RemoveNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, RemainingNotifiers - 1);
+            public ModuleMetadata UpdateInstance(object moduleInstance, IContainer container) => new ModuleMetadata(ModuleInfo, moduleInstance, container, RemainingNotifiers);
 
             public ModuleInfo ModuleInfo { get; }
             public object ModuleInstance { get; }
             public int RemainingNotifiers { get; } = 0;
+            public IContainer Container { get; }
         }
 
         /// <summary>
@@ -64,10 +66,13 @@ namespace Axle.Application.Modularity
         /// <param name="moduleCatalog">
         /// An collection of modules to be ranked.
         /// </param>
+        /// <param name="loadedModules">
+        /// A list of already loaded modules, which will aid in ranking a subsequent set of modules to be loaded at runtime.
+        /// </param>
         /// <returns>
         /// A collection of module groups, sorted by rank. 
         /// </returns>
-        private static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(IEnumerable<ModuleInfo> moduleCatalog)
+        private static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(IEnumerable<ModuleInfo> moduleCatalog, ICollection<Type> loadedModules)
         {
             IDictionary<Type, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<Type, Tuple<ModuleInfo, int>>();
             var modulesToLaunch = moduleCatalog.ToList();
@@ -94,6 +99,12 @@ namespace Axle.Application.Modularity
                         if (modulesWithRank.TryGetValue(moduleDependency.Type, out var parentRank))
                         {
                             rank = Math.Max(rank, parentRank.Item2);
+                        }
+                        else if (loadedModules.Contains(moduleDependency.Type))
+                        {   //
+                            // The module depends on an already loaded module.
+                            //
+                            rank = Math.Max(rank, 0);
                         }
                         else
                         {   //
@@ -125,6 +136,8 @@ namespace Axle.Application.Modularity
         }
 
         private readonly ConcurrentDictionary<Type, ModuleMetadata[]> _moduleDependencies = new ConcurrentDictionary<Type, ModuleMetadata[]>();
+        private readonly ConcurrentDictionary<Type, ModuleMetadata> _modules = new ConcurrentDictionary<Type, ModuleMetadata>();
+        private readonly IContainer _moduleContainer;
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvier;
 
@@ -132,6 +145,7 @@ namespace Axle.Application.Modularity
         {
             _moduleCatalog = moduleCatalog;
             _containerProvier = containerProvier;
+            _moduleContainer = containerProvier.Create();
         }
         public ModularContext() : this(new DefaultModuleCatalog(), new DefaultDependencyContainerProvider()) { }
 
@@ -139,6 +153,7 @@ namespace Axle.Application.Modularity
         {
             var modules = new ConcurrentDictionary<Type, ModuleMetadata>();
             var moduleInfos = _moduleCatalog.GetModules(moduleTypes);
+            var existingModuleTypes = new HashSet<Type>(_modules.Keys);
 
             //
             // Establish metadata for modules expecting callbacks
@@ -149,12 +164,32 @@ namespace Axle.Application.Modularity
                 var rm = moduleInfos[i].RequiredModules[j];
                 modules.AddOrUpdate(
                         rm.Type,
-                        _ => new ModuleMetadata(rm, null).AddNotifier(),
-                        (a, b) => b.AddNotifier());
+                        t =>
+                        {
+                            var result = _modules.TryGetValue(t, out var existingMM) ? existingMM : new ModuleMetadata(rm, null, null);
+                            if (!existingModuleTypes.Contains(moduleInfos[i].Type))
+                            {   //
+                                // if the current module is not previously initialized, it is eligible to notify its required modules.
+                                //
+                                result = result.AddNotifier();
+                            }
+                            return result;
+                        },
+                        (a, b) => 
+                        {
+                            if (!existingModuleTypes.Contains(moduleInfos[i].Type))
+                            {   //
+                                // if the current module is not previously initialized, it is eligible to notify its required modules.
+                                //
+                                return b.AddNotifier();
+                            }
+                            return b;
+                        });
             }
 
-            var rankedModules = RankModules(moduleInfos).ToArray();
-            var rootContainer = _containerProvier.Create();
+            
+            var rankedModules = RankModules(moduleInfos, existingModuleTypes).ToArray();
+            var rootContainer = _moduleContainer;
             var rootExporter = new ContainerExporter(rootContainer);
 
             for (var i = 0; i < rankedModules.Length; i++)
@@ -162,6 +197,12 @@ namespace Axle.Application.Modularity
             {
                 var moduleType = moduleInfo.Type;
                 var requiredModules = moduleInfo.RequiredModules.ToArray();
+                if (existingModuleTypes.Contains(moduleType))
+                {   //
+                    // the module was initialized before
+                    //
+                    continue;
+                }
 
                 using (var moduleContainer = _containerProvier.Create(rootContainer))
                 {
@@ -184,8 +225,8 @@ namespace Axle.Application.Modularity
                     var moduleInstance = moduleContainer.Resolve(moduleType);
                     var mm = modules.AddOrUpdate(
                             moduleType,
-                            new ModuleMetadata(moduleInfo, moduleInstance),
-                            (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance));
+                            new ModuleMetadata(moduleInfo, moduleInstance, moduleContainer),
+                            (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance, moduleContainer));
 
                     try
                     {
@@ -266,6 +307,14 @@ namespace Axle.Application.Modularity
                         // TODO: throw proper exception
                         throw;
                     }
+                }
+            }
+
+            foreach (var moduleMetadata in modules.Values)
+            {
+                if (!_modules.TryAdd(moduleMetadata.ModuleInfo.Type, moduleMetadata))
+                {
+                    // TODO: concurrent module initialization of the same module
                 }
             }
 

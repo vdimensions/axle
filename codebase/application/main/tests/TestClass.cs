@@ -62,10 +62,19 @@ namespace Axle.Application.Tests
         public class BC : AbstractModule { }
 
         [Test]
-        public void TestMethod()
+        public void TestModuleInitialization()
         {
             var c = new ModularContext();
             c.Launch(typeof(AB), typeof(AC), typeof(BC));
+        }
+
+        [Test]
+        public void TestMultipleModuleInitializations()
+        {
+            var c = new ModularContext();
+            c.Launch(typeof(AB));
+            c.Launch(typeof(AC));
+            c.Launch(typeof(BC));
         }
     }
 }
