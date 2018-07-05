@@ -29,12 +29,6 @@ namespace Axle.Application.Tests
             {
                 Console.WriteLine($"{x.GetType().Name} notifies {GetType().Name} for getting terminated");
             }
-
-            [ModuleReady]
-            public void Ready()
-            {
-                Console.WriteLine($"{GetType().Name} is ready");
-            }
         }
 
         [Module]
@@ -64,17 +58,16 @@ namespace Axle.Application.Tests
         [Test]
         public void TestModuleInitialization()
         {
-            var c = new ModularContext();
-            c.Launch(typeof(AB), typeof(AC), typeof(BC));
+            new ModularContext().Launch(typeof(AB), typeof(BC), typeof(AC));
         }
 
         [Test]
         public void TestMultipleModuleInitializations()
         {
-            var c = new ModularContext();
-            c.Launch(typeof(AB));
-            c.Launch(typeof(AC));
-            c.Launch(typeof(BC));
+            new ModularContext()
+                .Launch(typeof(AB))
+                .Launch(typeof(BC))
+                .Launch(typeof(AC));
         }
     }
 }

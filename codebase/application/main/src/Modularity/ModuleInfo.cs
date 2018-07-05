@@ -15,7 +15,7 @@ namespace Axle.Application.Modularity
             ModuleMethod initMethod, 
             IEnumerable<ModuleCallback> initCallbacks, 
             IEnumerable<ModuleCallback> terminateCallbacks, 
-            ModuleMethod readyMethod, 
+            ModuleMethod terminateMethod, 
             ModuleEntryMethod entryPointMethod, 
             params ModuleInfo[] requiredModules)
         {
@@ -23,7 +23,7 @@ namespace Axle.Application.Modularity
             InitMethod = initMethod;
             DependencyInitializedMethods = initCallbacks.OrderBy(x => x.Priority).ToArray();
             DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
-            ReadyMethod = readyMethod;
+            TerminateMethod = terminateMethod;
             EntryPointMethod = entryPointMethod;
             RequiredModules = requiredModules;
         }
@@ -37,7 +37,7 @@ namespace Axle.Application.Modularity
         public ModuleMethod InitMethod { get; }
         public ModuleCallback[] DependencyInitializedMethods { get; }
         public ModuleCallback[] DependencyTerminatedMethods { get; }
-        public ModuleMethod ReadyMethod { get; }
+        public ModuleMethod TerminateMethod { get; }
         public ModuleEntryMethod EntryPointMethod { get; }
         public ModuleInfo[] RequiredModules { get; }
     }

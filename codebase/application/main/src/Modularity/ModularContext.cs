@@ -33,6 +33,15 @@ namespace Axle.Application.Modularity
                 return this;
             }
         }
+        [Flags]
+        private enum ModuleState : sbyte
+        {
+            Hollow = 0,
+            Instantiated = 1,
+            Initialized = 2,
+            Ran = 4,
+            Terminated = -1,
+        }
 
         private sealed class ModuleMetadata
         {
@@ -42,19 +51,99 @@ namespace Axle.Application.Modularity
                 ModuleInstance = instance;
                 Container = container;
             }
-            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, int notifiers) : this(moduleInfo, instance, container)
+            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, ModuleState state) : this(moduleInfo, instance, container)
             {
-                RemainingNotifiers = notifiers;
+                State = state;
             }
 
-            public ModuleMetadata AddNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, RemainingNotifiers + 1);
-            public ModuleMetadata RemoveNotifier() => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, RemainingNotifiers - 1);
-            public ModuleMetadata UpdateInstance(object moduleInstance, IContainer container) => new ModuleMetadata(ModuleInfo, moduleInstance, container, RemainingNotifiers);
+            public ModuleMetadata UpdateInstance(object moduleInstance, IContainer container) => new ModuleMetadata(ModuleInfo, moduleInstance, container, State|ModuleState.Instantiated);
+
+            private ModuleMetadata ChangeState(ModuleState state) => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, state);
+
+            public ModuleMetadata Init(ModuleExporter exporter)
+            {
+                if ((State & ModuleState.Terminated) == ModuleState.Terminated)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it is was terminated.");
+                }
+                if ((State & ModuleState.Instantiated) != ModuleState.Instantiated)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it is was not instantiated.");
+                }
+                if ((State & ModuleState.Initialized) == ModuleState.Initialized)
+                {
+                    return this;
+                }
+
+                ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter);
+                return ChangeState(State | ModuleState.Initialized);
+            }
+
+            private void Notify(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
+            {
+                if (requiredModules.Length > 0)
+                {
+                    for (var k = 0; k < requiredModules.Length; k++)
+                    {
+                        var rm = requiredModules[k];
+                        if (!moduleMetadata.TryGetValue(rm.Type, out var rmm))
+                        {
+                            continue;
+                        }
+
+                        var callbacks = callbackProvider(rmm.ModuleInfo);
+                        for (var l = 0; l < callbacks.Length; l++)
+                        {
+                            var callback = callbacks[l];
+                            #if NETSTANDARD || NET45_OR_NEWER
+                            if (!callback.ArgumentType.GetTypeInfo().IsInstanceOfType(ModuleInstance))
+                            #else
+                            if (!callback.ArgumentType.IsInstanceOfType(ModuleInstance))
+                            #endif
+                            {
+                                continue;
+                            }
+
+                            try
+                            {
+                                callback.Invoke(rmm.ModuleInstance, ModuleInstance);
+                            }
+                            catch (Exception e)
+                            {
+                                // TODO: wrap exception
+                                throw;
+                            }
+                        }
+                    }
+                }
+            }
+
+            public void NotifyInit(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
+            {
+                Notify(requiredModules, moduleMetadata, m => m.DependencyInitializedMethods);
+            }
+            public void NotifyTerminate(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
+            {
+                Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
+            }
+
+            public ModuleMetadata Terminate(ModuleExporter exporter)
+            {
+                if ((State & ModuleState.Terminated) == ModuleState.Terminated)
+                {   //
+                    // Module is already terminated
+                    //
+                    return this;
+                }
+
+                ModuleInfo.TerminateMethod?.Invoke(ModuleInstance, exporter);
+                return ChangeState(State | ModuleState.Terminated);
+            }
 
             public ModuleInfo ModuleInfo { get; }
             public object ModuleInstance { get; }
-            public int RemainingNotifiers { get; } = 0;
             public IContainer Container { get; }
+            public ModuleState State { get; } = ModuleState.Hollow;
         }
 
         /// <summary>
@@ -85,7 +174,7 @@ namespace Axle.Application.Modularity
                     //
                     throw new InvalidOperationException(
                         string.Format(
-                            @"A circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
+                            @"Circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
                 }
                 remainingCount = modulesToLaunch.Count;
                 var modulesOfCurrentRank = new List<ModuleInfo>(modulesToLaunch.Count);
@@ -149,45 +238,11 @@ namespace Axle.Application.Modularity
         }
         public ModularContext() : this(new DefaultModuleCatalog(), new DefaultDependencyContainerProvider()) { }
 
-        public IContainer Launch(params Type[] moduleTypes)
+        public ModularContext Launch(params Type[] moduleTypes)
         {
-            var modules = new ConcurrentDictionary<Type, ModuleMetadata>();
             var moduleInfos = _moduleCatalog.GetModules(moduleTypes);
             var existingModuleTypes = new HashSet<Type>(_modules.Keys);
 
-            //
-            // Establish metadata for modules expecting callbacks
-            //
-            for (var i = 0; i < moduleInfos.Length; i++)
-            for (var j = 0; j < moduleInfos[i].RequiredModules.Length; j++)
-            {
-                var rm = moduleInfos[i].RequiredModules[j];
-                modules.AddOrUpdate(
-                        rm.Type,
-                        t =>
-                        {
-                            var result = _modules.TryGetValue(t, out var existingMM) ? existingMM : new ModuleMetadata(rm, null, null);
-                            if (!existingModuleTypes.Contains(moduleInfos[i].Type))
-                            {   //
-                                // if the current module is not previously initialized, it is eligible to notify its required modules.
-                                //
-                                result = result.AddNotifier();
-                            }
-                            return result;
-                        },
-                        (a, b) => 
-                        {
-                            if (!existingModuleTypes.Contains(moduleInfos[i].Type))
-                            {   //
-                                // if the current module is not previously initialized, it is eligible to notify its required modules.
-                                //
-                                return b.AddNotifier();
-                            }
-                            return b;
-                        });
-            }
-
-            
             var rankedModules = RankModules(moduleInfos, existingModuleTypes).ToArray();
             var rootContainer = _moduleContainer;
             var rootExporter = new ContainerExporter(rootContainer);
@@ -214,7 +269,7 @@ namespace Axle.Application.Modularity
                     for (var k = 0; k < requiredModules.Length; k++)
                     {
                         var rm = requiredModules[k];
-                        if (modules.TryGetValue(rm.Type, out var rmm))
+                        if (_modules.TryGetValue(rm.Type, out var rmm))
                         {
                             moduleContainer.RegisterInstance(rmm.ModuleInstance);
                         }
@@ -223,81 +278,20 @@ namespace Axle.Application.Modularity
                     // TODO: register configuration objects
 
                     var moduleInstance = moduleContainer.Resolve(moduleType);
-                    var mm = modules.AddOrUpdate(
+                    var mm = _modules.AddOrUpdate(
                             moduleType,
-                            new ModuleMetadata(moduleInfo, moduleInstance, moduleContainer),
+                            _ => new ModuleMetadata(moduleInfo, null, null).UpdateInstance(moduleInstance, moduleContainer),
                             (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance, moduleContainer));
 
                     try
                     {
-                        mm.ModuleInfo.InitMethod?.Invoke(mm.ModuleInstance, rootExporter);
-                        if (requiredModules.Length > 0)
-                        {
-                            for (var k = 0; k < requiredModules.Length; k++)
-                            {
-                                var rm = requiredModules[k];
-                                if (!modules.TryGetValue(rm.Type, out var rmm))
-                                {
-                                    continue;
-                                }
-
-                                for (var l = 0; l < rmm.ModuleInfo.DependencyInitializedMethods.Length; l++)
-                                {
-                                    var callback = rmm.ModuleInfo.DependencyInitializedMethods[l];
-                                    #if NETSTANDARD || NET45_OR_NEWER
-                                    if (!callback.ArgumentType.GetTypeInfo().IsInstanceOfType(mm.ModuleInstance))
-                                    #else
-                                    if (!callback.ArgumentType.IsInstanceOfType(mm.ModuleInstance))
-                                    #endif
-                                    {
-                                        continue;
-                                    }
-
-                                    try
-                                    {
-                                        callback.Invoke(rmm.ModuleInstance, mm.ModuleInstance);
-                                    }
-                                    catch (Exception e)
-                                    {
-                                        // TODO: wrap exception
-                                        throw;
-                                    }
-                                }
-
-                                rmm = modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
-                                if (rmm.RemainingNotifiers != 0)
-                                {
-                                    continue;
-                                }
-
-                                try
-                                {
-                                    rmm.ModuleInfo.ReadyMethod.Invoke(rmm.ModuleInstance, rootExporter);
-                                    //
-                                    // Ensure that rmm.RemainingNotifiers is negative to guarantee a single ready call.
-                                    //
-                                    modules.AddOrUpdate(rm.Type, _ => rmm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
-                                }
-                                catch (Exception e)
-                                {
-                                    // TODO: wrap exception
-                                    throw;
-                                }
-                            }
-                        }
-
-                        if (mm.RemainingNotifiers == 0)
-                        {
-                            mm.ModuleInfo.ReadyMethod?.Invoke(mm.ModuleInstance, rootExporter);
-                            //
-                            // mm.RemainingNotifiers will become negative, indicating the ready method is already called
-                            // 
-                            mm = modules.AddOrUpdate(moduleType, _ => mm.RemoveNotifier(), (_, m) => m.RemoveNotifier());
-                        }
+                        mm = _modules.AddOrUpdate(moduleType, _ => mm.Init(rootExporter), (_, m) => m.Init(rootExporter));
+                        mm.NotifyInit(requiredModules, _modules);
                     }
                     catch
                     {
-                        // TODO: termination method execution
+                        mm.NotifyInit(requiredModules, _modules);
+                        mm = mm.Terminate(rootExporter);
 
                         if (mm.ModuleInstance is IDisposable disposable)
                         {
@@ -310,15 +304,7 @@ namespace Axle.Application.Modularity
                 }
             }
 
-            foreach (var moduleMetadata in modules.Values)
-            {
-                if (!_modules.TryAdd(moduleMetadata.ModuleInfo.Type, moduleMetadata))
-                {
-                    // TODO: concurrent module initialization of the same module
-                }
-            }
-
-            return rootContainer;
+            return this;
         }
     }
 }

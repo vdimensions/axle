@@ -60,20 +60,20 @@ namespace Axle.Application.Modularity
                    .ToArray();
         }
 
-        public ModuleMethod GetReadyMethod(Type moduleType)
-        {
-            var introspector = new DefaultIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions)
-                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleReadyAttribute));
-            return m == null ? null : new ModuleMethod(m);
-        }
-
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
             var m = introspector.GetMethods(MemberScanOptions)
                                 .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleEntryPointAttribute));
             return m == null ? null : new ModuleEntryMethod(m);
+        }
+
+        public ModuleMethod GetTerminateMethod(Type moduleType)
+        {
+            var introspector = new DefaultIntrospector(moduleType);
+            var m = introspector.GetMethods(MemberScanOptions)
+                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleTerminateAttribute));
+            return m == null ? null : new ModuleMethod(m);
         }
 
         public Type[] GetRequiredModules(Type moduleType)

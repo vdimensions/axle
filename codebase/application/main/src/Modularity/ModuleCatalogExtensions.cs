@@ -61,7 +61,7 @@ namespace Axle.Application.Modularity
                         moduleCatalog.GetInitMethod(moduleType),
                         moduleCatalog.GetDependencyInitializedMethods(moduleType),
                         moduleCatalog.GetDependencyTerminatedMethods(moduleType),
-                        moduleCatalog.GetReadyMethod(moduleType),
+                        moduleCatalog.GetTerminateMethod(moduleType),
                         moduleCatalog.GetEntryPointMethod(moduleType),
                         requiredModules);
                 yield return module;

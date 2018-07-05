@@ -15,7 +15,7 @@ namespace Axle.Application.Modularity
         ModuleMethod GetInitMethod(Type moduleType);
         ModuleCallback[] GetDependencyInitializedMethods(Type moduleType);
         ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType);
-        ModuleMethod GetReadyMethod(Type moduleType);
+        ModuleMethod GetTerminateMethod(Type moduleType);
         ModuleEntryMethod GetEntryPointMethod(Type moduleType);
     }
 }
