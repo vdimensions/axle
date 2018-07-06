@@ -5,12 +5,13 @@ using System.Linq;
 using System.Reflection;
 
 using Axle.Application.DependencyInjection;
+using Axle.Application.Logging;
 using Axle.Extensions.String;
 
 
 namespace Axle.Application.Modularity
 {
-    public class ModularContext
+    public sealed class ModularContext
     {
         private sealed class ContainerExporter : ModuleExporter
         {
@@ -33,6 +34,7 @@ namespace Axle.Application.Modularity
                 return this;
             }
         }
+
         [Flags]
         private enum ModuleState : sbyte
         {
@@ -45,22 +47,64 @@ namespace Axle.Application.Modularity
 
         private sealed class ModuleMetadata
         {
-            public ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container)
+            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, ILogger logger)
             {
                 ModuleInfo = moduleInfo;
                 ModuleInstance = instance;
                 Container = container;
+                Logger = logger;
             }
-            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, ModuleState state) : this(moduleInfo, instance, container)
+            public ModuleMetadata(ModuleInfo moduleInfo) : this(moduleInfo, null, null, null) { }
+            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, ILogger logger, ModuleState state) : this(moduleInfo, instance, container, logger)
             {
                 State = state;
             }
 
-            public ModuleMetadata UpdateInstance(object moduleInstance, IContainer container) => new ModuleMetadata(ModuleInfo, moduleInstance, container, State|ModuleState.Instantiated);
+            public ModuleMetadata UpdateInstance(object moduleInstance, IContainer container, ILogger logger) => new ModuleMetadata(ModuleInfo, moduleInstance, container, logger, State|ModuleState.Instantiated);
 
-            private ModuleMetadata ChangeState(ModuleState state) => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, state);
+            private ModuleMetadata ChangeState(ModuleState state) => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, Logger, state);
 
-            public ModuleMetadata Init(ModuleExporter exporter)
+            private void Notify(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
+            {
+                if (requiredModules.Length <= 0)
+                {
+                    return;
+                }
+                for (var k = 0; k < requiredModules.Length; k++)
+                {
+                    var rm = requiredModules[k];
+                    if (!moduleMetadata.TryGetValue(rm.Type, out var rmm))
+                    {
+                        continue;
+                    }
+
+                    var callbacks = callbackProvider(rmm.ModuleInfo);
+                    for (var l = 0; l < callbacks.Length; l++)
+                    {
+                        var callback = callbacks[l];
+                        #if NETSTANDARD || NET45_OR_NEWER
+                        if (!callback.ArgumentType.GetTypeInfo().IsInstanceOfType(ModuleInstance))
+                        #else
+                        if (!callback.ArgumentType.IsInstanceOfType(ModuleInstance))
+                        #endif
+                        {
+                            continue;
+                        }
+
+                        try
+                        {
+                            callback.Invoke(rmm.ModuleInstance, ModuleInstance);
+                        }
+                        catch (Exception e)
+                        {
+                            // TODO: wrap exception
+                            throw;
+                        }
+                    }
+                }
+            }
+
+            public ModuleMetadata Init(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {
@@ -72,77 +116,72 @@ namespace Axle.Application.Modularity
                 }
                 if ((State & ModuleState.Initialized) == ModuleState.Initialized)
                 {
+                    Logger.Warn("Initialization attempted, but module was already initialized. ");
                     return this;
                 }
 
+                Logger.Debug("Initializing module ...");
+
                 ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter);
-                return ChangeState(State | ModuleState.Initialized);
-            }
-
-            private void Notify(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
-            {
-                if (requiredModules.Length > 0)
-                {
-                    for (var k = 0; k < requiredModules.Length; k++)
-                    {
-                        var rm = requiredModules[k];
-                        if (!moduleMetadata.TryGetValue(rm.Type, out var rmm))
-                        {
-                            continue;
-                        }
-
-                        var callbacks = callbackProvider(rmm.ModuleInfo);
-                        for (var l = 0; l < callbacks.Length; l++)
-                        {
-                            var callback = callbacks[l];
-                            #if NETSTANDARD || NET45_OR_NEWER
-                            if (!callback.ArgumentType.GetTypeInfo().IsInstanceOfType(ModuleInstance))
-                            #else
-                            if (!callback.ArgumentType.IsInstanceOfType(ModuleInstance))
-                            #endif
-                            {
-                                continue;
-                            }
-
-                            try
-                            {
-                                callback.Invoke(rmm.ModuleInstance, ModuleInstance);
-                            }
-                            catch (Exception e)
-                            {
-                                // TODO: wrap exception
-                                throw;
-                            }
-                        }
-                    }
-                }
-            }
-
-            public void NotifyInit(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
-            {
+                var result = ChangeState(State | ModuleState.Initialized);
                 Notify(requiredModules, moduleMetadata, m => m.DependencyInitializedMethods);
-            }
-            public void NotifyTerminate(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
-            {
-                Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
+
+                Logger.Write(LogSeverity.Info, "Module initialization complete. ");
+
+                return result;
             }
 
-            public ModuleMetadata Terminate(ModuleExporter exporter)
+            public ModuleMetadata Run(params string[] args)
+            {
+                if ((State & ModuleState.Terminated) == ModuleState.Terminated)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed since it is was terminated.");
+                }
+                if ((State & ModuleState.Instantiated) != ModuleState.Instantiated)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be instantiated first. ");
+                }
+                if ((State & ModuleState.Initialized) == ModuleState.Initialized)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be initialized first.");
+                }
+                if ((State & ModuleState.Ran) == ModuleState.Ran)
+                {   //
+                    // Module is already ran
+                    //
+                    Logger.Warn("Execution attempted, but module was already executed. ");
+                    return this;
+                }
+                ModuleInfo.EntryPointMethod?.Invoke(ModuleInstance, args);
+                return ChangeState(State | ModuleState.Ran);
+            }
+
+            public ModuleMetadata Terminate(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {   //
                     // Module is already terminated
                     //
+                    Logger.Warn("Termination attempted, but module was already terminated. ");
                     return this;
                 }
 
+                Logger.Debug("Terminating module ...");
+
+                Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
+
                 ModuleInfo.TerminateMethod?.Invoke(ModuleInstance, exporter);
-                return ChangeState(State | ModuleState.Terminated);
+                var result = ChangeState(State | ModuleState.Terminated);
+
+                Logger.Write(LogSeverity.Info, "Module termination complete. ");
+
+                return result;
             }
 
             public ModuleInfo ModuleInfo { get; }
             public object ModuleInstance { get; }
             public IContainer Container { get; }
+            public ILogger Logger { get; }
             public ModuleState State { get; } = ModuleState.Hollow;
         }
 
@@ -229,14 +268,19 @@ namespace Axle.Application.Modularity
         private readonly IContainer _moduleContainer;
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvier;
+        private readonly ILoggingServiceProvider _loggingServiceProvider;
 
-        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier)
+        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier, ILoggingServiceProvider loggingServiceProvider)
         {
             _moduleCatalog = moduleCatalog;
             _containerProvier = containerProvier;
             _moduleContainer = containerProvier.Create();
+            _loggingServiceProvider = loggingServiceProvider;
         }
-        public ModularContext() : this(new DefaultModuleCatalog(), new DefaultDependencyContainerProvider()) { }
+        public ModularContext() : this(
+                  new DefaultModuleCatalog(), 
+                  new DefaultDependencyContainerProvider(), 
+                  new DefaultLoggingServiceProvider()) { }
 
         public ModularContext Launch(params Type[] moduleTypes)
         {
@@ -261,7 +305,11 @@ namespace Axle.Application.Modularity
 
                 using (var moduleContainer = _containerProvier.Create(rootContainer))
                 {
-                    moduleContainer.RegisterInstance(moduleInfo).RegisterType(moduleType);
+                    var moduleLogger = _loggingServiceProvider.Create(moduleType);
+                    moduleContainer
+                            .RegisterInstance(moduleInfo)
+                            .RegisterType(moduleType)
+                            .RegisterInstance(moduleLogger);
 
                     //
                     // Make all required modules injectable
@@ -280,19 +328,16 @@ namespace Axle.Application.Modularity
                     var moduleInstance = moduleContainer.Resolve(moduleType);
                     var mm = _modules.AddOrUpdate(
                             moduleType,
-                            _ => new ModuleMetadata(moduleInfo, null, null).UpdateInstance(moduleInstance, moduleContainer),
-                            (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance, moduleContainer));
+                            _ => new ModuleMetadata(moduleInfo).UpdateInstance(moduleInstance, moduleContainer, moduleLogger),
+                            (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance, moduleContainer, moduleLogger));
 
                     try
                     {
-                        mm = _modules.AddOrUpdate(moduleType, _ => mm.Init(rootExporter), (_, m) => m.Init(rootExporter));
-                        mm.NotifyInit(requiredModules, _modules);
+                        mm = _modules.AddOrUpdate(moduleType, _ => mm.Init(rootExporter, requiredModules, _modules), (_, m) => m.Init(rootExporter, requiredModules, _modules));
                     }
                     catch
                     {
-                        mm.NotifyInit(requiredModules, _modules);
-                        mm = mm.Terminate(rootExporter);
-
+                        mm = mm.Terminate(rootExporter, requiredModules, _modules);
                         if (mm.ModuleInstance is IDisposable disposable)
                         {
                             disposable.Dispose();
@@ -304,6 +349,12 @@ namespace Axle.Application.Modularity
                 }
             }
 
+            return this;
+        }
+
+        public ModularContext Run(params string[] args)
+        {
+            // TODO: sort by rank before execution
             return this;
         }
     }

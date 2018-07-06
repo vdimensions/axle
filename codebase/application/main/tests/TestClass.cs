@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 
-using System;
-
+using Axle.Application.Logging;
 using Axle.Application.Modularity;
 
 
@@ -15,20 +14,22 @@ namespace Axle.Application.Tests
             [ModuleInit]
             public void Init()
             {
-                Console.WriteLine($"{GetType().Name} is initialized");
+                Logger.Debug($"{GetType().Name} is initialized");
             }
 
             [ModuleDependencyInitialized]
             public void OnDependencyInitialized(object x)
             {
-                Console.WriteLine($"{x.GetType().Name} notifies {GetType().Name} for being initialized");
+                Logger.Debug($"{x.GetType().Name} notifies {GetType().Name} for being initialized");
             }
 
             [ModuleDependencyTerminated]
             public void OnDependencyTerminated(object x)
             {
-                Console.WriteLine($"{x.GetType().Name} notifies {GetType().Name} for getting terminated");
+                Logger.Debug($"{x.GetType().Name} notifies {GetType().Name} for getting terminated");
             }
+
+            public ILogger Logger { get; set; }
         }
 
         [Module]
@@ -67,7 +68,7 @@ namespace Axle.Application.Tests
             new ModularContext()
                 .Launch(typeof(AB))
                 .Launch(typeof(BC))
-                .Launch(typeof(AC));
+                .Launch(typeof(A), typeof(C), typeof(AC));
         }
     }
 }
