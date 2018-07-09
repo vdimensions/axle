@@ -9,7 +9,7 @@ namespace Axle.Extensions.DateTime
     /// <summary>
     /// A static class that contains extension methods for the <see cref="DateTime"/> <see langword="struct"/>
     /// </summary>
-    public static partial class DateTimeExtensions
+    public static class DateTimeExtensions
     {
         /// <summary>
         /// Returns the number of days in the specified month and year.

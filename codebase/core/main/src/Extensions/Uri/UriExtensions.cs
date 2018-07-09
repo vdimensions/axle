@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 
 using Axle.Verification;
 
@@ -246,6 +247,25 @@ namespace Axle.Extensions.Uri
             return SchemeEqualsAssumeAbsolute(uri, scheme) ? uri : new System.Uri(scheme + uri.ToString().Substring(uri.Scheme.Length), UriKind.Absolute);
         }
 
+        #if NETSTANDARD1_0
+        /// <summary>
+        /// Resolves an absolute <see cref="System.Uri">URI</see> instance based on the combination of a base 
+        /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
+        /// </summary>
+        /// <param name="uri">The base <see cref="System.Uri">URI</see></param>
+        /// <param name="other">The relative <see cref="System.Uri">URI</see> to be combined with <paramref name="uri"/></param>
+        /// <returns>
+        /// An absolute <see cref="System.Uri">URI</see> instance based on the combination of a base 
+        /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
+        /// </returns>
+        /// <remarks>
+        /// This method will immediately return the <paramref name="other"/> in case it represents an 
+        /// <see cref="System.Uri.IsAbsoluteUri">absolute</see> URI
+        /// </remarks>
+        /// <exception cref="ArgumentOutOfRangeException">
+        /// <paramref name="uri" /> is not an absolute <see cref="T:System.Uri" /> instance. 
+        /// </exception>
+        #else
         /// <summary>
         /// Resolves an absolute <see cref="System.Uri">URI</see> instance based on the combination of a base 
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
@@ -290,6 +310,7 @@ namespace Axle.Extensions.Uri
         /// -or- 
         /// The MS-DOS path specified in <paramref name="uri" /> must start with <c>c:\</c>.
         /// </exception>
+        #endif
         public static System.Uri Resolve(this System.Uri uri, System.Uri other)
         {
             uri.VerifyArgument(nameof(uri)).IsNotNull();
@@ -299,25 +320,26 @@ namespace Axle.Extensions.Uri
             {
                 return other;
             }
+
             if (uri.IsAbsoluteUri)
             {
                 return new System.Uri(uri, other);
             }
 
-            var val = uri.ToString();
-            var oth = other.ToString();
+            var val = new StringBuilder(uri.ToString());
+            var oth = new StringBuilder(other.ToString());
             if (val.Length > 0 && val[val.Length - 1] == '/')
             {
                 if (oth.Length >= 1 && oth[0] == '/')
                 {
-                    oth = oth.Substring(1);
+                    oth = oth.Remove(0, 1);
                 }
             } 
             else if (oth[0] != '/')
             {
-                oth = '/' + oth;
+                oth = oth.Insert(0, '/');
             }
-            return new System.Uri(val + oth, UriKind.Relative);
+            return new System.Uri(val.Append(oth).ToString(), UriKind.Relative);
         }
 
         /// <summary>
@@ -367,11 +389,11 @@ namespace Axle.Extensions.Uri
 				.Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries)
 				.Select(parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries))
 				.GroupBy(parts => parts[0], parts => parts.Length > 2 ? string.Join("=", parts, 1, parts.Length - 1) : (parts.Length > 1 ? parts[1] : ""), comparer)
-                #if NET40_OR_NEWER
+                 #if NET40_OR_NEWER
                 .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping), comparer);
-                #else
+                 #else
                 .ToDictionary(grouping => grouping.Key, grouping => string.Join(",", grouping.ToArray()), comparer);
-                #endif
+                 #endif
         }
     }
 }

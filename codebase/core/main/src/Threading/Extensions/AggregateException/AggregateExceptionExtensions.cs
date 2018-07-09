@@ -9,6 +9,9 @@ namespace Axle.Threading.Extensions.AggregateException
 
     public static class AggregateExceptionExtensions
     {
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         private static IEnumerable<Exception> Resolve(AggregateException e, ICollection<Exception> result)
         {
             for (var i = 0; i < e.InnerExceptions.Count; i++)

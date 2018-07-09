@@ -5,7 +5,7 @@ namespace Axle.Extensions.DateTime
 {
     using DateTime = System.DateTime;
     
-    public static partial class DateTimeExtensions
+    public static class DateTimeTimezoneExtensions
     {
         #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
         /// <summary>
