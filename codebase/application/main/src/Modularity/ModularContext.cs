@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+//using System.Threading.Tasks;
 
 using Axle.Application.DependencyInjection;
 using Axle.Application.Logging;
@@ -11,7 +12,7 @@ using Axle.Extensions.String;
 
 namespace Axle.Application.Modularity
 {
-    public sealed class ModularContext
+    internal sealed class ModularContext : IDisposable
     {
         private sealed class ContainerExporter : ModuleExporter
         {
@@ -79,6 +80,8 @@ namespace Axle.Application.Modularity
                     }
 
                     var callbacks = callbackProvider(rmm.ModuleInfo);
+                    //List<Task> parallelCallbacks = new List<Task>(callbacks.Length);
+                    //List<Task> sequentialCallbacks = new List<Task>(callbacks.Length);
                     for (var l = 0; l < callbacks.Length; l++)
                     {
                         var callback = callbacks[l];
@@ -91,6 +94,9 @@ namespace Axle.Application.Modularity
                             continue;
                         }
 
+                        //var listToAddTaskTo = callback.AllowParallelInvoke ? parallelCallbacks : sequentialCallbacks;
+                        //listToAddTaskTo.Add(new Task(() => callback.Invoke(rmm.ModuleInstance, ModuleInstance)));
+
                         try
                         {
                             callback.Invoke(rmm.ModuleInstance, ModuleInstance);
@@ -101,6 +107,8 @@ namespace Axle.Application.Modularity
                             throw;
                         }
                     }
+
+                    //parallelCallbacks.StartAll();
                 }
             }
 
@@ -263,8 +271,8 @@ namespace Axle.Application.Modularity
             return modulesWithRank.Values.OrderBy(x => x.Item2).GroupBy(x => x.Item2, x => x.Item1);
         }
 
-        private readonly ConcurrentDictionary<Type, ModuleMetadata[]> _moduleDependencies = new ConcurrentDictionary<Type, ModuleMetadata[]>();
         private readonly ConcurrentDictionary<Type, ModuleMetadata> _modules = new ConcurrentDictionary<Type, ModuleMetadata>();
+        private readonly ConcurrentStack<ModuleMetadata> _moduleInstances = new ConcurrentStack<ModuleMetadata>();
         private readonly IContainer _moduleContainer;
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvier;
@@ -328,8 +336,26 @@ namespace Axle.Application.Modularity
                     var moduleInstance = moduleContainer.Resolve(moduleType);
                     var mm = _modules.AddOrUpdate(
                             moduleType,
-                            _ => new ModuleMetadata(moduleInfo).UpdateInstance(moduleInstance, moduleContainer, moduleLogger),
-                            (_, m) => m.ModuleInstance != null ? m : m.UpdateInstance(moduleInstance, moduleContainer, moduleLogger));
+                            _ =>
+                            {
+                                
+                                var result = new ModuleMetadata(moduleInfo).UpdateInstance(moduleInstance, moduleContainer, moduleLogger);
+                                _moduleInstances.Push(result);
+                                return result;
+                            },
+                            (_, m) =>
+                            {
+                                if (m.ModuleInstance != null)
+                                {
+                                    return m;
+                                }
+                                else
+                                {
+                                    var result = m.UpdateInstance(moduleInstance, moduleContainer, moduleLogger);
+                                    _moduleInstances.Push(result);
+                                    return result;
+                                }
+                            });
 
                     try
                     {
@@ -356,6 +382,19 @@ namespace Axle.Application.Modularity
         {
             // TODO: sort by rank before execution
             return this;
+        }
+
+        public void Dispose()
+        {
+            while (_moduleInstances.TryPop(out var module))
+            {
+                module.Terminate(new ContainerExporter(_moduleContainer), module.ModuleInfo.RequiredModules.ToArray(), _modules);
+                if (module.ModuleInstance is IDisposable d)
+                {
+                    d.Dispose();
+                }
+            }
+            _moduleContainer?.Dispose();
         }
     }
 }

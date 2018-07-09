@@ -11,11 +11,12 @@ namespace Axle.Application.Modularity
     {
         private readonly IInvokable _invokable;
 
-        internal ModuleCallback(IMethod invokable, int priority)
+        internal ModuleCallback(IMethod invokable, int priority, bool allowParallelInvoke)
         {
             invokable.VerifyArgument(nameof(invokable)).IsNotNull();
             ArgumentType = (_invokable = invokable).GetParameters().Single().Type;
             Priority = priority;
+            AllowParallelInvoke = allowParallelInvoke;
         }
 
         public void Invoke(object module, object arg)
@@ -25,5 +26,6 @@ namespace Axle.Application.Modularity
 
         public int Priority { get; }
         public Type ArgumentType { get; }
+        public bool AllowParallelInvoke { get; }
     }
 }

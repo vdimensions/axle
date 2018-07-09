@@ -16,13 +16,13 @@ namespace Axle.Application.Logging
     #endif
     public sealed class LogEntry : ILogEntry
     {
-        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
         private static string ThreadName(Thread t) => t.Name ?? $"Thread-{t.ManagedThreadId}";
         #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DateTime _timestamp;
-        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _threadID;
         #endif
@@ -35,7 +35,7 @@ namespace Axle.Application.Logging
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Exception _exception;
 
-        #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
         public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, string message) 
             : this(timestamp,threadID, severity, type, message, null) { }
         public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, Exception exception) 

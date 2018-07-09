@@ -96,7 +96,9 @@ namespace Axle.Application.Logging
             }
         }
         #endif
+
         private static void LogToDebug(ILogEntry message) => Debug.WriteLine(message);
+
         #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
         private static void LogToTrace(ILogEntry message) => Trace.WriteLine(message);
         #endif

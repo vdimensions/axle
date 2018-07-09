@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+#if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
+#endif
 #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using Axle.Environment;
 #endif
@@ -44,7 +46,7 @@ namespace Axle.Application.Modularity
                        i.GetMethods(MemberScanOptions)
                         .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyInitializedAttribute).SingleOrDefault(a => a != null) })
                         .Where(x => x.Attribute != null)
-                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority)))
+                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
                    .ToArray();
         }
 
@@ -56,7 +58,7 @@ namespace Axle.Application.Modularity
                        i.GetMethods(MemberScanOptions)
                         .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyTerminatedAttribute).SingleOrDefault(a => a != null) })
                         .Where(x => x.Attribute != null)
-                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority)))
+                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
                    .ToArray();
         }
 
