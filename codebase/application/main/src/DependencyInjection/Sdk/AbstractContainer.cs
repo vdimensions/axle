@@ -2,7 +2,7 @@
 using System;
 
 
-namespace Axle.Application.DependencyInjection.Sdk
+namespace Axle.DependencyInjection.Sdk
 {
     public abstract partial class AbstractContainer : IContainer
     {

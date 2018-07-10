@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
 
-using Axle.Application.Logging;
-using Axle.Application.Modularity;
+using Axle.Logging;
+using Axle.Modularity;
 
 
-namespace Axle.Application.Tests
+namespace Axle.ApplicationTests
 {
     [TestFixture]
     public class TestClass

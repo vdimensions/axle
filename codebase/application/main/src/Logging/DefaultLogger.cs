@@ -2,7 +2,7 @@
 using System.Diagnostics;
 
 
-namespace Axle.Application.Logging
+namespace Axle.Logging
 {
     internal sealed class DefaultLogger : ILogger
     {

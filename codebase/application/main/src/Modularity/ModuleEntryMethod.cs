@@ -1,7 +1,7 @@
 ﻿using Axle.Reflection;
 using Axle.Verification;
 
-namespace Axle.Application.Modularity
+namespace Axle.Modularity
 {
     public sealed class ModuleEntryMethod
     {

@@ -1,7 +1,4 @@
-﻿using Axle.Application.DependencyInjection;
-
-
-namespace Axle.Application
+﻿namespace Axle.DependencyInjection
 {
     public interface IDependencyContainerProvider
     {

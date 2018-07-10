@@ -1,10 +1,10 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
 using System;
 
-using Axle.Application.DependencyInjection.Sdk;
+using Axle.DependencyInjection.Sdk;
 
 
-namespace Axle.Application.DependencyInjection
+namespace Axle.DependencyInjection
 {
     public class Container : AbstractContainer, IDisposable
     {

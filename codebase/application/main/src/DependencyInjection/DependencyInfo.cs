@@ -3,7 +3,7 @@
 using Axle.Verification;
 
 
-namespace Axle.Application.DependencyInjection
+namespace Axle.DependencyInjection
 {
     /// <summary>
     /// A class that describes a dependency which needs to be satisfied by a 

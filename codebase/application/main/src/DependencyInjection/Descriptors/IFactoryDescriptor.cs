@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 
 
-namespace Axle.Application.DependencyInjection.Descriptors
+namespace Axle.DependencyInjection.Descriptors
 {
     public interface IFactoryDescriptor
     {

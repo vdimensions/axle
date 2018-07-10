@@ -1,11 +1,12 @@
 ﻿using System;
 
-using Axle.Application.Logging;
-using Axle.Application.Modularity;
+using Axle.DependencyInjection;
+using Axle.Logging;
+using Axle.Modularity;
 using Axle.Verification;
 
 
-namespace Axle.Application
+namespace Axle
 {
     public sealed class Application : IDisposable
     {

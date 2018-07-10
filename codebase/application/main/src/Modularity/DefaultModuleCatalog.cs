@@ -10,7 +10,7 @@ using Axle.Environment;
 using Axle.Reflection;
 
 
-namespace Axle.Application.Modularity
+namespace Axle.Modularity
 {
     internal sealed class DefaultModuleCatalog : IModuleCatalog
     {

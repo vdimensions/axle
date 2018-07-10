@@ -10,7 +10,7 @@ using System.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Application.DependencyInjection.Sdk
+namespace Axle.DependencyInjection.Sdk
 {
     internal sealed class DependencyMap : IDisposable
     {

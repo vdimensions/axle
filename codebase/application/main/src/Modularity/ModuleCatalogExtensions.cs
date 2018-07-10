@@ -5,7 +5,7 @@ using System.Linq;
 using Axle.Verification;
 
 
-namespace Axle.Application.Modularity
+namespace Axle.Modularity
 {
     public static class ModuleCatalogExtensions
     {
@@ -25,22 +25,24 @@ namespace Axle.Application.Modularity
         private static void ExpandModules(IModuleCatalog catalog, Type moduleType, HashSet<Type> types)
         {
             types.Add(moduleType);
-            foreach (var type in catalog.GetRequiredModules(moduleType))
+            var modules = catalog.GetRequiredModules(moduleType);
+            for (var i = 0; i < modules.Length; i++)
             {
-                ExpandModules(catalog, type, types);
+                ExpandModules(catalog, modules[i], types);
             }
         }
 
         private static IEnumerable<ModuleInfo> ExtractModules(
                 IModuleCatalog moduleCatalog, 
-                IEnumerable<Type> types, 
+                IList<Type> types, 
                 IDictionary<Type, ModuleInfo> knownModules)
         {
             var allModuleTypes = new HashSet<Type>();
-            foreach (var type in types)
+            for (var i = 0; i < types.Count; i++)
             {
-                ExpandModules(moduleCatalog, type, allModuleTypes);
+                ExpandModules(moduleCatalog, types[i], allModuleTypes);
             }
+
             foreach (var moduleType in allModuleTypes)
             {
                 var requiredModuleTypes = moduleCatalog.GetRequiredModules(moduleType);

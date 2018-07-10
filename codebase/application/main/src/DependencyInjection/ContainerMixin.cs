@@ -3,7 +3,7 @@ using System;
 using Axle.Verification;
 
 
-namespace Axle.Application.DependencyInjection
+namespace Axle.DependencyInjection
 {
     public static class ContainerMixin
     {

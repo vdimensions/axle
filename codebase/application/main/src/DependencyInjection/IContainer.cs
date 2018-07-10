@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Axle.Application.DependencyInjection
+namespace Axle.DependencyInjection
 {
     /// <summary>
     /// An interface representing a dependency container.

@@ -1,4 +1,4 @@
-﻿namespace Axle.Application.Logging
+﻿namespace Axle.Logging
 {
     /// <summary>
     /// An enumeration that represents the importance (severity) of an application log's entries.

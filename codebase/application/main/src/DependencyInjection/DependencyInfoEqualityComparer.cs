@@ -3,7 +3,7 @@
 using Axle.Extensions.Object;
 
 
-namespace Axle.Application.DependencyInjection
+namespace Axle.DependencyInjection
 {
     public sealed class DependencyInfoEqualityComparer : AbstractEqualityComparer<DependencyInfo>
     {

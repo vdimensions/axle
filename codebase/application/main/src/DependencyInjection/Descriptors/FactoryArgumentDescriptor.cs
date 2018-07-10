@@ -2,7 +2,7 @@ using Axle.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Application.DependencyInjection.Descriptors
+namespace Axle.DependencyInjection.Descriptors
 {
     public class FactoryArgumentDescriptor : IFactoryArgumentDescriptor
     {

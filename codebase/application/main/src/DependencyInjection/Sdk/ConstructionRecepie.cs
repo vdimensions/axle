@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using Axle.Application.DependencyInjection.Descriptors;
+using Axle.DependencyInjection.Descriptors;
 using Axle.Verification;
 
 
-namespace Axle.Application.DependencyInjection.Sdk
+namespace Axle.DependencyInjection.Sdk
 {
     /// <summary>
     /// A class representing a construction recepie; that is the constructor/factory method, 

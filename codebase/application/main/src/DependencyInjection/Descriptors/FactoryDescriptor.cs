@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Axle.Reflection;
 
 
-namespace Axle.Application.DependencyInjection.Descriptors
+namespace Axle.DependencyInjection.Descriptors
 {
     public class FactoryDescriptor : IFactoryDescriptor
     {

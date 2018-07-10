@@ -1,4 +1,4 @@
-﻿namespace Axle.Application.Modularity
+﻿namespace Axle.Modularity
 {
     public abstract class ModuleExporter
     {

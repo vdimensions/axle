@@ -1,5 +1,5 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
-namespace Axle.Application.DependencyInjection.Sdk
+namespace Axle.DependencyInjection.Sdk
 {
     public abstract partial class AbstractContainer
     {

@@ -3,7 +3,7 @@
 #endif
 
 
-namespace Axle.Application.Modularity
+namespace Axle.Modularity
 {
     public interface IModuleCatalog
     {

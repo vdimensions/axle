@@ -1,4 +1,4 @@
-namespace Axle.Application.DependencyInjection.Descriptors
+namespace Axle.DependencyInjection.Descriptors
 {
     public interface IFactoryArgumentDescriptor : IDependencyDescriptor
     {

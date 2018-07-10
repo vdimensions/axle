@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Axle.Application.Logging
+namespace Axle.Logging
 {
     public interface ILogger
     {

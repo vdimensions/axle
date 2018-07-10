@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.5;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
   <PropertyGroup>
     <ProjectGuid>101CF79E-134B-4483-8734-C9AC28F68E20</ProjectGuid>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
+    <RootNamespace>Axle</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>

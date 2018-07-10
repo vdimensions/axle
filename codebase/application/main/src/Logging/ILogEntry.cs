@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Axle.Application.Logging
+namespace Axle.Logging
 {
     /// <summary>
     /// Represents a log entry; that is, a representation of an application event that is to be written to the application log.

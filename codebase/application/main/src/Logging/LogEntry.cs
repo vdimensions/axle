@@ -6,7 +6,7 @@ using System.Threading;
 #endif
 
 
-namespace Axle.Application.Logging
+namespace Axle.Logging
 {
     /// <summary>
     /// The default <see cref="ILogEntry"/> implementation provided by the Axle Framework.

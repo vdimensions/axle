@@ -1,8 +1,5 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
-using Axle.Application.DependencyInjection;
-
-
-namespace Axle.Application
+namespace Axle.DependencyInjection
 {
     public sealed class DefaultDependencyContainerProvider : IDependencyContainerProvider
     {

@@ -1,9 +1,7 @@
 ﻿using System;
 
-using Axle.Application.Logging;
 
-
-namespace Axle.Application
+namespace Axle.Logging
 {
     /// <summary>
     /// An interface for creating <see cref="ILogger">logger</see> implementations.

@@ -6,12 +6,12 @@ using System.Linq;
 using System.Reflection;
 #endif
 
-using Axle.Application.DependencyInjection.Descriptors;
+using Axle.DependencyInjection.Descriptors;
 using Axle.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Application.DependencyInjection.Sdk
+namespace Axle.DependencyInjection.Sdk
 {
     /// <summary>
     /// An abstract class to serve as a base for custom <see cref="IDependencyDescriptorProvider"/> implementations.

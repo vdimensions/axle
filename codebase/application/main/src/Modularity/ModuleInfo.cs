@@ -6,7 +6,7 @@ using System.Reflection;
 using Axle.Verification;
 
 
-namespace Axle.Application.Modularity
+namespace Axle.Modularity
 {
     public sealed class ModuleInfo
     {
