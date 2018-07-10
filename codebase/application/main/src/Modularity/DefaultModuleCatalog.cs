@@ -43,7 +43,7 @@ namespace Axle.Modularity
                 }
 
                 var attr = t.GetCustomAttributes(typeof(ModuleAttribute), false);
-                if (attr.Length == 0)
+                if (!attr.Any())
                 {
                     continue;
                 }

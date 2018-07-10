@@ -126,17 +126,17 @@ namespace Axle.Modularity
                 }
                 if ((State & ModuleState.Initialized) == ModuleState.Initialized)
                 {
-                    Logger.Warn("Initialization attempted, but module was already initialized. ");
+                    Logger.Warn("Initialization attempted, but module `{0}` was already initialized. ", ModuleInfo.Type.FullName);
                     return this;
                 }
 
-                Logger.Debug("Initializing module ...");
+                Logger.Debug("Initializing module `{0}`...", ModuleInfo.Type.FullName);
 
                 ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter);
                 var result = ChangeState(State | ModuleState.Initialized);
                 Notify(requiredModules, moduleMetadata, m => m.DependencyInitializedMethods);
 
-                Logger.Write(LogSeverity.Info, "Module initialization complete. ");
+                Logger.Write(LogSeverity.Info, "Module `{0}` initialized.", ModuleInfo.Type.FullName);
 
                 return result;
             }
@@ -159,7 +159,7 @@ namespace Axle.Modularity
                 {   //
                     // Module is already ran
                     //
-                    Logger.Warn("Execution attempted, but module was already executed. ");
+                    Logger.Warn("Execution attempted, but module `{0}` was already executed. ", ModuleInfo.Type.FullName);
                     return this;
                 }
                 ModuleInfo.EntryPointMethod?.Invoke(ModuleInstance, args);
@@ -172,18 +172,18 @@ namespace Axle.Modularity
                 {   //
                     // Module is already terminated
                     //
-                    Logger.Warn("Termination attempted, but module was already terminated. ");
+                    Logger.Warn("Termination attempted, but module `{0}` was already terminated. ", ModuleInfo.Type.FullName);
                     return this;
                 }
 
-                Logger.Debug("Terminating module ...");
+                Logger.Debug("Terminating module `{0}` ...", ModuleInfo.Type.FullName);
 
                 Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
 
                 ModuleInfo.TerminateMethod?.Invoke(ModuleInstance, exporter);
                 var result = ChangeState(State | ModuleState.Terminated);
 
-                Logger.Write(LogSeverity.Info, "Module termination complete. ");
+                Logger.Write(LogSeverity.Info, "Module `{0}` terminated. ", ModuleInfo.Type.FullName);
 
                 return result;
             }

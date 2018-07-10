@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 using Axle.DependencyInjection;
 using Axle.Logging;
@@ -24,6 +26,34 @@ namespace Axle
             DependencyContainerProvider = new DefaultDependencyContainerProvider();
             ModuleCatalog = new DefaultModuleCatalog();
             _args = args;
+        }
+
+        public Application Execute(params Assembly[] assemblies)
+        {
+            var c = _moduleCatalog;
+            if (_modularContext == null)
+            {
+                lock (_syncRoot)
+                {
+                    if (_modularContext == null)
+                    {
+                        _modularContext = new ModularContext(c, _dependencyContainerProvider, _loggingService);
+                    }
+                }
+            }
+
+            var types = new List<Type>();
+            for (var i = 0; i < assemblies.Length; i++)
+            {
+                var assemblyTypes = c.DiscoverModuleTypes(assemblies[i]);
+                for (var j = 0; j < assemblyTypes.Length; j++)
+                {
+                    types.Add(assemblyTypes[j]);
+                }
+            }
+
+            _modularContext.Launch(types.ToArray()).Run(_args);
+            return this;
         }
 
         public Application Execute(params Type[] types)
