@@ -1,6 +1,5 @@
 ﻿using System;
-#if NETSTANDARD || NET45_OR_NEWER
-#endif
+using System.Reflection;
 
 
 namespace Axle.Modularity
@@ -10,6 +9,8 @@ namespace Axle.Modularity
         #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         Type[] DiscoverModuleTypes();
         #endif
+
+        Type[] DiscoverModuleTypes(Assembly assembly);
 
         Type[] GetRequiredModules(Type moduleType);
         ModuleMethod GetInitMethod(Type moduleType);

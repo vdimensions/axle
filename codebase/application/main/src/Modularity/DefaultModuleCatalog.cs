@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
-#endif
+
 #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
 using Axle.Environment;
 #endif
 using Axle.Reflection;
+using Axle.Verification;
 
 
 namespace Axle.Modularity
@@ -19,16 +19,40 @@ namespace Axle.Modularity
         #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         public Type[] DiscoverModuleTypes()
         {
-            return Platform.Runtime.GetAssemblies()
-                                   .SelectMany(x => x.GetTypes())
-                                    #if NETSTANDARD1_5
-                                   .Select(t => t.GetTypeInfo())
-                                    #endif
-                                   .Where(t => !t.IsAbstract && !t.IsInterface)
-                                   .Where(t => t.GetCustomAttributes(typeof(ModuleAttribute), false).Any())
-                                   .ToArray();
+            return Platform.Runtime.GetAssemblies().SelectMany(DiscoverModuleTypes).ToArray();
         }
         #endif
+
+        public Type[] DiscoverModuleTypes(Assembly assembly)
+        {
+            assembly.VerifyArgument(nameof(assembly)).IsNotNull();
+
+            var result = new List<Type>();
+            var types = assembly.GetTypes();
+            for (var i = 0; i < types.Length; i++)
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                var t = types[i].GetTypeInfo();
+                #else
+                var t = types[i];
+                #endif
+
+                if (t.IsInterface || t.IsAbstract)
+                {
+                    continue;
+                }
+
+                var attr = t.GetCustomAttributes(typeof(ModuleAttribute), false);
+                if (attr.Length == 0)
+                {
+                    continue;
+                }
+
+                result.Add(types[i]);
+            }
+
+            return result.ToArray();
+        }
 
         public ModuleMethod GetInitMethod(Type moduleType)
         {
