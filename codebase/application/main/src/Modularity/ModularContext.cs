@@ -275,7 +275,7 @@ namespace Axle.Modularity
 
         private readonly ConcurrentDictionary<Type, ModuleMetadata> _modules = new ConcurrentDictionary<Type, ModuleMetadata>();
         private readonly ConcurrentStack<ModuleMetadata> _moduleInstances = new ConcurrentStack<ModuleMetadata>();
-        private readonly IContainer _moduleContainer;
+        private readonly IContainer _rootContainer;
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvier;
         private readonly ILoggingServiceProvider _loggingServiceProvider;
@@ -284,7 +284,7 @@ namespace Axle.Modularity
         {
             _moduleCatalog = moduleCatalog;
             _containerProvier = containerProvier;
-            _moduleContainer = containerProvier.Create();
+            _rootContainer = containerProvier.Create();
             _loggingServiceProvider = loggingServiceProvider;
         }
         public ModularContext() : this(
@@ -298,8 +298,7 @@ namespace Axle.Modularity
             var existingModuleTypes = new HashSet<Type>(_modules.Keys);
 
             var rankedModules = RankModules(moduleInfos, existingModuleTypes).ToArray();
-            var rootContainer = _moduleContainer;
-            var rootExporter = new ContainerExporter(rootContainer);
+            var rootExporter = new ContainerExporter(_rootContainer);
 
             for (var i = 0; i < rankedModules.Length; i++)
             foreach (var moduleInfo in rankedModules[i])
@@ -313,7 +312,7 @@ namespace Axle.Modularity
                     continue;
                 }
 
-                using (var moduleContainer = _containerProvier.Create(rootContainer))
+                using (var moduleContainer = _containerProvier.Create(_rootContainer))
                 {
                     var moduleLogger = _loggingServiceProvider.Create(moduleType);
                     moduleContainer
@@ -390,13 +389,15 @@ namespace Axle.Modularity
         {
             while (_moduleInstances.TryPop(out var module))
             {
-                module.Terminate(new ContainerExporter(_moduleContainer), module.ModuleInfo.RequiredModules.ToArray(), _modules);
+                module.Terminate(new ContainerExporter(_rootContainer), module.ModuleInfo.RequiredModules.ToArray(), _modules);
                 if (module.ModuleInstance is IDisposable d)
                 {
                     d.Dispose();
                 }
             }
-            _moduleContainer?.Dispose();
+            _rootContainer?.Dispose();
         }
+
+        public IContainer Container => _rootContainer;
     }
 }

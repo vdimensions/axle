@@ -20,6 +20,7 @@ namespace Axle
         private ModularContext _modularContext;
         private readonly string[] _args;
 
+
         public Application(params string[] args)
         {
             LoggingService = new DefaultLoggingServiceProvider();
@@ -133,5 +134,7 @@ namespace Axle
                 }
             }
         }
+
+        public IContainer Container => _modularContext?.Container;
     }
 }

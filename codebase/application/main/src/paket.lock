@@ -1,6 +1,6 @@
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.25)
+    Axle.Core (1.5.1.26)
       System.Diagnostics.TraceSource (>= 4.0) - restriction: && (< net20) (>= netstandard1.6) (< netstandard2.0)
       System.Threading.Tasks.Unofficial (>= 3.1) - restriction: && (>= net35) (< net40) (< netstandard1.0)
       System.Threading.Thread (>= 4.0) - restriction: && (< net20) (>= netstandard1.6) (< netstandard2.0)

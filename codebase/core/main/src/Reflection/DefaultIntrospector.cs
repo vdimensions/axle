@@ -123,7 +123,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IAttributeInfo> GetAttributes()
+        public IAttributeInfo[] GetAttributes()
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes();
@@ -131,7 +131,7 @@ namespace Axle.Reflection
             return IntrospectedType.GetEffectiveAttributes();
             #endif
         }
-        public IEnumerable<IAttributeInfo> GetAttributes(Type attributeType)
+        public IAttributeInfo[] GetAttributes(Type attributeType)
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes(attributeType);
@@ -156,7 +156,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IConstructor> GetConstructors(ScanOptions scanOptions)
+        public IConstructor[] GetConstructors(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
@@ -180,7 +180,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IMethod> GetMethods(ScanOptions scanOptions)
+        public IMethod[] GetMethods(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
@@ -214,7 +214,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IProperty> GetProperties(ScanOptions scanOptions)
+        public IProperty[] GetProperties(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
@@ -251,7 +251,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IField> GetFields(ScanOptions scanOptions)
+        public IField[] GetFields(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
@@ -287,7 +287,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IEvent> GetEvents(ScanOptions scanOptions)
+        public IEvent[] GetEvents(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
@@ -302,14 +302,38 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IEnumerable<IMember> GetMembers(ScanOptions scanOptions)
+        public IMember[] GetMembers(ScanOptions scanOptions)
         {
-            var ctors = GetConstructors(scanOptions).Cast<IMember>();
-            var methods = GetMethods(scanOptions).Cast<IMember>();
-            var props = GetProperties(scanOptions).Cast<IMember>();
-            var fileds = GetFields(scanOptions).Cast<IMember>();
-            var events = GetEvents(scanOptions).Cast<IMember>();
-            return ctors.Union(methods).Union(props).Union(fileds).Union(events);
+            var ctors = GetConstructors(scanOptions);
+            var methods = GetMethods(scanOptions);
+            var props = GetProperties(scanOptions);
+            var fields = GetFields(scanOptions);
+            var events = GetEvents(scanOptions);
+
+            var result = new List<IMember>(ctors.Length + methods.Length + props.Length + fields.Length + events.Length);
+
+            for (var i = 0; i < ctors.Length; i++)
+            {
+                result.Add(ctors[i]);
+            }
+            for (var i = 0; i < methods.Length; i++)
+            {
+                result.Add(methods[i]);
+            }
+            for (var i = 0; i < props.Length; i++)
+            {
+                result.Add(props[i]);
+            }
+            for (var i = 0; i < fields.Length; i++)
+            {
+                result.Add(fields[i]);
+            }
+            for (var i = 0; i < events.Length; i++)
+            {
+                result.Add(events[i]);
+            }
+
+            return result.ToArray();
         }
 
         /// <inheritdoc />

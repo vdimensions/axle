@@ -45,5 +45,58 @@ namespace Axle.DependencyInjection
         {
             return Resolve<T>(container, string.Empty);
         }
+
+        public static bool TryResolve(this IContainer container, Type type, out object value, string name)
+        {
+            try
+            {
+                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(type, name);
+                return true;
+            }
+            catch
+            {
+                value = null;
+                return false;
+            }
+        }
+        public static bool TryResolve(this IContainer container, Type type, out object value)
+        {
+            try
+            {
+                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(type);
+                return true;
+            }
+            catch
+            {
+                value = null;
+                return false;
+            }
+        }
+        public static bool TryResolve<T>(this IContainer container, out T value, string name)
+        {
+            try
+            {
+                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve<T>(name);
+                return true;
+            }
+            catch
+            {
+                value = default(T);
+                return false;
+            }
+        }
+        public static bool TryResolve<T>(this IContainer container, out T value)
+        {
+            try
+            {
+                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve<T>();
+                return true;
+            }
+            catch
+            {
+                value = default(T);
+                return false;
+            }
+        }
     }
 }

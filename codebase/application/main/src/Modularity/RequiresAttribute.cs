@@ -3,7 +3,7 @@
 
 namespace Axle.Modularity
 {
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
+    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface, AllowMultiple = true)]
     public class RequiresAttribute : Attribute
     {
         public RequiresAttribute(Type moduleType)
