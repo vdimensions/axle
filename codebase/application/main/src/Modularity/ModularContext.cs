@@ -118,11 +118,11 @@ namespace Axle.Modularity
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {
-                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it is was terminated.");
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it has been terminated.");
                 }
                 if ((State & ModuleState.Instantiated) != ModuleState.Instantiated)
                 {
-                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it is was not instantiated.");
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it has not been instantiated.");
                 }
                 if ((State & ModuleState.Initialized) == ModuleState.Initialized)
                 {
@@ -145,7 +145,7 @@ namespace Axle.Modularity
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {
-                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed since it is was terminated.");
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed since it has been terminated.");
                 }
                 if ((State & ModuleState.Instantiated) != ModuleState.Instantiated)
                 {
@@ -223,7 +223,7 @@ namespace Axle.Modularity
                     //
                     throw new InvalidOperationException(
                         string.Format(
-                            @"Circular dependencies exists between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
+                            @"Circular dependencies exist between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
                 }
                 remainingCount = modulesToLaunch.Count;
                 var modulesOfCurrentRank = new List<ModuleInfo>(modulesToLaunch.Count);
@@ -325,8 +325,7 @@ namespace Axle.Modularity
                     //
                     for (var k = 0; k < requiredModules.Length; k++)
                     {
-                        var rm = requiredModules[k];
-                        if (_modules.TryGetValue(rm.Type, out var rmm))
+                        if (_modules.TryGetValue(requiredModules[k].Type, out var rmm))
                         {
                             moduleContainer.RegisterInstance(rmm.ModuleInstance);
                         }
