@@ -52,7 +52,7 @@ namespace Axle.Modularity
                             {
                                 if (!knownModules.TryGetValue(t, out var m))
                                 {
-                                    m = ExtractModules(moduleCatalog, new[] {t}, knownModules).Single();
+                                    m = ExtractModules(moduleCatalog, new[] {t}, knownModules).Single(x => x.Type == t);
                                     knownModules.Add(t, m);
                                 }
                                 return m;
