@@ -3,8 +3,6 @@
 
 namespace Axle.Modularity
 {
-    [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-    public sealed class ModuleAttribute : Attribute
-    {
-    }
+    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    public sealed class ModuleAttribute : Attribute { }
 }
