@@ -135,7 +135,7 @@ namespace Axle.Modularity
 
         public Type[] GetRequiredModules(Type moduleType)
         {
-            var result = new List<Type>();
+            var result = new HashSet<Type>();
             var attributes = CollectAttributes(TypeAndInterfaces(moduleType, new HashSet<Type>()), new List<RequiresAttribute>());
             for (var i = 0; i < attributes.Count; i++)
             {
