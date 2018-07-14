@@ -24,7 +24,10 @@ namespace Axle.Modularity
 
         private static void ExpandModules(IModuleCatalog catalog, Type moduleType, HashSet<Type> types)
         {
-            types.Add(moduleType);
+            if (types.Add(moduleType))
+            {
+                return;
+            }
             var modules = catalog.GetRequiredModules(moduleType);
             for (var i = 0; i < modules.Length; i++)
             {
@@ -45,7 +48,7 @@ namespace Axle.Modularity
 
             foreach (var moduleType in allModuleTypes)
             {
-                var requiredModuleTypes = moduleCatalog.GetRequiredModules(moduleType);
+                var requiredModuleTypes = moduleCatalog.GetRequiredModules(moduleType).Except(new []{moduleType});
                 var requiredModules = requiredModuleTypes
                         .Select(
                             t =>
