@@ -59,16 +59,13 @@ namespace Axle.ApplicationTests
         [Test]
         public void TestModuleInitialization()
         {
-            new Application().Execute(typeof(AB), typeof(BC), typeof(AC));
+            using (new Application().Execute(typeof(AB), typeof(BC), typeof(AC))) { }
         }
 
         [Test]
         public void TestMultipleModuleInitializations()
         {
-            new Application()
-               .Execute(typeof(AB))
-               .Execute(typeof(BC))
-               .Execute(typeof(A), typeof(C), typeof(AC));
+            using (new Application().Execute(typeof(AB)).Execute(typeof(BC)).Execute(typeof(A), typeof(C), typeof(AC))) { }
         }
     }
 }

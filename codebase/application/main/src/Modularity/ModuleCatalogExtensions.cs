@@ -24,7 +24,7 @@ namespace Axle.Modularity
 
         private static void ExpandModules(IModuleCatalog catalog, Type moduleType, HashSet<Type> types)
         {
-            if (types.Add(moduleType))
+            if (!types.Add(moduleType))
             {
                 return;
             }
