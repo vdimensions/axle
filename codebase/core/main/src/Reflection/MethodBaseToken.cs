@@ -22,7 +22,7 @@ namespace Axle.Reflection
     #if NETSTANDARD
     public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>> 
     #else
-	public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>> 
+	public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
     #endif
         where T: MethodBase
     {
@@ -55,6 +55,15 @@ namespace Axle.Reflection
                 {
                     _direction &= ParameterDirection.ReturnValue;
                 }
+            }
+
+            public bool IsDefined(Type attributeType, bool inherit)
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                return ReflectedMember.IsDefined(attributeType);
+                #else
+                return ReflectedMember.IsDefined(attributeType, inherit);
+                #endif
             }
 
             public string Name => _parameterInfo.Name;

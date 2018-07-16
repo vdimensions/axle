@@ -88,8 +88,7 @@ namespace Axle.Modularity
         public ModuleMethod GetInitMethod(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions)
-                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleInitAttribute));
+            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleInitAttribute>(true));
             return m == null ? null : new ModuleMethod(m);
         }
 
@@ -120,16 +119,14 @@ namespace Axle.Modularity
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions)
-                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleEntryPointAttribute));
+            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
             return m == null ? null : new ModuleEntryMethod(m);
         }
 
         public ModuleMethod GetTerminateMethod(Type moduleType)
         {
             var introspector = new DefaultIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions)
-                                .SingleOrDefault(x => x.Attributes.Any(a => a.Attribute is ModuleTerminateAttribute));
+            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
             return m == null ? null : new ModuleMethod(m);
         }
 

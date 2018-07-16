@@ -14,7 +14,8 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
-	public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>> where T: MemberInfo
+	public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget 
+	    where T: MemberInfo
     {
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -72,10 +73,19 @@ namespace Axle.Reflection
             #endif
         }
 
-        public virtual bool Equals(MemberTokenBase<T> other) { return EqualityComparer.Equals(this, other); }
-        public override bool Equals(object obj) { return EqualityComparer.Equals(this, obj); }
+        public virtual bool Equals(MemberTokenBase<T> other) => EqualityComparer.Equals(this, other);
+        public override bool Equals(object obj) => EqualityComparer.Equals(this, obj);
 
-        public override int GetHashCode() { return EqualityComparer.GetHashCode(this); }
+        public override int GetHashCode() => EqualityComparer.GetHashCode(this);
+
+        public bool IsDefined(Type attributeType, bool inherit)
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            return ReflectedMember.IsDefined(attributeType, inherit);
+            #else
+            return ReflectedMember.IsDefined(attributeType, inherit);
+            #endif
+        }
 
         MemberInfo IReflected.ReflectedMember => ReflectedMember;
         public Type DeclaringType => _declaringType;
