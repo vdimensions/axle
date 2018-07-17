@@ -112,7 +112,7 @@ namespace Axle.Reflection
             var member = expr.Member;
             #if !NETSTANDARD
             var type = member.DeclaringType;
-            if (type != member.ReflectedType && !(
+            if (type != null && type != member.ReflectedType && !(
                 type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
             {
 				throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
@@ -122,7 +122,7 @@ namespace Axle.Reflection
             return member;
         }
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="GetAttributes()"/> />
         public IAttributeInfo[] GetAttributes()
         {
             #if NETSTANDARD || NET45_OR_NEWER
@@ -138,6 +138,18 @@ namespace Axle.Reflection
             #else
             return IntrospectedType.GetEffectiveAttributes(attributeType);
             #endif
+        }
+        public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            var attrs = IntrospectedType.GetTypeInfo().GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+            #else
+            var attrs = IntrospectedType.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+            #endif
+            var empty = new Attribute[0];
+            return inherit 
+                ? CustomAttributeProviderExtensions.FilterAttributes(empty, attrs) 
+                : CustomAttributeProviderExtensions.FilterAttributes(attrs, empty);
         }
 
         /// <inheritdoc />
@@ -200,7 +212,7 @@ namespace Axle.Reflection
             #else
             var property = _introspectedType.GetProperty(propertyName, bindingFlags);
             #endif
-            return property != null ? new PropertyToken(property) : null;
+            return property != null ? PropertyToken.Create(property) : null;
         }
 
         /// <inheritdoc />
@@ -208,7 +220,7 @@ namespace Axle.Reflection
         {
             if (ExtractMember(expression) is PropertyInfo prop)
             {
-                return new PropertyToken(prop);
+                return PropertyToken.Create(prop);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
@@ -225,7 +237,7 @@ namespace Axle.Reflection
                 .GetProperties(bindingFlags)
                 .GroupBy(x => x.Name)
                 .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == _introspectedType));
-            return properties.Select(x => new PropertyToken(x)).Cast<IProperty>().ToArray();
+            return properties.Select(PropertyToken.Create).Cast<IProperty>().ToArray();
         }
 
         /// <inheritdoc />
@@ -336,8 +348,20 @@ namespace Axle.Reflection
             return result.ToArray();
         }
 
+        public bool IsDefined(Type attributeType, bool inherit)
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            return IntrospectedType.GetTypeInfo().IsDefined(attributeType, inherit);
+            #else
+            return IntrospectedType.IsDefined(attributeType, inherit);
+            #endif
+        }
+
         /// <inheritdoc />
         public Type IntrospectedType => _introspectedType;
+
+        [Obsolete("Use GetAttributes() method instead")]
+        IEnumerable<IAttributeInfo> IAttributeTarget.Attributes => GetAttributes();
     }
 
     public sealed class DefaultIntrospector<T> : DefaultIntrospector, IIntrospector<T>
@@ -348,7 +372,7 @@ namespace Axle.Reflection
         {
             if (ExtractMember(expression) is PropertyInfo prop)
             {
-                return new PropertyToken(prop);
+                return PropertyToken.Create(prop);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }

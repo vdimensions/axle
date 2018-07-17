@@ -29,7 +29,6 @@ namespace Axle.Reflection.Extensions
         {
             provider.VerifyArgument(nameof(provider)).IsNotNull();
 
-            var comparer = EqualityComparer<Attribute>.Default;
             var notInherited = (attributeType == null ? provider.GetCustomAttributes(false) : provider.GetCustomAttributes(attributeType, false))
                     #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
                     .Cast<Attribute>()
@@ -39,7 +38,7 @@ namespace Axle.Reflection.Extensions
                     #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
                     .Cast<Attribute>()
                     #endif
-                    .Except(notInherited, comparer);
+                    ;
             return FilterAttributes(notInherited, inherited);
         }
         #elif NETSTANDARD || NET45_OR_NEWER
@@ -47,7 +46,6 @@ namespace Axle.Reflection.Extensions
         {
             provider.VerifyArgument(nameof(provider)).IsNotNull();
 
-            var comparer = EqualityComparer<Attribute>.Default;
             var notInherited = (attributeType == null ? provider.GetCustomAttributes(false) : provider.GetCustomAttributes(attributeType, false))
                     #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
                     .Cast<Attribute>()
@@ -57,7 +55,7 @@ namespace Axle.Reflection.Extensions
                     #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
                     .Cast<Attribute>()
                     #endif
-                    .Except(notInherited, comparer);
+                    ;
             return FilterAttributes(notInherited, inherited);
         }
 
@@ -65,7 +63,6 @@ namespace Axle.Reflection.Extensions
         {
             provider.VerifyArgument(nameof(provider)).IsNotNull();
 
-            var comparer = EqualityComparer<Attribute>.Default;
             var notInherited = (attributeType == null ? provider.GetCustomAttributes(false) : provider.GetCustomAttributes(attributeType, false))
                     #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
                     .Cast<Attribute>()
@@ -75,49 +72,52 @@ namespace Axle.Reflection.Extensions
                     #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
                     .Cast<Attribute>()
                     #endif
-                    .Except(notInherited, comparer);
+                    ;
             return FilterAttributes(notInherited, inherited);
         }
         #endif
 
-        private static IAttributeInfo[] FilterAttributes(IEnumerable<Attribute> notInherited, IEnumerable<Attribute> inherited)
+        internal static IAttributeInfo[] FilterAttributes(IEnumerable<Attribute> notInherited, IEnumerable<Attribute> inherited)
         {
-            var attr = notInherited
-                .Select(
-                    x => new
+            var comparer = EqualityComparer<Attribute>.Default;
+            var result = new List<IAttributeInfo>();
+            foreach (var attribute in notInherited)
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
+                #else
+                var attributeUsage = attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
+                #endif
+                result.Add(
+                    new AttributeInfo
                     {
-                        Attribute = x,
+                        Attribute = attribute,
                         Inherited = false,
-                        #if NETSTANDARD || NET45_OR_NEWER
-                        AttributeUsage = x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                        #else
-                        AttributeUsage = x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                        #endif
-                    })
-                .Union(
-                    inherited
-                        .Select(
-                            x => new
-                            {
-                                Attribute = x,
-                                Inherited = true,
-                                #if NETSTANDARD || NET45_OR_NEWER
-                                AttributeUsage = x.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                                #else
-                                AttributeUsage = x.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single()
-                                #endif
-                            })
-                    // Only allow inherited attributes that are defined as inheritable
-                    .Where(x => x.AttributeUsage.Inherited))
-                .Select(
-                    x => new AttributeInfo
+                        AllowMultiple = attributeUsage.AllowMultiple,
+                        AttributeTargets = attributeUsage.ValidOn,
+                    });
+            }
+            foreach (var attribute in inherited)
+            {
+                if (result.Any(x => comparer.Equals(x.Attribute, attribute)))
+                {
+                    continue;
+                }
+                #if NETSTANDARD || NET45_OR_NEWER
+                var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
+                #else
+                var attributeUsage = attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
+                #endif
+                result.Add(
+                    new AttributeInfo
                     {
-                        Attribute = x.Attribute,
-                        AllowMultiple = x.AttributeUsage.AllowMultiple,
-                        AttributeTargets = x.AttributeUsage.ValidOn,
-                        Inherited = x.Inherited
-                    } as IAttributeInfo);
-            return attr.ToArray();
+                        Attribute = attribute,
+                        Inherited = true,
+                        AllowMultiple = attributeUsage.AllowMultiple,
+                        AttributeTargets = attributeUsage.ValidOn,
+                    });
+            }
+            return result.ToArray();
         }
     }
 }

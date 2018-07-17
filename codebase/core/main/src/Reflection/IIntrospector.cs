@@ -8,11 +8,8 @@ namespace Axle.Reflection
     /// <summary>
     /// An interface for an introspector; that is, an utility to provide reflection information on members of a given type.
     /// </summary>
-    public interface IIntrospector
+    public interface IIntrospector : IAttributeTarget
     {
-        IAttributeInfo[] GetAttributes();
-        IAttributeInfo[] GetAttributes(Type attributeType);
-
         IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);
 
         IConstructor[] GetConstructors(ScanOptions scanOptions);

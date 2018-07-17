@@ -16,13 +16,13 @@ namespace Axle.DependencyInjection.Descriptors
                 property.MemberType,
                 dependencyName.VerifyArgument(nameof(dependencyName)).IsNotNull(), 
                 property.Name);
-            var defaultValueAttribute = Member.Attributes.Select(x => x.Attribute).OfType<DefaultValueAttribute>().SingleOrDefault();
+            var defaultValueAttribute = Member.GetAttributes<DefaultValueAttribute>().Select(x => x.Attribute).OfType<DefaultValueAttribute>().SingleOrDefault();
             DefaultValue = defaultValueAttribute?.Value;
         }
 
         public void SetValue(object target, object value)
         {
-            Member.SetAccessor.SetValue(target, value);
+            ((IWriteableMember) Member).SetAccessor.SetValue(target, value);
         }
 
 

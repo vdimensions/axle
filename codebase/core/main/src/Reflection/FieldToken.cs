@@ -62,7 +62,7 @@ namespace Axle.Reflection
         public override int GetHashCode() => base.GetHashCode();
 
         public IGetAccessor GetAccessor => _accessors[0];
-        public ISetAccessor SetAccessor => _accessors[1];
+        public ISetAccessor SetAccessor => _accessors[1];        
         public bool IsReadOnly => ReflectedMember.IsInitOnly;
         IEnumerable<IAccessor> IAccessible.Accessors => _accessors;
         public override AccessModifier AccessModifier => _accessModifier;

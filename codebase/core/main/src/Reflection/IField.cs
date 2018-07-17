@@ -4,7 +4,7 @@
     /// An interface representing a reflected field member.
     /// </summary>
     /// <seealso cref="System.Reflection.FieldInfo"/>
-    public interface IField : IReadableMember, IWriteableMember, IAttributeTarget
+    public interface IField : IReadWriteMember, IAttributeTarget
     {
         /// <summary>
         /// Gets a value determining if the field represented by the current <see cref="IField"/> instance 

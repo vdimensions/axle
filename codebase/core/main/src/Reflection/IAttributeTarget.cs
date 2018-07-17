@@ -12,6 +12,15 @@ namespace Axle.Reflection
     public interface IAttributeTarget
     {
         /// <summary>
+        /// Gets a collection of zero or more <see cref="IAttributeInfo">attributes</see> that the reflected object has defined.
+        /// </summary>
+        IAttributeInfo[] GetAttributes();
+
+        IAttributeInfo[] GetAttributes(Type attributeType);
+
+        IAttributeInfo[] GetAttributes(Type attributeType, bool inherit);
+
+        /// <summary>
         /// Indicates whether one or more attributes of the specified <see cref="Type">type</see> or of its derived
         /// types is applied to this <see cref="IAttributeTarget">attribute target</see> instance.
         /// </summary>
@@ -36,6 +45,7 @@ namespace Axle.Reflection
         /// <summary>
         /// A collection of zero or more <see cref="IAttributeInfo">attributes</see> that the reflected object has.
         /// </summary>
+        [Obsolete("Use GetAttributes() method instead")]
         IEnumerable<IAttributeInfo> Attributes { get; }
     }
 }

@@ -36,7 +36,7 @@ namespace Axle.Modularity
             foreach (var type in types)
             {
                 var introspector = new DefaultIntrospector(type);
-                var introspectedAttrobutes = introspector.GetAttributes(typeof(TAttribute));
+                var introspectedAttrobutes = introspector.GetAttributes<TAttribute>();
                 for (var i = 0; i < introspectedAttrobutes.Length; i++)
                 {
                     attributes.Add((TAttribute) introspectedAttrobutes[i].Attribute);
@@ -98,7 +98,7 @@ namespace Axle.Modularity
             return introspectors
                    .SelectMany(i =>
                        i.GetMethods(MemberScanOptions)
-                        .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyInitializedAttribute).SingleOrDefault(a => a != null) })
+                        .Select(x => new { Method = x, Attribute = x.GetAttributes<ModuleDependencyInitializedAttribute>().Select(a => a.Attribute).Cast<ModuleDependencyInitializedAttribute>().SingleOrDefault() })
                         .Where(x => x.Attribute != null)
                         .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
                    .ToArray();
@@ -110,7 +110,7 @@ namespace Axle.Modularity
             return introspectors
                    .SelectMany(i => 
                        i.GetMethods(MemberScanOptions)
-                        .Select(x => new { Method = x, Attribute = x.Attributes.Select(a => a.Attribute as ModuleDependencyTerminatedAttribute).SingleOrDefault(a => a != null) })
+                        .Select(x => new { Method = x, Attribute = x.GetAttributes<ModuleDependencyTerminatedAttribute>().Select(a => a.Attribute).Cast<ModuleDependencyTerminatedAttribute>().SingleOrDefault() })
                         .Where(x => x.Attribute != null)
                         .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
                    .ToArray();

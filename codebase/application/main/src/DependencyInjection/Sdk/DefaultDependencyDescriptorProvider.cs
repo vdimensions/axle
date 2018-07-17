@@ -44,7 +44,7 @@ namespace Axle.DependencyInjection.Sdk
             return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
                 .GetProperties(MemberScanOptions)
                 .Where(x => x.AccessModifier != AccessModifier.Private)
-                .Where(x => x.SetAccessor != null)
+                .Where(x => x is IWriteableMember)
                 .Select(GetDescriptor);
         }
 
@@ -58,8 +58,7 @@ namespace Axle.DependencyInjection.Sdk
                 .Where(x => type.IsAssignableFrom(x.ReturnType))
                 #endif
                 .Select(GetDescriptor);
-            var constructors = introspector.GetConstructors(MemberScanOptions)
-                .Select(GetDescriptor);
+            var constructors = introspector.GetConstructors(MemberScanOptions).Select(GetDescriptor);
             return staticFactories.Union(constructors);
         }
     }

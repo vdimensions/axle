@@ -4,5 +4,5 @@
     /// An interface representing a reflected property member.
     /// </summary>
     /// <seealso cref="System.Reflection.PropertyInfo"/>
-    public interface IProperty : IReadableMember, IWriteableMember, IAttributeTarget { }
+    public interface IProperty : IMember, IAttributeTarget { }
 }

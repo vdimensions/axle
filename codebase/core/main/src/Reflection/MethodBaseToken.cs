@@ -34,14 +34,11 @@ namespace Axle.Reflection
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private readonly ParameterInfo _parameterInfo;
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-            private readonly IEnumerable<IAttributeInfo> _attributes;
-            [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private readonly ParameterDirection _direction;
 
             public Parameter(ParameterInfo parameterInfo)
             {
                 _parameterInfo = parameterInfo.VerifyArgument(nameof(parameterInfo)).IsNotNull();
-                _attributes = ReflectedMember.GetEffectiveAttributes();
 
                 if (parameterInfo.IsIn)
                 {
@@ -55,6 +52,17 @@ namespace Axle.Reflection
                 {
                     _direction &= ParameterDirection.ReturnValue;
                 }
+            }
+
+            public IAttributeInfo[] GetAttributes() => ReflectedMember.GetEffectiveAttributes();
+            public IAttributeInfo[] GetAttributes(Type attributeType) => ReflectedMember.GetEffectiveAttributes(attributeType);
+            public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
+            {
+                var reflectedMember = ReflectedMember;
+                var attrs = reflectedMember.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+                return inherit
+                    ? CustomAttributeProviderExtensions.FilterAttributes(new Attribute[0], attrs)
+                    : CustomAttributeProviderExtensions.FilterAttributes(attrs, new Attribute[0]);
             }
 
             public bool IsDefined(Type attributeType, bool inherit)
@@ -71,7 +79,8 @@ namespace Axle.Reflection
             public bool IsOptional => _parameterInfo.IsOptional;
             public object DefaultValue => _parameterInfo.DefaultValue;
             public ParameterInfo ReflectedMember => _parameterInfo;
-            public IEnumerable<IAttributeInfo> Attributes => _attributes;
+            [Obsolete("Use GetAttributes instead.")]
+            public IEnumerable<IAttributeInfo> Attributes => GetAttributes();
             public ParameterDirection Direction => _direction;
         }
 

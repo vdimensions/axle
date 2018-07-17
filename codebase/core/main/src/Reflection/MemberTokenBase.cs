@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -76,6 +77,25 @@ namespace Axle.Reflection
         public virtual bool Equals(MemberTokenBase<T> other) => EqualityComparer.Equals(this, other);
         public override bool Equals(object obj) => EqualityComparer.Equals(this, obj);
 
+        public IAttributeInfo[] GetAttributes()
+        {
+            var reflectedMember = ReflectedMember;
+            return reflectedMember.GetEffectiveAttributes() ?? new IAttributeInfo[0];
+        }
+        public IAttributeInfo[] GetAttributes(Type attributeType)
+        {
+            var reflectedMember = ReflectedMember;
+            return reflectedMember.GetEffectiveAttributes(attributeType) ?? new IAttributeInfo[0];
+        }
+        public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
+        {
+            var reflectedMember = ReflectedMember;
+            var attrs = reflectedMember.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+            return inherit 
+                ? CustomAttributeProviderExtensions.FilterAttributes(new Attribute[0], attrs) 
+                : CustomAttributeProviderExtensions.FilterAttributes(attrs, new Attribute[0]);
+        }
+
         public override int GetHashCode() => EqualityComparer.GetHashCode(this);
 
         public bool IsDefined(Type attributeType, bool inherit)
@@ -95,17 +115,15 @@ namespace Axle.Reflection
         public abstract AccessModifier AccessModifier { get; }
         public RuntimeTypeHandle TypeHandle => _typeHandle;
 
+        [Obsolete("Use GetAttributes() method instead.")]
         public IEnumerable<IAttributeInfo> Attributes
         {
             get
             {
-                // IMPORTANT! Get the reflected member outside the lock to prevent recursive entrance!
-                var reflectedMember = ReflectedMember;
-
                 return Lock.Invoke(
                     () => _attributes,
                     xx => xx == null,
-                    () => _attributes = reflectedMember.GetEffectiveAttributes()) ?? new IAttributeInfo[0];
+                    () => _attributes = GetAttributes());
             }
         }
 
