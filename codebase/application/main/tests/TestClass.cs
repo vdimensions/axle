@@ -14,19 +14,19 @@ namespace Axle.ApplicationTests
             [ModuleInit]
             public void Init()
             {
-                Logger.Debug($"{GetType().Name} is initialized");
+                //Logger.Debug($"{GetType().Name} is initialized");
             }
 
             [ModuleDependencyInitialized]
             public void OnDependencyInitialized(object x)
             {
-                Logger.Debug($"{x.GetType().Name} notifies {GetType().Name} for being initialized");
+                //Logger.Debug($"{x.GetType().Name} notifies {GetType().Name} for being initialized");
             }
 
             [ModuleDependencyTerminated]
             public void OnDependencyTerminated(object x)
             {
-                Logger.Debug($"{x.GetType().Name} notifies {GetType().Name} for getting terminated");
+                //Logger.Debug($"{x.GetType().Name} notifies {GetType().Name} for getting terminated");
             }
 
             public ILogger Logger { get; set; }

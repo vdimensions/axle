@@ -1,7 +1,7 @@
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.1.47)
+    Axle.Application (1.5.1.52)
       Axle.Core (>= 1.5.1)
     Axle.Core (1.5.1.28)
   remote: https://www.nuget.org/api/v2
