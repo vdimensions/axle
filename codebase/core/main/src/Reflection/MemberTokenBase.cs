@@ -42,6 +42,19 @@ namespace Axle.Reflection
             return AccessModifier.ProtectedInternal;
         }
 
+        public IAttributeInfo[] GetAttributes(T reflectedMember) { return reflectedMember.GetEffectiveAttributes() ?? new IAttributeInfo[0]; }
+        public IAttributeInfo[] GetAttributes(T reflectedMember, Type attributeType)
+        {
+            return reflectedMember.GetEffectiveAttributes(attributeType) ?? new IAttributeInfo[0];
+        }
+        public IAttributeInfo[] GetAttributes(T reflectedMember, Type attributeType, bool inherit)
+        {
+            var attrs = reflectedMember.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+            return inherit
+                ? CustomAttributeProviderExtensions.FilterAttributes(new Attribute[0], attrs)
+                : CustomAttributeProviderExtensions.FilterAttributes(attrs, new Attribute[0]);
+        }
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _declaringType;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -77,24 +90,9 @@ namespace Axle.Reflection
         public virtual bool Equals(MemberTokenBase<T> other) => EqualityComparer.Equals(this, other);
         public override bool Equals(object obj) => EqualityComparer.Equals(this, obj);
 
-        public IAttributeInfo[] GetAttributes()
-        {
-            var reflectedMember = ReflectedMember;
-            return reflectedMember.GetEffectiveAttributes() ?? new IAttributeInfo[0];
-        }
-        public IAttributeInfo[] GetAttributes(Type attributeType)
-        {
-            var reflectedMember = ReflectedMember;
-            return reflectedMember.GetEffectiveAttributes(attributeType) ?? new IAttributeInfo[0];
-        }
-        public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
-        {
-            var reflectedMember = ReflectedMember;
-            var attrs = reflectedMember.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
-            return inherit 
-                ? CustomAttributeProviderExtensions.FilterAttributes(new Attribute[0], attrs) 
-                : CustomAttributeProviderExtensions.FilterAttributes(attrs, new Attribute[0]);
-        }
+        public IAttributeInfo[] GetAttributes() => GetAttributes(ReflectedMember);
+        public IAttributeInfo[] GetAttributes(Type attributeType) => GetAttributes(ReflectedMember, attributeType);
+        public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit) => GetAttributes(ReflectedMember, attributeType, inherit);
 
         public override int GetHashCode() => EqualityComparer.GetHashCode(this);
 
@@ -120,10 +118,11 @@ namespace Axle.Reflection
         {
             get
             {
+                var reflectedMember = ReflectedMember;
                 return Lock.Invoke(
                     () => _attributes,
                     xx => xx == null,
-                    () => _attributes = GetAttributes());
+                    () => _attributes = GetAttributes(reflectedMember));
             }
         }
 

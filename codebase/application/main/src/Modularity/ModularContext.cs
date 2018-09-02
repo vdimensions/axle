@@ -312,13 +312,15 @@ namespace Axle.Modularity
                     continue;
                 }
 
-                using (var moduleContainer = _containerProvier.Create(_rootContainer))
+                using (var moduleInitializationContainer = _containerProvier.Create(_rootContainer))
                 {
                     var moduleLogger = _loggingServiceProvider.Create(moduleType);
-                    moduleContainer
+                    var moduleContainer = _containerProvier.Create(_rootContainer);
+                    moduleInitializationContainer
                             .RegisterInstance(moduleInfo)
                             .RegisterType(moduleType)
-                            .RegisterInstance(moduleLogger);
+                            .RegisterInstance(moduleLogger)
+                            .RegisterInstance(moduleContainer);
 
                     //
                     // Make all required modules injectable
@@ -327,19 +329,19 @@ namespace Axle.Modularity
                     {
                         if (_modules.TryGetValue(requiredModules[k].Type, out var rmm))
                         {
-                            moduleContainer.RegisterInstance(rmm.ModuleInstance);
+                            moduleInitializationContainer.RegisterInstance(rmm.ModuleInstance);
                         }
                     }
 
                     // TODO: register configuration objects
 
-                    var moduleInstance = moduleContainer.Resolve(moduleType);
+                    var moduleInstance = moduleInitializationContainer.Resolve(moduleType);
                     var mm = _modules.AddOrUpdate(
                             moduleType,
                             _ =>
                             {
                                 
-                                var result = new ModuleMetadata(moduleInfo).UpdateInstance(moduleInstance, moduleContainer, moduleLogger);
+                                var result = new ModuleMetadata(moduleInfo).UpdateInstance(moduleInstance, moduleInitializationContainer, moduleLogger);
                                 _moduleInstances.Push(result);
                                 return result;
                             },
@@ -351,7 +353,7 @@ namespace Axle.Modularity
                                 }
                                 else
                                 {
-                                    var result = m.UpdateInstance(moduleInstance, moduleContainer, moduleLogger);
+                                    var result = m.UpdateInstance(moduleInstance, moduleInitializationContainer, moduleLogger);
                                     _moduleInstances.Push(result);
                                     return result;
                                 }

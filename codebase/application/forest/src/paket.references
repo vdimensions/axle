@@ -1,0 +1,7 @@
+FSharp.Core
+Forest.Core
+Axle.Core
+Axle.Application
+
+group build
+  Mason.Targets.Preprocessor

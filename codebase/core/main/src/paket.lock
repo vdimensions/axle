@@ -1,7 +1,7 @@
 RESTRICTION: || (== net35) (== net40) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
 NUGET
   remote: https://www.nuget.org/api/v2
-    Microsoft.NETCore.Platforms (2.1) - restriction: == netstandard1.6
+    Microsoft.NETCore.Platforms (2.1.1) - restriction: == netstandard1.6
     Microsoft.NETCore.Targets (2.1) - restriction: == netstandard1.6
     runtime.native.System (4.3.1) - restriction: == netstandard1.6
       Microsoft.NETCore.Platforms (>= 1.1.1)
@@ -76,7 +76,7 @@ NUGET
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Runtime (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
-    System.Reflection.TypeExtensions (4.5) - restriction: == netstandard1.6
+    System.Reflection.TypeExtensions (4.5.1) - restriction: == netstandard1.6
       System.Reflection (>= 4.3) - restriction: || (== net35) (== net40) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.3)) (&& (== netstandard2.0) (< netstandard1.5))
       System.Resources.ResourceManager (>= 4.3) - restriction: || (== net35) (== net40) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.3)) (&& (== netstandard2.0) (< netstandard1.5))
       System.Runtime (>= 4.3) - restriction: || (== net35) (== net40) (== net45) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.3)) (&& (== netstandard2.0) (< netstandard1.5))
