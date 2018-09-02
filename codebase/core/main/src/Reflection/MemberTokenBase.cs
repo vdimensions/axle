@@ -118,6 +118,9 @@ namespace Axle.Reflection
         {
             get
             {
+                // The `ReflectedMember` property uses `Lock` internally.
+                // We call it before locking again to avoid recursive lock error. 
+                //
                 var reflectedMember = ReflectedMember;
                 return Lock.Invoke(
                     () => _attributes,
@@ -136,7 +139,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
-	public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
+    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
         where THandle: struct

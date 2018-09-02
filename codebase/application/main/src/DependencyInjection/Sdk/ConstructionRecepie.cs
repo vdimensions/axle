@@ -68,7 +68,7 @@ namespace Axle.DependencyInjection.Sdk
             }
         }
 
-        private static IEnumerable<T> FilterDescriptors<T>(IFactoryDescriptor descriptor, IEnumerable<T> descriptors, IDependencyDescriptorProvider dependencyDescriptorProvider)
+        private static IEnumerable<T> FilterDescriptors<T>(IFactoryDescriptor descriptor, IList<T> descriptors, IDependencyDescriptorProvider dependencyDescriptorProvider)
             where T: class, IDependencyDescriptor
         {
             var descriptorsCondensed = new HashSet<T>(descriptors, new ReferenceEqualityComparer<T>());

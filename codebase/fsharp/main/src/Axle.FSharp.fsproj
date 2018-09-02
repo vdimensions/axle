@@ -17,7 +17,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.fs" />
-    <Compile Include="Utils\Option.fs" />
+    <Compile Include="Extensions\Option.fs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="build.sh" />
