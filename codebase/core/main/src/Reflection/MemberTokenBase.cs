@@ -15,8 +15,8 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
-	public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget 
-	    where T: MemberInfo
+    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget 
+        where T: MemberInfo
     {
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -96,14 +96,7 @@ namespace Axle.Reflection
 
         public override int GetHashCode() => EqualityComparer.GetHashCode(this);
 
-        public bool IsDefined(Type attributeType, bool inherit)
-        {
-            #if NETSTANDARD || NET45_OR_NEWER
-            return ReflectedMember.IsDefined(attributeType, inherit);
-            #else
-            return ReflectedMember.IsDefined(attributeType, inherit);
-            #endif
-        }
+        public bool IsDefined(Type attributeType, bool inherit) => ReflectedMember.IsDefined(attributeType, inherit);
 
         MemberInfo IReflected.ReflectedMember => ReflectedMember;
         public Type DeclaringType => _declaringType;
@@ -172,7 +165,7 @@ namespace Axle.Reflection
                 Lock.Invoke(
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
-                    #if NETSTANDARD || NET45_OR_NEWER
+                    #if FX_RESHAPED_REFLECTION
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType));
                     #else
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));

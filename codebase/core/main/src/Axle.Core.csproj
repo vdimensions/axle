@@ -32,6 +32,9 @@
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />
+    <Compile Remove="Linq\ISequence.cs" />
+    <Compile Remove="Linq\Sequence.cs" />
+    <Compile Remove="Linq\SequenceExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Axle.Core.dist.csproj.paket.references" />

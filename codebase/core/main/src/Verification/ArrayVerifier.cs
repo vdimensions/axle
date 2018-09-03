@@ -27,7 +27,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T[]> IsNotEmpty<T>(this ArgumentReference<T[]> argument, string message)
         {
-            if (argument.IsNotNull().Value.Length == 0)
+            if (argument.Value.Length == 0)
             {
                 throw new ArgumentException(message ?? string.Format("Argument `{0}` cannot be an empty array.", argument.Name), argument.Name);
             }
@@ -46,6 +46,6 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<T[]> IsNotEmpty<T>(this ArgumentReference<T[]> argument) { return IsNotEmpty(argument, null); }
+        public static ArgumentReference<T[]> IsNotEmpty<T>(this ArgumentReference<T[]> argument) => IsNotEmpty(argument, null);
     }
 }

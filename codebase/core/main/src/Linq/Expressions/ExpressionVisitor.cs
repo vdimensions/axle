@@ -209,7 +209,7 @@ namespace Axle.Linq.Expressions
             return bindings != binding.Bindings ? Expression.MemberBind(binding.Member, bindings) : binding;
         }
 
-	    protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
+        protected virtual MemberListBinding VisitMemberListBinding(MemberListBinding binding)
         {
             var initializers = this.VisitElementInitializerList(binding.Initializers);
             return initializers != binding.Initializers ? Expression.ListBind(binding.Member, initializers) : binding;

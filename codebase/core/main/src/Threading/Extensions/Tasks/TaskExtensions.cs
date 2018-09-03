@@ -9,7 +9,7 @@ using Axle.Verification;
 
 namespace Axle.Threading.Extensions.Tasks
 {
-	public static class TaskExtensions
+    public static class TaskExtensions
     {
         #region ContinueWith(...)
         public static Task ContinueWith<T>(this Task<T> task, Action<T> action)

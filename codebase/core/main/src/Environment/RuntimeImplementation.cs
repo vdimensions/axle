@@ -19,7 +19,7 @@
         Mono,
 
         /// <summary>
-        /// The standard .NET framework CLR from Microsoft.
+        /// The original .NET framework CLR from Microsoft.
         /// </summary>
         NetFramework,
 

@@ -34,7 +34,7 @@ namespace Axle.Reflection
         /// </exception>
         public static bool HasAttribute<TAttribute>(this IAttributeTarget member) where TAttribute: Attribute
         {
-            return member.VerifyArgument(nameof(member)).IsNotNull().Value.Attributes.Select(x => x.Attribute).OfType<TAttribute>().Any();
+            return member.VerifyArgument(nameof(member)).IsNotNull().Value.GetAttributes().Select(x => x.Attribute).OfType<TAttribute>().Any();
         }
 
         /// <summary>
@@ -61,11 +61,11 @@ namespace Axle.Reflection
         public static bool HasAttribute(this IAttributeTarget member, Type attributeType)
         {
             attributeType.VerifyArgument(nameof(attributeType)).IsNotNull().Is<Attribute>();
-            return member.VerifyArgument(nameof(member)).IsNotNull().Value.Attributes
+            return member.VerifyArgument(nameof(member)).IsNotNull().Value.GetAttributes()
                 #if NETSTANDARD || NET45_OR_NEWER
                 .Any(x => attributeType.GetTypeInfo().IsAssignableFrom(x.Attribute.GetType().GetTypeInfo()));
                 #else
-                .Any(x => attributeType.IsAssignableFrom(x.Attribute.GetType()));
+                .Any(x => attributeType.IsInstanceOfType(x.Attribute));
                 #endif
         }
     }

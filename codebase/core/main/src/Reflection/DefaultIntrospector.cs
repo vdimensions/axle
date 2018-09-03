@@ -112,7 +112,7 @@ namespace Axle.Reflection
             var member = expr.Member;
             #if !NETSTANDARD
             var type = member.DeclaringType;
-            if (type != null && type != member.ReflectedType && !(
+            if (type != null && type != member.ReflectedType && null != member.ReflectedType && !(
                 type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
             {
 				throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));

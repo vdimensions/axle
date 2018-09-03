@@ -39,7 +39,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotEmpty(this ArgumentReference<string> argument, string message)
         {
-            return UncheckedIsNotEmpty(Verifier.IsNotNull(argument), message);
+            return UncheckedIsNotEmpty(argument, message);
         }
 
         /// <summary>

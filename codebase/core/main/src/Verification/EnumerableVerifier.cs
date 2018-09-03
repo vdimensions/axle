@@ -33,6 +33,9 @@ namespace Axle.Verification
         /// Thrown if the verified <paramref name="argument"/> represents an empty collection.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument, string message) where T: IEnumerable
         {
             var e = argument.IsNotNull().Value.GetEnumerator();
@@ -71,6 +74,9 @@ namespace Axle.Verification
         /// Thrown if the verified <paramref name="argument"/> represents an empty collection.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument) where T: IEnumerable
         {
             return IsNotNullOrEmpty(argument, null);

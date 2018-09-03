@@ -52,7 +52,7 @@ type [<Interface>] IForestViewProvider =
         let viewRegistry = upcast ContainerViewRegistry(container, DefaultViewRegistry(viewFactory, reflectionProvider)) : IViewRegistry
         let securityManager =
             match container.TryResolve<ISecurityManager>() with
-            | (true, rp) -> rp
+            | (true, sm) -> sm
             | (false, _) -> upcast NoopSecurityManager()
         let context = upcast DefaultForestContext(viewRegistry, securityManager) : IForestContext
         context |> exporter.Export |> ignore

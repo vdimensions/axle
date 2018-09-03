@@ -72,39 +72,39 @@ namespace Axle.Verification
         /// the current exception is raised in a catch block that handles the inner exception. 
         /// </param>
         public ArgumentTypeMismatchException(string message, string paramName, Exception inner) : base(message, paramName, inner) { }
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual 
         /// type parameters and the name of the parameter that causes this exception.
-		/// </summary>
-		/// <param name="expectedType">
+        /// </summary>
+        /// <param name="expectedType">
         /// The expected type of the argument. 
         /// </param>
-		/// <param name="actualType">
+        /// <param name="actualType">
         /// The actual type of the argument that caused the current exception. 
         /// </param>
-		/// <param name="paramName">
+        /// <param name="paramName">
         /// The name of the parameter that caused the current exception. 
         /// </param>
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName)
             : this(FormatMessage(expectedType, actualType), paramName) { }
-		/// <summary>
-		/// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual 
         /// type parameters, the name of the parameter that causes this exception and a reference to the inner exception that is the cause of 
         /// this exception.
-		/// </summary>
-		/// <param name="expectedType">
+        /// </summary>
+        /// <param name="expectedType">
         /// The expected type of the argument. 
         /// </param>
-		/// <param name="actualType">
+        /// <param name="actualType">
         /// The actual type of the argument that caused the current exception. 
         /// </param>
-		/// <param name="paramName">
+        /// <param name="paramName">
         /// The name of the parameter that caused the current exception. 
         /// </param>
-		/// <param name="inner">
-		/// The exception that is the cause of the current exception. If the innerException parameter is not a null reference, 
-		/// the current exception is raised in a catch block that handles the inner exception. 
-		/// </param>
+        /// <param name="inner">
+        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference, 
+        /// the current exception is raised in a catch block that handles the inner exception. 
+        /// </param>
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName, Exception inner)
             : this(FormatMessage(expectedType, actualType), paramName, inner) { }
         #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD

@@ -39,10 +39,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="build.sh" />
-    <None Include="deps-update.sh" />
     <None Include="paket.dependencies" />
     <None Include="paket.references" />
     <None Include="paket.sh" />
+    <None Include="restore.sh" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -74,6 +74,17 @@
         </Reference>
         <Reference Include="Axle.Core">
           <HintPath>packages\Axle.Core\lib\net45\Axle.Core.dll</HintPath>
+          <Private>True</Private>
+          <Paket>True</Paket>
+        </Reference>
+      </ItemGroup>
+    </When>
+  </Choose>
+  <Choose>
+    <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
+      <ItemGroup>
+        <Reference Include="Axle.Resources">
+          <HintPath>packages\Axle.Resources\lib\net45\Axle.Resources.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

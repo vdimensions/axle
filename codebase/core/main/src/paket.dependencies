@@ -1,4 +1,4 @@
-framework net35, net40, net45, netstandard1.0, netstandard1.3, netstandard1.5, netstandard1.6, netstandard2.0
+framework net35, net40, net45, net46, netstandard1.0, netstandard1.3, netstandard1.5, netstandard1.6, netstandard2.0
 
 source ../../../../dist/third-parties
   nuget System.Threading.Tasks.Unofficial >= 3.1 framework: net35

@@ -208,7 +208,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="ChangeKindToUtc"/>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind.Local"/>
-        public static DateTime ChangeKindToLocal(this DateTime dateTime) { return ChangeKind(dateTime, DateTimeKind.Local); }
+        public static DateTime ChangeKindToLocal(this DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Local);
 
         /// <summary>
         /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
@@ -223,6 +223,6 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="ChangeKindToUtc"/>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind.Utc"/>
-        public static DateTime ChangeKindToUtc(this DateTime dateTime) { return ChangeKind(dateTime, DateTimeKind.Utc); }
+        public static DateTime ChangeKindToUtc(this DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
     }
 }

@@ -1,13 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+#if !NETSTANDARD
+using System.Security.Policy;
+#endif
 
 
 namespace Axle.Environment
 {
-	/// <summary>
-	/// An interface serving as an abstraction to a .NET runtime.
-	/// </summary>
+    /// <summary>
+    /// An interface serving as an abstraction to a .NET runtime.
+    /// </summary>
     public partial interface IRuntime
     {
         IEnumerable<Assembly> GetAssemblies();
@@ -23,6 +26,23 @@ namespace Axle.Environment
         /// An <see cref="Assembly"/> object corresponding to the given <paramref name="assemblyName"/> parameter. 
         /// </returns>
         Assembly LoadAssembly(string assemblyName);
+
+        #if !NETSTANDARD
+        /// <summary>
+        /// Instructs the current runtime to load the assembly specified by the 
+        /// <paramref name="assemblyName"/>and <paramref name="securityEvidence"/> parameters. 
+        /// </summary>
+        /// <param name="assemblyName">
+        /// The name of the assembly to be loaded. 
+        /// </param>
+        /// <param name="securityEvidence">
+        /// The <see cref="Evidence"/> object to use when loading the assembly.  
+        /// </param>
+        /// <returns>
+        /// An <see cref="Assembly"/> object corresponding to the given <paramref name="assemblyName"/> parameter. 
+        /// </returns>
+        Assembly LoadAssembly(string assemblyName, Evidence securityEvidence);
+        #endif
 
         #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
         /// <summary>

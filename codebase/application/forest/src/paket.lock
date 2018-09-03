@@ -2,9 +2,12 @@ STORAGE: NONE
 RESTRICTION: || (== net40) (== net45) (== net46) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.1.54)
+    Axle.Application (1.5.1.57)
       Axle.Core (>= 1.5.1)
-    Axle.Core (1.5.1.33)
+      Axle.Resources (>= 1.5.1)
+    Axle.Core (1.5.1.38)
+    Axle.Resources (1.5.1.9)
+      Axle.Core (>= 1.5.1)
   remote: ../../../../../forest/dist
     Forest.Core (2.0.0.141)
       FSharp.Core (>= 4.5)

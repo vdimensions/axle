@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-#if NETSTANDARD
+#if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -18,6 +18,9 @@ namespace Axle.Verification
         /// <param name="reference">
         /// The argument reference instance to be unwrapped by this operator. 
         /// </param>
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static implicit operator T(ArgumentReference<T> reference) => reference._value;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -26,6 +29,9 @@ namespace Axle.Verification
         private readonly T _value;
 
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         internal ArgumentReference(string name, T value)
         {
             _name = name ?? throw new ArgumentNullException(nameof(name));
@@ -36,27 +42,19 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        #if NETSTANDARD
         private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
         {
             var actualType = Value.GetType();
+            #if NETSTANDARD || NET45_OR_NEWER
             if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType.GetTypeInfo()))
-            {
-                throw new ArgumentTypeMismatchException(expectedType, actualType, Name);
-            }
-            return this;
-        }
-        #else
-        private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
-        {
-            var actualType = Value.GetType();
+            #else
             if (!expectedType.IsAssignableFrom(actualType))
+            #endif
             {
                 throw new ArgumentTypeMismatchException(expectedType, actualType, Name);
             }
             return this;
         }
-        #endif
 
         /// <summary>
         /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by 
@@ -68,6 +66,9 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         [DebuggerStepThrough]
         public ArgumentReference<T> IsOfType(Type expectedType)
         {
@@ -84,6 +85,9 @@ namespace Axle.Verification
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         [DebuggerStepThrough]
         public ArgumentReference<TExpected> IsOfType<TExpected>()
         {
@@ -97,7 +101,13 @@ namespace Axle.Verification
         /// <summary>
         /// Gets the value passed in the argument the current <see cref="ArgumentReference{T}"/> instance represents.
         /// </summary>
-        public T Value => _value;
+        public T Value
+        {
+            #if NETSTANDARD || NET45_OR_NEWER
+            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+            #endif
+            get => _value;
+        }
 
         /// <inheritdoc cref="IReference{T}.Value"/>
         T IReference<T>.Value => _value;

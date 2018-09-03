@@ -73,72 +73,66 @@
   <files>
     <file src="bin\*\netstandard2.0\${id}.deps.json" target="lib\netstandard2.0" />
     <file src="bin\*\netstandard2.0\${id}.dll"       target="lib\netstandard2.0" />
-    <file src="bin\*\netstandard2.0\${id}.dll.mdb"   target="lib\netstandard2.0" />
+    <file src="bin\*\netstandard2.0\${id}.pdb"       target="lib\netstandard2.0" />
     <file src="bin\*\netstandard2.0\${id}.xml"       target="lib\netstandard2.0" />
 
     <file src="bin\*\netstandard1.6\${id}.deps.json" target="lib\netstandard1.6" />
     <file src="bin\*\netstandard1.6\${id}.dll"       target="lib\netstandard1.6" />
-    <file src="bin\*\netstandard1.6\${id}.dll.mdb"   target="lib\netstandard1.6" />
+    <file src="bin\*\netstandard1.6\${id}.pdb"       target="lib\netstandard1.6" />
     <file src="bin\*\netstandard1.6\${id}.xml"       target="lib\netstandard1.6" />
 
     <file src="bin\*\netstandard1.5\${id}.deps.json" target="lib\netstandard1.5" />
     <file src="bin\*\netstandard1.5\${id}.dll"       target="lib\netstandard1.5" />
-    <file src="bin\*\netstandard1.5\${id}.dll.mdb"   target="lib\netstandard1.5" />
+    <file src="bin\*\netstandard1.5\${id}.pdb"       target="lib\netstandard1.5" />
     <file src="bin\*\netstandard1.5\${id}.xml"       target="lib\netstandard1.5" />
 
     <file src="bin\*\netstandard1.4\${id}.deps.json" target="lib\netstandard1.4" />
     <file src="bin\*\netstandard1.4\${id}.dll"       target="lib\netstandard1.4" />
-    <file src="bin\*\netstandard1.4\${id}.dll.mdb"   target="lib\netstandard1.4" />
+    <file src="bin\*\netstandard1.4\${id}.pdb"       target="lib\netstandard1.4" />
     <file src="bin\*\netstandard1.4\${id}.xml"       target="lib\netstandard1.4" />
 
     <file src="bin\*\netstandard1.3\${id}.deps.json" target="lib\netstandard1.3" />
     <file src="bin\*\netstandard1.3\${id}.dll"       target="lib\netstandard1.3" />
-    <file src="bin\*\netstandard1.3\${id}.dll.mdb"   target="lib\netstandard1.3" />
+    <file src="bin\*\netstandard1.3\${id}.pdb"       target="lib\netstandard1.3" />
     <file src="bin\*\netstandard1.3\${id}.xml"       target="lib\netstandard1.3" />
 
     <file src="bin\*\netstandard1.2\${id}.deps.json" target="lib\netstandard1.2" />
     <file src="bin\*\netstandard1.2\${id}.dll"       target="lib\netstandard1.2" />
-    <file src="bin\*\netstandard1.2\${id}.dll.mdb"   target="lib\netstandard1.2" />
+    <file src="bin\*\netstandard1.2\${id}.pdb"       target="lib\netstandard1.2" />
     <file src="bin\*\netstandard1.2\${id}.xml"       target="lib\netstandard1.2" />
 
     <file src="bin\*\netstandard1.1\${id}.deps.json" target="lib\netstandard1.1" />
     <file src="bin\*\netstandard1.1\${id}.dll"       target="lib\netstandard1.1" />
-    <file src="bin\*\netstandard1.1\${id}.dll.mdb"   target="lib\netstandard1.1" />
+    <file src="bin\*\netstandard1.1\${id}.pdb"       target="lib\netstandard1.1" />
     <file src="bin\*\netstandard1.1\${id}.xml"       target="lib\netstandard1.1" />
 
     <file src="bin\*\netstandard1.0\${id}.deps.json" target="lib\netstandard1.0" />
     <file src="bin\*\netstandard1.0\${id}.dll"       target="lib\netstandard1.0" />
-    <file src="bin\*\netstandard1.0\${id}.dll.mdb"   target="lib\netstandard1.0" />
+    <file src="bin\*\netstandard1.0\${id}.pdb"       target="lib\netstandard1.0" />
     <file src="bin\*\netstandard1.0\${id}.xml"       target="lib\netstandard1.0" />
 
     <file src="bin\*\net46\${id}.dll"                target="lib\net46" />
     <file src="bin\*\net46\${id}.pdb"                target="lib\net46" />
-    <file src="bin\*\net46\${id}.dll.mdb"            target="lib\net46" />
     <file src="bin\*\net46\${id}.xml"                target="lib\net46" />
 
     <file src="bin\*\net45\${id}.dll"                target="lib\net45" />
     <file src="bin\*\net45\${id}.pdb"                target="lib\net45" />
-    <file src="bin\*\net45\${id}.dll.mdb"            target="lib\net45" />
     <file src="bin\*\net45\${id}.xml"                target="lib\net45" />
 
     <file src="bin\*\net40\${id}.dll"                target="lib\net40" />
     <file src="bin\*\net40\${id}.pdb"                target="lib\net40" />
-    <file src="bin\*\net40\${id}.dll.mdb"            target="lib\net40" />
     <file src="bin\*\net40\${id}.xml"                target="lib\net40" />
 
     <file src="bin\*\net35\${id}.dll"                target="lib\net35" />
     <file src="bin\*\net35\${id}.pdb"                target="lib\net35" />
-    <file src="bin\*\net35\${id}.dll.mdb"            target="lib\net35" />
     <file src="bin\*\net35\${id}.xml"                target="lib\net35" />
 
     <file src="bin\*\net30\${id}.dll"                target="lib\net30" />
     <file src="bin\*\net30\${id}.pdb"                target="lib\net30" />
-    <file src="bin\*\net30\${id}.dll.mdb"            target="lib\net30" />
     <file src="bin\*\net30\${id}.xml"                target="lib\net30" />
 
     <file src="bin\*\net20\${id}.dll"                target="lib\net20" />
     <file src="bin\*\net20\${id}.pdb"                target="lib\net20" />
-    <file src="bin\*\net20\${id}.dll.mdb"            target="lib\net20" />
     <file src="bin\*\net20\${id}.xml"                target="lib\net20" />
   </files>
 </package>

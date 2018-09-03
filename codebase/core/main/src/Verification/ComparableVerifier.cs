@@ -36,6 +36,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsGreaterThan<T>(this ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(minValue, null))
@@ -73,6 +76,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsGreaterThan<T>(this ArgumentReference<T> argument, T minValue) where T: IComparable<T>
         {
             return IsGreaterThan(argument, minValue, null);
@@ -103,6 +109,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(this ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(minValue, null))
@@ -140,6 +149,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(this ArgumentReference<T> argument, T minValue) where T: IComparable<T>
         {
             return IsGreaterThanOrEqualTo(argument, minValue, null);
@@ -170,6 +182,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsLessThan<T>(this ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(maxValue, null))
@@ -205,6 +220,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsLessThan<T>(this ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
         {
             return IsLessThan(argument, maxValue, null);
@@ -235,6 +253,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(this ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
         {
             if (ReferenceEquals(maxValue, null))
@@ -272,6 +293,9 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
+        #if NETSTANDARD || NET45_OR_NEWER
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(this ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
         {
             return IsLessThanOrEqualTo(argument, maxValue, null);

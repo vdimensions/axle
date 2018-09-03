@@ -26,9 +26,9 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsNotEmpty<T>(this ArgumentReference<T> argument, string message) where T: ICollection
+        public static ArgumentReference<T> IsNotEmpty<T>(this ArgumentReference<T> argument, string message) where T:ICollection
         {
-            if (argument.IsNotNull().Value.Count == 0)
+            if (argument.Value.Count == 0)
             {
                 throw new ArgumentException(message ?? string.Format("Argument `{0}` cannot be an empty collection.", argument.Name), argument.Name);
             }
@@ -46,6 +46,6 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsNotEmpty<T>(this ArgumentReference<T> argument) where T: ICollection { return IsNotEmpty(argument, null); }
+        public static ArgumentReference<T> IsNotEmpty<T>(this ArgumentReference<T> argument) where T:ICollection { return IsNotEmpty(argument, null); }
     }
 }

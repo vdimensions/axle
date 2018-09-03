@@ -16,7 +16,7 @@ namespace Axle.DependencyInjection.Descriptors
                 field.MemberType,
                 dependencyName.VerifyArgument(nameof(dependencyName)).IsNotNull(),
                 field.Name);
-            var defaultValueAttribute = Member.Attributes.Select(x => x.Attribute).OfType<DefaultValueAttribute>().SingleOrDefault();
+            var defaultValueAttribute = Member.GetAttributes<DefaultValueAttribute>().Select(x => x.Attribute).Cast<DefaultValueAttribute>().SingleOrDefault();
             DefaultValue = defaultValueAttribute?.Value;
         }
 
