@@ -81,7 +81,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="Forest.Core">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\forest.core\2.0.0.139\lib\net45\Forest.Core.dll</HintPath>
+          <HintPath>C:\Users\Ivaylo\.nuget\packages\forest.core\2.0.0.141\lib\net45\Forest.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -90,7 +90,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.6'">
       <ItemGroup>
         <Reference Include="Forest.Core">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\forest.core\2.0.0.139\lib\net46\Forest.Core.dll</HintPath>
+          <HintPath>C:\Users\Ivaylo\.nuget\packages\forest.core\2.0.0.141\lib\net46\Forest.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -99,7 +99,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETStandard' And $(TargetFrameworkVersion) == 'v2.0'">
       <ItemGroup>
         <Reference Include="Forest.Core">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\forest.core\2.0.0.139\lib\netstandard2.0\Forest.Core.dll</HintPath>
+          <HintPath>C:\Users\Ivaylo\.nuget\packages\forest.core\2.0.0.141\lib\netstandard2.0\Forest.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

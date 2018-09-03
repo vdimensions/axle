@@ -6,7 +6,7 @@ NUGET
       Axle.Core (>= 1.5.1)
     Axle.Core (1.5.1.33)
   remote: ../../../../../forest/dist
-    Forest.Core (2.0.0.139)
+    Forest.Core (2.0.0.141)
       FSharp.Core (>= 4.5)
   remote: https://www.nuget.org/api/v2
     FSharp.Core (4.5.2)
