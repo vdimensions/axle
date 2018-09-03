@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.1;net45;net40</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.1;net46;net45;net40</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
+  <Import Project="../../../../submodules/msbuild-dotnet-multitargeting/src/MultitargetingFrameworkSupport.targets" />
   <PropertyGroup>
     <ProjectGuid>DF3B43F1-D3EB-4C7C-8422-B6B343629CF6</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>

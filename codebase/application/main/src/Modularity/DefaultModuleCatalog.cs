@@ -18,7 +18,7 @@ namespace Axle.Modularity
         {
             if (types.Add(type))
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if FX_RESHAPED_REFLECTION
                 var interfaces = type.GetTypeInfo().GetInterfaces();
                 #else
                 var interfaces = type.GetInterfaces();
@@ -62,7 +62,7 @@ namespace Axle.Modularity
             var types = assembly.GetTypes();
             for (var i = 0; i < types.Length; i++)
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if FX_RESHAPED_REFLECTION
                 var t = types[i].GetTypeInfo();
                 #else
                 var t = types[i];

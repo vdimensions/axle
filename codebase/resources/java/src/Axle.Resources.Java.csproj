@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../targets/dotnet-multi-targeting/src/MultiTargetFrameworkSupport.targets" />
+  <Import Project="../../../../submodules/msbuild-dotnet-multitargeting/src/MultitargetingFrameworkSupport.targets" />
   <PropertyGroup>
     <ProjectGuid>5D89911E-F70B-4C08-9659-119104318881</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
