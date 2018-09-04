@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.IO;
-#if !NETSTANDARD
+#if NETFRAMEWORK
 using SqliteConnection  = System.Data.SQLite.SQLiteConnection;
 using SqliteTransaction = System.Data.SQLite.SQLiteTransaction;
 using SqliteCommand     = System.Data.SQLite.SQLiteCommand;
@@ -22,7 +22,7 @@ using Axle.References;
 
 namespace Axle.Data.Sqlite
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
 	public sealed class SqliteServiceProvider : DbServiceProvider<
@@ -57,7 +57,7 @@ namespace Axle.Data.Sqlite
             }
         }
 
-        #if !NETSTANDARD
+        #if NETFRAMEWORK
         public const string Name = "System.Data.Sqlite";
         #else
         public const string Name = "Microsoft.Data.Sqlite";
@@ -75,7 +75,7 @@ namespace Axle.Data.Sqlite
 
         public FileInfo CreateFile(string path)
         {
-            #if !NETSTANDARD
+            #if NETFRAMEWORK
             SqliteConnection.CreateFile(path);
             #else
             using (var fs = File.Create(path, 0, FileOptions.WriteThrough)) { }

@@ -11,7 +11,7 @@ using SqliteType = Axle.Data.Sqlite.SqliteType;
 
 namespace Axle.Data.Sqlite.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class SqliteDbTypeConverter<T1, T2> : DbTypeConverter<T1, T2>

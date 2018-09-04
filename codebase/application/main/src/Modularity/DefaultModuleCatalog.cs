@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using Axle.Environment;
 #endif
 using Axle.Reflection;
@@ -47,7 +47,7 @@ namespace Axle.Modularity
         }
         private const ScanOptions MemberScanOptions = ScanOptions.Instance|ScanOptions.NonPublic|ScanOptions.Public;
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public Type[] DiscoverModuleTypes()
         {
             return Platform.Runtime.GetAssemblies().SelectMany(DiscoverModuleTypes).ToArray();

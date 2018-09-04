@@ -5,7 +5,7 @@ using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Xml.Extraction
 {
-    #if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+    #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An abstract class to serve as a base for creating XML resource marshaller implementations.
     /// <para>

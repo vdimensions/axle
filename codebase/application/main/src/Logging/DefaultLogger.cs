@@ -6,7 +6,7 @@ namespace Axle.Logging
 {
     internal sealed class DefaultLogger : ILogger
     {
-        #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly object _syncRoot = new object();
 
@@ -22,7 +22,7 @@ namespace Axle.Logging
             _targetType = targetType ?? throw new ArgumentNullException(nameof(targetType));
         }
 
-        #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         private static void LogToConsole(ILogEntry message)
         {
             lock (_syncRoot)
@@ -37,7 +37,7 @@ namespace Axle.Logging
                     Console.ForegroundColor = ConsoleColor.Gray;
                     Console.Out.Write("{0:yyyy-MM-dd HH:mm:ss} ", message.Timestamp);
                     Console.Out.Flush();
-                    #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
                     Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Out.Write(message.ThreadID);
                     Console.Out.Flush();
@@ -99,18 +99,18 @@ namespace Axle.Logging
 
         private static void LogToDebug(ILogEntry message) => Debug.WriteLine(message);
 
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         private static void LogToTrace(ILogEntry message) => Trace.WriteLine(message);
         #endif
 
         void ILogger.Write(ILogEntry entry)
         {
-            #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
             var action = entry.Severity == LogSeverity.Debug ? new Action<ILogEntry>(LogToDebug) : LogToTrace;
             #else
             var action = new Action<ILogEntry>(LogToDebug);
             #endif
-            #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
             if (_enableConsoleLogs)
             {
                 action += LogToConsole;

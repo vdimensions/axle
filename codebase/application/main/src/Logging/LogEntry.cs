@@ -1,7 +1,7 @@
 using System;
 using System.Diagnostics;
 
-#if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System.Threading;
 #endif
 
@@ -11,18 +11,18 @@ namespace Axle.Logging
     /// <summary>
     /// The default <see cref="ILogEntry"/> implementation provided by the Axle Framework.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class LogEntry : ILogEntry
     {
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         private static string ThreadName(Thread t) => t.Name ?? $"Thread-{t.ManagedThreadId}";
         #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DateTime _timestamp;
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _threadID;
         #endif
@@ -35,7 +35,7 @@ namespace Axle.Logging
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Exception _exception;
 
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, string message) 
             : this(timestamp,threadID, severity, type, message, null) { }
         public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, Exception exception) 
@@ -94,7 +94,7 @@ namespace Axle.Logging
         public override string ToString()
         {
             var messageToWrite = _exception == null ? _message : $"{_message}\n{_exception.StackTrace}";
-            #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
             return $"{_timestamp:yyyy-MM-dd HH:mm:ss} {_threadID} [{_severity}] {_type.FullName}: {messageToWrite}";
             #else
             return $"{_timestamp:yyyy-MM-dd HH:mm:ss} [{_severity}] {_type.FullName}: {messageToWrite}";
@@ -102,7 +102,7 @@ namespace Axle.Logging
         }
 
         public DateTime Timestamp => _timestamp;
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         public string ThreadID => _threadID;
         #endif
         public LogSeverity Severity => _severity;

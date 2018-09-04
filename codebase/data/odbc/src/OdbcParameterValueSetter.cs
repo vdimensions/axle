@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Odbc;
@@ -10,12 +10,12 @@ using Axle.Data.Odbc.Conversion;
 
 namespace Axle.Data.Odbc
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class OdbcParameterValueSetter : DbParameterValueSetter<OdbcParameter, OdbcType>
     {
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Serializable]
         #endif
         private class OdbcTypeEqualityComparer : IEqualityComparer<OdbcType>

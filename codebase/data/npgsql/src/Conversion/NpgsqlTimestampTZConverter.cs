@@ -7,7 +7,7 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     internal sealed class NpgsqlTimestampTZConverter : NpgsqlDbTypeConverter<DateTime?, NpgsqlDateTime?>

@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD1_6_OR_NEWER
+﻿#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System.Xml;
 
 using Axle.Resources.Extraction;

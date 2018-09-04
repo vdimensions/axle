@@ -3,7 +3,7 @@
     /// <summary>
     /// An enumeration representing the possible access modifiers supported in the .NET framework.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public enum AccessModifier : byte

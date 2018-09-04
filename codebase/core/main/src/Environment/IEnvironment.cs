@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Text;
 using System.Globalization;
@@ -27,7 +27,23 @@ namespace Axle.Environment
         /// </summary>
         string NewLine { get; }
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+
+        /// <summary>
+        /// Gets the default path separator character for the current platform. 
+        /// </summary>
+        char PathSeparator { get; }
+        #endif
+
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+
+        /// <summary>
+        /// Gets the NetBIOS name of the current platform.
+        /// </summary>
+        string MachineName { get; }
+        #endif
+
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 
         /// <summary>
         /// Gets the <see cref="CultureInfo"/> that represents the culture installed with the current operating system.
@@ -38,16 +54,6 @@ namespace Axle.Environment
         /// Gets an encoding for the platform operating system's ANSI code page.
         /// </summary>
         Encoding DefaultEncoding { get; }
-
-        /// <summary>
-        /// Gets the default path separator character for the current platform. 
-        /// </summary>
-        char PathSeparator { get; }
-
-        /// <summary>
-        /// Gets the NetBIOS name of the current platform.
-        /// </summary>
-        string MachineName { get; }
 
         /// <summary>
         /// Gets an <see cref="OperatingSystem"/> object that contains the platform's OS identifier and version number.

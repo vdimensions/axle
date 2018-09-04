@@ -3,7 +3,7 @@
 
 namespace Axle.Conversion.Parsing
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class EnumParser<T> : AbstractParser<T>

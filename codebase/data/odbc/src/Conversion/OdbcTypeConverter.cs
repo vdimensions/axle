@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Data;
 using System.Data.Odbc;
@@ -9,7 +9,7 @@ using Axle.Data.Common.Conversion;
 
 namespace Axle.Data.Odbc.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class OdbcTypeConverter<T1, T2> : DbTypeConverter<T1, T2>

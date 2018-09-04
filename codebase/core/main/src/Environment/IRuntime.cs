@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-#if !NETSTANDARD
+#if NETFRAMEWORK
 using System.Security.Policy;
 #endif
 
@@ -27,7 +27,7 @@ namespace Axle.Environment
         /// </returns>
         Assembly LoadAssembly(string assemblyName);
 
-        #if !NETSTANDARD
+        #if NETFRAMEWORK
         /// <summary>
         /// Instructs the current runtime to load the assembly specified by the 
         /// <paramref name="assemblyName"/>and <paramref name="securityEvidence"/> parameters. 
@@ -44,7 +44,7 @@ namespace Axle.Environment
         Assembly LoadAssembly(string assemblyName, Evidence securityEvidence);
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Loads a satellite assembly to the specified <paramref name="targetAssembly">target</paramref> assembly and <paramref name="culture"/>.
         /// </summary>
@@ -83,7 +83,7 @@ namespace Axle.Environment
         /// </summary>
         RuntimeImplementation Implementation { get; }
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Returns a reference to the <see cref="AppDomain"/> instance hosting the current .NET runtime. 
         /// </summary>

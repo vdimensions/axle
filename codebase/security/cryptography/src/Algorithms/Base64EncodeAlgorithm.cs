@@ -7,7 +7,7 @@ using Axle.Security.Cryptography.Algorithms.Sdk;
 
 namespace Axle.Security.Cryptography.Algorithms
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class Base64EncodeAlgorithm : AbstractCryptographicAlgorithm

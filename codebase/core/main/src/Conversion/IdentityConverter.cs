@@ -4,7 +4,7 @@
     /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns 
     /// the object instance being passed for conversion without changing it. 
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class IdentityConverter<T> : ITwoWayConverter<T, T>

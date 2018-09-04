@@ -8,7 +8,7 @@ namespace Axle.Security.Cryptography.Algorithms.Hash
     /// <summary>
     /// Computes a Hash-based Message Authentication Code (HMAC) using the MD5 hash function.
     /// </summary>
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class HmacMD5HashAlgorithm : AbstractHashAlgorithm

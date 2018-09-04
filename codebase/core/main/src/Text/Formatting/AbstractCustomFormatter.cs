@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Axle.Text.Formatting
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class AbstractCustomFormatter<T> : ICustomFormatter<T>
@@ -84,7 +84,7 @@ namespace Axle.Text.Formatting
         protected abstract string DoFormat(string format, T arg, IFormatProvider formatProvider);
     }
 
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class AbstractCustomFormatter<T, TFP> : AbstractCustomFormatter<T>, ICustomFormatter<T, TFP> 

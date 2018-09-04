@@ -12,13 +12,13 @@ using Axle.Threading.ReaderWriterLock;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget 
         where T: MemberInfo
     {
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         protected internal static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
@@ -68,7 +68,7 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected internal readonly IReadWriteLock Lock = new ReadWriteLock();
 
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected MemberTokenBase(Type declaringType, string name)
         {
             _name = name;
@@ -82,7 +82,8 @@ namespace Axle.Reflection
             _name = name;
             _declaringType = declaringType;
             _typeHandle = declaringType.TypeHandle;
-            #if NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #else
             ReflectedMember = member;
             #endif
         }
@@ -122,16 +123,15 @@ namespace Axle.Reflection
             }
         }
 
-        #if NETSTANDARD
-        public virtual T ReflectedMember { get; }
-        #else
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public abstract T ReflectedMember { get; }
+        #else
+        public virtual T ReflectedMember { get; }
         #endif
     }
 
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
-    #endif
     public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
@@ -165,7 +165,7 @@ namespace Axle.Reflection
                 Lock.Invoke(
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
-                    #if FX_RESHAPED_REFLECTION
+                    #if NETSTANDARD
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType));
                     #else
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
@@ -174,4 +174,5 @@ namespace Axle.Reflection
             }
         }
     }
+    #endif
 }

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD
 using System.Reflection;
 #endif
 
@@ -13,7 +13,7 @@ namespace Axle.Verification
     /// <seealso cref="System.Type"/>
     public static class TypeVerifier
     {
-        #if !NETSTANDARD
+        #if NETFRAMEWORK
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
         /// can be assigned to the type specified by the <paramref name="expectedType"/> parameter. 
@@ -64,7 +64,7 @@ namespace Axle.Verification
             return IsUnchecked(argument.VerifyArgument(nameof(argument)).IsNotNull().Value, expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
         }
 
-        #if !NETSTANDARD
+        #if NETFRAMEWORK
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{Type}">argument reference</see> represented by the <paramref name="argument"/>
         /// can be assigned to the type specified by the <typeparamref name="TExpected"/> parameter. 
@@ -116,7 +116,7 @@ namespace Axle.Verification
         }
 
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
@@ -142,14 +142,14 @@ namespace Axle.Verification
         }
         #endif
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> IsNotAbstract(this ArgumentReference<Type> argument)
         {
             var actualType = argument.IsNotNull().Value;
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var actualTypeInfo = actualType.GetTypeInfo();
             if (actualTypeInfo.IsInterface || actualTypeInfo.IsAbstract)
             #else

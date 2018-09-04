@@ -14,7 +14,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-#if !NETSTANDARD || NETSTANDARD1_1_OR_NEWER
+#if NETFRAMEWORK || NETSTANDARD1_1_OR_NEWER
 [assembly: Guid("5562054B-F00C-4926-806A-55DFDDD14C98")]
 #endif
 

@@ -6,7 +6,7 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class NpgsqlGuidConverter : NpgsqlSameTypeConverter<Guid?>

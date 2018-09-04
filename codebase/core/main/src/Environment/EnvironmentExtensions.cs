@@ -5,8 +5,8 @@ namespace Axle.Environment
 {
     public static class EnvironmentExtensions
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool IsOSInternal(IEnvironment environment, OperatingSystemID osID)
@@ -16,7 +16,7 @@ namespace Axle.Environment
 
         public static bool IsMac(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Mac);
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static bool IsOS(this IEnvironment environment, OperatingSystemID osID)

@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 
-#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using Axle.References;
 #endif
 
@@ -11,7 +11,7 @@ namespace Axle.Environment
     /// </summary>
     public static partial class Platform
     {
-        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly IEnvironment _env = Singleton<EnvironmentInfo>.Instance.Value;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -1,5 +1,5 @@
 using System;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Globalization;
 using System.Text;
 #endif
@@ -9,8 +9,8 @@ namespace Axle.Environment
 {
     internal sealed class EnvironmentInfo : IEnvironment
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         internal static OperatingSystemID GetOSID(OperatingSystem os)
@@ -37,7 +37,7 @@ namespace Axle.Environment
         }
         #endif
 
-        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         private EnvironmentInfo()
         #else
         internal EnvironmentInfo()
@@ -46,12 +46,16 @@ namespace Axle.Environment
             Endianness = BitConverter.IsLittleEndian ? Endianness.LittleEndian : Endianness.BigEndian;
             ProcessorCount = System.Environment.ProcessorCount;
             NewLine = System.Environment.NewLine;
-            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+            PathSeparator = System.IO.Path.PathSeparator;
+            #endif
+            #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+            MachineName = System.Environment.MachineName;
+            #endif
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             Culture = CultureInfo.InstalledUICulture;
             DefaultEncoding = Encoding.Default;
-            MachineName = System.Environment.MachineName;
             OperatingSystem = System.Environment.OSVersion;
-            PathSeparator = System.IO.Path.PathSeparator;
             #endif
         }
 
@@ -59,11 +63,15 @@ namespace Axle.Environment
         public int ProcessorCount { get; }
         public string NewLine { get; }
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        public char PathSeparator { get; }
+        #endif
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        public string MachineName { get; }
+        #endif
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public CultureInfo Culture { get; }
         public Encoding DefaultEncoding { get; }
-        public char PathSeparator { get; }
-        public string MachineName { get; }
         public OperatingSystem OperatingSystem { get; }
         public OperatingSystemID OperatingSystemID => GetOSID(OperatingSystem);
         #endif

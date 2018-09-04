@@ -3,7 +3,7 @@
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     internal sealed class EventRemoveAccessor : EventAccessor, IRemoveAccessor

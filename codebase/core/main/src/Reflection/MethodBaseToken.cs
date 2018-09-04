@@ -16,17 +16,17 @@ namespace Axle.Reflection
     /// <typeparam name="T">
     /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member for the current <see cref="MethodBaseToken{T}"/> instance.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    #if NETSTANDARD
-    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>> 
-    #else
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 	public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
+    #else
+    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>> 
     #endif
         where T: MethodBase
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [Serializable]
         #endif
         internal sealed class Parameter : IParameter
@@ -67,7 +67,7 @@ namespace Axle.Reflection
 
             public bool IsDefined(Type attributeType, bool inherit)
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD
                 return ReflectedMember.IsDefined(attributeType);
                 #else
                 return ReflectedMember.IsDefined(attributeType, inherit);
@@ -84,17 +84,17 @@ namespace Axle.Reflection
             public ParameterDirection Direction => _direction;
         }
 
-        #if NETSTANDARD
-        protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
-        #else
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected internal MethodBaseToken(T info) : base(info, info.MethodHandle, info.DeclaringType, info.Name)
+        #else
+        protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
         #endif
         {
             _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
             _declaration = info.GetDeclarationType();
         }
 
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)
         {
             return (T)(isGeneric ? MethodBase.GetMethodFromHandle(handle, typeHandle) : MethodBase.GetMethodFromHandle(handle));

@@ -7,7 +7,7 @@ using Axle.Security.Cryptography.Algorithms.Sdk;
 
 namespace Axle.Security.Cryptography.Algorithms.Hash.Sdk
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class AbstractHashAlgorithm : AbstractEncryptionAlgorithm, IHashAlgorithm

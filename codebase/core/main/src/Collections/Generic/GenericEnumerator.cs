@@ -7,7 +7,7 @@ using System.Diagnostics;
 
 namespace Axle.Collections.Generic
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     internal class GenericEnumerator : GenericEnumerator<object>
@@ -15,7 +15,7 @@ namespace Axle.Collections.Generic
         public GenericEnumerator(IEnumerator enumerator) : base(enumerator) { }
     }
 
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public class GenericEnumerator<T> : IEnumerator<T>
@@ -48,7 +48,7 @@ namespace Axle.Collections.Generic
     }
 
     #if NETSTANDARD || NET35_OR_NEWER
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public class GenericEnumerator<T1, T2> : IEnumerator<T2>

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
 	public sealed class ReadOnlyPropertyToken : PropertyToken, IReadOnlyProperty

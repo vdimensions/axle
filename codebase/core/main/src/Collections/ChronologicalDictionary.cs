@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
 
@@ -17,12 +17,12 @@ namespace Axle.Collections
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
     /// <remarks>This class cannot be inherited.</remarks>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class ChronologicalDictionary<TKey, TValue> : DictionaryDecorator<TKey, TValue>
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [Serializable]
         private sealed class TimestampDictionary : Dictionary<ChronologicalKey<TKey>, TValue>, IDictionary<TKey, TValue>, ISerializable
         #else
@@ -30,7 +30,7 @@ namespace Axle.Collections
         #endif
         {
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             [NonSerialized]
             #endif
             private readonly ICollection<KeyValuePair<ChronologicalKey<TKey>, TValue>> _collection;
@@ -47,7 +47,7 @@ namespace Axle.Collections
                     new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
             public TimestampDictionary(IEqualityComparer<TKey> comparer) : this(
                     new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
-            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             internal TimestampDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
             {
                 _collection = this;

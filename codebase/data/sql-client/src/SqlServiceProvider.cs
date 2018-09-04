@@ -7,14 +7,14 @@ using Axle.Data.Common;
 
 namespace Axle.Data.SqlClient
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class SqlServiceProvider : DbServiceProvider<
             SqlConnection, 
             SqlTransaction, 
             SqlCommand,
-            #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             SqlDataAdapter, 
             #endif
             SqlDataReader, 
@@ -60,7 +60,7 @@ namespace Axle.Data.SqlClient
             return command;
         }
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override SqlDataAdapter CreateDataAdapter(SqlCommand command) => new SqlDataAdapter(command);
         #endif
         

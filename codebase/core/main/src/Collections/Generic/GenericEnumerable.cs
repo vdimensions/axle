@@ -14,7 +14,7 @@ namespace Axle.Collections.Generic
     /// </typeparam>
     /// <seealso cref="IEnumerable{T}"/>
     /// <seealso cref="IEnumerable"/>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public class GenericEnumerable<T> : IEnumerable<T>

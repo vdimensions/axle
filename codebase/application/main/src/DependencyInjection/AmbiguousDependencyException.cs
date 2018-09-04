@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
 
@@ -9,7 +9,7 @@ using Axle.Verification;
 
 namespace Axle.DependencyInjection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public class AmbiguousDependencyException : DependencyResolutionException
@@ -20,7 +20,7 @@ namespace Axle.DependencyInjection
             Candidates = candidates.VerifyArgument(nameof(candidates)).IsNotNullOrEmpty().Value;
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 
         /// <inheritdoc />
         protected AmbiguousDependencyException(SerializationInfo info, StreamingContext context) : base(info, context) { }

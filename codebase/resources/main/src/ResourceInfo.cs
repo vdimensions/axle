@@ -98,7 +98,7 @@ namespace Axle.Resources
                 return true;
             }
 
-            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             var serializer = new BinarySerializer();
             try
             {

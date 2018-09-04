@@ -6,7 +6,7 @@ namespace Axle.Conversion
     /// </summary>
     /// <seealso cref="decimal.FromOACurrency"/>
     /// <seealso cref="decimal.ToOACurrency"/>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class OACurrencyConverter : AbstractTwoWayConverter<decimal, long>

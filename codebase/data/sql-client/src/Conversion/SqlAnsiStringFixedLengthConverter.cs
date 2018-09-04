@@ -4,7 +4,7 @@ using System.Data.SqlTypes;
 
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class SqlAnsiStringFixedLengthConverter : SqlDbTypeConverter<string, SqlString>

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -21,7 +21,7 @@ namespace Axle.Reflection
         {
             _introspectedType = introspectedType.VerifyArgument(nameof(introspectedType)).IsNotNull();
         }
-        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -110,7 +110,7 @@ namespace Axle.Reflection
             }
 
             var member = expr.Member;
-            #if !NETSTANDARD
+            #if NETFRAMEWORK
             var type = member.DeclaringType;
             if (type != null && type != member.ReflectedType && null != member.ReflectedType && !(
                 type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
@@ -155,7 +155,7 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes)
         {
-            #if !NETSTANDARD
+            #if NETFRAMEWORK
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var constructor = _introspectedType.GetConstructor(argumentTypes) 
                            ?? _introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
@@ -173,7 +173,7 @@ namespace Axle.Reflection
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var constructors = _introspectedType.GetTypeInfo().GetConstructors(bindingFlags);
-            #elif !NETSTANDARD
+            #elif NETFRAMEWORK
             var constructors = _introspectedType.GetConstructors(bindingFlags);
             #endif
             return constructors.Select<ConstructorInfo, IConstructor>(x => new ConstructorToken(x)).ToArray();

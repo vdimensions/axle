@@ -6,7 +6,7 @@ using Axle.Data.Common.Conversion;
 
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class SqlDbTypeConverter<T1, T2> : DbTypeConverter<T1, T2>

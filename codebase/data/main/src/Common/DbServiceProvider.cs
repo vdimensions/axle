@@ -8,7 +8,7 @@ using Axle.Verification;
 
 namespace Axle.Data.Common
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// A base class for creating a factory for data access components.
     /// </summary>
@@ -30,14 +30,14 @@ namespace Axle.Data.Common
     /// <typeparam name="TDbParameter"></typeparam>
     /// <typeparam name="TDbType"></typeparam>
     #endif
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class DbServiceProvider<
             TDbConnection, 
             TDbTransaction,
             TDbCommand,
-            #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             TDbDataAdapter,
             #endif
             TDbDataReader,
@@ -46,7 +46,7 @@ namespace Axle.Data.Common
         where TDbConnection: class, IDbConnection
         where TDbTransaction: class, IDbTransaction 
         where TDbCommand: DbCommand, IDbCommand
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         where TDbDataAdapter : DbDataAdapter, IDbDataAdapter, IDataAdapter
         #endif
         where TDbDataReader: DbDataReader, IDataReader
@@ -96,7 +96,7 @@ namespace Axle.Data.Common
             var tran = transaction?.VerifyArgument(nameof(transaction)).IsOfType<TDbTransaction>().Value;
             return CreateCommand(queryString, commandType, commandTimeout, conn, tran);
         }
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected abstract TDbDataAdapter CreateDataAdapter(TDbCommand command);
         IDbDataAdapter IDbServiceProvider.CreateDataAdapter(DbCommand command)
         {

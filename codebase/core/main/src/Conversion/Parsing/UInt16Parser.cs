@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of 
     /// an <see cref="ushort">unsigned 16-bit integer</see> to a valid <see cref="ushort"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class UInt16Parser : AbstractParser<ushort>

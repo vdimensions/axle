@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace Axle.Text.RegularExpressions
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public class RegularExpression : IRegularExpression

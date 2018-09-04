@@ -4,7 +4,7 @@
     /// Indicates the byte order ("endianness") in which data is stored in a computer architecture. 
     /// </summary>
     /// <seealso cref="System.BitConverter.IsLittleEndian" />
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     //[Maturity(CodeMaturity.Frozen)]

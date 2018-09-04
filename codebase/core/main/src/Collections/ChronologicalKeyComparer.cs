@@ -3,7 +3,7 @@
 
 namespace Axle.Collections
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class ChronologicalKeyComparer<TKey> : IComparer<ChronologicalKey<TKey>>

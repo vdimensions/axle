@@ -10,7 +10,7 @@ using Axle.Verification;
 
 namespace Axle.Reflection.Extensions
 {
-    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
     using ICustomAttributeProvider = System.Reflection.ICustomAttributeProvider;
     #endif
 
@@ -24,18 +24,18 @@ namespace Axle.Reflection.Extensions
             public bool Inherited { get; internal set; }
         }
 
-        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         internal static IAttributeInfo[] GetEffectiveAttributes(this ICustomAttributeProvider provider, System.Type attributeType = null)
         {
             provider.VerifyArgument(nameof(provider)).IsNotNull();
 
             var notInherited = (attributeType == null ? provider.GetCustomAttributes(false) : provider.GetCustomAttributes(attributeType, false))
-                    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
                     .Cast<Attribute>()
                     #endif
                     ;
             var inherited = (attributeType == null ? provider.GetCustomAttributes(true) : provider.GetCustomAttributes(attributeType, true))
-                    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
                     .Cast<Attribute>()
                     #endif
                     ;
@@ -47,12 +47,12 @@ namespace Axle.Reflection.Extensions
             provider.VerifyArgument(nameof(provider)).IsNotNull();
 
             var notInherited = (attributeType == null ? provider.GetCustomAttributes(false) : provider.GetCustomAttributes(attributeType, false))
-                    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
                     .Cast<Attribute>()
                     #endif
                     ;
             var inherited = (attributeType == null ? provider.GetCustomAttributes(true) : provider.GetCustomAttributes(attributeType, true))
-                    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
                     .Cast<Attribute>()
                     #endif
                     ;
@@ -64,12 +64,12 @@ namespace Axle.Reflection.Extensions
             provider.VerifyArgument(nameof(provider)).IsNotNull();
 
             var notInherited = (attributeType == null ? provider.GetCustomAttributes(false) : provider.GetCustomAttributes(attributeType, false))
-                    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
                     .Cast<Attribute>()
                     #endif
                     ;
             var inherited = (attributeType == null ? provider.GetCustomAttributes(true) : provider.GetCustomAttributes(attributeType, true))
-                    #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+                    #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
                     .Cast<Attribute>()
                     #endif
                     ;

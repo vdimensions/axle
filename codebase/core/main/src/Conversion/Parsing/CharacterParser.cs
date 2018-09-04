@@ -7,13 +7,13 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a <see cref="char">character</see> to a valid <see cref="char"/> value.
     /// </summary>
     //[Stateless]
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class CharacterParser : AbstractParser<char>
     {
         /// <inheritdoc />
-        #if !NETSTANDARD || NETSTANDARD1_3_OR_NEWER
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         protected override char DoParse(string value, IFormatProvider formatProvider) { return char.Parse(value); }
         #elif NETSTANDARD1_0_OR_NEWER
         protected override char DoParse(string value, IFormatProvider formatProvider)

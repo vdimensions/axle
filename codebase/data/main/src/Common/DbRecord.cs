@@ -8,7 +8,7 @@ namespace Axle.Data.Common
 {
     public sealed class DbRecord : DbRecordDecorator
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public static implicit operator DbRecord(DataRow dataRow)
         {
             return new DbRecord(new DataRowAdapter(dataRow.VerifyArgument(nameof(dataRow)).IsNotNull()));

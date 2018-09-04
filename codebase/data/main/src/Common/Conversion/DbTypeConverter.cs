@@ -7,7 +7,7 @@ using Axle.Data.Conversion;
 
 namespace Axle.Data.Common.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public abstract class DbTypeConverter<T1, T2> : AbstractTwoWayConverter<T1, T2>, IDbValueConverter

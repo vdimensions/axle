@@ -1,5 +1,5 @@
 ﻿using System;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
 
@@ -13,7 +13,7 @@ namespace Axle.Conversion
     /// </summary>
     /// <seealso cref="IConverter{TSource,TTarget}"/>
     /// <seealso cref="ITwoWayConverter{TSource,TTarget}"/>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
 	public class ConversionException : Exception
@@ -84,7 +84,7 @@ namespace Axle.Conversion
                 destinationType.VerifyArgument(nameof(destinationType)).IsNotNull().Value.FullName), 
             inner) {}
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 	    protected ConversionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
     }

@@ -5,7 +5,7 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class NpgsqlSameTypeConverter<T> : NpgsqlDbTypeConverter<T, T>

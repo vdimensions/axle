@@ -5,14 +5,14 @@ using System.Data.Common;
 
 namespace Axle.Data.Extensions.DbCommand
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     using DataSet = System.Data.DataSet;
     #endif
     using DbCommand = System.Data.Common.DbCommand;
 
     public static class DbCommandExtensions
     {
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         private static int FillDataSet(this DbCommand command, DataSet ds, string tableName, Func<DbDataAdapter> createDataAdapter)
         {
             using (var da = createDataAdapter())

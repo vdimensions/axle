@@ -9,7 +9,7 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction.Embedded
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded resources.
     /// </summary>
@@ -36,7 +36,7 @@ namespace Axle.Resources.Extraction.Embedded
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
 
-            #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             var location = context.Location;
             var culture = context.Culture;
 

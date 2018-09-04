@@ -9,7 +9,7 @@ namespace Axle.Modularity
 {
     public static class ModuleCatalogExtensions
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog)
         {
             return GetModules(moduleCatalog, moduleCatalog.DiscoverModuleTypes());

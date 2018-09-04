@@ -10,7 +10,7 @@ namespace Axle.ComponentModel
     // ReSharper disable once ClassCannotBeInstantiated
     internal sealed class DriverRegistry
     {
-        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         public static DriverRegistry Instance => Axle.References.Singleton<DriverRegistry>.Instance.Value;
         #else
         private static readonly DriverRegistry _instance = new DriverRegistry();

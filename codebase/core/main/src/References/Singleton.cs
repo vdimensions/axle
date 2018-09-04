@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -20,7 +20,7 @@ namespace Axle.References
                 throw new InvalidOperationException(string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
             }
             var instance = (T) constructor.Invoke(new object[0]);
-            #if  NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             System.Threading.Thread.MemoryBarrier();
             #endif
             return instance;

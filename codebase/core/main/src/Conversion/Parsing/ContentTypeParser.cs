@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of <see cref="ContentType">content type</see> 
     /// to a valid <see cref="ContentType"/> instance.
     /// </summary>
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     //[Stateless]

@@ -6,7 +6,7 @@ using Axle.Verification;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class PropertyAccessor : IAccessor, IReflected<MethodInfo>

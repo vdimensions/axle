@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
 	public class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod
@@ -21,10 +21,10 @@ namespace Axle.Reflection
         /// </param>
         public MethodToken(MethodInfo info) : base(info)
         {
-            #if NETSTANDARD
-            _memberType = (ReflectedMember = info).ReturnType;
-            #else
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             _memberType = info.ReturnType;
+            #else
+            _memberType = (ReflectedMember = info).ReturnType;
             #endif
         }
 
@@ -50,7 +50,8 @@ namespace Axle.Reflection
             return new GenericMethodToken(this, types);
         }
 
-        #if NETSTANDARD        
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #else
         public override MethodInfo ReflectedMember { get; }
         #endif
         public override Type MemberType => _memberType;

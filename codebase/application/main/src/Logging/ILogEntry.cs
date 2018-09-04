@@ -13,7 +13,7 @@ namespace Axle.Logging
         /// </summary>
         DateTime Timestamp { get; }
 
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 
         /// <summary>
         /// The name of the thread where the application event occurred.

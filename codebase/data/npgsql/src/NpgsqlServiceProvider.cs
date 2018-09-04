@@ -8,14 +8,14 @@ using Axle.Data.Common;
 
 namespace Axle.Data.Npgsql
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class NpgsqlServiceProvider : DbServiceProvider<
         NpgsqlConnection,
         NpgsqlTransaction,
         NpgsqlCommand,
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         NpgsqlDataAdapter,
         #endif
         NpgsqlDataReader,
@@ -57,7 +57,7 @@ namespace Axle.Data.Npgsql
             return command;
         }
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
         protected override NpgsqlDataAdapter CreateDataAdapter(NpgsqlCommand command) => new NpgsqlDataAdapter(command);
         #endif
 

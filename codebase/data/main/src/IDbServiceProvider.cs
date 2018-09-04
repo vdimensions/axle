@@ -15,7 +15,7 @@ namespace Axle.Data
 
         IDbCommand CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction);
 
-        #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         IDbDataAdapter CreateDataAdapter(DbCommand command);
         #endif
 

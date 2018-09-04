@@ -1,7 +1,7 @@
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.IO;
-#if !NETSTANDARD
+#if NETFRAMEWORK
 using System.Runtime.Remoting.Messaging;
 #endif
 using System.Runtime.Serialization;
@@ -41,13 +41,13 @@ namespace Axle.IO.Serialization
 
         /// <inheritdoc />
         public object Deserialize(Stream stream, Type objectType) => Formatter.Deserialize(stream);
-        #if !NETSTANDARD
+        #if NETFRAMEWORK
         public object Deserialize(Stream stream, HeaderHandler handler) => Formatter.Deserialize(stream, handler);
         #endif
 
         /// <inheritdoc />
         public void Serialize(object obj, Stream stream) => Formatter.Serialize(stream, obj);
-        #if !NETSTANDARD
+        #if NETFRAMEWORK
         public void Serialize(object obj, Stream stream, Header[] headers) => Formatter.Serialize(stream, obj, headers);
         #endif
 

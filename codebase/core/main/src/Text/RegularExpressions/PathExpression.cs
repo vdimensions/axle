@@ -7,7 +7,7 @@ using Axle.Extensions.String;
 
 namespace Axle.Text.RegularExpressions
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class PathExpression : AbstractPathExpression

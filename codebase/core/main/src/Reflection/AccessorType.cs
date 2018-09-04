@@ -4,7 +4,7 @@
     /// An enumeration representing the various accessor types that are supported by the .NET framework
     /// and visible trough reflection.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public enum AccessorType : byte

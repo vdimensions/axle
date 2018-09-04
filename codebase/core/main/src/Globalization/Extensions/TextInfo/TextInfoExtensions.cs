@@ -13,7 +13,7 @@ namespace Axle.Globalization.Extensions.TextInfo
     /// </summary>
     public static class TextInfoExtensions
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the encoding for the OEM code page of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </summary>
@@ -75,7 +75,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         }
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the default encoding for the writing system represented by the current <see cref="TextInfo"/>. 
         /// This would be equal to encoding for the <see cref="TextInfo.OEMCodePage"/> for non-invariant cultures.

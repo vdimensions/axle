@@ -25,7 +25,7 @@ namespace Axle.Extensions.StringComparison
                     return StringComparer.CurrentCulture;
                 case System.StringComparison.CurrentCultureIgnoreCase:
                     return StringComparer.CurrentCultureIgnoreCase;
-                #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 case System.StringComparison.InvariantCulture:
                     return StringComparer.InvariantCulture;
                 case System.StringComparison.InvariantCultureIgnoreCase:

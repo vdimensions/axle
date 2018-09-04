@@ -1,5 +1,5 @@
 ﻿using System;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
 
@@ -10,7 +10,7 @@ namespace Axle.Verification
     /// The exception that is thrown if one of the arguments to a method is not of the expected type.
     /// </summary>
     /// <seealso cref="ArgumentException" />
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     #line 16
@@ -107,7 +107,7 @@ namespace Axle.Verification
         /// </param>
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName, Exception inner)
             : this(FormatMessage(expectedType, actualType), paramName, inner) { }
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with serialized data.
         /// </summary>
@@ -128,7 +128,7 @@ namespace Axle.Verification
     /// <typeparam name="TExpected">
     /// The expected type of the argument. 
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     #line 134
@@ -164,7 +164,7 @@ namespace Axle.Verification
         /// the current exception is raised in a catch block that handles the inner exception. 
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Type actualType, Exception inner) : base(typeof(TExpected), actualType, paramName, inner) { }
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected}" /> class with serialized data.
         /// </summary>
@@ -188,7 +188,7 @@ namespace Axle.Verification
     /// <typeparam name="T">
     /// The actual type of the argument. 
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     #line 194
@@ -218,7 +218,7 @@ namespace Axle.Verification
         /// the current exception is raised in a catch block that handles the inner exception. 
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Exception inner) : base(typeof(TExpected), typeof(T), paramName, inner) { }
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected,T}" /> class with serialized data.
         /// </summary>

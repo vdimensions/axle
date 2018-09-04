@@ -79,7 +79,7 @@ namespace Axle.Resources.Xml
             return stream;
         }
 
-        #if NETSTANDARD1_6_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         public override bool TryResolve(Type targetType, out object result)
         {
             var serializer = new XmlSerializer();

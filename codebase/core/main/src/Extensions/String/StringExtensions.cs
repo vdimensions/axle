@@ -1350,7 +1350,7 @@ namespace Axle.Extensions.String
         public static string TrimEnd(this string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
         #endregion TrimEnd(...)
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Retrieves the system's reference for the specified string. 
         /// </summary>

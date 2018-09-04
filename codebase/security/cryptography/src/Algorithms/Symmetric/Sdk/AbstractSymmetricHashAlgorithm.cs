@@ -9,7 +9,7 @@ using Axle.Security.Cryptography.Algorithms.Sdk;
 
 namespace Axle.Security.Cryptography.Algorithms.Symmetric.Sdk
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class AbstractSymmetricHashAlgorithm : AbstractCryptographicAlgorithm, ISymmetricHashAlgorithm
@@ -89,7 +89,7 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric.Sdk
 
         protected override string DoDecrypt(string value, Encoding encoding)
         {
-#warning this is not good code!
+            #warning this is not good code!
             var bytes = Convert.FromBase64String(value);
             return encoding.GetString(DoDecrypt(bytes));
         }

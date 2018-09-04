@@ -11,7 +11,7 @@ namespace Axle.Conversion.Parsing
     /// <typeparam name="T">
     /// The type a string is to be parsed to.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class AbstractParser<T> : IParser<T>

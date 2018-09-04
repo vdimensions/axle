@@ -13,7 +13,7 @@ namespace Axle
     /// The type of objects to compare.
     /// </typeparam>
     /// <seealso cref="object.ReferenceEquals(object, object)"/>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class ReferenceEqualityComparer<T> : IEqualityComparer<T> where T: class

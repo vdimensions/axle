@@ -6,13 +6,11 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
-    #endif
-    #if NETSTANDARD
-    public class FieldToken : MemberTokenBase<FieldInfo>,
-    #else
 	public class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
+    #else
+    public class FieldToken : MemberTokenBase<FieldInfo>,
     #endif
         IEquatable<FieldToken>, IField
     {
@@ -23,10 +21,10 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly FieldAccessor[] _accessors;
 
-        #if NETSTANDARD
-        public FieldToken(FieldInfo info) : base(info, info.DeclaringType, info.Name)
-        #else
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public FieldToken(FieldInfo info) : base(info, info.FieldHandle, info.DeclaringType, info.Name)
+        #else
+        public FieldToken(FieldInfo info) : base(info, info.DeclaringType, info.Name)
         #endif
         {
             _accessModifier = GetAccessModifier(info);
@@ -34,7 +32,7 @@ namespace Axle.Reflection
             _accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
         }
 
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override FieldInfo GetMember(RuntimeFieldHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)
         {
             return isGeneric ? FieldInfo.GetFieldFromHandle(handle, typeHandle) : FieldInfo.GetFieldFromHandle(handle);

@@ -1,4 +1,4 @@
-#if !NETSTANDARD
+#if NETFRAMEWORK
 namespace Axle.Data.Sqlite
 {
     /// <summary>

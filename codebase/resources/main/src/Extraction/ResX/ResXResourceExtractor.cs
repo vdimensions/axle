@@ -18,7 +18,7 @@ namespace Axle.Resources.Extraction.ResX
             IResourceExtractor actualExtractor = null;
 
             // ResX support varies depending on the platform
-            #if !NETSTANDARD
+            #if NETFRAMEWORK
             actualExtractor = new CompleteResXResourceExtractor();
             #elif NETSTANDARD2_0_OR_NEWER
             actualExtractor = new SimpleResXResourceExtractor();

@@ -7,7 +7,7 @@ using Axle.Verification;
 
 namespace Axle.Data.Resources
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class Query

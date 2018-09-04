@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Axle.Collections
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     internal struct ChronologicalKey<TKey> : IEquatable<ChronologicalKey<TKey>>

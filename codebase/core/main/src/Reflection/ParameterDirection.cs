@@ -7,7 +7,7 @@ namespace Axle.Reflection
     /// An enumeration representing the possible parameter directions.
     /// </summary>
     [Flags]
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public enum ParameterDirection : byte

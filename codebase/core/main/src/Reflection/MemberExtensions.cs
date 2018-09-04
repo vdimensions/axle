@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD
 using System.Reflection;
 #endif
 
@@ -62,7 +62,7 @@ namespace Axle.Reflection
         {
             attributeType.VerifyArgument(nameof(attributeType)).IsNotNull().Is<Attribute>();
             return member.VerifyArgument(nameof(member)).IsNotNull().Value.GetAttributes()
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD
                 .Any(x => attributeType.GetTypeInfo().IsAssignableFrom(x.Attribute.GetType().GetTypeInfo()));
                 #else
                 .Any(x => attributeType.IsInstanceOfType(x.Attribute));

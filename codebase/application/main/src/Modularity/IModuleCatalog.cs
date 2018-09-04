@@ -6,7 +6,7 @@ namespace Axle.Modularity
 {
     public interface IModuleCatalog
     {
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         Type[] DiscoverModuleTypes();
         #endif
 

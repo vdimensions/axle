@@ -1,12 +1,12 @@
 ﻿using System;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
 
 
 namespace Axle.DependencyInjection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public class DuplicateDependencyDefinitionException : DependencyRegistrationException
@@ -20,7 +20,7 @@ namespace Axle.DependencyInjection
                 string.IsNullOrEmpty(name) ? string.Empty : $"with the given name '{name}' and ",
                 type.FullName), 
             inner) { }
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected DuplicateDependencyDefinitionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
     }

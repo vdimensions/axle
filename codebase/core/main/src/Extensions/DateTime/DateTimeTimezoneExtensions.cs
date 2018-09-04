@@ -7,7 +7,7 @@ namespace Axle.Extensions.DateTime
     
     public static class DateTimeTimezoneExtensions
     {
-        #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// </summary>
@@ -36,7 +36,7 @@ namespace Axle.Extensions.DateTime
         }
         #endif
 
-        #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// <remarks>
@@ -78,7 +78,7 @@ namespace Axle.Extensions.DateTime
         #endif
         public static DateTime ToLocalTime(this DateTime current)
         {
-            #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
             return ToLocalTime(current, DateTimeKind.Local);
             #else
             return TimeZoneInfo.ConvertTime(current, TimeZoneInfo.Local);
@@ -132,7 +132,7 @@ namespace Axle.Extensions.DateTime
                     {   //
                         // assume the source date to be in UTC then.
                         //
-                        #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+                        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
                         dateTime = TimeZoneInfo.ConvertTime(dateTime, utcTimeZone, sourceTimeZone);
                         #else
                         dateTime = TimeZoneInfo.ConvertTime(new DateTime(dateTime.Ticks, DateTimeKind.Utc), sourceTimeZone);
@@ -143,7 +143,7 @@ namespace Axle.Extensions.DateTime
                 case DateTimeKind.Utc:
                     if (!sourceIsUtc)
                     {
-                        #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+                        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
                         dateTime = TimeZoneInfo.ConvertTime(dateTime, utcTimeZone, sourceTimeZone);
                         #else
                         dateTime = TimeZoneInfo.ConvertTime(dateTime, sourceTimeZone);
@@ -155,7 +155,7 @@ namespace Axle.Extensions.DateTime
                     break;
             }
             return new DateTime(
-                #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
                 TimeZoneInfo.ConvertTime(dateTime, sourceTimeZone, destinationTimeZone).Ticks,
                 #else
                 convertedToSourceTimezone 
@@ -186,7 +186,7 @@ namespace Axle.Extensions.DateTime
             TimeZoneInfo sourceTimeZone,
             TimeZoneInfo destinationTimeZone)
         {
-            #if NETSTANDARD1_3_OR_NEWER || !NETSTANDARD
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
             return ChangeTimeZone(dateTime, sourceTimeZone, destinationTimeZone, false);
             #else
             return TimeZoneInfo.ConvertTime(dateTime, destinationTimeZone);

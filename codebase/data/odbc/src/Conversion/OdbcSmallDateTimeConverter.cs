@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Data;
 using System.Data.Odbc;
@@ -6,7 +6,7 @@ using System.Data.Odbc;
 
 namespace Axle.Data.Odbc.Conversion
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class OdbcSmallDateTimeConverter : OdbcSameTypeConverter<DateTime?>

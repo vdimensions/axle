@@ -15,7 +15,7 @@ namespace Axle.Conversion
     /// <typeparam name="T">The type of the source object to be converted. </typeparam>
     /// <typeparam name="TIntermediate">The type of an intermediate object to convert the source object to. </typeparam>
     /// <typeparam name="TResult">The resulting type of the conversion, produced by converting the intermediate object. </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class ChainedConverter<T, TIntermediate, TResult> : AbstractConverter<T,TResult>

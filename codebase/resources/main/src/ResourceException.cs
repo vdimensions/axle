@@ -1,5 +1,5 @@
 ﻿using System;
-#if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
 
@@ -9,7 +9,7 @@ namespace Axle.Resources
     /// <summary>
     /// Represents errors that occur while working with resources.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public class ResourceException : Exception
@@ -40,7 +40,7 @@ namespace Axle.Resources
         /// </param>
         public ResourceException(string message, Exception inner) : base(message, inner) { }
 
-        #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceException"/> class with serialized data.

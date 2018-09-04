@@ -3,7 +3,7 @@
 
 namespace Axle.Threading
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An interface that provides the basis of a reader-writer lock; that is
     /// an object which utilizes synchronization mechanisms for read and write access to another object or resource.

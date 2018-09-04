@@ -11,7 +11,7 @@ namespace Axle.Security.Cryptography
     /// A class that converts a <see cref="byte">byte</see> array to and from its <see cref="string">string</see> representation.
     /// Each single byte is represented as a hexadecimal string.
     /// </summary>
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class HexConverter : AbstractTwoWayConverter<byte[], string>

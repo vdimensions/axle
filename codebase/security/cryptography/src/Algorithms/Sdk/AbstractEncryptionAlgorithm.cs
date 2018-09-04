@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Axle.Security.Cryptography.Algorithms.Sdk
 {
-    #if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract class AbstractEncryptionAlgorithm : IEncryptionAlgorithm, IDisposable
     {
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [NonSerialized]
         #endif
         private static readonly HexConverter _hex = new HexConverter();

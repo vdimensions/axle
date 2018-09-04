@@ -6,7 +6,7 @@ using Axle.Data.Common;
 
 namespace Axle.Data.OleDb
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public sealed class OleDbServiceProvider : DbServiceProvider<

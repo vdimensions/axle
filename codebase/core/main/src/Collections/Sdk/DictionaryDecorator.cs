@@ -11,7 +11,7 @@ namespace Axle.Collections.Sdk
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public abstract class DictionaryDecorator<TKey, TValue> : IDictionary<TKey, TValue>

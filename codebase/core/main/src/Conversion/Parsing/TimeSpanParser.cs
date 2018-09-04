@@ -8,7 +8,7 @@ namespace Axle.Conversion.Parsing
     /// <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
     /// </summary>
     //[Stateless]
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     #if NETSTANDARD1_0_OR_NEWER || NET40_OR_NEWER

@@ -7,14 +7,14 @@ using Axle.Verification;
 
 namespace Axle.Data.Common
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     public abstract class DbParameterValueSetter<TDbParameter, TDbType> : IDbParameterValueSetter<TDbParameter, TDbType> 
         where TDbParameter: IDataParameter 
         where TDbType: struct
     {
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Serializable]
         #endif
         protected sealed class DbTypeEqualityComparer : IEqualityComparer<DbType>

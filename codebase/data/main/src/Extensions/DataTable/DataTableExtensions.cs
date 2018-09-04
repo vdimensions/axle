@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 namespace Axle.Data.Extensions.DataTable
 {
     using DataTable = System.Data.DataTable;

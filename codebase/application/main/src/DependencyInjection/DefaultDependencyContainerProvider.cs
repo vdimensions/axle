@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 namespace Axle.DependencyInjection
 {
     public sealed class DefaultDependencyContainerProvider : IDependencyContainerProvider

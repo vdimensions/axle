@@ -9,12 +9,12 @@ using Axle.Data.SqlClient.Conversion;
 
 namespace Axle.Data.SqlClient
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class SqlParameterValueSetter : DbParameterValueSetter<SqlParameter, SqlDbType>
     {
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Serializable]
         #endif
         private class SqlDbTypeEqualityComparer : IEqualityComparer<SqlDbType>

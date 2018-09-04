@@ -14,7 +14,7 @@ namespace Axle.Text.RegularExpressions
     /// An implementation of the <see cref="IPathExpression" /> interface that is used to match paths for
     /// assemblies or embedded resources inside assemblies.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public sealed class AssemblyPathExpression : AbstractPathExpression

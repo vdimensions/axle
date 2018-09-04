@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
 	public sealed class WriteOnlyPropertyToken : PropertyToken, IWriteOnlyProperty
@@ -20,7 +20,7 @@ namespace Axle.Reflection
 
         public WriteOnlyPropertyToken(PropertyInfo propertyInfo) : base(propertyInfo)
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var sm = propertyInfo.SetMethod;
             #else
             var sm = propertyInfo.GetSetMethod(true);

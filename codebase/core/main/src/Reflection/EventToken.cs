@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
 	public class EventToken : MemberTokenBase<EventInfo>, IEquatable<EventToken>, IEvent
@@ -26,7 +26,7 @@ namespace Axle.Reflection
         public EventToken(EventInfo info) : base(info, info.DeclaringType, info.Name)
         {
             _eventInfo = info;
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var am = info.AddMethod;
             var rm = info.RemoveMethod;
             #else

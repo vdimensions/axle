@@ -12,12 +12,12 @@ using NpgsqlTypes;
 
 namespace Axle.Data.Npgsql
 {
-    #if !NETSTANDARD
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
     internal sealed class NpgsqlParameterValueSetter : DbParameterValueSetter<NpgsqlParameter, NpgsqlDbType>
     {
-        #if !NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Serializable]
         #endif
         private class NpgsqlDbTypeEqualityComparer : IEqualityComparer<NpgsqlDbType>

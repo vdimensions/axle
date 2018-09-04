@@ -1,4 +1,4 @@
-﻿//#if NETSTANDARD1_1_OR_NEWER || !NETSTANDARD
+﻿//#if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
 //using System;
 //using System.Collections.Concurrent;
 //using System.Collections.Generic;

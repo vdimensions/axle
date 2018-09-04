@@ -11,7 +11,7 @@ namespace Axle.Reflection
     /// </summary>
     public static class ReflectionExtensions
     {
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         internal static DeclarationType GetDeclarationType(bool isStatic, bool isAbstract, bool isVirtual, bool isOverride, bool isHideBySig, bool isSealed)
@@ -276,8 +276,8 @@ namespace Axle.Reflection
             return @this.Invoke(null, args);
         }
 
-        #if NETSTANDARD1_5_OR_NEWER || !NETSTANDARD
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         internal static BindingFlags GetFlagsUnsafe(this MethodBase member)
@@ -299,7 +299,7 @@ namespace Axle.Reflection
         }
         #endif
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         private static bool IsOverrideUnchecked(MethodInfo mi) => mi.GetRuntimeBaseDefinition().DeclaringType != mi.DeclaringType;
         #else
@@ -323,7 +323,7 @@ namespace Axle.Reflection
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var gm = property.GetMethod;
             var sm = property.SetMethod;
             #else
@@ -352,7 +352,7 @@ namespace Axle.Reflection
             {
                 throw new ArgumentNullException(nameof(eventInfo));
             }
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var am = eventInfo.AddMethod;
             var rm = eventInfo.RemoveMethod;
             #else

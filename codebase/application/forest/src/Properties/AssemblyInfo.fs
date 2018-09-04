@@ -16,7 +16,7 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyCulture("")>]
 
 [<assembly: ComVisible(false)>]
-#if !NETSTANDARD || NETSTANDARD1_1_OR_NEWER
+#if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
 [<assembly: Guid("5A6B7C35-2A40-4860-9B21-9AA13284F809")>]
 #endif
 

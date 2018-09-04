@@ -1,4 +1,4 @@
-﻿#if !NETSTANDARD || NETSTANDARD2_0_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics;
 using System.Globalization;
@@ -104,47 +104,47 @@ namespace Axle.Globalization
         /// <summary>
         /// Gets the <see cref="CultureInfo">culture</see> for the current <see cref="CultureScope">culture scope</see>.
         /// </summary>
-        public static CultureInfo CurrentCulture { get { return Thread.CurrentThread.CurrentCulture; } }
+        public static CultureInfo CurrentCulture => Thread.CurrentThread.CurrentCulture;
         /// <summary>
         /// Gets the <see cref="CultureInfo">culture</see> for the current <see cref="CultureScope">culture scope</see>.
         /// </summary>
-        public static CultureInfo CurrentUICulture { get { return Thread.CurrentThread.CurrentUICulture; } }
+        public static CultureInfo CurrentUICulture => Thread.CurrentThread.CurrentUICulture;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly CultureInfo previousCulture;
+        private readonly CultureInfo _previousCulture;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly CultureInfo previousUICulture;
+        private readonly CultureInfo _previousUiCulture;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly CultureInfo currentCulture;
+        private readonly CultureInfo _currentCulture;
         /// <summary>
         /// Gets the <see cref="CultureInfo">culture</see> that the current <see cref="CultureScope">culture scope</see> was initialized with.
         /// </summary>
-        public CultureInfo Culture => currentCulture;
+        public CultureInfo Culture => _currentCulture;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly CultureInfo currentUICulture;
+        private readonly CultureInfo _currentUiCulture;
         /// <summary>
         /// Gets the <see cref="CultureInfo">UI culture</see> that the current <see cref="CultureScope">culture scope</see> was initialized with.
         /// </summary>
-        public CultureInfo UICulture => currentUICulture;
+        public CultureInfo UICulture => _currentUiCulture;
 
         private CultureScope()
         {
             var thread = Thread.CurrentThread;
-            this.previousCulture = thread.CurrentCulture;
-            this.previousUICulture = thread.CurrentUICulture;
+            _previousCulture = thread.CurrentCulture;
+            _previousUiCulture = thread.CurrentUICulture;
         }
         private CultureScope(CultureInfo culture, CultureInfo uiCulture) : this()
         {
             var thread = Thread.CurrentThread;
-            this.currentCulture = culture;
+            _currentCulture = culture;
             if (culture != null)
             {
                 thread.CurrentCulture = culture;
             }
-            this.currentUICulture = uiCulture;
+            _currentUiCulture = uiCulture;
             if (uiCulture != null)
             {
                 thread.CurrentUICulture = uiCulture;
@@ -163,18 +163,18 @@ namespace Axle.Globalization
         public void Dispose()
         {
             var thread = Thread.CurrentThread;
-            if (this.currentCulture != null && this.previousCulture != null && thread.CurrentCulture.Equals(this.currentCulture))
+            if (_currentCulture != null && _previousCulture != null && thread.CurrentCulture.Equals(_currentCulture))
             {
-                thread.CurrentCulture = this.previousCulture;
+                thread.CurrentCulture = _previousCulture;
             }
-            if (this.currentUICulture != null && this.previousUICulture != null && thread.CurrentUICulture.Equals(this.currentUICulture))
+            if (_currentUiCulture != null && _previousUiCulture != null && thread.CurrentUICulture.Equals(_currentUiCulture))
             {
-                thread.CurrentUICulture = this.previousUICulture;
+                thread.CurrentUICulture = _previousUiCulture;
             }
         }
         void IDisposable.Dispose() 
         { 
-            this.Dispose(); 
+            Dispose(); 
         }
         #endregion
     }
