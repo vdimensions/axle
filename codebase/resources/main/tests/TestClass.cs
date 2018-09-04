@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text;
 
 using Axle.Conversion;
-using Axle.Extensions.IO.Stream;
+using Axle.IO.Extensions.Stream;
 
 using NUnit.Framework;
 
@@ -30,7 +30,7 @@ namespace Axle.Resources.Tests
         {
             
             var resourceManager = CreateResourceManager();
-            var fileResource = resourceManager.Resolve("testBundle", "LL2H.txt", CultureInfo.CurrentCulture);
+            var fileResource = resourceManager.Load("testBundle", "LL2H.txt", CultureInfo.CurrentCulture);
 
             Assert.IsNotNull(fileResource, "Unable to find LL2H.txt");
             Assert.AreEqual("testBundle", fileResource.Bundle);
@@ -49,7 +49,7 @@ namespace Axle.Resources.Tests
         {
             var resourceManager = CreateResourceManager();
 
-            var fileResource = resourceManager.Resolve("testBundle", "EmbeddedText.txt", CultureInfo.CurrentCulture);
+            var fileResource = resourceManager.Load("testBundle", "EmbeddedText.txt", CultureInfo.CurrentCulture);
 
             Assert.IsNotNull(fileResource, "Unable to find EmbeddedText.txt");
             Assert.AreEqual("testBundle", fileResource.Bundle);
@@ -68,7 +68,7 @@ namespace Axle.Resources.Tests
         {
             var resourceManager = CreateResourceManager();
 
-            var resxResource = resourceManager.Resolve("testBundle", "Greeting", CultureInfo.CurrentCulture);
+            var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
             Assert.IsNotNull(resxResource, "Unable to find Greeting message");
             Assert.AreEqual("testBundle", resxResource.Bundle);

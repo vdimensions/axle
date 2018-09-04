@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net46;net45;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net46;net45;</TargetFrameworks>
   </PropertyGroup>
   <Import Project="../../../../submodules/msbuild-dotnet-multitargeting/src/MultitargetingFrameworkSupport.targets" />
   <PropertyGroup>
@@ -19,6 +19,8 @@
     <Compile Include="Properties\AssemblyInfo.fs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="XmlTemplateExtractor.fs" />
+    <Compile Include="ViewManagement.fs" />
     <Compile Include="ForestModule.fs" />
     <None Include="build.sh" />
     <None Include="mason.properties" />
@@ -28,11 +30,6 @@
     <None Include="paket.sh" />
     <None Include="Properties\AssemblyInfo.fs.template" />
     <None Include="restore.sh" />
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="mscorlib" />
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
   </ItemGroup>
   <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
   <Import Project=".paket\Paket.Restore.targets" />

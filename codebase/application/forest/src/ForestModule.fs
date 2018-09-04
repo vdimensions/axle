@@ -1,45 +1,19 @@
 ﻿namespace Axle.Application.Forest
 
-open System
-
 open Forest
 open Forest.Reflection
 
 open Axle.DependencyInjection
 open Axle.Modularity
+open Axle.Resources
+open Axle.Resources.Bundling
+open Axle.Resources.Extraction
 
 
 [<Module>]
 [<Requires(typeof<ForestModule>)>]
 type [<Interface>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
-
- and [<Sealed;NoEquality;NoComparison>] private AxleViewFactory(container:IContainer) =
-    interface IViewFactory with
-        member __.Resolve(vm:IViewDescriptor) : IView = 
-            let x = ref Unchecked.defaultof<obj>
-            if container.TryResolve(vm.ViewType, x, vm.Name) || container.TryResolve(vm.ViewType, x)
-            then downcast !x:IView
-            else raise <| new InvalidOperationException(String.Format("Type {0} was not registered in a dependency container.", vm.ViewType.FullName))
-
- and [<Sealed;NoEquality;NoComparison>] private ContainerViewRegistry(container:IContainer, originalRegistry:IViewRegistry) =
-    interface IViewRegistry with
-        member __.GetDescriptor(viewType:Type):IViewDescriptor = 
-            originalRegistry.GetDescriptor viewType
-        member __.GetDescriptor(name:string):IViewDescriptor = 
-            originalRegistry.GetDescriptor name
-        member __.Register<'T when 'T:>IView>():IViewRegistry = 
-            container.RegisterType<'T>() |> ignore
-            originalRegistry.Register<'T>()
-        member __.Register(t:Type):IViewRegistry = 
-            container.RegisterType t |> ignore
-            originalRegistry.Register t
-        member __.Resolve(viewType:Type):IView = 
-            // this will call AxleViewFactory
-            originalRegistry.Resolve viewType
-        member __.Resolve(name:string): IView = 
-            // this will call AxleViewFactory
-            originalRegistry.Resolve name
 
  and [<Module;Sealed;NoEquality;NoComparison>] internal ForestModule(container:IContainer) =
     [<ModuleInit>]
@@ -62,7 +36,18 @@ type [<Interface>] IForestViewProvider =
         let ctx = container.Parent.Resolve<IForestContext>()
         ctx.ViewRegistry |> vp.RegisterViews
 
-    [<ModuleDependencyTerminated>]
-    member __.DependencyTerminated(vp:IForestViewProvider) =
-        ()
+    //[<ModuleDependencyTerminated>]
+    //member __.DependencyTerminated(vp:IForestViewProvider) = ()
+
+    interface IResourceExtractorConfigurer with
+        member __.Configure(registry:IResourceExtractorRegistry): unit = 
+            registry.Register(XmlTemplateExtractor()) 
+            |> ignore
+    interface IResourceBundleConfigurer with
+        member __.Configure(registry:IResourceBundleRegistry): unit = 
+            let parseUri = Axle.Conversion.Parsing.UriParser().Parse
+            let bundle = TemplateResourceInfo.BundleName
+            registry.Configure(bundle).Register(("./"+bundle) |> parseUri)
+            |> ignore
+        
 

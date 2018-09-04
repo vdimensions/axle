@@ -1,11 +1,11 @@
 RESTRICTION: || (== net35) (== net40) (== net45) (== netstandard1.3) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.28)
+    Axle.Core (1.5.1.40)
       System.Threading.Tasks.Unofficial (>= 3.1) - restriction: || (== net35) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard1.3) (>= net35) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))
     System.Threading.Tasks.Unofficial (3.1.0) - restriction: == net35
   remote: https://www.nuget.org/api/v2
-    Microsoft.NETCore.Platforms (2.1) - restriction: || (&& (== net35) (== netstandard1.4)) (&& (== net35) (== netstandard1.5)) (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.4)) (&& (== net40) (== netstandard1.5)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6)) (== netstandard1.3) (&& (== netstandard1.4) (== netstandard2.0)) (&& (== netstandard1.5) (== netstandard2.0)) (&& (== netstandard1.6) (== netstandard2.0))
+    Microsoft.NETCore.Platforms (2.1.1) - restriction: || (&& (== net35) (== netstandard1.4)) (&& (== net35) (== netstandard1.5)) (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.4)) (&& (== net40) (== netstandard1.5)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6)) (== netstandard1.3) (&& (== netstandard1.4) (== netstandard2.0)) (&& (== netstandard1.5) (== netstandard2.0)) (&& (== netstandard1.6) (== netstandard2.0))
     Microsoft.NETCore.Targets (2.1) - restriction: || (&& (== net35) (== netstandard1.4)) (&& (== net35) (== netstandard1.5)) (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.4)) (&& (== net40) (== netstandard1.5)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6)) (== netstandard1.3) (&& (== netstandard1.4) (== netstandard2.0)) (&& (== netstandard1.5) (== netstandard2.0)) (&& (== netstandard1.6) (== netstandard2.0))
     System.Diagnostics.TraceSource (4.3) - restriction: || (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.6)) (&& (== netstandard1.3) (== netstandard1.6)) (&& (== netstandard1.6) (== netstandard2.0))
     System.Globalization (4.3) - restriction: || (&& (== net35) (== netstandard1.4)) (&& (== net35) (== netstandard1.5)) (&& (== net35) (== netstandard1.6)) (&& (== net40) (== netstandard1.4)) (&& (== net40) (== netstandard1.5)) (&& (== net40) (== netstandard1.6)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6)) (== netstandard1.3) (&& (== netstandard1.4) (== netstandard2.0)) (&& (== netstandard1.5) (== netstandard2.0)) (&& (== netstandard1.6) (== netstandard2.0))
@@ -51,6 +51,6 @@ NUGET
 GROUP build
 NUGET
   remote: ../../../../submodules/mason/dist
-    Mason.Targets.Packager (0.1.1.26)
-    Mason.Targets.Preprocessor (0.1.1.13)
-    Mason.Targets.Verman (0.1.1.13)
+    Mason.Targets.Packager (0.2.0.41)
+    Mason.Targets.Preprocessor (0.2.0.78)
+    Mason.Targets.Verman (0.2.0.51)
