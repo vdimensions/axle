@@ -1,4 +1,5 @@
-﻿namespace Axle.Conversion
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Conversion
 {
     /// <summary>
     /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns 
@@ -32,4 +33,4 @@
         public bool TryConvertBack(T source, out T target) => TryConvert(source, out target);
     }
 }
-
+#endif

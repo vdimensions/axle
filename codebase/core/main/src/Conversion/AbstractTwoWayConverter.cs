@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Conversion
@@ -52,3 +53,4 @@ namespace Axle.Conversion
         }
     }
 }
+#endif

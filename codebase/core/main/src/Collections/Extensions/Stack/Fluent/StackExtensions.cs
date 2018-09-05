@@ -1,4 +1,5 @@
-﻿namespace Axle.Collections.Extensions.Stack.Fluent
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Collections.Extensions.Stack.Fluent
 {
     public static class StackExtensions
     {
@@ -14,3 +15,4 @@
     }
     
 }
+#endif

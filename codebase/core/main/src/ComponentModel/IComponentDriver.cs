@@ -1,4 +1,5 @@
-﻿namespace Axle.ComponentModel
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.ComponentModel
 {
     public interface IComponentDriver
     {
@@ -9,3 +10,4 @@
         T Resolve();
     }
 }
+#endif

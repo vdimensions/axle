@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Net.Mime;
 
 
@@ -11,7 +12,6 @@ namespace Axle.Conversion.Parsing
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    //[Stateless]
     public sealed class ContentTypeParser : AbstractParser<ContentType>
     {
         /// <inheritdoc />
@@ -21,3 +21,4 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
+#endif

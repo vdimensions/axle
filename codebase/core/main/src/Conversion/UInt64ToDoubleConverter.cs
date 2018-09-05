@@ -1,4 +1,5 @@
-﻿namespace Axle.Conversion
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Conversion
 {
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="ulong"/> and <see cref="double"/>.
@@ -15,3 +16,4 @@
         protected override ulong DoConvertBack(double source) => (ulong) source;
     }
 }
+#endif

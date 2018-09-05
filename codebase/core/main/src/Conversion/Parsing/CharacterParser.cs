@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Conversion.Parsing
@@ -45,3 +46,4 @@ namespace Axle.Conversion.Parsing
         public override bool TryParse(string value, IFormatProvider formatProvider, out char output) { return char.TryParse(value, out output); }
     }
 }
+#endif

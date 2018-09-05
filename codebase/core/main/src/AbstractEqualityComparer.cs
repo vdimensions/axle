@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 #if NETSTANDARD
 using System.Reflection;
@@ -167,3 +168,4 @@ namespace Axle
         protected abstract int DoGetHashCode(T obj);
     }
 }
+#endif

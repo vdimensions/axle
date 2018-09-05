@@ -1,4 +1,5 @@
-﻿namespace Axle.Environment
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Environment
 {
     /// <summary>
     /// Indicates the byte order ("endianness") in which data is stored in a computer architecture. 
@@ -21,3 +22,4 @@
         BigEndian = 1
     }
 }
+#endif

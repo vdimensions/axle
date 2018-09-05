@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Diagnostics;
 using System.Text;
 
 using Axle.Verification;
@@ -55,3 +56,4 @@ namespace Axle.Conversion
         public Encoding Encoding => _encoding;
     }
 }
+#endif

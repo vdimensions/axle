@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -35,3 +36,4 @@ namespace Axle.ComponentModel
         public IComponentDriver<T> GetDriver<T>() => _drivers.TryGetValue(typeof(T), out var driver) ? driver as IComponentDriver<T> : null;
     }
 }
+#endif

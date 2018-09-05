@@ -40,9 +40,11 @@
       </group>
       <group targetFramework="netstandard1.2">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
       </group>
       <group targetFramework="netstandard1.1">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />
+        <dependency id="Axle.Resources" version="${axle.dependency.version}" />
       </group>
       <group targetFramework="netstandard1.0">
         <dependency id="Axle.Core" version="${axle.dependency.version}" />

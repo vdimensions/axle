@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using Axle.Verification;
 
 
 namespace Axle.Conversion
@@ -31,3 +32,4 @@ namespace Axle.Conversion
         public bool TryConvertBack(TD source, out TS target) => _converter.TryConvert(source, out target);
     }
 }
+#endif

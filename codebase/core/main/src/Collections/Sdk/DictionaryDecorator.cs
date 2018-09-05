@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Collections;
 using System.Collections.Generic;
 
 
@@ -73,3 +74,4 @@ namespace Axle.Collections.Sdk
         #endregion
     }
 }
+#endif

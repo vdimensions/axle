@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -128,3 +129,4 @@ namespace Axle.Collections
         public ChronologicalDictionary(int capacity) : base(new TimestampDictionary(capacity)) { }
     }
 }
+#endif

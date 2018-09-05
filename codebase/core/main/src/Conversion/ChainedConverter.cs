@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using Axle.Verification;
 
 
 namespace Axle.Conversion
@@ -137,3 +138,4 @@ namespace Axle.Conversion
         }
     }
 }
+#endif

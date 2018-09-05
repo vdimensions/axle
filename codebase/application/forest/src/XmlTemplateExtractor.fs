@@ -27,21 +27,23 @@ type [<Sealed>] TemplateResourceInfo internal(name:string, culture:CultureInfo, 
         else this.BaseTryResolve (targetType, &result)
     member __.Value with get() = template
 
-type [<Sealed>] ResourceTemplateProvider(chain:ContextExtractionChain) =
+type [<Sealed>] ResourceTemplateProvider(chain:ContextExtractionChain, bundle:string, culture:CultureInfo) =
     interface ITemplateProvider with
         member __.Load name =
-            let resource = name |> chain.Extract 
-            use str = resource.Open()
-            str |> XmlTemplateParser().Parse name
+            let resourceName = String.Format("{0}.xml", name)
+            let resource = resourceName |> chain.Extract
+            if (obj.ReferenceEquals(resource, null)) then raise <| ResourceNotFoundException(name, bundle, culture)
+            use stream = resource.Open()
+            stream |> XmlTemplateParser().Parse name
 
 type [<Sealed>] XmlTemplateExtractor() =
     inherit AbstractResourceExtractor()
     override __.DoExtract(ctx:ResourceContext, name:string) =
         try
-            let provider = ResourceTemplateProvider(ctx.ExtractionChain)
+            let provider = ResourceTemplateProvider(ctx.ExtractionChain, ctx.Bundle, ctx.Culture)
             let template = Raw.loadTemplate provider name
             upcast TemplateResourceInfo(name, ctx.Culture, template, name |> ctx.ExtractionChain.Extract)
         with
-        | e -> ResourceLoadException(name, ctx.Bundle, ctx.Culture, e) |> raise
+        | :? ResourceNotFoundException -> Unchecked.defaultof<_>
 
 

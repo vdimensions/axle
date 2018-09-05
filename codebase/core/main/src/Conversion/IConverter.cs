@@ -1,4 +1,5 @@
-﻿namespace Axle.Conversion
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Conversion
 {
     /// <summary>
     /// An interface for a converter object, that is, a class which is used to convert 
@@ -39,3 +40,4 @@
         bool TryConvert(TSource source, out TTarget target);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Diagnostics;
 
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using Axle.References;
@@ -35,3 +36,4 @@ namespace Axle.Environment
         public static IRuntime Runtime => _runtime;
     }
 }
+#endif

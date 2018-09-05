@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Conversion.Parsing
@@ -95,3 +96,4 @@ namespace Axle.Conversion.Parsing
         bool IConverter<string, T>.TryConvert(string source, out T target) { return TryParse(source, out target); }
     }
 }
+#endif

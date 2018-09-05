@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Conversion.Parsing
@@ -26,3 +27,4 @@ namespace Axle.Conversion.Parsing
         bool TryParseExact(string value, string format, IFormatProvider formatProvider, out T result);
     }
 }
+#endif

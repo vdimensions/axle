@@ -1,4 +1,5 @@
-﻿namespace Axle.Conversion
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Conversion
 {
     /// <summary>
     /// An interface for converters that allow converting from one type to another and vice-versa.
@@ -50,3 +51,4 @@
         bool TryConvertBack(TTarget obj, out TSource result);
     }
 }
+#endif

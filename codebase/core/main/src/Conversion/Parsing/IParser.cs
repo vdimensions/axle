@@ -1,3 +1,4 @@
+#if NETSTANDARD || NET35_OR_NEWER
 using System;
 
 
@@ -145,3 +146,4 @@ namespace Axle.Conversion.Parsing
 	    bool TryParse(string value, out T output);
 	}
 }
+#endif

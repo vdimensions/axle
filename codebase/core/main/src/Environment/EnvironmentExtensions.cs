@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using Axle.Verification;
 
 
 namespace Axle.Environment
@@ -30,3 +31,4 @@ namespace Axle.Environment
         #endif
     }
 }
+#endif

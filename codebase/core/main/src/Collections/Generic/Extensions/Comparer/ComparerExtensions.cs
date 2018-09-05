@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 
 
@@ -15,3 +16,4 @@ namespace Axle.Collections.Generic.Extensions.Comparer
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿/*
+﻿#if NETSTANDARD || NET35_OR_NEWER
+/*
    Copyright 2014-2017 Virtual Dimensions
 
    Licensed under the Apache License, Version 2.0 (the "License");
@@ -156,3 +157,4 @@ namespace Axle
     /// </returns>
     public delegate bool Attempt<T1, T2, T3, T4, TResult>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, out TResult result);
 }
+#endif

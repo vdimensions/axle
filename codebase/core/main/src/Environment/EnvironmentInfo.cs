@@ -1,3 +1,4 @@
+#if NETSTANDARD || NET35_OR_NEWER
 using System;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Globalization;
@@ -77,3 +78,4 @@ namespace Axle.Environment
         #endif
     }
 }
+#endif

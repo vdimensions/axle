@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Globalization;
 
 
@@ -27,3 +28,4 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 using Axle.Verification;
 
@@ -38,3 +39,4 @@ namespace Axle.Collections.Extensions.Array
         }
     }
 }
+#endif

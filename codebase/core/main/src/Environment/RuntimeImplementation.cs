@@ -1,4 +1,5 @@
-﻿namespace Axle.Environment
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Environment
 {
     /// <summary>
     /// An enumeration describing the possible type of CLR implementations.
@@ -34,3 +35,4 @@
         NetStandard
     }
 }
+#endif

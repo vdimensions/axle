@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 #if NETFRAMEWORK
@@ -91,3 +92,4 @@ namespace Axle.Environment
         #endif
     }
 }
+#endif

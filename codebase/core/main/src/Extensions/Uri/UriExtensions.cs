@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -321,11 +322,7 @@ namespace Axle.Extensions.Uri
                 return other;
             }
 
-            if (uri.IsAbsoluteUri)
-            {
-                return new System.Uri(uri, other);
-            }
-
+            var kind = uri.IsAbsoluteUri ? UriKind.Absolute : UriKind.Relative;
             var val = new StringBuilder(uri.ToString());
             var oth = new StringBuilder(other.ToString());
             if (val.Length > 0 && val[val.Length - 1] == '/')
@@ -339,7 +336,7 @@ namespace Axle.Extensions.Uri
             {
                 oth = oth.Insert(0, '/');
             }
-            return new System.Uri(val.Append(oth).ToString(), UriKind.Relative);
+            return new System.Uri(val.Append(oth).ToString(), kind);
         }
 
         /// <summary>
@@ -397,3 +394,4 @@ namespace Axle.Extensions.Uri
         }
     }
 }
+#endif

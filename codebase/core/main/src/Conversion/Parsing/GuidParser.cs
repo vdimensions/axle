@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Conversion.Parsing
@@ -16,3 +17,4 @@ namespace Axle.Conversion.Parsing
         protected override Guid DoParse(string value, IFormatProvider formatProvider) => new Guid(value);
     }
 }
+#endif

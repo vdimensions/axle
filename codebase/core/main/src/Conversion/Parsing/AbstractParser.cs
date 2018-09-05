@@ -1,3 +1,4 @@
+#if NETSTANDARD || NET35_OR_NEWER
 using System;
 
 
@@ -140,3 +141,4 @@ namespace Axle.Conversion.Parsing
         public Type TargetType => typeof(T);
     }
 }
+#endif

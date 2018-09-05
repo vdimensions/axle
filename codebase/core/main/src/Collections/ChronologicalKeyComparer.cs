@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Collections.Generic;
 
 
 namespace Axle.Collections
@@ -11,3 +12,4 @@ namespace Axle.Collections
         public int Compare(ChronologicalKey<TKey> x, ChronologicalKey<TKey> y) => x.Timestamp.CompareTo(y.Timestamp);
     }
 }
+#endif

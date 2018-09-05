@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Collections.Generic;
 
 
 namespace Axle
@@ -23,3 +24,4 @@ namespace Axle
         int IEqualityComparer<T>.GetHashCode(T obj) => obj.GetHashCode();
     }
 }
+#endif

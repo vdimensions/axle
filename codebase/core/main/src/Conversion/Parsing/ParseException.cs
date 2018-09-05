@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
@@ -26,3 +27,4 @@ namespace Axle.Conversion.Parsing
         #endif
     }
 }
+#endif

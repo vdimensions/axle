@@ -1,4 +1,5 @@
-﻿namespace Axle.Collections.Extensions.Queue.Fluent
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Collections.Extensions.Queue.Fluent
 {
     public static class QueueExtensions
     {
@@ -13,3 +14,4 @@
         //}
     }
 }
+#endif

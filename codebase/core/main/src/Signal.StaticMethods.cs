@@ -1,4 +1,6 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
+
 
 namespace Axle
 {
@@ -47,4 +49,4 @@ namespace Axle
         }
     }
 }
-
+#endif
