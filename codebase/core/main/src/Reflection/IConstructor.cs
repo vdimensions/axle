@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a reflected constructor.
@@ -19,3 +20,4 @@
         object Invoke(params object[] args);
     }
 }
+#endif

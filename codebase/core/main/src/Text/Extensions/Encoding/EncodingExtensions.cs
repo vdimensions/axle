@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using Axle.Verification;
 
 
 namespace Axle.Text.Extensions.Encoding
@@ -29,3 +30,4 @@ namespace Axle.Text.Extensions.Encoding
         #endif
     }
 }
+#endif

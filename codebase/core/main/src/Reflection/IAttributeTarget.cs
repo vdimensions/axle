@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Collections.Generic;
 
 
@@ -49,3 +50,4 @@ namespace Axle.Reflection
         IEnumerable<IAttributeInfo> Attributes { get; }
     }
 }
+#endif

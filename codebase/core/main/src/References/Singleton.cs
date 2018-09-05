@@ -1,7 +1,9 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics;
+#if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
+#endif
 using System.Reflection;
 using System.Runtime.InteropServices;
 
@@ -63,17 +65,37 @@ namespace Axle.References
         
         internal static ConstructorInfo GetSingletonConstructor(Type type)
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var constructors = type.GetTypeInfo().GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             #else
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             #endif
+            #if NET20
+            var hasPublicConstructors = false;
+            ConstructorInfo constructor = null;;
+            for (var i = 0; i < constructors.Length; i++)
+            {
+                if (constructor == null && constructors[i].GetParameters().Length == 0)
+                {
+                    constructor = constructors[i];
+                }
+                if (!hasPublicConstructors && constructors[i].IsPublic)
+                {
+                    hasPublicConstructors = true;
+                }
+            }
+            if (hasPublicConstructors)
+            {
+                constructor = null;
+            }
+            #else
             var hasPublicConstructors = constructors.Any(x => x.IsPublic);
             ConstructorInfo constructor = null;
             if (!hasPublicConstructors)
             {
                 constructor = constructors.Where(x => x.GetParameters().Length == 0).SingleOrDefault();
             }
+            #endif
             return constructor;
         }
 
@@ -87,7 +109,7 @@ namespace Axle.References
             }
             var instanceProperty = typeof(Singleton<>)
                 .MakeGenericType(type)
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD
                 .GetTypeInfo()
                 #else
                 #endif

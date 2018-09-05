@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Reflection;
 
 using Axle.Verification;
@@ -363,3 +364,4 @@ namespace Axle.Reflection
         }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Reflection
@@ -15,3 +16,4 @@ namespace Axle.Reflection
         public override AccessorType AccessorType => AccessorType.Add;
     }
 }
+#endif

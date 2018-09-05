@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Reflection;
 
 
@@ -23,3 +24,4 @@ namespace Axle.Reflection
         public override Type MemberType => DeclaringType;
     }
 }
+#endif

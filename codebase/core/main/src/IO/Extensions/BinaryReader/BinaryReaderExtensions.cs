@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.IO;
 
 using Axle.Verification;
 
@@ -46,3 +47,4 @@ namespace Axle.IO.Extensions.BinaryReader
         }
     }
 }
+#endif

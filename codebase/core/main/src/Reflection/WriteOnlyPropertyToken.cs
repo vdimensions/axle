@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -9,7 +10,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-	public sealed class WriteOnlyPropertyToken : PropertyToken, IWriteOnlyProperty
+    public sealed class WriteOnlyPropertyToken : PropertyToken, IWriteOnlyProperty
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PropertySetAccessor _setAccessor;
@@ -56,3 +57,4 @@ namespace Axle.Reflection
         public ISetAccessor SetAccessor => _setAccessor;
     }
 }
+#endif

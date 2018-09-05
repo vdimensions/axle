@@ -1,4 +1,5 @@
-﻿#if NET35
+﻿#if NETSTANDARD || NET35_OR_NEWER
+#if NET35
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -334,3 +335,4 @@ namespace Axle.Linq.Expressions
     }
     #endif
 }
+#endif

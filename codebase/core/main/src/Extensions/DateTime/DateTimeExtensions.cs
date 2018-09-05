@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Globalization;
 
 
@@ -226,3 +227,4 @@ namespace Axle.Extensions.DateTime
         public static DateTime ChangeKindToUtc(this DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
     }
 }
+#endif

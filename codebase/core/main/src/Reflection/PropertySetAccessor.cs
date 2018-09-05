@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Reflection
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
@@ -23,3 +24,4 @@
         public override AccessorType AccessorType => AccessorType.Set;
     }
 }
+#endif

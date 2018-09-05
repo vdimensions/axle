@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections;
 using System.Diagnostics;
 
@@ -49,3 +50,4 @@ namespace Axle.Verification
         public static ArgumentReference<T> IsNotEmpty<T>(this ArgumentReference<T> argument) where T:ICollection { return IsNotEmpty(argument, null); }
     }
 }
+#endif

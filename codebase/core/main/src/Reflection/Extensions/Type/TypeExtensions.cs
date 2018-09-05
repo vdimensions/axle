@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
@@ -177,3 +178,4 @@ namespace Axle.Reflection.Extensions.Type
         }
     }
 }
+#endif

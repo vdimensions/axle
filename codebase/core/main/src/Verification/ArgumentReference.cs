@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Diagnostics;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
@@ -72,7 +73,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public ArgumentReference<T> IsOfType(Type expectedType)
         {
-            return IsOfTypeUnchecked(expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
+            return IsOfTypeUnchecked(Verifier.IsNotNull(Verifier.VerifyArgument(expectedType, nameof(expectedType))));
         }
 
         /// <summary>
@@ -116,3 +117,4 @@ namespace Axle.Verification
         object IReference.Value => _value;
     }
 }
+#endif

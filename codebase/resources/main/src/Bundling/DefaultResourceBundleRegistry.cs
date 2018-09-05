@@ -14,30 +14,30 @@ namespace Axle.Resources.Bundling
     /// </summary>
     public sealed class DefaultResourceBundleRegistry : IResourceBundleRegistry
     {
-        private sealed class BundleContent : IResourceBundleContent
+        private sealed class ConfigurableBundleContent : IConfigurableBundleContent
         {
             private readonly LinkedList<Uri> _locations;
-            private readonly DefaultResourceExtractorRegistry _extractors;
+            private readonly IResourceExtractorRegistry _extractors;
 
-            public BundleContent()
+            public ConfigurableBundleContent()
             {
                 _locations = new LinkedList<Uri>();
                 _extractors = new DefaultResourceExtractorRegistry();
             }
 
-            public IEnumerator<Uri> GetEnumerator() => _locations.GetEnumerator();
-            IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-
-            public IResourceBundleContent Register(Uri location)
+            IConfigurableBundleContent IConfigurableBundleContent.Register(Uri location)
             {
                 _locations.AddLast(location);
                 return this;
             }
 
-            public IResourceExtractorRegistry Extractors => _extractors;
+            IResourceExtractorRegistry IConfigurableBundleContent.Extractors => _extractors;
+
+            IEnumerable<Uri> IResourceBundleContent.Locations => _locations;
+            IEnumerable<IResourceExtractor> IResourceBundleContent.Extractors => _extractors;
         }
 
-        private readonly IDictionary<string, IResourceBundleContent> _perBundleContent;
+        private readonly IDictionary<string, IConfigurableBundleContent> _perBundleContent;
 
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class.
@@ -48,7 +48,7 @@ namespace Axle.Resources.Bundling
         public DefaultResourceBundleRegistry(bool caseSensitiveBundleNames)
         {
             var comparer = caseSensitiveBundleNames ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
-            _perBundleContent = new ChronologicalDictionary<string, IResourceBundleContent>(comparer);
+            _perBundleContent = new ChronologicalDictionary<string, IConfigurableBundleContent>(comparer);
         }
 
         /// <summary>
@@ -57,22 +57,22 @@ namespace Axle.Resources.Bundling
         public DefaultResourceBundleRegistry() : this(false) { }
 
         /// <inheritdoc />
-        public IResourceBundleContent Configure(string bundle)
+        public IConfigurableBundleContent Configure(string bundle)
         {
             if (!_perBundleContent.TryGetValue(bundle, out var contentRegistry))
             {
-                _perBundleContent.Add(bundle, contentRegistry = new BundleContent());
+                _perBundleContent.Add(bundle, contentRegistry = new ConfigurableBundleContent());
             }
             return contentRegistry;
         }
 
         /// <inheritdoc />
-        public IEnumerator<IResourceBundleContent> GetEnumerator() => _perBundleContent.Values.GetEnumerator();
+        public IEnumerator<IResourceBundleContent> GetEnumerator() => _perBundleContent.Values.Cast<IResourceBundleContent>().GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public IEnumerable<Uri> this[string bundle] => _perBundleContent.TryGetValue(bundle, out var result) ? result : Enumerable.Empty<Uri>();
+        public IResourceBundleContent this[string bundle] => _perBundleContent.TryGetValue(bundle, out var result) ? result : new ConfigurableBundleContent();
     }
 }

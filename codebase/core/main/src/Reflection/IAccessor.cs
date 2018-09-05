@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing an accessor to a reflected member (e.g. getters, setters, event manipulators, etc.)
@@ -26,3 +27,4 @@
         IMember Member { get; }
     }
 }
+#endif

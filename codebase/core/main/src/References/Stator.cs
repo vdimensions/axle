@@ -1,4 +1,5 @@
-﻿using Axle.ComponentModel;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using Axle.ComponentModel;
 using Axle.Verification;
 
 
@@ -33,3 +34,4 @@ namespace Axle.References
         object IReference.Value => Target;
     }
 }
+#endif

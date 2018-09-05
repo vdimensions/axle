@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -29,12 +30,15 @@ namespace Axle.Verification
         /// <paramref name="argumentName"/> is <c>null</c>.
         /// </exception>
         /// <seealso cref="ArgumentReference{T}"/>
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> VerifyArgument<T>(
-            this T argument,
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            T argument,
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             [System.ComponentModel.Localizable(false)]
             #endif
@@ -66,7 +70,11 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsNotNull<T>(this ArgumentReference<T> argument, string message)
+        public static ArgumentReference<T> IsNotNull<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T> argument, string message)
         {
             if (ReferenceEquals(argument.Value, null))
             {
@@ -90,7 +98,11 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsNotNull<T>(this ArgumentReference<T> argument)
+        public static ArgumentReference<T> IsNotNull<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T> argument)
         {
             return IsNotNull(argument, null);
         }
@@ -122,7 +134,11 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsNot<T>(this ArgumentReference<T> argument, T value, string message)
+        public static ArgumentReference<T> IsNot<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T> argument, T value, string message)
         {
             return IsTrue(argument, x => x.Equals(value), message);
         }
@@ -157,7 +173,11 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsNot<T>(this ArgumentReference<T> argument, T value, IEqualityComparer<T> comparer, string message)
+        public static ArgumentReference<T> IsNot<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T> argument, T value, IEqualityComparer<T> comparer, string message)
         {
             if (comparer == null)
             {
@@ -193,7 +213,11 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<T> IsTrue<T>(this ArgumentReference<T> argument, Predicate<T> condition, string message)
+        public static ArgumentReference<T> IsTrue<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T> argument, Predicate<T> condition, string message)
         {
             if (condition == null)
             {
@@ -211,3 +235,4 @@ namespace Axle.Verification
         }
     }
 }
+#endif

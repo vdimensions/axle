@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a type member that allows updating its value via a <see cref="ISetAccessor">set accessor</see>. 
@@ -15,3 +16,4 @@
         ISetAccessor SetAccessor { get; }
     }
 }
+#endif

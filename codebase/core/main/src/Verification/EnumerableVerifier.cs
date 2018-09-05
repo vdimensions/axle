@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections;
 using System.Diagnostics;
 
@@ -33,7 +34,7 @@ namespace Axle.Verification
         /// Thrown if the verified <paramref name="argument"/> represents an empty collection.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument, string message) where T: IEnumerable
@@ -74,7 +75,7 @@ namespace Axle.Verification
         /// Thrown if the verified <paramref name="argument"/> represents an empty collection.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument) where T: IEnumerable
@@ -83,3 +84,4 @@ namespace Axle.Verification
         }
     }
 }
+#endif

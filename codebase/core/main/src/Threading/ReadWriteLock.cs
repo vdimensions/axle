@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Diagnostics;
 using System.Threading;
 
@@ -251,3 +252,4 @@ namespace Axle.Threading
         public bool SupportsRecursion => _supportsRecursion;
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface that represents a get accessor (or getter) for a class member - a property or a field.
@@ -22,3 +23,4 @@
         object GetValue(object target);
     }
 }
+#endif

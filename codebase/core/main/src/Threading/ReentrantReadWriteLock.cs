@@ -1,4 +1,5 @@
-﻿using System.Threading;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Threading;
 
 
 namespace Axle.Threading
@@ -10,3 +11,4 @@ namespace Axle.Threading
         public ReentrantReadWriteLock() : base(new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion)) {}
     }
 }
+#endif

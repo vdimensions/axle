@@ -2,12 +2,12 @@
 
 open Forest
 open Forest.Reflection
+open Forest.Templates.Xml
 
 open Axle.DependencyInjection
 open Axle.Modularity
 open Axle.Resources
 open Axle.Resources.Bundling
-open Axle.Resources.Extraction
 
 
 [<Module>]
@@ -15,7 +15,7 @@ open Axle.Resources.Extraction
 type [<Interface>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
- and [<Module;Sealed;NoEquality;NoComparison>] internal ForestModule(container:IContainer) =
+ and [<Module;Sealed;NoEquality;NoComparison>] internal ForestModule(container:IContainer, resourceManager:ResourceManager) =
     [<ModuleInit>]
     member __.Init(exporter:ModuleExporter) =
         let reflectionProvider =
@@ -29,7 +29,9 @@ type [<Interface>] IForestViewProvider =
             | (true, sm) -> sm
             | (false, _) -> upcast NoopSecurityManager()
         let context = upcast DefaultForestContext(viewRegistry, securityManager) : IForestContext
+
         context |> exporter.Export |> ignore
+        resourceManager |> ResourceTemplateProvider |> exporter.Export |> ignore
 
     [<ModuleDependencyInitialized>]
     member __.DependencyInitialized(vp:IForestViewProvider) =
@@ -39,15 +41,13 @@ type [<Interface>] IForestViewProvider =
     //[<ModuleDependencyTerminated>]
     //member __.DependencyTerminated(vp:IForestViewProvider) = ()
 
-    interface IResourceExtractorConfigurer with
-        member __.Configure(registry:IResourceExtractorRegistry): unit = 
-            registry.Register(XmlTemplateExtractor()) 
-            |> ignore
     interface IResourceBundleConfigurer with
         member __.Configure(registry:IResourceBundleRegistry): unit = 
             let parseUri = Axle.Conversion.Parsing.UriParser().Parse
-            let bundle = TemplateResourceInfo.BundleName
-            registry.Configure(bundle).Register(("./"+bundle) |> parseUri)
+            let bundle = ResourceManagerIntegration.BundleName
+            registry.Configure(bundle)
+                    .Register(("./"+bundle) |> parseUri)
+                    .Extractors.Register(XmlTemplateParser() |> ResourceManagerIntegration.createExtractor)
             |> ignore
         
 

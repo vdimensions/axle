@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 
 
 namespace Axle.References
@@ -50,3 +51,4 @@ namespace Axle.References
         bool IsAlive { get; }
     }
 }
+#endif

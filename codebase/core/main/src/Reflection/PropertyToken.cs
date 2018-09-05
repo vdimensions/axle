@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -10,7 +11,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-	public abstract class PropertyToken : MemberTokenBase<PropertyInfo>, IProperty, IEquatable<PropertyToken>
+    public abstract class PropertyToken : MemberTokenBase<PropertyInfo>, IProperty, IEquatable<PropertyToken>
     {
         public static PropertyToken Create(PropertyInfo property)
         {
@@ -56,3 +57,4 @@ namespace Axle.Reflection
         public override Type MemberType => _memberType;
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     public interface ICombineRemoveMember : ICombinableMember, IRemoveableMember
     {
@@ -14,3 +15,4 @@
         IRemoveAccessor RemoveAccessor { get; }
     }
 }
+#endif

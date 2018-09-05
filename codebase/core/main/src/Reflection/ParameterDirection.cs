@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 
 
 namespace Axle.Reflection
@@ -41,3 +42,4 @@ namespace Axle.Reflection
         InputOutput = Input|Output
     }
 }
+#endif

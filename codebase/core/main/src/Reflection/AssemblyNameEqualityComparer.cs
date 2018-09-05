@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Reflection;
 
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -19,3 +20,4 @@ namespace Axle.Reflection
         #endif
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 
 
 namespace Axle.Text.Formatting
@@ -68,3 +69,4 @@ namespace Axle.Text.Formatting
         string Format(string format, T arg, TFP formatProvider);
     }
 }
+#endif

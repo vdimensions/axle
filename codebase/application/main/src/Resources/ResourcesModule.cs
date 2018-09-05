@@ -31,12 +31,8 @@ namespace Axle.Resources
             configurer.Configure(_resourceManager.Extractors);
         }
 
-        void IResourceBundleConfigurer.Configure(IResourceBundleRegistry registry)
-        {
-        }
+        void IResourceBundleConfigurer.Configure(IResourceBundleRegistry registry) { }
 
-        void IResourceExtractorConfigurer.Configure(IResourceExtractorRegistry registry)
-        {
-        }
+        void IResourceExtractorConfigurer.Configure(IResourceExtractorRegistry registry) { }
     }
 }

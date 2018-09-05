@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Diagnostics;
 
 
@@ -25,7 +26,12 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<T[]> IsNotEmpty<T>(this ArgumentReference<T[]> argument, string message)
+        public static ArgumentReference<T[]> IsNotEmpty<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T[]> argument, 
+            string message)
         {
             if (argument.Value.Length == 0)
             {
@@ -46,6 +52,11 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<T[]> IsNotEmpty<T>(this ArgumentReference<T[]> argument) => IsNotEmpty(argument, null);
+        public static ArgumentReference<T[]> IsNotEmpty<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<T[]> argument) => IsNotEmpty(argument, null);
     }
 }
+#endif

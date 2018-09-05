@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Diagnostics;
 using System.Text;
 
@@ -29,7 +29,7 @@ namespace Axle.Conversion
         /// <param name="encoding">The <see cref="System.Text.Encoding">encoding</see> that is used for the conversion.</param>
         public BytesToStringConverter(Encoding encoding)
         {
-            _encoding = encoding.VerifyArgument(nameof(encoding)).IsNotNull();
+            _encoding = Verifier.IsNotNull(Verifier.VerifyArgument(encoding, nameof(encoding)));
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -45,10 +45,10 @@ namespace Axle.Conversion
         #endif
 
         /// <inheritdoc />
-        protected override string DoConvert(byte[] source) => _encoding.GetString(source.VerifyArgument(nameof(source)).IsNotNull());
+        protected override string DoConvert(byte[] source) => _encoding.GetString(Verifier.IsNotNull(Verifier.VerifyArgument(source, nameof(source))));
 
         /// <inheritdoc />
-        protected override byte[] DoConvertBack(string source) => _encoding.GetBytes(source.VerifyArgument(nameof(source)).IsNotNull());
+        protected override byte[] DoConvertBack(string source) => _encoding.GetBytes(Verifier.IsNotNull(Verifier.VerifyArgument(source, nameof(source))));
 
         /// <summary>
         /// Gets the <see cref="System.Text.Encoding" /> instance used to convert string instances to bytes and vice-versa.

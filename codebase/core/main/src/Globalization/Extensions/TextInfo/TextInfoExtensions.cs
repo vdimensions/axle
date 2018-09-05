@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Text;
 
 using Axle.Verification;
@@ -130,3 +131,4 @@ namespace Axle.Globalization.Extensions.TextInfo
         #endif
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Diagnostics;
 
 
@@ -11,7 +12,7 @@ namespace Axle.Verification
     /// <seealso cref="string"/>
     public static class StringVerifier
     {
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static ArgumentReference<string> UncheckedIsNotEmpty(ArgumentReference<string> argument, string message)
@@ -37,7 +38,11 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<string> IsNotEmpty(this ArgumentReference<string> argument, string message)
+        public static ArgumentReference<string> IsNotEmpty(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<string> argument, string message)
         {
             return UncheckedIsNotEmpty(argument, message);
         }
@@ -53,7 +58,11 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<string> IsNotEmpty(this ArgumentReference<string> argument) { return IsNotEmpty(argument, null); }
+        public static ArgumentReference<string> IsNotEmpty(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<string> argument) => IsNotEmpty(argument, null);
 
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
@@ -66,10 +75,11 @@ namespace Axle.Verification
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </returns>
         [DebuggerStepThrough]
-        public static ArgumentReference<string> IsNotNullOrEmpty(this ArgumentReference<string> argument)
-        {
-            return IsNotEmpty(Verifier.IsNotNull(argument));
-        }
+        public static ArgumentReference<string> IsNotNullOrEmpty(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<string> argument) => IsNotEmpty(Verifier.IsNotNull(argument));
 
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
@@ -89,7 +99,10 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotNullOrEmpty(
-            this ArgumentReference<string> argument, 
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<string> argument, 
             string nullMessage, 
             string emptyMessage)
         {
@@ -97,3 +110,4 @@ namespace Axle.Verification
         }
     }
 }
+#endif

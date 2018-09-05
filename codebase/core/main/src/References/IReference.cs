@@ -1,4 +1,5 @@
-﻿namespace Axle.References
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.References
 {
     /// <summary>
     /// An interface representing a reference to an object.
@@ -26,3 +27,4 @@
         new T Value { get; }
     }
 }
+#endif

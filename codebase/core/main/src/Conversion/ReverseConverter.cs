@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using Axle.Verification;
 
 
@@ -13,7 +13,7 @@ namespace Axle.Conversion
 
         public ReverseConverter(ITwoWayConverter<TD, TS> converter)
         {
-            _converter = converter.VerifyArgument(nameof(converter)).IsNotNull().Value;
+            _converter = Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter))).Value;
         }
 
         /// <inheritdoc />

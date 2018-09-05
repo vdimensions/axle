@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using Axle.Verification;
 
 
 namespace Axle.References.Extensions.WeakReference
@@ -27,3 +28,4 @@ namespace Axle.References.Extensions.WeakReference
         }
     }
 }
+#endif

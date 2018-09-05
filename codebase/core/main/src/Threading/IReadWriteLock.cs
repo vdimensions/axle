@@ -1,9 +1,18 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 
 
 namespace Axle.Threading
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NET20
+    /// <summary>
+    /// An interface that provides the basis of a reader-writer lock; that is
+    /// an object which utilizes synchronization mechanisms for read and write access to another object or resource.
+    /// Multiple threads can read from the resource at a time, but only one can modify it.
+    /// All reader threads will be blocked if a writer thread is currently engaging the resource.
+    /// </summary>
+    /// <seealso cref="ILock" />
+    #elif NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An interface that provides the basis of a reader-writer lock; that is
     /// an object which utilizes synchronization mechanisms for read and write access to another object or resource.
@@ -214,3 +223,4 @@ namespace Axle.Threading
         bool TryEnterWriteLock(TimeSpan timeout);
     }
 }
+#endif

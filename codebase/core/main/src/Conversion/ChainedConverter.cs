@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using Axle.Verification;
 
 
@@ -26,8 +26,8 @@ namespace Axle.Conversion
 
         internal ChainedConverter(IConverter<T, TIntermediate> converter1, IConverter<TIntermediate, TResult> converter2)
         {
-            _converter1 = converter1.VerifyArgument(nameof(converter1)).IsNotNull().Value;
-            _converter2 = converter2.VerifyArgument(nameof(converter2)).IsNotNull().Value;
+            _converter1 = Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1))).Value;
+            _converter2 = Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2))).Value;
         }
 
         /// <inheritdoc />

@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An enumeration representing the various accessor types that are supported by the .NET framework
@@ -30,3 +31,4 @@
         Remove
     }
 }
+#endif

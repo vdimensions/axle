@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Diagnostics;
 using System.Reflection;
 
 using Axle.Verification;
@@ -29,3 +30,4 @@ namespace Axle.Reflection
         AccessModifier IAccessor.AccessModifier => OperationMethod.AccessModifier;
     }
 }
+#endif

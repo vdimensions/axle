@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a cast operator defined by a <see cref="System.Type">type</see>.
@@ -36,3 +37,4 @@
         bool TryInvoke(T1 target, out T2 result);
     }
 }
+#endif

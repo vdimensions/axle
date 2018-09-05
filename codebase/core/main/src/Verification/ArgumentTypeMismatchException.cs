@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
@@ -13,7 +14,6 @@ namespace Axle.Verification
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    #line 16
     public class ArgumentTypeMismatchException : ArgumentException
     {
         internal static string FormatMessage(Type expectedType, Type actualType)
@@ -119,7 +119,6 @@ namespace Axle.Verification
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
-        #line 122
     }
 
     /// <summary>
@@ -131,7 +130,6 @@ namespace Axle.Verification
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    #line 134
     public class ArgumentTypeMismatchException<TExpected> : ArgumentTypeMismatchException
     {
         /// <summary>
@@ -176,7 +174,6 @@ namespace Axle.Verification
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
-        #line 179
     }
 
     /// <summary>
@@ -191,7 +188,6 @@ namespace Axle.Verification
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    #line 194
     public class ArgumentTypeMismatchException<TExpected, T> : ArgumentTypeMismatchException
     {
         /// <summary>
@@ -230,6 +226,6 @@ namespace Axle.Verification
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
-        #line 233
     }
 }
+#endif

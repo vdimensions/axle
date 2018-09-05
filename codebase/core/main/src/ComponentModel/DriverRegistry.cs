@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -26,7 +26,7 @@ namespace Axle.ComponentModel
         [Conditional("STATOR")]
         public void RegisterDriver<T>(IComponentDriver<T> driver)
         {
-            driver.VerifyArgument(nameof(driver)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(driver, nameof(driver)));
             lock (_syncRoot)
             {
                 _drivers.Add(typeof(T), driver);

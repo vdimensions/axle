@@ -1,3 +1,6 @@
+framework: auto-detect
+storage: none
+
 source ../../../../dist
   nuget Axle.Core
   nuget Axle.Resources
@@ -7,8 +10,11 @@ source ../../../../dist/third-parties
   nuget Kajabity.Tools.Java content: none
 
 source https://nuget.org/api/v2
-  nuget System.Resources.ResourceManager
-  nuget NETStandard.Library
+  nuget NetStandard.Library framework: netstandard1.0, netstandard1.1
+  nuget System.Diagnostics.TraceSource framework: netstandard1.6
+  nuget System.Resources.ResourceManager framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6
+  nuget System.Threading.Thread framework: netstandard1.6
+  nuget System.Xml.XmlSerializer framework: netstandard1.6
 
 group test
   source https://nuget.org/api/v2

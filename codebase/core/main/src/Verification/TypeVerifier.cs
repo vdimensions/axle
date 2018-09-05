@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Diagnostics;
 #if NETSTANDARD
 using System.Reflection;
@@ -59,9 +60,15 @@ namespace Axle.Verification
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<Type> Is(this ArgumentReference<Type> argument, Type expectedType)
+        public static ArgumentReference<Type> Is(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<Type> argument, Type expectedType)
         {
-            return IsUnchecked(argument.VerifyArgument(nameof(argument)).IsNotNull().Value, expectedType.VerifyArgument(nameof(expectedType)).IsNotNull());
+            return IsUnchecked(
+                Verifier.IsNotNull(Verifier.VerifyArgument(argument, nameof(argument))).Value, 
+                Verifier.IsNotNull(Verifier.VerifyArgument(expectedType, nameof(expectedType))));
         }
 
         #if NETFRAMEWORK
@@ -110,9 +117,13 @@ namespace Axle.Verification
         /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<Type> Is<TExpected>(this ArgumentReference<Type> argument)
+        public static ArgumentReference<Type> Is<TExpected>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<Type> argument)
         {
-            return IsUnchecked(argument.VerifyArgument(nameof(argument)).IsNotNull().Value, typeof(TExpected));
+            return IsUnchecked(Verifier.IsNotNull(Verifier.VerifyArgument(argument, nameof(argument))).Value, typeof(TExpected));
         }
 
 
@@ -131,7 +142,11 @@ namespace Axle.Verification
             return argument;
         }
         #else
-        private static ArgumentReference<Type> IsUnchecked(this ArgumentReference<Type> argument, Type expectedType)
+        private static ArgumentReference<Type> IsUnchecked(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<Type> argument, Type expectedType)
         {
             var actualType = argument.Value;
             if (!expectedType.IsAssignableFrom(actualType))
@@ -146,9 +161,13 @@ namespace Axle.Verification
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
-        public static ArgumentReference<Type> IsNotAbstract(this ArgumentReference<Type> argument)
+        public static ArgumentReference<Type> IsNotAbstract(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ArgumentReference<Type> argument)
         {
-            var actualType = argument.IsNotNull().Value;
+            var actualType = Verifier.IsNotNull(argument).Value;
             #if NETSTANDARD
             var actualTypeInfo = actualType.GetTypeInfo();
             if (actualTypeInfo.IsInterface || actualTypeInfo.IsAbstract)
@@ -162,3 +181,4 @@ namespace Axle.Verification
         }
     }
 }
+#endif

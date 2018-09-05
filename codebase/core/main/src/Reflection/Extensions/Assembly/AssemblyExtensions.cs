@@ -1,4 +1,5 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 
@@ -36,4 +37,5 @@ namespace Axle.Reflection.Extensions.Assembly
         }
     }
 }
+#endif
 #endif

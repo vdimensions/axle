@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Diagnostics;
 
 using Axle.Verification;
@@ -45,3 +46,4 @@ namespace Axle.Text.Formatting
         #endregion
     }
 }
+#endif

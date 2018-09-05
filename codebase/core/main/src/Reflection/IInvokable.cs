@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface that represents a reflected member (usually a method or constructor) that can be invoked trough reflection.
@@ -38,3 +39,4 @@
         object Invoke(object target, params object[] args);
     }
 }
+#endif

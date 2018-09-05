@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD
 using System.Reflection;
 #endif
 
@@ -63,7 +63,7 @@ namespace Axle.DependencyInjection.Sdk
             classMemberDependency.VerifyArgument(nameof(classMemberDependency)).IsNotNull();
             var comparer = StringComparer.Ordinal;
 
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             if (!factoryArgumentDependency.Type.GetTypeInfo().IsAssignableFrom(classMemberDependency.Type.GetTypeInfo()))
             #else
             if (!factoryArgumentDependency.Type.IsAssignableFrom(classMemberDependency.Type))

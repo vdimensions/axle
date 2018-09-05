@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Diagnostics;
 using System.Reflection;
 
 
@@ -32,3 +33,4 @@ namespace Axle.Reflection
         FieldInfo IReflected<FieldInfo>.ReflectedMember => _fieldToken.ReflectedMember;
     }
 }
+#endif

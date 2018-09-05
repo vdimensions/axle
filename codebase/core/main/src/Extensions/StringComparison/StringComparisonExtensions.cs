@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.Extensions.StringComparison
@@ -41,3 +42,4 @@ namespace Axle.Extensions.StringComparison
         }
     }
 }
+#endif

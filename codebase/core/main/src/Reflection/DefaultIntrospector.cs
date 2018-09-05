@@ -1,4 +1,5 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -115,7 +116,7 @@ namespace Axle.Reflection
             if (type != null && type != member.ReflectedType && null != member.ReflectedType && !(
                 type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
             {
-				throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
+                throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
             }
             #endif
 
@@ -396,4 +397,5 @@ namespace Axle.Reflection
         }
     }
 }
+#endif
 #endif

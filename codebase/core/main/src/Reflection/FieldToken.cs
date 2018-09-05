@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -8,7 +9,7 @@ namespace Axle.Reflection
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
-	public class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
+    public class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
     #else
     public class FieldToken : MemberTokenBase<FieldInfo>,
     #endif
@@ -68,3 +69,4 @@ namespace Axle.Reflection
         public override Type MemberType => ReflectedMember.FieldType;
     }
 }
+#endif

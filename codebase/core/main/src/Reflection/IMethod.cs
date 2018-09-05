@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System;
 using System.Reflection;
 
 
@@ -52,3 +53,4 @@ namespace Axle.Reflection
         Type ReturnType { get; }
     }
 }
+#endif

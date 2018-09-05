@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 
 namespace Axle.References
@@ -89,3 +90,4 @@ namespace Axle.References
         bool IWeakReference<T>.IsAlive => IsAlive;
     }
 }
+#endif

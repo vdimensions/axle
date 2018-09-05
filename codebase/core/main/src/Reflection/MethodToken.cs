@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -8,7 +9,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-	public class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod
+    public class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _memberType;
@@ -60,3 +61,4 @@ namespace Axle.Reflection
         public Type ReturnType => ReflectedMember.ReturnType;
     }
 }
+#endif

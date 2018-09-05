@@ -1,7 +1,7 @@
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.40)
+    Axle.Core (1.5.1.41)
     Axle.Resources (1.5.1.9)
       Axle.Core (>= 1.5.1)
 

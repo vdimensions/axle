@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Axle.Reflection
     [Serializable]
     #endif
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-	public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
+    public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
     #else
     public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>> 
     #endif
@@ -123,3 +124,4 @@ namespace Axle.Reflection
         public override DeclarationType Declaration => _declaration;
     }
 }
+#endif

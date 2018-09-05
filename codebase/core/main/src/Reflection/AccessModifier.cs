@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An enumeration representing the possible access modifiers supported in the .NET framework.
@@ -34,3 +35,4 @@
         ProtectedInternal
     }
 }
+#endif

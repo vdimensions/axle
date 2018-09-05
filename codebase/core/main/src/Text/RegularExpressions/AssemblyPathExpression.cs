@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -57,3 +58,4 @@ namespace Axle.Text.RegularExpressions
         public override string Pattern => _pattern;
     }
 }
+#endif

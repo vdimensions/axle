@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a setter method (or setter) for a class member (a field or property).
@@ -23,3 +24,4 @@
         void SetValue(object target, object value);
     }
 }
+#endif

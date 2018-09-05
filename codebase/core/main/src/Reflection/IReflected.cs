@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿#if NETSTANDARD || NET20_OR_NEWER
+using System.Reflection;
 
 
 namespace Axle.Reflection
@@ -30,3 +31,4 @@ namespace Axle.Reflection
         new T ReflectedMember { get; }
     }
 }
+#endif

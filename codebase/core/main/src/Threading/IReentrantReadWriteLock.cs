@@ -1,6 +1,13 @@
-﻿namespace Axle.Threading
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Threading
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NET20
+    /// <summary>
+    /// An interface that provides the basis of a reentrant reader-writer lock.
+    /// </summary>
+    /// <seealso cref="IReadWriteLock" />
+    /// <seealso cref="ILock" />
+    #elif NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An interface that provides the basis of a reentrant reader-writer lock.
     /// </summary>
@@ -20,3 +27,4 @@
     #endif
     public interface IReentrantReadWriteLock : IReadWriteLock {}
 }
+#endif

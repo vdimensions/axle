@@ -1,4 +1,5 @@
-﻿namespace Axle.Text.RegularExpressions
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Text.RegularExpressions
 {
     /// <summary>
     /// A regular expressions designed for matching paths.
@@ -13,3 +14,4 @@
         string Pattern { get; }
     }
 }
+#endif

@@ -5,8 +5,7 @@ using Axle.Resources.Bundling;
 namespace Axle.Resources
 {
     [Module]
-    [Requires(typeof(ResourcesModule))]
-    public interface IResourceBundleConfigurer
+    public interface IResourceBundleConfigurer : IResourcesDependency
     {
         void Configure(IResourceBundleRegistry registry);
     }

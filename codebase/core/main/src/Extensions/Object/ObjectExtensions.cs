@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Linq;
 
 using Axle.Verification;
 
@@ -63,3 +64,4 @@ namespace Axle.Extensions.Object
         public static int CalculateHashCode<T>(this T obj, params object[] args) => CalculateHashCode(obj, 31, args);
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -160,4 +161,5 @@ namespace Axle.Reflection
         public static TResult Cast<T, TResult>(this T target) { return For<T, TResult>().Invoke(target); }
     }
 }
+#endif
 #endif

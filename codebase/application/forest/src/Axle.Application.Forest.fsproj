@@ -19,15 +19,16 @@
     <Compile Include="Properties\AssemblyInfo.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="XmlTemplateExtractor.fs" />
+    <Compile Include="ResourceManagerIntegration.fs" />
+    <Compile Include="ResourceTemplateProvider.fs" />
     <Compile Include="ViewManagement.fs" />
     <Compile Include="ForestModule.fs" />
+    <None Include="Axle.Application.Forest.nuspec.template" />
     <None Include="build.sh" />
     <None Include="mason.properties" />
     <None Include="paket.dependencies" />
     <None Include="paket.lock" />
     <None Include="paket.references" />
-    <None Include="paket.sh" />
     <None Include="Properties\AssemblyInfo.fs.template" />
     <None Include="restore.sh" />
   </ItemGroup>

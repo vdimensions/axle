@@ -14,12 +14,12 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyCulture("")]
 
 [assembly: ComVisible(false)]
-#if NETFRAMEWORK || NETSTANDARD1_1_OR_NEWER
+#if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
 [assembly: Guid("101CF79E-134B-4483-8734-C9AC28F68E20")]
 #endif
 
-[assembly: AssemblyVersion("1.5.1.57")]
-[assembly: AssemblyFileVersion("1.5.1.57")]
-[assembly: AssemblyInformationalVersion("1.5.1.57")]
+[assembly: AssemblyVersion("1.5.1.58")]
+[assembly: AssemblyFileVersion("1.5.1.58")]
+[assembly: AssemblyInformationalVersion("1.5.1.58")]
 
 [assembly: InternalsVisibleTo("Axle.Application.Tests")]

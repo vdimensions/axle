@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
@@ -17,7 +17,7 @@ namespace Axle.Conversion
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-	public class ConversionException : Exception
+    public class ConversionException : Exception
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="ConversionException"/> class.
@@ -58,8 +58,8 @@ namespace Axle.Conversion
         public ConversionException(Type sourceType, Type destinationType) : this(
             string.Format(
                 "Cannot convert an instance of {0} to {1}.", 
-                sourceType.VerifyArgument(nameof(sourceType)).IsNotNull().Value.FullName, 
-                destinationType.VerifyArgument(nameof(destinationType)).IsNotNull().Value.FullName),
+                Verifier.IsNotNull(Verifier.VerifyArgument(sourceType, nameof(sourceType))).Value.FullName, 
+                Verifier.IsNotNull(Verifier.VerifyArgument(destinationType, nameof(destinationType))).Value.FullName),
             null) {}
         /// <summary>
         /// Initializes a new instance of <see cref="ConversionException"/> to represent the failure of converting the given types,
@@ -81,12 +81,12 @@ namespace Axle.Conversion
         public ConversionException(Type sourceType, Type destinationType, Exception inner) : this(
             string.Format(
                 "Cannot convert an instance of {0} to {1}.", 
-                sourceType.VerifyArgument(nameof(sourceType)).IsNotNull().Value.FullName, 
-                destinationType.VerifyArgument(nameof(destinationType)).IsNotNull().Value.FullName), 
+                Verifier.IsNotNull(Verifier.VerifyArgument(sourceType, nameof(sourceType))).Value.FullName, 
+                Verifier.IsNotNull(Verifier.VerifyArgument(destinationType, nameof(destinationType))).Value.FullName), 
             inner) {}
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-	    protected ConversionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
+        protected ConversionException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
     }
 }

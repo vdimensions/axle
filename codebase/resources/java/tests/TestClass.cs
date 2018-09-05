@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text;
 
 using Axle.Conversion;
-using Axle.Extensions.IO.Stream;
+using Axle.IO.Extensions.Stream;
 using Axle.Resources.Extraction;
 using Axle.Resources.Java.Extraction;
 
@@ -29,7 +29,7 @@ namespace Axle.Resources.Java.Tests
                                .Register(parser.Parse("assembly://Axle.Resources.Java.Tests/Properties/"));
             resourceManager.Extractors.Register(new JavaPropertiesExtractor());
 
-            var resxResource = resourceManager.Resolve("testBundle", "Greeting", CultureInfo.CurrentCulture);
+            var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
             Assert.IsNotNull(resxResource, "Unable to find Greeting message");
             Assert.AreEqual("testBundle", resxResource.Bundle);

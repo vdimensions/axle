@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -47,3 +48,4 @@ namespace Axle.Text.RegularExpressions
         public static implicit operator Regex (RegularExpression expr) => expr._regex;
     }
 }
+#endif

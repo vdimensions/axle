@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET20_OR_NEWER
+namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a reflected field member.
@@ -21,3 +22,4 @@
         bool IsReadOnly { get; }
     }
 }
+#endif

@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Text.RegularExpressions;
 
 using Axle.Verification;
@@ -51,3 +52,4 @@ namespace Axle.Text.RegularExpressions
         public abstract string Pattern { get; }
     }
 }
+#endif

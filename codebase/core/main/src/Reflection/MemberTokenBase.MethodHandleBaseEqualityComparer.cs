@@ -1,4 +1,5 @@
-﻿namespace Axle.Reflection
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Reflection
 {
     public abstract partial class MemberTokenBase<T>
     {
@@ -56,3 +57,4 @@
     }
     #endif
 }
+#endif

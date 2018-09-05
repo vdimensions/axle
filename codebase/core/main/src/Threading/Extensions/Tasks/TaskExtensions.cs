@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -203,3 +204,4 @@ namespace Axle.Threading.Extensions.Tasks
         #endregion
     }
 }
+#endif

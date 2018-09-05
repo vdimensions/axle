@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-	public class EventToken : MemberTokenBase<EventInfo>, IEquatable<EventToken>, IEvent
+    public class EventToken : MemberTokenBase<EventInfo>, IEquatable<EventToken>, IEvent
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly AccessModifier _accessModifier;
@@ -70,3 +71,4 @@ namespace Axle.Reflection
         public override EventInfo ReflectedMember => _eventInfo;
     }
 }
+#endif

@@ -1,3 +1,5 @@
+storage: none
+
 source ../../../../dist
   nuget Axle.Core
   nuget Axle.Resources

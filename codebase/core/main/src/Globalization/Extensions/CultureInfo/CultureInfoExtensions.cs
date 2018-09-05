@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System.Collections.Generic;
 
 using Axle.Verification;
 
@@ -83,3 +84,4 @@ namespace Axle.Globalization.Extensions.CultureInfo
         }
     }
 }
+#endif
