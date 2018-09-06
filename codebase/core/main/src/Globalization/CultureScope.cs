@@ -9,8 +9,8 @@ namespace Axle.Globalization
 {
     /// <summary>
     /// Represents a disposable scope, which allows changing the current culture/ui culture of the executing thread to the 
-    /// respective <see cref="CultureScope.Culture"/> and <see cref="CultureScope.UICulture"/> troughout its lifetine. 
-    /// Upon disposing, the culture settings prior initializig the scope are rolled back.
+    /// respective <see cref="CultureScope.Culture"/> and <see cref="CultureScope.UICulture"/> throughout its lifetine. 
+    /// Upon disposing, the culture settings prior initializing the scope are rolled back.
     /// </summary>
     [Serializable]
     public sealed class CultureScope : IDisposable
