@@ -91,7 +91,7 @@ namespace Axle
         {
             if (action != null)
             {
-                // TODO: keep a map between the original action and the actual wrapper action, so that un-subscription will work for subscribe once calls
+                // TODO: keep a map between the original action and the actual wrapper action, so that unsubscription will work for subscribe once calls
                 var realAction = new Action[] { null };
                 realAction[0] = () =>
                 {
@@ -113,7 +113,7 @@ namespace Axle
         /// The delegate will be executed on each signal trigger as long as the provided by the <paramref name="predicate"/> evaluates to <c>true</c>. 
         /// </summary>
         /// <param name="action">
-        /// The subscribing delegate. Can be <c>null</c>. Passing null will have no effect on the existing subscriptions. 
+        /// The subscribing delegate. Can be <c>null</c>. Passing <c>null</c> will have no effect on the existing subscriptions. 
         /// </param>
         /// <param name="predicate">
         /// A predicate that determines whether the subscription delegate provided by the <paramref name="action"/> will be invoked upon triggering the signal. 
@@ -126,7 +126,7 @@ namespace Axle
             predicate.VerifyArgument(nameof(predicate)).IsNotNull();
             if (action != null)
             {
-                // TODO: keep a map between the original action and the actual wrapper action, so that un-subscription will work for subscribe once calls
+                // TODO: keep a map between the original action and the actual wrapper action, so that unsubscription will work for subscribe once calls
                 var realAction = new Action[] { null };
                 realAction[0] = () =>
                 {
@@ -465,7 +465,7 @@ namespace Axle
         }
 
         /// <summary>
-        /// Removes the provided delegate from any subscriptions to the current <see cref="Signal{T1, T2}"/> instance
+        /// Removes the provided delegate from any subscriptions to the current <see cref="Signal{T1, T2}"/> instance.
         /// </summary>
         /// <param name="action">
         /// The unsubscribing delegate. Can be <c>null</c>. Passing <c>null</c> value will cause no effect. 

@@ -14,7 +14,7 @@ type [<Sealed>] ResourceTemplateProvider(rm:ResourceManager) =
             let culture = CultureInfo.InvariantCulture
             let resource = rm.Load(bundle, name, culture)
             match resource with
-            | :? ResourceManagerIntegration.TemplateResourceInfo as tri -> Template.Root(tri.Value)
+            | :? ResourceManagerIntegration.TemplateResourceInfo as tri -> tri.Value
             | _ -> raise <| ResourceNotFoundException(name, bundle, culture)
 
 

@@ -2,12 +2,12 @@
 
 open Forest
 open Forest.Reflection
-open Forest.Templates.Xml
 
 open Axle.DependencyInjection
 open Axle.Modularity
 open Axle.Resources
 open Axle.Resources.Bundling
+open Axle.Resources.Extraction
 
 
 [<Module>]
@@ -47,7 +47,7 @@ type [<Interface>] IForestViewProvider =
             let bundle = ResourceManagerIntegration.BundleName
             registry.Configure(bundle)
                     .Register(("./"+bundle) |> parseUri)
-                    .Extractors.Register(XmlTemplateParser() |> ResourceManagerIntegration.createExtractor)
+                    .Extractors.Register(ResourceManagerIntegration.createExtractors())
             |> ignore
         
 

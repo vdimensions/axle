@@ -13,29 +13,43 @@ namespace Axle.Resources.Extraction
     /// <seealso cref="IResourceExtractor"/>
     public sealed class ContextExtractionChain
     {
+        private readonly ResourceContext _ownerContext;
         private readonly IEnumerable<ResourceContext> _subContexts;
-        private readonly IResourceExtractor[] _extractors;
+        internal readonly IEnumerable<IResourceExtractor> extractors;
 
-        internal ContextExtractionChain(IEnumerable<ResourceContext> subContexts, IResourceExtractor[] extractors)
+        internal ContextExtractionChain(ResourceContext ownerContext, IEnumerable<ResourceContext> subContexts, IEnumerable<IResourceExtractor> extractors)
         {
+            _ownerContext = ownerContext;
             _subContexts = subContexts;
-            _extractors = extractors;
+            this.extractors = extractors;
         }
 
         private IEnumerable<ResourceInfo> DoExtractAll(string name)
         {
+            var extractorContext = _ownerContext;
+            foreach (var extractor in extractors)
+            {
+                extractorContext = extractorContext.MoveOneExtractorForward();
+                var resource = extractor.Extract(extractorContext, name);
+                if (resource == null)
+                {
+                    continue;
+                }
+                resource.Bundle = _ownerContext.Bundle;
+                yield return resource;
+            }
             foreach (var subContext in _subContexts)
             {
-                foreach (var extractor in _extractors)
-                {
-                    var resource = extractor.Extract(subContext, name);
-                    if (resource == null)
-                    {
-                        continue;
-                    }
-                    resource.Bundle = subContext.Bundle;
-                    yield return resource;
-                }
+                //foreach (var extractor in _extractors)
+                //{
+                //    var resource = extractor.Extract(_ownerContext, name);
+                //    if (resource == null)
+                //    {
+                //        continue;
+                //    }
+                //    resource.Bundle = _ownerContext.Bundle;
+                //    yield return resource;
+                //}
                 foreach (var resource in subContext.ExtractionChain.DoExtractAll(name))
                 {
                     // The `Bundle` property must already be set in the chained extractor, no need to set it again here.

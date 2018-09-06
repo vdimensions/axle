@@ -20,8 +20,9 @@ namespace Axle.Text.RegularExpressions
         {
             // ReSharper disable LoopCanBeConvertedToQuery
             var result = value;
-            foreach (var terminal in EscapedRegexTerminals)
+            for (var i = 0; i < EscapedRegexTerminals.Length; i++)
             {
+                var terminal = EscapedRegexTerminals[i];
                 result = result.Replace(terminal.ToString(), @"\" + terminal);
             }
             return result;

@@ -2,6 +2,7 @@ FSharp.Core
 Forest.Core
 Axle.Core
 Axle.Application
+Axle.Resources.Xml
 
 group build
   Mason.Targets.Preprocessor

@@ -19,9 +19,10 @@ namespace Axle.Resources.Extraction
         private readonly Uri[] _locations;
         private readonly int _currentLocationIndex;
 
-        internal ResourceContext(string bundle, Uri[] locations, CultureInfo culture, IResourceExtractor[] extractors)
-            : this(bundle, locations, -1, culture, extractors) { }
-        private ResourceContext(string bundle, Uri[] locations, int currentLocationIndex, CultureInfo culture, IResourceExtractor[] extractors)
+        internal ResourceContext(string bundle, Uri[] locations, CultureInfo culture, IEnumerable<IResourceExtractor> extractors)
+            : this(bundle, locations, 0, culture, extractors) { }
+            //: this(bundle, locations, -1, culture, extractors) { }
+        private ResourceContext(string bundle, Uri[] locations, int currentLocationIndex, CultureInfo culture, IEnumerable<IResourceExtractor> extractors)
         {
             Bundle = bundle;
             _locations = locations;
@@ -29,15 +30,21 @@ namespace Axle.Resources.Extraction
             Culture = culture;
 
             var subContexts = GetSubContexts(extractors).ToArray();
-            ExtractionChain = new ContextExtractionChain(subContexts, extractors);
+            ExtractionChain = new ContextExtractionChain(this, subContexts, extractors);
         }
 
-        private IEnumerable<ResourceContext> GetSubContexts(IResourceExtractor[] extractors)
+        private IEnumerable<ResourceContext> GetSubContexts(IEnumerable<IResourceExtractor> extractors)
         {
             for (var i = _currentLocationIndex + 1; i < _locations.Length; i++)
             {
                 yield return new ResourceContext(Bundle, _locations, i, Culture, extractors);
             }
+        }
+
+        internal ResourceContext MoveOneExtractorForward()
+        {
+            var ex = ExtractionChain.extractors.Skip(1);
+            return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, ex);
         }
 
         /// <summary>
@@ -64,3 +71,4 @@ namespace Axle.Resources.Extraction
         public ContextExtractionChain ExtractionChain { get; }
     }
 }
+

@@ -61,7 +61,7 @@
           <Paket>True</Paket>
         </Reference>
         <Reference Include="Axle.Core">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\axle.core\1.5.1.41\lib\net45\Axle.Core.dll</HintPath>
+          <HintPath>packages\Axle.Core\lib\net45\Axle.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -72,7 +72,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="Axle.Resources">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\axle.resources\1.5.1.9\lib\net45\Axle.Resources.dll</HintPath>
+          <HintPath>packages\Axle.Resources\lib\net45\Axle.Resources.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -83,7 +83,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="Axle.Resources.Java">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\axle.resources.java\1.5.1.4\lib\net45\Axle.Resources.Java.dll</HintPath>
+          <HintPath>packages\Axle.Resources.Java\lib\net45\Axle.Resources.Java.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -94,7 +94,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="Kajabity.Tools.Java">
-          <HintPath>C:\Users\Ivaylo\.nuget\packages\kajabity.tools.java\0.2.6620.21245\lib\net40\Kajabity.Tools.Java.dll</HintPath>
+          <HintPath>packages\Kajabity.Tools.Java\lib\net40\Kajabity.Tools.Java.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

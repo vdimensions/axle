@@ -46,6 +46,15 @@ namespace Axle.Text.RegularExpressions
         /// <seealso cref="RegularExpression"/>
         /// <seealso cref="Regex"/>
         public static implicit operator Regex (RegularExpression expr) => expr._regex;
+
+        /// <summary>
+        /// Converts an instance of <see cref="Regex" /> to the corresponding <see cref="RegularExpression"/> equivalent.
+        /// </summary>
+        /// <param name="expr">The <see cref="Regex"/> instance to convert.</param>
+        /// <returns>An instance of <see cref="RegularExpression" /> equivalent the current <see cref="Regex"/> instance</returns>
+        /// <seealso cref="RegularExpression"/>
+        /// <seealso cref="Regex"/>
+        public static explicit operator RegularExpression(Regex expr) => new RegularExpression(expr);
     }
 }
 #endif

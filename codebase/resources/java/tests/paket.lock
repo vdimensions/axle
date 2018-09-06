@@ -1,11 +1,10 @@
-STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.41)
-    Axle.Resources (1.5.1.9)
+    Axle.Core (1.5.1.42)
+    Axle.Resources (1.5.1.22)
       Axle.Core (>= 1.5.1)
-    Axle.Resources.Java (1.5.1.4)
+    Axle.Resources.Java (1.5.1.5)
       Axle.Core (>= 1.5.1)
       Axle.Resources (>= 1.5.1)
       Kajabity.Tools.Java (>= 0.2)

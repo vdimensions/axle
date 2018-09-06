@@ -1,18 +1,22 @@
 RESTRICTION: || (== net45) (== net46) (== netstandard1.6) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.1.59)
+    Axle.Application (1.5.1.60)
       Axle.Core (>= 1.5.1)
       Axle.Resources (>= 1.5.1)
     Axle.Core (1.5.1.42)
       System.Diagnostics.TraceSource (>= 4.0) - restriction: || (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
       System.Threading.Thread (>= 4.0) - restriction: || (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
       System.Xml.XmlSerializer (>= 4.0.10) - restriction: || (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
-    Axle.Resources (1.5.1.16)
+    Axle.Resources (1.5.1.17)
       Axle.Core (>= 1.5.1)
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (== net45) (< net20) (>= netstandard1.3)) (&& (== net45) (< net20) (>= netstandard1.4)) (&& (== net45) (< net20) (>= netstandard1.5)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20)) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.4)) (&& (== netstandard2.0) (< netstandard1.5)) (&& (== netstandard2.0) (< netstandard1.6))
+    Axle.Resources.Xml (1.5.1.4)
+      Axle.Core (>= 1.5.1)
+      Axle.Resources (>= 1.5.1)
+      System.Xml.XmlDocument  - restriction: || (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
   remote: ../../../../../forest/dist
-    Forest.Core (2.0.0.144)
+    Forest.Core (2.0.0.146)
       FSharp.Core (>= 4.5)
   remote: https://www.nuget.org/api/v2
     FSharp.Core (4.5.2)

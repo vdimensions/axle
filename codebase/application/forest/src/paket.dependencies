@@ -10,6 +10,7 @@ source ../../../../../forest/dist
 source ../../../../dist
   nuget Axle.Core
   nuget Axle.Application
+  nuget Axle.Resources.Xml
 
 group build
   source ../../../../submodules/mason/dist
