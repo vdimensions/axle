@@ -1,5 +1,5 @@
-framework: auto-detect
-storage: none
+#framework: auto-detect
+#storage: none
 
 source ../../../../dist
   nuget Axle.Core
