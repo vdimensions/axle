@@ -31,12 +31,14 @@ namespace Axle.Modularity
             return types;
         }
 
-        private static IList<TAttribute> CollectAttributes<TAttribute>(IEnumerable<Type> types, IList<TAttribute> attributes) where TAttribute: Attribute
+        private static IList<TAttribute> CollectAttributes<TAttribute>(IEnumerable<Type> types, IList<TAttribute> attributes, bool allowInheritingTypes = false) where TAttribute: Attribute
         {
             foreach (var type in types)
             {
                 var introspector = new DefaultIntrospector(type);
-                var introspectedAttrobutes = introspector.GetAttributes<TAttribute>();
+                var introspectedAttrobutes = allowInheritingTypes
+                        ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
+                        : introspector.GetAttributes<TAttribute>();
                 for (var i = 0; i < introspectedAttrobutes.Length; i++)
                 {
                     attributes.Add((TAttribute) introspectedAttrobutes[i].Attribute);
@@ -47,12 +49,12 @@ namespace Axle.Modularity
         }
         private const ScanOptions MemberScanOptions = ScanOptions.Instance|ScanOptions.NonPublic|ScanOptions.Public;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public Type[] DiscoverModuleTypes()
         {
             return Platform.Runtime.GetAssemblies().SelectMany(DiscoverModuleTypes).ToArray();
         }
-        #endif
+#endif
 
         public Type[] DiscoverModuleTypes(Assembly assembly)
         {
@@ -133,7 +135,13 @@ namespace Axle.Modularity
         public Type[] GetRequiredModules(Type moduleType)
         {
             var result = new HashSet<Type>();
-            var attributes = CollectAttributes(TypeAndInterfaces(moduleType, new HashSet<Type>()), new List<RequiresAttribute>());
+            var attributes = CollectAttributes(
+                    TypeAndInterfaces(moduleType, new HashSet<Type>()), 
+                    new List<RequiresAttribute>(), 
+                    //
+                    // Note - the `RequiresAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    //
+                    true);
             for (var i = 0; i < attributes.Count; i++)
             {
                 result.Add(attributes[i].ModuleType);

@@ -19,10 +19,14 @@
     <Compile Include="Properties\AssemblyInfo.fs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ResourceManagerIntegration.fs" />
-    <Compile Include="ResourceTemplateProvider.fs" />
-    <Compile Include="ViewManagement.fs" />
-    <Compile Include="ForestModule.fs" />
+    <Compile Include="Templates\TemplateResourceInfo.fs" />
+    <Compile Include="Templates\Marshalling\TemplateMarshallingApi.fs" />
+    <Compile Include="Templates\Marshalling\XmlTemplateMarshaller.fs" />
+    <Compile Include="Templates\Marshalling\TemplateMarshallingModule.fs" />
+    <Compile Include="Templates\ResourceManagerIntegration.fs" />
+    <Compile Include="Templates\ForestResourceModule.fs" />
+    <Compile Include="Views\ViewManagement.fs" />
+    <Compile Include="Views\ForestModule.fs" />
     <None Include="Axle.Application.Forest.nuspec.template" />
     <None Include="build.sh" />
     <None Include="mason.properties" />

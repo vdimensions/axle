@@ -33,11 +33,13 @@ namespace Axle.DependencyInjection.Sdk
 
         public override IEnumerable<IPropertyDependencyDescriptor> GetFields(Type type)
         {
-            return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
-                .GetFields(MemberScanOptions)
-                .Where(x => x.AccessModifier != AccessModifier.Private)
-                .Where(x => !x.IsReadOnly)
-                .Select(GetDescriptor);
+            //const ScanOptions fieldScanOptions = MemberScanOptions&~ScanOptions.NonPublic;
+            //return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
+            //    .GetFields(fieldScanOptions)
+            //    .Where(x => x.AccessModifier != AccessModifier.Private)
+            //    .Where(x => !x.IsReadOnly)
+            //    .Select(GetDescriptor);
+            return Enumerable.Empty<IPropertyDependencyDescriptor>();
         }
         public override IEnumerable<IPropertyDependencyDescriptor> GetProperties(Type type)
         {

@@ -5,7 +5,8 @@ using Axle.Resources.Extraction;
 namespace Axle.Resources
 {
     [Module]
-    public interface IResourceExtractorConfigurer : IResourcesDependency
+    [RequiresResources]
+    public interface IResourceExtractorConfigurer
     {
         void Configure(IResourceExtractorRegistry registry);
     }

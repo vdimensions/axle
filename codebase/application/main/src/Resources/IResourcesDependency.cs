@@ -1,8 +1,15 @@
-﻿using Axle.Modularity;
+﻿using System;
+
+using Axle.Modularity;
 
 
 namespace Axle.Resources
 {
-    [Requires(typeof(ResourcesModule))]
-    public interface IResourcesDependency { }
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    public sealed class RequiresResourcesAttribute : RequiresAttribute
+    {
+        public RequiresResourcesAttribute() : base(typeof(ResourcesModule))
+        {
+        }
+    }
 }

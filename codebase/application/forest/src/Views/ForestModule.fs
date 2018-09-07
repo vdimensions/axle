@@ -1,21 +1,21 @@
 ﻿namespace Axle.Application.Forest
 
+open System
+
 open Forest
 open Forest.Reflection
 
 open Axle.DependencyInjection
 open Axle.Modularity
-open Axle.Resources
-open Axle.Resources.Bundling
-open Axle.Resources.Extraction
 
 
-[<Module>]
-[<Requires(typeof<ForestModule>)>]
-type [<Interface>] IForestViewProvider =
+[<AttributeUsage(AttributeTargets.Class|||AttributeTargets.Interface, Inherited = true, AllowMultiple = false)>]
+type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<ForestModule>)
+
+ and [<Interface;Module;RequiresForest>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
- and [<Module;Sealed;NoEquality;NoComparison>] internal ForestModule(container:IContainer, resourceManager:ResourceManager) =
+ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] internal ForestModule(container:IContainer) =
     [<ModuleInit>]
     member __.Init(exporter:ModuleExporter) =
         let reflectionProvider =
@@ -31,7 +31,6 @@ type [<Interface>] IForestViewProvider =
         let context = upcast DefaultForestContext(viewRegistry, securityManager) : IForestContext
 
         context |> exporter.Export |> ignore
-        resourceManager |> ResourceTemplateProvider |> exporter.Export |> ignore
 
     [<ModuleDependencyInitialized>]
     member __.DependencyInitialized(vp:IForestViewProvider) =
@@ -40,14 +39,4 @@ type [<Interface>] IForestViewProvider =
 
     //[<ModuleDependencyTerminated>]
     //member __.DependencyTerminated(vp:IForestViewProvider) = ()
-
-    interface IResourceBundleConfigurer with
-        member __.Configure(registry:IResourceBundleRegistry): unit = 
-            let parseUri = Axle.Conversion.Parsing.UriParser().Parse
-            let bundle = ResourceManagerIntegration.BundleName
-            registry.Configure(bundle)
-                    .Register(("./"+bundle) |> parseUri)
-                    .Extractors.Register(ResourceManagerIntegration.createExtractors())
-            |> ignore
-        
 
