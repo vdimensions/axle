@@ -44,6 +44,7 @@ namespace Axle
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
+    [Obsolete("Use Nullable<_> for value types and Nullsafe<_> for reference types instead.")]
     public struct Optional<T> : IEquatable<Optional<T>>, IEquatable<T>, IReference<T>
     {
         public static readonly Optional<T> Undefined = new Optional<T>();

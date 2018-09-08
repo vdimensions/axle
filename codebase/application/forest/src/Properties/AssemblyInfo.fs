@@ -20,8 +20,8 @@ open System.Runtime.InteropServices
 [<assembly: Guid("5A6B7C35-2A40-4860-9B21-9AA13284F809")>]
 #endif
 
-[<assembly: AssemblyVersion("1.5.1.32")>]
-[<assembly: AssemblyFileVersion("1.5.1.32")>]
-[<assembly: AssemblyInformationalVersion("1.5.1.32")>]
+[<assembly: AssemblyVersion("1.5.1.35")>]
+[<assembly: AssemblyFileVersion("1.5.1.35")>]
+[<assembly: AssemblyInformationalVersion("1.5.1.35")>]
 
 do ()

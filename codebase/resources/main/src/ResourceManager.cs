@@ -55,11 +55,15 @@ namespace Axle.Resources
             culture.VerifyArgument(nameof(culture)).IsNotNull();
 
             var bundleRegistry = Bundles[bundle];
-            var bundles = bundleRegistry.Locations.ToArray();
+            var locations = bundleRegistry.Locations.ToArray();
+            if (locations.Length == 0)
+            {
+                return null;
+            }
             var extractors = bundleRegistry.Extractors.Union(Extractors).ToArray();
             foreach (var ci in culture.ExpandHierarchy())
             {
-                var context = new ResourceContext(bundle, bundles, ci, extractors);
+                var context = new ResourceContext(bundle, locations, ci, extractors);
                 var result = context.ExtractionChain.Extract(name);
                 if (result != null)
                 {

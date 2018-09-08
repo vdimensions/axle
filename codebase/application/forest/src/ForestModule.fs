@@ -5,6 +5,7 @@ open System
 open Forest
 open Forest.Reflection
 
+open Axle.Application.Forest.Resources
 open Axle.DependencyInjection
 open Axle.Modularity
 
@@ -36,7 +37,4 @@ type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<For
     member __.DependencyInitialized(vp:IForestViewProvider) =
         let ctx = container.Parent.Resolve<IForestContext>()
         ctx.ViewRegistry |> vp.RegisterViews
-
-    //[<ModuleDependencyTerminated>]
-    //member __.DependencyTerminated(vp:IForestViewProvider) = ()
 

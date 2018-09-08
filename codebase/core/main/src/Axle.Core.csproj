@@ -29,6 +29,11 @@
     <Reference Remove="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Remove="_Experimental\**" />
+    <EmbeddedResource Remove="_Experimental\**" />
+    <None Remove="_Experimental\**" />
+  </ItemGroup>
+  <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="Linq\Collection.cs" />

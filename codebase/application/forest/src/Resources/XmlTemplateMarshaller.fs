@@ -1,6 +1,4 @@
-﻿namespace Axle.Application.Forest.Resources.Marshalling
-
-open System
+﻿namespace Axle.Application.Forest.Resources
 
 open Forest.Templates.Xml
 
@@ -10,8 +8,7 @@ open Axle.Resources.Xml.Extraction
 
 type [<Sealed;NoComparison>] XmlTemplateMarshaller() =
     interface IForestTemplateMarshaller with
-        member __.ResolveResourceName templateName =
-            String.Format("{0}.xml", templateName)
+        member __.Extension with get() = "xml"
         member __.Unmarshal name resource =
             match resource with
             | :? XDocumentResourceInfo as res -> res.Value |> XmlTemplateParser().ParseXml name |> Some
