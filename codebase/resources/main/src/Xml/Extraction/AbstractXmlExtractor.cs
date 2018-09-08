@@ -1,5 +1,6 @@
 ﻿using System;
 
+using Axle.References;
 using Axle.Resources.Extraction;
 
 
@@ -49,12 +50,12 @@ namespace Axle.Resources.Xml.Extraction
         protected abstract TX ExtractXml(ResourceContext context, string name, ResourceInfo resource);
 
         /// <inheritdoc />
-        protected sealed override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected sealed override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             var xmlResource = context.ExtractionChain.Extract(name);
             try
             {
-                return xmlResource != null ? ExtractXml(context, name, xmlResource) : null;
+                return xmlResource.HasValue ? ExtractXml(context, name, xmlResource.Value) : Nullsafe<ResourceInfo>.None;
             }
             catch (Exception e)
             {

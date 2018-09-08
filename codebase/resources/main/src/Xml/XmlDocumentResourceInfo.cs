@@ -1,21 +1,17 @@
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using System.Xml;
-using System.Xml.Linq;
 
 
 namespace Axle.Resources.Xml
 {
     /// <summary>
-    /// A class that represents a XML resources using <see cref="XDocument"/>.
+    /// A class that represents a XML resources using <see cref="XmlDocument"/>.
     /// </summary>
-    public sealed class XDocumentResourceInfo : XmlResourceInfo
+    public sealed class XmlDocumentResourceInfo : XmlResourceInfo
     {
-        internal XDocumentResourceInfo(string name, CultureInfo culture, XDocument value) : base(name, culture)
-        {
-            Value = value;
-        }
-        internal XDocumentResourceInfo(string name, CultureInfo culture, XDocument value, ResourceInfo originalResource) 
+        internal XmlDocumentResourceInfo(string name, CultureInfo culture, XmlDocument value, ResourceInfo originalResource) 
             : base(name, culture, originalResource)
         {
             Value = value;
@@ -24,7 +20,7 @@ namespace Axle.Resources.Xml
         /// <inheritdoc />
         public override bool TryResolve(Type targetType, out object result)
         {
-            if (targetType == typeof(XDocument))
+            if (targetType == typeof(XmlDocument))
             {
                 result = Value;
                 return true;
@@ -36,8 +32,9 @@ namespace Axle.Resources.Xml
         protected override void WriteTo(XmlWriter writer) => Value.WriteTo(writer);
 
         /// <summary>
-        /// Gets a reference to the <see cref="XDocument"/> instance representing the current XML resource.
+        /// Gets a reference to the <see cref="XmlDocument"/> instance representing the current XML resource.
         /// </summary>
-        public XDocument Value { get; }
+        public XmlDocument Value { get; }
     }
 }
+#endif

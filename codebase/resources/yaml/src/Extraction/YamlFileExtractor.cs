@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
+using Axle.References;
 using Axle.Resources.Extraction;
 
 using YamlDotNet.Core;
@@ -47,12 +48,12 @@ namespace Axle.Resources.Yaml.Extraction
             return null;
         }
 
-        protected override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             var finalProperties = new List<IDictionary<string, string>>();
-            foreach (var propertiesFileResourceInfo in context.ExtractionChain.ExtractAll(name))
+            foreach (var propertiesFileResourceInfo in context.ExtractionChain.ExtractAll(name).Where(x => x.HasValue).Select(x => x.Value))
             {
-                using (var stream = propertiesFileResourceInfo?.Open())
+                using (var stream = propertiesFileResourceInfo.Open())
                 {
                     if (stream == null)
                     {
@@ -61,7 +62,9 @@ namespace Axle.Resources.Yaml.Extraction
                     ReadData(stream, finalProperties);
                 }
             }
-            return finalProperties.Count == 0 ? null : new YamlResourceInfo(name, context.Culture, finalProperties);
+            return finalProperties.Count == 0 
+                ? Nullsafe<ResourceInfo>.None
+                : new YamlResourceInfo(name, context.Culture, finalProperties);
         }
     }
 }

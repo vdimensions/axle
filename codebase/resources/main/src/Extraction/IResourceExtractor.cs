@@ -1,5 +1,7 @@
 ﻿using System.Threading.Tasks;
 
+using Axle.References;
+
 
 namespace Axle.Resources.Extraction
 {
@@ -23,7 +25,7 @@ namespace Axle.Resources.Extraction
         /// </returns>
         /// <seealso cref="ExtractAsync"/>
         /// <seealso cref="ResourceContext"/>
-        ResourceInfo Extract(ResourceContext context, string name);
+        Nullsafe<ResourceInfo> Extract(ResourceContext context, string name);
 
         /// <summary>
         /// Attempts to asynchronously locate a resource based on the provided parameters.
@@ -40,6 +42,6 @@ namespace Axle.Resources.Extraction
         /// </returns>
         /// <seealso cref="Extract"/>
         /// <seealso cref="ResourceContext"/>
-        Task<ResourceInfo> ExtractAsync(ResourceContext context, string name);
+        Task<Nullsafe<ResourceInfo>> ExtractAsync(ResourceContext context, string name);
     }
 }

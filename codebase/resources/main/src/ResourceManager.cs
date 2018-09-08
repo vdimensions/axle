@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Linq;
 
 using Axle.Globalization.Extensions.CultureInfo;
+using Axle.References;
 using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 using Axle.Verification;
@@ -48,7 +49,7 @@ namespace Axle.Resources
         /// <returns>
         /// An instance of <see cref="ResourceInfo"/> that represents the loaded resource object.
         /// </returns>
-        public ResourceInfo Load(string bundle, string name, CultureInfo culture)
+        public Nullsafe<ResourceInfo> Load(string bundle, string name, CultureInfo culture)
         {
             bundle.VerifyArgument(nameof(bundle)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
@@ -65,12 +66,12 @@ namespace Axle.Resources
             {
                 var context = new ResourceContext(bundle, locations, ci, extractors);
                 var result = context.ExtractionChain.Extract(name);
-                if (result != null)
+                if (result.HasValue)
                 {
-                    return result;
+                    return result.Value;
                 }
             }
-            return null;
+            return Nullsafe<ResourceInfo>.None;
         }
 
         /// <summary>
@@ -94,7 +95,7 @@ namespace Axle.Resources
         public T Load<T>(string bundle, string name, CultureInfo culture)
         {
             var resource = Load(bundle, name, culture);
-            if (resource != null && resource.TryResolve<T>(out var instance))
+            if (resource.HasValue && resource.Value.TryResolve<T>(out var instance))
             {
                 return instance;
             }

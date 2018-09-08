@@ -4,6 +4,7 @@ using System.Reflection;
 using Axle.Environment;
 using Axle.Extensions.String;
 using Axle.Extensions.Uri;
+using Axle.References;
 using Axle.Verification;
 
 
@@ -31,7 +32,7 @@ namespace Axle.Resources.Extraction.Embedded
         /// <summary>
         /// Attempts to read an embedded resource.
         /// </summary>
-        protected override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();

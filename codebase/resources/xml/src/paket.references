@@ -1,6 +1,0 @@
-Axle.Core
-Axle.Resources
-System.Xml.XmlDocument
-
-group build
-  Mason.Targets.Preprocessor

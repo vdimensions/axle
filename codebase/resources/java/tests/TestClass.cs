@@ -31,11 +31,11 @@ namespace Axle.Resources.Java.Tests
 
             var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
-            Assert.IsNotNull(resxResource, "Unable to find Greeting message");
-            Assert.AreEqual("testBundle", resxResource.Bundle);
-            Assert.AreEqual(CultureInfo.InvariantCulture, resxResource.Culture);
+            Assert.IsTrue(resxResource.HasValue, "Unable to find Greeting message");
+            Assert.AreEqual("testBundle", resxResource.Value.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resxResource.Value.Culture);
 
-            using (var stream = resxResource.Open())
+            using (var stream = resxResource.Value.Open())
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);

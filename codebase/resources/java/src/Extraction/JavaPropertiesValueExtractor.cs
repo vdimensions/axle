@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Axle.Resources.Extraction;
 using Axle.Extensions.String;
+using Axle.References;
 
 
 namespace Axle.Resources.Java.Extraction
@@ -28,19 +29,23 @@ namespace Axle.Resources.Java.Extraction
         /// <summary>
         /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java properties file. 
         /// </summary>
-        protected override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             if (GetPropertiesFileData(context.Location, out var propertyFileName, out var keyPrefix))
             {
                 IDictionary<string, string> props = null;
                 var propertyResource = context.ExtractionChain.Extract(propertyFileName);
-                switch (propertyResource)
+                if (!propertyResource.HasValue)
+                {
+                    return Nullsafe<ResourceInfo>.None;
+                }
+                switch (propertyResource.Value)
                 {
                     case JavaPropertiesResourceInfo jp:
                         props = jp.Data;
                         break;
                     default:
-                        using (var stream = propertyResource?.Open())
+                        using (var stream = propertyResource.Value.Open())
                         if (stream != null)
                         {
                             JavaPropertiesFileExtractor.ReadData(stream, props = new Dictionary<string, string>(JavaPropertiesFileExtractor.KeyComparer));
@@ -53,8 +58,7 @@ namespace Axle.Resources.Java.Extraction
                     return new TextResourceInfo(name, context.Culture, result);
                 }
             }
-
-            return null;
+            return Nullsafe<ResourceInfo>.None;
         }
     }
 }

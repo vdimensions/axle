@@ -3,6 +3,7 @@ using System;
 using System.Globalization;
 
 using Axle.Extensions.String;
+using Axle.References;
 using Axle.Verification;
 
 
@@ -45,7 +46,7 @@ namespace Axle.Resources.Extraction.ResX
         protected AbstractResXResourceExtractor() : base() { }
 
         /// <inheritdoc />
-        protected sealed override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected sealed override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             var location = context.Location;
             var culture = context.Culture;
@@ -56,7 +57,7 @@ namespace Axle.Resources.Extraction.ResX
             return null;
         }
 
-        protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
+        protected abstract Nullsafe<ResourceInfo> ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
     }
 }
 #endif

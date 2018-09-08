@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
+using Axle.References;
+
 
 namespace Axle.Verification
 {
@@ -49,6 +51,27 @@ namespace Axle.Verification
                 throw new ArgumentNullException(nameof(argumentName));
             }
             return new ArgumentReference<T>(argumentName, argument);
+        }
+
+        #if NETSTANDARD
+        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+        #endif
+        [DebuggerStepThrough]
+        public static ArgumentReference<T> VerifyRefArg<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            IReference<T> argument,
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            [System.ComponentModel.Localizable(false)]
+            #endif
+            string argumentName) where T:class
+        {
+            if (argumentName == null)
+            {
+                throw new ArgumentNullException(nameof(argumentName));
+            }
+            return new ArgumentReference<T>(argumentName, argument.Value);
         }
 
         /// <summary>

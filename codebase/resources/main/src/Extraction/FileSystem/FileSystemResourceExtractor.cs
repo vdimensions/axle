@@ -2,6 +2,7 @@
 using System.IO;
 
 using Axle.Extensions.Uri;
+using Axle.References;
 using Axle.Verification;
 
 
@@ -12,7 +13,7 @@ namespace Axle.Resources.Extraction.FileSystem
     /// </summary>
     public class FileSystemResourceExtractor : AbstractResourceExtractor
     {
-        protected override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();

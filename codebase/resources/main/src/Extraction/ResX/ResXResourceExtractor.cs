@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿using Axle.References;
+using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction.ResX
@@ -10,7 +11,7 @@ namespace Axle.Resources.Extraction.ResX
     /// <inheritdoc />
     public sealed class ResXResourceExtractor : AbstractResourceExtractor
     {
-        protected override ResourceInfo DoExtract(ResourceContext context, string name)
+        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
@@ -25,8 +26,9 @@ namespace Axle.Resources.Extraction.ResX
             #elif NETSTANDARD1_3_OR_NEWER
             actualExtractor = new TextResXResourceExtractor();
             #endif
-
-            return actualExtractor?.Extract(context, name);
+            return actualExtractor != null 
+                ? actualExtractor.Extract(context, name)
+                : Nullsafe<ResourceInfo>.None;
         }
     }
 }

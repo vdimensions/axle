@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Axle.References;
 using Axle.Verification;
 
 
@@ -24,32 +25,23 @@ namespace Axle.Resources.Extraction
             this.extractors = extractors;
         }
 
-        private IEnumerable<ResourceInfo> DoExtractAll(string name)
+        private IEnumerable<Nullsafe<ResourceInfo>> DoExtractAll(string name)
         {
             var extractorContext = _ownerContext;
             foreach (var extractor in extractors)
             {
                 extractorContext = extractorContext.MoveOneExtractorForward();
                 var resource = extractor.Extract(extractorContext, name);
-                if (resource == null)
+                if (!resource.HasValue)
                 {
                     continue;
                 }
-                resource.Bundle = _ownerContext.Bundle;
-                yield return resource;
+                var r = resource.Value;
+                r.Bundle = _ownerContext.Bundle;
+                yield return Nullsafe<ResourceInfo>.Some(r);
             }
             foreach (var subContext in _subContexts)
             {
-                //foreach (var extractor in _extractors)
-                //{
-                //    var resource = extractor.Extract(_ownerContext, name);
-                //    if (resource == null)
-                //    {
-                //        continue;
-                //    }
-                //    resource.Bundle = _ownerContext.Bundle;
-                //    yield return resource;
-                //}
                 foreach (var resource in subContext.ExtractionChain.DoExtractAll(name))
                 {
                     // The `Bundle` property must already be set in the chained extractor, no need to set it again here.
@@ -69,7 +61,8 @@ namespace Axle.Resources.Extraction
         /// <returns>
         /// A <see cref="ResourceInfo"/> instance representing the located resource if found; <c>null</c> otherwise.
         /// </returns>
-        public ResourceInfo Extract(string name) => DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault();
+        public Nullsafe<ResourceInfo> Extract(string name) => 
+            DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault(x => x.HasValue);
 
         /// <summary>
         /// Attempts to extract all resources from the current <see cref="ContextExtractionChain">extraction chain</see>
@@ -82,6 +75,7 @@ namespace Axle.Resources.Extraction
         /// A collection of <see cref="ResourceInfo"/> instances representing resources that have successfully been extracted from 
         /// the current <see cref="ContextExtractionChain">chain</see>.
         /// </returns>
-        public IEnumerable<ResourceInfo> ExtractAll(string name) => DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+        public IEnumerable<Nullsafe<ResourceInfo>> ExtractAll(string name) => 
+            DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).Where(x => x.HasValue);
     }
 }

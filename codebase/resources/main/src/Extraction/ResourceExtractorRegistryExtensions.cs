@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
+using Axle.References;
 using Axle.Verification;
 
 
@@ -16,7 +17,7 @@ namespace Axle.Resources.Extraction
             var reg = registry;
             foreach (var extractor in extractors.Reverse())
             {
-                reg = registry.Register(extractor);
+                reg = registry.Register(Nullsafe<IResourceExtractor>.Some(extractor));
             }
             return reg;
         }

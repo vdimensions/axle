@@ -1,3 +1,4 @@
+#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Diagnostics;
 
@@ -53,7 +54,7 @@ namespace Axle.References
             }
         }
         public bool Equals(Nullsafe<T> other) => _isSet ? other._isSet && Equals(_value, other._value) : !other._isSet;
-        bool IEquatable<T>.Equals(T other) => _isSet && Equals(_value, other);
+        bool IEquatable<T>.Equals(T other) => Equals(_value, other);
 
         public override int GetHashCode() => _value == null ? 0 : _value.GetHashCode();
 
@@ -75,3 +76,4 @@ namespace Axle.References
         public bool HasValue => _isSet;
     }
 }
+#endif
