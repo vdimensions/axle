@@ -26,6 +26,8 @@
     <Compile Include="Resources\ForestResourceModule.fs" />
     <Compile Include="Views\ViewManagement.fs" />
     <Compile Include="ForestModule.fs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Include="Axle.Application.Forest.nuspec.template" />
     <None Include="build.sh" />
     <None Include="mason.properties" />

@@ -16,12 +16,12 @@ open System.Runtime.InteropServices
 [<assembly: AssemblyCulture("")>]
 
 [<assembly: ComVisible(false)>]
-#if NETFRAMEWORK || NETSTANDARD1_1_OR_NEWER
+#if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
 [<assembly: Guid("058DA5D4-BE62-4A66-AC23-DD162E113EBF")>]
 #endif
 
-[<assembly: AssemblyVersion("1.5.1.3")>]
-[<assembly: AssemblyFileVersion("1.5.1.3")>]
-[<assembly: AssemblyInformationalVersion("1.5.1.3")>]
+[<assembly: AssemblyVersion("1.5.1.9")>]
+[<assembly: AssemblyFileVersion("1.5.1.9")>]
+[<assembly: AssemblyInformationalVersion("1.5.1.9")>]
 
 do ()

@@ -17,9 +17,9 @@ namespace Axle.Resources.Extraction
 
         /// <inheritdoc />
         #if NETSTANDARD || NET45_OR_NEWER
-        public async Task<Nullsafe<ResourceInfo>> ExtractAsync(ResourceContext context, string name)
+        public virtual async Task<Nullsafe<ResourceInfo>> ExtractAsync(ResourceContext context, string name)
         #elif NET35_OR_NEWER
-        public Task<Nullsafe<ResourceInfo>> ExtractAsync(ResourceContext context, string name)
+        public virtual Task<Nullsafe<ResourceInfo>> ExtractAsync(ResourceContext context, string name)
         #endif
         {
             context.VerifyArgument(nameof(context)).IsNotNull();

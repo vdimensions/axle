@@ -26,9 +26,9 @@ type [<Sealed>] ResourceTemplateProvider(rm:ResourceManager) =
                 match bundles with
                 | [] -> raise <| ResourceNotFoundException(name, ResourceTemplateProvider.BundleName, CultureInfo.InvariantCulture)
                 | bundle::rest ->
-                    let template = rm.Load<Template>(bundle, name, CultureInfo.InvariantCulture)
-                    if not <| obj.ReferenceEquals(template, null) 
-                    then template
+                    let template = rm.Load(bundle, name, CultureInfo.InvariantCulture)
+                    if template.HasValue
+                    then template.Value.Resolve<Template>()
                     else load rest
             match this.bundles with
             | ValueSome b -> b

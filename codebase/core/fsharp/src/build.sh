@@ -2,6 +2,7 @@ msbuild="../../../../submodules/btw/msbuild.sh"
 paket='.paket/paket.sh'
 project='Axle.FSharp'
 
+rm -rf obj/
 $paket update
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
@@ -9,7 +10,6 @@ if [ $? -ne 0 ]; then
   exit
 fi
 
-rm -rf obj/
 dotnet restore $project.fsproj
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"

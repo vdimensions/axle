@@ -1,3 +1,4 @@
+#framework: netstandard2.0, netstandard1.6, net46, 
 framework: auto-detect
 storage: none
 
@@ -9,9 +10,9 @@ source ../../../../../forest/dist
 
 source ../../../../dist
   nuget Axle.Core
+  nuget Axle.FSharp
   nuget Axle.Application
   nuget Axle.Resources
-  nuget Axle.Resources.Xml
 
 group build
   source ../../../../submodules/mason/dist

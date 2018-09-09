@@ -1,7 +1,10 @@
-framework: netstandard2.0, net46, net45
+#framework: netstandard2.0, netstandard1.6, net46, net45
+framework: auto-detect
+storage: none
 
 source https://nuget.org/api/v2
   nuget FSharp.Core
+
 
 source ../../../../dist
   nuget Axle.Core

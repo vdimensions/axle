@@ -11,7 +11,7 @@ type [<Sealed;NoComparison>] XmlTemplateMarshaller() =
         member __.Extension with get() = "xml"
         member __.Unmarshal name resource =
             match resource with
-            | :? XDocumentResourceInfo as res -> res.Value |> XmlTemplateParser().ParseXml name |> Some
-            | _ -> None
+            | :? XDocumentResourceInfo as res -> res.Value |> XmlTemplateParser().ParseXml name |> System.Nullable
+            | _ -> System.Nullable<_>()
         member __.ChainedExtractors 
             with get() = seq { yield upcast XDocumentExtractor() }
