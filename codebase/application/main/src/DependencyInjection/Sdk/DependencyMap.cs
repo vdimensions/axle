@@ -3,7 +3,7 @@ using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD
 using System.Reflection;
 #endif
 
@@ -138,7 +138,7 @@ namespace Axle.DependencyInjection.Sdk
                 // TODO: assume prototyping
                 throw new DependencyNotFoundException(type, name);
             }
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD
             var filtered = candidates.Where(c => type.GetTypeInfo().IsAssignableFrom(c.Type.GetTypeInfo())).ToArray();
             #else
             var filtered = candidates.Where(c => type.IsAssignableFrom(c.Type)).ToArray();

@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD
 using System.Reflection;
 #endif
 
@@ -54,7 +54,7 @@ namespace Axle.DependencyInjection.Sdk
         {
             var introspector = new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull());
             var staticFactories = introspector.GetMethods(FactoryScanOptions)
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD
                 .Where(x => type.GetTypeInfo().IsAssignableFrom(x.ReturnType))
                 #else
                 .Where(x => type.IsAssignableFrom(x.ReturnType))

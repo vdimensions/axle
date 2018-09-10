@@ -4,6 +4,8 @@ open System
 
 open Forest
 open Forest.Reflection
+open Forest.Security
+open Forest.Templates.Raw
 
 open Axle
 open Axle.Application.Forest.Resources
@@ -17,19 +19,20 @@ type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<For
  and [<Interface;Module;RequiresForest>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
- and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] internal ForestModule(container:IContainer,app:Application) =
+ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
+        internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application) =
     [<ModuleInit>]
     member __.Init(exporter:ModuleExporter) =
         let reflectionProvider =
             match container.TryResolve<IReflectionProvider>() with
             | (true, rp) -> rp
             | (false, _) -> upcast DefaultReflectionProvider()
-        let viewFactory = upcast AxleViewFactory(container, app) : IViewFactory
         let securityManager =
             match container.TryResolve<ISecurityManager>() with
             | (true, sm) -> sm
             | (false, _) -> upcast NoopSecurityManager()
-        let context = upcast DefaultForestContext(viewFactory, reflectionProvider, securityManager) : IForestContext
+        let context:IForestContext = 
+            upcast DefaultForestContext(AxleViewFactory(container, app), reflectionProvider, securityManager, templateProvider)
 
         context |> exporter.Export |> ignore
 
