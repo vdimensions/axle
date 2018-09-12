@@ -320,7 +320,8 @@ namespace Axle.Modularity
                             .RegisterInstance(moduleInfo)
                             .RegisterType(moduleType)
                             .RegisterInstance(moduleLogger)
-                            .RegisterInstance(moduleContainer);
+                            .RegisterInstance(moduleContainer)
+                            .RegisterInstance(rootExporter);
 
                     //
                     // Make all required modules injectable

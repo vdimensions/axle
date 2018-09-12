@@ -16,11 +16,11 @@ open Axle.Modularity
 [<AttributeUsage(AttributeTargets.Class|||AttributeTargets.Interface, Inherited = true, AllowMultiple = false)>]
 type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<ForestModule>)
 
- and [<Interface;Module;RequiresForest>] IForestViewProvider =
+and [<Interface;Module;RequiresForest>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
- and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
-        internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application) =
+and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
+    internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application) =
     [<ModuleInit>]
     member __.Init(exporter:ModuleExporter) =
         let reflectionProvider =

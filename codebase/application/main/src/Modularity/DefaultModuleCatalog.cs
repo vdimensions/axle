@@ -49,12 +49,12 @@ namespace Axle.Modularity
         }
         private const ScanOptions MemberScanOptions = ScanOptions.Instance|ScanOptions.NonPublic|ScanOptions.Public;
 
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public Type[] DiscoverModuleTypes()
         {
             return Platform.Runtime.GetAssemblies().SelectMany(DiscoverModuleTypes).ToArray();
         }
-#endif
+        #endif
 
         public Type[] DiscoverModuleTypes(Assembly assembly)
         {
