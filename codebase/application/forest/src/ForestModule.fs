@@ -6,12 +6,23 @@ open Forest
 open Forest.Reflection
 open Forest.Security
 open Forest.Templates.Raw
+open Forest.Templates
+open Forest.UI
 
 open Axle
 open Axle.Application.Forest.Resources
 open Axle.DependencyInjection
 open Axle.Modularity
 
+
+/// An interface allowing communication between the Unity application and the Forest UI layer
+type [<Interface>] IForestFacade = 
+    inherit ICommandDispatcher
+    inherit IMessageDispatcher
+    abstract member LoadTemplate: template:string -> unit
+
+type [<Interface>] IForestRendererConfigurer =
+    abstract member SetRenderer: renderer:IDomProcessor -> unit
 
 [<AttributeUsage(AttributeTargets.Class|||AttributeTargets.Interface, Inherited = true, AllowMultiple = false)>]
 type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<ForestModule>)
@@ -21,8 +32,15 @@ and [<Interface;Module;RequiresForest>] IForestViewProvider =
 
 and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
     internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application) =
+    [<DefaultValue>]
+    val mutable private _engine:Engine
+    [<DefaultValue>]
+    val mutable private _result:ForestResult
+    [<DefaultValue>]
+    val mutable private _renderer:IDomProcessor
+
     [<ModuleInit>]
-    member __.Init(exporter:ModuleExporter) =
+    member this.Init(exporter:ModuleExporter) =
         let reflectionProvider =
             match container.TryResolve<IReflectionProvider>() with
             | (true, rp) -> rp
@@ -33,11 +51,32 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             | (false, _) -> upcast NoopSecurityManager()
         let context:IForestContext = 
             upcast DefaultForestContext(AxleViewFactory(container, app), reflectionProvider, securityManager, templateProvider)
+        this._engine <- new Engine(context)
+        this._result <- this._engine.InitialResult
 
-        context |> exporter.Export |> ignore
+        context 
+        |> exporter.Export 
+        |> ignore
+
+    interface IForestRendererConfigurer with
+        member this.SetRenderer renderer =
+            this._renderer <- renderer
 
     [<ModuleDependencyInitialized>]
     member __.DependencyInitialized(vp:IForestViewProvider) =
         let ctx = container.Parent.Resolve<IForestContext>()
         ctx.ViewRegistry |> vp.RegisterViews
+
+    interface ICommandDispatcher with
+        member this.ExecuteCommand target name arg =
+            this._result <- this._engine.Update(fun e -> e.ExecuteCommand target name arg)
+            this._result.Render this._renderer 
+    interface IMessageDispatcher with
+        member this.SendMessage(message:'M): unit = 
+            this._result <- this._engine.Update(fun e -> e.SendMessage message)
+            this._result.Render this._renderer 
+    interface IForestFacade with
+        member this.LoadTemplate name =
+            this._result <- this._engine.LoadTemplate name
+            this._result.Render this._renderer 
 
