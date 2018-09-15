@@ -32,26 +32,42 @@ namespace Axle.DependencyInjection.Sdk
                         return _map.Resolve(string.Empty, dependency.Type);
                     }
                 }
-                catch (DependencyResolutionException)
+                catch (DependencyResolutionException dre)
                 {
                     if (_parentContainer == null)
                     {
                         throw;
                     }
 
-                    if (!string.IsNullOrEmpty(dependency.DependencyName))
+                    var lastEx = dre;
+                    var pc = _parentContainer;
+                    do
                     {
-                        return _parentContainer.Resolve(dependency.Type, dependency.DependencyName);
-                    }
+                        if (!string.IsNullOrEmpty(dependency.DependencyName))
+                        {
+                            return pc.Resolve(dependency.Type, dependency.DependencyName);
+                        }
 
-                    try
-                    {
-                        return _parentContainer.Resolve(dependency.Type, dependency.MemberName);
+                        try
+                        {
+                            return pc.Resolve(dependency.Type, dependency.MemberName);
+                        }
+                        catch (DependencyNotFoundException)
+                        {
+                            try
+                            {
+                                return pc.Resolve(dependency.Type, string.Empty);
+                            }
+                            catch (DependencyNotFoundException e)
+                            {
+                                lastEx = e;
+                                pc = pc.Parent;
+                            }
+                        }
                     }
-                    catch (DependencyNotFoundException)
-                    {
-                        return _parentContainer.Resolve(dependency.Type, string.Empty);
-                    }
+                    while (pc != null);
+
+                    throw dre;
                 }
             }
         }

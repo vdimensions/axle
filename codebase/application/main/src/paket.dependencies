@@ -1,5 +1,6 @@
+framework: netstandard2.0, netstandard1.6, netstandard1.5, net46, net45, net40, net35
 #framework: auto-detect
-#storage: none
+storage: none
 
 source ../../../../dist
   nuget Axle.Core

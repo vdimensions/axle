@@ -13,13 +13,11 @@ type [<Sealed;NoEquality;NoComparison>] private AxleViewFactory(container:IConta
         app.DependencyContainerProvider.Create c
     interface IViewFactory with
         member __.Resolve(vm:IViewDescriptor) : IView =
-            let x = ref Unchecked.defaultof<obj>
             use tmpContainer = createSubContainer(container)
             tmpContainer
                 .RegisterType(vm.ViewType, vm.Name)
                 .RegisterType(vm.ViewModelType)
                 |> ignore
-            if tmpContainer.TryResolve(vm.ViewType, x, vm.Name)
-            then downcast !x:IView
-            else raise <| new InvalidOperationException(String.Format("Type {0} was not registered in a dependency container.", vm.ViewType.FullName))
+            // let exception pop, Forest will wrap it up accordingly
+            downcast (tmpContainer.Resolve(vm.ViewType, vm.Name)):IView
 
