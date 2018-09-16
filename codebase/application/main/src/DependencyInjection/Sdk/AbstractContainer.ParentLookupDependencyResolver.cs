@@ -3,7 +3,7 @@ namespace Axle.DependencyInjection.Sdk
 {
     public abstract partial class AbstractContainer
     {
-        private class ParentLookupDependencyResolver : IDependencyResolver
+        private sealed class ParentLookupDependencyResolver : IDependencyResolver
         {
             private readonly DependencyMap _map;
             private readonly IContainer _parentContainer;
@@ -32,14 +32,14 @@ namespace Axle.DependencyInjection.Sdk
                         return _map.Resolve(string.Empty, dependency.Type);
                     }
                 }
-                catch (DependencyResolutionException dre)
+                catch (DependencyResolutionException)
                 {
                     if (_parentContainer == null)
                     {
                         throw;
                     }
 
-                    var lastEx = dre;
+                    DependencyResolutionException lastEx;
                     var pc = _parentContainer;
                     do
                     {
@@ -67,7 +67,7 @@ namespace Axle.DependencyInjection.Sdk
                     }
                     while (pc != null);
 
-                    throw dre;
+                    throw lastEx;
                 }
             }
         }

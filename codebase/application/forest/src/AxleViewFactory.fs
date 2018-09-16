@@ -1,7 +1,5 @@
 ﻿namespace Axle.Application.Forest
 
-open System
-
 open Forest
 
 open Axle
@@ -18,6 +16,6 @@ type [<Sealed;NoEquality;NoComparison>] private AxleViewFactory(container:IConta
                 .RegisterType(vm.ViewType, vm.Name)
                 .RegisterType(vm.ViewModelType)
                 |> ignore
-            // let exception pop, Forest will wrap it up accordingly
-            downcast (tmpContainer.Resolve(vm.ViewType, vm.Name)):IView
+            // Let any DI exceptions pop, Forest will wrap them up accordingly
+            downcast tmpContainer.Resolve(vm.ViewType, vm.Name)
 

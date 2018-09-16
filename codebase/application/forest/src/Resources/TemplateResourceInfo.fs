@@ -24,5 +24,4 @@ type [<Sealed;NoComparison>] internal TemplateResourceInfo (name:string, culture
             true
         else this.BaseTryResolve (targetType, &result)
 
-    member __.Value 
-        with get() = template
+    member __.Value with get() = template

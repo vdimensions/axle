@@ -15,7 +15,7 @@ open Axle.DependencyInjection
 open Axle.Modularity
 
 
-/// An interface allowing communication between the Unity application and the Forest UI layer
+/// An interface allowing communication between the physical application front-end and the Forest UI layer
 type [<Interface>] IForestFacade = 
     inherit ICommandDispatcher
     inherit IMessageDispatcher
@@ -33,6 +33,8 @@ and [<Interface;Module;RequiresForest>] IForestViewProvider =
 and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
     internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application) =
     [<DefaultValue>]
+    val mutable private _context:IForestContext
+    [<DefaultValue>]
     val mutable private _engine:Engine
     [<DefaultValue>]
     val mutable private _result:ForestResult
@@ -49,13 +51,17 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             match container.TryResolve<ISecurityManager>() with
             | (true, sm) -> sm
             | (false, _) -> upcast NoopSecurityManager()
-        let context:IForestContext = 
-            upcast DefaultForestContext(AxleViewFactory(container, app), reflectionProvider, securityManager, templateProvider)
+        let viewFactory =
+            match null2vopt container.Parent with
+            | ValueSome c -> (c, app)
+            | ValueNone -> (container, app)
+            |> AxleViewFactory
+        let context:IForestContext = upcast DefaultForestContext(viewFactory, reflectionProvider, securityManager, templateProvider)
+        this._context <- context
         this._engine <- new Engine(context)
         this._result <- this._engine.InitialResult
-
         context 
-        |> exporter.Export 
+        |> exporter.Export
         |> ignore
 
     interface IForestRendererConfigurer with
@@ -63,9 +69,8 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             this._renderer <- renderer
 
     [<ModuleDependencyInitialized>]
-    member __.DependencyInitialized(vp:IForestViewProvider) =
-        let ctx = container.Parent.Resolve<IForestContext>()
-        ctx.ViewRegistry |> vp.RegisterViews
+    member this.DependencyInitialized(viewProvider:IForestViewProvider) =
+        this._context.ViewRegistry |> viewProvider.RegisterViews
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =
