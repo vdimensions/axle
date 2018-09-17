@@ -5,7 +5,7 @@ open System
 [<AutoOpen>]
 [<CompiledName("VerificationModule")>]
 module VerificationModule =
-    let inline private argref<'T> name (arg:'T) = Axle.Verification.Verifier.VerifyArgument<'T>(arg, name)
+    let inline argref<'T> name (arg:'T) = Axle.Verification.Verifier.VerifyArgument<'T>(arg, name)
     let inline private argderef<'T> (argref:Axle.Verification.ArgumentReference<'T>) = argref.Value
     let inline private argdo (fn:(ArgumentReference<'T> -> ArgumentReference<'U>)) name = 
         argref<'T> name >> fn >> argderef<'U>

@@ -1,6 +1,7 @@
 ﻿namespace Axle.Application.Forest
 
 open System
+open System.Reflection
 
 open Forest
 open Forest.Reflection
@@ -31,7 +32,7 @@ and [<Interface;Module;RequiresForest>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
 and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
-    internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application) =
+    internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application,rtp:ResourceTemplateProvider) =
     [<DefaultValue>]
     val mutable private _context:IForestContext
     [<DefaultValue>]
@@ -42,7 +43,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
     val mutable private _renderer:IDomProcessor
 
     [<ModuleInit>]
-    member this.Init(exporter:ModuleExporter) =
+    member this.Init() =
         let reflectionProvider =
             match container.TryResolve<IReflectionProvider>() with
             | (true, rp) -> rp
@@ -60,9 +61,6 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         this._context <- context
         this._engine <- new Engine(context)
         this._result <- this._engine.InitialResult
-        context 
-        |> exporter.Export
-        |> ignore
 
     interface IForestRendererConfigurer with
         member this.SetRenderer renderer =
@@ -70,7 +68,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
 
     [<ModuleDependencyInitialized>]
     member this.DependencyInitialized(viewProvider:IForestViewProvider) =
-        this._context.ViewRegistry |> viewProvider.RegisterViews
+        (this:>IViewRegistry) |> viewProvider.RegisterViews
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =
@@ -84,4 +82,15 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         member this.LoadTemplate name =
             this._result <- this._engine.LoadTemplate name
             this._result.Render this._renderer 
+    interface IViewRegistry with
+        member this.GetDescriptor(viewType:Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType
+        member this.GetDescriptor(name:vname): IViewDescriptor = this._context.ViewRegistry.GetDescriptor name
+        member this.Register<'t when 't:>IView>():IViewRegistry = 
+            typeof<'t>.GetTypeInfo().Assembly |> rtp.RegisterAssemblySource 
+            this._context.ViewRegistry.Register<'t>()
+        member this.Register(t:Type): IViewRegistry = 
+            t.GetTypeInfo().Assembly |> rtp.RegisterAssemblySource 
+            this._context.ViewRegistry.Register t
+        member this.Resolve(viewType: Type): IView = this._context.ViewRegistry.Resolve viewType
+        member this.Resolve(name:vname): IView = this._context.ViewRegistry.Resolve name
 

@@ -2,7 +2,7 @@ RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
     Axle.Core (1.5.1.46)
-    Axle.Resources (1.5.1.24)
+    Axle.Resources (1.5.1.27)
       Axle.Core (>= 1.5.1)
     Axle.Resources.Java (1.5.1.6)
       Axle.Core (>= 1.5.1)

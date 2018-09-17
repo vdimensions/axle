@@ -54,7 +54,6 @@
     <None Include="paket.dependencies" />
     <None Include="paket.lock" />
     <None Include="paket.references" />
-    <None Include="paket.sh" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedText.txt" />

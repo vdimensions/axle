@@ -1,24 +1,51 @@
 ﻿namespace Axle.Application.Forest.Resources
 
+open System
 open System.Globalization
+open System.Reflection
 
 open Forest.Templates.Raw
 
+open Axle
+open Axle.References
 open Axle.Resources
 
 
 type [<Sealed>] ResourceTemplateProvider(rm:ResourceManager) =
     [<DefaultValue>]
-    val mutable private bundles:string list voption
+    val mutable private _bundles:string list voption
+    [<DefaultValue>]
+    val mutable private _assemblies:Set<string> Nullsafe
 
     static member BundleName = "ForestTemplates"
 
     member internal this.AddBundle(bundle:string) = 
-        this.bundles <- 
-            match this.bundles with
+        this._bundles <- 
+            match this._bundles with
             | ValueSome b -> bundle::b
             | ValueNone -> [bundle]
             |> ValueSome
+
+    member internal this.RegisterAssemblySource(asm:Assembly) =
+        let asmname = asm.GetName().Name
+        let set =
+            match Option.ns2vopt this._assemblies with
+            | ValueSome x -> x
+            | ValueNone -> Set.empty
+        if set |> Set.contains asmname |> not then
+            let parseUri = (Axle.Conversion.Parsing.UriParser()).Parse
+            for bundle in this.Bundles do
+                rm.Bundles
+                    .Configure(bundle)
+                    .Register(String.Format("assembly://{0}/{1}", asmname, bundle) |> parseUri)
+                    |> ignore
+            this._assemblies <- set |> Set.add asmname |> Nullsafe.Some
+
+    member internal this.Bundles 
+        with get() = 
+            match this._bundles with
+            | ValueSome b -> b
+            | ValueNone -> []
         
     interface ITemplateProvider with
         member this.Load name =
@@ -30,8 +57,5 @@ type [<Sealed>] ResourceTemplateProvider(rm:ResourceManager) =
                     if template.HasValue
                     then template.Value.Resolve<Template>()
                     else load rest
-            match this.bundles with
-            | ValueSome b -> b
-            | ValueNone -> []
-            |> load
+            this.Bundles |> load
             

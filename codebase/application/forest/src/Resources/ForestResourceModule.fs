@@ -19,6 +19,7 @@ type [<Interface>] IForestTemplateMarshallerConfigurer =
 
     [<ModuleInit>]
     member this.Init(e:ModuleExporter) =
+        ResourceTemplateProvider.BundleName |> this.templateProvider.AddBundle
         this |> this.ModuleDependencyInitialized
         e.Export(this.templateProvider) |> ignore
 
@@ -45,12 +46,15 @@ type [<Interface>] IForestTemplateMarshallerConfigurer =
         member this.Register m =
             let parseUri = (new Axle.Conversion.Parsing.UriParser()).Parse
             let marshallingExtractor = MarshallingTemplateExtractor(m)
-            let formatSpecificBundleName = String.Format("{0}/{1}", ResourceTemplateProvider.BundleName, marshallingExtractor.Extension)
-            this.resourceManager.Bundles
-                .Configure(formatSpecificBundleName)
-                .Register(String.Format("./{0}", ResourceTemplateProvider.BundleName) |> parseUri)
-                .Register(String.Format("./{0}", formatSpecificBundleName) |> parseUri)
-                .Extractors.Register(marshallingExtractor.ToExtractorList())
-                |> ignore
+            let defaultBundleName = ResourceTemplateProvider.BundleName
+            let formatSpecificBundleName = String.Format("{0}/{1}", defaultBundleName, marshallingExtractor.Extension)
+            let extractors = marshallingExtractor.ToExtractorList()
             formatSpecificBundleName |> this.templateProvider.AddBundle
+            for bundle in [formatSpecificBundleName;defaultBundleName] do
+                this.resourceManager.Bundles
+                    .Configure(bundle)
+                    .Register(String.Format("./{0}", defaultBundleName) |> parseUri)
+                    .Register(String.Format("./{0}", formatSpecificBundleName) |> parseUri)
+                    .Extractors.Register(extractors)
+                    |> ignore
             upcast this:IForestTemplateMarshallerRegistry
