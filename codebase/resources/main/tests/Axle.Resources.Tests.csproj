@@ -46,6 +46,7 @@
     <EmbeddedResource Include="ResXTestMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>ResXTestMessages.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

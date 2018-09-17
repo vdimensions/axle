@@ -43,7 +43,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
     val mutable private _renderer:IDomProcessor
 
     [<ModuleInit>]
-    member this.Init() =
+    member this.Init(e:ModuleExporter) =
         let reflectionProvider =
             match container.TryResolve<IReflectionProvider>() with
             | (true, rp) -> rp
@@ -61,6 +61,8 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         this._context <- context
         this._engine <- new Engine(context)
         this._result <- this._engine.InitialResult
+
+        this |> e.Export<IForestFacade> |> ignore
 
     interface IForestRendererConfigurer with
         member this.SetRenderer renderer =

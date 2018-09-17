@@ -16,7 +16,7 @@ NUGET
       Axle.Core (>= 1.5.1)
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (== net45) (< net20) (>= netstandard1.3)) (&& (== net45) (< net20) (>= netstandard1.4)) (&& (== net45) (< net20) (>= netstandard1.5)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20)) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.4)) (&& (== netstandard2.0) (< netstandard1.5)) (&& (== netstandard2.0) (< netstandard1.6))
   remote: ../../../../../forest/dist
-    Forest.Core (2.0.0.180)
+    Forest.Core (2.0.0.181)
       FSharp.Core (>= 4.5)
   remote: https://www.nuget.org/api/v2
     FSharp.Core (4.5.2)

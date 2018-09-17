@@ -20,6 +20,7 @@
     <dependencies>
       <dependency id="Forest.Core" version="${forest.version}" />
       <dependency id="Axle.Core" version="${axle.dependency.version}" />
+      <dependency id="Axle.FSharp" version="${axle.dependency.version}" />
       <dependency id="Axle.Resources" version="${axle.dependency.version}" />
       <dependency id="Axle.Application" version="${axle.dependency.version}" />
     </dependencies>
