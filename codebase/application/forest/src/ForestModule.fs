@@ -94,5 +94,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             t.GetTypeInfo().Assembly |> rtp.RegisterAssemblySource 
             this._context.ViewRegistry.Register t
         member this.Resolve(viewType: Type): IView = this._context.ViewRegistry.Resolve viewType
+        member this.Resolve(viewType:Type, model:obj): IView = this._context.ViewRegistry.Resolve(viewType, model)
         member this.Resolve(name:vname): IView = this._context.ViewRegistry.Resolve name
+        member this.Resolve(name:vname, model:obj): IView = this._context.ViewRegistry.Resolve(name, model)
 
