@@ -1,6 +1,7 @@
 ﻿namespace Axle.Application.Forest
 
 open System
+open System.Diagnostics
 open System.Reflection
 
 open Forest
@@ -13,6 +14,7 @@ open Forest.UI
 open Axle
 open Axle.Application.Forest.Resources
 open Axle.DependencyInjection
+open Axle.Logging
 open Axle.Modularity
 
 
@@ -32,7 +34,7 @@ and [<Interface;Module;RequiresForest>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
 and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
-    internal ForestModule(container:IContainer,templateProvider:ITemplateProvider,app:Application,rtp:ResourceTemplateProvider) =
+    internal ForestModule(container : IContainer, templateProvider : ITemplateProvider, app : Application, rtp : ResourceTemplateProvider, logger : ILogger) =
     [<DefaultValue>]
     val mutable private _context:IForestContext
     [<DefaultValue>]
@@ -74,16 +76,28 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =
+            let sw = Stopwatch.StartNew()
             this._result <- this._engine.Update(fun e -> e.ExecuteCommand target name arg)
             this._result.Render this._renderer 
+            sw.Stop()
+            logger.Debug("Forest ExecuteCommand operation took {0}ms", sw.ElapsedMilliseconds)
+
     interface IMessageDispatcher with
         member this.SendMessage(message:'M): unit = 
+            let sw = Stopwatch.StartNew()
             this._result <- this._engine.Update(fun e -> e.SendMessage message)
             this._result.Render this._renderer 
+            sw.Stop()
+            logger.Debug("Forest SendMessage operation took {0}ms", sw.ElapsedMilliseconds)
+
     interface IForestFacade with
         member this.LoadTemplate name =
+            let sw = Stopwatch.StartNew()
             this._result <- this._engine.LoadTemplate name
             this._result.Render this._renderer 
+            sw.Stop()
+            logger.Debug("Forest LoadTemplate operation took {0}ms", sw.ElapsedMilliseconds)
+
     interface IViewRegistry with
         member this.GetDescriptor(viewType:Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType
         member this.GetDescriptor(name:vname): IViewDescriptor = this._context.ViewRegistry.GetDescriptor name
