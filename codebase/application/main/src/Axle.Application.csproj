@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net46;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../../submodules/msbuild-dotnet-multitargeting/src/MultitargetingFrameworkSupport.targets" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
   <PropertyGroup>
     <ProjectGuid>101CF79E-134B-4483-8734-C9AC28F68E20</ProjectGuid>
     <RootNamespace>Axle</RootNamespace>
