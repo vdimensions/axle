@@ -2,7 +2,7 @@
 framework: auto-detect
 storage: none
 
-source ../../../../dist/third-parties
+source https://nuget.org/api/v2
   nuget FSharp.Core
 
 source ../../../../../forest/dist

@@ -76,27 +76,39 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =
-            let sw = Stopwatch.StartNew()
+            let opWatch = Stopwatch.StartNew()
             this._result <- this._engine.Update(fun e -> e.ExecuteCommand target name arg)
+            opWatch.Stop()
+            logger.Debug("Forest ExecuteCommand operation took {0}ms", opWatch.ElapsedMilliseconds)
+
+            let renderWatch = Stopwatch.StartNew()
             this._result.Render this._renderer 
-            sw.Stop()
-            logger.Debug("Forest ExecuteCommand operation took {0}ms", sw.ElapsedMilliseconds)
+            renderWatch.Stop()
+            logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
 
     interface IMessageDispatcher with
         member this.SendMessage(message:'M): unit = 
             let sw = Stopwatch.StartNew()
             this._result <- this._engine.Update(fun e -> e.SendMessage message)
-            this._result.Render this._renderer 
             sw.Stop()
             logger.Debug("Forest SendMessage operation took {0}ms", sw.ElapsedMilliseconds)
+
+            let renderWatch = Stopwatch.StartNew()
+            this._result.Render this._renderer 
+            renderWatch.Stop()
+            logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
 
     interface IForestFacade with
         member this.LoadTemplate name =
             let sw = Stopwatch.StartNew()
             this._result <- this._engine.LoadTemplate name
-            this._result.Render this._renderer 
             sw.Stop()
             logger.Debug("Forest LoadTemplate operation took {0}ms", sw.ElapsedMilliseconds)
+
+            let renderWatch = Stopwatch.StartNew()
+            this._result.Render this._renderer 
+            renderWatch.Stop()
+            logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
 
     interface IViewRegistry with
         member this.GetDescriptor(viewType:Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType
