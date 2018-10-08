@@ -45,7 +45,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
     val mutable private _renderer:IDomProcessor
 
     [<ModuleInit>]
-    member this.Init(e:ModuleExporter) =
+    member this.Init(e : ModuleExporter) =
         let reflectionProvider =
             match container.TryResolve<IReflectionProvider>() with
             | (true, rp) -> rp
@@ -71,7 +71,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             this._renderer <- renderer
 
     [<ModuleDependencyInitialized>]
-    member this.DependencyInitialized(viewProvider:IForestViewProvider) =
+    member this.DependencyInitialized(viewProvider : IForestViewProvider) =
         (this:>IViewRegistry) |> viewProvider.RegisterViews
 
     interface ICommandDispatcher with
@@ -87,7 +87,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
 
     interface IMessageDispatcher with
-        member this.SendMessage(message:'M): unit = 
+        member this.SendMessage(message : 'M): unit = 
             let sw = Stopwatch.StartNew()
             this._result <- this._engine.Update(fun e -> e.SendMessage message)
             sw.Stop()
@@ -111,16 +111,16 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
 
     interface IViewRegistry with
-        member this.GetDescriptor(viewType:Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType
-        member this.GetDescriptor(name:vname): IViewDescriptor = this._context.ViewRegistry.GetDescriptor name
+        member this.GetDescriptor(viewType : Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType
+        member this.GetDescriptor(name : vname): IViewDescriptor = this._context.ViewRegistry.GetDescriptor name
         member this.Register<'t when 't:>IView>():IViewRegistry = 
             typeof<'t>.GetTypeInfo().Assembly |> rtp.RegisterAssemblySource 
             this._context.ViewRegistry.Register<'t>()
-        member this.Register(t:Type): IViewRegistry = 
+        member this.Register(t : Type): IViewRegistry = 
             t.GetTypeInfo().Assembly |> rtp.RegisterAssemblySource 
             this._context.ViewRegistry.Register t
-        member this.Resolve(viewType: Type): IView = this._context.ViewRegistry.Resolve viewType
-        member this.Resolve(viewType:Type, model:obj): IView = this._context.ViewRegistry.Resolve(viewType, model)
-        member this.Resolve(name:vname): IView = this._context.ViewRegistry.Resolve name
-        member this.Resolve(name:vname, model:obj): IView = this._context.ViewRegistry.Resolve(name, model)
+        member this.Resolve(viewType : Type): IView = this._context.ViewRegistry.Resolve viewType
+        member this.Resolve(viewType : Type, model : obj): IView = this._context.ViewRegistry.Resolve(viewType, model)
+        member this.Resolve(name : vname): IView = this._context.ViewRegistry.Resolve name
+        member this.Resolve(name : vname, model : obj): IView = this._context.ViewRegistry.Resolve(name, model)
 
