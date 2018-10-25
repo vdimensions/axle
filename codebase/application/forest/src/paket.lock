@@ -16,7 +16,7 @@ NUGET
       Axle.Core (>= 1.5.1)
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (== net45) (< net20) (>= netstandard1.3)) (&& (== net45) (< net20) (>= netstandard1.4)) (&& (== net45) (< net20) (>= netstandard1.5)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20)) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.4)) (&& (== netstandard2.0) (< netstandard1.5)) (&& (== netstandard2.0) (< netstandard1.6))
   remote: ../../../../../forest/dist
-    Forest.Core (2.0.6848.26933)
+    Forest.Core (2.0.6854.38839)
       FSharp.Core (>= 4.5.2)
       NETStandard.Library (>= 1.6.1) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)
   remote: https://www.nuget.org/api/v2
@@ -44,7 +44,7 @@ NUGET
       System.Threading.Thread (>= 4.0) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)
       System.Threading.ThreadPool (>= 4.0.10) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)
       System.Threading.Timer (>= 4.0.1) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)
-    Microsoft.NETCore.Platforms (2.1.1) - restriction: || (&& (== net45) (== netstandard2.0)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (== netstandard2.0)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
+    Microsoft.NETCore.Platforms (2.1.1) - restriction: || (&& (== net46) (== netstandard2.0)) (&& (== net46) (< net45) (>= netstandard1.6)) (&& (== net46) (>= netstandard1.6) (< portable-net45+win8+wpa81)) (&& (== net46) (>= netstandard1.6) (>= uap10.0)) (== netstandard1.6)
     Microsoft.NETCore.Targets (2.1) - restriction: || (&& (== net45) (== netstandard2.0)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (== netstandard2.0)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
     Microsoft.Win32.Primitives (4.3) - restriction: || (&& (== net46) (== netstandard2.0)) (&& (== net46) (< net45) (>= netstandard1.6)) (&& (== net46) (>= netstandard1.6) (>= uap10.0)) (== netstandard1.6)
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (&& (== net45) (>= netstandard1.3)) (== netstandard1.6) (== netstandard2.0)
@@ -289,8 +289,8 @@ NUGET
       System.Reflection.Extensions (>= 4.3) - restriction: || (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.6) (== netstandard2.0)
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.6) (== netstandard2.0)
       System.Runtime (>= 4.3) - restriction: || (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.6) (== netstandard2.0)
-    System.Net.Http (4.3.3) - restriction: || (&& (== net46) (== netstandard2.0)) (&& (== net46) (< net45) (>= netstandard1.6)) (&& (== net46) (>= netstandard1.6) (>= uap10.0)) (== netstandard1.6)
-      Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (&& (== net45) (< portable-net45+win8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wpa81)) (== netstandard1.6) (== netstandard2.0)
+    System.Net.Http (4.3.4) - restriction: || (&& (== net46) (== netstandard2.0)) (&& (== net46) (< net45) (>= netstandard1.6)) (&& (== net46) (>= netstandard1.6) (>= uap10.0)) (== netstandard1.6)
+      Microsoft.NETCore.Platforms (>= 1.1.1) - restriction: || (&& (== net45) (< portable-net45+win8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wpa81)) (== netstandard1.6) (== netstandard2.0)
       runtime.native.System (>= 4.3) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6) (== netstandard2.0)
       runtime.native.System.Net.Http (>= 4.3) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6) (== netstandard2.0)
       runtime.native.System.Security.Cryptography.OpenSsl (>= 4.3.2) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6) (== netstandard2.0)

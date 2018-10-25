@@ -7,8 +7,8 @@ open System.Reflection
 open Forest
 open Forest.Reflection
 open Forest.Security
-open Forest.Templates.Raw
 open Forest.Templates
+open Forest.Templates.Raw
 open Forest.UI
 
 open Axle
@@ -27,6 +27,9 @@ type [<Interface>] IForestFacade =
 type [<Interface>] IForestRendererConfigurer =
     abstract member SetRenderer: renderer:IDomProcessor -> unit
 
+type [<Interface>] IForestEngineProviderConfigurer =
+    abstract member SetEngineProvider: ep : IForestEngineProvider -> unit
+
 [<AttributeUsage(AttributeTargets.Class|||AttributeTargets.Interface, Inherited = true, AllowMultiple = false)>]
 type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<ForestModule>)
 
@@ -34,15 +37,18 @@ and [<Interface;Module;RequiresForest>] IForestViewProvider =
     abstract member RegisterViews: registry:IViewRegistry -> unit
 
 and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule>)>] 
-    internal ForestModule(container : IContainer, templateProvider : ITemplateProvider, app : Application, rtp : ResourceTemplateProvider, logger : ILogger) =
+    internal ForestModule(
+        container : IContainer, 
+        templateProvider : ITemplateProvider, 
+        app : Application, 
+        rtp : ResourceTemplateProvider, 
+        logger : ILogger) =
     [<DefaultValue>]
-    val mutable private _context:IForestContext
+    val mutable private _context : IForestContext
     [<DefaultValue>]
-    val mutable private _engine:Engine
+    val mutable private _renderer : IDomProcessor
     [<DefaultValue>]
-    val mutable private _result:ForestResult
-    [<DefaultValue>]
-    val mutable private _renderer:IDomProcessor
+    val mutable private _engineProvider : IForestEngineProvider
 
     [<ModuleInit>]
     member this.Init(e : ModuleExporter) =
@@ -61,54 +67,48 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             |> AxleViewFactory
         let context:IForestContext = upcast DefaultForestContext(viewFactory, reflectionProvider, securityManager, templateProvider)
         this._context <- context
-        this._engine <- new Engine(context)
-        this._result <- this._engine.InitialResult
+        this._engineProvider <- DefaultForestEngineProvider(Engine(context))
 
+        context |> e.Export<IForestContext> |> ignore
         this |> e.Export<IForestFacade> |> ignore
 
-    interface IForestRendererConfigurer with
-        member this.SetRenderer renderer =
-            this._renderer <- renderer
-
-    [<ModuleDependencyInitialized>]
-    member this.DependencyInitialized(viewProvider : IForestViewProvider) =
-        (this:>IViewRegistry) |> viewProvider.RegisterViews
+    member this.Render(result : ForestResult) =
+        let renderWatch = Stopwatch.StartNew()
+        result.Render this._renderer 
+        renderWatch.Stop()
+        logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =
             let opWatch = Stopwatch.StartNew()
-            this._result <- this._engine.Update(fun e -> e.ExecuteCommand target name arg)
+            let res = this._engineProvider.Engine.Update(fun e -> e.ExecuteCommand target name arg)
             opWatch.Stop()
             logger.Debug("Forest ExecuteCommand operation took {0}ms", opWatch.ElapsedMilliseconds)
-
-            let renderWatch = Stopwatch.StartNew()
-            this._result.Render this._renderer 
-            renderWatch.Stop()
-            logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
+            this.Render(res)
 
     interface IMessageDispatcher with
         member this.SendMessage(message : 'M): unit = 
             let sw = Stopwatch.StartNew()
-            this._result <- this._engine.Update(fun e -> e.SendMessage message)
+            let res = this._engineProvider.Engine.Update(fun e -> e.SendMessage message)
             sw.Stop()
             logger.Debug("Forest SendMessage operation took {0}ms", sw.ElapsedMilliseconds)
-
-            let renderWatch = Stopwatch.StartNew()
-            this._result.Render this._renderer 
-            renderWatch.Stop()
-            logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
+            this.Render(res)
 
     interface IForestFacade with
         member this.LoadTemplate name =
             let sw = Stopwatch.StartNew()
-            this._result <- this._engine.LoadTemplate name
+            let res = this._engineProvider.Engine.LoadTemplate name
             sw.Stop()
             logger.Debug("Forest LoadTemplate operation took {0}ms", sw.ElapsedMilliseconds)
+            this.Render(res)
 
-            let renderWatch = Stopwatch.StartNew()
-            this._result.Render this._renderer 
-            renderWatch.Stop()
-            logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
+    interface IForestRendererConfigurer with member this.SetRenderer renderer = this._renderer <- renderer
+
+    interface IForestEngineProviderConfigurer with member this.SetEngineProvider ep = this._engineProvider <- ep
+
+    [<ModuleDependencyInitialized>]
+    member this.DependencyInitialized(viewProvider : IForestViewProvider) =
+        (this:>IViewRegistry) |> viewProvider.RegisterViews
 
     interface IViewRegistry with
         member this.GetDescriptor(viewType : Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType
@@ -123,4 +123,3 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         member this.Resolve(viewType : Type, model : obj): IView = this._context.ViewRegistry.Resolve(viewType, model)
         member this.Resolve(name : vname): IView = this._context.ViewRegistry.Resolve name
         member this.Resolve(name : vname, model : obj): IView = this._context.ViewRegistry.Resolve(name, model)
-
