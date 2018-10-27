@@ -11,9 +11,9 @@ namespace Axle.Modularity
         private readonly Type[] _parentModuleTypes =
         {
             typeof(StatisticsModule),
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            typeof(DynamicModuleLoader)
-            #endif
+            //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            //typeof(DynamicModuleLoader)
+            //#endif
         };
 
         public ModuleCatalogWrapper(IModuleCatalog originalCatalog)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -20,6 +21,7 @@ namespace Axle
         private IDependencyContainerProvider _dependencyContainerProvider;
         private ModuleCatalogWrapper _moduleCatalog;
         private volatile ModularContext _modularContext;
+        private readonly IList<Type> _moduleTypes = new List<Type>();
 
         public Application(params string[] args)
         {
@@ -62,18 +64,50 @@ namespace Axle
             return _modularContext;
         }
 
-        public Application Execute(params Assembly[] assemblies)
+        public Application Load(Type type)
         {
-            var c = _moduleCatalog;
-            var types = assemblies.SelectMany(a => c.DiscoverModuleTypes(a)).ToArray();
-            InitModularContext(c).Launch(types).Run(_args);
+            ThrowIfStarted();
+            _moduleTypes.Add(type.VerifyArgument(nameof(type)).IsNotNull());
             return this;
         }
 
+        public Application Load(Assembly assembly)
+        {
+            ThrowIfStarted();
+            foreach (var type in _moduleCatalog.DiscoverModuleTypes(assembly.VerifyArgument(nameof(assembly)).IsNotNull()))
+            {
+                _moduleTypes.Add(type);
+            }
+            return this;
+        }
+
+        public Application Run(params string[] args)
+        {
+            ThrowIfStarted();
+            InitModularContext(_moduleCatalog).Launch(_moduleTypes.ToArray()).Run(args);
+            return this;
+        }
+
+        [Obsolete]
+        public Application Execute(params Assembly[] assemblies)
+        {
+            var c = _moduleCatalog;
+            foreach (var type in assemblies.SelectMany(a => c.DiscoverModuleTypes(a)))
+            {
+                _moduleTypes.Add(type);
+            }
+            return Run(_args);
+        }
+
+
+        [Obsolete]
         public Application Execute(params Type[] types)
         {
-            InitModularContext(_moduleCatalog).Launch(types).Run(_args);
-            return this;
+            foreach (var type in types)
+            {
+                _moduleTypes.Add(type);
+            }
+            return Run(_args);
         }
 
         public void ShutDown()

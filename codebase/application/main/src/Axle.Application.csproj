@@ -23,6 +23,10 @@
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Remove="Modularity\DynamicModuleLoader.cs" />
+    <Compile Remove="Modularity\IAssemblyLoadListener.cs" />
+  </ItemGroup>
+  <ItemGroup>
     <None Remove="paket.lock" />
   </ItemGroup>
   <Target Name="BeforeBuild">

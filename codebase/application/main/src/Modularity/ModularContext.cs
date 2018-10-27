@@ -151,7 +151,7 @@ namespace Axle.Modularity
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be instantiated first. ");
                 }
-                if ((State & ModuleState.Initialized) == ModuleState.Initialized)
+                if ((State & ModuleState.Initialized) != ModuleState.Initialized)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be initialized first.");
                 }
@@ -279,6 +279,7 @@ namespace Axle.Modularity
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvier;
         private readonly ILoggingServiceProvider _loggingServiceProvider;
+        private readonly IList<ModuleMetadata> _initializedModules = new List<ModuleMetadata>();
 
         public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier, ILoggingServiceProvider loggingServiceProvider)
         {
@@ -363,6 +364,7 @@ namespace Axle.Modularity
                     try
                     {
                         mm = _modules.AddOrUpdate(moduleType, _ => mm.Init(rootExporter, requiredModules, _modules), (_, m) => m.Init(rootExporter, requiredModules, _modules));
+                        _initializedModules.Add(mm);
                     }
                     catch
                     {
@@ -383,7 +385,11 @@ namespace Axle.Modularity
 
         public ModularContext Run(params string[] args)
         {
-            // TODO: sort by rank before execution
+            foreach (var initializedModule in _initializedModules)
+            {
+                _modules.TryUpdate(initializedModule.ModuleInfo.Type, initializedModule.Run(args), initializedModule);
+            }
+            _initializedModules.Clear();
             return this;
         }
 

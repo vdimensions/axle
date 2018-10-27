@@ -36,7 +36,7 @@ namespace Axle.Modularity
 
         public void OnAssemblyLoad(object sender, AssemblyLoadEventArgs args)
         {
-            _application.Execute(args.LoadedAssembly);
+            _application.Load(args.LoadedAssembly);
         }
     }
     // ReSharper restore UnusedMember.Local
