@@ -1,0 +1,13 @@
+Axle.Application
+
+Microsoft.AspNetCore
+Microsoft.AspNetCore.Http.Abstractions
+Microsoft.AspNetCore.Hosting.Abstractions
+
+Microsoft.Extensions.Caching.Memory
+Microsoft.AspNetCore.Session
+
+Microsoft.AspNetCore.Server.Kestrel
+
+group build
+  Mason.Targets.Preprocessor
