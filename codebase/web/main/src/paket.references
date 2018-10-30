@@ -1,12 +1,13 @@
 Axle.Application
 
-Microsoft.AspNetCore
 Microsoft.AspNetCore.Http.Abstractions
 Microsoft.AspNetCore.Hosting.Abstractions
+Microsoft.Extensions.Logging.Abstractions
 
 Microsoft.Extensions.Caching.Memory
 Microsoft.AspNetCore.Session
 
+Microsoft.AspNetCore
 Microsoft.AspNetCore.Server.Kestrel
 
 group build

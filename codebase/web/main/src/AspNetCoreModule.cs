@@ -3,45 +3,47 @@ using System.Collections.Generic;
 
 using Axle.Modularity;
 
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Axle.Web.AspNetCore
 {
-    [AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public sealed class RequiresWebHostAttribute : RequiresAttribute
-    {
-        public RequiresWebHostAttribute() : base(typeof(WebHostModule)) { }
-    }
-
-    [RequiresWebHost]
+    [RequiresAspNetCore]
     public interface IWebHostConfigurer
     {
         IWebHostBuilder Configure(IWebHostBuilder builder);
     }
-    [RequiresWebHost]
+    [RequiresAspNetCore]
     public interface IServiceConfigurer
     {
         IServiceCollection Configure(IServiceCollection builder);
     }
-    [RequiresWebHost]
+    [RequiresAspNetCore]
     public interface IApplicationConfigurer
     {
         Microsoft.AspNetCore.Builder.IApplicationBuilder Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder builder);
     }
 
-    [Module]
-    internal sealed class WebHostModule
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    public sealed class RequiresAspNetCoreAttribute : RequiresAttribute
     {
+        public RequiresAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
+    }
+
+    [Module]
+    internal sealed class AspNetCoreModule
+    {
+        private readonly IWebHostBuilder _host;
+        private readonly Application _app;
         private readonly IList<IWebHostConfigurer> _whConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
         private readonly IList<IApplicationConfigurer> _appConfigurers = new List<IApplicationConfigurer>();
 
-        [ModuleInit]
-        internal void Init()
+        public AspNetCoreModule(IWebHostBuilder host, Application app)
         {
+            _host = host;
+            _app = app;
         }
 
         [ModuleDependencyInitialized]
@@ -64,18 +66,28 @@ namespace Axle.Web.AspNetCore
 
         private void ConfigureServices(IServiceCollection services)
         {
-            foreach (var cfg in _serviceConfigurers) cfg.Configure(services);
+            foreach (var cfg in _serviceConfigurers)
+            {
+                cfg.Configure(services);
+            }
         }
 
         private void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
-            foreach (var cfg in _appConfigurers) cfg.Configure(app);
+            app.ApplicationServices
+               .GetRequiredService<IApplicationLifetime>()
+               .ApplicationStopped.Register(_app.ShutDown);
+
+            foreach (var cfg in _appConfigurers)
+            {
+                cfg.Configure(app);
+            }
         }
 
         [ModuleEntryPoint]
         internal void Run(string[] args)
         {
-            var host = WebHost.CreateDefaultBuilder(args);
+            var host = _host;
 
             foreach (var cfg in _whConfigurers)
             {
@@ -89,17 +101,4 @@ namespace Axle.Web.AspNetCore
                 .Run();
         }
     }
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public sealed class RequiresAspNetCoreAttribute : RequiresAttribute
-    {
-        public RequiresAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
-    }
-    [Module]
-    [RequiresWebHost]
-    internal sealed class AspNetCoreModule
-    {
-    }
-
-    
 }
