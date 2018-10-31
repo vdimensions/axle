@@ -1,27 +1,32 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 
+using Axle.Logging;
 using Axle.Modularity;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 
 namespace Axle.Web.AspNetCore.Session
 {
-
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public sealed class RequiresAspNetSessionAttribute : RequiresAttribute
-    {
-        public RequiresAspNetSessionAttribute() : base(typeof(AspNetSessionModule)) { }
-    }
-
     [Module]
     [RequiresAspNetCore]
-    public sealed class AspNetSessionModule : IServiceConfigurer, IApplicationConfigurer
+    public sealed class AspNetSessionModule : IServiceConfigurer, IApplicationConfigurer, ISessionEventListener
     {
-        private SessionLifetime _lt = new SessionLifetime(TimeSpan.FromMinutes(20));
+        private readonly SessionLifetime _lt = new SessionLifetime(TimeSpan.FromMinutes(20));
+        private readonly ILogger _logger;
+
+        public AspNetSessionModule(ILogger logger)
+        {
+            _logger = logger;
+        }
+
+        [ModuleInit]
+        internal void Init()
+        {
+            _lt.Subscribe(this);
+        }
 
         IServiceCollection IServiceConfigurer.Configure(IServiceCollection services)
         {
@@ -30,17 +35,27 @@ namespace Axle.Web.AspNetCore.Session
 
         Microsoft.AspNetCore.Builder.IApplicationBuilder IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
-            // TODO: subscribe events
-            return app
-                .UseSession()
-                .Use(_lt.Middleware)
-                ;
+            return app.UseSession().Use(_lt.Middleware);
         }
 
-        [ModuleTerminate]
-        internal void Terminate()
+        void ISessionEventListener.OnSessionStart(ISession session)
         {
-            _lt?.Dispose();
+            _logger.Trace("Started a new session '{0}'.", session.Id);
         }
+
+        void ISessionEventListener.OnSessionEnd(string sessionId)
+        {
+            _logger.Trace("Session '{0}' has expired.", sessionId);
+        }
+
+
+        [ModuleDependencyInitialized]
+        internal void OnSessionEventListenerInitialized(ISessionEventListener listener) => _lt.Subscribe(listener);
+
+        [ModuleDependencyTerminated]
+        internal void OnSessionEventListenerTerminated(ISessionEventListener listener) => _lt.Unsubscribe(listener);
+
+        [ModuleTerminate]
+        internal void Terminate() => _lt.Unsubscribe(this).Dispose();
     }
 }

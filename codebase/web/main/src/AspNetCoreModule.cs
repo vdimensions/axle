@@ -40,7 +40,7 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
         private readonly IList<IApplicationConfigurer> _appConfigurers = new List<IApplicationConfigurer>();
 
-        public AspNetCoreModule(IWebHostBuilder host, Application app)
+        public AspNetCoreModule(Application app, IWebHostBuilder host)
         {
             _host = host;
             _app = app;

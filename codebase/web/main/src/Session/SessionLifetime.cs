@@ -16,14 +16,13 @@ namespace Axle.Web.AspNetCore.Session
 {
     internal sealed class SessionLifetime : IDisposable
     {
+        const string SessionKey = "FirstSeen";
+
         private readonly ISerializer _serializer = new BinarySerializer();
         private readonly TimeSpan _sessionDuration;
         private readonly Timer _timer;
-        private ConcurrentDictionary<string, DateTime> _sessionTimeouts = new ConcurrentDictionary<string, DateTime>();
-        const string SessionKey = "FirstSeen";
-
-        public event Action<string> SessionStart;
-        public event Action<string> SessionEnd;
+        private readonly ConcurrentDictionary<string, DateTime> _sessionTimeouts = new ConcurrentDictionary<string, DateTime>();
+        private readonly IList<ISessionEventListener> _listeners = new List<ISessionEventListener>();
 
         public SessionLifetime(TimeSpan sessionDuration)
         {
@@ -35,26 +34,29 @@ namespace Axle.Web.AspNetCore.Session
         private void TimerTick(object state)
         {
             var keys = _sessionTimeouts.Keys.ToArray();
-            var toRemove = new List<string>();
+            var expiredSessions = new List<string>();
             var now = DateTime.UtcNow;
             foreach (var key in keys)
             {
-                if (_sessionTimeouts.TryGetValue(key, out var sessionLastUpdate) && (sessionLastUpdate - now).TotalMilliseconds > _sessionDuration.TotalMilliseconds)
+                if (_sessionTimeouts.TryGetValue(key, out var sessionLastUpdate) && (now - sessionLastUpdate).TotalMilliseconds > _sessionDuration.TotalMilliseconds)
                 {
-                    toRemove.Add(key);
+                    expiredSessions.Add(key);
                 }
             }
 
-            foreach (var key in toRemove)
+            foreach (var key in expiredSessions)
             {
                 if (_sessionTimeouts.TryRemove(key, out var _))
                 {
-                    SessionEnd?.Invoke(key);
+                    foreach (var listener in _listeners)
+                    {
+                        listener.OnSessionEnd(key);
+                    }
                 }
             }
         }
 
-        private DateTime UpdateSessionVisit(ISession session)
+        private void UpdateSessionVisit(ISession session)
         {
             // TODO: new session notfy
             var res = DateTime.UtcNow;
@@ -65,16 +67,18 @@ namespace Axle.Web.AspNetCore.Session
                 session.Set(SessionKey, memStream.ToByteArray());
                 _sessionTimeouts.AddOrUpdate(session.Id, res, (_, __) => res);
             }
-            return res;
         }
 
         public Task Middleware(HttpContext context, Func<Task> func)
         {
             var session = context.Session;
-            if (!session.TryGetValue(SessionKey, out var dateBytes))
+            if (!session.TryGetValue(SessionKey, out _))
             {
                 UpdateSessionVisit(session);
-                SessionStart?.Invoke(session.Id);
+                foreach (var listener in _listeners)
+                {
+                    listener.OnSessionStart(session);
+                }
             }
             else
             {
@@ -83,11 +87,21 @@ namespace Axle.Web.AspNetCore.Session
             return func.Invoke();
         }
 
+        public SessionLifetime Subscribe(ISessionEventListener listener)
+        {
+            _listeners.Add(listener);
+            return this;
+        }
+        public SessionLifetime Unsubscribe(ISessionEventListener listener)
+        {
+            _listeners.Remove(listener);
+            return this;
+        }
+
         public void Dispose()
         {
             _timer?.Dispose();
-            SessionStart = null;
-            SessionEnd = null;
+            _listeners.Clear();
         }
     }
 }
