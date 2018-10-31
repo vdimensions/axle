@@ -1,0 +1,6 @@
+Axle.Application
+Axle.Application.Forest
+Axle.Web.AspNetCore
+
+group build
+  Mason.Targets.Preprocessor

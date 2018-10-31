@@ -1,15 +1,14 @@
-msbuild="../../../../submodules/btw/msbuild.sh"
-project='Axle.Application.Forest'
+paket=".paket/paket.sh"
+project='Axle.Web.AspNetCore.Forest'
 
-./restore.sh
-
-$msbuild $project.fsproj
+$paket update
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""
   exit
 fi
-$msbuild $project.dist.csproj
+rm -rf obj/
+dotnet restore $project.fsproj
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""

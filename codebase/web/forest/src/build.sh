@@ -1,5 +1,5 @@
 msbuild="../../../../submodules/btw/msbuild.sh"
-project='Axle.Application.Forest'
+project='Axle.Web.AspNetCore.Forest'
 
 ./restore.sh
 
