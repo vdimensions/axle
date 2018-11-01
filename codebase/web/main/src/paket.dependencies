@@ -1,5 +1,5 @@
 framework auto-detect
-storage none
+#storage none
 
 source ../../../../dist
   nuget Axle.Application

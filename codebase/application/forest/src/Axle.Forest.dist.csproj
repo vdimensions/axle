@@ -6,8 +6,8 @@
     <ProjectGuid>{D7C8BBB3-0256-46CF-B778-5EB7E423229C}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle.Application.Forest</RootNamespace>
-    <AssemblyName>Axle.Application.Forest.dist</AssemblyName>
+    <RootNamespace>Axle.Forest</RootNamespace>
+    <AssemblyName>Axle.Forest.dist</AssemblyName>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFramework>net45</TargetFramework>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>

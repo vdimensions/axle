@@ -1,15 +1,14 @@
-msbuild="../../../../submodules/btw/msbuild.sh"
-project='Axle.Application.Forest'
+project='Axle.Forest'
 
 ./restore.sh
 
-$msbuild $project.fsproj
+dotnet msbuild $project.fsproj
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""
   exit
 fi
-$msbuild $project.dist.csproj
+dotnet msbuild $project.dist.csproj
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""

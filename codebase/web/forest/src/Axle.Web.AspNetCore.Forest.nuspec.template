@@ -19,6 +19,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="Axle.Application" version="${axle.dependency.version}" />
+      <dependency id="Axle.Forest" version="${axle.dependency.version}" />
       <dependency id="Microsoft.AspNetCore" version="2.1.4" />
       <dependency id="Microsoft.AspNetCore.Hosting" version="2.1.1" />
       <dependency id="Microsoft.AspNetCore.Session" version="2.1.1" />

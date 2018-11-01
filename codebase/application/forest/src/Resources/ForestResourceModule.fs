@@ -1,8 +1,8 @@
-﻿namespace Axle.Application.Forest.Resources
+﻿namespace Axle.Forest.Resources
 
 open System
 
-open Axle.Application.Forest.Resources
+open Axle.Forest.Resources
 open Axle.Modularity
 open Axle.Resources
 open Axle.Resources.Extraction

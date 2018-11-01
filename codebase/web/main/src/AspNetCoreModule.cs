@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Axle.Modularity;
 
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -39,11 +40,18 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IWebHostConfigurer> _whConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
         private readonly IList<IApplicationConfigurer> _appConfigurers = new List<IApplicationConfigurer>();
+        private readonly AxleHttpContextAccessor _httpContextAccessor = new AxleHttpContextAccessor();
 
         public AspNetCoreModule(Application app, IWebHostBuilder host)
         {
             _host = host;
             _app = app;
+        }
+
+        [ModuleInit]
+        internal void Init(ModuleExporter exporter)
+        {
+            exporter.Export<IHttpContextAccessor>(_httpContextAccessor);
         }
 
         [ModuleDependencyInitialized]
@@ -70,13 +78,18 @@ namespace Axle.Web.AspNetCore
             {
                 cfg.Configure(services);
             }
+            services.AddHttpContextAccessor();
         }
 
         private void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
-            app.ApplicationServices
+            var services = app.ApplicationServices;
+            services
                .GetRequiredService<IApplicationLifetime>()
                .ApplicationStopped.Register(_app.ShutDown);
+
+            var accessor = services.GetRequiredService<IHttpContextAccessor>();
+            _httpContextAccessor.Accessor = accessor;
 
             foreach (var cfg in _appConfigurers)
             {

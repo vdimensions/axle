@@ -1,4 +1,4 @@
-﻿namespace Axle.Application.Forest.Resources
+﻿namespace Axle.Forest.Resources
 
 open System
 

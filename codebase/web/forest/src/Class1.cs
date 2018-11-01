@@ -4,7 +4,7 @@ using Axle.Web.AspNetCore.Session;
 
 namespace Axle.Web.AspNetCore.Forest
 {
-    using RequiresForest = global::Axle.Application.Forest.RequiresForest;
+    using RequiresForest = AAF::Axle.Application.Forest.RequiresForest;
 
     [Module]
     [RequiresForest]

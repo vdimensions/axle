@@ -1,8 +1,9 @@
-﻿namespace Axle.Application.Forest
+﻿namespace Axle.Forest
 
 open System
 open System.Diagnostics
 open System.Reflection
+open System.Runtime.CompilerServices
 
 open Forest
 open Forest.Reflection
@@ -12,7 +13,7 @@ open Forest.Templates.Raw
 open Forest.UI
 
 open Axle
-open Axle.Application.Forest.Resources
+open Axle.Forest.Resources
 open Axle.DependencyInjection
 open Axle.Logging
 open Axle.Modularity
@@ -123,3 +124,8 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         member this.Resolve(viewType : Type, model : obj): IView = this._context.ViewRegistry.Resolve(viewType, model)
         member this.Resolve(name : vname): IView = this._context.ViewRegistry.Resolve name
         member this.Resolve(name : vname, model : obj): IView = this._context.ViewRegistry.Resolve(name, model)
+
+[<Extension>]
+type Extensions =
+    static member LoadForest(builder : Axle.IApplicationBuilder) =
+        builder.Load(typeof<ForestModule>)

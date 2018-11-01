@@ -9,7 +9,7 @@ source ../../../../../forest/dist
 
 source ../../../../dist
   nuget Axle.Application
-  nuget Axle.Application.Forest
+  nuget Axle.Forest
   nuget Axle.Web.AspNetCore
 
 group build

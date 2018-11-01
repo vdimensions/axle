@@ -1,5 +1,5 @@
 paket='.paket/paket.sh'
-project='Axle.Application.Forest'
+project='Axle.Forest'
 
 $paket update
 if [ $? -ne 0 ]; then
