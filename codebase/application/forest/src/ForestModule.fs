@@ -78,6 +78,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         result.Render this._renderer 
         renderWatch.Stop()
         logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
+        logger.Debug("Result is \n{0}", result)
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =

@@ -19,7 +19,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <dependencies>
       <dependency id="Axle.Core" version="${axle.dependency.version}" />
-      <dependency id="FSharp.Core" version="${fsharp.core.version}" />
+      <dependency id="FSharp.Core" version="[${fsharp.core.version},)" />
     </dependencies>
     <frameworkAssemblies>
     </frameworkAssemblies>
