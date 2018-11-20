@@ -23,10 +23,10 @@ open Axle.Modularity
 type [<Interface>] IForestFacade = 
     inherit ICommandDispatcher
     inherit IMessageDispatcher
-    abstract member LoadTemplate: template:string -> unit
+    abstract member LoadTemplate: template : string -> unit
 
 type [<Interface>] IForestRendererConfigurer =
-    abstract member SetRenderer: renderer:IDomProcessor -> unit
+    abstract member SetRenderer: renderer : IDomProcessor -> unit
 
 type [<Interface>] IForestEngineProviderConfigurer =
     abstract member SetEngineProvider: ep : IForestEngineProvider -> unit
@@ -68,7 +68,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             |> AxleViewFactory
         let context:IForestContext = upcast DefaultForestContext(viewFactory, reflectionProvider, securityManager, templateProvider)
         this._context <- context
-        this._engineProvider <- DefaultForestEngineProvider(Engine(context))
+        this._engineProvider <- DefaultForestEngineProvider(ForestEngine(context))
 
         context |> e.Export<IForestContext> |> ignore
         this |> e.Export<IForestFacade> |> ignore

@@ -7,20 +7,20 @@ open Axle.DependencyInjection
 open Axle.Verification
 
 
-type [<Sealed;NoEquality;NoComparison>] private AxleViewFactory(container:IContainer, app:Application) =
-    let createSubContainer(c:IContainer) =
+type [<Sealed;NoEquality;NoComparison>] private AxleViewFactory(container : IContainer, app : Application) =
+    let createSubContainer(c : IContainer) =
         app.DependencyContainerProvider.Create c
 
-    member private __.resolve(NotNull "descriptor" descriptor:IViewDescriptor) : IView =
+    member private __.resolve(NotNull "descriptor" descriptor : IViewDescriptor) : IView =
         use tmpContainer = createSubContainer(container)
         tmpContainer
             .RegisterType(descriptor.ViewType, descriptor.Name)
-            .RegisterType(descriptor.ViewModelType)
+            .RegisterType(descriptor.ModelType)
             |> ignore
         // Let any DI exceptions pop, Forest will wrap them up accordingly
         downcast tmpContainer.Resolve(descriptor.ViewType, descriptor.Name)
 
-    member private __.resolveWithModel(NotNull "descriptor" descriptor:IViewDescriptor, NotNull "model" model:obj) : IView =
+    member private __.resolveWithModel(NotNull "descriptor" descriptor : IViewDescriptor, NotNull "model" model : obj) : IView =
         use tmpContainer = createSubContainer(container)
         tmpContainer
             .RegisterType(descriptor.ViewType, descriptor.Name)

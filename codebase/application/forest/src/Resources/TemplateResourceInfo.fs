@@ -8,7 +8,7 @@ open Forest.Templates.Raw
 open Axle.Resources
 
 
-type [<Sealed;NoComparison>] internal TemplateResourceInfo (name:string, culture:CultureInfo, template:Template, originalResource:ResourceInfo) =
+type [<Sealed;NoComparison>] internal TemplateResourceInfo (name : string, culture : CultureInfo, template : Template, originalResource : ResourceInfo) =
     inherit ResourceInfo(name, culture, "text/forest-template+xml")
     
     override this.Open() =

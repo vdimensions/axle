@@ -10,29 +10,29 @@ open Axle.Resources.Extraction
 
 [<Module;RequiresResources;Requires(typeof<ForestResourceModule>)>]
 type [<Interface>] IForestTemplateMarshallerConfigurer =
-    abstract member RegisterMarshallers: registry:IForestTemplateMarshallerRegistry -> unit
+    abstract member RegisterMarshallers: registry : IForestTemplateMarshallerRegistry -> unit
 
  and [<Sealed;NoEquality;NoComparison;Module;RequiresResources>] internal ForestResourceModule =
-    val private resourceManager:ResourceManager
-    val private templateProvider:ResourceTemplateProvider
+    val private resourceManager : ResourceManager
+    val private templateProvider : ResourceTemplateProvider
     new(rm:ResourceManager) = { resourceManager = rm; templateProvider = ResourceTemplateProvider(rm) }
 
     [<ModuleInit>]
-    member this.Init(e:ModuleExporter) =
+    member this.Init (e : ModuleExporter) =
         ResourceTemplateProvider.BundleName |> this.templateProvider.AddBundle
         this |> this.ModuleDependencyInitialized
         e.Export(this.templateProvider) |> ignore
 
     [<ModuleTerminate>]
-    member this.Terminate() =
+    member this.Terminate () =
         this |> this.ModuleDependencyTerminated
 
     [<ModuleDependencyInitialized>]
-    member this.ModuleDependencyInitialized(cfg:IForestTemplateMarshallerConfigurer) =
+    member this.ModuleDependencyInitialized (cfg : IForestTemplateMarshallerConfigurer) =
         this |> cfg.RegisterMarshallers
 
     [<ModuleDependencyTerminated>]
-    member __.ModuleDependencyTerminated(_:IForestTemplateMarshallerConfigurer) =
+    member __.ModuleDependencyTerminated (_ : IForestTemplateMarshallerConfigurer) =
         ()
 
     interface IForestTemplateMarshallerConfigurer with

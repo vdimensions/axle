@@ -13,20 +13,20 @@ open Axle.Resources
 
 type [<Sealed>] ResourceTemplateProvider(rm:ResourceManager) =
     [<DefaultValue>]
-    val mutable private _bundles:string list voption
+    val mutable private _bundles : string list voption
     [<DefaultValue>]
-    val mutable private _assemblies:Set<string> Nullsafe
+    val mutable private _assemblies : Set<string> Nullsafe
 
     static member BundleName = "ForestTemplates"
 
-    member internal this.AddBundle(bundle:string) = 
+    member internal this.AddBundle(bundle : string) = 
         this._bundles <- 
             match this._bundles with
             | ValueSome b -> bundle::b
             | ValueNone -> [bundle]
             |> ValueSome
 
-    member internal this.RegisterAssemblySource(asm:Assembly) =
+    member internal this.RegisterAssemblySource(asm : Assembly) =
         let asmname = asm.GetName().Name
         let set =
             match Option.ns2vopt this._assemblies with

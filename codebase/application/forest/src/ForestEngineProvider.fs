@@ -4,8 +4,8 @@ open Forest
 
 
 type [<Interface>] IForestEngineProvider =
-    abstract member Engine : Engine with get
+    abstract member Engine : ForestEngine with get
 
-type [<Sealed;NoEquality;NoComparison>] DefaultForestEngineProvider(engine : Engine) =
-    let mutable _engine : Engine = engine
+type [<Sealed;NoEquality;NoComparison>] DefaultForestEngineProvider(engine : ForestEngine) =
+    let mutable _engine : ForestEngine = engine
     interface IForestEngineProvider with member __.Engine with get() = _engine
