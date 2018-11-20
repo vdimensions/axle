@@ -28,9 +28,6 @@ type [<Interface>] IForestFacade =
 type [<Interface>] IForestRendererConfigurer =
     abstract member SetRenderer: renderer : IDomProcessor -> unit
 
-type [<Interface>] IForestEngineProviderConfigurer =
-    abstract member SetEngineProvider: ep : IForestEngineProvider -> unit
-
 [<AttributeUsage(AttributeTargets.Class|||AttributeTargets.Interface, Inherited = true, AllowMultiple = false)>]
 type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<ForestModule>)
 
@@ -80,6 +77,14 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
         logger.Debug("Result is \n{0}", result)
 
+    [<ModuleDependencyInitialized>]
+    member this.DependencyInitialized(viewProvider : IForestViewProvider) =
+        (this :> IViewRegistry) |> viewProvider.RegisterViews
+
+    [<ModuleDependencyInitialized>]
+    member this.DependencyInitialized(engineProvider : IForestEngineProvider) =
+        this._engineProvider <- engineProvider
+
     interface ICommandDispatcher with
         member this.ExecuteCommand target name arg =
             let opWatch = Stopwatch.StartNew()
@@ -105,12 +110,6 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             this.Render(res)
 
     interface IForestRendererConfigurer with member this.SetRenderer renderer = this._renderer <- renderer
-
-    interface IForestEngineProviderConfigurer with member this.SetEngineProvider ep = this._engineProvider <- ep
-
-    [<ModuleDependencyInitialized>]
-    member this.DependencyInitialized(viewProvider : IForestViewProvider) =
-        (this:>IViewRegistry) |> viewProvider.RegisterViews
 
     interface IViewRegistry with
         member this.GetDescriptor(viewType : Type): IViewDescriptor = this._context.ViewRegistry.GetDescriptor viewType

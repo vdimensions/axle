@@ -26,7 +26,7 @@ namespace Axle.Web.AspNetCore.Session
 
         public SessionLifetime(TimeSpan sessionDuration)
         {
-            var resolution = sessionDuration.Minutes > 0 ? 10l : 1l;
+            var resolution = sessionDuration.Minutes > 0 ? 10L : 1L;
             _sessionDuration = sessionDuration;
             _timer = new Timer(TimerTick, this, TimeSpan.Zero, new TimeSpan(sessionDuration.Ticks / resolution));
         }
@@ -46,7 +46,7 @@ namespace Axle.Web.AspNetCore.Session
 
             foreach (var key in expiredSessions)
             {
-                if (_sessionTimeouts.TryRemove(key, out var _))
+                if (_sessionTimeouts.TryRemove(key, out _))
                 {
                     foreach (var listener in _listeners)
                     {
