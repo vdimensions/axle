@@ -1,3 +1,4 @@
+STORAGE: NONE
 RESTRICTION: == netstandard2.0
 NUGET
   remote: ../../../../dist
@@ -8,7 +9,7 @@ NUGET
     Axle.Resources (1.5.1.27)
       Axle.Core (>= 1.5.1)
   remote: https://www.nuget.org/api/v2
-    Microsoft.AspNetCore (2.1.4)
+    Microsoft.AspNetCore (2.1.6)
       Microsoft.AspNetCore.Diagnostics (>= 2.1.1)
       Microsoft.AspNetCore.HostFiltering (>= 2.1.1)
       Microsoft.AspNetCore.Hosting (>= 2.1.1)
@@ -217,7 +218,7 @@ NUGET
       Microsoft.Extensions.Logging.Configuration (>= 2.1.1)
     Microsoft.Extensions.Logging.Debug (2.1.1)
       Microsoft.Extensions.Logging (>= 2.1.1)
-    Microsoft.Extensions.ObjectPool (2.1.1)
+    Microsoft.Extensions.ObjectPool (2.1.6)
     Microsoft.Extensions.Options (2.1.1)
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 2.1.1)
       Microsoft.Extensions.Primitives (>= 2.1.1)
@@ -226,9 +227,9 @@ NUGET
       Microsoft.Extensions.Configuration.Binder (>= 2.1.1)
       Microsoft.Extensions.DependencyInjection.Abstractions (>= 2.1.1)
       Microsoft.Extensions.Options (>= 2.1.1)
-    Microsoft.Extensions.Primitives (2.1.1)
+    Microsoft.Extensions.Primitives (2.1.6)
       System.Memory (>= 4.5.1)
-      System.Runtime.CompilerServices.Unsafe (>= 4.5.1)
+      System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
     Microsoft.Net.Http.Headers (2.1.1)
       Microsoft.Extensions.Primitives (>= 2.1.1)
       System.Buffers (>= 4.5)

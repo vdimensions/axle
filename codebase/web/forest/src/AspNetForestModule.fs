@@ -13,7 +13,7 @@ open Axle.Web.AspNetCore.Session
 type [<Sealed>] RequiresAspNetForest() = inherit RequiresAttribute(typeof<AspNetForestModule>)
 
 and [<Sealed;NoComparison;Module;Forest.RequiresForest;RequiresAspNetSession>] internal AspNetForestModule(ctx : Forest.IForestContext, accessor : IHttpContextAccessor, logger : Axle.Logging.ILogger) = 
-    let forestEnginesPerSession = new ConcurrentDictionary<string, Forest.Engine>(StringComparer.Ordinal)
+    let forestEnginesPerSession = new ConcurrentDictionary<string, Forest.ForestEngine>(StringComparer.Ordinal)
 
     let engineIdentity _ e = e
 
@@ -21,8 +21,8 @@ and [<Sealed;NoComparison;Module;Forest.RequiresForest;RequiresAspNetSession>] i
         member __.OnSessionStart(session) =
             forestEnginesPerSession.AddOrUpdate(
                 session.Id,
-                Forest.Engine(ctx),
-                System.Func<string, Forest.Engine, Forest.Engine>(engineIdentity)) 
+                Forest.ForestEngine(ctx),
+                System.Func<string, Forest.ForestEngine, Forest.ForestEngine>(engineIdentity)) 
             |> ignore
             logger.Trace("Added http-session-bound forest context for session id {0}", session.Id)
 
