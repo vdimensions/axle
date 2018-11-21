@@ -6,7 +6,7 @@ NUGET
       Axle.Core (>= 1.5.1)
       Axle.Resources (>= 1.5.1)
     Axle.Core (1.5.1.46)
-    Axle.Forest (1.5.1.69)
+    Axle.Forest (1.5.1.71)
       Axle.Application (>= 1.5.1)
       Axle.Core (>= 1.5.1)
       Axle.FSharp (>= 1.5.1)
@@ -25,7 +25,7 @@ NUGET
       Microsoft.AspNetCore.Session (>= 2.1.1)
       Microsoft.Extensions.Logging.Abstractions (>= 2.1.1)
   remote: ../../../../../forest/dist
-    Forest.Core (2.0.6898.19583)
+    Forest.Core (2.0.6899.20164)
       FSharp.Core (>= 4.5.3)
   remote: https://www.nuget.org/api/v2
     FSharp.Core (4.5.3)

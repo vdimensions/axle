@@ -24,6 +24,7 @@
     <Compile Include="Resources\ResourceTemplateProvider.fs" />
     <Compile Include="Resources\ForestResourceModule.fs" />
     <Compile Include="AxleViewFactory.fs" />
+    <Compile Include="NoOp.fs" />
     <Compile Include="ForestEngineProvider.fs" />
     <Compile Include="ForestModule.fs" />
   </ItemGroup>
