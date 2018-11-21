@@ -8,7 +8,6 @@ open System.Runtime.CompilerServices
 open Forest
 open Forest.Reflection
 open Forest.Security
-open Forest.Templates
 open Forest.Templates.Raw
 open Forest.UI
 
@@ -18,8 +17,32 @@ open Axle.DependencyInjection
 open Axle.Logging
 open Axle.Modularity
 
-type [<Interface>] IForestRendererConfigurer =
-    abstract member SetRenderer: renderer : IDomProcessor -> unit
+type [<Sealed;NoEquality;NoComparison>] private LoggingForestFacade(logger : ILogger, facade : IForestFacade) =
+    interface IMessageDispatcher with
+        member __.SendMessage message =
+            let sw = Stopwatch.StartNew()
+            let result = facade.SendMessage message
+            sw.Stop()
+            logger.Trace("Forest 'SendMessage' operation took {0}ms to complete. ", sw.ElapsedMilliseconds)
+            result
+
+    interface ICommandDispatcher with
+        member __.ExecuteCommand target command arg =
+            let sw = Stopwatch.StartNew()
+            let result = facade.ExecuteCommand target command arg
+            sw.Stop()
+            logger.Trace("Forest 'ExecuteCommand' operation took {0}ms to complete. ", sw.ElapsedMilliseconds)
+            result
+
+    interface IForestFacade with
+        member __.LoadTemplate template =
+            let sw = Stopwatch.StartNew()
+            let result = facade.LoadTemplate template
+            sw.Stop()
+            logger.Trace("Forest 'LoadTemplate' operation took {0}ms to complete. ", sw.ElapsedMilliseconds)
+            result
+type [<Sealed;NoEquality;NoComparison>] private LoggingForestFacadeProvider(logger : ILogger, provider : IForestFacadeProvider) =
+    interface IForestFacadeProvider with member __.ForestFacade with get() = upcast LoggingForestFacade(logger, provider.ForestFacade)
 
 [<AttributeUsage(AttributeTargets.Class|||AttributeTargets.Interface, Inherited = true, AllowMultiple = false)>]
 type [<Sealed>] RequiresForestAttribute() = inherit RequiresAttribute(typeof<ForestModule>)
@@ -37,11 +60,7 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
     [<DefaultValue>]
     val mutable private _context : IForestContext
     [<DefaultValue>]
-    val mutable private _facade : IForestFacade 
-    [<DefaultValue;Obsolete>]
-    val mutable private _renderer : IDomProcessor
-    [<DefaultValue;Obsolete>]
-    val mutable private _engineProvider : IForestEngineProvider
+    val mutable private _facadeProvider : IForestFacadeProvider 
 
     [<ModuleInit>]
     member this.Init(e : ModuleExporter) =
@@ -60,75 +79,42 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             |> AxleViewFactory
         let context : IForestContext = upcast DefaultForestContext(viewFactory, reflectionProvider, securityManager, templateProvider)
         this._context <- context
-        this._facade <- NoOp.Facade context
-        //this._engineProvider <- DefaultForestEngineProvider(ForestEngine(context))
+        this._facadeProvider <- NoOp.FacadeProvider context
 
         context |> e.Export<IForestContext> |> ignore
         this |> e.Export<IForestFacade> |> ignore
-
-    //member this.Render(result : ForestResult) =
-    //    let renderWatch = Stopwatch.StartNew()
-    //    result.Render this._renderer 
-    //    renderWatch.Stop()
-    //    logger.Debug("Forest Render operation took {0}ms", renderWatch.ElapsedMilliseconds)
-    //    logger.Debug("Result is \n{0}", result)
 
     [<ModuleDependencyInitialized>]
     member this.DependencyInitialized (viewProvider : IForestViewProvider) =
         (this :> IViewRegistry) |> viewProvider.RegisterViews
 
     [<ModuleDependencyInitialized>]
-    member this.DependencyInitialized (facade : IForestFacade) =
-        this._facade <- facade
+    member this.DependencyInitialized (facadeProvider : IForestFacadeProvider) =
+        this._facadeProvider <- facadeProvider
+        this.MakeDebuggerFacade()
 
-    //[<ModuleDependencyInitialized>]
-    //member this.DependencyInitialized (engineProvider : IForestEngineProvider) =
-    //    this._engineProvider <- engineProvider
-
-    //interface ICommandDispatcher with
-    //    member this.ExecuteCommand target name arg =
-    //        let opWatch = Stopwatch.StartNew()
-    //        let res = this._engineProvider.Engine.Update(fun e -> e.ExecuteCommand target name arg)
-    //        opWatch.Stop()
-    //        logger.Debug("Forest ExecuteCommand operation took {0}ms", opWatch.ElapsedMilliseconds)
-    //        this.Render(res)
-    //
-    //interface IMessageDispatcher with
-    //    member this.SendMessage(message : 'M): unit = 
-    //        let sw = Stopwatch.StartNew()
-    //        let res = this._engineProvider.Engine.Update(fun e -> e.SendMessage message)
-    //        sw.Stop()
-    //        logger.Debug("Forest SendMessage operation took {0}ms", sw.ElapsedMilliseconds)
-    //        this.Render(res)
-    //
-    //interface IForestFacade with
-    //    member this.LoadTemplate name =
-    //        let sw = Stopwatch.StartNew()
-    //        let res = this._engineProvider.Engine.LoadTemplate name
-    //        sw.Stop()
-    //        logger.Debug("Forest LoadTemplate operation took {0}ms", sw.ElapsedMilliseconds)
-    //        this.Render(res)
-    
-    //interface IForestRendererConfigurer with member this.SetRenderer renderer = this._renderer <- renderer
+    [<Conditional("DEBUG")>]
+    member private this.MakeDebuggerFacade() =
+        this._facadeProvider <- (LoggingForestFacadeProvider(logger, this._facadeProvider) :> IForestFacadeProvider)
 
     interface IForestFacade with
         member this.LoadTemplate t = 
             let opWatch = Stopwatch.StartNew()
-            this._facade.LoadTemplate t
+            this._facadeProvider.ForestFacade.LoadTemplate t
             opWatch.Stop()
             logger.Debug("Forest LoadTemplate operation took {0}ms", opWatch.ElapsedMilliseconds)
 
     interface IMessageDispatcher with
         member this.SendMessage msg = 
             let opWatch = Stopwatch.StartNew()
-            this._facade.SendMessage msg
+            this._facadeProvider.ForestFacade.SendMessage msg
             opWatch.Stop()
             logger.Debug("Forest SendMessage operation took {0}ms", opWatch.ElapsedMilliseconds)
 
     interface ICommandDispatcher with
         member this.ExecuteCommand target cmd arg = 
             let opWatch = Stopwatch.StartNew()
-            this._facade.ExecuteCommand target cmd arg
+            this._facadeProvider.ForestFacade.ExecuteCommand target cmd arg
             opWatch.Stop()
             logger.Debug("Forest ExecuteCommand operation took {0}ms", opWatch.ElapsedMilliseconds)
 
