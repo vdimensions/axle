@@ -2,7 +2,7 @@ STORAGE: NONE
 RESTRICTION: == netstandard2.0
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.1.81)
+    Axle.Application (1.5.1.83)
       Axle.Core (>= 1.5.1)
       Axle.Resources (>= 1.5.1)
     Axle.Core (1.5.1.46)

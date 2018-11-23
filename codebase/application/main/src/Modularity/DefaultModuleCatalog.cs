@@ -132,6 +132,30 @@ namespace Axle.Modularity
             return m == null ? null : new ModuleMethod(m);
         }
 
+        public UtilizesAttribute[] GetUtilizedModules(Type moduleType)
+        {
+            return CollectAttributes(
+                    TypeAndInterfaces(moduleType, new HashSet<Type>()),
+                    new List<UtilizesAttribute>(),
+                    //
+                    // Note - the `UtilizesAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    //
+                    true)
+                .ToArray();
+        }
+
+        public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType)
+        {
+            return CollectAttributes(
+                        TypeAndInterfaces(moduleType, new HashSet<Type>()),
+                        new List<UtilizedByAttribute>(),
+                        //
+                        // Note - the `UtilizedByAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                        //
+                        true)
+                .ToArray();
+        }
+
         public Type[] GetRequiredModules(Type moduleType)
         {
             var result = new HashSet<Type>();

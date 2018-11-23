@@ -16,7 +16,9 @@ namespace Axle.Modularity
             IEnumerable<ModuleCallback> initCallbacks, 
             IEnumerable<ModuleCallback> terminateCallbacks, 
             ModuleMethod terminateMethod, 
-            ModuleEntryMethod entryPointMethod, 
+            ModuleEntryMethod entryPointMethod,
+            UtilizesAttribute[] utilizedModules,
+            UtilizedByAttribute[] utilizedByModules,
             params ModuleInfo[] requiredModules)
         {
             Type = type.VerifyArgument(nameof(type)).IsNotAbstract();
@@ -25,6 +27,8 @@ namespace Axle.Modularity
             DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
             TerminateMethod = terminateMethod;
             EntryPointMethod = entryPointMethod;
+            UtilizedModules = utilizedModules;
+            UtilizedByModules = utilizedByModules;
             RequiredModules = requiredModules;
         }
 
@@ -39,6 +43,8 @@ namespace Axle.Modularity
         public ModuleCallback[] DependencyTerminatedMethods { get; }
         public ModuleMethod TerminateMethod { get; }
         public ModuleEntryMethod EntryPointMethod { get; }
+        public UtilizesAttribute[] UtilizedModules { get; }
+        public UtilizedByAttribute[] UtilizedByModules { get; }
         public ModuleInfo[] RequiredModules { get; }
     }
 }

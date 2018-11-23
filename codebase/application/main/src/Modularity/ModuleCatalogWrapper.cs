@@ -45,6 +45,9 @@ namespace Axle.Modularity
 
         public ModuleMethod GetTerminateMethod(Type moduleType) => _originalCatalog.GetTerminateMethod(moduleType);
 
+        public UtilizesAttribute[] GetUtilizedModules(Type moduleType) => _originalCatalog.GetUtilizedModules(moduleType);
+        public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType) => _originalCatalog.GetUtilizedByModules(moduleType);
+
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType) => _originalCatalog.GetEntryPointMethod(moduleType);
     }
 }

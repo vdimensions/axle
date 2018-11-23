@@ -49,9 +49,23 @@ namespace Axle.Modularity
                 {
                     var moduleInfo = modulesToLaunch[i];
                     var rank = 0;
-                    for (var j = 0; j < moduleInfo.RequiredModules.Length; j++)
+                    IEnumerable<ModuleInfo> requiredModules = moduleInfo.RequiredModules;
+                    //
+                    // Expand the required modules with the utilized modules
+                    //
+                    foreach (var ua in moduleInfo.UtilizedModules)
                     {
-                        var moduleDependency = moduleInfo.RequiredModules[j];
+                        requiredModules = requiredModules.Union(modulesToLaunch.Where(mi => ua.Accepts(mi.Type)));
+                    }
+                    //
+                    // Expand the required modules with the utilized by modules
+                    //
+                    foreach (var uby in modulesToLaunch.SelectMany(x => x.UtilizedByModules).Where(uby => uby.Accepts(moduleInfo.Type)))
+                    {
+                        requiredModules = requiredModules.Union(new[] { moduleInfo });
+                    }
+                    foreach (var moduleDependency in requiredModules)
+                    {
                         if (modulesWithRank.TryGetValue(moduleDependency.Type, out var parentRank))
                         {
                             rank = Math.Max(rank, parentRank.Item2);

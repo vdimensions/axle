@@ -84,7 +84,7 @@ namespace Axle
             return _modularContext;
         }
 
-        public IApplicationBuilder SetDependencyContainerProvider(IDependencyContainerProvider containerProvider)
+        IApplicationBuilder IApplicationBuilder.SetDependencyContainerProvider(IDependencyContainerProvider containerProvider)
         {
             lock (_syncRoot)
             {
@@ -94,7 +94,7 @@ namespace Axle
             return this;
         }
 
-        public IApplicationBuilder SetLoggingService(ILoggingServiceProvider loggingService)
+        IApplicationBuilder IApplicationBuilder.SetLoggingService(ILoggingServiceProvider loggingService)
         {
             lock (_syncRoot)
             {
@@ -104,7 +104,7 @@ namespace Axle
             return this;
         }
 
-        public IApplicationBuilder ConfigureDependencies(Action<IContainer> configAction)
+        IApplicationBuilder IApplicationBuilder.ConfigureDependencies(Action<IContainer> configAction)
         {
             ThrowIfStarted();
             configAction.VerifyArgument(nameof(configAction)).IsNotNull();
@@ -112,13 +112,14 @@ namespace Axle
             return this;
         }
 
-        public IApplicationBuilder Load(Type type)
+        IApplicationBuilder IApplicationBuilder.Load(Type type)
         {
             ThrowIfStarted();
             _moduleTypes.Add(type.VerifyArgument(nameof(type)).IsNotNull());
             return this;
         }
-        public IApplicationBuilder Load(params Type[] types)
+
+        IApplicationBuilder IApplicationBuilder.Load(params Type[] types)
         {
             ThrowIfStarted();
             foreach (var type in types)
@@ -130,7 +131,8 @@ namespace Axle
             }
             return this;
         }
-        public IApplicationBuilder Load(Assembly assembly)
+
+        IApplicationBuilder IApplicationBuilder.Load(Assembly assembly)
         {
             ThrowIfStarted();
             foreach (var type in _moduleCatalog.DiscoverModuleTypes(assembly.VerifyArgument(nameof(assembly)).IsNotNull()))
@@ -139,7 +141,7 @@ namespace Axle
             }
             return this;
         }
-        public IApplicationBuilder Load(IEnumerable<Assembly> assemblies)
+        IApplicationBuilder IApplicationBuilder.Load(IEnumerable<Assembly> assemblies)
         {
             ThrowIfStarted();
             foreach (var type in assemblies.SelectMany(a => _moduleCatalog.DiscoverModuleTypes(a)))
@@ -169,6 +171,21 @@ namespace Axle
             }
         }
 
+        void IDisposable.Dispose() => ShutDown();
+
+        private IModuleCatalog ModuleCatalog
+        {
+            get => _moduleCatalog;
+            set
+            {
+                lock (_syncRoot)
+                {
+                    ThrowIfStarted();
+                    _moduleCatalog = new ModuleCatalogWrapper(value.VerifyArgument(nameof(value)).IsNotNull().Value);
+                }
+            }
+        }
+
         [Obsolete]
         public Application Execute(params Assembly[] assemblies)
         {
@@ -190,33 +207,18 @@ namespace Axle
             return Run(_args);
         }
 
-        void IDisposable.Dispose() => ShutDown();
-
-        private IModuleCatalog ModuleCatalog
-        {
-            get => _moduleCatalog;
-            set
-            {
-                lock (_syncRoot)
-                {
-                    ThrowIfStarted();
-                    _moduleCatalog = new ModuleCatalogWrapper(value.VerifyArgument(nameof(value)).IsNotNull().Value);
-                }
-            }
-        }
-
         [Obsolete]
         public IDependencyContainerProvider DependencyContainerProvider
         {
             get => _dependencyContainerProvider;
-            set => SetDependencyContainerProvider(value.VerifyArgument(nameof(value)).IsNotNull().Value);
+            set => (this as IApplicationBuilder).SetDependencyContainerProvider(value.VerifyArgument(nameof(value)).IsNotNull().Value);
         }
 
         [Obsolete]
         public ILoggingServiceProvider LoggingService
         {
             get => _loggingService;
-            set => SetLoggingService(value.VerifyArgument(nameof(value)).IsNotNull().Value);
+            set => (this as IApplicationBuilder).SetLoggingService(value.VerifyArgument(nameof(value)).IsNotNull().Value);
         }
 
         [Obsolete]

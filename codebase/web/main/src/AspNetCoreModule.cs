@@ -32,6 +32,12 @@ namespace Axle.Web.AspNetCore
         public RequiresAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
     }
 
+    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
+    public sealed class UtilizesAspNetCoreAttribute : UtilizesAttribute
+    {
+        public UtilizesAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
+    }
+
     [Module]
     internal sealed class AspNetCoreModule
     {

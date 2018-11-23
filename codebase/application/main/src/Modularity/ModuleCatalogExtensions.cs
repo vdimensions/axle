@@ -61,6 +61,8 @@ namespace Axle.Modularity
                                 return m;
                             })
                         .ToArray();
+                var utilizedModules = moduleCatalog.GetUtilizedModules(moduleType);
+                var utilizedByModules = moduleCatalog.GetUtilizedByModules(moduleType);
                 var module = new ModuleInfo(
                         moduleType,
                         moduleCatalog.GetInitMethod(moduleType),
@@ -68,6 +70,8 @@ namespace Axle.Modularity
                         moduleCatalog.GetDependencyTerminatedMethods(moduleType),
                         moduleCatalog.GetTerminateMethod(moduleType),
                         moduleCatalog.GetEntryPointMethod(moduleType),
+                        utilizedModules,
+                        utilizedByModules,
                         requiredModules);
                 yield return module;
             }
