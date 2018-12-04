@@ -1,0 +1,11 @@
+FSharp.Core
+Forest.Core
+Forest.Web.WebSharper
+Axle.Core
+Axle.Application
+Axle.Forest
+Axle.Web.AspNetCore
+Axle.Web.WebSharper
+WebSharper
+WebSharper.FSharp
+WebSharper.UI

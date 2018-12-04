@@ -1,0 +1,20 @@
+﻿framework: auto-detect
+storage: none
+
+source https://nuget.org/api/v2
+  nuget FSharp.Core >= 4.5
+  nuget WebSharper.UI >= 4.5.5.155
+  nuget WebSharper
+  nuget WebSharper.FSharp
+
+source ../../../../../forest/dist
+  nuget Forest.Core >= 2.0
+  nuget Forest.Web.WebSharper >= 2.0
+
+source ../../../../dist/
+  nuget Axle.Core
+  nuget Axle.Application
+  nuget Axle.Forest
+  nuget Axle.Web.AspNetCore
+  nuget Axle.Web.WebSharper
+
