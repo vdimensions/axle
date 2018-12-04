@@ -3,13 +3,17 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/AssemblyLevelProperties.targets" />
   <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
+  <Import Project="../../../Axle.Common.props" />
   <PropertyGroup>
     <ProjectGuid>5D89911E-F70B-4C08-9659-119104318881</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <Description>Axle Framework resources library to handle Java properties</Description>
+    <PackageTags>Axle.Resources.Java Kajabity.Tools.Java</PackageTags>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
@@ -29,6 +33,8 @@
     <None Remove="Axle.Resources.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
-  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+  <ItemGroup>
+    <Folder Include="Properties\" />
+  </ItemGroup>
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

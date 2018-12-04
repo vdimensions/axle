@@ -3,11 +3,11 @@
   <PropertyGroup>
     <!-- Versioning properties -->
     <Deterministic>false</Deterministic>
-    <Major>1</Major>
-    <Minor>5</Minor>
-    <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build>
-    <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision>
-    <Version>$(Major).$(Minor).$(Build).$(Revision)</Version>
+    <VersionMajor>1</VersionMajor>
+    <VersionMinor>5</VersionMinor>
+    <!-- <Build>$([System.DateTime]::op_Subtraction($([System.DateTime]::get_Now().get_Date()),$([System.DateTime]::new(2000,1,1))).get_TotalDays())</Build> -->
+    <!-- <Revision>$([MSBuild]::Divide($([System.DateTime]::get_Now().get_TimeOfDay().get_TotalSeconds()), 2).ToString('F0'))</Revision> -->
+    <Version>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</Version>
     <!-- Copyright info -->
     <Company>Virtual Dimensions</Company>
     <Copyright>Copyright © $(Company) 2013-$([System.DateTime]::get_Now().get_Year())</Copyright>
@@ -24,7 +24,7 @@
     <AssemblyDescription>$(Description)</AssemblyDescription>
     <AssemblyCompany>$(Company)</AssemblyCompany>
     <AssemblyCopyright>$(Copyright)</AssemblyCopyright>  
-    <AssemblyTrademark>$(Trademark)</AssemblyTrademark>  
+    <AssemblyTrademark>$(Trademark)</AssemblyTrademark>
     <AssemblyVersion>$(Version)</AssemblyVersion>
     <AssemblyFileVersion>$(Version)</AssemblyFileVersion>
     <AssemblyInformationalVersion>$(Version)</AssemblyInformationalVersion>

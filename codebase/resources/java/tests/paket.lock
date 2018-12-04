@@ -1,15 +1,16 @@
+STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
     Axle.Core (1.5.1.46)
     Axle.Resources (1.5.1.27)
       Axle.Core (>= 1.5.1)
-    Axle.Resources.Java (1.5.1.6)
-      Axle.Core (>= 1.5.1)
-      Axle.Resources (>= 1.5.1)
-      Kajabity.Tools.Java (>= 0.2)
-    Kajabity.Tools.Java (0.2.6620.21245) - content: none
+    Axle.Resources.Java (1.5.6912.32220)
+      Axle.Core (>= 1.5.1.46)
+      Axle.Resources (>= 1.5.1.27)
+      Kajabity.Tools.Java (>= 0.2.6862.30334)
   remote: https://www.nuget.org/api/v2
+    Kajabity.Tools.Java (0.2.6862.30334) - content: none
     NETStandard.Library (2.0.3) - restriction: || (&& (== net45) (== netstandard1.0)) (&& (== net45) (== netstandard1.1))
     System.Diagnostics.TraceSource (4.3) - restriction: && (== net45) (== netstandard1.6)
     System.Resources.ResourceManager (4.3) - restriction: || (&& (== net45) (== netstandard1.3)) (&& (== net45) (== netstandard1.4)) (&& (== net45) (== netstandard1.5)) (&& (== net45) (== netstandard1.6))
@@ -19,4 +20,4 @@ NUGET
 GROUP test
 NUGET
   remote: https://www.nuget.org/api/v2
-    NUnit (3.10.1) - restriction: == net45
+    NUnit (3.11) - restriction: == net45
