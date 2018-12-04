@@ -1,6 +1,3 @@
 Axle.Core
 Axle.Resources
 Kajabity.Tools.Java
-
-group build
-  Mason.Targets.Preprocessor
