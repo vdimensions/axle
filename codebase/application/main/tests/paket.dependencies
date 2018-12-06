@@ -1,4 +1,5 @@
 framework: net45
+storage: none
 
 source ../../../../dist
   nuget Axle.Core

@@ -59,7 +59,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="Axle.Application">
-          <HintPath>packages\Axle.Application\lib\net45\Axle.Application.dll</HintPath>
+          <HintPath>C:\Users\Ivaylo\.nuget\packages\axle.application\1.5.1.85\lib\net45\Axle.Application.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -73,7 +73,7 @@
           <Paket>True</Paket>
         </Reference>
         <Reference Include="Axle.Core">
-          <HintPath>packages\Axle.Core\lib\net45\Axle.Core.dll</HintPath>
+          <HintPath>C:\Users\Ivaylo\.nuget\packages\axle.core\1.5.1.46\lib\net45\Axle.Core.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>
@@ -84,7 +84,7 @@
     <When Condition="$(TargetFrameworkIdentifier) == '.NETFramework' And $(TargetFrameworkVersion) == 'v4.5'">
       <ItemGroup>
         <Reference Include="Axle.Resources">
-          <HintPath>packages\Axle.Resources\lib\net45\Axle.Resources.dll</HintPath>
+          <HintPath>C:\Users\Ivaylo\.nuget\packages\axle.resources\1.5.1.27\lib\net45\Axle.Resources.dll</HintPath>
           <Private>True</Private>
           <Paket>True</Paket>
         </Reference>

@@ -11,9 +11,3 @@ source https://nuget.org/api/v2
   nuget System.Resources.ResourceManager framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6
   nuget System.Threading.Thread >= 4.0 framework: netstandard1.6
   nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
-
-group build
-  source ../../../../submodules/mason/dist
-    nuget Mason.Targets.Packager
-    nuget Mason.Targets.Preprocessor
-    nuget Mason.Targets.Verman
