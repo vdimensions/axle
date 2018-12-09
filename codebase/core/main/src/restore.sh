@@ -1,6 +1,7 @@
+paket='.paket/paket.sh'
 project='Axle.Core'
 
-./paket.sh update
+$paket update
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""
