@@ -1,12 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;net45;net46;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net46;net45;</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../../submodules/msbuild-dotnet-multitargeting/src/MultitargetingFrameworkSupport.targets" />
+
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Name>Axle.FSharp</Name>
     <AssemblyName>Axle.FSharp</AssemblyName>
@@ -14,21 +12,20 @@
     <ProjectGuid>{058DA5D4-BE62-4A66-AC23-DD162E113EBF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <Language>F#</Language>
+    <Description>Axle Framework F#-friendly Library</Description>
   </PropertyGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+
   <ItemGroup>
-    <None Include="Axle.FSharp.nuspec.template" />
     <None Include="build.sh" />
-    <None Include="mason.properties" />
+    <None Include="restore.sh" />
     <None Include="paket.dependencies" />
     <None Include="paket.lock" />
     <None Include="paket.references" />
-    <None Include="paket.sh" />
-    <None Include="Properties\AssemblyInfo.fs.template" />
-    <None Include="restore.sh" />
   </ItemGroup>
-  <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.fs" />
-  </ItemGroup>
+
   <ItemGroup>
     <Compile Include="Option\Option.fs" />
     <Compile Include="Option\Nullable.fs" />
@@ -37,6 +34,6 @@
     <Compile Include="References\Nullsafe.fs" />
     <Compile Include="Verification\Verification.fs" />
   </ItemGroup>
-  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

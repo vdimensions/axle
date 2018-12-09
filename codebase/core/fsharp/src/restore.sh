@@ -1,6 +1,7 @@
+paket='.paket/paket.sh'
 project='Axle.FSharp'
 
-./paket.sh update
+$paket update
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""
@@ -13,3 +14,4 @@ if [ $? -ne 0 ]; then
   echo ""
   exit
 fi
+$paket simplify
