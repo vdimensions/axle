@@ -6,14 +6,17 @@
 
   <PropertyGroup>
     <ProjectGuid>101CF79E-134B-4483-8734-C9AC28F68E20</ProjectGuid>
+    <AssemblyName>Axle.Application</AssemblyName>
     <RootNamespace>Axle</RootNamespace>
-    <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <Description>Axle framework's application library</Description>
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
+
+  <PropertyGroup>
+    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+  </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>

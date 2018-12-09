@@ -3,9 +3,8 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;net46;net45;</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
+
   <PropertyGroup>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Name>Axle.Forest</Name>
     <AssemblyName>Axle.Forest</AssemblyName>
@@ -13,10 +12,20 @@
     <ProjectGuid>{5A6B7C35-2A40-4860-9B21-9AA13284F809}</ProjectGuid>
     <OutputType>Library</OutputType>
     <TargetFSharpCoreVersion>4.4.0.0</TargetFSharpCoreVersion>
+    <Description>Axle integration with the Forest framework</Description>
+    <Language>F#</Language>
   </PropertyGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+
   <ItemGroup>
-    <Compile Include="Properties\AssemblyInfo.fs" />
+    <None Include="build.sh" />
+    <None Include="restore.sh" />
+    <None Include="paket.dependencies" />
+    <None Include="paket.lock" />
+    <None Include="paket.references" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Include="Resources\TemplateResourceInfo.fs" />
     <Compile Include="Resources\TemplateMarshalling.fs" />
@@ -28,16 +37,6 @@
     <Compile Include="NoOp.fs" />
     <Compile Include="ForestModule.fs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="$(AssemblyName).nuspec.template" />
-    <None Include="build.sh" />
-    <None Include="mason.properties" />
-    <None Include="paket.dependencies" />
-    <None Include="paket.lock" />
-    <None Include="paket.references" />
-    <None Include="Properties\AssemblyInfo.fs.template" />
-    <None Include="restore.sh" />
-  </ItemGroup>
-  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
