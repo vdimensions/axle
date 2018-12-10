@@ -3,36 +3,48 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;netstandard1.3;netstandard1.0;net46;net45;net40;net35;net20</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../targets/stator/src/Stator.props" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
+
   <PropertyGroup>
     <ProjectGuid>{43919C97-BCFD-4802-95D7-76435E066962}</ProjectGuid>
     <RootNamespace>Axle</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Description>Axle Framework Core Library</Description>
+    
+  </PropertyGroup>
+    
+  <Import Project="../../../targets/stator/src/Stator.props" />
+  <Import Project="../../../Axle.Common.props" />
+  
+  <PropertyGroup>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
     <Reference Remove="System.Data" />
     <Reference Remove="System.Xml" />
     <Reference Remove="System.Xml.Linq" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Remove="_Experimental\**" />
     <EmbeddedResource Remove="_Experimental\**" />
     <None Remove="_Experimental\**" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
@@ -41,14 +53,10 @@
     <Compile Remove="Linq\Sequence.cs" />
     <Compile Remove="Linq\SequenceExtensions.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Remove="Axle.Core.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
+
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

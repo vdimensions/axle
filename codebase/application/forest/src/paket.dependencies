@@ -2,19 +2,10 @@ framework: auto-detect
 storage: none
 
 source https://nuget.org/api/v2
-  nuget FSharp.Core
 
 source ../../../../../forest/dist
   nuget Forest.Core
 
 source ../../../../dist
-  nuget Axle.Core
   nuget Axle.FSharp
   nuget Axle.Application
-  nuget Axle.Resources
-
-group build
-  source ../../../../submodules/mason/dist
-    nuget Mason.Targets.Packager
-    nuget Mason.Targets.Preprocessor
-    nuget Mason.Targets.Verman

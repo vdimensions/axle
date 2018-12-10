@@ -1,38 +1,43 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net46;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
+
   <PropertyGroup>
     <ProjectGuid>101CF79E-134B-4483-8734-C9AC28F68E20</ProjectGuid>
+    <AssemblyName>Axle.Application</AssemblyName>
     <RootNamespace>Axle</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <Description>Axle framework's application library</Description>
+  </PropertyGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+
+  <PropertyGroup>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Modularity\DynamicModuleLoader.cs" />
     <Compile Remove="Modularity\IAssemblyLoadListener.cs" />
   </ItemGroup>
+
   <ItemGroup>
-    <None Remove="paket.lock" />
+    <Folder Include="Properties\" />
   </ItemGroup>
-  <Target Name="BeforeBuild">
-  </Target>
-  <Target Name="AfterBuild">
-  </Target>
-  <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

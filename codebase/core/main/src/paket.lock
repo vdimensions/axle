@@ -1,7 +1,8 @@
+STORAGE: NONE
 RESTRICTION: || (== net35) (== net40) (== net45) (== net46) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
 NUGET
   remote: https://www.nuget.org/api/v2
-    Microsoft.NETCore.Platforms (2.1.1) - restriction: == netstandard1.6
+    Microsoft.NETCore.Platforms (2.2) - restriction: == netstandard1.6
     Microsoft.NETCore.Targets (2.1) - restriction: == netstandard1.6
     runtime.native.System (4.3.1) - restriction: == netstandard1.6
       Microsoft.NETCore.Platforms (>= 1.1.1)
@@ -89,7 +90,7 @@ NUGET
     System.Runtime (4.3) - restriction: == netstandard1.6
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       Microsoft.NETCore.Targets (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
-    System.Runtime.CompilerServices.Unsafe (4.5.1) - restriction: == netstandard1.6
+    System.Runtime.CompilerServices.Unsafe (4.5.2) - restriction: == netstandard1.6
       System.Runtime (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.0)) (&& (== net46) (< net45)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6)
     System.Runtime.Extensions (4.3) - restriction: == netstandard1.6
       Microsoft.NETCore.Platforms (>= 1.1) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.0) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
@@ -183,10 +184,3 @@ NUGET
       System.Xml.XmlDocument (>= 4.3) - restriction: || (== net35) (== net40) (&& (== net45) (< portable-net45+win8+wp8+wpa81)) (&& (== net46) (< net45)) (&& (== net46) (< portable-net45+win8+wp8+wpa81)) (&& (== netstandard1.0) (>= netstandard1.3)) (&& (== netstandard1.0) (< portable-net45+win8+wp8+wpa81)) (== netstandard1.3) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
   remote: ../../../../dist/third-parties
     System.Threading.Tasks.Unofficial (3.1.0) - restriction: == net35
-
-GROUP build
-NUGET
-  remote: ../../../../submodules/mason/dist
-    Mason.Targets.Packager (0.2.0.41)
-    Mason.Targets.Preprocessor (0.2.0.78)
-    Mason.Targets.Verman (0.2.0.51)

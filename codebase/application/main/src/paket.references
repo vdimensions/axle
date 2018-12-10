@@ -1,5 +1,2 @@
 Axle.Core
 Axle.Resources
-
-group build
-  Mason.Targets.Preprocessor

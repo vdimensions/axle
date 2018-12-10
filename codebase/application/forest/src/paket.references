@@ -1,9 +1,3 @@
-FSharp.Core
 Forest.Core
-Axle.Core
 Axle.FSharp
 Axle.Application
-Axle.Resources
-
-group build
-  Mason.Targets.Preprocessor
