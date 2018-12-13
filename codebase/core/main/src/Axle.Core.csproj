@@ -7,29 +7,20 @@
   <PropertyGroup>
     <ProjectGuid>{43919C97-BCFD-4802-95D7-76435E066962}</ProjectGuid>
     <RootNamespace>Axle</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <Description>Axle Framework Core Library</Description>
-    
   </PropertyGroup>
     
   <Import Project="../../../targets/stator/src/Stator.props" />
-  <Import Project="../../../Axle.Common.props" />
   
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
 
@@ -58,5 +49,6 @@
     <None Remove="paket.lock" />
   </ItemGroup>
 
+  <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
