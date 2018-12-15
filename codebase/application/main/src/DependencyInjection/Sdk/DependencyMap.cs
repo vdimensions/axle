@@ -89,7 +89,7 @@ namespace Axle.DependencyInjection.Sdk
         {
             state.VerifyArgument(nameof(state)).IsNotNull();
             _states.AddOrUpdate(
-                    name.VerifyArgument(nameof(name)),
+                    name,
                     x => new[] { state },
                     (x, oldState) =>
                     {
@@ -102,7 +102,7 @@ namespace Axle.DependencyInjection.Sdk
                     });
         }
 
-        public void RegisterConstant(string name, object value) => Register(name, new ConstantDependencyState(name, value));
+        public void RegisterConstant(string name, object value) => Register(name.VerifyArgument(nameof(name)).IsNotNull(), new ConstantDependencyState(name, value));
 
         private void RegisterConstructible(
                 string name, 
@@ -122,12 +122,12 @@ namespace Axle.DependencyInjection.Sdk
 
         public void RegisterSingletion(string name, Type type, IDependencyDescriptorProvider ddp, IDependencyResolver resolver)
         {
-            RegisterConstructible(name, type, ddp, resolver, (a, b, c, d) => new SingletonDependencyState(a, b, c, d));
+            RegisterConstructible(name.VerifyArgument(nameof(name)).IsNotNull(), type, ddp, resolver, (a, b, c, d) => new SingletonDependencyState(a, b, c, d));
         }
 
         public void RegisterPrototype(string name, Type type, IDependencyDescriptorProvider ddp, IDependencyResolver resolver)
         {
-            RegisterConstructible(name, type, ddp, resolver, (a, b, c, d) => new PrototypeDependencyState(a, b, c, d));
+            RegisterConstructible(name.VerifyArgument(nameof(name)).IsNotNull(), type, ddp, resolver, (a, b, c, d) => new PrototypeDependencyState(a, b, c, d));
         }
 
 
