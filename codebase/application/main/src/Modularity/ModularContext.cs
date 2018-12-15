@@ -50,21 +50,27 @@ namespace Axle.Modularity
                 {
                     var moduleInfo = modulesToLaunch[i];
                     int rank = 0, updatedRequiredModules = 0;
-                    IEnumerable<ModuleInfo> requiredModules = moduleInfo.RequiredModules;
+                    var requiredModules = new HashSet<ModuleInfo>(moduleInfo.RequiredModules, new AdaptiveEqualityComparer<ModuleInfo,Type>(x => x.Type));
                     //
                     // Expand the required modules with the utilized modules
                     //
                     foreach (var ua in moduleInfo.UtilizedModules)
                     {
-                        requiredModules = requiredModules.Union(modulesToLaunch.Where(mi => ua.Accepts(mi.Type)));
-                        updatedRequiredModules++;
+                        var newModules = modulesToLaunch.Where(mi => ua.Accepts(mi.Type));
+                        foreach (var newRequiredModule in newModules)
+                        {
+                            requiredModules.Remove(newRequiredModule);
+                            requiredModules.Add(newRequiredModule);
+                            updatedRequiredModules++;
+                        }
                     }
                     //
                     // Expand the required modules with the utilized by modules
                     //
                     if (modulesToLaunch.SelectMany(x => x.UtilizedByModules).Any(uby => uby.Accepts(moduleInfo.Type)))
                     {
-                        requiredModules = requiredModules.Union(new[] { moduleInfo });
+                        requiredModules.Remove(moduleInfo);
+                        requiredModules.Add(moduleInfo);
                         updatedRequiredModules++;
                     }
                     foreach (var moduleDependency in requiredModules)
