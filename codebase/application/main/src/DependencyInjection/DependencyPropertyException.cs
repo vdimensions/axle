@@ -15,13 +15,14 @@ namespace Axle.DependencyInjection
     {
         internal DependencyPropertyException() { }
         private DependencyPropertyException(string message, Exception inner) : base(message, inner) { }
-        public DependencyPropertyException(Type type, string propertyName) : this(type, propertyName, null, null) { }
-        public DependencyPropertyException(Type type, string propertyName, Exception inner) : this(type, propertyName, null, inner) { }
-        public DependencyPropertyException(Type type, string propertyName, string message, Exception inner) 
+        public DependencyPropertyException(Type type, Type propertyType, string propertyName) : this(type, propertyType, propertyName, null, null) { }
+        public DependencyPropertyException(Type type, Type propertyType, string propertyName, Exception inner) : this(type, propertyType, propertyName, null, inner) { }
+        public DependencyPropertyException(Type type, Type propertyType, string propertyName, string message, Exception inner) 
             : this(
                 string.Format(
-                    "Unable to initialize dependency of type {0}. Could not satisfy property '{1}'{2}",
+                    "Unable to initialize dependency of type `{0}`. Could not satisfy property '{2}' of type `{1}` {3}",
                     type.VerifyArgument(nameof(type)).Value.FullName,
+                    propertyType.VerifyArgument(nameof(propertyType)).Value.FullName,
                     propertyName.VerifyArgument(nameof(propertyName)).IsNotNullOrEmpty().Value,
                     $". {message ?? string.Empty}"), 
                 inner) { }

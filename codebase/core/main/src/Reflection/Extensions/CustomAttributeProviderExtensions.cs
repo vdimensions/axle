@@ -85,17 +85,17 @@ namespace Axle.Reflection.Extensions
             foreach (var attribute in notInherited)
             {
                 #if NETSTANDARD || NET45_OR_NEWER
-                var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
-                #else
-                var attributeUsage = attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
-                #endif
+                var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
+#else
+                var attributeUsage = attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
+#endif
                 result.Add(
                     new AttributeInfo
                     {
                         Attribute = attribute,
                         Inherited = false,
-                        AllowMultiple = attributeUsage.AllowMultiple,
-                        AttributeTargets = attributeUsage.ValidOn,
+                        AllowMultiple = attributeUsage?.AllowMultiple ?? false,
+                        AttributeTargets = attributeUsage?.ValidOn ?? AttributeTargets.All,
                     });
             }
             foreach (var attribute in inherited)
@@ -105,7 +105,7 @@ namespace Axle.Reflection.Extensions
                     continue;
                 }
                 #if NETSTANDARD || NET45_OR_NEWER
-                var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
+                var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
                 #else
                 var attributeUsage = attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().Single();
                 #endif
@@ -114,8 +114,8 @@ namespace Axle.Reflection.Extensions
                     {
                         Attribute = attribute,
                         Inherited = true,
-                        AllowMultiple = attributeUsage.AllowMultiple,
-                        AttributeTargets = attributeUsage.ValidOn,
+                        AllowMultiple = attributeUsage?.AllowMultiple ?? false,
+                        AttributeTargets = attributeUsage?.ValidOn ?? AttributeTargets.All,
                     });
             }
             return result.ToArray();
