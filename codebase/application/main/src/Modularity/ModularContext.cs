@@ -13,6 +13,62 @@ namespace Axle.Modularity
 {
     internal sealed partial class ModularContext : IDisposable
     {
+        private static IList<ModuleInfo> ExpandRequiredModules(IEnumerable<ModuleInfo> m)
+        {
+            var modulesToLaunch = m.ToList();
+            for (var i = 0; i < modulesToLaunch.Count; i++)
+            {
+                var moduleInfo = modulesToLaunch[i];
+                var updatedRequiredModules = 0;
+                var requiredModules = new HashSet<ModuleInfo>(moduleInfo.RequiredModules,
+                    new AdaptiveEqualityComparer<ModuleInfo, Type>(x => x.Type));
+                //
+                // Expand the required modules with the utilized modules
+                //
+                foreach (var ua in moduleInfo.UtilizedModules)
+                {
+                    var newModules = modulesToLaunch.Where(mi => ua.Accepts(mi.Type));
+                    foreach (var newRequiredModule in newModules)
+                    {
+                        requiredModules.Remove(newRequiredModule);
+                        requiredModules.Add(newRequiredModule);
+                        updatedRequiredModules++;
+                    }
+                }
+
+                //
+                // Expand the required modules with the utilized by modules
+                //
+                if (modulesToLaunch.SelectMany(x => x.UtilizedByModules).Any(uby => uby.Accepts(moduleInfo.Type)))
+                {
+                    requiredModules.Remove(moduleInfo);
+                    requiredModules.Add(moduleInfo);
+                    updatedRequiredModules++;
+                }
+
+                if (updatedRequiredModules > 0)
+                {
+                    //
+                    // In case some of the auxiliary modules have been detected,
+                    // we will promote them to required modules in order to have them trigger dependency init callbacks.
+                    //
+                    var newModuleInfo = new ModuleInfo(
+                        moduleInfo.Type,
+                        moduleInfo.InitMethod,
+                        moduleInfo.DependencyInitializedMethods,
+                        moduleInfo.DependencyTerminatedMethods,
+                        moduleInfo.TerminateMethod,
+                        moduleInfo.EntryPointMethod,
+                        moduleInfo.UtilizedModules,
+                        moduleInfo.UtilizedByModules,
+                        requiredModules.ToArray());
+                    modulesToLaunch[i] = newModuleInfo;
+                }
+            }
+
+            return modulesToLaunch;
+        }
+
         /// <summary>
         /// Creates a list of modules, grouped by and sorted by a rank integer. The rank determines
         /// the order for bootstrapping the modules -- those with lower rank will be bootstrapped earlier. 
@@ -31,7 +87,7 @@ namespace Axle.Modularity
         private static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(IEnumerable<ModuleInfo> moduleCatalog, ICollection<Type> loadedModules)
         {
             IDictionary<Type, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<Type, Tuple<ModuleInfo, int>>();
-            var modulesToLaunch = moduleCatalog.ToList();
+            var modulesToLaunch = ExpandRequiredModules(moduleCatalog);
             var remainingCount = int.MaxValue;
             while (modulesToLaunch.Count > 0)
             {
@@ -43,37 +99,16 @@ namespace Axle.Modularity
                         string.Format(
                             @"Circular dependencies exist between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
                 }
+
                 remainingCount = modulesToLaunch.Count;
                 var modulesOfCurrentRank = new List<ModuleInfo>(modulesToLaunch.Count);
                 var modulesToRemove = new List<ModuleInfo>(modulesToLaunch.Count);
+
                 for (var i = 0; i < modulesToLaunch.Count; i++)
                 {
                     var moduleInfo = modulesToLaunch[i];
-                    int rank = 0, updatedRequiredModules = 0;
-                    var requiredModules = new HashSet<ModuleInfo>(moduleInfo.RequiredModules, new AdaptiveEqualityComparer<ModuleInfo,Type>(x => x.Type));
-                    //
-                    // Expand the required modules with the utilized modules
-                    //
-                    foreach (var ua in moduleInfo.UtilizedModules)
-                    {
-                        var newModules = modulesToLaunch.Where(mi => ua.Accepts(mi.Type));
-                        foreach (var newRequiredModule in newModules)
-                        {
-                            requiredModules.Remove(newRequiredModule);
-                            requiredModules.Add(newRequiredModule);
-                            updatedRequiredModules++;
-                        }
-                    }
-                    //
-                    // Expand the required modules with the utilized by modules
-                    //
-                    if (modulesToLaunch.SelectMany(x => x.UtilizedByModules).Any(uby => uby.Accepts(moduleInfo.Type)))
-                    {
-                        requiredModules.Remove(moduleInfo);
-                        requiredModules.Add(moduleInfo);
-                        updatedRequiredModules++;
-                    }
-                    foreach (var moduleDependency in requiredModules)
+                    int rank = 0;
+                    foreach (var moduleDependency in moduleInfo.RequiredModules)
                     {
                         if (modulesWithRank.TryGetValue(moduleDependency.Type, out var parentRank))
                         {
@@ -106,29 +141,8 @@ namespace Axle.Modularity
                     // Modules with no dependencies will have a rank of 1.
                     //
                     modulesToRemove.Add(moduleInfo);
-                    if (updatedRequiredModules > 0)
-                    {
-                        // In case some of the auxiliary modules have been detected,
-                        // we will promote them to required modules in order to have them trigger dependency init callbacks.
-                        //
-                        var newModuleInfo = new ModuleInfo(
-                            moduleInfo.Type,
-                            moduleInfo.InitMethod,
-                            moduleInfo.DependencyInitializedMethods,
-                            moduleInfo.DependencyTerminatedMethods,
-                            moduleInfo.TerminateMethod,
-                            moduleInfo.EntryPointMethod,
-                            moduleInfo.UtilizedModules,
-                            moduleInfo.UtilizedByModules,
-                            requiredModules.ToArray());
-                        modulesOfCurrentRank.Add(newModuleInfo);
-                        modulesWithRank[newModuleInfo.Type] = Tuple.Create(newModuleInfo, rank + 1);
-                    }
-                    else
-                    {
-                        modulesOfCurrentRank.Add(moduleInfo);
-                        modulesWithRank[moduleInfo.Type] = Tuple.Create(moduleInfo, rank + 1);
-                    }
+                    modulesOfCurrentRank.Add(moduleInfo);
+                    modulesWithRank[moduleInfo.Type] = Tuple.Create(moduleInfo, rank + 1);
                 }
                 modulesToRemove.ForEach(x => modulesToLaunch.Remove(x));
             }
