@@ -125,7 +125,7 @@ namespace Axle.DependencyInjection.Sdk
                     return prop.DefaultValue;
                 }
 
-                throw new DependencyPropertyException(prop.Info.Type, prop.Info.MemberName, e);
+                throw new DependencyPropertyException(TargetType, prop.Info.Type, prop.Info.MemberName, e);
             }
         }
 
@@ -151,7 +151,7 @@ namespace Axle.DependencyInjection.Sdk
                 }
                 catch (Exception e)
                 {
-                    throw new DependencyPropertyException(TargetType, property.Prop.Info.MemberName, "An error has occurred while invoking a member's setter, see inner exception for more details. ", e);
+                    throw new DependencyPropertyException(TargetType, property.Prop.Info.Type, property.Prop.Info.MemberName, "An error has occurred while invoking a member's setter, see inner exception for more details. ", e);
                 }
             }
 
