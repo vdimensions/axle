@@ -1,11 +1,11 @@
 ﻿framework: auto-detect
 storage: none
 
-source https://nuget.org/api/v2
-  nuget FSharp.Core >= 4.5
-  nuget WebSharper.UI >= 4.5.5.155
+source https://api.nuget.org/v3/index.json
+  nuget WebSharper.UI
   nuget WebSharper
   nuget WebSharper.FSharp
+  nuget FSharp.Core
 
 source ../../../../../forest/dist
   nuget Forest.Core >= 2.0

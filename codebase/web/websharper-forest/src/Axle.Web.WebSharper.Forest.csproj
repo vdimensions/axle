@@ -6,18 +6,12 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <Name>Axle.Web.WebSharper.Forest</Name>
     <AssemblyName>Axle.Web.WebSharper.Forest</AssemblyName>
     <Description>A library to integrate WebSharper with the Axle framework and Forest.</Description>
-    <RootNamespace>Axle.Web.WebSharper.Forest</RootNamespace>
     <ProjectGuid>{2C211B8E-C35E-4EFD-B638-18574728557B}</ProjectGuid>
     <OutputType>Library</OutputType>
   </PropertyGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/AssemblyLevelProperties.targets" />
 
   <ItemGroup>
     <None Include="paket.dependencies" />
@@ -30,5 +24,6 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
+  <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
