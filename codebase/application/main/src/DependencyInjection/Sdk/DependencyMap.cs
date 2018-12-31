@@ -54,7 +54,22 @@ namespace Axle.DependencyInjection.Sdk
                 _resolver = resolver.VerifyArgument(nameof(resolver)).IsNotNull().Value;
             }
 
-            public override object Resolve() => _recepies.Select(r => r.Complete(_resolver)).FirstOrDefault();
+            public override object Resolve()
+            {
+                DependencyConstructionException lastEx = null;
+                foreach (var recepie in _recepies)
+                {
+                    try
+                    {
+                        return recepie.Complete(_resolver);
+                    }
+                    catch (DependencyConstructionException e)
+                    {
+                        lastEx = e;
+                    }
+                }
+                throw new DependencyResolutionException(Type, Name, lastEx);
+            }
 
             public sealed override Type Type { get; }
         }
