@@ -3,10 +3,11 @@ using System.Collections.Generic;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
-//using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 using Axle.DependencyInjection;
 using Axle.Logging;
+using Axle.Threading.Extensions.Tasks;
 
 
 namespace Axle.Modularity
@@ -47,8 +48,8 @@ namespace Axle.Modularity
                     }
 
                     var callbacks = callbackProvider(rmm.ModuleInfo);
-                    //List<Task> parallelCallbacks = new List<Task>(callbacks.Length);
-                    //List<Task> sequentialCallbacks = new List<Task>(callbacks.Length);
+                    var parallelCallbacks = new List<Task>(callbacks.Length);
+                    var sequentialCallbacks = new List<Task>(callbacks.Length);
                     for (var l = 0; l < callbacks.Length; l++)
                     {
                         var callback = callbacks[l];
@@ -61,21 +62,26 @@ namespace Axle.Modularity
                             continue;
                         }
 
-                        //var listToAddTaskTo = callback.AllowParallelInvoke ? parallelCallbacks : sequentialCallbacks;
-                        //listToAddTaskTo.Add(new Task(() => callback.Invoke(rmm.ModuleInstance, ModuleInstance)));
+                        var listToAddTaskTo = callback.AllowParallelInvoke ? parallelCallbacks : sequentialCallbacks;
+                        listToAddTaskTo.Add(new Task(() => callback.Invoke(rmm.ModuleInstance, ModuleInstance)));
 
-                        try
-                        {
-                            callback.Invoke(rmm.ModuleInstance, ModuleInstance);
-                        }
-                        catch (Exception e)
-                        {
-                            // TODO: wrap exception
-                            throw;
-                        }
+                        //parallelCallbacks.StartAll();
+
+                        //try
+                        //{
+                        //    callback.Invoke(rmm.ModuleInstance, ModuleInstance);
+                        //}
+                        //catch (Exception e)
+                        //{
+                        //    // TODO: wrap exception
+                        //    throw;
+                        //}
                     }
 
-                    //parallelCallbacks.StartAll();
+                    parallelCallbacks.Start();
+                    sequentialCallbacks.RunSynchronously();
+                    parallelCallbacks.WaitForAll();
+                    sequentialCallbacks.WaitForAll();
                 }
             }
 
