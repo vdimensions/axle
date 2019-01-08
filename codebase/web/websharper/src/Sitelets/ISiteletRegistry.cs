@@ -2,7 +2,7 @@
 using WebSharper.Sitelets;
 
 
-namespace Axle.Web.WebSharper
+namespace Axle.Web.WebSharper.Sitelets
 {
     public interface ISiteletRegistry
     {

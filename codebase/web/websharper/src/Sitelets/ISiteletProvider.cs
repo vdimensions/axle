@@ -1,4 +1,4 @@
-﻿namespace Axle.Web.WebSharper
+﻿namespace Axle.Web.WebSharper.Sitelets
 {
     [RequiresWebSharperSitelets]
     public interface ISiteletProvider

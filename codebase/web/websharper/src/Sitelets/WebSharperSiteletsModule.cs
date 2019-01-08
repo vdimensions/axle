@@ -11,7 +11,7 @@ using WebSharper.AspNetCore;
 using WebSharper.Sitelets;
 
 
-namespace Axle.Web.WebSharper
+namespace Axle.Web.WebSharper.Sitelets
 {
     [Module]
     [RequiresAspNetCore]
