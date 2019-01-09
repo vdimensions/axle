@@ -14,7 +14,7 @@ module private NoOp =
 
     type [<Sealed;NoComparison;NoEquality>] private Facade(ctx : IForestContext) =
         inherit DefaultForestFacade<IPhysicalView>(ctx, Renderer(DefaultErrorMessage))
-        override __.LoadTemplate _ = invalidOp DefaultErrorMessage
+        override __.LoadTree _ = invalidOp DefaultErrorMessage
         override __.SendMessage _ = invalidOp DefaultErrorMessage
         override __.ExecuteCommand _ _ _ = invalidOp DefaultErrorMessage
 
