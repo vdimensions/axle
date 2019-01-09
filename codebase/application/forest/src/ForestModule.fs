@@ -27,19 +27,19 @@ type [<Sealed;NoEquality;NoComparison>] private LoggingForestFacade(logger : ILo
             result
 
     interface ICommandDispatcher with
-        member __.ExecuteCommand target command arg =
+        member __.ExecuteCommand command target arg =
             let sw = Stopwatch.StartNew()
-            let result = facade.ExecuteCommand target command arg
+            let result = facade.ExecuteCommand command target arg
             sw.Stop()
             logger.Trace("Forest 'ExecuteCommand' operation took {0}ms to complete. ", sw.ElapsedMilliseconds)
             result
 
     interface IForestFacade with
-        member __.LoadTemplate template =
+        member __.LoadTree tree =
             let sw = Stopwatch.StartNew()
-            let result = facade.LoadTemplate template
+            let result = facade.LoadTree tree
             sw.Stop()
-            logger.Trace("Forest 'LoadTemplate' operation took {0}ms to complete. ", sw.ElapsedMilliseconds)
+            logger.Trace("Forest 'LoadTree' operation took {0}ms to complete. ", sw.ElapsedMilliseconds)
             result
 type [<Sealed;NoEquality;NoComparison>] private LoggingForestFacadeProvider(logger : ILogger, provider : IForestFacadeProvider) =
     interface IForestFacadeProvider with member __.ForestFacade with get() = upcast LoggingForestFacade(logger, provider.ForestFacade)
@@ -98,9 +98,9 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
         this._facadeProvider <- (LoggingForestFacadeProvider(logger, this._facadeProvider) :> IForestFacadeProvider)
 
     interface IForestFacade with
-        member this.LoadTemplate t = 
+        member this.LoadTree t = 
             let opWatch = Stopwatch.StartNew()
-            this._facadeProvider.ForestFacade.LoadTemplate t
+            this._facadeProvider.ForestFacade.LoadTree t
             opWatch.Stop()
             logger.Debug("Forest LoadTemplate operation took {0}ms", opWatch.ElapsedMilliseconds)
 
@@ -112,9 +112,9 @@ and [<Sealed;NoEquality;NoComparison;Module;Requires(typeof<ForestResourceModule
             logger.Debug("Forest SendMessage operation took {0}ms", opWatch.ElapsedMilliseconds)
 
     interface ICommandDispatcher with
-        member this.ExecuteCommand target cmd arg = 
+        member this.ExecuteCommand cmd target arg = 
             let opWatch = Stopwatch.StartNew()
-            this._facadeProvider.ForestFacade.ExecuteCommand target cmd arg
+            this._facadeProvider.ForestFacade.ExecuteCommand cmd target arg
             opWatch.Stop()
             logger.Debug("Forest ExecuteCommand operation took {0}ms", opWatch.ElapsedMilliseconds)
 
