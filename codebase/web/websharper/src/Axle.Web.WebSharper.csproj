@@ -1,0 +1,26 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <Name>Axle.Web.WebSharper</Name>
+    <AssemblyName>Axle.Web.WebSharper</AssemblyName>
+    <Description>A library to integrate WebSharper with the Axle framework.</Description>
+    <RootNamespace>Axle.Web.WebSharper</RootNamespace>
+    <ProjectGuid>{06D29389-3DB1-4841-A74C-6905C870970B}</ProjectGuid>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="paket.dependencies" />
+    <None Include="paket.lock" />
+    <None Include="paket.references" />
+    <None Include="restore.sh" />
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+  <Import Project=".paket\Paket.Restore.targets" />
+
+</Project>

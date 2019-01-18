@@ -2,7 +2,11 @@ STORAGE: NONE
 RESTRICTION: || (== net45) (== net46) (== netstandard1.6) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
+<<<<<<< HEAD
+    Axle.Application (1.5.2178.36219)
+=======
     Axle.Application (1.5.2190.40278)
+>>>>>>> master
       Axle.Resources (>= 1.5.1.27)
     Axle.Core (1.5.2178.22316)
       NETStandard.Library (>= 1.6.1) - restriction: || (&& (== net45) (< net20)) (&& (== net46) (< net20)) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.3)) (&& (== netstandard2.0) (< netstandard1.5)) (&& (== netstandard2.0) (< netstandard1.6))
