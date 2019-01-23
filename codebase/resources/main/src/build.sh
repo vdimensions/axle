@@ -1,15 +1,9 @@
-msbuild="../../../../submodules/btw/msbuild.sh"
 project='Axle.Resources'
+project_format="csproj"
 
 ./restore.sh
 
-$msbuild $project.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
-$msbuild $project.dist.csproj
+dotnet clean $project.$project_format && dotnet build $project.$project_format && dotnet pack $project.$project_format --no-build -- no-restore
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""

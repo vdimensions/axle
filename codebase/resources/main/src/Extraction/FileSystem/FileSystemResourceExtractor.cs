@@ -23,7 +23,7 @@ namespace Axle.Resources.Extraction.FileSystem
             var culture = context.Culture;
             if (CultureInfo.InvariantCulture.Equals(culture) && location.IsAbsoluteUri && File.Exists(location.AbsolutePath))
             {
-                return new FileSystemResourceInfo(location, name, culture);
+                return new FileSystemResourceInfo(context.Location, name, culture);
             }
             #endif
 

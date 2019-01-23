@@ -1,11 +1,11 @@
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.1.46)
-    Axle.Resources (1.5.1.27)
-      Axle.Core (>= 1.5.1)
+    Axle.Core (1.5.2178.22316)
+    Axle.Resources (1.5.2213.18200)
+      Axle.Core (>= 1.5.2178.22316)
 
 GROUP test
 NUGET
   remote: https://www.nuget.org/api/v2
-    NUnit (3.10.1) - restriction: == net45
+    NUnit (3.11) - restriction: == net45

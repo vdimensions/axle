@@ -1,20 +1,10 @@
-#framework: auto-detect
-#storage: none
+framework: auto-detect
+storage: none
+
+source https://api.nuget.org/v3/index.json
+
+source ../../../../dist/third-parties
 
 source ../../../../dist
   nuget Axle.Core
 
-source ../../../../dist/third-parties
-  nuget System.Threading.Tasks.Unofficial >= 3.1 framework: net35
-
-source https://nuget.org/api/v2
-  nuget System.Diagnostics.TraceSource framework: netstandard1.6
-  nuget System.Resources.ResourceManager framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6
-  nuget System.Threading.Thread framework: netstandard1.6
-  nuget System.Xml.XmlSerializer framework: netstandard1.6
-	
-group build
-  source ../../../../submodules/mason/dist
-    nuget Mason.Targets.Packager
-    nuget Mason.Targets.Preprocessor
-    nuget Mason.Targets.Verman
