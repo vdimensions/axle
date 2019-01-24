@@ -153,15 +153,15 @@ namespace Axle.Modularity
         private readonly ConcurrentStack<ModuleMetadata> _moduleInstances = new ConcurrentStack<ModuleMetadata>();
         private readonly IContainer _rootContainer;
         private readonly IModuleCatalog _moduleCatalog;
-        private readonly IDependencyContainerProvider _containerProvier;
+        private readonly IDependencyContainerProvider _containerProvider;
         private readonly ILoggingServiceProvider _loggingServiceProvider;
         private readonly IList<ModuleMetadata> _initializedModules = new List<ModuleMetadata>();
 
-        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvier, ILoggingServiceProvider loggingServiceProvider)
+        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider)
         {
             _moduleCatalog = moduleCatalog;
-            _containerProvier = containerProvier;
-            _rootContainer = containerProvier.Create();
+            _containerProvider = containerProvider;
+            _rootContainer = containerProvider.Create();
             _loggingServiceProvider = loggingServiceProvider;
         }
         public ModularContext() : this(
@@ -189,10 +189,10 @@ namespace Axle.Modularity
                     continue;
                 }
 
-                using (var moduleInitializationContainer = _containerProvier.Create(_rootContainer))
+                using (var moduleInitializationContainer = _containerProvider.Create(_rootContainer))
                 {
                     var moduleLogger = _loggingServiceProvider.Create(moduleType);
-                    var moduleContainer = _containerProvier.Create(_rootContainer);
+                    var moduleContainer = _containerProvider.Create(_rootContainer);
                     moduleInitializationContainer
                             .RegisterInstance(moduleInfo)
                             .RegisterType(moduleType)
@@ -229,12 +229,10 @@ namespace Axle.Modularity
                                 {
                                     return m;
                                 }
-                                else
-                                {
-                                    var result = m.UpdateInstance(moduleInstance, moduleInitializationContainer, moduleLogger);
-                                    _moduleInstances.Push(result);
-                                    return result;
-                                }
+
+                                var result = m.UpdateInstance(moduleInstance, moduleInitializationContainer, moduleLogger);
+                                _moduleInstances.Push(result);
+                                return result;
                             });
 
                     try
