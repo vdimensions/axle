@@ -3,6 +3,6 @@
     [RequiresWebSharperSitelets]
     public interface ISiteletProvider
     {
-        void RegisterSitelets(ISiteletRegistry registry);
+        void RegisterSitelet(ISiteletRegistry registry);
     }
 }

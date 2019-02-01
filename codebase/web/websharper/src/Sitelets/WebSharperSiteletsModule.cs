@@ -20,17 +20,36 @@ namespace Axle.Web.WebSharper.Sitelets
     internal sealed class WebSharperSiteletsModule : IApplicationConfigurer, ISiteletRegistry, IServiceConfigurer
     {
         private readonly IList<Action<IServiceCollection>> _siteletRegistrationRequests = new List<Action<IServiceCollection>>();
+        private readonly IList<IWebSharperConfigurer> _wsConfigurers = new List<IWebSharperConfigurer>();
 
         public Microsoft.AspNetCore.Builder.IApplicationBuilder Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder builder)
         {
-            return builder.UseWebSharper();
+            return builder.UseWebSharper(ConfigureWebSharper);
+        }
+
+        private void ConfigureWebSharper(WebSharperBuilder b)
+        {
+            for (var i = 0; i < _wsConfigurers.Count; i++)
+            {
+                _wsConfigurers[i].Configure(b);
+            }
         }
 
         [ModuleDependencyInitialized]
-        internal void SiteletProviderInitialized(ISiteletProvider provider) => provider.RegisterSitelets(this);
+        internal void SiteletProviderInitialized(ISiteletProvider provider) => provider.RegisterSitelet(this);
+
+        [ModuleDependencyInitialized]
+        internal void WebSharperConfigurerInitialized(IWebSharperConfigurer configurer) => _wsConfigurers.Add(configurer);
+
+        [ModuleDependencyTerminated]
+        internal void WebSharperConfigurerTerminated(IWebSharperConfigurer configurer) => _wsConfigurers.Remove(configurer);
 
         [ModuleTerminate]
-        internal void OnTerminated() => _siteletRegistrationRequests.Clear();
+        internal void OnTerminated()
+        {
+            _siteletRegistrationRequests.Clear();
+            _wsConfigurers.Clear();
+        }
 
         ISiteletRegistry ISiteletRegistry.RegisterSitelet<T>(Sitelet<T> sitelet)
         {
@@ -49,7 +68,7 @@ namespace Axle.Web.WebSharper.Sitelets
             {
                 _siteletRegistrationRequests[i].Invoke(builder);
             }
-            // free any refernces held up by the lambdas
+            // free any references held up by the lambdas
             _siteletRegistrationRequests.Clear();
             return builder;
         }
