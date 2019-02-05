@@ -8,7 +8,7 @@ NUGET
       System.Threading.Thread (>= 4.3) - restriction: || (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
       System.Xml.XmlSerializer (>= 4.3) - restriction: || (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== net46) (< net20) (>= netstandard1.6)) (== netstandard1.6)
   remote: https://www.nuget.org/api/v2
-    FSharp.Core (4.5.4)
+    FSharp.Core (4.6.1)
       System.Collections (>= 4.0.11) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)
       System.Console (>= 4.0) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)
       System.Diagnostics.Debug (>= 4.0.11) - restriction: || (&& (== net46) (< net45) (>= netstandard1.6)) (== netstandard1.6)

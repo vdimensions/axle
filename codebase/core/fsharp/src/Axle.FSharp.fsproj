@@ -33,6 +33,7 @@
     <Compile Include="Option\ValueOptionExtensions.fs" />
     <Compile Include="References\Nullsafe.fs" />
     <Compile Include="Verification\Verification.fs" />
+    <Compile Include="DateTime\DateTime.fs" />
   </ItemGroup>
 
   <Import Project=".paket\Paket.Restore.targets" />

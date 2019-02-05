@@ -14,3 +14,5 @@ module VerificationModule =
     let inline (|NotEmpty|) name (arg:string) = arg |> argdo StringVerifier.IsNotEmpty name
     let inline (|NotNullOrEmpty|) name (arg:string) = arg |> argdo StringVerifier.IsNotNullOrEmpty name
     let inline (|NotAbstract|) name (arg:Type) = arg |> argdo TypeVerifier.IsNotAbstract name
+
+    let inline (|Default|) defaultValue input = defaultArg input defaultValue
