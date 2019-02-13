@@ -1,6 +1,4 @@
-Axle.Core
 Axle.Resources
 YamlDotNet
-
 group build
-  Mason.Targets.Preprocessor
+Mason.Targets.Preprocessor
