@@ -1,0 +1,87 @@
+{
+  "metadata": [
+    {
+      "src": [
+        {
+          "src": "codebase/core/main",
+          "files": [ "src/*.csproj" ],
+          "exclude": [ "src/bin/**", "src/obj/**", "src/.paket/**", "src/paket-files/**" ]
+        }
+      ],
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      },
+      "dest": "obj/docfx/api/core/main"
+    },
+    {
+      "src": [
+        {
+          "src": "codebase/resources/main",
+          "files": [ "src/*.csproj" ],
+          "exclude": [ "src/bin/**", "src/obj/**", "src/.paket/**", "src/paket-files/**" ]
+        }
+      ],
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      },
+      "dest": "obj/docfx/api/resources/main"
+    },
+    {
+      "src": [
+        {
+          "src": "codebase/resources/java",
+          "files": [ "src/*.csproj" ],
+          "exclude": [ "src/bin/**", "src/obj/**", "src/.paket/**", "src/paket-files/**" ]
+        }
+      ],
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      },
+      "dest": "obj/docfx/api/resources/java"
+    },
+    {
+      "src": [
+        {
+          "src": "codebase/resources/yaml",
+          "files": [ "src/*.csproj" ],
+          "exclude": [ "src/bin/**", "src/obj/**", "src/.paket/**", "src/paket-files/**" ]
+        }
+      ],
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      },
+      "dest": "obj/docfx/api/core/main"
+    }
+  ],
+  "build": {
+    "content": [
+      {
+        "files": [ "**/*.yml" ],
+        "src": "obj/docfx/api",
+        "dest": "api"
+      },
+      {
+        "files": [ "docs/toc.yml" ]
+      },
+      {
+        "files": [ "docs/articles/**/*.md" ]
+      },
+      {
+        "files": [ "toc.yml", "*.md" ]
+      }
+    ],
+    "resource": [
+      {
+        "files": [ "docs/articles/images/**"]
+      }
+    ],
+    "overwrite": "docs/specs/*.md",
+    "globalMetadata": {
+      "_appTitle": "Forest framework website",
+      "_enableSearch": true
+    },
+    "markdownEngineName": "markdig",
+    "dest": "_site",
+    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+  }
+}
