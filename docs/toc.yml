@@ -1,9 +1,8 @@
 ﻿- name: Home
   href: index.md
 - name: Articles
-  href: articles/
-  homepage: articles/getting_started.md
-  homepage: index.md
+  href: articles/getting_started.md
+  topicHref: articles/getting_started.md
 - name: API Documentation
-  href: api/
+  href: api/index.md
 

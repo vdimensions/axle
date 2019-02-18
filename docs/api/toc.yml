@@ -1,0 +1,10 @@
+- name: Core Library
+  topicHref: xref:Axle
+- name: Resources Library
+  topicHref: xref:Axle.Resources
+  items:
+  - name: Java Property Files
+    topicHref: xref:Axle.Resources.Java
+#   - name: Yaml Files
+#     href: api/resources/yaml/
+#     topicHref: api/resources/yaml/Axle.Resources.Yaml.html

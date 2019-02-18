@@ -11,7 +11,7 @@
       "properties": {
         "TargetFramework": "netstandard2.0"
       },
-      "dest": "../obj/docfx/api/core/main"
+      "dest": "obj/docfx/api/core/main"
     },
     {
       "src": [
@@ -24,7 +24,7 @@
       "properties": {
         "TargetFramework": "netstandard2.0"
       },
-      "dest": "../obj/docfx/api/resources/main"
+      "dest": "obj/docfx/api/resources/main"
     },
     {
       "src": [
@@ -37,34 +37,18 @@
       "properties": {
         "TargetFramework": "netstandard2.0"
       },
-      "dest": "../obj/docfx/api/resources/java"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/resources/yaml",
-          "files": [ "src/*.csproj" ],
-          "exclude": [ "src/bin/**", "src/obj/**", "src/.paket/**", "src/paket-files/**" ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "../obj/docfx/api/core/main"
+      "dest": "obj/docfx/api/resources/java"
     }
   ],
   "build": {
     "content": [
       {
         "files": [ "**/*.yml" ],
-        "src": "../obj/docfx/api",
+        "src": "obj/docfx/api",
         "dest": "api"
       },
       {
-        "files": [ "toc.yml", "*.md" ]
-      },
-      {
-        "files": [ "articles/**/*.md" ]
+        "files": [ "*.md", "toc.yml", "api/toc.yml", "api/**.md", "articles/**" ]
       }
     ],
     "resource": [
