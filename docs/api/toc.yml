@@ -1,3 +1,5 @@
+- name: Home
+  href: index.md
 - name: Core Library
   topicHref: xref:Axle
 - name: Resources Library
