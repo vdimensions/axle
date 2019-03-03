@@ -1,7 +1,7 @@
 using Axle.Conversion;
 
 
-namespace Axle.Data.Common.Conversion
+namespace Axle.Data.Conversion
 {
     public interface IDbRecordConverter<T> : IConverter<IDbRecord, T>
     {

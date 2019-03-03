@@ -4,7 +4,7 @@ using System;
 using Axle.Data.Extensions.DataReader;
 
 
-namespace Axle.Data.Extensions.DataRow 
+namespace Axle.Data.Extensions.DataRow
 {
     using DataRow = System.Data.DataRow;
 
@@ -43,12 +43,12 @@ namespace Axle.Data.Extensions.DataRow
         public static bool TryFetch<T>(this DataRow row, int columnIndex, out T? result) where T : struct
         {
             result = null;
-            return TryGetData(row, columnIndex, out object res) && DataReaderExtensions.TryFetchValueType(res, out result);
+            return TryGetData(row, columnIndex, out var res) && DataReaderExtensions.TryFetchValueType(res, out result);
         }
         public static bool TryFetch<T>(this DataRow row, string columnName, out T? result) where T : struct
         {
             result = null;
-            return TryGetData(row, columnName, out object res) && DataReaderExtensions.TryFetchValueType(res, out result);
+            return TryGetData(row, columnName, out var res) && DataReaderExtensions.TryFetchValueType(res, out result);
         }
 
         #if NETSTANDARD || NET45_OR_NEWER

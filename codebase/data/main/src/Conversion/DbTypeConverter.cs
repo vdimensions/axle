@@ -2,10 +2,9 @@
 using System.Diagnostics;
 
 using Axle.Conversion;
-using Axle.Data.Conversion;
 
 
-namespace Axle.Data.Common.Conversion
+namespace Axle.Data.Conversion
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]

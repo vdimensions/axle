@@ -11,7 +11,7 @@ namespace Axle.Data.Common
     [System.Serializable]
     #endif
     public abstract class DbParameterValueSetter<TDbParameter, TDbType> : IDbParameterValueSetter<TDbParameter, TDbType> 
-        where TDbParameter: IDataParameter 
+        where TDbParameter: IDataParameter
         where TDbType: struct
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

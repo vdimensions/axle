@@ -24,15 +24,15 @@ namespace Axle.Data.Common
     internal sealed class DataRowAdapter : IDbRecord
     {
         private readonly DataRow _target;
-    
+
         public DataRowAdapter(DataRow target)
         {
             _target = target.VerifyArgument(nameof(target)).IsNotNull();
         }
-    
+
         public string GetFieldName(int i) => _target.Table.Columns[i].ColumnName;
         public Type GetFieldType(int i) => _target.Table.Columns[i].DataType;
-    
+
         public Guid GetGuid(int i) => _target.Field<Guid>(i);
         public Guid GetGuid(string name) => _target.Field<Guid>(name);
 
@@ -70,15 +70,15 @@ namespace Axle.Data.Common
         public DateTime GetDateTime(string name) => _target.Field<DateTime>(name);
 
         public int GetOrdinal(string name) => _target.Table.Columns[name].Ordinal;
-    
+
         public IEnumerator<object> GetEnumerator() => _target.ItemArray.Cast<object>().GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
-    
+
         public int FieldCount => _target.ItemArray.Length;
         public string[] FieldNames => _target.Table.Columns.OfType<DataColumn>().Select(x => x.ColumnName).ToArray();
-    
+
         public object this[int i] => _target[i];
-    
+
         public object this[string name]
         {
             get
