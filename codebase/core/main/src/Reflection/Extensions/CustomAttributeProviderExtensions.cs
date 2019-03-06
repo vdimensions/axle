@@ -86,9 +86,9 @@ namespace Axle.Reflection.Extensions
             {
                 #if NETSTANDARD || NET45_OR_NEWER
                 var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
-#else
+                #else
                 var attributeUsage = attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
-#endif
+                #endif
                 result.Add(
                     new AttributeInfo
                     {

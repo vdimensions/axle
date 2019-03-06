@@ -17,8 +17,18 @@ namespace Axle.Reflection
         /// </summary>
         IAttributeInfo[] GetAttributes();
 
+        /// <summary>
+        /// Gets a collection of zero or more <see cref="IAttributeInfo">attributes</see> of the provided
+        /// by the <paramref name="attributeType"/> parameter type, that the reflected object has defined.
+        /// </summary>
         IAttributeInfo[] GetAttributes(Type attributeType);
 
+        /// <summary>
+        /// Gets a collection of zero or more <see cref="IAttributeInfo">attributes</see> of the provided
+        /// by the <paramref name="attributeType"/> parameter type, that the reflected object has defined,
+        /// and including/excluding attributes from base types depending on the value of the <paramref name="inherit"/>
+        /// parameter.
+        /// </summary>
         IAttributeInfo[] GetAttributes(Type attributeType, bool inherit);
 
         /// <summary>

@@ -1,9 +1,4 @@
-Axle.Core
-Axle.Application
 Axle.Web.AspNetCore
-WebSharper
 WebSharper.UI
 WebSharper.AspNetCore
-Microsoft.AspNetCore
-Microsoft.AspNetCore.Authentication
 Microsoft.AspNetCore.Authentication.Cookies
