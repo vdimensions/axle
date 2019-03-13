@@ -5,7 +5,7 @@ using System.Collections.Generic;
 namespace Axle.Data
 {
     /// <summary>
-    /// An interface that represents a data record
+    /// An interface that represents a data record object.
     /// </summary>
     public interface IDbRecord : IEnumerable<object>
     {
@@ -55,7 +55,8 @@ namespace Axle.Data
         /// Gets the number of columns in the current record.
         /// </summary>
         /// <returns>
-        /// When not positioned in a valid recordset, <c>0</c>; otherwise, the number of columns in the current record. The default is <c>-1</c>.
+        /// When not positioned in a valid recordset, <c>0</c>; otherwise, the number of columns in the current record.
+        /// The default is <c>-1</c>.
         /// </returns>
         int FieldCount { get; }
         string[] FieldNames { get; }

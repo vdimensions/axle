@@ -89,7 +89,7 @@ namespace Axle.Data.Extensions.DataReader
         public static bool TryFetch<T>(this IDataReader reader, int columnIndex, out T? result) where T : struct
         {
             result = null;
-            return TryGetData(reader, columnIndex, out object res) && TryFetchValueType(res, out result);
+            return TryGetData(reader, columnIndex, out var res) && TryFetchValueType(res, out result);
         }
 
         //LOW PERFORMANCE

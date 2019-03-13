@@ -15,10 +15,10 @@ namespace Axle.Data.Common
         }
         #endif
 
-        public static DbRecord FromDataRecord(DbDataRecord dataRecord) => 
+        public static DbRecord FromDataRecord(DbDataRecord dataRecord) =>
             new DbRecord(new DataRecordAdapter(dataRecord.VerifyArgument(nameof(dataRecord)).IsNotNull().Value));
 
-        public static DbRecord FromDataReader(DbDataReader dataReader) => 
+        public static DbRecord FromDataReader(DbDataReader dataReader) =>
             new DbRecord(new DataRecordAdapter(dataReader.VerifyArgument(nameof(dataReader)).IsNotNull().Value));
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
