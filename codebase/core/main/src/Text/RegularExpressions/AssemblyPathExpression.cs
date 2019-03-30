@@ -1,12 +1,8 @@
 ﻿#if NETSTANDARD || NET35_OR_NEWER
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 using System.Text.RegularExpressions;
-
-using Axle.Verification;
 
 
 namespace Axle.Text.RegularExpressions
@@ -18,44 +14,30 @@ namespace Axle.Text.RegularExpressions
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class AssemblyPathExpression : AbstractPathExpression
+    [Obsolete("Use `Axle.Text.Expressions.Path.AssemblyPathExpression` instead")]
+    public sealed class AssemblyPathExpression : IPathExpression
     {
-        private static readonly IDictionary<string, string> _Replacements = new Dictionary<string, string>(3)
-        {
-            {@"\", @"."},
-            {@"/", @"."},
-            {@" ", @"_"}
-        };
-
-        private const string AntSingleAsteriskWinRegex = @"(?<=[\.]{0,1})(?:[^\.]+)(?=[\.]{0,1})";
-        private const string AntDoubleAsteriskRegex = @"(?:.{0,})";
-
-        private static Regex CreateRegex(string pattern, RegexOptions options)
-        {
-            if (pattern == null)
-            {
-                throw new ArgumentNullException(nameof(pattern));
-            }
-
-            var res = _Replacements.Aggregate(EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
-            //options |= RegexOptions.IgnoreCase;
-            res = res.Replace("**", AntDoubleAsteriskRegex).Replace("*", AntSingleAsteriskWinRegex);
-            return new Regex(res, options);
-        }
-
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string _pattern;
+        private readonly Axle.Text.Expressions.Path.AssemblyPathExpression _expr;
 
-        public AssemblyPathExpression(string pattern) : base(pattern, CreateRegex)
+        public AssemblyPathExpression(string pattern)
         {
-            var ptrn = _Replacements.Aggregate(pattern, (p, c) => p.Replace(c.Key, c.Value));
-            _pattern = ptrn;
+             _expr = new Axle.Text.Expressions.Path.AssemblyPathExpression(pattern);
         }
 
-        public bool IsMatch(Assembly value) => IsMatch(value.VerifyArgument(nameof(value)).IsNotNull().Value.GetName().Name);
-        public bool IsMatch(AssemblyName value) => IsMatch(value.VerifyArgument(nameof(value)).Value.Name);
+        public bool IsMatch(Assembly value) => _expr.IsMatch(value);
+        public bool IsMatch(AssemblyName value) => _expr.IsMatch(value);
+        public bool IsMatch(string input) => _expr.IsMatch(input);
+        public bool IsMatch(string input, int startIndex) => _expr.IsMatch(input, startIndex);
 
-        public override string Pattern => _pattern;
+        public Match[] Match(string input) => _expr.Match(input);
+        public Match[] Match(string input, int startIndex) => _expr.Match(input, startIndex);
+
+        public string[] Split(string input) => _expr.Split(input);
+        public string[] Split(string input, int count) => _expr.Split(input, count);
+        public string[] Split(string input, int count, int startIndex) => _expr.Split(input, count, startIndex);
+
+        public string Pattern => _expr.Pattern;
     }
 }
 #endif

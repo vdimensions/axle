@@ -1,9 +1,6 @@
 ﻿#if NETSTANDARD || NET35_OR_NEWER
 using System;
-using System.Diagnostics;
 using System.Text.RegularExpressions;
-
-using Axle.Extensions.String;
 
 
 namespace Axle.Text.RegularExpressions
@@ -11,61 +8,27 @@ namespace Axle.Text.RegularExpressions
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class PathExpression : AbstractPathExpression
+    [Obsolete("Use `Axle.Text.Expressions.Path.PathExpression` instead")]
+    public sealed class PathExpression : IPathExpression
     {
-        private const string AntSingleAsteriskWinRegex = @"(?:(?<=[\\]{0,1})(?:[^\\]+)(?=[\\]{0,1}))";
-        private const string AntSingleAsteriskUnixRegex = @"(?<=[/]{0,1})(?:[^/]+)(?=[/]{0,1})";
-        private const string AntDoubleAsteriskRegex = @"(?:.{0,})";
+        private readonly Axle.Text.Expressions.Path.PathExpression _expr;
 
-        private static Regex CreateRegex(string pattern, RegexOptions options)
+        public PathExpression(string pattern)
         {
-            if (pattern == null)
-            {
-                throw new ArgumentNullException(nameof(pattern));
-            }
-            
-            var res = EscapeRegex(pattern);
-            if (!res.Contains("/", StringComparison.Ordinal))
-            {
-                // assume windows path
-
-                // windows path is not case-sesnsitive
-                options |= RegexOptions.IgnoreCase;
-
-                //var unixRes = res
-                //    .Replace("\\\\", "/")
-                //    .Replace("**", AntDoubleAsteriskRegex)
-                //    .Replace("*", AntSingleAsteriskUnixRegex);
-                var winRes = res
-                    .Replace("**", AntDoubleAsteriskRegex)
-                    .Replace("*", AntSingleAsteriskWinRegex);
-                res = winRes;//string.Format("(?<unixpath>{0})|(?<windowspath>{1})", unixRes, winRes);
-            }
-            else
-            {
-                // assume unix path
-
-                var unixRes = res
-                    .Replace("**", AntDoubleAsteriskRegex)
-                    .Replace("*", AntSingleAsteriskUnixRegex);
-                //var winRes = res
-                //    .Replace("/", "\\\\")
-                //    .Replace("**", AntDoubleAsteriskRegex)
-                //    .Replace("*", AntSingleAsteriskWinRegex);
-                res = unixRes;// string.Format("(?<unixpath>{0})|(?<windowspath>{1})", unixRes, winRes);
-            }
-            return new Regex(res, options);
+            _expr = new Axle.Text.Expressions.Path.PathExpression(pattern);
         }
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly string _pattern;
+        public bool IsMatch(string input) => _expr.IsMatch(input);
+        public bool IsMatch(string input, int startIndex) => _expr.IsMatch(input, startIndex);
 
-        public PathExpression(string pattern) : base(pattern, CreateRegex)
-        {
-            _pattern = pattern;
-        }
+        public Match[] Match(string input) => _expr.Match(input);
+        public Match[] Match(string input, int startIndex) => _expr.Match(input, startIndex);
 
-        public override string Pattern => _pattern;
+        public string[] Split(string input) => _expr.Split(input);
+        public string[] Split(string input, int count) => _expr.Split(input, count);
+        public string[] Split(string input, int count, int startIndex) => _expr.Split(input, count, startIndex);
+
+        public string Pattern => _expr.Pattern;
     }
 }
 #endif
