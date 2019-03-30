@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -23,12 +24,13 @@ namespace Axle.Text.Expressions.Substitution
 
         private readonly Regex _expression;
 
-        private static Capture[] GetCaptures(Regex regex, string input)
+        private static string[] GetCaptures(Regex regex, string input)
         {
             var groups = regex.Match(input).Groups;
             return regex.GetGroupNames()
-                .Where(groupName => groups[(string) groupName].Captures.Count > 0).ToDictionary(groupName => groupName, groupName => groups[groupName])
+                .Where(groupName => groups[groupName].Captures.Count > 0).ToDictionary(groupName => groupName, groupName => groups[groupName])
                 .SelectMany(x => x.Value.Captures.Cast<Capture>())
+                .Select(x => x.Value)
                 .ToArray();
         }
 
@@ -46,15 +48,16 @@ namespace Axle.Text.Expressions.Substitution
             input.VerifyArgument(nameof(input)).IsNotNull();
             var result = input;
             var groupCaptures = GetCaptures(_expression, result);
+            var unresolved = new HashSet<string>(StringComparer.Ordinal);
             do
             {
-                foreach (var groupCapture in groupCaptures)
+                foreach (var token in groupCaptures)
                 {
-                    var token = groupCapture.Value;
                     var nakedToken = token.Substring(_exprStart.Length, token.Length - (_exprStart.Length + _exprEnd.Length));
                     var ix = result.IndexOf(token, StringComparison.Ordinal);
                     if (ix < 0 || !sp.TrySubstitute(nakedToken, out var replacement))
                     {
+                        unresolved.Add(token);
                         continue;
                     }
 
@@ -67,7 +70,7 @@ namespace Axle.Text.Expressions.Substitution
 
                 groupCaptures = GetCaptures(_expression, result);
             }
-            while (groupCaptures.Length > 0);
+            while (groupCaptures.Except(unresolved, StringComparer.Ordinal).Any());
 
             return result;
         }
