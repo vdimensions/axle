@@ -22,6 +22,7 @@
     <Compile Include="DataReaderExtensions.fs" />
     <Compile Include="DataRowExtensions.fs" />
     <Compile Include="DataRecordExtensions.fs" />
+    <Compile Include="Option.fs" />
   </ItemGroup>
   
   <Import Project=".paket\Paket.Restore.targets" />
