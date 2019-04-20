@@ -11,7 +11,7 @@ namespace Axle.References
     [Serializable]
     #endif
     public struct Nullsafe<T> : IEquatable<Nullsafe<T>>, IEquatable<T>, IReference<T>
-        where T:class
+        where T: class
     {
         /// <summary>
         /// An empty <see cref="Nullsafe{T}"/> value representing a <c>null</c> reference.
@@ -57,6 +57,12 @@ namespace Axle.References
         bool IEquatable<T>.Equals(T other) => Equals(_value, other);
 
         public override int GetHashCode() => _value == null ? 0 : _value.GetHashCode();
+
+        public bool TryGetValue(out T value)
+        {
+            value = _value;
+            return value != null;
+        }
 
         /// <summary>
         /// Gets the value of the underlying object represented by the current <see cref="Nullsafe{T}"/> instance.

@@ -31,6 +31,7 @@
     <Compile Include="Option\Nullable.fs" />
     <Compile Include="Option\OptionExtensions.fs" />
     <Compile Include="Option\ValueOptionExtensions.fs" />
+    <Compile Include="References\Reference.fs" />
     <Compile Include="Result\Result.fs" />
     <Compile Include="References\Nullsafe.fs" />
     <Compile Include="Verification\Verification.fs" />

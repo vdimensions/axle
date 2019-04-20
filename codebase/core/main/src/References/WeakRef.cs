@@ -16,7 +16,7 @@ namespace Axle.References
         private WeakRef(WeakReference<T> reference) { _reference = reference; }
         public WeakRef(T target, bool trackResurrection) : this(new WeakReference<T>(target, trackResurrection)) { }
         public WeakRef(T target) : this(new WeakReference<T>(target)) { }
-        #else 
+        #else
         private readonly WeakReference _reference;
 
         private WeakRef(WeakReference reference) { _reference = reference; }
@@ -38,7 +38,7 @@ namespace Axle.References
 
         public override int GetHashCode() => _reference.GetHashCode();
 
-        public bool TryGetTarget(out T target)
+        public bool TryGetValue(out T target)
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return _reference.TryGetTarget(out target);
@@ -79,7 +79,7 @@ namespace Axle.References
             get
             {
                 #if NETSTANDARD || NET45_OR_NEWER
-                return _reference.TryGetTarget(out var _);
+                return _reference.TryGetTarget(out _);
                 #else
                 return _reference.IsAlive;
                 #endif

@@ -11,13 +11,14 @@ using Axle.References;
 namespace Axle.Verification
 {
     /// <summary>
-    /// A <see langword="struct"/> that represents a reference to an argument for a method or constructor. 
-    /// The argument reference is usually represented by its name (as defined in the respective method/constructor) and the value passed to it. 
+    /// A <see langword="struct"/> that represents a reference to an argument for a method or constructor.
+    /// The argument reference is usually represented by its name (as defined in the respective method/constructor)
+    /// and the value passed to it.
     /// </summary>
     public struct ArgumentReference<T> : IReference<T>
     {
         /// <param name="reference">
-        /// The argument reference instance to be unwrapped by this operator. 
+        /// The argument reference instance to be unwrapped by this operator.
         /// </param>
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -58,11 +59,11 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by 
+        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by
         /// the <paramref name="expectedType"/> parameter.
         /// </summary>
         /// <param name="expectedType">
-        /// The expected type for the argument represented by the current <see cref="ArgumentReference{T}"/> instance. 
+        /// The expected type for the argument represented by the current <see cref="ArgumentReference{T}"/> instance.
         /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
@@ -77,11 +78,11 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by 
+        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by
         /// the <typeparamref name="TExpected"/> generic parameter.
         /// </summary>
         /// <typeparam name="TExpected">
-        /// The expected type for the argument represented by the current <see cref="ArgumentReference{T}"/> instance. 
+        /// The expected type for the argument represented by the current <see cref="ArgumentReference{T}"/> instance.
         /// </typeparam>
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
@@ -110,6 +111,12 @@ namespace Axle.Verification
             get => _value;
         }
 
+        /// <inheritdoc cref="IReference{T}.TryGetValue(out T)"/>
+        bool IReference<T>.TryGetValue(out T value)
+        {
+            value = _value;
+            return true;
+        }
         /// <inheritdoc cref="IReference{T}.Value"/>
         T IReference<T>.Value => _value;
 

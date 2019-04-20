@@ -86,6 +86,12 @@ namespace Axle
         /// </returns>
         public override string ToString () { return _isSet ? (_value == null ? "null" : _value.ToString()) : "[Undefined]"; }
 
+        bool IReference<T>.TryGetValue(out T value)
+        {
+            value = _value;
+            return _isSet;
+        }
+
         //[CanBeNull(false)]
         /// <summary>
         /// Gets the value of the underlying object represented by the current <see cref="Optional{T}"/> instance, or <c>null</c> if there is no value present.

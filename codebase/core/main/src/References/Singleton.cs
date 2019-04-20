@@ -41,6 +41,12 @@ namespace Axle.References
         public static Singleton<T> Instance => _instance;
 
         public T Value => LazySingletonAllocator.Instance;
+
+        bool IReference<T>.TryGetValue(out T value)
+        {
+            value = Value;
+            return true;
+        }
         T IReference<T>.Value => Value;
         object IReference.Value => Value;
 
@@ -62,7 +68,7 @@ namespace Axle.References
     public static class Singleton
     {
         internal const string CandidateConstructorNotFoundMessageFormat = "The class '{0}' has one or more public constructors and cannot be used with the singleton pattern!";
-        
+
         internal static ConstructorInfo GetSingletonConstructor(Type type)
         {
             #if NETSTANDARD
@@ -93,7 +99,7 @@ namespace Axle.References
             ConstructorInfo constructor = null;
             if (!hasPublicConstructors)
             {
-                constructor = constructors.Where(x => x.GetParameters().Length == 0).SingleOrDefault();
+                constructor = constructors.SingleOrDefault(x => x.GetParameters().Length == 0);
             }
             #endif
             return constructor;
