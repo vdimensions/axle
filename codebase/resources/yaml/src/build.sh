@@ -1,28 +1,9 @@
-msbuild="../../../../submodules/btw/msbuild.sh"
 paket='.paket/paket.sh'
 project='Axle.Resources.Yaml'
 
-$paket update
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
+./restore.sh
 
-rm -rf obj/
-dotnet restore $project.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
-$msbuild $project.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
-$msbuild $project.dist.csproj
+dotnet clean $project.csproj && dotnet build $project.csproj && dotnet pack $project.csproj --no-build
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""

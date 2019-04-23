@@ -1,11 +1,8 @@
+storage: none
+content: none
+
+source https://api.nuget.org/v3/index.json
+  nuget YamlDotNet >= 4.3
+
 source ../../../../dist
   nuget Axle.Resources
-
-source https://nuget.org/api/v2
-  nuget YamlDotNet >= 4.3 content: none
-
-group build
-  source ../../../../submodules/mason/dist
-    nuget Mason.Targets.Packager
-    nuget Mason.Targets.Preprocessor
-    nuget Mason.Targets.Verman

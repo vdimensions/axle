@@ -1,7 +1,7 @@
 paket='.paket/paket.sh'
 project='Axle.Resources.Java'
 
-.restore.sh
+./restore.sh
 
 dotnet clean $project.csproj && dotnet build $project.csproj && dotnet pack $project.csproj --no-build
 if [ $? -ne 0 ]; then

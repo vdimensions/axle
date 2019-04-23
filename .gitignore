@@ -20,6 +20,9 @@
 **/packages/
 **/target/
 
+# docfx compiled documentation directory
+_site/
+
 # files
 
 **/buildlog.txt

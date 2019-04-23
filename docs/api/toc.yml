@@ -1,12 +1,31 @@
 - name: Home
   href: index.md
+
 - name: Core Library
   topicHref: xref:Axle
+
 - name: Resources Library
   topicHref: xref:Axle.Resources
   items:
   - name: Java Property Files
     topicHref: xref:Axle.Resources.Java
-#   - name: Yaml Files
-#     href: api/resources/yaml/
-#     topicHref: api/resources/yaml/Axle.Resources.Yaml.html
+  - name: Yaml Files
+    topicHref: xref:Axle.Resources.Yaml
+
+- name: Application Library
+  topicHref: xref:Axle.Application
+  
+- name: Data Library
+  topicHref: xref:Axle.Data
+  
+- name: Security Library
+  topicHref: xref:Axle.Security
+  items:
+  - name: Cryptography
+    topicHref: xref:Axle.Security.Cryptography
+  
+- name: Web Library
+  topicHref: xref:Axle.Web
+  items:
+  - name: WebSharper
+    topicHref: xref:Axle.Web.WebSharper
