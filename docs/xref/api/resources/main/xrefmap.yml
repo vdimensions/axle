@@ -1,0 +1,1355 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Axle.Resources
+  name: Axle.Resources
+  href: resources/main/Axle.Resources.html
+  commentId: N:Axle.Resources
+  fullName: Axle.Resources
+  nameWithType: Axle.Resources
+- uid: Axle.Resources.BinaryResourceInfo
+  name: BinaryResourceInfo
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html
+  commentId: T:Axle.Resources.BinaryResourceInfo
+  fullName: Axle.Resources.BinaryResourceInfo
+  nameWithType: BinaryResourceInfo
+- uid: Axle.Resources.BinaryResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,System.Byte[])
+  name: BinaryResourceInfo(String, CultureInfo, Byte[])
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo__ctor_System_String_System_Globalization_CultureInfo_System_Byte___
+  commentId: M:Axle.Resources.BinaryResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,System.Byte[])
+  name.vb: BinaryResourceInfo(String, CultureInfo, Byte())
+  fullName: Axle.Resources.BinaryResourceInfo.BinaryResourceInfo(System.String, System.Globalization.CultureInfo, System.Byte[])
+  fullName.vb: Axle.Resources.BinaryResourceInfo.BinaryResourceInfo(System.String, System.Globalization.CultureInfo, System.Byte())
+  nameWithType: BinaryResourceInfo.BinaryResourceInfo(String, CultureInfo, Byte[])
+  nameWithType.vb: BinaryResourceInfo.BinaryResourceInfo(String, CultureInfo, Byte())
+- uid: Axle.Resources.BinaryResourceInfo.#ctor*
+  name: BinaryResourceInfo
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo__ctor_
+  commentId: Overload:Axle.Resources.BinaryResourceInfo.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.BinaryResourceInfo.BinaryResourceInfo
+  nameWithType: BinaryResourceInfo.BinaryResourceInfo
+- uid: Axle.Resources.BinaryResourceInfo.Open
+  name: Open()
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo_Open
+  commentId: M:Axle.Resources.BinaryResourceInfo.Open
+  fullName: Axle.Resources.BinaryResourceInfo.Open()
+  nameWithType: BinaryResourceInfo.Open()
+- uid: Axle.Resources.BinaryResourceInfo.Open*
+  name: Open
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo_Open_
+  commentId: Overload:Axle.Resources.BinaryResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.BinaryResourceInfo.Open
+  nameWithType: BinaryResourceInfo.Open
+- uid: Axle.Resources.BinaryResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.BinaryResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.BinaryResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.BinaryResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: BinaryResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: BinaryResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.BinaryResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.BinaryResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.BinaryResourceInfo.TryResolve
+  nameWithType: BinaryResourceInfo.TryResolve
+- uid: Axle.Resources.BinaryResourceInfo.Value
+  name: Value
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo_Value
+  commentId: P:Axle.Resources.BinaryResourceInfo.Value
+  fullName: Axle.Resources.BinaryResourceInfo.Value
+  nameWithType: BinaryResourceInfo.Value
+- uid: Axle.Resources.BinaryResourceInfo.Value*
+  name: Value
+  href: resources/main/Axle.Resources.BinaryResourceInfo.html#Axle_Resources_BinaryResourceInfo_Value_
+  commentId: Overload:Axle.Resources.BinaryResourceInfo.Value
+  isSpec: "True"
+  fullName: Axle.Resources.BinaryResourceInfo.Value
+  nameWithType: BinaryResourceInfo.Value
+- uid: Axle.Resources.Bundling
+  name: Axle.Resources.Bundling
+  href: resources/main/Axle.Resources.Bundling.html
+  commentId: N:Axle.Resources.Bundling
+  fullName: Axle.Resources.Bundling
+  nameWithType: Axle.Resources.Bundling
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry
+  name: DefaultResourceBundleRegistry
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html
+  commentId: T:Axle.Resources.Bundling.DefaultResourceBundleRegistry
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry
+  nameWithType: DefaultResourceBundleRegistry
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.#ctor
+  name: DefaultResourceBundleRegistry()
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry__ctor
+  commentId: M:Axle.Resources.Bundling.DefaultResourceBundleRegistry.#ctor
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.DefaultResourceBundleRegistry()
+  nameWithType: DefaultResourceBundleRegistry.DefaultResourceBundleRegistry()
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.#ctor(System.Boolean)
+  name: DefaultResourceBundleRegistry(Boolean)
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry__ctor_System_Boolean_
+  commentId: M:Axle.Resources.Bundling.DefaultResourceBundleRegistry.#ctor(System.Boolean)
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.DefaultResourceBundleRegistry(System.Boolean)
+  nameWithType: DefaultResourceBundleRegistry.DefaultResourceBundleRegistry(Boolean)
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.#ctor*
+  name: DefaultResourceBundleRegistry
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry__ctor_
+  commentId: Overload:Axle.Resources.Bundling.DefaultResourceBundleRegistry.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.DefaultResourceBundleRegistry
+  nameWithType: DefaultResourceBundleRegistry.DefaultResourceBundleRegistry
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Configure(System.String)
+  name: Configure(String)
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_Configure_System_String_
+  commentId: M:Axle.Resources.Bundling.DefaultResourceBundleRegistry.Configure(System.String)
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Configure(System.String)
+  nameWithType: DefaultResourceBundleRegistry.Configure(String)
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Configure*
+  name: Configure
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_Configure_
+  commentId: Overload:Axle.Resources.Bundling.DefaultResourceBundleRegistry.Configure
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Configure
+  nameWithType: DefaultResourceBundleRegistry.Configure
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.GetEnumerator
+  name: GetEnumerator()
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_GetEnumerator
+  commentId: M:Axle.Resources.Bundling.DefaultResourceBundleRegistry.GetEnumerator
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.GetEnumerator()
+  nameWithType: DefaultResourceBundleRegistry.GetEnumerator()
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.GetEnumerator*
+  name: GetEnumerator
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_GetEnumerator_
+  commentId: Overload:Axle.Resources.Bundling.DefaultResourceBundleRegistry.GetEnumerator
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.GetEnumerator
+  nameWithType: DefaultResourceBundleRegistry.GetEnumerator
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item(System.String)
+  name: Item[String]
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_Item_System_String_
+  commentId: P:Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item(System.String)
+  name.vb: Item(String)
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item[System.String]
+  fullName.vb: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item(System.String)
+  nameWithType: DefaultResourceBundleRegistry.Item[String]
+  nameWithType.vb: DefaultResourceBundleRegistry.Item(String)
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item*
+  name: Item
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_Item_
+  commentId: Overload:Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.Item
+  nameWithType: DefaultResourceBundleRegistry.Item
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.System#Collections#IEnumerable#GetEnumerator
+  name: IEnumerable.GetEnumerator()
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_System_Collections_IEnumerable_GetEnumerator
+  commentId: M:Axle.Resources.Bundling.DefaultResourceBundleRegistry.System#Collections#IEnumerable#GetEnumerator
+  name.vb: System.Collections.IEnumerable.GetEnumerator()
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: DefaultResourceBundleRegistry.IEnumerable.GetEnumerator()
+  nameWithType.vb: DefaultResourceBundleRegistry.System.Collections.IEnumerable.GetEnumerator()
+- uid: Axle.Resources.Bundling.DefaultResourceBundleRegistry.System#Collections#IEnumerable#GetEnumerator*
+  name: IEnumerable.GetEnumerator
+  href: resources/main/Axle.Resources.Bundling.DefaultResourceBundleRegistry.html#Axle_Resources_Bundling_DefaultResourceBundleRegistry_System_Collections_IEnumerable_GetEnumerator_
+  commentId: Overload:Axle.Resources.Bundling.DefaultResourceBundleRegistry.System#Collections#IEnumerable#GetEnumerator
+  isSpec: "True"
+  name.vb: System.Collections.IEnumerable.GetEnumerator
+  fullName: Axle.Resources.Bundling.DefaultResourceBundleRegistry.System.Collections.IEnumerable.GetEnumerator
+  nameWithType: DefaultResourceBundleRegistry.IEnumerable.GetEnumerator
+  nameWithType.vb: DefaultResourceBundleRegistry.System.Collections.IEnumerable.GetEnumerator
+- uid: Axle.Resources.Bundling.IConfigurableBundleContent
+  name: IConfigurableBundleContent
+  href: resources/main/Axle.Resources.Bundling.IConfigurableBundleContent.html
+  commentId: T:Axle.Resources.Bundling.IConfigurableBundleContent
+  fullName: Axle.Resources.Bundling.IConfigurableBundleContent
+  nameWithType: IConfigurableBundleContent
+- uid: Axle.Resources.Bundling.IConfigurableBundleContent.Extractors
+  name: Extractors
+  href: resources/main/Axle.Resources.Bundling.IConfigurableBundleContent.html#Axle_Resources_Bundling_IConfigurableBundleContent_Extractors
+  commentId: P:Axle.Resources.Bundling.IConfigurableBundleContent.Extractors
+  fullName: Axle.Resources.Bundling.IConfigurableBundleContent.Extractors
+  nameWithType: IConfigurableBundleContent.Extractors
+- uid: Axle.Resources.Bundling.IConfigurableBundleContent.Extractors*
+  name: Extractors
+  href: resources/main/Axle.Resources.Bundling.IConfigurableBundleContent.html#Axle_Resources_Bundling_IConfigurableBundleContent_Extractors_
+  commentId: Overload:Axle.Resources.Bundling.IConfigurableBundleContent.Extractors
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.IConfigurableBundleContent.Extractors
+  nameWithType: IConfigurableBundleContent.Extractors
+- uid: Axle.Resources.Bundling.IConfigurableBundleContent.Register(System.Uri)
+  name: Register(Uri)
+  href: resources/main/Axle.Resources.Bundling.IConfigurableBundleContent.html#Axle_Resources_Bundling_IConfigurableBundleContent_Register_System_Uri_
+  commentId: M:Axle.Resources.Bundling.IConfigurableBundleContent.Register(System.Uri)
+  fullName: Axle.Resources.Bundling.IConfigurableBundleContent.Register(System.Uri)
+  nameWithType: IConfigurableBundleContent.Register(Uri)
+- uid: Axle.Resources.Bundling.IConfigurableBundleContent.Register*
+  name: Register
+  href: resources/main/Axle.Resources.Bundling.IConfigurableBundleContent.html#Axle_Resources_Bundling_IConfigurableBundleContent_Register_
+  commentId: Overload:Axle.Resources.Bundling.IConfigurableBundleContent.Register
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.IConfigurableBundleContent.Register
+  nameWithType: IConfigurableBundleContent.Register
+- uid: Axle.Resources.Bundling.IResourceBundleContent
+  name: IResourceBundleContent
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleContent.html
+  commentId: T:Axle.Resources.Bundling.IResourceBundleContent
+  fullName: Axle.Resources.Bundling.IResourceBundleContent
+  nameWithType: IResourceBundleContent
+- uid: Axle.Resources.Bundling.IResourceBundleContent.Extractors
+  name: Extractors
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleContent.html#Axle_Resources_Bundling_IResourceBundleContent_Extractors
+  commentId: P:Axle.Resources.Bundling.IResourceBundleContent.Extractors
+  fullName: Axle.Resources.Bundling.IResourceBundleContent.Extractors
+  nameWithType: IResourceBundleContent.Extractors
+- uid: Axle.Resources.Bundling.IResourceBundleContent.Extractors*
+  name: Extractors
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleContent.html#Axle_Resources_Bundling_IResourceBundleContent_Extractors_
+  commentId: Overload:Axle.Resources.Bundling.IResourceBundleContent.Extractors
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.IResourceBundleContent.Extractors
+  nameWithType: IResourceBundleContent.Extractors
+- uid: Axle.Resources.Bundling.IResourceBundleContent.Locations
+  name: Locations
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleContent.html#Axle_Resources_Bundling_IResourceBundleContent_Locations
+  commentId: P:Axle.Resources.Bundling.IResourceBundleContent.Locations
+  fullName: Axle.Resources.Bundling.IResourceBundleContent.Locations
+  nameWithType: IResourceBundleContent.Locations
+- uid: Axle.Resources.Bundling.IResourceBundleContent.Locations*
+  name: Locations
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleContent.html#Axle_Resources_Bundling_IResourceBundleContent_Locations_
+  commentId: Overload:Axle.Resources.Bundling.IResourceBundleContent.Locations
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.IResourceBundleContent.Locations
+  nameWithType: IResourceBundleContent.Locations
+- uid: Axle.Resources.Bundling.IResourceBundleRegistry
+  name: IResourceBundleRegistry
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleRegistry.html
+  commentId: T:Axle.Resources.Bundling.IResourceBundleRegistry
+  fullName: Axle.Resources.Bundling.IResourceBundleRegistry
+  nameWithType: IResourceBundleRegistry
+- uid: Axle.Resources.Bundling.IResourceBundleRegistry.Configure(System.String)
+  name: Configure(String)
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleRegistry.html#Axle_Resources_Bundling_IResourceBundleRegistry_Configure_System_String_
+  commentId: M:Axle.Resources.Bundling.IResourceBundleRegistry.Configure(System.String)
+  fullName: Axle.Resources.Bundling.IResourceBundleRegistry.Configure(System.String)
+  nameWithType: IResourceBundleRegistry.Configure(String)
+- uid: Axle.Resources.Bundling.IResourceBundleRegistry.Configure*
+  name: Configure
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleRegistry.html#Axle_Resources_Bundling_IResourceBundleRegistry_Configure_
+  commentId: Overload:Axle.Resources.Bundling.IResourceBundleRegistry.Configure
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.IResourceBundleRegistry.Configure
+  nameWithType: IResourceBundleRegistry.Configure
+- uid: Axle.Resources.Bundling.IResourceBundleRegistry.Item(System.String)
+  name: Item[String]
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleRegistry.html#Axle_Resources_Bundling_IResourceBundleRegistry_Item_System_String_
+  commentId: P:Axle.Resources.Bundling.IResourceBundleRegistry.Item(System.String)
+  name.vb: Item(String)
+  fullName: Axle.Resources.Bundling.IResourceBundleRegistry.Item[System.String]
+  fullName.vb: Axle.Resources.Bundling.IResourceBundleRegistry.Item(System.String)
+  nameWithType: IResourceBundleRegistry.Item[String]
+  nameWithType.vb: IResourceBundleRegistry.Item(String)
+- uid: Axle.Resources.Bundling.IResourceBundleRegistry.Item*
+  name: Item
+  href: resources/main/Axle.Resources.Bundling.IResourceBundleRegistry.html#Axle_Resources_Bundling_IResourceBundleRegistry_Item_
+  commentId: Overload:Axle.Resources.Bundling.IResourceBundleRegistry.Item
+  isSpec: "True"
+  fullName: Axle.Resources.Bundling.IResourceBundleRegistry.Item
+  nameWithType: IResourceBundleRegistry.Item
+- uid: Axle.Resources.DefaultResourceManager
+  name: DefaultResourceManager
+  href: resources/main/Axle.Resources.DefaultResourceManager.html
+  commentId: T:Axle.Resources.DefaultResourceManager
+  fullName: Axle.Resources.DefaultResourceManager
+  nameWithType: DefaultResourceManager
+- uid: Axle.Resources.DefaultResourceManager.#ctor
+  name: DefaultResourceManager()
+  href: resources/main/Axle.Resources.DefaultResourceManager.html#Axle_Resources_DefaultResourceManager__ctor
+  commentId: M:Axle.Resources.DefaultResourceManager.#ctor
+  fullName: Axle.Resources.DefaultResourceManager.DefaultResourceManager()
+  nameWithType: DefaultResourceManager.DefaultResourceManager()
+- uid: Axle.Resources.DefaultResourceManager.#ctor*
+  name: DefaultResourceManager
+  href: resources/main/Axle.Resources.DefaultResourceManager.html#Axle_Resources_DefaultResourceManager__ctor_
+  commentId: Overload:Axle.Resources.DefaultResourceManager.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.DefaultResourceManager.DefaultResourceManager
+  nameWithType: DefaultResourceManager.DefaultResourceManager
+- uid: Axle.Resources.Extraction
+  name: Axle.Resources.Extraction
+  href: resources/main/Axle.Resources.Extraction.html
+  commentId: N:Axle.Resources.Extraction
+  fullName: Axle.Resources.Extraction
+  nameWithType: Axle.Resources.Extraction
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor
+  name: AbstractResourceExtractor
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html
+  commentId: T:Axle.Resources.Extraction.AbstractResourceExtractor
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor
+  nameWithType: AbstractResourceExtractor
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: DoExtract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html#Axle_Resources_Extraction_AbstractResourceExtractor_DoExtract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.AbstractResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: AbstractResourceExtractor.DoExtract(ResourceContext, String)
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor.DoExtract*
+  name: DoExtract
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html#Axle_Resources_Extraction_AbstractResourceExtractor_DoExtract_
+  commentId: Overload:Axle.Resources.Extraction.AbstractResourceExtractor.DoExtract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor.DoExtract
+  nameWithType: AbstractResourceExtractor.DoExtract
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor.Extract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: Extract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html#Axle_Resources_Extraction_AbstractResourceExtractor_Extract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.AbstractResourceExtractor.Extract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor.Extract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: AbstractResourceExtractor.Extract(ResourceContext, String)
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor.Extract*
+  name: Extract
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html#Axle_Resources_Extraction_AbstractResourceExtractor_Extract_
+  commentId: Overload:Axle.Resources.Extraction.AbstractResourceExtractor.Extract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor.Extract
+  nameWithType: AbstractResourceExtractor.Extract
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor.ExtractAsync(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: ExtractAsync(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html#Axle_Resources_Extraction_AbstractResourceExtractor_ExtractAsync_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.AbstractResourceExtractor.ExtractAsync(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor.ExtractAsync(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: AbstractResourceExtractor.ExtractAsync(ResourceContext, String)
+- uid: Axle.Resources.Extraction.AbstractResourceExtractor.ExtractAsync*
+  name: ExtractAsync
+  href: resources/main/Axle.Resources.Extraction.AbstractResourceExtractor.html#Axle_Resources_Extraction_AbstractResourceExtractor_ExtractAsync_
+  commentId: Overload:Axle.Resources.Extraction.AbstractResourceExtractor.ExtractAsync
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.AbstractResourceExtractor.ExtractAsync
+  nameWithType: AbstractResourceExtractor.ExtractAsync
+- uid: Axle.Resources.Extraction.ContextExtractionChain
+  name: ContextExtractionChain
+  href: resources/main/Axle.Resources.Extraction.ContextExtractionChain.html
+  commentId: T:Axle.Resources.Extraction.ContextExtractionChain
+  fullName: Axle.Resources.Extraction.ContextExtractionChain
+  nameWithType: ContextExtractionChain
+- uid: Axle.Resources.Extraction.ContextExtractionChain.Extract(System.String)
+  name: Extract(String)
+  href: resources/main/Axle.Resources.Extraction.ContextExtractionChain.html#Axle_Resources_Extraction_ContextExtractionChain_Extract_System_String_
+  commentId: M:Axle.Resources.Extraction.ContextExtractionChain.Extract(System.String)
+  fullName: Axle.Resources.Extraction.ContextExtractionChain.Extract(System.String)
+  nameWithType: ContextExtractionChain.Extract(String)
+- uid: Axle.Resources.Extraction.ContextExtractionChain.Extract*
+  name: Extract
+  href: resources/main/Axle.Resources.Extraction.ContextExtractionChain.html#Axle_Resources_Extraction_ContextExtractionChain_Extract_
+  commentId: Overload:Axle.Resources.Extraction.ContextExtractionChain.Extract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ContextExtractionChain.Extract
+  nameWithType: ContextExtractionChain.Extract
+- uid: Axle.Resources.Extraction.ContextExtractionChain.ExtractAll(System.String)
+  name: ExtractAll(String)
+  href: resources/main/Axle.Resources.Extraction.ContextExtractionChain.html#Axle_Resources_Extraction_ContextExtractionChain_ExtractAll_System_String_
+  commentId: M:Axle.Resources.Extraction.ContextExtractionChain.ExtractAll(System.String)
+  fullName: Axle.Resources.Extraction.ContextExtractionChain.ExtractAll(System.String)
+  nameWithType: ContextExtractionChain.ExtractAll(String)
+- uid: Axle.Resources.Extraction.ContextExtractionChain.ExtractAll*
+  name: ExtractAll
+  href: resources/main/Axle.Resources.Extraction.ContextExtractionChain.html#Axle_Resources_Extraction_ContextExtractionChain_ExtractAll_
+  commentId: Overload:Axle.Resources.Extraction.ContextExtractionChain.ExtractAll
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ContextExtractionChain.ExtractAll
+  nameWithType: ContextExtractionChain.ExtractAll
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry
+  name: DefaultResourceExtractorRegistry
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html
+  commentId: T:Axle.Resources.Extraction.DefaultResourceExtractorRegistry
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry
+  nameWithType: DefaultResourceExtractorRegistry
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register(Nullsafe{Axle.Resources.Extraction.IResourceExtractor})
+  name: Register(Nullsafe<IResourceExtractor>)
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html#Axle_Resources_Extraction_DefaultResourceExtractorRegistry_Register_Nullsafe_Axle_Resources_Extraction_IResourceExtractor__
+  commentId: M:Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register(Nullsafe{Axle.Resources.Extraction.IResourceExtractor})
+  name.vb: Register(Nullsafe(Of IResourceExtractor))
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register(Nullsafe<Axle.Resources.Extraction.IResourceExtractor>)
+  fullName.vb: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register(Nullsafe(Of Axle.Resources.Extraction.IResourceExtractor))
+  nameWithType: DefaultResourceExtractorRegistry.Register(Nullsafe<IResourceExtractor>)
+  nameWithType.vb: DefaultResourceExtractorRegistry.Register(Nullsafe(Of IResourceExtractor))
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register*
+  name: Register
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html#Axle_Resources_Extraction_DefaultResourceExtractorRegistry_Register_
+  commentId: Overload:Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.Register
+  nameWithType: DefaultResourceExtractorRegistry.Register
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#Generic#IEnumerable{Axle#Resources#Extraction#IResourceExtractor}#GetEnumerator
+  name: IEnumerable<IResourceExtractor>.GetEnumerator()
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html#Axle_Resources_Extraction_DefaultResourceExtractorRegistry_System_Collections_Generic_IEnumerable_Axle_Resources_Extraction_IResourceExtractor__GetEnumerator
+  commentId: M:Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#Generic#IEnumerable{Axle#Resources#Extraction#IResourceExtractor}#GetEnumerator
+  name.vb: System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>.GetEnumerator()
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>.GetEnumerator()
+  nameWithType: DefaultResourceExtractorRegistry.IEnumerable<IResourceExtractor>.GetEnumerator()
+  nameWithType.vb: DefaultResourceExtractorRegistry.System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>.GetEnumerator()
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#Generic#IEnumerable{Axle#Resources#Extraction#IResourceExtractor}#GetEnumerator*
+  name: IEnumerable<IResourceExtractor>.GetEnumerator
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html#Axle_Resources_Extraction_DefaultResourceExtractorRegistry_System_Collections_Generic_IEnumerable_Axle_Resources_Extraction_IResourceExtractor__GetEnumerator_
+  commentId: Overload:Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#Generic#IEnumerable{Axle#Resources#Extraction#IResourceExtractor}#GetEnumerator
+  isSpec: "True"
+  name.vb: System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>.GetEnumerator
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>.GetEnumerator
+  nameWithType: DefaultResourceExtractorRegistry.IEnumerable<IResourceExtractor>.GetEnumerator
+  nameWithType.vb: DefaultResourceExtractorRegistry.System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>.GetEnumerator
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#IEnumerable#GetEnumerator
+  name: IEnumerable.GetEnumerator()
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html#Axle_Resources_Extraction_DefaultResourceExtractorRegistry_System_Collections_IEnumerable_GetEnumerator
+  commentId: M:Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#IEnumerable#GetEnumerator
+  name.vb: System.Collections.IEnumerable.GetEnumerator()
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: DefaultResourceExtractorRegistry.IEnumerable.GetEnumerator()
+  nameWithType.vb: DefaultResourceExtractorRegistry.System.Collections.IEnumerable.GetEnumerator()
+- uid: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#IEnumerable#GetEnumerator*
+  name: IEnumerable.GetEnumerator
+  href: resources/main/Axle.Resources.Extraction.DefaultResourceExtractorRegistry.html#Axle_Resources_Extraction_DefaultResourceExtractorRegistry_System_Collections_IEnumerable_GetEnumerator_
+  commentId: Overload:Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System#Collections#IEnumerable#GetEnumerator
+  isSpec: "True"
+  name.vb: System.Collections.IEnumerable.GetEnumerator
+  fullName: Axle.Resources.Extraction.DefaultResourceExtractorRegistry.System.Collections.IEnumerable.GetEnumerator
+  nameWithType: DefaultResourceExtractorRegistry.IEnumerable.GetEnumerator
+  nameWithType.vb: DefaultResourceExtractorRegistry.System.Collections.IEnumerable.GetEnumerator
+- uid: Axle.Resources.Extraction.Embedded
+  name: Axle.Resources.Extraction.Embedded
+  href: resources/main/Axle.Resources.Extraction.Embedded.html
+  commentId: N:Axle.Resources.Extraction.Embedded
+  fullName: Axle.Resources.Extraction.Embedded
+  nameWithType: Axle.Resources.Extraction.Embedded
+- uid: Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor
+  name: EmbeddedResourceExtractor
+  href: resources/main/Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.html
+  commentId: T:Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor
+  fullName: Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor
+  nameWithType: EmbeddedResourceExtractor
+- uid: Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: DoExtract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.html#Axle_Resources_Extraction_Embedded_EmbeddedResourceExtractor_DoExtract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: EmbeddedResourceExtractor.DoExtract(ResourceContext, String)
+- uid: Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.DoExtract*
+  name: DoExtract
+  href: resources/main/Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.html#Axle_Resources_Extraction_Embedded_EmbeddedResourceExtractor_DoExtract_
+  commentId: Overload:Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.DoExtract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.Embedded.EmbeddedResourceExtractor.DoExtract
+  nameWithType: EmbeddedResourceExtractor.DoExtract
+- uid: Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo
+  name: EmbeddedResourceInfo
+  href: resources/main/Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.html
+  commentId: T:Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo
+  fullName: Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo
+  nameWithType: EmbeddedResourceInfo
+- uid: Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.Open
+  name: Open()
+  href: resources/main/Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.html#Axle_Resources_Extraction_Embedded_EmbeddedResourceInfo_Open
+  commentId: M:Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.Open
+  fullName: Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.Open()
+  nameWithType: EmbeddedResourceInfo.Open()
+- uid: Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.Open*
+  name: Open
+  href: resources/main/Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.html#Axle_Resources_Extraction_Embedded_EmbeddedResourceInfo_Open_
+  commentId: Overload:Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.Embedded.EmbeddedResourceInfo.Open
+  nameWithType: EmbeddedResourceInfo.Open
+- uid: Axle.Resources.Extraction.FileSystem
+  name: Axle.Resources.Extraction.FileSystem
+  href: resources/main/Axle.Resources.Extraction.FileSystem.html
+  commentId: N:Axle.Resources.Extraction.FileSystem
+  fullName: Axle.Resources.Extraction.FileSystem
+  nameWithType: Axle.Resources.Extraction.FileSystem
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor
+  name: FileSystemResourceExtractor
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.html
+  commentId: T:Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor
+  nameWithType: FileSystemResourceExtractor
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: DoExtract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.html#Axle_Resources_Extraction_FileSystem_FileSystemResourceExtractor_DoExtract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: FileSystemResourceExtractor.DoExtract(ResourceContext, String)
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.DoExtract*
+  name: DoExtract
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.html#Axle_Resources_Extraction_FileSystem_FileSystemResourceExtractor_DoExtract_
+  commentId: Overload:Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.DoExtract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceExtractor.DoExtract
+  nameWithType: FileSystemResourceExtractor.DoExtract
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo
+  name: FileSystemResourceInfo
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.html
+  commentId: T:Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo
+  nameWithType: FileSystemResourceInfo
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.Open
+  name: Open()
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.html#Axle_Resources_Extraction_FileSystem_FileSystemResourceInfo_Open
+  commentId: M:Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.Open
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.Open()
+  nameWithType: FileSystemResourceInfo.Open()
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.Open*
+  name: Open
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.html#Axle_Resources_Extraction_FileSystem_FileSystemResourceInfo_Open_
+  commentId: Overload:Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.Open
+  nameWithType: FileSystemResourceInfo.Open
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.html#Axle_Resources_Extraction_FileSystem_FileSystemResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: FileSystemResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: FileSystemResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.html#Axle_Resources_Extraction_FileSystem_FileSystemResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.FileSystem.FileSystemResourceInfo.TryResolve
+  nameWithType: FileSystemResourceInfo.TryResolve
+- uid: Axle.Resources.Extraction.IResourceExtractor
+  name: IResourceExtractor
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractor.html
+  commentId: T:Axle.Resources.Extraction.IResourceExtractor
+  fullName: Axle.Resources.Extraction.IResourceExtractor
+  nameWithType: IResourceExtractor
+- uid: Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: Extract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractor.html#Axle_Resources_Extraction_IResourceExtractor_Extract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: IResourceExtractor.Extract(ResourceContext, String)
+- uid: Axle.Resources.Extraction.IResourceExtractor.Extract*
+  name: Extract
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractor.html#Axle_Resources_Extraction_IResourceExtractor_Extract_
+  commentId: Overload:Axle.Resources.Extraction.IResourceExtractor.Extract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.IResourceExtractor.Extract
+  nameWithType: IResourceExtractor.Extract
+- uid: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: ExtractAsync(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractor.html#Axle_Resources_Extraction_IResourceExtractor_ExtractAsync_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: IResourceExtractor.ExtractAsync(ResourceContext, String)
+- uid: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync*
+  name: ExtractAsync
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractor.html#Axle_Resources_Extraction_IResourceExtractor_ExtractAsync_
+  commentId: Overload:Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+  nameWithType: IResourceExtractor.ExtractAsync
+- uid: Axle.Resources.Extraction.IResourceExtractorRegistry
+  name: IResourceExtractorRegistry
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractorRegistry.html
+  commentId: T:Axle.Resources.Extraction.IResourceExtractorRegistry
+  fullName: Axle.Resources.Extraction.IResourceExtractorRegistry
+  nameWithType: IResourceExtractorRegistry
+- uid: Axle.Resources.Extraction.IResourceExtractorRegistry.Register(Nullsafe{Axle.Resources.Extraction.IResourceExtractor})
+  name: Register(Nullsafe<IResourceExtractor>)
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractorRegistry.html#Axle_Resources_Extraction_IResourceExtractorRegistry_Register_Nullsafe_Axle_Resources_Extraction_IResourceExtractor__
+  commentId: M:Axle.Resources.Extraction.IResourceExtractorRegistry.Register(Nullsafe{Axle.Resources.Extraction.IResourceExtractor})
+  name.vb: Register(Nullsafe(Of IResourceExtractor))
+  fullName: Axle.Resources.Extraction.IResourceExtractorRegistry.Register(Nullsafe<Axle.Resources.Extraction.IResourceExtractor>)
+  fullName.vb: Axle.Resources.Extraction.IResourceExtractorRegistry.Register(Nullsafe(Of Axle.Resources.Extraction.IResourceExtractor))
+  nameWithType: IResourceExtractorRegistry.Register(Nullsafe<IResourceExtractor>)
+  nameWithType.vb: IResourceExtractorRegistry.Register(Nullsafe(Of IResourceExtractor))
+- uid: Axle.Resources.Extraction.IResourceExtractorRegistry.Register*
+  name: Register
+  href: resources/main/Axle.Resources.Extraction.IResourceExtractorRegistry.html#Axle_Resources_Extraction_IResourceExtractorRegistry_Register_
+  commentId: Overload:Axle.Resources.Extraction.IResourceExtractorRegistry.Register
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.IResourceExtractorRegistry.Register
+  nameWithType: IResourceExtractorRegistry.Register
+- uid: Axle.Resources.Extraction.ResourceContext
+  name: ResourceContext
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html
+  commentId: T:Axle.Resources.Extraction.ResourceContext
+  fullName: Axle.Resources.Extraction.ResourceContext
+  nameWithType: ResourceContext
+- uid: Axle.Resources.Extraction.ResourceContext.Bundle
+  name: Bundle
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_Bundle
+  commentId: P:Axle.Resources.Extraction.ResourceContext.Bundle
+  fullName: Axle.Resources.Extraction.ResourceContext.Bundle
+  nameWithType: ResourceContext.Bundle
+- uid: Axle.Resources.Extraction.ResourceContext.Bundle*
+  name: Bundle
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_Bundle_
+  commentId: Overload:Axle.Resources.Extraction.ResourceContext.Bundle
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ResourceContext.Bundle
+  nameWithType: ResourceContext.Bundle
+- uid: Axle.Resources.Extraction.ResourceContext.Culture
+  name: Culture
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_Culture
+  commentId: P:Axle.Resources.Extraction.ResourceContext.Culture
+  fullName: Axle.Resources.Extraction.ResourceContext.Culture
+  nameWithType: ResourceContext.Culture
+- uid: Axle.Resources.Extraction.ResourceContext.Culture*
+  name: Culture
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_Culture_
+  commentId: Overload:Axle.Resources.Extraction.ResourceContext.Culture
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ResourceContext.Culture
+  nameWithType: ResourceContext.Culture
+- uid: Axle.Resources.Extraction.ResourceContext.ExtractionChain
+  name: ExtractionChain
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_ExtractionChain
+  commentId: P:Axle.Resources.Extraction.ResourceContext.ExtractionChain
+  fullName: Axle.Resources.Extraction.ResourceContext.ExtractionChain
+  nameWithType: ResourceContext.ExtractionChain
+- uid: Axle.Resources.Extraction.ResourceContext.ExtractionChain*
+  name: ExtractionChain
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_ExtractionChain_
+  commentId: Overload:Axle.Resources.Extraction.ResourceContext.ExtractionChain
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ResourceContext.ExtractionChain
+  nameWithType: ResourceContext.ExtractionChain
+- uid: Axle.Resources.Extraction.ResourceContext.Location
+  name: Location
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_Location
+  commentId: P:Axle.Resources.Extraction.ResourceContext.Location
+  fullName: Axle.Resources.Extraction.ResourceContext.Location
+  nameWithType: ResourceContext.Location
+- uid: Axle.Resources.Extraction.ResourceContext.Location*
+  name: Location
+  href: resources/main/Axle.Resources.Extraction.ResourceContext.html#Axle_Resources_Extraction_ResourceContext_Location_
+  commentId: Overload:Axle.Resources.Extraction.ResourceContext.Location
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ResourceContext.Location
+  nameWithType: ResourceContext.Location
+- uid: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions
+  name: ResourceExtractorRegistryExtensions
+  href: resources/main/Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.html
+  commentId: T:Axle.Resources.Extraction.ResourceExtractorRegistryExtensions
+  fullName: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions
+  nameWithType: ResourceExtractorRegistryExtensions
+- uid: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry,Axle.Resources.Extraction.IResourceExtractor[])
+  name: Register(IResourceExtractorRegistry, IResourceExtractor[])
+  href: resources/main/Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.html#Axle_Resources_Extraction_ResourceExtractorRegistryExtensions_Register_Axle_Resources_Extraction_IResourceExtractorRegistry_Axle_Resources_Extraction_IResourceExtractor___
+  commentId: M:Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry,Axle.Resources.Extraction.IResourceExtractor[])
+  name.vb: Register(IResourceExtractorRegistry, IResourceExtractor())
+  fullName: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry, Axle.Resources.Extraction.IResourceExtractor[])
+  fullName.vb: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry, Axle.Resources.Extraction.IResourceExtractor())
+  nameWithType: ResourceExtractorRegistryExtensions.Register(IResourceExtractorRegistry, IResourceExtractor[])
+  nameWithType.vb: ResourceExtractorRegistryExtensions.Register(IResourceExtractorRegistry, IResourceExtractor())
+- uid: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry,System.Collections.Generic.IEnumerable{Axle.Resources.Extraction.IResourceExtractor})
+  name: Register(IResourceExtractorRegistry, IEnumerable<IResourceExtractor>)
+  href: resources/main/Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.html#Axle_Resources_Extraction_ResourceExtractorRegistryExtensions_Register_Axle_Resources_Extraction_IResourceExtractorRegistry_System_Collections_Generic_IEnumerable_Axle_Resources_Extraction_IResourceExtractor__
+  commentId: M:Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry,System.Collections.Generic.IEnumerable{Axle.Resources.Extraction.IResourceExtractor})
+  name.vb: Register(IResourceExtractorRegistry, IEnumerable(Of IResourceExtractor))
+  fullName: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry, System.Collections.Generic.IEnumerable<Axle.Resources.Extraction.IResourceExtractor>)
+  fullName.vb: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register(Axle.Resources.Extraction.IResourceExtractorRegistry, System.Collections.Generic.IEnumerable(Of Axle.Resources.Extraction.IResourceExtractor))
+  nameWithType: ResourceExtractorRegistryExtensions.Register(IResourceExtractorRegistry, IEnumerable<IResourceExtractor>)
+  nameWithType.vb: ResourceExtractorRegistryExtensions.Register(IResourceExtractorRegistry, IEnumerable(Of IResourceExtractor))
+- uid: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register*
+  name: Register
+  href: resources/main/Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.html#Axle_Resources_Extraction_ResourceExtractorRegistryExtensions_Register_
+  commentId: Overload:Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ResourceExtractorRegistryExtensions.Register
+  nameWithType: ResourceExtractorRegistryExtensions.Register
+- uid: Axle.Resources.Extraction.ResX
+  name: Axle.Resources.Extraction.ResX
+  href: resources/main/Axle.Resources.Extraction.ResX.html
+  commentId: N:Axle.Resources.Extraction.ResX
+  fullName: Axle.Resources.Extraction.ResX
+  nameWithType: Axle.Resources.Extraction.ResX
+- uid: Axle.Resources.Extraction.ResX.ResXResourceExtractor
+  name: ResXResourceExtractor
+  href: resources/main/Axle.Resources.Extraction.ResX.ResXResourceExtractor.html
+  commentId: T:Axle.Resources.Extraction.ResX.ResXResourceExtractor
+  fullName: Axle.Resources.Extraction.ResX.ResXResourceExtractor
+  nameWithType: ResXResourceExtractor
+- uid: Axle.Resources.Extraction.ResX.ResXResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: DoExtract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Extraction.ResX.ResXResourceExtractor.html#Axle_Resources_Extraction_ResX_ResXResourceExtractor_DoExtract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Extraction.ResX.ResXResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Extraction.ResX.ResXResourceExtractor.DoExtract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: ResXResourceExtractor.DoExtract(ResourceContext, String)
+- uid: Axle.Resources.Extraction.ResX.ResXResourceExtractor.DoExtract*
+  name: DoExtract
+  href: resources/main/Axle.Resources.Extraction.ResX.ResXResourceExtractor.html#Axle_Resources_Extraction_ResX_ResXResourceExtractor_DoExtract_
+  commentId: Overload:Axle.Resources.Extraction.ResX.ResXResourceExtractor.DoExtract
+  isSpec: "True"
+  fullName: Axle.Resources.Extraction.ResX.ResXResourceExtractor.DoExtract
+  nameWithType: ResXResourceExtractor.DoExtract
+- uid: Axle.Resources.ResourceException
+  name: ResourceException
+  href: resources/main/Axle.Resources.ResourceException.html
+  commentId: T:Axle.Resources.ResourceException
+  fullName: Axle.Resources.ResourceException
+  nameWithType: ResourceException
+- uid: Axle.Resources.ResourceException.#ctor
+  name: ResourceException()
+  href: resources/main/Axle.Resources.ResourceException.html#Axle_Resources_ResourceException__ctor
+  commentId: M:Axle.Resources.ResourceException.#ctor
+  fullName: Axle.Resources.ResourceException.ResourceException()
+  nameWithType: ResourceException.ResourceException()
+- uid: Axle.Resources.ResourceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  name: ResourceException(SerializationInfo, StreamingContext)
+  href: resources/main/Axle.Resources.ResourceException.html#Axle_Resources_ResourceException__ctor_System_Runtime_Serialization_SerializationInfo_System_Runtime_Serialization_StreamingContext_
+  commentId: M:Axle.Resources.ResourceException.#ctor(System.Runtime.Serialization.SerializationInfo,System.Runtime.Serialization.StreamingContext)
+  fullName: Axle.Resources.ResourceException.ResourceException(System.Runtime.Serialization.SerializationInfo, System.Runtime.Serialization.StreamingContext)
+  nameWithType: ResourceException.ResourceException(SerializationInfo, StreamingContext)
+- uid: Axle.Resources.ResourceException.#ctor(System.String)
+  name: ResourceException(String)
+  href: resources/main/Axle.Resources.ResourceException.html#Axle_Resources_ResourceException__ctor_System_String_
+  commentId: M:Axle.Resources.ResourceException.#ctor(System.String)
+  fullName: Axle.Resources.ResourceException.ResourceException(System.String)
+  nameWithType: ResourceException.ResourceException(String)
+- uid: Axle.Resources.ResourceException.#ctor(System.String,System.Exception)
+  name: ResourceException(String, Exception)
+  href: resources/main/Axle.Resources.ResourceException.html#Axle_Resources_ResourceException__ctor_System_String_System_Exception_
+  commentId: M:Axle.Resources.ResourceException.#ctor(System.String,System.Exception)
+  fullName: Axle.Resources.ResourceException.ResourceException(System.String, System.Exception)
+  nameWithType: ResourceException.ResourceException(String, Exception)
+- uid: Axle.Resources.ResourceException.#ctor*
+  name: ResourceException
+  href: resources/main/Axle.Resources.ResourceException.html#Axle_Resources_ResourceException__ctor_
+  commentId: Overload:Axle.Resources.ResourceException.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceException.ResourceException
+  nameWithType: ResourceException.ResourceException
+- uid: Axle.Resources.ResourceInfo
+  name: ResourceInfo
+  href: resources/main/Axle.Resources.ResourceInfo.html
+  commentId: T:Axle.Resources.ResourceInfo
+  fullName: Axle.Resources.ResourceInfo
+  nameWithType: ResourceInfo
+- uid: Axle.Resources.ResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,System.String)
+  name: ResourceInfo(String, CultureInfo, String)
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo__ctor_System_String_System_Globalization_CultureInfo_System_String_
+  commentId: M:Axle.Resources.ResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,System.String)
+  fullName: Axle.Resources.ResourceInfo.ResourceInfo(System.String, System.Globalization.CultureInfo, System.String)
+  nameWithType: ResourceInfo.ResourceInfo(String, CultureInfo, String)
+- uid: Axle.Resources.ResourceInfo.#ctor*
+  name: ResourceInfo
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo__ctor_
+  commentId: Overload:Axle.Resources.ResourceInfo.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.ResourceInfo
+  nameWithType: ResourceInfo.ResourceInfo
+- uid: Axle.Resources.ResourceInfo.Bundle
+  name: Bundle
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Bundle
+  commentId: P:Axle.Resources.ResourceInfo.Bundle
+  fullName: Axle.Resources.ResourceInfo.Bundle
+  nameWithType: ResourceInfo.Bundle
+- uid: Axle.Resources.ResourceInfo.Bundle*
+  name: Bundle
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Bundle_
+  commentId: Overload:Axle.Resources.ResourceInfo.Bundle
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.Bundle
+  nameWithType: ResourceInfo.Bundle
+- uid: Axle.Resources.ResourceInfo.ContentType
+  name: ContentType
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_ContentType
+  commentId: P:Axle.Resources.ResourceInfo.ContentType
+  fullName: Axle.Resources.ResourceInfo.ContentType
+  nameWithType: ResourceInfo.ContentType
+- uid: Axle.Resources.ResourceInfo.ContentType*
+  name: ContentType
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_ContentType_
+  commentId: Overload:Axle.Resources.ResourceInfo.ContentType
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.ContentType
+  nameWithType: ResourceInfo.ContentType
+- uid: Axle.Resources.ResourceInfo.Culture
+  name: Culture
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Culture
+  commentId: P:Axle.Resources.ResourceInfo.Culture
+  fullName: Axle.Resources.ResourceInfo.Culture
+  nameWithType: ResourceInfo.Culture
+- uid: Axle.Resources.ResourceInfo.Culture*
+  name: Culture
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Culture_
+  commentId: Overload:Axle.Resources.ResourceInfo.Culture
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.Culture
+  nameWithType: ResourceInfo.Culture
+- uid: Axle.Resources.ResourceInfo.Name
+  name: Name
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Name
+  commentId: P:Axle.Resources.ResourceInfo.Name
+  fullName: Axle.Resources.ResourceInfo.Name
+  nameWithType: ResourceInfo.Name
+- uid: Axle.Resources.ResourceInfo.Name*
+  name: Name
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Name_
+  commentId: Overload:Axle.Resources.ResourceInfo.Name
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.Name
+  nameWithType: ResourceInfo.Name
+- uid: Axle.Resources.ResourceInfo.Open
+  name: Open()
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Open
+  commentId: M:Axle.Resources.ResourceInfo.Open
+  fullName: Axle.Resources.ResourceInfo.Open()
+  nameWithType: ResourceInfo.Open()
+- uid: Axle.Resources.ResourceInfo.Open*
+  name: Open
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Open_
+  commentId: Overload:Axle.Resources.ResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.Open
+  nameWithType: ResourceInfo.Open
+- uid: Axle.Resources.ResourceInfo.Resolve(System.Type)
+  name: Resolve(Type)
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Resolve_System_Type_
+  commentId: M:Axle.Resources.ResourceInfo.Resolve(System.Type)
+  fullName: Axle.Resources.ResourceInfo.Resolve(System.Type)
+  nameWithType: ResourceInfo.Resolve(Type)
+- uid: Axle.Resources.ResourceInfo.Resolve*
+  name: Resolve
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Resolve_
+  commentId: Overload:Axle.Resources.ResourceInfo.Resolve
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.Resolve
+  nameWithType: ResourceInfo.Resolve
+- uid: Axle.Resources.ResourceInfo.Resolve``1
+  name: Resolve<T>()
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_Resolve__1
+  commentId: M:Axle.Resources.ResourceInfo.Resolve``1
+  name.vb: Resolve(Of T)()
+  fullName: Axle.Resources.ResourceInfo.Resolve<T>()
+  fullName.vb: Axle.Resources.ResourceInfo.Resolve(Of T)()
+  nameWithType: ResourceInfo.Resolve<T>()
+  nameWithType.vb: ResourceInfo.Resolve(Of T)()
+- uid: Axle.Resources.ResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.ResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.ResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.ResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: ResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: ResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.ResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.ResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceInfo.TryResolve
+  nameWithType: ResourceInfo.TryResolve
+- uid: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+  name: TryResolve<T>(out T)
+  href: resources/main/Axle.Resources.ResourceInfo.html#Axle_Resources_ResourceInfo_TryResolve__1___0__
+  commentId: M:Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+  name.vb: TryResolve(Of T)(ByRef T)
+  fullName: Axle.Resources.ResourceInfo.TryResolve<T>(out T)
+  fullName.vb: Axle.Resources.ResourceInfo.TryResolve(Of T)(ByRef T)
+  nameWithType: ResourceInfo.TryResolve<T>(out T)
+  nameWithType.vb: ResourceInfo.TryResolve(Of T)(ByRef T)
+- uid: Axle.Resources.ResourceLoadException
+  name: ResourceLoadException
+  href: resources/main/Axle.Resources.ResourceLoadException.html
+  commentId: T:Axle.Resources.ResourceLoadException
+  fullName: Axle.Resources.ResourceLoadException
+  nameWithType: ResourceLoadException
+- uid: Axle.Resources.ResourceLoadException.#ctor
+  name: ResourceLoadException()
+  href: resources/main/Axle.Resources.ResourceLoadException.html#Axle_Resources_ResourceLoadException__ctor
+  commentId: M:Axle.Resources.ResourceLoadException.#ctor
+  fullName: Axle.Resources.ResourceLoadException.ResourceLoadException()
+  nameWithType: ResourceLoadException.ResourceLoadException()
+- uid: Axle.Resources.ResourceLoadException.#ctor(System.String)
+  name: ResourceLoadException(String)
+  href: resources/main/Axle.Resources.ResourceLoadException.html#Axle_Resources_ResourceLoadException__ctor_System_String_
+  commentId: M:Axle.Resources.ResourceLoadException.#ctor(System.String)
+  fullName: Axle.Resources.ResourceLoadException.ResourceLoadException(System.String)
+  nameWithType: ResourceLoadException.ResourceLoadException(String)
+- uid: Axle.Resources.ResourceLoadException.#ctor(System.String,System.Exception)
+  name: ResourceLoadException(String, Exception)
+  href: resources/main/Axle.Resources.ResourceLoadException.html#Axle_Resources_ResourceLoadException__ctor_System_String_System_Exception_
+  commentId: M:Axle.Resources.ResourceLoadException.#ctor(System.String,System.Exception)
+  fullName: Axle.Resources.ResourceLoadException.ResourceLoadException(System.String, System.Exception)
+  nameWithType: ResourceLoadException.ResourceLoadException(String, Exception)
+- uid: Axle.Resources.ResourceLoadException.#ctor(System.String,System.String,System.Globalization.CultureInfo,System.Exception)
+  name: ResourceLoadException(String, String, CultureInfo, Exception)
+  href: resources/main/Axle.Resources.ResourceLoadException.html#Axle_Resources_ResourceLoadException__ctor_System_String_System_String_System_Globalization_CultureInfo_System_Exception_
+  commentId: M:Axle.Resources.ResourceLoadException.#ctor(System.String,System.String,System.Globalization.CultureInfo,System.Exception)
+  fullName: Axle.Resources.ResourceLoadException.ResourceLoadException(System.String, System.String, System.Globalization.CultureInfo, System.Exception)
+  nameWithType: ResourceLoadException.ResourceLoadException(String, String, CultureInfo, Exception)
+- uid: Axle.Resources.ResourceLoadException.#ctor*
+  name: ResourceLoadException
+  href: resources/main/Axle.Resources.ResourceLoadException.html#Axle_Resources_ResourceLoadException__ctor_
+  commentId: Overload:Axle.Resources.ResourceLoadException.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceLoadException.ResourceLoadException
+  nameWithType: ResourceLoadException.ResourceLoadException
+- uid: Axle.Resources.ResourceManager
+  name: ResourceManager
+  href: resources/main/Axle.Resources.ResourceManager.html
+  commentId: T:Axle.Resources.ResourceManager
+  fullName: Axle.Resources.ResourceManager
+  nameWithType: ResourceManager
+- uid: Axle.Resources.ResourceManager.#ctor(Axle.Resources.Bundling.IResourceBundleRegistry,Axle.Resources.Extraction.IResourceExtractorRegistry)
+  name: ResourceManager(IResourceBundleRegistry, IResourceExtractorRegistry)
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager__ctor_Axle_Resources_Bundling_IResourceBundleRegistry_Axle_Resources_Extraction_IResourceExtractorRegistry_
+  commentId: M:Axle.Resources.ResourceManager.#ctor(Axle.Resources.Bundling.IResourceBundleRegistry,Axle.Resources.Extraction.IResourceExtractorRegistry)
+  fullName: Axle.Resources.ResourceManager.ResourceManager(Axle.Resources.Bundling.IResourceBundleRegistry, Axle.Resources.Extraction.IResourceExtractorRegistry)
+  nameWithType: ResourceManager.ResourceManager(IResourceBundleRegistry, IResourceExtractorRegistry)
+- uid: Axle.Resources.ResourceManager.#ctor*
+  name: ResourceManager
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager__ctor_
+  commentId: Overload:Axle.Resources.ResourceManager.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceManager.ResourceManager
+  nameWithType: ResourceManager.ResourceManager
+- uid: Axle.Resources.ResourceManager.Bundles
+  name: Bundles
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Bundles
+  commentId: P:Axle.Resources.ResourceManager.Bundles
+  fullName: Axle.Resources.ResourceManager.Bundles
+  nameWithType: ResourceManager.Bundles
+- uid: Axle.Resources.ResourceManager.Bundles*
+  name: Bundles
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Bundles_
+  commentId: Overload:Axle.Resources.ResourceManager.Bundles
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceManager.Bundles
+  nameWithType: ResourceManager.Bundles
+- uid: Axle.Resources.ResourceManager.Extractors
+  name: Extractors
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Extractors
+  commentId: P:Axle.Resources.ResourceManager.Extractors
+  fullName: Axle.Resources.ResourceManager.Extractors
+  nameWithType: ResourceManager.Extractors
+- uid: Axle.Resources.ResourceManager.Extractors*
+  name: Extractors
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Extractors_
+  commentId: Overload:Axle.Resources.ResourceManager.Extractors
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceManager.Extractors
+  nameWithType: ResourceManager.Extractors
+- uid: Axle.Resources.ResourceManager.Load(System.String,System.String,System.Globalization.CultureInfo)
+  name: Load(String, String, CultureInfo)
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Load_System_String_System_String_System_Globalization_CultureInfo_
+  commentId: M:Axle.Resources.ResourceManager.Load(System.String,System.String,System.Globalization.CultureInfo)
+  fullName: Axle.Resources.ResourceManager.Load(System.String, System.String, System.Globalization.CultureInfo)
+  nameWithType: ResourceManager.Load(String, String, CultureInfo)
+- uid: Axle.Resources.ResourceManager.Load*
+  name: Load
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Load_
+  commentId: Overload:Axle.Resources.ResourceManager.Load
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceManager.Load
+  nameWithType: ResourceManager.Load
+- uid: Axle.Resources.ResourceManager.Load``1(System.String,System.String,System.Globalization.CultureInfo)
+  name: Load<T>(String, String, CultureInfo)
+  href: resources/main/Axle.Resources.ResourceManager.html#Axle_Resources_ResourceManager_Load__1_System_String_System_String_System_Globalization_CultureInfo_
+  commentId: M:Axle.Resources.ResourceManager.Load``1(System.String,System.String,System.Globalization.CultureInfo)
+  name.vb: Load(Of T)(String, String, CultureInfo)
+  fullName: Axle.Resources.ResourceManager.Load<T>(System.String, System.String, System.Globalization.CultureInfo)
+  fullName.vb: Axle.Resources.ResourceManager.Load(Of T)(System.String, System.String, System.Globalization.CultureInfo)
+  nameWithType: ResourceManager.Load<T>(String, String, CultureInfo)
+  nameWithType.vb: ResourceManager.Load(Of T)(String, String, CultureInfo)
+- uid: Axle.Resources.ResourceNotFoundException
+  name: ResourceNotFoundException
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html
+  commentId: T:Axle.Resources.ResourceNotFoundException
+  fullName: Axle.Resources.ResourceNotFoundException
+  nameWithType: ResourceNotFoundException
+- uid: Axle.Resources.ResourceNotFoundException.#ctor
+  name: ResourceNotFoundException()
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html#Axle_Resources_ResourceNotFoundException__ctor
+  commentId: M:Axle.Resources.ResourceNotFoundException.#ctor
+  fullName: Axle.Resources.ResourceNotFoundException.ResourceNotFoundException()
+  nameWithType: ResourceNotFoundException.ResourceNotFoundException()
+- uid: Axle.Resources.ResourceNotFoundException.#ctor(System.String)
+  name: ResourceNotFoundException(String)
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html#Axle_Resources_ResourceNotFoundException__ctor_System_String_
+  commentId: M:Axle.Resources.ResourceNotFoundException.#ctor(System.String)
+  fullName: Axle.Resources.ResourceNotFoundException.ResourceNotFoundException(System.String)
+  nameWithType: ResourceNotFoundException.ResourceNotFoundException(String)
+- uid: Axle.Resources.ResourceNotFoundException.#ctor(System.String,System.Exception)
+  name: ResourceNotFoundException(String, Exception)
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html#Axle_Resources_ResourceNotFoundException__ctor_System_String_System_Exception_
+  commentId: M:Axle.Resources.ResourceNotFoundException.#ctor(System.String,System.Exception)
+  fullName: Axle.Resources.ResourceNotFoundException.ResourceNotFoundException(System.String, System.Exception)
+  nameWithType: ResourceNotFoundException.ResourceNotFoundException(String, Exception)
+- uid: Axle.Resources.ResourceNotFoundException.#ctor(System.String,System.String,System.Globalization.CultureInfo)
+  name: ResourceNotFoundException(String, String, CultureInfo)
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html#Axle_Resources_ResourceNotFoundException__ctor_System_String_System_String_System_Globalization_CultureInfo_
+  commentId: M:Axle.Resources.ResourceNotFoundException.#ctor(System.String,System.String,System.Globalization.CultureInfo)
+  fullName: Axle.Resources.ResourceNotFoundException.ResourceNotFoundException(System.String, System.String, System.Globalization.CultureInfo)
+  nameWithType: ResourceNotFoundException.ResourceNotFoundException(String, String, CultureInfo)
+- uid: Axle.Resources.ResourceNotFoundException.#ctor(System.String,System.String,System.Globalization.CultureInfo,System.Exception)
+  name: ResourceNotFoundException(String, String, CultureInfo, Exception)
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html#Axle_Resources_ResourceNotFoundException__ctor_System_String_System_String_System_Globalization_CultureInfo_System_Exception_
+  commentId: M:Axle.Resources.ResourceNotFoundException.#ctor(System.String,System.String,System.Globalization.CultureInfo,System.Exception)
+  fullName: Axle.Resources.ResourceNotFoundException.ResourceNotFoundException(System.String, System.String, System.Globalization.CultureInfo, System.Exception)
+  nameWithType: ResourceNotFoundException.ResourceNotFoundException(String, String, CultureInfo, Exception)
+- uid: Axle.Resources.ResourceNotFoundException.#ctor*
+  name: ResourceNotFoundException
+  href: resources/main/Axle.Resources.ResourceNotFoundException.html#Axle_Resources_ResourceNotFoundException__ctor_
+  commentId: Overload:Axle.Resources.ResourceNotFoundException.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.ResourceNotFoundException.ResourceNotFoundException
+  nameWithType: ResourceNotFoundException.ResourceNotFoundException
+- uid: Axle.Resources.TextResourceInfo
+  name: TextResourceInfo
+  href: resources/main/Axle.Resources.TextResourceInfo.html
+  commentId: T:Axle.Resources.TextResourceInfo
+  fullName: Axle.Resources.TextResourceInfo
+  nameWithType: TextResourceInfo
+- uid: Axle.Resources.TextResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,System.String)
+  name: TextResourceInfo(String, CultureInfo, String)
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo__ctor_System_String_System_Globalization_CultureInfo_System_String_
+  commentId: M:Axle.Resources.TextResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,System.String)
+  fullName: Axle.Resources.TextResourceInfo.TextResourceInfo(System.String, System.Globalization.CultureInfo, System.String)
+  nameWithType: TextResourceInfo.TextResourceInfo(String, CultureInfo, String)
+- uid: Axle.Resources.TextResourceInfo.#ctor*
+  name: TextResourceInfo
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo__ctor_
+  commentId: Overload:Axle.Resources.TextResourceInfo.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.TextResourceInfo.TextResourceInfo
+  nameWithType: TextResourceInfo.TextResourceInfo
+- uid: Axle.Resources.TextResourceInfo.Open
+  name: Open()
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo_Open
+  commentId: M:Axle.Resources.TextResourceInfo.Open
+  fullName: Axle.Resources.TextResourceInfo.Open()
+  nameWithType: TextResourceInfo.Open()
+- uid: Axle.Resources.TextResourceInfo.Open*
+  name: Open
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo_Open_
+  commentId: Overload:Axle.Resources.TextResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.TextResourceInfo.Open
+  nameWithType: TextResourceInfo.Open
+- uid: Axle.Resources.TextResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.TextResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.TextResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.TextResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: TextResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: TextResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.TextResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.TextResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.TextResourceInfo.TryResolve
+  nameWithType: TextResourceInfo.TryResolve
+- uid: Axle.Resources.TextResourceInfo.Value
+  name: Value
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo_Value
+  commentId: P:Axle.Resources.TextResourceInfo.Value
+  fullName: Axle.Resources.TextResourceInfo.Value
+  nameWithType: TextResourceInfo.Value
+- uid: Axle.Resources.TextResourceInfo.Value*
+  name: Value
+  href: resources/main/Axle.Resources.TextResourceInfo.html#Axle_Resources_TextResourceInfo_Value_
+  commentId: Overload:Axle.Resources.TextResourceInfo.Value
+  isSpec: "True"
+  fullName: Axle.Resources.TextResourceInfo.Value
+  nameWithType: TextResourceInfo.Value
+- uid: Axle.Resources.Xml
+  name: Axle.Resources.Xml
+  href: resources/main/Axle.Resources.Xml.html
+  commentId: N:Axle.Resources.Xml
+  fullName: Axle.Resources.Xml
+  nameWithType: Axle.Resources.Xml
+- uid: Axle.Resources.Xml.Extraction
+  name: Axle.Resources.Xml.Extraction
+  href: resources/main/Axle.Resources.Xml.Extraction.html
+  commentId: N:Axle.Resources.Xml.Extraction
+  fullName: Axle.Resources.Xml.Extraction
+  nameWithType: Axle.Resources.Xml.Extraction
+- uid: Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1
+  name: AbstractXmlExtractor<TX>
+  href: resources/main/Axle.Resources.Xml.Extraction.AbstractXmlExtractor-1.html
+  commentId: T:Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1
+  name.vb: AbstractXmlExtractor(Of TX)
+  fullName: Axle.Resources.Xml.Extraction.AbstractXmlExtractor<TX>
+  fullName.vb: Axle.Resources.Xml.Extraction.AbstractXmlExtractor(Of TX)
+  nameWithType: AbstractXmlExtractor<TX>
+  nameWithType.vb: AbstractXmlExtractor(Of TX)
+- uid: Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  name: DoExtract(ResourceContext, String)
+  href: resources/main/Axle.Resources.Xml.Extraction.AbstractXmlExtractor-1.html#Axle_Resources_Xml_Extraction_AbstractXmlExtractor_1_DoExtract_Axle_Resources_Extraction_ResourceContext_System_String_
+  commentId: M:Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.DoExtract(Axle.Resources.Extraction.ResourceContext,System.String)
+  fullName: Axle.Resources.Xml.Extraction.AbstractXmlExtractor<TX>.DoExtract(Axle.Resources.Extraction.ResourceContext, System.String)
+  fullName.vb: Axle.Resources.Xml.Extraction.AbstractXmlExtractor(Of TX).DoExtract(Axle.Resources.Extraction.ResourceContext, System.String)
+  nameWithType: AbstractXmlExtractor<TX>.DoExtract(ResourceContext, String)
+  nameWithType.vb: AbstractXmlExtractor(Of TX).DoExtract(ResourceContext, String)
+- uid: Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.DoExtract*
+  name: DoExtract
+  href: resources/main/Axle.Resources.Xml.Extraction.AbstractXmlExtractor-1.html#Axle_Resources_Xml_Extraction_AbstractXmlExtractor_1_DoExtract_
+  commentId: Overload:Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.DoExtract
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.Extraction.AbstractXmlExtractor<TX>.DoExtract
+  fullName.vb: Axle.Resources.Xml.Extraction.AbstractXmlExtractor(Of TX).DoExtract
+  nameWithType: AbstractXmlExtractor<TX>.DoExtract
+  nameWithType.vb: AbstractXmlExtractor(Of TX).DoExtract
+- uid: Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.ExtractXml(Axle.Resources.Extraction.ResourceContext,System.String,Axle.Resources.ResourceInfo)
+  name: ExtractXml(ResourceContext, String, ResourceInfo)
+  href: resources/main/Axle.Resources.Xml.Extraction.AbstractXmlExtractor-1.html#Axle_Resources_Xml_Extraction_AbstractXmlExtractor_1_ExtractXml_Axle_Resources_Extraction_ResourceContext_System_String_Axle_Resources_ResourceInfo_
+  commentId: M:Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.ExtractXml(Axle.Resources.Extraction.ResourceContext,System.String,Axle.Resources.ResourceInfo)
+  fullName: Axle.Resources.Xml.Extraction.AbstractXmlExtractor<TX>.ExtractXml(Axle.Resources.Extraction.ResourceContext, System.String, Axle.Resources.ResourceInfo)
+  fullName.vb: Axle.Resources.Xml.Extraction.AbstractXmlExtractor(Of TX).ExtractXml(Axle.Resources.Extraction.ResourceContext, System.String, Axle.Resources.ResourceInfo)
+  nameWithType: AbstractXmlExtractor<TX>.ExtractXml(ResourceContext, String, ResourceInfo)
+  nameWithType.vb: AbstractXmlExtractor(Of TX).ExtractXml(ResourceContext, String, ResourceInfo)
+- uid: Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.ExtractXml*
+  name: ExtractXml
+  href: resources/main/Axle.Resources.Xml.Extraction.AbstractXmlExtractor-1.html#Axle_Resources_Xml_Extraction_AbstractXmlExtractor_1_ExtractXml_
+  commentId: Overload:Axle.Resources.Xml.Extraction.AbstractXmlExtractor`1.ExtractXml
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.Extraction.AbstractXmlExtractor<TX>.ExtractXml
+  fullName.vb: Axle.Resources.Xml.Extraction.AbstractXmlExtractor(Of TX).ExtractXml
+  nameWithType: AbstractXmlExtractor<TX>.ExtractXml
+  nameWithType.vb: AbstractXmlExtractor(Of TX).ExtractXml
+- uid: Axle.Resources.Xml.Extraction.XDocumentExtractor
+  name: XDocumentExtractor
+  href: resources/main/Axle.Resources.Xml.Extraction.XDocumentExtractor.html
+  commentId: T:Axle.Resources.Xml.Extraction.XDocumentExtractor
+  fullName: Axle.Resources.Xml.Extraction.XDocumentExtractor
+  nameWithType: XDocumentExtractor
+- uid: Axle.Resources.Xml.Extraction.XDocumentExtractor.#ctor
+  name: XDocumentExtractor()
+  href: resources/main/Axle.Resources.Xml.Extraction.XDocumentExtractor.html#Axle_Resources_Xml_Extraction_XDocumentExtractor__ctor
+  commentId: M:Axle.Resources.Xml.Extraction.XDocumentExtractor.#ctor
+  fullName: Axle.Resources.Xml.Extraction.XDocumentExtractor.XDocumentExtractor()
+  nameWithType: XDocumentExtractor.XDocumentExtractor()
+- uid: Axle.Resources.Xml.Extraction.XDocumentExtractor.#ctor(System.Xml.Linq.LoadOptions)
+  name: XDocumentExtractor(LoadOptions)
+  href: resources/main/Axle.Resources.Xml.Extraction.XDocumentExtractor.html#Axle_Resources_Xml_Extraction_XDocumentExtractor__ctor_System_Xml_Linq_LoadOptions_
+  commentId: M:Axle.Resources.Xml.Extraction.XDocumentExtractor.#ctor(System.Xml.Linq.LoadOptions)
+  fullName: Axle.Resources.Xml.Extraction.XDocumentExtractor.XDocumentExtractor(System.Xml.Linq.LoadOptions)
+  nameWithType: XDocumentExtractor.XDocumentExtractor(LoadOptions)
+- uid: Axle.Resources.Xml.Extraction.XDocumentExtractor.#ctor*
+  name: XDocumentExtractor
+  href: resources/main/Axle.Resources.Xml.Extraction.XDocumentExtractor.html#Axle_Resources_Xml_Extraction_XDocumentExtractor__ctor_
+  commentId: Overload:Axle.Resources.Xml.Extraction.XDocumentExtractor.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.Extraction.XDocumentExtractor.XDocumentExtractor
+  nameWithType: XDocumentExtractor.XDocumentExtractor
+- uid: Axle.Resources.Xml.Extraction.XDocumentExtractor.ExtractXml(Axle.Resources.Extraction.ResourceContext,System.String,Axle.Resources.ResourceInfo)
+  name: ExtractXml(ResourceContext, String, ResourceInfo)
+  href: resources/main/Axle.Resources.Xml.Extraction.XDocumentExtractor.html#Axle_Resources_Xml_Extraction_XDocumentExtractor_ExtractXml_Axle_Resources_Extraction_ResourceContext_System_String_Axle_Resources_ResourceInfo_
+  commentId: M:Axle.Resources.Xml.Extraction.XDocumentExtractor.ExtractXml(Axle.Resources.Extraction.ResourceContext,System.String,Axle.Resources.ResourceInfo)
+  fullName: Axle.Resources.Xml.Extraction.XDocumentExtractor.ExtractXml(Axle.Resources.Extraction.ResourceContext, System.String, Axle.Resources.ResourceInfo)
+  nameWithType: XDocumentExtractor.ExtractXml(ResourceContext, String, ResourceInfo)
+- uid: Axle.Resources.Xml.Extraction.XDocumentExtractor.ExtractXml*
+  name: ExtractXml
+  href: resources/main/Axle.Resources.Xml.Extraction.XDocumentExtractor.html#Axle_Resources_Xml_Extraction_XDocumentExtractor_ExtractXml_
+  commentId: Overload:Axle.Resources.Xml.Extraction.XDocumentExtractor.ExtractXml
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.Extraction.XDocumentExtractor.ExtractXml
+  nameWithType: XDocumentExtractor.ExtractXml
+- uid: Axle.Resources.Xml.Extraction.XmlDocumentExtractor
+  name: XmlDocumentExtractor
+  href: resources/main/Axle.Resources.Xml.Extraction.XmlDocumentExtractor.html
+  commentId: T:Axle.Resources.Xml.Extraction.XmlDocumentExtractor
+  fullName: Axle.Resources.Xml.Extraction.XmlDocumentExtractor
+  nameWithType: XmlDocumentExtractor
+- uid: Axle.Resources.Xml.Extraction.XmlDocumentExtractor.ExtractXml(Axle.Resources.Extraction.ResourceContext,System.String,Axle.Resources.ResourceInfo)
+  name: ExtractXml(ResourceContext, String, ResourceInfo)
+  href: resources/main/Axle.Resources.Xml.Extraction.XmlDocumentExtractor.html#Axle_Resources_Xml_Extraction_XmlDocumentExtractor_ExtractXml_Axle_Resources_Extraction_ResourceContext_System_String_Axle_Resources_ResourceInfo_
+  commentId: M:Axle.Resources.Xml.Extraction.XmlDocumentExtractor.ExtractXml(Axle.Resources.Extraction.ResourceContext,System.String,Axle.Resources.ResourceInfo)
+  fullName: Axle.Resources.Xml.Extraction.XmlDocumentExtractor.ExtractXml(Axle.Resources.Extraction.ResourceContext, System.String, Axle.Resources.ResourceInfo)
+  nameWithType: XmlDocumentExtractor.ExtractXml(ResourceContext, String, ResourceInfo)
+- uid: Axle.Resources.Xml.Extraction.XmlDocumentExtractor.ExtractXml*
+  name: ExtractXml
+  href: resources/main/Axle.Resources.Xml.Extraction.XmlDocumentExtractor.html#Axle_Resources_Xml_Extraction_XmlDocumentExtractor_ExtractXml_
+  commentId: Overload:Axle.Resources.Xml.Extraction.XmlDocumentExtractor.ExtractXml
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.Extraction.XmlDocumentExtractor.ExtractXml
+  nameWithType: XmlDocumentExtractor.ExtractXml
+- uid: Axle.Resources.Xml.XDocumentResourceInfo
+  name: XDocumentResourceInfo
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html
+  commentId: T:Axle.Resources.Xml.XDocumentResourceInfo
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo
+  nameWithType: XDocumentResourceInfo
+- uid: Axle.Resources.Xml.XDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html#Axle_Resources_Xml_XDocumentResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.Xml.XDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.Xml.XDocumentResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: XDocumentResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: XDocumentResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.Xml.XDocumentResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html#Axle_Resources_Xml_XDocumentResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.Xml.XDocumentResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo.TryResolve
+  nameWithType: XDocumentResourceInfo.TryResolve
+- uid: Axle.Resources.Xml.XDocumentResourceInfo.Value
+  name: Value
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html#Axle_Resources_Xml_XDocumentResourceInfo_Value
+  commentId: P:Axle.Resources.Xml.XDocumentResourceInfo.Value
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo.Value
+  nameWithType: XDocumentResourceInfo.Value
+- uid: Axle.Resources.Xml.XDocumentResourceInfo.Value*
+  name: Value
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html#Axle_Resources_Xml_XDocumentResourceInfo_Value_
+  commentId: Overload:Axle.Resources.Xml.XDocumentResourceInfo.Value
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo.Value
+  nameWithType: XDocumentResourceInfo.Value
+- uid: Axle.Resources.Xml.XDocumentResourceInfo.WriteTo(System.Xml.XmlWriter)
+  name: WriteTo(XmlWriter)
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html#Axle_Resources_Xml_XDocumentResourceInfo_WriteTo_System_Xml_XmlWriter_
+  commentId: M:Axle.Resources.Xml.XDocumentResourceInfo.WriteTo(System.Xml.XmlWriter)
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo.WriteTo(System.Xml.XmlWriter)
+  nameWithType: XDocumentResourceInfo.WriteTo(XmlWriter)
+- uid: Axle.Resources.Xml.XDocumentResourceInfo.WriteTo*
+  name: WriteTo
+  href: resources/main/Axle.Resources.Xml.XDocumentResourceInfo.html#Axle_Resources_Xml_XDocumentResourceInfo_WriteTo_
+  commentId: Overload:Axle.Resources.Xml.XDocumentResourceInfo.WriteTo
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XDocumentResourceInfo.WriteTo
+  nameWithType: XDocumentResourceInfo.WriteTo
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo
+  name: XmlDocumentResourceInfo
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html
+  commentId: T:Axle.Resources.Xml.XmlDocumentResourceInfo
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo
+  nameWithType: XmlDocumentResourceInfo
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html#Axle_Resources_Xml_XmlDocumentResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: XmlDocumentResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: XmlDocumentResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html#Axle_Resources_Xml_XmlDocumentResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo.TryResolve
+  nameWithType: XmlDocumentResourceInfo.TryResolve
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo.Value
+  name: Value
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html#Axle_Resources_Xml_XmlDocumentResourceInfo_Value
+  commentId: P:Axle.Resources.Xml.XmlDocumentResourceInfo.Value
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo.Value
+  nameWithType: XmlDocumentResourceInfo.Value
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo.Value*
+  name: Value
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html#Axle_Resources_Xml_XmlDocumentResourceInfo_Value_
+  commentId: Overload:Axle.Resources.Xml.XmlDocumentResourceInfo.Value
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo.Value
+  nameWithType: XmlDocumentResourceInfo.Value
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo.WriteTo(System.Xml.XmlWriter)
+  name: WriteTo(XmlWriter)
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html#Axle_Resources_Xml_XmlDocumentResourceInfo_WriteTo_System_Xml_XmlWriter_
+  commentId: M:Axle.Resources.Xml.XmlDocumentResourceInfo.WriteTo(System.Xml.XmlWriter)
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo.WriteTo(System.Xml.XmlWriter)
+  nameWithType: XmlDocumentResourceInfo.WriteTo(XmlWriter)
+- uid: Axle.Resources.Xml.XmlDocumentResourceInfo.WriteTo*
+  name: WriteTo
+  href: resources/main/Axle.Resources.Xml.XmlDocumentResourceInfo.html#Axle_Resources_Xml_XmlDocumentResourceInfo_WriteTo_
+  commentId: Overload:Axle.Resources.Xml.XmlDocumentResourceInfo.WriteTo
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlDocumentResourceInfo.WriteTo
+  nameWithType: XmlDocumentResourceInfo.WriteTo
+- uid: Axle.Resources.Xml.XmlResourceInfo
+  name: XmlResourceInfo
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html
+  commentId: T:Axle.Resources.Xml.XmlResourceInfo
+  fullName: Axle.Resources.Xml.XmlResourceInfo
+  nameWithType: XmlResourceInfo
+- uid: Axle.Resources.Xml.XmlResourceInfo.#ctor(System.String,System.Globalization.CultureInfo)
+  name: XmlResourceInfo(String, CultureInfo)
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo__ctor_System_String_System_Globalization_CultureInfo_
+  commentId: M:Axle.Resources.Xml.XmlResourceInfo.#ctor(System.String,System.Globalization.CultureInfo)
+  fullName: Axle.Resources.Xml.XmlResourceInfo.XmlResourceInfo(System.String, System.Globalization.CultureInfo)
+  nameWithType: XmlResourceInfo.XmlResourceInfo(String, CultureInfo)
+- uid: Axle.Resources.Xml.XmlResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,Axle.Resources.ResourceInfo)
+  name: XmlResourceInfo(String, CultureInfo, ResourceInfo)
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo__ctor_System_String_System_Globalization_CultureInfo_Axle_Resources_ResourceInfo_
+  commentId: M:Axle.Resources.Xml.XmlResourceInfo.#ctor(System.String,System.Globalization.CultureInfo,Axle.Resources.ResourceInfo)
+  fullName: Axle.Resources.Xml.XmlResourceInfo.XmlResourceInfo(System.String, System.Globalization.CultureInfo, Axle.Resources.ResourceInfo)
+  nameWithType: XmlResourceInfo.XmlResourceInfo(String, CultureInfo, ResourceInfo)
+- uid: Axle.Resources.Xml.XmlResourceInfo.#ctor*
+  name: XmlResourceInfo
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo__ctor_
+  commentId: Overload:Axle.Resources.Xml.XmlResourceInfo.#ctor
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlResourceInfo.XmlResourceInfo
+  nameWithType: XmlResourceInfo.XmlResourceInfo
+- uid: Axle.Resources.Xml.XmlResourceInfo.ContentType
+  name: ContentType
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_ContentType
+  commentId: F:Axle.Resources.Xml.XmlResourceInfo.ContentType
+  fullName: Axle.Resources.Xml.XmlResourceInfo.ContentType
+  nameWithType: XmlResourceInfo.ContentType
+- uid: Axle.Resources.Xml.XmlResourceInfo.FileExtension
+  name: FileExtension
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_FileExtension
+  commentId: F:Axle.Resources.Xml.XmlResourceInfo.FileExtension
+  fullName: Axle.Resources.Xml.XmlResourceInfo.FileExtension
+  nameWithType: XmlResourceInfo.FileExtension
+- uid: Axle.Resources.Xml.XmlResourceInfo.Open
+  name: Open()
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_Open
+  commentId: M:Axle.Resources.Xml.XmlResourceInfo.Open
+  fullName: Axle.Resources.Xml.XmlResourceInfo.Open()
+  nameWithType: XmlResourceInfo.Open()
+- uid: Axle.Resources.Xml.XmlResourceInfo.Open*
+  name: Open
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_Open_
+  commentId: Overload:Axle.Resources.Xml.XmlResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlResourceInfo.Open
+  nameWithType: XmlResourceInfo.Open
+- uid: Axle.Resources.Xml.XmlResourceInfo.TryResolve(System.Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_TryResolve_System_Type_System_Object__
+  commentId: M:Axle.Resources.Xml.XmlResourceInfo.TryResolve(System.Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.Xml.XmlResourceInfo.TryResolve(System.Type, out System.Object)
+  fullName.vb: Axle.Resources.Xml.XmlResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  nameWithType: XmlResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: XmlResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.Xml.XmlResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.Xml.XmlResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlResourceInfo.TryResolve
+  nameWithType: XmlResourceInfo.TryResolve
+- uid: Axle.Resources.Xml.XmlResourceInfo.WriteTo(System.Xml.XmlWriter)
+  name: WriteTo(XmlWriter)
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_WriteTo_System_Xml_XmlWriter_
+  commentId: M:Axle.Resources.Xml.XmlResourceInfo.WriteTo(System.Xml.XmlWriter)
+  fullName: Axle.Resources.Xml.XmlResourceInfo.WriteTo(System.Xml.XmlWriter)
+  nameWithType: XmlResourceInfo.WriteTo(XmlWriter)
+- uid: Axle.Resources.Xml.XmlResourceInfo.WriteTo*
+  name: WriteTo
+  href: resources/main/Axle.Resources.Xml.XmlResourceInfo.html#Axle_Resources_Xml_XmlResourceInfo_WriteTo_
+  commentId: Overload:Axle.Resources.Xml.XmlResourceInfo.WriteTo
+  isSpec: "True"
+  fullName: Axle.Resources.Xml.XmlResourceInfo.WriteTo
+  nameWithType: XmlResourceInfo.WriteTo

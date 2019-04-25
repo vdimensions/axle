@@ -1,0 +1,66 @@
+{
+    "metadata": [{
+      "src": {
+        "src": "./",
+        "files": "src/*.csproj",
+        "exclude": [
+          "src/bin/**",
+          "src/obj/**",
+          "src/.paket/**",
+          "src/paket-files/**"
+        ]
+      },
+      "properties": {
+        "TargetFramework": "netstandard2.0"
+      },
+      "dest": "src/obj/docfx/api"
+    }],
+    "build": {
+      "content": [
+        {
+          "files": "**/*.yml",
+          "src": "src/obj/docfx/api",
+          "dest": "api/web/main"
+        },
+        {
+          "files": [
+            ".docs/*.md",
+            ".docs/toc.yml",
+            ".docs/api/toc.yml",
+            ".docs/api/**.md",
+            ".docs/api_spec/**",
+            ".docs/articles/**",
+            ".docs/roadmap/**"
+          ]
+        }
+      ],
+      "xrefService": [
+        "https://xref.docs.microsoft.com/query?uid={uid}"
+      ],
+      "globalMetadata": {
+        "_appTitle": "Axle Framework Website",
+        "_appFooter": "Copyright &copy; Virtual Dimensions 2013 - 2019. All rights reserved.",
+        "_enableSearch": true,
+        "newFileRepository": {
+          "branch": "master"
+        },
+        "_gitContribute": {
+          "repo": "https://github.com/vdimensions/axle-framework",
+          "branch": "master",
+          "path": "docs/api_spec/web/main"
+        },
+        "_gitUrlPattern": "github"
+      },
+      "template": [
+        "default",
+        "../../../docs/templates/site"
+      ],
+      "overwrite": [
+        {
+          "files": "../../docs/api_spec/web/main/**.md",
+          "exclude": "obj/**"
+        }
+      ],
+      "dest": "../../../_site"
+    }
+  }

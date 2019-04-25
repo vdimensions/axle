@@ -1,204 +1,4 @@
 {
-  "metadata": [
-    {
-      "src": [
-        {
-          "src": "../codebase/core/main",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/core/main"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/resources/main",
-          "files": [ "src/*.csproj" ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/resources/main"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/resources/java",
-          "files": [ 
-            "src/*.csproj"
-          ],
-          "exclude": [ 
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/resources/java"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/resources/yaml",
-          "files": [ 
-            "src/*.csproj"
-          ],
-          "exclude": [ 
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/resources/yaml"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/application/main",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/application/main"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/data/main",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/data/main"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/security/main",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/security/main"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/security/cryptography",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/security/cryptography"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/web/main",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/web/main"
-    },
-    {
-      "src": [
-        {
-          "src": "../codebase/web/websharper",
-          "files": [
-            "src/*.csproj"
-          ],
-          "exclude": [
-            "src/bin/**",
-            "src/obj/**",
-            "src/.paket/**",
-            "src/paket-files/**"
-          ]
-        }
-      ],
-      "properties": {
-        "TargetFramework": "netstandard2.0"
-      },
-      "dest": "obj/docfx/api/web/websharper"
-    }
-  ],
   "build": {
     "template": [
       "default",
@@ -249,7 +49,7 @@
       "content": [
         {
           "files": [
-            "api/**.yml",
+            "api/**.yml"
           ],
           "exclude": [
             "**/toc.yml",
@@ -318,6 +118,18 @@
     },
     "markdownEngineName": "markdig",
     "dest": "../_site",
-    "xrefService": [ "https://xref.docs.microsoft.com/query?uid={uid}" ]
+    "xref": [ 
+      "xref/api/core/main/xrefmap.yml",
+      "xref/api/resources/main/xrefmap.yml",
+      "xref/api/resources/java/xrefmap.yml",
+      "xref/api/resources/yaml/xrefmap.yml",
+      "xref/api/application/main/xrefmap.yml",
+      "xref/api/data/main/xrefmap.yml",
+      "xref/api/web/main/xrefmap.yml",
+      "xref/api/web/websharper/xrefmap.yml"
+    ],
+    "xrefService": [ 
+      "https://xref.docs.microsoft.com/query?uid={uid}"
+    ]
   }
 }

@@ -1,0 +1,94 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Axle.Resources.Java
+  name: Axle.Resources.Java
+  href: resources/java/Axle.Resources.Java.html
+  commentId: N:Axle.Resources.Java
+  fullName: Axle.Resources.Java
+  nameWithType: Axle.Resources.Java
+- uid: Axle.Resources.Java.Extraction
+  name: Axle.Resources.Java.Extraction
+  href: resources/java/Axle.Resources.Java.Extraction.html
+  commentId: N:Axle.Resources.Java.Extraction
+  fullName: Axle.Resources.Java.Extraction
+  nameWithType: Axle.Resources.Java.Extraction
+- uid: Axle.Resources.Java.Extraction.JavaPropertiesExtractor
+  name: JavaPropertiesExtractor
+  href: resources/java/Axle.Resources.Java.Extraction.JavaPropertiesExtractor.html
+  commentId: T:Axle.Resources.Java.Extraction.JavaPropertiesExtractor
+  fullName: Axle.Resources.Java.Extraction.JavaPropertiesExtractor
+  nameWithType: JavaPropertiesExtractor
+- uid: Axle.Resources.Java.Extraction.JavaPropertiesExtractor.GetEnumerator
+  name: GetEnumerator()
+  href: resources/java/Axle.Resources.Java.Extraction.JavaPropertiesExtractor.html#Axle_Resources_Java_Extraction_JavaPropertiesExtractor_GetEnumerator
+  commentId: M:Axle.Resources.Java.Extraction.JavaPropertiesExtractor.GetEnumerator
+  fullName: Axle.Resources.Java.Extraction.JavaPropertiesExtractor.GetEnumerator()
+  nameWithType: JavaPropertiesExtractor.GetEnumerator()
+- uid: Axle.Resources.Java.Extraction.JavaPropertiesExtractor.GetEnumerator*
+  name: GetEnumerator
+  href: resources/java/Axle.Resources.Java.Extraction.JavaPropertiesExtractor.html#Axle_Resources_Java_Extraction_JavaPropertiesExtractor_GetEnumerator_
+  commentId: Overload:Axle.Resources.Java.Extraction.JavaPropertiesExtractor.GetEnumerator
+  isSpec: "True"
+  fullName: Axle.Resources.Java.Extraction.JavaPropertiesExtractor.GetEnumerator
+  nameWithType: JavaPropertiesExtractor.GetEnumerator
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo
+  name: JavaPropertiesResourceInfo
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html
+  commentId: T:Axle.Resources.Java.JavaPropertiesResourceInfo
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo
+  nameWithType: JavaPropertiesResourceInfo
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.Data
+  name: Data
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_Data
+  commentId: P:Axle.Resources.Java.JavaPropertiesResourceInfo.Data
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.Data
+  nameWithType: JavaPropertiesResourceInfo.Data
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.Data*
+  name: Data
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_Data_
+  commentId: Overload:Axle.Resources.Java.JavaPropertiesResourceInfo.Data
+  isSpec: "True"
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.Data
+  nameWithType: JavaPropertiesResourceInfo.Data
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.FileExtension
+  name: FileExtension
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_FileExtension
+  commentId: F:Axle.Resources.Java.JavaPropertiesResourceInfo.FileExtension
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.FileExtension
+  nameWithType: JavaPropertiesResourceInfo.FileExtension
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.MimeType
+  name: MimeType
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_MimeType
+  commentId: F:Axle.Resources.Java.JavaPropertiesResourceInfo.MimeType
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.MimeType
+  nameWithType: JavaPropertiesResourceInfo.MimeType
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.Open
+  name: Open()
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_Open
+  commentId: M:Axle.Resources.Java.JavaPropertiesResourceInfo.Open
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.Open()
+  nameWithType: JavaPropertiesResourceInfo.Open()
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.Open*
+  name: Open
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_Open_
+  commentId: Overload:Axle.Resources.Java.JavaPropertiesResourceInfo.Open
+  isSpec: "True"
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.Open
+  nameWithType: JavaPropertiesResourceInfo.Open
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve(Type,System.Object@)
+  name: TryResolve(Type, out Object)
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_TryResolve_Type_System_Object__
+  commentId: M:Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve(Type,System.Object@)
+  name.vb: TryResolve(Type, ByRef Object)
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve(Type, out System.Object)
+  fullName.vb: Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve(Type, ByRef System.Object)
+  nameWithType: JavaPropertiesResourceInfo.TryResolve(Type, out Object)
+  nameWithType.vb: JavaPropertiesResourceInfo.TryResolve(Type, ByRef Object)
+- uid: Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve*
+  name: TryResolve
+  href: resources/java/Axle.Resources.Java.JavaPropertiesResourceInfo.html#Axle_Resources_Java_JavaPropertiesResourceInfo_TryResolve_
+  commentId: Overload:Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve
+  isSpec: "True"
+  fullName: Axle.Resources.Java.JavaPropertiesResourceInfo.TryResolve
+  nameWithType: JavaPropertiesResourceInfo.TryResolve

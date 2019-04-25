@@ -1,0 +1,2256 @@
+### YamlMime:XRefMap
+sorted: true
+references:
+- uid: Axle.Data
+  name: Axle.Data
+  href: data/main/Axle.Data.html
+  commentId: N:Axle.Data
+  fullName: Axle.Data
+  nameWithType: Axle.Data
+- uid: Axle.Data.Common
+  name: Axle.Data.Common
+  href: data/main/Axle.Data.Common.html
+  commentId: N:Axle.Data.Common
+  fullName: Axle.Data.Common
+  nameWithType: Axle.Data.Common
+- uid: Axle.Data.Common.DbConnectionDecorator
+  name: DbConnectionDecorator
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html
+  commentId: T:Axle.Data.Common.DbConnectionDecorator
+  fullName: Axle.Data.Common.DbConnectionDecorator
+  nameWithType: DbConnectionDecorator
+- uid: Axle.Data.Common.DbConnectionDecorator.#ctor(System.Data.IDbConnection)
+  name: DbConnectionDecorator(IDbConnection)
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator__ctor_System_Data_IDbConnection_
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.#ctor(System.Data.IDbConnection)
+  fullName: Axle.Data.Common.DbConnectionDecorator.DbConnectionDecorator(System.Data.IDbConnection)
+  nameWithType: DbConnectionDecorator.DbConnectionDecorator(IDbConnection)
+- uid: Axle.Data.Common.DbConnectionDecorator.#ctor*
+  name: DbConnectionDecorator
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator__ctor_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.#ctor
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.DbConnectionDecorator
+  nameWithType: DbConnectionDecorator.DbConnectionDecorator
+- uid: Axle.Data.Common.DbConnectionDecorator.BeginTransaction
+  name: BeginTransaction()
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_BeginTransaction
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.BeginTransaction
+  fullName: Axle.Data.Common.DbConnectionDecorator.BeginTransaction()
+  nameWithType: DbConnectionDecorator.BeginTransaction()
+- uid: Axle.Data.Common.DbConnectionDecorator.BeginTransaction(System.Data.IsolationLevel)
+  name: BeginTransaction(IsolationLevel)
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_BeginTransaction_System_Data_IsolationLevel_
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.BeginTransaction(System.Data.IsolationLevel)
+  fullName: Axle.Data.Common.DbConnectionDecorator.BeginTransaction(System.Data.IsolationLevel)
+  nameWithType: DbConnectionDecorator.BeginTransaction(IsolationLevel)
+- uid: Axle.Data.Common.DbConnectionDecorator.BeginTransaction*
+  name: BeginTransaction
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_BeginTransaction_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.BeginTransaction
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.BeginTransaction
+  nameWithType: DbConnectionDecorator.BeginTransaction
+- uid: Axle.Data.Common.DbConnectionDecorator.ChangeDatabase(System.String)
+  name: ChangeDatabase(String)
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_ChangeDatabase_System_String_
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.ChangeDatabase(System.String)
+  fullName: Axle.Data.Common.DbConnectionDecorator.ChangeDatabase(System.String)
+  nameWithType: DbConnectionDecorator.ChangeDatabase(String)
+- uid: Axle.Data.Common.DbConnectionDecorator.ChangeDatabase*
+  name: ChangeDatabase
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_ChangeDatabase_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.ChangeDatabase
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.ChangeDatabase
+  nameWithType: DbConnectionDecorator.ChangeDatabase
+- uid: Axle.Data.Common.DbConnectionDecorator.Close
+  name: Close()
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Close
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.Close
+  fullName: Axle.Data.Common.DbConnectionDecorator.Close()
+  nameWithType: DbConnectionDecorator.Close()
+- uid: Axle.Data.Common.DbConnectionDecorator.Close*
+  name: Close
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Close_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.Close
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.Close
+  nameWithType: DbConnectionDecorator.Close
+- uid: Axle.Data.Common.DbConnectionDecorator.ConnectionString
+  name: ConnectionString
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_ConnectionString
+  commentId: P:Axle.Data.Common.DbConnectionDecorator.ConnectionString
+  fullName: Axle.Data.Common.DbConnectionDecorator.ConnectionString
+  nameWithType: DbConnectionDecorator.ConnectionString
+- uid: Axle.Data.Common.DbConnectionDecorator.ConnectionString*
+  name: ConnectionString
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_ConnectionString_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.ConnectionString
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.ConnectionString
+  nameWithType: DbConnectionDecorator.ConnectionString
+- uid: Axle.Data.Common.DbConnectionDecorator.ConnectionTimeout
+  name: ConnectionTimeout
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_ConnectionTimeout
+  commentId: P:Axle.Data.Common.DbConnectionDecorator.ConnectionTimeout
+  fullName: Axle.Data.Common.DbConnectionDecorator.ConnectionTimeout
+  nameWithType: DbConnectionDecorator.ConnectionTimeout
+- uid: Axle.Data.Common.DbConnectionDecorator.ConnectionTimeout*
+  name: ConnectionTimeout
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_ConnectionTimeout_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.ConnectionTimeout
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.ConnectionTimeout
+  nameWithType: DbConnectionDecorator.ConnectionTimeout
+- uid: Axle.Data.Common.DbConnectionDecorator.CreateCommand
+  name: CreateCommand()
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_CreateCommand
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.CreateCommand
+  fullName: Axle.Data.Common.DbConnectionDecorator.CreateCommand()
+  nameWithType: DbConnectionDecorator.CreateCommand()
+- uid: Axle.Data.Common.DbConnectionDecorator.CreateCommand*
+  name: CreateCommand
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_CreateCommand_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.CreateCommand
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.CreateCommand
+  nameWithType: DbConnectionDecorator.CreateCommand
+- uid: Axle.Data.Common.DbConnectionDecorator.Database
+  name: Database
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Database
+  commentId: P:Axle.Data.Common.DbConnectionDecorator.Database
+  fullName: Axle.Data.Common.DbConnectionDecorator.Database
+  nameWithType: DbConnectionDecorator.Database
+- uid: Axle.Data.Common.DbConnectionDecorator.Database*
+  name: Database
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Database_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.Database
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.Database
+  nameWithType: DbConnectionDecorator.Database
+- uid: Axle.Data.Common.DbConnectionDecorator.Dispose
+  name: Dispose()
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Dispose
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.Dispose
+  fullName: Axle.Data.Common.DbConnectionDecorator.Dispose()
+  nameWithType: DbConnectionDecorator.Dispose()
+- uid: Axle.Data.Common.DbConnectionDecorator.Dispose*
+  name: Dispose
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Dispose_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.Dispose
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.Dispose
+  nameWithType: DbConnectionDecorator.Dispose
+- uid: Axle.Data.Common.DbConnectionDecorator.Open
+  name: Open()
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Open
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.Open
+  fullName: Axle.Data.Common.DbConnectionDecorator.Open()
+  nameWithType: DbConnectionDecorator.Open()
+- uid: Axle.Data.Common.DbConnectionDecorator.Open*
+  name: Open
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Open_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.Open
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.Open
+  nameWithType: DbConnectionDecorator.Open
+- uid: Axle.Data.Common.DbConnectionDecorator.State
+  name: State
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_State
+  commentId: P:Axle.Data.Common.DbConnectionDecorator.State
+  fullName: Axle.Data.Common.DbConnectionDecorator.State
+  nameWithType: DbConnectionDecorator.State
+- uid: Axle.Data.Common.DbConnectionDecorator.State*
+  name: State
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_State_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.State
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbConnectionDecorator.State
+  nameWithType: DbConnectionDecorator.State
+- uid: Axle.Data.Common.DbConnectionDecorator.System#IDisposable#Dispose
+  name: IDisposable.Dispose()
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_System_IDisposable_Dispose
+  commentId: M:Axle.Data.Common.DbConnectionDecorator.System#IDisposable#Dispose
+  name.vb: System.IDisposable.Dispose()
+  fullName: Axle.Data.Common.DbConnectionDecorator.System.IDisposable.Dispose()
+  nameWithType: DbConnectionDecorator.IDisposable.Dispose()
+  nameWithType.vb: DbConnectionDecorator.System.IDisposable.Dispose()
+- uid: Axle.Data.Common.DbConnectionDecorator.System#IDisposable#Dispose*
+  name: IDisposable.Dispose
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_System_IDisposable_Dispose_
+  commentId: Overload:Axle.Data.Common.DbConnectionDecorator.System#IDisposable#Dispose
+  isSpec: "True"
+  name.vb: System.IDisposable.Dispose
+  fullName: Axle.Data.Common.DbConnectionDecorator.System.IDisposable.Dispose
+  nameWithType: DbConnectionDecorator.IDisposable.Dispose
+  nameWithType.vb: DbConnectionDecorator.System.IDisposable.Dispose
+- uid: Axle.Data.Common.DbConnectionDecorator.Target
+  name: Target
+  href: data/main/Axle.Data.Common.DbConnectionDecorator.html#Axle_Data_Common_DbConnectionDecorator_Target
+  commentId: F:Axle.Data.Common.DbConnectionDecorator.Target
+  fullName: Axle.Data.Common.DbConnectionDecorator.Target
+  nameWithType: DbConnectionDecorator.Target
+- uid: Axle.Data.Common.DbParameterValueSetter`2
+  name: DbParameterValueSetter<TDbParameter, TDbType>
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html
+  commentId: T:Axle.Data.Common.DbParameterValueSetter`2
+  name.vb: DbParameterValueSetter(Of TDbParameter, TDbType)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.#ctor
+  name: DbParameterValueSetter()
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2__ctor
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.#ctor
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbParameterValueSetter()
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbParameterValueSetter()
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbParameterValueSetter()
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbParameterValueSetter()
+- uid: Axle.Data.Common.DbParameterValueSetter`2.#ctor(System.Collections.Generic.IEqualityComparer{`1})
+  name: DbParameterValueSetter(IEqualityComparer<TDbType>)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2__ctor_System_Collections_Generic_IEqualityComparer__1__
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.#ctor(System.Collections.Generic.IEqualityComparer{`1})
+  name.vb: DbParameterValueSetter(IEqualityComparer(Of TDbType))
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbParameterValueSetter(System.Collections.Generic.IEqualityComparer<TDbType>)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbParameterValueSetter(System.Collections.Generic.IEqualityComparer(Of TDbType))
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbParameterValueSetter(IEqualityComparer<TDbType>)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbParameterValueSetter(IEqualityComparer(Of TDbType))
+- uid: Axle.Data.Common.DbParameterValueSetter`2.#ctor*
+  name: DbParameterValueSetter
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2__ctor_
+  commentId: Overload:Axle.Data.Common.DbParameterValueSetter`2.#ctor
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbParameterValueSetter
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbParameterValueSetter
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbParameterValueSetter
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbParameterValueSetter
+- uid: Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer
+  name: DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.DbTypeEqualityComparer.html
+  commentId: T:Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer
+  name.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer
+- uid: Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.Equals(System.Data.DbType,System.Data.DbType)
+  name: Equals(DbType, DbType)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.DbTypeEqualityComparer.html#Axle_Data_Common_DbParameterValueSetter_2_DbTypeEqualityComparer_Equals_System_Data_DbType_System_Data_DbType_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.Equals(System.Data.DbType,System.Data.DbType)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.Equals(System.Data.DbType, System.Data.DbType)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.Equals(System.Data.DbType, System.Data.DbType)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.Equals(DbType, DbType)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.Equals(DbType, DbType)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.Equals*
+  name: Equals
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.DbTypeEqualityComparer.html#Axle_Data_Common_DbParameterValueSetter_2_DbTypeEqualityComparer_Equals_
+  commentId: Overload:Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.Equals
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.Equals
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.Equals
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.Equals
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.Equals
+- uid: Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.GetHashCode(System.Data.DbType)
+  name: GetHashCode(DbType)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.DbTypeEqualityComparer.html#Axle_Data_Common_DbParameterValueSetter_2_DbTypeEqualityComparer_GetHashCode_System_Data_DbType_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.GetHashCode(System.Data.DbType)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.GetHashCode(System.Data.DbType)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.GetHashCode(System.Data.DbType)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.GetHashCode(DbType)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.GetHashCode(DbType)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.GetHashCode*
+  name: GetHashCode
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.DbTypeEqualityComparer.html#Axle_Data_Common_DbParameterValueSetter_2_DbTypeEqualityComparer_GetHashCode_
+  commentId: Overload:Axle.Data.Common.DbParameterValueSetter`2.DbTypeEqualityComparer.GetHashCode
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.GetHashCode
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.GetHashCode
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.DbTypeEqualityComparer.GetHashCode
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).DbTypeEqualityComparer.GetHashCode
+- uid: Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter(Axle.Data.Conversion.IDbValueConverter,`1)
+  name: RegisterConverter(IDbValueConverter, TDbType)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_RegisterConverter_Axle_Data_Conversion_IDbValueConverter__1_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter(Axle.Data.Conversion.IDbValueConverter,`1)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter(Axle.Data.Conversion.IDbValueConverter, TDbType)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter(Axle.Data.Conversion.IDbValueConverter, TDbType)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter(IDbValueConverter, TDbType)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter(IDbValueConverter, TDbType)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter(Axle.Data.Conversion.IDbValueConverter,`1,System.Data.DbType)
+  name: RegisterConverter(IDbValueConverter, TDbType, DbType)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_RegisterConverter_Axle_Data_Conversion_IDbValueConverter__1_System_Data_DbType_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter(Axle.Data.Conversion.IDbValueConverter,`1,System.Data.DbType)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter(Axle.Data.Conversion.IDbValueConverter, TDbType, System.Data.DbType)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter(Axle.Data.Conversion.IDbValueConverter, TDbType, System.Data.DbType)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter(IDbValueConverter, TDbType, DbType)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter(IDbValueConverter, TDbType, DbType)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter(Axle.Data.Conversion.IDbValueConverter,System.Data.DbType)
+  name: RegisterConverter(IDbValueConverter, DbType)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_RegisterConverter_Axle_Data_Conversion_IDbValueConverter_System_Data_DbType_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter(Axle.Data.Conversion.IDbValueConverter,System.Data.DbType)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter(Axle.Data.Conversion.IDbValueConverter, System.Data.DbType)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter(Axle.Data.Conversion.IDbValueConverter, System.Data.DbType)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter(IDbValueConverter, DbType)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter(IDbValueConverter, DbType)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter*
+  name: RegisterConverter
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_RegisterConverter_
+  commentId: Overload:Axle.Data.Common.DbParameterValueSetter`2.RegisterConverter
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.RegisterConverter
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).RegisterConverter
+- uid: Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,`1,System.Object)
+  name: SetValue(TDbParameter, TDbType, Object)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_SetValue__0__1_System_Object_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,`1,System.Object)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, TDbType, System.Object)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, TDbType, System.Object)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, TDbType, Object)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, TDbType, Object)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,`1,System.Object,Axle.Data.Conversion.IDbValueConverter)
+  name: SetValue(TDbParameter, TDbType, Object, IDbValueConverter)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_SetValue__0__1_System_Object_Axle_Data_Conversion_IDbValueConverter_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,`1,System.Object,Axle.Data.Conversion.IDbValueConverter)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, TDbType, System.Object, Axle.Data.Conversion.IDbValueConverter)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, TDbType, System.Object, Axle.Data.Conversion.IDbValueConverter)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, TDbType, Object, IDbValueConverter)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, TDbType, Object, IDbValueConverter)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,System.Data.DbType,System.Object)
+  name: SetValue(TDbParameter, DbType, Object)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_SetValue__0_System_Data_DbType_System_Object_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,System.Data.DbType,System.Object)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, System.Data.DbType, System.Object)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, System.Data.DbType, System.Object)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, DbType, Object)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, DbType, Object)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,System.Data.DbType,System.Object,Axle.Data.Conversion.IDbValueConverter)
+  name: SetValue(TDbParameter, DbType, Object, IDbValueConverter)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_SetValue__0_System_Data_DbType_System_Object_Axle_Data_Conversion_IDbValueConverter_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.SetValue(`0,System.Data.DbType,System.Object,Axle.Data.Conversion.IDbValueConverter)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, System.Data.DbType, System.Object, Axle.Data.Conversion.IDbValueConverter)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, System.Data.DbType, System.Object, Axle.Data.Conversion.IDbValueConverter)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, DbType, Object, IDbValueConverter)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, DbType, Object, IDbValueConverter)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.SetValue(System.Data.IDataParameter,System.Data.DbType,System.Object)
+  name: SetValue(IDataParameter, DbType, Object)
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_SetValue_System_Data_IDataParameter_System_Data_DbType_System_Object_
+  commentId: M:Axle.Data.Common.DbParameterValueSetter`2.SetValue(System.Data.IDataParameter,System.Data.DbType,System.Object)
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.SetValue(System.Data.IDataParameter, System.Data.DbType, System.Object)
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(System.Data.IDataParameter, System.Data.DbType, System.Object)
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.SetValue(IDataParameter, DbType, Object)
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).SetValue(IDataParameter, DbType, Object)
+- uid: Axle.Data.Common.DbParameterValueSetter`2.SetValue*
+  name: SetValue
+  href: data/main/Axle.Data.Common.DbParameterValueSetter-2.html#Axle_Data_Common_DbParameterValueSetter_2_SetValue_
+  commentId: Overload:Axle.Data.Common.DbParameterValueSetter`2.SetValue
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbParameterValueSetter<TDbParameter, TDbType>.SetValue
+  fullName.vb: Axle.Data.Common.DbParameterValueSetter(Of TDbParameter, TDbType).SetValue
+  nameWithType: DbParameterValueSetter<TDbParameter, TDbType>.SetValue
+  nameWithType.vb: DbParameterValueSetter(Of TDbParameter, TDbType).SetValue
+- uid: Axle.Data.Common.DbRecord
+  name: DbRecord
+  href: data/main/Axle.Data.Common.DbRecord.html
+  commentId: T:Axle.Data.Common.DbRecord
+  fullName: Axle.Data.Common.DbRecord
+  nameWithType: DbRecord
+- uid: Axle.Data.Common.DbRecord.#ctor(Axle.Data.IDbRecord)
+  name: DbRecord(IDbRecord)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord__ctor_Axle_Data_IDbRecord_
+  commentId: M:Axle.Data.Common.DbRecord.#ctor(Axle.Data.IDbRecord)
+  fullName: Axle.Data.Common.DbRecord.DbRecord(Axle.Data.IDbRecord)
+  nameWithType: DbRecord.DbRecord(IDbRecord)
+- uid: Axle.Data.Common.DbRecord.#ctor*
+  name: DbRecord
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord__ctor_
+  commentId: Overload:Axle.Data.Common.DbRecord.#ctor
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecord.DbRecord
+  nameWithType: DbRecord.DbRecord
+- uid: Axle.Data.Common.DbRecord.FromDataReader(System.Data.Common.DbDataReader)
+  name: FromDataReader(DbDataReader)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_FromDataReader_System_Data_Common_DbDataReader_
+  commentId: M:Axle.Data.Common.DbRecord.FromDataReader(System.Data.Common.DbDataReader)
+  fullName: Axle.Data.Common.DbRecord.FromDataReader(System.Data.Common.DbDataReader)
+  nameWithType: DbRecord.FromDataReader(DbDataReader)
+- uid: Axle.Data.Common.DbRecord.FromDataReader*
+  name: FromDataReader
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_FromDataReader_
+  commentId: Overload:Axle.Data.Common.DbRecord.FromDataReader
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecord.FromDataReader
+  nameWithType: DbRecord.FromDataReader
+- uid: Axle.Data.Common.DbRecord.FromDataRecord(System.Data.Common.DbDataRecord)
+  name: FromDataRecord(DbDataRecord)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_FromDataRecord_System_Data_Common_DbDataRecord_
+  commentId: M:Axle.Data.Common.DbRecord.FromDataRecord(System.Data.Common.DbDataRecord)
+  fullName: Axle.Data.Common.DbRecord.FromDataRecord(System.Data.Common.DbDataRecord)
+  nameWithType: DbRecord.FromDataRecord(DbDataRecord)
+- uid: Axle.Data.Common.DbRecord.FromDataRecord*
+  name: FromDataRecord
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_FromDataRecord_
+  commentId: Overload:Axle.Data.Common.DbRecord.FromDataRecord
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecord.FromDataRecord
+  nameWithType: DbRecord.FromDataRecord
+- uid: Axle.Data.Common.DbRecord.FromDataRow(System.Data.DataRow)
+  name: FromDataRow(DataRow)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_FromDataRow_System_Data_DataRow_
+  commentId: M:Axle.Data.Common.DbRecord.FromDataRow(System.Data.DataRow)
+  fullName: Axle.Data.Common.DbRecord.FromDataRow(System.Data.DataRow)
+  nameWithType: DbRecord.FromDataRow(DataRow)
+- uid: Axle.Data.Common.DbRecord.FromDataRow*
+  name: FromDataRow
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_FromDataRow_
+  commentId: Overload:Axle.Data.Common.DbRecord.FromDataRow
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecord.FromDataRow
+  nameWithType: DbRecord.FromDataRow
+- uid: Axle.Data.Common.DbRecord.op_Implicit(System.Data.Common.DbDataReader)~Axle.Data.Common.DbRecord
+  name: Implicit(DbDataReader to DbRecord)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_op_Implicit_System_Data_Common_DbDataReader__Axle_Data_Common_DbRecord
+  commentId: M:Axle.Data.Common.DbRecord.op_Implicit(System.Data.Common.DbDataReader)~Axle.Data.Common.DbRecord
+  name.vb: Widening(DbDataReader to DbRecord)
+  fullName: Axle.Data.Common.DbRecord.Implicit(System.Data.Common.DbDataReader to Axle.Data.Common.DbRecord)
+  fullName.vb: Axle.Data.Common.DbRecord.Widening(System.Data.Common.DbDataReader to Axle.Data.Common.DbRecord)
+  nameWithType: DbRecord.Implicit(DbDataReader to DbRecord)
+  nameWithType.vb: DbRecord.Widening(DbDataReader to DbRecord)
+- uid: Axle.Data.Common.DbRecord.op_Implicit(System.Data.Common.DbDataRecord)~Axle.Data.Common.DbRecord
+  name: Implicit(DbDataRecord to DbRecord)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_op_Implicit_System_Data_Common_DbDataRecord__Axle_Data_Common_DbRecord
+  commentId: M:Axle.Data.Common.DbRecord.op_Implicit(System.Data.Common.DbDataRecord)~Axle.Data.Common.DbRecord
+  name.vb: Widening(DbDataRecord to DbRecord)
+  fullName: Axle.Data.Common.DbRecord.Implicit(System.Data.Common.DbDataRecord to Axle.Data.Common.DbRecord)
+  fullName.vb: Axle.Data.Common.DbRecord.Widening(System.Data.Common.DbDataRecord to Axle.Data.Common.DbRecord)
+  nameWithType: DbRecord.Implicit(DbDataRecord to DbRecord)
+  nameWithType.vb: DbRecord.Widening(DbDataRecord to DbRecord)
+- uid: Axle.Data.Common.DbRecord.op_Implicit(System.Data.DataRow)~Axle.Data.Common.DbRecord
+  name: Implicit(DataRow to DbRecord)
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_op_Implicit_System_Data_DataRow__Axle_Data_Common_DbRecord
+  commentId: M:Axle.Data.Common.DbRecord.op_Implicit(System.Data.DataRow)~Axle.Data.Common.DbRecord
+  name.vb: Widening(DataRow to DbRecord)
+  fullName: Axle.Data.Common.DbRecord.Implicit(System.Data.DataRow to Axle.Data.Common.DbRecord)
+  fullName.vb: Axle.Data.Common.DbRecord.Widening(System.Data.DataRow to Axle.Data.Common.DbRecord)
+  nameWithType: DbRecord.Implicit(DataRow to DbRecord)
+  nameWithType.vb: DbRecord.Widening(DataRow to DbRecord)
+- uid: Axle.Data.Common.DbRecord.op_Implicit*
+  name: Implicit
+  href: data/main/Axle.Data.Common.DbRecord.html#Axle_Data_Common_DbRecord_op_Implicit_
+  commentId: Overload:Axle.Data.Common.DbRecord.op_Implicit
+  isSpec: "True"
+  name.vb: Widening
+  fullName: Axle.Data.Common.DbRecord.Implicit
+  fullName.vb: Axle.Data.Common.DbRecord.Widening
+  nameWithType: DbRecord.Implicit
+  nameWithType.vb: DbRecord.Widening
+- uid: Axle.Data.Common.DbRecordDecorator
+  name: DbRecordDecorator
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html
+  commentId: T:Axle.Data.Common.DbRecordDecorator
+  fullName: Axle.Data.Common.DbRecordDecorator
+  nameWithType: DbRecordDecorator
+- uid: Axle.Data.Common.DbRecordDecorator.#ctor(Axle.Data.IDbRecord)
+  name: DbRecordDecorator(IDbRecord)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator__ctor_Axle_Data_IDbRecord_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.#ctor(Axle.Data.IDbRecord)
+  fullName: Axle.Data.Common.DbRecordDecorator.DbRecordDecorator(Axle.Data.IDbRecord)
+  nameWithType: DbRecordDecorator.DbRecordDecorator(IDbRecord)
+- uid: Axle.Data.Common.DbRecordDecorator.#ctor*
+  name: DbRecordDecorator
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator__ctor_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.#ctor
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.DbRecordDecorator
+  nameWithType: DbRecordDecorator.DbRecordDecorator
+- uid: Axle.Data.Common.DbRecordDecorator.FieldCount
+  name: FieldCount
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_FieldCount
+  commentId: P:Axle.Data.Common.DbRecordDecorator.FieldCount
+  fullName: Axle.Data.Common.DbRecordDecorator.FieldCount
+  nameWithType: DbRecordDecorator.FieldCount
+- uid: Axle.Data.Common.DbRecordDecorator.FieldCount*
+  name: FieldCount
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_FieldCount_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.FieldCount
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.FieldCount
+  nameWithType: DbRecordDecorator.FieldCount
+- uid: Axle.Data.Common.DbRecordDecorator.FieldNames
+  name: FieldNames
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_FieldNames
+  commentId: P:Axle.Data.Common.DbRecordDecorator.FieldNames
+  fullName: Axle.Data.Common.DbRecordDecorator.FieldNames
+  nameWithType: DbRecordDecorator.FieldNames
+- uid: Axle.Data.Common.DbRecordDecorator.FieldNames*
+  name: FieldNames
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_FieldNames_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.FieldNames
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.FieldNames
+  nameWithType: DbRecordDecorator.FieldNames
+- uid: Axle.Data.Common.DbRecordDecorator.GetBoolean(System.Int32)
+  name: GetBoolean(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetBoolean_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetBoolean(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetBoolean(System.Int32)
+  nameWithType: DbRecordDecorator.GetBoolean(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetBoolean(System.String)
+  name: GetBoolean(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetBoolean_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetBoolean(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetBoolean(System.String)
+  nameWithType: DbRecordDecorator.GetBoolean(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetBoolean*
+  name: GetBoolean
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetBoolean_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetBoolean
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetBoolean
+  nameWithType: DbRecordDecorator.GetBoolean
+- uid: Axle.Data.Common.DbRecordDecorator.GetByte(System.Int32)
+  name: GetByte(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetByte_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetByte(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetByte(System.Int32)
+  nameWithType: DbRecordDecorator.GetByte(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetByte(System.String)
+  name: GetByte(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetByte_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetByte(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetByte(System.String)
+  nameWithType: DbRecordDecorator.GetByte(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetByte*
+  name: GetByte
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetByte_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetByte
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetByte
+  nameWithType: DbRecordDecorator.GetByte
+- uid: Axle.Data.Common.DbRecordDecorator.GetChar(System.Int32)
+  name: GetChar(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetChar_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetChar(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetChar(System.Int32)
+  nameWithType: DbRecordDecorator.GetChar(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetChar(System.String)
+  name: GetChar(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetChar_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetChar(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetChar(System.String)
+  nameWithType: DbRecordDecorator.GetChar(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetChar*
+  name: GetChar
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetChar_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetChar
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetChar
+  nameWithType: DbRecordDecorator.GetChar
+- uid: Axle.Data.Common.DbRecordDecorator.GetDateTime(System.Int32)
+  name: GetDateTime(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDateTime_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetDateTime(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDateTime(System.Int32)
+  nameWithType: DbRecordDecorator.GetDateTime(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetDateTime(System.String)
+  name: GetDateTime(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDateTime_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetDateTime(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDateTime(System.String)
+  nameWithType: DbRecordDecorator.GetDateTime(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetDateTime*
+  name: GetDateTime
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDateTime_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetDateTime
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDateTime
+  nameWithType: DbRecordDecorator.GetDateTime
+- uid: Axle.Data.Common.DbRecordDecorator.GetDecimal(System.Int32)
+  name: GetDecimal(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDecimal_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetDecimal(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDecimal(System.Int32)
+  nameWithType: DbRecordDecorator.GetDecimal(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetDecimal(System.String)
+  name: GetDecimal(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDecimal_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetDecimal(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDecimal(System.String)
+  nameWithType: DbRecordDecorator.GetDecimal(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetDecimal*
+  name: GetDecimal
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDecimal_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetDecimal
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDecimal
+  nameWithType: DbRecordDecorator.GetDecimal
+- uid: Axle.Data.Common.DbRecordDecorator.GetDouble(System.Int32)
+  name: GetDouble(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDouble_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetDouble(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDouble(System.Int32)
+  nameWithType: DbRecordDecorator.GetDouble(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetDouble(System.String)
+  name: GetDouble(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDouble_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetDouble(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDouble(System.String)
+  nameWithType: DbRecordDecorator.GetDouble(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetDouble*
+  name: GetDouble
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetDouble_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetDouble
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetDouble
+  nameWithType: DbRecordDecorator.GetDouble
+- uid: Axle.Data.Common.DbRecordDecorator.GetEnumerator
+  name: GetEnumerator()
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetEnumerator
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetEnumerator
+  fullName: Axle.Data.Common.DbRecordDecorator.GetEnumerator()
+  nameWithType: DbRecordDecorator.GetEnumerator()
+- uid: Axle.Data.Common.DbRecordDecorator.GetEnumerator*
+  name: GetEnumerator
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetEnumerator_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetEnumerator
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetEnumerator
+  nameWithType: DbRecordDecorator.GetEnumerator
+- uid: Axle.Data.Common.DbRecordDecorator.GetFieldName(System.Int32)
+  name: GetFieldName(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFieldName_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetFieldName(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFieldName(System.Int32)
+  nameWithType: DbRecordDecorator.GetFieldName(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetFieldName*
+  name: GetFieldName
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFieldName_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetFieldName
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFieldName
+  nameWithType: DbRecordDecorator.GetFieldName
+- uid: Axle.Data.Common.DbRecordDecorator.GetFieldType(System.Int32)
+  name: GetFieldType(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFieldType_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetFieldType(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFieldType(System.Int32)
+  nameWithType: DbRecordDecorator.GetFieldType(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetFieldType*
+  name: GetFieldType
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFieldType_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetFieldType
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFieldType
+  nameWithType: DbRecordDecorator.GetFieldType
+- uid: Axle.Data.Common.DbRecordDecorator.GetFloat(System.Int32)
+  name: GetFloat(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFloat_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetFloat(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFloat(System.Int32)
+  nameWithType: DbRecordDecorator.GetFloat(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetFloat(System.String)
+  name: GetFloat(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFloat_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetFloat(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFloat(System.String)
+  nameWithType: DbRecordDecorator.GetFloat(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetFloat*
+  name: GetFloat
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetFloat_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetFloat
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetFloat
+  nameWithType: DbRecordDecorator.GetFloat
+- uid: Axle.Data.Common.DbRecordDecorator.GetGuid(System.Int32)
+  name: GetGuid(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetGuid_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetGuid(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetGuid(System.Int32)
+  nameWithType: DbRecordDecorator.GetGuid(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetGuid(System.String)
+  name: GetGuid(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetGuid_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetGuid(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetGuid(System.String)
+  nameWithType: DbRecordDecorator.GetGuid(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetGuid*
+  name: GetGuid
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetGuid_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetGuid
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetGuid
+  nameWithType: DbRecordDecorator.GetGuid
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt16(System.Int32)
+  name: GetInt16(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt16_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetInt16(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt16(System.Int32)
+  nameWithType: DbRecordDecorator.GetInt16(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt16(System.String)
+  name: GetInt16(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt16_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetInt16(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt16(System.String)
+  nameWithType: DbRecordDecorator.GetInt16(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt16*
+  name: GetInt16
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt16_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetInt16
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt16
+  nameWithType: DbRecordDecorator.GetInt16
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt32(System.Int32)
+  name: GetInt32(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt32_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetInt32(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt32(System.Int32)
+  nameWithType: DbRecordDecorator.GetInt32(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt32(System.String)
+  name: GetInt32(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt32_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetInt32(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt32(System.String)
+  nameWithType: DbRecordDecorator.GetInt32(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt32*
+  name: GetInt32
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt32_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetInt32
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt32
+  nameWithType: DbRecordDecorator.GetInt32
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt64(System.Int32)
+  name: GetInt64(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt64_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetInt64(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt64(System.Int32)
+  nameWithType: DbRecordDecorator.GetInt64(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt64(System.String)
+  name: GetInt64(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt64_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetInt64(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt64(System.String)
+  nameWithType: DbRecordDecorator.GetInt64(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetInt64*
+  name: GetInt64
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetInt64_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetInt64
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetInt64
+  nameWithType: DbRecordDecorator.GetInt64
+- uid: Axle.Data.Common.DbRecordDecorator.GetOrdinal(System.String)
+  name: GetOrdinal(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetOrdinal_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetOrdinal(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetOrdinal(System.String)
+  nameWithType: DbRecordDecorator.GetOrdinal(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetOrdinal*
+  name: GetOrdinal
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetOrdinal_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetOrdinal
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetOrdinal
+  nameWithType: DbRecordDecorator.GetOrdinal
+- uid: Axle.Data.Common.DbRecordDecorator.GetString(System.Int32)
+  name: GetString(Int32)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetString_System_Int32_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetString(System.Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetString(System.Int32)
+  nameWithType: DbRecordDecorator.GetString(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.GetString(System.String)
+  name: GetString(String)
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetString_System_String_
+  commentId: M:Axle.Data.Common.DbRecordDecorator.GetString(System.String)
+  fullName: Axle.Data.Common.DbRecordDecorator.GetString(System.String)
+  nameWithType: DbRecordDecorator.GetString(String)
+- uid: Axle.Data.Common.DbRecordDecorator.GetString*
+  name: GetString
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_GetString_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.GetString
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.GetString
+  nameWithType: DbRecordDecorator.GetString
+- uid: Axle.Data.Common.DbRecordDecorator.Item(System.Int32)
+  name: Item[Int32]
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_Item_System_Int32_
+  commentId: P:Axle.Data.Common.DbRecordDecorator.Item(System.Int32)
+  name.vb: Item(Int32)
+  fullName: Axle.Data.Common.DbRecordDecorator.Item[System.Int32]
+  fullName.vb: Axle.Data.Common.DbRecordDecorator.Item(System.Int32)
+  nameWithType: DbRecordDecorator.Item[Int32]
+  nameWithType.vb: DbRecordDecorator.Item(Int32)
+- uid: Axle.Data.Common.DbRecordDecorator.Item(System.String)
+  name: Item[String]
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_Item_System_String_
+  commentId: P:Axle.Data.Common.DbRecordDecorator.Item(System.String)
+  name.vb: Item(String)
+  fullName: Axle.Data.Common.DbRecordDecorator.Item[System.String]
+  fullName.vb: Axle.Data.Common.DbRecordDecorator.Item(System.String)
+  nameWithType: DbRecordDecorator.Item[String]
+  nameWithType.vb: DbRecordDecorator.Item(String)
+- uid: Axle.Data.Common.DbRecordDecorator.Item*
+  name: Item
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_Item_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.Item
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbRecordDecorator.Item
+  nameWithType: DbRecordDecorator.Item
+- uid: Axle.Data.Common.DbRecordDecorator.System#Collections#IEnumerable#GetEnumerator
+  name: IEnumerable.GetEnumerator()
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_System_Collections_IEnumerable_GetEnumerator
+  commentId: M:Axle.Data.Common.DbRecordDecorator.System#Collections#IEnumerable#GetEnumerator
+  name.vb: System.Collections.IEnumerable.GetEnumerator()
+  fullName: Axle.Data.Common.DbRecordDecorator.System.Collections.IEnumerable.GetEnumerator()
+  nameWithType: DbRecordDecorator.IEnumerable.GetEnumerator()
+  nameWithType.vb: DbRecordDecorator.System.Collections.IEnumerable.GetEnumerator()
+- uid: Axle.Data.Common.DbRecordDecorator.System#Collections#IEnumerable#GetEnumerator*
+  name: IEnumerable.GetEnumerator
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_System_Collections_IEnumerable_GetEnumerator_
+  commentId: Overload:Axle.Data.Common.DbRecordDecorator.System#Collections#IEnumerable#GetEnumerator
+  isSpec: "True"
+  name.vb: System.Collections.IEnumerable.GetEnumerator
+  fullName: Axle.Data.Common.DbRecordDecorator.System.Collections.IEnumerable.GetEnumerator
+  nameWithType: DbRecordDecorator.IEnumerable.GetEnumerator
+  nameWithType.vb: DbRecordDecorator.System.Collections.IEnumerable.GetEnumerator
+- uid: Axle.Data.Common.DbRecordDecorator.Target
+  name: Target
+  href: data/main/Axle.Data.Common.DbRecordDecorator.html#Axle_Data_Common_DbRecordDecorator_Target
+  commentId: F:Axle.Data.Common.DbRecordDecorator.Target
+  fullName: Axle.Data.Common.DbRecordDecorator.Target
+  nameWithType: DbRecordDecorator.Target
+- uid: Axle.Data.Common.DbServiceProvider`7
+  name: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html
+  commentId: T:Axle.Data.Common.DbServiceProvider`7
+  name.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType)
+- uid: Axle.Data.Common.DbServiceProvider`7.#ctor(System.String,System.String)
+  name: DbServiceProvider(String, String)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7__ctor_System_String_System_String_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.#ctor(System.String,System.String)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DbServiceProvider(System.String, System.String)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DbServiceProvider(System.String, System.String)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DbServiceProvider(String, String)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DbServiceProvider(String, String)
+- uid: Axle.Data.Common.DbServiceProvider`7.#ctor*
+  name: DbServiceProvider
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7__ctor_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.#ctor
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DbServiceProvider
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DbServiceProvider
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DbServiceProvider
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DbServiceProvider
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbParameterFactory{TDbParameter,TDbType}#CreateDbParameter(System.String,System.Nullable{`6},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name: IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter(String, Nullable<TDbType>, Nullable<Int32>, ParameterDirection, Object)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbParameterFactory_TDbParameter_TDbType__CreateDbParameter_System_String_System_Nullable__6__System_Nullable_System_Int32__System_Data_ParameterDirection_System_Object_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbParameterFactory{TDbParameter,TDbType}#CreateDbParameter(System.String,System.Nullable{`6},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name.vb: Axle.Data.IDbParameterFactory<TDbParameter,TDbType>.CreateDbParameter(String, Nullable(Of TDbType), Nullable(Of Int32), ParameterDirection, Object)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter(System.String, System.Nullable<TDbType>, System.Nullable<System.Int32>, System.Data.ParameterDirection, System.Object)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbParameterFactory<TDbParameter,TDbType>.CreateDbParameter(System.String, System.Nullable(Of TDbType), System.Nullable(Of System.Int32), System.Data.ParameterDirection, System.Object)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter(String, Nullable<TDbType>, Nullable<Int32>, ParameterDirection, Object)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbParameterFactory<TDbParameter,TDbType>.CreateDbParameter(String, Nullable(Of TDbType), Nullable(Of Int32), ParameterDirection, Object)
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbParameterFactory{TDbParameter,TDbType}#CreateDbParameter*
+  name: IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbParameterFactory_TDbParameter_TDbType__CreateDbParameter_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbParameterFactory{TDbParameter,TDbType}#CreateDbParameter
+  isSpec: "True"
+  name.vb: Axle.Data.IDbParameterFactory<TDbParameter,TDbType>.CreateDbParameter
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbParameterFactory<TDbParameter,TDbType>.CreateDbParameter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbParameterFactory<TDbParameter,TDbType>.CreateDbParameter
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateCommand(System.String,System.Nullable{System.Data.CommandType},System.Nullable{System.Int32},System.Data.IDbConnection,System.Data.IDbTransaction)
+  name: IDbServiceProvider.CreateCommand(String, Nullable<CommandType>, Nullable<Int32>, IDbConnection, IDbTransaction)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateCommand_System_String_System_Nullable_System_Data_CommandType__System_Nullable_System_Int32__System_Data_IDbConnection_System_Data_IDbTransaction_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateCommand(System.String,System.Nullable{System.Data.CommandType},System.Nullable{System.Int32},System.Data.IDbConnection,System.Data.IDbTransaction)
+  name.vb: Axle.Data.IDbServiceProvider.CreateCommand(String, Nullable(Of CommandType), Nullable(Of Int32), IDbConnection, IDbTransaction)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateCommand(System.String, System.Nullable<System.Data.CommandType>, System.Nullable<System.Int32>, System.Data.IDbConnection, System.Data.IDbTransaction)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateCommand(System.String, System.Nullable(Of System.Data.CommandType), System.Nullable(Of System.Int32), System.Data.IDbConnection, System.Data.IDbTransaction)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateCommand(String, Nullable<CommandType>, Nullable<Int32>, IDbConnection, IDbTransaction)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateCommand(String, Nullable(Of CommandType), Nullable(Of Int32), IDbConnection, IDbTransaction)
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateCommand*
+  name: IDbServiceProvider.CreateCommand
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateCommand_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateCommand
+  isSpec: "True"
+  name.vb: Axle.Data.IDbServiceProvider.CreateCommand
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateCommand
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateCommand
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateCommand
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateCommand
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateConnection(System.String)
+  name: IDbServiceProvider.CreateConnection(String)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateConnection_System_String_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateConnection(System.String)
+  name.vb: Axle.Data.IDbServiceProvider.CreateConnection(String)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateConnection(System.String)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateConnection(System.String)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateConnection(String)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateConnection(String)
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateConnection*
+  name: IDbServiceProvider.CreateConnection
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateConnection_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateConnection
+  isSpec: "True"
+  name.vb: Axle.Data.IDbServiceProvider.CreateConnection
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateConnection
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateConnection
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateConnection
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateConnection
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataAdapter(System.Data.Common.DbCommand)
+  name: IDbServiceProvider.CreateDataAdapter(DbCommand)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateDataAdapter_System_Data_Common_DbCommand_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataAdapter(System.Data.Common.DbCommand)
+  name.vb: Axle.Data.IDbServiceProvider.CreateDataAdapter(DbCommand)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateDataAdapter(System.Data.Common.DbCommand)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataAdapter(System.Data.Common.DbCommand)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateDataAdapter(DbCommand)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataAdapter(DbCommand)
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataAdapter*
+  name: IDbServiceProvider.CreateDataAdapter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateDataAdapter_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataAdapter
+  isSpec: "True"
+  name.vb: Axle.Data.IDbServiceProvider.CreateDataAdapter
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateDataAdapter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataAdapter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateDataAdapter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataAdapter
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataReader(System.Data.IDbCommand,System.Nullable{System.Data.CommandBehavior})
+  name: IDbServiceProvider.CreateDataReader(IDbCommand, Nullable<CommandBehavior>)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateDataReader_System_Data_IDbCommand_System_Nullable_System_Data_CommandBehavior__
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataReader(System.Data.IDbCommand,System.Nullable{System.Data.CommandBehavior})
+  name.vb: Axle.Data.IDbServiceProvider.CreateDataReader(IDbCommand, Nullable(Of CommandBehavior))
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateDataReader(System.Data.IDbCommand, System.Nullable<System.Data.CommandBehavior>)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataReader(System.Data.IDbCommand, System.Nullable(Of System.Data.CommandBehavior))
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateDataReader(IDbCommand, Nullable<CommandBehavior>)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataReader(IDbCommand, Nullable(Of CommandBehavior))
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataReader*
+  name: IDbServiceProvider.CreateDataReader
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateDataReader_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateDataReader
+  isSpec: "True"
+  name.vb: Axle.Data.IDbServiceProvider.CreateDataReader
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateDataReader
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataReader
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateDataReader
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateDataReader
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateParameter(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name: IDbServiceProvider.CreateParameter(String, Nullable<DbType>, Nullable<Int32>, ParameterDirection, Object)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateParameter_System_String_System_Nullable_System_Data_DbType__System_Nullable_System_Int32__System_Data_ParameterDirection_System_Object_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateParameter(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name.vb: Axle.Data.IDbServiceProvider.CreateParameter(String, Nullable(Of DbType), Nullable(Of Int32), ParameterDirection, Object)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateParameter(System.String, System.Nullable<System.Data.DbType>, System.Nullable<System.Int32>, System.Data.ParameterDirection, System.Object)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateParameter(System.String, System.Nullable(Of System.Data.DbType), System.Nullable(Of System.Int32), System.Data.ParameterDirection, System.Object)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateParameter(String, Nullable<DbType>, Nullable<Int32>, ParameterDirection, Object)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateParameter(String, Nullable(Of DbType), Nullable(Of Int32), ParameterDirection, Object)
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateParameter*
+  name: IDbServiceProvider.CreateParameter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateParameter_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateParameter
+  isSpec: "True"
+  name.vb: Axle.Data.IDbServiceProvider.CreateParameter
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateParameter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateParameter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateParameter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateParameter
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateTransaction(System.Data.IDbConnection,System.Nullable{System.Data.IsolationLevel})
+  name: IDbServiceProvider.CreateTransaction(IDbConnection, Nullable<IsolationLevel>)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateTransaction_System_Data_IDbConnection_System_Nullable_System_Data_IsolationLevel__
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateTransaction(System.Data.IDbConnection,System.Nullable{System.Data.IsolationLevel})
+  name.vb: Axle.Data.IDbServiceProvider.CreateTransaction(IDbConnection, Nullable(Of IsolationLevel))
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateTransaction(System.Data.IDbConnection, System.Nullable<System.Data.IsolationLevel>)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateTransaction(System.Data.IDbConnection, System.Nullable(Of System.Data.IsolationLevel))
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateTransaction(IDbConnection, Nullable<IsolationLevel>)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateTransaction(IDbConnection, Nullable(Of IsolationLevel))
+- uid: Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateTransaction*
+  name: IDbServiceProvider.CreateTransaction
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_Axle_Data_IDbServiceProvider_CreateTransaction_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.Axle#Data#IDbServiceProvider#CreateTransaction
+  isSpec: "True"
+  name.vb: Axle.Data.IDbServiceProvider.CreateTransaction
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.Axle.Data.IDbServiceProvider.CreateTransaction
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateTransaction
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.IDbServiceProvider.CreateTransaction
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).Axle.Data.IDbServiceProvider.CreateTransaction
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateCommand(System.String,System.Nullable{System.Data.CommandType},System.Nullable{System.Int32},`0,`1)
+  name: CreateCommand(String, Nullable<CommandType>, Nullable<Int32>, TDbConnection, TDbTransaction)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateCommand_System_String_System_Nullable_System_Data_CommandType__System_Nullable_System_Int32___0__1_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateCommand(System.String,System.Nullable{System.Data.CommandType},System.Nullable{System.Int32},`0,`1)
+  name.vb: CreateCommand(String, Nullable(Of CommandType), Nullable(Of Int32), TDbConnection, TDbTransaction)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateCommand(System.String, System.Nullable<System.Data.CommandType>, System.Nullable<System.Int32>, TDbConnection, TDbTransaction)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateCommand(System.String, System.Nullable(Of System.Data.CommandType), System.Nullable(Of System.Int32), TDbConnection, TDbTransaction)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateCommand(String, Nullable<CommandType>, Nullable<Int32>, TDbConnection, TDbTransaction)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateCommand(String, Nullable(Of CommandType), Nullable(Of Int32), TDbConnection, TDbTransaction)
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateCommand*
+  name: CreateCommand
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateCommand_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.CreateCommand
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateCommand
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateCommand
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateCommand
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateCommand
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateConnection(System.String)
+  name: CreateConnection(String)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateConnection_System_String_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateConnection(System.String)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateConnection(System.String)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateConnection(System.String)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateConnection(String)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateConnection(String)
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateConnection*
+  name: CreateConnection
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateConnection_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.CreateConnection
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateConnection
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateConnection
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateConnection
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateConnection
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDataAdapter(`2)
+  name: CreateDataAdapter(TDbCommand)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDataAdapter__2_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateDataAdapter(`2)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataAdapter(TDbCommand)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataAdapter(TDbCommand)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataAdapter(TDbCommand)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataAdapter(TDbCommand)
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDataAdapter*
+  name: CreateDataAdapter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDataAdapter_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.CreateDataAdapter
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataAdapter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataAdapter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataAdapter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataAdapter
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDataReader(`2,System.Nullable{System.Data.CommandBehavior})
+  name: CreateDataReader(TDbCommand, Nullable<CommandBehavior>)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDataReader__2_System_Nullable_System_Data_CommandBehavior__
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateDataReader(`2,System.Nullable{System.Data.CommandBehavior})
+  name.vb: CreateDataReader(TDbCommand, Nullable(Of CommandBehavior))
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataReader(TDbCommand, System.Nullable<System.Data.CommandBehavior>)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataReader(TDbCommand, System.Nullable(Of System.Data.CommandBehavior))
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataReader(TDbCommand, Nullable<CommandBehavior>)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataReader(TDbCommand, Nullable(Of CommandBehavior))
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDataReader*
+  name: CreateDataReader
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDataReader_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.CreateDataReader
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataReader
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataReader
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDataReader
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDataReader
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDbParameter(System.String,System.Nullable{`6},System.Nullable{System.Int32},System.Data.ParameterDirection)
+  name: CreateDbParameter(String, Nullable<TDbType>, Nullable<Int32>, ParameterDirection)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDbParameter_System_String_System_Nullable__6__System_Nullable_System_Int32__System_Data_ParameterDirection_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateDbParameter(System.String,System.Nullable{`6},System.Nullable{System.Int32},System.Data.ParameterDirection)
+  name.vb: CreateDbParameter(String, Nullable(Of TDbType), Nullable(Of Int32), ParameterDirection)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDbParameter(System.String, System.Nullable<TDbType>, System.Nullable<System.Int32>, System.Data.ParameterDirection)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDbParameter(System.String, System.Nullable(Of TDbType), System.Nullable(Of System.Int32), System.Data.ParameterDirection)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDbParameter(String, Nullable<TDbType>, Nullable<Int32>, ParameterDirection)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDbParameter(String, Nullable(Of TDbType), Nullable(Of Int32), ParameterDirection)
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDbParameter(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Int32},System.Data.ParameterDirection)
+  name: CreateDbParameter(String, Nullable<DbType>, Nullable<Int32>, ParameterDirection)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDbParameter_System_String_System_Nullable_System_Data_DbType__System_Nullable_System_Int32__System_Data_ParameterDirection_
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateDbParameter(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Int32},System.Data.ParameterDirection)
+  name.vb: CreateDbParameter(String, Nullable(Of DbType), Nullable(Of Int32), ParameterDirection)
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDbParameter(System.String, System.Nullable<System.Data.DbType>, System.Nullable<System.Int32>, System.Data.ParameterDirection)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDbParameter(System.String, System.Nullable(Of System.Data.DbType), System.Nullable(Of System.Int32), System.Data.ParameterDirection)
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDbParameter(String, Nullable<DbType>, Nullable<Int32>, ParameterDirection)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDbParameter(String, Nullable(Of DbType), Nullable(Of Int32), ParameterDirection)
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateDbParameter*
+  name: CreateDbParameter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateDbParameter_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.CreateDbParameter
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDbParameter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDbParameter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateDbParameter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateDbParameter
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateTransaction(`0,System.Nullable{System.Data.IsolationLevel})
+  name: CreateTransaction(TDbConnection, Nullable<IsolationLevel>)
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateTransaction__0_System_Nullable_System_Data_IsolationLevel__
+  commentId: M:Axle.Data.Common.DbServiceProvider`7.CreateTransaction(`0,System.Nullable{System.Data.IsolationLevel})
+  name.vb: CreateTransaction(TDbConnection, Nullable(Of IsolationLevel))
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateTransaction(TDbConnection, System.Nullable<System.Data.IsolationLevel>)
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateTransaction(TDbConnection, System.Nullable(Of System.Data.IsolationLevel))
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateTransaction(TDbConnection, Nullable<IsolationLevel>)
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateTransaction(TDbConnection, Nullable(Of IsolationLevel))
+- uid: Axle.Data.Common.DbServiceProvider`7.CreateTransaction*
+  name: CreateTransaction
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_CreateTransaction_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.CreateTransaction
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateTransaction
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateTransaction
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.CreateTransaction
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).CreateTransaction
+- uid: Axle.Data.Common.DbServiceProvider`7.DialectName
+  name: DialectName
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_DialectName
+  commentId: P:Axle.Data.Common.DbServiceProvider`7.DialectName
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DialectName
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DialectName
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DialectName
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DialectName
+- uid: Axle.Data.Common.DbServiceProvider`7.DialectName*
+  name: DialectName
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_DialectName_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.DialectName
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DialectName
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DialectName
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.DialectName
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).DialectName
+- uid: Axle.Data.Common.DbServiceProvider`7.ParameterValueSetter
+  name: ParameterValueSetter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_ParameterValueSetter
+  commentId: P:Axle.Data.Common.DbServiceProvider`7.ParameterValueSetter
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ParameterValueSetter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ParameterValueSetter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ParameterValueSetter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ParameterValueSetter
+- uid: Axle.Data.Common.DbServiceProvider`7.ParameterValueSetter*
+  name: ParameterValueSetter
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_ParameterValueSetter_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.ParameterValueSetter
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ParameterValueSetter
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ParameterValueSetter
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ParameterValueSetter
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ParameterValueSetter
+- uid: Axle.Data.Common.DbServiceProvider`7.ProviderName
+  name: ProviderName
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_ProviderName
+  commentId: P:Axle.Data.Common.DbServiceProvider`7.ProviderName
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ProviderName
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ProviderName
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ProviderName
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ProviderName
+- uid: Axle.Data.Common.DbServiceProvider`7.ProviderName*
+  name: ProviderName
+  href: data/main/Axle.Data.Common.DbServiceProvider-7.html#Axle_Data_Common_DbServiceProvider_7_ProviderName_
+  commentId: Overload:Axle.Data.Common.DbServiceProvider`7.ProviderName
+  isSpec: "True"
+  fullName: Axle.Data.Common.DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ProviderName
+  fullName.vb: Axle.Data.Common.DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ProviderName
+  nameWithType: DbServiceProvider<TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType>.ProviderName
+  nameWithType.vb: DbServiceProvider(Of TDbConnection, TDbTransaction, TDbCommand, TDbDataAdapter, TDbDataReader, TDbParameter, TDbType).ProviderName
+- uid: Axle.Data.Conversion
+  name: Axle.Data.Conversion
+  href: data/main/Axle.Data.Conversion.html
+  commentId: N:Axle.Data.Conversion
+  fullName: Axle.Data.Conversion
+  nameWithType: Axle.Data.Conversion
+- uid: Axle.Data.Conversion.DbRecordConverter`1
+  name: DbRecordConverter<T>
+  href: data/main/Axle.Data.Conversion.DbRecordConverter-1.html
+  commentId: T:Axle.Data.Conversion.DbRecordConverter`1
+  name.vb: DbRecordConverter(Of T)
+  fullName: Axle.Data.Conversion.DbRecordConverter<T>
+  fullName.vb: Axle.Data.Conversion.DbRecordConverter(Of T)
+  nameWithType: DbRecordConverter<T>
+  nameWithType.vb: DbRecordConverter(Of T)
+- uid: Axle.Data.Conversion.DbRecordConverter`1.Convert(Axle.Data.IDbRecord,System.String)
+  name: Convert(IDbRecord, String)
+  href: data/main/Axle.Data.Conversion.DbRecordConverter-1.html#Axle_Data_Conversion_DbRecordConverter_1_Convert_Axle_Data_IDbRecord_System_String_
+  commentId: M:Axle.Data.Conversion.DbRecordConverter`1.Convert(Axle.Data.IDbRecord,System.String)
+  fullName: Axle.Data.Conversion.DbRecordConverter<T>.Convert(Axle.Data.IDbRecord, System.String)
+  fullName.vb: Axle.Data.Conversion.DbRecordConverter(Of T).Convert(Axle.Data.IDbRecord, System.String)
+  nameWithType: DbRecordConverter<T>.Convert(IDbRecord, String)
+  nameWithType.vb: DbRecordConverter(Of T).Convert(IDbRecord, String)
+- uid: Axle.Data.Conversion.DbRecordConverter`1.Convert*
+  name: Convert
+  href: data/main/Axle.Data.Conversion.DbRecordConverter-1.html#Axle_Data_Conversion_DbRecordConverter_1_Convert_
+  commentId: Overload:Axle.Data.Conversion.DbRecordConverter`1.Convert
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbRecordConverter<T>.Convert
+  fullName.vb: Axle.Data.Conversion.DbRecordConverter(Of T).Convert
+  nameWithType: DbRecordConverter<T>.Convert
+  nameWithType.vb: DbRecordConverter(Of T).Convert
+- uid: Axle.Data.Conversion.DbRecordConverter`1.DoConvert(Axle.Data.IDbRecord)
+  name: DoConvert(IDbRecord)
+  href: data/main/Axle.Data.Conversion.DbRecordConverter-1.html#Axle_Data_Conversion_DbRecordConverter_1_DoConvert_Axle_Data_IDbRecord_
+  commentId: M:Axle.Data.Conversion.DbRecordConverter`1.DoConvert(Axle.Data.IDbRecord)
+  fullName: Axle.Data.Conversion.DbRecordConverter<T>.DoConvert(Axle.Data.IDbRecord)
+  fullName.vb: Axle.Data.Conversion.DbRecordConverter(Of T).DoConvert(Axle.Data.IDbRecord)
+  nameWithType: DbRecordConverter<T>.DoConvert(IDbRecord)
+  nameWithType.vb: DbRecordConverter(Of T).DoConvert(IDbRecord)
+- uid: Axle.Data.Conversion.DbRecordConverter`1.DoConvert(Axle.Data.IDbRecord,System.String)
+  name: DoConvert(IDbRecord, String)
+  href: data/main/Axle.Data.Conversion.DbRecordConverter-1.html#Axle_Data_Conversion_DbRecordConverter_1_DoConvert_Axle_Data_IDbRecord_System_String_
+  commentId: M:Axle.Data.Conversion.DbRecordConverter`1.DoConvert(Axle.Data.IDbRecord,System.String)
+  fullName: Axle.Data.Conversion.DbRecordConverter<T>.DoConvert(Axle.Data.IDbRecord, System.String)
+  fullName.vb: Axle.Data.Conversion.DbRecordConverter(Of T).DoConvert(Axle.Data.IDbRecord, System.String)
+  nameWithType: DbRecordConverter<T>.DoConvert(IDbRecord, String)
+  nameWithType.vb: DbRecordConverter(Of T).DoConvert(IDbRecord, String)
+- uid: Axle.Data.Conversion.DbRecordConverter`1.DoConvert*
+  name: DoConvert
+  href: data/main/Axle.Data.Conversion.DbRecordConverter-1.html#Axle_Data_Conversion_DbRecordConverter_1_DoConvert_
+  commentId: Overload:Axle.Data.Conversion.DbRecordConverter`1.DoConvert
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbRecordConverter<T>.DoConvert
+  fullName.vb: Axle.Data.Conversion.DbRecordConverter(Of T).DoConvert
+  nameWithType: DbRecordConverter<T>.DoConvert
+  nameWithType.vb: DbRecordConverter(Of T).DoConvert
+- uid: Axle.Data.Conversion.DbTypeConverter`2
+  name: DbTypeConverter<T1, T2>
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html
+  commentId: T:Axle.Data.Conversion.DbTypeConverter`2
+  name.vb: DbTypeConverter(Of T1, T2)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2)
+  nameWithType: DbTypeConverter<T1, T2>
+  nameWithType.vb: DbTypeConverter(Of T1, T2)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.#ctor(System.Data.DbType)
+  name: DbTypeConverter(DbType)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2__ctor_System_Data_DbType_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.#ctor(System.Data.DbType)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DbTypeConverter(System.Data.DbType)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DbTypeConverter(System.Data.DbType)
+  nameWithType: DbTypeConverter<T1, T2>.DbTypeConverter(DbType)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DbTypeConverter(DbType)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.#ctor*
+  name: DbTypeConverter
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2__ctor_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.#ctor
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DbTypeConverter
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DbTypeConverter
+  nameWithType: DbTypeConverter<T1, T2>.DbTypeConverter
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DbTypeConverter
+- uid: Axle.Data.Conversion.DbTypeConverter`2.Convert(System.Object)
+  name: Convert(Object)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_Convert_System_Object_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.Convert(System.Object)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.Convert(System.Object)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).Convert(System.Object)
+  nameWithType: DbTypeConverter<T1, T2>.Convert(Object)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).Convert(Object)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.Convert*
+  name: Convert
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_Convert_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.Convert
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.Convert
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).Convert
+  nameWithType: DbTypeConverter<T1, T2>.Convert
+  nameWithType.vb: DbTypeConverter(Of T1, T2).Convert
+- uid: Axle.Data.Conversion.DbTypeConverter`2.ConvertBack(System.Object)
+  name: ConvertBack(Object)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_ConvertBack_System_Object_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.ConvertBack(System.Object)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.ConvertBack(System.Object)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).ConvertBack(System.Object)
+  nameWithType: DbTypeConverter<T1, T2>.ConvertBack(Object)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).ConvertBack(Object)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.ConvertBack*
+  name: ConvertBack
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_ConvertBack_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.ConvertBack
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.ConvertBack
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).ConvertBack
+  nameWithType: DbTypeConverter<T1, T2>.ConvertBack
+  nameWithType.vb: DbTypeConverter(Of T1, T2).ConvertBack
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DbType
+  name: DbType
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DbType
+  commentId: P:Axle.Data.Conversion.DbTypeConverter`2.DbType
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DbType
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DbType
+  nameWithType: DbTypeConverter<T1, T2>.DbType
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DbType
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DbType*
+  name: DbType
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DbType_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.DbType
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DbType
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DbType
+  nameWithType: DbTypeConverter<T1, T2>.DbType
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DbType
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DestinationNullEquivalent
+  name: DestinationNullEquivalent
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DestinationNullEquivalent
+  commentId: P:Axle.Data.Conversion.DbTypeConverter`2.DestinationNullEquivalent
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DestinationNullEquivalent
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DestinationNullEquivalent
+  nameWithType: DbTypeConverter<T1, T2>.DestinationNullEquivalent
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DestinationNullEquivalent
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DestinationNullEquivalent*
+  name: DestinationNullEquivalent
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DestinationNullEquivalent_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.DestinationNullEquivalent
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DestinationNullEquivalent
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DestinationNullEquivalent
+  nameWithType: DbTypeConverter<T1, T2>.DestinationNullEquivalent
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DestinationNullEquivalent
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DoConvert(`0)
+  name: DoConvert(T1)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DoConvert__0_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.DoConvert(`0)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DoConvert(T1)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DoConvert(T1)
+  nameWithType: DbTypeConverter<T1, T2>.DoConvert(T1)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DoConvert(T1)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DoConvert*
+  name: DoConvert
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DoConvert_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.DoConvert
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DoConvert
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DoConvert
+  nameWithType: DbTypeConverter<T1, T2>.DoConvert
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DoConvert
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DoConvertBack(`1)
+  name: DoConvertBack(T2)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DoConvertBack__1_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.DoConvertBack(`1)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DoConvertBack(T2)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DoConvertBack(T2)
+  nameWithType: DbTypeConverter<T1, T2>.DoConvertBack(T2)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DoConvertBack(T2)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.DoConvertBack*
+  name: DoConvertBack
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_DoConvertBack_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.DoConvertBack
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.DoConvertBack
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DoConvertBack
+  nameWithType: DbTypeConverter<T1, T2>.DoConvertBack
+  nameWithType.vb: DbTypeConverter(Of T1, T2).DoConvertBack
+- uid: Axle.Data.Conversion.DbTypeConverter`2.GetNotNullDestinationValue(`0)
+  name: GetNotNullDestinationValue(T1)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_GetNotNullDestinationValue__0_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.GetNotNullDestinationValue(`0)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.GetNotNullDestinationValue(T1)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).GetNotNullDestinationValue(T1)
+  nameWithType: DbTypeConverter<T1, T2>.GetNotNullDestinationValue(T1)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).GetNotNullDestinationValue(T1)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.GetNotNullDestinationValue*
+  name: GetNotNullDestinationValue
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_GetNotNullDestinationValue_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.GetNotNullDestinationValue
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.GetNotNullDestinationValue
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).GetNotNullDestinationValue
+  nameWithType: DbTypeConverter<T1, T2>.GetNotNullDestinationValue
+  nameWithType.vb: DbTypeConverter(Of T1, T2).GetNotNullDestinationValue
+- uid: Axle.Data.Conversion.DbTypeConverter`2.GetNotNullSourceValue(`1)
+  name: GetNotNullSourceValue(T2)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_GetNotNullSourceValue__1_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.GetNotNullSourceValue(`1)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.GetNotNullSourceValue(T2)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).GetNotNullSourceValue(T2)
+  nameWithType: DbTypeConverter<T1, T2>.GetNotNullSourceValue(T2)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).GetNotNullSourceValue(T2)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.GetNotNullSourceValue*
+  name: GetNotNullSourceValue
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_GetNotNullSourceValue_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.GetNotNullSourceValue
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.GetNotNullSourceValue
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).GetNotNullSourceValue
+  nameWithType: DbTypeConverter<T1, T2>.GetNotNullSourceValue
+  nameWithType.vb: DbTypeConverter(Of T1, T2).GetNotNullSourceValue
+- uid: Axle.Data.Conversion.DbTypeConverter`2.IsNull(`1)
+  name: IsNull(T2)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_IsNull__1_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.IsNull(`1)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.IsNull(T2)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).IsNull(T2)
+  nameWithType: DbTypeConverter<T1, T2>.IsNull(T2)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).IsNull(T2)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.IsNull*
+  name: IsNull
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_IsNull_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.IsNull
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.IsNull
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).IsNull
+  nameWithType: DbTypeConverter<T1, T2>.IsNull
+  nameWithType.vb: DbTypeConverter(Of T1, T2).IsNull
+- uid: Axle.Data.Conversion.DbTypeConverter`2.IsStub(`0)
+  name: IsStub(T1)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_IsStub__0_
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.IsStub(`0)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.IsStub(T1)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).IsStub(T1)
+  nameWithType: DbTypeConverter<T1, T2>.IsStub(T1)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).IsStub(T1)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.IsStub*
+  name: IsStub
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_IsStub_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.IsStub
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.IsStub
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).IsStub
+  nameWithType: DbTypeConverter<T1, T2>.IsStub
+  nameWithType.vb: DbTypeConverter(Of T1, T2).IsStub
+- uid: Axle.Data.Conversion.DbTypeConverter`2.SourceNullEquivalent
+  name: SourceNullEquivalent
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_SourceNullEquivalent
+  commentId: P:Axle.Data.Conversion.DbTypeConverter`2.SourceNullEquivalent
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.SourceNullEquivalent
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).SourceNullEquivalent
+  nameWithType: DbTypeConverter<T1, T2>.SourceNullEquivalent
+  nameWithType.vb: DbTypeConverter(Of T1, T2).SourceNullEquivalent
+- uid: Axle.Data.Conversion.DbTypeConverter`2.SourceNullEquivalent*
+  name: SourceNullEquivalent
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_SourceNullEquivalent_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.SourceNullEquivalent
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.SourceNullEquivalent
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).SourceNullEquivalent
+  nameWithType: DbTypeConverter<T1, T2>.SourceNullEquivalent
+  nameWithType.vb: DbTypeConverter(Of T1, T2).SourceNullEquivalent
+- uid: Axle.Data.Conversion.DbTypeConverter`2.TryConvert(System.Object,System.Object@)
+  name: TryConvert(Object, out Object)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_TryConvert_System_Object_System_Object__
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.TryConvert(System.Object,System.Object@)
+  name.vb: TryConvert(Object, ByRef Object)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.TryConvert(System.Object, out System.Object)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).TryConvert(System.Object, ByRef System.Object)
+  nameWithType: DbTypeConverter<T1, T2>.TryConvert(Object, out Object)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).TryConvert(Object, ByRef Object)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.TryConvert*
+  name: TryConvert
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_TryConvert_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.TryConvert
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.TryConvert
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).TryConvert
+  nameWithType: DbTypeConverter<T1, T2>.TryConvert
+  nameWithType.vb: DbTypeConverter(Of T1, T2).TryConvert
+- uid: Axle.Data.Conversion.DbTypeConverter`2.TryConvertBack(System.Object,System.Object@)
+  name: TryConvertBack(Object, out Object)
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_TryConvertBack_System_Object_System_Object__
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.TryConvertBack(System.Object,System.Object@)
+  name.vb: TryConvertBack(Object, ByRef Object)
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.TryConvertBack(System.Object, out System.Object)
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).TryConvertBack(System.Object, ByRef System.Object)
+  nameWithType: DbTypeConverter<T1, T2>.TryConvertBack(Object, out Object)
+  nameWithType.vb: DbTypeConverter(Of T1, T2).TryConvertBack(Object, ByRef Object)
+- uid: Axle.Data.Conversion.DbTypeConverter`2.TryConvertBack*
+  name: TryConvertBack
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_TryConvertBack_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.TryConvertBack
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.TryConvertBack
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).TryConvertBack
+  nameWithType: DbTypeConverter<T1, T2>.TryConvertBack
+  nameWithType.vb: DbTypeConverter(Of T1, T2).TryConvertBack
+- uid: Axle.Data.Conversion.IDbRecordConverter`1
+  name: IDbRecordConverter<T>
+  href: data/main/Axle.Data.Conversion.IDbRecordConverter-1.html
+  commentId: T:Axle.Data.Conversion.IDbRecordConverter`1
+  name.vb: IDbRecordConverter(Of T)
+  fullName: Axle.Data.Conversion.IDbRecordConverter<T>
+  fullName.vb: Axle.Data.Conversion.IDbRecordConverter(Of T)
+  nameWithType: IDbRecordConverter<T>
+  nameWithType.vb: IDbRecordConverter(Of T)
+- uid: Axle.Data.Conversion.IDbRecordConverter`1.Convert(Axle.Data.IDbRecord,System.String)
+  name: Convert(IDbRecord, String)
+  href: data/main/Axle.Data.Conversion.IDbRecordConverter-1.html#Axle_Data_Conversion_IDbRecordConverter_1_Convert_Axle_Data_IDbRecord_System_String_
+  commentId: M:Axle.Data.Conversion.IDbRecordConverter`1.Convert(Axle.Data.IDbRecord,System.String)
+  fullName: Axle.Data.Conversion.IDbRecordConverter<T>.Convert(Axle.Data.IDbRecord, System.String)
+  fullName.vb: Axle.Data.Conversion.IDbRecordConverter(Of T).Convert(Axle.Data.IDbRecord, System.String)
+  nameWithType: IDbRecordConverter<T>.Convert(IDbRecord, String)
+  nameWithType.vb: IDbRecordConverter(Of T).Convert(IDbRecord, String)
+- uid: Axle.Data.Conversion.IDbRecordConverter`1.Convert*
+  name: Convert
+  href: data/main/Axle.Data.Conversion.IDbRecordConverter-1.html#Axle_Data_Conversion_IDbRecordConverter_1_Convert_
+  commentId: Overload:Axle.Data.Conversion.IDbRecordConverter`1.Convert
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.IDbRecordConverter<T>.Convert
+  fullName.vb: Axle.Data.Conversion.IDbRecordConverter(Of T).Convert
+  nameWithType: IDbRecordConverter<T>.Convert
+  nameWithType.vb: IDbRecordConverter(Of T).Convert
+- uid: Axle.Data.Conversion.IDbValueConverter
+  name: IDbValueConverter
+  href: data/main/Axle.Data.Conversion.IDbValueConverter.html
+  commentId: T:Axle.Data.Conversion.IDbValueConverter
+  fullName: Axle.Data.Conversion.IDbValueConverter
+  nameWithType: IDbValueConverter
+- uid: Axle.Data.Conversion.IDbValueConverter.DbType
+  name: DbType
+  href: data/main/Axle.Data.Conversion.IDbValueConverter.html#Axle_Data_Conversion_IDbValueConverter_DbType
+  commentId: P:Axle.Data.Conversion.IDbValueConverter.DbType
+  fullName: Axle.Data.Conversion.IDbValueConverter.DbType
+  nameWithType: IDbValueConverter.DbType
+- uid: Axle.Data.Conversion.IDbValueConverter.DbType*
+  name: DbType
+  href: data/main/Axle.Data.Conversion.IDbValueConverter.html#Axle_Data_Conversion_IDbValueConverter_DbType_
+  commentId: Overload:Axle.Data.Conversion.IDbValueConverter.DbType
+  isSpec: "True"
+  fullName: Axle.Data.Conversion.IDbValueConverter.DbType
+  nameWithType: IDbValueConverter.DbType
+- uid: Axle.Data.Extensions.DataReader
+  name: Axle.Data.Extensions.DataReader
+  href: data/main/Axle.Data.Extensions.DataReader.html
+  commentId: N:Axle.Data.Extensions.DataReader
+  fullName: Axle.Data.Extensions.DataReader
+  nameWithType: Axle.Data.Extensions.DataReader
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions
+  name: DataReaderExtensions
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html
+  commentId: T:Axle.Data.Extensions.DataReader.DataReaderExtensions
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions
+  nameWithType: DataReaderExtensions
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch*
+  name: Fetch
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html#Axle_Data_Extensions_DataReader_DataReaderExtensions_Fetch_
+  commentId: Overload:Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch
+  nameWithType: DataReaderExtensions.Fetch
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch``1(System.Data.IDataReader,System.Int32)
+  name: Fetch<T>(IDataReader, Int32)
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html#Axle_Data_Extensions_DataReader_DataReaderExtensions_Fetch__1_System_Data_IDataReader_System_Int32_
+  commentId: M:Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch``1(System.Data.IDataReader,System.Int32)
+  name.vb: Fetch(Of T)(IDataReader, Int32)
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch<T>(System.Data.IDataReader, System.Int32)
+  fullName.vb: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch(Of T)(System.Data.IDataReader, System.Int32)
+  nameWithType: DataReaderExtensions.Fetch<T>(IDataReader, Int32)
+  nameWithType.vb: DataReaderExtensions.Fetch(Of T)(IDataReader, Int32)
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch``1(System.Data.IDataReader,System.String)
+  name: Fetch<T>(IDataReader, String)
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html#Axle_Data_Extensions_DataReader_DataReaderExtensions_Fetch__1_System_Data_IDataReader_System_String_
+  commentId: M:Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch``1(System.Data.IDataReader,System.String)
+  name.vb: Fetch(Of T)(IDataReader, String)
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch<T>(System.Data.IDataReader, System.String)
+  fullName.vb: Axle.Data.Extensions.DataReader.DataReaderExtensions.Fetch(Of T)(System.Data.IDataReader, System.String)
+  nameWithType: DataReaderExtensions.Fetch<T>(IDataReader, String)
+  nameWithType.vb: DataReaderExtensions.Fetch(Of T)(IDataReader, String)
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch*
+  name: TryFetch
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html#Axle_Data_Extensions_DataReader_DataReaderExtensions_TryFetch_
+  commentId: Overload:Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch
+  nameWithType: DataReaderExtensions.TryFetch
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch``1(System.Data.IDataReader,System.Int32,``0@)
+  name: TryFetch<T>(IDataReader, Int32, out T)
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html#Axle_Data_Extensions_DataReader_DataReaderExtensions_TryFetch__1_System_Data_IDataReader_System_Int32___0__
+  commentId: M:Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch``1(System.Data.IDataReader,System.Int32,``0@)
+  name.vb: TryFetch(Of T)(IDataReader, Int32, ByRef T)
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch<T>(System.Data.IDataReader, System.Int32, out T)
+  fullName.vb: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch(Of T)(System.Data.IDataReader, System.Int32, ByRef T)
+  nameWithType: DataReaderExtensions.TryFetch<T>(IDataReader, Int32, out T)
+  nameWithType.vb: DataReaderExtensions.TryFetch(Of T)(IDataReader, Int32, ByRef T)
+- uid: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch``1(System.Data.IDataReader,System.Int32,System.Nullable{``0}@)
+  name: TryFetch<T>(IDataReader, Int32, out Nullable<T>)
+  href: data/main/Axle.Data.Extensions.DataReader.DataReaderExtensions.html#Axle_Data_Extensions_DataReader_DataReaderExtensions_TryFetch__1_System_Data_IDataReader_System_Int32_System_Nullable___0___
+  commentId: M:Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch``1(System.Data.IDataReader,System.Int32,System.Nullable{``0}@)
+  name.vb: TryFetch(Of T)(IDataReader, Int32, ByRef Nullable(Of T))
+  fullName: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch<T>(System.Data.IDataReader, System.Int32, out System.Nullable<T>)
+  fullName.vb: Axle.Data.Extensions.DataReader.DataReaderExtensions.TryFetch(Of T)(System.Data.IDataReader, System.Int32, ByRef System.Nullable(Of T))
+  nameWithType: DataReaderExtensions.TryFetch<T>(IDataReader, Int32, out Nullable<T>)
+  nameWithType.vb: DataReaderExtensions.TryFetch(Of T)(IDataReader, Int32, ByRef Nullable(Of T))
+- uid: Axle.Data.Extensions.DataRow
+  name: Axle.Data.Extensions.DataRow
+  href: data/main/Axle.Data.Extensions.DataRow.html
+  commentId: N:Axle.Data.Extensions.DataRow
+  fullName: Axle.Data.Extensions.DataRow
+  nameWithType: Axle.Data.Extensions.DataRow
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions
+  name: DataRowExtensions
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html
+  commentId: T:Axle.Data.Extensions.DataRow.DataRowExtensions
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions
+  nameWithType: DataRowExtensions
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch*
+  name: Fetch
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_Fetch_
+  commentId: Overload:Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch
+  nameWithType: DataRowExtensions.Fetch
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch``1(System.Data.DataRow,System.Int32)
+  name: Fetch<T>(DataRow, Int32)
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_Fetch__1_System_Data_DataRow_System_Int32_
+  commentId: M:Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch``1(System.Data.DataRow,System.Int32)
+  name.vb: Fetch(Of T)(DataRow, Int32)
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch<T>(System.Data.DataRow, System.Int32)
+  fullName.vb: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch(Of T)(System.Data.DataRow, System.Int32)
+  nameWithType: DataRowExtensions.Fetch<T>(DataRow, Int32)
+  nameWithType.vb: DataRowExtensions.Fetch(Of T)(DataRow, Int32)
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch``1(System.Data.DataRow,System.String)
+  name: Fetch<T>(DataRow, String)
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_Fetch__1_System_Data_DataRow_System_String_
+  commentId: M:Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch``1(System.Data.DataRow,System.String)
+  name.vb: Fetch(Of T)(DataRow, String)
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch<T>(System.Data.DataRow, System.String)
+  fullName.vb: Axle.Data.Extensions.DataRow.DataRowExtensions.Fetch(Of T)(System.Data.DataRow, System.String)
+  nameWithType: DataRowExtensions.Fetch<T>(DataRow, String)
+  nameWithType.vb: DataRowExtensions.Fetch(Of T)(DataRow, String)
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch*
+  name: TryFetch
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_TryFetch_
+  commentId: Overload:Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch
+  nameWithType: DataRowExtensions.TryFetch
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.Int32,``0@)
+  name: TryFetch<T>(DataRow, Int32, out T)
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_TryFetch__1_System_Data_DataRow_System_Int32___0__
+  commentId: M:Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.Int32,``0@)
+  name.vb: TryFetch(Of T)(DataRow, Int32, ByRef T)
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch<T>(System.Data.DataRow, System.Int32, out T)
+  fullName.vb: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch(Of T)(System.Data.DataRow, System.Int32, ByRef T)
+  nameWithType: DataRowExtensions.TryFetch<T>(DataRow, Int32, out T)
+  nameWithType.vb: DataRowExtensions.TryFetch(Of T)(DataRow, Int32, ByRef T)
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.Int32,System.Nullable{``0}@)
+  name: TryFetch<T>(DataRow, Int32, out Nullable<T>)
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_TryFetch__1_System_Data_DataRow_System_Int32_System_Nullable___0___
+  commentId: M:Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.Int32,System.Nullable{``0}@)
+  name.vb: TryFetch(Of T)(DataRow, Int32, ByRef Nullable(Of T))
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch<T>(System.Data.DataRow, System.Int32, out System.Nullable<T>)
+  fullName.vb: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch(Of T)(System.Data.DataRow, System.Int32, ByRef System.Nullable(Of T))
+  nameWithType: DataRowExtensions.TryFetch<T>(DataRow, Int32, out Nullable<T>)
+  nameWithType.vb: DataRowExtensions.TryFetch(Of T)(DataRow, Int32, ByRef Nullable(Of T))
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.String,``0@)
+  name: TryFetch<T>(DataRow, String, out T)
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_TryFetch__1_System_Data_DataRow_System_String___0__
+  commentId: M:Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.String,``0@)
+  name.vb: TryFetch(Of T)(DataRow, String, ByRef T)
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch<T>(System.Data.DataRow, System.String, out T)
+  fullName.vb: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch(Of T)(System.Data.DataRow, System.String, ByRef T)
+  nameWithType: DataRowExtensions.TryFetch<T>(DataRow, String, out T)
+  nameWithType.vb: DataRowExtensions.TryFetch(Of T)(DataRow, String, ByRef T)
+- uid: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.String,System.Nullable{``0}@)
+  name: TryFetch<T>(DataRow, String, out Nullable<T>)
+  href: data/main/Axle.Data.Extensions.DataRow.DataRowExtensions.html#Axle_Data_Extensions_DataRow_DataRowExtensions_TryFetch__1_System_Data_DataRow_System_String_System_Nullable___0___
+  commentId: M:Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch``1(System.Data.DataRow,System.String,System.Nullable{``0}@)
+  name.vb: TryFetch(Of T)(DataRow, String, ByRef Nullable(Of T))
+  fullName: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch<T>(System.Data.DataRow, System.String, out System.Nullable<T>)
+  fullName.vb: Axle.Data.Extensions.DataRow.DataRowExtensions.TryFetch(Of T)(System.Data.DataRow, System.String, ByRef System.Nullable(Of T))
+  nameWithType: DataRowExtensions.TryFetch<T>(DataRow, String, out Nullable<T>)
+  nameWithType.vb: DataRowExtensions.TryFetch(Of T)(DataRow, String, ByRef Nullable(Of T))
+- uid: Axle.Data.Extensions.DataSet
+  name: Axle.Data.Extensions.DataSet
+  href: data/main/Axle.Data.Extensions.DataSet.html
+  commentId: N:Axle.Data.Extensions.DataSet
+  fullName: Axle.Data.Extensions.DataSet
+  nameWithType: Axle.Data.Extensions.DataSet
+- uid: Axle.Data.Extensions.DataSet.DataSetExtensions
+  name: DataSetExtensions
+  href: data/main/Axle.Data.Extensions.DataSet.DataSetExtensions.html
+  commentId: T:Axle.Data.Extensions.DataSet.DataSetExtensions
+  fullName: Axle.Data.Extensions.DataSet.DataSetExtensions
+  nameWithType: DataSetExtensions
+- uid: Axle.Data.Extensions.DataSet.DataSetExtensions.IsEmpty(System.Data.DataSet)
+  name: IsEmpty(DataSet)
+  href: data/main/Axle.Data.Extensions.DataSet.DataSetExtensions.html#Axle_Data_Extensions_DataSet_DataSetExtensions_IsEmpty_System_Data_DataSet_
+  commentId: M:Axle.Data.Extensions.DataSet.DataSetExtensions.IsEmpty(System.Data.DataSet)
+  fullName: Axle.Data.Extensions.DataSet.DataSetExtensions.IsEmpty(System.Data.DataSet)
+  nameWithType: DataSetExtensions.IsEmpty(DataSet)
+- uid: Axle.Data.Extensions.DataSet.DataSetExtensions.IsEmpty*
+  name: IsEmpty
+  href: data/main/Axle.Data.Extensions.DataSet.DataSetExtensions.html#Axle_Data_Extensions_DataSet_DataSetExtensions_IsEmpty_
+  commentId: Overload:Axle.Data.Extensions.DataSet.DataSetExtensions.IsEmpty
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DataSet.DataSetExtensions.IsEmpty
+  nameWithType: DataSetExtensions.IsEmpty
+- uid: Axle.Data.Extensions.DataTable
+  name: Axle.Data.Extensions.DataTable
+  href: data/main/Axle.Data.Extensions.DataTable.html
+  commentId: N:Axle.Data.Extensions.DataTable
+  fullName: Axle.Data.Extensions.DataTable
+  nameWithType: Axle.Data.Extensions.DataTable
+- uid: Axle.Data.Extensions.DataTable.DataTableExtensions
+  name: DataTableExtensions
+  href: data/main/Axle.Data.Extensions.DataTable.DataTableExtensions.html
+  commentId: T:Axle.Data.Extensions.DataTable.DataTableExtensions
+  fullName: Axle.Data.Extensions.DataTable.DataTableExtensions
+  nameWithType: DataTableExtensions
+- uid: Axle.Data.Extensions.DataTable.DataTableExtensions.IsEmpty(System.Data.DataTable)
+  name: IsEmpty(DataTable)
+  href: data/main/Axle.Data.Extensions.DataTable.DataTableExtensions.html#Axle_Data_Extensions_DataTable_DataTableExtensions_IsEmpty_System_Data_DataTable_
+  commentId: M:Axle.Data.Extensions.DataTable.DataTableExtensions.IsEmpty(System.Data.DataTable)
+  fullName: Axle.Data.Extensions.DataTable.DataTableExtensions.IsEmpty(System.Data.DataTable)
+  nameWithType: DataTableExtensions.IsEmpty(DataTable)
+- uid: Axle.Data.Extensions.DataTable.DataTableExtensions.IsEmpty*
+  name: IsEmpty
+  href: data/main/Axle.Data.Extensions.DataTable.DataTableExtensions.html#Axle_Data_Extensions_DataTable_DataTableExtensions_IsEmpty_
+  commentId: Overload:Axle.Data.Extensions.DataTable.DataTableExtensions.IsEmpty
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DataTable.DataTableExtensions.IsEmpty
+  nameWithType: DataTableExtensions.IsEmpty
+- uid: Axle.Data.Extensions.DbCommand
+  name: Axle.Data.Extensions.DbCommand
+  href: data/main/Axle.Data.Extensions.DbCommand.html
+  commentId: N:Axle.Data.Extensions.DbCommand
+  fullName: Axle.Data.Extensions.DbCommand
+  nameWithType: Axle.Data.Extensions.DbCommand
+- uid: Axle.Data.Extensions.DbCommand.DbCommandExtensions
+  name: DbCommandExtensions
+  href: data/main/Axle.Data.Extensions.DbCommand.DbCommandExtensions.html
+  commentId: T:Axle.Data.Extensions.DbCommand.DbCommandExtensions
+  fullName: Axle.Data.Extensions.DbCommand.DbCommandExtensions
+  nameWithType: DbCommandExtensions
+- uid: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand,System.String,System.Func{System.Data.Common.DbDataAdapter})
+  name: FillDataSet(DbCommand, String, Func<DbDataAdapter>)
+  href: data/main/Axle.Data.Extensions.DbCommand.DbCommandExtensions.html#Axle_Data_Extensions_DbCommand_DbCommandExtensions_FillDataSet_System_Data_Common_DbCommand_System_String_System_Func_System_Data_Common_DbDataAdapter__
+  commentId: M:Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand,System.String,System.Func{System.Data.Common.DbDataAdapter})
+  name.vb: FillDataSet(DbCommand, String, Func(Of DbDataAdapter))
+  fullName: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand, System.String, System.Func<System.Data.Common.DbDataAdapter>)
+  fullName.vb: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand, System.String, System.Func(Of System.Data.Common.DbDataAdapter))
+  nameWithType: DbCommandExtensions.FillDataSet(DbCommand, String, Func<DbDataAdapter>)
+  nameWithType.vb: DbCommandExtensions.FillDataSet(DbCommand, String, Func(Of DbDataAdapter))
+- uid: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand,System.String,System.String,System.Func{System.Data.Common.DbDataAdapter})
+  name: FillDataSet(DbCommand, String, String, Func<DbDataAdapter>)
+  href: data/main/Axle.Data.Extensions.DbCommand.DbCommandExtensions.html#Axle_Data_Extensions_DbCommand_DbCommandExtensions_FillDataSet_System_Data_Common_DbCommand_System_String_System_String_System_Func_System_Data_Common_DbDataAdapter__
+  commentId: M:Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand,System.String,System.String,System.Func{System.Data.Common.DbDataAdapter})
+  name.vb: FillDataSet(DbCommand, String, String, Func(Of DbDataAdapter))
+  fullName: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand, System.String, System.String, System.Func<System.Data.Common.DbDataAdapter>)
+  fullName.vb: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet(System.Data.Common.DbCommand, System.String, System.String, System.Func(Of System.Data.Common.DbDataAdapter))
+  nameWithType: DbCommandExtensions.FillDataSet(DbCommand, String, String, Func<DbDataAdapter>)
+  nameWithType.vb: DbCommandExtensions.FillDataSet(DbCommand, String, String, Func(Of DbDataAdapter))
+- uid: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet*
+  name: FillDataSet
+  href: data/main/Axle.Data.Extensions.DbCommand.DbCommandExtensions.html#Axle_Data_Extensions_DbCommand_DbCommandExtensions_FillDataSet_
+  commentId: Overload:Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet
+  isSpec: "True"
+  fullName: Axle.Data.Extensions.DbCommand.DbCommandExtensions.FillDataSet
+  nameWithType: DbCommandExtensions.FillDataSet
+- uid: Axle.Data.Extensions.DbRecord
+  name: Axle.Data.Extensions.DbRecord
+  href: data/main/Axle.Data.Extensions.DbRecord.html
+  commentId: N:Axle.Data.Extensions.DbRecord
+  fullName: Axle.Data.Extensions.DbRecord
+  nameWithType: Axle.Data.Extensions.DbRecord
+- uid: Axle.Data.Extensions.DbRecord.DbRecordExtensions
+  name: DbRecordExtensions
+  href: data/main/Axle.Data.Extensions.DbRecord.DbRecordExtensions.html
+  commentId: T:Axle.Data.Extensions.DbRecord.DbRecordExtensions
+  fullName: Axle.Data.Extensions.DbRecord.DbRecordExtensions
+  nameWithType: DbRecordExtensions
+- uid: Axle.Data.IDbParameterFactory`2
+  name: IDbParameterFactory<TDbParameter, TDbType>
+  href: data/main/Axle.Data.IDbParameterFactory-2.html
+  commentId: T:Axle.Data.IDbParameterFactory`2
+  name.vb: IDbParameterFactory(Of TDbParameter, TDbType)
+  fullName: Axle.Data.IDbParameterFactory<TDbParameter, TDbType>
+  fullName.vb: Axle.Data.IDbParameterFactory(Of TDbParameter, TDbType)
+  nameWithType: IDbParameterFactory<TDbParameter, TDbType>
+  nameWithType.vb: IDbParameterFactory(Of TDbParameter, TDbType)
+- uid: Axle.Data.IDbParameterFactory`2.CreateDbParameter(System.String,System.Nullable{`1},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name: CreateDbParameter(String, Nullable<TDbType>, Nullable<Int32>, ParameterDirection, Object)
+  href: data/main/Axle.Data.IDbParameterFactory-2.html#Axle_Data_IDbParameterFactory_2_CreateDbParameter_System_String_System_Nullable__1__System_Nullable_System_Int32__System_Data_ParameterDirection_System_Object_
+  commentId: M:Axle.Data.IDbParameterFactory`2.CreateDbParameter(System.String,System.Nullable{`1},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name.vb: CreateDbParameter(String, Nullable(Of TDbType), Nullable(Of Int32), ParameterDirection, Object)
+  fullName: Axle.Data.IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter(System.String, System.Nullable<TDbType>, System.Nullable<System.Int32>, System.Data.ParameterDirection, System.Object)
+  fullName.vb: Axle.Data.IDbParameterFactory(Of TDbParameter, TDbType).CreateDbParameter(System.String, System.Nullable(Of TDbType), System.Nullable(Of System.Int32), System.Data.ParameterDirection, System.Object)
+  nameWithType: IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter(String, Nullable<TDbType>, Nullable<Int32>, ParameterDirection, Object)
+  nameWithType.vb: IDbParameterFactory(Of TDbParameter, TDbType).CreateDbParameter(String, Nullable(Of TDbType), Nullable(Of Int32), ParameterDirection, Object)
+- uid: Axle.Data.IDbParameterFactory`2.CreateDbParameter*
+  name: CreateDbParameter
+  href: data/main/Axle.Data.IDbParameterFactory-2.html#Axle_Data_IDbParameterFactory_2_CreateDbParameter_
+  commentId: Overload:Axle.Data.IDbParameterFactory`2.CreateDbParameter
+  isSpec: "True"
+  fullName: Axle.Data.IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter
+  fullName.vb: Axle.Data.IDbParameterFactory(Of TDbParameter, TDbType).CreateDbParameter
+  nameWithType: IDbParameterFactory<TDbParameter, TDbType>.CreateDbParameter
+  nameWithType.vb: IDbParameterFactory(Of TDbParameter, TDbType).CreateDbParameter
+- uid: Axle.Data.IDbParameterValueSetter
+  name: IDbParameterValueSetter
+  href: data/main/Axle.Data.IDbParameterValueSetter.html
+  commentId: T:Axle.Data.IDbParameterValueSetter
+  fullName: Axle.Data.IDbParameterValueSetter
+  nameWithType: IDbParameterValueSetter
+- uid: Axle.Data.IDbParameterValueSetter.SetValue(System.Data.IDataParameter,System.Data.DbType,System.Object)
+  name: SetValue(IDataParameter, DbType, Object)
+  href: data/main/Axle.Data.IDbParameterValueSetter.html#Axle_Data_IDbParameterValueSetter_SetValue_System_Data_IDataParameter_System_Data_DbType_System_Object_
+  commentId: M:Axle.Data.IDbParameterValueSetter.SetValue(System.Data.IDataParameter,System.Data.DbType,System.Object)
+  fullName: Axle.Data.IDbParameterValueSetter.SetValue(System.Data.IDataParameter, System.Data.DbType, System.Object)
+  nameWithType: IDbParameterValueSetter.SetValue(IDataParameter, DbType, Object)
+- uid: Axle.Data.IDbParameterValueSetter.SetValue*
+  name: SetValue
+  href: data/main/Axle.Data.IDbParameterValueSetter.html#Axle_Data_IDbParameterValueSetter_SetValue_
+  commentId: Overload:Axle.Data.IDbParameterValueSetter.SetValue
+  isSpec: "True"
+  fullName: Axle.Data.IDbParameterValueSetter.SetValue
+  nameWithType: IDbParameterValueSetter.SetValue
+- uid: Axle.Data.IDbParameterValueSetter`2
+  name: IDbParameterValueSetter<TDbParameter, TDbType>
+  href: data/main/Axle.Data.IDbParameterValueSetter-2.html
+  commentId: T:Axle.Data.IDbParameterValueSetter`2
+  name.vb: IDbParameterValueSetter(Of TDbParameter, TDbType)
+  fullName: Axle.Data.IDbParameterValueSetter<TDbParameter, TDbType>
+  fullName.vb: Axle.Data.IDbParameterValueSetter(Of TDbParameter, TDbType)
+  nameWithType: IDbParameterValueSetter<TDbParameter, TDbType>
+  nameWithType.vb: IDbParameterValueSetter(Of TDbParameter, TDbType)
+- uid: Axle.Data.IDbParameterValueSetter`2.SetValue(`0,`1,System.Object)
+  name: SetValue(TDbParameter, TDbType, Object)
+  href: data/main/Axle.Data.IDbParameterValueSetter-2.html#Axle_Data_IDbParameterValueSetter_2_SetValue__0__1_System_Object_
+  commentId: M:Axle.Data.IDbParameterValueSetter`2.SetValue(`0,`1,System.Object)
+  fullName: Axle.Data.IDbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, TDbType, System.Object)
+  fullName.vb: Axle.Data.IDbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, TDbType, System.Object)
+  nameWithType: IDbParameterValueSetter<TDbParameter, TDbType>.SetValue(TDbParameter, TDbType, Object)
+  nameWithType.vb: IDbParameterValueSetter(Of TDbParameter, TDbType).SetValue(TDbParameter, TDbType, Object)
+- uid: Axle.Data.IDbParameterValueSetter`2.SetValue*
+  name: SetValue
+  href: data/main/Axle.Data.IDbParameterValueSetter-2.html#Axle_Data_IDbParameterValueSetter_2_SetValue_
+  commentId: Overload:Axle.Data.IDbParameterValueSetter`2.SetValue
+  isSpec: "True"
+  fullName: Axle.Data.IDbParameterValueSetter<TDbParameter, TDbType>.SetValue
+  fullName.vb: Axle.Data.IDbParameterValueSetter(Of TDbParameter, TDbType).SetValue
+  nameWithType: IDbParameterValueSetter<TDbParameter, TDbType>.SetValue
+  nameWithType.vb: IDbParameterValueSetter(Of TDbParameter, TDbType).SetValue
+- uid: Axle.Data.IDbRecord
+  name: IDbRecord
+  href: data/main/Axle.Data.IDbRecord.html
+  commentId: T:Axle.Data.IDbRecord
+  fullName: Axle.Data.IDbRecord
+  nameWithType: IDbRecord
+- uid: Axle.Data.IDbRecord.FieldCount
+  name: FieldCount
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_FieldCount
+  commentId: P:Axle.Data.IDbRecord.FieldCount
+  fullName: Axle.Data.IDbRecord.FieldCount
+  nameWithType: IDbRecord.FieldCount
+- uid: Axle.Data.IDbRecord.FieldCount*
+  name: FieldCount
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_FieldCount_
+  commentId: Overload:Axle.Data.IDbRecord.FieldCount
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.FieldCount
+  nameWithType: IDbRecord.FieldCount
+- uid: Axle.Data.IDbRecord.FieldNames
+  name: FieldNames
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_FieldNames
+  commentId: P:Axle.Data.IDbRecord.FieldNames
+  fullName: Axle.Data.IDbRecord.FieldNames
+  nameWithType: IDbRecord.FieldNames
+- uid: Axle.Data.IDbRecord.FieldNames*
+  name: FieldNames
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_FieldNames_
+  commentId: Overload:Axle.Data.IDbRecord.FieldNames
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.FieldNames
+  nameWithType: IDbRecord.FieldNames
+- uid: Axle.Data.IDbRecord.GetBoolean(System.Int32)
+  name: GetBoolean(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetBoolean_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetBoolean(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetBoolean(System.Int32)
+  nameWithType: IDbRecord.GetBoolean(Int32)
+- uid: Axle.Data.IDbRecord.GetBoolean(System.String)
+  name: GetBoolean(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetBoolean_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetBoolean(System.String)
+  fullName: Axle.Data.IDbRecord.GetBoolean(System.String)
+  nameWithType: IDbRecord.GetBoolean(String)
+- uid: Axle.Data.IDbRecord.GetBoolean*
+  name: GetBoolean
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetBoolean_
+  commentId: Overload:Axle.Data.IDbRecord.GetBoolean
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetBoolean
+  nameWithType: IDbRecord.GetBoolean
+- uid: Axle.Data.IDbRecord.GetByte(System.Int32)
+  name: GetByte(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetByte_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetByte(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetByte(System.Int32)
+  nameWithType: IDbRecord.GetByte(Int32)
+- uid: Axle.Data.IDbRecord.GetByte(System.String)
+  name: GetByte(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetByte_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetByte(System.String)
+  fullName: Axle.Data.IDbRecord.GetByte(System.String)
+  nameWithType: IDbRecord.GetByte(String)
+- uid: Axle.Data.IDbRecord.GetByte*
+  name: GetByte
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetByte_
+  commentId: Overload:Axle.Data.IDbRecord.GetByte
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetByte
+  nameWithType: IDbRecord.GetByte
+- uid: Axle.Data.IDbRecord.GetChar(System.Int32)
+  name: GetChar(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetChar_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetChar(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetChar(System.Int32)
+  nameWithType: IDbRecord.GetChar(Int32)
+- uid: Axle.Data.IDbRecord.GetChar(System.String)
+  name: GetChar(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetChar_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetChar(System.String)
+  fullName: Axle.Data.IDbRecord.GetChar(System.String)
+  nameWithType: IDbRecord.GetChar(String)
+- uid: Axle.Data.IDbRecord.GetChar*
+  name: GetChar
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetChar_
+  commentId: Overload:Axle.Data.IDbRecord.GetChar
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetChar
+  nameWithType: IDbRecord.GetChar
+- uid: Axle.Data.IDbRecord.GetDateTime(System.Int32)
+  name: GetDateTime(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDateTime_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetDateTime(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetDateTime(System.Int32)
+  nameWithType: IDbRecord.GetDateTime(Int32)
+- uid: Axle.Data.IDbRecord.GetDateTime(System.String)
+  name: GetDateTime(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDateTime_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetDateTime(System.String)
+  fullName: Axle.Data.IDbRecord.GetDateTime(System.String)
+  nameWithType: IDbRecord.GetDateTime(String)
+- uid: Axle.Data.IDbRecord.GetDateTime*
+  name: GetDateTime
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDateTime_
+  commentId: Overload:Axle.Data.IDbRecord.GetDateTime
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetDateTime
+  nameWithType: IDbRecord.GetDateTime
+- uid: Axle.Data.IDbRecord.GetDecimal(System.Int32)
+  name: GetDecimal(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDecimal_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetDecimal(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetDecimal(System.Int32)
+  nameWithType: IDbRecord.GetDecimal(Int32)
+- uid: Axle.Data.IDbRecord.GetDecimal(System.String)
+  name: GetDecimal(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDecimal_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetDecimal(System.String)
+  fullName: Axle.Data.IDbRecord.GetDecimal(System.String)
+  nameWithType: IDbRecord.GetDecimal(String)
+- uid: Axle.Data.IDbRecord.GetDecimal*
+  name: GetDecimal
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDecimal_
+  commentId: Overload:Axle.Data.IDbRecord.GetDecimal
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetDecimal
+  nameWithType: IDbRecord.GetDecimal
+- uid: Axle.Data.IDbRecord.GetDouble(System.Int32)
+  name: GetDouble(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDouble_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetDouble(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetDouble(System.Int32)
+  nameWithType: IDbRecord.GetDouble(Int32)
+- uid: Axle.Data.IDbRecord.GetDouble(System.String)
+  name: GetDouble(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDouble_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetDouble(System.String)
+  fullName: Axle.Data.IDbRecord.GetDouble(System.String)
+  nameWithType: IDbRecord.GetDouble(String)
+- uid: Axle.Data.IDbRecord.GetDouble*
+  name: GetDouble
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetDouble_
+  commentId: Overload:Axle.Data.IDbRecord.GetDouble
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetDouble
+  nameWithType: IDbRecord.GetDouble
+- uid: Axle.Data.IDbRecord.GetFieldName(System.Int32)
+  name: GetFieldName(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFieldName_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetFieldName(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetFieldName(System.Int32)
+  nameWithType: IDbRecord.GetFieldName(Int32)
+- uid: Axle.Data.IDbRecord.GetFieldName*
+  name: GetFieldName
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFieldName_
+  commentId: Overload:Axle.Data.IDbRecord.GetFieldName
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetFieldName
+  nameWithType: IDbRecord.GetFieldName
+- uid: Axle.Data.IDbRecord.GetFieldType(System.Int32)
+  name: GetFieldType(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFieldType_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetFieldType(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetFieldType(System.Int32)
+  nameWithType: IDbRecord.GetFieldType(Int32)
+- uid: Axle.Data.IDbRecord.GetFieldType*
+  name: GetFieldType
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFieldType_
+  commentId: Overload:Axle.Data.IDbRecord.GetFieldType
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetFieldType
+  nameWithType: IDbRecord.GetFieldType
+- uid: Axle.Data.IDbRecord.GetFloat(System.Int32)
+  name: GetFloat(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFloat_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetFloat(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetFloat(System.Int32)
+  nameWithType: IDbRecord.GetFloat(Int32)
+- uid: Axle.Data.IDbRecord.GetFloat(System.String)
+  name: GetFloat(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFloat_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetFloat(System.String)
+  fullName: Axle.Data.IDbRecord.GetFloat(System.String)
+  nameWithType: IDbRecord.GetFloat(String)
+- uid: Axle.Data.IDbRecord.GetFloat*
+  name: GetFloat
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetFloat_
+  commentId: Overload:Axle.Data.IDbRecord.GetFloat
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetFloat
+  nameWithType: IDbRecord.GetFloat
+- uid: Axle.Data.IDbRecord.GetGuid(System.Int32)
+  name: GetGuid(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetGuid_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetGuid(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetGuid(System.Int32)
+  nameWithType: IDbRecord.GetGuid(Int32)
+- uid: Axle.Data.IDbRecord.GetGuid(System.String)
+  name: GetGuid(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetGuid_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetGuid(System.String)
+  fullName: Axle.Data.IDbRecord.GetGuid(System.String)
+  nameWithType: IDbRecord.GetGuid(String)
+- uid: Axle.Data.IDbRecord.GetGuid*
+  name: GetGuid
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetGuid_
+  commentId: Overload:Axle.Data.IDbRecord.GetGuid
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetGuid
+  nameWithType: IDbRecord.GetGuid
+- uid: Axle.Data.IDbRecord.GetInt16(System.Int32)
+  name: GetInt16(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt16_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetInt16(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetInt16(System.Int32)
+  nameWithType: IDbRecord.GetInt16(Int32)
+- uid: Axle.Data.IDbRecord.GetInt16(System.String)
+  name: GetInt16(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt16_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetInt16(System.String)
+  fullName: Axle.Data.IDbRecord.GetInt16(System.String)
+  nameWithType: IDbRecord.GetInt16(String)
+- uid: Axle.Data.IDbRecord.GetInt16*
+  name: GetInt16
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt16_
+  commentId: Overload:Axle.Data.IDbRecord.GetInt16
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetInt16
+  nameWithType: IDbRecord.GetInt16
+- uid: Axle.Data.IDbRecord.GetInt32(System.Int32)
+  name: GetInt32(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt32_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetInt32(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetInt32(System.Int32)
+  nameWithType: IDbRecord.GetInt32(Int32)
+- uid: Axle.Data.IDbRecord.GetInt32(System.String)
+  name: GetInt32(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt32_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetInt32(System.String)
+  fullName: Axle.Data.IDbRecord.GetInt32(System.String)
+  nameWithType: IDbRecord.GetInt32(String)
+- uid: Axle.Data.IDbRecord.GetInt32*
+  name: GetInt32
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt32_
+  commentId: Overload:Axle.Data.IDbRecord.GetInt32
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetInt32
+  nameWithType: IDbRecord.GetInt32
+- uid: Axle.Data.IDbRecord.GetInt64(System.Int32)
+  name: GetInt64(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt64_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetInt64(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetInt64(System.Int32)
+  nameWithType: IDbRecord.GetInt64(Int32)
+- uid: Axle.Data.IDbRecord.GetInt64(System.String)
+  name: GetInt64(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt64_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetInt64(System.String)
+  fullName: Axle.Data.IDbRecord.GetInt64(System.String)
+  nameWithType: IDbRecord.GetInt64(String)
+- uid: Axle.Data.IDbRecord.GetInt64*
+  name: GetInt64
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetInt64_
+  commentId: Overload:Axle.Data.IDbRecord.GetInt64
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetInt64
+  nameWithType: IDbRecord.GetInt64
+- uid: Axle.Data.IDbRecord.GetOrdinal(System.String)
+  name: GetOrdinal(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetOrdinal_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetOrdinal(System.String)
+  fullName: Axle.Data.IDbRecord.GetOrdinal(System.String)
+  nameWithType: IDbRecord.GetOrdinal(String)
+- uid: Axle.Data.IDbRecord.GetOrdinal*
+  name: GetOrdinal
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetOrdinal_
+  commentId: Overload:Axle.Data.IDbRecord.GetOrdinal
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetOrdinal
+  nameWithType: IDbRecord.GetOrdinal
+- uid: Axle.Data.IDbRecord.GetString(System.Int32)
+  name: GetString(Int32)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetString_System_Int32_
+  commentId: M:Axle.Data.IDbRecord.GetString(System.Int32)
+  fullName: Axle.Data.IDbRecord.GetString(System.Int32)
+  nameWithType: IDbRecord.GetString(Int32)
+- uid: Axle.Data.IDbRecord.GetString(System.String)
+  name: GetString(String)
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetString_System_String_
+  commentId: M:Axle.Data.IDbRecord.GetString(System.String)
+  fullName: Axle.Data.IDbRecord.GetString(System.String)
+  nameWithType: IDbRecord.GetString(String)
+- uid: Axle.Data.IDbRecord.GetString*
+  name: GetString
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_GetString_
+  commentId: Overload:Axle.Data.IDbRecord.GetString
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.GetString
+  nameWithType: IDbRecord.GetString
+- uid: Axle.Data.IDbRecord.Item(System.Int32)
+  name: Item[Int32]
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_Item_System_Int32_
+  commentId: P:Axle.Data.IDbRecord.Item(System.Int32)
+  name.vb: Item(Int32)
+  fullName: Axle.Data.IDbRecord.Item[System.Int32]
+  fullName.vb: Axle.Data.IDbRecord.Item(System.Int32)
+  nameWithType: IDbRecord.Item[Int32]
+  nameWithType.vb: IDbRecord.Item(Int32)
+- uid: Axle.Data.IDbRecord.Item(System.String)
+  name: Item[String]
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_Item_System_String_
+  commentId: P:Axle.Data.IDbRecord.Item(System.String)
+  name.vb: Item(String)
+  fullName: Axle.Data.IDbRecord.Item[System.String]
+  fullName.vb: Axle.Data.IDbRecord.Item(System.String)
+  nameWithType: IDbRecord.Item[String]
+  nameWithType.vb: IDbRecord.Item(String)
+- uid: Axle.Data.IDbRecord.Item*
+  name: Item
+  href: data/main/Axle.Data.IDbRecord.html#Axle_Data_IDbRecord_Item_
+  commentId: Overload:Axle.Data.IDbRecord.Item
+  isSpec: "True"
+  fullName: Axle.Data.IDbRecord.Item
+  nameWithType: IDbRecord.Item
+- uid: Axle.Data.IDbServiceProvider
+  name: IDbServiceProvider
+  href: data/main/Axle.Data.IDbServiceProvider.html
+  commentId: T:Axle.Data.IDbServiceProvider
+  fullName: Axle.Data.IDbServiceProvider
+  nameWithType: IDbServiceProvider
+- uid: Axle.Data.IDbServiceProvider.CreateCommand(System.String,System.Nullable{System.Data.CommandType},System.Nullable{System.Int32},System.Data.IDbConnection,System.Data.IDbTransaction)
+  name: CreateCommand(String, Nullable<CommandType>, Nullable<Int32>, IDbConnection, IDbTransaction)
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateCommand_System_String_System_Nullable_System_Data_CommandType__System_Nullable_System_Int32__System_Data_IDbConnection_System_Data_IDbTransaction_
+  commentId: M:Axle.Data.IDbServiceProvider.CreateCommand(System.String,System.Nullable{System.Data.CommandType},System.Nullable{System.Int32},System.Data.IDbConnection,System.Data.IDbTransaction)
+  name.vb: CreateCommand(String, Nullable(Of CommandType), Nullable(Of Int32), IDbConnection, IDbTransaction)
+  fullName: Axle.Data.IDbServiceProvider.CreateCommand(System.String, System.Nullable<System.Data.CommandType>, System.Nullable<System.Int32>, System.Data.IDbConnection, System.Data.IDbTransaction)
+  fullName.vb: Axle.Data.IDbServiceProvider.CreateCommand(System.String, System.Nullable(Of System.Data.CommandType), System.Nullable(Of System.Int32), System.Data.IDbConnection, System.Data.IDbTransaction)
+  nameWithType: IDbServiceProvider.CreateCommand(String, Nullable<CommandType>, Nullable<Int32>, IDbConnection, IDbTransaction)
+  nameWithType.vb: IDbServiceProvider.CreateCommand(String, Nullable(Of CommandType), Nullable(Of Int32), IDbConnection, IDbTransaction)
+- uid: Axle.Data.IDbServiceProvider.CreateCommand*
+  name: CreateCommand
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateCommand_
+  commentId: Overload:Axle.Data.IDbServiceProvider.CreateCommand
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.CreateCommand
+  nameWithType: IDbServiceProvider.CreateCommand
+- uid: Axle.Data.IDbServiceProvider.CreateConnection(System.String)
+  name: CreateConnection(String)
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateConnection_System_String_
+  commentId: M:Axle.Data.IDbServiceProvider.CreateConnection(System.String)
+  fullName: Axle.Data.IDbServiceProvider.CreateConnection(System.String)
+  nameWithType: IDbServiceProvider.CreateConnection(String)
+- uid: Axle.Data.IDbServiceProvider.CreateConnection*
+  name: CreateConnection
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateConnection_
+  commentId: Overload:Axle.Data.IDbServiceProvider.CreateConnection
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.CreateConnection
+  nameWithType: IDbServiceProvider.CreateConnection
+- uid: Axle.Data.IDbServiceProvider.CreateDataAdapter(System.Data.Common.DbCommand)
+  name: CreateDataAdapter(DbCommand)
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateDataAdapter_System_Data_Common_DbCommand_
+  commentId: M:Axle.Data.IDbServiceProvider.CreateDataAdapter(System.Data.Common.DbCommand)
+  fullName: Axle.Data.IDbServiceProvider.CreateDataAdapter(System.Data.Common.DbCommand)
+  nameWithType: IDbServiceProvider.CreateDataAdapter(DbCommand)
+- uid: Axle.Data.IDbServiceProvider.CreateDataAdapter*
+  name: CreateDataAdapter
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateDataAdapter_
+  commentId: Overload:Axle.Data.IDbServiceProvider.CreateDataAdapter
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.CreateDataAdapter
+  nameWithType: IDbServiceProvider.CreateDataAdapter
+- uid: Axle.Data.IDbServiceProvider.CreateDataReader(System.Data.IDbCommand,System.Nullable{System.Data.CommandBehavior})
+  name: CreateDataReader(IDbCommand, Nullable<CommandBehavior>)
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateDataReader_System_Data_IDbCommand_System_Nullable_System_Data_CommandBehavior__
+  commentId: M:Axle.Data.IDbServiceProvider.CreateDataReader(System.Data.IDbCommand,System.Nullable{System.Data.CommandBehavior})
+  name.vb: CreateDataReader(IDbCommand, Nullable(Of CommandBehavior))
+  fullName: Axle.Data.IDbServiceProvider.CreateDataReader(System.Data.IDbCommand, System.Nullable<System.Data.CommandBehavior>)
+  fullName.vb: Axle.Data.IDbServiceProvider.CreateDataReader(System.Data.IDbCommand, System.Nullable(Of System.Data.CommandBehavior))
+  nameWithType: IDbServiceProvider.CreateDataReader(IDbCommand, Nullable<CommandBehavior>)
+  nameWithType.vb: IDbServiceProvider.CreateDataReader(IDbCommand, Nullable(Of CommandBehavior))
+- uid: Axle.Data.IDbServiceProvider.CreateDataReader*
+  name: CreateDataReader
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateDataReader_
+  commentId: Overload:Axle.Data.IDbServiceProvider.CreateDataReader
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.CreateDataReader
+  nameWithType: IDbServiceProvider.CreateDataReader
+- uid: Axle.Data.IDbServiceProvider.CreateParameter(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name: CreateParameter(String, Nullable<DbType>, Nullable<Int32>, ParameterDirection, Object)
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateParameter_System_String_System_Nullable_System_Data_DbType__System_Nullable_System_Int32__System_Data_ParameterDirection_System_Object_
+  commentId: M:Axle.Data.IDbServiceProvider.CreateParameter(System.String,System.Nullable{System.Data.DbType},System.Nullable{System.Int32},System.Data.ParameterDirection,System.Object)
+  name.vb: CreateParameter(String, Nullable(Of DbType), Nullable(Of Int32), ParameterDirection, Object)
+  fullName: Axle.Data.IDbServiceProvider.CreateParameter(System.String, System.Nullable<System.Data.DbType>, System.Nullable<System.Int32>, System.Data.ParameterDirection, System.Object)
+  fullName.vb: Axle.Data.IDbServiceProvider.CreateParameter(System.String, System.Nullable(Of System.Data.DbType), System.Nullable(Of System.Int32), System.Data.ParameterDirection, System.Object)
+  nameWithType: IDbServiceProvider.CreateParameter(String, Nullable<DbType>, Nullable<Int32>, ParameterDirection, Object)
+  nameWithType.vb: IDbServiceProvider.CreateParameter(String, Nullable(Of DbType), Nullable(Of Int32), ParameterDirection, Object)
+- uid: Axle.Data.IDbServiceProvider.CreateParameter*
+  name: CreateParameter
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateParameter_
+  commentId: Overload:Axle.Data.IDbServiceProvider.CreateParameter
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.CreateParameter
+  nameWithType: IDbServiceProvider.CreateParameter
+- uid: Axle.Data.IDbServiceProvider.CreateTransaction(System.Data.IDbConnection,System.Nullable{System.Data.IsolationLevel})
+  name: CreateTransaction(IDbConnection, Nullable<IsolationLevel>)
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateTransaction_System_Data_IDbConnection_System_Nullable_System_Data_IsolationLevel__
+  commentId: M:Axle.Data.IDbServiceProvider.CreateTransaction(System.Data.IDbConnection,System.Nullable{System.Data.IsolationLevel})
+  name.vb: CreateTransaction(IDbConnection, Nullable(Of IsolationLevel))
+  fullName: Axle.Data.IDbServiceProvider.CreateTransaction(System.Data.IDbConnection, System.Nullable<System.Data.IsolationLevel>)
+  fullName.vb: Axle.Data.IDbServiceProvider.CreateTransaction(System.Data.IDbConnection, System.Nullable(Of System.Data.IsolationLevel))
+  nameWithType: IDbServiceProvider.CreateTransaction(IDbConnection, Nullable<IsolationLevel>)
+  nameWithType.vb: IDbServiceProvider.CreateTransaction(IDbConnection, Nullable(Of IsolationLevel))
+- uid: Axle.Data.IDbServiceProvider.CreateTransaction*
+  name: CreateTransaction
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_CreateTransaction_
+  commentId: Overload:Axle.Data.IDbServiceProvider.CreateTransaction
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.CreateTransaction
+  nameWithType: IDbServiceProvider.CreateTransaction
+- uid: Axle.Data.IDbServiceProvider.DialectName
+  name: DialectName
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_DialectName
+  commentId: P:Axle.Data.IDbServiceProvider.DialectName
+  fullName: Axle.Data.IDbServiceProvider.DialectName
+  nameWithType: IDbServiceProvider.DialectName
+- uid: Axle.Data.IDbServiceProvider.DialectName*
+  name: DialectName
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_DialectName_
+  commentId: Overload:Axle.Data.IDbServiceProvider.DialectName
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.DialectName
+  nameWithType: IDbServiceProvider.DialectName
+- uid: Axle.Data.IDbServiceProvider.ProviderName
+  name: ProviderName
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_ProviderName
+  commentId: P:Axle.Data.IDbServiceProvider.ProviderName
+  fullName: Axle.Data.IDbServiceProvider.ProviderName
+  nameWithType: IDbServiceProvider.ProviderName
+- uid: Axle.Data.IDbServiceProvider.ProviderName*
+  name: ProviderName
+  href: data/main/Axle.Data.IDbServiceProvider.html#Axle_Data_IDbServiceProvider_ProviderName_
+  commentId: Overload:Axle.Data.IDbServiceProvider.ProviderName
+  isSpec: "True"
+  fullName: Axle.Data.IDbServiceProvider.ProviderName
+  nameWithType: IDbServiceProvider.ProviderName
