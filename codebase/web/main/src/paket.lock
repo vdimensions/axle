@@ -250,7 +250,7 @@ NUGET
       System.Memory (>= 4.5)
       System.Security.AccessControl (>= 4.5)
       System.Security.Principal.Windows (>= 4.5)
-    Newtonsoft.Json (12.0.1)
+    Newtonsoft.Json (12.0.2)
     System.Buffers (4.5)
     System.Collections.Immutable (1.5)
     System.ComponentModel.Annotations (4.5)
