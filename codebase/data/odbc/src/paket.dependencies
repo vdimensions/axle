@@ -1,14 +1,9 @@
-source ../../../../dist
-  nuget Axle.Core
-	nuget Axle.Data
+storage: none
 
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
   nuget System.Data.Common framework: netstandard2.0
   nuget System.Data.Odbc framework: netstandard1.2, netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6, netstandard2.0
   nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
 
-group build
-	source ../../../../submodules/mason/dist
-	  nuget Mason.Targets.Packager
-	  nuget Mason.Targets.Preprocessor
-	  nuget Mason.Targets.Verman
+source ../../../../dist
+  nuget Axle.Data

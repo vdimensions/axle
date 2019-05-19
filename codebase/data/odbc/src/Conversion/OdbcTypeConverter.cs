@@ -1,10 +1,9 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-using System;
 using System.Data;
 using System.Data.Odbc;
 using System.Diagnostics;
 
-using Axle.Data.Common.Conversion;
+using Axle.Data.Conversion;
 
 
 namespace Axle.Data.Odbc.Conversion

@@ -5,15 +5,11 @@ source ../../../../dist
   nuget Axle.Application
 
 source https://nuget.org/api/v2
-  nuget Microsoft.AspNetCore.Http.Abstractions
-  nuget Microsoft.AspNetCore.Hosting.Abstractions
-  nuget Microsoft.Extensions.Logging.Abstractions
 
   nuget Microsoft.Extensions.Caching.Memory
   nuget Microsoft.AspNetCore.Session
 
   nuget Microsoft.AspNetCore
-  nuget Microsoft.AspNetCore.Server.Kestrel
 
 
 group build
