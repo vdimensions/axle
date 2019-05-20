@@ -1,7 +1,7 @@
 ﻿using System.Data;
 using System.Diagnostics;
 
-using Axle.Data.Common.Conversion;
+using Axle.Data.Conversion;
 
 using NpgsqlTypes;
 

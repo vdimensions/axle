@@ -1,10 +1,6 @@
-Axle.Core
 Axle.Data
 Npgsql
-System.Data.Common
-
 group legacy
-  Npgsql
-  
-group build
-  Mason.Targets.Preprocessor
+Npgsql
+group netstandard1_3
+Npgsql
