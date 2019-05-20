@@ -2,7 +2,7 @@
 using System.Data.OleDb;
 using System.Diagnostics;
 
-using Axle.Data.Common.Conversion;
+using Axle.Data.Conversion;
 
 
 namespace Axle.Data.OleDb.Conversion

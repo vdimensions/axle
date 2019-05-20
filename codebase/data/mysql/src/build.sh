@@ -1,5 +1,5 @@
 paket='.paket/paket.sh'
-project='Axle.Data.Odbc'
+project='Axle.Data.MySql'
 project_format='csproj'
 
 ./restore.sh

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ProjectGuid>25EADD2A-1F07-45AC-A4FB-8E6A3AF23BAC</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <Description>Axle Framework Data Access Library for MySql databases</Description>
+  </PropertyGroup>
+  <Import Project="../../../Axle.Common.props" />
+  <Import Project=".paket\Paket.Restore.targets" />
+</Project>

@@ -3,33 +3,25 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-  <Import Project="../../../../submodules/vdimensions_msbuild_sdk/src/MultitargetingFrameworkSupport.targets" />
+  
   <PropertyGroup>
     <ProjectGuid>5562054B-F00C-4926-806A-55DFDDD14C98</ProjectGuid>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
-    <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <OutputType>Library</OutputType>
+    <Description>Axle Framework Data Access Library for ODBC</Description>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-  </PropertyGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+  
   <ItemGroup>
     <None Remove="Axle.Logging.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
+
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
   </Target>
+
   <Import Project="packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets" Condition="Exists('packages\build\Mason.Targets.Preprocessor\build\Mason.Targets.Preprocessor.targets')" Label="Paket" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
