@@ -11,13 +11,13 @@ namespace Axle.Data.SqlClient
     [System.Serializable]
     #endif
     public sealed class SqlServiceProvider : DbServiceProvider<
-            SqlConnection, 
-            SqlTransaction, 
+            SqlConnection,
+            SqlTransaction,
             SqlCommand,
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            SqlDataAdapter, 
+            SqlDataAdapter,
             #endif
-            SqlDataReader, 
+            SqlDataReader,
             SqlParameter,
             SqlDbType>
     {
@@ -32,21 +32,21 @@ namespace Axle.Data.SqlClient
         {
             _parameterValueSetter = new SqlParameterValueSetter();
         }
-        
+
         protected override SqlConnection CreateConnection(string connectionString) { return new SqlConnection(connectionString); }
-        
+
         protected override SqlTransaction CreateTransaction(SqlConnection connection, IsolationLevel? isolationLevel)
         {
             return isolationLevel.HasValue
                 ? connection.BeginTransaction(isolationLevel.Value)
                 : connection.BeginTransaction();
         }
-        
+
         protected override SqlCommand CreateCommand(
-            string queryString, 
-            CommandType? commandType, 
-            int? commandTimeout, 
-            SqlConnection connection, 
+            string queryString,
+            CommandType? commandType,
+            int? commandTimeout,
+            SqlConnection connection,
             SqlTransaction transaction)
         {
             var command = transaction != null
@@ -63,12 +63,12 @@ namespace Axle.Data.SqlClient
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override SqlDataAdapter CreateDataAdapter(SqlCommand command) => new SqlDataAdapter(command);
         #endif
-        
+
         protected override SqlDataReader CreateDataReader(SqlCommand command, CommandBehavior? behavior)
         {
             return behavior.HasValue ? command.ExecuteReader(behavior.Value) : command.ExecuteReader();
         }
-        
+
         protected override SqlParameter CreateDbParameter(string name, SqlDbType? type, int? size, ParameterDirection direction)
         {
             return type.HasValue

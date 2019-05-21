@@ -7,7 +7,7 @@
   <PropertyGroup>
     <ProjectGuid>1DA50E5B-0778-4E5D-8BF5-08AE4C645647</ProjectGuid>
     <OutputType>Library</OutputType>
-    <Description>Axle Framework Data Access Library</Description>
+    <Description>Axle's data access library</Description>
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />

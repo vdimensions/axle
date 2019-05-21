@@ -7,8 +7,8 @@ namespace Axle.Data.MySql.Conversion
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
-    internal sealed class MySqlInt64Converter : MySqlSameTypeConverter<long?>
+    internal sealed class MySqlUInt64Converter : MySqlSameTypeConverter<ulong?>
     {
-        public MySqlInt64Converter() : base(DbType.Int64, MySqlDbType.Int64, true) { }
+        public MySqlUInt64Converter() : base(DbType.UInt64, MySqlDbType.UInt64, true) { }
     }
 }

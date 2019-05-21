@@ -7,7 +7,7 @@
   <PropertyGroup>
     <ProjectGuid>3CFAC4A9-56FE-4036-ADB2-122F61C564EB</ProjectGuid>
     <OutputType>Library</OutputType>
-    <Description>Axle Framework Data Access Library for OLE DB</Description>
+    <Description>Axle's data access library for OLE DB</Description>
   </PropertyGroup>
 
   <ItemGroup>

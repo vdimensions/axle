@@ -29,6 +29,9 @@ namespace Axle.Data.MySql
             RegisterConverter(new MySqlInt16Converter());
             RegisterConverter(new MySqlInt32Converter());
             RegisterConverter(new MySqlInt64Converter());
+            RegisterConverter(new MySqlUInt16Converter());
+            RegisterConverter(new MySqlUInt32Converter());
+            RegisterConverter(new MySqlUInt64Converter());
             RegisterConverter(new MySqlSingleConverter());
             RegisterConverter(new MySqlDoubleConverter());
             //RegisterConverter(new MySqlDecimalConverter());

@@ -7,7 +7,7 @@
   <PropertyGroup>
     <ProjectGuid>5562054B-F00C-4926-806A-55DFDDD14C98</ProjectGuid>
     <OutputType>Library</OutputType>
-    <Description>Axle Framework Data Access Library for ODBC</Description>
+    <Description>Axle's data access library for ODBC</Description>
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />

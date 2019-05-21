@@ -12,11 +12,12 @@ namespace Axle.Data.MySql
         MySqlConnection,
         MySqlTransaction,
         MySqlCommand,
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         MySqlDataAdapter,
+        #endif
         MySqlDataReader,
         MySqlParameter,
-        MySqlDbType>/*,
-        IDbParameterValueSetter<OleDbType>*/
+        MySqlDbType>
     {
         public const string Name = "MySql.Data.MySqlClient";
 
@@ -40,8 +41,8 @@ namespace Axle.Data.MySql
         }
 
         protected override MySqlCommand CreateCommand(
-            string queryString, 
-            CommandType? commandType, 
+            string queryString,
+            CommandType? commandType,
             int? commandTimeout,
             MySqlConnection connection,
             MySqlTransaction transaction)
@@ -57,10 +58,12 @@ namespace Axle.Data.MySql
             return command;
         }
 
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override MySqlDataAdapter CreateDataAdapter(MySqlCommand command)
         {
             return new MySqlDataAdapter(command);
         }
+        #endif
 
         protected override MySqlDataReader CreateDataReader(MySqlCommand command, CommandBehavior? behavior)
         {
