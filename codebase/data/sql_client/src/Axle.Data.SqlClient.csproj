@@ -6,7 +6,7 @@
   <PropertyGroup>
     <ProjectGuid>82EE9E10-E6CE-485F-A943-BA33E303035E</ProjectGuid>
     <OutputType>Library</OutputType>
-    <Description>Axle Framework Data Access Library for Microsoft SQL Server databases</Description>
+    <Description>Axle's data access library for Microsoft SQL Server</Description>
   </PropertyGroup>
   <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
