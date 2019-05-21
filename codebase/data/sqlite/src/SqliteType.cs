@@ -11,17 +11,17 @@ namespace Axle.Data.Sqlite
         /// All integers in SQLite default to Int64
         /// </summary>
         Integer = 1,
-        
+
         /// <summary>
         /// All floating point numbers in SQLite default to double
         /// </summary>
         Double = 2,
-        
+
         /// <summary>
         /// The default data type of SQLite is text
         /// </summary>
         Text = 3,
-        
+
         /// <summary>
         /// Typically blob types are only seen when returned from a function
         /// </summary>

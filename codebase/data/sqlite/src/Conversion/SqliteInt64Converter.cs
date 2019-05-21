@@ -1,9 +1,9 @@
 ﻿using System.Data;
 
-#if NETSTANDARD
-using SqliteType = Microsoft.Data.Sqlite.SqliteType;
-#else
+#if NETFRAMEWORK
 using SqliteType = Axle.Data.Sqlite.SqliteType;
+#else
+using SqliteType = Microsoft.Data.Sqlite.SqliteType;
 #endif
 
 

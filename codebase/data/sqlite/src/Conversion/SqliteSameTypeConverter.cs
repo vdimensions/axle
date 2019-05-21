@@ -1,9 +1,9 @@
 ﻿using System.Data;
 
-#if NETSTANDARD
-using SqliteType = Microsoft.Data.Sqlite.SqliteType;
-#else
+#if NETFRAMEWORK
 using SqliteType = Axle.Data.Sqlite.SqliteType;
+#else
+using SqliteType = Microsoft.Data.Sqlite.SqliteType;
 #endif
 
 
@@ -11,7 +11,7 @@ namespace Axle.Data.Sqlite.Conversion
 {
     internal abstract class SqliteSameTypeConverter<T> : SqliteDbTypeConverter<T, T>
     {
-        protected SqliteSameTypeConverter(DbType dbType, SqliteType npgsqlDbType, bool registerAbstractDbType) : base(dbType, npgsqlDbType, registerAbstractDbType) { }
+        protected SqliteSameTypeConverter(DbType dbType, SqliteType sqliteDbType, bool registerAbstractDbType) : base(dbType, sqliteDbType, registerAbstractDbType) { }
 
         protected override T GetNotNullSourceValue(T value) => value;
         protected override T GetNotNullDestinationValue(T value) => value;

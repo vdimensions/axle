@@ -1,12 +1,12 @@
 ﻿using System.Data;
 using System.Diagnostics;
 
-using Axle.Data.Common.Conversion;
+using Axle.Data.Conversion;
 
-#if NETSTANDARD
-using SqliteType = Microsoft.Data.Sqlite.SqliteType;
-#else
+#if NETFRAMEWORK
 using SqliteType = Axle.Data.Sqlite.SqliteType;
+#else
+using SqliteType = Microsoft.Data.Sqlite.SqliteType;
 #endif
 
 namespace Axle.Data.Sqlite.Conversion

@@ -25,7 +25,7 @@ namespace Axle.Data.Sqlite
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-	public sealed class SqliteServiceProvider : DbServiceProvider<
+    public sealed class SqliteServiceProvider : DbServiceProvider<
             SqliteConnection,
             SqliteTransaction,
             SqliteCommand,
@@ -34,7 +34,6 @@ namespace Axle.Data.Sqlite
             SqliteParameter,
             SqliteType>
     {
-
         private static DbType SqliteType2DbType(SqliteType type)
         {
             switch (type)
@@ -44,7 +43,7 @@ namespace Axle.Data.Sqlite
                 case SqliteType.Blob:
                     // TODO: not sure if right
                     return DbType.Binary;
-                #if NETSTANDARD
+                #if NETSTANDARD2_0_OR_NEWER
                 case SqliteType.Real:
                 #else
                 case SqliteType.Double:
@@ -135,5 +134,4 @@ namespace Axle.Data.Sqlite
 
         protected override IDbParameterValueSetter<SqliteParameter, SqliteType> ParameterValueSetter => _parameterValueSetter;
     }
-    
 }
