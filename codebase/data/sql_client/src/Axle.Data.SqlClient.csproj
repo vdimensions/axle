@@ -1,12 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.2;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
-    <ProjectGuid>BEBAE308-F02E-479E-90A0-6D88E2D3EFD9</ProjectGuid>
+    <ProjectGuid>82EE9E10-E6CE-485F-A943-BA33E303035E</ProjectGuid>
     <OutputType>Library</OutputType>
-    <Description>Axle Framework Data Access Library for PostgreSQL databases</Description>
+    <Description>Axle Framework Data Access Library for Microsoft SQL Server databases</Description>
   </PropertyGroup>
   <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
