@@ -1,8 +1,6 @@
-source ../../../../dist
-  nuget Axle.Core
+framework: auto-detect
+storage: none
 
-group build
-	source ../../../../submodules/mason/dist
-	  nuget Mason.Targets.Packager
-	  nuget Mason.Targets.Preprocessor
-	  nuget Mason.Targets.Verman
+source https://api.nuget.org/v3/index.json
+source ../../../../dist
+  nuget Axle.Core ~> 1.5

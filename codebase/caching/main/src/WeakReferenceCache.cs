@@ -70,7 +70,7 @@ namespace Axle.Caching
 
         public object this[object key]
         {
-            get => _nodes.TryGetValue(key, out var res) && res.TryGetTarget(out WeakReferenceCacheNode node) ? node.Value : null;
+            get => _nodes.TryGetValue(key, out var res) && res.TryGetValue(out WeakReferenceCacheNode node) ? node.Value : null;
             set
             {
                 var node = new WeakReferenceCacheNode {Key = key, Value = value};
