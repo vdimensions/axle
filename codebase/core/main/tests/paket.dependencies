@@ -3,7 +3,7 @@ storage: none
 
 source https://api.nuget.org/v3/index.json
 source ../../../../dist
-  nuget Axle.Core
+  nuget Axle.Core ~> 1.5
 
 group test
   source https://api.nuget.org/v3/index.json

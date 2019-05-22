@@ -1,13 +1,6 @@
-source ../../../../dist
-  nuget Axle.Core
+framework: auto-detect
+storage: none
 
 source https://api.nuget.org/v3/index.json
-  nuget System.Diagnostics.TraceSource >= 4.0 framework: netstandard1.6
-  nuget System.Threading.Thread >= 4.0 framework: netstandard1.6
-  nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
-	
-group build
-  source ../../../../submodules/mason/dist
-    nuget Mason.Targets.Packager
-    nuget Mason.Targets.Preprocessor
-    nuget Mason.Targets.Verman
+source ../../../../dist
+  nuget Axle.Core ~> 1.5

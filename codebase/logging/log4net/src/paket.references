@@ -1,5 +1,2 @@
-Axle.Core
+Axle.Application
 log4net
-
-group build
-  Mason.Targets.Preprocessor

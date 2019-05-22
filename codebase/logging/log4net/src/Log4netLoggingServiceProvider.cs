@@ -1,7 +1,5 @@
 ﻿using System;
 
-using Axle.Core.Infrastructure.Logging;
-
 
 namespace Axle.Logging.Log4net
 {

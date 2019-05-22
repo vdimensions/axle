@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
 
-using Axle.Core.Infrastructure.Logging;
 using Axle.Verification;
 
 using log4net;
@@ -10,7 +9,7 @@ using log4net;
 namespace Axle.Logging.Log4net
 {
     // ReSharper disable once InconsistentNaming
-    internal sealed class Log4netLogger : Axle.Core.Infrastructure.Logging.ILogger
+    internal sealed class Log4netLogger : ILogger
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _targetType;
@@ -24,7 +23,7 @@ namespace Axle.Logging.Log4net
         }
 
         #region Implementation of ILogger
-        void Axle.Core.Infrastructure.Logging.ILogger.Write(ILogEntry entry)
+        void ILogger.Write(ILogEntry entry)
         {
             switch (entry.Severity)
             {
@@ -47,7 +46,7 @@ namespace Axle.Logging.Log4net
             }
         }
         
-        Type Axle.Core.Infrastructure.Logging.ILogger.TargetType => _targetType;
+        Type ILogger.TargetType => _targetType;
         #endregion
     }
 }
