@@ -10,8 +10,6 @@
     <Description>Axle's data access library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
-
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
@@ -20,5 +18,6 @@
     <None Remove="paket.lock" />
   </ItemGroup>
 
+  <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
