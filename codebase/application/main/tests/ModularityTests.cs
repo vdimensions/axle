@@ -1,13 +1,12 @@
-﻿using NUnit.Framework;
-
-using Axle.Logging;
+﻿using Axle.Logging;
 using Axle.Modularity;
+using NUnit.Framework;
 
 
 namespace Axle.ApplicationTests
 {
     [TestFixture]
-    public class TestClass
+    public class ModularityTests
     {
         public abstract class AbstractModule
         {

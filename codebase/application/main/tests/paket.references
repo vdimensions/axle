@@ -1,5 +1,5 @@
-Axle.Core
 Axle.Application
 
 group test
   NUnit
+  NUnit3TestAdapter
