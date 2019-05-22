@@ -1,11 +1,10 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+
 using System;
 using System.Globalization;
-
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.ResX
+namespace Axle.Resources.ResX.Extraction
 {
     internal sealed class ResXResourceResolver
     {

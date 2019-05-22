@@ -4,6 +4,7 @@ using System.Text;
 
 using Axle.Conversion;
 using Axle.IO.Extensions.Stream;
+using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 using Axle.Resources.Java.Extraction;
 
@@ -26,7 +27,7 @@ namespace Axle.Resources.Java.Tests
             resourceManager.Bundles
                            .Configure("testBundle")
                                .Register(parser.Parse("Messages.properties"))
-                               .Register(parser.Parse("assembly://Axle.Resources.Java.Tests/Properties/"));
+                               .Register(GetType().Assembly, "./Properties/");
             resourceManager.Extractors.Register(new JavaPropertiesExtractor());
 
             var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);

@@ -2,11 +2,10 @@
 using System;
 using System.Globalization;
 using System.IO;
-
+using Axle.Resources.ResX.Extraction;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.ResX
+namespace Axle.Resources.ResX
 {
     internal sealed class ResXStreamResourceInfo : ResourceInfo
     {

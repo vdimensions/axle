@@ -1,15 +1,14 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+
 using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-
 using Axle.Extensions.String;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.Embedded
+namespace Axle.Resources.Embedded
 {
     /// <summary>
     /// A class representing an embedded resource.

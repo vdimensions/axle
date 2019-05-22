@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Reflection;
-
 using Axle.Environment;
 using Axle.Extensions.String;
 using Axle.Extensions.Uri;
 using Axle.References;
+using Axle.Resources.Extraction;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.Embedded
+namespace Axle.Resources.Embedded.Extraction
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
@@ -25,8 +24,8 @@ namespace Axle.Resources.Extraction.Embedded
         private static Assembly GetAssembly(IRuntime runtime, Uri uri)
         {
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
-            var assenblyName = uri.IsResource() ? uri.Host.TrimEnd(".dll", cmp).TrimEnd(".exe", cmp) : uri.Host;
-            return runtime.LoadAssembly(assenblyName);
+            var assemblyName = uri.IsResource() ? uri.Host.TrimEnd(".dll", cmp).TrimEnd(".exe", cmp) : uri.Host;
+            return runtime.LoadAssembly(assemblyName);
         }
 
         /// <summary>

@@ -1227,6 +1227,25 @@ references:
   fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).DbTypeConverter
   nameWithType: DbTypeConverter<T1, T2>.DbTypeConverter
   nameWithType.vb: DbTypeConverter(Of T1, T2).DbTypeConverter
+- uid: Axle.Data.Conversion.DbTypeConverter`2.Axle#Conversion#ITwoWayConverter{System#Object,System#Object}#Invert
+  name: ITwoWayConverter<Object, Object>.Invert()
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_Axle_Conversion_ITwoWayConverter_System_Object_System_Object__Invert
+  commentId: M:Axle.Data.Conversion.DbTypeConverter`2.Axle#Conversion#ITwoWayConverter{System#Object,System#Object}#Invert
+  name.vb: Axle.Conversion.ITwoWayConverter<System.Object,System.Object>.Invert()
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.Axle.Conversion.ITwoWayConverter<System.Object, System.Object>.Invert()
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).Axle.Conversion.ITwoWayConverter<System.Object,System.Object>.Invert()
+  nameWithType: DbTypeConverter<T1, T2>.ITwoWayConverter<Object, Object>.Invert()
+  nameWithType.vb: DbTypeConverter(Of T1, T2).Axle.Conversion.ITwoWayConverter<System.Object,System.Object>.Invert()
+- uid: Axle.Data.Conversion.DbTypeConverter`2.Axle#Conversion#ITwoWayConverter{System#Object,System#Object}#Invert*
+  name: ITwoWayConverter<Object, Object>.Invert
+  href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_Axle_Conversion_ITwoWayConverter_System_Object_System_Object__Invert_
+  commentId: Overload:Axle.Data.Conversion.DbTypeConverter`2.Axle#Conversion#ITwoWayConverter{System#Object,System#Object}#Invert
+  isSpec: "True"
+  name.vb: Axle.Conversion.ITwoWayConverter<System.Object,System.Object>.Invert
+  fullName: Axle.Data.Conversion.DbTypeConverter<T1, T2>.Axle.Conversion.ITwoWayConverter<System.Object, System.Object>.Invert
+  fullName.vb: Axle.Data.Conversion.DbTypeConverter(Of T1, T2).Axle.Conversion.ITwoWayConverter<System.Object,System.Object>.Invert
+  nameWithType: DbTypeConverter<T1, T2>.ITwoWayConverter<Object, Object>.Invert
+  nameWithType.vb: DbTypeConverter(Of T1, T2).Axle.Conversion.ITwoWayConverter<System.Object,System.Object>.Invert
 - uid: Axle.Data.Conversion.DbTypeConverter`2.Convert(System.Object)
   name: Convert(Object)
   href: data/main/Axle.Data.Conversion.DbTypeConverter-2.html#Axle_Data_Conversion_DbTypeConverter_2_Convert_System_Object_

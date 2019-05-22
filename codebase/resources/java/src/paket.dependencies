@@ -1,7 +1,6 @@
 storage: none
 
 source ../../../../dist
-  nuget Axle.Core
   nuget Axle.Resources
 
 source https://api.nuget.org/v3/index.json

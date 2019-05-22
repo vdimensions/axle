@@ -1,13 +1,12 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
-
 using Axle.Extensions.String;
 using Axle.References;
+using Axle.Resources.Extraction;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.ResX
+namespace Axle.Resources.ResX.Extraction
 {
     /// <summary>
     /// An class to serve as a base for <see cref="IResourceExtractor"/> implementations

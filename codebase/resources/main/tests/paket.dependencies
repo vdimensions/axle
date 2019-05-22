@@ -1,9 +1,10 @@
-framework: net45
+framework: auto-detect
+storage: none
 
 source ../../../../dist
-  nuget Axle.Core
   nuget Axle.Resources
 
 group test
-  source https://nuget.org/api/v2
-    nuget NUnit >= 3.6.1 framework: net45
+  source https://api.nuget.org/v3/index.json
+    nuget NUnit
+    nuget NUnit3TestAdapter

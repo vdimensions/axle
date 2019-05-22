@@ -1,12 +1,11 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+
 using System;
 using System.Globalization;
-
 using Axle.Extensions.Uri;
 using Axle.References;
 
-
-namespace Axle.Resources.Extraction.ResX
+namespace Axle.Resources.ResX.Extraction
 {
     /// <summary>
     /// The .NET's native resource extractor implementation, supporting only text resources.

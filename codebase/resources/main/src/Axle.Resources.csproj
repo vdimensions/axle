@@ -3,20 +3,16 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>0952b72d-9d69-4439-885f-096ed969e9e5</ProjectGuid>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
-    <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
+    <OutputType>Library</OutputType>
     <Description>Axle resource management library</Description>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Extraction\IResourceExtractionChain.cs" />
     <Compile Remove="Extraction\ResourceExtractionChain.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Axle.Resources.dist.csproj.paket.references" />
-    <None Remove="paket.lock" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

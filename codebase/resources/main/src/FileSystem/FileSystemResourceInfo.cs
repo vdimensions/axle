@@ -2,12 +2,10 @@
 using System;
 using System.Globalization;
 using System.IO;
-
 using Axle.Extensions.Uri;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.FileSystem
+namespace Axle.Resources.FileSystem
 {
     /// <inheritdoc />
     /// <summary>

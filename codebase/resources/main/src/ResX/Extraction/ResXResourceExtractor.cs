@@ -1,8 +1,8 @@
 ﻿using Axle.References;
+using Axle.Resources.Extraction;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.ResX
+namespace Axle.Resources.ResX.Extraction
 {
     /// <summary>
     /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable
@@ -18,7 +18,7 @@ namespace Axle.Resources.Extraction.ResX
 
             IResourceExtractor actualExtractor = null;
 
-            // ResX support varies depending on the platform
+            // The extent of ResX support varies depending on the target framework
             #if NETFRAMEWORK
             actualExtractor = new CompleteResXResourceExtractor();
             #elif NETSTANDARD2_0_OR_NEWER

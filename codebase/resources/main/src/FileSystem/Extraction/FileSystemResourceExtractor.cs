@@ -1,12 +1,11 @@
 ﻿using System.Globalization;
 using System.IO;
-
 using Axle.Extensions.Uri;
 using Axle.References;
+using Axle.Resources.Extraction;
 using Axle.Verification;
 
-
-namespace Axle.Resources.Extraction.FileSystem
+namespace Axle.Resources.FileSystem.Extraction
 {
     /// <summary>
     /// An implementation of the <see cref="IResourceExtractor"/> that reads resources from the file system.

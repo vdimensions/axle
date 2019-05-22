@@ -4,7 +4,7 @@ using System.Text;
 
 using Axle.Conversion;
 using Axle.IO.Extensions.Stream;
-
+using Axle.Resources.Bundling;
 using NUnit.Framework;
 
 
@@ -20,16 +20,16 @@ namespace Axle.Resources.Tests
             var parser = new UriParser();
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles.Configure("testBundle")
-                .Register(parser.Parse("file:///C:/Users/Ivaylo/Desktop/"))
+                .RegisterApplicationRelativePath("./Content")
                 .Register(parser.Parse("resx://Axle.Resources.Tests/Axle.Resources.Tests.ResXTestMessages"))
                 .Register(parser.Parse("assembly://Axle.Resources.Tests/"));
             return resourceManager;
         }
-        //[Test]
+        [Test]
         public void TestFileResourceAccess()
         {            
             var resourceManager = CreateResourceManager();
-            var fileResource = resourceManager.Load("testBundle", "LL2H.txt", CultureInfo.CurrentCulture);
+            var fileResource = resourceManager.Load("testBundle", "FileSystemTestFile.txt", CultureInfo.CurrentCulture);
 
             Assert.IsTrue(fileResource.HasValue, "Unable to find LL2H.txt");
             Assert.AreEqual("testBundle", fileResource.Value.Bundle);

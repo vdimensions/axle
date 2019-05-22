@@ -1,16 +1,13 @@
 framework: auto-detect
 storage: none
 
-source ../../../../dist
-  nuget Axle.Core
-  nuget Axle.Resources
-  nuget Axle.Resources.Yaml
-
 source https://api.nuget.org/v3/index.json
-  nuget System.Resources.ResourceManager
-  nuget NETStandard.Library
   nuget YamlDotNet content: none
+
+source ../../../../dist
+  nuget Axle.Resources.Yaml
 
 group test
   source https://api.nuget.org/v3/index.json
-    nuget NUnit >= 3.6.1 framework: net45
+    nuget NUnit
+    nuget NUnit3TestAdapter

@@ -4,6 +4,7 @@ using System.Text;
 
 using Axle.Conversion;
 using Axle.IO.Extensions.Stream;
+using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 using Axle.Resources.Yaml.Extraction;
 
@@ -21,12 +22,12 @@ namespace Axle.Resources.Yaml.Tests
         [Test]
         public void TestMethod()
         {
-            var parser = new UriParser();
+            var uriParser = new UriParser();
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                            .Configure("testBundle")
-                               .Register(parser.Parse("Messages.yml"))
-                               .Register(parser.Parse("assembly://Axle.Resources.Yaml.Tests/Properties/"));
+                               .Register(uriParser.Parse("Messages.yml"))
+                               .Register(GetType().Assembly, "./Properties/");
             resourceManager.Extractors.Register(new YamlExtractor());
 
             var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);

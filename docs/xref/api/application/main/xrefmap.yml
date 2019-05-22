@@ -898,11 +898,11 @@ references:
   commentId: T:Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor
   fullName: Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor
   nameWithType: FactoryArgumentDescriptor
-- uid: Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.#ctor(IParameter,System.String)
+- uid: Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.#ctor(Axle.Reflection.IParameter,System.String)
   name: FactoryArgumentDescriptor(IParameter, String)
-  href: application/main/Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.html#Axle_DependencyInjection_Descriptors_FactoryArgumentDescriptor__ctor_IParameter_System_String_
-  commentId: M:Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.#ctor(IParameter,System.String)
-  fullName: Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.FactoryArgumentDescriptor(IParameter, System.String)
+  href: application/main/Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.html#Axle_DependencyInjection_Descriptors_FactoryArgumentDescriptor__ctor_Axle_Reflection_IParameter_System_String_
+  commentId: M:Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.#ctor(Axle.Reflection.IParameter,System.String)
+  fullName: Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.FactoryArgumentDescriptor(Axle.Reflection.IParameter, System.String)
   nameWithType: FactoryArgumentDescriptor.FactoryArgumentDescriptor(IParameter, String)
 - uid: Axle.DependencyInjection.Descriptors.FactoryArgumentDescriptor.#ctor*
   name: FactoryArgumentDescriptor
@@ -969,13 +969,13 @@ references:
   commentId: T:Axle.DependencyInjection.Descriptors.FactoryDescriptor
   fullName: Axle.DependencyInjection.Descriptors.FactoryDescriptor
   nameWithType: FactoryDescriptor
-- uid: Axle.DependencyInjection.Descriptors.FactoryDescriptor.#ctor(IInvokable,System.Collections.Generic.IList{Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor})
+- uid: Axle.DependencyInjection.Descriptors.FactoryDescriptor.#ctor(Axle.Reflection.IInvokable,System.Collections.Generic.IList{Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor})
   name: FactoryDescriptor(IInvokable, IList<IFactoryArgumentDescriptor>)
-  href: application/main/Axle.DependencyInjection.Descriptors.FactoryDescriptor.html#Axle_DependencyInjection_Descriptors_FactoryDescriptor__ctor_IInvokable_System_Collections_Generic_IList_Axle_DependencyInjection_Descriptors_IFactoryArgumentDescriptor__
-  commentId: M:Axle.DependencyInjection.Descriptors.FactoryDescriptor.#ctor(IInvokable,System.Collections.Generic.IList{Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor})
+  href: application/main/Axle.DependencyInjection.Descriptors.FactoryDescriptor.html#Axle_DependencyInjection_Descriptors_FactoryDescriptor__ctor_Axle_Reflection_IInvokable_System_Collections_Generic_IList_Axle_DependencyInjection_Descriptors_IFactoryArgumentDescriptor__
+  commentId: M:Axle.DependencyInjection.Descriptors.FactoryDescriptor.#ctor(Axle.Reflection.IInvokable,System.Collections.Generic.IList{Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor})
   name.vb: FactoryDescriptor(IInvokable, IList(Of IFactoryArgumentDescriptor))
-  fullName: Axle.DependencyInjection.Descriptors.FactoryDescriptor.FactoryDescriptor(IInvokable, System.Collections.Generic.IList<Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor>)
-  fullName.vb: Axle.DependencyInjection.Descriptors.FactoryDescriptor.FactoryDescriptor(IInvokable, System.Collections.Generic.IList(Of Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor))
+  fullName: Axle.DependencyInjection.Descriptors.FactoryDescriptor.FactoryDescriptor(Axle.Reflection.IInvokable, System.Collections.Generic.IList<Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor>)
+  fullName.vb: Axle.DependencyInjection.Descriptors.FactoryDescriptor.FactoryDescriptor(Axle.Reflection.IInvokable, System.Collections.Generic.IList(Of Axle.DependencyInjection.Descriptors.IFactoryArgumentDescriptor))
   nameWithType: FactoryDescriptor.FactoryDescriptor(IInvokable, IList<IFactoryArgumentDescriptor>)
   nameWithType.vb: FactoryDescriptor.FactoryDescriptor(IInvokable, IList(Of IFactoryArgumentDescriptor))
 - uid: Axle.DependencyInjection.Descriptors.FactoryDescriptor.#ctor*
@@ -1033,11 +1033,11 @@ references:
   commentId: T:Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor
   fullName: Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor
   nameWithType: FieldDependencyDescriptor
-- uid: Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.#ctor(IField,System.String)
+- uid: Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.#ctor(Axle.Reflection.IField,System.String)
   name: FieldDependencyDescriptor(IField, String)
-  href: application/main/Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.html#Axle_DependencyInjection_Descriptors_FieldDependencyDescriptor__ctor_IField_System_String_
-  commentId: M:Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.#ctor(IField,System.String)
-  fullName: Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.FieldDependencyDescriptor(IField, System.String)
+  href: application/main/Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.html#Axle_DependencyInjection_Descriptors_FieldDependencyDescriptor__ctor_Axle_Reflection_IField_System_String_
+  commentId: M:Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.#ctor(Axle.Reflection.IField,System.String)
+  fullName: Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.FieldDependencyDescriptor(Axle.Reflection.IField, System.String)
   nameWithType: FieldDependencyDescriptor.FieldDependencyDescriptor(IField, String)
 - uid: Axle.DependencyInjection.Descriptors.FieldDependencyDescriptor.#ctor*
   name: FieldDependencyDescriptor
@@ -1226,11 +1226,11 @@ references:
   commentId: T:Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor
   fullName: Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor
   nameWithType: PropertyDependencyDescriptor
-- uid: Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.#ctor(IProperty,System.String)
+- uid: Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.#ctor(Axle.Reflection.IProperty,System.String)
   name: PropertyDependencyDescriptor(IProperty, String)
-  href: application/main/Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.html#Axle_DependencyInjection_Descriptors_PropertyDependencyDescriptor__ctor_IProperty_System_String_
-  commentId: M:Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.#ctor(IProperty,System.String)
-  fullName: Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.PropertyDependencyDescriptor(IProperty, System.String)
+  href: application/main/Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.html#Axle_DependencyInjection_Descriptors_PropertyDependencyDescriptor__ctor_Axle_Reflection_IProperty_System_String_
+  commentId: M:Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.#ctor(Axle.Reflection.IProperty,System.String)
+  fullName: Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.PropertyDependencyDescriptor(Axle.Reflection.IProperty, System.String)
   nameWithType: PropertyDependencyDescriptor.PropertyDependencyDescriptor(IProperty, String)
 - uid: Axle.DependencyInjection.Descriptors.PropertyDependencyDescriptor.#ctor*
   name: PropertyDependencyDescriptor
@@ -1596,23 +1596,23 @@ references:
   isSpec: "True"
   fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.DoDependenciesConverge
   nameWithType: AbstractDependencyDescriptorProvider.DoDependenciesConverge
-- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IField)
+- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IField)
   name: GetDependencyName(IField)
-  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDependencyName_IField_
-  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IField)
-  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IField)
+  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDependencyName_Axle_Reflection_IField_
+  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IField)
+  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IField)
   nameWithType: AbstractDependencyDescriptorProvider.GetDependencyName(IField)
-- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IParameter)
+- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IParameter)
   name: GetDependencyName(IParameter)
-  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDependencyName_IParameter_
-  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IParameter)
-  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IParameter)
+  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDependencyName_Axle_Reflection_IParameter_
+  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IParameter)
+  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IParameter)
   nameWithType: AbstractDependencyDescriptorProvider.GetDependencyName(IParameter)
-- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IProperty)
+- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IProperty)
   name: GetDependencyName(IProperty)
-  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDependencyName_IProperty_
-  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IProperty)
-  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(IProperty)
+  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDependencyName_Axle_Reflection_IProperty_
+  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IProperty)
+  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IProperty)
   nameWithType: AbstractDependencyDescriptorProvider.GetDependencyName(IProperty)
 - uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName*
   name: GetDependencyName
@@ -1621,23 +1621,23 @@ references:
   isSpec: "True"
   fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDependencyName
   nameWithType: AbstractDependencyDescriptorProvider.GetDependencyName
-- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IField)
+- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IField)
   name: GetDescriptor(IField)
-  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDescriptor_IField_
-  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IField)
-  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IField)
+  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDescriptor_Axle_Reflection_IField_
+  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IField)
+  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IField)
   nameWithType: AbstractDependencyDescriptorProvider.GetDescriptor(IField)
-- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IInvokable)
+- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IInvokable)
   name: GetDescriptor(IInvokable)
-  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDescriptor_IInvokable_
-  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IInvokable)
-  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IInvokable)
+  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDescriptor_Axle_Reflection_IInvokable_
+  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IInvokable)
+  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IInvokable)
   nameWithType: AbstractDependencyDescriptorProvider.GetDescriptor(IInvokable)
-- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IProperty)
+- uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IProperty)
   name: GetDescriptor(IProperty)
-  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDescriptor_IProperty_
-  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IProperty)
-  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(IProperty)
+  href: application/main/Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_AbstractDependencyDescriptorProvider_GetDescriptor_Axle_Reflection_IProperty_
+  commentId: M:Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IProperty)
+  fullName: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor(Axle.Reflection.IProperty)
   nameWithType: AbstractDependencyDescriptorProvider.GetDescriptor(IProperty)
 - uid: Axle.DependencyInjection.Sdk.AbstractDependencyDescriptorProvider.GetDescriptor*
   name: GetDescriptor
@@ -1784,23 +1784,23 @@ references:
   commentId: T:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider
   fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider
   nameWithType: DefaultDependencyDescriptorProvider
-- uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IField)
+- uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IField)
   name: GetDependencyName(IField)
-  href: application/main/Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_DefaultDependencyDescriptorProvider_GetDependencyName_IField_
-  commentId: M:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IField)
-  fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IField)
+  href: application/main/Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_DefaultDependencyDescriptorProvider_GetDependencyName_Axle_Reflection_IField_
+  commentId: M:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IField)
+  fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IField)
   nameWithType: DefaultDependencyDescriptorProvider.GetDependencyName(IField)
-- uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IParameter)
+- uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IParameter)
   name: GetDependencyName(IParameter)
-  href: application/main/Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_DefaultDependencyDescriptorProvider_GetDependencyName_IParameter_
-  commentId: M:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IParameter)
-  fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IParameter)
+  href: application/main/Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_DefaultDependencyDescriptorProvider_GetDependencyName_Axle_Reflection_IParameter_
+  commentId: M:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IParameter)
+  fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IParameter)
   nameWithType: DefaultDependencyDescriptorProvider.GetDependencyName(IParameter)
-- uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IProperty)
+- uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IProperty)
   name: GetDependencyName(IProperty)
-  href: application/main/Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_DefaultDependencyDescriptorProvider_GetDependencyName_IProperty_
-  commentId: M:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IProperty)
-  fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(IProperty)
+  href: application/main/Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.html#Axle_DependencyInjection_Sdk_DefaultDependencyDescriptorProvider_GetDependencyName_Axle_Reflection_IProperty_
+  commentId: M:Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IProperty)
+  fullName: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName(Axle.Reflection.IProperty)
   nameWithType: DefaultDependencyDescriptorProvider.GetDependencyName(IProperty)
 - uid: Axle.DependencyInjection.Sdk.DefaultDependencyDescriptorProvider.GetDependencyName*
   name: GetDependencyName
@@ -3294,11 +3294,11 @@ references:
   commentId: T:Axle.Resources.IResourceBundleConfigurer
   fullName: Axle.Resources.IResourceBundleConfigurer
   nameWithType: IResourceBundleConfigurer
-- uid: Axle.Resources.IResourceBundleConfigurer.Configure(IResourceBundleRegistry)
+- uid: Axle.Resources.IResourceBundleConfigurer.Configure(Axle.Resources.Bundling.IResourceBundleRegistry)
   name: Configure(IResourceBundleRegistry)
-  href: application/main/Axle.Resources.IResourceBundleConfigurer.html#Axle_Resources_IResourceBundleConfigurer_Configure_IResourceBundleRegistry_
-  commentId: M:Axle.Resources.IResourceBundleConfigurer.Configure(IResourceBundleRegistry)
-  fullName: Axle.Resources.IResourceBundleConfigurer.Configure(IResourceBundleRegistry)
+  href: application/main/Axle.Resources.IResourceBundleConfigurer.html#Axle_Resources_IResourceBundleConfigurer_Configure_Axle_Resources_Bundling_IResourceBundleRegistry_
+  commentId: M:Axle.Resources.IResourceBundleConfigurer.Configure(Axle.Resources.Bundling.IResourceBundleRegistry)
+  fullName: Axle.Resources.IResourceBundleConfigurer.Configure(Axle.Resources.Bundling.IResourceBundleRegistry)
   nameWithType: IResourceBundleConfigurer.Configure(IResourceBundleRegistry)
 - uid: Axle.Resources.IResourceBundleConfigurer.Configure*
   name: Configure
@@ -3313,11 +3313,11 @@ references:
   commentId: T:Axle.Resources.IResourceExtractorConfigurer
   fullName: Axle.Resources.IResourceExtractorConfigurer
   nameWithType: IResourceExtractorConfigurer
-- uid: Axle.Resources.IResourceExtractorConfigurer.Configure(IResourceExtractorRegistry)
+- uid: Axle.Resources.IResourceExtractorConfigurer.Configure(Axle.Resources.Extraction.IResourceExtractorRegistry)
   name: Configure(IResourceExtractorRegistry)
-  href: application/main/Axle.Resources.IResourceExtractorConfigurer.html#Axle_Resources_IResourceExtractorConfigurer_Configure_IResourceExtractorRegistry_
-  commentId: M:Axle.Resources.IResourceExtractorConfigurer.Configure(IResourceExtractorRegistry)
-  fullName: Axle.Resources.IResourceExtractorConfigurer.Configure(IResourceExtractorRegistry)
+  href: application/main/Axle.Resources.IResourceExtractorConfigurer.html#Axle_Resources_IResourceExtractorConfigurer_Configure_Axle_Resources_Extraction_IResourceExtractorRegistry_
+  commentId: M:Axle.Resources.IResourceExtractorConfigurer.Configure(Axle.Resources.Extraction.IResourceExtractorRegistry)
+  fullName: Axle.Resources.IResourceExtractorConfigurer.Configure(Axle.Resources.Extraction.IResourceExtractorRegistry)
   nameWithType: IResourceExtractorConfigurer.Configure(IResourceExtractorRegistry)
 - uid: Axle.Resources.IResourceExtractorConfigurer.Configure*
   name: Configure

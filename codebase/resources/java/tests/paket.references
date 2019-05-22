@@ -1,6 +1,4 @@
-Axle.Core
-Axle.Resources
 Axle.Resources.Java
-
 group test
-  NUnit
+NUnit
+NUnit3TestAdapter

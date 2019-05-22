@@ -1,9 +1,9 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using Axle.Resources.Bundling;
+using Axle.Resources.Embedded.Extraction;
 using Axle.Resources.Extraction;
-using Axle.Resources.Extraction.Embedded;
-using Axle.Resources.Extraction.FileSystem;
-using Axle.Resources.Extraction.ResX;
+using Axle.Resources.FileSystem.Extraction;
+using Axle.Resources.ResX.Extraction;
 
 
 namespace Axle.Resources

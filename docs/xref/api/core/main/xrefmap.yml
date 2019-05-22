@@ -4312,6 +4312,68 @@ references:
   fullName.vb: Axle.Conversion.Parsing.IStrictParser(Of T).TryParseExact
   nameWithType: IStrictParser<T>.TryParseExact
   nameWithType.vb: IStrictParser(Of T).TryParseExact
+- uid: Axle.Conversion.Parsing.NullableParser`1
+  name: NullableParser<T>
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html
+  commentId: T:Axle.Conversion.Parsing.NullableParser`1
+  name.vb: NullableParser(Of T)
+  fullName: Axle.Conversion.Parsing.NullableParser<T>
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T)
+  nameWithType: NullableParser<T>
+  nameWithType.vb: NullableParser(Of T)
+- uid: Axle.Conversion.Parsing.NullableParser`1.#ctor(Axle.Conversion.Parsing.IParser{`0})
+  name: NullableParser(IParser<T>)
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html#Axle_Conversion_Parsing_NullableParser_1__ctor_Axle_Conversion_Parsing_IParser__0__
+  commentId: M:Axle.Conversion.Parsing.NullableParser`1.#ctor(Axle.Conversion.Parsing.IParser{`0})
+  name.vb: NullableParser(IParser(Of T))
+  fullName: Axle.Conversion.Parsing.NullableParser<T>.NullableParser(Axle.Conversion.Parsing.IParser<T>)
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T).NullableParser(Axle.Conversion.Parsing.IParser(Of T))
+  nameWithType: NullableParser<T>.NullableParser(IParser<T>)
+  nameWithType.vb: NullableParser(Of T).NullableParser(IParser(Of T))
+- uid: Axle.Conversion.Parsing.NullableParser`1.#ctor*
+  name: NullableParser
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html#Axle_Conversion_Parsing_NullableParser_1__ctor_
+  commentId: Overload:Axle.Conversion.Parsing.NullableParser`1.#ctor
+  isSpec: "True"
+  fullName: Axle.Conversion.Parsing.NullableParser<T>.NullableParser
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T).NullableParser
+  nameWithType: NullableParser<T>.NullableParser
+  nameWithType.vb: NullableParser(Of T).NullableParser
+- uid: Axle.Conversion.Parsing.NullableParser`1.DoParse(System.String,System.IFormatProvider)
+  name: DoParse(String, IFormatProvider)
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html#Axle_Conversion_Parsing_NullableParser_1_DoParse_System_String_System_IFormatProvider_
+  commentId: M:Axle.Conversion.Parsing.NullableParser`1.DoParse(System.String,System.IFormatProvider)
+  fullName: Axle.Conversion.Parsing.NullableParser<T>.DoParse(System.String, System.IFormatProvider)
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T).DoParse(System.String, System.IFormatProvider)
+  nameWithType: NullableParser<T>.DoParse(String, IFormatProvider)
+  nameWithType.vb: NullableParser(Of T).DoParse(String, IFormatProvider)
+- uid: Axle.Conversion.Parsing.NullableParser`1.DoParse*
+  name: DoParse
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html#Axle_Conversion_Parsing_NullableParser_1_DoParse_
+  commentId: Overload:Axle.Conversion.Parsing.NullableParser`1.DoParse
+  isSpec: "True"
+  fullName: Axle.Conversion.Parsing.NullableParser<T>.DoParse
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T).DoParse
+  nameWithType: NullableParser<T>.DoParse
+  nameWithType.vb: NullableParser(Of T).DoParse
+- uid: Axle.Conversion.Parsing.NullableParser`1.TryParse(System.String,System.IFormatProvider,System.Nullable{`0}@)
+  name: TryParse(String, IFormatProvider, out Nullable<T>)
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html#Axle_Conversion_Parsing_NullableParser_1_TryParse_System_String_System_IFormatProvider_System_Nullable__0___
+  commentId: M:Axle.Conversion.Parsing.NullableParser`1.TryParse(System.String,System.IFormatProvider,System.Nullable{`0}@)
+  name.vb: TryParse(String, IFormatProvider, ByRef Nullable(Of T))
+  fullName: Axle.Conversion.Parsing.NullableParser<T>.TryParse(System.String, System.IFormatProvider, out System.Nullable<T>)
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T).TryParse(System.String, System.IFormatProvider, ByRef System.Nullable(Of T))
+  nameWithType: NullableParser<T>.TryParse(String, IFormatProvider, out Nullable<T>)
+  nameWithType.vb: NullableParser(Of T).TryParse(String, IFormatProvider, ByRef Nullable(Of T))
+- uid: Axle.Conversion.Parsing.NullableParser`1.TryParse*
+  name: TryParse
+  href: core/main/Axle.Conversion.Parsing.NullableParser-1.html#Axle_Conversion_Parsing_NullableParser_1_TryParse_
+  commentId: Overload:Axle.Conversion.Parsing.NullableParser`1.TryParse
+  isSpec: "True"
+  fullName: Axle.Conversion.Parsing.NullableParser<T>.TryParse
+  fullName.vb: Axle.Conversion.Parsing.NullableParser(Of T).TryParse
+  nameWithType: NullableParser<T>.TryParse
+  nameWithType.vb: NullableParser(Of T).TryParse
 - uid: Axle.Conversion.Parsing.ParseException
   name: ParseException
   href: core/main/Axle.Conversion.Parsing.ParseException.html
@@ -4373,6 +4435,28 @@ references:
   isSpec: "True"
   fullName: Axle.Conversion.Parsing.ParseException.ParseException
   nameWithType: ParseException.ParseException
+- uid: Axle.Conversion.Parsing.ParserExtensions
+  name: ParserExtensions
+  href: core/main/Axle.Conversion.Parsing.ParserExtensions.html
+  commentId: T:Axle.Conversion.Parsing.ParserExtensions
+  fullName: Axle.Conversion.Parsing.ParserExtensions
+  nameWithType: ParserExtensions
+- uid: Axle.Conversion.Parsing.ParserExtensions.GetNullableParser*
+  name: GetNullableParser
+  href: core/main/Axle.Conversion.Parsing.ParserExtensions.html#Axle_Conversion_Parsing_ParserExtensions_GetNullableParser_
+  commentId: Overload:Axle.Conversion.Parsing.ParserExtensions.GetNullableParser
+  isSpec: "True"
+  fullName: Axle.Conversion.Parsing.ParserExtensions.GetNullableParser
+  nameWithType: ParserExtensions.GetNullableParser
+- uid: Axle.Conversion.Parsing.ParserExtensions.GetNullableParser``1(Axle.Conversion.Parsing.IParser{``0})
+  name: GetNullableParser<T>(IParser<T>)
+  href: core/main/Axle.Conversion.Parsing.ParserExtensions.html#Axle_Conversion_Parsing_ParserExtensions_GetNullableParser__1_Axle_Conversion_Parsing_IParser___0__
+  commentId: M:Axle.Conversion.Parsing.ParserExtensions.GetNullableParser``1(Axle.Conversion.Parsing.IParser{``0})
+  name.vb: GetNullableParser(Of T)(IParser(Of T))
+  fullName: Axle.Conversion.Parsing.ParserExtensions.GetNullableParser<T>(Axle.Conversion.Parsing.IParser<T>)
+  fullName.vb: Axle.Conversion.Parsing.ParserExtensions.GetNullableParser(Of T)(Axle.Conversion.Parsing.IParser(Of T))
+  nameWithType: ParserExtensions.GetNullableParser<T>(IParser<T>)
+  nameWithType.vb: ParserExtensions.GetNullableParser(Of T)(IParser(Of T))
 - uid: Axle.Conversion.Parsing.SByteParser
   name: SByteParser
   href: core/main/Axle.Conversion.Parsing.SByteParser.html
@@ -8143,33 +8227,6 @@ references:
   fullName.vb: Axle.References.Nullsafe(Of T).Equals
   nameWithType: Nullsafe<T>.Equals
   nameWithType.vb: Nullsafe(Of T).Equals
-- uid: Axle.References.Nullsafe`1.Eval*
-  name: Eval
-  href: core/main/Axle.References.Nullsafe-1.html#Axle_References_Nullsafe_1_Eval_
-  commentId: Overload:Axle.References.Nullsafe`1.Eval
-  isSpec: "True"
-  fullName: Axle.References.Nullsafe<T>.Eval
-  fullName.vb: Axle.References.Nullsafe(Of T).Eval
-  nameWithType: Nullsafe<T>.Eval
-  nameWithType.vb: Nullsafe(Of T).Eval
-- uid: Axle.References.Nullsafe`1.Eval``1(Axle.References.RefTypeFunc{`0,``0})
-  name: Eval<TResult>(RefTypeFunc<T, TResult>)
-  href: core/main/Axle.References.Nullsafe-1.html#Axle_References_Nullsafe_1_Eval__1_Axle_References_RefTypeFunc__0___0__
-  commentId: M:Axle.References.Nullsafe`1.Eval``1(Axle.References.RefTypeFunc{`0,``0})
-  name.vb: Eval(Of TResult)(RefTypeFunc(Of T, TResult))
-  fullName: Axle.References.Nullsafe<T>.Eval<TResult>(Axle.References.RefTypeFunc<T, TResult>)
-  fullName.vb: Axle.References.Nullsafe(Of T).Eval(Of TResult)(Axle.References.RefTypeFunc(Of T, TResult))
-  nameWithType: Nullsafe<T>.Eval<TResult>(RefTypeFunc<T, TResult>)
-  nameWithType.vb: Nullsafe(Of T).Eval(Of TResult)(RefTypeFunc(Of T, TResult))
-- uid: Axle.References.Nullsafe`1.Eval``1(Axle.References.ValTypeFunc{`0,``0})
-  name: Eval<TResult>(ValTypeFunc<T, TResult>)
-  href: core/main/Axle.References.Nullsafe-1.html#Axle_References_Nullsafe_1_Eval__1_Axle_References_ValTypeFunc__0___0__
-  commentId: M:Axle.References.Nullsafe`1.Eval``1(Axle.References.ValTypeFunc{`0,``0})
-  name.vb: Eval(Of TResult)(ValTypeFunc(Of T, TResult))
-  fullName: Axle.References.Nullsafe<T>.Eval<TResult>(Axle.References.ValTypeFunc<T, TResult>)
-  fullName.vb: Axle.References.Nullsafe(Of T).Eval(Of TResult)(Axle.References.ValTypeFunc(Of T, TResult))
-  nameWithType: Nullsafe<T>.Eval<TResult>(ValTypeFunc<T, TResult>)
-  nameWithType.vb: Nullsafe(Of T).Eval(Of TResult)(ValTypeFunc(Of T, TResult))
 - uid: Axle.References.Nullsafe`1.GetHashCode
   name: GetHashCode()
   href: core/main/Axle.References.Nullsafe-1.html#Axle_References_Nullsafe_1_GetHashCode
@@ -8321,15 +8378,6 @@ references:
   fullName.vb: Axle.References.Nullsafe(Of T).Value
   nameWithType: Nullsafe<T>.Value
   nameWithType.vb: Nullsafe(Of T).Value
-- uid: Axle.References.RefTypeFunc`2
-  name: RefTypeFunc<T, TResult>
-  href: core/main/Axle.References.RefTypeFunc-2.html
-  commentId: T:Axle.References.RefTypeFunc`2
-  name.vb: RefTypeFunc(Of T, TResult)
-  fullName: Axle.References.RefTypeFunc<T, TResult>
-  fullName.vb: Axle.References.RefTypeFunc(Of T, TResult)
-  nameWithType: RefTypeFunc<T, TResult>
-  nameWithType.vb: RefTypeFunc(Of T, TResult)
 - uid: Axle.References.Singleton
   name: Singleton
   href: core/main/Axle.References.Singleton.html
@@ -8730,15 +8778,6 @@ references:
   fullName.vb: Axle.References.ThreadLocalRef(Of T).Value
   nameWithType: ThreadLocalRef<T>.Value
   nameWithType.vb: ThreadLocalRef(Of T).Value
-- uid: Axle.References.ValTypeFunc`2
-  name: ValTypeFunc<T, TResult>
-  href: core/main/Axle.References.ValTypeFunc-2.html
-  commentId: T:Axle.References.ValTypeFunc`2
-  name.vb: ValTypeFunc(Of T, TResult)
-  fullName: Axle.References.ValTypeFunc<T, TResult>
-  fullName.vb: Axle.References.ValTypeFunc(Of T, TResult)
-  nameWithType: ValTypeFunc<T, TResult>
-  nameWithType.vb: ValTypeFunc(Of T, TResult)
 - uid: Axle.References.WeakRef`1
   name: WeakRef<T>
   href: core/main/Axle.References.WeakRef-1.html
