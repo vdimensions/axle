@@ -2,3 +2,4 @@ Axle.Core
 
 group test
   NUnit
+  NUnit3TestAdapter
