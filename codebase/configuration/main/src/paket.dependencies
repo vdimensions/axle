@@ -3,7 +3,7 @@ framework: net35, net40, net45, netstandard2.0
 source ../../../../dist
   nuget Axle.Core
 
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
   nuget System.Configuration.ConfigurationManager >= 4.0.1 framework: netstandard2.0
   nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
 

@@ -3,7 +3,7 @@ framework: net35, net40, net45, netstandard1.6, netstandard2.0
 source ../../../../dist
   nuget Axle.Core
 
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
   nuget System.Diagnostics.TraceSource >= 4.0 framework: netstandard1.6
   nuget System.Net.Security >= 4.0.0 framework: netstandard1.6
   nuget System.Threading.Thread >= 4.0 framework: netstandard1.6

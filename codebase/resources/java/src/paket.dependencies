@@ -4,7 +4,7 @@ source ../../../../dist
   nuget Axle.Core
   nuget Axle.Resources
 
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
   nuget Kajabity.Tools.Java content: none
   nuget NetStandard.Library framework: netstandard1.0, netstandard1.1
   nuget System.Diagnostics.TraceSource framework: netstandard1.6

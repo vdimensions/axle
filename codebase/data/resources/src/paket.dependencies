@@ -3,7 +3,7 @@ source ../../../../dist
   nuget Axle.Data
   nuget Axle.Resources
 
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
   nuget System.Data.Common framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6, netstandard2.0
   nuget System.Resources.ResourceManager framework: netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6
   nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6

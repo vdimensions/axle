@@ -6,5 +6,5 @@ source https://api.nuget.org/v3/index.json
 source ../../../../dist/third-parties
 
 source ../../../../dist
-  nuget Axle.Core
+  nuget Axle.Core ~> 1.5
 

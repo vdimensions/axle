@@ -6,11 +6,11 @@ source ../../../../dist
   nuget Axle.Resources
   nuget Axle.Resources.Yaml
 
-source https://nuget.org/api/v2
+source https://api.nuget.org/v3/index.json
   nuget System.Resources.ResourceManager
   nuget NETStandard.Library
   nuget YamlDotNet content: none
 
 group test
-  source https://nuget.org/api/v2
+  source https://api.nuget.org/v3/index.json
     nuget NUnit >= 3.6.1 framework: net45
