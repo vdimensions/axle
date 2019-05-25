@@ -1,9 +1,11 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
+#if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
+#endif
 
 
 namespace Axle.Collections.Generic
@@ -12,7 +14,7 @@ namespace Axle.Collections.Generic
     /// A generic adapter for the non-generic <see cref="IList"/> collection.
     /// </summary>
     /// <typeparam name="T">
-    /// The type of the elements in the list. 
+    /// The type of the elements in the list.
     /// </typeparam>
     /// <seealso cref="IList{T}"/>
     /// <seealso cref="IList"/>
@@ -27,21 +29,33 @@ namespace Axle.Collections.Generic
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Func<object, T> _converter;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="GenericList{T}"/> class.
+        /// </summary>
+        /// <param name="collection">The underlying collection to be exposed as generic.</param>
+        /// <param name="converter">
+        /// A conversion function that is used to turn the raw object elements of the underlying collection to the
+        /// the generic type <typeparamref name="T"/>.
+        /// </param>
         public GenericList(IList collection, Func<object, T> converter)
         {
             _underlyingCollection = collection ?? throw new ArgumentNullException(nameof(collection));
             _converter = converter ?? throw new ArgumentNullException(nameof(converter));
         }
+        /// <summary>
+        /// Creates a new instance of the <see cref="GenericList{T}"/> class.
+        /// </summary>
+        /// <param name="collection">The underlying collection to be exposed as generic.</param>
         public GenericList(IList collection) : this(collection, x => (T) x) { }
 
         /// <inheritdoc />
-        public void Add(T value) { _underlyingCollection.Add(value); }
+        public void Add(T value) => _underlyingCollection.Add(value);
 
         /// <inheritdoc cref="IList{T}" />
-        public void Clear() { _underlyingCollection.Clear(); }
+        public void Clear() => _underlyingCollection.Clear();
 
         /// <inheritdoc />
-        public bool Contains(T value) { return _underlyingCollection.Contains(value); }
+        public bool Contains(T value) => _underlyingCollection.Contains(value);
 
         /// <inheritdoc />
         public void CopyTo(T[] array, int index)
@@ -53,14 +67,24 @@ namespace Axle.Collections.Generic
         }
 
         /// <inheritdoc />
+        #if NETSTANDARD || NET35_OR_NEWER
         public IEnumerator<T> GetEnumerator() { return _underlyingCollection.OfType<T>().GetEnumerator(); }
-        IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
+        #else
+        public IEnumerator<T> GetEnumerator()
+        {
+            foreach (T element in _underlyingCollection)
+            {
+                yield return element;
+            }
+        }
+        #endif
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public int IndexOf(T value) { return _underlyingCollection.IndexOf(value); }
+        public int IndexOf(T value) => _underlyingCollection.IndexOf(value);
 
         /// <inheritdoc />
-        public void Insert(int index, T value) { _underlyingCollection.Insert(index, value); }
+        public void Insert(int index, T value) => _underlyingCollection.Insert(index, value);
 
         /// <inheritdoc />
         public bool Remove(T value)
@@ -71,11 +95,11 @@ namespace Axle.Collections.Generic
         }
 
         /// <inheritdoc cref="IList{T}"/>
-        public void RemoveAt(int index) { _underlyingCollection.RemoveAt(index); }
+        public void RemoveAt(int index) => _underlyingCollection.RemoveAt(index);
 
         /// <inheritdoc />
         public bool IsReadOnly => _underlyingCollection.IsReadOnly;
-        
+
         /// <summary>
         /// Gets a value indicating whether the <see cref="GenericList{T}"/> has a fixed size.
         /// </summary>

@@ -32,78 +32,78 @@ namespace Axle.Verification
         /// Initializes a new instance of <see cref="ArgumentTypeMismatchException" /> class with a specified error message
         /// </summary>
         /// <param name="message">
-        /// The error message that explains the reason for the exception. 
+        /// The error message that explains the reason for the exception.
         /// </param>
         public ArgumentTypeMismatchException(string message) : base(message) {}
         /// <summary>
         /// Initializes a new instance of <see cref="ArgumentTypeMismatchException" /> class with a specified error message and
-        /// a reference to the inner exception that is the cause of this exception. 
+        /// a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception. </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception. 
-        /// If the innerException parameter is not a null reference, the current exception is raised in a catch block 
-        /// that handles the inner exception. 
+        /// The exception that is the cause of the current exception.
+        /// If the innerException parameter is not a null reference, the current exception is raised in a catch block
+        /// that handles the inner exception.
         /// </param>
         public ArgumentTypeMismatchException(string message, Exception inner) : base(message, inner) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error
         /// message and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="message">
-        /// The error message that explains the reason for the exception. 
+        /// The error message that explains the reason for the exception.
         /// </param>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         public ArgumentTypeMismatchException(string message, string paramName) : base(message, paramName) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error
         /// message and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="message">
-        /// The error message that explains the reason for the exception. 
+        /// The error message that explains the reason for the exception.
         /// </param>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference, 
-        /// the current exception is raised in a catch block that handles the inner exception. 
+        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference,
+        /// the current exception is raised in a catch block that handles the inner exception.
         /// </param>
         public ArgumentTypeMismatchException(string message, string paramName, Exception inner) : base(message, paramName, inner) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual
         /// type parameters and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="expectedType">
-        /// The expected type of the argument. 
+        /// The expected type of the argument.
         /// </param>
         /// <param name="actualType">
-        /// The actual type of the argument that caused the current exception. 
+        /// The actual type of the argument that caused the current exception.
         /// </param>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName)
             : this(FormatMessage(expectedType, actualType), paramName) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual 
-        /// type parameters, the name of the parameter that causes this exception and a reference to the inner exception that is the cause of 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException"/> class with the expected and actual
+        /// type parameters, the name of the parameter that causes this exception and a reference to the inner exception that is the cause of
         /// this exception.
         /// </summary>
         /// <param name="expectedType">
-        /// The expected type of the argument. 
+        /// The expected type of the argument.
         /// </param>
         /// <param name="actualType">
-        /// The actual type of the argument that caused the current exception. 
+        /// The actual type of the argument that caused the current exception.
         /// </param>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference, 
-        /// the current exception is raised in a catch block that handles the inner exception. 
+        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference,
+        /// the current exception is raised in a catch block that handles the inner exception.
         /// </param>
         public ArgumentTypeMismatchException(Type expectedType, Type actualType, string paramName, Exception inner)
             : this(FormatMessage(expectedType, actualType), paramName, inner) { }
@@ -112,10 +112,10 @@ namespace Axle.Verification
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with serialized data.
         /// </summary>
         /// <param name="info">
-        /// The object that holds the serialized object data. 
+        /// The object that holds the serialized object data.
         /// </param>
         /// <param name="context">
-        /// The contextual information about the source or destination. 
+        /// The contextual information about the source or destination.
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
@@ -125,7 +125,7 @@ namespace Axle.Verification
     /// The exception that is thrown if one of the arguments of a method is not of the expected type.
     /// </summary>
     /// <typeparam name="TExpected">
-    /// The expected type of the argument. 
+    /// The expected type of the argument.
     /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -137,29 +137,29 @@ namespace Axle.Verification
         /// </summary>
         public ArgumentTypeMismatchException() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error
         /// message and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         /// <param name="actualType">
-        /// The actual type of the argument that caused the current exception. 
+        /// The actual type of the argument that caused the current exception.
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Type actualType) : base(typeof(TExpected), actualType, paramName) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException" /> class with a specified error
         /// message and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         /// <param name="actualType">
-        /// The actual type of the argument that caused the current exception. 
+        /// The actual type of the argument that caused the current exception.
         /// </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference, 
-        /// the current exception is raised in a catch block that handles the inner exception. 
+        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference,
+        /// the current exception is raised in a catch block that handles the inner exception.
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Type actualType, Exception inner) : base(typeof(TExpected), actualType, paramName, inner) { }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -167,10 +167,10 @@ namespace Axle.Verification
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected}" /> class with serialized data.
         /// </summary>
         /// <param name="info">
-        /// The object that holds the serialized object data. 
+        /// The object that holds the serialized object data.
         /// </param>
         /// <param name="context">
-        /// The contextual information about the source or destination. 
+        /// The contextual information about the source or destination.
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
@@ -180,10 +180,10 @@ namespace Axle.Verification
     /// The exception that is thrown if one of the arguments of a method is not of the expected type.
     /// </summary>
     /// <typeparam name="TExpected">
-    /// The expected type of the argument. 
+    /// The expected type of the argument.
     /// </typeparam>
     /// <typeparam name="T">
-    /// The actual type of the argument. 
+    /// The actual type of the argument.
     /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -195,23 +195,23 @@ namespace Axle.Verification
         /// </summary>
         public ArgumentTypeMismatchException() { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{Texpected,T}" /> class with a specified error 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{Texpected,T}" /> class with a specified error
         /// message and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         public ArgumentTypeMismatchException(string paramName) : base(typeof(TExpected), typeof(T), paramName) { }
         /// <summary>
-        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{Texpected,T}" /> class with a specified error 
+        /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{Texpected,T}" /> class with a specified error
         /// message and the name of the parameter that causes this exception.
         /// </summary>
         /// <param name="paramName">
-        /// The name of the parameter that caused the current exception. 
+        /// The name of the parameter that caused the current exception.
         /// </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference, 
-        /// the current exception is raised in a catch block that handles the inner exception. 
+        /// The exception that is the cause of the current exception. If the innerException parameter is not a null reference,
+        /// the current exception is raised in a catch block that handles the inner exception.
         /// </param>
         public ArgumentTypeMismatchException(string paramName, Exception inner) : base(typeof(TExpected), typeof(T), paramName, inner) { }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -219,10 +219,10 @@ namespace Axle.Verification
         /// Initializes a new instance of the <see cref="ArgumentTypeMismatchException{TExpected,T}" /> class with serialized data.
         /// </summary>
         /// <param name="info">
-        /// The object that holds the serialized object data. 
+        /// The object that holds the serialized object data.
         /// </param>
         /// <param name="context">
-        /// The contextual information about the source or destination. 
+        /// The contextual information about the source or destination.
         /// </param>
         protected ArgumentTypeMismatchException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif

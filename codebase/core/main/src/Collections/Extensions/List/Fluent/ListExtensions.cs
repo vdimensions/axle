@@ -10,12 +10,12 @@ namespace Axle.Collections.Extensions.List.Fluent
 
     /// <summary>
     /// A static class to contain extension methods that allow manipulating <see cref="List{T}"/> collection
-    /// instances using the fluent interface pattern. 
+    /// instances using the fluent interface pattern.
     /// </summary>
     public static class ListExtensions
     {
         /// <summary>
-        /// Adds an item to the <see cref="IList"/>. 
+        /// Adds an item to the <see cref="IList"/>.
         /// </summary>
         /// <typeparam name="TCollection">
         /// The type of the collection this extension method is called against. Must implement the <see cref="IList"/> interface.

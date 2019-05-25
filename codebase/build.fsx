@@ -15,10 +15,23 @@ let paketVersion = "5.207.3"
 
 let projectLocations = [
     "core/main"
-    "core/fsharp"
+    //"core/fsharp"
     "resources/main"
     "resources/java"
     "resources/yaml"
+    "data/main"
+    //"data/fsharp"
+    //"data/resources"
+    "data/sql_client"
+    "data/odbc"
+    "data/oledb"
+    "data/npgsql"
+    "data/mysql"
+    "data/sqlite"
+    "caching/main"
+    "logging/log4net"
+    "security/cryptography"
+    "application/main"
 ]
 
 let dir_exists = DirectoryInfo.ofPath >> DirectoryInfo.exists
@@ -57,15 +70,17 @@ open Fake.DotNet
 
 let dotnet_sdk = lazy DotNet.install DotNet.Versions.Release_2_1_4
 //let inline dotnet op = DotNet.exec (DotNet.Options.lift dotnet_sdk.Value) op
-let inline dotnet op = DotNet.exec id op
-let inline dotnet_clean arg = dotnet "clean" arg
-let inline dotnet_restore arg = dotnet "restore" arg
-let inline dotnet_build arg = dotnet "build" arg
-let inline dotnet_pack arg = dotnet "pack" arg
-let inline dotnet_test arg = dotnet "test" arg
+let inline dotnet op cmd = DotNet.exec op cmd
+let inline dotnet_clean op arg = dotnet op "clean" arg
+let inline dotnet_restore op arg = dotnet op "restore" arg
+let inline dotnet_build op arg = dotnet op "build" arg
+let inline dotnet_pack op arg = dotnet op "pack" arg
+let inline dotnet_test op arg = dotnet op "test" arg
 //    DotNet.exec (DotNet.Options.lift dotnet_sdk.Value) "restore" arg
 //let inline build arg =
 //    DotNet.exec dotnet "build" arg
+
+let dotnet_options = (fun (op : DotNet.Options) -> { op with Verbosity = Some DotNet.Verbosity.Quiet })
 
 let createDynamicTarget location =
     let targetName = location
@@ -79,10 +94,10 @@ let createDynamicTarget location =
                 Trace.trace (sprintf "Project to build %s" dir)
                 clean ()
                 paket "update" |> ignore
-                dotnet_clean "" |> ignore
-                dotnet_restore "" |> ignore
-                dotnet_build "" |> ignore
-                dotnet_pack "" |> ignore
+                dotnet_clean dotnet_options "" |> ignore
+                dotnet_restore dotnet_options "" |> ignore
+                dotnet_build dotnet_options "" |> ignore
+                dotnet_pack dotnet_options "" |> ignore
                 ()
             finally 
                 Shell.popd()
@@ -95,14 +110,16 @@ let createDynamicTarget location =
                 Trace.trace (sprintf "Test project to build %s" dir)
                 clean ()
                 paket "update" |> ignore
-                dotnet_clean "" |> ignore
-                dotnet_restore "" |> ignore
-                dotnet_build "" |> ignore
-                dotnet_test "" |> ignore
+                dotnet_clean dotnet_options "" |> ignore
+                dotnet_restore dotnet_options "" |> ignore
+                dotnet_build dotnet_options "" |> ignore
+                dotnet_test dotnet_options "" |> ignore
                 ()
             finally 
                 Shell.popd()
-        else ()
+        else 
+            Trace.traceImportantfn "Project '%s' does not have tests" location
+            ()
     )
     targetName
 

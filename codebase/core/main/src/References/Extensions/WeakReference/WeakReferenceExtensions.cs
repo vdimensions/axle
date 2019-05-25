@@ -5,7 +5,7 @@ using Axle.Verification;
 namespace Axle.References.Extensions.WeakReference
 {
     /// <summary>
-    /// A static class containing common extensions to <see cref="bool"/> values.
+    /// A static class containing common extensions to the <see cref="System.WeakReference"/> type.
     /// </summary>
     public static class WeakReferenceExtensions
     {

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
 
@@ -23,8 +23,8 @@ namespace Axle
 
         public AdaptiveEqualityComparer(Func<T1, T2> adaptFunc, IEqualityComparer<T2> comparer)
         {
-            _adaptFunc = adaptFunc.VerifyArgument(nameof(adaptFunc)).IsNotNull();
-            _actualComparer = comparer.VerifyArgument(nameof(comparer)).IsNotNull().Value;
+            _adaptFunc = Verifier.IsNotNull(Verifier.VerifyArgument(adaptFunc, nameof(adaptFunc)));
+            _actualComparer = Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer))).Value;
         }
         public AdaptiveEqualityComparer(Func<T1, T2> adaptFunc) : this(adaptFunc, EqualityComparer<T2>.Default) { }
 

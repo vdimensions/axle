@@ -14,7 +14,7 @@ namespace Axle.Verification
     public static class Verifier
     {
         /// <summary>
-        /// Creates an instance of <see cref="ArgumentReference{T}"/> representing the passed object as an argument 
+        /// Creates an instance of <see cref="ArgumentReference{T}"/> representing the passed object as an argument
         /// to a method or constructor.
         /// </summary>
         /// <typeparam name="T">The type of the argument.</typeparam>
@@ -25,7 +25,7 @@ namespace Axle.Verification
         /// The name of the argument to be represented by the produced <see cref="ArgumentReference{T}"/> instance.
         /// </param>
         /// <returns>
-        /// An instance of <see cref="ArgumentReference{T}"/> representing the passed object as an argument 
+        /// An instance of <see cref="ArgumentReference{T}"/> representing the passed object as an argument
         /// to a method or constructor.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -38,7 +38,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> VerifyArgument<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             T argument,
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -53,13 +53,31 @@ namespace Axle.Verification
             return new ArgumentReference<T>(argumentName, argument);
         }
 
+        /// <summary>
+        /// Same as <see cref="VerifyArgument{T}"/>, but the passed object is an implementation of <see cref="IReference{T}"/>.
+        /// </summary>
+        /// <typeparam name="T">The type of the argument.</typeparam>
+        /// <param name="argument">
+        /// The argument reference object.
+        /// </param>
+        /// <param name="argumentName">
+        /// The name of the argument to be represented by the produced <see cref="ArgumentReference{T}"/> instance.
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="ArgumentReference{T}"/> representing the passed object as an argument
+        /// to a method or constructor.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="argumentName"/> is <c>null</c>.
+        /// </exception>
+        /// <seealso cref="ArgumentReference{T}"/>
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<T> VerifyRefArg<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             IReference<T> argument,
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -76,7 +94,7 @@ namespace Axle.Verification
 
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is not <c>null</c>. In case the verification fails, an <see cref="ArgumentNullException"/> is thrown. 
+        /// is not <c>null</c>. In case the verification fails, an <see cref="ArgumentNullException"/> is thrown.
         /// </summary>
         /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
         /// <param name="argument">
@@ -95,7 +113,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNotNull<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             ArgumentReference<T> argument, string message)
         {
@@ -107,7 +125,7 @@ namespace Axle.Verification
         }
         /// <summary>
         /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is not <c>null</c>. In case the verification fails, an <see cref="ArgumentNullException"/> is thrown. 
+        /// is not <c>null</c>. In case the verification fails, an <see cref="ArgumentNullException"/> is thrown.
         /// </summary>
         /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
         /// <param name="argument">
@@ -123,7 +141,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNotNull<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             ArgumentReference<T> argument)
         {
@@ -136,7 +154,7 @@ namespace Axle.Verification
         /// <typeparam name="T">Type of the verified argument.</typeparam>
         /// <param name="argument">
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified. 
+        /// which is being verified.
         /// </param>
         /// <param name="value">
         /// A value the current argument is expected to be equal to.
@@ -159,7 +177,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNot<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             ArgumentReference<T> argument, T value, string message)
         {
@@ -172,7 +190,7 @@ namespace Axle.Verification
         /// <typeparam name="T">Type of the verified argument.</typeparam>
         /// <param name="argument">
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified. 
+        /// which is being verified.
         /// </param>
         /// <param name="value">
         /// A value the current argument is expected to be equal to.
@@ -198,7 +216,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsNot<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             ArgumentReference<T> argument, T value, IEqualityComparer<T> comparer, string message)
         {
@@ -215,7 +233,7 @@ namespace Axle.Verification
         /// <typeparam name="T">Type of the verified argument.</typeparam>
         /// <param name="argument">
         /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified. 
+        /// which is being verified.
         /// </param>
         /// <param name="condition">
         /// A delegate representing the verification condition to pass.

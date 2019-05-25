@@ -14,7 +14,7 @@ namespace Axle.Text.Expressions.Regular
         /// Indicates whether the current <see cref="IRegularExpression"/> finds a match in a specified <paramref name="input"/> string.
         /// </summary>
         /// <param name="input">
-        /// The string to search for a match. 
+        /// The string to search for a match.
         /// </param>
         /// <returns>
         /// <c>true</c> if the regular expression finds a match; otherwise, <c>false</c>.
@@ -28,7 +28,7 @@ namespace Axle.Text.Expressions.Regular
         /// Indicates whether the current <see cref="IRegularExpression"/> finds a match in a specified input string.
         /// </summary>
         /// <param name="input">
-        /// The string to search for a match. 
+        /// The string to search for a match.
         /// </param>
         /// <param name="startIndex">
         /// The character position at which to start the search.
@@ -52,7 +52,7 @@ namespace Axle.Text.Expressions.Regular
         /// The string to search for a match.
         /// </param>
         /// <returns>
-        /// An array of the <see cref="System.Text.RegularExpressions.Match"/> objects found by the search. 
+        /// An array of the <see cref="System.Text.RegularExpressions.Match"/> objects found by the search.
         /// If no matches are found, the method returns an empty array.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">
@@ -70,7 +70,7 @@ namespace Axle.Text.Expressions.Regular
         /// The character position in the <paramref name="input"/> string at which to start the search.
         /// </param>
         /// <returns>
-        /// An array of the <see cref="System.Text.RegularExpressions.Match"/> objects found by the search. 
+        /// An array of the <see cref="System.Text.RegularExpressions.Match"/> objects found by the search.
         /// If no matches are found, the method returns an empty array.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">
@@ -82,8 +82,8 @@ namespace Axle.Text.Expressions.Regular
         Match[] Match(string input, int startIndex);
 
         /// <summary>
-        /// Splits an <paramref name="input"/> string into an array of substrings, 
-        /// at the positions defined by the current <see cref="IRegularExpression"/> instance. 
+        /// Splits an <paramref name="input"/> string into an array of substrings,
+        /// at the positions defined by the current <see cref="IRegularExpression"/> instance.
         /// </summary>
         /// <param name="input">
         /// The string to be split.
@@ -97,8 +97,8 @@ namespace Axle.Text.Expressions.Regular
         string[] Split(string input);
 
         /// <summary>
-        /// Splits an <paramref name="input"/> string a specified maximum number of times into an array of substrings, 
-        /// at the positions defined by the current <see cref="IRegularExpression"/> instance. 
+        /// Splits an <paramref name="input"/> string a specified maximum number of times into an array of substrings,
+        /// at the positions defined by the current <see cref="IRegularExpression"/> instance.
         /// </summary>
         /// <param name="input">
         /// The string to be split.
@@ -118,8 +118,8 @@ namespace Axle.Text.Expressions.Regular
         string[] Split(string input, int count);
 
         /// <summary>
-        /// Splits an <paramref name="input"/> string a specified maximum number of times into an array of substrings, 
-        /// at the positions defined by the current <see cref="IRegularExpression"/> instance. 
+        /// Splits an <paramref name="input"/> string a specified maximum number of times into an array of substrings,
+        /// at the positions defined by the current <see cref="IRegularExpression"/> instance.
         /// The search for the regular expression pattern starts at a specified character position in the <paramref name="input"/> string.
         /// </summary>
         /// <param name="input">
@@ -129,7 +129,7 @@ namespace Axle.Text.Expressions.Regular
         /// The maximum number of times the split can occur.
         /// </param>
         /// <param name="startIndex">
-        /// The character position in the <paramref name="input"/> string where the search will begin. 
+        /// The character position in the <paramref name="input"/> string where the search will begin.
         /// </param>
         /// <returns>
         /// An array of strings.

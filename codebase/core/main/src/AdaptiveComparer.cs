@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
 
@@ -20,11 +20,11 @@ namespace Axle
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         #endif
         private readonly IComparer<T2> _actualComparer;
-        
+
         public AdaptiveComparer(Func<T1, T2> adaptFunc, IComparer<T2> comparer)
         {
-            _adaptFunc = adaptFunc.VerifyArgument(nameof(adaptFunc)).IsNotNull();
-            _actualComparer = comparer.VerifyArgument(nameof(comparer)).IsNotNull().Value;
+            _adaptFunc = Verifier.IsNotNull(Verifier.VerifyArgument(adaptFunc, nameof(adaptFunc)));
+            _actualComparer = Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer))).Value;
         }
         public AdaptiveComparer(Func<T1, T2> adaptFunc) : this(adaptFunc, Comparer<T2>.Default){}
 

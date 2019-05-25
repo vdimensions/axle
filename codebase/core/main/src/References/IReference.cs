@@ -22,7 +22,7 @@ namespace Axle.References
     public interface IReference<T> : IReference
     {
         /// <summary>
-        /// Tries to retrieve the value that is referenced by the current <see cref="IReference{T}"/> object.
+        /// Attempts to retrieve the value that is encapsulated by the current <see cref="IReference{T}"/> object.
         /// </summary>
         /// <param name="value">
         /// When this method returns, contains the reference value, if it is available. This parameter is treated as uninitialized.

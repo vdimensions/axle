@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,7 +7,7 @@ namespace Axle.Collections.Sdk
 {
     /// <summary>
     /// An abstract base class that can be used as a wrapper over an <see cref="IDictionary{TKey, TValue}"/> instance.
-    /// Can be used as a base class for dictionary-based key/value collections. The initial implementation delegates all 
+    /// Can be used as a base class for dictionary-based key/value collections. The initial implementation delegates all
     /// <see cref="IDictionary{TKey, TValue}"/> logic to the provided inner dictionary class.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
@@ -25,9 +25,9 @@ namespace Axle.Collections.Sdk
         }
 
         #region Implementation of IEnumerable
-		/// <summary>Returns an enumerator that iterates through the collection.</summary>
-		/// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.</returns>
-		/// <filterpriority>1</filterpriority>
+        /// <summary>Returns an enumerator that iterates through the collection.</summary>
+        /// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.</returns>
+        /// <filterpriority>1</filterpriority>
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => Target.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         #endregion
@@ -54,22 +54,29 @@ namespace Axle.Collections.Sdk
         #endregion
 
         #region Implementation of IDictionary<TKey,TValue>
+        /// <inheritdoc />
         public virtual bool ContainsKey(TKey key) => Target.ContainsKey(key);
 
+        /// <inheritdoc />
         public virtual void Add(TKey key, TValue value) => Target.Add(key, value);
 
+        /// <inheritdoc />
         public virtual bool Remove(TKey key) => Target.Remove(key);
 
+        /// <inheritdoc />
         public virtual bool TryGetValue(TKey key, out TValue value) => Target.TryGetValue(key, out value);
 
+        /// <inheritdoc />
         public virtual TValue this[TKey key]
         {
             get => Target[key];
             set => Target[key] = value;
         }
 
+        /// <inheritdoc />
         public virtual ICollection<TKey> Keys => Target.Keys;
 
+        /// <inheritdoc />
         public virtual ICollection<TValue> Values => Target.Values;
         #endregion
     }

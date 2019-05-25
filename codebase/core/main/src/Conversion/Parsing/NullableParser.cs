@@ -18,7 +18,7 @@ namespace Axle.Conversion.Parsing
 
         public NullableParser(IParser<T> actualParser)
         {
-            _actualParser = actualParser.VerifyArgument(nameof(actualParser)).IsNotNull().Value;
+            _actualParser = Verifier.IsNotNull(Verifier.VerifyArgument(actualParser, nameof(actualParser))).Value;
         }
 
         /// <inheritdoc />

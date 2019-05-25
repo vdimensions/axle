@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 
 using Axle.Verification;
@@ -17,7 +17,7 @@ namespace Axle.Collections.Extensions.Array
         /// Creates an array of specific type out of an object array.
         /// </summary>
         /// <param name="array">
-        /// The source array to be converted. 
+        /// The source array to be converted.
         /// </param>
         /// <param name="type">
         /// The destination type of the resulting array.
@@ -28,10 +28,14 @@ namespace Axle.Collections.Extensions.Array
         /// <exception cref="InvalidCastException">
         /// There is an element inside the <paramref name="array"/> which cannot be cast to the destination <paramref name="type"/>.
         /// </exception>
-        public static Array MakeGeneric(this object[] array, Type type)
+        public static Array MakeGeneric(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            object[] array, Type type)
         {
-            array.VerifyArgument(nameof(array)).IsNotNull();
-            type.VerifyArgument(nameof(type)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(array, nameof(array)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
 
             var destinationArray = Array.CreateInstance(type, array.Length);
             Array.Copy(array, destinationArray, array.Length);

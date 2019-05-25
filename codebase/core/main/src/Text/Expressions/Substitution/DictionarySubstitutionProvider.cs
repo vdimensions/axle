@@ -11,10 +11,10 @@ namespace Axle.Text.Expressions.Substitution
 
         public DictionarySubstitutionProvider(IDictionary<string, string> dict)
         {
-            _dict = dict.VerifyArgument(nameof(dict)).IsNotNull().Value;
+            _dict = Verifier.IsNotNull(Verifier.VerifyArgument(dict, nameof(dict))).Value;
         }
 
         public bool TrySubstitute(string token, out string value) => 
-            _dict.TryGetValue(token.VerifyArgument(nameof(token)).IsNotNullOrEmpty().Value, out value);
+            _dict.TryGetValue(StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(token, nameof(token))).Value, out value);
     }
 }

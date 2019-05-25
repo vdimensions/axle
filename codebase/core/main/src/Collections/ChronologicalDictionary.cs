@@ -1,8 +1,10 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+#if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
+#endif
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
@@ -55,11 +57,25 @@ namespace Axle.Collections
             }
 
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectData(info, context);
-            #endif            
-            
+            #endif
+
+            #if NETSTANDARD || NET35_OR_NEWER
             private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate() => _collection
                                                                            .OrderBy(x => x.Key, new ChronologicalKeyComparer<TKey>())
                                                                            .Select(x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
+            #else
+            private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate()
+            {
+                var array = new KeyValuePair<ChronologicalKey<TKey>,TValue>[_collection.Count];
+                _collection.CopyTo(array, 0);
+                var comparer = new AdaptiveComparer<KeyValuePair<ChronologicalKey<TKey>,TValue>, ChronologicalKey<TKey>>(x => x.Key);
+                Array.Sort(array, comparer);
+                foreach (var element in array)
+                {
+                    yield return new KeyValuePair<TKey, TValue>(element.Key.Key, element.Value);
+                }
+            }
+            #endif
 
             #region Implementation of IEnumerable<KeyValuePair<TKey,TValue>>
             IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() { return Enumerate().GetEnumerator(); }
@@ -82,7 +98,15 @@ namespace Axle.Collections
 
             void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex)
             {
+                #if NETSTANDARD || NET35_OR_NEWER
                 base.Keys.Select(x => new KeyValuePair<TKey, TValue>(x.Key, this[x])).ToList().CopyTo(array, arrayIndex);
+                #else
+                using (var enumerator = Enumerate().GetEnumerator())
+                for (var i = arrayIndex; i < array.Length && enumerator.MoveNext(); i++)
+                {
+                    array[i] = enumerator.Current;
+                }
+                #endif
             }
 
             bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
@@ -115,17 +139,77 @@ namespace Axle.Collections
                 }
             }
 
-            new private ICollection<TKey> Keys { get { return Enumerate().Select(key => key.Key).ToArray(); } }
+            new private ICollection<TKey> Keys
+            {
+                get
+                {
+                    #if NETSTANDARD || NET35_OR_NEWER
+                    return Enumerate().Select(key => key.Key).ToArray();
+                    #else
+                    ICollection<TKey> list = new List<TKey>(Count);
+                    using (var enumerator = Enumerate().GetEnumerator())
+                    while (enumerator.MoveNext())
+                    {
+                        list.Add(enumerator.Current.Key);
+                    }
+                    return list;
+                    #endif
+                }
+            }
             ICollection<TKey> IDictionary<TKey, TValue>.Keys => Keys;
 
-            new private ICollection<TValue> Values => Enumerate().Select(x => x.Value).ToArray();
+            new private ICollection<TValue> Values
+            {
+                get
+                {
+                    #if NETSTANDARD || NET35_OR_NEWER
+                    return Enumerate().Select(x => x.Value).ToArray();
+                    #else
+                    ICollection<TValue> list = new List<TValue>(Count);
+                    using (var enumerator = Enumerate().GetEnumerator())
+                    while (enumerator.MoveNext())
+                    {
+                        list.Add(enumerator.Current.Value);
+                    }
+                    return list;
+                    #endif
+                }
+            }
+
             ICollection<TValue> IDictionary<TKey, TValue>.Values => Values;
             #endregion
         }
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class.
+        /// </summary>
         public ChronologicalDictionary() : base(new TimestampDictionary()) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class using the provided
+        /// <paramref name="comparer"/>.
+        /// </summary>
+        /// <param name="comparer">
+        /// An instance of <see cref="IEqualityComparer{TKey}"/> to be used for key comparison.
+        /// </param>
         public ChronologicalDictionary(IEqualityComparer<TKey> comparer) : base(new TimestampDictionary(comparer)) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class
+        /// with the specified <paramref name="capacity"/> and using the provided <paramref name="comparer"/>.
+        /// </summary>
+        /// <param name="capacity">
+        /// The initial capacity of the underlying collection.
+        /// </param>
+        /// <param name="comparer">
+        /// An instance of <see cref="IEqualityComparer{TKey}"/> to be used for key comparison.
+        /// </param>
         public ChronologicalDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(new TimestampDictionary(capacity, comparer)) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class
+        /// with the specified <paramref name="capacity"/>.
+        /// </summary>
+        /// <param name="capacity">
+        /// The initial capacity of the underlying collection.
+        /// </param>
         public ChronologicalDictionary(int capacity) : base(new TimestampDictionary(capacity)) { }
     }
 }

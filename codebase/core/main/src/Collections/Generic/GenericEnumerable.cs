@@ -1,4 +1,4 @@
-#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD || NET20_OR_NEWER
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +10,7 @@ namespace Axle.Collections.Generic
     /// A generic adapter for the non-generic <see cref="IEnumerable"/>
     /// </summary>
     /// <typeparam name="T">
-    /// The type of objects to enumerate. 
+    /// The type of objects to enumerate.
     /// </typeparam>
     /// <seealso cref="IEnumerable{T}"/>
     /// <seealso cref="IEnumerable"/>
@@ -22,6 +22,10 @@ namespace Axle.Collections.Generic
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IEnumerable _innerCollection;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="GenericEnumerable{T}"/> class.
+        /// </summary>
+        /// <param name="collection">The underlying collection to be exposed as generic.</param>
         public GenericEnumerable(IEnumerable collection)
         {
             _innerCollection = collection;

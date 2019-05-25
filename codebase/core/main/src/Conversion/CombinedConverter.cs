@@ -28,8 +28,8 @@ namespace Axle.Conversion
         /// </param>
         public CombinedConverter(IConverter<T1, T2> primaryConverter, IConverter<T2, T1> reverseConverter)
         {
-            _primaryConverter = primaryConverter.VerifyArgument(nameof(primaryConverter)).IsNotNull().Value;
-            _reverseConverter = reverseConverter.VerifyArgument(nameof(reverseConverter)).IsNotNull().Value;
+            _primaryConverter = Verifier.IsNotNull(Verifier.VerifyArgument(primaryConverter, nameof(primaryConverter))).Value;
+            _reverseConverter = Verifier.IsNotNull(Verifier.VerifyArgument(reverseConverter, nameof(reverseConverter))).Value;
         }
 
         T2 IConverter<T1, T2>.Convert(T1 source) => _primaryConverter.Convert(source);

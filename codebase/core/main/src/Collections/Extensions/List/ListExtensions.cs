@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -27,10 +27,14 @@ namespace Axle.Collections.Extensions.List
         /// A new <see cref="IList"/> instance that represents a generic <see cref="IList{T}"/> with the generic type being the one
         /// provided by the <paramref name="type"/> parameter.
         /// </returns>
-        public static IList MakeGeneric(this IList list, Type type)
+        public static IList MakeGeneric(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IList list, Type type)
         {
-            list.VerifyArgument(nameof(list)).IsNotNull();
-            type.VerifyArgument(nameof(type)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(list, nameof(list)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
 
             if (type == typeof(object))
             {
@@ -40,7 +44,7 @@ namespace Axle.Collections.Extensions.List
                  */
                 return list is IList<object> ? list : new GenericList<object>(list);
             }
-            
+
             var result = (IList) Activator.CreateInstance(typeof(List<>).MakeGenericType(type));
             foreach (var element in list)
             {

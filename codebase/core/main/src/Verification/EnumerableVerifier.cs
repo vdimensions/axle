@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -7,7 +7,7 @@ using System.Diagnostics;
 namespace Axle.Verification
 {
     /// <summary>
-    /// Extension methods to the <see cref="ArgumentReference{T}"/> class that enable verification for arguments 
+    /// Extension methods to the <see cref="ArgumentReference{T}"/> class that enable verification for arguments
     /// of type <see cref="IEnumerable" />.
     /// </summary>
     /// <seealso cref="IEnumerable"/>
@@ -37,9 +37,13 @@ namespace Axle.Verification
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument, string message) where T: IEnumerable
+        public static ArgumentReference<T> IsNotNullOrEmpty<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            ArgumentReference<T> argument, string message) where T: IEnumerable
         {
-            var e = argument.IsNotNull().Value.GetEnumerator();
+            var e = Verifier.IsNotNull(argument).Value.GetEnumerator();
             try
             {
                 if (!e.MoveNext())
@@ -78,7 +82,11 @@ namespace Axle.Verification
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static ArgumentReference<T> IsNotNullOrEmpty<T>(this ArgumentReference<T> argument) where T: IEnumerable
+        public static ArgumentReference<T> IsNotNullOrEmpty<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            ArgumentReference<T> argument) where T: IEnumerable
         {
             return IsNotNullOrEmpty(argument, null);
         }
