@@ -16,6 +16,9 @@ let paketVersion = "5.207.3"
 let projectLocations = [
     "core/main"
     "core/fsharp"
+    "resources/main"
+    "resources/java"
+    "resources/yaml"
 ]
 
 let dir_exists = DirectoryInfo.ofPath >> DirectoryInfo.exists
@@ -64,53 +67,51 @@ let inline dotnet_test arg = dotnet "test" arg
 //let inline build arg =
 //    DotNet.exec dotnet "build" arg
 
-
-Target.create "Build" (fun _ ->
-    for pl in projectLocations do
-        let codeDir = sprintf "%s/src" pl
+let createDynamicTarget location =
+    let targetName = location
+    Target.create targetName (fun _ ->
+        let codeDir = sprintf "%s/src" location
+        let testsDir = sprintf "%s/tests" location
         if (dir_exists codeDir) then
             Shell.pushd (codeDir)
             let dir = Shell.pwd()
             try
-                Trace.trace (sprintf "Poject to build %s" dir)
+                Trace.trace (sprintf "Project to build %s" dir)
                 clean ()
-                paket "update"
-                dotnet_clean ""
-                dotnet_restore ""
-                dotnet_build ""
-                dotnet_pack ""
+                paket "update" |> ignore
+                dotnet_clean "" |> ignore
+                dotnet_restore "" |> ignore
+                dotnet_build "" |> ignore
+                dotnet_pack "" |> ignore
                 ()
             finally 
                 Shell.popd()
         else ()
-)
 
-Target.create "Test" (fun _ ->
-    for pl in projectLocations do
-        let codeDir = sprintf "%s/tests" pl
-        if (dir_exists codeDir) then
-            Shell.pushd (codeDir)
+        if (dir_exists testsDir) then
+            Shell.pushd (testsDir)
             let dir = Shell.pwd()
             try
-                Trace.trace (sprintf "Poject to build %s" dir)
+                Trace.trace (sprintf "Test project to build %s" dir)
                 clean ()
-                paket "update"
-                dotnet_clean ""
-                dotnet_restore ""
-                dotnet_build ""
-                dotnet_test ""
+                paket "update" |> ignore
+                dotnet_clean "" |> ignore
+                dotnet_restore "" |> ignore
+                dotnet_build "" |> ignore
+                dotnet_test "" |> ignore
                 ()
             finally 
                 Shell.popd()
         else ()
-)
+    )
+    targetName
 
-Target.create "Default" (fun _ ->
-    ()
-)
+Target.create "Default" (fun _ -> ())
 
 open Fake.Core.TargetOperators
 
-"Build" ==> "Test" ==> "Default"
+projectLocations 
+|> List.map createDynamicTarget
+|> List.fold (fun a b -> Trace.trace (sprintf "target %s" a); b ==> a) "Default"
 
 Target.runOrDefault "Default"
