@@ -2,7 +2,6 @@ STORAGE: NONE
 RESTRICTION: || (== net35) (== net40) (== net45) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.2331.35781)
+    Axle.Core (1.5.2335.35997)
       System.Threading.Tasks.Unofficial (>= 3.1) - restriction: || (== net35) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))
-  remote: https://api.nuget.org/v3/index.json
-    System.Threading.Tasks.Unofficial (3.1) - restriction: || (== net35) (&& (== net40) (== netstandard2.0)) (&& (== net45) (== netstandard2.0) (< netstandard1.0)) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))
+    System.Threading.Tasks.Unofficial (3.1.0) - restriction: || (== net35) (&& (== net40) (== netstandard2.0)) (&& (== net45) (== netstandard2.0) (< netstandard1.0)) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))

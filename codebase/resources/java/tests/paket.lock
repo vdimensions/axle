@@ -2,12 +2,11 @@ STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.5.2331.35781)
-    Axle.Resources (1.5.2332.15259)
-      Axle.Core (>= 1.5.2331.35781)
-    Axle.Resources.Java (1.5.2168.29343)
-      Axle.Core (>= 1.5.1.46)
-      Axle.Resources (>= 1.5.1.27)
+    Axle.Core (1.5.2335.35997)
+    Axle.Resources (1.5.2335.36025)
+      Axle.Core (>= 1.5.2335.35872)
+    Axle.Resources.Java (1.5.2335.36055)
+      Axle.Resources (>= 1.5.2335.36025)
       Kajabity.Tools.Java (>= 0.2.6862.30334)
   remote: https://api.nuget.org/v3/index.json
     Kajabity.Tools.Java (0.2.6862.30334)
