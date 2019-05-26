@@ -20,7 +20,7 @@ namespace Axle.Reflection
 
         public DefaultIntrospector(Type introspectedType)
         {
-            _introspectedType = introspectedType.VerifyArgument(nameof(introspectedType)).IsNotNull();
+            _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(introspectedType, nameof(introspectedType)));
         }
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         #if NETSTANDARD || NET45_OR_NEWER
@@ -148,7 +148,7 @@ namespace Axle.Reflection
             var attrs = IntrospectedType.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
             #endif
             var empty = new Attribute[0];
-            return inherit 
+            return inherit
                 ? CustomAttributeProviderExtensions.FilterAttributes(empty, attrs) 
                 : CustomAttributeProviderExtensions.FilterAttributes(attrs, empty);
         }
@@ -158,7 +158,7 @@ namespace Axle.Reflection
         {
             #if NETFRAMEWORK
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            var constructor = _introspectedType.GetConstructor(argumentTypes) 
+            var constructor = _introspectedType.GetConstructor(argumentTypes)
                            ?? _introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
             return constructor != null ? new ConstructorToken(constructor) : null;
             #elif NETSTANDARD1_5_OR_NEWER
@@ -177,7 +177,7 @@ namespace Axle.Reflection
             #elif NETFRAMEWORK
             var constructors = _introspectedType.GetConstructors(bindingFlags);
             #endif
-            return constructors.Select<ConstructorInfo, IConstructor>(x => new ConstructorToken(x)).ToArray();
+            return Enumerable.ToArray(Enumerable.Select<ConstructorInfo, IConstructor>(constructors, x => new ConstructorToken(x)));
         }
 
         /// <inheritdoc />
@@ -217,7 +217,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IProperty GetProperty(Expression<Func<object>> expression)
+        public IProperty GetProperty<TResult>(Expression<Func<TResult>> expression)
         {
             if (ExtractMember(expression) is PropertyInfo prop)
             {
@@ -254,7 +254,7 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IField GetField(Expression<Func<object>> expression)
+        public IField GetField<TResult>(Expression<Func<TResult>> expression)
         {
             if (ExtractMember(expression) is FieldInfo field)
             {
@@ -275,7 +275,7 @@ namespace Axle.Reflection
                 .GetFields(bindingFlags)
                 .GroupBy(x => x.Name)
                 .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == _introspectedType));
-            return fields.Select<FieldInfo, IField>(x => new FieldToken(x)).ToArray();
+            return Enumerable.ToArray(Enumerable.Select<FieldInfo, IField>(fields, x => new FieldToken(x)));
         }
 
         /// <inheritdoc />
@@ -290,7 +290,7 @@ namespace Axle.Reflection
             return @event != null ? new EventToken(@event) : null;
         }
         /// <inheritdoc />
-        public IEvent GetEvent(Expression<Func<object>> expression)
+        public IEvent GetEvent<TResult>(Expression<Func<TResult>> expression)
         {
             if (ExtractMember(expression) is EventInfo evt)
             {
@@ -369,7 +369,7 @@ namespace Axle.Reflection
     {
         public DefaultIntrospector() : base(typeof(T)) { }
 
-        public IProperty GetProperty(Expression<Func<T, object>> expression)
+        public IProperty GetProperty<TResult>(Expression<Func<T, TResult>> expression)
         {
             if (ExtractMember(expression) is PropertyInfo prop)
             {
@@ -378,7 +378,7 @@ namespace Axle.Reflection
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
 
-        public IField GetField(Expression<Func<T, object>> expression)
+        public IField GetField<TResult>(Expression<Func<T, TResult>> expression)
         {
             if (ExtractMember(expression) is FieldInfo field)
             {
@@ -387,7 +387,7 @@ namespace Axle.Reflection
             throw new ArgumentException(string.Format("Argument {0} is not a valid field expression.", expression), nameof(expression));
         }
 
-        public IEvent GetEvent(Expression<Func<T, object>> expression)
+        public IEvent GetEvent<TResult>(Expression<Func<T, TResult>> expression)
         {
             if (ExtractMember(expression) is EventInfo evt)
             {

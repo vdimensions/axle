@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
@@ -13,9 +12,8 @@ namespace Axle.Reflection
         /// 
         /// </param>
         /// <param name="handler">
-        /// The delegate to combine. 
+        /// The delegate to combine.
         /// </param>
         void AddDelegate(object target, Delegate handler);
     }
 }
-#endif

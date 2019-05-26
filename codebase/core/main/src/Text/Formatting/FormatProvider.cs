@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Diagnostics;
 
@@ -26,7 +26,7 @@ namespace Axle.Text.Formatting
 
         public FormatProvider(ICustomFormatter formatter)
         {
-            _customFormatter = formatter.VerifyArgument(nameof(formatter)).IsNotNull().Value;
+            _customFormatter = Verifier.IsNotNull(Verifier.VerifyArgument(formatter, nameof(formatter))).Value;
         }
 
         /// <inheritdoc />
@@ -34,7 +34,7 @@ namespace Axle.Text.Formatting
 
         protected virtual bool SupportFormatter(Type formatType)
         {
-            return typeof(ICustomFormatter).Equals(formatType);
+            return typeof(ICustomFormatter) == formatType;
         }
 
         #region Implementation of ICustomFormatter

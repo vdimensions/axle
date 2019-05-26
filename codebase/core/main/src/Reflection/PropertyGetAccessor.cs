@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
@@ -13,4 +12,3 @@ namespace Axle.Reflection
         public override AccessorType AccessorType => AccessorType.Get;
     }
 }
-#endif

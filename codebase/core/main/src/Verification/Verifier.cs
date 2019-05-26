@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 
@@ -256,7 +255,7 @@ namespace Axle.Verification
         [DebuggerStepThrough]
         public static ArgumentReference<T> IsTrue<T>(
             #if NETSTANDARD || NET35_OR_NEWER
-            this 
+            this
             #endif
             ArgumentReference<T> argument, Predicate<T> condition, string message)
         {
@@ -276,4 +275,3 @@ namespace Axle.Verification
         }
     }
 }
-#endif

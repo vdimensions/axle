@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     /// <summary>
     /// An enumeration representing the various accessor types that are supported by the .NET framework
@@ -11,24 +10,23 @@ namespace Axle.Reflection
     public enum AccessorType : byte
     {
         /// <summary>
-        /// Represents the <see langword="get" /> accessor, typically associated with property getters. 
+        /// Represents the <see langword="get" /> accessor, typically associated with property getters.
         /// </summary>
         Get,
 
         /// <summary>
-        /// Represents the <see langword="set" /> accessor, typically associated with property setters. 
+        /// Represents the <see langword="set" /> accessor, typically associated with property setters.
         /// </summary>
         Set, 
 
         /// <summary>
-        /// Represents the <see langword="add" /> accessor, typically associated with events and delegates. 
+        /// Represents the <see langword="add" /> accessor, typically associated with events and delegates.
         /// </summary>
         Add,
 
         /// <summary>
-        /// Represents the <see langword="remove" /> accessor, typically associated with events and delegates. 
+        /// Represents the <see langword="remove" /> accessor, typically associated with events and delegates.
         /// </summary>
         Remove
     }
 }
-#endif

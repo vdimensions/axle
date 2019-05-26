@@ -1,4 +1,9 @@
 System.Diagnostics.TraceSource
-System.Threading.Tasks.Unofficial
 System.Threading.Thread
 System.Xml.XmlSerializer
+
+group net20
+  LinqBridge
+
+group net35
+  System.Threading.Tasks.Unofficial

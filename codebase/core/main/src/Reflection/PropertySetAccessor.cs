@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
@@ -19,9 +18,8 @@ namespace Axle.Reflection
         /// </param>
         /// <seealso cref="IProperty"/>
         /// <seealso cref="System.Reflection.PropertyInfo"/>
-        public void SetValue(object target, object value) { OperationMethod.Invoke(target, value); }
+        public void SetValue(object target, object value) => OperationMethod.Invoke(target, value);
 
         public override AccessorType AccessorType => AccessorType.Set;
     }
 }
-#endif

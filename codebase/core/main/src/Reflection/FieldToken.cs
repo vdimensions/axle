@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -29,7 +28,7 @@ namespace Axle.Reflection
         #endif
         {
             _accessModifier = GetAccessModifier(info);
-            _declaration = info.GetDeclarationType();
+            _declaration = ReflectionExtensions.GetDeclarationType(info);
             _accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
         }
 
@@ -61,7 +60,7 @@ namespace Axle.Reflection
         public override int GetHashCode() => base.GetHashCode();
 
         public IGetAccessor GetAccessor => _accessors[0];
-        public ISetAccessor SetAccessor => _accessors[1];        
+        public ISetAccessor SetAccessor => _accessors[1];
         public bool IsReadOnly => ReflectedMember.IsInitOnly;
         IEnumerable<IAccessor> IAccessible.Accessors => _accessors;
         public override AccessModifier AccessModifier => _accessModifier;
@@ -69,4 +68,3 @@ namespace Axle.Reflection
         public override Type MemberType => ReflectedMember.FieldType;
     }
 }
-#endif

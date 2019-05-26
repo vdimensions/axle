@@ -37,61 +37,61 @@ namespace Axle.Threading
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered read mode. 
-        /// </para>
-        /// -or- 
-        /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
-        /// This limit is large enough so that an applications should never encounter it. 
-        /// </para>
-        /// </exception>
-        /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
-        /// </exception>
-        public void EnterReadLock() => _innerLock.EnterReadLock();
-
-        /// <inheritdoc /> 
-        /// <exception cref="System.Threading.LockRecursionException">
-        /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered a lock in any mode. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered read mode.
         /// </para>
         /// -or-
         /// <para>
-        /// The current thread has entered read mode, so trying to enter upgradeable 
-        /// mode would create the possibility of a deadlock.
-        /// </para>
-        /// -or- 
-        /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
-        /// This limit is large enough so that an applications should never encounter it. 
+        /// The recursion number would exceed the capacity of the counter.
+        /// This limit is large enough so that an applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
+        /// </exception>
+        public void EnterReadLock() => _innerLock.EnterReadLock();
+
+        /// <inheritdoc />
+        /// <exception cref="System.Threading.LockRecursionException">
+        /// <para>
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered a lock in any mode.
+        /// </para>
+        /// -or-
+        /// <para>
+        /// The current thread has entered read mode, so trying to enter upgradeable
+        /// mode would create the possibility of a deadlock.
+        /// </para>
+        /// -or-
+        /// <para>
+        /// The recursion number would exceed the capacity of the counter.
+        /// This limit is large enough so that an applications should never encounter it.
+        /// </para>
+        /// </exception>
+        /// <exception cref="ObjectDisposedException">
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public void EnterUpgradeableReadLock() => _innerLock.EnterUpgradeableReadLock();
 
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered the lock in any mode. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered the lock in any mode.
         /// </para>
         /// -or-
         /// <para>
-        /// The current thread has entered read mode, so trying to enter the 
-        /// lock in write mode would create the possibility of a deadlock. 
+        /// The current thread has entered read mode, so trying to enter the
+        /// lock in write mode would create the possibility of a deadlock.
         /// </para>
         /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
+        /// The recursion number would exceed the capacity of the counter.
         /// The limit is so large that applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public void EnterWriteLock() => _innerLock.EnterWriteLock();
 
@@ -107,126 +107,126 @@ namespace Axle.Threading
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered the lock. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered the lock.
         /// </para>
-        /// -or- 
+        /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
-        /// This limit is large enough so that an applications should never encounter it. 
+        /// The recursion number would exceed the capacity of the counter.
+        /// This limit is large enough so that an applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnterReadLock(int millisecondsTimeout) => _innerLock.TryEnterReadLock(millisecondsTimeout);
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered the lock. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered the lock.
         /// </para>
-        /// -or- 
+        /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
-        /// This limit is large enough so that an applications should never encounter it. 
+        /// The recursion number would exceed the capacity of the counter.
+        /// This limit is large enough so that an applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnterReadLock(TimeSpan timeout) => _innerLock.TryEnterReadLock(timeout);
 
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered the lock in any mode. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered the lock in any mode.
         /// </para>
         /// -or-
         /// <para>
-        /// The current thread has entered read mode, so trying to enter the 
-        /// lock in write mode would create the possibility of a deadlock. 
+        /// The current thread has entered read mode, so trying to enter the
+        /// lock in write mode would create the possibility of a deadlock.
         /// </para>
         /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
+        /// The recursion number would exceed the capacity of the counter.
         /// The limit is so large that applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnterWriteLock(int millisecondsTimeout) => _innerLock.TryEnterWriteLock(millisecondsTimeout);
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered the lock in any mode. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered the lock in any mode.
         /// </para>
         /// -or-
         /// <para>
-        /// The current thread has entered read mode, so trying to enter the 
-        /// lock in write mode would create the possibility of a deadlock. 
+        /// The current thread has entered read mode, so trying to enter the
+        /// lock in write mode would create the possibility of a deadlock.
         /// </para>
         /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
+        /// The recursion number would exceed the capacity of the counter.
         /// The limit is so large that applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnterWriteLock(TimeSpan timeout) => _innerLock.TryEnterWriteLock(timeout);
 
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered a lock in any mode. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered a lock in any mode.
         /// </para>
         /// -or-
         /// <para>
-        /// The current thread has entered read mode, so trying to enter upgradeable 
+        /// The current thread has entered read mode, so trying to enter upgradeable
         /// mode would create the possibility of a deadlock.
         /// </para>
-        /// -or- 
+        /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
-        /// This limit is large enough so that an applications should never encounter it. 
+        /// The recursion number would exceed the capacity of the counter.
+        /// This limit is large enough so that an applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnterUpgradeableReadLock(int millisecondsTimeout) => _innerLock.TryEnterUpgradeableReadLock(millisecondsTimeout);
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>
-        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c> 
-        /// and the current thread has already entered a lock in any mode. 
+        /// The <see cref="SupportsRecursion"/> property is set to <c>false</c>
+        /// and the current thread has already entered a lock in any mode.
         /// </para>
         /// -or-
         /// <para>
-        /// The current thread has entered read mode, so trying to enter upgradeable 
+        /// The current thread has entered read mode, so trying to enter upgradeable
         /// mode would create the possibility of a deadlock.
         /// </para>
-        /// -or- 
+        /// -or-
         /// <para>
-        /// The recursion number would exceed the capacity of the counter. 
-        /// This limit is large enough so that an applications should never encounter it. 
+        /// The recursion number would exceed the capacity of the counter.
+        /// This limit is large enough so that an applications should never encounter it.
         /// </para>
         /// </exception>
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnterUpgradeableReadLock(TimeSpan timeout) => _innerLock.TryEnterUpgradeableReadLock(timeout);
 
         #region Implementation of ILock
         /// <inheritdoc />
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public void Enter() => EnterWriteLock();
 
@@ -235,7 +235,7 @@ namespace Axle.Threading
 
         /// <inheritdoc />
         /// <exception cref="ObjectDisposedException">
-        /// The current <see cref="ReadWriteLock"/> instance has been disposed. 
+        /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
         public bool TryEnter(int millisecondsTimeout) => _innerLock.TryEnterWriteLock(millisecondsTimeout);
 
@@ -246,8 +246,8 @@ namespace Axle.Threading
         /// <summary>
         /// Gets a value that indicates if the current <see cref="ReaderWriterLockSlim"/> instance
         /// can enter a specific lock mode more than once.
-        /// If this value is set to false, every attempt to obtain a lock when another lock of the 
-        /// same mode is alreaddy held will result in a <see cref="System.Threading.LockRecursionException"/>.
+        /// If this value is set to false, every attempt to obtain a lock when another lock of the
+        /// same mode is already held will result in a <see cref="System.Threading.LockRecursionException"/>.
         /// </summary>
         public bool SupportsRecursion => _supportsRecursion;
     }

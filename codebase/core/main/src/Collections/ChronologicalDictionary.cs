@@ -2,9 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
-#endif
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif
@@ -59,26 +57,14 @@ namespace Axle.Collections
             void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectData(info, context);
             #endif
 
-            #if NETSTANDARD || NET35_OR_NEWER
-            private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate() => _collection
-                                                                           .OrderBy(x => x.Key, new ChronologicalKeyComparer<TKey>())
-                                                                           .Select(x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
-            #else
             private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate()
             {
-                var array = new KeyValuePair<ChronologicalKey<TKey>,TValue>[_collection.Count];
-                _collection.CopyTo(array, 0);
-                var comparer = new AdaptiveComparer<KeyValuePair<ChronologicalKey<TKey>,TValue>, ChronologicalKey<TKey>>(x => x.Key);
-                Array.Sort(array, comparer);
-                foreach (var element in array)
-                {
-                    yield return new KeyValuePair<TKey, TValue>(element.Key.Key, element.Value);
-                }
+                return Enumerable.Select(
+                    Enumerable.OrderBy(_collection, x => x.Key, new ChronologicalKeyComparer<TKey>()), x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
             }
-            #endif
 
             #region Implementation of IEnumerable<KeyValuePair<TKey,TValue>>
-            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() { return Enumerate().GetEnumerator(); }
+            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => Enumerate().GetEnumerator();
             #endregion
 
             #region Implementation of ICollection<KeyValuePair<TKey,TValue>>
@@ -139,43 +125,10 @@ namespace Axle.Collections
                 }
             }
 
-            new private ICollection<TKey> Keys
-            {
-                get
-                {
-                    #if NETSTANDARD || NET35_OR_NEWER
-                    return Enumerate().Select(key => key.Key).ToArray();
-                    #else
-                    ICollection<TKey> list = new List<TKey>(Count);
-                    using (var enumerator = Enumerate().GetEnumerator())
-                    while (enumerator.MoveNext())
-                    {
-                        list.Add(enumerator.Current.Key);
-                    }
-                    return list;
-                    #endif
-                }
-            }
+            new private ICollection<TKey> Keys => Enumerable.ToArray(Enumerable.Select(Enumerate(), key => key.Key));
             ICollection<TKey> IDictionary<TKey, TValue>.Keys => Keys;
 
-            new private ICollection<TValue> Values
-            {
-                get
-                {
-                    #if NETSTANDARD || NET35_OR_NEWER
-                    return Enumerate().Select(x => x.Value).ToArray();
-                    #else
-                    ICollection<TValue> list = new List<TValue>(Count);
-                    using (var enumerator = Enumerate().GetEnumerator())
-                    while (enumerator.MoveNext())
-                    {
-                        list.Add(enumerator.Current.Value);
-                    }
-                    return list;
-                    #endif
-                }
-            }
-
+            new private ICollection<TValue> Values => Enumerable.ToArray(Enumerable.Select(Enumerate(), key => key.Value));
             ICollection<TValue> IDictionary<TKey, TValue>.Values => Values;
             #endregion
         }

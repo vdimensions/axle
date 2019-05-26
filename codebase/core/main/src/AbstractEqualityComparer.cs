@@ -12,8 +12,8 @@ namespace Axle
     /// An abstract class to serve as a base to implementing the <see cref="IEqualityComparer{T}" /> interface.
     /// </summary>
     /// <typeparam name="T">
-    /// The type of objects to compare. This type parameter is contravariant. That is, you can use either the type 
-    /// you specified or any type that is less derived. For more information about covariance and contravariance, 
+    /// The type of objects to compare. This type parameter is contravariant. That is, you can use either the type
+    /// you specified or any type that is less derived. For more information about covariance and contravariance,
     /// see "Covariance and Contravariance in Generics".
     /// </typeparam>
     /// <seealso cref="IEqualityComparer{T}" />
@@ -32,34 +32,34 @@ namespace Axle
         #endif
 
         /// <summary>
-        /// Determines whether the specified object instances are considered equal. 
+        /// Determines whether the specified object instances are considered equal.
         /// </summary>
         /// <param name="x">
-        /// The first object to compare. 
+        /// The first object to compare.
         /// </param>
         /// <param name="y">
-        /// The second object to compare. 
+        /// The second object to compare.
         /// </param>
         new public bool Equals(object x, object y)
         {
             return ReferenceEquals(x, null)
                 ? ReferenceEquals(y, null)
                 : ReferenceEquals(y, null)
-                    ? false 
+                    ? false
                     : ReferenceEquals(x, y) || (
-                        x is T 
-                            ? (y is T ? DoEquals((T) x, (T) y) : y.Equals(x))
+                        x is T xT
+                            ? (y is T yT ? DoEquals(xT, yT) : y.Equals(x))
                             : (y is T ? x.Equals(y) : object.Equals(x, y)));
         }
 
         /// <summary>
-        /// Determines whether the specified object instances are considered equal. 
+        /// Determines whether the specified object instances are considered equal.
         /// </summary>
         /// <param name="x">
-        /// The first object to compare. 
+        /// The first object to compare.
         /// </param>
         /// <param name="y">
-        /// The second object to compare. 
+        /// The second object to compare.
         /// </param>
         public bool Equals(T x, T y)
         {
@@ -95,7 +95,7 @@ namespace Axle
         }
 
         /// <summary>
-        /// Returns a hash code for the specified object. 
+        /// Returns a hash code for the specified object.
         /// </summary>
         /// <param name="obj">
         /// The instance of <typeparamref name="T"/> for which a hash code is to be returned.
@@ -117,16 +117,16 @@ namespace Axle
                 throw new ArgumentNullException(nameof(obj));
             }
 
-            return appendTypeHashCode 
-                ? DoGetHashCode(obj)^GetType().GetHashCode() 
-				: DoGetHashCode(obj);
+            return appendTypeHashCode
+                ? DoGetHashCode(obj)^GetType().GetHashCode()
+                : DoGetHashCode(obj);
         }
 
         /// <summary>
         /// Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
         /// </summary>
         /// <param name="obj">
-        /// The object to compare with the current object. 
+        /// The object to compare with the current object.
         /// </param>
         /// <returns>
         /// <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, <c>false</c>.
@@ -136,7 +136,7 @@ namespace Axle
         // ReSharper restore BaseObjectEqualsIsObjectEquals
 
         /// <summary>
-        /// Serves as a hash function for a particular type. 
+        /// Serves as a hash function for a particular type.
         /// </summary>
         /// <returns>
         /// A hash code for the current <see cref="T:System.Object" />.
@@ -149,7 +149,7 @@ namespace Axle
         /// When overridden in a derived class, determines if the two <typeparamref name="T" /> instances are equal.
         /// </summary>
         /// <param name="x">
-        /// The first object to compare. 
+        /// The first object to compare.
         /// </param>
         /// <param name="y">
         /// The second object to compare.
@@ -157,13 +157,13 @@ namespace Axle
         protected abstract bool DoEquals(T x, T y);
 
         /// <summary>
-        /// When overridden in a derived class, this method produces the hash code of the supplied object. 
+        /// When overridden in a derived class, this method produces the hash code of the supplied object.
         /// </summary>
         /// <param name="obj">
-        /// The object whose hash code should be calculated. 
+        /// The object whose hash code should be calculated.
         /// </param>
         /// <returns>
-        /// The hash code of the passed by the <paramref name="obj"/> object. 
+        /// The hash code of the passed by the <paramref name="obj"/> object.
         /// </returns>
         protected abstract int DoGetHashCode(T obj);
     }

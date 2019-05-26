@@ -1,11 +1,10 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
 {
     /// <summary>
-    /// An enumeration with all the possible flags that can be used when reflecting a type member with an <see cref="IIntrospector" >introspector</see> instance
+    /// An enumeration with all the possible flags that can be used when reflecting a type member with an <see cref="IIntrospector" >introspector</see> instance.
     /// </summary>
     /// <seealso cref="IIntrospector"/>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -40,7 +39,7 @@ namespace Axle.Reflection
         Instance = 1 << 3,
 
         /// <summary>
-        /// Scan results will include matching public instance members. 
+        /// Scan results will include matching public instance members.
         /// <para>
         /// This is a shortcut for using the <c>ScanOptions.Public | ScanOptions.Instance</c> flags.
         /// </para>
@@ -48,7 +47,7 @@ namespace Axle.Reflection
         PublicInstance = Public | Instance,
 
         /// <summary>
-        /// Scan results will include matching public static members. 
+        /// Scan results will include matching public static members.
         /// <para>
         /// This is a shortcut for using the <c>ScanOptions.Public | ScanOptions.Static</c> flags.
         /// </para>
@@ -61,4 +60,3 @@ namespace Axle.Reflection
         Default = Public | Static | Instance
     }
 }
-#endif

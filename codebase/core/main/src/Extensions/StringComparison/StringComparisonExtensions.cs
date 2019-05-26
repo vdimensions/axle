@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 
 
@@ -10,15 +10,19 @@ namespace Axle.Extensions.StringComparison
     public static class StringComparisonExtensions
     {
         /// <summary>
-        /// Gets the respective <see cref="StringComparer"/> implementation corresponding to 
+        /// Gets the respective <see cref="StringComparer"/> implementation corresponding to
         /// the given <paramref name="stringComparison"/> value.
         /// </summary>
         /// <param name="stringComparison">One of the <see cref="StringComparison"/> values</param>
         /// <returns>
-        /// A <seealso cref="StringComparer"/> instance that corresponds to the given 
+        /// A <seealso cref="StringComparer"/> instance that corresponds to the given
         /// <paramref name="stringComparison"/> value.
         /// </returns>
-        public static StringComparer GetComparer(this System.StringComparison stringComparison)
+        public static StringComparer GetComparer(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            System.StringComparison stringComparison)
         {
             switch (stringComparison)
             {

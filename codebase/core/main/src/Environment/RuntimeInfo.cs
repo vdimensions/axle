@@ -1,11 +1,9 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
 #if NETFRAMEWORK
-using System.IO;
 using System.Security.Policy;
 #endif
 #if NETSTANDARD1_7
@@ -28,9 +26,9 @@ namespace Axle.Environment
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         private static Version GetMonoVersion()
         {
-            var dispalayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
-            return dispalayNameMethod != null
-                ? new VersionParser().Parse(dispalayNameMethod.Invoke(null, null).ToString().TakeBeforeFirst(" ", StringComparison.OrdinalIgnoreCase).Trim())
+            var displayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
+            return displayNameMethod != null
+                ? new VersionParser().Parse(StringExtensions.TakeBeforeFirst(displayNameMethod.Invoke(null, null).ToString(), " ", StringComparison.OrdinalIgnoreCase).Trim())
                 : null;
         }
         #endif
@@ -71,7 +69,7 @@ namespace Axle.Environment
         }
 
         #if NETFRAMEWORK
-        public Assembly LoadAssembly(string assemblyName) { return LoadAssembly(assemblyName, null); }
+        public Assembly LoadAssembly(string assemblyName) => LoadAssembly(assemblyName, null);
         public Assembly LoadAssembly(string assemblyName, Evidence securityEvidence)
         {
             if (assemblyName == null)
@@ -119,7 +117,7 @@ namespace Axle.Environment
                     },
                     (string a, Evidence e, out Assembly res) =>
                     {
-                        var name = Path.Combine(Directory.GetCurrentDirectory(), hasExt ? a : a + ext);
+                        var name = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), hasExt ? a : a + ext);
                         try
                         {
                             res = e == null ? Assembly.LoadFrom(name) : Assembly.LoadFrom(name, e);
@@ -133,10 +131,13 @@ namespace Axle.Environment
                     }
                 };
 
-            var noExtName = hasExt ? assemblyName.TakeBeforeLast('.') : assemblyName;
-            if (chain.Any(noExtName, securityEvidence, out var result))
+            var noExtName = hasExt ? StringExtensions.TakeBeforeLast(assemblyName, '.') : assemblyName;
+            foreach (var attempt in chain)
             {
-                return result;
+                if (attempt.Invoke(noExtName, securityEvidence, out var result))
+                {
+                    return result;
+                }
             }
             throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
         }
@@ -229,7 +230,7 @@ namespace Axle.Environment
                     //}
                 };
 
-            var noExtName = hasExt ? assemblyName.TakeBeforeLast('.') : assemblyName;
+            var noExtName = hasExt ? StringExtensions.TakeBeforeLast(assemblyName, '.') : assemblyName;
             if (chain.Any(noExtName, out var result))
             {
                 return result;
@@ -241,18 +242,24 @@ namespace Axle.Environment
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         private string ResolveAssemblyName(string assemblyName)
         {
-            return !Platform.Environment.IsWindows()
-                ? GetAssemblies()
-                    .Select(x => x.GetName().Name)
-                    .Where(x => x.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
-                    .SingleOrDefault() ?? assemblyName
-                : assemblyName;
+            if (!EnvironmentExtensions.IsWindows(Platform.Environment))
+            {
+                foreach (var assembly in GetAssemblies())
+                {
+                    var resolveAssemblyName = assembly.GetName().Name;
+                    if (resolveAssemblyName.Equals(assemblyName, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return resolveAssemblyName;
+                    }
+                }
+            }
+            return assemblyName;
         }
 
         public Assembly LoadSatelliteAssembly(Assembly targetAssembly, System.Globalization.CultureInfo culture)
         {
-            targetAssembly.VerifyArgument(nameof(targetAssembly)).IsNotNull();
-            culture.VerifyArgument(nameof(culture)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(targetAssembly, nameof(targetAssembly)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(culture, nameof(culture)));
 
             if (culture.Equals(System.Globalization.CultureInfo.InvariantCulture))
             {
@@ -260,13 +267,22 @@ namespace Axle.Environment
             }
 
             var paths = new[] { Domain.RelativeSearchPath, Domain.BaseDirectory };
-            var satelliteAssemblyPath = paths
-                .Where(x => !string.IsNullOrEmpty(x))
-                .Select(x => System.IO.Path.Combine(x, $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll"))
-                .FirstOrDefault(System.IO.File.Exists);
-            return satelliteAssemblyPath != null 
-                ? LoadAssembly(System.IO.Path.GetFullPath(satelliteAssemblyPath)) 
-                : null;
+            var satelliteAssemblyDllName = $"{culture.Name}/{targetAssembly.GetName().Name}.resources.dll";
+            foreach (var path in paths)
+            {
+                if (string.IsNullOrEmpty(path))
+                {
+                    continue;
+                }
+                var satelliteAssemblyPath = System.IO.Path.Combine(path, satelliteAssemblyDllName);
+                if (!System.IO.File.Exists(satelliteAssemblyPath))
+                {
+                    continue;
+                }
+                return LoadAssembly(System.IO.Path.GetFullPath(satelliteAssemblyPath));
+            }
+
+            return null;
         }
         #endif
 

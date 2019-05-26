@@ -38,7 +38,7 @@ namespace Axle.Conversion
         /// The message that describes the error.
         /// </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception, or a <c>null</c> reference (<c>Nothing</c> in Visual Basic) 
+        /// The exception that is the cause of the current exception, or a <c>null</c> reference (<c>Nothing</c> in Visual Basic)
         /// if no inner exception is specified.
         /// </param>
         public ConversionException(string message, Exception inner) : base(message, inner) {}
@@ -57,13 +57,13 @@ namespace Axle.Conversion
         /// </exception>
         public ConversionException(Type sourceType, Type destinationType) : this(
             string.Format(
-                "Cannot convert an instance of {0} to {1}.", 
-                Verifier.IsNotNull(Verifier.VerifyArgument(sourceType, nameof(sourceType))).Value.FullName, 
+                "Cannot convert an instance of {0} to {1}.",
+                Verifier.IsNotNull(Verifier.VerifyArgument(sourceType, nameof(sourceType))).Value.FullName,
                 Verifier.IsNotNull(Verifier.VerifyArgument(destinationType, nameof(destinationType))).Value.FullName),
             null) {}
         /// <summary>
         /// Initializes a new instance of <see cref="ConversionException"/> to represent the failure of converting the given types,
-        /// and a reference to the inner exception that is the cause of this exception..
+        /// and a reference to the inner exception that is the cause of this exception.
         /// </summary>
         /// <param name="sourceType">
         /// The type of the source object that failed to convert.
@@ -72,7 +72,7 @@ namespace Axle.Conversion
         /// The destination type of the failed conversion.
         /// </param>
         /// <param name="inner">
-        /// The exception that is the cause of the current exception, or a <c>null</c> reference (<c>Nothing</c> in Visual Basic) 
+        /// The exception that is the cause of the current exception, or a <c>null</c> reference (<c>Nothing</c> in Visual Basic)
         /// if no inner exception is specified.
         /// </param>
         /// <exception cref="ArgumentNullException">
@@ -80,9 +80,9 @@ namespace Axle.Conversion
         /// </exception>
         public ConversionException(Type sourceType, Type destinationType, Exception inner) : this(
             string.Format(
-                "Cannot convert an instance of {0} to {1}.", 
-                Verifier.IsNotNull(Verifier.VerifyArgument(sourceType, nameof(sourceType))).Value.FullName, 
-                Verifier.IsNotNull(Verifier.VerifyArgument(destinationType, nameof(destinationType))).Value.FullName), 
+                "Cannot convert an instance of {0} to {1}.",
+                Verifier.IsNotNull(Verifier.VerifyArgument(sourceType, nameof(sourceType))).Value.FullName,
+                Verifier.IsNotNull(Verifier.VerifyArgument(destinationType, nameof(destinationType))).Value.FullName),
             inner) {}
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

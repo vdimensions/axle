@@ -12,7 +12,7 @@ namespace Axle.Conversion
     public sealed class OACurrencyConverter : AbstractTwoWayConverter<decimal, long>
     {
         /// <summary>
-        /// Converts the specified <see cref="decimal"/> value to the equivalent OLE Automation Currency value, 
+        /// Converts the specified <see cref="decimal"/> value to the equivalent OLE Automation Currency value,
         /// which is contained in a <see cref="long">64-bit signed integer</see>.
         /// </summary>
         /// <param name="value">
@@ -24,11 +24,11 @@ namespace Axle.Conversion
         protected override long DoConvert(decimal value) => decimal.ToOACurrency(value);
 
         /// <summary>
-        /// Converts the specified <see cref="long">64-bit signed integer</see>, which contains an OLE Automation Currency value, 
+        /// Converts the specified <see cref="long">64-bit signed integer</see>, which contains an OLE Automation Currency value,
         /// to the equivalent <see cref="decimal"/> value.
         /// </summary>
         /// <param name="value">
-        /// An OLE Automation Currency value. 
+        /// An OLE Automation Currency value.
         /// </param>
         /// <returns>
         /// A <see cref="decimal"/> that contains the equivalent of <paramref name="value"/>.

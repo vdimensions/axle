@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
@@ -14,32 +13,31 @@ namespace Axle.Reflection
     public enum ParameterDirection : byte
     {
         /// <summary>
-        /// The parameter direction could not be determined. 
+        /// The parameter direction could not be determined.
         /// </summary>
         Unknown = 0,
 
         /// <summary>
-        /// A flag used to mark an input parameter. 
+        /// A flag used to mark an input parameter.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.IsIn"/>
         Input = 1,
 
         /// <summary>
-        /// A flag used to mark an output parameter. 
+        /// A flag used to mark an output parameter.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.IsOut"/>
         Output = 2,
 
         /// <summary>
-        /// A flag used to mark a return value. 
+        /// A flag used to mark a return value.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.IsRetval"/>
         ReturnValue = 4,
 
         /// <summary>
-        /// A flag used to represent a parameter which is both an input and an output one. 
+        /// A flag used to represent a parameter which is both an input and an output one.
         /// </summary>
         InputOutput = Input|Output
     }
 }
-#endif

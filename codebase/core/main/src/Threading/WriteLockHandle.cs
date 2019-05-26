@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System.Diagnostics;
+﻿using System.Diagnostics;
 
 
 namespace Axle.Threading
@@ -14,7 +13,7 @@ namespace Axle.Threading
             _readWriteLock = readWriteLock;
             _readWriteLock.EnterWriteLock();
         }
-        
+
         public void Dispose()
         {
             if (_readWriteLock == null)
@@ -28,4 +27,3 @@ namespace Axle.Threading
         ILock ILockHandle.Lock => _readWriteLock;
     }
 }
-#endif

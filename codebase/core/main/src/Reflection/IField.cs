@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a reflected field member.
@@ -8,8 +7,8 @@ namespace Axle.Reflection
     public interface IField : IReadWriteMember, IAttributeTarget
     {
         /// <summary>
-        /// Gets a value determining if the field represented by the current <see cref="IField"/> instance 
-        /// is declared as read-only, i.e. it's value can be set only within the body of a constructor 
+        /// Gets a value determining if the field represented by the current <see cref="IField"/> instance
+        /// is declared as read-only, i.e. it's value can be set only within the body of a constructor
         /// or initialization expression.
         /// <para>
         /// In C# read-only fields are declared using the <c>readonly</c> keyword.
@@ -22,4 +21,3 @@ namespace Axle.Reflection
         bool IsReadOnly { get; }
     }
 }
-#endif

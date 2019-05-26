@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using Axle.Verification;
 
 
@@ -15,19 +15,35 @@ namespace Axle.Environment
             return (environment.OperatingSystemID & osID) == osID;
         }
 
-        public static bool IsMac(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Mac);
+        public static bool IsMac(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IEnvironment environment) => IsOS(environment, OperatingSystemID.Mac);
 
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        public static bool IsOS(this IEnvironment environment, OperatingSystemID osID)
+        public static bool IsOS(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IEnvironment environment, OperatingSystemID osID)
         {
-            environment.VerifyArgument(nameof(environment)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(environment, nameof(environment)));
             return IsOSInternal(environment, osID);
         }
-        public static bool IsUnix(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Unix);
+        public static bool IsUnix(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IEnvironment environment) => IsOS(environment, OperatingSystemID.Unix);
 
-        public static bool IsWindows(this IEnvironment environment) => IsOS(environment, OperatingSystemID.Windows);
+        public static bool IsWindows(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IEnvironment environment) => IsOS(environment, OperatingSystemID.Windows);
         #endif
     }
 }

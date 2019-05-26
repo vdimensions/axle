@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
@@ -10,7 +9,7 @@ namespace Axle.Reflection
     public interface IAttributeInfo
     {
         /// <summary>
-        /// Gets a reference to the reflected <see cref="Attribute">attribute</see> instance. 
+        /// Gets a reference to the reflected <see cref="Attribute">attribute</see> instance.
         /// </summary>
         Attribute Attribute { get; }
 
@@ -33,4 +32,3 @@ namespace Axle.Reflection
         bool Inherited { get; }
     }
 }
-#endif

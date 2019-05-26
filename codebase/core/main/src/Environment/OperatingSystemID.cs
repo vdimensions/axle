@@ -33,7 +33,7 @@ namespace Axle.Environment
     \************\---------/****************/
 
     /// <summary>
-    /// An enumeration of various operating system and platform identifiers, supported by an assembly. 
+    /// An enumeration of various operating system and platform identifiers, supported by an assembly.
     /// <list type="table">
     ///   <listheader>
     ///     <term>Value</term>
@@ -90,42 +90,42 @@ namespace Axle.Environment
     public enum OperatingSystemID : short
     {
         /// <summary>
-        /// Used to identify unrecognized operating system. 
+        /// Used to identify unrecognized operating system.
         /// </summary>
         Unknown = 0,
 
         /// <summary>
-        /// Marks <b>any</b> Unix operating system. 
+        /// Marks <b>any</b> Unix operating system.
         /// </summary>
         Unix = 1 << 7,
 
         /// <summary>
-        /// Identifies the Macintosh operating system. 
+        /// Identifies the Macintosh operating system.
         /// </summary>
         MacOS = 1 << 6,
 
         /// <summary>
-        /// Identifies the Xbox 360 platform. 
+        /// Identifies the Xbox 360 platform.
         /// </summary>
         XBox = 1 << 5,
 
         /// <summary>
-        /// Marks <b>any</b> Windows operating system. 
+        /// Marks <b>any</b> Windows operating system.
         /// </summary>
         Windows = 1 << 4,
 
         /// <summary>
-        /// Identifies a Windows CE operating system. 
+        /// Identifies a Windows CE operating system.
         /// </summary>
         WinCE = Windows | 1,
 
         /// <summary>
-        /// Marks <b>any</b> Win32 operating system. 
+        /// Marks <b>any</b> Win32 operating system.
         /// </summary>
         Win32 = Windows | (1 << 3),
 
         /// <summary>
-        /// Identifies a Win32s operating system. Win32s is a layer that runs on 16-bit versions of Windows to provide access to 32-bit applications. 
+        /// Identifies a Win32s operating system. Win32s is a layer that runs on 16-bit versions of Windows to provide access to 32-bit applications.
         /// </summary>
         Win32S = Win32 | (1 << 1),
 
@@ -135,7 +135,7 @@ namespace Axle.Environment
         Win32Windows = Win32 | 1,
 
         /// <summary>
-        /// Identifies a Windows NT operating system or later. 
+        /// Identifies a Windows NT operating system or later.
         /// </summary>
         Win32NT = Win32 | (1 << 2),
 
@@ -152,7 +152,7 @@ namespace Axle.Environment
         Win = Windows,
 
         /// <summary>
-        /// Marks <b>any</b> Macintosh operating system. 
+        /// Marks <b>any</b> Macintosh operating system.
         /// </summary>
         Mac = MacOS,
 

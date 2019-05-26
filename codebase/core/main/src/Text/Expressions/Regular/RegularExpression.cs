@@ -1,6 +1,8 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Diagnostics;
+#if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
+#endif
 using System.Text.RegularExpressions;
 
 
@@ -27,9 +29,29 @@ namespace Axle.Text.Expressions.Regular
         public bool IsMatch(string input, int startIndex) => _regex.IsMatch(input, startIndex);
 
         /// <inheritdoc />
+        #if NETSTANDARD || NET35_OR_NEWER
         public Match[] Match(string input) => _regex.Matches(input).Cast<Match>().ToArray();
+        #else
+        public Match[] Match(string input)
+        {
+            var result = _regex.Matches(input);
+            var array = new Match[result.Count];
+            result.CopyTo(array, 0);
+            return array;
+        }
+        #endif
         /// <inheritdoc />
+        #if NETSTANDARD || NET35_OR_NEWER
         public Match[] Match(string input, int startIndex) => _regex.Matches(input, startIndex).Cast<Match>().ToArray();
+        #else
+        public Match[] Match(string input, int startIndex)
+        {
+            var result = _regex.Matches(input, startIndex);
+            var array = new Match[result.Count];
+            result.CopyTo(array, 0);
+            return array;
+        }
+        #endif
 
         /// <inheritdoc />
         public string[] Split(string input) => _regex.Split(input);

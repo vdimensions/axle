@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Text.RegularExpressions;
 
@@ -34,7 +34,7 @@ namespace Axle.Text.Expressions.Path
 
         private AbstractPathExpression(IRegularExpression target)
         {
-            _target = target.VerifyArgument(nameof(target)).IsNotNull().Value;
+            _target = Verifier.IsNotNull(Verifier.VerifyArgument(target, nameof(target))).Value;
         }
         protected AbstractPathExpression(string pattern, Func<string, RegexOptions, Regex> regexFactory) 
             : this(new RegularExpression(regexFactory(pattern, RegExOptions))) { }

@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -29,12 +28,12 @@ namespace Axle.Reflection
             #endif
         }
 
-        public bool Equals(MethodToken other) { return base.Equals(other); }
-        public override bool Equals(object obj) { return obj is MethodToken && base.Equals(obj); }
+        public bool Equals(MethodToken other) => base.Equals(other);
+        public override bool Equals(object obj) => obj is MethodToken && base.Equals(obj);
 
-        public override int GetHashCode() { return base.GetHashCode(); }
+        public override int GetHashCode() => base.GetHashCode();
 
-        public object Invoke(object target, params object[] args) { return ReflectedMember.Invoke(target, args); }
+        public object Invoke(object target, params object[] args) => ReflectedMember.Invoke(target, args);
 
         public IGenericMethod MakeGeneric(params Type[] types)
         {
@@ -61,4 +60,3 @@ namespace Axle.Reflection
         public Type ReturnType => ReflectedMember.ReturnType;
     }
 }
-#endif

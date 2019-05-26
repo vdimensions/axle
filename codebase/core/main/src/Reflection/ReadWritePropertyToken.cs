@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -37,7 +36,7 @@ namespace Axle.Reflection
             }
             if (sm == null)
             {
-                throw new ArgumentException("The property is not writeable. ", nameof(propertyInfo));
+                throw new ArgumentException("The property is not writable. ", nameof(propertyInfo));
             }
 
             _getAccessor = new PropertyGetAccessor(this, new MethodToken(gm));
@@ -69,4 +68,3 @@ namespace Axle.Reflection
         public ISetAccessor SetAccessor => _setAccessor;
     }
 }
-#endif

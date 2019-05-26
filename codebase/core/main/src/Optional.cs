@@ -1,4 +1,4 @@
-#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -25,7 +25,11 @@ namespace Axle
 
         public static IEnumerable<T> FilterPresent<T>(this IEnumerable<Optional<T>> collection)
         {
-            return collection.VerifyArgument(nameof(collection)).IsNotNull().Value.Where(x => x.HasValue).Select(x => x.Value);
+            return Enumerable.Select(
+                Enumerable.Where(
+                    Verifier.IsNotNull(Verifier.VerifyArgument(collection, nameof(collection))).Value, 
+                    x => x.HasValue), 
+                x => x.Value);
         }
 
         public static Optional<TResult> Next<T, TResult>(this Optional<T> arg, Func<T, TResult> map)

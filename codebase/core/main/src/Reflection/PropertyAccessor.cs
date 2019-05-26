@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 
 using Axle.Verification;
@@ -18,8 +17,8 @@ namespace Axle.Reflection
 
         protected PropertyAccessor(PropertyToken property, MethodToken operationMethod)
         {
-            _property = property.VerifyArgument(nameof(property)).IsNotNull();
-            OperationMethod = operationMethod.VerifyArgument(nameof(operationMethod)).IsNotNull();
+            _property = Verifier.IsNotNull(Verifier.VerifyArgument(property, nameof(property)));
+            OperationMethod = Verifier.IsNotNull(Verifier.VerifyArgument(operationMethod, nameof(operationMethod)));
         }
 
         public IMember Member => _property;
@@ -30,4 +29,3 @@ namespace Axle.Reflection
         AccessModifier IAccessor.AccessModifier => OperationMethod.AccessModifier;
     }
 }
-#endif

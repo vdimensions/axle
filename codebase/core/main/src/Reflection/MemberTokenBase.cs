@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
@@ -16,7 +15,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget 
+    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
         where T: MemberInfo
     {
         #if NETSTANDARD
@@ -43,14 +42,14 @@ namespace Axle.Reflection
             return AccessModifier.ProtectedInternal;
         }
 
-        public IAttributeInfo[] GetAttributes(T reflectedMember) { return reflectedMember.GetEffectiveAttributes() ?? new IAttributeInfo[0]; }
+        public IAttributeInfo[] GetAttributes(T reflectedMember) => CustomAttributeProviderExtensions.GetEffectiveAttributes(reflectedMember) ?? new IAttributeInfo[0];
         public IAttributeInfo[] GetAttributes(T reflectedMember, Type attributeType)
         {
-            return reflectedMember.GetEffectiveAttributes(attributeType) ?? new IAttributeInfo[0];
+            return CustomAttributeProviderExtensions.GetEffectiveAttributes(reflectedMember, attributeType) ?? new IAttributeInfo[0];
         }
         public IAttributeInfo[] GetAttributes(T reflectedMember, Type attributeType, bool inherit)
         {
-            var attrs = reflectedMember.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+            var attrs = Enumerable.Cast<Attribute>(reflectedMember.GetCustomAttributes(attributeType, inherit));
             return inherit
                 ? CustomAttributeProviderExtensions.FilterAttributes(new Attribute[0], attrs)
                 : CustomAttributeProviderExtensions.FilterAttributes(attrs, new Attribute[0]);
@@ -67,7 +66,11 @@ namespace Axle.Reflection
         private IEnumerable<IAttributeInfo> _attributes;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        #if NET20
+        protected internal readonly ILock Lock = new MonitorLock();
+        #else
         protected internal readonly IReadWriteLock Lock = new ReadWriteLock();
+        #endif
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected MemberTokenBase(Type declaringType, string name)
@@ -112,12 +115,17 @@ namespace Axle.Reflection
         public IEnumerable<IAttributeInfo> Attributes
         {
             get
-            {
+            {   //
                 // The `ReflectedMember` property uses `Lock` internally.
-                // We call it before locking again to avoid recursive lock error. 
+                // We call it before locking again to avoid recursive lock error.
                 //
                 var reflectedMember = ReflectedMember;
-                return Lock.Invoke(
+                #if NET20
+                return LockExtensions.Invoke(
+                #else
+                return ReaderWriterLockExtensions.Invoke(
+                #endif
+                    Lock,
                     () => _attributes,
                     xx => xx == null,
                     () => _attributes = GetAttributes(reflectedMember));
@@ -133,7 +141,7 @@ namespace Axle.Reflection
 
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
-    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>, 
+    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>,
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
         where THandle: struct
@@ -149,10 +157,10 @@ namespace Axle.Reflection
             _handle = handle;
         }
 
-        public virtual bool Equals(MemberTokenBase<T, THandle> other) { return EqualityComparer.Equals(this, other); }
-        public override bool Equals(object obj) { return EqualityComparer.Equals(this, obj); }
+        public virtual bool Equals(MemberTokenBase<T, THandle> other) => EqualityComparer.Equals(this, other);
+        public override bool Equals(object obj) => EqualityComparer.Equals(this, obj);
 
-        public override int GetHashCode() { return EqualityComparer.GetHashCode(this); }
+        public override int GetHashCode() => EqualityComparer.GetHashCode(this);
 
         protected abstract T GetMember(THandle handle, RuntimeTypeHandle typeHandle, bool isGeneric);
 
@@ -163,7 +171,12 @@ namespace Axle.Reflection
             get
             {
                 T item = null;
-                Lock.Invoke(
+                #if NET20
+                return LockExtensions.Invoke(
+                #else
+                return ReaderWriterLockExtensions.Invoke(
+                #endif
+                    Lock,
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
                     #if NETSTANDARD
@@ -177,4 +190,3 @@ namespace Axle.Reflection
     }
     #endif
 }
-#endif

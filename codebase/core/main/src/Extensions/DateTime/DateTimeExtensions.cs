@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Globalization;
 
@@ -19,12 +19,16 @@ namespace Axle.Extensions.DateTime
         /// The <see cref="System.DateTime"/> instance upon which this extension method is invoked.
         /// </param>
         /// <returns>
-        /// Returns the number of days in the specified date's month and year. 
-        /// For example, if month equals 2 for February, the return value is 28 or 29 depending upon whether year is a 
-        /// leap year. 
+        /// Returns the number of days in the specified date's month and year.
+        /// For example, if month equals 2 for February, the return value is 28 or 29 depending upon whether year is a
+        /// leap year.
         /// </returns>
         /// <seealso cref="System.DateTime.DaysInMonth" />
-        public static int DaysInMonth(this DateTime current)
+        public static int DaysInMonth(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current)
         {
             return DateTime.DaysInMonth(current.Year, current.Month);
         }
@@ -43,7 +47,11 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
-        public static DateTime FirstDayOfWeek(this DateTime current, CultureInfo culture)
+        public static DateTime FirstDayOfWeek(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current, CultureInfo culture)
         {
             return FirstDayOfWeek(current, culture.DateTimeFormat.FirstDayOfWeek);
         }
@@ -62,7 +70,11 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.DayOfWeek)"/>
-        public static DateTime FirstDayOfWeek(this DateTime current, DayOfWeek firstDayOfWeek)
+        public static DateTime FirstDayOfWeek(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current, DayOfWeek firstDayOfWeek)
         {
             var currentDayOfWeek = current.DayOfWeek;
             if (firstDayOfWeek == currentDayOfWeek)
@@ -89,7 +101,11 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DateTime"/> value representing the first day of the same month as <paramref name="current"/> date time is in.
         /// </returns>
         /// <seealso cref="LastDayOfMonth"/>
-        public static DateTime FirstDayOfMonth(this DateTime current)
+        public static DateTime FirstDayOfMonth(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current)
         {
             return new DateTime(current.Year, current.Month, 1, 0, 0, 0, current.Kind);
         }
@@ -104,7 +120,11 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DateTime"/> value representing the first day of the same year as <paramref name="current"/> date time is in.
         /// </returns>
         /// <seealso cref="LastDayOfYear"/>
-        public static DateTime FirstDayOfYear(this DateTime current)
+        public static DateTime FirstDayOfYear(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current)
         {
             return new DateTime(current.Year, 1, 1, 0, 0, 0, current.Kind);
         }
@@ -123,7 +143,11 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
-        public static DateTime LastDayOfWeek(this DateTime current, CultureInfo culture)
+        public static DateTime LastDayOfWeek(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current, CultureInfo culture)
         {
             return LastDayOfWeek(current, culture.DateTimeFormat.FirstDayOfWeek);
         }
@@ -142,7 +166,11 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.DayOfWeek)"/>
-        public static DateTime LastDayOfWeek(this DateTime current, DayOfWeek firstDayOfWeek)
+        public static DateTime LastDayOfWeek(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current, DayOfWeek firstDayOfWeek)
         {
             return FirstDayOfWeek(current, firstDayOfWeek).AddDays(6);
         }
@@ -157,7 +185,11 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DateTime"/> value representing the last day of the same month as <paramref name="current"/> date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfMonth"/>
-        public static DateTime LastDayOfMonth(this DateTime current)
+        public static DateTime LastDayOfMonth(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current)
         {
             return new DateTime(current.Year, current.Month, DaysInMonth(current), 0, 0, 0, 0, current.Kind);
         }
@@ -172,14 +204,18 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DateTime"/> value representing the last day of the same year as <paramref name="current"/> date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfYear"/>
-        public static DateTime LastDayOfYear(this DateTime current)
+        public static DateTime LastDayOfYear(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime current)
         {
             return new DateTime(current.Year, 12, 31, 0, 0, 0, current.Kind);
         }
 
 
         /// <summary>
-        /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
+        /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with
         /// a <see cref="DateTime.Kind"/> value as specified by the <paramref name="kind"/> parameter.
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> value to change the kind of.</param>
@@ -187,44 +223,56 @@ namespace Axle.Extensions.DateTime
         /// The <see cref="DateTimeKind"/> value to use for the changed <see cref="DateTime"/>.
         /// </param>
         /// <returns>
-        /// A new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
+        /// A new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with
         /// a <see cref="DateTime.Kind"/> value as specified by the <paramref name="kind"/> parameter.
         /// </returns>
         /// <seealso cref="ChangeKindToLocal"/>
         /// <seealso cref="ChangeKindToUtc"/>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
-        public static DateTime ChangeKind(this DateTime dateTime, DateTimeKind kind) { return new DateTime(dateTime.Ticks, kind); }
+        public static DateTime ChangeKind(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime dateTime, DateTimeKind kind) { return new DateTime(dateTime.Ticks, kind); }
 
         /// <summary>
-        /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
+        /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with
         /// a <see cref="DateTime.Kind"/> value changed to <see cref="DateTimeKind.Local"/>.
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> value to change the kind of.</param>
         /// <returns>
-        /// A new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
+        /// A new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with
         /// a <see cref="DateTime.Kind"/> value changed to <see cref="DateTimeKind.Local"/>.
         /// </returns>
         /// <seealso cref="ChangeKindToLocal"/>
         /// <seealso cref="ChangeKindToUtc"/>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind.Local"/>
-        public static DateTime ChangeKindToLocal(this DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Local);
+        public static DateTime ChangeKindToLocal(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Local);
 
         /// <summary>
-        /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
+        /// Returns a new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with
         /// a <see cref="DateTime.Kind"/> value changed to <see cref="DateTimeKind.Utc"/>.
         /// </summary>
         /// <param name="dateTime">The <see cref="DateTime"/> value to change the kind of.</param>
         /// <returns>
-        /// A new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with 
+        /// A new <see cref="DateTime"/> value with the same number of <see cref="DateTime.Ticks"/> but with
         /// a <see cref="DateTime.Kind"/> value changed to <see cref="DateTimeKind.Utc"/>.
         /// </returns>
         /// <seealso cref="ChangeKindToLocal"/>
         /// <seealso cref="ChangeKindToUtc"/>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind.Utc"/>
-        public static DateTime ChangeKindToUtc(this DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
+        public static DateTime ChangeKindToUtc(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
     }
 }
 #endif

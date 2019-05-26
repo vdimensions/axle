@@ -53,7 +53,7 @@ namespace Axle
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
-    public delegate bool Attempt<T, TResult>(T arg, out TResult result);
+    public delegate bool Attempt<in T, TResult>(T arg, out TResult result);
 
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
@@ -81,7 +81,7 @@ namespace Axle
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
-    public delegate bool Attempt<T1, T2, TResult>(T1 arg1, T2 arg2, out TResult result);
+    public delegate bool Attempt<in T1, in T2, TResult>(T1 arg1, T2 arg2, out TResult result);
 
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
@@ -115,7 +115,7 @@ namespace Axle
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
-    public delegate bool Attempt<T1, T2, T3, TResult>(T1 arg1, T2 arg2, T3 arg3, out TResult result);
+    public delegate bool Attempt<in T1, in T2, in T3, TResult>(T1 arg1, T2 arg2, T3 arg3, out TResult result);
 
     /// <summary>
     /// Represents an attempt delegate, that is, a delegate representing an action that may or may not succeed.
@@ -155,6 +155,6 @@ namespace Axle
     /// <returns>
     /// <c>true</c> if the action represented by the attempt succeeded; <c>false</c> otherwise.
     /// </returns>
-    public delegate bool Attempt<T1, T2, T3, T4, TResult>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, out TResult result);
+    public delegate bool Attempt<in T1, in T2, in T3, in T4, TResult>(T1 arg1, T2 arg2, T3 arg3, T4 arg4, out TResult result);
 }
 #endif

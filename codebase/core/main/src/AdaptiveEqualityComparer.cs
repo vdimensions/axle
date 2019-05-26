@@ -29,10 +29,10 @@ namespace Axle
         public AdaptiveEqualityComparer(Func<T1, T2> adaptFunc) : this(adaptFunc, EqualityComparer<T2>.Default) { }
 
         /// <inheritdoc />
-        public bool Equals(T1 x, T1 y) { return _actualComparer.Equals(_adaptFunc(x), _adaptFunc(y)); }
+        public bool Equals(T1 x, T1 y) => _actualComparer.Equals(_adaptFunc(x), _adaptFunc(y));
 
         /// <inheritdoc />
-        public int GetHashCode(T1 obj) { return _actualComparer.GetHashCode(_adaptFunc(obj)); }
+        public int GetHashCode(T1 obj) => _actualComparer.GetHashCode(_adaptFunc(obj));
     }
 }
 #endif

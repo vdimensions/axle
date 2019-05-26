@@ -68,7 +68,7 @@ namespace Axle.Collections.Generic
 
         /// <inheritdoc />
         #if NETSTANDARD || NET35_OR_NEWER
-        public IEnumerator<T> GetEnumerator() { return _underlyingCollection.OfType<T>().GetEnumerator(); }
+        public IEnumerator<T> GetEnumerator() => _underlyingCollection.OfType<T>().GetEnumerator();
         #else
         public IEnumerator<T> GetEnumerator()
         {
@@ -78,6 +78,7 @@ namespace Axle.Collections.Generic
             }
         }
         #endif
+        /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
@@ -107,6 +108,7 @@ namespace Axle.Collections.Generic
         /// <c>true</c> if the <see cref="GenericList{T}"/> has a fixed size; otherwise, <c>false</c>.
         /// </returns>
         public bool IsFixedSize => _underlyingCollection.IsFixedSize;
+
         internal IList RawCollection => _underlyingCollection;
 
         /// <inheritdoc />
@@ -119,28 +121,45 @@ namespace Axle.Collections.Generic
         #region ICollection Implementation
         void ICollection.CopyTo(Array array, int index) => _underlyingCollection.CopyTo(array, index);
 
+        /// <inheritdoc />
         int ICollection.Count => _underlyingCollection.Count;
+
+        /// <inheritdoc />
         bool ICollection.IsSynchronized => _underlyingCollection.IsSynchronized;
+
+        /// <inheritdoc />
         object ICollection.SyncRoot => _underlyingCollection.SyncRoot;
+
+        /// <inheritdoc />
         int ICollection<T>.Count => _underlyingCollection.Count;
         #endregion
 
         #region IList Implementation
+        /// <inheritdoc />
         int IList.Add(object value) => _underlyingCollection.Add(value);
 
+        /// <inheritdoc />
         bool IList.Contains(object value) => _underlyingCollection.Contains(value);
 
+        /// <inheritdoc />
         int IList.IndexOf(object value) => _underlyingCollection.IndexOf(value);
 
+        /// <inheritdoc />
         void IList.Insert(int index, object value) => _underlyingCollection.Insert(index, value);
 
+        /// <inheritdoc />
         void IList.Remove(object value) => _underlyingCollection.Remove(value);
 
+        /// <inheritdoc />
         void IList.RemoveAt(int index) => _underlyingCollection.RemoveAt(index);
 
+        /// <inheritdoc />
         bool IList.IsFixedSize => IsFixedSize;
+
+        /// <inheritdoc />
         bool IList.IsReadOnly => IsReadOnly;
 
+        /// <inheritdoc />
         object IList.this[int index]
         {
             get => _underlyingCollection[index];

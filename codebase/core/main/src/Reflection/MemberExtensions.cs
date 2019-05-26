@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Linq;
 #if NETSTANDARD
 using System.Reflection;
@@ -19,7 +18,7 @@ namespace Axle.Reflection
         /// Determines if the given <see cref="IAttributeTarget"/> instance has an attribute of the type <typeparamref name="TAttribute"/> defined.
         /// </summary>
         /// <typeparam name="TAttribute">
-        /// The type of an attribute to check if defined for the current <see cref="IAttributeTarget"/> instance. 
+        /// The type of an attribute to check if defined for the current <see cref="IAttributeTarget"/> instance.
         /// <para>
         /// Only types inheriting from the <see cref="Attribute"/> class must be specified.
         /// </para>
@@ -35,7 +34,11 @@ namespace Axle.Reflection
         /// </exception>
         public static bool HasAttribute<TAttribute>(this IAttributeTarget member) where TAttribute: Attribute
         {
-            return member.VerifyArgument(nameof(member)).IsNotNull().Value.GetAttributes().Select(x => x.Attribute).OfType<TAttribute>().Any();
+            return Enumerable.Any(
+                Enumerable.OfType<TAttribute>(
+                    Enumerable.Select(
+                        Verifier.IsNotNull(Verifier.VerifyArgument(member, nameof(member))).Value.GetAttributes(),
+                        x => x.Attribute)));
         }
 
         /// <summary>
@@ -45,7 +48,7 @@ namespace Axle.Reflection
         /// The target <see cref="IAttributeTarget"/> instance this extension method is executed against.
         /// </param>
         /// <param name="attributeType">
-        /// The type of an attribute to check if defined for the current <see cref="IAttributeTarget"/> instance. 
+        /// The type of an attribute to check if defined for the current <see cref="IAttributeTarget"/> instance.
         /// <para>
         /// Only types inheriting from the <see cref="Attribute"/> class must be specified.
         /// </para>
@@ -61,14 +64,13 @@ namespace Axle.Reflection
         /// </exception>
         public static bool HasAttribute(this IAttributeTarget member, Type attributeType)
         {
-            attributeType.VerifyArgument(nameof(attributeType)).IsNotNull().Is<Attribute>();
-            return member.VerifyArgument(nameof(member)).IsNotNull().Value.GetAttributes()
-                #if NETSTANDARD
-                .Any(x => attributeType.GetTypeInfo().IsAssignableFrom(x.Attribute.GetType().GetTypeInfo()));
-                #else
-                .Any(x => attributeType.IsInstanceOfType(x.Attribute));
-                #endif
+            TypeVerifier.Is<Attribute>(Verifier.IsNotNull(Verifier.VerifyArgument(attributeType, nameof(attributeType))));
+            var attributes = Verifier.IsNotNull(Verifier.VerifyArgument(member, nameof(member))).Value.GetAttributes();
+            #if NETSTANDARD
+            return attributes.Any(x => attributeType.GetTypeInfo().IsAssignableFrom(x.Attribute.GetType().GetTypeInfo()));
+            #else
+            return Enumerable.Any(attributes, x => attributeType.IsInstanceOfType(x.Attribute));
+            #endif
         }
     }
 }
-#endif

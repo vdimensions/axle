@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.Reflection;
 
@@ -15,7 +14,7 @@ namespace Axle.Reflection
     {
         public static PropertyToken Create(PropertyInfo property)
         {
-            property.VerifyArgument(nameof(property)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(property, nameof(property)));
 
             if (property.CanRead)
             {
@@ -27,7 +26,7 @@ namespace Axle.Reflection
                 return new WriteOnlyPropertyToken(property);
             }
 
-            throw new InvalidOperationException("Cannot create a property token object from a proeprty that cannot be read and written.");
+            throw new InvalidOperationException("Cannot create a property token object from a property that cannot be read and written.");
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -57,4 +56,3 @@ namespace Axle.Reflection
         public override Type MemberType => _memberType;
     }
 }
-#endif

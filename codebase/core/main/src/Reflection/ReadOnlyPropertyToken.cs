@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -38,7 +37,7 @@ namespace Axle.Reflection
             var isFamily = gm.IsFamily && !isPublic;
             var isPrivate = gm.IsPrivate && !(isPublic || isFamily || isAssembly);
             _accessModifier = GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
-            _declaration = gm.GetDeclarationType();
+            _declaration = ReflectionExtensions.GetDeclarationType(gm);
         }
 
         IAccessor IAccessible.FindAccessor(AccessorType accessorType)
@@ -57,4 +56,3 @@ namespace Axle.Reflection
         public IGetAccessor GetAccessor => _getAccessor;
     }
 }
-#endif

@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,7 +22,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
     #else
-    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>> 
+    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>>
     #endif
         where T: MethodBase
     {
@@ -39,7 +38,7 @@ namespace Axle.Reflection
 
             public Parameter(ParameterInfo parameterInfo)
             {
-                _parameterInfo = parameterInfo.VerifyArgument(nameof(parameterInfo)).IsNotNull();
+                _parameterInfo = Verifier.IsNotNull(Verifier.VerifyArgument(parameterInfo, nameof(parameterInfo)));
 
                 if (parameterInfo.IsIn)
                 {
@@ -55,12 +54,16 @@ namespace Axle.Reflection
                 }
             }
 
-            public IAttributeInfo[] GetAttributes() => ReflectedMember.GetEffectiveAttributes();
-            public IAttributeInfo[] GetAttributes(Type attributeType) => ReflectedMember.GetEffectiveAttributes(attributeType);
+            public IAttributeInfo[] GetAttributes() => CustomAttributeProviderExtensions.GetEffectiveAttributes(ReflectedMember);
+            public IAttributeInfo[] GetAttributes(Type attributeType) => CustomAttributeProviderExtensions.GetEffectiveAttributes(ReflectedMember, attributeType);
             public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
             {
                 var reflectedMember = ReflectedMember;
-                var attrs = reflectedMember.GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
+                #if NETSTANDARD || NET45_OR_NEWER
+                var attrs = Enumerable.Cast<Attribute>(CustomAttributeExtensions.GetCustomAttributes(reflectedMember, attributeType, inherit));
+                #else
+                var attrs = Enumerable.Cast<Attribute>(reflectedMember.GetCustomAttributes(attributeType, inherit));
+                #endif
                 return inherit
                     ? CustomAttributeProviderExtensions.FilterAttributes(new Attribute[0], attrs)
                     : CustomAttributeProviderExtensions.FilterAttributes(attrs, new Attribute[0]);
@@ -69,7 +72,7 @@ namespace Axle.Reflection
             public bool IsDefined(Type attributeType, bool inherit)
             {
                 #if NETSTANDARD
-                return ReflectedMember.IsDefined(attributeType);
+                return CustomAttributeExtensions.IsDefined(ReflectedMember, attributeType);
                 #else
                 return ReflectedMember.IsDefined(attributeType, inherit);
                 #endif
@@ -91,8 +94,8 @@ namespace Axle.Reflection
         protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
         #endif
         {
-            _accessModifier = GetAccessModifier(info.VerifyArgument(nameof(info)).IsNotNull());
-            _declaration = info.GetDeclarationType();
+            _accessModifier = GetAccessModifier(Verifier.IsNotNull(Verifier.VerifyArgument(info, nameof(info))));
+            _declaration = ReflectionExtensions.GetDeclarationType(info);
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -115,7 +118,7 @@ namespace Axle.Reflection
         public IParameter[] GetParameters() { return GetParameters(ReflectedMember.GetParameters()); }
         protected virtual IParameter[] GetParameters(IEnumerable<ParameterInfo> reflectedParameters)
         {
-            return reflectedParameters.Select(x => new Parameter(x)).Cast<IParameter>().ToArray();
+            return Enumerable.ToArray(Enumerable.Cast<IParameter>(Enumerable.Select(reflectedParameters, x => new Parameter(x))));
         }
 
         public bool Equals(MethodBaseToken<T> other) => base.Equals(other);
@@ -124,4 +127,3 @@ namespace Axle.Reflection
         public override DeclarationType Declaration => _declaration;
     }
 }
-#endif

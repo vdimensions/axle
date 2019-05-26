@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     /// <summary>
     /// An interface that represents a reflected member (usually a method or constructor) that can be invoked trough reflection.
@@ -7,11 +6,11 @@ namespace Axle.Reflection
     public interface IInvokable
     {
         /// <summary>
-        /// Returns an array of <see cref="IParameter" /> instances, each representing a parameter to the current 
-        /// <see cref="IInvokable" /> implementation. If the invocable has no parameters, an empty array is returned.
+        /// Returns an array of <see cref="IParameter" /> instances, each representing a parameter to the current
+        /// <see cref="IInvokable" /> implementation. If the invokable has no parameters, an empty array is returned.
         /// </summary>
         /// <returns>
-        /// An array of <see cref="IParameter" /> instances, each representing a parameter to the current 
+        /// An array of <see cref="IParameter" /> instances, each representing a parameter to the current
         /// <see cref="IInvokable" /> implementation, or an empty array if the method has no parameters.
         /// </returns>
         IParameter[] GetParameters();
@@ -20,7 +19,7 @@ namespace Axle.Reflection
         /// Invokes the current <see cref="IInvokable" /> implementation.
         /// </summary>
         /// <param name="target">
-        /// If the reflected member is an instance method, represents the target object upon whose behalf the method is invoked on 
+        /// If the reflected member is an instance method, represents the target object upon whose behalf the method is invoked on
         /// (and would be referenced by the <c>this</c> keyword in the reflected code). <br />
         /// </param>
         /// <param name="args">
@@ -39,4 +38,3 @@ namespace Axle.Reflection
         object Invoke(object target, params object[] args);
     }
 }
-#endif

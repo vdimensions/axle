@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -37,7 +36,7 @@ namespace Axle.Text.Expressions.Path
                 throw new ArgumentNullException(nameof(pattern));
             }
 
-            var res = _Replacements.Aggregate(EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
+            var res = Enumerable.Aggregate(_Replacements, EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
             //options |= RegexOptions.IgnoreCase;
             res = res.Replace("**", AntDoubleAsteriskRegex).Replace("*", AntSingleAsteriskWinRegex);
             return new Regex(res, options);
@@ -48,14 +47,13 @@ namespace Axle.Text.Expressions.Path
 
         public AssemblyPathExpression(string pattern) : base(pattern, CreateRegex)
         {
-            var ptrn = _Replacements.Aggregate(pattern, (p, c) => p.Replace(c.Key, c.Value));
+            var ptrn = Enumerable.Aggregate(_Replacements, pattern, (p, c) => p.Replace(c.Key, c.Value));
             _pattern = ptrn;
         }
 
-        public bool IsMatch(Assembly value) => IsMatch(value.VerifyArgument(nameof(value)).IsNotNull().Value.GetName().Name);
-        public bool IsMatch(AssemblyName value) => IsMatch(value.VerifyArgument(nameof(value)).Value.Name);
+        public bool IsMatch(Assembly value) => IsMatch(Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))).Value.GetName().Name);
+        public bool IsMatch(AssemblyName value) => IsMatch(Verifier.VerifyArgument(value, nameof(value)).Value.Name);
 
         public override string Pattern => _pattern;
     }
 }
-#endif

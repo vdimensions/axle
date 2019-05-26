@@ -1,11 +1,10 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Threading
 {
     /// <summary>
-    /// A <see cref="IDisposable">disposable</see> handle for a <see cref="ILock">synchronization lock</see> that is curently taking place.
+    /// A <see cref="IDisposable">disposable</see> handle for a <see cref="ILock">synchronization lock</see> that is currently taking place.
     /// </summary>
     /// <remarks>
     /// Disposal of this instance will release the held lock.
@@ -18,4 +17,3 @@ namespace Axle.Threading
         ILock Lock { get; }
     }
 }
-#endif

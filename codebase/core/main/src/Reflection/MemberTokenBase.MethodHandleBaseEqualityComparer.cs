@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     public abstract partial class MemberTokenBase<T>
     {
@@ -10,9 +9,9 @@ namespace Axle.Reflection
         {
             internal MethodHandleBaseEqualityComparer() { }
 
-            protected override int DoGetHashCode(TT obj) { return obj.ReflectedMember.GetHashCode(); }
+            protected override int DoGetHashCode(TT obj) => obj.ReflectedMember.GetHashCode();
 
-            protected override bool DoEquals(TT x, TT y) { return x.ReflectedMember.Equals(y.ReflectedMember); }
+            protected override bool DoEquals(TT x, TT y) => x.ReflectedMember.Equals(y.ReflectedMember);
         }
 
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
@@ -34,15 +33,9 @@ namespace Axle.Reflection
         {
             internal MethodHandleBaseEqualityComparer() { }
 
-            protected override int DoGetHashCode(MemberTokenBase<T, THandle> obj)
-            {
-                return obj.Handle.GetHashCode();
-            }
+            protected override int DoGetHashCode(MemberTokenBase<T, THandle> obj) => obj.Handle.GetHashCode();
 
-            protected override bool DoEquals(MemberTokenBase<T, THandle> x, MemberTokenBase<T, THandle> y)
-            {
-                return x.Handle.Equals(y.Handle);
-            }
+            protected override bool DoEquals(MemberTokenBase<T, THandle> x, MemberTokenBase<T, THandle> y) => x.Handle.Equals(y.Handle);
         }
 
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
@@ -57,4 +50,3 @@ namespace Axle.Reflection
     }
     #endif
 }
-#endif

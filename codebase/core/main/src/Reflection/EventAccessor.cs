@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 
 
@@ -30,4 +29,3 @@ namespace Axle.Reflection
         MethodInfo IReflected<MethodInfo>.ReflectedMember => OperationMethod.ReflectedMember;
     }
 }
-#endif

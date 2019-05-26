@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics;
 using System.Linq;
@@ -37,7 +36,7 @@ namespace Axle.Reflection
                     if (!IsDefined)
                     {
                         return new InvalidCastException(string.Format("No cast operator is defined for types {0} and {1}.",
-                            typeof(T1).FullName, 
+                            typeof(T1).FullName,
                             typeof(T2).FullName));
                     }
                     return (T2) method.Invoke(null, new[] { target });
@@ -99,13 +98,11 @@ namespace Axle.Reflection
             private static MethodInfo FindMethod(Type targetType, string methodName, Type returnType, BindingFlags bindingFlags)
             {
                 #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-                return targetType.GetTypeInfo()
+                var methods = targetType.GetTypeInfo().GetMethods(bindingFlags);
                 #else
-                return targetType
+                var methods = targetType.GetMethods(bindingFlags);
                 #endif
-                    .GetMethods(bindingFlags)
-                    .Where(m => m.Name.Equals(methodName, StringComparison.Ordinal) && m.ReturnType.Equals(returnType))
-                    .SingleOrDefault();
+                return Enumerable.SingleOrDefault(methods, m => m.Name.Equals(methodName, StringComparison.Ordinal) && m.ReturnType.Equals(returnType));
             }
 
             public T2 Invoke(T1 target) { return (T2) DoInvoke(target); }
@@ -138,7 +135,7 @@ namespace Axle.Reflection
 
             private object DoInvoke(object target)
             {
-                var castOperator = new[] { ImplicitOperator, ExplicitOperator }.FirstOrDefault(x => x.IsDefined);
+                var castOperator = Enumerable.FirstOrDefault(new[] { ImplicitOperator, ExplicitOperator }, x => x.IsDefined);
                 if (castOperator != null)
                 {
                     return castOperator.Invoke(target);
@@ -156,10 +153,13 @@ namespace Axle.Reflection
         {
             return Singleton.GetSingletonInstance<ICastOperator>(typeof(CastOp<,>).MakeGenericType(source, target));
         }
-        public static ICastOperator<T, TResult> For<T, TResult>() { return CastOp<T, TResult>.Instance; }
+        public static ICastOperator<T, TResult> For<T, TResult>() => CastOp<T, TResult>.Instance;
 
-        public static TResult Cast<T, TResult>(this T target) { return For<T, TResult>().Invoke(target); }
+        public static TResult Cast<T, TResult>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            T target) => For<T, TResult>().Invoke(target);
     }
 }
-#endif
 #endif

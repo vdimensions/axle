@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     /// <summary>
     /// An interface representing a cast operator defined by a <see cref="System.Type">type</see>.
@@ -12,10 +11,10 @@ namespace Axle.Reflection
         /// <paramref name="target"/> object object.
         /// </summary>
         /// <param name="target">
-        /// The target object to be cast. 
+        /// The target object to be cast.
         /// </param>
         /// <returns>
-        /// An object that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance. 
+        /// An object that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance.
         /// </returns>
         object Invoke(object target);
 
@@ -27,7 +26,7 @@ namespace Axle.Reflection
         /// The target object to be cast.
         /// </param>
         /// <param name="result">
-        /// An object that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance. 
+        /// An object that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance.
         /// </param>
         /// <returns>
         /// <c>true</c> if the cast operation succeeds; <c>false</c> otherwise.
@@ -53,11 +52,11 @@ namespace Axle.Reflection
         /// on the target object.
         /// </summary>
         /// <param name="target">
-        /// The target object to be cast. 
+        /// The target object to be cast.
         /// </param>
         /// <returns>
         /// An instance of <typeparamref name="T2"/> that is the result of the cast operation represented by the current
-        /// <see cref="ICastOperator{T1, T2}">cast operator</see> instance. 
+        /// <see cref="ICastOperator{T1, T2}">cast operator</see> instance.
         /// </returns>
         T2 Invoke(T1 target);
         /// <summary>
@@ -68,7 +67,7 @@ namespace Axle.Reflection
         /// The target object to be cast.
         /// </param>
         /// <param name="result">
-        /// An instance of <typeparamref name="T2"/> that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance. 
+        /// An instance of <typeparamref name="T2"/> that is the result of the cast operation represented by the current <see cref="ICastOperator">cast operator</see> instance.
         /// </param>
         /// <returns>
         /// <c>true</c> if the cast operation succeeds; <c>false</c> otherwise.
@@ -76,4 +75,3 @@ namespace Axle.Reflection
         bool TryInvoke(T1 target, out T2 result);
     }
 }
-#endif

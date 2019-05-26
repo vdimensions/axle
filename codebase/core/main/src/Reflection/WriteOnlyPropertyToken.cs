@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
@@ -29,7 +28,7 @@ namespace Axle.Reflection
 
             if (sm == null)
             {
-                throw new ArgumentException("The property is not writeable. ",  nameof(propertyInfo));
+                throw new ArgumentException("The property is not writable. ",  nameof(propertyInfo));
             }
             _setAccessor = new PropertySetAccessor(this, new MethodToken(sm));
 
@@ -38,7 +37,7 @@ namespace Axle.Reflection
             var isFamily = sm.IsFamily && !isPublic;
             var isPrivate = sm.IsPrivate && !(isPublic || isFamily || isAssembly);
             _accessModifier = GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
-            _declaration = sm.GetDeclarationType();
+            _declaration = ReflectionExtensions.GetDeclarationType(sm);
         }
 
         IAccessor IAccessible.FindAccessor(AccessorType accessorType)
@@ -57,4 +56,3 @@ namespace Axle.Reflection
         public ISetAccessor SetAccessor => _setAccessor;
     }
 }
-#endif

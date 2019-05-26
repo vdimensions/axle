@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Linq;
 
 using Axle.Verification;
@@ -6,6 +6,9 @@ using Axle.Verification;
 
 namespace Axle.Extensions.Object
 {
+    /// <summary>
+    /// A static class containing common extension methods applicable to all <see cref="System.Object"/> instances.
+    /// </summary>
     public static class ObjectExtensions
     {
         /// <summary>
@@ -13,15 +16,15 @@ namespace Axle.Extensions.Object
         /// </summary>
         /// <remarks>
         /// The usual context of calculating the hash code includes a type's members. However, this method does not
-        /// constrain you in any way to pass external and potentially un-related objects that will be used to obtain the resuling hash.
+        /// constrain you in any way to pass external and potentially un-related objects that will be used to obtain the resulting hash.
         /// Be advised to carefully choose the arguments when performing calls to this method, as it serves more as a convenient
-        /// shortcut to manualy doing the hash calculation.
+        /// shortcut to manually doing the hash calculation.
         /// </remarks>
         /// <typeparam name="T">
         /// The type of the object to calculate a hash code for.
         /// </typeparam>
         /// <param name="obj">
-        /// The source object to calculate the hash code for. 
+        /// The source object to calculate the hash code for.
         /// Its own <see cref="object.GetHashCode()"/> method is not invoked inside this method, only the hashes of the arguments are being used.
         /// </param>
         /// <param name="magic">
@@ -35,8 +38,8 @@ namespace Axle.Extensions.Object
         /// </returns>
         public static int CalculateHashCode<T>(this T obj, int magic, params object[] args)
         {
-            obj.VerifyArgument(nameof(obj)).IsNotNull();
-            return (magic == 0 ? 1 : magic) * args.Aggregate(0, (x, y) => x ^ (y?.GetHashCode() ?? 0));
+            Verifier.IsNotNull(Verifier.VerifyArgument(obj, nameof(obj)));
+            return (magic == 0 ? 1 : magic) * Enumerable.Aggregate(args, 0, (x, y) => x ^ (y?.GetHashCode() ?? 0));
         }
 
         /// <summary>
@@ -44,15 +47,15 @@ namespace Axle.Extensions.Object
         /// </summary>
         /// <remarks>
         /// The usual context of calculating the hash code includes a type's members. However, this method does not
-        /// constrain you in any way to pass external and potentially un-related objects that will be used to obtain the resuling hash.
+        /// constrain you in any way to pass external and potentially un-related objects that will be used to obtain the resulting hash.
         /// Be advised to carefully choose the arguments when performing calls to this method, as it serves more as a convenient
-        /// shortcut to manualy doing the hash calculation.
+        /// shortcut to manually doing the hash calculation.
         /// </remarks>
         /// <typeparam name="T">
         /// The type of the object to calculate a hash code for.
         /// </typeparam>
         /// <param name="obj">
-        /// The source object to calculate the hash code for. 
+        /// The source object to calculate the hash code for.
         /// Its own <see cref="object.GetHashCode()"/> method is not invoked inside this method, only the hashes of the arguments are being used.
         /// </param>
         /// <param name="args">

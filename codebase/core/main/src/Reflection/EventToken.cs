@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -39,9 +38,9 @@ namespace Axle.Reflection
 
             _declaration = ReflectionExtensions.GetDeclarationTypeUnchecked(am, rm);
             var m = new[] { am, rm };
-            var isPublic = m.All(x => (x == null) || x.IsPublic);
-            var isAssembly = !isPublic && m.All(x => (x == null) || x.IsAssembly);
-            var isFamily = !isPublic && m.All(x => (x == null) || x.IsFamily);
+            var isPublic = Enumerable.All(m, x => (x == null) || x.IsPublic);
+            var isAssembly = !isPublic && Enumerable.All(m, x => (x == null) || x.IsAssembly);
+            var isFamily = !isPublic && Enumerable.All(m, x => (x == null) || x.IsFamily);
             var isPrivate = !(isPublic || isFamily || isAssembly) && m.All(x => (x == null) || x.IsPrivate);
             _accessModifier = GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
         }
@@ -71,4 +70,3 @@ namespace Axle.Reflection
         public override EventInfo ReflectedMember => _eventInfo;
     }
 }
-#endif

@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 using Axle.Verification;
 
@@ -40,4 +39,3 @@ namespace Axle.Reflection
         }
     }
 }
-#endif

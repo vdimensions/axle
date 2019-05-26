@@ -1,12 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Reflection;
 
 
 namespace Axle.Reflection
 {
     /// <summary>
-    /// An interface that represents a reflected method. Enables quering the reflected metadata and allows 
+    /// An interface that represents a reflected method. Enables querying the reflected metadata and allows
     /// the invocation of the reflected member.
     /// </summary>
     /// <seealso cref="IInvokable"/>
@@ -16,7 +15,7 @@ namespace Axle.Reflection
     public interface IMethod : IMember, IReflected<MethodInfo>, IInvokable, IAttributeTarget
     {
         /// <summary>
-        /// Substitutes the elements of an array of types for the type parameters of the current generic method definition, 
+        /// Substitutes the elements of an array of types for the type parameters of the current generic method definition,
         /// and returns a <see cref="IGenericMethod"/> object representing the resulting constructed method.
         /// </summary>
         /// <param name="types">
@@ -53,4 +52,3 @@ namespace Axle.Reflection
         Type ReturnType { get; }
     }
 }
-#endif

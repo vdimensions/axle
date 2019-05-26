@@ -1,4 +1,3 @@
-#if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
 
 using Axle.Verification;
@@ -28,4 +27,3 @@ namespace Axle.Text.Expressions.Substitution
         }
     }
 }
-#endif

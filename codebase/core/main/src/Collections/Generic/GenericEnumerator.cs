@@ -86,7 +86,6 @@ namespace Axle.Collections.Generic
     /// <seealso cref="IEnumerator"/>
     /// <seealso cref="GenericEnumerator{T}"/>
     /// <seealso cref="GenericEnumerator"/>
-    #if NETSTANDARD || NET20_OR_NEWER
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
@@ -132,6 +131,5 @@ namespace Axle.Collections.Generic
         /// <inheritdoc />
         object IEnumerator.Current => _innerEnumerator.Current;
     }
-    #endif
 }
 #endif

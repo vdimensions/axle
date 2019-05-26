@@ -1,23 +1,22 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
 {
     /// <summary>
-    /// An interface representing a reflected parameter to a constructor or method and discovers parameter metadata. 
+    /// An interface representing a reflected parameter to a constructor or method and discovers parameter metadata.
     /// </summary>
     /// <seealso cref="System.Reflection.ParameterInfo"/>
     public interface IParameter : IAttributeTarget
     {
         /// <summary>
-        /// The type of the current <see cref="IParameter">parameter</see>. 
+        /// The type of the current <see cref="IParameter">parameter</see>.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.ParameterType"/>
         Type Type { get; }
 
         /// <summary>
-        /// The name of the current <see cref="IParameter">parameter</see>. 
+        /// The name of the current <see cref="IParameter">parameter</see>.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.Name"/>
         string Name { get; }
@@ -29,7 +28,7 @@ namespace Axle.Reflection
         bool IsOptional { get; }
 
         /// <summary>
-        /// Gets the default value of the parameter if it has one. 
+        /// Gets the default value of the parameter if it has one.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.DefaultValue"/>
         object DefaultValue { get; }
@@ -40,4 +39,3 @@ namespace Axle.Reflection
         ParameterDirection Direction { get; }
     }
 }
-#endif

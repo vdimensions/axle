@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Reflection
+﻿namespace Axle.Reflection
 {
     /// <summary>
     /// An interface that represents a get accessor (or getter) for a class member - a property or a field.
@@ -10,7 +9,7 @@ namespace Axle.Reflection
     public interface IGetAccessor : IAccessor
     {
         /// <summary>
-        /// Invokes the appropriate mechanism of the reflected getter. For properties, this will invoke the 
+        /// Invokes the appropriate mechanism of the reflected getter. For properties, this will invoke the
         /// property's get method, for fields it will return the field's value.
         /// </summary>
         /// <param name="target">
@@ -23,4 +22,3 @@ namespace Axle.Reflection
         object GetValue(object target);
     }
 }
-#endif

@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
@@ -11,9 +10,8 @@ namespace Axle.Reflection
     {
         public EventRemoveAccessor(EventToken @event, MethodToken operationMethod) : base(@event, operationMethod) { }
 
-        public void RemoveDelegate(object target, Delegate handler) { OperationMethod.Invoke(target, handler); }
+        public void RemoveDelegate(object target, Delegate handler) => OperationMethod.Invoke(target, handler);
 
         public override AccessorType AccessorType => AccessorType.Remove;
     }
 }
-#endif

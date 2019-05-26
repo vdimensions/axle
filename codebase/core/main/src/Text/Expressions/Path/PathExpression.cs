@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Diagnostics;
 using System.Text.RegularExpressions;
@@ -25,7 +25,7 @@ namespace Axle.Text.Expressions.Path
             }
 
             var res = EscapeRegex(pattern);
-            if (!res.Contains("/", StringComparison.Ordinal))
+            if (!StringExtensions.Contains(res, "/", StringComparison.Ordinal))
             {
                 // assume windows path
 

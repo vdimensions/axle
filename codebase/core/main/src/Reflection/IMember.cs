@@ -1,11 +1,10 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Reflection
 {
     /// <summary>
-    /// Represents a reflected member of a <c>struct</c>, <c>class</c>, or <c>interface</c>. 
+    /// Represents a reflected member of a <c>struct</c>, <c>class</c>, or <c>interface</c>.
     /// This interface acts as a high-level abstraction over concrete member types, such as a constructor, method, field, property and etc.
     /// </summary>
     /// <seealso cref="IConstructor"/>
@@ -33,14 +32,13 @@ namespace Axle.Reflection
         string Name { get; }
 
         /// <summary>
-        /// Gets the declaration type for the current <see cref="IMember">member</see>. 
+        /// Gets the declaration type for the current <see cref="IMember">member</see>.
         /// </summary>
         DeclarationType Declaration { get; }
 
         /// <summary>
-        /// Gets the access modifier of the current <see cref="IMember">member</see>. 
+        /// Gets the access modifier of the current <see cref="IMember">member</see>.
         /// </summary>
         AccessModifier AccessModifier { get; }
     }
 }
-#endif

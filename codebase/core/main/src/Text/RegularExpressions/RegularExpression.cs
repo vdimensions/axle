@@ -8,7 +8,7 @@ namespace Axle.Text.RegularExpressions
     [System.Serializable]
     #endif
     [System.Obsolete("Use `Axle.Text.Expressions.Regular.RegularExpression` instead")]
-    public class RegularExpression : Axle.Text.Expressions.Regular.RegularExpression, IRegularExpression 
+    public class RegularExpression : Axle.Text.Expressions.Regular.RegularExpression, IRegularExpression
     {
         public RegularExpression(Regex regex) : base(regex) { }
         public RegularExpression(string patterm, RegexOptions options) : base(patterm, options) { }

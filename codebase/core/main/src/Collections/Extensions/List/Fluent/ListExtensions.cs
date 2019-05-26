@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +25,11 @@ namespace Axle.Collections.Extensions.List.Fluent
         /// <returns>the <see cref="IList"/> instance this method is called against.</returns>
         /// <exception cref="ArgumentNullException"><paramref name="list"/> is <c>null</c>.</exception>
         /// <seealso cref="IList.Add"/>
-        public static TCollection FluentAdd<TCollection>(this TCollection list, object item) where TCollection: class, IList
+        public static TCollection FluentAdd<TCollection>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TCollection list, object item) where TCollection: class, IList
         {
             if (list == null)
             {
@@ -35,7 +39,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             return list;
         }
 
-        public static TCollection FluentClear<TCollection>(this TCollection list) where TCollection: class, IList
+        public static TCollection FluentClear<TCollection>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TCollection list) where TCollection: class, IList
         {
             if (list == null)
             {
@@ -45,7 +53,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             return list;
         }
 
-        public static TCollection FluentCopyTo<TCollection>(this TCollection list, Array array, int arrayIndex) where TCollection: class, IList
+        public static TCollection FluentCopyTo<TCollection>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TCollection list, Array array, int arrayIndex) where TCollection: class, IList
         {
             if (list == null)
             {
@@ -55,7 +67,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             return list;
         }
 
-        public static TList FluentInsert<TList, T>(this TList list, int index, T item) where TList: class, IList<T>
+        public static TList FluentInsert<TList, T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TList list, int index, T item) where TList: class, IList<T>
         {
             if (list == null)
             {
@@ -64,7 +80,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             list.Insert(index, item);
             return list;
         }
-        public static TList FluentInsert<TList>(this TList list, int index, object item) where TList : class, IList
+        public static TList FluentInsert<TList>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TList list, int index, object item) where TList : class, IList
         {
             if (list == null)
             {
@@ -74,7 +94,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             return list;
         }
 
-        public static TCollection FluentRemove<TCollection>(this TCollection list, object item) where TCollection: class, IList
+        public static TCollection FluentRemove<TCollection>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TCollection list, object item) where TCollection: class, IList
         {
             if (list == null)
             {
@@ -84,7 +108,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             return list;
         }
 
-        public static TList FluentRemoveAt<TList, T>(this TList list, int index) where TList : class, IList<T>
+        public static TList FluentRemoveAt<TList, T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TList list, int index) where TList : class, IList<T>
         {
             if (list == null)
             {
@@ -93,7 +121,11 @@ namespace Axle.Collections.Extensions.List.Fluent
             list.RemoveAt(index);
             return list;
         }
-        public static TList FluentRemoveAt<TList>(this TList list, int index) where TList : class, IList
+        public static TList FluentRemoveAt<TList>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TList list, int index) where TList : class, IList
         {
             if (list == null)
             {

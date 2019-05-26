@@ -7,7 +7,7 @@ namespace Axle.Threading
     /// <inheritdoc cref="ReadWriteLock" />
     public sealed class ReentrantReadWriteLock : ReadWriteLock, IReentrantReadWriteLock
     {
-        // IMPORTANT: Earlier mono versions throw NotSupportedExcception for other than `NoRecursion` policies
+        // IMPORTANT: Earlier mono versions throw NotSupportedException for other than `NoRecursion` policies
         public ReentrantReadWriteLock() : base(new ReaderWriterLockSlim(LockRecursionPolicy.SupportsRecursion)) {}
     }
 }

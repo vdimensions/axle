@@ -1,8 +1,6 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
-using System.Linq;
-
 using Axle.Verification;
 
 
@@ -13,21 +11,21 @@ namespace Axle.Extensions.String
     /// <summary>
     /// A static class containing common extension methods to <see cref="String"/> instances.
     /// </summary>
-    public static partial class StringExtensions
+    public static class StringExtensions
     {
         #region Contains(...)
         /// <summary>
-        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance.
         /// </param>
         /// <param name="value">
-        /// The <see cref="string"/> to seek. 
+        /// The <see cref="string"/> to seek.
         /// </param>
         /// <param name="comparison">
-        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search. 
+        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search.
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
@@ -41,7 +39,11 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="StringComparison"/>
         /// <seealso cref="string.IndexOf(string, StringComparison)"/>
-        public static bool Contains(this string str, string value, StringComparison comparison)
+        public static bool Contains(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
@@ -51,14 +53,14 @@ namespace Axle.Extensions.String
         }
 
         /// <summary>
-        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance.
         /// </param>
         /// <param name="value">
-        /// The <see cref="string"/> to seek. 
+        /// The <see cref="string"/> to seek.
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
@@ -70,7 +72,11 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// </exception>
         /// <seealso cref="string.IndexOf(string)"/>
-        public static bool Contains(this string str, string value)
+        public static bool Contains(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value)
         {
             if (str == null)
             {
@@ -80,20 +86,20 @@ namespace Axle.Extensions.String
         }
 
         /// <summary>
-        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance.
         /// </param>
         /// <param name="value">
-        /// The <see cref="string"/> to seek. 
+        /// The <see cref="string"/> to seek.
         /// </param>
         /// <param name="startIndex">
-        /// The search starting position. 
+        /// The search starting position.
         /// </param>
         /// <param name="comparison">
-        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search. 
+        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search.
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
@@ -110,7 +116,11 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="StringComparison"/>
         /// <seealso cref="string.IndexOf(string, int, StringComparison)"/>
-        public static bool Contains(this string str, string value, int startIndex, StringComparison comparison)
+        public static bool Contains(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
@@ -120,17 +130,17 @@ namespace Axle.Extensions.String
         }
 
         /// <summary>
-        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance.
         /// </param>
         /// <param name="value">
-        /// The <see cref="string"/> to seek. 
+        /// The <see cref="string"/> to seek.
         /// </param>
         /// <param name="startIndex">
-        /// The search starting position. 
+        /// The search starting position.
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
@@ -143,7 +153,11 @@ namespace Axle.Extensions.String
         /// <paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="str"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int)"/>
-        public static bool Contains(this string str, string value, int startIndex)
+        public static bool Contains(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex)
         {
             if (str == null)
             {
@@ -153,23 +167,23 @@ namespace Axle.Extensions.String
         }
 
         /// <summary>
-        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance.
         /// </param>
         /// <param name="value">
-        /// The <see cref="string"/> to seek. 
+        /// The <see cref="string"/> to seek.
         /// </param>
         /// <param name="startIndex">
-        /// The search starting position. 
+        /// The search starting position.
         /// </param>
         /// <param name="count">
-        /// The number of character positions to examine. 
+        /// The number of character positions to examine.
         /// </param>
         /// <param name="comparison">
-        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search. 
+        ///  One of the <see cref="StringComparison"/> enumeration values that specifies the rules for the search.
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
@@ -180,7 +194,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="count"/> or <paramref name="startIndex"/> is negative.
-        /// <para>-or-</para> 
+        /// <para>-or-</para>
         /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
         /// <para>-or-</para>
         /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
@@ -190,7 +204,11 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="StringComparison"/>
         /// <seealso cref="string.IndexOf(string, int, int, StringComparison)"/>
-        public static bool Contains(this string str, string value, int startIndex, int count, StringComparison comparison)
+        public static bool Contains(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, int count, StringComparison comparison)
         {
             if (str == null)
             {
@@ -200,20 +218,20 @@ namespace Axle.Extensions.String
         }
 
         /// <summary>
-        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained 
+        /// Determines if the provided by the <paramref name="value"/> parameter <see cref="string"/> is contained
         /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/> instance.
         /// </param>
         /// <param name="value">
-        /// The <see cref="string"/> to seek. 
+        /// The <see cref="string"/> to seek.
         /// </param>
         /// <param name="startIndex">
-        /// The search starting position. 
+        /// The search starting position.
         /// </param>
         /// <param name="count">
-        /// The number of character positions to examine. 
+        /// The number of character positions to examine.
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
@@ -224,13 +242,17 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
         /// <paramref name="count"/> or <paramref name="startIndex"/> is negative.
-        /// <para>-or-</para> 
+        /// <para>-or-</para>
         /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
         /// <para>-or-</para>
         /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int, int)"/>
-        public static bool Contains(this string str, string value, int startIndex, int count)
+        public static bool Contains(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, int count)
         {
             if (str == null)
             {
@@ -251,7 +273,11 @@ namespace Axle.Extensions.String
         /// <paramref name="str"/> is <c>null</c>.
         /// </exception>
         /// <seealso cref="string.Empty"/>
-        public static bool IsEmpty(this string str)
+        public static bool IsEmpty(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str)
         {
             if (str == null)
             {
@@ -270,7 +296,11 @@ namespace Axle.Extensions.String
         /// <seealso cref="string.Empty"/>
         /// <seealso cref="string.IsNullOrEmpty(string)"/>
         /// <seealso cref="IsEmpty(string)"/>
-        public static bool IsNullOrEmpty(this string str) => string.IsNullOrEmpty(str);
+        public static bool IsNullOrEmpty(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str) => string.IsNullOrEmpty(str);
 
         /// <summary>
         /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed order.
@@ -282,30 +312,36 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>.
         /// </exception>
-        public static string Reverse(this string str)
+        public static string Reverse(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str)
         {
-            return new string(str.VerifyArgument(nameof(str)).IsNotNull().Value.ToCharArray().Reverse().ToArray());
+            var chars = Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.ToCharArray();
+            Array.Reverse(chars);
+            return new string(chars);
         }
 
         #region Split(...)
         /// <summary>
-        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified Unicode character provided by the <paramref name="separator"/> parameter. 
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified Unicode character provided by the <paramref name="separator"/> parameter.
         /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/>
         /// </param>
         /// <param name="options">
-        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned;
         /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
         /// </param>
         /// <param name="separator">
         /// An Unicode character to act as a delimiter.
         /// </param>
         /// <returns>
-        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified Unicode character. 
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified Unicode character.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>;
@@ -314,29 +350,33 @@ namespace Axle.Extensions.String
         /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
         /// </exception>
         /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
-        public static string[] Split(this string str, StringSplitOptions options, char separator)
+        public static string[] Split(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, StringSplitOptions options, char separator)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(new[] { separator }, options);
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.Split(new[] { separator }, options);
         }
 
         /// <summary>
-        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter. 
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter.
         /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/>
         /// </param>
         /// <param name="options">
-        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned;
         /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
         /// </param>
         /// <param name="separators">
         /// An array of Unicode characters to act as delimiters, an empty array or <c>null</c>.
         /// </param>
         /// <returns>
-        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified Unicode character. 
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified Unicode character.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>;
@@ -345,32 +385,36 @@ namespace Axle.Extensions.String
         /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
         /// </exception>
         /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
-        public static string[] Split(this string str, StringSplitOptions options, params char[] separators)
+        public static string[] Split(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, StringSplitOptions options, params char[] separators)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, options);
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.Split(separators, options);
         }
 
         /// <summary>
-        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter. 
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified Unicode character array provided by the <paramref name="separators"/> parameter.
         /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/>
         /// </param>
         /// <param name="options">
-        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned;
         /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
         /// </param>
         /// <param name="count">
-        /// The maximum number of substrings to return. 
+        /// The maximum number of substrings to return.
         /// </param>
         /// <param name="separators">
         /// An array of Unicode characters to act as delimiters, an empty array or <c>null</c>.
         /// </param>
         /// <returns>
-        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified Unicode character. 
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified Unicode character.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>;
@@ -382,29 +426,33 @@ namespace Axle.Extensions.String
         /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
         /// </exception>
         /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
-        public static string[] Split(this string str, StringSplitOptions options, int count, params char[] separators)
+        public static string[] Split(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, StringSplitOptions options, int count, params char[] separators)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, count, options);
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.Split(separators, count, options);
         }
 
         /// <summary>
-        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter.
         /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/>
         /// </param>
         /// <param name="options">
-        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned;
         /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
         /// </param>
         /// <param name="separators">
         /// An array of strings to act as delimiters, an empty array or <c>null</c>.
         /// </param>
         /// <returns>
-        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified array of strings. 
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified array of strings.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>;
@@ -413,32 +461,36 @@ namespace Axle.Extensions.String
         /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
         /// </exception>
         /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
-        public static string[] Split(this string str, StringSplitOptions options, params string[] separators)
+        public static string[] Split(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, StringSplitOptions options, params string[] separators)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, options);
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.Split(separators, options);
         }
 
         /// <summary>
-        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter.
         /// The <paramref name="options"/> parameter specifies whether to return empty array elements.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/>
         /// </param>
         /// <param name="options">
-        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned; 
+        /// Use <see cref="StringSplitOptions.RemoveEmptyEntries"/> to omit empty array elements from the array returned;
         /// or <see cref="StringSplitOptions.None"/> to include empty array elements in the array returned
         /// </param>
         /// <param name="count">
-        /// The maximum number of substrings to return. 
+        /// The maximum number of substrings to return.
         /// </param>
         /// <param name="separators">
         /// An array of strings to act as delimiters, an empty array or <c>null</c>.
         /// </param>
         /// <returns>
-        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified array of strings. 
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified array of strings.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>;
@@ -450,14 +502,18 @@ namespace Axle.Extensions.String
         /// <paramref name="options"/> is not one of the <see cref="StringSplitOptions"/> values.
         /// </exception>
         /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
-        public static string[] Split(this string str, StringSplitOptions options, int count, params string[] separators)
+        public static string[] Split(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, StringSplitOptions options, int count, params string[] separators)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, count, options);
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.Split(separators, count, options);
         }
 
         /// <summary>
-        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter. 
+        /// Returns a string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified array of strings provided by the <paramref name="separators"/> parameter.
         /// </summary>
         /// <param name="str">
         /// The target <see cref="string"/>
@@ -466,16 +522,20 @@ namespace Axle.Extensions.String
         /// An array of strings to act as delimiters, an empty array or <c>null</c>.
         /// </param>
         /// <returns>
-        /// A string array that contains the substrings in the <paramref name="str">target string</paramref> 
-        /// that are delimited by elements of a specified array of strings. 
+        /// A string array that contains the substrings in the <paramref name="str">target string</paramref>
+        /// that are delimited by elements of a specified array of strings.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>;
         /// </exception>
         /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
-        public static string[] Split(this string str, params string[] separators)
+        public static string[] Split(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, params string[] separators)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.Split(separators, StringSplitOptions.None);
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.Split(separators, StringSplitOptions.None);
         }
         #endregion Split(...)
 
@@ -514,7 +574,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -526,20 +586,24 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeBeforeFirst(this string str, string value, int startIndex, StringComparison comparison)
+        public static string TakeBeforeFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
@@ -557,7 +621,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -566,7 +630,7 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -575,7 +639,11 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeBeforeFirst(this string str, string value, StringComparison comparison)
+        public static string TakeBeforeFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
@@ -593,7 +661,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -602,17 +670,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeBeforeFirst(this string str, string value, int startIndex)
+        public static string TakeBeforeFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex)
         {
             return TakeBeforeFirst(str, value, startIndex, StringComparison.CurrentCulture);
         }
@@ -621,19 +693,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeBeforeFirst(this string str, string value)
+        public static string TakeBeforeFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value)
         {
             return TakeBeforeFirst(str, value, StringComparison.CurrentCulture);
         }
@@ -642,7 +718,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -651,17 +727,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeBeforeFirst(this string str, char value, int startIndex)
+        public static string TakeBeforeFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value, int startIndex)
         {
             if (str == null)
             {
@@ -675,19 +755,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the first occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeBeforeFirst(this string str, char value)
+        public static string TakeBeforeFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value)
         {
             if (str == null)
             {
@@ -703,7 +787,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -715,20 +799,24 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeBeforeLast(this string str, string value, int startIndex, StringComparison comparison)
+        public static string TakeBeforeLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
@@ -746,7 +834,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -755,7 +843,7 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -764,7 +852,11 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeBeforeLast(this string str, string value, StringComparison comparison)
+        public static string TakeBeforeLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
@@ -782,7 +874,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -791,17 +883,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeBeforeLast(this string str, string value, int startIndex)
+        public static string TakeBeforeLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex)
         {
             return TakeBeforeLast(str, value, startIndex, StringComparison.CurrentCulture);
         }
@@ -810,19 +906,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeBeforeLast(this string str, string value)
+        public static string TakeBeforeLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value)
         {
             return TakeBeforeLast(str, value, StringComparison.CurrentCulture);
         }
@@ -831,7 +931,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="char"/> value to cut the string by.
@@ -840,17 +940,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeBeforeLast(this string str, char value, int startIndex)
+        public static string TakeBeforeLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value, int startIndex)
         {
             if (str == null)
             {
@@ -864,19 +968,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that precedes the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="char"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that precedes the last occurrence of a given <paramref name="value"/>, or
         /// the original string if the <paramref name="value"/> was not found.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeBeforeLast(this string str, char value)
+        public static string TakeBeforeLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value)
         {
             if (str == null)
             {
@@ -892,7 +1000,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -904,20 +1012,24 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeAfterFirst(this string str, string value, int startIndex, StringComparison comparison)
+        public static string TakeAfterFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
@@ -934,7 +1046,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -943,7 +1055,7 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -952,7 +1064,11 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeAfterFirst(this string str, string value, StringComparison comparison)
+        public static string TakeAfterFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
@@ -969,19 +1085,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeAfterFirst(this string str, string value)
+        public static string TakeAfterFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value)
         {
             return TakeAfterFirst(str, value, StringComparison.CurrentCulture);
         }
@@ -990,7 +1110,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -999,17 +1119,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeAfterFirst(this string str, string value, int startIndex)
+        public static string TakeAfterFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex)
         {
             return TakeAfterFirst(str, value, startIndex, StringComparison.CurrentCulture);
         }
@@ -1018,19 +1142,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="char"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeAfterFirst(this string str, char value)
+        public static string TakeAfterFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value)
         {
             if (str == null)
             {
@@ -1043,7 +1171,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the first occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="char"/> value to cut the string by.
@@ -1052,17 +1180,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the first occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeAfterFirst(this string str, char value, int startIndex)
+        public static string TakeAfterFirst(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value, int startIndex)
         {
             if (str == null)
             {
@@ -1077,7 +1209,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -1089,20 +1221,24 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeAfterLast(this string str, string value, int startIndex, StringComparison comparison)
+        public static string TakeAfterLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex, StringComparison comparison)
         {
             if (str == null)
             {
@@ -1119,7 +1255,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -1128,7 +1264,7 @@ namespace Axle.Extensions.String
         /// One of the <see cref="StringComparison"/> values, determining the string comparison method to be used for searching.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
@@ -1137,7 +1273,11 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TakeAfterLast(this string str, string value, StringComparison comparison)
+        public static string TakeAfterLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
             if (str == null)
             {
@@ -1154,19 +1294,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeAfterLast(this string str, string value)
+        public static string TakeAfterLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value)
         {
             return TakeAfterLast(str, value, StringComparison.CurrentCulture);
         }
@@ -1175,7 +1319,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="string"/> value to cut the string by.
@@ -1184,17 +1328,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeAfterLast(this string str, string value, int startIndex)
+        public static string TakeAfterLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, int startIndex)
         {
             return TakeAfterLast(str, value, startIndex, StringComparison.CurrentCulture);
         }
@@ -1203,7 +1351,7 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="char"/> value to cut the string by.
@@ -1212,17 +1360,21 @@ namespace Axle.Extensions.String
         /// The index to start the searching from.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="IndexOutOfRangeException">
-        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>, 
+        /// <paramref name="startIndex"/> specifies a position that is greater than the length of the string <paramref name="str"/>,
         /// or is less than zero.
         /// </exception>
-        public static string TakeAfterLast(this string str, char value, int startIndex)
+        public static string TakeAfterLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value, int startIndex)
         {
             if (str == null)
             {
@@ -1235,19 +1387,23 @@ namespace Axle.Extensions.String
         /// Takes the part of a string that follows the last occurrence of a given <paramref name="value"/>.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The <see cref="char"/> value to cut the string by.
         /// </param>
         /// <returns>
-        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or 
+        /// The part of the original string that follows the last occurrence of a given <paramref name="value"/>, or
         /// <see cref="System.String.Empty">an empty string</see> if the <paramref name="value"/> was not found in the string.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TakeAfterLast(this string str, char value)
+        public static string TakeAfterLast(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, char value)
         {
             if (str == null)
             {
@@ -1262,7 +1418,7 @@ namespace Axle.Extensions.String
         /// Removes the leading occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The string value to be cut.
@@ -1279,10 +1435,14 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TrimStart(this string str, string value, StringComparison comparison)
+        public static string TrimStart(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.StartsWith(value, comparison)
-                ? str.TakeAfterFirst(value, 0, comparison)
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.StartsWith(value, comparison)
+                ? TakeAfterFirst(str, value, 0, comparison)
                 : str;
         }
 
@@ -1290,7 +1450,7 @@ namespace Axle.Extensions.String
         /// Removes the leading occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The string value to be cut.
@@ -1301,7 +1461,11 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TrimStart(this string str, string value) { return TrimStart(str, value, StringComparison.CurrentCulture); }
+        public static string TrimStart(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value) => TrimStart(str, value, StringComparison.CurrentCulture);
         #endregion TrimStart(...)
 
         #region TrimEnd(...)
@@ -1309,7 +1473,7 @@ namespace Axle.Extensions.String
         /// Removes the trailing occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The string value to be cut.
@@ -1326,10 +1490,14 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
-        public static string TrimEnd(this string str, string value, StringComparison comparison)
+        public static string TrimEnd(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value, StringComparison comparison)
         {
-            return str.VerifyArgument(nameof(str)).IsNotNull().Value.EndsWith(value, comparison)
-                ? str.TakeBeforeLast(value, comparison)
+            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.EndsWith(value, comparison)
+                ? TakeBeforeLast(str, value, comparison)
                 : str;
         }
 
@@ -1337,7 +1505,7 @@ namespace Axle.Extensions.String
         /// Removes the trailing occurrence of a given string <paramref name="value"/> from a target <see cref="string"/> instance.
         /// </summary>
         /// <param name="str">
-        /// The target <see cref="string"/> instance this extension method is called on. 
+        /// The target <see cref="string"/> instance this extension method is called on.
         /// </param>
         /// <param name="value">
         /// The string value to be cut.
@@ -1348,23 +1516,31 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
-        public static string TrimEnd(this string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
+        public static string TrimEnd(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
         #endregion TrimEnd(...)
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
-        /// Retrieves the system's reference for the specified string. 
+        /// Retrieves the system's reference for the specified string.
         /// </summary>
         /// <param name="str">A <see cref="string"/> to search for in the intern pool.</param>
         /// <returns>
-        /// The system's reference to <paramref name="str"/>, if it is interned; otherwise, a new reference to a 
+        /// The system's reference to <paramref name="str"/>, if it is interned; otherwise, a new reference to a
         /// <see cref="string"/> with the value of <paramref name="str"/>.
         /// </returns>
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>.
         /// </exception>
         /// <seealso cref="string.Intern(string)"/>
-        public static string Intern(this string str) { return string.Intern(str.VerifyArgument(nameof(str)).IsNotNull()); }
+        public static string Intern(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string str) => string.Intern(Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))));
         #endif
 
         #if NETSTANDARD || NET45_OR_NEWER
@@ -1377,20 +1553,39 @@ namespace Axle.Extensions.String
         #endif
         private static string JoinInternal(IEnumerable<string> values, string separator)
         {
-            return string.Join(separator, values.ToArray());
+            var strArr = new List<string>(values).ToArray();
+            return string.Join(separator, strArr);
         }
 
-        public static string Join(this string separator, IEnumerable<string> values) { return JoinInternal(values, separator); }
-        public static string Join(this char separator, IEnumerable<string> values) { return JoinInternal(values, separator.ToString()); }
-        public static string Join(this string separator, params string[] values) { return JoinInternal(values, separator); }
-        public static string Join(this char separator, params string[] values) { return JoinInternal(values, separator.ToString()); }
+        public static string Join(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string separator, IEnumerable<string> values) => JoinInternal(values, separator);
+        public static string Join(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            char separator, IEnumerable<string> values) => JoinInternal(values, separator.ToString());
+        public static string Join(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            string separator, params string[] values) => JoinInternal(values, separator);
+        public static string Join(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            char separator, params string[] values) => JoinInternal(values, separator.ToString());
 
+        #if NETSTANDARD || NET35_OR_NEWER
         [Obsolete] public static string Join(this IEnumerable<string> @this, string separator) { return JoinInternal(@this, separator); }
         [Obsolete] public static string Join(this IEnumerable<string> @this, char separator) { return JoinInternal(@this, separator.ToString()); }
         [Obsolete] public static string Join(this IEnumerable<string> @this) { return JoinInternal(@this, string.Empty); }
         [Obsolete] public static string Join(this string[] @this, string separator) { return JoinInternal(@this, separator); }
         [Obsolete] public static string Join(this string[] @this, char separator) { return JoinInternal(@this, separator.ToString()); }
         [Obsolete] public static string Join(this string[] @this) { return JoinInternal(@this, string.Empty); }
+        #endif
     }
 }
 #endif

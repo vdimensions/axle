@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Reflection;
 
 
@@ -21,9 +20,9 @@ namespace Axle.Reflection
             _accessorType = accessorType;
         }
 
-        object IGetAccessor.GetValue(object target) { return _fieldToken.ReflectedMember.GetValue(target); }
+        object IGetAccessor.GetValue(object target) => _fieldToken.ReflectedMember.GetValue(target);
 
-        void ISetAccessor.SetValue(object target, object value) { _fieldToken.ReflectedMember.SetValue(target, value); }
+        void ISetAccessor.SetValue(object target, object value) => _fieldToken.ReflectedMember.SetValue(target, value);
 
         DeclarationType IAccessor.Declaration => _fieldToken.Declaration;
         AccessModifier IAccessor.AccessModifier => _fieldToken.AccessModifier;
@@ -33,4 +32,3 @@ namespace Axle.Reflection
         FieldInfo IReflected<FieldInfo>.ReflectedMember => _fieldToken.ReflectedMember;
     }
 }
-#endif
