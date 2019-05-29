@@ -1,15 +1,25 @@
-framework: net20, net35, net40, net45, net46, netstandard1.0, netstandard1.3, netstandard1.5, netstandard1.6, netstandard2.0
+framework: auto-detect
 storage: none
 
-source https://api.nuget.org/v3/index.json
-  nuget System.Diagnostics.TraceSource >= 4.0 framework: netstandard1.6
-  nuget System.Threading.Thread >= 4.0 framework: netstandard1.6
-  nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
+group netstandard1_6
+  framework: netstandard1.6
+  storage: none
 
-group net20
   source https://api.nuget.org/v3/index.json
-    nuget LinqBridge framework: net20
+    nuget System.Diagnostics.TraceSource >= 4.0
+    nuget System.Threading.Thread >= 4.0
+    nuget System.Xml.XmlSerializer >= 4.0.10
 
 group net35
+  framework: net35
+  storage: none
+
   source https://api.nuget.org/v3/index.json
-    nuget System.Threading.Tasks.Unofficial framework: net35
+    nuget System.Threading.Tasks.Unofficial
+
+group net20
+  framework: net20
+  storage: none
+
+  source https://api.nuget.org/v3/index.json
+    nuget LinqBridge
