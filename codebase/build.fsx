@@ -14,7 +14,7 @@ open Fake.Net
 
 let paketVersion = "5.207.3"
 
-let nugetApiKey = ""
+let nugetApiKey =  Environment.environVarOrFail "NUGET_ORG_VDIMENSIONS_API_KEY"
 let nugetServer = "https://www.nuget.org/api/v2/package"
 
 let projectLocations = [
@@ -142,7 +142,7 @@ let build op =
     //    Trace.tracefn "Performing msbuild Build for %s in %s" singleFsProj dir
     //    // this is an F# project. dotnet build fails to produce valid metadata in the dll, we should use MSBuild instead (but not dotnet msbuild).
     //    msbuild "Build" singleFsProj
-    | list ->
+    | _ ->
         invalidOp "Multiple project files are not supported by this script. Please, make sure you have a single msbuild file in the directory of the given project."
 
 let createDynamicTarget location =
