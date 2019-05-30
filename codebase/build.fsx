@@ -33,19 +33,18 @@ let getVersionBuild propsFile =
     let yearSince = Xml.read true propsFile "" "" "Project/PropertyGroup/CopyrightYearSince" |> Seq.map System.Int32.Parse |> Seq.head
     let now = System.DateTime.UtcNow
     let backThen = System.DateTime(yearSince, 1, 1)
-    let days = (now - backThen).TotalDays |> int
-    ("VersionBuild", days.ToString())
+    ("VersionBuild", int((now - backThen).TotalDays).ToString())
 
-let getVersionRevision propsFile =
+let getVersionRevision () =
     let value = int(System.DateTime.UtcNow.TimeOfDay.TotalSeconds / 2.0).ToString()
     ("VersionRevision", value)
 
 let customDotnetdParams = 
     (fun () ->
         let propsFile = (sprintf "%s/Axle.Common.props" (Shell.pwd()))
-        let mutable p = [ 
-            getVersionBuild propsFile 
-            getVersionRevision propsFile
+        let mutable p = [
+            getVersionBuild propsFile
+            getVersionRevision ()
         ] 
         createParams p
     )()
