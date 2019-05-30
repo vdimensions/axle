@@ -7,6 +7,11 @@ nuget Fake.Core.Target //"
 
 //#load "./.fake/build.fsx/intellisense.fsx"
 
+#load "./common.fsx"
+#load "./paket.fsx"
+open VDimensions.Fake.Common
+open VDimensions.Fake.Paket
+
 open Fake.Core
 open Fake.IO
 open Fake.IO.Globbing.Operators
@@ -14,8 +19,40 @@ open Fake.Net
 
 let paketVersion = "5.207.3"
 
-let nugetApiKey =  Environment.environVarOrFail "NUGET_ORG_VDIMENSIONS_API_KEY"
+let buildNumber = Environment.environVarOrNone "APPVEYOR_BUILD_NUMBER"
+let nugetApiKey =  Environment.environVarOrNone "NUGET_ORG_VDIMENSIONS_API_KEY"
 let nugetServer = "https://www.nuget.org/api/v2/package"
+
+let createParams (data : list<string*string>) =
+    let propertyFormat = " -p:{0}={1}"
+    let sb = 
+        data
+        |> List.fold (fun (sb : System.Text.StringBuilder) (k, v) -> sb.AppendFormat(propertyFormat, k, v)) (System.Text.StringBuilder())
+    sb.ToString()
+
+let getVersionBuild propsFile =
+    let yearSince = Xml.read true propsFile "" "" "Project/PropertyGroup/CopyrightYearSince" |> Seq.map System.Int32.Parse |> Seq.head
+    let now = System.DateTime.UtcNow
+    let backThen = System.DateTime(yearSince, 1, 1)
+    let days = (now - backThen).TotalDays |> int
+    ("VersionBuild", days.ToString())
+
+let getVersionRevision propsFile =
+    let value = 
+        match buildNumber with
+        | Some value -> value
+        | None -> int(System.DateTime.UtcNow.TimeOfDay.TotalSeconds / 2.0).ToString()
+    ("VersionRevision", value)
+
+let customDotnetdParams = 
+    (fun () ->
+        let propsFile = (sprintf "%s/Axle.Common.props" (Shell.pwd()))
+        let mutable p = [ 
+            getVersionBuild propsFile 
+            getVersionRevision propsFile
+        ] 
+        createParams p
+    )()
 
 let projectLocations = [
     "core/main"
@@ -33,10 +70,10 @@ let projectLocations = [
     "data/mysql"
     "data/sqlite"
     "caching/main"
-    "logging/log4net"
     "security/main"
     "security/cryptography"
     "application/main"
+    "logging/log4net"
     "web/main"
     "web/websharper"
 ]
@@ -48,40 +85,13 @@ let nupkg_map fn =
     |> Seq.map fn
     |> List.ofSeq
 
-let paket command =
-    let paketEndpoint = sprintf "https://github.com/fsprojects/Paket/releases/download/%s/paket.exe" paketVersion
-    let paketDir = Path.combine (Shell.pwd()) ".paket"
-    let paketExe = Path.combine paketDir "paket.exe"
-    if not (File.exists paketExe) then
-        Trace.trace "downloading Paket"
-        Http.downloadFile paketExe paketEndpoint
-        |> ignore
-    else
-        Trace.trace "Paket already exists"
-    Trace.trace "Installing dependencies"
-    // run "paket.exe"
-    Command.RawCommand(paketExe, Arguments.OfArgs [command])
-    |> CreateProcess.fromCommand
-    // use mono if linux
-    |> CreateProcess.withFramework
-    // throw an error if the process fails
-    |> CreateProcess.ensureExitCode
-    |> Proc.run
-    |> ignore
-    ()
 
 let msbuild command arg =
     let msbuildExe = "msbuild"
     // run "msbuild.exe"
     Command.RawCommand(msbuildExe, Arguments.OfArgs [command; arg])
-    |> CreateProcess.fromCommand
-    // use mono if linux
-    |> CreateProcess.withFramework
-    // throw an error if the process fails
-    |> CreateProcess.ensureExitCode
-    |> Proc.run
+    |> runRetry 0
     |> ignore
-    ()
 
 let clean () =
     let objPath = Path.combine (Shell.pwd()) "obj"
@@ -130,13 +140,18 @@ let dotnet_push op server apiKey =
         |> exn
         |> raise
 
-let dotnet_options = (fun (op : DotNet.Options) -> { op with Verbosity = Some DotNet.Verbosity.Quiet })
+let dotnet_options = 
+    (fun (op : DotNet.Options) -> 
+        { op with 
+            Verbosity = Some DotNet.Verbosity.Quiet
+            CustomParams = Some customDotnetdParams
+        })
 
 let build op =
     let dir = Shell.pwd()
     match !!(sprintf "%s/*.fsproj" dir) |> List.ofSeq with
     | [] | [_] -> 
-        Trace.tracefn "Performing dotnet build for all projects in %s" dir
+        Trace.tracefn "Performing dotnet build for default project in dir '%s'" dir
         dotnet_build op "" |> ignore
     //| [singleFsProj] ->
     //    Trace.tracefn "Performing msbuild Build for %s in %s" singleFsProj dir
@@ -156,7 +171,7 @@ let createDynamicTarget location =
             try
                 Trace.tracefn "Project to build %s" dir
                 clean ()
-                paket "update" |> ignore
+                paket 3 paketVersion "update" |> ignore
                 dotnet_clean dotnet_options "" |> ignore
                 dotnet_restore dotnet_options "" |> ignore
                 build dotnet_options
@@ -172,7 +187,7 @@ let createDynamicTarget location =
             try
                 Trace.tracefn "Test project to build %s" dir
                 clean ()
-                paket "update" |> ignore
+                paket 3 paketVersion "update" |> ignore
                 dotnet_clean dotnet_options "" |> ignore
                 dotnet_restore dotnet_options "" |> ignore
                 dotnet_build dotnet_options "" |> ignore
@@ -189,15 +204,19 @@ let createDynamicTarget location =
 
 
 Target.create "Prepare" cleanNupkg
-Target.create "Default" cleanNupkg
-Target.create "Publish" (fun _ -> ())//(fun _ -> dotnet_push dotnet_options nugetServer nugetApiKey)
-
+Target.create "Publish" (fun _ -> 
+    match nugetApiKey with
+    | Some apiKey -> dotnet_push dotnet_options nugetServer apiKey |> ignore
+    | None -> ()
+)
 open Fake.Core.TargetOperators
 
-"Prepare" ==> "Publish" ==> "Default"
+"Prepare" ==> "Publish"
 
 projectLocations 
 |> List.map createDynamicTarget
-|> List.fold (fun a b -> Trace.tracefn "target %s" a; b ==> a) "Publish"
+|> List.rev
+|> List.fold (fun a b -> b ==> a; b) "Publish"
+|> ignore
 
-Target.runOrDefault "Default"
+Target.runOrDefault "Publish"
