@@ -19,7 +19,6 @@ open Fake.Net
 
 let paketVersion = "5.207.3"
 
-let buildNumber = Environment.environVarOrNone "APPVEYOR_BUILD_NUMBER"
 let nugetApiKey =  Environment.environVarOrNone "NUGET_ORG_VDIMENSIONS_API_KEY"
 let nugetServer = "https://www.nuget.org/api/v2/package"
 
@@ -38,10 +37,7 @@ let getVersionBuild propsFile =
     ("VersionBuild", days.ToString())
 
 let getVersionRevision propsFile =
-    let value = 
-        match buildNumber with
-        | Some value -> value
-        | None -> int(System.DateTime.UtcNow.TimeOfDay.TotalSeconds / 2.0).ToString()
+    let value = int(System.DateTime.UtcNow.TimeOfDay.TotalSeconds / 2.0).ToString()
     ("VersionRevision", value)
 
 let customDotnetdParams = 
@@ -206,7 +202,7 @@ let createDynamicTarget location =
 Target.create "Prepare" cleanNupkg
 Target.create "Publish" (fun _ -> 
     match nugetApiKey with
-    | Some apiKey -> dotnet_push dotnet_options nugetServer apiKey |> ignore
+    | Some apiKey -> dotnet_push id nugetServer apiKey |> ignore
     | None -> ()
 )
 open Fake.Core.TargetOperators
