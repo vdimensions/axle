@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Globalization;
 
 
@@ -20,6 +19,7 @@ namespace Axle.Conversion.Parsing
             return formatProvider != null ? UInt32.Parse(value, formatProvider) : UInt32.Parse(value);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out UInt32 output)
         {
             return formatProvider != null
@@ -28,4 +28,3 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
-#endif

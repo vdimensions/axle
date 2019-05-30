@@ -1,4 +1,3 @@
-#if NETSTANDARD || NET20_OR_NEWER
 using System;
 
 
@@ -138,7 +137,7 @@ namespace Axle.Conversion.Parsing
         T IConverter<string, T>.Convert(string source) { return Parse(source); }
         bool IConverter<string, T>.TryConvert(string source, out T target) { return TryParse(source, out target); }
 
+        /// <inheritdoc />
         public Type TargetType => typeof(T);
     }
 }
-#endif

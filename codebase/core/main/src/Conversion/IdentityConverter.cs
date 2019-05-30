@@ -1,9 +1,8 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Conversion
+﻿namespace Axle.Conversion
 {
     /// <summary>
-    /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns 
-    /// the object instance being passed for conversion without changing it. 
+    /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns
+    /// the object instance being passed for conversion without changing it.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
@@ -33,4 +32,3 @@ namespace Axle.Conversion
         public bool TryConvertBack(T source, out T target) => TryConvert(source, out target);
     }
 }
-#endif

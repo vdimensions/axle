@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion.Parsing
@@ -16,7 +15,7 @@ namespace Axle.Conversion.Parsing
 
         bool IStrictParser.TryParseExact(string value, string format, IFormatProvider formatProvider, out object result)
         {
-            if (this.TryParseExact(value, format, formatProvider, out var res))
+            if (TryParseExact(value, format, formatProvider, out var res))
             {
                 result = res;
                 return true;
@@ -96,4 +95,3 @@ namespace Axle.Conversion.Parsing
         bool IConverter<string, T>.TryConvert(string source, out T target) { return TryParse(source, out target); }
     }
 }
-#endif

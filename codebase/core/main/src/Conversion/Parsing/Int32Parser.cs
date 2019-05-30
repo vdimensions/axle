@@ -1,12 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Globalization;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a 
+    /// A class that can parse <see cref="string">string</see> representations of a
     /// <see cref="int">32-bit integer</see> to a valid <see cref="int"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -20,6 +19,7 @@ namespace Axle.Conversion.Parsing
             return formatProvider != null ? Int32.Parse(value, formatProvider) : Int32.Parse(value);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out Int32 output)
         {
             return formatProvider != null
@@ -28,4 +28,3 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
-#endif

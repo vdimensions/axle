@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 
 
@@ -81,4 +80,3 @@ namespace Axle.Collections.Sdk
         #endregion
     }
 }
-#endif

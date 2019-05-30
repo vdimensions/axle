@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Conversion
+﻿namespace Axle.Conversion
 {
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="float"/> and <see cref="double"/>.
@@ -16,4 +15,3 @@ namespace Axle.Conversion
         protected override float DoConvertBack(double source) => (float) source;
     }
 }
-#endif

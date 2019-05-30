@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Conversion
+﻿namespace Axle.Conversion
 {
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="long"/> and <see cref="float"/>.
@@ -16,4 +15,3 @@ namespace Axle.Conversion
         protected override long DoConvertBack(float source) => (long) source;
     }
 }
-#endif

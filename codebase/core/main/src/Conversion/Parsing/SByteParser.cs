@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Globalization;
 
 
@@ -20,10 +19,10 @@ namespace Axle.Conversion.Parsing
             return SByte.Parse(value, formatProvider);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out SByte output)
         {
             return SByte.TryParse(value, NumberStyles.None, formatProvider, out output);
         }
     }
 }
-#endif

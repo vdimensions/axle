@@ -1,11 +1,10 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of 
+    /// A class that can parse <see cref="string">string</see> representations of
     /// an <see cref="Uri">uniform resource identifier</see> to a valid <see cref="Uri"/> instance.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -16,10 +15,10 @@ namespace Axle.Conversion.Parsing
         /// <inheritdoc />
         protected override Uri DoParse(string value, IFormatProvider formatProvider) => new Uri(value, UriKind.RelativeOrAbsolute);
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out Uri output)
         {
             return Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out output);
         }
     }
 }
-#endif
