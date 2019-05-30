@@ -1,3 +1,5 @@
+#nowarn "52"
+
 #r "paket:
 nuget Fake.IO.FileSystem
 nuget Fake.DotNet.Cli
@@ -211,7 +213,7 @@ open Fake.Core.TargetOperators
 projectLocations 
 |> List.map createDynamicTarget
 |> List.rev
-|> List.fold (fun a b -> b ==> a; b) "Publish"
+|> List.fold (fun a b -> b ==> a |> ignore; b) "Publish"
 |> ignore
 
 Target.runOrDefault "Publish"
