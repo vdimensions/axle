@@ -1,2 +1,5 @@
-Axle.Data
-System.Data.SqlClient
+group main
+  Axle.Data
+
+group netstandard
+  System.Data.SqlClient

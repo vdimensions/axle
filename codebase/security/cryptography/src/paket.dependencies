@@ -1,6 +1,6 @@
 framework: auto-detect
 storage: none
 
-source https://api.nuget.org/v3/index.json
 source ../../../../dist
-  nuget Axle.Core ~> 1.5
+source https://api.nuget.org/v3/index.json
+  nuget Axle.Core

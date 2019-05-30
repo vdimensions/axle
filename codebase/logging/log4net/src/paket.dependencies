@@ -1,8 +1,7 @@
 framework: auto-detect
 storage: none
 
-source https://api.nuget.org/v3/index.json
-  nuget log4net
-  
 source ../../../../dist
-  nuget Axle.Application ~> 1.5
+source https://api.nuget.org/v3/index.json
+  nuget log4net  
+  nuget Axle.Application

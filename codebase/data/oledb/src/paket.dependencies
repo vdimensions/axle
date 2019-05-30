@@ -1,8 +1,6 @@
+framework: auto-detect
 storage: none
 
-source https://api.nuget.org/v3/index.json
-  nuget System.Data.Common framework: netstandard2.0
-  nuget System.Xml.XmlSerializer >= 4.0.10 framework: netstandard1.6
-
 source ../../../../dist
+source https://api.nuget.org/v3/index.json
   nuget Axle.Data

@@ -6,11 +6,11 @@
 
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
+    <ProjectGuid>{06D29389-3DB1-4841-A74C-6905C870970B}</ProjectGuid>
     <Name>Axle.Web.WebSharper</Name>
     <AssemblyName>Axle.Web.WebSharper</AssemblyName>
     <Description>A library to integrate WebSharper with the Axle framework.</Description>
     <RootNamespace>Axle.Web.WebSharper</RootNamespace>
-    <ProjectGuid>{06D29389-3DB1-4841-A74C-6905C870970B}</ProjectGuid>
   </PropertyGroup>
 
   <ItemGroup>
@@ -22,5 +22,4 @@
 
   <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
-
 </Project>

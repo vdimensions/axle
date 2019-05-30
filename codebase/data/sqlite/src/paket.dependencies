@@ -1,14 +1,21 @@
-storage: none
-framework: auto-detect
+group main
+  framework: auto-detect
+  storage: none
 
-source https://api.nuget.org/v3/index.json
-source ../../../../dist
-  nuget Axle.Data
+  source ../../../../dist
+  source https://api.nuget.org/v3/index.json
+    nuget Axle.Data
 
 group netstandard
+  framework: netstandard2.0
+  storage: none
+
   source https://api.nuget.org/v3/index.json
-    nuget Microsoft.Data.Sqlite.Core >= 2.0 framework: netstandard2.0
+    nuget Microsoft.Data.Sqlite.Core >= 2.0 
 
 group netXX
+  framework: net35, net40, net45
+  storage: none
+
   source https://api.nuget.org/v3/index.json
-    nuget System.Data.SQLite.Core framework: net35, net40, net45
+    nuget System.Data.SQLite.Core 

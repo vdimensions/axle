@@ -1,15 +1,8 @@
-msbuild="../../../../submodules/btw/msbuild.sh"
 project='Axle.Web.AspNetCore'
 
 ./restore.sh
 
-$msbuild $project.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
-$msbuild $project.dist.csproj
+dotnet clean $project.csproj && dotnet build $project.csproj && dotnet pack $project.csproj --no-build --no-restore
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""

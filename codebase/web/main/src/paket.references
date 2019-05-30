@@ -2,5 +2,3 @@ Axle.Application
 Microsoft.Extensions.Caching.Memory
 Microsoft.AspNetCore.Session
 Microsoft.AspNetCore
-group build
-Mason.Targets.Preprocessor

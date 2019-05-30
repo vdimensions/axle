@@ -2,18 +2,8 @@ framework auto-detect
 storage none
 
 source ../../../../dist
-  nuget Axle.Application
-
 source https://api.nuget.org/v3/index.json
-
+  nuget Axle.Application
   nuget Microsoft.Extensions.Caching.Memory
   nuget Microsoft.AspNetCore.Session
-
   nuget Microsoft.AspNetCore
-
-
-group build
-  source ../../../../submodules/mason/dist
-    nuget Mason.Targets.Packager
-    nuget Mason.Targets.Preprocessor
-    nuget Mason.Targets.Verman

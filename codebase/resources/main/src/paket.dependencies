@@ -1,10 +1,15 @@
-framework: auto-detect
-storage: none
+group main
+  framework: auto-detect
+  storage: none
 
-source https://api.nuget.org/v3/index.json
+  source https://api.nuget.org/v3/index.json
+  source ../../../../dist
+    nuget Axle.Core
 
-source ../../../../dist/third-parties
+group netstandard1_x
+  framework: netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3
+  storage: none
 
-source ../../../../dist
-  nuget Axle.Core ~> 1.5
+  source https://api.nuget.org/v3/index.json
+    nuget System.Resources.ResourceManager 
 

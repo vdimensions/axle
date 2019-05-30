@@ -1,1 +1,5 @@
-Axle.Core
+group main
+  Axle.Core
+
+group netstandard1_x
+  System.Resources.ResourceManager 
