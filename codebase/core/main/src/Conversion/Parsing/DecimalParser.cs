@@ -1,13 +1,12 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Globalization;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of 
-    /// a <see cref="decimal">decimal</see> to a valid <see cref="decimal"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of  a
+    /// <see cref="decimal">decimal</see> to a valid <see cref="decimal"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -34,4 +33,3 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
-#endif

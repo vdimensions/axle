@@ -1,11 +1,10 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a 
+    /// A class that can parse <see cref="string">string</see> representations of a
     /// <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
     /// </summary>
     //[Stateless]
@@ -24,6 +23,7 @@ namespace Axle.Conversion.Parsing
             return TimeSpan.Parse(value);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out TimeSpan output)
         {
             return TimeSpan.TryParse(value, out output);
@@ -43,4 +43,3 @@ namespace Axle.Conversion.Parsing
         #endif
     }
 }
-#endif

@@ -1,12 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 using System.Globalization;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of 
+    /// A class that can parse <see cref="string">string</see> representations of
     /// an <see cref="ushort">unsigned 16-bit integer</see> to a valid <see cref="ushort"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -20,6 +19,7 @@ namespace Axle.Conversion.Parsing
             return formatProvider != null ? UInt16.Parse(value, formatProvider) : UInt16.Parse(value);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out UInt16 output)
         {
             return formatProvider != null
@@ -28,4 +28,3 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
-#endif

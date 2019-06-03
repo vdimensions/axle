@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-namespace Axle.Builder
+﻿namespace Axle.Builder
 {
     public interface IFluentBuilder<T>
     {
@@ -13,4 +12,3 @@ namespace Axle.Builder
         TArgs Args { get; }
     }
 }
-#endif

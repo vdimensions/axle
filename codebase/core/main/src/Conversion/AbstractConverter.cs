@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion
@@ -29,6 +28,16 @@ namespace Axle.Conversion
         /// <seealso cref="Convert"/>
         protected abstract TD DoConvert(TS source);
 
+        /// <summary>
+        /// Converts a given <paramref name="value"/> of type <typeparamref name="TS"/> to
+        /// a value of type <typeparamref name="TD"/>.
+        /// </summary>
+        /// <param name="value">
+        /// The value to convert.
+        /// </param>
+        /// <returns>
+        /// A value of type <typeparamref name="TD"/> that is the result of converting the given <paramref name="value"/>.
+        /// </returns>
         public TD Convert(TS value)
         {
             try
@@ -45,6 +54,20 @@ namespace Axle.Conversion
             }
         }
 
+        /// <summary>
+        /// Attempts to convert a given <paramref name="value"/> of type <typeparamref name="TS"/> to
+        /// a value of type <typeparamref name="TD"/>.
+        /// </summary>
+        /// <param name="value">
+        /// The value to convert.
+        /// </param>
+        /// <param name="result">
+        /// A value of type <typeparamref name="TD"/> that is the result of converting the given <paramref name="value"/>.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the conversion was successful, and a value was written to the <paramref name="result"/> output parameter;
+        /// <c>false</c> otherwise.
+        /// </returns>
         public virtual bool TryConvert(TS value, out TD result)
         {
             try
@@ -60,4 +83,3 @@ namespace Axle.Conversion
         }
     }
 }
-#endif

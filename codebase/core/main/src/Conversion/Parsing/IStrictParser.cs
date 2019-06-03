@@ -1,12 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
     /// An interface for a strict parser; that is, a parser which may use additional formatting prerequisites in order to parse
-    /// a raw string value into an object instance. 
+    /// a raw string value into an object instance.
     /// </summary>
     /// <seealso cref="IParser" />
     public interface IStrictParser : IParser
@@ -27,4 +26,3 @@ namespace Axle.Conversion.Parsing
         bool TryParseExact(string value, string format, IFormatProvider formatProvider, out T result);
     }
 }
-#endif

@@ -1,11 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of a <see cref="char">character</see> to a valid <see cref="char"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of a
+    /// <see cref="char">character</see> to a valid <see cref="char"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -18,14 +18,14 @@ namespace Axle.Conversion.Parsing
         #elif NETSTANDARD1_0_OR_NEWER
         protected override char DoParse(string value, IFormatProvider formatProvider)
         {
-            return char.TryParse(value, out char res) 
-                ? res 
+            return char.TryParse(value, out char res)
+                ? res
                 : throw new ParseException($"Could not parse value {value} into a valid character. ");
         }
         #endif
 
         /// <summary>
-        /// Converts the specified string representation of a logical value to its <see cref="char"/> equivalent. 
+        /// Converts the specified string representation of a logical value to its <see cref="char"/> equivalent.
         /// A return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
@@ -33,16 +33,15 @@ namespace Axle.Conversion.Parsing
         /// </param>
         /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format recognition.</param>
         /// <param name="output">
-        /// When this method returns, contains the <see cref="char"/> value equivalent to 
+        /// When this method returns, contains the <see cref="char"/> value equivalent to
         /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
-        /// value for <see cref="char"/> if the conversion has failed. 
+        /// value for <see cref="char"/> if the conversion has failed.
         /// The conversion fails if the <paramref name="value"/> parameter is null or is not of the correct format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
         /// true if value was converted successfully; otherwise, false.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out char output) { return char.TryParse(value, out output); }
+        public override bool TryParse(string value, IFormatProvider formatProvider, out char output) => char.TryParse(value, out output);
     }
 }
-#endif

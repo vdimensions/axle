@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using Axle.Verification;
+﻿using Axle.Verification;
 
 
 namespace Axle.Conversion
@@ -7,7 +6,7 @@ namespace Axle.Conversion
     /// <summary>
     /// A special converter implementation that chains together two <see cref="IConverter{TSource,TTarget}"/> instances.
     /// Useful if the conversion from an instance of a given type <typeparamref name="T" /> must be converted to an intermediate
-    /// type <typeparamref name="TIntermediate"/> with one <see cref="IConverter{T,T1}">converter</see> before that conversion result 
+    /// type <typeparamref name="TIntermediate"/> with one <see cref="IConverter{T,T1}">converter</see> before that conversion result
     /// is converted to the desired type <typeparamref name="TResult"/> with <see cref="IConverter{T1,TResult}">another converter</see>.
     /// <para>
     /// Multiple chained converters can be used together to cover a more complex conversion with more than one intermediate object.
@@ -138,4 +137,3 @@ namespace Axle.Conversion
         }
     }
 }
-#endif

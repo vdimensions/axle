@@ -29,6 +29,7 @@ namespace Axle.Conversion.Parsing
                 : _actualParser.Parse(value, formatProvider);
         }
 
+        /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out T? output)
         {
             output = null;

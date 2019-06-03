@@ -1,13 +1,18 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System;
+﻿using System;
 
 
 namespace Axle.Conversion.Parsing
 {
+    /// <summary>
+    /// A generic <see cref="IParser{T}"/> implementation that can handle <see cref="Enum">enum</see> types.
+    /// </summary>
+    /// <typeparam name="T">
+    /// An enumeration type.
+    /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class EnumParser<T> : AbstractParser<T>
+    public sealed class EnumParser<T> : AbstractParser<T> where T: struct
     {
         /// <inheritdoc />
         protected override T DoParse(string value, IFormatProvider formatProvider)
@@ -23,7 +28,7 @@ namespace Axle.Conversion.Parsing
             }
             catch (ArgumentException)
             {
-                if (value.Trim().StartsWith("-"))
+                if (value.Trim().StartsWith("-", StringComparison.Ordinal))
                 {
                     var longParser = new Int64Parser();
                     if (longParser.TryParse(value, formatProvider, out var res))
@@ -44,4 +49,3 @@ namespace Axle.Conversion.Parsing
         }
     }
 }
-#endif
