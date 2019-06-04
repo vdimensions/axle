@@ -5,6 +5,7 @@ nuget Fake.IO.FileSystem
 nuget Fake.DotNet.Cli
 nuget Fake.DotNet.Paket
 nuget Fake.Net.Http
+nuget Fake.Tools.Git
 nuget Fake.Core.Target //"
 
 //#load "./.fake/build.fsx/intellisense.fsx"
@@ -23,6 +24,7 @@ let paketVersion = "5.207.3"
 
 let nugetApiKey =  Environment.environVarOrNone "NUGET_ORG_VDIMENSIONS_API_KEY"
 let nugetServer = "https://www.nuget.org/api/v2/package"
+let runTestsOnBuild = false
 
 let createParams (data : list<string*string>) =
     let propertyFormat = " -p:{0}={1}"
@@ -99,6 +101,7 @@ let clean () =
 
 let cleanNupkg = (fun _ -> nupkg_map (fun nupkg -> Trace.tracefn "NUPK CLEAN: %s" nupkg; Shell.rm_rf nupkg) |> ignore)
 
+let get_git_branch() = Fake.Tools.Git.Information.getBranchName(Shell.pwd())
 
 open Fake.DotNet
 open Fake.DotNet.NuGet
@@ -188,8 +191,7 @@ let createDynamicTarget location =
                 dotnet_clean dotnet_options "" |> ignore
                 dotnet_restore dotnet_options "" |> ignore
                 dotnet_build dotnet_options "" |> ignore
-                dotnet_test dotnet_options "" |> ignore
-                ()
+                if runTestsOnBuild then dotnet_test dotnet_options "" |> ignore
             finally 
                 Shell.popd()
         else 
@@ -198,13 +200,12 @@ let createDynamicTarget location =
     )
     targetName
 
-
-
 Target.create "Prepare" cleanNupkg
 Target.create "Publish" (fun _ -> 
-    match nugetApiKey with
-    | Some apiKey -> dotnet_push id nugetServer apiKey |> ignore
-    | None -> ()
+    let gitBranch = get_git_branch()
+    match (gitBranch, nugetApiKey) with
+    | ("master", Some apiKey) -> dotnet_push id nugetServer apiKey |> ignore
+    | _ -> ()
 )
 open Fake.Core.TargetOperators
 
@@ -216,4 +217,4 @@ projectLocations
 |> List.fold (fun a b -> b ==> a |> ignore; b) "Publish"
 |> ignore
 
-Target.runOrDefault "Publish"
+Target.runOrDefaultWithArguments "Publish"
