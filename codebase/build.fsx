@@ -105,7 +105,7 @@ let clean () =
 
 let cleanNupkg = (fun _ -> nupkg_map (fun nupkg -> Trace.tracefn "NUPK CLEAN: %s" nupkg; Shell.rm_rf nupkg) |> ignore)
 
-let get_git_branch() = Fake.Tools.Git.Information.getBranchName(Shell.pwd())
+let get_git_branch() = do_in_root (fun _ -> Fake.Tools.Git.Information.getBranchName(Shell.pwd())) ()
 
 open Fake.DotNet
 open Fake.DotNet.NuGet
