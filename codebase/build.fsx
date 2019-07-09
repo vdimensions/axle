@@ -79,16 +79,15 @@ let projectLocations = [
 
 let dir_exists = DirectoryInfo.ofPath >> DirectoryInfo.exists
 let rootDir = (Shell.pwd());
-let nupkg_map fn = 
+let do_in_root<'a, 'b> (op : 'a -> 'b) (args : 'a) =
     let dir = (Shell.pwd());
     try
         Shell.cd rootDir
-        !!"../dist/*.nupkg"
-        |> Seq.map fn
-        |> List.ofSeq
+        op args
     finally
         Shell.cd dir
-
+let nupkg_map fn = 
+    do_in_root (fun fn -> !!"../dist/*.nupkg" |> Seq.map fn |> List.ofSeq) fn
 
 let msbuild command arg =
     let msbuildExe = "msbuild"
@@ -106,7 +105,7 @@ let clean () =
 
 let cleanNupkg = (fun _ -> nupkg_map (fun nupkg -> Trace.tracefn "NUPK CLEAN: %s" nupkg; Shell.rm_rf nupkg) |> ignore)
 
-let get_git_branch() = Fake.Tools.Git.Information.getBranchName(Shell.pwd())
+let get_git_branch() = do_in_root (fun _ -> Fake.Tools.Git.Information.getBranchName(Shell.pwd())) ()
 
 open Fake.DotNet
 open Fake.DotNet.NuGet
