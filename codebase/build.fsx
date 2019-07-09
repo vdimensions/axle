@@ -78,11 +78,16 @@ let projectLocations = [
 ]
 
 let dir_exists = DirectoryInfo.ofPath >> DirectoryInfo.exists
-
+let rootDir = (Shell.pwd());
 let nupkg_map fn = 
-    !!"../dist/*.nupkg"
-    |> Seq.map fn
-    |> List.ofSeq
+    let dir = (Shell.pwd());
+    try
+        Shell.cd rootDir
+        !!"../dist/*.nupkg"
+        |> Seq.map fn
+        |> List.ofSeq
+    finally
+        Shell.cd dir
 
 
 let msbuild command arg =
@@ -205,7 +210,7 @@ Target.create "Publish" (fun _ ->
     let gitBranch = get_git_branch()
     match (gitBranch, nugetApiKey) with
     | ("master", Some apiKey) -> dotnet_push id nugetServer apiKey |> ignore
-    | _ -> ()
+    | _ -> Trace.traceImportantfn "Branch '%s' will not push anything to nuget.org" gitBranch
 )
 open Fake.Core.TargetOperators
 
