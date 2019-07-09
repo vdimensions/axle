@@ -79,16 +79,15 @@ let projectLocations = [
 
 let dir_exists = DirectoryInfo.ofPath >> DirectoryInfo.exists
 let rootDir = (Shell.pwd());
-let nupkg_map fn = 
+let do_in_root<'a, 'b> (op : 'a -> 'b) (args : 'a) =
     let dir = (Shell.pwd());
     try
         Shell.cd rootDir
-        !!"../dist/*.nupkg"
-        |> Seq.map fn
-        |> List.ofSeq
+        op args
     finally
         Shell.cd dir
-
+let nupkg_map fn = 
+    do_in_root (fun fn -> !!"../dist/*.nupkg" |> Seq.map fn |> List.ofSeq) fn
 
 let msbuild command arg =
     let msbuildExe = "msbuild"
@@ -207,7 +206,7 @@ let createDynamicTarget location =
 
 Target.create "Prepare" cleanNupkg
 Target.create "Publish" (fun _ -> 
-    let gitBranch = get_git_branch()
+    let gitBranch = do_in_root get_git_branch ()
     match (gitBranch, nugetApiKey) with
     | ("master", Some apiKey) -> dotnet_push id nugetServer apiKey |> ignore
     | _ -> Trace.traceImportantfn "Branch '%s' will not push anything to nuget.org" gitBranch
