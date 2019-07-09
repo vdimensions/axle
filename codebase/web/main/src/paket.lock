@@ -1,13 +1,12 @@
 STORAGE: NONE
 RESTRICTION: == netstandard2.0
 NUGET
-  remote: ../../../../dist
-    Axle.Application (1.5.2301.16702)
-      Axle.Resources (>= 1.5.2298.31892)
-    Axle.Core (1.5.2300.19594)
-    Axle.Resources (1.5.2298.31892)
-      Axle.Core (>= 1.5.2279.26640)
-  remote: https://www.nuget.org/api/v2
+  remote: https://api.nuget.org/v3/index.json
+    Axle.Application (1.5.2344.25595)
+      Axle.Resources (>= 1.5.2344.25595)
+    Axle.Core (1.5.2344.25595)
+    Axle.Resources (1.5.2344.25595)
+      Axle.Core (>= 1.5.2344.25595)
     Microsoft.AspNetCore (2.2)
       Microsoft.AspNetCore.Diagnostics (>= 2.2)
       Microsoft.AspNetCore.HostFiltering (>= 2.2)
@@ -259,7 +258,7 @@ NUGET
       System.Buffers (>= 4.4)
       System.Memory (>= 4.5.1)
       System.Threading.Tasks.Extensions (>= 4.5.1)
-    System.Memory (4.5.2)
+    System.Memory (4.5.3)
       System.Buffers (>= 4.4)
       System.Numerics.Vectors (>= 4.4)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
@@ -283,10 +282,3 @@ NUGET
     System.Text.Encodings.Web (4.5)
     System.Threading.Tasks.Extensions (4.5.2)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
-
-GROUP build
-NUGET
-  remote: ../../../../submodules/mason/dist
-    Mason.Targets.Packager (0.2.0.41)
-    Mason.Targets.Preprocessor (0.2.0.78)
-    Mason.Targets.Verman (0.2.0.51)

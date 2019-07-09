@@ -4,12 +4,14 @@ group main
 
   source https://api.nuget.org/v3/index.json
   source ../../../../dist
-    nuget Axle.Core
+
+  nuget Axle.Core
 
 group netstandard1_x
   framework: netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3
   storage: none
 
   source https://api.nuget.org/v3/index.json
-    nuget System.Resources.ResourceManager 
+  
+  nuget System.Resources.ResourceManager 
 

@@ -2,9 +2,9 @@ framework: auto-detect
 storage: none
 
 source https://api.nuget.org/v3/index.json
-  nuget WebSharper.UI ~> 4.5
-  nuget WebSharper.AspNetCore
-  nuget Microsoft.AspNetCore.Authentication.Cookies
-
 source ../../../../dist/
-  nuget Axle.Web.AspNetCore
+
+nuget WebSharper.UI < 4.5.9
+nuget WebSharper.AspNetCore
+nuget Microsoft.AspNetCore.Authentication.Cookies
+nuget Axle.Web.AspNetCore
