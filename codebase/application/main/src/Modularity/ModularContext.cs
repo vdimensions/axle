@@ -116,13 +116,13 @@ namespace Axle.Modularity
                         }
                         else if (loadedModules.Contains(moduleDependency.Type))
                         {   //
-                            // The module depends on an already loaded module.
+                            // The module depends on an already loaded module. This will not contribute to rank increments.
                             //
                             rank = Math.Max(rank, 0);
                         }
                         else
                         {   //
-                            // The module has an unranked dependency, it cannot be ranked as well.
+                            // If a module has an unranked dependency, it cannot be ranked as well.
                             //
                             rank = -1;
                             break;
@@ -194,11 +194,11 @@ namespace Axle.Modularity
                     var moduleLogger = _loggingServiceProvider.Create(moduleType);
                     var moduleContainer = _containerProvider.Create(_rootContainer);
                     moduleInitializationContainer
-                            .RegisterInstance(moduleInfo)
-                            .RegisterType(moduleType)
-                            .RegisterInstance(moduleLogger)
-                            .RegisterInstance(moduleContainer)
-                            .RegisterInstance(rootExporter);
+                        .RegisterType(moduleType)            // register the module type to be instantiated via DI
+                        .RegisterInstance(moduleInfo)        // register module info so that modules can reflect on themselves
+                        .RegisterInstance(moduleLogger)      // register the module's dedicated logger
+                        .RegisterInstance(moduleContainer)   // register the module's dedicated DI container
+                        .RegisterInstance(rootExporter);     // register the global dependencies exporter
 
                     //
                     // Make all required modules injectable
@@ -218,7 +218,6 @@ namespace Axle.Modularity
                             moduleType,
                             _ =>
                             {
-                                
                                 var result = new ModuleMetadata(moduleInfo).UpdateInstance(moduleInstance, moduleInitializationContainer, moduleLogger);
                                 _moduleInstances.Push(result);
                                 return result;

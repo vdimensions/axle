@@ -22,6 +22,15 @@ namespace Axle
         IApplicationBuilder Load(IEnumerable<Assembly> assemblies);
         Application Run(params string[] args);
     }
+
+    public static class ApplicationBuilderExtensions
+    {
+        public static IApplicationBuilder Load<T>(this IApplicationBuilder builder) where T : class
+        {
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.Load(typeof(T));
+        }
+    }
+
     public sealed class Application : IApplicationBuilder, IDisposable
     {
         public static IApplicationBuilder Build() => new Application();

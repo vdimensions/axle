@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Concurrent;
-using System.Collections.Generic;
-using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
-using System.Reflection;
-#endif
-//using System.Threading.Tasks;
-
-using Axle.DependencyInjection;
-using Axle.Extensions.String;
-using Axle.Logging;
+﻿using Axle.DependencyInjection;
 
 
 namespace Axle.Modularity
@@ -34,6 +23,18 @@ namespace Axle.Modularity
             public override ModuleExporter Export<T>(T instance)
             {
                 _container.RegisterInstance(instance);
+                return this;
+            }
+
+            public override ModuleExporter Export<T>(string name)
+            {
+                _container.RegisterType<T>(name);
+                return this;
+            }
+
+            public override ModuleExporter Export<T>()
+            {
+                _container.RegisterType<T>();
                 return this;
             }
         }
