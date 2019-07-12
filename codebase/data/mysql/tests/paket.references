@@ -1,0 +1,5 @@
+Axle.Data.MySql
+
+group test
+  NUnit
+  NUnit3TestAdapter

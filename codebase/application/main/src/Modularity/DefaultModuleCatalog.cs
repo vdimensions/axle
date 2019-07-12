@@ -36,12 +36,12 @@ namespace Axle.Modularity
             foreach (var type in types)
             {
                 var introspector = new DefaultIntrospector(type);
-                var introspectedAttrobutes = allowInheritingTypes
+                var introspectedAttributes = allowInheritingTypes
                         ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
                         : introspector.GetAttributes<TAttribute>();
-                for (var i = 0; i < introspectedAttrobutes.Length; i++)
+                for (var i = 0; i < introspectedAttributes.Length; i++)
                 {
-                    attributes.Add((TAttribute) introspectedAttrobutes[i].Attribute);
+                    attributes.Add((TAttribute) introspectedAttributes[i].Attribute);
                 }
             }
 

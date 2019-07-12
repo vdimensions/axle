@@ -1,8 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
-
 using Axle.Data.Common;
+using Axle.References;
 
 
 namespace Axle.Data.SqlClient
@@ -22,13 +22,15 @@ namespace Axle.Data.SqlClient
             SqlDbType>
     {
         public const string Name = "System.Data.SqlClient";
-        public const string Dialect = "MS-SQL";
+        public const string Dialect = "MSSQL";
+
+        public static SqlServiceProvider Instance => Singleton<SqlServiceProvider>.Instance.Value;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly SqlParameterValueSetter _parameterValueSetter;
 
-        public SqlServiceProvider() : this(Name) { }
-        internal SqlServiceProvider(string name) : base(name, Dialect)
+        private SqlServiceProvider() : this(Name) { }
+        private SqlServiceProvider(string name) : base(name, Dialect)
         {
             _parameterValueSetter = new SqlParameterValueSetter();
         }

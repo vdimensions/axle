@@ -4,13 +4,14 @@ group main
 
   source ../../../../dist
   source https://api.nuget.org/v3/index.json
+    
+  nuget Axle.Data.MySql
 
-  nuget Axle.Application
-
-group netstandard
-  framework: netstandard1.2, netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6, netstandard2.0
+group test
+  framework: auto-detect
   storage: none
 
   source https://api.nuget.org/v3/index.json
 
-  nuget System.Data.Common 
+  nuget NUnit
+  nuget NUnit3TestAdapter

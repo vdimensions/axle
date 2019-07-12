@@ -1,9 +1,11 @@
 ﻿using System.Data;
-
+using System.Diagnostics.CodeAnalysis;
 using Npgsql;
 using NpgsqlTypes;
 
 using Axle.Data.Common;
+using Axle.Modularity;
+using Axle.References;
 
 
 namespace Axle.Data.Npgsql
@@ -25,10 +27,12 @@ namespace Axle.Data.Npgsql
         public const string Name = "Npgsql";
         public const string Dialect = "PostgreSQL";
 
+        public static NpgsqlServiceProvider Instance => Singleton<NpgsqlServiceProvider>.Instance.Value;
+
         private readonly IDbParameterValueSetter<NpgsqlParameter, NpgsqlDbType> _parameterValueSetter = new NpgsqlParameterValueSetter();
 
-        internal NpgsqlServiceProvider() : this(Name) { }
-        internal NpgsqlServiceProvider(string name) : base(name, Dialect) { }
+        private NpgsqlServiceProvider() : this(Name) { }
+        private NpgsqlServiceProvider(string name) : base(name, Dialect) { }
 
         protected override NpgsqlConnection CreateConnection(string connectionString) => new NpgsqlConnection(connectionString);
 

@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using Axle.Data.Common;
+using Axle.References;
 using MySql.Data.MySqlClient;
 
 
@@ -20,13 +21,17 @@ namespace Axle.Data.MySql
         MySqlDbType>
     {
         public const string Name = "MySql.Data.MySqlClient";
+        public const string Dialect = "MySQL";
+
+        public static MySqlServiceProvider Instance => Singleton<MySqlServiceProvider>.Instance.Value;
 
         private readonly MySqlParameterValueSetter _parameterValueSetter;
 
-        public MySqlServiceProvider(string dialect) : base(Name, dialect)
+        private MySqlServiceProvider(string dialect) : base(Name, dialect)
         {
             _parameterValueSetter = new MySqlParameterValueSetter();
         }
+        private MySqlServiceProvider() : this(Dialect) { }
 
         protected override MySqlConnection CreateConnection(string connectionString)
         {

@@ -17,6 +17,7 @@ using SqliteDataAdapter = Axle.Data.Sqlite.SqliteDataAdapter;
 #endif
 
 using Axle.Data.Common;
+using Axle.Modularity;
 using Axle.References;
 
 

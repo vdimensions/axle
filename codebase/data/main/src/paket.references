@@ -1,5 +1,5 @@
 group main
-  Axle.Core
+  Axle.Application
 
 group netstandard
   System.Data.Common

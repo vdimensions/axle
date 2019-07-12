@@ -1,14 +1,24 @@
-storage: none
+group main
+  storage: none
 
-source https://api.nuget.org/v3/index.json
-source ../../../../dist
-  nuget Npgsql >= 3.1 framework: net45, netstandard2.0
+  source ../../../../dist
+  source https://api.nuget.org/v3/index.json
+
+  nuget Npgsql >= 3.1, framework: netstandard2.0, net451, net45
   nuget Axle.Data
 
 group netstandard1_3
+  framework: netstandard1.5, netstandard1.4, netstandard1.3
+  storage: none
+  
   source https://api.nuget.org/v3/index.json
-    nuget Npgsql < 4 framework: netstandard1.3
+  
+  nuget Npgsql < 4
 
 group legacy
+  framework: net40, net35
+  storage: none
+
   source https://api.nuget.org/v3/index.json
-    nuget Npgsql < 3 framework: net35, net40
+  
+  nuget Npgsql < 3
