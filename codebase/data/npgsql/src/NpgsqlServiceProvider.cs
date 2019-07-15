@@ -31,8 +31,7 @@ namespace Axle.Data.Npgsql
 
         private readonly IDbParameterValueSetter<NpgsqlParameter, NpgsqlDbType> _parameterValueSetter = new NpgsqlParameterValueSetter();
 
-        private NpgsqlServiceProvider() : this(Name) { }
-        private NpgsqlServiceProvider(string name) : base(name, Dialect) { }
+        private NpgsqlServiceProvider() : base(Name, Dialect) { }
 
         protected override NpgsqlConnection CreateConnection(string connectionString) => new NpgsqlConnection(connectionString);
 

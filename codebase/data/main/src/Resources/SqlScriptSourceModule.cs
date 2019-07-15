@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Linq;
 using Axle.Data.Resources.Extraction;
 using Axle.Modularity;
 using Axle.Resources;
@@ -20,6 +17,6 @@ namespace Axle.Data.Resources
             registry.Configure(Bundle).Extractors.Register(new SqlScriptSourceExtractor(Registry.Select(x => x.DialectName)));
         }
 
-        internal DbServiceProviderRegistry Registry { get; set; }
+        internal IDbServiceProviderRegistry Registry { get; set; }
     }
 }

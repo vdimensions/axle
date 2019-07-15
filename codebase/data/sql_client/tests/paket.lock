@@ -1,0 +1,28 @@
+STORAGE: NONE
+RESTRICTION: == net461
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    Axle.Application (1.5.2383.23057)
+      Axle.Resources (>= 1.5.2383.23057)
+    Axle.Core (1.5.2383.23057)
+    Axle.Data (1.5.2383.23057)
+      Axle.Application (>= 1.5.2383.23057)
+    Axle.Data.SqlClient (1.5.2383.23057)
+      Axle.Data (>= 1.5.2383.23057)
+    Axle.Resources (1.5.2383.23057)
+      Axle.Core (>= 1.5.2383.23057)
+
+GROUP test
+STORAGE: NONE
+RESTRICTION: == net461
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    NUnit (3.12)
+    NUnit3TestAdapter (3.13)
+    System.Configuration.ConfigurationManager (4.5)
+      System.Security.Permissions (>= 4.5)
+    System.Security.AccessControl (4.5)
+      System.Security.Principal.Windows (>= 4.5)
+    System.Security.Permissions (4.5)
+      System.Security.AccessControl (>= 4.5)
+    System.Security.Principal.Windows (4.5.1)

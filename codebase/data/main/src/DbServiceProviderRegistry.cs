@@ -2,14 +2,18 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Linq;
 using Axle.Modularity;
+using Axle.Verification;
 
 
 namespace Axle.Data
 {
+    internal interface IDbServiceProviderRegistry : IEnumerable<IDbServiceProvider>
+    {
+        IDbServiceProvider this[string providerName] { get; }
+    }
     [Module]
-    internal sealed class DbServiceProviderRegistry : IEnumerable<IDbServiceProvider>
+    internal sealed class DbServiceProviderRegistry : IDbServiceProviderRegistry
     {
         private readonly ConcurrentDictionary<string, IDbServiceProvider> _providers = new ConcurrentDictionary<string, IDbServiceProvider>(StringComparer.Ordinal);
 
@@ -35,5 +39,10 @@ namespace Axle.Data
 
         IEnumerator<IDbServiceProvider> IEnumerable<IDbServiceProvider>.GetEnumerator() => _providers.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _providers.Values.GetEnumerator();
+
+        IDbServiceProvider IDbServiceProviderRegistry.this[string name]
+        {
+            get => _providers.TryGetValue(name.VerifyArgument(nameof(name)), out var res) ? res : null;
+        }
     }
 }
