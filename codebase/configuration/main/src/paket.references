@@ -1,5 +1,5 @@
-Axle.Core
-System.Configuration.ConfigurationManager 
+group main
+  Axle.Core
 
-group build
-  Mason.Targets.Preprocessor
+group netstandard
+  System.Configuration.ConfigurationManager 

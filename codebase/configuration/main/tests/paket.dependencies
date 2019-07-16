@@ -4,10 +4,14 @@ group main
 
   source ../../../../dist
   source https://api.nuget.org/v3/index.json
-  nuget Axle.Core
+    
+  nuget Axle.Configuration
 
-group netstandard
-  framework: netstandard2.0
+group test
+  framework: auto-detect
   storage: none
+
   source https://api.nuget.org/v3/index.json
-  nuget System.Configuration.ConfigurationManager >= 4.0.1 
+
+  nuget NUnit
+  nuget NUnit3TestAdapter

@@ -3,7 +3,7 @@ using System.ComponentModel;
 using System.Globalization;
 
 using Axle.Configuration.Sdk;
-using Axle.Text.RegularExpressions;
+using Axle.Text.Expressions.Path;
 
 
 namespace Axle.Configuration

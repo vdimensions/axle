@@ -20,16 +20,16 @@ namespace Axle.Configuration.Sdk
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private readonly AddRemoveOperation _operation;
 
-            public ElementKey(Object originalElementKey, AddRemoveOperation operation) : this()
+            public ElementKey(object originalElementKey, AddRemoveOperation operation) : this()
             {
                 _originalElementKey = originalElementKey ?? throw new ArgumentNullException(nameof(originalElementKey));
                 _operation = operation;
             }
 
-            public override bool Equals(object obj) { return obj != null && obj is ElementKey && DoEquals((ElementKey) obj); }
+            public override bool Equals(object obj) => obj != null && obj is ElementKey && DoEquals((ElementKey)obj);
             public bool Equals(ElementKey other) { return DoEquals(other); }
 
-            public override int GetHashCode() { return _originalElementKey.GetHashCode()^_operation.GetHashCode(); }
+            public override int GetHashCode() => _originalElementKey.GetHashCode()^_operation.GetHashCode();
 
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -58,7 +58,7 @@ namespace Axle.Configuration.Sdk
             {
                 return CreateRemoveElement();
             }
-            throw new ArgumentException("Unsupported element '" + elementName + "'", "elementName");
+            throw new ArgumentException("Unsupported element '" + elementName + "'", nameof(elementName));
         }
 
         protected virtual TAdd CreateAddElement() { return new TAdd(); }

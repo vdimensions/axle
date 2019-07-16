@@ -1,0 +1,16 @@
+STORAGE: NONE
+RESTRICTION: == net461
+NUGET
+  remote: ../../../../dist
+    Axle.Configuration (1.5.2387.19530)
+      Axle.Core (>= 1.5.2383.23057)
+  remote: https://api.nuget.org/v3/index.json
+    Axle.Core (1.5.2383.23057)
+
+GROUP test
+STORAGE: NONE
+RESTRICTION: == net461
+NUGET
+  remote: https://api.nuget.org/v3/index.json
+    NUnit (3.12)
+    NUnit3TestAdapter (3.13)

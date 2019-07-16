@@ -60,7 +60,7 @@ namespace Axle.Configuration.Sdk
 
         protected T Resolve<T>(ConfigurationProperty property)
         {
-            return (T) base[property.VerifyArgument("property").IsNotNull().Value];
+            return (T) base[property.VerifyArgument(nameof(property)).IsNotNull().Value];
         }
 
         void ISupportsDeserializeInternal.Deserialize(XmlReader reader, bool serializeCollectionKey) { DeserializeElement(reader, serializeCollectionKey); }

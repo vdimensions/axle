@@ -4,5 +4,6 @@ using System.Xml;
 
 namespace Axle.Configuration.Sdk
 {
-    internal delegate void DeserializeMethod<T>(T element, XmlReader reader, bool serializeCollectionKey) where T: ConfigurationElement;
+    internal delegate void DeserializeMethod<T>(T element, XmlReader reader, bool serializeCollectionKey) 
+        where T: ConfigurationElement;
 }

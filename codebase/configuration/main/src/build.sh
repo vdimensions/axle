@@ -1,28 +1,9 @@
-msbuild="../../../../submodules/btw/msbuild.sh"
-paket='.paket/paket.sh'
 project='Axle.Configuration'
+project_format='csproj'
 
-$paket update
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
+./restore.sh
 
-#rm -rf obj/
-dotnet restore $project.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
-$msbuild $project.csproj
-if [ $? -ne 0 ]; then
-  read -rsp "Press [Enter] to quit"
-  echo ""
-  exit
-fi
-$msbuild $project.dist.csproj
+dotnet clean $project.$project_format && dotnet build $project.$project_format && rm -rf ../../../../dist/$project.?.*.nupkg && dotnet pack $project.$project_format --no-build --no-restore
 if [ $? -ne 0 ]; then
   read -rsp "Press [Enter] to quit"
   echo ""
