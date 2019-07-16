@@ -1,0 +1,4 @@
+group main
+  Axle.Configuration
+group netstandard
+  Microsoft.Extensions.Configuration.Json
