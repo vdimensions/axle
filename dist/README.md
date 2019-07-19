@@ -1,6 +1,6 @@
 # What is this directory used for?
 
-This directory is used to hold nuget packages produced during build. Every project is configured to create a nuget package there when `dotnet pack` is executed.
+This directory is used to hold nuget packages produced during build. Every project is configured to create a nuget package here when `dotnet pack` is executed.
 
 ## User workflow
 

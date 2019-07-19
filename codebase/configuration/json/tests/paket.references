@@ -1,0 +1,5 @@
+Axle.Configuration.Json
+
+group test
+  NUnit
+  NUnit3TestAdapter
