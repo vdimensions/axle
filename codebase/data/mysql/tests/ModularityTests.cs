@@ -3,6 +3,7 @@ using System.Linq;
 using Axle;
 using Axle.Configuration;
 using Axle.Data.Configuration;
+using Axle.Data.DataSources;
 using Axle.DependencyInjection;
 using NUnit.Framework;
 
@@ -16,7 +17,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .LoadMySqlModule();
+                .UseMySql();
             using (appBuilder.Run())
             {
                 var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
@@ -32,12 +33,12 @@ namespace Axle.Data.MySql.Tests
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
                 .AddLegacyConfig()
-                .LoadMySqlModule();
+                .UseMySql();
             using (appBuilder.Run())
             {
                 var cfg = container.Resolve<IConfiguration>();
-                var connectionStrings = cfg.GetSection("connectionStrings");
-                var defaultConnectionString = connectionStrings.GetSection<ConnectionStringInfo>("default");
+                var connectionStrings = cfg.GetConnectionStrings();
+                var defaultConnectionString = connectionStrings.Where(x => x.Name.Equals("default"));
 
                 Assert.IsNotNull(defaultConnectionString);
             }
@@ -49,13 +50,40 @@ namespace Axle.Data.MySql.Tests
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
                 .AddLegacyConfig()
-                .LoadMySqlModule();
+                .UseMySql();
             using (appBuilder.Run())
             {
                 var cfg = container.Resolve<IConfiguration>();
-                var defaultConnectionString = cfg.GetSection<Dictionary<string, ConnectionStringInfo>>("connectionStrings");
+                var connectionStrings = cfg.GetConnectionStrings();
 
-                Assert.IsNotNull(defaultConnectionString);
+                Assert.IsNotNull(connectionStrings);
+                Assert.IsNotEmpty(connectionStrings);
+            }
+        }
+
+        [Test]
+        public void TestDataSourceDiscovery()
+        {
+            IContainer container = null;
+            var appBuilder = Application.Build()
+                .ConfigureDependencies(c => container = c)
+                .AddLegacyConfig()
+                .UseDataSources()
+                .UseMySql();
+            using (appBuilder.Run())
+            {
+                var cfg = container.Resolve<IConfiguration>();
+                var connectionStrings = cfg.GetConnectionStrings();
+
+                Assert.IsNotNull(connectionStrings);
+
+                foreach (var connectionStringInfo in connectionStrings)
+                {
+                    var resolved = container.TryResolve<DataSource>(out var dataSource, connectionStringInfo.Name);
+                    Assert.IsTrue(resolved);
+                    Assert.IsNotNull(dataSource);
+                    Assert.AreEqual(dataSource.Name, connectionStringInfo.Name);
+                }
             }
         }
     }

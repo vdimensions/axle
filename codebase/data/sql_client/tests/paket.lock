@@ -1,16 +1,24 @@
 STORAGE: NONE
 RESTRICTION: == net461
 NUGET
+  remote: ../../../../dist
+    Axle.Application (1.5.2395.28226)
+      Axle.Configuration (>= 1.5.2395.24069)
+      Axle.Resources (>= 1.5.2390.14285)
+    Axle.Configuration (1.5.2395.29753)
+      Axle.Core (>= 1.5.2394.24181)
+      Microsoft.Extensions.Configuration.Binder (>= 2.2.4)
+      Microsoft.Extensions.Configuration.FileExtensions (>= 2.2)
+    Axle.Core (1.5.2395.22432)
+    Axle.Data (1.5.2395.23399)
+      Axle.Application (>= 1.5.2395.22810)
+    Axle.Data.SqlClient (1.5.2395.31174)
+      Axle.Data (>= 1.5.2395.23399)
+    Axle.Resources (1.5.2390.14285)
+      Axle.Core (>= 1.5.2390.14064)
   remote: https://api.nuget.org/v3/index.json
-    Axle.Application (1.5.2383.23057)
-      Axle.Resources (>= 1.5.2383.23057)
-    Axle.Core (1.5.2383.23057)
-    Axle.Data (1.5.2383.23057)
-      Axle.Application (>= 1.5.2383.23057)
-    Axle.Data.SqlClient (1.5.2383.23057)
-      Axle.Data (>= 1.5.2383.23057)
-    Axle.Resources (1.5.2383.23057)
-      Axle.Core (>= 1.5.2383.23057)
+    Microsoft.Extensions.Configuration.Binder (2.2.4)
+    Microsoft.Extensions.Configuration.FileExtensions (2.2)
 
 GROUP test
 STORAGE: NONE

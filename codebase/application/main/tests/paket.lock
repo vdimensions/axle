@@ -2,10 +2,10 @@ STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.2395.26832)
-      Axle.Configuration (>= 1.5.2395.24069)
+    Axle.Application (1.5.2395.31886)
+      Axle.Configuration (>= 1.5.2395.29753)
       Axle.Resources (>= 1.5.2390.14285)
-    Axle.Configuration (1.5.2395.26701)
+    Axle.Configuration (1.5.2395.29753)
       Axle.Core (>= 1.5.2394.24181)
     Axle.Core (1.5.2395.22432)
     Axle.Resources (1.5.2390.14285)

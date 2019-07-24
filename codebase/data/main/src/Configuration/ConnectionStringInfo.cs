@@ -8,6 +8,13 @@ namespace Axle.Data.Configuration
     /// </summary>
     public sealed class ConnectionStringInfo : IEquatable<ConnectionStringInfo>
     {
+        internal ConnectionStringInfo(string name, string providerName, string connectionString)
+        {
+            Name = name;
+            ProviderName = providerName;
+            ConnectionString = connectionString;
+        }
+
         internal const string ConfigSectionName = "ConnectionStrings";
 
         public override int GetHashCode() => this.CalculateHashCode(Name, ProviderName, ConnectionString);
@@ -20,8 +27,8 @@ namespace Axle.Data.Configuration
                    cmp.Equals(ConnectionString, other.ConnectionString);
         }
 
-        public string Name { get; set; }
-        public string ProviderName { get; set; }
-        public string ConnectionString { get; set; }
+        public string Name { get; }
+        public string ProviderName { get; }
+        public string ConnectionString { get; }
     }
 }

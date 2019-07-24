@@ -11,7 +11,7 @@ namespace Axle.Data.Npgsql.Tests
         //public void TestNpgsqlProviderIsRegistered()
         //{
         //    IContainer container = null;
-        //    using (Application.Build().ConfigureDependencies(c => container = c).LoadNpgsqlModule().Run())
+        //    using (Application.Build().ConfigureDependencies(c => container = c).UsePostgreSql().Run())
         //    {
         //        var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
         //        Assert.IsNotEmpty(providers, "No database service providers have been registered");

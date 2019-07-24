@@ -11,7 +11,7 @@ namespace Axle.Data.SqlClient.Tests
         public void TestSqlClientProviderIsRegistered()
         {
             IContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).LoadSqlClientModule().Run())
+            using (Application.Build().ConfigureDependencies(c => container = c).UseSqlClient().Run())
             {
                 var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
                 Assert.IsNotEmpty(providers, "No database service providers have been registered");

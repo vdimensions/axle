@@ -2,10 +2,10 @@ STORAGE: NONE
 RESTRICTION: || (== net35) (== net40) (== net45) (== net46) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.2395.22810)
-      Axle.Configuration (>= 1.5.2395.19841)
+    Axle.Application (1.5.2395.31886)
+      Axle.Configuration (>= 1.5.2395.29753)
       Axle.Resources (>= 1.5.2390.14285)
-    Axle.Configuration (1.5.2395.19841)
+    Axle.Configuration (1.5.2395.29753)
       Axle.Core (>= 1.5.2394.24181)
       Microsoft.Extensions.Configuration.Binder (>= 2.2.4) - restriction: || (&& (== net35) (>= net461)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net40) (>= net461)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== net45) (>= net461)) (&& (== net46) (< net35) (>= netstandard2.0)) (&& (== net46) (>= net461)) (&& (== netstandard1.5) (>= net461)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= net461)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
       Microsoft.Extensions.Configuration.FileExtensions (>= 2.2) - restriction: || (&& (== net35) (>= net461)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net40) (>= net461)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== net45) (>= net461)) (&& (== net46) (< net35) (>= netstandard2.0)) (&& (== net46) (>= net461)) (&& (== netstandard1.5) (>= net461)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= net461)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)

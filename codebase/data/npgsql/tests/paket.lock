@@ -1,15 +1,26 @@
 STORAGE: NONE
 RESTRICTION: == net461
 NUGET
+  remote: ../../../../dist
+    Axle.Application (1.5.2395.28226)
+      Axle.Configuration (>= 1.5.2395.24069)
+      Axle.Resources (>= 1.5.2390.14285)
+    Axle.Configuration (1.5.2395.29753)
+      Axle.Core (>= 1.5.2394.24181)
+      Microsoft.Extensions.Configuration.Binder (>= 2.2.4)
+      Microsoft.Extensions.Configuration.FileExtensions (>= 2.2)
+    Axle.Core (1.5.2395.22432)
+    Axle.Data (1.5.2395.23399)
+      Axle.Application (>= 1.5.2395.22810)
+    Axle.Data.Npgsql (1.5.2395.31141)
+      Axle.Data (>= 1.5.2395.23399)
+      Npgsql (>= 4.0.8)
+    Axle.Resources (1.5.2390.14285)
+      Axle.Core (>= 1.5.2390.14064)
   remote: https://api.nuget.org/v3/index.json
-    Axle.Application (1.5.2383.23057)
-      Axle.Resources (>= 1.5.2383.23057)
-    Axle.Core (1.5.2383.23057)
-    Axle.Data (1.5.2383.23057)
-      Axle.Application (>= 1.5.2383.23057)
-    Axle.Resources (1.5.2383.23057)
-      Axle.Core (>= 1.5.2383.23057)
-    Npgsql (4.0.7)
+    Microsoft.Extensions.Configuration.Binder (2.2.4)
+    Microsoft.Extensions.Configuration.FileExtensions (2.2)
+    Npgsql (4.0.8)
       System.Memory (>= 4.5.3)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
       System.Threading.Tasks.Extensions (>= 4.5.2)
@@ -24,10 +35,6 @@ NUGET
     System.Threading.Tasks.Extensions (4.5.3)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
     System.ValueTuple (4.5)
-  remote: ../../../../dist
-    Axle.Data.Npgsql (1.5.2386.28299)
-      Axle.Data (>= 1.5.2383.23057)
-      Npgsql (>= 4.0.7)
 
 GROUP test
 STORAGE: NONE
