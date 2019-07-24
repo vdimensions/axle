@@ -17,17 +17,23 @@ namespace Axle.Data.Resources
 
         internal SqlScriptSource(string name, IDictionary<string, string> scripts)
         {
-            Name = name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
-            _scripts = scripts.VerifyArgument(nameof(scripts)).IsNotNull().Value;
+            Name = StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
+            _scripts = Verifier.IsNotNull(Verifier.VerifyArgument(scripts, nameof(scripts))).Value;
         }
 
-        public string GetScript(string dialectName)
+        private string GetScript(string dialectName)
         {
             if (_scripts.TryGetValue(dialectName.VerifyArgument(nameof(dialectName)).IsNotNullOrEmpty(), out var result) || _scripts.TryGetValue(string.Empty, out result))
             {
                 return result;
             }
             throw new NotSupportedException($"The '{Name}' script is not available for dialect '{dialectName}'");
+        }
+
+        public string ResolveScript(IDbServiceProvider dbProvider)
+        {
+            dbProvider.VerifyArgument(nameof(dbProvider)).IsNotNull();
+            return GetScript(dbProvider.DialectName);
         }
 
         public string Name { get; }

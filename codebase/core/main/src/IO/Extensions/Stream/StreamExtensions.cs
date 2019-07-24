@@ -1,5 +1,5 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
-using System;
+﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 
 using Axle.Verification;
@@ -10,8 +10,9 @@ namespace Axle.IO.Extensions.Stream
     using Stream = System.IO.Stream;
 
     /// <summary>
-    /// A static class providing extension methods to <see cref="Stream"/> instances.
+    /// A static class providing extension methods to  instances of the <see cref="Stream"/> class.
     /// </summary>
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class StreamExtensions
     {
         private const int DefaultBufferSize = 4096;
@@ -40,9 +41,13 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ObjectDisposedException">
         /// Methods were called after the stream was closed. 
         /// </exception>
-        public static void Allocate(this Stream stream, int length)
+        public static void Allocate(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, int length)
         {
-            stream.VerifyArgument(nameof(stream)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(stream, nameof(stream)));
             if (!stream.CanWrite)
             {
                 throw new NotSupportedException("The specified input stream does not support writing.");
@@ -51,6 +56,45 @@ namespace Axle.IO.Extensions.Stream
             stream.Write(new byte[length], 0, length);
             stream.Seek(position, SeekOrigin.Begin);
         }
+
+        #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Writes the contents of the provided <paramref name="stream"/> to a temporary file.
+        /// </summary>
+        /// <param name="stream">
+        /// The stream object to dump.
+        /// </param>
+        /// <returns>
+        /// A <see cref="TemporaryStreamDump"/> instance pointing to the file containing the dumped data.
+        /// </returns>
+        /// <seealso cref="TemporaryStreamDump"/>
+        /// <seealso cref="TemporaryStreamDump.Dump(Stream, bool)"/>
+        public static TemporaryStreamDump Dump(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream) => TemporaryStreamDump.Dump(stream, true);
+
+        /// <summary>
+        /// Writes the contents of the target <paramref name="stream"/> to a temporary file in the given <paramref name="location"/>.
+        /// </summary>
+        /// <param name="stream">
+        /// The stream object to dump.
+        /// </param>
+        /// <param name="location">
+        /// The location of the file to dump the stream into.
+        /// </param>
+        /// <returns>
+        /// A <see cref="TemporaryStreamDump"/> instance pointing to the file containing the dumped data.
+        /// </returns>
+        /// <seealso cref="TemporaryStreamDump"/>
+        /// <seealso cref="TemporaryStreamDump.Dump(Stream, string, bool)"/>
+        public static TemporaryStreamDump DumpTo(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, string location) => TemporaryStreamDump.Dump(stream, location, true);
+        #endif
 
         /// <summary>
         /// Sets the position of the target <paramref name="stream"/> to its start. The call is equivalent to the following code:
@@ -71,7 +115,11 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ObjectDisposedException">
         /// Methods were called after the stream was closed. 
         /// </exception>
-        public static long SeekToBeginning(this Stream stream)
+        public static long SeekToBeginning(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream)
         {
             if (stream == null)
             {
@@ -101,7 +149,11 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ObjectDisposedException">
         /// Methods were called after the stream was closed. 
         /// </exception>
-        public static long SeekToEnd(this Stream stream)
+        public static long SeekToEnd(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream)
         {
             if (stream == null)
             {
@@ -122,7 +174,7 @@ namespace Axle.IO.Extensions.Stream
         /// An integer value determining the size of the buffer used for reading from the stream.
         /// </param>
         /// <param name="leaveOpen">
-        /// A <see cref="bool">boolean</see> flag indicating wheter to leave the stream open or not. 
+        /// A <see cref="bool">boolean</see> flag indicating whether to leave the stream open or not. 
         /// </param>
         /// <returns>
         /// An array of <see cref="byte"/> values representing the contents of the <paramref name="stream"/>.
@@ -137,10 +189,14 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ObjectDisposedException">
         /// Methods were called after the stream was closed. 
         /// </exception>
-        public static byte[] ToByteArray(this Stream stream, int bufferSize, bool leaveOpen)
+        public static byte[] ToByteArray(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, int bufferSize, bool leaveOpen)
         {
-            stream.VerifyArgument(nameof(stream)).IsNotNull();
-            bufferSize.VerifyArgument(nameof(bufferSize)).IsGreaterThan(0);
+            Verifier.IsNotNull(Verifier.VerifyArgument(stream, nameof(stream)));
+            ComparableVerifier.IsGreaterThan(Verifier.VerifyArgument(bufferSize, nameof(bufferSize)), 0);
 
             var result = new byte[stream.Length];
             var position = stream.Position;
@@ -176,7 +232,7 @@ namespace Axle.IO.Extensions.Stream
         /// The <see cref="Stream">stream</see> to convert.
         /// </param>
         /// <param name="leaveOpen">
-        /// A <see cref="bool">boolean</see> flag indicating wheter to leave the stream open or not. 
+        /// A <see cref="bool">boolean</see> flag indicating whether to leave the stream open or not. 
         /// </param>
         /// <returns>
         /// An array of <see cref="byte"/> values representing the contents of the <paramref name="stream"/>.
@@ -190,7 +246,11 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ObjectDisposedException">
         /// Methods were called after the stream was closed. 
         /// </exception>
-        public static byte[] ToByteArray(this Stream stream, bool leaveOpen) { return ToByteArray(stream, DefaultBufferSize, leaveOpen); }
+        public static byte[] ToByteArray(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, bool leaveOpen) => ToByteArray(stream, DefaultBufferSize, leaveOpen);
         /// <summary>
         /// Converts the contents of a <see cref="Stream"/> instance to an array of bytes.
         /// <remarks>
@@ -215,7 +275,11 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ObjectDisposedException">
         /// Methods were called after the stream was closed. 
         /// </exception>
-        public static byte[] ToByteArray(this Stream stream, int bufferSize) { return ToByteArray(stream, bufferSize, false); }
+        public static byte[] ToByteArray(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, int bufferSize) => ToByteArray(stream, bufferSize, false);
         /// <summary>
         /// Converts the contents of a <see cref="Stream"/> instance to an array of bytes.
         /// <remarks>
@@ -231,7 +295,11 @@ namespace Axle.IO.Extensions.Stream
         /// The stream does not support seeking, such as if the stream is constructed from a pipe or console output. 
         /// </exception>
         /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
-        public static byte[] ToByteArray(this Stream stream) { return ToByteArray(stream, DefaultBufferSize, false); }
+        public static byte[] ToByteArray(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream) => ToByteArray(stream, DefaultBufferSize, false);
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -279,9 +347,13 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="ArgumentOutOfRangeException">
         /// Parameter <paramref name="bufferSize"/> is not a positive number. 
         /// </exception>
-        public static long WriteTo(this Stream stream, Stream target, int bufferSize)
+        public static long WriteTo(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, Stream target, int bufferSize)
         {
-            stream.VerifyArgument(nameof(stream)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(stream, nameof(stream)));
             if (bufferSize <= 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(bufferSize), bufferSize, "Invalid buffer size");
@@ -315,9 +387,13 @@ namespace Axle.IO.Extensions.Stream
         /// <exception cref="InvalidOperationException">
         /// The output target and the input target are the same instance.
         /// </exception>
-        public static long WriteTo(this Stream stream, Stream target, byte[] buffer)
+        public static long WriteTo(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            Stream stream, Stream target, byte[] buffer)
         {
-            stream.VerifyArgument(nameof(stream)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(stream, nameof(stream)));
             if (!stream.CanRead)
             {
                 throw new NotSupportedException("The specified input stream does not support reading.");
@@ -334,4 +410,3 @@ namespace Axle.IO.Extensions.Stream
         }
     }
 }
-#endif

@@ -13,23 +13,23 @@ namespace Axle.Conversion.Parsing
     #endif
     public sealed class DoubleParser : AbstractParser<double>
     {
-        private readonly CultureInfo _fallbackFormatProvider;
+        private readonly NumberStyles _numberStyles;
 
-        public DoubleParser() { }
-        public DoubleParser(CultureInfo fallbackFormatProvider)
+        public DoubleParser() : this(NumberStyles.Any&~NumberStyles.AllowThousands) { }
+        public DoubleParser(NumberStyles numberStyles)
         {
-            _fallbackFormatProvider = fallbackFormatProvider;
+            _numberStyles = numberStyles;
         }
 
         /// <inheritdoc />
         protected override Double DoParse(string value, IFormatProvider formatProvider)
         {
-            return Double.Parse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider);
+            return Double.Parse(value, _numberStyles, formatProvider);
         }
 
         public override bool TryParse(string value, IFormatProvider formatProvider, out Double output)
         {
-            return Double.TryParse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider, out output);
+            return Double.TryParse(value, _numberStyles, formatProvider, out output);
         }
     }
 }

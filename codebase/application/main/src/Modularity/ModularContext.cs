@@ -2,11 +2,13 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Configuration;
 //using System.Threading.Tasks;
 
 using Axle.DependencyInjection;
 using Axle.Extensions.String;
 using Axle.Logging;
+using Axle.Text.Expressions.Substitution;
 
 
 namespace Axle.Modularity
@@ -155,19 +157,17 @@ namespace Axle.Modularity
         private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvider;
         private readonly ILoggingServiceProvider _loggingServiceProvider;
+        private readonly IConfigSource _appConfigurationSource;
         private readonly IList<ModuleMetadata> _initializedModules = new List<ModuleMetadata>();
 
-        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider)
+        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider, IConfigSource appConfigurationSource)
         {
             _moduleCatalog = moduleCatalog;
             _containerProvider = containerProvider;
             _rootContainer = containerProvider.Create();
             _loggingServiceProvider = loggingServiceProvider;
+            _appConfigurationSource = appConfigurationSource;
         }
-        public ModularContext() : this(
-                  new DefaultModuleCatalog(), 
-                  new DefaultDependencyContainerProvider(), 
-                  new DefaultLoggingServiceProvider()) { }
 
         public ModularContext Launch(params Type[] moduleTypes)
         {
@@ -176,6 +176,16 @@ namespace Axle.Modularity
 
             var rankedModules = RankModules(moduleInfos, existingModuleTypes).ToArray();
             var rootExporter = new ContainerExporter(_rootContainer);
+
+            var substExpr = new DefaultSubstitutionExpression();
+            var baseConfig = new LayeredConfigManager()
+                .Prepend(_appConfigurationSource)
+                .Append(EnvironmentConfigSource.Instance);
+            IConfiguration globalAppConfig = 
+                new SubstitutionResolvingConfig(
+                    baseConfig.LoadConfiguration(),
+                    substExpr);
+            _rootContainer.RegisterInstance(globalAppConfig);
 
             for (var i = 0; i < rankedModules.Length; i++)
             foreach (var moduleInfo in rankedModules[i])
@@ -188,6 +198,7 @@ namespace Axle.Modularity
                     //
                     continue;
                 }
+
 
                 using (var moduleInitializationContainer = _containerProvider.Create(_rootContainer))
                 {
@@ -211,7 +222,15 @@ namespace Axle.Modularity
                         }
                     }
 
-                    // TODO: register configuration objects
+                    var baseModuleConfig = 
+                    // TODO:
+                    //    baseConfig.Prepend(...);
+                        baseConfig;
+                    IConfiguration moduleConfig = 
+                        new SubstitutionResolvingConfig(
+                            baseModuleConfig.LoadConfiguration(),
+                            substExpr);
+                    moduleInitializationContainer.RegisterInstance(moduleConfig);
 
                     var moduleInstance = moduleInitializationContainer.Resolve(moduleType);
                     var mm = _modules.AddOrUpdate(

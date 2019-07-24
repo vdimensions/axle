@@ -1,17 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
-    <TargetFramework>net45</TargetFramework>
+    <TargetFramework>net461</TargetFramework>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
-
   <PropertyGroup>
     <ProjectGuid>{0562EAB0-074F-40AD-A49D-812C80FFB316}</ProjectGuid>
     <OutputType>Library</OutputType>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
-
   <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
-
 </Project>

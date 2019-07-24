@@ -1,5 +1,5 @@
 Axle.Configuration
-
-group test
-  NUnit
-  NUnit3TestAdapter
+Microsoft.Extensions.Configuration.Json
+Microsoft.Extensions.Configuration.EnvironmentVariables
+NUnit
+NUnit3TestAdapter

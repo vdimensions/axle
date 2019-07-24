@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
+using Axle.Configuration;
 
 
 namespace Axle.Modularity
@@ -14,6 +15,7 @@ namespace Axle.Modularity
             //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             //typeof(DynamicModuleLoader)
             //#endif
+            typeof(ConfigurationModule)
         };
 
         public ModuleCatalogWrapper(IModuleCatalog originalCatalog)

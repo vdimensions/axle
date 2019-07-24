@@ -1,18 +1,25 @@
 STORAGE: NONE
-RESTRICTION: == net45
+RESTRICTION: == net461
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.2387.20280)
-      Axle.Resources (>= 1.5.2387.20280)
-    Axle.Core (1.5.2387.20280)
-    Axle.Data (1.5.2387.20280)
-      Axle.Application (>= 1.5.2383.23057)
-    Axle.Data.MySql (1.5.2387.20280)
-      Axle.Data (>= 1.5.2383.23057)
+    Axle.Application (1.5.2395.28226)
+      Axle.Configuration (>= 1.5.2395.24069)
+      Axle.Resources (>= 1.5.2390.14285)
+    Axle.Configuration (1.5.2395.29753)
+      Axle.Core (>= 1.5.2394.24181)
+      Microsoft.Extensions.Configuration.Binder (>= 2.2.4)
+      Microsoft.Extensions.Configuration.FileExtensions (>= 2.2)
+    Axle.Core (1.5.2395.22432)
+    Axle.Data (1.5.2395.23399)
+      Axle.Application (>= 1.5.2395.22810)
+    Axle.Data.MySql (1.5.2390.14285)
+      Axle.Data (>= 1.5.2390.14285)
       MySqlConnector (>= 0.56)
-    Axle.Resources (1.5.2387.20280)
-      Axle.Core (>= 1.5.2387.20280)
+    Axle.Resources (1.5.2390.14285)
+      Axle.Core (>= 1.5.2390.14064)
   remote: https://api.nuget.org/v3/index.json
+    Microsoft.Extensions.Configuration.Binder (2.2.4)
+    Microsoft.Extensions.Configuration.FileExtensions (2.2)
     MySqlConnector (0.56)
       System.Buffers (>= 4.4)
       System.Memory (>= 4.5)
@@ -20,14 +27,16 @@ NUGET
     System.Buffers (4.5)
     System.Memory (4.5.3)
       System.Buffers (>= 4.4)
+      System.Numerics.Vectors (>= 4.4)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
+    System.Numerics.Vectors (4.5)
     System.Runtime.CompilerServices.Unsafe (4.5.2)
     System.Threading.Tasks.Extensions (4.5.3)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
 
 GROUP test
 STORAGE: NONE
-RESTRICTION: == net45
+RESTRICTION: == net461
 NUGET
   remote: https://api.nuget.org/v3/index.json
     NUnit (3.12)

@@ -63,7 +63,6 @@ let projectLocations = [
     "security/main"
     "security/cryptography"
     "configuration/main"
-    "configuration/json"
     "application/main"
     "data/main"
     "data/fsharp"

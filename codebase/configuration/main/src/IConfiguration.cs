@@ -1,16 +1,9 @@
-﻿using System;
-
-
-namespace Axle.Configuration
+﻿namespace Axle.Configuration
 {
     /// <summary>
     /// An interface representing the system configuration.
     /// </summary>
-    public interface IConfiguration
+    public interface IConfiguration : IConfigSection
     {
-        string Path { get; }
-        IConfigurationSection GetSection(Type type);
-        T GetSection<T>() where T: class, IConfigurationSection;
-        T GetSection<T>(bool useDefault) where T: class, IConfigurationSection, new();
     }
 }

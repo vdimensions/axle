@@ -2,6 +2,7 @@
 using System;
 
 using Axle.Data.Extensions.DataReader;
+using Axle.Verification;
 
 
 namespace Axle.Data.Extensions.DataRow
@@ -10,8 +11,8 @@ namespace Axle.Data.Extensions.DataRow
 
     public static class DataRowExtensions
     {
-        public static T Fetch<T>(this DataRow row, int columnIndex) => (T) GetData(row, columnIndex);
-        public static T Fetch<T>(this DataRow row, string columnName) => (T) GetData(row, columnName);
+        public static T Fetch<T>(this DataRow row, int columnIndex) => (T) GetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnIndex);
+        public static T Fetch<T>(this DataRow row, string columnName) => (T) GetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnName);
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -24,7 +25,7 @@ namespace Axle.Data.Extensions.DataRow
 
         public static bool TryFetch<T>(this DataRow row, int columnIndex, out T result)
         {
-            if (!TryGetData(row, columnIndex, out var res) || res == DBNull.Value || !DataReaderExtensions.TryCast(res, out result))
+            if (!TryGetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnIndex, out var res) || res == DBNull.Value || !DataReaderExtensions.TryCast(res, out result))
             {
                 result = default(T);
                 return false;
@@ -33,7 +34,7 @@ namespace Axle.Data.Extensions.DataRow
         }
         public static bool TryFetch<T>(this DataRow row, string columnName, out T result)
         {
-            if (!TryGetData(row, columnName, out var res) || res == DBNull.Value || !DataReaderExtensions.TryCast(res, out result))
+            if (!TryGetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnName, out var res) || res == DBNull.Value || !DataReaderExtensions.TryCast(res, out result))
             {
                 result = default(T);
                 return false;
@@ -43,12 +44,12 @@ namespace Axle.Data.Extensions.DataRow
         public static bool TryFetch<T>(this DataRow row, int columnIndex, out T? result) where T : struct
         {
             result = null;
-            return TryGetData(row, columnIndex, out var res) && DataReaderExtensions.TryFetchValueType(res, out result);
+            return TryGetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnIndex, out var res) && DataReaderExtensions.TryFetchValueType(res, out result);
         }
         public static bool TryFetch<T>(this DataRow row, string columnName, out T? result) where T : struct
         {
             result = null;
-            return TryGetData(row, columnName, out var res) && DataReaderExtensions.TryFetchValueType(res, out result);
+            return TryGetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnName, out var res) && DataReaderExtensions.TryFetchValueType(res, out result);
         }
 
         #if NETSTANDARD || NET45_OR_NEWER

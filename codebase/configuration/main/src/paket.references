@@ -1,5 +1,4 @@
-group main
-  Axle.Core
-
-group netstandard
-  System.Configuration.ConfigurationManager 
+Axle.Core
+System.Configuration.ConfigurationManager
+Microsoft.Extensions.Configuration.FileExtensions
+Microsoft.Extensions.Configuration.Binder

@@ -1,17 +1,11 @@
-group main
-  framework: auto-detect
-  storage: none
+framework: auto-detect
+storage: none
 
-  source ../../../../dist
-  source https://api.nuget.org/v3/index.json
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
     
-  nuget Axle.Configuration
-
-group test
-  framework: auto-detect
-  storage: none
-
-  source https://api.nuget.org/v3/index.json
-
-  nuget NUnit
-  nuget NUnit3TestAdapter
+nuget Axle.Configuration
+nuget Microsoft.Extensions.Configuration.Json
+nuget Microsoft.Extensions.Configuration.EnvironmentVariables
+nuget NUnit
+nuget NUnit3TestAdapter

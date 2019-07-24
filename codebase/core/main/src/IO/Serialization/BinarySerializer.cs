@@ -12,7 +12,7 @@ namespace Axle.IO.Serialization
 {
     /// <summary>
     /// An <see cref="ISerializer"/> implementation that uses the <see cref="BinaryFormatter">binary formatter</see>
-    /// that is built-in within the .NET framework to serialize objects.
+    /// that is built-in within the .NET framework.
     /// </summary>
     /// <seealso cref="BinaryFormatter"/>
     [Serializable]

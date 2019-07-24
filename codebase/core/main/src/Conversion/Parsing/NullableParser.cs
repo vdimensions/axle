@@ -16,6 +16,12 @@ namespace Axle.Conversion.Parsing
     {
         private readonly IParser<T> _actualParser;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="NullableParser{T}"/> class.
+        /// </summary>
+        /// <param name="actualParser">
+        /// The underlying <see cref="IParser{T}">parser</see> that is wrapped by the current <see cref="NullableParser{T}"/> instance.
+        /// </param>
         public NullableParser(IParser<T> actualParser)
         {
             _actualParser = Verifier.IsNotNull(Verifier.VerifyArgument(actualParser, nameof(actualParser))).Value;

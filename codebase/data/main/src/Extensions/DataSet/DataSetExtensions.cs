@@ -2,6 +2,7 @@
 using System.Linq;
 
 using Axle.Data.Extensions.DataTable;
+using Axle.Verification;
 
 
 namespace Axle.Data.Extensions.DataSet
@@ -13,7 +14,7 @@ namespace Axle.Data.Extensions.DataSet
     {
         public static bool IsEmpty(this DataSet dataSet)
         {
-            return dataSet.Tables.Cast<DataTable>().All(table => table.IsEmpty());
+            return dataSet.VerifyArgument(nameof(dataSet)).IsNotNull().Value.Tables.Cast<DataTable>().All(table => table.IsEmpty());
         }
     }
 }

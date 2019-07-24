@@ -3,9 +3,8 @@ storage: none
 
 source https://api.nuget.org/v3/index.json
 source ../../../../dist
-  nuget Axle.Core
 
-group test
-  source https://api.nuget.org/v3/index.json
-    nuget NUnit
-    nuget NUnit3TestAdapter
+nuget Axle.Core
+
+nuget NUnit
+nuget NUnit3TestAdapter

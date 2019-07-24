@@ -45,7 +45,7 @@ namespace Axle.Data.Common
             TDbType> : IDbServiceProvider, IDbParameterFactory<TDbParameter, TDbType>
         where TDbConnection: class, IDbConnection
         where TDbTransaction: class, IDbTransaction 
-        where TDbCommand: DbCommand, IDbCommand
+        where TDbCommand: DbCommand
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         where TDbDataAdapter : DbDataAdapter, IDbDataAdapter, IDataAdapter
         #endif
@@ -90,7 +90,7 @@ namespace Axle.Data.Common
 
         #region Command
         protected abstract TDbCommand CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, TDbConnection connection, TDbTransaction transaction);
-        IDbCommand IDbServiceProvider.CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction)
+        DbCommand IDbServiceProvider.CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction)
         {
             var conn = connection.VerifyArgument(nameof(connection)).IsNotNull().IsOfType<TDbConnection>().Value;
             var tran = transaction?.VerifyArgument(nameof(transaction)).IsOfType<TDbTransaction>().Value;
@@ -98,7 +98,7 @@ namespace Axle.Data.Common
         }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected abstract TDbDataAdapter CreateDataAdapter(TDbCommand command);
-        IDbDataAdapter IDbServiceProvider.CreateDataAdapter(DbCommand command)
+        DbDataAdapter IDbServiceProvider.CreateDataAdapter(IDbCommand command)
         {
             return CreateDataAdapter(command.VerifyArgument(nameof(command)).IsNotNull().IsOfType<TDbCommand>());
         }

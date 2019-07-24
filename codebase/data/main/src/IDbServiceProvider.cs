@@ -1,3 +1,4 @@
+using System;
 using System.Data;
 using System.Data.Common;
 
@@ -6,17 +7,14 @@ namespace Axle.Data
 {
     public interface IDbServiceProvider
     {
-        //IDataConnection CreateConnection(string connectionString);
-        //IDataConnection CreateConnection(ConnectionStringSettings connectionString);
-
         IDbConnection CreateConnection(string connectionString);
 
         IDbTransaction CreateTransaction(IDbConnection connection, IsolationLevel? isolationLevel);
 
-        IDbCommand CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction);
+        DbCommand CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction);
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        IDbDataAdapter CreateDataAdapter(DbCommand command);
+        DbDataAdapter CreateDataAdapter(IDbCommand command);
         #endif
 
         DbDataReader CreateDataReader(IDbCommand command, CommandBehavior? behavior);

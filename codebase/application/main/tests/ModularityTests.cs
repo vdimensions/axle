@@ -1,4 +1,7 @@
-﻿using Axle.Logging;
+﻿using Axle;
+using Axle.Configuration;
+using Axle.DependencyInjection;
+using Axle.Logging;
 using Axle.Modularity;
 using NUnit.Framework;
 
@@ -58,13 +61,30 @@ namespace Axle.ApplicationTests
         [Test]
         public void TestModuleInitialization()
         {
-            using (Application.Build().Load(typeof(AB)).Load(typeof(BC)).Load(typeof(AC)).Run()) { }
+            using (Application.Build().Load<AB>().Load<BC>().Load<AC>().Run()) { }
         }
 
         [Test]
         public void TestMultipleModuleInitializations()
         {
-            using (Application.Build().Load(typeof(AB)).Load(typeof(BC)).Load(typeof(A)).Load(typeof(C)).Load(typeof(AC)).Run()) { }
+            using (Application.Build().Load<AB>().Load<BC>().Load<A>().Load<C>().Load<AC>().Run()) { }
+        }
+
+        [Test]
+        public void TestModuleConfig()
+        {
+            IContainer container = null;
+            using (Application.Build().ConfigureDependencies(c => container = c).AddLegacyConfig().Run())
+            {
+                var configuration = container.Resolve<IConfiguration>();
+                var message = configuration["message"].Value;
+                var messageFormat = configuration["messageFormat"].Value;
+                var user = System.Environment.UserName;
+                Assert.IsNotNull(configuration);
+                Assert.IsNotNull(message);
+                Assert.IsNotNull(messageFormat);
+                Assert.AreEqual(string.Format(messageFormat, user), message);
+            }
         }
     }
 }

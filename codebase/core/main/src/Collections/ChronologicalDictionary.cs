@@ -34,19 +34,21 @@ namespace Axle.Collections
             [NonSerialized]
             #endif
             private readonly ICollection<KeyValuePair<ChronologicalKey<TKey>, TValue>> _collection;
+            private readonly IEqualityComparer<TKey> _comparer;
 
-            private TimestampDictionary(IDictionary<ChronologicalKey<TKey>, TValue> dictionary) : base(dictionary)
+            private TimestampDictionary(IDictionary<ChronologicalKey<TKey>, TValue> dictionary, IEqualityComparer<TKey> comparer) : base(dictionary)
             {
                 _collection = this;
+                _comparer = comparer;
             }
             public TimestampDictionary() : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key))) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), EqualityComparer<TKey>.Default) { }
             public TimestampDictionary(int capacity) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key))) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), EqualityComparer<TKey>.Default) { }
             public TimestampDictionary(int capacity, IEqualityComparer<TKey> comparer) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), comparer) { }
             public TimestampDictionary(IEqualityComparer<TKey> comparer) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer))) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), comparer) { }
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             internal TimestampDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
             {
@@ -69,14 +71,14 @@ namespace Axle.Collections
             #region Implementation of ICollection<KeyValuePair<TKey,TValue>>
             void ICollection<KeyValuePair<TKey, TValue>>.Add(KeyValuePair<TKey, TValue> item)
             {
-                var k = new ChronologicalKey<TKey>(item.Key, DateTime.UtcNow);
+                var k = new ChronologicalKey<TKey>(item.Key, DateTime.UtcNow, _comparer);
                 var kvp = new KeyValuePair<ChronologicalKey<TKey>, TValue>(k, item.Value);
                 _collection.Add(kvp);
             }
 
             bool ICollection<KeyValuePair<TKey, TValue>>.Contains(KeyValuePair<TKey, TValue> item)
             {
-                var k = new ChronologicalKey<TKey>(item.Key, DateTime.UtcNow);
+                var k = new ChronologicalKey<TKey>(item.Key, DateTime.UtcNow, _comparer);
                 var kvp = new KeyValuePair<ChronologicalKey<TKey>, TValue>(k, item.Value);
                 return _collection.Contains(kvp);
             }
@@ -96,7 +98,7 @@ namespace Axle.Collections
 
             bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item)
             {
-                var k = new ChronologicalKey<TKey>(item.Key, DateTime.UtcNow);
+                var k = new ChronologicalKey<TKey>(item.Key, DateTime.UtcNow, _comparer);
                 var kvp = new KeyValuePair<ChronologicalKey<TKey>, TValue>(k, item.Value);
                 return _collection.Remove(kvp);
             }
@@ -105,20 +107,20 @@ namespace Axle.Collections
             #endregion
 
             #region Implementation of IDictionary<TKey,TValue>
-            public bool ContainsKey(TKey key) => ContainsKey(new ChronologicalKey<TKey>(key, DateTime.UtcNow));
+            public bool ContainsKey(TKey key) => ContainsKey(new ChronologicalKey<TKey>(key, DateTime.UtcNow, _comparer));
 
-            public void Add(TKey key, TValue value) => Add(new ChronologicalKey<TKey>(key, DateTime.UtcNow), value);
+            public void Add(TKey key, TValue value) => Add(new ChronologicalKey<TKey>(key, DateTime.UtcNow, _comparer), value);
 
-            public bool Remove(TKey key) => Remove(new ChronologicalKey<TKey>(key, DateTime.UtcNow));
+            public bool Remove(TKey key) => Remove(new ChronologicalKey<TKey>(key, DateTime.UtcNow, _comparer));
 
-            public bool TryGetValue(TKey key, out TValue value) => TryGetValue(new ChronologicalKey<TKey>(key, DateTime.UtcNow), out value);
+            public bool TryGetValue(TKey key, out TValue value) => TryGetValue(new ChronologicalKey<TKey>(key, DateTime.UtcNow, _comparer), out value);
 
             public TValue this[TKey key]
             {
-                get => base[new ChronologicalKey<TKey>(key, DateTime.UtcNow)];
+                get => base[new ChronologicalKey<TKey>(key, DateTime.UtcNow, _comparer)];
                 set
                 {
-                    var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow);
+                    var k = new ChronologicalKey<TKey>(key, DateTime.UtcNow, _comparer);
                     Remove(k);
                     base[k] = value;
                 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
+using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
@@ -11,47 +11,30 @@ using Axle.Verification;
 
 namespace Axle
 {
-    public interface IApplicationBuilder
-    {
-        IApplicationBuilder SetDependencyContainerProvider(IDependencyContainerProvider containerProvider);
-        IApplicationBuilder SetLoggingService(ILoggingServiceProvider loggingService);
-        IApplicationBuilder ConfigureDependencies(Action<IContainer> configAction);
-        IApplicationBuilder Load(Type type);
-        IApplicationBuilder Load(params Type[] types);
-        IApplicationBuilder Load(Assembly assembly);
-        IApplicationBuilder Load(IEnumerable<Assembly> assemblies);
-        Application Run(params string[] args);
-    }
-
-    public static class ApplicationBuilderExtensions
-    {
-        public static IApplicationBuilder Load<T>(this IApplicationBuilder builder) where T : class
-        {
-            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.Load(typeof(T));
-        }
-    }
-
-    public sealed class Application : IApplicationBuilder, IDisposable
+    public sealed partial class Application : IDisposable
     {
         public static IApplicationBuilder Build() => new Application();
-
-        private readonly object _syncRoot = new object();
 
         [Obsolete]
         private readonly string[] _args;
 
-        private ILoggingServiceProvider _loggingService;
-        private IDependencyContainerProvider _dependencyContainerProvider;
-        private ModuleCatalogWrapper _moduleCatalog;
-        private volatile ModularContext _modularContext;
+        private readonly object _syncRoot = new object();
+        private readonly ModuleCatalogWrapper _moduleCatalog;
         private readonly IList<Type> _moduleTypes = new List<Type>();
         private readonly IList<Action<IContainer>> _onContainerReadyHandlers = new List<Action<IContainer>>();
 
+        private ILoggingServiceProvider _loggingService;
+        private IDependencyContainerProvider _dependencyContainerProvider;
+        private volatile ModularContext _modularContext;
+        private LayeredConfigManager _config;
+
         private Application()
         {
-            ModuleCatalog = new DefaultModuleCatalog();
-            DependencyContainerProvider = new DefaultDependencyContainerProvider();
-            LoggingService = new DefaultLoggingServiceProvider();
+            _dependencyContainerProvider = new DefaultDependencyContainerProvider();
+            _loggingService = new DefaultLoggingServiceProvider();
+            //ModuleCatalog = new DefaultModuleCatalog();
+            _moduleCatalog = new ModuleCatalogWrapper(new DefaultModuleCatalog());
+            _config = new LayeredConfigManager();
         }
 
         [Obsolete]
@@ -73,7 +56,7 @@ namespace Axle
             lock (_syncRoot)
             if (_modularContext == null)
             {
-                throw new InvalidOperationException("Application not initialized yet. You must first call the Execute method.");
+                throw new InvalidOperationException("Application not initialized yet. You must first call the Run method.");
             }
         }
 
@@ -86,49 +69,14 @@ namespace Axle
             lock (_syncRoot)
             if (_modularContext == null)
             {
-                var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService);
+                var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService, _config);
                 ctx.Container.RegisterInstance(this);
                 _modularContext = ctx;
             }
             return _modularContext;
         }
 
-        IApplicationBuilder IApplicationBuilder.SetDependencyContainerProvider(IDependencyContainerProvider containerProvider)
-        {
-            lock (_syncRoot)
-            {
-                ThrowIfStarted();
-                _dependencyContainerProvider = containerProvider;
-            }
-            return this;
-        }
-
-        IApplicationBuilder IApplicationBuilder.SetLoggingService(ILoggingServiceProvider loggingService)
-        {
-            lock (_syncRoot)
-            {
-                ThrowIfStarted();
-                _loggingService = loggingService;
-            }
-            return this;
-        }
-
-        IApplicationBuilder IApplicationBuilder.ConfigureDependencies(Action<IContainer> configAction)
-        {
-            ThrowIfStarted();
-            configAction.VerifyArgument(nameof(configAction)).IsNotNull();
-            _onContainerReadyHandlers.Add(configAction);
-            return this;
-        }
-
-        IApplicationBuilder IApplicationBuilder.Load(Type type)
-        {
-            ThrowIfStarted();
-            _moduleTypes.Add(type.VerifyArgument(nameof(type)).IsNotNull());
-            return this;
-        }
-
-        IApplicationBuilder IApplicationBuilder.Load(params Type[] types)
+        private IApplicationBuilder Load(IEnumerable<Type> types)
         {
             ThrowIfStarted();
             foreach (var type in types)
@@ -137,25 +85,6 @@ namespace Axle
                 {
                     _moduleTypes.Add(type);
                 }
-            }
-            return this;
-        }
-
-        IApplicationBuilder IApplicationBuilder.Load(Assembly assembly)
-        {
-            ThrowIfStarted();
-            foreach (var type in _moduleCatalog.DiscoverModuleTypes(assembly.VerifyArgument(nameof(assembly)).IsNotNull()))
-            {
-                _moduleTypes.Add(type);
-            }
-            return this;
-        }
-        IApplicationBuilder IApplicationBuilder.Load(IEnumerable<Assembly> assemblies)
-        {
-            ThrowIfStarted();
-            foreach (var type in assemblies.SelectMany(a => _moduleCatalog.DiscoverModuleTypes(a)))
-            {
-                _moduleTypes.Add(type);
             }
             return this;
         }
@@ -181,19 +110,6 @@ namespace Axle
         }
 
         void IDisposable.Dispose() => ShutDown();
-
-        private IModuleCatalog ModuleCatalog
-        {
-            get => _moduleCatalog;
-            set
-            {
-                lock (_syncRoot)
-                {
-                    ThrowIfStarted();
-                    _moduleCatalog = new ModuleCatalogWrapper(value.VerifyArgument(nameof(value)).IsNotNull().Value);
-                }
-            }
-        }
 
         [Obsolete]
         public Application Execute(params Assembly[] assemblies)

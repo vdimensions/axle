@@ -2,6 +2,6 @@
 {
     //public interface IApplicationConfiguration : IConfiguration
     //{
-    //    System.Configuration.Configuration AppConfig { get; }
+    //    System.Config.Config AppConfig { get; }
     //}
 }

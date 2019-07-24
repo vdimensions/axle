@@ -13,24 +13,24 @@ namespace Axle.Conversion.Parsing
     #endif
     public sealed class SingleParser : AbstractParser<float>
     {
-        private readonly CultureInfo _fallbackFormatProvider;
+        private readonly NumberStyles _numberStyles;
 
-        public SingleParser() { }
-        public SingleParser(CultureInfo fallbackFormatProvider)
+        public SingleParser() : this(NumberStyles.Any&~NumberStyles.AllowThousands) { }
+        public SingleParser(NumberStyles numberStyles)
         {
-            _fallbackFormatProvider = fallbackFormatProvider;
+            _numberStyles = numberStyles;
         }
 
         /// <inheritdoc />
         protected override Single DoParse(string value, IFormatProvider formatProvider)
         {
-            return Single.Parse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider);
+            return Single.Parse(value, _numberStyles, formatProvider);
         }
 
         /// <inheritdoc />
         public override bool TryParse(string value, IFormatProvider formatProvider, out Single output)
         {
-            return Single.TryParse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider, out output);
+            return Single.TryParse(value, _numberStyles, formatProvider, out output);
         }
     }
 }

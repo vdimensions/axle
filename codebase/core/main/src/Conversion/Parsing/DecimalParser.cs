@@ -13,23 +13,23 @@ namespace Axle.Conversion.Parsing
     #endif
     public sealed class DecimalParser : AbstractParser<Decimal>
     {
-        private readonly CultureInfo _fallbackFormatProvider;
+        private readonly NumberStyles _numberStyles;
 
-        public DecimalParser() { }
-        public DecimalParser(CultureInfo fallbackFormatProvider)
+        public DecimalParser() : this(NumberStyles.Any&~NumberStyles.AllowThousands) { }
+        public DecimalParser(NumberStyles numberStyles)
         {
-            _fallbackFormatProvider = fallbackFormatProvider;
+            _numberStyles = numberStyles;
         }
 
         /// <inheritdoc />
         protected override Decimal DoParse(string value, IFormatProvider formatProvider)
         {
-            return Decimal.Parse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider);
+            return Decimal.Parse(value, _numberStyles, formatProvider);
         }
 
         public override bool TryParse(string value, IFormatProvider formatProvider, out Decimal output)
         {
-            return Decimal.TryParse(value, NumberStyles.Any, formatProvider ?? _fallbackFormatProvider, out output);
+            return Decimal.TryParse(value, _numberStyles, formatProvider, out output);
         }
     }
 }

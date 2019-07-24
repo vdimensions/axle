@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using Axle.Verification;
 
 
 namespace Axle.Data.Extensions.DataReader
@@ -15,8 +16,8 @@ namespace Axle.Data.Extensions.DataReader
         #endif
         private static object GetData(IDataRecord reader, string columnName) => reader[columnName];
 
-        public static T Fetch<T>(this IDataReader reader, int columnIndex) => (T) GetData(reader, columnIndex);
-        public static T Fetch<T>(this IDataReader reader, string columnName) => (T) GetData(reader, columnName);
+        public static T Fetch<T>(this IDataReader reader, int columnIndex) => (T) GetData(reader.VerifyArgument(nameof(reader)).IsNotNull().Value, columnIndex);
+        public static T Fetch<T>(this IDataReader reader, string columnName) => (T) GetData(reader.VerifyArgument(nameof(reader)).IsNotNull().Value, columnName);
 
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -79,7 +80,7 @@ namespace Axle.Data.Extensions.DataReader
 
         public static bool TryFetch<T>(this IDataReader reader, int columnIndex, out T result)
         {
-            if (!TryGetData(reader, columnIndex, out var res) || res == DBNull.Value || !TryCast(res, out result))
+            if (!TryGetData(reader.VerifyArgument(nameof(reader)).IsNotNull().Value, columnIndex, out var res) || res == DBNull.Value || !TryCast(res, out result))
             {
                 result = default(T);
                 return false;
@@ -89,7 +90,7 @@ namespace Axle.Data.Extensions.DataReader
         public static bool TryFetch<T>(this IDataReader reader, int columnIndex, out T? result) where T : struct
         {
             result = null;
-            return TryGetData(reader, columnIndex, out var res) && TryFetchValueType(res, out result);
+            return TryGetData(reader.VerifyArgument(nameof(reader)).IsNotNull().Value, columnIndex, out var res) && TryFetchValueType(res, out result);
         }
 
         //LOW PERFORMANCE

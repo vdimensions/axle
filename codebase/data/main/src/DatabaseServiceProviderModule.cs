@@ -19,7 +19,7 @@ namespace Axle.Data
 
         string IDbServiceProvider.DialectName => Provider.DialectName;
 
-        IDbCommand IDbServiceProvider.CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction)
+        DbCommand IDbServiceProvider.CreateCommand(string queryString, CommandType? commandType, int? commandTimeout, IDbConnection connection, IDbTransaction transaction)
         {
             return Provider.CreateCommand(queryString, commandType, commandTimeout, connection, transaction);
         }
@@ -27,7 +27,7 @@ namespace Axle.Data
         IDbConnection IDbServiceProvider.CreateConnection(string connectionString) => Provider.CreateConnection(connectionString);
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        IDbDataAdapter IDbServiceProvider.CreateDataAdapter(DbCommand command) => Provider.CreateDataAdapter(command);
+        DbDataAdapter IDbServiceProvider.CreateDataAdapter(IDbCommand command) => Provider.CreateDataAdapter(command);
         #endif
 
         DbDataReader IDbServiceProvider.CreateDataReader(IDbCommand command, CommandBehavior? behavior)

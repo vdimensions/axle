@@ -1,8 +1,9 @@
 ﻿namespace Axle.Conversion
 {
     /// <summary>
-    /// An identity converter, that is, a <see cref="IConverter{T, T}"/> implementation that returns
-    /// the object instance being passed for conversion without changing it.
+    /// Similar to the identity function in mathematics - which returns the value passed in,
+    /// an identity converter is an implementation of the <see cref="IConverter{T, T}"/> interface
+    /// that returns the same object instance which was passed for conversion.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]

@@ -29,20 +29,22 @@ namespace Axle.Text.Expressions.Substitution
 
         private readonly Regex _expression;
 
-        private static string[] GetCaptures(Regex regex, string input)
+        private static string[] GetCaptures(Regex regex, string input, StringComparer comparer)
         {
             var groups = regex.Match(input).Groups;
             return Enumerable.ToArray(
-                Enumerable.Select(
-                    Enumerable.SelectMany(
-                        Enumerable.ToDictionary(
-                            Enumerable.Where(
-                                regex.GetGroupNames(),
-                                groupName => groups[groupName].Captures.Count > 0),
-                            groupName => groupName,
-                            groupName => groups[groupName]),
-                        x => Enumerable.Cast<Capture>(x.Value.Captures)),
-                    x => x.Value));
+                Enumerable.Distinct(
+                    Enumerable.Select(
+                        Enumerable.SelectMany(
+                            Enumerable.ToDictionary(
+                                Enumerable.Where(
+                                    regex.GetGroupNames(),
+                                    groupName => groups[groupName].Captures.Count > 0),
+                                groupName => groupName,
+                                groupName => groups[groupName]),
+                            x => Enumerable.Cast<Capture>(x.Value.Captures)),
+                        x => x.Value),
+                    comparer));
         }
 
         protected AbstractSubstitutionExpression(string exprStart, string exprEnd)
@@ -57,12 +59,13 @@ namespace Axle.Text.Expressions.Substitution
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(sp, nameof(sp)));
             Verifier.IsNotNull(Verifier.VerifyArgument(input, nameof(input)));
+            var cmp = StringComparer.Ordinal;
             var result = input;
-            var groupCaptures = GetCaptures(_expression, result);
+            var groupCaptures = GetCaptures(_expression, result, cmp);
             #if NETSTANDARD || NET35_OR_NEWER
-            var unresolved = new HashSet<string>(StringComparer.Ordinal);
+            var unresolved = new HashSet<string>(cmp);
             #else
-            var unresolved = new Hashtable(StringComparer.Ordinal);
+            var unresolved = new Hashtable(cmp);
             #endif
             do
             {
@@ -87,12 +90,12 @@ namespace Axle.Text.Expressions.Substitution
                     result = sb.ToString();
                 }
 
-                groupCaptures = GetCaptures(_expression, result);
+                groupCaptures = GetCaptures(_expression, result, cmp);
             }
             #if NETSTANDARD || NET35_OR_NEWER
-            while (Enumerable.Any(Enumerable.Except(groupCaptures, unresolved, StringComparer.Ordinal)));
+            while (Enumerable.Any(Enumerable.Except(groupCaptures, unresolved, cmp)));
             #else
-            while (Enumerable.Any(Enumerable.Except(groupCaptures, Enumerable.Cast<string>(unresolved.Keys), StringComparer.Ordinal)));
+            while (Enumerable.Any(Enumerable.Except(groupCaptures, Enumerable.Cast<string>(unresolved.Keys), cmp)));
             #endif
 
             return result;

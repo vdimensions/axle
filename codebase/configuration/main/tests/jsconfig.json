@@ -1,0 +1,8 @@
+{
+  "greetings": {
+    "default": "Hello"
+  },
+  "subject": {
+    "name": "World"
+  }
+}

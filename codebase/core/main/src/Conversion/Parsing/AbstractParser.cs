@@ -16,8 +16,8 @@ namespace Axle.Conversion.Parsing
     #endif
     public abstract class AbstractParser<T> : IParser<T>
     {
-        object IParser.Parse(string value, IFormatProvider formatProvider) { return Parse(value, formatProvider); }
-        object IParser.Parse(string value) { return Parse(value); }
+        object IParser.Parse(string value, IFormatProvider formatProvider) => Parse(value, formatProvider);
+        object IParser.Parse(string value) => Parse(value);
 
         bool IParser.TryParse(string value, IFormatProvider formatProvider, out object result)
         {
@@ -47,7 +47,7 @@ namespace Axle.Conversion.Parsing
         /// <returns>An instance of <typeparamref name="T" />.</returns>
         /// <exception cref="InvalidOperationException">Thrown if the string cannot be recognized
         /// as a valid provider for and instance of <typeparamref name="T"/>.</exception>
-        public T Parse(string value) { return Parse(value, null); }
+        public T Parse(string value) => Parse(value, null);
         public T Parse(string value, IFormatProvider formatProvider)
         {
             if (value == null)
@@ -63,6 +63,10 @@ namespace Axle.Conversion.Parsing
             try
             {
                 return DoParse(value, formatProvider);
+            }
+            catch (ArgumentException)
+            {
+                throw;
             }
             catch (Exception ex)
             {
@@ -87,7 +91,7 @@ namespace Axle.Conversion.Parsing
         /// <returns>
         /// true if value was converted successfully; otherwise, false.
         /// </returns>
-        public virtual bool TryParse(string value, out T output) { return TryParse(value, null, out output); }
+        public virtual bool TryParse(string value, out T output) => TryParse(value, null, out output);
         public virtual bool TryParse(string value, IFormatProvider formatProvider, out T output)
         {
             if (value == null)
@@ -104,6 +108,10 @@ namespace Axle.Conversion.Parsing
             try
             {
                 output = DoParse(value, formatProvider);
+            }
+            catch (ArgumentException)
+            {
+                throw;
             }
             catch
             {
@@ -132,10 +140,10 @@ namespace Axle.Conversion.Parsing
         /// <param name="value">The value to be validated.</param>
         /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format recognition.</param>
         /// <returns>true if the value can be parsed to the specified type; false otherwise</returns>
-        public virtual bool Validate(string value, IFormatProvider formatProvider) { return true; }
+        public virtual bool Validate(string value, IFormatProvider formatProvider) => true;
 
-        T IConverter<string, T>.Convert(string source) { return Parse(source); }
-        bool IConverter<string, T>.TryConvert(string source, out T target) { return TryParse(source, out target); }
+        T IConverter<string, T>.Convert(string source) => Parse(source);
+        bool IConverter<string, T>.TryConvert(string source, out T target) => TryParse(source, out target);
 
         /// <inheritdoc />
         public Type TargetType => typeof(T);
