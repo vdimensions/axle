@@ -1,16 +1,15 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
   <metadata>
     <id>Axle.Web.WebSharper.All</id>
-    <version>1.0.0.3</version>
+    <version>1.0.0.4</version>
     <authors>Virtual Dimensions</authors>
     <owners>Virtual Dimensions</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Axle.Web.WebSharper.All</description>
     <copyright>Copyright © Virtual Dimensions</copyright>
-    <tags>Axle Forest WebSharper</tags>
+    <tags>Axle WebSharper</tags>
     <dependencies>
       <group targetFramework=".NETCoreApp2.1">
-        <dependency id="Forest.Core" />
         <dependency id="WebSharper" version="4.5.2.309" />
         <dependency id="WebSharper.FSharp" version="4.5.2.309" />
         <dependency id="WebSharper.UI" version="4.5.2.145" />
