@@ -40,7 +40,7 @@ namespace Axle.Data.DataSources
                 _commandType,
                 _commandTimeout,
                 _connection.WrappedInstance,
-                _connection.CurrentTransaction.WrappedInstance);
+                _connection.CurrentTransaction?.WrappedInstance);
             foreach (var parameter in _parameters)
             {
                 command.Parameters.Add(parameter);
@@ -50,7 +50,7 @@ namespace Axle.Data.DataSources
 
         DataSourceCommand ICommandBuilderResult.Build()
         {
-            return new DataSourceCommand(_provider, _commandText, CreateCommandInstance);
+            return new DataSourceCommand(_connection.DataSource, _provider, _commandText, CreateCommandInstance);
         }
     }
 }

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Linq;
-using Axle.Builder;
 using Axle.Data.Extensions.DbCommand;
 using Axle.Verification;
 
@@ -15,46 +14,12 @@ namespace Axle.Data.DataSources
         private readonly IDbServiceProvider _provider;
         private readonly Func<string, DbCommand> _commandFactory;
 
-        internal DataSourceCommand(IDbServiceProvider provider, string commandText, Func<string, DbCommand> commandFactory)
+        internal DataSourceCommand(IDataSource dataSource, IDbServiceProvider provider, string commandText, Func<string, DbCommand> commandFactory)
         {
+            DataSource = dataSource;
             _provider = provider;
             _commandFactory = commandFactory;
             CommandText = commandText;
-        }
-
-        public IDataParameter CreateParameter(Func<IDbParameterBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
-            var p = buildFunc(new DbParameterBuilder(_provider));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
-        }
-
-        public IDataParameter CreateInputParameter(string name, Func<IDbParameterValueBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
-            var p = buildFunc(new DbParameterBuilder(_provider).CreateParameter(name, ParameterDirection.Input));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
-        }
-
-        public IDataParameter CreateInputOutputParameter(string name, Func<IDbParameterValueBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
-            var p = buildFunc(new DbParameterBuilder(_provider).CreateParameter(name, ParameterDirection.InputOutput));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
-        }
-
-        public IDataParameter CreateOutputParameter(string name, Func<IDbParameterTypeBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
-            var p = buildFunc(new DbParameterBuilder(_provider).CreateParameter(name, ParameterDirection.Output));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
-        }
-
-        public IDataParameter CreateReturnParameter(string name, Func<IDbParameterTypeBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
-            var p = buildFunc(new DbParameterBuilder(_provider).CreateParameter(name, ParameterDirection.ReturnValue));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
         }
 
         private TResult Execute<TResult>(Func<DbCommand, TResult> operation, out int returnValue, IEnumerable<IDataParameter> parameters)
@@ -71,7 +36,7 @@ namespace Axle.Data.DataSources
                 {
                     result = operation(command);
                     #warning use return value output parameter
-                    var returnValueParameter = parameters.SingleOrDefault(p => p.Direction == ParameterDirection.ReturnValue);
+                    var returnValueParameter = Enumerable.SingleOrDefault(parameters, p => p.Direction == ParameterDirection.ReturnValue);
                     if (returnValueParameter != null)
                     {
                         var outValue = returnValueParameter.Value;
@@ -114,7 +79,7 @@ namespace Axle.Data.DataSources
 
         public void ExecuteReader(CommandBehavior behavior, Action<DbDataReader> readAction, params IDataParameter[] parameters)
         {
-            readAction.VerifyArgument(nameof(readAction)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(readAction, nameof(readAction)));
             Execute<object>(
                 command =>
                 {
@@ -158,5 +123,6 @@ namespace Axle.Data.DataSources
         public override string ToString() => CommandText;
 
         public string CommandText { get; }
+        public IDataSource DataSource { get; }
     }
 }
