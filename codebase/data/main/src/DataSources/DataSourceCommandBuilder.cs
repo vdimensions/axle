@@ -40,7 +40,7 @@ namespace Axle.Data.DataSources
                 _commandType,
                 _commandTimeout,
                 _connection.WrappedInstance,
-                _connection.CurrentTransaction.WrappedInstance);
+                _connection.CurrentTransaction?.WrappedInstance);
             foreach (var parameter in _parameters)
             {
                 command.Parameters.Add(parameter);
