@@ -50,7 +50,7 @@ namespace Axle.Data.DataSources
 
         DataSourceCommand ICommandBuilderResult.Build()
         {
-            return new DataSourceCommand(_provider, _commandText, CreateCommandInstance);
+            return new DataSourceCommand(_connection.DataSource, _provider, _commandText, CreateCommandInstance);
         }
     }
 }

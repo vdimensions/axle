@@ -2,9 +2,8 @@
 
 namespace Axle.Data.DataSources
 {
-    public interface IDataSourceResource : IDisposable
+    public interface IDataSourceResource : IDataSourceObject, IDisposable
     {
-        IDataSource DataSource { get; }
     }
     public interface IDataSourceResource<T> : IDataSourceResource where T: IDisposable
     {
