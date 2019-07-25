@@ -47,6 +47,13 @@ namespace Axle
             return this;
         }
 
+        IApplicationBuilder IApplicationBuilder.ConfigureModules(Action<IApplicationModuleConfigurer> setupModules)
+        {
+            setupModules.VerifyArgument(nameof(setupModules)).IsNotNull();
+            setupModules(this);
+            return this;
+        }
+
         IApplicationBuilder IApplicationBuilder.Load(IEnumerable<Type> types) => Load(types);
         IApplicationBuilder IApplicationBuilder.Load(Assembly assembly)
         {

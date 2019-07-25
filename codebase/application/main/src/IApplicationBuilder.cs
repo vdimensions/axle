@@ -20,9 +20,11 @@ namespace Axle
 
         IApplicationBuilder ConfigureApplication(Action<IApplicationConfigurationBuilder> setupConfigurationAction);
 
-        IApplicationBuilder Load(IEnumerable<Type> types);
-        IApplicationBuilder Load(Assembly assembly);
-        IApplicationBuilder Load(IEnumerable<Assembly> assemblies);
+        IApplicationBuilder ConfigureModules(Action<IApplicationModuleConfigurer> setupModules);
+
+        [Obsolete("Use `ConfigureModules` method instead")] IApplicationBuilder Load(IEnumerable<Type> types);
+        [Obsolete("Use `ConfigureModules` method instead")] IApplicationBuilder Load(Assembly assembly);
+        [Obsolete("Use `ConfigureModules` method instead")] IApplicationBuilder Load(IEnumerable<Assembly> assemblies);
 
         Application Run(params string[] args);
     }

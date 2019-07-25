@@ -8,12 +8,15 @@ namespace Axle
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class ApplicationBuilderExtensions
     {
+        [Obsolete("Use `ConfigureModules` instead")] 
         public static IApplicationBuilder Load<T>(this IApplicationBuilder builder) where T: class
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
             return Load(builder, typeof(T));
         }
+        [Obsolete("Use `ConfigureModules` instead")] 
         public static IApplicationBuilder Load(this IApplicationBuilder builder, Type type) => Load(builder, new[]{type});
+        [Obsolete("Use `ConfigureModules` instead")] 
         public static IApplicationBuilder Load(this IApplicationBuilder builder, params Type[] types)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));

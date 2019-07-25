@@ -76,7 +76,7 @@ namespace Axle
             return _modularContext;
         }
 
-        private IApplicationBuilder Load(IEnumerable<Type> types)
+        private Application Load(IEnumerable<Type> types)
         {
             ThrowIfStarted();
             foreach (var type in types)
