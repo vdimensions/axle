@@ -5,6 +5,7 @@ using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources;
 using Axle.DependencyInjection;
+using Axle.Modularity;
 using NUnit.Framework;
 
 namespace Axle.Data.MySql.Tests
@@ -32,7 +33,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .AddLegacyConfig()
+                .EnableLegacyConfig()
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -49,7 +50,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .AddLegacyConfig()
+                .EnableLegacyConfig()
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -67,7 +68,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .AddLegacyConfig()
+                .EnableLegacyConfig()
                 .UseDataSources()
                 .UseMySql();
             using (appBuilder.Run())

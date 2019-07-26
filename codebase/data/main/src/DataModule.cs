@@ -1,5 +1,4 @@
-﻿using Axle.Data.Resources;
-using Axle.Modularity;
+﻿using Axle.Modularity;
 
 namespace Axle.Data
 {
@@ -9,7 +8,6 @@ namespace Axle.Data
     [Utilizes("Axle.Data.Npgsql.NpgsqlModule, Axle.Data.Npgsql")]
     [Utilizes("Axle.Data.Sqlite.SqliteModule, Axle.Data.Sqlite")]
     [Utilizes("Axle.Data.MySql.MySqlModule, Axle.Data.MySql")]
-    [Requires(typeof(SqlScriptSourceModule))]
     internal sealed class DataModule
     {
 

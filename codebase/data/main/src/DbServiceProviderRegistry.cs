@@ -8,10 +8,6 @@ using Axle.Verification;
 
 namespace Axle.Data
 {
-    internal interface IDbServiceProviderRegistry : IEnumerable<IDbServiceProvider>
-    {
-        IDbServiceProvider this[string providerName] { get; }
-    }
     [Module]
     internal sealed class DbServiceProviderRegistry : IDbServiceProviderRegistry
     {

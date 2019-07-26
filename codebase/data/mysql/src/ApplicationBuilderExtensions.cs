@@ -6,7 +6,8 @@ namespace Axle.Data.MySql
     {
         public static IApplicationBuilder UseMySql(this IApplicationBuilder builder)
         {
-            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.Load<MySqlModule>();
+            builder.VerifyArgument(nameof(builder)).IsNotNull();
+            return builder.ConfigureModules(m => m.Load<MySqlModule>());
         }
     }
 }

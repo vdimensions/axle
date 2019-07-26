@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Axle.Verification;
 
-
-namespace Axle.Data.Resources
+namespace Axle.Data.DataSources.Resources
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -17,7 +15,7 @@ namespace Axle.Data.Resources
 
         internal SqlScriptSource(string name, IDictionary<string, string> scripts)
         {
-            Name = StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
+            this.Name = StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
             _scripts = Verifier.IsNotNull(Verifier.VerifyArgument(scripts, nameof(scripts))).Value;
         }
 

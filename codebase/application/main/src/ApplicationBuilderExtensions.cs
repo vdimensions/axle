@@ -32,7 +32,9 @@ namespace Axle
         #endif
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public static IApplicationBuilder AddLegacyConfig(this IApplicationBuilder builder)
+        [Obsolete("Use EnableLegacyConfig instead")]
+        public static IApplicationBuilder AddLegacyConfig(this IApplicationBuilder builder) => EnableLegacyConfig(builder);
+        public static IApplicationBuilder EnableLegacyConfig(this IApplicationBuilder builder)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
             return builder.ConfigureApplication(a => a.AppendLegacyConfig());

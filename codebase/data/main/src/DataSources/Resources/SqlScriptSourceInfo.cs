@@ -1,11 +1,9 @@
 using System;
 using System.Globalization;
 using System.IO;
-
 using Axle.Resources;
 
-
-namespace Axle.Data.Resources
+namespace Axle.Data.DataSources.Resources
 {
     /// <summary>
     /// A resource class to represent <see cref="SqlScriptSource">database sqlScriptSource</see> objects.
