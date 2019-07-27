@@ -2,17 +2,23 @@ REDIRECTS: ON
 STORAGE: NONE
 RESTRICTION: == net461
 NUGET
-  remote: https://api.nuget.org/v3/index.json
-    Axle.Application (1.5.2396.27060)
+  remote: ../../../../dist
+    Axle.Application (1.6.2398.24144)
       Axle.Configuration (>= 1.5.2396.13956)
       Axle.Resources (>= 1.5.2396.13956)
-    Axle.Configuration (1.5.2396.13956)
-      Axle.Core (>= 1.5.2396.13956)
+    Axle.Configuration (1.6.2398.24144)
+      Axle.Core (>= 1.6.2398.24144)
       Microsoft.Extensions.Configuration.Binder (>= 2.2.4)
       Microsoft.Extensions.Configuration.FileExtensions (>= 2.2)
-    Axle.Core (1.5.2396.13956)
-    Axle.Resources (1.5.2396.13956)
-      Axle.Core (>= 1.5.2396.13956)
+    Axle.Core (1.6.2398.24144)
+    Axle.Data (1.6.2398.24144)
+      Axle.Application (>= 1.5.2396.27060)
+    Axle.Data.Npgsql (1.6.2398.24144)
+      Axle.Data (>= 1.5.2398.23146)
+      Npgsql (>= 4.0.8)
+    Axle.Resources (1.6.2398.24144)
+      Axle.Core (>= 1.6.2398.24144)
+  remote: https://api.nuget.org/v3/index.json
     Microsoft.Extensions.Configuration.Binder (2.2.4)
     Microsoft.Extensions.Configuration.FileExtensions (2.2)
     Npgsql (4.0.8)
@@ -32,9 +38,3 @@ NUGET
     System.Threading.Tasks.Extensions (4.5.3)
       System.Runtime.CompilerServices.Unsafe (>= 4.5.2)
     System.ValueTuple (4.5)
-  remote: ../../../../dist
-    Axle.Data (1.5.2398.23146)
-      Axle.Application (>= 1.5.2396.27060)
-    Axle.Data.Npgsql (1.5.2398.23281)
-      Axle.Data (>= 1.5.2398.23146)
-      Npgsql (>= 4.0.8)

@@ -2,14 +2,14 @@ STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.2395.31886)
-      Axle.Configuration (>= 1.5.2395.29753)
-      Axle.Resources (>= 1.5.2390.14285)
-    Axle.Configuration (1.5.2395.29753)
-      Axle.Core (>= 1.5.2394.24181)
-    Axle.Core (1.5.2395.22432)
-    Axle.Resources (1.5.2390.14285)
-      Axle.Core (>= 1.5.2390.14064)
+    Axle.Application (1.6.2398.24144)
+      Axle.Configuration (>= 1.5.2396.13956)
+      Axle.Resources (>= 1.5.2396.13956)
+    Axle.Configuration (1.6.2398.24144)
+      Axle.Core (>= 1.6.2398.24144)
+    Axle.Core (1.6.2398.24144)
+    Axle.Resources (1.6.2398.24144)
+      Axle.Core (>= 1.6.2398.24144)
 
 GROUP test
 NUGET
