@@ -14,6 +14,7 @@ namespace Axle.Data.Odbc
         OdbcConnection,
         OdbcTransaction,
         OdbcCommand,
+        OdbcCommandBuilder,
         OdbcDataAdapter,
         OdbcDataReader,
         OdbcParameter,
@@ -25,10 +26,7 @@ namespace Axle.Data.Odbc
 
         public OdbcServiceProvider(string dialect) : base(Name, dialect) { }
         
-        protected override OdbcConnection CreateConnection(string connectionString)
-        {
-            return new OdbcConnection(connectionString);
-        }
+        protected override OdbcConnection CreateConnection(string connectionString) => new OdbcConnection(connectionString);
 
         protected override OdbcTransaction CreateTransaction(OdbcConnection connection, IsolationLevel? isolationLevel)
         {
@@ -55,10 +53,9 @@ namespace Axle.Data.Odbc
             return command;
         }
 
-        protected override OdbcDataAdapter CreateDataAdapter(OdbcCommand command)
-        {
-            return new OdbcDataAdapter(command);
-        }
+        protected override OdbcCommandBuilder CreateCommandBuilder(OdbcDataAdapter dataAdapter) => new OdbcCommandBuilder(dataAdapter);
+
+        protected override OdbcDataAdapter CreateDataAdapter(OdbcCommand command) => new OdbcDataAdapter(command);
 
         protected override OdbcDataReader CreateDataReader(OdbcCommand command, CommandBehavior? behavior)
         {

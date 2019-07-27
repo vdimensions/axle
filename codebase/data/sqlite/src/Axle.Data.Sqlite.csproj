@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   <PropertyGroup>
     <ProjectGuid>879FE3A1-6FF7-466D-91FA-4DB67AE5E66A</ProjectGuid>

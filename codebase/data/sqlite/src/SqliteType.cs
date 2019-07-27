@@ -1,4 +1,3 @@
-#if NETFRAMEWORK
 namespace Axle.Data.Sqlite
 {
     /// <summary>
@@ -28,4 +27,3 @@ namespace Axle.Data.Sqlite
         Blob = 4
     }
 }
-#endif

@@ -15,6 +15,7 @@ namespace Axle.Data.Common
     /// <typeparam name="TDbConnection"></typeparam>
     /// <typeparam name="TDbTransaction"></typeparam>
     /// <typeparam name="TDbCommand"></typeparam>
+    /// <typeparam name="TDbCommandBuilder"></typeparam>
     /// <typeparam name="TDbDataAdapter"></typeparam>
     /// <typeparam name="TDbDataReader"></typeparam>
     /// <typeparam name="TDbParameter"></typeparam>
@@ -38,6 +39,7 @@ namespace Axle.Data.Common
             TDbTransaction,
             TDbCommand,
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            TDbCommandBuilder,
             TDbDataAdapter,
             #endif
             TDbDataReader,
@@ -47,6 +49,7 @@ namespace Axle.Data.Common
         where TDbTransaction: class, IDbTransaction 
         where TDbCommand: DbCommand
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        where TDbCommandBuilder : DbCommandBuilder
         where TDbDataAdapter : DbDataAdapter, IDbDataAdapter, IDataAdapter
         #endif
         where TDbDataReader: DbDataReader, IDataReader
@@ -97,6 +100,13 @@ namespace Axle.Data.Common
             return CreateCommand(queryString, commandType, commandTimeout, conn, tran);
         }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        protected abstract TDbCommandBuilder CreateCommandBuilder(TDbDataAdapter dataAdapter);
+        DbCommandBuilder IDbServiceProvider.CreateCommandBuilder(DbDataAdapter dataAdapter)
+        {
+            var da = dataAdapter.VerifyArgument(nameof(dataAdapter)).IsNotNull().IsOfType<TDbDataAdapter>();
+            return CreateCommandBuilder(da);
+        }
+
         protected abstract TDbDataAdapter CreateDataAdapter(TDbCommand command);
         DbDataAdapter IDbServiceProvider.CreateDataAdapter(IDbCommand command)
         {

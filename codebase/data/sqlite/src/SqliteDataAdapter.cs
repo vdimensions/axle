@@ -1,4 +1,4 @@
-﻿#if !NETFRAMEWORK
+﻿#if !(NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER)
 using System;
 using System.Data.Common;
 

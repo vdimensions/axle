@@ -4,5 +4,5 @@ storage: none
 source https://api.nuget.org/v3/index.json
 
 source ../../../../dist
-  nuget Axle.FSharp
-  nuget Axle.Data
+  nuget Axle.FSharp ~> 1.5
+  nuget Axle.Data ~> 1.5

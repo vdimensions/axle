@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Data;
 using System.IO;
-#if NETFRAMEWORK
-using SqliteConnection  = System.Data.SQLite.SQLiteConnection;
-using SqliteTransaction = System.Data.SQLite.SQLiteTransaction;
-using SqliteCommand     = System.Data.SQLite.SQLiteCommand;
-using SqliteDataAdapter = System.Data.SQLite.SQLiteDataAdapter;
-using SqliteDataReader  = System.Data.SQLite.SQLiteDataReader;
-using SqliteParameter   = System.Data.SQLite.SQLiteParameter;
-using SqliteType        = Axle.Data.Sqlite.SqliteType;
-#else
-using Microsoft.Data.Sqlite;
 
-using SqliteType        = Microsoft.Data.Sqlite.SqliteType;
-using SqliteDataAdapter = Axle.Data.Sqlite.SqliteDataAdapter;
-#endif
+using SqliteConnection      = System.Data.SQLite.SQLiteConnection;
+using SqliteTransaction     = System.Data.SQLite.SQLiteTransaction;
+using SqliteCommand         = System.Data.SQLite.SQLiteCommand;
+using SqliteCommandBuilder  = System.Data.SQLite.SQLiteCommandBuilder;
+using SqliteDataAdapter     = System.Data.SQLite.SQLiteDataAdapter;
+using SqliteDataReader      = System.Data.SQLite.SQLiteDataReader;
+using SqliteParameter       = System.Data.SQLite.SQLiteParameter;
+using SqliteType            = Axle.Data.Sqlite.SqliteType;
 
 using Axle.Data.Common;
-using Axle.Modularity;
 using Axle.References;
 
 
@@ -30,6 +24,7 @@ namespace Axle.Data.Sqlite
             SqliteConnection,
             SqliteTransaction,
             SqliteCommand,
+            SqliteCommandBuilder,
             SqliteDataAdapter,
             SqliteDataReader,
             SqliteParameter,
@@ -44,11 +39,7 @@ namespace Axle.Data.Sqlite
                 case SqliteType.Blob:
                     // TODO: not sure if right
                     return DbType.Binary;
-                #if NETSTANDARD2_0_OR_NEWER
-                case SqliteType.Real:
-                #else
                 case SqliteType.Double:
-                #endif
                     return DbType.Double;
                 case SqliteType.Text:
                     return DbType.String;
@@ -57,11 +48,8 @@ namespace Axle.Data.Sqlite
             }
         }
 
-        #if NETFRAMEWORK
         public const string Name = "System.Data.Sqlite";
-        #else
-        public const string Name = "Microsoft.Data.Sqlite";
-        #endif
+
         /// <summary>
         /// Name of the SQLite dialect as recognized by the Axle framework
         /// </summary>
@@ -75,11 +63,7 @@ namespace Axle.Data.Sqlite
 
         public FileInfo CreateFile(string path)
         {
-            #if NETFRAMEWORK
             SqliteConnection.CreateFile(path);
-            #else
-            using (var fs = File.Create(path, 0, FileOptions.WriteThrough)) { }
-            #endif
             return new FileInfo(path);
         }
 
@@ -112,6 +96,8 @@ namespace Axle.Data.Sqlite
             }
             return command;
         }
+
+        protected override SqliteCommandBuilder CreateCommandBuilder(SqliteDataAdapter dataAdapter) => new SqliteCommandBuilder(dataAdapter);
 
         protected override SqliteDataAdapter CreateDataAdapter(SqliteCommand command) => new SqliteDataAdapter(command);
 

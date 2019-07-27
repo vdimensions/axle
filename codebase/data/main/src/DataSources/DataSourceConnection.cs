@@ -17,6 +17,7 @@ namespace Axle.Data.DataSources
         public DataSourceConnection(IDbServiceProvider provider, IDataSource dataSource, ResourceManager resourceManager)
         {
             _provider = provider;
+            DataSource = dataSource;
             _resourceManager = resourceManager;
             _connection = provider.CreateConnection(dataSource.ConnectionString);
             _connection.Open();

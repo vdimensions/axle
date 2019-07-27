@@ -5,13 +5,8 @@ using Axle.Data.Common;
 using Axle.Data.Conversion;
 using Axle.Data.Sqlite.Conversion;
 
-#if NETFRAMEWORK
 using SqliteParameter = System.Data.SQLite.SQLiteParameter;
 using SqliteType      = Axle.Data.Sqlite.SqliteType;
-#else
-using SqliteParameter = Microsoft.Data.Sqlite.SqliteParameter;
-using SqliteType      = Microsoft.Data.Sqlite.SqliteType;
-#endif
 
 
 namespace Axle.Data.Sqlite

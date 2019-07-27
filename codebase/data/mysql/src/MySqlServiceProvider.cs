@@ -14,6 +14,7 @@ namespace Axle.Data.MySql
         MySqlTransaction,
         MySqlCommand,
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        MySqlCommandBuilder,
         MySqlDataAdapter,
         #endif
         MySqlDataReader,
@@ -64,6 +65,11 @@ namespace Axle.Data.MySql
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        protected override MySqlCommandBuilder CreateCommandBuilder(MySqlDataAdapter dataAdapter)
+        {
+            return new MySqlCommandBuilder(dataAdapter);
+        }
+
         protected override MySqlDataAdapter CreateDataAdapter(MySqlCommand command)
         {
             return new MySqlDataAdapter(command);

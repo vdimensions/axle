@@ -6,7 +6,8 @@ namespace Axle.Data.Npgsql
     {
         public static IApplicationBuilder UsePostgreSql(this IApplicationBuilder builder)
         {
-            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.Load<NpgsqlModule>();
+            builder.VerifyArgument(nameof(builder)).IsNotNull();
+            return builder.ConfigureModules(m => m.Load<NpgsqlModule>());
         }
     }
 }

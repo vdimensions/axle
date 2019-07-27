@@ -4,18 +4,12 @@ group main
 
   source ../../../../dist
   source https://api.nuget.org/v3/index.json
-    nuget Axle.Data
 
-group netstandard
-  framework: netstandard2.0
-  storage: none
-
-  source https://api.nuget.org/v3/index.json
-    nuget Microsoft.Data.Sqlite.Core >= 2.0 
+  nuget Axle.Data
 
 group netXX
-  framework: net35, net40, net45
+  framework: netstandard2.0, net461, net45, net40, net35
   storage: none
 
   source https://api.nuget.org/v3/index.json
-    nuget System.Data.SQLite.Core 
+  nuget System.Data.SQLite.Core 

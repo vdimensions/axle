@@ -1,6 +1,6 @@
 ﻿using System.Data;
 using System.Data.OleDb;
-
+using System.Diagnostics.CodeAnalysis;
 using Axle.Data.Common;
 
 
@@ -9,10 +9,12 @@ namespace Axle.Data.OleDb
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class OleDbServiceProvider : DbServiceProvider<
         OleDbConnection,
         OleDbTransaction,
         OleDbCommand,
+        OleDbCommandBuilder,
         OleDbDataAdapter,
         OleDbDataReader,
         OleDbParameter,
@@ -23,10 +25,7 @@ namespace Axle.Data.OleDb
 
         public OleDbServiceProvider(string dialect) : base(Name, dialect) { }
 
-        protected override OleDbConnection CreateConnection(string connectionString)
-        {
-            return new OleDbConnection(connectionString);
-        }
+        protected override OleDbConnection CreateConnection(string connectionString) => new OleDbConnection(connectionString);
 
         protected override OleDbTransaction CreateTransaction(OleDbConnection connection, IsolationLevel? isolationLevel)
         {
@@ -53,10 +52,9 @@ namespace Axle.Data.OleDb
             return command;
         }
 
-        protected override OleDbDataAdapter CreateDataAdapter(OleDbCommand command)
-        {
-            return new OleDbDataAdapter(command);
-        }
+        protected override OleDbCommandBuilder CreateCommandBuilder(OleDbDataAdapter dataAdapter) => new OleDbCommandBuilder(dataAdapter);
+
+        protected override OleDbDataAdapter CreateDataAdapter(OleDbCommand command) => new OleDbDataAdapter(command);
 
         protected override OleDbDataReader CreateDataReader(OleDbCommand command, CommandBehavior? behavior)
         {

@@ -15,6 +15,7 @@ namespace Axle.Data.SqlClient
             SqlTransaction,
             SqlCommand,
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            SqlCommandBuilder,
             SqlDataAdapter,
             #endif
             SqlDataReader,
@@ -63,6 +64,8 @@ namespace Axle.Data.SqlClient
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        protected override SqlCommandBuilder CreateCommandBuilder(SqlDataAdapter dataAdapter) => new SqlCommandBuilder(dataAdapter);
+
         protected override SqlDataAdapter CreateDataAdapter(SqlCommand command) => new SqlDataAdapter(command);
         #endif
 

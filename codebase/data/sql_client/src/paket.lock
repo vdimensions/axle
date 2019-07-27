@@ -1,28 +1,24 @@
 STORAGE: NONE
 RESTRICTION: || (== net35) (== net40) (== net45) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
 NUGET
-  remote: ../../../../dist
-    Axle.Application (1.5.2395.28226)
-      Axle.Configuration (>= 1.5.2395.24069)
-      Axle.Resources (>= 1.5.2390.14285)
-    Axle.Configuration (1.5.2395.29753)
-      Axle.Core (>= 1.5.2394.24181)
+  remote: https://api.nuget.org/v3/index.json
+    Axle.Application (1.5.2396.27060)
+      Axle.Configuration (>= 1.5.2396.13956)
+      Axle.Resources (>= 1.5.2396.13956)
+    Axle.Configuration (1.5.2396.13956)
+      Axle.Core (>= 1.5.2396.13956)
       Microsoft.Extensions.Configuration.Binder (>= 2.2.4) - restriction: || (&& (== net35) (>= net461)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net40) (>= net461)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== net45) (>= net461)) (&& (== netstandard1.5) (>= net461)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= net461)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
       Microsoft.Extensions.Configuration.FileExtensions (>= 2.2) - restriction: || (&& (== net35) (>= net461)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net40) (>= net461)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== net45) (>= net461)) (&& (== netstandard1.5) (>= net461)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= net461)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
       System.Configuration.ConfigurationManager (>= 4.5) - restriction: || (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
-    Axle.Core (1.5.2395.22432)
+    Axle.Core (1.5.2396.13956)
       NETStandard.Library (>= 1.6.1) - restriction: || (&& (== net35) (< net20) (>= netstandard1.0)) (&& (== net35) (< net20) (>= netstandard1.3)) (&& (== net35) (< net20) (>= netstandard1.5)) (&& (== net35) (< net20) (>= netstandard1.6)) (&& (== net40) (< net20) (>= netstandard1.0)) (&& (== net40) (< net20) (>= netstandard1.3)) (&& (== net40) (< net20) (>= netstandard1.5)) (&& (== net40) (< net20) (>= netstandard1.6)) (&& (== net45) (< net20)) (== netstandard1.5) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.3)) (&& (== netstandard2.0) (< netstandard1.5)) (&& (== netstandard2.0) (< netstandard1.6))
       System.Diagnostics.TraceSource (>= 4.3) - restriction: || (&& (== net35) (< net20) (>= netstandard1.6)) (&& (== net40) (< net20) (>= netstandard1.6)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== netstandard1.5) (>= netstandard1.6)) (== netstandard1.6)
       System.Threading.Tasks.Unofficial (>= 3.1) - restriction: || (== net35) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard1.5) (>= net35) (< netstandard1.0)) (&& (== netstandard1.6) (>= net35) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))
       System.Threading.Thread (>= 4.3) - restriction: || (&& (== net35) (< net20) (>= netstandard1.6)) (&& (== net40) (< net20) (>= netstandard1.6)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== netstandard1.5) (>= netstandard1.6)) (== netstandard1.6)
       System.Xml.XmlSerializer (>= 4.3) - restriction: || (&& (== net35) (< net20) (>= netstandard1.6)) (&& (== net40) (< net20) (>= netstandard1.6)) (&& (== net45) (< net20) (>= netstandard1.6)) (&& (== netstandard1.5) (>= netstandard1.6)) (== netstandard1.6)
-    Axle.Data (1.5.2395.23399)
-      Axle.Application (>= 1.5.2395.22810)
-      System.Data.Common (>= 4.3) - restriction: || (&& (== net40) (< net35) (>= netstandard1.5)) (&& (== net40) (< net35) (>= netstandard1.6)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net45) (< net35) (>= netstandard1.5)) (&& (== net45) (< net35) (>= netstandard1.6)) (&& (== net45) (< net35) (>= netstandard2.0)) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
-    Axle.Resources (1.5.2390.14285)
-      Axle.Core (>= 1.5.2390.14064)
+    Axle.Resources (1.5.2396.13956)
+      Axle.Core (>= 1.5.2396.13956)
       System.Resources.ResourceManager (>= 4.3) - restriction: || (&& (== net40) (< net35) (>= netstandard1.3)) (&& (== net40) (< net35) (>= netstandard1.6)) (&& (== net45) (< net35) (>= netstandard1.3)) (&& (== net45) (< net35) (>= netstandard1.6)) (== netstandard1.5) (== netstandard1.6) (&& (== netstandard2.0) (< netstandard1.6))
-  remote: https://api.nuget.org/v3/index.json
     Microsoft.Extensions.Configuration (2.2) - restriction: || (&& (== net35) (>= net461) (>= netstandard2.0)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net40) (>= net461) (>= netstandard2.0)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== net45) (>= net461) (>= netstandard2.0)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
       Microsoft.Extensions.Configuration.Abstractions (>= 2.2) - restriction: || (&& (== net35) (>= netstandard2.0)) (&& (== net40) (>= netstandard2.0)) (&& (== net45) (>= netstandard2.0)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
     Microsoft.Extensions.Configuration.Abstractions (2.2) - restriction: || (&& (== net35) (>= net461) (>= netstandard2.0)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net40) (>= net461) (>= netstandard2.0)) (&& (== net45) (< net35) (>= netstandard2.0)) (&& (== net45) (>= net461) (>= netstandard2.0)) (&& (== netstandard1.5) (>= netstandard2.0)) (&& (== netstandard1.6) (>= netstandard2.0)) (== netstandard2.0)
@@ -608,6 +604,10 @@ NUGET
       System.Threading (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Xml.ReaderWriter (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.0)) (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.0)) (&& (== net40) (>= netstandard1.3)) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
       System.Xml.XmlDocument (>= 4.3) - restriction: || (&& (== net35) (>= netstandard1.3)) (&& (== net40) (>= netstandard1.3)) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
+  remote: ../../../../dist
+    Axle.Data (1.5.2398.23146)
+      Axle.Application (>= 1.5.2396.27060)
+      System.Data.Common (>= 4.3) - restriction: || (&& (== net40) (< net35) (>= netstandard1.5)) (&& (== net40) (< net35) (>= netstandard1.6)) (&& (== net40) (< net35) (>= netstandard2.0)) (&& (== net45) (< net35) (>= netstandard1.5)) (&& (== net45) (< net35) (>= netstandard1.6)) (&& (== net45) (< net35) (>= netstandard2.0)) (== netstandard1.5) (== netstandard1.6) (== netstandard2.0)
 
 GROUP netstandard
 STORAGE: NONE

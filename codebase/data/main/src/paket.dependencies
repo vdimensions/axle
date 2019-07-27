@@ -5,10 +5,10 @@ group main
   source ../../../../dist
   source https://api.nuget.org/v3/index.json
 
-  nuget Axle.Application
+  nuget Axle.Application ~> 1.5
 
 group netstandard
-  framework: netstandard1.2, netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6, netstandard2.0
+  framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
   storage: none
 
   source https://api.nuget.org/v3/index.json
