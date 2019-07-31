@@ -3,12 +3,13 @@
 using Axle.Conversion.Parsing;
 using Axle.Extensions.Uri;
 using NUnit.Framework;
-using UriParser = Axle.Conversion.Parsing.UriParser;
 
 namespace Axle.Core.Tests.Extensions
 {
+    using UriParser = Axle.Conversion.Parsing.UriParser;
+
     [TestFixture]
-    public class UriExtensionsTests
+    public class UriExtensions
     {
         private IParser<Uri> _uriParser = new UriParser();
 

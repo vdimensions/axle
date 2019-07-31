@@ -18,7 +18,7 @@ namespace Axle.Data.DataSources
     [Module]
     [Requires(typeof(DataModule))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    internal sealed class DataSourceModule : ISqlScriptLocationRegistry
+    internal sealed class DataSourceModule : ISqlScriptLocationRegistry, IDataSourceRegistry
     {
         internal const string SqlScriptsBundle = "SqlScripts";
 
@@ -26,6 +26,7 @@ namespace Axle.Data.DataSources
         private readonly IConfiguration _configuration;
         private readonly ResourceManager _dataSourceResourceManager;
         private readonly IResourceExtractor _scriptExtractor;
+        private readonly Dictionary<string, DataSource> _dataSources = new Dictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
         public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
         {
@@ -39,49 +40,58 @@ namespace Axle.Data.DataSources
         [ModuleInit]
         internal void OnInit(ModuleExporter exporter)
         {
-            var dataSources = new Dictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
+            
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             foreach (var cs in _configuration.GetConnectionStrings())
             {
-                if (!string.IsNullOrEmpty(cs.ProviderName))
-                {
-                    var provider = _dbServiceProviders[cs.ProviderName];
-                    if (provider == null)
-                    {
-                        Logger.Warn(
-                            "No data source will be associated with connection string '{0}'. Provider '{1}' is not registered.",
-                            cs.Name,
-                            cs.ProviderName);
-                    }
-                    else
-                    {
-                        var dataSource = new DataSource(cs.Name, provider, cs.ConnectionString, _dataSourceResourceManager);
-                        Logger.Trace(
-                            "A data source was successfully created for connection string '{0}', using the following data provider: {1}.",
-                            cs.Name,
-                            cs.ProviderName);
-                        dataSources.Add(dataSource.Name, dataSource);
-                    }
-                }
-                else
-                {
-                    Logger.Warn(
-                        "No data source will be associated with connection string '{0}'. The `{1}` field is not set.",
-                        cs.Name,
-                        nameof(cs.ProviderName));
-                }
+                RegisterDataSource(cs);
             }
             #endif
 
-            foreach (var dataSource in dataSources.Values)
+            foreach (var dataSource in _dataSources.Values)
             {
                 exporter.Export(dataSource, dataSource.Name);
+            }
+        }
+
+        public void RegisterDataSource(ConnectionStringInfo cs)
+        {
+            var dataSources = _dataSources;
+            if (!string.IsNullOrEmpty(cs.ProviderName))
+            {
+                var provider = _dbServiceProviders[cs.ProviderName];
+                if (provider == null)
+                {
+                    Logger.Warn(
+                        "No data source will be associated with connection string '{0}'. Provider '{1}' is not registered.",
+                        cs.Name,
+                        cs.ProviderName);
+                }
+                else
+                {
+                    var dataSource = new DataSource(cs.Name, provider, cs.ConnectionString, _dataSourceResourceManager);
+                    Logger.Trace(
+                        "A data source was successfully created for connection string '{0}', using the following data provider: {1}.",
+                        cs.Name,
+                        cs.ProviderName);
+                    dataSources.Add(dataSource.Name, dataSource);
+                }
+            }
+            else
+            {
+                Logger.Warn(
+                    "No data source will be associated with connection string '{0}'. The `{1}` field is not set.",
+                    cs.Name,
+                    nameof(cs.ProviderName));
             }
         }
 
         [ModuleDependencyInitialized]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnSqlScriptBundleConfigurerInitialized(ISqlScriptLocationConfigurer configurer) => configurer.RegisterScriptLocations(this);
+
+        [ModuleDependencyInitialized]
+        internal void OnDataSourceProviderInitialized(IDataSourceProvider dataSourceProvider) => dataSourceProvider.RegisterDataSources(this);
 
         ISqlScriptLocationRegistry ISqlScriptLocationRegistry.Register(string bundle, Uri location)
         {

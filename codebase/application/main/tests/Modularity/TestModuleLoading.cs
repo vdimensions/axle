@@ -1,15 +1,14 @@
-﻿using Axle;
-using Axle.Configuration;
+﻿using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
 using NUnit.Framework;
 
 
-namespace Axle.ApplicationTests
+namespace Axle.ApplicationTests.Modularity
 {
     [TestFixture]
-    public class ModularityTests
+    public class TestModuleLoading
     {
         public abstract class AbstractModule
         {

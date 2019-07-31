@@ -19,6 +19,7 @@ namespace Axle.Modularity
         ModuleMethod GetTerminateMethod(Type moduleType);
         UtilizesAttribute[] GetUtilizedModules(Type moduleType);
         UtilizedByAttribute[] GetUtilizedByModules(Type moduleType);
+        ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType);
         ModuleEntryMethod GetEntryPointMethod(Type moduleType);
     }
 }

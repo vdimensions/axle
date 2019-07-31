@@ -21,6 +21,11 @@ namespace Axle.Modularity
             moduleCatalog.VerifyArgument(nameof(moduleCatalog)).IsNotNull();
             return ExtractModules(moduleCatalog, types, new Dictionary<Type, ModuleInfo>()).ToArray();
         }
+        public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, IEnumerable<Type> types)
+        {
+            moduleCatalog.VerifyArgument(nameof(moduleCatalog)).IsNotNull();
+            return ExtractModules(moduleCatalog, types, new Dictionary<Type, ModuleInfo>()).ToArray();
+        }
 
         private static void ExpandModules(IModuleCatalog catalog, Type moduleType, HashSet<Type> types)
         {
@@ -37,13 +42,13 @@ namespace Axle.Modularity
 
         private static IEnumerable<ModuleInfo> ExtractModules(
                 IModuleCatalog moduleCatalog, 
-                IList<Type> types, 
+                IEnumerable<Type> types, 
                 IDictionary<Type, ModuleInfo> knownModules)
         {
             var allModuleTypes = new HashSet<Type>();
-            for (var i = 0; i < types.Count; i++)
+            foreach (var v in types)
             {
-                ExpandModules(moduleCatalog, types[i], allModuleTypes);
+                ExpandModules(moduleCatalog, v, allModuleTypes);
             }
 
             foreach (var moduleType in allModuleTypes)
@@ -72,6 +77,7 @@ namespace Axle.Modularity
                         moduleCatalog.GetEntryPointMethod(moduleType),
                         utilizedModules,
                         utilizedByModules,
+                        moduleCatalog.GetCommandLineTrigger(moduleType),
                         requiredModules);
                 yield return module;
             }
