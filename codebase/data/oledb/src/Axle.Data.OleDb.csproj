@@ -3,18 +3,15 @@
   <PropertyGroup>
     <TargetFrameworks>net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup>
     <ProjectGuid>3CFAC4A9-56FE-4036-ADB2-122F61C564EB</ProjectGuid>
     <OutputType>Library</OutputType>
     <Description>Axle's data access library for OLE DB</Description>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="Axle.Logging.dist.csproj.paket.references" />
     <None Remove="paket.lock" />
   </ItemGroup>
   <Import Project="../../../Axle.Common.props" />
-
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

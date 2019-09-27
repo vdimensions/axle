@@ -3,12 +3,10 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.1;net46;net45;net40</TargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup>
     <ProjectGuid>DF3B43F1-D3EB-4C7C-8422-B6B343629CF6</ProjectGuid>
     <Description>Axle framework caching library</Description>
   </PropertyGroup>
-
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

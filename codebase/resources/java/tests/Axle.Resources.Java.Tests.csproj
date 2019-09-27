@@ -24,5 +24,5 @@
     <None Include="restore.sh" />
   </ItemGroup>
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

@@ -1,5 +1,2 @@
-group main
-  Axle.Application
-
-group netstandard
-  System.Data.Common
+Axle.Application
+System.Data.Common

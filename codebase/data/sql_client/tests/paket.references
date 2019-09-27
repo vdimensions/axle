@@ -1,6 +1,4 @@
 Axle.Data.SqlClient
-
-group test
-  NUnit
-  NUnit3TestAdapter
-  System.Configuration.ConfigurationManager
+System.Configuration.ConfigurationManager
+NUnit
+NUnit3TestAdapter

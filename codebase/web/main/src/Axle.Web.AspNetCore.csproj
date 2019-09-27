@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0</TargetFrameworks>
@@ -6,7 +7,6 @@
     <ProjectGuid>{6A38CBF9-103A-4093-B2F5-181B7717B9B6}</ProjectGuid>
     <Description>Axle Framework ASP.NET Core Library.</Description>
   </PropertyGroup>
-
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

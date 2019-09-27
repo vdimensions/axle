@@ -1,6 +1,2 @@
 Axle.Data
-Npgsql
-group legacy
-Npgsql
-group netstandard1_3
-Npgsql
+Axle.Data.Npgsql.MultiTarget

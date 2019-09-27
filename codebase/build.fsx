@@ -22,7 +22,6 @@ open Fake.Net
 
 let paketVersion = "5.207.3"
 
-let nugetApiKey =  Environment.environVarOrNone "NUGET_ORG_VDIMENSIONS_API_KEY"
 let nugetServer = "https://www.nuget.org/api/v2/package"
 let runTestsOnBuild = false
 
@@ -123,27 +122,6 @@ let inline dotnet_nuget op arg = dotnet op "nuget" arg
 //let inline build arg =
 //    DotNet.exec dotnet "build" arg
 
-let dotnet_push op server apiKey =
-    let result =
-        nupkg_map (
-            fun nupkg ->
-                Trace.tracefn "Publishing nuget package: %s" nupkg
-                //(nupkg, dotnet_nuget op (sprintf "push %s --source %s --api-key %s" nupkg server apiKey))
-                //nupkg
-                nupkg, (dotnet_nuget op (sprintf "push %s --source %s --api-key %s" nupkg server apiKey))
-            )
-        |> Seq.filter (fun (_, p) -> p.ExitCode <> 0)
-        |> List.ofSeq
-
-    match result with
-    | [] -> ()
-    | failedAssemblies ->
-        failedAssemblies
-        |> List.map (fun (nuget, proc) -> sprintf "Failed to push NuGet package '%s'. Process finished with exit code %d." nuget proc.ExitCode)
-        |> String.concat System.Environment.NewLine
-        |> exn
-        |> raise
-
 let dotnet_options = 
     (fun (op : DotNet.Options) -> 
         { op with 
@@ -205,20 +183,17 @@ let createDynamicTarget location =
     targetName
 
 Target.create "Prepare" cleanNupkg
-Target.create "Publish" (fun _ -> 
-    let gitBranch = do_in_root get_git_branch ()
-    match (gitBranch, nugetApiKey) with
-    | ("master", Some apiKey) -> dotnet_push id nugetServer apiKey |> ignore
-    | _ -> Trace.traceImportantfn "Branch '%s' will not push anything to nuget.org" gitBranch
+Target.create "Complete" (fun _ -> 
+    ()
 )
 open Fake.Core.TargetOperators
 
-"Prepare" ==> "Publish"
+"Prepare" ==> "Complete"
 
 projectLocations 
 |> List.map createDynamicTarget
 |> List.rev
-|> List.fold (fun a b -> b ==> a |> ignore; b) "Publish"
+|> List.fold (fun a b -> b ==> a |> ignore; b) "Complete"
 |> ignore
 
-Target.runOrDefaultWithArguments "Publish"
+Target.runOrDefaultWithArguments "Complete"

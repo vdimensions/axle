@@ -1,4 +1,3 @@
-paket='.paket/paket.sh'
 project='Axle.Data.Odbc'
 project_format='csproj'
 

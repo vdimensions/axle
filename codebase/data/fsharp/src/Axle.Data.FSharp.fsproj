@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net46;net45;</TargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup>
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Name>Axle.Data.FSharp</Name>
@@ -15,15 +14,12 @@
     <Language>F#</Language>
     <Description>Axle Data F#-friendly Library</Description>
   </PropertyGroup>
-
   <Import Project="../../../Axle.Common.props" />
-
   <ItemGroup>
     <Compile Include="DataReaderExtensions.fs" />
     <Compile Include="DataRowExtensions.fs" />
     <Compile Include="DataRecordExtensions.fs" />
     <Compile Include="Option.fs" />
   </ItemGroup>
-  
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

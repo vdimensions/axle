@@ -1,4 +1,3 @@
-paket='.paket/paket.sh'
 project='Axle.Data.OleDb'
 project_format='csproj'
 

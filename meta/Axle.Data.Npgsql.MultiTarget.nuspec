@@ -1,0 +1,44 @@
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>Axle.Data.Npgsql.MultiTarget</id>
+    <version>1.0.0.3</version>
+    <authors>Virtual Dimensions</authors>
+    <owners>Virtual Dimensions</owners>
+    <license type="expression">PostgreSQL</license>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>A meta package to enable proper installation of the Npgsql package when using a multi-targeting .NET SDK project.</description>
+    <copyright>Copyright © Virtual Dimensions</copyright>
+    <tags>Axle Npgsql Multi-targeting</tags>
+    <dependencies>
+      <group targetFramework="netstandard2.0">
+        <dependency id="Npgsql" version="4.0.10" />
+      </group>
+      <group targetFramework="net451">
+        <dependency id="Npgsql" version="4.0.10" />
+      </group>
+      <group targetFramework="net45">
+        <dependency id="Npgsql" version="4.0.10" />
+      </group>
+      
+      <group targetFramework="netstandard1.6">
+        <dependency id="Npgsql" version="[3.0, 3.2.7]" />
+      </group>
+      <group targetFramework="netstandard1.5">
+        <dependency id="Npgsql" version="[3.0, 3.2.7]" />
+      </group>
+      <group targetFramework="netstandard1.4">
+        <dependency id="Npgsql" version="[3.0, 3.2.7]" />
+      </group>
+      <group targetFramework="netstandard1.3">
+        <dependency id="Npgsql" version="[3.0, 3.2.7]" />
+      </group>
+
+      <group targetFramework="net40">
+        <dependency id="Npgsql" version="(,2.2.7]" />
+      </group>
+      <group targetFramework="net35">
+        <dependency id="Npgsql" version="(,2.2.7]" />
+      </group>
+    </dependencies>
+  </metadata>
+</package>

@@ -1,5 +1,3 @@
 Axle.Application
-
-group test
-  NUnit
-  NUnit3TestAdapter
+NUnit
+NUnit3TestAdapter

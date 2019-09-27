@@ -1,5 +1,2 @@
-group main
-  Axle.Data
-
-group netstandard
-  System.Data.Odbc
+Axle.Data
+System.Data.Odbc

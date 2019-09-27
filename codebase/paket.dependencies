@@ -1,0 +1,71 @@
+storage: none
+
+source ../dist
+source https://api.nuget.org/v3/index.json
+
+nuget System.Configuration.ConfigurationManager >= 4.0.1        framework: netstandard2.0
+nuget System.Data.Common                                        framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+nuget System.Data.Odbc                                          framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+nuget System.Data.SqlClient                                     framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+nuget System.Numerics.Vectors                                   framework: netstandard2.1, netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2, net471, net47, net462, net461, net46, net451, net45
+nuget System.Resources.ResourceManager                          framework: netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3
+
+
+nuget Microsoft.AspNetCore < 3                                  framework: netstandard2.0
+nuget Microsoft.AspNetCore.Authentication.OpenIdConnect < 3     framework: netstandard2.0
+nuget Microsoft.Extensions.Caching.Memory                       framework: netstandard2.0
+nuget Microsoft.AspNetCore.MiddlewareAnalysis < 3               framework: netstandard2.0
+nuget Microsoft.AspNetCore.NodeServices < 3                     framework: netstandard2.0
+nuget Microsoft.AspNetCore.Owin < 3                             framework: netstandard2.0
+nuget Microsoft.AspNetCore.Server.Kestrel < 3                   framework: netstandard2.0
+nuget Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv < 3   framework: netstandard2.0
+nuget Microsoft.AspNetCore.Session                              framework: netstandard2.0
+nuget Microsoft.AspNetCore.SpaServices < 3                      framework: netstandard2.0
+nuget Microsoft.AspNetCore.SpaServices.Extensions < 3           framework: netstandard2.0
+
+nuget Microsoft.Extensions.Configuration.FileExtensions         framework: netstandard2.0, net461
+nuget Microsoft.Extensions.Configuration.Binder                 framework: netstandard2.0, net461
+nuget Microsoft.Extensions.Configuration.EnvironmentVariables   framework: netstandard2.0, net461
+nuget Microsoft.Extensions.Configuration.Json                   framework: netstandard2.0, net461
+nuget Microsoft.Extensions.Configuration.FileExtensions         framework: netstandard2.0, net461
+
+#
+# FSharp
+#
+nuget FSharp.Core < 4.7
+
+#
+# Test Dependencies
+#
+nuget NUnit
+nuget NUnit3TestAdapter
+
+#
+# 3rd Party Packages
+#
+nuget Kajabity.Tools.Java                                       content: none
+nuget log4net
+nuget MySqlConnector
+nuget System.Data.SQLite.Core                                   framework: netstandard2.0, net461, net45, net40, net35
+nuget YamlDotNet >= 4.3
+
+#
+# Axle Dependencies
+#
+nuget Axle.Application
+nuget Axle.Caching
+nuget Axle.Configuration
+nuget Axle.Data
+nuget Axle.Data.FSharp
+nuget Axle.Data.MySql
+nuget Axle.Data.Npgsql
+nuget Axle.Data.Odbc
+nuget Axle.Data.OleDb
+nuget Axle.Data.SqlClient
+nuget Axle.FSharp
+nuget Axle.Resources
+nuget Axle.Resources.Java
+nuget Axle.Resources.Yaml
+nuget Axle.Security
+nuget Axle.Security.Cryptography
+nuget Axle.Web.AspNetCore

@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-  
   <PropertyGroup>
     <ProjectGuid>5D89911E-F70B-4C08-9659-119104318881</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
@@ -13,9 +12,7 @@
     <Description>Axle Framework resources library to handle Java properties</Description>
     <PackageTags>Axle.Resources.Java Kajabity.Tools.Java</PackageTags>
   </PropertyGroup>
-
   <Import Project="../../../Axle.Common.props" />
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
@@ -37,5 +34,5 @@
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
 </Project>

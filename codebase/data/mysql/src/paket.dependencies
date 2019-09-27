@@ -1,7 +1,0 @@
-storage: none
-
-source ../../../../dist
-source https://api.nuget.org/v3/index.json
-
-nuget MySqlConnector
-nuget Axle.Data

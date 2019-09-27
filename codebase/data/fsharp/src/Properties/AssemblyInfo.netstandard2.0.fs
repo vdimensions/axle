@@ -16,7 +16,7 @@ open System.Reflection
 [<assembly: AssemblyConfiguration("Debug")>]
 [<assembly: AssemblyCulture("")>]
 [<assembly: System.Runtime.InteropServices.GuidAttribute("{5E088541-AAA7-427B-9C45-757C73875B2C}")>]
-[<assembly: AssemblyVersion("1.6.2398.24359")>]
-[<assembly: AssemblyFileVersion("1.6.2398.24359")>]
-[<assembly: AssemblyInformationalVersion("1.6.2398.24359")>]
+[<assembly: AssemblyVersion("1.6.2460.23744")>]
+[<assembly: AssemblyFileVersion("1.6.2460.23744")>]
+[<assembly: AssemblyInformationalVersion("1.6.2460.23744")>]
 do()
