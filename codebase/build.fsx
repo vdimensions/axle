@@ -50,7 +50,7 @@ open Fake.Core.TargetOperators
 "Prepare" ==> "Complete"
 
 projectLocations 
-|> List.map VDBuild.createDynamicTarget
+|> List.map (VDBuild.createDynamicTarget "Axle.Common.props")
 |> List.rev
 |> List.fold (fun a b -> b ==> a |> ignore; b) "Complete"
 |> ignore

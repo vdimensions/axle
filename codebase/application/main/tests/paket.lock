@@ -2,14 +2,14 @@ STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.6.2462.18735)
-      Axle.Configuration (>= 1.6.2462.18735)
-      Axle.Resources (>= 1.6.2462.18735)
-    Axle.Configuration (1.6.2462.18735)
-      Axle.Core (>= 1.6.2462.18735)
-    Axle.Core (1.6.2462.18735)
-    Axle.Resources (1.6.2462.18735)
-      Axle.Core (>= 1.6.2462.18735)
+    Axle.Application (1.6.2462.22955)
+      Axle.Configuration (>= 1.6.2462.21445)
+      Axle.Resources (>= 1.6.2462.21445)
+    Axle.Configuration (1.6.2462.22955)
+      Axle.Core (>= 1.6.2462.22955)
+    Axle.Core (1.6.2462.22955)
+    Axle.Resources (1.6.2462.22955)
+      Axle.Core (>= 1.6.2462.22955)
   remote: https://api.nuget.org/v3/index.json
     NUnit (3.12)
     NUnit3TestAdapter (3.15.1)

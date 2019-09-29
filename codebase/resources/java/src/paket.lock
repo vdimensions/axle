@@ -2,11 +2,11 @@ STORAGE: NONE
 RESTRICTION: || (== net35) (== net40) (== net45) (== netstandard1.3) (== netstandard2.0)
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.6.2462.18735)
+    Axle.Core (1.6.2462.22955)
       NETStandard.Library (>= 1.6.1) - restriction: || (&& (== net35) (< net20) (>= netstandard1.0)) (&& (== net35) (< net20) (>= netstandard1.3)) (&& (== net35) (< net20) (>= netstandard1.5)) (&& (== net35) (< net20) (>= netstandard1.6)) (&& (== net40) (< net20) (>= netstandard1.0)) (&& (== net40) (< net20) (>= netstandard1.3)) (&& (== net40) (< net20) (>= netstandard1.5)) (&& (== net40) (< net20) (>= netstandard1.6)) (&& (== net45) (< net20)) (== netstandard1.3) (&& (== netstandard2.0) (< netstandard1.3)) (&& (== netstandard2.0) (< netstandard1.5)) (&& (== netstandard2.0) (< netstandard1.6))
       System.Threading.Tasks.Unofficial (>= 3.1) - restriction: || (== net35) (&& (== net45) (< net40) (< netstandard1.0)) (&& (== netstandard1.3) (>= net35) (< netstandard1.0)) (&& (== netstandard2.0) (>= net35) (< netstandard1.0))
-    Axle.Resources (1.6.2462.18735)
-      Axle.Core (>= 1.6.2462.18735)
+    Axle.Resources (1.6.2462.22955)
+      Axle.Core (>= 1.6.2462.22955)
   remote: https://api.nuget.org/v3/index.json
     Kajabity.Tools.Java (0.2.6862.30334) - content: none
       NETStandard.Library (>= 1.6.1) - restriction: || (&& (== net35) (< net20) (>= netstandard1.0)) (&& (== net35) (< net20) (>= netstandard1.1)) (&& (== net40) (< net20) (>= netstandard1.0)) (&& (== net40) (< net20) (>= netstandard1.1)) (&& (== net45) (< net20)) (== netstandard1.3) (&& (== netstandard2.0) (< netstandard1.1))

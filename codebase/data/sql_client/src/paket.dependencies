@@ -5,4 +5,11 @@ source ../../../../dist
 source https://api.nuget.org/v3/index.json
 
 nuget Axle.Data
-nuget System.Data.SqlClient   framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+
+group netstandardxx
+  framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+  storage none
+  
+  source https://api.nuget.org/v3/index.json
+
+  nuget System.Data.SqlClient   

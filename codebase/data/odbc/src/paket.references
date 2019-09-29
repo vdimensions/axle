@@ -1,2 +1,4 @@
 Axle.Data
-System.Data.Odbc
+
+group netstandrdxx
+  System.Data.Odbc
