@@ -56,9 +56,9 @@ namespace Axle.Collections.Generic
         /// <inheritdoc />
         public void Dispose()
         {
-            if (_nonGenericEnumerator is IDisposable enumratorAsIDisposalbe)
+            if (_nonGenericEnumerator is IDisposable enumeratorAsIDisposable)
             {
-                enumratorAsIDisposalbe.Dispose();
+                enumeratorAsIDisposable.Dispose();
             }
         }
         /// <inheritdoc />
@@ -115,9 +115,9 @@ namespace Axle.Collections.Generic
         /// <inheritdoc />
         public void Dispose()
         {
-            if (_innerEnumerator is IDisposable enumratorAsIDisposalbe)
+            if (_innerEnumerator is IDisposable enumeratorAsIDisposable)
             {
-                enumratorAsIDisposalbe.Dispose();
+                enumeratorAsIDisposable.Dispose();
             }
             _converter = null;
         }

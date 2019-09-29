@@ -46,7 +46,7 @@ namespace Axle.IO.Serialization
         /// An error has occurred durring the serialization process.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The caller does not have the required permissions
+        /// The caller does not have the required permissions.
         /// </exception>
         #else
         /// <summary>
@@ -63,7 +63,7 @@ namespace Axle.IO.Serialization
         /// Either <paramref name="obj"/> or <paramref name="stream"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="System.Security.SecurityException">
-        /// The caller does not have the required permissions
+        /// The caller does not have the required permissions.
         /// </exception>
         #endif
         void Serialize(object obj, Stream stream);

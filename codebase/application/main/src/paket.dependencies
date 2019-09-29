@@ -1,0 +1,8 @@
+framework: auto-detect
+storage: none
+
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
+
+nuget Axle.Resources
+nuget Axle.Configuration

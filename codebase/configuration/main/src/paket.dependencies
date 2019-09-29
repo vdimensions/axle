@@ -1,0 +1,9 @@
+storage: none
+
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
+
+nuget Axle.Core
+nuget System.Configuration.ConfigurationManager >= 4.0.1 framework: netstandard2.0
+nuget Microsoft.Extensions.Configuration.FileExtensions framework: netstandard2.0, net461
+nuget Microsoft.Extensions.Configuration.Binder framework: netstandard2.0, net461

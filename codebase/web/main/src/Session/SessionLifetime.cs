@@ -58,7 +58,7 @@ namespace Axle.Web.AspNetCore.Session
 
         private void UpdateSessionVisit(ISession session)
         {
-            // TODO: new session notfy
+            // TODO: new session notify
             var res = DateTime.UtcNow;
             using (var memStream = new MemoryStream())
             {

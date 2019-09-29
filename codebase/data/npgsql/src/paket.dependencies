@@ -1,8 +1,7 @@
-group main
-  storage: none
+storage: none
 
-  source ../../../../dist
-  source https://api.nuget.org/v3/index.json
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
 
-  nuget Axle.Data.Npgsql.MultiTarget
-  nuget Axle.Data
+nuget Axle.Data.Npgsql.MultiTarget
+nuget Axle.Data

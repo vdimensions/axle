@@ -1,4 +1,4 @@
-paket='.paket/paket.sh'
+paket='../../../.paket/paket.sh'
 project='Axle.Data.Npgsql'
 project_format='csproj'
 

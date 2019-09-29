@@ -7,9 +7,11 @@ nuget System.Configuration.ConfigurationManager >= 4.0.1        framework: netst
 nuget System.Data.Common                                        framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
 nuget System.Data.Odbc                                          framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
 nuget System.Data.SqlClient                                     framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+nuget System.Diagnostics.TraceSource >= 4.0                     framework: netstandard1.6
 nuget System.Numerics.Vectors                                   framework: netstandard2.1, netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2, net471, net47, net462, net461, net46, net451, net45
 nuget System.Resources.ResourceManager                          framework: netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3
-
+nuget System.Threading.Thread >= 4.0                            framework: netstandard1.6
+nuget System.Xml.XmlSerializer >= 4.0.10                        framework: netstandard1.6
 
 nuget Microsoft.AspNetCore < 3                                  framework: netstandard2.0
 nuget Microsoft.AspNetCore.Authentication.OpenIdConnect < 3     framework: netstandard2.0
@@ -44,28 +46,30 @@ nuget NUnit3TestAdapter
 # 3rd Party Packages
 #
 nuget Kajabity.Tools.Java                                       content: none
+nuget LinqBridge                                                framework: net20
 nuget log4net
 nuget MySqlConnector
 nuget System.Data.SQLite.Core                                   framework: netstandard2.0, net461, net45, net40, net35
+nuget System.Threading.Tasks.Unofficial                         framework: net35
 nuget YamlDotNet >= 4.3
 
 #
 # Axle Dependencies
 #
-nuget Axle.Application
-nuget Axle.Caching
-nuget Axle.Configuration
-nuget Axle.Data
-nuget Axle.Data.FSharp
-nuget Axle.Data.MySql
-nuget Axle.Data.Npgsql
-nuget Axle.Data.Odbc
-nuget Axle.Data.OleDb
-nuget Axle.Data.SqlClient
-nuget Axle.FSharp
-nuget Axle.Resources
-nuget Axle.Resources.Java
-nuget Axle.Resources.Yaml
-nuget Axle.Security
-nuget Axle.Security.Cryptography
-nuget Axle.Web.AspNetCore
+#nuget Axle.Application
+#nuget Axle.Caching
+#nuget Axle.Configuration
+#nuget Axle.Data
+#nuget Axle.Data.FSharp
+#nuget Axle.Data.MySql
+#nuget Axle.Data.Npgsql
+#nuget Axle.Data.Odbc
+#nuget Axle.Data.OleDb
+#nuget Axle.Data.SqlClient
+#nuget Axle.FSharp
+#nuget Axle.Resources
+#nuget Axle.Resources.Java
+#nuget Axle.Resources.Yaml
+#nuget Axle.Security
+#nuget Axle.Security.Cryptography
+#nuget Axle.Web.AspNetCore

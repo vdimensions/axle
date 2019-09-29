@@ -27,5 +27,5 @@
   <ItemGroup>
     <None Remove="paket.lock" />
   </ItemGroup>
-  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

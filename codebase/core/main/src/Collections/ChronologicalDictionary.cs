@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
@@ -20,6 +21,7 @@ namespace Axle.Collections
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
+    [SuppressMessage("ReSharper", "RedundantOverriddenMember")]
     public sealed class ChronologicalDictionary<TKey, TValue> : DictionaryDecorator<TKey, TValue>
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -165,5 +167,22 @@ namespace Axle.Collections
         /// The initial capacity of the underlying collection.
         /// </param>
         public ChronologicalDictionary(int capacity) : base(new TimestampDictionary(capacity)) { }
+
+        /// <summary>
+        /// Gets or sets the value associated with the provided <paramref name="key"/>.
+        /// </summary>
+        /// <remarks>
+        /// When overwriting a value with an existing key, the data sorting will disregard the old value's ordering
+        /// and will treat this as a more-recent modification, meaning the key and its new data will appear at a
+        /// later position when enumerated.
+        /// </remarks>
+        /// <param name="key">
+        /// The key to associate a value with.
+        /// </param>
+        public override TValue this[TKey key]
+        {
+            get => base[key];
+            set => base[key] = value;
+        }
     }
 }

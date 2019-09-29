@@ -1,0 +1,7 @@
+storage: none
+
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
+
+nuget Axle.Application
+nuget System.Data.Common  framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2

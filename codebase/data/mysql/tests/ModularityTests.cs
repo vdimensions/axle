@@ -87,5 +87,35 @@ namespace Axle.Data.MySql.Tests
                 }
             }
         }
+
+        [Module]
+        private class X : ISqlScriptLocationConfigurer
+        {
+            public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
+            {
+                registry.Register("test", GetType().Assembly, "SqlScripts/");
+            }
+        }
+
+        //[Test]
+        public void TestDataSourceCmdDiscovery()
+        {
+            IContainer container = null;
+            var appBuilder = Application.Build()
+                .ConfigureDependencies(c => container = c)
+                .EnableLegacyConfig()
+                .UseDataSources()
+                .UseMySql()
+                .ConfigureModules(m => m.Load<X>());
+            using (appBuilder.Run())
+            {
+                var testDataSource = container.Resolve<IDataSource>("test");
+                using (var connection = testDataSource.OpenConnection())
+                {
+                    var script = connection.GetScript("test", "x");
+                    Assert.IsNotNull(script);
+                }
+            }
+        }
     }
 }

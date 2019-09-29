@@ -1,0 +1,8 @@
+framework: auto-detect
+storage: none
+
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
+
+nuget Axle.Data
+nuget System.Data.SQLite.Core   framework: netstandard2.0, net461, net45, net40, net35

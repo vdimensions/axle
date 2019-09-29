@@ -1,0 +1,10 @@
+framework: auto-detect
+storage: none
+
+source https://api.nuget.org/v3/index.json
+source ../../../../dist
+
+nuget Axle.Resources.Java
+
+nuget NUnit
+nuget NUnit3TestAdapter
