@@ -13,7 +13,7 @@
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
-    <VersionMinor>6</VersionMinor>
+    <VersionMinor>7</VersionMinor>
     <PackageVersionRange>[$(VersionMajor).$(VersionMinor),)</PackageVersionRange>
   </PropertyGroup>
 
@@ -60,7 +60,7 @@
 
   <!-- Package restore properties -->
   <PropertyGroup>
-    <RestoreSources>$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
+    <RestoreSources>$(RestoreSources);$(PackageOutputPath)\restore</RestoreSources>
   </PropertyGroup>
 
   <!-- Paket paths -->
