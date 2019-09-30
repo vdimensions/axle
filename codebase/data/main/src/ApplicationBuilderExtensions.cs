@@ -4,9 +4,9 @@ namespace Axle.Data
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseData(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseData(this IApplicationBuilder app)
         {
-            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.Load(typeof(DataModule));
+            return app.VerifyArgument(nameof(app)).IsNotNull().Value.Load(typeof(DataModule));
         }
     }
 }

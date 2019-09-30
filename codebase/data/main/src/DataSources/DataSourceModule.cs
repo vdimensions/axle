@@ -40,7 +40,6 @@ namespace Axle.Data.DataSources
         [ModuleInit]
         internal void OnInit(ModuleExporter exporter)
         {
-            
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             foreach (var cs in _configuration.GetConnectionStrings())
             {
