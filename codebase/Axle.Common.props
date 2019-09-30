@@ -60,7 +60,7 @@
 
   <!-- Package restore properties -->
   <PropertyGroup>
-    <RestoreSources>$(RestoreSources);$(PackageOutputPath)\restore</RestoreSources>
+    <RestoreSources>$(PackageOutputPath)\restore;https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
   </PropertyGroup>
 
   <!-- Paket paths -->
