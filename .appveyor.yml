@@ -3,13 +3,13 @@ branches:
   only:
   - master
 skip_tags: true
-image: Visual Studio 2019
+skip_branch_with_pr: true
+image: Visual Studio 2017
 platform: Any CPU
-environment:
 cache:
-- '%USERPROFILE%\.nuget\packages' -> packet.lock
-- '%LocalAppData%\NuGet\Cache' -> packet.lock
-- '%LocalAppData%\NuGet\v3-cache' -> paket.lock
+- "'%USERPROFILE%\\.nuget\\packages' -> packet.lock"
+- "'%LocalAppData%\\NuGet\\Cache' -> packet.lock"
+- "'%LocalAppData%\\NuGet\\v3-cache' -> paket.lock"
 - paket-files -> packet.lock
 build_script:
 - ps: "git submodule init -q \ngit submodule update -q \ngit submodule foreach git fetch origin -q \ngit submodule foreach git pull origin master -q \ncd codebase\ndotnet tool install fake-cli --tool-path .\\.tools\n.\\.tools\\fake --silent run .\\build.fsx"
