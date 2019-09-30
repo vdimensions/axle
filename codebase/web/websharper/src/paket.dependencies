@@ -6,5 +6,5 @@ source ../../../../dist/
 
 nuget WebSharper.UI < 4.5.9
 nuget WebSharper.AspNetCore
-nuget Microsoft.AspNetCore.Authentication.Cookies
+nuget Microsoft.AspNetCore.Authentication.Cookies < 3
 nuget Axle.Web.AspNetCore

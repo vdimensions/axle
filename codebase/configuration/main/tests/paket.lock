@@ -2,15 +2,15 @@ STORAGE: NONE
 RESTRICTION: == net461
 NUGET
   remote: ../../../../dist
-    Axle.Configuration (1.5.2395.29753)
-      Axle.Core (>= 1.5.2394.24181)
-      Microsoft.Extensions.Configuration.Binder (>= 2.2.4)
-      Microsoft.Extensions.Configuration.FileExtensions (>= 2.2)
-    Axle.Core (1.5.2395.22432)
+    Axle.Configuration (1.6.2463.24892)
+      Axle.Core (>= 1.6.2463.24892)
+      Microsoft.Extensions.Configuration.Binder (>= 3.0)
+      Microsoft.Extensions.Configuration.FileExtensions (>= 3.0)
+    Axle.Core (1.6.2463.24892)
   remote: https://api.nuget.org/v3/index.json
-    Microsoft.Extensions.Configuration.Binder (2.2.4)
-    Microsoft.Extensions.Configuration.EnvironmentVariables (2.2.4)
-    Microsoft.Extensions.Configuration.FileExtensions (2.2)
-    Microsoft.Extensions.Configuration.Json (2.2)
+    Microsoft.Extensions.Configuration.Binder (3.0)
+    Microsoft.Extensions.Configuration.EnvironmentVariables (3.0)
+    Microsoft.Extensions.Configuration.FileExtensions (3.0)
+    Microsoft.Extensions.Configuration.Json (3.0)
     NUnit (3.12)
-    NUnit3TestAdapter (3.13)
+    NUnit3TestAdapter (3.15.1)

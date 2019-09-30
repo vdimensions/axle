@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-  
+
   <PropertyGroup>
     <ProjectGuid>5D89911E-F70B-4C08-9659-119104318881</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
@@ -14,28 +14,32 @@
     <PackageTags>Axle.Resources.Java Kajabity.Tools.Java</PackageTags>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Resources\IResource.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="Axle.Resources.dist.csproj.paket.references" />
-    <None Remove="paket.lock" />
-  </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project=".paket\Paket.Restore.targets" />
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Kajabity.Tools.Java" Version="0.2.6862.30334" />
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
 </Project>

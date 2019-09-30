@@ -19,6 +19,7 @@ namespace Axle.Modularity
             ModuleEntryMethod entryPointMethod,
             UtilizesAttribute[] utilizedModules,
             UtilizedByAttribute[] utilizedByModules,
+            ModuleCommandLineTriggerAttribute commandLineTrigger,
             params ModuleInfo[] requiredModules)
         {
             Type = type.VerifyArgument(nameof(type)).IsNotAbstract();
@@ -30,21 +31,29 @@ namespace Axle.Modularity
             UtilizedModules = utilizedModules;
             UtilizedByModules = utilizedByModules;
             RequiredModules = requiredModules;
+            CommandLineTrigger = commandLineTrigger;
         }
 
+        
+        internal ModuleMethod InitMethod { get; }
+        internal ModuleCallback[] DependencyInitializedMethods { get; }
+        internal ModuleCallback[] DependencyTerminatedMethods { get; }
+        internal ModuleMethod TerminateMethod { get; }
+        internal ModuleEntryMethod EntryPointMethod { get; }
+        internal ModuleCommandLineTriggerAttribute CommandLineTrigger { get; }
+
         public Type Type { get; }
+
         #if NETSTANDARD || NET45_OR_NEWER
         public Assembly Assembly => Type.GetTypeInfo().Assembly;
         #else
         public Assembly Assembly => Type.Assembly;
         #endif
-        public ModuleMethod InitMethod { get; }
-        public ModuleCallback[] DependencyInitializedMethods { get; }
-        public ModuleCallback[] DependencyTerminatedMethods { get; }
-        public ModuleMethod TerminateMethod { get; }
-        public ModuleEntryMethod EntryPointMethod { get; }
+
         public UtilizesAttribute[] UtilizedModules { get; }
+
         public UtilizedByAttribute[] UtilizedByModules { get; }
+
         public ModuleInfo[] RequiredModules { get; }
     }
 }

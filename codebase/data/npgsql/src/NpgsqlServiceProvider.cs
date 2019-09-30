@@ -1,10 +1,8 @@
 ﻿using System.Data;
-using System.Diagnostics.CodeAnalysis;
 using Npgsql;
 using NpgsqlTypes;
 
 using Axle.Data.Common;
-using Axle.Modularity;
 using Axle.References;
 
 
@@ -18,6 +16,7 @@ namespace Axle.Data.Npgsql
         NpgsqlTransaction,
         NpgsqlCommand,
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        NpgsqlCommandBuilder,
         NpgsqlDataAdapter,
         #endif
         NpgsqlDataReader,
@@ -61,6 +60,8 @@ namespace Axle.Data.Npgsql
         }
 
         #if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
+        protected override NpgsqlCommandBuilder CreateCommandBuilder(NpgsqlDataAdapter dataAdapter) => new NpgsqlCommandBuilder(dataAdapter);
+
         protected override NpgsqlDataAdapter CreateDataAdapter(NpgsqlCommand command) => new NpgsqlDataAdapter(command);
         #endif
 

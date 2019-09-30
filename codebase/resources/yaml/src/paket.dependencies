@@ -4,5 +4,6 @@ content: none
 
 source ../../../../dist
 source https://api.nuget.org/v3/index.json
-  nuget YamlDotNet >= 4.3
-  nuget Axle.Resources
+
+nuget YamlDotNet >= 4.3
+nuget Axle.Resources

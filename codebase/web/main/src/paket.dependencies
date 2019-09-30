@@ -3,7 +3,17 @@ storage none
 
 source ../../../../dist
 source https://api.nuget.org/v3/index.json
-  nuget Axle.Application
-  nuget Microsoft.Extensions.Caching.Memory
-  nuget Microsoft.AspNetCore.Session
-  nuget Microsoft.AspNetCore
+
+nuget Axle.Application
+nuget Microsoft.Extensions.Caching.Memory
+nuget Microsoft.AspNetCore.Session
+nuget Microsoft.AspNetCore < 3
+nuget Microsoft.AspNetCore.Authentication.OpenIdConnect < 3
+nuget Microsoft.AspNetCore.MiddlewareAnalysis < 3
+nuget Microsoft.AspNetCore.NodeServices < 3
+nuget Microsoft.AspNetCore.Owin < 3
+nuget Microsoft.AspNetCore.Server.Kestrel < 3
+nuget Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv
+nuget Microsoft.AspNetCore.Session
+nuget Microsoft.AspNetCore.SpaServices < 3
+nuget Microsoft.AspNetCore.SpaServices.Extensions < 3

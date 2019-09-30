@@ -2,9 +2,9 @@ framework: auto-detect
 storage: none
 
 source ../../../../dist
-  nuget Axle.Resources
+source https://api.nuget.org/v3/index.json
 
-group test
-  source https://api.nuget.org/v3/index.json
-    nuget NUnit
-    nuget NUnit3TestAdapter
+nuget Axle.Resources
+
+nuget NUnit
+nuget NUnit3TestAdapter

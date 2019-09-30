@@ -7,23 +7,34 @@ namespace Axle.Modularity
     public sealed class ModuleMethod
     {
         private readonly IInvokable _invokable;
-        private readonly bool _hasParams;
+        private readonly IParameter[] _params;
 
         internal ModuleMethod(IInvokable invokable)
         {
             _invokable = invokable.VerifyArgument(nameof(invokable)).IsNotNull().Value;
-            _hasParams = invokable.GetParameters().Length > 0;
+            _params = invokable.GetParameters();
         }
 
-        public void Invoke(object module, ModuleExporter exporter)
+        public void Invoke(object module, ModuleExporter exporter, string[] args)
         {
-            if (_hasParams)
+            switch (_params.Length)
             {
-                _invokable.Invoke(module, exporter);
-            }
-            else
-            {
-                _invokable.Invoke(module);
+                case 2:
+                {
+                    _invokable.Invoke(module, exporter, args);
+                    break;
+                }
+                case 1:
+                {
+                    var arg1 = _params[0].Type.IsArray ? (object) args : (object) exporter;
+                    _invokable.Invoke(module, arg1);
+                    break;
+                }
+                default:
+                {
+                    _invokable.Invoke(module);
+                    break;
+                }
             }
         }
     }

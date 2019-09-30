@@ -3,5 +3,6 @@ storage: none
 
 source ../../../../dist
 source https://api.nuget.org/v3/index.json
-  nuget FSharp.Core
-  nuget Axle.Core
+
+nuget FSharp.Core < 4.7
+nuget Axle.Core

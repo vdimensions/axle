@@ -3,7 +3,6 @@
   <PropertyGroup>
     <TargetFrameworks>net35;net40;net45;netstandard2.0;netstandard1.3</TargetFrameworks>
   </PropertyGroup>
-
   <PropertyGroup>
     <ProjectGuid>F3F97266-80F8-4C54-8CBC-1D72A5042E19</ProjectGuid>
     <RootNamespace>$(AssemblyName)</RootNamespace>
@@ -13,25 +12,20 @@
     <Description>Axle Framework resources library to handle yaml files</Description>
     <PackageTags>Axle.Resources.Yaml</PackageTags>
   </PropertyGroup>
-
   <Import Project="../../../Axle.Common.props" />
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
-
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
-
   <ItemGroup>
     <None Remove="paket.lock" />
   </ItemGroup>
-  
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>

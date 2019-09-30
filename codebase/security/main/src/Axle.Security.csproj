@@ -3,13 +3,19 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>7CDEE3ED-184E-497A-BD14-F949D544D52F</ProjectGuid>
     <Description>Axle Framework security library</Description>
   </PropertyGroup>
+
   <ItemGroup>
     <Folder Include="Auditing\" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Core" Version="$(VersionMajor).$(VersionMinor)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

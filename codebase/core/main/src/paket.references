@@ -1,11 +1,6 @@
-group netstandard1_6
-  System.Diagnostics.TraceSource
-  System.Threading.Thread
-  System.Xml.XmlSerializer
+System.Diagnostics.TraceSource
+System.Threading.Tasks.Unofficial
+System.Threading.Thread
+System.Xml.XmlSerializer
   
-group net35
-  System.Threading.Tasks.Unofficial
-
-group net20
-  LinqBridge
-
+LinqBridge

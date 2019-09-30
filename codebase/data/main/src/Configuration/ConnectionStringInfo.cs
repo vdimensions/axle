@@ -8,7 +8,7 @@ namespace Axle.Data.Configuration
     /// </summary>
     public sealed class ConnectionStringInfo : IEquatable<ConnectionStringInfo>
     {
-        internal ConnectionStringInfo(string name, string providerName, string connectionString)
+        public ConnectionStringInfo(string name, string providerName, string connectionString)
         {
             Name = name;
             ProviderName = providerName;

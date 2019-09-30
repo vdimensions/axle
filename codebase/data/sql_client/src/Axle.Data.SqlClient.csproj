@@ -3,11 +3,17 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>82EE9E10-E6CE-485F-A943-BA33E303035E</ProjectGuid>
     <OutputType>Library</OutputType>
     <Description>Axle's data access library for Microsoft SQL Server</Description>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../SqlClient.Package.targets" />
 </Project>

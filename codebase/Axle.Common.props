@@ -6,14 +6,15 @@
     <CopyrightYearSince>2013</CopyrightYearSince>
     <Authors>$(Company)</Authors>
     <Trademark></Trademark>
-    <License>http://www.apache.org/licenses/LICENSE-2.0</License>
+    <License>Apache-2.0</License>
   </PropertyGroup>
 
   <!-- Versioning properties -->
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
-    <VersionMinor>5</VersionMinor>
+    <VersionMinor>6</VersionMinor>
+    <PackageVersionRange>[$(VersionMajor).$(VersionMinor),)</PackageVersionRange>
   </PropertyGroup>
 
   <!-- Common props -->
@@ -44,16 +45,26 @@
     <AssemblyInformationalVersion Condition=" '$(AssemblyInformationalVersion)' == '' ">$(Version)</AssemblyInformationalVersion>
   </PropertyGroup>
 
-  <!-- nuget package properties -->
+  <!-- NuGet package properties -->
   <PropertyGroup>
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageLicense>$(License)</PackageLicense>
-    <PackageLicenseUrl>$(PackageLicense)</PackageLicenseUrl>
+    <PackageLicenseExpression>$(PackageLicense)</PackageLicenseExpression>
     <PackageProjectUrl></PackageProjectUrl>
     <PackageIconUri></PackageIconUri>
     <PackageVersion Condition=" '$(PackageVersion)' == '' ">$(Version)</PackageVersion>
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
     <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <!-- Package restore properties -->
+  <PropertyGroup>
+    <RestoreSources>$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
+  </PropertyGroup>
+
+  <!-- Paket paths -->
+  <PropertyGroup>
+    <PaketExePath>$(MSBuildProjectDirectory)\..\..\..\.paket\paket.exe</PaketExePath>
   </PropertyGroup>
 </Project>

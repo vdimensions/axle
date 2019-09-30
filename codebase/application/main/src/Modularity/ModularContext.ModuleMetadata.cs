@@ -85,7 +85,7 @@ namespace Axle.Modularity
                 }
             }
 
-            public ModuleMetadata Init(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
+            public ModuleMetadata Init(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, string[] args)
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {
@@ -103,7 +103,7 @@ namespace Axle.Modularity
 
                 Logger.Debug("Initializing module `{0}`...", ModuleInfo.Type.FullName);
 
-                ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter);
+                ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter, args);
                 var result = ChangeState(State | ModuleState.Initialized);
                 Notify(requiredModules, moduleMetadata, m => m.DependencyInitializedMethods);
 
@@ -137,7 +137,7 @@ namespace Axle.Modularity
                 return ChangeState(State | ModuleState.Ran);
             }
 
-            public ModuleMetadata Terminate(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata)
+            public ModuleMetadata Terminate(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, string[] args)
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {   //
@@ -151,7 +151,7 @@ namespace Axle.Modularity
 
                 Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
 
-                ModuleInfo.TerminateMethod?.Invoke(ModuleInstance, exporter);
+                ModuleInfo.TerminateMethod?.Invoke(ModuleInstance, exporter, args);
                 var result = ChangeState(State | ModuleState.Terminated);
 
                 Logger.Write(LogSeverity.Info, "Module `{0}` terminated. ", ModuleInfo.Type.FullName);

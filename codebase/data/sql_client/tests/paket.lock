@@ -1,36 +1,32 @@
+REDIRECTS: ON
 STORAGE: NONE
 RESTRICTION: == net461
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.5.2395.28226)
-      Axle.Configuration (>= 1.5.2395.24069)
-      Axle.Resources (>= 1.5.2390.14285)
-    Axle.Configuration (1.5.2395.29753)
-      Axle.Core (>= 1.5.2394.24181)
-      Microsoft.Extensions.Configuration.Binder (>= 2.2.4)
-      Microsoft.Extensions.Configuration.FileExtensions (>= 2.2)
-    Axle.Core (1.5.2395.22432)
-    Axle.Data (1.5.2395.23399)
-      Axle.Application (>= 1.5.2395.22810)
-    Axle.Data.SqlClient (1.5.2395.31174)
-      Axle.Data (>= 1.5.2395.23399)
-    Axle.Resources (1.5.2390.14285)
-      Axle.Core (>= 1.5.2390.14064)
+    Axle.Application (1.6.2463.24892)
+      Axle.Configuration (>= 1.6)
+      Axle.Core (>= 1.6)
+      Axle.Resources (>= 1.6)
+    Axle.Configuration (1.6.2463.24892)
+      Axle.Core (>= 1.6.2463.24892)
+      Microsoft.Extensions.Configuration.Binder (>= 3.0)
+      Microsoft.Extensions.Configuration.FileExtensions (>= 3.0)
+    Axle.Core (1.6.2463.24892)
+    Axle.Data (1.6.2463.24892)
+      Axle.Application (>= 1.6.2463.24892)
+    Axle.Data.SqlClient (1.6.2463.24892)
+      Axle.Data (>= 1.6)
+    Axle.Resources (1.6.2463.24892)
+      Axle.Core (>= 1.6)
   remote: https://api.nuget.org/v3/index.json
-    Microsoft.Extensions.Configuration.Binder (2.2.4)
-    Microsoft.Extensions.Configuration.FileExtensions (2.2)
-
-GROUP test
-STORAGE: NONE
-RESTRICTION: == net461
-NUGET
-  remote: https://api.nuget.org/v3/index.json
+    Microsoft.Extensions.Configuration.Binder (3.0)
+    Microsoft.Extensions.Configuration.FileExtensions (3.0)
     NUnit (3.12)
-    NUnit3TestAdapter (3.13)
-    System.Configuration.ConfigurationManager (4.5)
-      System.Security.Permissions (>= 4.5)
-    System.Security.AccessControl (4.5)
-      System.Security.Principal.Windows (>= 4.5)
-    System.Security.Permissions (4.5)
-      System.Security.AccessControl (>= 4.5)
-    System.Security.Principal.Windows (4.5.1)
+    NUnit3TestAdapter (3.15.1)
+    System.Configuration.ConfigurationManager (4.6)
+      System.Security.Permissions (>= 4.6)
+    System.Security.AccessControl (4.6)
+      System.Security.Principal.Windows (>= 4.6)
+    System.Security.Permissions (4.6)
+      System.Security.AccessControl (>= 4.6)
+    System.Security.Principal.Windows (4.6)

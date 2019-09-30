@@ -1,5 +1,3 @@
 Axle.Resources.Yaml
-
-group test
-  NUnit
-  NUnit3TestAdapter
+NUnit
+NUnit3TestAdapter

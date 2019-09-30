@@ -9,7 +9,7 @@ namespace Axle.Data.DataSources
 
         IDataSourceCommand GetCommand(string commandText, CommandType commandType, Func<ICommandBuilder, ICommandBuilder> buildCommandCallback);
 
-        IDataSourceCommand GetScript(string scriptPath, CommandType commandType, Func<ICommandBuilder, ICommandBuilder> buildCommandCallback);
+        IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, Func<ICommandBuilder, ICommandBuilder> buildCommandCallback);
 
         IDataSourceTransaction CurrentTransaction { get; }
     }

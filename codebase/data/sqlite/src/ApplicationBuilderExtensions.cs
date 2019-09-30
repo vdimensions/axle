@@ -4,9 +4,10 @@ namespace Axle.Data.Sqlite
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder LoadSqlite(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseSqlite(this IApplicationBuilder builder)
         {
-            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.Load<SqliteModule>();
+            builder.VerifyArgument(nameof(builder)).IsNotNull();
+            return builder.ConfigureModules(m => m.Load<SqliteModule>());
         }
     }
 }

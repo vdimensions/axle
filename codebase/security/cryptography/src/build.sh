@@ -1,4 +1,3 @@
-paket='.paket/paket.sh'
 project='Axle.Security.Cryptography'
 project_format='csproj'
 

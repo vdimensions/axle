@@ -1,4 +1,3 @@
-using System;
 using System.Data;
 using System.Data.Common;
 
@@ -15,6 +14,7 @@ namespace Axle.Data
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         DbDataAdapter CreateDataAdapter(IDbCommand command);
+        DbCommandBuilder CreateCommandBuilder(DbDataAdapter dataAdapter);
         #endif
 
         DbDataReader CreateDataReader(IDbCommand command, CommandBehavior? behavior);

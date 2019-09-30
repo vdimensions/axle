@@ -1,16 +1,7 @@
-group main
-  framework: auto-detect
-  storage: none
+storage: none
 
-  source ../../../../dist
-  source https://api.nuget.org/v3/index.json
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
 
-  nuget Axle.Application
-
-group netstandard
-  framework: netstandard1.2, netstandard1.3, netstandard1.4, netstandard1.5, netstandard1.6, netstandard2.0
-  storage: none
-
-  source https://api.nuget.org/v3/index.json
-
-  nuget System.Data.Common 
+nuget Axle.Application
+nuget System.Data.Common  framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Globalization;
-using Axle.Data.Resources;
+using Axle.Data.DataSources.Resources;
 using Axle.Resources;
 using Axle.Verification;
 
@@ -16,6 +16,8 @@ namespace Axle.Data.DataSources
 
         public DataSourceConnection(IDbServiceProvider provider, IDataSource dataSource, ResourceManager resourceManager)
         {
+            _provider = provider;
+            DataSource = dataSource;
             _resourceManager = resourceManager;
             _connection = provider.CreateConnection(dataSource.ConnectionString);
             _connection.Open();
@@ -48,16 +50,15 @@ namespace Axle.Data.DataSources
             return new DataSourceCommandBuilder(_provider, this, commandType, commandText);
         }
 
-        private ICommandBuilder BuildScriptedCommand(string scriptPath, CommandType commandType)
+        private ICommandBuilder BuildScriptedCommand(string bundle, string scriptPath, CommandType commandType)
         {
-            const string bundle = SqlScriptSourceModule.Bundle;
-            var scriptSource = _resourceManager.Load<SqlScriptSource>(bundle, scriptPath, CultureInfo.InvariantCulture);
-            if (scriptSource == null)
+            var res = _resourceManager.Load(bundle, scriptPath, CultureInfo.InvariantCulture);
+            if (res.HasValue && res.Value is SqlScriptSourceInfo scriptSourceInfo)
             {
-                throw new InvalidOperationException(string.Format("Could not resolve command {0}:{1}.", bundle, scriptPath));
+                var commandText = scriptSourceInfo.Value.ResolveScript(_provider);
+                return BuildCommand(commandText, commandType);
             }
-            var commandText = scriptSource.ResolveScript(_provider);
-            return BuildCommand(commandText, commandType);
+            throw new InvalidOperationException(string.Format("Could not resolve sql script {0}.", scriptPath));
         }
 
         //private ICommandBuilder BuildStoredProcedureCall(string bundleName, string commandName)
@@ -69,14 +70,17 @@ namespace Axle.Data.DataSources
         public IDataSourceCommand GetCommand(string commandText, CommandType commandType, Func<ICommandBuilder, ICommandBuilder> buildCommandCallback)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(commandText, nameof(commandText)));
             var b = buildCommandCallback(BuildCommand(commandText, commandType));
             return ((ICommandBuilderResult) b).Build();
         }
 
-        public IDataSourceCommand GetScript(string scriptPath, CommandType commandType, Func<ICommandBuilder, ICommandBuilder> buildCommandCallback)
+        public IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, Func<ICommandBuilder, ICommandBuilder> buildCommandCallback)
         {
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(bundle, nameof(bundle)));
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(scriptPath, nameof(scriptPath)));
             Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
-            var b = buildCommandCallback(BuildScriptedCommand(scriptPath, commandType));
+            var b = buildCommandCallback(BuildScriptedCommand(bundle, scriptPath, commandType));
             return ((ICommandBuilderResult) b).Build();
         }
 

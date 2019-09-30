@@ -37,8 +37,8 @@ namespace Axle.Modularity
             {
                 var introspector = new DefaultIntrospector(type);
                 var introspectedAttributes = allowInheritingTypes
-                        ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
-                        : introspector.GetAttributes<TAttribute>();
+                    ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
+                    : introspector.GetAttributes<TAttribute>();
                 for (var i = 0; i < introspectedAttributes.Length; i++)
                 {
                     attributes.Add((TAttribute) introspectedAttributes[i].Attribute);
@@ -154,6 +154,15 @@ namespace Axle.Modularity
                         //
                         true)
                 .ToArray();
+        }
+
+        public ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType)
+        {
+            return CollectAttributes(
+                    new[]{moduleType},
+                    new List<ModuleCommandLineTriggerAttribute>(),
+                    true)
+                .SingleOrDefault();
         }
 
         public Type[] GetRequiredModules(Type moduleType)

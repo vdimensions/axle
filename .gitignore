@@ -7,6 +7,8 @@
 **/.archetype-template/
 **/.idea/
 **/.nuget/
+**/.paket/
+!codebase/.paket
 **/.project-template/
 **/.svn/
 **/.vs/

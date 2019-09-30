@@ -1,8 +1,0 @@
-group main
-  Axle.Data
-
-group netstandard
-  Microsoft.Data.Sqlite.Core
-
-group netXX
-  System.Data.SQLite.Core

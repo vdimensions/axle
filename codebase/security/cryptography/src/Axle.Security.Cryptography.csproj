@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
-
+  
   <PropertyGroup>
     <ProjectGuid>AB4D08D0-AE39-4992-96DA-FDD3676E806B</ProjectGuid>
     <OutputType>Library</OutputType>
@@ -14,6 +14,9 @@
     <Compile Remove="Algorithms\Sdk\BaseXXEncryptionAlgorithm.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Axle.Core" Version="$(VersionMajor).$(VersionMinor)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

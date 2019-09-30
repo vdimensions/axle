@@ -32,7 +32,6 @@ namespace Axle
         {
             _dependencyContainerProvider = new DefaultDependencyContainerProvider();
             _loggingService = new DefaultLoggingServiceProvider();
-            //ModuleCatalog = new DefaultModuleCatalog();
             _moduleCatalog = new ModuleCatalogWrapper(new DefaultModuleCatalog());
             _config = new LayeredConfigManager();
         }
@@ -60,7 +59,7 @@ namespace Axle
             }
         }
 
-        private ModularContext InitModularContext(IModuleCatalog c)
+        private ModularContext InitModularContext(IModuleCatalog c, string[] args)
         {
             if (_modularContext != null)
             {
@@ -69,7 +68,7 @@ namespace Axle
             lock (_syncRoot)
             if (_modularContext == null)
             {
-                var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService, _config);
+                var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService, _config, args);
                 ctx.Container.RegisterInstance(this);
                 _modularContext = ctx;
             }
@@ -92,12 +91,12 @@ namespace Axle
         public Application Run(params string[] args)
         {
             ThrowIfStarted();
-            var ctx = InitModularContext(_moduleCatalog);
+            var ctx = InitModularContext(_moduleCatalog, args);
             foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
             {
                 onContainerReadyHandler.Invoke(ctx.Container);
             }
-            ctx.Launch(_moduleTypes.ToArray()).Run(args);
+            ctx.Launch(_moduleTypes.ToArray()).Run();
             return this;
         }
 
@@ -109,51 +108,15 @@ namespace Axle
             }
         }
 
-        void IDisposable.Dispose() => ShutDown();
+        public IContainer CreateContainer() => _dependencyContainerProvider.Create();
+        public IContainer CreateContainer(IContainer parent) => _dependencyContainerProvider.Create(parent);
 
-        [Obsolete]
-        public Application Execute(params Assembly[] assemblies)
-        {
-            var c = _moduleCatalog;
-            foreach (var type in assemblies.SelectMany(a => c.DiscoverModuleTypes(a)))
-            {
-                _moduleTypes.Add(type);
-            }
-            return Run(_args);
-        }
-        
-        [Obsolete]
-        public Application Execute(params Type[] types)
-        {
-            foreach (var type in types)
-            {
-                _moduleTypes.Add(type);
-            }
-            return Run(_args);
-        }
+        void IDisposable.Dispose() => ShutDown();
 
         [Obsolete]
         public IDependencyContainerProvider DependencyContainerProvider
         {
             get => _dependencyContainerProvider;
-            set => (this as IApplicationBuilder).SetDependencyContainerProvider(value.VerifyArgument(nameof(value)).IsNotNull().Value);
-        }
-
-        [Obsolete]
-        public ILoggingServiceProvider LoggingService
-        {
-            get => _loggingService;
-            set => (this as IApplicationBuilder).SetLoggingService(value.VerifyArgument(nameof(value)).IsNotNull().Value);
-        }
-
-        [Obsolete]
-        public IContainer Container
-        {
-            get
-            {
-                ThrowIfNotStarted();
-                return _modularContext?.Container;
-            }
         }
     }
 }

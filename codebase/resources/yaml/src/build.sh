@@ -1,4 +1,3 @@
-paket='.paket/paket.sh'
 project='Axle.Resources.Yaml'
 
 ./restore.sh

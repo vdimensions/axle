@@ -1,4 +1,3 @@
-paket='.paket/paket.sh'
 project='Axle.Logging.Log4net'
 project_format='csproj'
 

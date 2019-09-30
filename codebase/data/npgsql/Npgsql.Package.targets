@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <Choose>
+    <When Condition="'$(FrameworkShortName)' == 'netstandard2.0'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="4.0.10" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'net451'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="4.0.10" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'net45'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="4.0.10" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'netstandard1.6'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="3.2.7" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'netstandard1.5'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="3.2.7" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'netstandard1.4'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="3.2.7" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'netstandard1.3'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="3.2.7" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'net40'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="2.2.7" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(FrameworkShortName)' == 'net35'">
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="2.2.7" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Include="Npgsql" Version="4.0.10" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+</Project>

@@ -1,5 +1,4 @@
 Axle.Data.MySql
-
-group test
-  NUnit
-  NUnit3TestAdapter
+NUnit
+NUnit3TestAdapter
+System.Numerics.Vectors

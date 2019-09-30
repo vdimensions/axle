@@ -3,11 +3,7 @@ using System.Diagnostics;
 
 using Axle.Data.Conversion;
 
-#if NETFRAMEWORK
 using SqliteType = Axle.Data.Sqlite.SqliteType;
-#else
-using SqliteType = Microsoft.Data.Sqlite.SqliteType;
-#endif
 
 namespace Axle.Data.Sqlite.Conversion
 {

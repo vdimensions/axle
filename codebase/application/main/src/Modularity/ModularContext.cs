@@ -21,38 +21,40 @@ namespace Axle.Modularity
             for (var i = 0; i < modulesToLaunch.Count; i++)
             {
                 var moduleInfo = modulesToLaunch[i];
-                var updatedRequiredModules = 0;
-                var requiredModules = new HashSet<ModuleInfo>(moduleInfo.RequiredModules,
+                var reasonsToUpdateRequiredModules = 0;
+                var expandedRequiredModules = new HashSet<ModuleInfo>(
+                    moduleInfo.RequiredModules,
                     new AdaptiveEqualityComparer<ModuleInfo, Type>(x => x.Type));
                 //
-                // Expand the required modules with the utilized modules
+                // Expand the 'required modules' with the 'utilized modules'
                 //
                 foreach (var ua in moduleInfo.UtilizedModules)
                 {
                     var newModules = modulesToLaunch.Where(mi => ua.Accepts(mi.Type));
                     foreach (var newRequiredModule in newModules)
                     {
-                        requiredModules.Remove(newRequiredModule);
-                        requiredModules.Add(newRequiredModule);
-                        updatedRequiredModules++;
+                        expandedRequiredModules.Remove(newRequiredModule);
+                        expandedRequiredModules.Add(newRequiredModule);
+                        reasonsToUpdateRequiredModules++;
                     }
                 }
 
                 //
-                // Expand the required modules with the utilized by modules
+                // Expand the 'required modules' with the 'utilized-by modules'
                 //
                 if (modulesToLaunch.SelectMany(x => x.UtilizedByModules).Any(uby => uby.Accepts(moduleInfo.Type)))
                 {
-                    requiredModules.Remove(moduleInfo);
-                    requiredModules.Add(moduleInfo);
-                    updatedRequiredModules++;
+                    expandedRequiredModules.Remove(moduleInfo);
+                    expandedRequiredModules.Add(moduleInfo);
+                    reasonsToUpdateRequiredModules++;
                 }
 
-                if (updatedRequiredModules > 0)
+                if (reasonsToUpdateRequiredModules > 0)
                 {
                     //
-                    // In case some of the auxiliary modules have been detected,
-                    // we will promote them to required modules in order to have them trigger dependency init callbacks.
+                    // In case some of the 'auxiliary modules' have been detected,
+                    // we will promote them to 'required modules' in order to have
+                    // them properly participate in dependency init callbacks.
                     //
                     var newModuleInfo = new ModuleInfo(
                         moduleInfo.Type,
@@ -63,12 +65,62 @@ namespace Axle.Modularity
                         moduleInfo.EntryPointMethod,
                         moduleInfo.UtilizedModules,
                         moduleInfo.UtilizedByModules,
-                        requiredModules.ToArray());
+                        moduleInfo.CommandLineTrigger,
+                        expandedRequiredModules.ToArray());
                     modulesToLaunch[i] = newModuleInfo;
                 }
             }
-
             return modulesToLaunch;
+        }
+        private static IList<ModuleInfo> FilterTriggeredModules(IEnumerable<ModuleInfo> modules, IList<string> commandLineArgs)
+        {
+            var modulesToLaunch = modules.ToList();
+            var cmp = StringComparer.Ordinal;
+            var disabledModules = new HashSet<string>(cmp);
+            for (var i = 0; i < modulesToLaunch.Count; i++)
+            {
+                var moduleInfo = modulesToLaunch[i];
+                var moduleKey = UtilizesAttribute.TypeToString(moduleInfo.Type);
+                var commandLineTrigger = moduleInfo.CommandLineTrigger;
+                if (commandLineTrigger != null)
+                {
+                    if (commandLineArgs.Count <= commandLineTrigger.ArgumentIndex)
+                    {
+                        disabledModules.Add(moduleKey);
+                    }
+                    else if (!string.IsNullOrEmpty(commandLineTrigger.ArgumentValue) 
+                        && !cmp.Equals(commandLineArgs[commandLineTrigger.ArgumentIndex], commandLineTrigger.ArgumentValue))
+                    {
+                        disabledModules.Add(moduleKey);
+                    }
+                }
+            }
+
+            if (disabledModules.Count <= 0)
+            {
+                return modulesToLaunch;
+            }
+
+            for (var i = 0; i < modulesToLaunch.Count; i++)
+            {
+                var moduleToFilter = modulesToLaunch[i];
+                if (disabledModules.Contains(UtilizesAttribute.TypeToString(moduleToFilter.Type)))
+                {
+                    modulesToLaunch[i] = null;
+                }
+                else
+                {
+                    var filterRequiredModules = moduleToFilter.RequiredModules
+                        .Where(x => !disabledModules.Contains(UtilizesAttribute.TypeToString(x.Type)))
+                        .ToArray();
+                    if (filterRequiredModules.Length != moduleToFilter.RequiredModules.Length)
+                    {
+                        modulesToLaunch[i] = null;
+                    }
+                }
+            }
+
+            return modulesToLaunch.Where(x => x != null).ToList();
         }
 
         /// <summary>
@@ -86,10 +138,13 @@ namespace Axle.Modularity
         /// <returns>
         /// A collection of module groups, sorted by rank. 
         /// </returns>
-        private static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(IEnumerable<ModuleInfo> moduleCatalog, ICollection<Type> loadedModules)
+        private static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(
+            IEnumerable<ModuleInfo> moduleCatalog, 
+            ICollection<Type> loadedModules,
+            IList<string> args)
         {
             IDictionary<Type, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<Type, Tuple<ModuleInfo, int>>();
-            var modulesToLaunch = ExpandRequiredModules(moduleCatalog);
+            var modulesToLaunch = FilterTriggeredModules(ExpandRequiredModules(moduleCatalog), args);
             var remainingCount = int.MaxValue;
             while (modulesToLaunch.Count > 0)
             {
@@ -159,22 +214,24 @@ namespace Axle.Modularity
         private readonly ILoggingServiceProvider _loggingServiceProvider;
         private readonly IConfigSource _appConfigurationSource;
         private readonly IList<ModuleMetadata> _initializedModules = new List<ModuleMetadata>();
+        private readonly string[] _args;
 
-        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider, IConfigSource appConfigurationSource)
+        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider, IConfigSource appConfigurationSource, string[] args)
         {
             _moduleCatalog = moduleCatalog;
             _containerProvider = containerProvider;
             _rootContainer = containerProvider.Create();
             _loggingServiceProvider = loggingServiceProvider;
             _appConfigurationSource = appConfigurationSource;
+            _args = args;
         }
 
-        public ModularContext Launch(params Type[] moduleTypes)
+        public ModularContext Launch(IEnumerable<Type> moduleTypes)
         {
             var moduleInfos = _moduleCatalog.GetModules(moduleTypes);
             var existingModuleTypes = new HashSet<Type>(_modules.Keys);
 
-            var rankedModules = RankModules(moduleInfos, existingModuleTypes).ToArray();
+            var rankedModules = RankModules(moduleInfos, existingModuleTypes, _args).ToArray();
             var rootExporter = new ContainerExporter(_rootContainer);
 
             var substExpr = new DefaultSubstitutionExpression();
@@ -185,13 +242,14 @@ namespace Axle.Modularity
                 new SubstitutionResolvingConfig(
                     baseConfig.LoadConfiguration(),
                     substExpr);
-            _rootContainer.RegisterInstance(globalAppConfig);
 
+            // TODO: strip ranked modules from non-activated
+
+            _rootContainer.RegisterInstance(globalAppConfig);
             for (var i = 0; i < rankedModules.Length; i++)
             foreach (var moduleInfo in rankedModules[i])
             {
                 var moduleType = moduleInfo.Type;
-                var requiredModules = moduleInfo.RequiredModules.ToArray();
                 if (existingModuleTypes.Contains(moduleType))
                 {   //
                     // the module was initialized before
@@ -199,7 +257,7 @@ namespace Axle.Modularity
                     continue;
                 }
 
-
+                var requiredModules = moduleInfo.RequiredModules.ToArray();
                 using (var moduleInitializationContainer = _containerProvider.Create(_rootContainer))
                 {
                     var moduleLogger = _loggingServiceProvider.Create(moduleType);
@@ -255,12 +313,12 @@ namespace Axle.Modularity
 
                     try
                     {
-                        mm = _modules.AddOrUpdate(moduleType, _ => mm.Init(rootExporter, requiredModules, _modules), (_, m) => m.Init(rootExporter, requiredModules, _modules));
+                        mm = _modules.AddOrUpdate(moduleType, _ => mm.Init(rootExporter, requiredModules, _modules, _args), (_, m) => m.Init(rootExporter, requiredModules, _modules, _args));
                         _initializedModules.Add(mm);
                     }
                     catch
                     {
-                        mm = mm.Terminate(rootExporter, requiredModules, _modules);
+                        mm = mm.Terminate(rootExporter, requiredModules, _modules, _args);
                         if (mm.ModuleInstance is IDisposable disposable)
                         {
                             disposable.Dispose();
@@ -275,11 +333,11 @@ namespace Axle.Modularity
             return this;
         }
 
-        public ModularContext Run(params string[] args)
+        public ModularContext Run()
         {
             foreach (var initializedModule in _initializedModules)
             {
-                _modules.TryUpdate(initializedModule.ModuleInfo.Type, initializedModule.Run(args), initializedModule);
+                _modules.TryUpdate(initializedModule.ModuleInfo.Type, initializedModule.Run(_args), initializedModule);
             }
             _initializedModules.Clear();
             return this;
@@ -289,7 +347,7 @@ namespace Axle.Modularity
         {
             while (_moduleInstances.TryPop(out var module))
             {
-                module.Terminate(new ContainerExporter(_rootContainer), module.ModuleInfo.RequiredModules.ToArray(), _modules);
+                module.Terminate(new ContainerExporter(_rootContainer), module.ModuleInfo.RequiredModules.ToArray(), _modules, _args);
                 if (module.ModuleInstance is IDisposable d)
                 {
                     d.Dispose();

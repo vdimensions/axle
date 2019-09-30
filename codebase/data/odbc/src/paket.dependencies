@@ -1,14 +1,14 @@
-group main
-  framework: auto-detect
-  storage: none
+storage none
+framework auto-detect
 
-  source ../../../../dist
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
+
+nuget Axle.Data
+
+group netstandrdxx
+  framework netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
+  
   source https://api.nuget.org/v3/index.json
-    nuget Axle.Data
-
-  group netstandard
-    framework: netstandard2.0, netstandard1.6, netstandard1.5, netstandard1.4, netstandard1.3, netstandard1.2
-    storage: none
-
-    source https://api.nuget.org/v3/index.json
-      nuget System.Data.Odbc
+  
+  nuget System.Data.Odbc 

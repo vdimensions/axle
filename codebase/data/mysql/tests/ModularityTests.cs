@@ -5,6 +5,7 @@ using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources;
 using Axle.DependencyInjection;
+using Axle.Modularity;
 using NUnit.Framework;
 
 namespace Axle.Data.MySql.Tests
@@ -32,7 +33,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .AddLegacyConfig()
+                .EnableLegacyConfig()
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -49,7 +50,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .AddLegacyConfig()
+                .EnableLegacyConfig()
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -67,7 +68,7 @@ namespace Axle.Data.MySql.Tests
             IContainer container = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => container = c)
-                .AddLegacyConfig()
+                .EnableLegacyConfig()
                 .UseDataSources()
                 .UseMySql();
             using (appBuilder.Run())
@@ -83,6 +84,36 @@ namespace Axle.Data.MySql.Tests
                     Assert.IsTrue(resolved);
                     Assert.IsNotNull(dataSource);
                     Assert.AreEqual(dataSource.Name, connectionStringInfo.Name);
+                }
+            }
+        }
+
+        [Module]
+        private class X : ISqlScriptLocationConfigurer
+        {
+            public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
+            {
+                registry.Register("test", GetType().Assembly, "SqlScripts/");
+            }
+        }
+
+        //[Test]
+        public void TestDataSourceCmdDiscovery()
+        {
+            IContainer container = null;
+            var appBuilder = Application.Build()
+                .ConfigureDependencies(c => container = c)
+                .EnableLegacyConfig()
+                .UseDataSources()
+                .UseMySql()
+                .ConfigureModules(m => m.Load<X>());
+            using (appBuilder.Run())
+            {
+                var testDataSource = container.Resolve<IDataSource>("test");
+                using (var connection = testDataSource.OpenConnection())
+                {
+                    var script = connection.GetScript("test", "x");
+                    Assert.IsNotNull(script);
                 }
             }
         }

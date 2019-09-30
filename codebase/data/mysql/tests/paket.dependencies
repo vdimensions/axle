@@ -1,17 +1,11 @@
-group main
-  framework: auto-detect
-  storage: none
+framework: auto-detect
+storage: none
+redirects: on
 
-  source ../../../../dist
-  source https://api.nuget.org/v3/index.json
-    
-  nuget Axle.Data.MySql
-
-group test
-  framework: auto-detect
-  storage: none
-
-  source https://api.nuget.org/v3/index.json
-
-  nuget NUnit
-  nuget NUnit3TestAdapter
+source ../../../../dist
+source https://api.nuget.org/v3/index.json
+  
+nuget Axle.Data.MySql
+nuget NUnit
+nuget NUnit3TestAdapter
+nuget System.Numerics.Vectors

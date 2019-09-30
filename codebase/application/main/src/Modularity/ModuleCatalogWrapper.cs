@@ -49,6 +49,7 @@ namespace Axle.Modularity
 
         public UtilizesAttribute[] GetUtilizedModules(Type moduleType) => _originalCatalog.GetUtilizedModules(moduleType);
         public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType) => _originalCatalog.GetUtilizedByModules(moduleType);
+        public ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType) => _originalCatalog.GetCommandLineTrigger(moduleType);
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType) => _originalCatalog.GetEntryPointMethod(moduleType);
     }
