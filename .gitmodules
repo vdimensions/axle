@@ -3,7 +3,7 @@
 	url = https://github.com/ivaylo5ev/mason
 [submodule "submodules/btw"]
 	path = submodules/btw
-	url = https://github.com/virtual-dimensions/btw
+	url = https://github.com/vdimensions/btw
 [submodule "submodules/msbuild-dotnet-multitargeting"]
 	path = submodules/msbuild-dotnet-multitargeting
 	url = https://github.com/vdimensions/msbuild-dotnet-multitargeting.git
