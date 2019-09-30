@@ -3,13 +3,16 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net461;net46;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>{8DBBA160-18F0-4268-890F-6D1C26AA0746}</ProjectGuid>
     <Description>Axle framework configuration library</Description>
   </PropertyGroup>
+
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
     <Reference Include="System.Configuration" />
   </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
   <Import Project=".paket\Paket.Restore.targets" />
 </Project>
