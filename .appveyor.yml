@@ -12,7 +12,7 @@ cache:
 - "'%LocalAppData%\\NuGet\\v3-cache' -> paket.lock"
 - paket-files -> packet.lock
 build_script:
-- ps: "git submodule init -q \ngit submodule update -q \ngit submodule foreach git fetch origin -q \ngit submodule foreach git pull origin master -q \ncd codebase\ndotnet tool install fake-cli --tool-path .\\.tools\n.\\.tools\\fake --silent run .\\build.fsx"
+- ps: "git submodule init -q \ngit submodule update -q \ngit submodule foreach git fetch origin -q \ngit submodule foreach git pull origin master -q \ncd dist \nmkdir restore \ncd .. \ncd codebase\ndotnet tool install fake-cli --tool-path .\\.tools\n.\\.tools\\fake --silent run .\\build.fsx"
 artifacts:
 - path: dist/*.nupkg
   name: NuGet Package
