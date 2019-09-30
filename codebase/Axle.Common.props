@@ -60,7 +60,7 @@
 
   <!-- Package restore properties -->
   <PropertyGroup>
-    <RestoreSources>$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
+    <RestoreSources>$(RestoreSources);$(PackageOutputPath)\restore</RestoreSources>
   </PropertyGroup>
 
   <!-- Paket paths -->
