@@ -2,11 +2,11 @@ STORAGE: NONE
 RESTRICTION: == net45
 NUGET
   remote: ../../../../dist
-    Axle.Core (1.6.2462.22955)
-    Axle.Resources (1.6.2462.22955)
-      Axle.Core (>= 1.6.2462.22955)
-    Axle.Resources.Yaml (1.6.2462.22955)
-      Axle.Resources (>= 1.6.2462.22955)
+    Axle.Core (1.6.2463.24892)
+    Axle.Resources (1.6.2463.24892)
+      Axle.Core (>= 1.6)
+    Axle.Resources.Yaml (1.6.2463.24892)
+      Axle.Resources (>= 1.6.2463.24892)
       YamlDotNet (>= 7.0)
   remote: https://api.nuget.org/v3/index.json
     NUnit (3.12)

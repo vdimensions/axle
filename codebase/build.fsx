@@ -16,6 +16,8 @@ open VDimensions.Fake
 open Fake.Core
 open Fake.IO
 
+let dir = Shell.pwd()
+
 let projectLocations = [
     "core/main"
     "core/fsharp"
@@ -42,6 +44,7 @@ let projectLocations = [
 
 Target.create "Prepare" VDBuild.cleanNupkg
 Target.create "Complete" (fun _ -> 
+    Shell.rm_rf (sprintf "%s/../dist/restore" dir)
     // TODO: create tag
     ()
 )

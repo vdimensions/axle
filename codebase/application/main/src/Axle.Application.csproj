@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net461;net46;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>101CF79E-134B-4483-8734-C9AC28F68E20</ProjectGuid>
     <AssemblyName>Axle.Application</AssemblyName>
@@ -10,27 +11,38 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <Description>Axle framework's application library</Description>
   </PropertyGroup>
-  <Import Project="../../../Axle.Common.props" />
+
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+  
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Modularity\DynamicModuleLoader.cs" />
     <Compile Remove="Modularity\IAssemblyLoadListener.cs" />
   </ItemGroup>
+
   <ItemGroup>
     <Folder Include="Properties\" />
   </ItemGroup>
-  <Import Project=".paket\Paket.Restore.targets" />
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Configuration" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
 </Project>

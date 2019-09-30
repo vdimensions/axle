@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <ProjectGuid>{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -17,12 +14,13 @@
   <ItemGroup>
     <None Include="build.sh" />
     <EmbeddedResource Include="Properties\Messages.properties" />
-    <None Include="paket.dependencies" />
-    <None Include="paket.lock" />
-    <None Include="paket.references" />
-    <None Include="paket.sh" />
     <None Include="restore.sh" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Axle.Resources.Java.csproj" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../../../NUnit.Packages.targets" />
 </Project>

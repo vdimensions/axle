@@ -3,15 +3,22 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>0952b72d-9d69-4439-885f-096ed969e9e5</ProjectGuid>
     <OutputType>Library</OutputType>
     <Description>Axle resource management library</Description>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="Extraction\IResourceExtractionChain.cs" />
     <Compile Remove="Extraction\ResourceExtractionChain.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../../Resources.Package.targets" />
 </Project>

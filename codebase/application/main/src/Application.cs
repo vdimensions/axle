@@ -108,30 +108,15 @@ namespace Axle
             }
         }
 
+        public IContainer CreateContainer() => _dependencyContainerProvider.Create();
+        public IContainer CreateContainer(IContainer parent) => _dependencyContainerProvider.Create(parent);
+
         void IDisposable.Dispose() => ShutDown();
 
         [Obsolete]
         public IDependencyContainerProvider DependencyContainerProvider
         {
             get => _dependencyContainerProvider;
-            set => (this as IApplicationBuilder).SetDependencyContainerProvider(value.VerifyArgument(nameof(value)).IsNotNull().Value);
-        }
-
-        [Obsolete]
-        public ILoggingServiceProvider LoggingService
-        {
-            get => _loggingService;
-            set => (this as IApplicationBuilder).SetLoggingService(value.VerifyArgument(nameof(value)).IsNotNull().Value);
-        }
-
-        [Obsolete]
-        public IContainer Container
-        {
-            get
-            {
-                ThrowIfNotStarted();
-                return _modularContext?.Container;
-            }
         }
     }
 }

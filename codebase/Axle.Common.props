@@ -14,6 +14,7 @@
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
     <VersionMinor>6</VersionMinor>
+    <PackageVersionRange>[$(VersionMajor).$(VersionMinor),)</PackageVersionRange>
   </PropertyGroup>
 
   <!-- Common props -->
@@ -55,6 +56,11 @@
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
     <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+  </PropertyGroup>
+
+  <!-- Package restore properties -->
+  <PropertyGroup>
+    <RestoreSources>$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
   </PropertyGroup>
 
   <!-- Paket paths -->

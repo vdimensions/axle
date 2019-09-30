@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <ProjectGuid>{CE2898DE-95CA-4476-AA7A-913353C4F6CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -11,9 +8,11 @@
     <AssemblyName>Axle.Resources.Tests</AssemblyName>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="build.sh" />
     <None Include="restore.sh" />
@@ -21,16 +20,23 @@
     <None Include="paket.lock" />
     <None Include="paket.references" />
   </ItemGroup>
+
   <ItemGroup>
     <EmbeddedResource Include="EmbeddedText.txt" />
     <EmbeddedResource Include="EmbeddedText2.en.txt" />
     <EmbeddedResource Include="EmbeddedText2.bg.txt" />
   </ItemGroup>
+
   <ItemGroup>
     <Content Include="Content\FileSystemTestFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Axle.Resources.csproj" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../../../NUnit.Packages.targets" />
 </Project>

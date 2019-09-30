@@ -2,17 +2,18 @@ STORAGE: NONE
 RESTRICTION: == netstandard2.0
 NUGET
   remote: ../../../../dist
-    Axle.Application (1.6.2462.22955)
-      Axle.Configuration (>= 1.6.2462.21445)
-      Axle.Resources (>= 1.6.2462.21445)
-    Axle.Configuration (1.6.2462.22955)
-      Axle.Core (>= 1.6.2462.22955)
+    Axle.Application (1.6.2463.24892)
+      Axle.Configuration (>= 1.6)
+      Axle.Core (>= 1.6)
+      Axle.Resources (>= 1.6)
+    Axle.Configuration (1.6.2463.24892)
+      Axle.Core (>= 1.6.2463.24892)
       Microsoft.Extensions.Configuration.Binder (>= 3.0)
       Microsoft.Extensions.Configuration.FileExtensions (>= 3.0)
       System.Configuration.ConfigurationManager (>= 4.6)
-    Axle.Core (1.6.2462.22955)
-    Axle.Resources (1.6.2462.22955)
-      Axle.Core (>= 1.6.2462.22955)
+    Axle.Core (1.6.2463.24892)
+    Axle.Resources (1.6.2463.24892)
+      Axle.Core (>= 1.6)
   remote: https://api.nuget.org/v3/index.json
     Microsoft.AspNetCore (2.2)
       Microsoft.AspNetCore.Diagnostics (>= 2.2)

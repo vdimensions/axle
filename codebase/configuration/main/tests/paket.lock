@@ -2,11 +2,11 @@ STORAGE: NONE
 RESTRICTION: == net461
 NUGET
   remote: ../../../../dist
-    Axle.Configuration (1.6.2462.22955)
-      Axle.Core (>= 1.6.2462.22955)
+    Axle.Configuration (1.6.2463.24892)
+      Axle.Core (>= 1.6.2463.24892)
       Microsoft.Extensions.Configuration.Binder (>= 3.0)
       Microsoft.Extensions.Configuration.FileExtensions (>= 3.0)
-    Axle.Core (1.6.2462.22955)
+    Axle.Core (1.6.2463.24892)
   remote: https://api.nuget.org/v3/index.json
     Microsoft.Extensions.Configuration.Binder (3.0)
     Microsoft.Extensions.Configuration.EnvironmentVariables (3.0)

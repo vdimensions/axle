@@ -1,23 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
-  </PropertyGroup>
-  <PropertyGroup>
     <ProjectGuid>{8EDF4429-251A-416D-BB68-93F227191BCF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+  
   <ItemGroup>
     <None Include="build.sh" />
-    <None Include="paket.dependencies" />
-    <None Include="paket.references" />
     <None Include="restore.sh" />
   </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\src\Axle.Application.csproj" />
+  </ItemGroup>
+  
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../../../NUnit.Packages.targets" />
 </Project>
