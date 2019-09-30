@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Axle.Application.csproj" />
+    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
   </ItemGroup>
   
   <Import Project="../../../Axle.Common.props" />

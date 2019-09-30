@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Axle.Resources.Java.csproj" />
+    <PackageReference Include="Axle.Resources.Java" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

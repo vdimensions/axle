@@ -13,7 +13,7 @@
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
-    <VersionMinor>7</VersionMinor>
+    <VersionMinor>6</VersionMinor>
     <PackageVersionRange>[$(VersionMajor).$(VersionMinor),)</PackageVersionRange>
   </PropertyGroup>
 
@@ -67,4 +67,6 @@
   <PropertyGroup>
     <PaketExePath>$(MSBuildProjectDirectory)\..\..\..\.paket\paket.exe</PaketExePath>
   </PropertyGroup>
+
+  <Import Project="Dependency.Versions.props" />
 </Project>

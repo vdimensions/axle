@@ -4,10 +4,10 @@ namespace Axle.Data.MySql
 {
     public static class ApplicationBuilderExtensions
     {
-        public static IApplicationBuilder UseMySql(this IApplicationBuilder builder)
+        public static IApplicationBuilder UseMySql(this IApplicationBuilder app)
         {
-            builder.VerifyArgument(nameof(builder)).IsNotNull();
-            return builder.ConfigureModules(m => m.Load<MySqlModule>());
+            app.VerifyArgument(nameof(app)).IsNotNull();
+            return app.ConfigureModules(m => m.Load<MySqlModule>());
         }
     }
 }

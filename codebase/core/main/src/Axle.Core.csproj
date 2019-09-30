@@ -3,31 +3,39 @@
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;netstandard1.3;netstandard1.0;net46;net45;net40;net35;net20</TargetFrameworks>
   </PropertyGroup>
+  
   <PropertyGroup>
     <ProjectGuid>{43919C97-BCFD-4802-95D7-76435E066962}</ProjectGuid>
     <RootNamespace>Axle</RootNamespace>
     <Description>Axle Framework Core Library</Description>
   </PropertyGroup>
+
   <Import Project="../../../targets/stator/src/Stator.props" />
+
   <PropertyGroup>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
   </PropertyGroup>
+
   <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
+
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
     <Reference Remove="System.Data" />
     <Reference Remove="System.Xml" />
     <Reference Remove="System.Xml.Linq" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Remove="_Experimental\**" />
     <EmbeddedResource Remove="_Experimental\**" />
     <None Remove="_Experimental\**" />
   </ItemGroup>
+
   <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
@@ -37,12 +45,7 @@
     <Compile Remove="Linq\Sequence.cs" />
     <Compile Remove="Linq\SequenceExtensions.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <None Remove="paket.lock" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="paket-files\" />
-  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="..\..\..\.paket\Paket.Restore.targets" />
+  <Import Project="../Axle.Core.Dependencies.targets" />
 </Project>

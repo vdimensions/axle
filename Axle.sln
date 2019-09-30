@@ -51,7 +51,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.OleDb", "codebase
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.SqlClient", "codebase\data\sql_client\src\Axle.Data.SqlClient.csproj", "{82EE9E10-E6CE-485F-A943-BA33E303035E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.Sqlite", "codebase\data\sqlite\src\Axle.Data.Sqlite.csproj", "{879FE3A1-6FF7-466D-91FA-4DB67AE5E66A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.SQLite", "codebase\data\sqlite\src\Axle.Data.SQLite.csproj", "{879FE3A1-6FF7-466D-91FA-4DB67AE5E66A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{FBBEBC56-CADC-4DE3-A75B-B373C1A7382F}"
 EndProject

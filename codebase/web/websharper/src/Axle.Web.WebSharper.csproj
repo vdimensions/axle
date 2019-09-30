@@ -20,6 +20,13 @@
     <None Include="restore.sh" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Axle.Web.AspNetCore" Version="$(PackageVersionRange)" />
+
+    <PackageReference Include="WebSharper.UI" Version="4.5.8.161" />
+    <PackageReference Include="WebSharper.AspNetCore" Version="4.5.4.109" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="[2.2, 3.0)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
 </Project>

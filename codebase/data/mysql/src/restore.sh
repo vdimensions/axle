@@ -1,4 +1,3 @@
-paket='../../../.paket/paket.sh'
 project='Axle.Data.MySql'
 project_format='csproj'
 

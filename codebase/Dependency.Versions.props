@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup>
+    <System_Data_Common_Version>4.3</System_Data_Common_Version>
+  </PropertyGroup>
+</Project>

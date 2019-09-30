@@ -1,21 +1,24 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net461</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <ProjectGuid>{D8E36B44-60AF-4F8D-A148-F68F555876F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="build.sh" />
     <None Include="restore.sh" />
-    <None Include="paket.references" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../../../NUnit.Packages.targets" />
 </Project>

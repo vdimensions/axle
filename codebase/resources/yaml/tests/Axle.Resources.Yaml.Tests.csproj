@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net45</TargetFrameworks>
-  </PropertyGroup>
-  <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{C4F31EBB-4880-4E07-AAC0-8EC65C85F56B}</ProjectGuid>
@@ -13,9 +10,11 @@
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="build.sh" />
     <EmbeddedResource Include="Properties\Messages.yml" />
@@ -24,6 +23,11 @@
     <None Include="paket.references" />
     <None Include="restore.sh" />
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Resources.Yaml" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
-  <Import Project=".paket\Paket.Restore.targets" />
+  <Import Project="../../../NUnit.Packages.targets" />
 </Project>

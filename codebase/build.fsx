@@ -36,6 +36,7 @@ let projectLocations = [
     "data/oledb"
     "data/npgsql"
     "data/sqlite"
+    "data/sqlite_ms"
     "data/mysql"
     "logging/log4net"
     "web/main"

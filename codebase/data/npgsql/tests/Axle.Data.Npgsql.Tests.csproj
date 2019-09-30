@@ -11,7 +11,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Axle.Data.Npgsql.csproj" />
+    <PackageReference Include="Axle.Data.Npgsql" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
