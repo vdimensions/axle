@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using Axle.Configuration;
 using Axle.Modularity;
 
 using Microsoft.AspNetCore.Hosting;
@@ -43,15 +43,17 @@ namespace Axle.Web.AspNetCore
     {
         private readonly IWebHostBuilder _host;
         private readonly Application _app;
+        private readonly IConfiguration _appConfig;
         private readonly IList<IWebHostConfigurer> _whConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
         private readonly IList<IApplicationConfigurer> _appConfigurers = new List<IApplicationConfigurer>();
         private readonly AxleHttpContextAccessor _httpContextAccessor = new AxleHttpContextAccessor();
 
-        public AspNetCoreModule(Application app, IWebHostBuilder host)
+        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
         {
             _host = host;
             _app = app;
+            _appConfig = appConfig;
         }
 
         [ModuleInit]
@@ -107,6 +109,11 @@ namespace Axle.Web.AspNetCore
         internal void Run(string[] args)
         {
             var host = _host;
+            //
+            // configure the web host with a re-adapted Axle application configuration
+            //
+            Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new Axle.Configuration.Adapters.AxleConfigurationProvider(_appConfig);
+            host.UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }));
 
             foreach (var cfg in _whConfigurers)
             {

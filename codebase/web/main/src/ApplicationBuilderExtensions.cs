@@ -8,24 +8,20 @@ namespace Axle.Web.AspNetCore
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class ApplicationBuilderExtensions
     {
-        private static IApplicationBuilder RegisterAspNetCoreModule(IApplicationBuilder builder, IWebHostBuilder webHostBuilder)
+        private static IApplicationBuilder RegisterAspNetCoreModule(IApplicationBuilder app, IWebHostBuilder webHostBuilder)
         {
-            return builder
+            return app
                 .ConfigureDependencies(container => container.RegisterInstance(webHostBuilder, string.Empty))
                 .ConfigureModules(m => m.Load<AspNetCoreModule>());
         }
 
-        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder builder, IWebHostBuilder webHostBuilder)
+        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app, IWebHostBuilder webHostBuilder)
         {
-            builder.VerifyArgument(nameof(builder)).IsNotNull();
+            app.VerifyArgument(nameof(app)).IsNotNull();
             webHostBuilder.VerifyArgument(nameof(webHostBuilder)).IsNotNull();
-            return RegisterAspNetCoreModule(builder, webHostBuilder);
+            return RegisterAspNetCoreModule(app, webHostBuilder);
         }
-        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder builder)
-        {
-            builder.VerifyArgument(nameof(builder)).IsNotNull();
-            // TODO: expose command line args from the application
-            return RegisterAspNetCoreModule(builder, WebHost.CreateDefaultBuilder());
-        }
+        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app, string[] args) => UseAspNetCore(app, WebHost.CreateDefaultBuilder(args));
+        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app) => UseAspNetCore(app, WebHost.CreateDefaultBuilder());
     }
 }

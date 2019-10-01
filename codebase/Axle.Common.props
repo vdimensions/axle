@@ -13,7 +13,7 @@
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
-    <VersionMinor>7</VersionMinor>
+    <VersionMinor>6</VersionMinor>
     <PackageVersionRange>[$(VersionMajor).$(VersionMinor),)</PackageVersionRange>
   </PropertyGroup>
 
@@ -62,6 +62,10 @@
   <PropertyGroup>
     <RestoreSources>$(PackageOutputPath)\restore;https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
   </PropertyGroup>
+
+  <Target Name="RegisterLocalNugetPackage" AfterTargets="Pack">
+    <Exec Condition="Exists('$(PackageOutputPath)\$(AssemblyName).$(PackageVersion).nupkg')"  Command="nuget add &quot;$(PackageOutputPath)\$(AssemblyName).$(PackageVersion).nupkg&quot; -Source &quot;$(PackageOutputPath)\restore&quot;"/>
+  </Target>
 
   <!-- Paket paths -->
   <PropertyGroup>

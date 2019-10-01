@@ -6,6 +6,11 @@ namespace Axle.Configuration.Adapters
 {
     using MSConfigurationProvider = Microsoft.Extensions.Configuration.ConfigurationProvider;
 
+    /// <summary>
+    /// An implementation of the <see cref="IConfigurationProvider"/> which exposes an instance of <see cref="IConfigSection"/>
+    /// to be used as configuration source where <see cref="Microsoft.Extensions.Configuration.IConfiguration"/> objects
+    /// are required.
+    /// </summary>
     internal class AxleConfigurationProvider : MSConfigurationProvider
     {
         private static void Parse(string key, IConfigSetting setting, IDictionary<string, string> data)
