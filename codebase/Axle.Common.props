@@ -14,7 +14,6 @@
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
     <VersionMinor>6</VersionMinor>
-    <PackageVersionRange>[$(VersionMajor).$(VersionMinor),)</PackageVersionRange>
   </PropertyGroup>
 
   <!-- Common props -->
@@ -23,6 +22,18 @@
     <DocumentationFile Condition=" '$(DocumentationFile)' == '' ">$(BaseOutputPath)\$(AssemblyName).xml</DocumentationFile>
     <GenerateAssemblyInfo Condition=" '$(GenerateAssemblyInfo)' == '' ">true</GenerateAssemblyInfo>
   </PropertyGroup>
+
+  <!-- Packaging properties -->
+  <PropertyGroup>
+    <RestoreSources>https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
+    <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
+  </PropertyGroup>
+
+  <!-- Configure VDimensions MSBuild Sdk -->
+  <PropertyGroup>
+    <!-- Enable local nuget feed for packages produced by this project -->
+    <EnabeLocalPackageRestore>true</EnabeLocalPackageRestore>
+  </PropertyGroup>
   
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\VDimensions.MSBuild.Sdk.targets" />
 
@@ -30,6 +41,7 @@
   <PropertyGroup>
     <Copyright>Copyright © $(Company) $(CopyrightYearSince)-$(CopyrightYearCurrent)</Copyright>
     <Version>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</Version>
+    <PackageVersionRange>[$(Version),)</PackageVersionRange>
   </PropertyGroup>
 
   <!-- Assembly props -->
@@ -54,18 +66,8 @@
     <PackageIconUri></PackageIconUri>
     <PackageVersion Condition=" '$(PackageVersion)' == '' ">$(Version)</PackageVersion>
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
-    <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
-
-  <!-- Package restore properties -->
-  <PropertyGroup>
-    <RestoreSources>$(PackageOutputPath)\restore;https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
-  </PropertyGroup>
-
-  <Target Name="RegisterLocalNugetPackage" AfterTargets="Pack">
-    <Exec Condition="Exists('$(PackageOutputPath)\$(AssemblyName).$(PackageVersion).nupkg')"  Command="nuget add &quot;$(PackageOutputPath)\$(AssemblyName).$(PackageVersion).nupkg&quot; -Source &quot;$(PackageOutputPath)\restore&quot;"/>
-  </Target>
 
   <!-- Paket paths -->
   <PropertyGroup>
