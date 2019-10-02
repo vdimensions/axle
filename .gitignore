@@ -18,6 +18,7 @@
 **/bin/
 **/obj/
 **/out/
+**/dist/restore/
 **/paket-files/
 **/packages/
 **/target/

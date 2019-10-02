@@ -1,4 +1,7 @@
+using System;
 using System.Data;
+using System.Globalization;
+using Axle.Data.DataSources.Resources;
 using Axle.Resources;
 using Axle.Verification;
 
@@ -20,6 +23,45 @@ namespace Axle.Data.DataSources
         public IDbParameterValueBuilder CreateParameter(string name, ParameterDirection direction) => _serviceProvider.GetDbParameterBuilder().CreateParameter(name, direction);
 
         public IDataSourceConnection OpenConnection() => new DataSourceConnection(_serviceProvider, this, _resourceManager);
+
+        private ICommandBuilder BuildCommand(string commandText, CommandType commandType)
+        {
+            return new DataSourceCommandBuilder(_serviceProvider, this, commandType, commandText);
+        }
+
+        private ICommandBuilder BuildScriptedCommand(string bundle, string scriptPath, CommandType commandType)
+        {
+            var res = _resourceManager.Load(bundle, scriptPath, CultureInfo.InvariantCulture);
+            if (res.HasValue && res.Value is SqlScriptSourceInfo scriptSourceInfo)
+            {
+                var commandText = scriptSourceInfo.Value.ResolveScript(_serviceProvider);
+                return BuildCommand(commandText, commandType);
+            }
+            throw new InvalidOperationException(string.Format("Could not resolve sql script {0}.", scriptPath));
+        }
+
+        //private ICommandBuilder BuildStoredProcedureCall(string bundleName, string commandName)
+        //{
+        //    return BuildCommand(CommandType.StoredProcedure, bundleName, commandName);
+        //}
+        private ICommandBuilder BuildStoredProcedureCall(string commandText) => BuildCommand(commandText, CommandType.StoredProcedure);
+
+        public IDataSourceCommand GetCommand(string commandText, CommandType commandType, BuildCommandCallback buildCommandCallback)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(commandText, nameof(commandText)));
+            var b = buildCommandCallback(BuildCommand(commandText, commandType));
+            return ((ICommandBuilderResult)b).Build();
+        }
+
+        public IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, BuildCommandCallback buildCommandCallback)
+        {
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(bundle, nameof(bundle)));
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(scriptPath, nameof(scriptPath)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
+            var b = buildCommandCallback(BuildScriptedCommand(bundle, scriptPath, commandType));
+            return ((ICommandBuilderResult)b).Build();
+        }
 
         public string Name { get; }
         public string ConnectionString { get; }

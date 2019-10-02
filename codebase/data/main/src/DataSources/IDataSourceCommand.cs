@@ -8,20 +8,20 @@ namespace Axle.Data.DataSources
     public interface IDataSourceCommand : IDataSourceObject
     {
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        void ExecuteReader(CommandBehavior behavior, Action<DbDataReader> readAction, params IDataParameter[] parameters);
+        void ExecuteReader(IDataSourceConnection connection, CommandBehavior behavior, Action<DbDataReader> readAction, params IDataParameter[] parameters);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        int ExecuteNonQuery(params IDataParameter[] parameters);
+        int ExecuteNonQuery(IDataSourceConnection connection, params IDataParameter[] parameters);
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        int ExecuteQuery(DataSet results, params IDataParameter[] parameters);
+        int ExecuteQuery(IDataSourceConnection connection, DataSet results, params IDataParameter[] parameters);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        int ExecuteQuery(DataTable results, params IDataParameter[] parameters);
+        int ExecuteQuery(IDataSourceConnection connection, DataTable results, params IDataParameter[] parameters);
         #endif
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        object ExecuteScalar(params IDataParameter[] parameters);
+        object ExecuteScalar(IDataSourceConnection connection, params IDataParameter[] parameters);
     }
 }

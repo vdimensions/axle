@@ -45,7 +45,7 @@ let projectLocations = [
 
 Target.create "---Prepare---" VDBuild.cleanNupkg
 Target.create "---Complete---" (fun _ -> 
-    Shell.rm_rf (sprintf "%s/../dist/restore" dir)
+    //Shell.rm_rf (sprintf "%s/../dist/restore" dir)
     // TODO: create tag
     ()
 )

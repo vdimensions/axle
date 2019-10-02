@@ -41,7 +41,7 @@
   <PropertyGroup>
     <Copyright>Copyright © $(Company) $(CopyrightYearSince)-$(CopyrightYearCurrent)</Copyright>
     <Version>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</Version>
-    <PackageVersionRange>[$(Version),)</PackageVersionRange>
+    <PackageVersionRange>$(VersionMajor).$(VersionMinor).$(VersionBuild).*</PackageVersionRange>
   </PropertyGroup>
 
   <!-- Assembly props -->

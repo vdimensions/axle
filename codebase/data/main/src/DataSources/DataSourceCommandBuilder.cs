@@ -8,7 +8,7 @@ namespace Axle.Data.DataSources
     internal sealed class DataSourceCommandBuilder : ICommandBuilder, ICommandBuilderResult
     {
         private readonly IDbServiceProvider _provider;
-        private readonly IDataSourceConnection _connection;
+        private readonly IDataSource _dataSource;
         private readonly string _commandText;
         private readonly CommandType _commandType;
         private int? _commandTimeout;
@@ -16,12 +16,12 @@ namespace Axle.Data.DataSources
 
         public DataSourceCommandBuilder(
             IDbServiceProvider provider,
-            IDataSourceConnection connection,
+            IDataSource dataSource,
             CommandType commandType, 
             string commandText)
         {
             _provider = provider;
-            _connection = connection;
+            _dataSource = dataSource;
             _commandType = commandType;
             _commandText = commandText;
             _parameters = new List<IDataParameter>();
@@ -33,14 +33,14 @@ namespace Axle.Data.DataSources
             return this;
         }
 
-        private DbCommand CreateCommandInstance(string text)
+        private DbCommand CreateCommandInstance(string text, IDataSourceConnection connection)
         {
             var command = _provider.CreateCommand(
                 text,
                 _commandType,
                 _commandTimeout,
-                _connection.WrappedInstance,
-                _connection.CurrentTransaction?.WrappedInstance);
+                connection.WrappedInstance,
+                connection.CurrentTransaction?.WrappedInstance);
             foreach (var parameter in _parameters)
             {
                 command.Parameters.Add(parameter);
@@ -50,7 +50,7 @@ namespace Axle.Data.DataSources
 
         DataSourceCommand ICommandBuilderResult.Build()
         {
-            return new DataSourceCommand(_connection.DataSource, _provider, _commandText, CreateCommandInstance);
+            return new DataSourceCommand(_dataSource, _provider, _commandText, CreateCommandInstance);
         }
     }
 }

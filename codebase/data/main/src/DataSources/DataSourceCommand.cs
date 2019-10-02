@@ -9,12 +9,14 @@ using Axle.Verification;
 
 namespace Axle.Data.DataSources
 {
+    internal delegate DbCommand CommandFactory(string commandText, IDataSourceConnection connection);
+
     internal sealed class DataSourceCommand : IDataSourceCommand
     {
         private readonly IDbServiceProvider _provider;
-        private readonly Func<string, DbCommand> _commandFactory;
+        private readonly CommandFactory _commandFactory;
 
-        internal DataSourceCommand(IDataSource dataSource, IDbServiceProvider provider, string commandText, Func<string, DbCommand> commandFactory)
+        internal DataSourceCommand(IDataSource dataSource, IDbServiceProvider provider, string commandText, CommandFactory commandFactory)
         {
             DataSource = dataSource;
             _provider = provider;
@@ -22,9 +24,9 @@ namespace Axle.Data.DataSources
             CommandText = commandText;
         }
 
-        private TResult Execute<TResult>(Func<DbCommand, TResult> operation, out int returnValue, IEnumerable<IDataParameter> parameters)
+        private TResult Execute<TResult>(Func<DbCommand, TResult> operation, IDataSourceConnection connection, out int returnValue, IEnumerable<IDataParameter> parameters)
         {
-            using (var command = _commandFactory(CommandText))
+            using (var command = _commandFactory(CommandText, connection))
             {
                 foreach (var dataParameter in parameters)
                 {
@@ -52,32 +54,39 @@ namespace Axle.Data.DataSources
             }
         }
 
-        public int ExecuteNonQuery(params IDataParameter[] parameters) => Execute(c => c.ExecuteNonQuery(), out _, parameters);
+        public int ExecuteNonQuery(IDataSourceConnection connection, params IDataParameter[] parameters)
+        {
+            connection.VerifyArgument(nameof(connection)).IsNotNull();
+            return Execute(c => c.ExecuteNonQuery(), connection, out _, parameters);
+        }
+
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public int ExecuteQuery(DataSet results, params IDataParameter[] parameters)
+        public int ExecuteQuery(IDataSourceConnection connection, DataSet results, params IDataParameter[] parameters)
         {
             return Execute(
                 command => DbCommandExtensions.FillDataSet(
                     command, 
                     Verifier.IsNotNull(Verifier.VerifyArgument(results, nameof(results))).Value, 
-                    () => _provider.CreateDataAdapter(command)), 
+                    () => _provider.CreateDataAdapter(command)),
+                connection.VerifyArgument(nameof(connection)).IsNotNull().Value,
                 out _,
                 parameters);
         }
-        public int ExecuteQuery(DataTable results, params IDataParameter[] parameters)
+        public int ExecuteQuery(IDataSourceConnection connection, DataTable results, params IDataParameter[] parameters)
         {
             return Execute(
                 command => DbCommandExtensions.FillDataTable(
                     command, 
                     Verifier.IsNotNull(Verifier.VerifyArgument(results, nameof(results))).Value, 
-                    () => _provider.CreateDataAdapter(command)), 
+                    () => _provider.CreateDataAdapter(command)),
+                connection.VerifyArgument(nameof(connection)).IsNotNull().Value,
                 out _,
                 parameters);
         }
         #endif
 
-        public void ExecuteReader(CommandBehavior behavior, Action<DbDataReader> readAction, params IDataParameter[] parameters)
+        public void ExecuteReader(IDataSourceConnection connection, CommandBehavior behavior, Action<DbDataReader> readAction, params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(readAction, nameof(readAction)));
             Execute<object>(
@@ -89,31 +98,38 @@ namespace Axle.Data.DataSources
                     }
                     return null;
                 },
+                connection.VerifyArgument(nameof(connection)).IsNotNull().Value,
                 out _,
                 parameters);
         }
 
-        public object ExecuteScalar(params IDataParameter[] parameters) => Execute(command => command.ExecuteScalar(), out _, parameters);
+        public object ExecuteScalar(IDataSourceConnection connection, params IDataParameter[] parameters)
+        {
+            connection.VerifyArgument(nameof(connection)).IsNotNull();
+            return Execute(command => command.ExecuteScalar(), connection, out _, parameters);
+        }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public int ExecuteStoredProcedure(DataSet results, params IDataParameter[] parameters)
+        public int ExecuteStoredProcedure(IDataSourceConnection connection, DataSet results, params IDataParameter[] parameters)
         {
             Execute<object>(
                 command => DbCommandExtensions.FillDataSet(
                     command, 
                     Verifier.IsNotNull(Verifier.VerifyArgument(results, nameof(results))), 
                     () => _provider.CreateDataAdapter(command)),
+                connection.VerifyArgument(nameof(connection)).IsNotNull().Value,
                 out var returnValue,
                 parameters);
             return returnValue;
         }
-        public int ExecuteStoredProcedure(DataTable results, params IDataParameter[] parameters)
+        public int ExecuteStoredProcedure(IDataSourceConnection connection, DataTable results, params IDataParameter[] parameters)
         {
             Execute<object>(
                 command => DbCommandExtensions.FillDataTable(
                     command, 
                     Verifier.IsNotNull(Verifier.VerifyArgument(results, nameof(results))), 
-                    () => _provider.CreateDataAdapter(command)), 
+                    () => _provider.CreateDataAdapter(command)),
+                connection.VerifyArgument(nameof(connection)).IsNotNull().Value,
                 out var returnValue,
                 parameters);
             return returnValue;

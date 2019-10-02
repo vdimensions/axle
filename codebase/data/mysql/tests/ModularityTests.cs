@@ -97,7 +97,7 @@ namespace Axle.Data.MySql.Tests
             }
         }
 
-        //[Test]
+        [Test]
         public void TestDataSourceCmdDiscovery()
         {
             IContainer container = null;
@@ -109,12 +109,9 @@ namespace Axle.Data.MySql.Tests
                 .ConfigureModules(m => m.Load<X>());
             using (appBuilder.Run())
             {
-                var testDataSource = container.Resolve<IDataSource>("test");
-                using (var connection = testDataSource.OpenConnection())
-                {
-                    var script = connection.GetScript("test", "x");
-                    Assert.IsNotNull(script);
-                }
+                var testDataSource = container.Resolve<IDataSource>("default");
+                var script = testDataSource.GetScript("test", "MySqlTestScript");
+                Assert.IsNotNull(script);
             }
         }
     }
