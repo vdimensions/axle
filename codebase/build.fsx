@@ -43,20 +43,17 @@ let projectLocations = [
     "web/websharper"
 ]
 
-Target.create "Prepare" VDBuild.cleanNupkg
-Target.create "Complete" (fun _ -> 
+Target.create "---Prepare---" VDBuild.cleanNupkg
+Target.create "---Complete---" (fun _ -> 
     Shell.rm_rf (sprintf "%s/../dist/restore" dir)
     // TODO: create tag
     ()
 )
 open Fake.Core.TargetOperators
 
-"Prepare" ==> "Complete"
-
-projectLocations 
-|> List.map (VDBuild.createDynamicTarget "Axle.Common.props")
+("---Prepare---")::(projectLocations |> List.map (VDBuild.createDynamicTarget "Axle.Common.props"))
 |> List.rev
-|> List.fold (fun a b -> b ==> a |> ignore; b) "Complete"
+|> List.fold (fun a b -> b ==> a |> ignore; b) "---Complete---"
 |> ignore
 
-Target.runOrDefaultWithArguments "Complete"
+Target.runOrDefaultWithArguments "---Complete---"
