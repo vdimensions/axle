@@ -24,10 +24,7 @@ namespace Axle.Data.DataSources
 
         public IDataSourceConnection OpenConnection() => new DataSourceConnection(_serviceProvider, this, _resourceManager);
 
-        private ICommandBuilder BuildCommand(string commandText, CommandType commandType)
-        {
-            return new DataSourceCommandBuilder(_serviceProvider, this, commandType, commandText);
-        }
+        private ICommandBuilder BuildCommand(string commandText, CommandType commandType) => new DataSourceCommandBuilder(_serviceProvider, this, commandType, commandText);
 
         private ICommandBuilder BuildScriptedCommand(string bundle, string scriptPath, CommandType commandType)
         {

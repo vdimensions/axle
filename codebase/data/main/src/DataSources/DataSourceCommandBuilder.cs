@@ -12,7 +12,6 @@ namespace Axle.Data.DataSources
         private readonly string _commandText;
         private readonly CommandType _commandType;
         private int? _commandTimeout;
-        private readonly ICollection<IDataParameter> _parameters;
 
         public DataSourceCommandBuilder(
             IDbServiceProvider provider,
@@ -24,7 +23,6 @@ namespace Axle.Data.DataSources
             _dataSource = dataSource;
             _commandType = commandType;
             _commandText = commandText;
-            _parameters = new List<IDataParameter>();
         }
 
         public ICommandBuilder SetTimeout(int timeout)
@@ -41,10 +39,6 @@ namespace Axle.Data.DataSources
                 _commandTimeout,
                 connection.WrappedInstance,
                 connection.CurrentTransaction?.WrappedInstance);
-            foreach (var parameter in _parameters)
-            {
-                command.Parameters.Add(parameter);
-            }
             return command;
         }
 
