@@ -41,13 +41,21 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <summary>
-        /// Parses a string to the specified type.
+        /// Parses a <see cref="string"/> to the specified type <typeparamref name="T"/>.
         /// </summary>
-        /// <param name="value">The string value to be parsed.</param>
-        /// <returns>An instance of <typeparamref name="T" />.</returns>
-        /// <exception cref="InvalidOperationException">Thrown if the string cannot be recognized
-        /// as a valid provider for and instance of <typeparamref name="T"/>.</exception>
+        /// <param name="value">
+        /// The string value to be parsed.
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="T" />.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// Thrown if the string cannot be recognized
+        /// as a valid provider for and instance of <typeparamref name="T"/>.
+        /// </exception>
         public T Parse(string value) => Parse(value, null);
+
+        /// <inheritdoc />
         public T Parse(string value, IFormatProvider formatProvider)
         {
             if (value == null)
@@ -92,6 +100,8 @@ namespace Axle.Conversion.Parsing
         /// true if value was converted successfully; otherwise, false.
         /// </returns>
         public virtual bool TryParse(string value, out T output) => TryParse(value, null, out output);
+
+        /// <inheritdoc />
         public virtual bool TryParse(string value, IFormatProvider formatProvider, out T output)
         {
             if (value == null)
@@ -128,9 +138,15 @@ namespace Axle.Conversion.Parsing
         /// This method is intended to be used after a string validation was performed.
         /// </remarks> 
         /// </summary>
-        /// <param name="value">The string value to be parsed.</param>
-        /// <param name="formatProvider"></param>
-        /// <returns>An instance of <typeparamref name="T" />.</returns>
+        /// <param name="value">
+        /// The string value to be parsed.
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition. 
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="T" />.
+        /// </returns>
         protected abstract T DoParse(string value, IFormatProvider formatProvider);
 
         /// <summary>

@@ -6,6 +6,9 @@ namespace Axle.Extensions.DateTime
 {
     using DateTime = System.DateTime;
 
+    /// <summary>
+    /// A static class containing <see cref="DateTime"/> extensions methods for working with timezones.
+    /// </summary>
     public static class DateTimeTimezoneExtensions
     {
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
@@ -151,8 +154,6 @@ namespace Axle.Extensions.DateTime
                         convertedToSourceTimezone = true;
                         #endif
                     }
-                    break;
-                default:
                     break;
             }
             return new DateTime(

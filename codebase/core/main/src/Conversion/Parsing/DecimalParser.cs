@@ -15,7 +15,16 @@ namespace Axle.Conversion.Parsing
     {
         private readonly NumberStyles _numberStyles;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="DecimalParser"/> class.
+        /// </summary>
         public DecimalParser() : this(NumberStyles.Any&~NumberStyles.AllowThousands) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="DecimalParser"/> class using the provided <paramref name="numberStyles"/>.
+        /// </summary>
+        /// <param name="numberStyles">
+        /// One of the <see cref="NumberStyles"/> enumeration values.
+        /// </param>
         public DecimalParser(NumberStyles numberStyles)
         {
             _numberStyles = numberStyles;
@@ -27,6 +36,27 @@ namespace Axle.Conversion.Parsing
             return Decimal.Parse(value, _numberStyles, formatProvider);
         }
 
+        /// <summary>
+        /// Converts the specified <see cref="string">string</see> representation of a logical <paramref name="value"/>
+        /// to its <see cref="decimal"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="string">string</see> containing the value to convert.
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition.
+        /// </param>
+        /// <param name="output">
+        /// When this method returns, <paramref name="output"/> contains the <see cref="decimal"/> value equivalent to
+        /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
+        /// value for <see cref="decimal"/> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if value was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
         public override bool TryParse(string value, IFormatProvider formatProvider, out Decimal output)
         {
             return Decimal.TryParse(value, _numberStyles, formatProvider, out output);
