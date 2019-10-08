@@ -8,6 +8,9 @@ using System.Text.RegularExpressions;
 
 namespace Axle.Text.Expressions.Regular
 {
+    /// <summary>
+    /// Represents a regular expression. Acts as a wrapper around the <see cref="Regex" /> class.
+    /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
@@ -16,12 +19,33 @@ namespace Axle.Text.Expressions.Regular
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Regex _regex;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="RegularExpression"/> class using the provided <see cref="Regex"/> object.
+        /// </summary>
+        /// <param name="regex">
+        /// Teh underlying <see cref="Regex"/> object.
+        /// </param>
         public RegularExpression(Regex regex)
         {
             _regex = regex;
         }
-        public RegularExpression(string patterm, RegexOptions options) : this(new Regex(patterm, options)) {}
-        public RegularExpression(string patterm) : this(new Regex(patterm)) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="RegularExpression"/> for the specified <paramref name="pattern"/>
+        /// with <paramref name="options"/> that modify the pattern.
+        /// </summary>
+        /// <param name="pattern">
+        /// The regular expression pattern to match.
+        /// </param>
+        /// <param name="options">
+        /// </param>
+        public RegularExpression(string pattern, RegexOptions options) : this(new Regex(pattern, options)) {}
+        /// <summary>
+        /// Creates a new instance of the <see cref="RegularExpression"/> for the specified <paramref name="pattern"/>.
+        /// </summary>
+        /// <param name="pattern">
+        /// The regular expression pattern to match.
+        /// </param>
+        public RegularExpression(string pattern) : this(new Regex(pattern)) { }
 
         /// <inheritdoc />
         public bool IsMatch(string input) => _regex.IsMatch(input);

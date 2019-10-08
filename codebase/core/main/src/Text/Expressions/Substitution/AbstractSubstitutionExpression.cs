@@ -14,6 +14,9 @@ using Axle.Verification;
 
 namespace Axle.Text.Expressions.Substitution
 {
+    /// <summary>
+    /// An abstract class to aid the implementation of the <see cref="ISubstitutionExpression"/> interface.
+    /// </summary>
     public abstract class AbstractSubstitutionExpression : ISubstitutionExpression
     {
         private const string MatchGroupName = "exp";
@@ -55,6 +58,7 @@ namespace Axle.Text.Expressions.Substitution
             _expression = new Regex(regExPattern, Options);
         }
 
+        /// <inheritdoc />
         public string Replace(string input, ISubstitutionProvider sp)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(sp, nameof(sp)));

@@ -4,12 +4,11 @@ using System;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// An abstract class to be used as a base class for any
-    /// custom type parser.
-    /// Supports input validation prior parsing.
+    /// An abstract class to aid the implementation of a custom parser.
+    /// Supports optional input validation prior parsing.
     /// </summary>
     /// <typeparam name="T">
-    /// The type a string is to be parsed to.
+    /// The result type of the parsing.
     /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]

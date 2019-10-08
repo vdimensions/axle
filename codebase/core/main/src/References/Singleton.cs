@@ -62,7 +62,7 @@ namespace Axle.References
             }
         }
 
-        public static implicit operator T(Singleton<T> singleton) { return singleton.Value; }
+        public static implicit operator T(Singleton<T> singleton) => singleton.Value;
     }
 
     public static class Singleton

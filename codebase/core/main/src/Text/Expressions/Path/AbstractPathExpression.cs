@@ -28,7 +28,7 @@ namespace Axle.Text.Expressions.Path
         /// The <see cref="string"/> value to escape.
         /// </param>
         /// <returns>
-        /// A <see cref="string"/> instance prduced from the <paramref name="value"/> parameter by escaping 
+        /// A <see cref="string"/> instance produced from the <paramref name="value"/> parameter by escaping 
         /// all special regex symbols that were present in the original value. The resulting string is therefore
         /// suitable to be used as a pattern when creating a <see cref="Regex"/> object.
         /// </returns>
@@ -36,7 +36,6 @@ namespace Axle.Text.Expressions.Path
         /// <seealso cref="Regex.pattern"/>
         protected static string EscapeRegex(string value)
         {
-            // ReSharper disable LoopCanBeConvertedToQuery
             var result = value;
             for (var i = 0; i < EscapedRegexTerminals.Length; i++)
             {
@@ -44,7 +43,6 @@ namespace Axle.Text.Expressions.Path
                 result = result.Replace(terminal.ToString(), @"\" + terminal);
             }
             return result;
-            // ReSharper restore LoopCanBeConvertedToQuery
         }
 
         private readonly IRegularExpression _target;

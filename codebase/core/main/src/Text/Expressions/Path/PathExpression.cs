@@ -8,6 +8,9 @@ using Axle.Extensions.String;
 
 namespace Axle.Text.Expressions.Path
 {
+    /// <summary>
+    /// A class representing a filesystem globbing expression.
+    /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
@@ -60,11 +63,20 @@ namespace Axle.Text.Expressions.Path
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _pattern;
 
+        /// <summary>
+        /// Creates a new path expression using the specified <paramref name="pattern"/>.
+        /// </summary>
+        /// <param name="pattern">
+        /// The globbing pattern to match.
+        /// </param>
         public PathExpression(string pattern) : base(pattern, CreateRegex)
         {
             _pattern = pattern;
         }
 
+        /// <summary>
+        /// Gets the pattern used by the current <see cref="PathExpression"/>.
+        /// </summary>
         public override string Pattern => _pattern;
     }
 }

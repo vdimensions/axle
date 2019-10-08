@@ -12,7 +12,7 @@ namespace Axle.References
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class AsyncLocalReference<T> : IAsyncLocalReference<T>
+    public sealed class AsyncLocalRef<T> : IAsyncLocalReference<T>
     {
         private struct AsyncLocalRefValue
         {
@@ -30,17 +30,17 @@ namespace Axle.References
         private static class AsyncLocalValueChangedArgsConstructor
         {
             [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-            private static readonly IConstructor _constructor;
+            private static readonly IConstructor Constructor;
 
             static AsyncLocalValueChangedArgsConstructor()
             {
                 var typeofT = typeof(T);
-                _constructor = new DefaultIntrospector<AsyncLocalValueChangedArgs<T>>().GetConstructor(ScanOptions.NonPublic, typeofT, typeofT, typeof(bool));
+                Constructor = new DefaultIntrospector<AsyncLocalValueChangedArgs<T>>().GetConstructor(ScanOptions.NonPublic, typeofT, typeofT, typeof(bool));
             }
 
             public static AsyncLocalValueChangedArgs<T> Invoke(T previousValue, T currentValue, bool contextChanged)
             {
-                return (AsyncLocalValueChangedArgs<T>) _constructor.Invoke(previousValue, currentValue, contextChanged);
+                return (AsyncLocalValueChangedArgs<T>) Constructor.Invoke(previousValue, currentValue, contextChanged);
             }
         }
 
@@ -52,18 +52,18 @@ namespace Axle.References
 
         private readonly AsyncLocal<AsyncLocalRefValue> _t;
 
-        private AsyncLocalReference(AsyncLocal<AsyncLocalRefValue> t) => _t = t;
+        private AsyncLocalRef(AsyncLocal<AsyncLocalRefValue> t) => _t = t;
         /// <summary>
-        /// Creates a <see cref="AsyncLocalReference{T}"/> instance that does not receive change notifications.
+        /// Creates a <see cref="AsyncLocalRef{T}"/> instance that does not receive change notifications.
         /// </summary>
-        public AsyncLocalReference() : this(new AsyncLocal<AsyncLocalRefValue>()) { }
+        public AsyncLocalRef() : this(new AsyncLocal<AsyncLocalRefValue>()) { }
         /// <summary>
-        /// Creates a <see cref="AsyncLocalReference{T}"/> instance that receives change notifications.
+        /// Creates a <see cref="AsyncLocalRef{T}"/> instance that receives change notifications.
         /// </summary>
         /// <param name="valueChangedHandler">
         /// The delegate that is called whenever the current value changes on any thread.
         /// </param>
-        public AsyncLocalReference(Action<AsyncLocalValueChangedArgs<T>> valueChangedHandler)
+        public AsyncLocalRef(Action<AsyncLocalValueChangedArgs<T>> valueChangedHandler)
             : this(valueChangedHandler == null ? throw new ArgumentNullException(nameof(valueChangedHandler)) : new AsyncLocal<AsyncLocalRefValue>(x => MapValueChangedHandler(x, valueChangedHandler))) { }
 
         /// <summary>

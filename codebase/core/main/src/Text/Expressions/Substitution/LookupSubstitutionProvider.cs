@@ -14,6 +14,7 @@ namespace Axle.Text.Expressions.Substitution
             _lookup = Verifier.IsNotNull(Verifier.VerifyArgument(lookup, nameof(lookup))).Value;
         }
 
+        /// <inheritdoc />
         public bool TrySubstitute(string token, out string value)
         {
             if (_lookup.Contains(token))

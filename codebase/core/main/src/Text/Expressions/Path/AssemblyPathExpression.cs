@@ -19,7 +19,7 @@ namespace Axle.Text.Expressions.Path
     #endif
     public sealed class AssemblyPathExpression : AbstractPathExpression
     {
-        private static readonly IDictionary<string, string> _Replacements = new Dictionary<string, string>(3)
+        private static readonly IDictionary<string, string> Replacements = new Dictionary<string, string>(3, StringComparer.Ordinal)
         {
             {@"\", @"."},
             {@"/", @"."},
@@ -36,7 +36,7 @@ namespace Axle.Text.Expressions.Path
                 throw new ArgumentNullException(nameof(pattern));
             }
 
-            var res = Enumerable.Aggregate(_Replacements, EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
+            var res = Enumerable.Aggregate(Replacements, EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
             //options |= RegexOptions.IgnoreCase;
             res = res.Replace("**", AntDoubleAsteriskRegex).Replace("*", AntSingleAsteriskWinRegex);
             return new Regex(res, options);
@@ -45,15 +45,37 @@ namespace Axle.Text.Expressions.Path
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _pattern;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="AssemblyPathExpression"/> class using the provided <paramref name="pattern"/>.
+        /// </summary>
+        /// <param name="pattern">
+        /// The pattern that to match.
+        /// </param>
         public AssemblyPathExpression(string pattern) : base(pattern, CreateRegex)
         {
-            var ptrn = Enumerable.Aggregate(_Replacements, pattern, (p, c) => p.Replace(c.Key, c.Value));
-            _pattern = ptrn;
+            var processedPattern = Enumerable.Aggregate(Replacements, pattern, (p, c) => p.Replace(c.Key, c.Value));
+            _pattern = processedPattern;
         }
-
+        /// <summary>
+        /// Indicates whether the provided <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>
+        /// <c>true</c> if the provided <see cref="Assembly"/> <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern;
+        /// <c>false</c> otherwise.
+        /// </returns>
         public bool IsMatch(Assembly value) => IsMatch(Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))).Value.GetName().Name);
+        /// <summary>
+        /// Indicates whether the provided <see cref="AssemblyName"/> <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern.
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns>
+        /// <c>true</c> if the provided <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern;
+        /// <c>false</c> otherwise.
+        /// </returns>
         public bool IsMatch(AssemblyName value) => IsMatch(Verifier.VerifyArgument(value, nameof(value)).Value.Name);
 
+        /// <inheritdoc />
         public override string Pattern => _pattern;
     }
 }
