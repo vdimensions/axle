@@ -4,7 +4,6 @@ using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Axle.Reflection;
 
-
 namespace Axle.References
 {
     /// <summary>

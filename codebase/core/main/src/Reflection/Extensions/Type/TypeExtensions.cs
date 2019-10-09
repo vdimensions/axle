@@ -17,7 +17,6 @@ namespace Axle.Reflection.Extensions.Type
     public static class TypeExtensions
     {
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
-
         /// <summary>
         /// Gets the underlying <see cref="TypeCode">type code</see> of the specified <see cref="Type"/>.
         /// </summary>

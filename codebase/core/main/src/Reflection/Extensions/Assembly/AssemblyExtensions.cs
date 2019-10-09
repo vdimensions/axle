@@ -1,15 +1,18 @@
 ﻿#if NETSTANDARD || NET35_OR_NEWER
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-
 using Axle.Environment;
-
 
 namespace Axle.Reflection.Extensions.Assembly
 {
     using Assembly = System.Reflection.Assembly;
 
+    /// <summary>
+    /// A class containing extension methods tied to the <see cref="Assembly"/> type.
+    /// </summary>
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class AssemblyExtensions
     {
         /// <summary>

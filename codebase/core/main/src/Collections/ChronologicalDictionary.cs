@@ -139,6 +139,7 @@ namespace Axle.Collections
         /// <summary>
         /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class.
         /// </summary>
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public ChronologicalDictionary() : base(new TimestampDictionary()) { }
         /// <summary>
         /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class using the provided
@@ -158,6 +159,7 @@ namespace Axle.Collections
         /// <param name="comparer">
         /// An instance of <see cref="IEqualityComparer{TKey}"/> to be used for key comparison.
         /// </param>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public ChronologicalDictionary(int capacity, IEqualityComparer<TKey> comparer) : base(new TimestampDictionary(capacity, comparer)) { }
         /// <summary>
         /// Creates a new instance of the <see cref="ChronologicalDictionary{TKey,TValue}"/> class
@@ -166,6 +168,7 @@ namespace Axle.Collections
         /// <param name="capacity">
         /// The initial capacity of the underlying collection.
         /// </param>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public ChronologicalDictionary(int capacity) : base(new TimestampDictionary(capacity)) { }
 
         /// <summary>

@@ -3,12 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Diagnostics;
 using System.Reflection;
-
-using Axle.References;
 using Axle.Reflection.Extensions;
 using Axle.Threading;
 using Axle.Threading.ReaderWriterLock;
-
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using Axle.References;
+#endif
 
 namespace Axle.Reflection
 {
@@ -21,7 +21,7 @@ namespace Axle.Reflection
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        protected internal static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
+        protected static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
         {
             if (isPublic)
             {
@@ -69,7 +69,7 @@ namespace Axle.Reflection
         #if NET20
         protected internal readonly ILock Lock = new MonitorLock();
         #else
-        protected internal readonly IReadWriteLock Lock = new ReadWriteLock();
+        protected readonly IReadWriteLock Lock = new ReadWriteLock();
         #endif
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
