@@ -234,7 +234,7 @@ namespace Axle.Modularity
             var rankedModules = RankModules(moduleInfos, existingModuleTypes, _args).ToArray();
             var rootExporter = new ContainerExporter(_rootContainer);
 
-            var substExpr = new DefaultSubstitutionExpression();
+            var substExpr = new StandardSubstitutionExpression();
             var baseConfig = new LayeredConfigManager()
                 .Prepend(_appConfigurationSource)
                 .Append(EnvironmentConfigSource.Instance);

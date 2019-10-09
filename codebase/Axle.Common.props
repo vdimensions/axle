@@ -46,7 +46,7 @@
   <!-- Versioning properties (after sdk) -->
   <PropertyGroup>
     <Copyright>Copyright © $(Company) $(CopyrightYearSince)-$(CopyrightYearCurrent)</Copyright>
-    <Version>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</Version>
+    <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionPrefix>
     <PackageVersionRange>$(VersionMajor).$(VersionMinor).*</PackageVersionRange>
   </PropertyGroup>
 

@@ -12,12 +12,11 @@ namespace Axle.Web.WebSharper
     [UtilizesAspNetSession]
     internal sealed class WebSharperModule : IServiceConfigurer
     {
-        public IServiceCollection Configure(IServiceCollection builder)
+        public void Configure(IServiceCollection services)
         {
-            builder
+            services
                 .AddAuthentication("WebSharper")
                 .AddCookie("WebSharper", options => { });
-            return builder;
         }
     }
 }

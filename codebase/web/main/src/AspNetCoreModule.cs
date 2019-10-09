@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Axle.Configuration;
 using Axle.Modularity;
 
@@ -10,34 +10,6 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Axle.Web.AspNetCore
 {
-    [RequiresAspNetCore]
-    public interface IWebHostConfigurer
-    {
-        IWebHostBuilder Configure(IWebHostBuilder builder);
-    }
-    [RequiresAspNetCore]
-    public interface IServiceConfigurer
-    {
-        IServiceCollection Configure(IServiceCollection builder);
-    }
-    [RequiresAspNetCore]
-    public interface IApplicationConfigurer
-    {
-        Microsoft.AspNetCore.Builder.IApplicationBuilder Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder builder);
-    }
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public sealed class RequiresAspNetCoreAttribute : RequiresAttribute
-    {
-        public RequiresAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
-    }
-
-    [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
-    public sealed class UtilizesAspNetCoreAttribute : UtilizesAttribute
-    {
-        public UtilizesAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
-    }
-
     [Module]
     internal sealed class AspNetCoreModule
     {
@@ -57,24 +29,28 @@ namespace Axle.Web.AspNetCore
         }
 
         [ModuleInit]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Init(ModuleExporter exporter)
         {
             exporter.Export<IHttpContextAccessor>(_httpContextAccessor);
         }
 
         [ModuleDependencyInitialized]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnWebHostConfigurerInitialized(IWebHostConfigurer cfg)
         {
             _whConfigurers.Add(cfg);
         }
 
         [ModuleDependencyInitialized]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnServiceConfigurerInitialized(IServiceConfigurer cfg)
         {
             _serviceConfigurers.Add(cfg);
         }
 
         [ModuleDependencyInitialized]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnApplicationConfigurerInitialized(IApplicationConfigurer cfg)
         {
             _appConfigurers.Add(cfg);
@@ -82,10 +58,12 @@ namespace Axle.Web.AspNetCore
 
         private void ConfigureServices(IServiceCollection services)
         {
-            foreach (var cfg in _serviceConfigurers)
+            for (var i = 0; i < _serviceConfigurers.Count; i++)
             {
+                var cfg = _serviceConfigurers[i];
                 cfg.Configure(services);
             }
+
             services.AddHttpContextAccessor();
         }
 
@@ -99,13 +77,24 @@ namespace Axle.Web.AspNetCore
             var accessor = services.GetRequiredService<IHttpContextAccessor>();
             _httpContextAccessor.Accessor = accessor;
 
-            foreach (var cfg in _appConfigurers)
+            var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+            for (var i = 0; i < _appConfigurers.Count; i++)
             {
-                cfg.Configure(app);
+                var cfg = _appConfigurers[i];
+                cfg.Configure(app, hostingEnvironment);
+            }
+        }
+        private void ConfigureHost(IWebHostBuilder host)
+        {
+            for (var i = 0; i < _whConfigurers.Count; i++)
+            {
+                var cfg = _whConfigurers[i];
+                cfg.Configure(host);
             }
         }
 
         [ModuleEntryPoint]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Run(string[] args)
         {
             var host = _host;
@@ -115,10 +104,7 @@ namespace Axle.Web.AspNetCore
             Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new Axle.Configuration.Adapters.AxleConfigurationProvider(_appConfig);
             host.UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }));
 
-            foreach (var cfg in _whConfigurers)
-            {
-                cfg.Configure(host);
-            }
+            ConfigureHost(host);
 
             host
                 .ConfigureServices(ConfigureServices)

@@ -15,13 +15,16 @@ namespace Axle.Web.AspNetCore
                 .ConfigureModules(m => m.Load<AspNetCoreModule>());
         }
 
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app, IWebHostBuilder webHostBuilder)
         {
             app.VerifyArgument(nameof(app)).IsNotNull();
             webHostBuilder.VerifyArgument(nameof(webHostBuilder)).IsNotNull();
             return RegisterAspNetCoreModule(app, webHostBuilder);
         }
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app, string[] args) => UseAspNetCore(app, WebHost.CreateDefaultBuilder(args));
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app) => UseAspNetCore(app, WebHost.CreateDefaultBuilder());
     }
 }

@@ -4,6 +4,7 @@ using Axle.Logging;
 using Axle.Modularity;
 
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,14 +29,14 @@ namespace Axle.Web.AspNetCore.Session
             _lt.Subscribe(this);
         }
 
-        IServiceCollection IServiceConfigurer.Configure(IServiceCollection services)
+        void IServiceConfigurer.Configure(IServiceCollection services)
         {
-            return services.AddDistributedMemoryCache().AddSession();
+            services.AddDistributedMemoryCache().AddSession();
         }
 
-        Microsoft.AspNetCore.Builder.IApplicationBuilder IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
+        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
         {
-            return app.UseSession().Use(_lt.Middleware);
+            app.UseSession().Use(_lt.Middleware);
         }
 
         void ISessionEventListener.OnSessionStart(ISession session)

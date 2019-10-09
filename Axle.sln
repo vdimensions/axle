@@ -64,6 +64,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Application.Tests", "codebase\application\main\tests\Axle.Application.Tests.csproj", "{8EDF4429-251A-416D-BB68-93F227191BCF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "configuration", "configuration", "{ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}"
+ProjectSection(SolutionItems) = preProject
+	codebase\configuration\main\Axle.Configuration.Dependencies.targets = codebase\configuration\main\Axle.Configuration.Dependencies.targets
+EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.MySql", "codebase\data\mysql\src\Axle.Data.MySql.csproj", "{25EADD2A-1F07-45AC-A4FB-8E6A3AF23BAC}"
 EndProject
@@ -203,6 +206,10 @@ Global
 		{06D29389-3DB1-4841-A74C-6905C870970B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06D29389-3DB1-4841-A74C-6905C870970B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06D29389-3DB1-4841-A74C-6905C870970B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0DA48E1A-CA70-4B9F-A870-50DBC7C05448}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0DA48E1A-CA70-4B9F-A870-50DBC7C05448}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0DA48E1A-CA70-4B9F-A870-50DBC7C05448}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0DA48E1A-CA70-4B9F-A870-50DBC7C05448}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
