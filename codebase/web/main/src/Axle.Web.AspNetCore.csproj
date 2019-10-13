@@ -20,8 +20,6 @@
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="[2.2, 3)" />
     <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv" Version="[2.2, 3)" />
     <PackageReference Include="Microsoft.AspNetCore.Session" Version="[2.2, 3)" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices" Version="[2.2.7, 3)" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="[2.2, 3)" />
     <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="[2.2, 3)" />
   </ItemGroup>
 

@@ -30,6 +30,7 @@ namespace Axle.References
         {
             [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
             private static readonly IConstructor Constructor;
+            private static readonly object False = false, True = true;
 
             static AsyncLocalValueChangedArgsConstructor()
             {
@@ -39,7 +40,7 @@ namespace Axle.References
 
             public static AsyncLocalValueChangedArgs<T> Invoke(T previousValue, T currentValue, bool contextChanged)
             {
-                return (AsyncLocalValueChangedArgs<T>) Constructor.Invoke(previousValue, currentValue, contextChanged);
+                return (AsyncLocalValueChangedArgs<T>) Constructor.Invoke(previousValue, currentValue, contextChanged ? True : False);
             }
         }
 

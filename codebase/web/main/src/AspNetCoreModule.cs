@@ -1,10 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Configuration;
 using Axle.Modularity;
 
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 
@@ -19,7 +19,6 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IWebHostConfigurer> _whConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
         private readonly IList<IApplicationConfigurer> _appConfigurers = new List<IApplicationConfigurer>();
-        private readonly AxleHttpContextAccessor _httpContextAccessor = new AxleHttpContextAccessor();
 
         public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
         {
@@ -32,7 +31,6 @@ namespace Axle.Web.AspNetCore
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Init(ModuleExporter exporter)
         {
-            exporter.Export<IHttpContextAccessor>(_httpContextAccessor);
         }
 
         [ModuleDependencyInitialized]
@@ -56,6 +54,20 @@ namespace Axle.Web.AspNetCore
             _appConfigurers.Add(cfg);
         }
 
+        private class AxleStartupFilter : IStartupFilter
+        {
+            Action<Microsoft.AspNetCore.Builder.IApplicationBuilder> IStartupFilter.Configure(Action<Microsoft.AspNetCore.Builder.IApplicationBuilder> next)
+            {
+                return builder =>
+                {
+                    Delegate?.Invoke(builder);
+                    next(builder);
+                };
+            }
+            
+            public Action<Microsoft.AspNetCore.Builder.IApplicationBuilder> Delegate;
+        }
+        
         private void ConfigureServices(IServiceCollection services)
         {
             for (var i = 0; i < _serviceConfigurers.Count; i++)
@@ -63,21 +75,16 @@ namespace Axle.Web.AspNetCore
                 var cfg = _serviceConfigurers[i];
                 cfg.Configure(services);
             }
-
-            services.AddHttpContextAccessor();
+            services.AddSingleton<IStartupFilter>(provider => new AxleStartupFilter {Delegate = ConfigureApp});
         }
 
-        private void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
+        void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
             var services = app.ApplicationServices;
             services
-               .GetRequiredService<IApplicationLifetime>()
-               .ApplicationStopped.Register(_app.ShutDown);
-
-            var accessor = services.GetRequiredService<IHttpContextAccessor>();
-            _httpContextAccessor.Accessor = accessor;
-
-            var hostingEnvironment = app.ApplicationServices.GetService<IHostingEnvironment>();
+                .GetRequiredService<IApplicationLifetime>()
+                .ApplicationStopped.Register(_app.ShutDown);
+            var hostingEnvironment = services.GetService<IHostingEnvironment>();
             for (var i = 0; i < _appConfigurers.Count; i++)
             {
                 var cfg = _appConfigurers[i];
@@ -92,7 +99,7 @@ namespace Axle.Web.AspNetCore
                 cfg.Configure(host);
             }
         }
-
+        
         [ModuleEntryPoint]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Run(string[] args)
@@ -105,10 +112,15 @@ namespace Axle.Web.AspNetCore
             host.UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }));
 
             ConfigureHost(host);
-
+            var applicationKey = host.GetSetting(WebHostDefaults.ApplicationKey);
+            var startupAssemblyKey = host.GetSetting(WebHostDefaults.StartupAssemblyKey);
             host
                 .ConfigureServices(ConfigureServices)
-                .Configure(ConfigureApp)
+                //.Configure(ConfigureApp)
+                .Configure(_ => { })
+                // we need to restore the ApplicationKey/StartupAssemblyKey as they are being reset by the `Configure` method.
+                .UseSetting(WebHostDefaults.ApplicationKey, applicationKey)
+                .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey)
                 .Build()
                 .Run();
         }

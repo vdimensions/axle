@@ -31,6 +31,11 @@
         /// <summary>
         /// An access modifier for reflected members with <see langword="protected internal"/> access.
         /// </summary>
-        ProtectedInternal
+        ProtectedInternal,
+
+        /// <summary>
+        /// An access modifier for reflected members with <see langword="private protected"/> access.
+        /// </summary>
+        PrivateProtected
     }
 }
