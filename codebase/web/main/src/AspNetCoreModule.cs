@@ -1,9 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
+using System.Reflection;
 using Axle.Configuration;
 using Axle.Modularity;
-
+using Axle.Web.AspNetCore.Lifecycle;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -16,9 +17,12 @@ namespace Axle.Web.AspNetCore
         private readonly IWebHostBuilder _host;
         private readonly Application _app;
         private readonly IConfiguration _appConfig;
-        private readonly IList<IWebHostConfigurer> _whConfigurers = new List<IWebHostConfigurer>();
+        private readonly IList<IWebHostConfigurer> _hostConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
         private readonly IList<IApplicationConfigurer> _appConfigurers = new List<IApplicationConfigurer>();
+        private readonly IList<IAspNetCoreApplicationStartHandler> _appStartHandlers = new List<IAspNetCoreApplicationStartHandler>();
+        private readonly IList<IAspNetCoreApplicationStoppedHandler> _appStoppedHandlers = new List<IAspNetCoreApplicationStoppedHandler>();
+        private readonly IList<IAspNetCoreApplicationStoppingHandler> _appStoppingHandlers = new List<IAspNetCoreApplicationStoppingHandler>();
 
         public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
         {
@@ -27,45 +31,56 @@ namespace Axle.Web.AspNetCore
             _appConfig = appConfig;
         }
 
-        [ModuleInit]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleInit]
         internal void Init(ModuleExporter exporter)
         {
         }
 
-        [ModuleDependencyInitialized]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        internal void OnWebHostConfigurerInitialized(IWebHostConfigurer cfg)
-        {
-            _whConfigurers.Add(cfg);
-        }
-
         [ModuleDependencyInitialized]
-        [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        internal void OnServiceConfigurerInitialized(IServiceConfigurer cfg)
-        {
-            _serviceConfigurers.Add(cfg);
-        }
+        internal void OnDependencyInitialized(IWebHostConfigurer cfg) => _hostConfigurers.Add(cfg);
 
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
-        [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        internal void OnApplicationConfigurerInitialized(IApplicationConfigurer cfg)
-        {
-            _appConfigurers.Add(cfg);
-        }
+        internal void OnDependencyInitialized(IServiceConfigurer cfg) => _serviceConfigurers.Add(cfg);
 
-        private class AxleStartupFilter : IStartupFilter
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyInitialized]
+        internal void OnDependencyInitialized(IApplicationConfigurer cfg) => _appConfigurers.Add(cfg);
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyInitialized]
+        internal void OnDependencyInitialized(IAspNetCoreApplicationStartHandler handler) => _appStartHandlers.Add(handler);
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyInitialized]
+        internal void OnDependencyInitialized(IAspNetCoreApplicationStoppingHandler handler) => _appStoppingHandlers.Add(handler);
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyInitialized]
+        internal void OnDependencyInitialized(IAspNetCoreApplicationStoppedHandler handler) => _appStoppedHandlers.Add(handler);
+        
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyTerminated]
+        internal void OnDependencyTerminated(IAspNetCoreApplicationStartHandler handler) => _appStartHandlers.Remove(handler);
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyTerminated]
+        internal void OnDependencyTerminated(IAspNetCoreApplicationStoppingHandler handler) => _appStoppingHandlers.Remove(handler);
+
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyTerminated]
+        internal void OnDependencyTerminated(IAspNetCoreApplicationStoppedHandler handler) => _appStoppedHandlers.Remove(handler);
+
+        private IWebHostBuilder ConfigureHost(IWebHostBuilder host)
         {
-            Action<Microsoft.AspNetCore.Builder.IApplicationBuilder> IStartupFilter.Configure(Action<Microsoft.AspNetCore.Builder.IApplicationBuilder> next)
+            for (var i = 0; i < _hostConfigurers.Count; i++)
             {
-                return builder =>
-                {
-                    Delegate?.Invoke(builder);
-                    next(builder);
-                };
+                var cfg = _hostConfigurers[i];
+                cfg.Configure(host);
             }
-            
-            public Action<Microsoft.AspNetCore.Builder.IApplicationBuilder> Delegate;
+            return host;
         }
         
         private void ConfigureServices(IServiceCollection services)
@@ -75,15 +90,16 @@ namespace Axle.Web.AspNetCore
                 var cfg = _serviceConfigurers[i];
                 cfg.Configure(services);
             }
-            services.AddSingleton<IStartupFilter>(provider => new AxleStartupFilter {Delegate = ConfigureApp});
         }
 
         void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
             var services = app.ApplicationServices;
-            services
-                .GetRequiredService<IApplicationLifetime>()
-                .ApplicationStopped.Register(_app.ShutDown);
+            var lifeTime = services.GetRequiredService<IApplicationLifetime>();
+            lifeTime.ApplicationStarted.Register(OnApplicationStarted);
+            lifeTime.ApplicationStopping.Register(OnApplicationStopping);
+            lifeTime.ApplicationStopped.Register(OnApplicationStopped);
+            
             var hostingEnvironment = services.GetService<IHostingEnvironment>();
             for (var i = 0; i < _appConfigurers.Count; i++)
             {
@@ -91,38 +107,70 @@ namespace Axle.Web.AspNetCore
                 cfg.Configure(app, hostingEnvironment);
             }
         }
-        private void ConfigureHost(IWebHostBuilder host)
+
+        private void OnApplicationStarted()
         {
-            for (var i = 0; i < _whConfigurers.Count; i++)
+            var handlers = _appStartHandlers.ToArray();
+            for (var i = 0; i < handlers.Length; ++i)
             {
-                var cfg = _whConfigurers[i];
-                cfg.Configure(host);
+                handlers[i].OnApplicationStart();
             }
         }
-        
+        private void OnApplicationStopping()
+        {
+            var handlers = _appStoppingHandlers.ToArray();
+            for (var i = handlers.Length - 1; i >= 0; --i)
+            {
+                handlers[i].OnApplicationStopping();
+            }
+        }
+        private void OnApplicationStopped()
+        {
+            try
+            {
+                var handlers = _appStoppedHandlers.ToArray();
+                for (var i = handlers.Length - 1; i >= 0; --i)
+                {
+                    handlers[i].OnApplicationStopped();
+                }
+            }
+            finally
+            {
+                _app.ShutDown();
+            }
+        }
+
         [ModuleEntryPoint]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Run(string[] args)
         {
-            var host = _host;
-            //
-            // configure the web host with a re-adapted Axle application configuration
-            //
             Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new Axle.Configuration.Adapters.AxleConfigurationProvider(_appConfig);
-            host.UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }));
-
-            ConfigureHost(host);
-            var applicationKey = host.GetSetting(WebHostDefaults.ApplicationKey);
-            var startupAssemblyKey = host.GetSetting(WebHostDefaults.StartupAssemblyKey);
-            host
+            string startupAssemblyKey = null, applicationKey = null, entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            var host = _host
+                // configure the web host with a re-adapted Axle application configuration
+                .UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }))
+                // ensure ApplicationKey setting is passed, and fallback to the executing assembly name
+                .UseSetting(WebHostDefaults.ApplicationKey, applicationKey = (_host.GetSetting(WebHostDefaults.ApplicationKey) ?? entryAssemblyName))
+                // ensure StartupAssemblyKey setting is passed, and fallback to the executing assembly name
+                .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey = (_host.GetSetting(WebHostDefaults.StartupAssemblyKey) ?? entryAssemblyName));
+            
+            ConfigureHost(host)
                 .ConfigureServices(ConfigureServices)
-                //.Configure(ConfigureApp)
-                .Configure(_ => { })
+                .Configure(ConfigureApp)
                 // we need to restore the ApplicationKey/StartupAssemblyKey as they are being reset by the `Configure` method.
+                // otherwise ASPNETCORE will not be able to auto-discover controllers
                 .UseSetting(WebHostDefaults.ApplicationKey, applicationKey)
                 .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey)
                 .Build()
                 .Run();
+        }
+        
+        [ModuleTerminate]
+        internal void Terminate()
+        {
+            _appStartHandlers.Clear();
+            _appStoppingHandlers.Clear();
+            _appStoppedHandlers.Clear();
         }
     }
 }
