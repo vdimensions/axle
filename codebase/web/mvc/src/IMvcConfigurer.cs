@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Routing;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Axle.Web.AspNetCore.Mvc
 {
@@ -7,10 +6,5 @@ namespace Axle.Web.AspNetCore.Mvc
     public interface IMvcConfigurer
     {
         void ConfigureMvc(IMvcBuilder builder);
-    }
-    [RequiresAspNetMvc]
-    public interface IMvcRouteConfigurer
-    {
-        void ConfigureRoutes(IRouteBuilder routeBuilder);
     }
 }

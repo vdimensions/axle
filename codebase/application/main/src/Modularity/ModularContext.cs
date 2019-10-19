@@ -18,57 +18,84 @@ namespace Axle.Modularity
         private static IList<ModuleInfo> ExpandRequiredModules(IEnumerable<ModuleInfo> m)
         {
             var modulesToLaunch = m.ToList();
+            var moduleInfoEqualityComparer = new AdaptiveEqualityComparer<ModuleInfo, Type>(x => x.Type);
+            var requiredModules = modulesToLaunch.ToDictionary(mi => mi, _ => new HashSet<ModuleInfo>(moduleInfoEqualityComparer), moduleInfoEqualityComparer);
             for (var i = 0; i < modulesToLaunch.Count; i++)
             {
                 var moduleInfo = modulesToLaunch[i];
-                var reasonsToUpdateRequiredModules = 0;
-                var expandedRequiredModules = new HashSet<ModuleInfo>(
-                    moduleInfo.RequiredModules,
-                    new AdaptiveEqualityComparer<ModuleInfo, Type>(x => x.Type));
+                var expandedRequiredModules = requiredModules[moduleInfo];
                 //
                 // Expand the 'required modules' with the 'utilized modules'
                 //
                 foreach (var ua in moduleInfo.UtilizedModules)
                 {
-                    var newModules = modulesToLaunch.Where(mi => ua.Accepts(mi.Type));
+                    var newModules = modulesToLaunch.Where(mi => ua.ModuleType == mi.Type);
                     foreach (var newRequiredModule in newModules)
                     {
-                        expandedRequiredModules.Remove(newRequiredModule);
                         expandedRequiredModules.Add(newRequiredModule);
-                        reasonsToUpdateRequiredModules++;
                     }
                 }
 
                 //
                 // Expand the 'required modules' with the 'utilized-by modules'
                 //
-                if (modulesToLaunch.SelectMany(x => x.UtilizedByModules).Any(uby => uby.Accepts(moduleInfo.Type)))
+                var baseType = 
+                    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                    moduleInfo.Type.BaseType
+                    #else
+                    System.Reflection.IntrospectionExtensions.GetTypeInfo(moduleInfo.Type).BaseType
+                    #endif
+                    ;
+                var genType = baseType == null ? null :
+                    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                    baseType
+                    #else
+                    System.Reflection.IntrospectionExtensions.GetTypeInfo(baseType)
+                    #endif
+                        .IsGenericType ? baseType.GetGenericTypeDefinition() : null;
+                ModuleInfo genericModule = null;
+                if (genType != null && genType == typeof(CollectorModule<>))
                 {
-                    expandedRequiredModules.Remove(moduleInfo);
-                    expandedRequiredModules.Add(moduleInfo);
-                    reasonsToUpdateRequiredModules++;
+                    var genericArg = 
+                        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                        baseType
+                        #else
+                        System.Reflection.IntrospectionExtensions.GetTypeInfo(genType)
+                        #endif
+                        .GetGenericArguments()[0];
+                    genericModule = modulesToLaunch.SingleOrDefault(x => x.Type == genericArg);
+                    if (genericModule != null)
+                    {
+                        expandedRequiredModules.Add(genericModule);
+                    }
                 }
+                foreach (var utilizedBy in modulesToLaunch
+                    .SelectMany(x => x.UtilizedByModules.Select(u => new { UtilizedBy = u, Module = x }))
+                    .Where(x => x.UtilizedBy.Accepts(moduleInfo.Type))
+                    .Select(x => x.Module))
+                {
+                    if (genericModule != null)
+                    {
+                        requiredModules[utilizedBy].Add(genericModule);
+                    }
+                    expandedRequiredModules.Add(utilizedBy);
+                }
+            }
 
-                if (reasonsToUpdateRequiredModules > 0)
+            foreach (var x in modulesToLaunch)
+            {
+                var newRequiredModules = requiredModules[x];
+                if (newRequiredModules.Count <= 0)
                 {
-                    //
-                    // In case some of the 'auxiliary modules' have been detected,
-                    // we will promote them to 'required modules' in order to have
-                    // them properly participate in dependency init callbacks.
-                    //
-                    var newModuleInfo = new ModuleInfo(
-                        moduleInfo.Type,
-                        moduleInfo.InitMethod,
-                        moduleInfo.DependencyInitializedMethods,
-                        moduleInfo.DependencyTerminatedMethods,
-                        moduleInfo.TerminateMethod,
-                        moduleInfo.EntryPointMethod,
-                        moduleInfo.UtilizedModules,
-                        moduleInfo.UtilizedByModules,
-                        moduleInfo.CommandLineTrigger,
-                        expandedRequiredModules.ToArray());
-                    modulesToLaunch[i] = newModuleInfo;
+                    continue;
                 }
+                var newModules = new HashSet<ModuleInfo>(x.RequiredModules, moduleInfoEqualityComparer);
+                foreach (var newRequiredModule in newRequiredModules)
+                {
+                    newModules.Remove(newRequiredModule);
+                    newModules.Add(newRequiredModule);
+                }
+                x.RequiredModules = newModules.ToArray();
             }
             return modulesToLaunch;
         }

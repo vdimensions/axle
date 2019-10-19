@@ -10,7 +10,7 @@ using Axle.Verification;
 namespace Axle.Modularity
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
-    public class UtilizesAttribute : Attribute
+    public class UtilizesAttribute : Attribute, IUsesAttribute
     {
         #if NETSTANDARD || NET45_OR_NEWER
         internal static string TypeToString(Type type) => $"{type.FullName}, {type.GetTypeInfo().Assembly.GetName().Name}";
@@ -23,14 +23,17 @@ namespace Axle.Modularity
         {
             Module = module.VerifyArgument(nameof(module)).IsNotNullOrEmpty();
         }
+
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public UtilizesAttribute(Type moduleType)
         {
             Module = TypeToString(moduleType.VerifyArgument(nameof(moduleType)).IsNotNull());
         }
 
-        internal bool Accepts(Type type) => TypeToString(type.VerifyArgument(nameof(type))).Equals(Module, StringComparison.Ordinal);
-
         public string Module { get; }
+
+        Type IUsesAttribute.ModuleType => Type.GetType(Module);
+
+        bool IUsesAttribute.Required => false;
     }
 }

@@ -8,7 +8,7 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
-    public sealed class ModuleInfo
+    internal sealed class ModuleInfo
     {
         internal ModuleInfo(
             Type type, 
@@ -17,7 +17,7 @@ namespace Axle.Modularity
             IEnumerable<ModuleCallback> terminateCallbacks, 
             ModuleMethod terminateMethod, 
             ModuleEntryMethod entryPointMethod,
-            UtilizesAttribute[] utilizedModules,
+            IUsesAttribute[] utilizedModules,
             UtilizedByAttribute[] utilizedByModules,
             ModuleCommandLineTriggerAttribute commandLineTrigger,
             params ModuleInfo[] requiredModules)
@@ -50,10 +50,10 @@ namespace Axle.Modularity
         public Assembly Assembly => Type.Assembly;
         #endif
 
-        public UtilizesAttribute[] UtilizedModules { get; }
+        public IUsesAttribute[] UtilizedModules { get; }
 
         public UtilizedByAttribute[] UtilizedByModules { get; }
 
-        public ModuleInfo[] RequiredModules { get; }
+        public ModuleInfo[] RequiredModules { get; internal set; }
     }
 }

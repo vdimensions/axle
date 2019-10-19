@@ -10,18 +10,19 @@ namespace Axle.Modularity
     public static class ModuleCatalogExtensions
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog)
+        internal static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog)
         {
             return GetModules(moduleCatalog, moduleCatalog.DiscoverModuleTypes());
         }
         #endif
 
-        public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, params Type[] types)
+        internal static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, params Type[] types)
         {
             moduleCatalog.VerifyArgument(nameof(moduleCatalog)).IsNotNull();
             return ExtractModules(moduleCatalog, types, new Dictionary<Type, ModuleInfo>()).ToArray();
         }
-        public static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, IEnumerable<Type> types)
+
+        internal static ModuleInfo[] GetModules(this IModuleCatalog moduleCatalog, IEnumerable<Type> types)
         {
             moduleCatalog.VerifyArgument(nameof(moduleCatalog)).IsNotNull();
             return ExtractModules(moduleCatalog, types, new Dictionary<Type, ModuleInfo>()).ToArray();
