@@ -5,6 +5,6 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
 {
     public interface IModelResolver
     {
-        Task<object> Resolve(IReadOnlyDictionary<string, object> routeData, ModelResolutionChain next);
+        Task<object> Resolve(IReadOnlyDictionary<string, object> routeData, ModelResolutionContext next);
     }
 }

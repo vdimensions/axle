@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Axle.Logging;
@@ -16,12 +17,13 @@ namespace Axle.Web.AspNetCore.Mvc
     [Module]
     [RequiresAspNetCore]
     [UtilizesAspNetSession] // If Session is used, MVC must be initialized after Session
-    public sealed class AspNetMvcModule : IServiceConfigurer, IApplicationConfigurer
+    public sealed class AspNetMvcModule : IServiceConfigurer, IApplicationConfigurer, IModelTypeRegistry
     {
         private readonly ILogger _logger;
         private readonly IList<IMvcConfigurer> _configurers;
         private readonly IList<IMvcRouteConfigurer> _routeConfigurers;
-        private readonly IList<IModelResolverProvider> _modelBindingConfigurers;
+        private readonly IList<IModelResolverProvider> _modelResolverProviders;
+        private readonly ICollection<Type> _modelResolverTypes = new HashSet<Type>();
 
 
         public AspNetMvcModule(ILogger logger)
@@ -29,7 +31,7 @@ namespace Axle.Web.AspNetCore.Mvc
             _logger = logger;
             _configurers = new List<IMvcConfigurer>();
             _routeConfigurers = new List<IMvcRouteConfigurer>();
-            _modelBindingConfigurers = new List<IModelResolverProvider>();
+            _modelResolverProviders = new List<IModelResolverProvider>();
         }
 
         [ModuleInit]
@@ -46,7 +48,7 @@ namespace Axle.Web.AspNetCore.Mvc
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
-        internal void OnDependencyInitialized(IModelResolverProvider configurer) => _modelBindingConfigurers.Add(configurer);
+        internal void OnDependencyInitialized(IModelResolverProvider configurer) => _modelResolverProviders.Add(configurer);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyTerminated]
@@ -58,7 +60,7 @@ namespace Axle.Web.AspNetCore.Mvc
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyTerminated]
-        internal void OnDependencyTerminated(IModelResolverProvider configurer) => _modelBindingConfigurers.Remove(configurer);
+        internal void OnDependencyTerminated(IModelResolverProvider configurer) => _modelResolverProviders.Remove(configurer);
 
         void IServiceConfigurer.Configure(IServiceCollection services) => Configure(services.AddMvc());
 
@@ -86,9 +88,13 @@ namespace Axle.Web.AspNetCore.Mvc
 
         private void OverrideModelBinding(MvcOptions options)
         {
+            foreach (var modelResolverProvider in _modelResolverProviders)
+            {
+                modelResolverProvider.RegisterTypes(this);
+            }
             var bp = options.ModelBinderProviders.ToArray();
             options.ModelBinderProviders.Clear();
-            options.ModelBinderProviders.Insert(0, new AxleModelBinderProvider(_modelBindingConfigurers, bp));
+            options.ModelBinderProviders.Insert(0, new AxleModelBinderProvider(_modelResolverTypes, _modelResolverProviders, bp));
         }
 
         private void Configure(IRouteBuilder routeBuilder)
@@ -103,5 +109,7 @@ namespace Axle.Web.AspNetCore.Mvc
         internal void Terminate()
         {
         }
+
+        void IModelTypeRegistry.Register(Type type) => _modelResolverTypes.Add(type);
     }
 }
