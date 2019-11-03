@@ -32,8 +32,10 @@ namespace Axle.Web.AspNetCore.Session
             return _perSessionData.TryRemove(sessionId, out removed);
         }
 
+        public string SessionId => _accessor.HttpContext.Session.Id;
+
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public T Current => _perSessionData.TryGetValue(_accessor.HttpContext.Session.Id, out var result) ? result : default(T);
+        public T Current => _perSessionData.TryGetValue(SessionId, out var result) ? result : default(T);
 
         public void Dispose()
         {

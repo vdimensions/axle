@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
+using Axle.Configuration;
 using Axle.Logging;
 using Axle.Modularity;
 using Axle.Web.AspNetCore.Http;
@@ -19,7 +20,7 @@ namespace Axle.Web.AspNetCore.Session
         private readonly SessionLifetime _lt = new SessionLifetime(TimeSpan.FromMinutes(20));
         private readonly ILogger _logger;
 
-        public AspNetSessionModule(ILogger logger)
+        public AspNetSessionModule(IConfiguration configuration, ILogger logger)
         {
             _logger = logger;
         }
@@ -38,7 +39,14 @@ namespace Axle.Web.AspNetCore.Session
 
         void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
         {
-            app.UseSession().Use(_lt.Middleware);
+            var options = new SessionOptions
+            {
+                Cookie =
+                {
+                    IsEssential = true
+                }
+            };
+            app.UseSession(options).Use(_lt.Middleware);
         }
 
         void ISessionEventListener.OnSessionStart(ISession session) => _logger.Trace("Started a new session '{0}'.", session.Id);
