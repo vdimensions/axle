@@ -66,14 +66,7 @@ namespace Axle.Web.AspNetCore.Mvc
 
         void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
         {
-            if (_routeConfigurers.Count > 0)
-            {
-                app.UseMvc(Configure);
-            }
-            else
-            {
-                app.UseMvc();
-            }
+            app.UseMvc(Configure);
         }
 
         private void Configure(IMvcBuilder builder)
@@ -93,13 +86,13 @@ namespace Axle.Web.AspNetCore.Mvc
                 modelResolverProvider.RegisterTypes(this);
             }
             var bp = options.ModelBinderProviders.ToArray();
-            options.ModelBinderProviders.Clear();
+            //options.ModelBinderProviders.Clear();
             options.ModelBinderProviders.Insert(0, new AxleModelBinderProvider(_modelResolverTypes, _modelResolverProviders, bp));
         }
 
         private void Configure(IRouteBuilder routeBuilder)
         {
-            for (var i = 0; i < _configurers.Count; ++i)
+            for (var i = 0; i < _routeConfigurers.Count; ++i)
             {
                 _routeConfigurers[i].ConfigureRoutes(routeBuilder);
             }
