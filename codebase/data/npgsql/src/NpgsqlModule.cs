@@ -4,8 +4,8 @@ using Axle.Modularity;
 
 namespace Axle.Data.Npgsql
 {
-    [Module]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [Module]
     internal sealed class NpgsqlModule : DatabaseServiceProviderModule
     {
         public NpgsqlModule() : base(NpgsqlServiceProvider.Instance) { }

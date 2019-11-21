@@ -3,8 +3,8 @@ using Axle.Modularity;
 
 namespace Axle.Data.Sqlite.Microsoft
 {
-    [Module]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [Module]
     internal sealed class SqliteModule : DatabaseServiceProviderModule
     {
         public SqliteModule() : base(SqliteServiceProvider.Instance){ }

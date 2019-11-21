@@ -1,4 +1,4 @@
-project='Axle.Data.Sqlite'
+project='Axle.Data.Sqlite.Microsoft'
 project_format='csproj'
 
 ./restore.sh

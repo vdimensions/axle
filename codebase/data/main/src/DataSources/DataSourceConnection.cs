@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Data;
-using System.Globalization;
-using Axle.Data.DataSources.Resources;
 using Axle.Resources;
-using Axle.Verification;
 
 namespace Axle.Data.DataSources
 {
@@ -11,7 +8,9 @@ namespace Axle.Data.DataSources
     {
         private readonly IDbServiceProvider _provider;
         private readonly IDbConnection _connection;
+        #pragma warning disable IDE0052 // Remove unread private members
         private readonly ResourceManager _resourceManager;
+        #pragma warning restore IDE0052 // Remove unread private members
 
         public DataSourceConnection(IDbServiceProvider provider, IDataSource dataSource, ResourceManager resourceManager)
         {

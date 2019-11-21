@@ -3,8 +3,8 @@ using Axle.Modularity;
 
 namespace Axle.Data.SqlClient
 {
-    [Module]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [Module]
     internal sealed class SqlClientModule : DatabaseServiceProviderModule
     {
         public SqlClientModule() : base(SqlServiceProvider.Instance) { } 
