@@ -42,11 +42,11 @@ namespace Axle.Verification
         /// can be assigned to the type specified by the <paramref name="expectedType"/> parameter.
         /// </summary>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{Type}"/> that represents a method/constructor argument of type <see cref="System.Type"/>.
+        /// An instance of <see cref="ArgumentReference{Type}"/> that represents a method/constructor argument of type <see cref="Type"/>.
         /// </param>
         /// <param name="expectedType">
         /// The type that must be compliant with type of the validated argument.
-        /// The compliance check is performed using the <see cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" /> method.
+        /// The compliance check is performed using the <see cref="TypeInfo.IsAssignableFrom(TypeInfo)" /> method.
         /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{Type}"/> instance that represents the verified argument.
@@ -57,7 +57,7 @@ namespace Axle.Verification
         /// <exception cref="ArgumentTypeMismatchException">
         /// The argument cannot be assigned to the type specified by the <paramref name="expectedType"/> parameter.
         /// </exception>
-        /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
+        /// <seealso cref="TypeInfo.IsAssignableFrom(TypeInfo)" />
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is(
@@ -100,10 +100,10 @@ namespace Axle.Verification
         /// </summary>
         /// <typeparam name="TExpected">
         /// The type that must be compliant with type of the validated argument.
-        /// The compliance check is performed using the <see cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" /> method.
+        /// The compliance check is performed using the <see cref="TypeInfo.IsAssignableFrom(TypeInfo)" /> method.
         /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{Type}"/> that represents a method/constructor argument of type <see cref="System.Type"/>.
+        /// An instance of <see cref="ArgumentReference{Type}"/> that represents a method/constructor argument of type <see cref="Type"/>.
         /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{Type}"/> instance that represents the verified argument.
@@ -114,7 +114,7 @@ namespace Axle.Verification
         /// <exception cref="ArgumentTypeMismatchException">
         /// The argument cannot be assigned to the type specified by the <typeparamref name="TExpected"/> parameter.
         /// </exception>
-        /// <seealso cref="System.Reflection.TypeInfo.IsAssignableFrom(System.Reflection.TypeInfo)" />
+        /// <seealso cref="TypeInfo.IsAssignableFrom(TypeInfo)" />
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is<TExpected>(
@@ -157,7 +157,7 @@ namespace Axle.Verification
         }
         #endif
 
-        #if NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Verifies if an argument of type <see cref="Type"/> represents an <see cref="Type.IsAbstract">abstract</see> class.
         /// </summary>
