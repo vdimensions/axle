@@ -184,7 +184,6 @@ namespace Axle.Reflection
                     #else
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
                     #endif
-                return item;
             }
         }
     }

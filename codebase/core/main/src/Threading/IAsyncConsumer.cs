@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 
 namespace Axle.Threading
 {
@@ -42,3 +43,4 @@ namespace Axle.Threading
         void Complete();
     }
 }
+#endif
