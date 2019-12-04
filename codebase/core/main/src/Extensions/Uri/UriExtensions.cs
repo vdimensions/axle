@@ -17,7 +17,17 @@ namespace Axle.Extensions.Uri
     /// </summary>
     public static class UriExtensions
     {
+        /// <summary>
+        /// The uri scheme for accessing resources embedded into an assembly. 
+        /// Similar to the <see cref="UriSchemeResource"/> but requires the assemby <em>name</em> 
+        /// to be provided as a host of the <see cref="Uri"/>.
+        /// </summary>
         public const string UriSchemeAssembly = "assembly";
+        /// <summary>
+        /// The uri scheme for accessing resources embedded into an assembly. 
+        /// Similar to the <see cref="UriSchemeAssembly"/> but requires the assemby <em>file name</em>
+        /// to be provided as a host of the <see cref="Uri"/>.
+        /// </summary>
         public const string UriSchemeResource = "res";
 
         /// <summary>
@@ -191,6 +201,8 @@ namespace Axle.Extensions.Uri
         /// </returns>
         /// <seealso cref="IsResource"/>
         /// <seealso cref="IsAssembly"/>
+        /// <seealso cref="UriSchemeResource"/>
+        /// <seealso cref="UriSchemeAssembly"/>
         public static bool IsEmbeddedResource(this System.Uri uri)
         {
             if (uri == null)

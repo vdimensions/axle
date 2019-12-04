@@ -6,11 +6,14 @@ using System.Reflection;
 
 namespace Axle.Conversion.Binding
 {
-    public sealed class SimpleTypeBindingConverter : IBindingConverter
+    /// <summary>
+    /// A <see cref="IBindingConverter"/> implementation supporting the conversion of a handful of primitive types. 
+    /// </summary>
+    public sealed class DefaultBindingConverter : IBindingConverter
     {
         private static readonly IDictionary<Type, IConverter<string, object>> _fallbackConverters;
 
-        static SimpleTypeBindingConverter() 
+        static DefaultBindingConverter() 
         {
             var booleanParser = new BooleanParser();
             var characterParser = new CharacterParser();
@@ -72,6 +75,7 @@ namespace Axle.Conversion.Binding
             };
         }
 
+        /// <inheritdoc/>
         public bool TryConvertMemberValue(string rawValue, Type targetType, out object boundValue)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(targetType, nameof(targetType)));

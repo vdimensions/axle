@@ -13,11 +13,11 @@ namespace Axle.Conversion.Binding
             }
             else if (valueProvider is IComplexMemberValueProvider cvp)
             {
-                var members = ctx.MemberInfoProvider.GetMembers(instance);
+                var members = ctx.ObjectInfoProvider.GetMembers(instance);
                 foreach (var member in members)
                 {
                     if (cvp.TryGetValue(member.Name, out var memberValueProvider) 
-                        && ctx.MemberInfoProvider.TryCreateInstance(member.GetType(), out var memberInstance)
+                        && ctx.ObjectInfoProvider.TryCreateInstance(member.GetType(), out var memberInstance)
                         && TryBind(ctx, memberValueProvider, memberInstance, member.GetType(), out var memberValue))
                     {
                         member.SetAccessor.SetValue(instance, memberValue);
@@ -30,7 +30,7 @@ namespace Axle.Conversion.Binding
             return false;
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc />
         public object Bind(BindingContext bindingContext, object instance)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(bindingContext, nameof(bindingContext)));
@@ -40,12 +40,12 @@ namespace Axle.Conversion.Binding
                 : instance;
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc />
         public object Bind(BindingContext bindingContext, Type type)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(bindingContext, nameof(bindingContext)));
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            return bindingContext.MemberInfoProvider.TryCreateInstance(type, out var instance) 
+            return bindingContext.ObjectInfoProvider.TryCreateInstance(type, out var instance) 
                 && TryBind(bindingContext, bindingContext.MemberValueProvider, instance, type, out var boundValue) 
                     ? boundValue 
                     : instance;

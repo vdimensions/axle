@@ -33,7 +33,6 @@ namespace Axle.Text.Expressions.Path
         /// suitable to be used as a pattern when creating a <see cref="Regex"/> object.
         /// </returns>
         /// <seealso cref="Regex"/>
-        /// <seealso cref="Regex.pattern"/>
         protected static string EscapeRegex(string value)
         {
             var result = value;

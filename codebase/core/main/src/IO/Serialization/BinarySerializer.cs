@@ -42,13 +42,39 @@ namespace Axle.IO.Serialization
         /// <inheritdoc />
         public object Deserialize(Stream stream, Type objectType) => Formatter.Deserialize(stream);
         #if NETFRAMEWORK
+        /// <summary>
+        /// Deserializes the specified <paramref name="stream"/> into an object graph. The provided header <paramref name="handler"/> handles any headers
+        /// present in the stream.
+        /// </summary>
+        /// <param name="stream">
+        /// The stream providing the data to deserialize.
+        /// </param>
+        /// <param name="handler">
+        /// A <see cref="HeaderHandler"/> instance.
+        /// </param>
+        /// <returns>
+        /// An object instance representing the deserialized result.
+        /// </returns>
         public object Deserialize(Stream stream, HeaderHandler handler) => Formatter.Deserialize(stream, handler);
         #endif
 
         /// <inheritdoc />
         public void Serialize(object obj, Stream stream) => Formatter.Serialize(stream, obj);
         #if NETFRAMEWORK
-        public void Serialize(object obj, Stream stream, Header[] headers) => Formatter.Serialize(stream, obj, headers);
+        /// <summary>
+        /// Serializes an object <paramref name="graph"/> into the specified <paramref name="stream"/>, 
+        /// attaching the provided <paramref name="headers"/>.
+        /// </summary>
+        /// <param name="graph">
+        /// The object to be serialized.
+        /// </param>
+        /// <param name="stream">
+        /// The target <paramref name="stream"/> to serialize the object to.
+        /// </param>
+        /// <param name="headers">
+        /// Remoting headers to include in the serialization. Can be <c><see langword="null"/></c>.
+        /// </param>
+        public void Serialize(object graph, Stream stream, Header[] headers) => Formatter.Serialize(stream, graph, headers);
         #endif
 
         /// <summary>

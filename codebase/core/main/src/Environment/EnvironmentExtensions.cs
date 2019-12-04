@@ -19,12 +19,42 @@ namespace Axle.Environment
             return (environment.OperatingSystemID & osID) == osID;
         }
 
+        /// <summary>
+        /// Determines whether the given <paramref name="environment"/> object represents
+        /// a <see cref="OperatingSystemID.MacOS"/> operating system.
+        /// </summary>
+        /// <param name="environment">
+        /// The <see cref="IEnvironment"/> instance to check.
+        /// </param>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the given <paramref name="environment"/> is 
+        /// a <see cref="OperatingSystemID.MacOS"/> operating system;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        /// <seealso cref="IsOS(IEnvironment, OperatingSystemID)"/>
+        /// <seealso cref="OperatingSystemID"/>
         public static bool IsMac(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             IEnvironment environment) => IsOS(environment, OperatingSystemID.Mac);
 
+        /// <summary>
+        /// Determines whether the given <paramref name="environment"/> object represents
+        /// a certain operating system.
+        /// </summary>
+        /// <param name="environment">
+        /// The <see cref="IEnvironment"/> instance to check.
+        /// </param>
+        /// <param name="osID">
+        /// The <see cref="OperatingSystemID"/> of the operating system to check.
+        /// </param>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the given <paramref name="environment"/> is 
+        /// an operating system represented by the <paramref name="osID"/>;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        /// <seealso cref="OperatingSystemID"/>
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
@@ -37,12 +67,40 @@ namespace Axle.Environment
             Verifier.IsNotNull(Verifier.VerifyArgument(environment, nameof(environment)));
             return IsOSInternal(environment, osID);
         }
+        /// <summary>
+        /// Determines whether the given <paramref name="environment"/> object represents
+        /// a <see cref="OperatingSystemID.Unix"/> operating system.
+        /// </summary>
+        /// <param name="environment">
+        /// The <see cref="IEnvironment"/> instance to check.
+        /// </param>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the given <paramref name="environment"/> is 
+        /// a <see cref="OperatingSystemID.Unix"/> operating system;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        /// <seealso cref="IsOS(IEnvironment, OperatingSystemID)"/>
+        /// <seealso cref="OperatingSystemID"/>
         public static bool IsUnix(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             IEnvironment environment) => IsOS(environment, OperatingSystemID.Unix);
 
+        /// <summary>
+        /// Determines whether the given <paramref name="environment"/> object represents
+        /// a <see cref="OperatingSystemID.Windows"/> operating system.
+        /// </summary>
+        /// <param name="environment">
+        /// The <see cref="IEnvironment"/> instance to check.
+        /// </param>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the given <paramref name="environment"/> is 
+        /// a <see cref="OperatingSystemID.Windows"/> operating system;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        /// <seealso cref="IsOS(IEnvironment, OperatingSystemID)"/>
+        /// <seealso cref="OperatingSystemID"/>
         public static bool IsWindows(
             #if NETSTANDARD || NET35_OR_NEWER
             this

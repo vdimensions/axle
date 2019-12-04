@@ -65,6 +65,9 @@ namespace Axle.References
         public static implicit operator T(Singleton<T> singleton) => singleton.Value;
     }
 
+    /// <summary>
+    /// A static class containing utility methods for working with singleton objects.
+    /// </summary>
     public static class Singleton
     {
         internal const string CandidateConstructorNotFoundMessageFormat = "The class '{0}' has one or more public constructors and cannot be used with the singleton pattern!";
@@ -124,7 +127,7 @@ namespace Axle.References
             return ((IReference) res)?.Value;
         }
 
-        public static T GetSingletonInstance<T>(Type type) { return (T) GetSingletonInstance(type); }
+        public static T GetSingletonInstance<T>(Type type) => (T) GetSingletonInstance(type);
     }
 }
 #endif

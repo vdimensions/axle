@@ -26,20 +26,20 @@ namespace Axle.Reflection
         Instance = 1,
 
         /// <summary>
-        /// Used for static members of a class.
+        /// Used for <see langword="static"/> members of a class.
         /// </summary>
         /// <seealso cref="System.Reflection.MethodBase.IsStatic"/>
         /// <seealso cref="System.Reflection.FieldInfo.IsStatic"/>
         Static = (1 << 1),
 
         /// <summary>
-        /// The member is abstract.
+        /// The member is <see langword="abstract"/>.
         /// </summary>
         /// <seealso cref="System.Reflection.MethodBase.IsAbstract"/>
         Abstract = (1 << 2),
 
         /// <summary>
-        /// The member is virtual.
+        /// The member is <see langword="virtual"/>.
         /// </summary>
         /// <seealso cref="System.Reflection.MethodBase.IsVirtual"/>
         Virtual = (1 << 3),
@@ -56,7 +56,7 @@ namespace Axle.Reflection
         HideBySig = (1 << 5),
 
         /// <summary>
-        /// The member is sealed; it cannot be overridden. 
+        /// The member is <see langword="sealed"/>; it cannot be overridden. 
         /// </summary>
         /// <seealso cref="System.Reflection.MethodBase.IsFinal"/>
         Sealed = (1 << 6)
