@@ -7,7 +7,8 @@ using Axle.Verification;
 namespace Axle.Extensions.Object
 {
     /// <summary>
-    /// A static class containing common extension methods applicable to all <see cref="System.Object"/> instances.
+    /// A <see langword="static"/> class containing common extension methods 
+    /// applicable to all <see cref="System.Object"/> instances.
     /// </summary>
     public static class ObjectExtensions
     {

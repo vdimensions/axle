@@ -1,6 +1,5 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Collections.Generic;
-
 using Axle.Verification;
 
 
@@ -8,11 +7,15 @@ namespace Axle
 {
     using Enumerable = System.Linq.Enumerable;
 
+    /// <summary>
+    /// A <see langword="static"/> class containing extension methods for 
+    /// working with attempt delegates.
+    /// </summary>
     public static class AttemptExtensions
     {
         /// <summary>
-        /// Executes the collection of <see cref="Attempt{TResult}"/> in the provided by the collection order
-        /// until any of the delegates returns <c>true</c>.
+        /// Executes the collection of <see cref="Attempt{TResult}"/> in the provided by 
+        /// collection order until any of the delegates returns <c><see langword="true"/></c>.
         /// </summary>
         /// <typeparam name="TResult">
         /// The type of the result of the <see cref="Attempt{TResult}"/> delegate.
@@ -24,7 +27,9 @@ namespace Axle
         /// An output parameter containing the result of the first delegate to return <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); <c>false</c>otherwise.
+        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegate succeeds (returns <c><see langword="true"/></c> itself); 
+        /// <c>false</c> otherwise.
         /// </returns>
         public static bool Any<TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -41,8 +46,8 @@ namespace Axle
             return false;
         }
         /// <summary>
-        /// Executes the collection of <see cref="Attempt{T, TResult}"/> in the provided by the collection order
-        /// until any of the delegates returns <c>true</c>.
+        /// Executes the collection of <see cref="Attempt{T, TResult}"/> in the provided by 
+        /// the collection order until any of the delegates returns <c><see langword="true"/></c>.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the argument to the <see cref="Attempt{T, TResult}"/> delegate.
@@ -60,7 +65,9 @@ namespace Axle
         /// An output parameter containing the result of the first delegate to return <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); <c>false</c>otherwise.
+        /// <c><see langword="true"/></c> if any of the provided by the 
+        /// <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); 
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool Any<T, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -77,17 +84,20 @@ namespace Axle
             return false;
         }
         /// <summary>
-        /// Executes the collection of <see cref="Attempt{T1, T2, TResult}"/> in the provided by the collection order
-        /// until any of the delegates returns <c>true</c>.
+        /// Executes the collection of <see cref="Attempt{T1, T2, TResult}"/> in the provided 
+        /// by the collection order until any of the delegates returns <c><see langword="true"/></c>.
         /// </summary>
         /// <typeparam name="T1">
-        /// The type of the first argument to the <see cref="Attempt{T1, T2, TResult}"/> delegate.
+        /// The type of the first argument to the <see cref="Attempt{T1, T2, TResult}"/> 
+        /// delegate.
         /// </typeparam>
         /// <typeparam name="T2">
-        /// The type of the second argument to the <see cref="Attempt{T1, T2, TResult}"/> delegate.
+        /// The type of the second argument to the <see cref="Attempt{T1, T2, TResult}"/> 
+        /// delegate.
         /// </typeparam>
         /// <typeparam name="TResult">
-        /// The type of the result of the <see cref="Attempt{T1, T2, TResult}"/> delegate.
+        /// The type of the result of the <see cref="Attempt{T1, T2, TResult}"/> 
+        /// delegate.
         /// </typeparam>
         /// <param name="attempts">
         /// The collection of <see cref="Attempt{T1, T2, TResult}"/> to invoke.
@@ -99,10 +109,13 @@ namespace Axle
         /// The second argument to the <see cref="Attempt{T1, T2, TResult}"/> delegate.
         /// </param>
         /// <param name="result">
-        /// An output parameter containing the result of the first delegate to return <c>true</c>.
+        /// An output parameter containing the result of the first delegate to return 
+        /// <c><see langword="true"/></c>.
         /// </param>
         /// <returns>
-        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); <c>false</c>otherwise.
+        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegates succeeds (returns <c><see langword="true"/></c> itself); 
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool Any<T1, T2, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -119,8 +132,8 @@ namespace Axle
             return false;
         }
         /// <summary>
-        /// Executes the collection of <see cref="Attempt{T1, T2, T3, TResult}"/> in the provided by the collection order
-        /// until any of the delegates returns <c>true</c>.
+        /// Executes the collection of <see cref="Attempt{T1, T2, T3, TResult}"/> in the provided by 
+        /// the collection order until any of the delegates returns <c><see langword="true"/></c>.
         /// </summary>
         /// <typeparam name="T1">
         /// The type of the first argument to the <see cref="Attempt{T1, T2, T3, TResult}"/> delegate.
@@ -147,10 +160,13 @@ namespace Axle
         /// The third argument to the <see cref="Attempt{T1, T2, T3, TResult}"/> delegate.
         /// </param>
         /// <param name="result">
-        /// An output parameter containing the result of the first delegate to return <c>true</c>.
+        /// An output parameter containing the result of the first delegate to return 
+        /// <c><see langword="true"/></c>.
         /// </param>
         /// <returns>
-        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); <c>false</c>otherwise.
+        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegate succeeds (returns <c><see langword="true"/></c> itself); 
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool Any<T1, T2, T3, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -167,8 +183,8 @@ namespace Axle
             return false;
         }
         /// <summary>
-        /// Executes the collection of <see cref="Attempt{T1, T2, T3, T4, TResult}"/> in the provided by the collection order
-        /// until any of the delegates returns <c>true</c>.
+        /// Executes the collection of <see cref="Attempt{T1, T2, T3, T4, TResult}"/> in the provided 
+        /// by the collection order until any of the delegates returns <c><see langword="true"/></c>.
         /// </summary>
         /// <typeparam name="T1">
         /// The type of the first argument to the <see cref="Attempt{T1, T2, T3, T4, TResult}"/> delegate.
@@ -204,7 +220,9 @@ namespace Axle
         /// An output parameter containing the result of the first delegate to return <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); <c>false</c>otherwise.
+        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegate succeeds (returns <c><see langword="true"/></c> itself);
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool Any<T1, T2, T3, T4, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -235,7 +253,8 @@ namespace Axle
         /// A default value to use as a fallback in case the provided delegate does not produce a value of its own.
         /// </param>
         /// <returns>
-        /// Either the delegate's result, or the provided by the <paramref name="defaultValue"/> parameter value.
+        /// Either the delegate's result, or the provided by the <paramref name="defaultValue"/> 
+        /// parameter value.
         /// </returns>
         public static TResult InvokeOrDefault<TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -246,8 +265,8 @@ namespace Axle
             return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(out var result) ? result : defaultValue;
         }
         /// <summary>
-        /// Invokes the current <see cref="Attempt{T, TResult}"/> and returns either the delegate's result,
-        /// or the provided by the <paramref name="defaultValue"/> parameter value.
+        /// Invokes the current <see cref="Attempt{T, TResult}"/> and returns either the delegate's 
+        /// result, or the provided by the <paramref name="defaultValue"/> parameter value.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the first argument to the <see cref="Attempt{T, TResult}"/> delegate.
@@ -400,113 +419,6 @@ namespace Axle
             Attempt<T1, T2, T3, T4, TResult> attempt, T1 arg1, T2 arg2, T3 arg3, T4 arg4, TResult defaultValue)
         {
             return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(arg1, arg2, arg3, arg4, out var result) ? result : defaultValue;
-        }
-
-        public static Optional<TResult> Invoke<TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Attempt<TResult> attempt)
-        {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(out var result) ? Optional.From(result) : Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Attempt<T, TResult> attempt, T arg)
-        {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(arg, out var result) ? Optional.From(result) : Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T1, T2, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Attempt<T1, T2, TResult> attempt, T1 arg1, T2 arg2)
-        {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(arg1, arg2, out var result) ? Optional.From(result) : Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T1, T2, T3, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Attempt<T1, T2, T3, TResult> attempt, T1 arg1, T2 arg2, T3 arg3)
-        {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(arg1, arg2, arg3, out var result) ? Optional.From(result) : Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T1, T2, T3, T4, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Attempt<T1, T2, T3, T4, TResult> attempt, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-        {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(attempt, nameof(attempt))).Value.Invoke(arg1, arg2, arg3, arg4, out var result) ? Optional.From(result) : Optional<TResult>.Undefined;
-        }
-
-        public static Optional<TResult> Invoke<TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            IEnumerable<Attempt<TResult>> attempts)
-        {
-            var res = default(TResult);
-            if (Enumerable.Any(Verifier.IsNotNull(Verifier.VerifyArgument(attempts, nameof(attempts))).Value, x => x(out res)))
-            {
-                return Optional.From(res);
-            }
-            return Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            IEnumerable<Attempt<T, TResult>> attempts, T arg)
-        {
-            var res = default(TResult);
-            if (Enumerable.Any(Verifier.IsNotNull(Verifier.VerifyArgument(attempts, nameof(attempts))).Value, x => x(arg, out res)))
-            {
-                return Optional.From(res);
-            }
-            return Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T1, T2, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            IEnumerable<Attempt<T1, T2, TResult>> attempts, T1 arg1, T2 arg2)
-        {
-            var res = default(TResult);
-            if (Enumerable.Any(Verifier.IsNotNull(Verifier.VerifyArgument(attempts, nameof(attempts))).Value, x => x(arg1, arg2, out res)))
-            {
-                return Optional.From(res);
-            }
-            return Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T1, T2, T3, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            IEnumerable<Attempt<T1, T2, T3, TResult>> attempts, T1 arg1, T2 arg2, T3 arg3)
-        {
-            var res = default(TResult);
-            if (Enumerable.Any(Verifier.IsNotNull(Verifier.VerifyArgument(attempts, nameof(attempts))).Value, x => x(arg1, arg2, arg3, out res)))
-            {
-                return Optional.From(res);
-            }
-            return Optional<TResult>.Undefined;
-        }
-        public static Optional<TResult> Invoke<T1, T2, T3, T4, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            IEnumerable<Attempt<T1, T2, T3, T4, TResult>> attempts, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
-        {
-            var res = default(TResult);
-            if (Enumerable.Any(Verifier.IsNotNull(Verifier.VerifyArgument(attempts, nameof(attempts))).Value, x => x(arg1, arg2, arg3, arg4, out res)))
-            {
-                return Optional.From(res);
-            }
-            return Optional<TResult>.Undefined;
         }
     }
 }

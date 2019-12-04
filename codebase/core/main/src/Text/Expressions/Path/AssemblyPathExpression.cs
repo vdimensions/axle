@@ -59,7 +59,9 @@ namespace Axle.Text.Expressions.Path
         /// <summary>
         /// Indicates whether the provided <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">
+        /// The value to match against the current <see cref="AssemblyPathExpression"/> instance.
+        /// </param>
         /// <returns>
         /// <c>true</c> if the provided <see cref="Assembly"/> <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern;
         /// <c>false</c> otherwise.
@@ -68,7 +70,9 @@ namespace Axle.Text.Expressions.Path
         /// <summary>
         /// Indicates whether the provided <see cref="AssemblyName"/> <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">
+        /// The value to match against the current <see cref="AssemblyPathExpression"/> instance.
+        /// </param>
         /// <returns>
         /// <c>true</c> if the provided <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern;
         /// <c>false</c> otherwise.

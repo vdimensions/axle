@@ -4,6 +4,10 @@ using Axle.Verification;
 
 namespace Axle.Environment
 {
+    /// <summary>
+    /// A <see langword="static"/> class containing extension methods for 
+    /// the <see cref="IEnvironment"/> interface
+    /// </summary>
     public static class EnvironmentExtensions
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

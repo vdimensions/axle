@@ -8,6 +8,9 @@ namespace Axle.Threading.Extensions.AggregateException
 {
     using AggregateException = System.AggregateException;
 
+    /// <summary>
+    /// A static class containing extension methods for the <see cref="AggregateException"/> class.
+    /// </summary>
     public static class AggregateExceptionExtensions
     {
         private static IEnumerable<Exception> Resolve(AggregateException e, ICollection<Exception> result)

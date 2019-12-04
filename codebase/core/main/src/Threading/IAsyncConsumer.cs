@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD1_3_OR_NEWER || NET35_OR_NEWER
 using System;
 
 namespace Axle.Threading

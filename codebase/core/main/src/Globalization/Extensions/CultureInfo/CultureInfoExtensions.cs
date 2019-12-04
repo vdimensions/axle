@@ -9,7 +9,8 @@ namespace Axle.Globalization.Extensions.CultureInfo
     using CultureInfo = System.Globalization.CultureInfo;
 
     /// <summary>
-    /// A static class providing extension methods to <see cref="CultureInfo"/> instances.
+    /// A <see langword="static"/> class providing extension methods to 
+    /// <see cref="CultureInfo"/> instances.
     /// </summary>
     public static class CultureInfoExtensions
     {

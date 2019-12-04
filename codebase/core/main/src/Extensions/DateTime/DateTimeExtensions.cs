@@ -8,7 +8,8 @@ namespace Axle.Extensions.DateTime
     using DateTime = System.DateTime;
 
     /// <summary>
-    /// A static class that contains extension methods for the <see cref="DateTime"/> <see langword="struct"/>
+    /// A <see langword="static"/> class that contains extension methods for the 
+    /// <see cref="DateTime"/> <see langword="struct"/>
     /// </summary>
     public static class DateTimeExtensions
     {

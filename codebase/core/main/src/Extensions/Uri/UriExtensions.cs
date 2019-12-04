@@ -12,7 +12,8 @@ namespace Axle.Extensions.Uri
     using StringComparison = System.StringComparison;
 
     /// <summary>
-    /// A static class containing common extension methods to <see cref="Uri"/> instances.
+    /// A <see langword="static"/> class containing common extension 
+    /// methods to <see cref="Uri"/> instances.
     /// </summary>
     public static class UriExtensions
     {

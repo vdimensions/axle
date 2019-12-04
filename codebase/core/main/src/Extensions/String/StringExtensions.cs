@@ -9,7 +9,8 @@ namespace Axle.Extensions.String
     using StringComparison = System.StringComparison;
 
     /// <summary>
-    /// A static class containing common extension methods to <see cref="String"/> instances.
+    /// A <see langword="static"/> class containing common extension methods to 
+    /// <see cref="String"/> instances.
     /// </summary>
     public static class StringExtensions
     {
