@@ -7,7 +7,7 @@ namespace Axle.Conversion.Binding
 {
     public sealed class BindingConverter : IBindingConverter
     {
-        private readonly IBindingConverter _simpleValuesConverter = new DefaultBindingConverter();
+        private readonly IBindingConverter _fallbackConverter = new DefaultBindingConverter();
         private readonly ConcurrentDictionary<Type, IConverter<string, object>> _converters = new ConcurrentDictionary<Type, IConverter<string, object>>();
 
         public void RegisterConverter<T>(IConverter<string, T> converter)
@@ -25,7 +25,7 @@ namespace Axle.Conversion.Binding
             Verifier.IsNotNull(Verifier.VerifyArgument(targetType, nameof(targetType)));
             return _converters.TryGetValue(targetType, out var converter)
                 ? converter.TryConvert(rawValue, out boundValue)
-                : _simpleValuesConverter.TryConvertMemberValue(rawValue, targetType, out boundValue);
+                : _fallbackConverter.TryConvertMemberValue(rawValue, targetType, out boundValue);
         }
     }
 }
