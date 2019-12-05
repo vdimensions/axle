@@ -46,16 +46,20 @@ namespace Axle.Conversion.Binding
             {
                 return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
             }
-            else if (valueProvider is IComplexMemberValueProvider cvp)
+            else if (instance != null && valueProvider is IComplexMemberValueProvider cvp)
             {
                 var members = objectInfoProvider.GetMembers(instance);
                 foreach (var member in members)
                 {
-                    if (cvp.TryGetValue(member.Name, out var memberValueProvider) 
-                        && objectInfoProvider.TryCreateInstance(member.GetType(), out var memberInstance)
-                        && TryBind(objectInfoProvider, converter, memberValueProvider, memberInstance, member.GetType(), out var memberValue))
+                    if (cvp.TryGetValue(member.Name, out var memberValueProvider))
                     {
-                        member.SetAccessor.SetValue(instance, memberValue);
+                        var memberType = member.MemberType;
+                        var memberInstance = objectInfoProvider.TryCreateInstance(memberType, out var memberInstance1)
+                            ? memberInstance1 : null;
+                        if (TryBind(objectInfoProvider, converter, memberValueProvider, memberInstance, memberType, out var memberValue))
+                        {
+                            member.SetAccessor.SetValue(instance, memberValue);
+                        }
                     }
                 }
                 boundValue = instance;

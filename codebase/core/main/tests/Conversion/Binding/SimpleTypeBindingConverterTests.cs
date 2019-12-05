@@ -9,7 +9,7 @@ using Axle.Extensions.DateTime;
 namespace Axle.Core.Tests.Conversion.Binding
 {
     [TestFixture]
-    public class SimpleTypeBindingConverterTest
+    public class SimpleTypeBindingConverterTests
     {
         private void RunConversion(CultureInfo culture)
         {
