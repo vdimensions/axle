@@ -111,27 +111,6 @@ namespace Axle.Reflection
         public abstract AccessModifier AccessModifier { get; }
         public RuntimeTypeHandle TypeHandle => _typeHandle;
 
-        [Obsolete("Use GetAttributes() method instead.")]
-        public IEnumerable<IAttributeInfo> Attributes
-        {
-            get
-            {   //
-                // The `ReflectedMember` property uses `Lock` internally.
-                // We call it before locking again to avoid recursive lock error.
-                //
-                var reflectedMember = ReflectedMember;
-                #if NET20
-                return LockExtensions.Invoke(
-                #else
-                return ReaderWriterLockExtensions.Invoke(
-                #endif
-                    Lock,
-                    () => _attributes,
-                    xx => xx == null,
-                    () => _attributes = GetAttributes(reflectedMember));
-            }
-        }
-
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public abstract T ReflectedMember { get; }
         #else

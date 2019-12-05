@@ -360,9 +360,6 @@ namespace Axle.Reflection
 
         /// <inheritdoc />
         public Type IntrospectedType => _introspectedType;
-
-        [Obsolete("Use GetAttributes() method instead")]
-        IEnumerable<IAttributeInfo> IAttributeTarget.Attributes => GetAttributes();
     }
 
     public sealed class DefaultIntrospector<T> : DefaultIntrospector, IIntrospector<T>

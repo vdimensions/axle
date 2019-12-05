@@ -52,12 +52,6 @@ namespace Axle.Reflection
         /// is applied to this <see cref="IAttributeTarget">attribute target</see> instance; otherwise, <c>false</c>.
         /// </returns>
         bool IsDefined(Type attributeType, bool inherit);
-
-        /// <summary>
-        /// A collection of zero or more <see cref="IAttributeInfo">attributes</see> that the reflected object has.
-        /// </summary>
-        [Obsolete("Use GetAttributes() method instead")]
-        IEnumerable<IAttributeInfo> Attributes { get; }
     }
 }
 #endif

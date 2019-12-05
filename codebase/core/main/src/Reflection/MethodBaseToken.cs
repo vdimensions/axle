@@ -83,8 +83,6 @@ namespace Axle.Reflection
             public bool IsOptional => _parameterInfo.IsOptional;
             public object DefaultValue => _parameterInfo.DefaultValue;
             public ParameterInfo ReflectedMember => _parameterInfo;
-            [Obsolete("Use GetAttributes instead.")]
-            public IEnumerable<IAttributeInfo> Attributes => GetAttributes();
             public ParameterDirection Direction => _direction;
         }
 
