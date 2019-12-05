@@ -16,11 +16,12 @@ namespace Axle.Conversion.Parsing
         private readonly NumberStyles _numberStyles;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="SingleParser"/> class..
+        /// Creates a new instance of the <see cref="SingleParser"/> class.
         /// </summary>
         public SingleParser() : this(NumberStyles.Any&~NumberStyles.AllowThousands) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="SingleParser"/> class using the provided <paramref name="numberStyles"/>.
+        /// Creates a new instance of the <see cref="SingleParser"/> class using the provided 
+        /// <paramref name="numberStyles"/>.
         /// </summary>
         /// <param name="numberStyles">
         /// One of the <see cref="NumberStyles"/> enumeration values.
@@ -39,19 +40,21 @@ namespace Axle.Conversion.Parsing
         /// <summary>
         /// Converts the specified <see cref="string">string</see> representation of a logical <paramref name="value"/>
         /// to its <see cref="float"/> equivalent.
-        /// A return value indicates whether the conversion succeeded or failed.
+        /// A <see cref="Boolean">boolean</see> return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
         /// A <see cref="string">string</see> containing the value to convert.
         /// </param>
         /// <param name="formatProvider">
-        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition.
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
         /// </param>
         /// <param name="output">
         /// When this method returns, <paramref name="output"/> contains the <see cref="float"/> value equivalent to
         /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
         /// value for <see cref="float"/> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c><see langword="null"/></c> or is not 
+        /// of the correct format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>

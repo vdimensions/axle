@@ -5,7 +5,8 @@
     #endif
     internal sealed class PropertySetAccessor : PropertyAccessor, ISetAccessor
     {
-        public PropertySetAccessor(PropertyToken property, MethodToken operationMethod) : base(property, operationMethod) { }
+        public PropertySetAccessor(PropertyToken property, MethodToken operationMethod) 
+            : base(property, operationMethod) { }
 
         /// <summary>
         /// Sets the value of the property to the specified by the parameter <paramref name="value"/> parameter object.

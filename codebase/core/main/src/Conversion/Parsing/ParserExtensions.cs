@@ -13,7 +13,8 @@ namespace Axle.Conversion.Parsing
         /// </summary>
         /// <typeparam name="T">The type of values this parser can handle.</typeparam>
         /// <param name="parser">
-        /// The underlying <see cref="IParser{T}"/> which is used to parse non-empty string representations of <typeparamref name="T"/>
+        /// The underlying <see cref="IParser{T}"/> which is used to parse non-empty string representations of 
+        /// <typeparamref name="T"/>
         /// </param>
         /// <returns>
         /// A nullable type parser instance derived from the provided <paramref name="parser"/>.

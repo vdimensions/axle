@@ -5,7 +5,8 @@ using System;
 namespace Axle.Text.Formatting
 {
     /// <summary>
-    /// A generic interface derived from the <see cref="IFormatProvider"/> that is specific about the formatted object type.
+    /// A generic interface derived from the <see cref="IFormatProvider"/> that is specific about the formatted object 
+    /// type.
     /// </summary>
     /// <typeparam name="T">
     /// The type of the formatted object.
@@ -35,8 +36,8 @@ namespace Axle.Text.Formatting
     }
 
     /// <summary>
-    /// A generic interface derived from the <see cref="IFormatProvider"/> that is specific about the formatted object type
-    /// and the <seealso cref="IFormatProvider"/> type that is used for formatting.
+    /// A generic interface derived from the <see cref="IFormatProvider"/> that is specific about the formatted object 
+    /// type and the <seealso cref="IFormatProvider"/> type that is used for formatting.
     /// </summary>
     /// <typeparam name="T">
     /// The type of the formatted object.

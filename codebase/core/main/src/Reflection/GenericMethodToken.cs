@@ -17,7 +17,8 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IEnumerable<Type> _genericArguments;
 
-        internal GenericMethodToken(MethodToken rawMethod, params Type[] args) : base(rawMethod.ReflectedMember.MakeGenericMethod(args))
+        internal GenericMethodToken(MethodToken rawMethod, params Type[] args) 
+            : base(rawMethod.ReflectedMember.MakeGenericMethod(args))
         {
             _rawMethod = rawMethod;
             _genericArguments = args;

@@ -90,8 +90,8 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <summary>
-        /// This method is called within the <see cref="TryParseExact(string,string,System.IFormatProvider,out T)"/> to further
-        /// validate the provided value and format, before the parsing is attempted.
+        /// This method is called within the <see cref="TryParseExact(string,string,System.IFormatProvider,out T)"/> to
+        /// further validate the provided value and format, before the parsing is attempted.
         /// </summary>
         /// <param name="value">
         /// A <see cref="string"/> containing the value to convert. 
@@ -100,11 +100,13 @@ namespace Axle.Conversion.Parsing
         /// A format string specifying the format of the value to parse. 
         /// </param>
         /// <param name="formatProvider">
-        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition. 
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific 
+        /// format recognition. 
         /// </param>
         /// <returns>
-        /// <c>true</c>, if the validation logic determines that the value is a valid representation of <typeparamref name="T"/>;
-        /// <c>false</c> otherwise.
+        /// <c><see langword="true"/></c>, if the validation logic determines that the value is a valid representation 
+        /// of <typeparamref name="T"/>;
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public virtual bool ValidateExact(string value, string format, IFormatProvider formatProvider)
         {
@@ -112,8 +114,8 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <summary>
-        /// Attempts to create an instance of the specified type,
-        /// but does not perform any validation of the input string.
+        /// Attempts to create an instance of the specified type, but does not perform any validation of the input 
+        /// string.
         /// <remarks>
         /// This method is intended to be used after a string validation was performed.
         /// </remarks> 
@@ -125,9 +127,12 @@ namespace Axle.Conversion.Parsing
         /// A format string specifying the format of the value to parse. 
         /// </param>
         /// <param name="formatProvider">
-        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition. 
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific 
+        /// format recognition. 
         /// </param>
-        /// <returns>An instance of <typeparamref name="T" />.</returns>
+        /// <returns>
+        /// An instance of <typeparamref name="T" />.
+        /// </returns>
         protected abstract T DoParseExact(string value, string format, IFormatProvider formatProvider);
 
         T IConverter<string, T>.Convert(string source) => Parse(source);

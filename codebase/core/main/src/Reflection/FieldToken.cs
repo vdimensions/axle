@@ -39,10 +39,8 @@ namespace Axle.Reflection
         }
         #endif
 
-        public static AccessModifier GetAccessModifier(FieldInfo fieldInfo)
-        {
-            return GetAccessModifier(fieldInfo.IsPublic, fieldInfo.IsAssembly, fieldInfo.IsFamily, fieldInfo.IsPrivate);
-        }
+        public static AccessModifier GetAccessModifier(FieldInfo fieldInfo) =>
+            GetAccessModifier(fieldInfo.IsPublic, fieldInfo.IsAssembly, fieldInfo.IsFamily, fieldInfo.IsPrivate);
 
         public override bool Equals(object obj) => obj is FieldToken f && Equals(f);
         public bool Equals(FieldToken other) => base.Equals(other);

@@ -7,7 +7,8 @@
     public interface ISimpleMemberValueProvider : IBindingValueProvider
     {
         /// <summary>
-        /// A string representation of the value represented by the current <see cref="ISimpleMemberValueProvider"/> implementation.
+        /// A string representation of the value represented by the current <see cref="ISimpleMemberValueProvider"/>   
+        /// implementation.
         /// </summary>
         string Value { get; }
     }

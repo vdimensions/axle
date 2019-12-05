@@ -260,8 +260,12 @@ namespace Axle.Extensions.Uri
         /// Resolves an absolute <see cref="System.Uri">URI</see> instance based on the combination of a base
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
         /// </summary>
-        /// <param name="uri">The base <see cref="System.Uri">URI</see></param>
-        /// <param name="other">The relative <see cref="System.Uri">URI</see> to be combined with <paramref name="uri"/></param>
+        /// <param name="uri">
+        /// The base <see cref="System.Uri">URI</see>
+        /// </param>
+        /// <param name="other">
+        /// The relative <see cref="System.Uri">URI</see> to be combined with <paramref name="uri"/>
+        /// </param>
         /// <returns>
         /// An absolute <see cref="System.Uri">URI</see> instance based on the combination of a base
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
@@ -278,8 +282,12 @@ namespace Axle.Extensions.Uri
         /// Resolves an absolute <see cref="System.Uri">URI</see> instance based on the combination of a base
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
         /// </summary>
-        /// <param name="uri">The base <see cref="System.Uri">URI</see></param>
-        /// <param name="other">The relative <see cref="System.Uri">URI</see> to be combined with <paramref name="uri"/></param>
+        /// <param name="uri">
+        /// The base <see cref="System.Uri">URI</see>
+        /// </param>
+        /// <param name="other">
+        /// The relative <see cref="System.Uri">URI</see> to be combined with <paramref name="uri"/>
+        /// </param>
         /// <returns>
         /// An absolute <see cref="System.Uri">URI</see> instance based on the combination of a base
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
@@ -292,29 +300,41 @@ namespace Axle.Extensions.Uri
         /// <paramref name="uri" /> is not an absolute <see cref="T:System.Uri" /> instance.
         /// </exception>
         /// <exception cref="UriFormatException">
-        /// The URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is empty or contains only spaces.
+        /// The URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is empty or contains only
+        /// spaces.
         /// -or-
-        /// The scheme specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is not valid.
+        /// The scheme specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> 
+        /// is not valid.
         /// -or-
-        /// The URI formed by combining <paramref name="uri" /> and <paramref name="other" /> contains too many slashes.
+        /// The URI formed by combining <paramref name="uri" /> and <paramref name="other" /> contains too many 
+        /// slashes.
         /// -or-
-        /// The password specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is not valid.
+        /// The password specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" />
+        /// is not valid.
         /// -or-
-        /// The host name specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is not valid.
+        /// The host name specified in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> is not valid.
         /// -or-
-        /// The file name specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is not valid.
+        /// The file name specified in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> is not valid.
         /// -or-
-        /// The user name specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is not valid.
+        /// The user name specified in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> is not valid.
         /// -or-
-        /// The host or authority name specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> cannot be terminated by backslashes.
+        /// The host or authority name specified in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> cannot be terminated by backslashes.
         /// -or-
-        /// The port number specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> is not valid or cannot be parsed.
+        /// The port number specified in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> is not valid or cannot be parsed.
         /// -or-
-        /// The length of the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> exceeds 65519 characters.
+        /// The length of the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> exceeds 65519 characters.
         /// -or-
-        /// The length of the scheme specified in the URI formed by combining <paramref name="uri" /> and <paramref name="other" /> exceeds 1023 characters.
+        /// The length of the scheme specified in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" /> exceeds 1023 characters.
         /// -or-
-        /// There is an invalid character sequence in the URI formed by combining <paramref name="uri" /> and <paramref name="other" />.
+        /// There is an invalid character sequence in the URI formed by combining <paramref name="uri" /> and 
+        /// <paramref name="other" />.
         /// -or-
         /// The MS-DOS path specified in <paramref name="uri" /> must start with <c>c:\</c>.
         /// </exception>
@@ -394,14 +414,21 @@ namespace Axle.Extensions.Uri
 
             return Enumerable.ToDictionary(
                 Enumerable.GroupBy(
-                    Enumerable.Select(uri.Query.TrimStart('?').Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries), parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries)), parts => parts[0], parts => parts.Length > 2 ? string.Join("=", parts, 1, parts.Length - 1) : (parts.Length > 1 ? parts[1] : ""), comparer),
-                    grouping => grouping.Key,
-                    #if NET40_OR_NEWER
-                    grouping => string.Join(",", grouping),
-                    #else
-                    grouping => string.Join(",", Enumerable.ToArray(grouping)),
-                    #endif
-                    comparer);
+                    Enumerable.Select(
+                        uri.Query.TrimStart('?').Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries), 
+                        parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries)), 
+                    parts => parts[0], 
+                    parts => parts.Length > 2 
+                        ? string.Join("=", parts, 1, parts.Length - 1) 
+                        : (parts.Length > 1 ? parts[1] : ""), 
+                    comparer),
+                grouping => grouping.Key,
+                #if NET40_OR_NEWER
+                grouping => string.Join(",", grouping),
+                #else
+                grouping => string.Join(",", Enumerable.ToArray(grouping)),
+                #endif
+                comparer);
         }
     }
 }

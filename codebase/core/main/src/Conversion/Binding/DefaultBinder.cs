@@ -28,13 +28,19 @@ namespace Axle.Conversion.Binding
         }
         #if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
         /// <summary>
-        /// Creates a new instance of the <see cref="DefaultBinder"/> class using a <see cref="ReflectionObjectInfoProvider"/>
-        /// and a <see cref="DefaultBindingConverter"/>
+        /// Creates a new instance of the <see cref="DefaultBinder"/> class using a 
+        /// <see cref="ReflectionObjectInfoProvider"/> and a <see cref="DefaultBindingConverter"/>
         /// </summary>
         public DefaultBinder() : this(new ReflectionObjectInfoProvider(), new DefaultBindingConverter()) { }
         #endif
 
-        private bool TryBind(IBindingObjectInfoProvider objectInfoProvider, IBindingConverter converter, IBindingValueProvider valueProvider, object instance, Type targetType, out object boundValue)
+        private bool TryBind(
+            IBindingObjectInfoProvider objectInfoProvider, 
+            IBindingConverter converter, 
+            IBindingValueProvider valueProvider, 
+            object instance, 
+            Type targetType, 
+            out object boundValue)
         {
             if (valueProvider is ISimpleMemberValueProvider svp)
             {
@@ -64,7 +70,13 @@ namespace Axle.Conversion.Binding
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(instance, nameof(instance)));
-            return TryBind(ObjectInfoProvider, Converter, memberValueProvider, instance, instance.GetType(), out var boundValue) 
+            return TryBind(
+                    ObjectInfoProvider, 
+                    Converter, 
+                    memberValueProvider, 
+                    instance, 
+                    instance.GetType(), 
+                    out var boundValue) 
                 ? boundValue 
                 : instance;
         }
@@ -87,8 +99,8 @@ namespace Axle.Conversion.Binding
         public IBindingObjectInfoProvider ObjectInfoProvider { get; }
 
         /// <summary>
-        /// Gets the current <see cref="IBindingConverter"/> instance that handles the conversion of the raw data values
-        /// during the binding process.
+        /// Gets the current <see cref="IBindingConverter"/> instance that handles the conversion of the raw data 
+        /// values during the binding process.
         /// </summary>
         public IBindingConverter Converter { get; }
     }

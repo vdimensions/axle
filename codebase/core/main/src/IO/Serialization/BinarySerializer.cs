@@ -26,7 +26,8 @@ namespace Axle.IO.Serialization
             Formatter = new BinaryFormatter();
         }
         /// <summary>
-        /// Initializes a new instance of the <see cref="Axle.IO.Serialization.BinarySerializer"/> class with a given selector and streaming context.
+        /// Initializes a new instance of the <see cref="Axle.IO.Serialization.BinarySerializer"/> class with a given 
+        /// selector and streaming context.
         /// </summary>
         /// <param name="selector">
         /// The <see cref="ISurrogateSelector"/> to use. Can be <c>null</c>. 
@@ -43,8 +44,8 @@ namespace Axle.IO.Serialization
         public object Deserialize(Stream stream, Type objectType) => Formatter.Deserialize(stream);
         #if NETFRAMEWORK
         /// <summary>
-        /// Deserializes the specified <paramref name="stream"/> into an object graph. The provided header <paramref name="handler"/> handles any headers
-        /// present in the stream.
+        /// Deserializes the specified <paramref name="stream"/> into an object graph. The provided header 
+        /// <paramref name="handler"/> handles any headers present in the stream.
         /// </summary>
         /// <param name="stream">
         /// The stream providing the data to deserialize.
@@ -74,7 +75,8 @@ namespace Axle.IO.Serialization
         /// <param name="headers">
         /// Remoting headers to include in the serialization. Can be <c><see langword="null"/></c>.
         /// </param>
-        public void Serialize(object graph, Stream stream, Header[] headers) => Formatter.Serialize(stream, graph, headers);
+        public void Serialize(object graph, Stream stream, Header[] headers) => 
+            Formatter.Serialize(stream, graph, headers);
         #endif
 
         /// <summary>

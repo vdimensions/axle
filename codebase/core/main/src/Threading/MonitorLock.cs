@@ -5,7 +5,8 @@ using System.Threading;
 namespace Axle.Threading
 {
     /// <summary>
-    /// A monitor lock class. Uses the regular <see cref="Monitor"/> API for issuing locks on a provided <see cref="object"/>.
+    /// A monitor lock class. Uses the regular <see cref="Monitor"/> API for issuing locks on a provided 
+    /// <see cref="object"/>.
     /// </summary>
     public class MonitorLock : ILock
     {

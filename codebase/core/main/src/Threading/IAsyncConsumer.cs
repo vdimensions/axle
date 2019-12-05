@@ -18,7 +18,7 @@ namespace Axle.Threading
     public interface IAsyncConsumer<T>
     {
         /// <summary>
-        /// Processed data suppied by an <see cref="AsyncProducer{T}"/>.
+        /// A method invoked when data suppied by an <see cref="AsyncProducer{T}"/> is available.
         /// </summary>
         /// <param name="data">
         /// An instance of <typeparamref name="T"/> provided by an <see cref="AsyncProducer{T}"/>
@@ -34,6 +34,7 @@ namespace Axle.Threading
         /// <param name="data">
         /// The data item that was being processed while the exception was thrown.
         /// </param>
+        /// <seealso cref="Consume(T)"/>
         void HandleError(Exception e, T data);
 
         /// <summary>

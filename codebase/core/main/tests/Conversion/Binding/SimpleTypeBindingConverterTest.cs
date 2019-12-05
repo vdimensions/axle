@@ -28,7 +28,7 @@ namespace Axle.Core.Tests.Conversion.Binding
                 { typeof(double), 10.0 },
                 { typeof(decimal), (decimal) 11.1 },
                 { typeof(Guid), Guid.Empty },
-                // Date time objects are not guaranteed to be reverse-parseable across cultures, we should skip them for now
+                // Date time objects are not guaranteed to be consistenly parseable across cultures, we should skip them for now
                 //{ typeof(DateTime), DateTime.Now.Date.ToISOString() },
                 { typeof(TimeSpan), TimeSpan.Zero },
                 { typeof(Version), new Version(1, 0) },

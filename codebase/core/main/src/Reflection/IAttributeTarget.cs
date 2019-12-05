@@ -1,6 +1,5 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
-using System.Collections.Generic;
 
 
 namespace Axle.Reflection
@@ -13,7 +12,8 @@ namespace Axle.Reflection
     public interface IAttributeTarget
     {
         /// <summary>
-        /// Gets a collection of zero or more <see cref="IAttributeInfo">attributes</see> that the reflected object has defined.
+        /// Gets a collection of zero or more <see cref="IAttributeInfo">attributes</see> that the reflected object has
+        /// defined.
         /// </summary>
         IAttributeInfo[] GetAttributes();
 
@@ -36,7 +36,8 @@ namespace Axle.Reflection
         /// types is applied to this <see cref="IAttributeTarget">attribute target</see> instance.
         /// </summary>
         /// <param name="attributeType">
-        /// The <see cref="Type">type</see> of custom <see cref="Attribute">attribute</see> to search for. The search includes derived types.
+        /// The <see cref="Type">type</see> of custom <see cref="Attribute">attribute</see> to search for. The search 
+        /// includes derived types.
         /// </param>
         /// <param name="inherit">
         /// <c>true</c> to search this member's inheritance chain to find the attributes; otherwise, <c>false</c>.

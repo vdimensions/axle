@@ -22,28 +22,32 @@ namespace Axle.Conversion.Parsing
         /// </summary>
         public ParseException() { }
         /// <summary>
-        /// Creates a new instance of the <see cref="ParseException"/> class with a specified error <paramref name="message"/>.
+        /// Creates a new instance of the <see cref="ParseException"/> class with a specified error 
+        /// <paramref name="message"/>.
         /// </summary>
         /// <param name="message">
         /// The message that describes the error.
         /// </param>
         public ParseException(string message) : base(message) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="ParseException"/> class with a specified error <paramref name="message"/>
-        /// and a reference to the <paramref name="inner"/> exception that is the cause of this exception.
+        /// Creates a new instance of the <see cref="ParseException"/> class with a specified error 
+        /// <paramref name="message"/> and a reference to the <paramref name="inner"/> exception that is the cause of 
+        /// this exception.
         /// </summary>
         /// <param name="message">
         /// The message that describes the error.
         /// </param>
         /// <param name="inner">
         /// The <see cref="Exception">exception</see> that is the cause of the current exception.
-        /// If the <paramref name="inner"/> parameter is not a <c>null</c> reference (<c>Nothing</c> in Visual Basic),
-        /// the current exception is raised in a catch block that handles the inner exception.
+        /// If the <paramref name="inner"/> parameter is not a <c><see langword="null"/></c> reference 
+        /// (<c>Nothing</c> in Visual Basic), the current exception is raised in a catch block that handles the inner 
+        /// exception.
         /// </param>
         public ParseException(string message, Exception inner) : base(message, inner) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="ParseException"/> class with information about the <see cref="string"/>
-        /// <paramref name="value"/>being parsed and the target <paramref name="type"/> of the parsing.
+        /// Creates a new instance of the <see cref="ParseException"/> class with information about the 
+        /// <see cref="string"/> <paramref name="value"/>being parsed and the target <paramref name="type"/> of the 
+        /// parsing.
         /// </summary>
         /// <param name="value">
         /// The input <see cref="string"/> that was parsed.
@@ -53,8 +57,9 @@ namespace Axle.Conversion.Parsing
         /// </param>
         public ParseException(string value, Type type) : this(string.Format(MessageFormat, type.FullName, value)) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="ParseException"/> class with information about the <see cref="string"/>
-        /// <paramref name="value"/>being parsed and the target <paramref name="type"/> of the parsing.
+        /// Creates a new instance of the <see cref="ParseException"/> class with information about the 
+        /// <see cref="string"/> <paramref name="value"/>being parsed and the target <paramref name="type"/> of the 
+        /// parsing.
         /// </summary>
         /// <param name="value">
         /// The input <see cref="string"/> that was parsed.
@@ -64,14 +69,16 @@ namespace Axle.Conversion.Parsing
         /// </param>
         /// <param name="inner">
         /// The <see cref="Exception">exception</see> that is the cause of the current exception.
-        /// If the <paramref name="inner"/> parameter is not a <c>null</c> reference (<c>Nothing</c> in Visual Basic),
-        /// the current exception is raised in a catch block that handles the inner exception.
+        /// If the <paramref name="inner"/> parameter is not a <c><see langword="null"/></c> reference 
+        /// (<c>Nothing</c> in Visual Basic), the current exception is raised in a catch block that handles the inner 
+        /// exception.
         /// </param>
-        public ParseException(string value, Type type, Exception inner) : this(string.Format(MessageFormat, type.FullName, value), inner) { }
+        public ParseException(string value, Type type, Exception inner) 
+            : this(string.Format(MessageFormat, type.FullName, value), inner) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="ParseException"/> class with information about the <see cref="string"/>
-        /// <paramref name="value"/>being parsed, the <paramref name="format"/> used to represent the value,
-        /// and the target <paramref name="type"/> of the parsing.
+        /// Creates a new instance of the <see cref="ParseException"/> class with information about the 
+        /// <see cref="string"/> <paramref name="value"/>being parsed, the <paramref name="format"/> used to represent
+        /// the value, and the target <paramref name="type"/> of the parsing.
         /// </summary>
         /// <param name="value">
         /// The input <see cref="string"/> that was parsed.
@@ -82,11 +89,12 @@ namespace Axle.Conversion.Parsing
         /// <param name="type">
         /// A <see cref="Type"/> representing the desired result type of the parsed value.
         /// </param>
-        public ParseException(string value, string format, Type type) : this(string.Format(MessageFormatExact, type.FullName, value, format)) { }
+        public ParseException(string value, string format, Type type) 
+            : this(string.Format(MessageFormatExact, type.FullName, value, format)) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="ParseException"/> class with information about the <see cref="string"/>
-        /// <paramref name="value"/>being parsed, the <paramref name="format"/> used to represent the value,
-        /// and the target <paramref name="type"/> of the parsing.
+        /// Creates a new instance of the <see cref="ParseException"/> class with information about the 
+        /// <see cref="string"/> <paramref name="value"/>being parsed, the <paramref name="format"/> used to represent
+        /// the value, and the target <paramref name="type"/> of the parsing.
         /// </summary>
         /// <param name="value">
         /// The input <see cref="string"/> that was parsed.
@@ -99,10 +107,12 @@ namespace Axle.Conversion.Parsing
         /// </param>
         /// <param name="inner">
         /// The <see cref="Exception">exception</see> that is the cause of the current exception.
-        /// If the <paramref name="inner"/> parameter is not a <c>null</c> reference (<c>Nothing</c> in Visual Basic),
-        /// the current exception is raised in a catch block that handles the inner exception.
+        /// If the <paramref name="inner"/> parameter is not a <c><see langword="null"/></c> reference 
+        /// (<c>Nothing</c> in Visual Basic), the current exception is raised in a catch block that handles the inner 
+        /// exception.
         /// </param>
-        public ParseException(string value, string format, Type type, Exception inner) : this(string.Format(MessageFormatExact, type.FullName, value, format), inner) { }
+        public ParseException(string value, string format, Type type, Exception inner) 
+            : this(string.Format(MessageFormatExact, type.FullName, value, format), inner) { }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Creates a new instance of the <see cref="ParseException"/> class with serialized data.

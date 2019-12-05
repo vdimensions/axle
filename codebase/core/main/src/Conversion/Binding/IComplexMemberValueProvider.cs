@@ -1,8 +1,8 @@
 ﻿namespace Axle.Conversion.Binding
 {
     /// <summary>
-    /// An interface representing an binder object provider; that is a type of <see cref="IBindingValueProvider"/> that is used to
-    /// supply values for complex types.
+    /// An interface representing an binder object provider; that is a type of <see cref="IBindingValueProvider"/> 
+    /// that is used to supply values for complex types.
     /// </summary>
     public interface IComplexMemberValueProvider : IBindingValueProvider
     {
@@ -13,7 +13,9 @@
         /// The member to lookup values for.
         /// </param>
         /// <param name="value">
-        /// An <see cref="IBindingValueProvider"/> instnce representing the value associated with the given <paramref name="member"/>
+        /// An <see cref="IBindingValueProvider"/> instnce representing the value associated with the given 
+        /// <paramref name="member"/>. 
+        /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
         /// <c>true</c>, if there are values for the given <paramref name="member"/>; <c>false</c> otherwise.
@@ -27,8 +29,8 @@
         /// The member to lookup values for.
         /// </param>
         /// <returns>
-        /// An <see cref="IBindingValueProvider"/> instnce representing the values associated with the given <paramref name="member"/>, 
-        /// or <c>null</c> if no values exist for the given member.
+        /// An <see cref="IBindingValueProvider"/> instnce representing the values associated with the given 
+        /// <paramref name="member"/>, or <c><see langword="null"/></c> if no values exist for the given member.
         /// </returns>
         IBindingValueProvider this[string member] { get; }
     }

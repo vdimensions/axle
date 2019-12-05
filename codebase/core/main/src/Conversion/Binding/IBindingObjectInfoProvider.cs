@@ -44,6 +44,7 @@ namespace Axle.Conversion.Binding
         /// </param>
         /// <param name="instance">
         /// An output parameter representing the newly created object instance.
+        /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
         /// <c><see langword="true"/></c> if an object instance was successfully created, and the 

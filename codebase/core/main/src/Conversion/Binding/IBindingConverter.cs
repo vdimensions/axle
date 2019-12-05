@@ -20,6 +20,7 @@ namespace Axle.Conversion.Binding
         /// </param>
         /// <param name="boundValue">
         /// An output parameter representing the converted value.
+        /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
         /// <c><see langword="true"/></c> if the conversion was successful and the <paramref name="boundValue"/> was set;
