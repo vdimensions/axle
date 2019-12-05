@@ -3,22 +3,51 @@ using System;
 
 namespace Axle.Conversion.Binding
 {
+    /// <summary>
+    /// A general-purpose implementation of the <see cref="IBinder"/> interface.
+    /// </summary>
+    /// <seealso cref="IBinder"/>
     public class DefaultBinder : IBinder
     {
-        private bool TryBind(BindingContext ctx, IBindingMemberValueProvider valueProvider, object instance, Type targetType, out object boundValue)
+        /// <summary>
+        /// Creates a new instance of the <see cref="DefaultBinder"/> class using the specified 
+        /// <paramref name="objectInfoProvider"/> and <paramref name="converter"/>.
+        /// </summary>
+        /// <param name="objectInfoProvider">
+        /// A <see cref="IBindingObjectInfoProvider"/> instance that enables creation and member access 
+        /// to the object instance being bound.
+        /// </param>
+        /// <param name="converter">
+        /// A <see cref="IBindingConverter"/> instance that handles the conversion of the raw data values
+        /// during the binding process.
+        /// </param>
+        public DefaultBinder(IBindingObjectInfoProvider objectInfoProvider, IBindingConverter converter)
+        {
+            ObjectInfoProvider = Verifier.IsNotNull(Verifier.VerifyArgument(objectInfoProvider, nameof(objectInfoProvider))).Value;
+            Converter = Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter))).Value;
+        }
+        #if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
+        /// <summary>
+        /// Creates a new instance of the <see cref="DefaultBinder"/> class using a <see cref="ReflectionObjectInfoProvider"/>
+        /// and a <see cref="DefaultBindingConverter"/>
+        /// </summary>
+        public DefaultBinder() : this(new ReflectionObjectInfoProvider(), new DefaultBindingConverter()) { }
+        #endif
+
+        private bool TryBind(IBindingObjectInfoProvider objectInfoProvider, IBindingConverter converter, IBindingValueProvider valueProvider, object instance, Type targetType, out object boundValue)
         {
             if (valueProvider is ISimpleMemberValueProvider svp)
             {
-                return ctx.Converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
+                return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
             }
             else if (valueProvider is IComplexMemberValueProvider cvp)
             {
-                var members = ctx.ObjectInfoProvider.GetMembers(instance);
+                var members = objectInfoProvider.GetMembers(instance);
                 foreach (var member in members)
                 {
                     if (cvp.TryGetValue(member.Name, out var memberValueProvider) 
-                        && ctx.ObjectInfoProvider.TryCreateInstance(member.GetType(), out var memberInstance)
-                        && TryBind(ctx, memberValueProvider, memberInstance, member.GetType(), out var memberValue))
+                        && objectInfoProvider.TryCreateInstance(member.GetType(), out var memberInstance)
+                        && TryBind(objectInfoProvider, converter, memberValueProvider, memberInstance, member.GetType(), out var memberValue))
                     {
                         member.SetAccessor.SetValue(instance, memberValue);
                     }
@@ -31,24 +60,36 @@ namespace Axle.Conversion.Binding
         }
 
         /// <inheritdoc />
-        public object Bind(BindingContext bindingContext, object instance)
+        public object Bind(IBindingValueProvider memberValueProvider, object instance)
         {
-            Verifier.IsNotNull(Verifier.VerifyArgument(bindingContext, nameof(bindingContext)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(instance, nameof(instance)));
-            return TryBind(bindingContext, bindingContext.MemberValueProvider, instance, instance.GetType(), out var boundValue) 
+            return TryBind(ObjectInfoProvider, Converter, memberValueProvider, instance, instance.GetType(), out var boundValue) 
                 ? boundValue 
                 : instance;
         }
 
         /// <inheritdoc />
-        public object Bind(BindingContext bindingContext, Type type)
+        public object Bind(IBindingValueProvider memberValueProvider, Type type)
         {
-            Verifier.IsNotNull(Verifier.VerifyArgument(bindingContext, nameof(bindingContext)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            return bindingContext.ObjectInfoProvider.TryCreateInstance(type, out var instance) 
-                && TryBind(bindingContext, bindingContext.MemberValueProvider, instance, type, out var boundValue) 
+            return ObjectInfoProvider.TryCreateInstance(type, out var instance) 
+                && TryBind(ObjectInfoProvider, Converter, memberValueProvider, instance, type, out var boundValue) 
                     ? boundValue 
                     : instance;
         }
+
+        /// <summary>
+        /// Gets the current <see cref="IBindingObjectInfoProvider"/> instance that enables creation and member access 
+        /// to the object instance being bound.
+        /// </summary>
+        public IBindingObjectInfoProvider ObjectInfoProvider { get; }
+
+        /// <summary>
+        /// Gets the current <see cref="IBindingConverter"/> instance that handles the conversion of the raw data values
+        /// during the binding process.
+        /// </summary>
+        public IBindingConverter Converter { get; }
     }
 }

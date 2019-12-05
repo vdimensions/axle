@@ -4,6 +4,7 @@ using Axle.Conversion.Binding;
 using System.Collections.Generic;
 using System.Globalization;
 using Axle.Globalization;
+using Axle.Extensions.DateTime;
 
 namespace Axle.Core.Tests.Conversion.Binding
 {
@@ -27,8 +28,8 @@ namespace Axle.Core.Tests.Conversion.Binding
                 { typeof(double), 10.0 },
                 { typeof(decimal), (decimal) 11.1 },
                 { typeof(Guid), Guid.Empty },
-                // Date time objects are not guaranteed to be reverse-parsed across cultures, we should skip them for now
-                //{ typeof(DateTime), DateTime.UtcNow.Date },
+                // Date time objects are not guaranteed to be reverse-parseable across cultures, we should skip them for now
+                //{ typeof(DateTime), DateTime.Now.Date.ToISOString() },
                 { typeof(TimeSpan), TimeSpan.Zero },
                 { typeof(Version), new Version(1, 0) },
                 { typeof(Uri), new Uri("http://google.com") },
@@ -47,10 +48,11 @@ namespace Axle.Core.Tests.Conversion.Binding
                 { typeof(Nullable<decimal>), new Nullable<decimal>() },
                 { typeof(Nullable<Guid>), new Nullable<Guid>() },
                 { typeof(Nullable<DateTime>), new Nullable<DateTime>() },
+                { typeof(Nullable<DateTimeOffset>), new Nullable<DateTimeOffset>() },
                 { typeof(Nullable<TimeSpan>), new Nullable<TimeSpan>() },
             };
 
-            var converter = new SimpleTypeBindingConverter();
+            var converter = new DefaultBindingConverter();
 
             using (CultureScope.Create(culture))
             {
@@ -58,7 +60,7 @@ namespace Axle.Core.Tests.Conversion.Binding
                 {
                     var type = kvp.Key;
                     var value = kvp.Value;
-                    var stringValue = value == null ? "" : string.Format(culture, "{0}", value);
+                    var stringValue = value?.ToString() ?? string.Empty;
                     if (converter.TryConvertMemberValue(stringValue, type, out var convertedValue))
                     {
                         Assert.AreEqual(value, convertedValue);

@@ -10,33 +10,33 @@ namespace Axle.Conversion.Binding
     {
         /// <summary>
         /// Binds the provided <paramref name="instance"/> object with the data available in the given 
-        /// <paramref name="bindingContext"/>.
+        /// <paramref name="memberValueProvider"/>.
         /// </summary>
-        /// <param name="bindingContext">
-        /// The <see cref="BindingContext"/> instance that is supplying context information for the binding process.
+        /// <param name="memberValueProvider">
+        /// The <see cref="IBindingValueProvider"/> instance that is supplying values for the binding process.
         /// </param>
         /// <param name="instance">
         /// An <see cref="object"/> instance that will be updated with the provided by the 
-        /// <paramref name="bindingContext"/> values.
+        /// <paramref name="memberValueProvider"/> values.
         /// </param>
         /// <returns>
         /// A refernce to the databound object.
         /// </returns>
-        object Bind(BindingContext bindingContext, object instance);
+        object Bind(IBindingValueProvider memberValueProvider, object instance);
         /// <summary>
         /// Binds an object instance of the provided <paramref name="type"/> with the data available in the given 
-        /// <paramref name="bindingContext"/>.
+        /// <paramref name="memberValueProvider"/>.
         /// </summary>
-        /// <param name="bindingContext">
-        /// The <see cref="BindingContext"/> instance that is supplying context information for the binding process.
+        /// <param name="memberValueProvider">
+        /// The <see cref="IBindingValueProvider"/> instance that is supplying values for the binding process.
         /// </param>
         /// <param name="type">
         /// The <see cref="Type"/> of the object instance that will be updated with the provided by the 
-        /// <paramref name="bindingContext"/> values.
+        /// <paramref name="memberValueProvider"/> values.
         /// </param>
         /// <returns>
-        /// A refernce to the databound object.
+        /// A reference to the databound object.
         /// </returns>
-        object Bind(BindingContext bindingContext, Type type);
+        object Bind(IBindingValueProvider memberValueProvider, Type type);
     }
 }
