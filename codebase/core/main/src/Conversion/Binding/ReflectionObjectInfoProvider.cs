@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using Axle.Reflection;
+using Axle.Reflection.Extensions.Type;
 using Axle.Verification;
 
 namespace Axle.Conversion.Binding
@@ -22,6 +23,37 @@ namespace Axle.Conversion.Binding
         /// <inheritdoc/>
         public IReadWriteMember[] GetMembers(object instance)
         {
+            switch (instance)
+            {
+                case null:
+                case bool _:
+                case sbyte _:
+                case byte _:
+                case short _:
+                case ushort _:
+                case int _:
+                case uint _:
+                case long _:
+                case ulong _:
+                case float _:
+                case double _:
+                case decimal _:
+                case char _:
+                case string _:
+                case DateTime _:
+                case DateTimeOffset _:
+                case TimeSpan _:
+                case Guid _:
+                #if NETSTANDARD2_0_OR_NEWER || NET35_OR_NEWER
+                case DBNull _:
+                #endif
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                case object obj when obj.GetType().IsEnum || obj.GetType().IsDelegate() || obj.GetType().IsNullableType():
+                #else
+                case object obj when obj.GetType().IsDelegate() || obj.GetType().IsNullableType():
+                #endif
+                    return new IReadWriteMember[0]; 
+            }
             var introspector = new DefaultIntrospector(instance.GetType());
             return introspector
                 .GetMembers(ScanOptions.Instance | ScanOptions.Public)
@@ -31,12 +63,18 @@ namespace Axle.Conversion.Binding
         }
 
         /// <inheritdoc/>
-        public bool TryCreateInstance(Type type, out object instance)
+        public object CreateInstance(Type type)
         {
-            Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            var introspector = new DefaultIntrospector(type);
-            instance = introspector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
-            return instance != null;
+            try
+            {
+                Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
+                var introspector = new DefaultIntrospector(type);
+                return introspector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

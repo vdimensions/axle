@@ -42,15 +42,9 @@ namespace Axle.Conversion.Binding
         /// <param name="type">
         /// The type to create an instance of.
         /// </param>
-        /// <param name="instance">
-        /// An output parameter representing the newly created object instance.
-        /// This parameter is passed uninitialized.
-        /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if an object instance was successfully created, and the 
-        /// <paramref name="instance"/> parameter was set;
-        /// <c><see langword="false"/></c> otherwise.
+        /// The newly created object instance, or <c><see langword="null"/></c> if instantiation did not succeed.
         /// </returns>
-        bool TryCreateInstance(Type type, out object instance);
+        object CreateInstance(Type type);
     }
 }

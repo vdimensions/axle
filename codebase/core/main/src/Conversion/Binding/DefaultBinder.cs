@@ -34,7 +34,7 @@ namespace Axle.Conversion.Binding
         public DefaultBinder() : this(new ReflectionObjectInfoProvider(), new DefaultBindingConverter()) { }
         #endif
 
-        private bool TryBind(
+        private static bool TryBind(
             IBindingObjectInfoProvider objectInfoProvider, 
             IBindingConverter converter, 
             IBindingValueProvider valueProvider, 
@@ -54,9 +54,15 @@ namespace Axle.Conversion.Binding
                     if (cvp.TryGetValue(member.Name, out var memberValueProvider))
                     {
                         var memberType = member.MemberType;
-                        var memberInstance = objectInfoProvider.TryCreateInstance(memberType, out var memberInstance1)
-                            ? memberInstance1 : null;
-                        if (TryBind(objectInfoProvider, converter, memberValueProvider, memberInstance, memberType, out var memberValue))
+                        var memberInstance = 
+                            member.GetAccessor?.GetValue(instance) ?? objectInfoProvider.CreateInstance(memberType);
+                        if (TryBind(
+                                objectInfoProvider, 
+                                converter, 
+                                memberValueProvider, 
+                                memberInstance, 
+                                memberType, 
+                                out var memberValue))
                         {
                             member.SetAccessor.SetValue(instance, memberValue);
                         }
@@ -90,10 +96,10 @@ namespace Axle.Conversion.Binding
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            return ObjectInfoProvider.TryCreateInstance(type, out var instance) 
-                && TryBind(ObjectInfoProvider, Converter, memberValueProvider, instance, type, out var boundValue) 
-                    ? boundValue 
-                    : instance;
+            var instance = ObjectInfoProvider.CreateInstance(type);
+            return TryBind(ObjectInfoProvider, Converter, memberValueProvider, instance, type, out var boundValue) 
+                ? boundValue 
+                : instance;
         }
 
         /// <summary>
