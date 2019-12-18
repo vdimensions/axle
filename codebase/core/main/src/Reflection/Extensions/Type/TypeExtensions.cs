@@ -197,7 +197,7 @@ namespace Axle.Reflection.Extensions.Type
         }
 
         /// <summary>
-        /// Determines if a specific <paramref name="type"/> is a superclass of a given <paramref name="other"/> type.
+        /// Determines if a specific <paramref name="type"/> is a superclass of a given <typeparamref name="T"/> type.
         /// </summary>
         /// <param name="type">
         /// The <see cref="Type">type</see> to check.

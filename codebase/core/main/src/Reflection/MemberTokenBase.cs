@@ -63,9 +63,6 @@ namespace Axle.Reflection
         private readonly string _name;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IEnumerable<IAttributeInfo> _attributes;
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         #if NET20
         protected internal readonly ILock Lock = new MonitorLock();
         #else

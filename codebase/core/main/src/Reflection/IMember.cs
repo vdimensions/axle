@@ -5,7 +5,8 @@ namespace Axle.Reflection
 {
     /// <summary>
     /// Represents a reflected member of a <c>struct</c>, <c>class</c>, or <c>interface</c>.
-    /// This interface acts as a high-level abstraction over concrete member types, such as a constructor, method, field, property and etc.
+    /// This interface acts as a high-level abstraction over concrete member types, such as a constructor, method, 
+    /// field, property and etc.
     /// </summary>
     /// <seealso cref="IConstructor"/>
     /// <seealso cref="IMethod"/>

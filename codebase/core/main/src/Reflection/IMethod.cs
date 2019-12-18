@@ -15,8 +15,9 @@ namespace Axle.Reflection
     public interface IMethod : IMember, IReflected<MethodInfo>, IInvokable, IAttributeTarget
     {
         /// <summary>
-        /// Substitutes the elements of an array of types for the type parameters of the current generic method definition,
-        /// and returns a <see cref="IGenericMethod"/> object representing the resulting constructed method.
+        /// Substitutes the elements of an array of types for the type parameters of the current generic method 
+        /// definition, and returns a <see cref="IGenericMethod"/> object representing the resulting constructed 
+        /// method.
         /// </summary>
         /// <param name="types">
         /// An array of types to be substituted for the type parameters of the generic method definition.
@@ -27,7 +28,8 @@ namespace Axle.Reflection
         /// <exception cref="System.InvalidOperationException">
         /// The current <see cref="IMethod">method</see> is already an instance of <see cref="IGenericMethod"/>
         /// <para>-OR-</para>
-        /// The current <see cref="IMethod">method</see> does not accept type parameters (<see cref="IsGeneric"/> is <c>false</c>).
+        /// The current <see cref="IMethod">method</see> does not accept type parameters (<see cref="IsGeneric"/> is 
+        /// <c>false</c>).
         /// </exception>
         /// <seealso cref="IGenericMethod"/>
         /// <seealso cref="MethodInfo.MakeGenericMethod"/>

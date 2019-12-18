@@ -22,7 +22,8 @@ namespace Axle.Reflection
         string Name { get; }
 
         /// <summary>
-        /// Gets a value indicating whether the current <see cref="IParameter">parameter</see> is optional to the corresponding constructor or method.
+        /// Gets a value indicating whether the current <see cref="IParameter">parameter</see> is optional to the 
+        /// corresponding constructor or method.
         /// </summary>
         /// <seealso cref="System.Reflection.ParameterInfo.IsOptional"/>
         bool IsOptional { get; }

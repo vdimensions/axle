@@ -12,7 +12,7 @@ namespace Axle.Reflection
     public sealed class GenericMethodToken : MethodToken, IGenericMethod
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly IMethod _rawMethod;
+        private readonly MethodToken _rawMethod;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IEnumerable<Type> _genericArguments;
