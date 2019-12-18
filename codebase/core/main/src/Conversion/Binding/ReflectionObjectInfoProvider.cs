@@ -54,7 +54,7 @@ namespace Axle.Conversion.Binding
                 #endif
                     return new IReadWriteMember[0]; 
             }
-            var introspector = new DefaultIntrospector(instance.GetType());
+            var introspector = new TypeIntrospector(instance.GetType());
             return introspector
                 .GetMembers(ScanOptions.Instance | ScanOptions.Public)
                 .Select(x => x as IReadWriteMember)
@@ -68,7 +68,7 @@ namespace Axle.Conversion.Binding
             try
             {
                 Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-                var introspector = new DefaultIntrospector(type);
+                var introspector = new TypeIntrospector(type);
                 return introspector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
             }
             catch

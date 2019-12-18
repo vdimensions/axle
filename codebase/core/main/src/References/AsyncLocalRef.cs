@@ -35,7 +35,7 @@ namespace Axle.References
             static AsyncLocalValueChangedArgsConstructor()
             {
                 var typeofT = typeof(T);
-                Constructor = new DefaultIntrospector<AsyncLocalValueChangedArgs<T>>().GetConstructor(ScanOptions.NonPublic, typeofT, typeofT, typeof(bool));
+                Constructor = new TypeIntrospector<AsyncLocalValueChangedArgs<T>>().GetConstructor(ScanOptions.NonPublic, typeofT, typeofT, typeof(bool));
             }
 
             public static AsyncLocalValueChangedArgs<T> Invoke(T previousValue, T currentValue, bool contextChanged)
