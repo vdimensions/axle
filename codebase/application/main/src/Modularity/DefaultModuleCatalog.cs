@@ -35,7 +35,7 @@ namespace Axle.Modularity
         {
             foreach (var type in types)
             {
-                var introspector = new DefaultIntrospector(type);
+                var introspector = new TypeIntrospector(type);
                 var introspectedAttributes = allowInheritingTypes
                     ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
                     : introspector.GetAttributes<TAttribute>();
@@ -89,14 +89,14 @@ namespace Axle.Modularity
 
         public ModuleMethod GetInitMethod(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
+            var introspector = new TypeIntrospector(moduleType);
             var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleInitAttribute>(true));
             return m == null ? null : new ModuleMethod(m);
         }
 
         public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
         {
-            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
+            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new TypeIntrospector(t));
             return introspectors
                    .SelectMany(i =>
                        i.GetMethods(MemberScanOptions)
@@ -108,7 +108,7 @@ namespace Axle.Modularity
 
         public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
         {
-            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
+            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new TypeIntrospector(t));
             return introspectors
                    .SelectMany(i => 
                        i.GetMethods(MemberScanOptions)
@@ -120,14 +120,14 @@ namespace Axle.Modularity
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
+            var introspector = new TypeIntrospector(moduleType);
             var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
             return m == null ? null : new ModuleEntryMethod(m);
         }
 
         public ModuleMethod GetTerminateMethod(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
+            var introspector = new TypeIntrospector(moduleType);
             var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
             return m == null ? null : new ModuleMethod(m);
         }

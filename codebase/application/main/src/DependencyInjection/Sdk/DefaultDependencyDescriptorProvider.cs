@@ -34,7 +34,7 @@ namespace Axle.DependencyInjection.Sdk
         public override IEnumerable<IPropertyDependencyDescriptor> GetFields(Type type)
         {
             //const ScanOptions fieldScanOptions = MemberScanOptions&~ScanOptions.NonPublic;
-            //return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
+            //return new TypeIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
             //    .GetFields(fieldScanOptions)
             //    .Where(x => x.AccessModifier != AccessModifier.Private)
             //    .Where(x => !x.IsReadOnly)
@@ -43,7 +43,7 @@ namespace Axle.DependencyInjection.Sdk
         }
         public override IEnumerable<IPropertyDependencyDescriptor> GetProperties(Type type)
         {
-            return new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
+            return new TypeIntrospector(type.VerifyArgument(nameof(type)).IsNotNull())
                 .GetProperties(MemberScanOptions)
                 .Where(x => x.AccessModifier != AccessModifier.Private)
                 .Where(x => x is IWriteableMember)
@@ -52,7 +52,7 @@ namespace Axle.DependencyInjection.Sdk
 
         public override IEnumerable<IFactoryDescriptor> GetFactories(Type type)
         {
-            var introspector = new DefaultIntrospector(type.VerifyArgument(nameof(type)).IsNotNull());
+            var introspector = new TypeIntrospector(type.VerifyArgument(nameof(type)).IsNotNull());
             var staticFactories = introspector.GetMethods(FactoryScanOptions)
                 #if NETSTANDARD
                 .Where(x => type.GetTypeInfo().IsAssignableFrom(x.ReturnType))
