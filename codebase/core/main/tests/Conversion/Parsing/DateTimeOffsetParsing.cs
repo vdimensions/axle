@@ -32,7 +32,7 @@ namespace Axle.Core.Tests.Conversion.Parsing
         {
             var date = DateTime.Now;
             var dateTimeOffset = new DateTimeOffset(
-                new DateTime(date.Ticks, DateTimeKind.Local), TimeSpan.FromHours(2));
+                new DateTime(date.Ticks, DateTimeKind.Local), TimeZoneInfo.Local.GetUtcOffset(date));
             var isoString = dateTimeOffset.ToISOString();
             var parser = new DateTimeOffsetParser();
 
