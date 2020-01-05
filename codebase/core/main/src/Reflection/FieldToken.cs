@@ -49,9 +49,12 @@ namespace Axle.Reflection
         {
             switch (accessorType)
             {
-                case AccessorType.Get:  return GetAccessor;
-                case AccessorType.Set:  return SetAccessor;
-                default:                return null;
+                case AccessorType.Get:
+                    return GetAccessor;
+                case AccessorType.Set:
+                    return SetAccessor;
+                default:
+                    return null;
             }
         }
 

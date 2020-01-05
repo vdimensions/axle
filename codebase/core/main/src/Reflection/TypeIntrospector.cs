@@ -32,6 +32,7 @@ namespace Axle.Reflection
         {
             _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(introspectedType, nameof(introspectedType)));
         }
+        
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
@@ -73,17 +74,20 @@ namespace Axle.Reflection
             {
                 return false;
             }
-
-            if ((options & ScanOptions.Public) != ScanOptions.Public && member.AccessModifier == AccessModifier.Public)
+            
+            switch (member.AccessModifier)
             {
-                return false;
+                case AccessModifier.Internal:
+                case AccessModifier.Protected:
+                case AccessModifier.ProtectedInternal:
+                case AccessModifier.Private:
+                case AccessModifier.PrivateProtected:
+                    return (options & ScanOptions.NonPublic) == ScanOptions.NonPublic;
+                case AccessModifier.Public:
+                    return (options & ScanOptions.Public) == ScanOptions.Public;
+                default: 
+                    return false;
             }
-            if ((options & ScanOptions.NonPublic) != ScanOptions.NonPublic && (member.AccessModifier == AccessModifier.Internal || member.AccessModifier == AccessModifier.Private || member.AccessModifier == AccessModifier.Protected || member.AccessModifier == AccessModifier.ProtectedInternal))
-            {
-                return false;
-            }
-
-            return true;
         }
         #endif
 
@@ -362,7 +366,10 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public bool IsDefined(Type attributeType, bool inherit)
+        bool IAttributeTarget.IsDefined(Type attributeType, bool inherit) => IsAttributeDefined(attributeType, inherit);
+
+        /// <inheritdoc />
+        public bool IsAttributeDefined(Type attributeType, bool inherit)
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().IsDefined(attributeType, inherit);
@@ -376,7 +383,7 @@ namespace Axle.Reflection
     }
 
     /// <summary>
-    /// The default implmentation of the <see cref="ITypeIntrospector{T}"/> interface.
+    /// The default implementation of the <see cref="ITypeIntrospector{T}"/> interface.
     /// </summary>
     /// <typeparam name="T">
     /// The <see cref="Type"/> to provide reflected information for by the current <see cref="TypeIntrospector{T}"/>

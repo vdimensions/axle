@@ -12,19 +12,22 @@ namespace Axle.Data.DataSources
         private readonly IDbServiceProvider _serviceProvider;
         private readonly ResourceManager _resourceManager;
 
-        public DataSource(string name, IDbServiceProvider serviceProvider, string connectionString, ResourceManager resourceManager)
+        internal DataSource(string name, IDbServiceProvider serviceProvider, string connectionString, ResourceManager resourceManager)
         {
             Name = StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
-            _serviceProvider = Verifier.IsNotNull(Verifier.VerifyArgument(serviceProvider, nameof(serviceProvider))).Value;
             ConnectionString = Verifier.IsNotNull(Verifier.VerifyArgument(connectionString, nameof(connectionString)));
+            _serviceProvider = Verifier.IsNotNull(Verifier.VerifyArgument(serviceProvider, nameof(serviceProvider))).Value;
             _resourceManager = Verifier.IsNotNull(Verifier.VerifyArgument(resourceManager, nameof(resourceManager)));
         }
 
-        public IDbParameterValueBuilder CreateParameter(string name, ParameterDirection direction) => _serviceProvider.GetDbParameterBuilder().CreateParameter(name, direction);
+        public IDbParameterValueBuilder CreateParameter(string name, ParameterDirection direction) 
+            => _serviceProvider.GetDbParameterBuilder().CreateParameter(name, direction);
 
-        public IDataSourceConnection OpenConnection() => new DataSourceConnection(_serviceProvider, this, _resourceManager);
+        public IDataSourceConnection OpenConnection() 
+            => new DataSourceConnection(_serviceProvider, this);
 
-        private ICommandBuilder BuildCommand(string commandText, CommandType commandType) => new DataSourceCommandBuilder(_serviceProvider, this, commandType, commandText);
+        private ICommandBuilder BuildCommand(string commandText, CommandType commandType) 
+            => new DataSourceCommandBuilder(_serviceProvider, this, commandType, commandText);
 
         private ICommandBuilder BuildScriptedCommand(string bundle, string scriptPath, CommandType commandType)
         {
@@ -48,7 +51,7 @@ namespace Axle.Data.DataSources
             Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
             StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(commandText, nameof(commandText)));
             var b = buildCommandCallback(BuildCommand(commandText, commandType));
-            return ((ICommandBuilderResult)b).Build();
+            return ((ICommandBuilderResult) b).Build();
         }
 
         public IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, BuildCommandCallback buildCommandCallback)
@@ -57,7 +60,7 @@ namespace Axle.Data.DataSources
             StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(scriptPath, nameof(scriptPath)));
             Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
             var b = buildCommandCallback(BuildScriptedCommand(bundle, scriptPath, commandType));
-            return ((ICommandBuilderResult)b).Build();
+            return ((ICommandBuilderResult) b).Build();
         }
 
         public string Name { get; }

@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Axle;
 using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources;
@@ -89,7 +88,7 @@ namespace Axle.Data.MySql.Tests
         }
 
         [Module]
-        private class X : ISqlScriptLocationConfigurer
+        private class SqlScriptsConfigurer : ISqlScriptLocationConfigurer
         {
             public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
             {
@@ -106,7 +105,7 @@ namespace Axle.Data.MySql.Tests
                 .EnableLegacyConfig()
                 .UseDataSources()
                 .UseMySql()
-                .ConfigureModules(m => m.Load<X>());
+                .ConfigureModules(m => m.Load<SqlScriptsConfigurer>());
             using (appBuilder.Run())
             {
                 var testDataSource = container.Resolve<IDataSource>("default");

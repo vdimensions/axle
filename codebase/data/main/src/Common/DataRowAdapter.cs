@@ -57,8 +57,8 @@ namespace Axle.Data.Common
         public long GetInt64(int i) => _target.Field<long>(i);
         public long GetInt64(string name) => _target.Field<long>(name);
 
-        public float GetFloat(int i) => _target.Field<float>(i);
-        public float GetFloat(string name) => _target.Field<float>(name);
+        public float GetSingle(int i) => _target.Field<float>(i);
+        public float GetSingle(string name) => _target.Field<float>(name);
 
         public double GetDouble(int i) => _target.Field<double>(i);
         public double GetDouble(string name) => _target.Field<double>(name);

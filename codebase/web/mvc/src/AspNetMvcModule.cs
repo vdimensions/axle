@@ -42,6 +42,7 @@ namespace Axle.Web.AspNetCore.Mvc
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
         internal void OnDependencyInitialized(IMvcConfigurer configurer) => _configurers.Add(configurer);
+        
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
         internal void OnDependencyInitialized(IMvcRouteConfigurer configurer) => _routeConfigurers.Add(configurer);
