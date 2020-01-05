@@ -5,7 +5,6 @@ using System.Reflection;
 
 using Axle.DependencyInjection;
 using Axle.Logging;
-using Axle.Modularity;
 using Axle.Verification;
 
 

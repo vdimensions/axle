@@ -1,13 +1,8 @@
-﻿
-using System.Linq;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
+using System.Linq;
 using Axle.Conversion.Binding;
 using Axle.Verification;
-//#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
-//using Axle.Configuration.Adapters;
-//using Microsoft.Extensions.Configuration;
-//#endif
 
 namespace Axle.Configuration
 {
@@ -16,7 +11,7 @@ namespace Axle.Configuration
     /// </summary>
     public static class ConfigSectionExtensions
     {
-        internal sealed class ConfigurationBindingValueProvider : IComplexMemberValueProvider
+        private sealed class ConfigurationBindingValueProvider : IComplexMemberValueProvider
         {
             private readonly IConfigSection _config;
 
@@ -67,20 +62,22 @@ namespace Axle.Configuration
             return null;
         }
 
+        public static object GetSection(this IConfigSection config, string sectionName, Type sectionType)
+        {
+            config.VerifyArgument(nameof(config)).IsNotNull();
+            sectionName.VerifyArgument(nameof(sectionName)).IsNotNullOrEmpty();
+            return new DefaultBinder().Bind(
+                new ConfigurationBindingValueProvider(config.GetSection(sectionName)), 
+                sectionType);
+        }
+
         public static T GetSection<T>(this IConfigSection config, string sectionName) where T: class, new()
         {
             config.VerifyArgument(nameof(config)).IsNotNull();
             sectionName.VerifyArgument(nameof(sectionName)).IsNotNullOrEmpty();
-            var result = new T();
-            //#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
-            //var msConfig = new ConfigurationRoot(new IConfigurationProvider[]{new AxleConfigurationProvider(config.GetSection(sectionName))});
-            //msConfig.Bind(result);
-            //return result;
-            //#else
-            //return null;
-            //#endif
-            var binder = new DefaultBinder();
-            return (T) binder.Bind(new ConfigurationBindingValueProvider(config.GetSection(sectionName)), result);
+            return (T) new DefaultBinder().Bind(
+                new ConfigurationBindingValueProvider(config.GetSection(sectionName)), 
+                new T());
         }
     }
 }

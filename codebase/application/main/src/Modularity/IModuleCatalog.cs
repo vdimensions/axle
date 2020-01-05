@@ -21,5 +21,6 @@ namespace Axle.Modularity
         UtilizedByAttribute[] GetUtilizedByModules(Type moduleType);
         ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType);
         ModuleEntryMethod GetEntryPointMethod(Type moduleType);
+        ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType);
     }
 }
