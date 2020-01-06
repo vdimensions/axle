@@ -8,7 +8,7 @@ using NUnit.Framework;
 namespace Axle.ApplicationTests.Modularity
 {
     [TestFixture]
-    public class TestModuleLoading
+    public class ModuleLoadingTests
     {
         public abstract class AbstractModule
         {

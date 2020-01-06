@@ -6,7 +6,7 @@ using NUnit.Framework;
 namespace Axle.ApplicationTests.Modularity
 {
     [TestFixture]
-    public class TestCommandLineTrigger
+    public class CommandLineTriggeringTests
     {
         public abstract class AbstractModule
         {
@@ -33,6 +33,7 @@ namespace Axle.ApplicationTests.Modularity
             internal void Init(ModuleExporter mex, string[] cmdArgs)
             {
                 mex.Export(this);
+                System.Console.WriteLine("Triggering command argument: {0}", cmdArgs[1]);
             }
         }
 
