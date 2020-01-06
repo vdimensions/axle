@@ -8,15 +8,11 @@ namespace Axle.Data.DataSources
     {
         private readonly IDbServiceProvider _provider;
         private readonly IDbConnection _connection;
-        #pragma warning disable IDE0052 // Remove unread private members
-        private readonly ResourceManager _resourceManager;
-        #pragma warning restore IDE0052 // Remove unread private members
 
-        public DataSourceConnection(IDbServiceProvider provider, IDataSource dataSource, ResourceManager resourceManager)
+        public DataSourceConnection(IDbServiceProvider provider, IDataSource dataSource)
         {
             _provider = provider;
             DataSource = dataSource;
-            _resourceManager = resourceManager;
             _connection = provider.CreateConnection(dataSource.ConnectionString);
             _connection.Open();
         }

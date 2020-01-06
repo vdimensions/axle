@@ -15,9 +15,7 @@ namespace Axle.Conversion.Binding
         /// <inheritdoc/>
         public IReadWriteMember GetMember(object instance, string member)
         {
-            return GetMembers(instance)
-                .Where(x => StringComparer.Ordinal.Equals(member, x.Name))
-                .SingleOrDefault();
+            return GetMembers(instance).SingleOrDefault(x => StringComparer.Ordinal.Equals(member, (string) x.Name));
         }
 
         /// <inheritdoc/>

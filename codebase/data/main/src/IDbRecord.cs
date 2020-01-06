@@ -37,8 +37,8 @@ namespace Axle.Data
         long GetInt64(int i);
         long GetInt64(string name);
 
-        float GetFloat(int i);
-        float GetFloat(string name);
+        float GetSingle(int i);
+        float GetSingle(string name);
 
         double GetDouble(int i);
         double GetDouble(string name);

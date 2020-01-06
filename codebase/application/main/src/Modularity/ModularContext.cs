@@ -2,9 +2,8 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-using Axle.Configuration;
 //using System.Threading.Tasks;
-
+using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Extensions.String;
 using Axle.Logging;
@@ -290,11 +289,11 @@ namespace Axle.Modularity
                     var moduleLogger = _loggingServiceProvider.Create(moduleType);
                     var moduleContainer = _containerProvider.Create(_rootContainer);
                     moduleInitializationContainer
-                        .RegisterType(moduleType)            // register the module type to be instantiated via DI
-                        .RegisterInstance(moduleInfo)        // register module info so that modules can reflect on themselves
-                        .RegisterInstance(moduleLogger)      // register the module's dedicated logger
-                        .RegisterInstance(moduleContainer)   // register the module's dedicated DI container
-                        .RegisterInstance(rootExporter);     // register the global dependencies exporter
+                        .RegisterType(moduleType)          // register the module type to be instantiated via DI
+                        .RegisterInstance(moduleInfo)      // register moduleInfo so that a module can reflect on itself
+                        .RegisterInstance(moduleLogger)    // register the module's dedicated logger
+                        .RegisterInstance(moduleContainer) // register the module's dedicated DI container
+                        .RegisterInstance(rootExporter);   // register the global dependencies exporter
 
                     //
                     // Make all required modules injectable
@@ -316,6 +315,16 @@ namespace Axle.Modularity
                             baseModuleConfig.LoadConfiguration(),
                             substExpr);
                     moduleInitializationContainer.RegisterInstance(moduleConfig);
+
+                    if (moduleInfo.ConfigSectionInfo != null)
+                    {   //
+                        // if the module expects a configuration section from the global config
+                        // auto-resolve it here and make it available for injection into the module
+                        //
+                        var csi = moduleInfo.ConfigSectionInfo;
+                        var moduleConfigSection = ConfigSectionExtensions.GetSection(moduleConfig, csi.Name, csi.Type);
+                        moduleInitializationContainer.RegisterInstance(moduleConfigSection);
+                    }
 
                     var moduleInstance = moduleInitializationContainer.Resolve(moduleType);
                     var mm = _modules.AddOrUpdate(

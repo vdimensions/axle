@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
-using Axle.Verification;
 
 
 namespace Axle
@@ -45,17 +43,22 @@ namespace Axle
         private void ThrowIfStarted()
         {
             lock (_syncRoot)
-            if (_modularContext != null)
             {
-                throw new InvalidOperationException("Application already started. ");
+                if (_modularContext != null)
+                {
+                    throw new InvalidOperationException("Application already started. ");
+                }
             }
         }
         private void ThrowIfNotStarted()
         {
             lock (_syncRoot)
-            if (_modularContext == null)
             {
-                throw new InvalidOperationException("Application not initialized yet. You must first call the Run method.");
+                if (_modularContext == null)
+                {
+                    throw new InvalidOperationException(
+                        "Application not initialized yet. You must first call the Run method.");
+                }
             }
         }
 
@@ -66,11 +69,13 @@ namespace Axle
                 return _modularContext;
             }
             lock (_syncRoot)
-            if (_modularContext == null)
             {
-                var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService, _config, args);
-                ctx.Container.RegisterInstance(this);
-                _modularContext = ctx;
+                if (_modularContext == null)
+                {
+                    var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService, _config, args);
+                    ctx.Container.RegisterInstance(this);
+                    _modularContext = ctx;
+                }
             }
             return _modularContext;
         }
@@ -112,11 +117,5 @@ namespace Axle
         public IContainer CreateContainer(IContainer parent) => _dependencyContainerProvider.Create(parent);
 
         void IDisposable.Dispose() => ShutDown();
-
-        [Obsolete]
-        public IDependencyContainerProvider DependencyContainerProvider
-        {
-            get => _dependencyContainerProvider;
-        }
     }
 }

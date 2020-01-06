@@ -13,8 +13,25 @@ namespace Axle.Web.AspNetCore.StaticFiles
     {
         public UtilizesStaticFilesAttribute() : base(typeof(StaticFilesModule)) { }
     }
+    
+    [Module]
+    public sealed class DefaultFilesModule : IApplicationConfigurer
+    {
+        public DefaultFilesModule(IConfiguration configuration)
+        {
+
+        }
+
+        void IApplicationConfigurer.Configure(
+            Microsoft.AspNetCore.Builder.IApplicationBuilder app, 
+            IHostingEnvironment env)
+        {
+            app.UseDefaultFiles();
+        }
+    }
 
     [Module]
+    [Utilizes(typeof(DefaultFilesModule))]
     public sealed class StaticFilesModule : IApplicationConfigurer
     {
         public StaticFilesModule(IConfiguration configuration)

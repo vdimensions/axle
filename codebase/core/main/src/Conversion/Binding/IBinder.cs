@@ -20,7 +20,7 @@ namespace Axle.Conversion.Binding
         /// <paramref name="memberValueProvider"/> values.
         /// </param>
         /// <returns>
-        /// A refernce to the databound object.
+        /// A reference to the data-bound object.
         /// </returns>
         object Bind(IBindingValueProvider memberValueProvider, object instance);
         /// <summary>
@@ -35,7 +35,7 @@ namespace Axle.Conversion.Binding
         /// <paramref name="memberValueProvider"/> values.
         /// </param>
         /// <returns>
-        /// A reference to the databound object.
+        /// A reference to the data-bound object.
         /// </returns>
         object Bind(IBindingValueProvider memberValueProvider, Type type);
     }

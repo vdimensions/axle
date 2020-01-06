@@ -90,6 +90,16 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.WebSharper", "code
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.Sqlite.Microsoft", "codebase\data\sqlite_ms\src\Axle.Data.Sqlite.Microsoft.csproj", "{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Web.AspNetCore.Mvc", "codebase\web\mvc\src\Axle.Web.AspNetCore.Mvc.csproj", "{566538F3-C76F-41F1-986E-B282ADEB6D22}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Targets", "Targets", "{D256F73B-FD7E-4C68-B18F-192E81240F9B}"
+ProjectSection(SolutionItems) = preProject
+	codebase\Axle.Common.props = codebase\Axle.Common.props
+	codebase\Dependency.Versions.props = codebase\Dependency.Versions.props
+	codebase\FSharp.Core.Packages.targets = codebase\FSharp.Core.Packages.targets
+	codebase\NUnit.Packages.targets = codebase\NUnit.Packages.targets
+EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -212,6 +222,10 @@ Global
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{566538F3-C76F-41F1-986E-B282ADEB6D22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{566538F3-C76F-41F1-986E-B282ADEB6D22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{566538F3-C76F-41F1-986E-B282ADEB6D22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{566538F3-C76F-41F1-986E-B282ADEB6D22}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -249,6 +263,7 @@ Global
 		{6A38CBF9-103A-4093-B2F5-181B7717B9B6} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 		{06D29389-3DB1-4841-A74C-6905C870970B} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
+		{566538F3-C76F-41F1-986E-B282ADEB6D22} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

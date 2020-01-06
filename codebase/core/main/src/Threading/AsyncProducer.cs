@@ -83,7 +83,7 @@ namespace Axle.Threading
         public void Push(T item) => _dataItems.Add(item);
 
         #region IDisposable Support
-        private bool _wasDisposed = false;
+        private bool _wasDisposed;
 
         /// <summary>
         /// Disposes of the current <see cref="AsyncProducer{T}"/> instance.
