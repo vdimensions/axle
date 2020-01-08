@@ -55,29 +55,27 @@ namespace Axle.Configuration
         {
             config.VerifyArgument(nameof(config)).IsNotNull();
             sectionName.VerifyArgument(nameof(sectionName)).IsNotNullOrEmpty();
-            if (config[sectionName] is IConfigSection result)
-            {
-                return result;
-            }
-            return null;
+            return config[sectionName] as IConfigSection;
         }
 
         public static object GetSection(this IConfigSection config, string sectionName, Type sectionType)
         {
-            config.VerifyArgument(nameof(config)).IsNotNull();
-            sectionName.VerifyArgument(nameof(sectionName)).IsNotNullOrEmpty();
-            return new DefaultBinder().Bind(
-                new ConfigurationBindingValueProvider(config.GetSection(sectionName)), 
-                sectionType);
+            var configSection = GetSection(config, sectionName);
+            return configSection != null 
+                ? new DefaultBinder().Bind(
+                    new ConfigurationBindingValueProvider(configSection), 
+                    sectionType)
+                : null;
         }
 
         public static T GetSection<T>(this IConfigSection config, string sectionName) where T: class, new()
         {
-            config.VerifyArgument(nameof(config)).IsNotNull();
-            sectionName.VerifyArgument(nameof(sectionName)).IsNotNullOrEmpty();
-            return (T) new DefaultBinder().Bind(
-                new ConfigurationBindingValueProvider(config.GetSection(sectionName)), 
-                new T());
+            var configSection = GetSection(config, sectionName);
+            return configSection != null
+                ? (T) new DefaultBinder().Bind(
+                    new ConfigurationBindingValueProvider(configSection), 
+                    new T())
+                : null;
         }
     }
 }

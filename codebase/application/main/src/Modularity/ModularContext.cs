@@ -235,38 +235,31 @@ namespace Axle.Modularity
         private readonly ConcurrentDictionary<Type, ModuleMetadata> _modules = new ConcurrentDictionary<Type, ModuleMetadata>();
         private readonly ConcurrentStack<ModuleMetadata> _moduleInstances = new ConcurrentStack<ModuleMetadata>();
         private readonly IContainer _rootContainer;
-        private readonly IModuleCatalog _moduleCatalog;
         private readonly IDependencyContainerProvider _containerProvider;
         private readonly ILoggingServiceProvider _loggingServiceProvider;
-        private readonly IConfigSource _appConfigurationSource;
         private readonly IList<ModuleMetadata> _initializedModules = new List<ModuleMetadata>();
         private readonly string[] _args;
 
-        public ModularContext(IModuleCatalog moduleCatalog, IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider, IConfigSource appConfigurationSource, string[] args)
+        public ModularContext(IDependencyContainerProvider containerProvider, ILoggingServiceProvider loggingServiceProvider, IConfigSource appConfigurationSource, string[] args)
         {
-            _moduleCatalog = moduleCatalog;
             _containerProvider = containerProvider;
             _rootContainer = containerProvider.Create();
             _loggingServiceProvider = loggingServiceProvider;
-            _appConfigurationSource = appConfigurationSource;
             _args = args;
         }
 
-        public ModularContext Launch(IEnumerable<Type> moduleTypes)
+        public ModularContext Launch(IModuleCatalog moduleCatalog, IConfigManager config, IEnumerable<Type> moduleTypes)
         {
-            var moduleInfos = _moduleCatalog.GetModules(moduleTypes);
+            var moduleInfos = moduleCatalog.GetModules(moduleTypes);
             var existingModuleTypes = new HashSet<Type>(_modules.Keys);
 
             var rankedModules = RankModules(moduleInfos, existingModuleTypes, _args).ToArray();
             var rootExporter = new ContainerExporter(_rootContainer);
 
             var substExpr = new StandardSubstitutionExpression();
-            var baseConfig = new LayeredConfigManager()
-                .Prepend(_appConfigurationSource)
-                .Append(EnvironmentConfigSource.Instance);
             IConfiguration globalAppConfig = 
                 new SubstitutionResolvingConfig(
-                    baseConfig.LoadConfiguration(),
+                    config.LoadConfiguration(),
                     substExpr);
 
             // TODO: strip ranked modules from non-activated
@@ -307,9 +300,9 @@ namespace Axle.Modularity
                     }
 
                     var baseModuleConfig = 
-                    // TODO:
-                    //    baseConfig.Prepend(...);
-                        baseConfig;
+                        // TODO:
+                        // config.Prepend(...);
+                        config;
                     IConfiguration moduleConfig = 
                         new SubstitutionResolvingConfig(
                             baseModuleConfig.LoadConfiguration(),
@@ -323,7 +316,10 @@ namespace Axle.Modularity
                         //
                         var csi = moduleInfo.ConfigSectionInfo;
                         var moduleConfigSection = ConfigSectionExtensions.GetSection(moduleConfig, csi.Name, csi.Type);
-                        moduleInitializationContainer.RegisterInstance(moduleConfigSection);
+                        if (moduleConfigSection != null)
+                        {
+                            moduleInitializationContainer.RegisterInstance(moduleConfigSection);
+                        }
                     }
 
                     var moduleInstance = moduleInitializationContainer.Resolve(moduleType);
