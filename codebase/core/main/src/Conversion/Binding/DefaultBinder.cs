@@ -35,12 +35,12 @@ namespace Axle.Conversion.Binding
         #endif
 
         private static bool TryBind(
-            IBindingObjectInfoProvider objectInfoProvider, 
-            IBindingConverter converter, 
-            IBindingValueProvider valueProvider, 
-            object instance, 
-            Type targetType, 
-            out object boundValue)
+                IBindingObjectInfoProvider objectInfoProvider, 
+                IBindingConverter converter, 
+                IBindingValueProvider valueProvider, 
+                object instance, 
+                Type targetType, 
+                out object boundValue)
         {
             if (valueProvider is ISimpleMemberValueProvider svp)
             {

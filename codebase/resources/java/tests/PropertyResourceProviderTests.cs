@@ -17,10 +17,10 @@ namespace Axle.Resources.Java.Tests
     using UriParser = Axle.Conversion.Parsing.UriParser;
 
     [TestFixture]
-    public class TestClass
+    public class PropertyResourceProviderTests
     {
         [Test]
-        public void TestMethod()
+        public void TestPropertyValueRetrieval()
         {
             var parser = new UriParser();
             var resourceManager = new DefaultResourceManager();

@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-
+using System.Xml.Linq;
 using Axle.References;
 using Axle.Resources.Extraction;
-
-using Kajabity.Tools.Java;
-
+using Axle.Text.StructuredData;
+using Axle.Text.StructuredData.Properties;
 
 namespace Axle.Resources.Java.Extraction
 {
@@ -22,13 +21,12 @@ namespace Axle.Resources.Java.Extraction
         internal static void ReadData(Stream stream, IDictionary<string, string> finalProperties) => ReadData(stream, finalProperties, Encoding.UTF8);
         private static void ReadData(Stream stream, IDictionary<string, string> finalProperties, Encoding encoding)
         {
-            var propertiesFile = new JavaProperties();
-            propertiesFile.Load(stream, encoding);
-            foreach (var key in propertiesFile.Keys)
+            var structure = new PropertiesDataReader(StringComparer.OrdinalIgnoreCase).Read(stream, encoding);
+            foreach (var item in structure.GetChildren())
             {
-                if (!finalProperties.ContainsKey(key))
+                if (item is IStructuredDataValue v && !finalProperties.ContainsKey(v.Name))
                 {
-                    finalProperties[key] = propertiesFile[key];
+                    finalProperties[v.Name] = v.Value;
                 }
             }
         }

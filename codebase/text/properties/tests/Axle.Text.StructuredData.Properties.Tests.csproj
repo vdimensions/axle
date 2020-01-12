@@ -1,0 +1,31 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{2F8DD6CD-BAFF-4271-A03E-BB67DC53B9E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Axle.Text.StructuredData.Properties.Tests</RootNamespace>
+    <AssemblyName>Axle.Text.StructuredData.Properties.Tests</AssemblyName>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build.sh" />
+    <None Include="restore.sh" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Text.StructuredData.Properties" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../NUnit.Packages.targets" />
+</Project>
