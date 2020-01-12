@@ -70,6 +70,31 @@ namespace Axle.Reflection
         /// The <see cref="Type"/> which the current <see cref="IIntrospector"/> instance provides reflected information for.
         /// </summary>
         Type IntrospectedType { get; }
+
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Gets the underlying <see cref="TypeCode"/> for the <see cref="IntrospectedType"/>.
+        /// </summary>
+        TypeCode TypeCode { get; }
+        #endif
+
+        /// <summary>
+        /// Determines if the <see cref="IntrospectedType"/> is a delegate.
+        /// </summary>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the provided <see cref="IntrospectedType"/> is a delegate;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        bool IsDelegate { get; }
+
+        /// <summary>
+        /// Checks whether the specified <see cref="IntrospectedType"/> is a nullable type.
+        /// </summary>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a nullable type; 
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        bool IsNullableType { get; }
     }
 
     public interface ITypeIntrospector<T> : ITypeIntrospector

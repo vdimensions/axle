@@ -15,7 +15,7 @@ namespace Axle.Conversion.Binding
         /// <inheritdoc/>
         public IReadWriteMember GetMember(object instance, string member)
         {
-            return GetMembers(instance).SingleOrDefault(x => StringComparer.Ordinal.Equals(member, (string) x.Name));
+            return GetMembers(instance).SingleOrDefault(x => StringComparer.Ordinal.Equals(member, x.Name));
         }
 
         /// <inheritdoc/>
@@ -60,14 +60,22 @@ namespace Axle.Conversion.Binding
                 .ToArray();
         }
 
+        private TypeIntrospector RemapType(TypeIntrospector introspector)
+        {
+            //if (introspector.IsGenericType)
+            //{
+                //var genericType
+            //}
+            return introspector;
+        }
+
         /// <inheritdoc/>
         public object CreateInstance(Type type)
         {
+            var remappedIntrospector = RemapType(new TypeIntrospector(type));
             try
             {
-                Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-                var introspector = new TypeIntrospector(type);
-                return introspector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
+                return remappedIntrospector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
             }
             catch
             {

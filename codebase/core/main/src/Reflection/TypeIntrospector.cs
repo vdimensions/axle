@@ -18,19 +18,23 @@ namespace Axle.Reflection
     /// </summary>
     public class TypeIntrospector : ITypeIntrospector
     {
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Type _introspectedType;
-
-        /// <summary>
-        /// Creates a new instance of the <see cref="TypeIntrospector" /> class.
-        /// </summary>
-        /// <param name="introspectedType">
-        /// The <see cref="Type"/> to provide reflected information for by the current <see cref="TypeIntrospector"/>
-        /// instance.
-        /// </param>
-        public TypeIntrospector(Type introspectedType)
+        private static bool MatchesSignature(MethodBase mb, Type[] types)
         {
-            _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(introspectedType, nameof(introspectedType)));
+            var parameters = mb.GetParameters();
+            if (types.Length != parameters.Length)
+            {
+                return false;
+            }
+
+            for (var i = 0; i < types.Length; ++i)
+            {
+                if (parameters[i].ParameterType != types[i])
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
         
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
@@ -63,7 +67,6 @@ namespace Axle.Reflection
         #endif
 
         #if NETSTANDARD || NET45_OR_NEWER
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         private static bool MatchesScanOptions(IMember member, ScanOptions options)
         {
             if ((options & ScanOptions.Static) != ScanOptions.Static && member.Declaration == DeclarationType.Static)
@@ -136,6 +139,21 @@ namespace Axle.Reflection
 
             return member;
         }
+        
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        private readonly Type _introspectedType;
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="TypeIntrospector" /> class.
+        /// </summary>
+        /// <param name="type">
+        /// The <see cref="Type"/> to provide reflected information for by the current <see cref="TypeIntrospector"/>
+        /// instance.
+        /// </param>
+        public TypeIntrospector(Type type)
+        {
+            _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
+        }
 
         /// <inheritdoc cref="GetAttributes()"/>
         public IAttributeInfo[] GetAttributes()
@@ -181,16 +199,23 @@ namespace Axle.Reflection
             var constructor = _introspectedType.GetTypeInfo().GetConstructor(argumentTypes);
             var result = new ConstructorToken(constructor);
             return MatchesScanOptions(result, scanOptions) ? result : null;
+            #elif NETSTANDARD1_3_OR_NEWER 
+            var result = _introspectedType.GetTypeInfo().DeclaredConstructors
+                .Where(x => MatchesSignature(x, argumentTypes))
+                .Select(x => new ConstructorToken(x))
+                .SingleOrDefault();
+            return result != null && MatchesScanOptions(result, scanOptions) ? result : null;
             #endif
         }
 
         /// <inheritdoc />
         public IConstructor[] GetConstructors(ScanOptions scanOptions)
         {
-            var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var constructors = _introspectedType.GetTypeInfo().GetConstructors(bindingFlags);
             #elif NETFRAMEWORK
+            var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var constructors = _introspectedType.GetConstructors(bindingFlags);
             #endif
             return Enumerable.ToArray(Enumerable.Select<ConstructorInfo, IConstructor>(constructors, x => new ConstructorToken(x)));
@@ -333,17 +358,17 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public IMember[] GetMembers(ScanOptions scanOptions)
         {
-            var ctors = GetConstructors(scanOptions);
+            var constructors = GetConstructors(scanOptions);
             var methods = GetMethods(scanOptions);
             var props = GetProperties(scanOptions);
             var fields = GetFields(scanOptions);
             var events = GetEvents(scanOptions);
 
-            var result = new List<IMember>(ctors.Length + methods.Length + props.Length + fields.Length + events.Length);
+            var result = new List<IMember>(constructors.Length + methods.Length + props.Length + fields.Length + events.Length);
 
-            for (var i = 0; i < ctors.Length; i++)
+            for (var i = 0; i < constructors.Length; i++)
             {
-                result.Add(ctors[i]);
+                result.Add(constructors[i]);
             }
             for (var i = 0; i < methods.Length; i++)
             {
@@ -378,8 +403,59 @@ namespace Axle.Reflection
             #endif
         }
 
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Gets the underlying <see cref="TypeCode"/> for the <see cref="IntrospectedType"/>.
+        /// </summary>
+        public TypeCode TypeCode => Type.GetTypeCode(_introspectedType);
+        #endif
+
         /// <inheritdoc />
         public Type IntrospectedType => _introspectedType;
+
+        /// <summary>
+        /// Determines if the <see cref="IntrospectedType"/> is a delegate.
+        /// </summary>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the provided <see cref="IntrospectedType"/> is a delegate;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        public bool IsDelegate
+        {
+            get
+            {
+                return typeof(MulticastDelegate)
+                    #if NETSTANDARD || NET45_OR_NEWER
+                    .GetTypeInfo()
+                    .IsAssignableFrom(_introspectedType.GetTypeInfo().BaseType.GetTypeInfo())
+                    #else
+                    .IsAssignableFrom(_introspectedType.BaseType)
+                    #endif
+                    ;
+            }
+        }
+        
+        #if NETSTANDARD || NET35_OR_NEWER
+        /// <summary>
+        /// Checks whether the specified <see cref="IntrospectedType"/> is a nullable type.
+        /// </summary>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a nullable type; 
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        public bool IsNullableType
+        {
+            get
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                var ti = _introspectedType.GetTypeInfo();
+                return ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>);
+                #else
+                return _introspectedType.IsGenericType && _introspectedType.GetGenericTypeDefinition() == typeof (Nullable<>);
+                #endif
+            }
+        }
+        #endif
     }
 
     /// <summary>
