@@ -71,6 +71,10 @@ namespace Axle.Conversion.Binding
                 boundValue = instance;
                 return true;
             }
+            else // TOOD: check for collection binding
+            {
+                
+            }
             boundValue = null;
             return false;
         }

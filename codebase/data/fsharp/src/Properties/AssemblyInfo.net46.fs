@@ -11,7 +11,7 @@ open System.Reflection
 [<assembly: AssemblyProduct("Axle.Data.FSharp")>]
 [<assembly: AssemblyDescription("Axle Data F#-friendly Library")>]
 [<assembly: AssemblyCompany("Virtual Dimensions")>]
-[<assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2019")>]
+[<assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2020")>]
 [<assembly: AssemblyTrademark("")>]
 [<assembly: AssemblyConfiguration("Debug")>]
 [<assembly: AssemblyCulture("")>]

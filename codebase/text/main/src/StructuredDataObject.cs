@@ -12,7 +12,7 @@ namespace Axle.Text.StructuredData
     public sealed class StructuredDataObject : StructuredDataNode, IStructuredDataObject
     {
         private const string NameTokenRegexPattern =
-            "(?:(?:(?<=\\[)(?:[^\\]]+)(?=\\]))|(?:(?<=\\\")(?:[^\\\"]+)(?=\\\"))|(?:(?<=\\')(?:[^\\']+)(?=\\'))|(?:[\\-A-Za-z0-9_]+))";
+            "(?:(?:(?<=\\[)(?:[^\\]]+)(?=\\]))|(?:(?<=\\\")(?:[^\\\"]+)(?=\\\"))|(?:(?<=\\')(?:[^\\']+)(?=\\'))|(?:[^\\.\\n\\[\\]\\\"\\'\\:\\s]+))";
 
         private static readonly IRegularExpression _NameTokenRegex;
 
