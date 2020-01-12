@@ -90,7 +90,7 @@ namespace Axle.Text.StructuredData
                     return matchingChildren.ToArray();
                 }
                 startIndex = 1 + startIndex;
-                children = matchingChildren.OfType<IStructuredDataObject>() .SelectMany(c => c.GetChildren());;
+                children = matchingChildren.OfType<IStructuredDataObject>() .SelectMany(c => c.GetChildren());
             }
         }
     }

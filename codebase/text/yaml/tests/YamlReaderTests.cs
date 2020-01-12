@@ -25,11 +25,11 @@ namespace Axle.Text.StructuredData.Yaml.Tests
 
             var item1 = data.GetChildren("SingleKey").SingleOrDefault() as IStructuredDataValue;
             var item2 = data.GetChildren("System");
-            var item3 = data.GetChildren("System.Text");
-            var item4 = data.GetChildren("System.Text.Encoding").SingleOrDefault() as IStructuredDataValue;
-            var item5 = data.GetChildren("System.Text.DefaultEncoding").SingleOrDefault() as IStructuredDataValue;
-            var item6 = item3.OfType<IStructuredDataObject>().Take(1).SingleOrDefault()?.GetChildren("Encoding").SingleOrDefault() as IStructuredDataValue;
-            var item7 = item3.OfType<IStructuredDataObject>().Skip(1).Take(1).SingleOrDefault()?.GetChildren("DefaultEncoding").SingleOrDefault() as IStructuredDataValue;
+            var item3 = data.GetChildren("System.Text").OfType<IStructuredDataObject>();
+            var item4 = data.GetChildren("System.Text.Encoding").FirstOrDefault() as IStructuredDataValue;
+            var item5 = data.GetChildren("System.Text.DefaultEncoding").FirstOrDefault() as IStructuredDataValue;
+            var item6 = item3.Take(1).FirstOrDefault()?.GetChildren("Encoding").FirstOrDefault() as IStructuredDataValue;
+            var item7 = item3.Take(1).FirstOrDefault()?.GetChildren("DefaultEncoding").FirstOrDefault() as IStructuredDataValue;
             
             Assert.IsNotNull(item1, "Lookup for value failed for simple key {0}", "SingleKey");
             Assert.IsNotNull(item2, "Lookup for object failed for simple key {0}", "System");

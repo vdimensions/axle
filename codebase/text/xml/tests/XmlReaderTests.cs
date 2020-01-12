@@ -15,22 +15,37 @@ namespace Axle.Text.StructuredData.Xml.Tests
     public class XmlReaderTests
     {
         [Test]
-        public void TestDataLookup()
+        public void TestXDocumentDataLookup()
         {
             var propertiesPath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "data.xml");
             var reader = new XDocumentDataReader(StringComparer.OrdinalIgnoreCase);
+            TestData(reader, propertiesPath);
+        }
+        
+        [Test]
+        public void TestXmlDocumentDataLookup()
+        {
+            var propertiesPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "data.xml");
+            var reader = new XmlDataReader(StringComparer.OrdinalIgnoreCase);
+            TestData(reader, propertiesPath);
+        }
+
+        private static void TestData(IStructuredDataReader reader, string propertiesPath)
+        {
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
             var item1 = data.GetChildren("SingleKey").SingleOrDefault() as IStructuredDataValue;
             var item2 = data.GetChildren("System");
-            var item3 = data.GetChildren("System.Text");
-            var item4 = data.GetChildren("System.Text.Encoding").SingleOrDefault() as IStructuredDataValue;
-            var item5 = data.GetChildren("System.Text.DefaultEncoding").SingleOrDefault() as IStructuredDataValue;
-            var item6 = item3.OfType<IStructuredDataObject>().Take(1).SingleOrDefault()?.GetChildren("Encoding").SingleOrDefault() as IStructuredDataValue;
-            var item7 = item3.OfType<IStructuredDataObject>().Skip(1).Take(1).SingleOrDefault()?.GetChildren("DefaultEncoding").SingleOrDefault() as IStructuredDataValue;
-            
+            var item3 = data.GetChildren("System.Text").OfType<IStructuredDataObject>();
+            var item4 = data.GetChildren("System.Text.Encoding").FirstOrDefault() as IStructuredDataValue;
+            var item5 = data.GetChildren("System.Text.DefaultEncoding").FirstOrDefault() as IStructuredDataValue;
+            var item6 = item3.FirstOrDefault()?.GetChildren("Encoding").FirstOrDefault() as IStructuredDataValue;
+            var item7 = item3.FirstOrDefault()?.GetChildren("DefaultEncoding").FirstOrDefault() as IStructuredDataValue;
+
             Assert.IsNotNull(item1, "Lookup for value failed for simple key {0}", "SingleKey");
             Assert.IsNotNull(item2, "Lookup for object failed for simple key {0}", "System");
             Assert.IsNotNull(item3, "Lookup for object failed for complex key {0}", "System.Text");

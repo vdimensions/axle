@@ -17,16 +17,16 @@ namespace Axle.Text.StructuredData.Xml
         protected override XDocument GetXmlObject(string xml) 
             => XDocument.Parse(xml);
 
-        internal override XmlDataNode CreateXmlNode(XDocument xmlObj)
+        internal override XmlNodeAdapter CreateXmlNode(XDocument xmlObj)
         {
-            return new XmlDataNode(
+            return new XmlNodeAdapter(
                 string.Empty, 
                 xmlObj.Root.Value, 
                 xmlObj.Root.Elements().Select(CreateXmlNode).ToArray());
         }
-        private XmlDataNode CreateXmlNode(XElement xElement)
+        private XmlNodeAdapter CreateXmlNode(XElement xElement)
         {
-            return new XmlDataNode(
+            return new XmlNodeAdapter(
                 xElement.Name.LocalName, 
                 xElement.Value, 
                 xElement.Elements().Select(CreateXmlNode).ToArray());

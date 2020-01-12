@@ -10,24 +10,7 @@ namespace Axle.Text.StructuredData
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public abstract class AbstractStructuredDataReader : IStructuredDataReader
     {
-        private readonly StringComparer _comparer;
-
-        protected AbstractStructuredDataReader(StringComparer comparer)
-        {
-            _comparer = comparer;
-        }
-
-        protected abstract IStructuredDataAdapter CreateAdapter(Stream stream, Encoding encoding);
-        protected abstract IStructuredDataAdapter CreateAdapter(string data);
-        
-        private IStructuredDataRoot ReadStructuredData(
-            IStructuredDataAdapter adapter, 
-            StringComparer comparer)
-        {
-            return new StructuredDataObjectRoot(ReadStructuredData(string.Empty, adapter), comparer);
-        }
-
-        private IEnumerable<IStructuredDataNode> FixHierarchy(string key, IEnumerable<IStructuredDataNode> nodes)
+        private static IEnumerable<IStructuredDataNode> FixHierarchy(string key, IEnumerable<IStructuredDataNode> nodes)
         {
             var tokenizedKey = StructuredDataObject.Tokenize(key);
             var currentNodes = nodes;
@@ -54,39 +37,60 @@ namespace Axle.Text.StructuredData
             }
             return currentNodes;
         }
-        private IList<IStructuredDataNode> ReadStructuredData(
+        
+        private readonly StringComparer _comparer;
+
+        protected AbstractStructuredDataReader(StringComparer comparer)
+        {
+            _comparer = comparer;
+        }
+
+        protected abstract IStructuredDataAdapter CreateAdapter(Stream stream, Encoding encoding);
+        protected abstract IStructuredDataAdapter CreateAdapter(string data);
+        
+        private IStructuredDataRoot ReadStructuredData(
+            IStructuredDataAdapter adapter, 
+            StringComparer comparer)
+        {
+            return new StructuredDataObjectRoot(ReadStructuredData(string.Empty, adapter), comparer);
+        }
+
+        private IEnumerable<IStructuredDataNode> ExpandChildren(IStructuredDataAdapter adapter)
+        {
+            foreach (var childGroup in adapter.Children.GroupBy(x => x.Name))
+            foreach (var child in childGroup)
+            foreach (var node in FixHierarchy(childGroup.Key, ReadStructuredData(childGroup.Key, child)))
+            {
+                yield return node;
+            }
+        }
+        
+        private IEnumerable<IStructuredDataNode> ReadStructuredData(
             string key,
             IStructuredDataAdapter adapter)
         {
-            var result = new List<IStructuredDataNode>();
-            if (adapter.Value != null)
+            var isRoot = key.Length == 0;
+            if (isRoot)
             {
-                result.Add(new StructuredDataValue(key, null, adapter.Value));
-            }
-            var childrenDictionary = adapter.GetChildren();
-            foreach (var nestedData in childrenDictionary)
-            foreach (var values in nestedData.Value.Select(v => ReadStructuredData(nestedData.Key, v)))
-            {
-                if (key.Length == 0)
+                foreach (var node in ExpandChildren(adapter))
                 {
-                    foreach (var node in FixHierarchy(nestedData.Key, values))
-                    {
-                        result.Add(node);
-                    }
-                }
-                else
-                {
-                    var nodes = new List<IStructuredDataNode>();
-                    foreach (var node in FixHierarchy(nestedData.Key, values))
-                    {
-                        nodes.Add(node);
-                    }
-                    result.Add(new StructuredDataObject(key, null, nodes));
+                    yield return node;
                 }
             }
-            return result;
+            else
+            {
+                if (adapter.Value != null)
+                {
+                    yield return new StructuredDataValue(key, null, adapter.Value);
+                }
+                var children = ExpandChildren(adapter);
+                if (children.Any())
+                {
+                    yield return new StructuredDataObject(key, null, children, false);
+                }
+            }
         }
-        
+
         public IStructuredDataRoot Read(Stream stream, Encoding encoding) 
             => ReadStructuredData(CreateAdapter(stream, encoding), _comparer);
 

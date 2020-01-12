@@ -4,7 +4,8 @@ namespace Axle.Text.StructuredData
 {
     public interface IStructuredDataAdapter
     {
-        IDictionary<string, IStructuredDataAdapter[]> GetChildren();
+        string Name { get; }
         string Value { get; }
+        IEnumerable<IStructuredDataAdapter> Children { get; }
     }
 }

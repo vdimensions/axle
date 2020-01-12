@@ -14,39 +14,36 @@ namespace Axle.Text.StructuredData.Yaml
     {
         private sealed class Adapter : AbstractStructuredDataAdapter
         {
-            private readonly IDictionary<string, IStructuredDataAdapter[]> _data;
-            private readonly string _value;
-
-            public Adapter(StringComparer comparer, object rawData, string value = null)
+            internal static IEnumerable<IStructuredDataAdapter> ToChildren(string name, object o)
             {
-                _value = value;
-                var data = new Dictionary<string, IStructuredDataAdapter[]>(comparer);
-                switch (rawData)
+                switch (o)
                 {
                     case string v:
-                        _value = v;
+                        yield return new Adapter(name, Enumerable.Empty<IStructuredDataAdapter>(), v);
                         break;
-                    case IDictionary<object, object> d:
-                        foreach (var kvp in d)
+                    case IDictionary<object, object> dict:
+                        var children = dict.SelectMany(x => ToChildren(x.Key.ToString(), x.Value));
+                        yield return new Adapter(name, children, null);
+                        break;
+                    case IList<object> list:
+                        foreach (var adapter in list.SelectMany(x => ToChildren(name, x)))
                         {
-                            var key = kvp.Key.ToString();
-                            switch (kvp.Value)
-                            {
-                                case IList<object> list:
-                                    data.Add(key, list.Select(x => new Adapter(comparer, x) as IStructuredDataAdapter).ToArray());
-                                    break;
-                                default:
-                                    data.Add(key, new IStructuredDataAdapter[]{new Adapter(comparer, kvp.Value)});
-                                    break;
-                            }
+                            yield return adapter;
                         }
                         break;
                 }
-                _data = data;
             }
 
-            public override IDictionary<string, IStructuredDataAdapter[]> GetChildren() => _data;
-            public override string Value => _value;
+            private Adapter(string name, IEnumerable<IStructuredDataAdapter> children, string value)
+            {
+                Name = name;
+                Children = children;
+                Value = value;
+            }
+
+            public override string Name { get; }
+            public override string Value { get; }
+            public override IEnumerable<IStructuredDataAdapter> Children { get; }
         }
         
         public YamlDataReader(StringComparer comparer) : base(comparer) { }
@@ -57,17 +54,17 @@ namespace Axle.Text.StructuredData.Yaml
             try
             {
                 var result = deserializer.Deserialize<object>(new StreamReader(stream, encoding, true));
-                return new Adapter(Comparer, result);
+                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
             }
             catch (YamlException e)
             {
-                if (e.Message.Contains("Expected 'MappingStart', got 'SequenceStart'"))
+                if (!e.Message.Contains("Expected 'MappingStart', got 'SequenceStart'"))
                 {
-                    stream.Seek(0, SeekOrigin.Begin);
-                    var result = deserializer.Deserialize<List<object>>(new StreamReader(stream, encoding, true));
-                    return new Adapter(Comparer, result);
+                    throw;
                 }
-                throw;
+                stream.Seek(0, SeekOrigin.Begin);
+                var result = deserializer.Deserialize<List<object>>(new StreamReader(stream, encoding, true));
+                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
             }
         }
 
@@ -77,16 +74,16 @@ namespace Axle.Text.StructuredData.Yaml
             try
             {
                 var result = deserializer.Deserialize<object>(new StringReader(data));
-                return new Adapter(Comparer, result);
+                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
             }
             catch (YamlException e)
             {
-                if (e.Message.Contains("Expected 'MappingStart', got 'SequenceStart'"))
+                if (!e.Message.Contains("Expected 'MappingStart', got 'SequenceStart'"))
                 {
-                    var result = deserializer.Deserialize<List<object>>(new StringReader(data));
-                    return new Adapter(Comparer, result);
+                    throw;
                 }
-                throw;
+                var result = deserializer.Deserialize<List<object>>(new StringReader(data));
+                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
             }
         }
     }

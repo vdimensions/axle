@@ -13,23 +13,20 @@ namespace Axle.Text.StructuredData.Properties
     {
         private sealed class Adapter : AbstractStructuredDataAdapter
         {
-            private readonly JavaProperties _propertiesFile;
-            private readonly string _value;
-            private readonly IDictionary<string, IStructuredDataAdapter[]> _children;
-
-            public Adapter(JavaProperties propertiesFile, StringComparer comparer, string value = null)
+            public Adapter(JavaProperties propertiesFile) : this(string.Empty, null)
             {
-                _propertiesFile = propertiesFile;
-                _value = value;
-                var emptyProperties = new JavaProperties();
-                _children = _propertiesFile.ToDictionary(
-                    x => x.Key,
-                    x => new IStructuredDataAdapter[] {new Adapter(emptyProperties, comparer, x.Value)},
-                    comparer);
+                Children = propertiesFile.Select(x => new Adapter(x.Key, x.Value) as IStructuredDataAdapter);
+            }
+            private Adapter(string key, string value)
+            {
+                Name = key;
+                Value = value;
+                Children = Enumerable.Empty<IStructuredDataAdapter>();
             }
 
-            public override IDictionary<string, IStructuredDataAdapter[]> GetChildren() => _children;
-            public override string Value => _value;
+            public override string Name { get; }
+            public override string Value { get; }
+            public override IEnumerable<IStructuredDataAdapter> Children { get; }
         }
         public PropertiesDataReader(StringComparer comparer) : base(comparer) { }
 
@@ -37,7 +34,7 @@ namespace Axle.Text.StructuredData.Properties
         {
             var propertiesFile = new JavaProperties();
             propertiesFile.Load(stream, encoding);
-            return new Adapter(propertiesFile, Comparer);
+            return new Adapter(propertiesFile);
         }
 
         protected override IStructuredDataAdapter CreateAdapter(string data)

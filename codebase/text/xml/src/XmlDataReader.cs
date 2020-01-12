@@ -26,19 +26,18 @@ namespace Axle.Text.StructuredData.Xml
             return doc;
         }
 
-        internal override XmlDataNode CreateXmlNode(XmlDocument xmlObj)
+        internal override XmlNodeAdapter CreateXmlNode(XmlDocument xmlObj) 
+            => CreateXmlNode(xmlObj.ChildNodes.OfType<XmlNode>().Last());
+        
+        private XmlNodeAdapter CreateXmlNode(XmlNode xmlElement)
         {
-            return new XmlDataNode(
-                string.Empty, 
-                xmlObj.Value, 
-                xmlObj.ChildNodes.OfType<XmlNode>().Select(CreateXmlNode).ToArray());
-        }
-        private XmlDataNode CreateXmlNode(XmlNode xmlElement)
-        {
-            return new XmlDataNode(
+            var allChildren = xmlElement.ChildNodes.OfType<XmlNode>();
+            var value = allChildren.Where(x => x.NodeType == XmlNodeType.Text).Select(x => x.Value).SingleOrDefault();
+            var children = value != null ? new XmlNode[0] : allChildren.Where(x => x.NodeType != XmlNodeType.Text);
+            return new XmlNodeAdapter(
                 xmlElement.Name, 
-                xmlElement.Value, 
-                xmlElement.ChildNodes.OfType<XmlNode>().Select(CreateXmlNode).ToArray());
+                value, 
+                children.Select(CreateXmlNode).ToArray());
         }
     }
 }

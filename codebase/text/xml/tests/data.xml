@@ -6,5 +6,9 @@
             <encoding>UTF-8</encoding>
             <defaultEncoding>UTF-8</defaultEncoding>
         </text>
+        <text>
+            <encoding>UTF-16</encoding>
+            <defaultEncoding>UTF-16</defaultEncoding>
+        </text>
     </system>
 </root>
