@@ -29,7 +29,7 @@ namespace Axle.Text.StructuredData
         public IEnumerable<IStructuredDataNode> GetChildren() => _inner.GetChildren();
         public IEnumerable<IStructuredDataNode> GetChildren(string name) => _inner.GetChildren(name);
 
-        public string Name => _inner.Name;
+        public string Key => _inner.Key;
         public IStructuredDataObject Parent => _inner.Parent;
         StringComparer IStructuredDataNode.KeyComparer => _comparer;
     }

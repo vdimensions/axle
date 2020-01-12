@@ -57,7 +57,7 @@ namespace Axle.Text.StructuredData
 
         private IEnumerable<IStructuredDataNode> ExpandChildren(IStructuredDataAdapter adapter)
         {
-            foreach (var childGroup in adapter.Children.GroupBy(x => x.Name))
+            foreach (var childGroup in adapter.Children.GroupBy(x => x.Key))
             foreach (var child in childGroup)
             foreach (var node in FixHierarchy(childGroup.Key, ReadStructuredData(childGroup.Key, child)))
             {

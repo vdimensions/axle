@@ -4,8 +4,7 @@
     <ProjectGuid>{5FBB8571-DE95-4AFF-BD35-BE3D579D9BE0}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle.Resources.Java.Tests</RootNamespace>
-    <AssemblyName>Axle.Resources.Java.Tests</AssemblyName>
+    <RootNamespace>Axle.Resources.Properties.Tests</RootNamespace>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
   <ItemGroup>
@@ -18,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Resources.Java" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Resources.Properties" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

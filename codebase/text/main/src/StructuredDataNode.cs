@@ -10,21 +10,21 @@ namespace Axle.Text.StructuredData
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Runtime.Serialization.DataMember]
         #endif
-        private readonly string _name;
+        private readonly string _key;
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly IStructuredDataObject _parent;
 
-        protected StructuredDataNode(string name, IStructuredDataObject parent)
+        protected StructuredDataNode(string key, IStructuredDataObject parent)
         {
             _parent = parent;
-            _name = name;
+            _key = key;
         }
 
         StringComparer IStructuredDataNode.KeyComparer => Parent?.KeyComparer ?? StringComparer.OrdinalIgnoreCase;
-        public string Name => _name;
+        public string Key => _key;
         public IStructuredDataObject Parent => _parent;
     }
 }

@@ -7,12 +7,12 @@ namespace Axle.Text.StructuredData.Xml
     {
         public XmlNodeAdapter(string name, string value, ICollection<XmlNodeAdapter> children)
         {
-            Name = name;
+            Key = name;
             Children = children;
             Value = (children.Count > 0 || string.IsNullOrEmpty(value)) ? null : value;
         }
 
-        public string Name { get; }
+        public string Key { get; }
         public string Value { get; }
         public IEnumerable<XmlNodeAdapter> Children { get; }
         IEnumerable<IStructuredDataAdapter> IStructuredDataAdapter.Children => Children.Cast<IStructuredDataAdapter>();

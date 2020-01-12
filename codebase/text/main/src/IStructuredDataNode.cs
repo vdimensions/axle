@@ -4,7 +4,7 @@ namespace Axle.Text.StructuredData
 {
     public interface IStructuredDataNode
     {
-        string Name { get; }
+        string Key { get; }
         IStructuredDataObject Parent { get; }
         StringComparer KeyComparer { get; }
     }

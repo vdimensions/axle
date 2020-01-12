@@ -37,10 +37,10 @@ namespace Axle.Text.StructuredData
         private readonly IEnumerable<IStructuredDataNode> _children;
         
         public StructuredDataObject(
-                string name, 
+                string key, 
                 IStructuredDataObject parent, 
                 IEnumerable<IStructuredDataNode> children, 
-                bool recursiveParentMapping = false) : base(name, parent)
+                bool recursiveParentMapping = false) : base(key, parent)
         {
             var p = this;
             _children = recursiveParentMapping 
@@ -50,9 +50,9 @@ namespace Axle.Text.StructuredData
                         switch (child)
                         {
                             case StructuredDataValue value:
-                                return new StructuredDataValue(value.Name, p, value.Value);
+                                return new StructuredDataValue(value.Key, p, value.Value);
                             case StructuredDataObject obj:
-                                return new StructuredDataObject(obj.Name, p, obj.GetChildren(), true);
+                                return new StructuredDataObject(obj.Key, p, obj.GetChildren(), true);
                             default:
                                 return child;
                         }
@@ -61,10 +61,10 @@ namespace Axle.Text.StructuredData
         }
 
         public StructuredDataObject(
-                string name, 
+                string key, 
                 IStructuredDataObject parent, 
                 IEnumerable<IStructuredDataNode> children) 
-            : this(name, parent, children, true) { }
+            : this(key, parent, children, true) { }
 
         public IEnumerable<IStructuredDataNode> GetChildren() => _children;
         public IEnumerable<IStructuredDataNode> GetChildren(string name)
@@ -84,7 +84,7 @@ namespace Axle.Text.StructuredData
             while (true)
             {
                 var token = tokens[startIndex];
-                var matchingChildren = children.Where(child => comparer.Equals(child.Name, token));
+                var matchingChildren = children.Where(child => comparer.Equals(child.Key, token));
                 if ((startIndex + 1) == tokens.Length)
                 {
                     return matchingChildren.ToArray();

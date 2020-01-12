@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -8,9 +9,9 @@ using System.Xml;
 namespace Axle.Text.StructuredData.Xml
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class XmlDataReader : AbstractXmlDataReader<XmlDocument>
+    public sealed class XmlDocumentDataReader : AbstractXmlDataReader<XmlDocument>
     {
-        public XmlDataReader(StringComparer comparer) : base(comparer) { }
+        public XmlDocumentDataReader(StringComparer comparer) : base(comparer) { }
 
         protected override XmlDocument GetXmlObject(Stream stream, Encoding encoding)
         {
@@ -41,3 +42,4 @@ namespace Axle.Text.StructuredData.Xml
         }
     }
 }
+#endif

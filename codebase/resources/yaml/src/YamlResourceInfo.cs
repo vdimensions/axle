@@ -2,12 +2,8 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
-
-using Axle.Reflection.Extensions.Type;
-using Axle.Resources.Yaml.Extraction;
-
+using Axle.Resources.StructuredData;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -17,11 +13,8 @@ namespace Axle.Resources.Yaml
     /// <summary>
     /// A class representing a YAML file as a resource.
     /// </summary>
-    public sealed class YamlResourceInfo : ResourceInfo
+    public sealed class YamlResourceInfo : StructuredDataResourceInfo
     {
-        private readonly IEnumerable<IDictionary<string, string>> _data;
-        private readonly ResourceInfo _originalResource;
-
         /// <summary>
         /// Gets the content (MIME) type of a java properties file.
         /// </summary>
@@ -32,14 +25,13 @@ namespace Axle.Resources.Yaml
         /// </summary>
         public const string FileExtension = ".yml";
 
-        internal YamlResourceInfo(string name, CultureInfo culture, IEnumerable<IDictionary<string, string>> data) : base(name, culture, MimeType)
+        internal YamlResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data) 
+            : base(name, culture, MimeType, data)
         {
-            _data = data;
         }
-        internal YamlResourceInfo(string name, CultureInfo culture, IEnumerable<IDictionary<string, string>> data, ResourceInfo originalResource) 
-            : this(name, culture, data)
+        internal YamlResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data, ResourceInfo originalResource) 
+            : base(name, culture, MimeType, data, originalResource)
         {
-            _originalResource = originalResource;
         }
 
         /// <summary>
@@ -53,18 +45,14 @@ namespace Axle.Resources.Yaml
             // ReSharper disable EmptyGeneralCatchClause
             try
             {
-                var stream = _originalResource?.Open();
-                if (stream != null)
-                {
-                    return stream;
-                }
+                return base.Open();
             }
             catch { }
             // ReSharper restore EmptyGeneralCatchClause
 
             var result = new MemoryStream();
             var writer = new StreamWriter(result, Encoding.UTF8);
-            new Serializer().Serialize(writer, _data);
+            new Serializer().Serialize(writer, Data);
             result.Seek(0, SeekOrigin.Begin);
             return result;
         }
@@ -72,12 +60,6 @@ namespace Axle.Resources.Yaml
         /// <inheritdoc />
         public override bool TryResolve(Type targetType, out object result)
         {
-            if (targetType?.ExtendsOrImplements<IEnumerable<IDictionary<string, string>>>() ?? false)
-            {
-                result = Data;
-                return true;
-            }
-
             try
             {
                 var deserializer = new Deserializer();
@@ -99,11 +81,5 @@ namespace Axle.Resources.Yaml
             result = null;
             return false;
         }
-
-        /// <summary>
-        /// Gets a <see cref="IDictionary{TKey,TValue}"/> representing the contents of the YAML file.
-        /// </summary>
-        //TODO: make the data read-only
-        public IEnumerable<IDictionary<string, string>> Data => new List<IDictionary<string, string>>(_data.Select(x => new Dictionary<string, string>(x, YamlFileExtractor.KeyComparer) as IDictionary<string, string>));
     }
 }

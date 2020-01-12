@@ -1,22 +1,21 @@
 using System;
 using System.Collections.Generic;
-
-using Axle.Resources.Extraction;
 using Axle.Extensions.String;
 using Axle.References;
+using Axle.Resources.Extraction;
+using Axle.Resources.StructuredData;
 
-
-namespace Axle.Resources.Java.Extraction
+namespace Axle.Resources.Properties.Extraction
 {
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementation that can access the values defined in a Java properties file.
     /// </summary>
-    internal sealed class JavaPropertiesValueExtractor : AbstractResourceExtractor
+    internal sealed class PropertiesValueExtractor : AbstractResourceExtractor
     {
         private static bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
         {
             propertyFileName = keyPrefix = null;
-            const string ext = JavaPropertiesResourceInfo.FileExtension;
+            const string ext = PropertiesResourceInfo.FileExtension;
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
             var locStr = location.ToString();
             keyPrefix = locStr.TakeAfterFirst(ext, cmp);
@@ -41,15 +40,16 @@ namespace Axle.Resources.Java.Extraction
                 }
                 switch (propertyResource.Value)
                 {
-                    case JavaPropertiesResourceInfo jp:
+                    case StructuredDataResourceInfo jp:
                         props = jp.Data;
                         break;
                     default:
-                        using (var stream = propertyResource.Value.Open())
-                        if (stream != null)
-                        {
-                            JavaPropertiesFileExtractor.ReadData(stream, props = new Dictionary<string, string>(JavaPropertiesFileExtractor.KeyComparer));
-                        }
+                        //using (var stream = propertyResource.Value.Open())
+                        //if (stream != null)
+                        //{
+                        //    var x = new PropertiesFileExtractor();
+                        //    x.ReadData(stream, props = new Dictionary<string, string>(PropertiesFileExtractor.DefaultKeyComparer));
+                        //}
                         break;
                 }
 

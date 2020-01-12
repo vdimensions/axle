@@ -19,12 +19,12 @@ namespace Axle.Text.StructuredData.Properties
             }
             private Adapter(string key, string value)
             {
-                Name = key;
+                Key = key;
                 Value = value;
                 Children = Enumerable.Empty<IStructuredDataAdapter>();
             }
 
-            public override string Name { get; }
+            public override string Key { get; }
             public override string Value { get; }
             public override IEnumerable<IStructuredDataAdapter> Children { get; }
         }

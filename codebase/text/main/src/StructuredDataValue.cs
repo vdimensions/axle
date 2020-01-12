@@ -7,7 +7,7 @@ namespace Axle.Text.StructuredData
     #endif
     public sealed class StructuredDataValue : StructuredDataNode, IStructuredDataValue
     {
-        public StructuredDataValue(string name, IStructuredDataObject parent, string value) : base(name, parent)
+        public StructuredDataValue(string key, IStructuredDataObject parent, string value) : base(key, parent)
         {
             Value = value;
         }

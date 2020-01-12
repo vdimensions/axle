@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Text.StructuredData" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

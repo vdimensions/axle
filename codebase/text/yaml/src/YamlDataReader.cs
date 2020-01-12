@@ -36,12 +36,12 @@ namespace Axle.Text.StructuredData.Yaml
 
             private Adapter(string name, IEnumerable<IStructuredDataAdapter> children, string value)
             {
-                Name = name;
+                Key = name;
                 Children = children;
                 Value = value;
             }
 
-            public override string Name { get; }
+            public override string Key { get; }
             public override string Value { get; }
             public override IEnumerable<IStructuredDataAdapter> Children { get; }
         }

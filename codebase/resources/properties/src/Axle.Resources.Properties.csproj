@@ -11,7 +11,7 @@
     <PlatformTarget>AnyCPU</PlatformTarget>
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <Description>Axle Framework resources library to handle Java properties</Description>
-    <PackageTags>Axle.Resources.Java Kajabity.Tools.Java</PackageTags>
+    <PackageTags>Axle.Resources.Properties Kajabity.Tools.Java</PackageTags>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">

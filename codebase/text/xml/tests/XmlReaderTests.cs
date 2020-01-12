@@ -3,9 +3,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-
-using Axle.Text.StructuredData;
-using Axle.Text.StructuredData.Xml;
 using NUnit.Framework;
 
 
@@ -30,7 +27,7 @@ namespace Axle.Text.StructuredData.Xml.Tests
             var propertiesPath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "data.xml");
-            var reader = new XmlDataReader(StringComparer.OrdinalIgnoreCase);
+            var reader = new XmlDocumentDataReader(StringComparer.OrdinalIgnoreCase);
             TestData(reader, propertiesPath);
         }
 
