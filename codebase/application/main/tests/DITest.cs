@@ -18,9 +18,7 @@ namespace Axle.ApplicationTests
 
         private class Vip : Person
         {
-            public Vip(string name) : base(name)
-            {
-            }
+            public Vip(string name) : base(name) { }
         }
 
         [Test]
@@ -60,7 +58,7 @@ namespace Axle.ApplicationTests
             var p = c.Resolve<Person>();
             Assert.AreEqual(name, p.Name);
 
-            var p2 = c.Resolve<Person>();
+            var p2 = c.Resolve<Vip>();
 
             Assert.AreSame(p, p2);
         }

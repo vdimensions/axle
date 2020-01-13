@@ -11,6 +11,15 @@ namespace Axle.Data.MySql.Tests
 {
     public class ModularityTests
     {
+        [Module]
+        private class SqlScriptsConfigurer : ISqlScriptLocationConfigurer
+        {
+            public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
+            {
+                registry.Register("test", GetType().Assembly, "SqlScripts/");
+            }
+        }
+        
         [Test]
         public void TestMySqlProviderIsRegistered()
         {
@@ -26,6 +35,7 @@ namespace Axle.Data.MySql.Tests
                 Assert.AreEqual(providers[0].ProviderName, MySqlServiceProvider.Name);
             }
         }
+        
         [Test]
         public void TestConnectionStringBinding()
         {
@@ -43,6 +53,7 @@ namespace Axle.Data.MySql.Tests
                 Assert.IsNotNull(defaultConnectionString);
             }
         }
+        
         [Test]
         public void TestConnectionStringsBinding()
         {
@@ -84,15 +95,6 @@ namespace Axle.Data.MySql.Tests
                     Assert.IsNotNull(dataSource);
                     Assert.AreEqual(dataSource.Name, connectionStringInfo.Name);
                 }
-            }
-        }
-
-        [Module]
-        private class SqlScriptsConfigurer : ISqlScriptLocationConfigurer
-        {
-            public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
-            {
-                registry.Register("test", GetType().Assembly, "SqlScripts/");
             }
         }
 

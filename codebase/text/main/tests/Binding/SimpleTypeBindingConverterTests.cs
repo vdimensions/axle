@@ -1,12 +1,11 @@
-﻿using NUnit.Framework;
-using System;
-using Axle.Text.StructuredData.Binding;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Axle.Globalization;
-using Axle.Extensions.DateTime;
+using Axle.Text.StructuredData.Binding;
+using NUnit.Framework;
 
-namespace Axle.StructuredData.Binding.Tests
+namespace Axle.Text.StructuredData.Tests.Binding
 {
     [TestFixture]
     public class SimpleTypeBindingConverterTests

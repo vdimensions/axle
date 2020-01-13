@@ -42,38 +42,38 @@ namespace Axle.Text.StructuredData.Binding
                 Type targetType, 
                 out object boundValue)
         {
-            if (valueProvider is ISimpleMemberValueProvider svp)
+            switch (valueProvider)
             {
-                return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
-            }
-            else if (instance != null && valueProvider is IComplexMemberValueProvider cvp)
-            {
-                var members = objectInfoProvider.GetMembers(instance);
-                foreach (var member in members)
-                {
-                    if (cvp.TryGetValue(member.Name, out var memberValueProvider))
+                case ISimpleMemberValueProvider svp:
+                    return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
+                case IComplexMemberValueProvider cvp:
+                    if (instance != null)
                     {
-                        var memberType = member.MemberType;
-                        var memberInstance = 
-                            member.GetAccessor?.GetValue(instance) ?? objectInfoProvider.CreateInstance(memberType);
-                        if (TryBind(
-                                objectInfoProvider, 
-                                converter, 
-                                memberValueProvider, 
-                                memberInstance, 
-                                memberType, 
-                                out var memberValue))
+                        var members = objectInfoProvider.GetMembers(instance);
+                        foreach (var member in members)
                         {
-                            member.SetAccessor.SetValue(instance, memberValue);
+                            if (cvp.TryGetValue(member.Name, out var memberValueProvider))
+                            {
+                                var memberType = member.MemberType;
+                                var memberInstance = 
+                                    member.GetAccessor?.GetValue(instance) ?? objectInfoProvider.CreateInstance(memberType);
+                                
+                                if (TryBind(
+                                    objectInfoProvider, 
+                                    converter, 
+                                    memberValueProvider, 
+                                    memberInstance, 
+                                    memberType, 
+                                    out var memberValue))
+                                {
+                                    member.SetAccessor.SetValue(instance, memberValue);
+                                }
+                            }
                         }
+                        boundValue = instance;
+                        return true;
                     }
-                }
-                boundValue = instance;
-                return true;
-            }
-            else // TOOD: check for collection binding
-            {
-                
+                    break;
             }
             boundValue = null;
             return false;

@@ -3,7 +3,7 @@ using System.Xml.Linq;
 using Axle.Text.StructuredData.Binding;
 using NUnit.Framework;
 
-namespace Axle.Text.StructuredData.Binding.Tests
+namespace Axle.Text.StructuredData.Tests.Binding
 {
     [TestFixture]
     public class BinderTests
