@@ -1,9 +1,10 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NET35_OR_NEWER
+using Axle.Conversion;
 using Axle.Verification;
 using System;
 using System.Collections.Concurrent;
 
-namespace Axle.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding
 {
     public sealed class BindingConverter : IBindingConverter
     {

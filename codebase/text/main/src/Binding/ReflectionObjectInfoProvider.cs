@@ -5,7 +5,7 @@ using Axle.Reflection;
 using Axle.Reflection.Extensions.Type;
 using Axle.Verification;
 
-namespace Axle.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// An implementation of the <see cref="IBindingObjectInfoProvider"/> that uses reflection.

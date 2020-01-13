@@ -1,4 +1,4 @@
-﻿namespace Axle.Conversion.Binding
+﻿namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// An interface representing a member value provider; that is an object which provides values for 

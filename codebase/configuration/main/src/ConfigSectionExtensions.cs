@@ -1,7 +1,7 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Linq;
-using Axle.Conversion.Binding;
+using Axle.Text.StructuredData.Binding;
 using Axle.Verification;
 
 namespace Axle.Configuration

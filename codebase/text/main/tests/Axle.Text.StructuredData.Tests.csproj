@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <ProjectGuid>{D4C56580-5C6F-4D05-A519-95E6B1F59F1F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="build.sh" />
+    <None Include="restore.sh" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Axle.Text.StructuredData" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../NUnit.Packages.targets" />
+</Project>

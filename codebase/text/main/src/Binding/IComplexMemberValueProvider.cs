@@ -1,4 +1,4 @@
-﻿namespace Axle.Conversion.Binding
+﻿namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// An interface representing an binder object provider; that is a type of <see cref="IBindingValueProvider"/> 

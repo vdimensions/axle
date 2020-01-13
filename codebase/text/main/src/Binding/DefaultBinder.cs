@@ -1,7 +1,7 @@
 ﻿using Axle.Verification;
 using System;
 
-namespace Axle.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// A general-purpose implementation of the <see cref="IBinder"/> interface.

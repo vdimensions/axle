@@ -1,4 +1,4 @@
-﻿namespace Axle.Conversion.Binding
+﻿namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// The default implementation of the <see cref="ISimpleMemberValueProvider"/> interface.

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Xml.Linq;
-using Axle.Conversion.Binding;
+using Axle.Text.StructuredData.Binding;
 using NUnit.Framework;
 
-namespace Axle.Core.Tests.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding.Tests
 {
     [TestFixture]
     public class BinderTests

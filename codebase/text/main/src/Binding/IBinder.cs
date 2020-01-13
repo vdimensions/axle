@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Axle.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// An interface representing a binder; that is an object which is used to bind a structured data format to

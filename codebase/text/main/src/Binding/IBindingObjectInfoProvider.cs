@@ -1,7 +1,7 @@
 ﻿using System;
 using Axle.Reflection;
 
-namespace Axle.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// An interface representing an object information provider. An object information provider is 

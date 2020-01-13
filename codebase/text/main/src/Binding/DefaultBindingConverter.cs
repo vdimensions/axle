@@ -1,10 +1,11 @@
-﻿using Axle.Conversion.Parsing;
+﻿using Axle.Conversion;
+using Axle.Conversion.Parsing;
 using Axle.Verification;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Axle.Conversion.Binding
+namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// A <see cref="IBindingConverter"/> implementation supporting the conversion of a handful of primitive types. 
