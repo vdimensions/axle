@@ -1,5 +1,6 @@
 ﻿using Axle.Verification;
 using System;
+using System.Linq;
 
 namespace Axle.Text.StructuredData.Binding
 {
@@ -34,6 +35,18 @@ namespace Axle.Text.StructuredData.Binding
         public DefaultBinder() : this(new ReflectionObjectInfoProvider(), new DefaultBindingConverter()) { }
         #endif
 
+        private static bool IsCollection(object instance, out Type elementType)
+        {
+            // TODO: determine if the passed in object is a collection
+            elementType = null;
+            return false;
+        }
+
+        private static object GetCollectionItem(object collection, int index)
+        {
+            throw new NotImplementedException();
+        }
+
         private static bool TryBind(
                 IBindingObjectInfoProvider objectInfoProvider, 
                 IBindingConverter converter, 
@@ -46,34 +59,83 @@ namespace Axle.Text.StructuredData.Binding
             {
                 case ISimpleMemberValueProvider svp:
                     return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
-                case IComplexMemberValueProvider cvp:
-                    if (instance != null)
+                case ICollectionMemberValueProvider collectionProvider:
+                    if (instance == null)
                     {
-                        var members = objectInfoProvider.GetMembers(instance);
-                        foreach (var member in members)
+                        break;
+                    }
+                    // TODO: make method not a try attempt
+                    if (collectionProvider.TryGetValues(out var providers))
+                    {
+                        if (IsCollection(instance, out var elementType))
                         {
-                            if (cvp.TryGetValue(member.Name, out var memberValueProvider))
-                            {
-                                var memberType = member.MemberType;
-                                var memberInstance = 
-                                    member.GetAccessor?.GetValue(instance) ?? objectInfoProvider.CreateInstance(memberType);
-                                
-                                if (TryBind(
-                                    objectInfoProvider, 
-                                    converter, 
-                                    memberValueProvider, 
-                                    memberInstance, 
-                                    memberType, 
-                                    out var memberValue))
+                            var items = providers.Select(
+                                (provider, i) =>
                                 {
-                                    member.SetAccessor.SetValue(instance, memberValue);
-                                }
+                                    if (TryBind(
+                                        objectInfoProvider,
+                                        converter,
+                                        provider,
+                                        GetCollectionItem(instance, i),
+                                        elementType,
+                                        out var item))
+                                    {
+                                        return instance;
+                                    }
+                                    return null;
+                                });
+                            //TODO: set items to instance somehow
+                            boundValue = instance;
+                            return true;
+                        }
+                        else
+                        {
+                            return TryBind(
+                                objectInfoProvider, 
+                                converter, 
+                                providers.Last(), 
+                                instance, 
+                                targetType, 
+                                out boundValue);
+                        }                        
+                    }
+
+                    break;
+                case IComplexMemberValueProvider complexProvider:
+                    if (instance == null)
+                    {
+                        break;
+                    }
+                    if (IsCollection(instance, out var _))
+                    {
+                        //TODO: convert this provider to singleton collection provider instead
+                        // and invoke TryBind again.
+                    }
+                    var members = objectInfoProvider.GetMembers(instance);
+                    foreach (var member in members)
+                    {
+                        // TODO: if member is collection. call cvp.TryGetValues(member.Name, out var valueProviders)
+
+                        if (complexProvider.TryGetValue(member.Name, out var memberValueProvider))
+                        {
+                            var memberType = member.MemberType;
+                            var memberInstance =
+                                member.GetAccessor?.GetValue(instance) ?? objectInfoProvider.CreateInstance(memberType);
+
+                            if (TryBind(
+                                objectInfoProvider,
+                                converter,
+                                memberValueProvider,
+                                memberInstance,
+                                memberType,
+                                out var memberValue))
+                            {
+                                member.SetAccessor.SetValue(instance, memberValue);
                             }
                         }
-                        boundValue = instance;
-                        return true;
                     }
-                    break;
+                    boundValue = instance;
+                    return true;
             }
             boundValue = null;
             return false;
