@@ -2,8 +2,8 @@
 
 namespace Axle.Text.StructuredData.Binding
 {
-    public interface ICollectionMemberValueProvider : IBindingValueProvider
+    public interface ICollectionMemberValueProvider : IBindingValueProvider, IEnumerable<IBindingValueProvider>
     {
-        bool TryGetValues(out IEnumerable<IBindingValueProvider> values);
+        IBindingCollectionAdapter CollectionAdapter { get; }
     }
 }

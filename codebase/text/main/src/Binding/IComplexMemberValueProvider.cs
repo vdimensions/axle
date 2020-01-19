@@ -13,7 +13,7 @@
         /// The member to lookup values for.
         /// </param>
         /// <param name="value">
-        /// An <see cref="IBindingValueProvider"/> instnce representing the value associated with the given 
+        /// An <see cref="IBindingValueProvider"/> instance representing the value associated with the given 
         /// <paramref name="member"/>. 
         /// This parameter is passed uninitialized.
         /// </param>
@@ -29,7 +29,7 @@
         /// The member to lookup values for.
         /// </param>
         /// <returns>
-        /// An <see cref="IBindingValueProvider"/> instnce representing the values associated with the given 
+        /// An <see cref="IBindingValueProvider"/> instance representing the values associated with the given 
         /// <paramref name="member"/>, or <c><see langword="null"/></c> if no values exist for the given member.
         /// </returns>
         IBindingValueProvider this[string member] { get; }

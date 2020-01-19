@@ -5,7 +5,7 @@ namespace Axle.Text.StructuredData.Binding
 {
     internal sealed class BoxingConverter<T> : IConverter<string, object>
     {
-        private IConverter<string, T> _actualConverter;
+        private readonly IConverter<string, T> _actualConverter;
 
         public BoxingConverter(IConverter<string, T> converter)
         {

@@ -1,14 +1,11 @@
 ﻿#if NETSTANDARD || NET35_OR_NEWER
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 
 using Axle.Reflection.Extensions;
-using Axle.Verification;
 
 
 namespace Axle.Reflection
@@ -16,7 +13,7 @@ namespace Axle.Reflection
     /// <summary>
     /// The default implementation of the <see cref="ITypeIntrospector"/> interface.
     /// </summary>
-    public class TypeIntrospector : ITypeIntrospector
+    public class TypeIntrospector : AbstractTypeIntrospector
     {
         private static bool MatchesSignature(MethodBase mb, Type[] types)
         {
@@ -94,55 +91,6 @@ namespace Axle.Reflection
         }
         #endif
 
-        protected static MemberInfo ExtractMember<T>(Expression<T> expression)
-        {
-            var expr = expression.Body as MemberExpression;
-            if (expr == null)
-            {
-                if (expression.Body is UnaryExpression unary)
-                {
-                    expr = unary.Operand as MemberExpression;
-                    if (expr == null)
-                    {
-                        if (unary.NodeType == ExpressionType.Convert)
-                        {
-                            unary = (UnaryExpression) unary.Operand;
-                        }
-                        if (unary.NodeType == ExpressionType.ArrayLength)
-                        {
-                            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-                            var m = unary.Operand.Type.GetTypeInfo().GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #else
-                            var m = unary.Operand.Type.GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #endif
-                            return m[0];
-                        }
-                        expr = unary.Operand as MemberExpression;
-                    }
-                }
-            }
-
-            if (expr == null)
-            {
-                throw new ArgumentException(string.Format("The provided expression {0} is not a valid member expression.", expression), nameof(expression));
-            }
-
-            var member = expr.Member;
-            #if NETFRAMEWORK
-            var type = member.DeclaringType;
-            if (type != null && type != member.ReflectedType && null != member.ReflectedType && !(
-                type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
-            {
-                throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
-            }
-            #endif
-
-            return member;
-        }
-        
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly Type _introspectedType;
-
         /// <summary>
         /// Creates a new instance of the <see cref="TypeIntrospector" /> class.
         /// </summary>
@@ -150,13 +98,10 @@ namespace Axle.Reflection
         /// The <see cref="Type"/> to provide reflected information for by the current <see cref="TypeIntrospector"/>
         /// instance.
         /// </param>
-        public TypeIntrospector(Type type)
-        {
-            _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-        }
+        public TypeIntrospector(Type type) : base(type) { }
 
         /// <inheritdoc cref="GetAttributes()"/>
-        public IAttributeInfo[] GetAttributes()
+        public sealed override IAttributeInfo[] GetAttributes()
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes();
@@ -165,7 +110,7 @@ namespace Axle.Reflection
             #endif
         }
         /// <inheritdoc />
-        public IAttributeInfo[] GetAttributes(Type attributeType)
+        public sealed override IAttributeInfo[] GetAttributes(Type attributeType)
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes(attributeType);
@@ -174,7 +119,7 @@ namespace Axle.Reflection
             #endif
         }
         /// <inheritdoc />
-        public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
+        public sealed override IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
         {
             #if NETSTANDARD || NET45_OR_NEWER
             var attrs = IntrospectedType.GetTypeInfo().GetCustomAttributes(attributeType, inherit).Cast<Attribute>();
@@ -188,19 +133,20 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes)
+        public sealed override IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes)
         {
+            var introspectedType = IntrospectedType;
             #if NETFRAMEWORK
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            var constructor = _introspectedType.GetConstructor(argumentTypes)
-                           ?? _introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
+            var constructor = introspectedType.GetConstructor(argumentTypes)
+                           ?? introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
             return constructor != null ? new ConstructorToken(constructor) : null;
             #elif NETSTANDARD1_5_OR_NEWER
-            var constructor = _introspectedType.GetTypeInfo().GetConstructor(argumentTypes);
+            var constructor = introspectedType.GetTypeInfo().GetConstructor(argumentTypes);
             var result = new ConstructorToken(constructor);
             return MatchesScanOptions(result, scanOptions) ? result : null;
             #elif NETSTANDARD1_3_OR_NEWER 
-            var result = _introspectedType.GetTypeInfo().DeclaredConstructors
+            var result = introspectedType.GetTypeInfo().DeclaredConstructors
                 .Where(x => MatchesSignature(x, argumentTypes))
                 .Select(x => new ConstructorToken(x))
                 .SingleOrDefault();
@@ -209,192 +155,141 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
-        public IConstructor[] GetConstructors(ScanOptions scanOptions)
+        public override IConstructor GetConstructor(ConstructorInfo reflectedConstructor) 
+            => new ConstructorToken(reflectedConstructor);
+
+        /// <inheritdoc />
+        public sealed override IConstructor[] GetConstructors(ScanOptions scanOptions)
         {
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            var constructors = _introspectedType.GetTypeInfo().GetConstructors(bindingFlags);
+            var constructors = IntrospectedType.GetTypeInfo().GetConstructors(bindingFlags);
             #elif NETFRAMEWORK
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            var constructors = _introspectedType.GetConstructors(bindingFlags);
+            var constructors = IntrospectedType.GetConstructors(bindingFlags);
             #endif
-            return Enumerable.ToArray(Enumerable.Select<ConstructorInfo, IConstructor>(constructors, x => new ConstructorToken(x)));
+            return Enumerable.ToArray(Enumerable.Select(constructors, GetConstructor));
         }
 
         /// <inheritdoc />
-        public IMethod GetMethod(ScanOptions scanOptions, string methodName)
+        public sealed override IMethod GetMethod(ScanOptions scanOptions, string methodName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var method = _introspectedType.GetTypeInfo().GetMethod(methodName, bindingFlags);
+            var method = IntrospectedType.GetTypeInfo().GetMethod(methodName, bindingFlags);
             #else
-            var method = _introspectedType.GetMethod(methodName, bindingFlags);
+            var method = IntrospectedType.GetMethod(methodName, bindingFlags);
             #endif
-            return method != null ? new MethodToken(method) : null;
+            return method != null ? GetMethod(method) : null;
         }
+        /// <inheritdoc />
+        public override IMethod GetMethod(MethodInfo reflectedMethod) => new MethodToken(reflectedMethod);
 
         /// <inheritdoc />
-        public IMethod[] GetMethods(ScanOptions scanOptions)
+        public sealed override IMethod[] GetMethods(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var methods = _introspectedType.GetTypeInfo().GetMethods(bindingFlags);
+            var methods = IntrospectedType.GetTypeInfo().GetMethods(bindingFlags);
             #else
-            var methods = _introspectedType.GetMethods(bindingFlags);
+            var methods = IntrospectedType.GetMethods(bindingFlags);
             #endif
-            return methods.Select<MethodInfo, IMethod>(x => new MethodToken(x)).ToArray();
+            return methods.Select<MethodInfo, IMethod>(GetMethod).ToArray();
         }
 
         /// <inheritdoc />
-        public IProperty GetProperty(ScanOptions scanOptions, string propertyName)
+        public sealed override IProperty GetProperty(ScanOptions scanOptions, string propertyName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var property = _introspectedType.GetTypeInfo().GetProperty(propertyName, bindingFlags);
+            var property = IntrospectedType.GetTypeInfo().GetProperty(propertyName, bindingFlags);
             #else
-            var property = _introspectedType.GetProperty(propertyName, bindingFlags);
+            var property = IntrospectedType.GetProperty(propertyName, bindingFlags);
             #endif
-            return property != null ? PropertyToken.Create(property) : null;
+            return property != null ? GetProperty(property) : null;
         }
 
-        /// <inheritdoc />
-        public IProperty GetProperty<TResult>(Expression<Func<TResult>> expression)
-        {
-            if (ExtractMember(expression) is PropertyInfo prop)
-            {
-                return PropertyToken.Create(prop);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
+        public override IProperty GetProperty(PropertyInfo reflectedProperty) => PropertyToken.Create(reflectedProperty);
 
         /// <inheritdoc />
-        public IProperty[] GetProperties(ScanOptions scanOptions)
+        public sealed override IProperty[] GetProperties(ScanOptions scanOptions)
         {
+            var introspectedType = IntrospectedType;
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var properties = _introspectedType.GetTypeInfo()
+            var properties = introspectedType.GetTypeInfo()
             #else
-            var properties = _introspectedType
+            var properties = introspectedType
             #endif
                 .GetProperties(bindingFlags)
                 .GroupBy(x => x.Name)
-                .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == _introspectedType));
-            return properties.Select(PropertyToken.Create).Cast<IProperty>().ToArray();
+                .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == introspectedType));
+            return properties.Select(GetProperty).ToArray();
         }
 
         /// <inheritdoc />
-        public IField GetField(ScanOptions scanOptions, string fieldName)
+        public sealed override IField GetField(ScanOptions scanOptions, string fieldName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var field = _introspectedType.GetTypeInfo().GetField(fieldName, bindingFlags);
+            var field = IntrospectedType.GetTypeInfo().GetField(fieldName, bindingFlags);
             #else
-            var field = _introspectedType.GetField(fieldName, bindingFlags);
+            var field = IntrospectedType.GetField(fieldName, bindingFlags);
             #endif
-            return field != null ? new FieldToken(field) : null;
+            return field != null ? GetField(field) : null;
         }
 
         /// <inheritdoc />
-        public IField GetField<TResult>(Expression<Func<TResult>> expression)
-        {
-            if (ExtractMember(expression) is FieldInfo field)
-            {
-                return new FieldToken(field);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
+        public override IField GetField(FieldInfo reflectedField) => new FieldToken(reflectedField);
 
         /// <inheritdoc />
-        public IField[] GetFields(ScanOptions scanOptions)
+        public sealed override IField[] GetFields(ScanOptions scanOptions)
         {
+            var introspectedType = IntrospectedType;
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var fields = _introspectedType.GetTypeInfo()
+            var fields = introspectedType.GetTypeInfo()
             #else
-            var fields = _introspectedType
+            var fields = introspectedType
             #endif
                 .GetFields(bindingFlags)
                 .GroupBy(x => x.Name)
-                .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == _introspectedType));
+                .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == introspectedType));
             return Enumerable.ToArray(Enumerable.Select<FieldInfo, IField>(fields, x => new FieldToken(x)));
         }
 
         /// <inheritdoc />
-        public IEvent GetEvent(ScanOptions scanOptions, string eventName)
+        public sealed override IEvent GetEvent(ScanOptions scanOptions, string eventName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var @event = _introspectedType.GetTypeInfo().GetEvent(eventName, bindingFlags);
+            var @event = IntrospectedType.GetTypeInfo().GetEvent(eventName, bindingFlags);
             #else
-            var @event = _introspectedType.GetEvent(eventName, bindingFlags);
+            var @event = IntrospectedType.GetEvent(eventName, bindingFlags);
             #endif
             return @event != null ? new EventToken(@event) : null;
         }
-        /// <inheritdoc />
-        public IEvent GetEvent<TResult>(Expression<Func<TResult>> expression)
-        {
-            if (ExtractMember(expression) is EventInfo evt)
-            {
-                return new EventToken(evt);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
 
         /// <inheritdoc />
-        public IEvent[] GetEvents(ScanOptions scanOptions)
+        public override IEvent GetEvent(EventInfo reflectedEvent) => new EventToken(reflectedEvent);
+
+        /// <inheritdoc />
+        public sealed override IEvent[] GetEvents(ScanOptions scanOptions)
         {
+            var introspectedType = IntrospectedType;
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-            var events = _introspectedType.GetTypeInfo()
-            #else
-            var events = _introspectedType
-            #endif
+            var events = introspectedType
+                #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+                .GetTypeInfo()
+                #endif
                 .GetEvents(bindingFlags)
                 .GroupBy(x => x.Name)
-                .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == _introspectedType));
+                .SelectMany(x => x.Count() == 1 ? x : x.Where(y => y.DeclaringType == introspectedType));
             return events.Select<EventInfo, IEvent>(x => new EventToken(x)).ToArray();
         }
 
         /// <inheritdoc />
-        public IMember[] GetMembers(ScanOptions scanOptions)
-        {
-            var constructors = GetConstructors(scanOptions);
-            var methods = GetMethods(scanOptions);
-            var props = GetProperties(scanOptions);
-            var fields = GetFields(scanOptions);
-            var events = GetEvents(scanOptions);
-
-            var result = new List<IMember>(constructors.Length + methods.Length + props.Length + fields.Length + events.Length);
-
-            for (var i = 0; i < constructors.Length; i++)
-            {
-                result.Add(constructors[i]);
-            }
-            for (var i = 0; i < methods.Length; i++)
-            {
-                result.Add(methods[i]);
-            }
-            for (var i = 0; i < props.Length; i++)
-            {
-                result.Add(props[i]);
-            }
-            for (var i = 0; i < fields.Length; i++)
-            {
-                result.Add(fields[i]);
-            }
-            for (var i = 0; i < events.Length; i++)
-            {
-                result.Add(events[i]);
-            }
-
-            return result.ToArray();
-        }
-
-        /// <inheritdoc />
-        bool IAttributeTarget.IsDefined(Type attributeType, bool inherit) => IsAttributeDefined(attributeType, inherit);
-
-        /// <inheritdoc />
-        public bool IsAttributeDefined(Type attributeType, bool inherit)
+        public sealed override bool IsAttributeDefined(Type attributeType, bool inherit)
         {
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().IsDefined(attributeType, inherit);
@@ -402,60 +297,6 @@ namespace Axle.Reflection
             return IntrospectedType.IsDefined(attributeType, inherit);
             #endif
         }
-
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
-        /// <summary>
-        /// Gets the underlying <see cref="TypeCode"/> for the <see cref="IntrospectedType"/>.
-        /// </summary>
-        public TypeCode TypeCode => Type.GetTypeCode(_introspectedType);
-        #endif
-
-        /// <inheritdoc />
-        public Type IntrospectedType => _introspectedType;
-
-        /// <summary>
-        /// Determines if the <see cref="IntrospectedType"/> is a delegate.
-        /// </summary>
-        /// <returns>
-        /// <c><see langword="true"/></c> if the provided <see cref="IntrospectedType"/> is a delegate;
-        /// <c><see langword="false"/></c> otherwise.
-        /// </returns>
-        public bool IsDelegate
-        {
-            get
-            {
-                return typeof(MulticastDelegate)
-                    #if NETSTANDARD || NET45_OR_NEWER
-                    .GetTypeInfo()
-                    .IsAssignableFrom(_introspectedType.GetTypeInfo().BaseType.GetTypeInfo())
-                    #else
-                    .IsAssignableFrom(_introspectedType.BaseType)
-                    #endif
-                    ;
-            }
-        }
-        
-        #if NETSTANDARD || NET35_OR_NEWER
-        /// <summary>
-        /// Checks whether the specified <see cref="IntrospectedType"/> is a nullable type.
-        /// </summary>
-        /// <returns>
-        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a nullable type; 
-        /// <c><see langword="false"/></c> otherwise.
-        /// </returns>
-        public bool IsNullableType
-        {
-            get
-            {
-                #if NETSTANDARD || NET45_OR_NEWER
-                var ti = _introspectedType.GetTypeInfo();
-                return ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>);
-                #else
-                return _introspectedType.IsGenericType && _introspectedType.GetGenericTypeDefinition() == typeof (Nullable<>);
-                #endif
-            }
-        }
-        #endif
     }
 
     /// <summary>
@@ -476,7 +317,7 @@ namespace Axle.Reflection
         {
             if (ExtractMember(expression) is PropertyInfo prop)
             {
-                return PropertyToken.Create(prop);
+                return base.GetProperty(prop);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
@@ -486,7 +327,7 @@ namespace Axle.Reflection
         {
             if (ExtractMember(expression) is FieldInfo field)
             {
-                return new FieldToken(field);
+                return base.GetField(field);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid field expression.", expression), nameof(expression));
         }
@@ -496,7 +337,7 @@ namespace Axle.Reflection
         {
             if (ExtractMember(expression) is EventInfo evt)
             {
-                return new EventToken(evt);
+                return base.GetEvent(evt);
             }
             throw new ArgumentException(string.Format("Argument {0} is not a valid event expression.", expression), nameof(expression));
         }

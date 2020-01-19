@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using Axle.Reflection;
 
 namespace Axle.Text.StructuredData.Binding
@@ -46,5 +48,15 @@ namespace Axle.Text.StructuredData.Binding
         /// The newly created object instance, or <c><see langword="null"/></c> if instantiation did not succeed.
         /// </returns>
         object CreateInstance(Type type);
+
+        IBindingCollectionAdapter GetCollectionAdapter(Type type);
+    }
+
+    public interface IBindingCollectionAdapter
+    {
+        object ItemAt(IEnumerable collection, int index);
+        object SetItems(object collection, IEnumerable items);
+        Type CollectionType { get; }
+        Type ElementType { get; }
     }
 }
