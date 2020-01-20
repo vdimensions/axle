@@ -30,6 +30,24 @@ namespace Axle.Text.StructuredData.Binding
             public Type ElementType { get; }
         }
 
+        internal abstract class CollectionAdapter< TCollection> : CollectionAdapter
+            where TCollection : class, IEnumerable
+        {
+            protected GenericCollectionAdapter() : base(typeof(TCollection), typeof(object)) { }
+
+            public sealed override object ItemAt(IEnumerable collection, int index)
+            {
+                return ItemAt((TCollection) collection, index);
+            }
+            public virtual object ItemAt(TCollection collection, int index) => collection.OfType<object>().Skip(index).Take(1);
+
+            public sealed override object SetItems(object collection, IEnumerable items)
+            {
+                return SetItems(collection as TCollection, items);
+            }
+            public abstract TCollection SetItems(TCollection collection, IEnumerable items);
+        }
+
         internal abstract class GenericCollectionAdapter<T, TCollection> : CollectionAdapter
             where TCollection: class, IEnumerable<T>
         {
@@ -95,13 +113,70 @@ namespace Axle.Text.StructuredData.Binding
             }
         }
 
-        private static Type GetElementType(Type genericType)
+        internal sealed class GenericLinkedListAdapter<T> : GenericCollectionAdapter<T, LinkedList<T>>
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            return genericType.GetGenericArguments()[0];
-            #else
-            return genericType.GetTypeInfo().GetGenericArguments()[0];
-            #endif
+            public override LinkedList<T> SetItems(LinkedList<T> collection, IEnumerable<T> items)
+            {
+                if (collection != null)
+                {
+                    collection.Clear();
+                } 
+                else
+                {
+                    collection = new LinkedList<T>();
+                }
+                foreach (var item in items)
+                {
+                    collection.AddLast(item);
+                }
+                return collection;
+            }
+        }
+
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        internal sealed class RawListAdapter : CollectionAdapter<ArrayList>
+        {
+            public sealed override object ItemAt(ArrayList collection, int index)
+            {
+                if (collection.Count > index)
+                {
+                    return collection[index];
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            public override ArrayList SetItems(ArrayList collection, IEnumerable items)
+            {
+                if (collection == null)
+                {
+                    return collection = new ArrayList()
+                }
+                else
+                {
+                    collection.Clear();
+                }
+                foreach (var item in items)
+                {
+                    collection.Add(item);
+                }
+                return collection;
+            }
+        }
+        #endif
+
+        private static object CreateInstance(ITypeIntrospector introspector)
+        {
+            try
+            {
+                return introspector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
+            }
+            catch
+            {
+                return null;
+            }
         }
         
         /// <inheritdoc/>
@@ -155,14 +230,7 @@ namespace Axle.Text.StructuredData.Binding
         public object CreateInstance(Type type)
         {
             var remappedIntrospector = RemapType(type);
-            try
-            {
-                return remappedIntrospector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
-            }
-            catch
-            {
-                return null;
-            }
+            return CreateInstance(remappedIntrospector);
         }
 
         private TypeIntrospector RemapType(Type type)
@@ -178,20 +246,50 @@ namespace Axle.Text.StructuredData.Binding
         public IBindingCollectionAdapter GetCollectionAdapter(Type type)
         {
             var introspector = new TypeIntrospector(type);
-            if (introspector.IsGenericType)
+            ITypeIntrospector adapterIntrospector = null;
+            if (type.IsArray)
             {
-                var definitionType = introspector.GetGenericTypeDefinition().GenericDefinitionType;
-                if (definitionType == typeof(List<>))
+                adapterIntrospector = new TypeIntrospector(typeof(GenericArrayAdapter<>))
+                    .GetGenericTypeDefinition()
+                    .MakeGenericType(type)
+                    .GetIntrospector();
+            }
+            else if ((introspector.Categories & TypeCategories.Generic) == TypeCategories.Generic)
+            {
+                var genericDefinition = introspector.GetGenericTypeDefinition();
+                var genericDefinitionType = genericDefinition.GenericDefinitionType;
+                var elementType = genericDefinition.GenericTypeArguments[0];
+                if (genericDefinitionType == typeof(List<>) 
+                    || genericDefinitionType == typeof(IList<>)
+                    || genericDefinitionType == typeof(ICollection<>)
+                    || genericDefinitionType == typeof(IEnumerable<>))
                 {
-                    return new GenericListAdapter(type);
+                    adapterIntrospector = new TypeIntrospector(typeof(GenericListAdapter<>))
+                        .GetGenericTypeDefinition()
+                        .MakeGenericType(elementType)
+                        .GetIntrospector();
                 }
-                else if (definitionType.IsArray)
+                else if (genericDefinitionType == typeof(LinkedList<>))
                 {
-                    return new GenericListAdapter(type);
+                    adapterIntrospector = new TypeIntrospector(typeof(GenericLinkedListAdapter<>))
+                        .GetGenericTypeDefinition()
+                        .MakeGenericType(elementType)
+                        .GetIntrospector();
                 }
             }
+            else
+            {
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                if (type == typeof(ArrayList) || type == typeof (IList) || type == typeof(IEnumerable))
+                {
+                    adapterIntrospector = new TypeIntrospector(typeof(RawListAdapter));
+                }
+                #endif
+            }
 
-            return null;
+            return adapterIntrospector == null 
+                ? null 
+                : CreateInstance(adapterIntrospector) as IBindingCollectionAdapter;
         }
     }
 }
