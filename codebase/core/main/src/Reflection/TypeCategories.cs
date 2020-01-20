@@ -17,38 +17,38 @@ namespace Axle.Reflection
         /// </summary>
         Unknown             =       0,
         /// <summary>
-        /// Represents value types
+        /// Represents value types.
         /// </summary>
         ValueType           = 1 <<  1,  // 2
         /// <summary>
-        /// Represents reference types
+        /// Represents reference types.
         /// </summary>
         ReferenceType       = 1 <<  2,  // 4
         /// <summary>
-        /// Represents genric types
+        /// Represents generic types.
         /// </summary>
         Generic             = 1 <<  3,  // 8
         /// <summary>
-        /// Represents array types
+        /// Represents array types.
         /// </summary>
         /// <seealso cref="GenericDefinition"/>
         Array               = 1 <<  4 | ReferenceType, // 20
         /// <summary>
-        /// Represents enumeration types
+        /// Represents enumeration types.
         /// </summary>
         /// <seealso cref="ValueTuple"/>
         Enum                = 1 <<  5 | ValueType, // 34
         /// <summary>
-        /// Represens nullable value types types
+        /// Represens nullable value types types.
         /// </summary>
         /// <seealso cref="ValueType"/>
         NullableValueType   = 1 <<  6 | ValueType | Generic, // 76
         /// <summary>
-        /// Represents abstract reference types
+        /// Represents abstract reference types.
         /// </summary>
         Abstract            = 1 <<  7 | ReferenceType, // 132
         /// <summary>
-        /// Represents non-inheritable reference types
+        /// Represents non-inheritable reference types.
         /// </summary>
         /// <seealso cref="ReferenceType"/>
         /// <seealso cref="Interface"/>
@@ -59,17 +59,17 @@ namespace Axle.Reflection
         /// </summary>
         Static              = Abstract | Sealed, // 392
         /// <summary>
-        /// Represents interface types
+        /// Represents interface types.
         /// </summary>
         /// <seealso cref="ReferenceType"/>
         /// <seealso cref="Abstract"/>
         Interface = 1 <<  9 | Abstract, // 644
         /// <summary>
-        /// Represents delegate types
+        /// Represents delegate types.
         /// </summary>
         Delegate            = 1 << 10 | ReferenceType, // 1028
         /// <summary>
-        /// Represents an <seealso cref="Attribute"/> type
+        /// Represents an <seealso cref="Attribute"/> type.
         /// </summary>
         Attribute = 1 << 11 | ReferenceType, // 2052
         /// <summary>
