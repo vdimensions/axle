@@ -29,5 +29,9 @@ namespace Axle.Reflection
         /// <see cref="IGenericTypeIntrospector"/> instance.
         /// </summary>
         Type GenericDefinitionType { get; }
+        /// <summary>
+        /// Gets the <see cref="IGenericTypeIntrospector"/> for the <see cref="GenericDefinitionType"/>.
+        /// </summary>
+        IGenericTypeIntrospector RawTypeIntrospector { get; }
     }
 }

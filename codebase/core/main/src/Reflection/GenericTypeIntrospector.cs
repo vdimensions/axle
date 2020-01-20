@@ -6,8 +6,11 @@ namespace Axle.Reflection
 {
     internal sealed class GenericTypeIntrospector : AbstractGenericTypeIntrospector
     {
-        public GenericTypeIntrospector(Type genericDefinitionType, params Type[] genericTypeArguments) 
-            : base(genericDefinitionType, genericTypeArguments) { }
+        public GenericTypeIntrospector(
+                Type genericDefinitionType, 
+                IGenericTypeIntrospector rawTypeIntrospector, 
+                params Type[] genericTypeArguments) 
+            : base(genericDefinitionType, rawTypeIntrospector, genericTypeArguments) { }
         
         public override ITypeIntrospector GetIntrospector()
         {
@@ -19,6 +22,11 @@ namespace Axle.Reflection
 
         public override IGenericTypeIntrospector MakeGenericType(params Type[] typeParameters)
         {
+            if (typeParameters.Length == 0)
+            {
+                return this;
+            }
+
             var concatenatedTypes = new Type[typeParameters.Length + GenericTypeArguments.Length];
             GenericTypeArguments.CopyTo(concatenatedTypes, 0);
             typeParameters.CopyTo(concatenatedTypes,GenericTypeArguments.Length);
@@ -26,7 +34,7 @@ namespace Axle.Reflection
             {
                 throw new InvalidOperationException("You have provided more types than the supported number of generic type arguments.");
             }
-            return new GenericTypeIntrospector(GenericDefinitionType, concatenatedTypes);
+            return new GenericTypeIntrospector(GenericDefinitionType, RawTypeIntrospector, concatenatedTypes);
         }
 
         private Type[] GenericTypeConstraints

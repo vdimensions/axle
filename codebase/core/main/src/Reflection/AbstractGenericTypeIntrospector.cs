@@ -7,7 +7,12 @@ namespace Axle.Reflection
 {
     public abstract class AbstractGenericTypeIntrospector : IGenericTypeIntrospector
     {
-        protected AbstractGenericTypeIntrospector(Type genericDefinitionType, Type[] genericTypeArguments)
+        private readonly IGenericTypeIntrospector _rawTypeIntrospector;
+
+        protected AbstractGenericTypeIntrospector(
+                Type genericDefinitionType, 
+                IGenericTypeIntrospector rawTypeIntrospector, 
+                Type[] genericTypeArguments)
         {
             Verifier.IsTrue(
                 Verifier.IsNotNull(Verifier.VerifyArgument(genericDefinitionType, nameof(genericDefinitionType))), 
@@ -26,6 +31,7 @@ namespace Axle.Reflection
 
         public Type[] GenericTypeArguments { get; }
         public Type GenericDefinitionType { get; }
+        public IGenericTypeIntrospector RawTypeIntrospector { get; }
     }
 }
 #endif

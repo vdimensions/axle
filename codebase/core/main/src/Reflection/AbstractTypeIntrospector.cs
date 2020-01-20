@@ -236,15 +236,17 @@ namespace Axle.Reflection
         {
             if ((Categories & TypeCategories.GenericDefinition) == TypeCategories.GenericDefinition)
             {
-                return new GenericTypeIntrospector(_introspectedType);
+                return new GenericTypeIntrospector(_introspectedType, null);
             }
             if ((Categories & TypeCategories.Generic) == TypeCategories.Generic)
             {
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                return new GenericTypeIntrospector(_introspectedType.GetGenericTypeDefinition());
+                var ti = _introspectedType;
                 #else
-                return new GenericTypeIntrospector(_introspectedType.GetTypeInfo().GetGenericTypeDefinition());
+                var ti = _introspectedType.GetTypeInfo();
                 #endif
+                return new GenericTypeIntrospector(ti.GetGenericTypeDefinition(), null)
+                    .MakeGenericType(ti.GetGenericArguments());
             }
             return null;
 
