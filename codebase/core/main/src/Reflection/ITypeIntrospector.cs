@@ -124,11 +124,11 @@ namespace Axle.Reflection
         Type IntrospectedType { get; }
 
         /// <summary>
-        /// Gets a value representing one or a combination of several <see cref="TypeCategories"/> values which describe
+        /// Gets a value representing one or a combination of several <see cref="TypeFlags"/> values which describe
         /// the <see cref="IntrospectedType"/> properties;
         /// </summary>
-        /// <seealso cref="TypeCategories"/>
-        TypeCategories Categories { get; }
+        /// <seealso cref="TypeFlags"/>
+        TypeFlags Flags { get; }
 
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         /// <summary>

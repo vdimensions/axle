@@ -12,131 +12,16 @@ namespace Axle.Reflection
 {
     public abstract class AbstractTypeIntrospector : ITypeIntrospector
     {
-        private static TypeCategories GetTypeCategories(Type type)
-        {
-            var result = TypeCategories.Unknown;
-
-            #if NETSTANDARD || NET45_OR_NEWER
-            if (type.GetTypeInfo().IsGenericType)
-            #else
-            if (type.IsGenericType)
-            #endif
-            {
-                result |= TypeCategories.Generic;
-            }
-
-            #if NETSTANDARD || NET45_OR_NEWER
-            if (type.GetTypeInfo().IsGenericTypeDefinition)
-            #else
-            if (type.IsGenericTypeDefinition)
-            #endif
-            {
-                result |= TypeCategories.GenericDefinition;
-            }
-
-            #if NETSTANDARD2_0 || NETFRAMEWORK
-            if (type.IsValueType)
-            #else
-            if (type.GetTypeInfo().IsValueType)
-            #endif
-            {
-                result |= TypeCategories.ValueType;
-
-                #if NETSTANDARD2_0 || NETFRAMEWORK
-                if (type.IsEnum)
-                #else
-                if (type.GetTypeInfo().IsEnum)
-                #endif
-                {
-                    result |= TypeCategories.Enum;
-                }
-                
-                #if NETSTANDARD || NET45_OR_NEWER
-                var ti = type.GetTypeInfo();
-                if (ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>))
-                #else
-                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
-                #endif
-                {
-                    result |= TypeCategories.NullableValueType;
-                }
-            }
-            else
-            {
-                result |= TypeCategories.ReferenceType;
-                
-                #if NETSTANDARD2_0 || NETFRAMEWORK
-                if (type.IsAbstract)
-                #else
-                if (type.GetTypeInfo().IsAbstract)
-                #endif
-                {
-                    result |= TypeCategories.Abstract;
-                }
-
-                #if NETSTANDARD2_0 || NETFRAMEWORK
-                if (type.IsSealed)
-                #else
-                if (type.GetTypeInfo().IsSealed)
-                #endif
-                {
-                    result |= TypeCategories.Sealed;
-                }
-
-                #if NETSTANDARD2_0 || NETFRAMEWORK
-                if (type.IsInterface)
-                #else
-                if (type.GetTypeInfo().IsInterface)
-                #endif
-                {
-                    result |= TypeCategories.Interface;
-                }
-                else if (typeof(Attribute)
-                        #if NETSTANDARD || NET45_OR_NEWER
-                        .GetTypeInfo()
-                        .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
-                        #else
-                        .IsAssignableFrom(type.BaseType)
-                        #endif
-                        )
-                {
-                    result |= TypeCategories.Attribute;
-                }
-                else if (typeof(MulticastDelegate)
-                        #if NETSTANDARD || NET45_OR_NEWER
-                        .GetTypeInfo()
-                        .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
-                        #else
-                        .IsAssignableFrom(type.BaseType)
-                        #endif
-                        )
-                {
-                    result |= TypeCategories.Delegate;
-                }
-            }
-
-            #if NETSTANDARD2_0 || NETFRAMEWORK
-            if (type.IsArray)
-            #else
-            if (type.GetTypeInfo().IsArray)
-            #endif
-            {
-                result |= TypeCategories.Array;
-            }
-
-            return result;
-        }
-
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _introspectedType;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly TypeCategories _categories;
+        private readonly TypeFlags _flags;
 
         protected AbstractTypeIntrospector(Type type)
         {
             _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            _categories = GetTypeCategories(type);
+            _flags = TypeFlagsExtensions.Determine(type);
         }
 
         public abstract IAttributeInfo[] GetAttributes();
@@ -232,11 +117,11 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public IGenericTypeIntrospector GetGenericTypeDefinition()
         {
-            if ((Categories & TypeCategories.GenericDefinition) == TypeCategories.GenericDefinition)
+            if (_flags.IsGenericDefinition())
             {
                 return new GenericTypeIntrospector(_introspectedType, null);
             }
-            if ((Categories & TypeCategories.Generic) == TypeCategories.Generic)
+            if (_flags.IsGeneric())
             {
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 var ti = _introspectedType;
@@ -257,7 +142,7 @@ namespace Axle.Reflection
         public Type IntrospectedType => _introspectedType;
 
         /// <inheritdoc />
-        public TypeCategories Categories => _categories;
+        public TypeFlags Flags => _flags;
 
 
 
@@ -265,30 +150,28 @@ namespace Axle.Reflection
         
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         /// <inheritdoc />
-        public bool IsDelegate => TypeCategories.Delegate == (_categories & TypeCategories.Delegate);
+        public bool IsDelegate => _flags.IsDelegate();
         #endif
         
         #if NETSTANDARD || NET35_OR_NEWER
         /// <inheritdoc />
-        public bool IsGenericType => TypeCategories.Generic == (_categories & TypeCategories.Generic);
+        public bool IsGenericType => _flags.IsGeneric();
         #endif
 
         #if NETSTANDARD || NET35_OR_NEWER
         /// <inheritdoc />
-        public bool IsGenericTypeDefinition 
-            => TypeCategories.GenericDefinition == (_categories & TypeCategories.GenericDefinition);
+        public bool IsGenericTypeDefinition => _flags.IsGenericDefinition();
         #endif
 
         #if NETSTANDARD || NET35_OR_NEWER
         /// <inheritdoc />
-        public bool IsNullableType 
-            => TypeCategories.NullableValueType == (_categories & TypeCategories.NullableValueType);
+        public bool IsNullableType => _flags.IsNullableValueType();
         #endif
 
-        public bool IsEnum => TypeCategories.Enum == (_categories & TypeCategories.Enum);
+        public bool IsEnum => _flags.IsEnum();
 
         /// <inheritdoc />
-        public bool IsAbstract => TypeCategories.Abstract == (_categories & TypeCategories.Abstract);
+        public bool IsAbstract => _flags.IsAbstract();
     }
 }
 #endif

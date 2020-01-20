@@ -10,7 +10,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public enum TypeCategories : short
+    public enum TypeFlags : short
     {
         /// <summary>
         /// Default type category.
@@ -39,7 +39,7 @@ namespace Axle.Reflection
         /// <seealso cref="ValueTuple"/>
         Enum                = 1 <<  5 | ValueType, // 34
         /// <summary>
-        /// Represens nullable value types types.
+        /// Represents nullable value types types.
         /// </summary>
         /// <seealso cref="ValueType"/>
         NullableValueType   = 1 <<  6 | ValueType | Generic, // 76

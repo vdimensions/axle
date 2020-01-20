@@ -214,19 +214,17 @@ namespace Axle.Text.StructuredData.Binding
                     return new IReadWriteMember[0]; 
                 case object obj:
                     var introspector = new TypeIntrospector(obj.GetType());
-                    var cat = introspector.Categories;
-                    foreach (var targetCat in new[]
+                    var flags = introspector.Flags;
+                    var unusableObjectFlags = new[]
                     {
-                        TypeCategories.Delegate, 
-                        TypeCategories.Enum, 
-                        TypeCategories.NullableValueType,
-                        TypeCategories.Attribute
-                    })
+                        TypeFlags.Delegate,
+                        TypeFlags.Enum,
+                        TypeFlags.NullableValueType,
+                        TypeFlags.Attribute
+                    };
+                    if (unusableObjectFlags.Any(x => flags.HasFlag(x)))
                     {
-                        if (targetCat == (cat & targetCat))
-                        {
-                            return new IReadWriteMember[0]; 
-                        }
+                        return new IReadWriteMember[0]; 
                     }
                     break;
             }
@@ -265,7 +263,7 @@ namespace Axle.Text.StructuredData.Binding
                     .MakeGenericType(type)
                     .GetIntrospector();
             }
-            else if ((introspector.Categories & TypeCategories.Generic) == TypeCategories.Generic)
+            else if (introspector.Flags.IsGeneric())
             {
                 var genericDefinition = introspector.GetGenericTypeDefinition();
                 var genericDefinitionType = genericDefinition.GenericDefinitionType;
