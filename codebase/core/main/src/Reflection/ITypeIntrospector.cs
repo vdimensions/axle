@@ -123,6 +123,13 @@ namespace Axle.Reflection
         /// </summary>
         Type IntrospectedType { get; }
 
+        /// <summary>
+        /// Gets a value representing one or a combination of several <see cref="TypeCategories"/> values which describe
+        /// the <see cref="IntrospectedType"/> properties;
+        /// </summary>
+        /// <seealso cref="TypeCategories"/>
+        TypeCategories Categories { get; }
+
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the underlying <see cref="TypeCode"/> for the <see cref="IntrospectedType"/>.
@@ -137,6 +144,7 @@ namespace Axle.Reflection
         /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a generic type; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
+        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
         bool IsGenericType { get; }
 
         /// <summary>
@@ -146,6 +154,7 @@ namespace Axle.Reflection
         /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a generic type definition; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
+        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
         bool IsGenericTypeDefinition { get; }
 
         /// <summary>
@@ -155,6 +164,7 @@ namespace Axle.Reflection
         /// <c><see langword="true"/></c> if the provided <see cref="IntrospectedType"/> is a delegate;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
+        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
         bool IsDelegate { get; }
 
         /// <summary>
@@ -164,6 +174,7 @@ namespace Axle.Reflection
         /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a nullable type; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
+        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
         bool IsNullableType { get; }
 
         /// <summary>
@@ -173,6 +184,7 @@ namespace Axle.Reflection
         /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is abstract; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
+        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
         bool IsAbstract { get; }
 
         /// <summary>
@@ -182,6 +194,7 @@ namespace Axle.Reflection
         /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> represents an enumeration; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
+        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
         bool IsEnum { get; }
     }
 
