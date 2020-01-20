@@ -16,30 +16,6 @@ namespace Axle.Reflection
         {
             var result = TypeCategories.Unknown;
 
-            if (typeof(MulticastDelegate)
-                    #if NETSTANDARD || NET45_OR_NEWER
-                    .GetTypeInfo()
-                    .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
-                    #else
-                    .IsAssignableFrom(type.BaseType)
-                    #endif
-                    )
-            {
-                result |= TypeCategories.Delegate;
-            }
-
-            if (typeof(Attribute)
-                    #if NETSTANDARD || NET45_OR_NEWER
-                    .GetTypeInfo()
-                    .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
-                    #else
-                    .IsAssignableFrom(type.BaseType)
-                    #endif
-                    )
-            {
-                result |= TypeCategories.Attribute;
-            }
-
             #if NETSTANDARD || NET45_OR_NEWER
             if (type.GetTypeInfo().IsGenericType)
             #else
@@ -65,47 +41,78 @@ namespace Axle.Reflection
             #endif
             {
                 result |= TypeCategories.ValueType;
+
+                #if NETSTANDARD2_0 || NETFRAMEWORK
+                if (type.IsEnum)
+                #else
+                if (type.GetTypeInfo().IsEnum)
+                #endif
+                {
+                    result |= TypeCategories.Enum;
+                }
+                
+                #if NETSTANDARD || NET45_OR_NEWER
+                var ti = type.GetTypeInfo();
+                if (ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>))
+                #else
+                if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
+                #endif
+                {
+                    result |= TypeCategories.NullableValueType;
+                }
             }
             else
             {
                 result |= TypeCategories.ReferenceType;
-            }
+                
+                #if NETSTANDARD2_0 || NETFRAMEWORK
+                if (type.IsAbstract)
+                #else
+                if (type.GetTypeInfo().IsAbstract)
+                #endif
+                {
+                    result |= TypeCategories.Abstract;
+                }
 
-            #if NETSTANDARD || NET45_OR_NEWER
-            var ti = type.GetTypeInfo();
-            if (ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>))
-            #else
-            if (type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>))
-            #endif
-            {
-                result |= TypeCategories.NullableValueType;
-            }
+                #if NETSTANDARD2_0 || NETFRAMEWORK
+                if (type.IsSealed)
+                #else
+                if (type.GetTypeInfo().IsSealed)
+                #endif
+                {
+                    result |= TypeCategories.Sealed;
+                }
 
-            #if NETSTANDARD2_0 || NETFRAMEWORK
-            if (type.IsAbstract)
-            #else
-            if (type.GetTypeInfo().IsAbstract)
-            #endif
-            {
-                result |= TypeCategories.Abstract;
-            }
-
-            #if NETSTANDARD2_0 || NETFRAMEWORK
-            if (type.IsSealed)
-            #else
-            if (type.GetTypeInfo().IsSealed)
-            #endif
-            {
-                result |= TypeCategories.Sealed;
-            }
-
-            #if NETSTANDARD2_0 || NETFRAMEWORK
-            if (type.IsInterface)
-            #else
-            if (type.GetTypeInfo().IsInterface)
-            #endif
-            {
-                result |= TypeCategories.Interface;
+                #if NETSTANDARD2_0 || NETFRAMEWORK
+                if (type.IsInterface)
+                #else
+                if (type.GetTypeInfo().IsInterface)
+                #endif
+                {
+                    result |= TypeCategories.Interface;
+                }
+                else if (typeof(Attribute)
+                        #if NETSTANDARD || NET45_OR_NEWER
+                        .GetTypeInfo()
+                        .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
+                        #else
+                        .IsAssignableFrom(type.BaseType)
+                        #endif
+                        )
+                {
+                    result |= TypeCategories.Attribute;
+                }
+                else if (typeof(MulticastDelegate)
+                        #if NETSTANDARD || NET45_OR_NEWER
+                        .GetTypeInfo()
+                        .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
+                        #else
+                        .IsAssignableFrom(type.BaseType)
+                        #endif
+                        )
+                {
+                    result |= TypeCategories.Delegate;
+                }
             }
 
             #if NETSTANDARD2_0 || NETFRAMEWORK
@@ -115,15 +122,6 @@ namespace Axle.Reflection
             #endif
             {
                 result |= TypeCategories.Array;
-            }
-
-            #if NETSTANDARD2_0 || NETFRAMEWORK
-            if (type.IsEnum)
-            #else
-            if (type.GetTypeInfo().IsEnum)
-            #endif
-            {
-                result |= TypeCategories.Enum;
             }
 
             return result;

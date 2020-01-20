@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Reflection;
-using Axle.Reflection.Extensions.Type;
 
 namespace Axle.Text.StructuredData.Binding
 {
@@ -30,10 +29,10 @@ namespace Axle.Text.StructuredData.Binding
             public Type ElementType { get; }
         }
 
-        internal abstract class CollectionAdapter< TCollection> : CollectionAdapter
+        internal abstract class RawCollectionAdapter< TCollection> : CollectionAdapter
             where TCollection : class, IEnumerable
         {
-            protected GenericCollectionAdapter() : base(typeof(TCollection), typeof(object)) { }
+            protected RawCollectionAdapter() : base(typeof(TCollection), typeof(object)) { }
 
             public sealed override object ItemAt(IEnumerable collection, int index)
             {
@@ -134,7 +133,7 @@ namespace Axle.Text.StructuredData.Binding
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        internal sealed class RawListAdapter : CollectionAdapter<ArrayList>
+        internal sealed class RawListAdapter : RawCollectionAdapter<ArrayList>
         {
             public sealed override object ItemAt(ArrayList collection, int index)
             {
@@ -152,7 +151,7 @@ namespace Axle.Text.StructuredData.Binding
             {
                 if (collection == null)
                 {
-                    return collection = new ArrayList()
+                    collection = new ArrayList();
                 }
                 else
                 {
@@ -212,12 +211,24 @@ namespace Axle.Text.StructuredData.Binding
                 #if NETSTANDARD2_0_OR_NEWER || NET35_OR_NEWER
                 case DBNull _:
                 #endif
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                case object obj when obj.GetType().IsEnum || obj.GetType().IsDelegate() || obj.GetType().IsNullableType():
-                #else
-                case object obj when obj.GetType().IsDelegate() || obj.GetType().IsNullableType():
-                #endif
                     return new IReadWriteMember[0]; 
+                case object obj:
+                    var introspector = new TypeIntrospector(obj.GetType());
+                    var cat = introspector.Categories;
+                    foreach (var targetCat in new[]
+                    {
+                        TypeCategories.Delegate, 
+                        TypeCategories.Enum, 
+                        TypeCategories.NullableValueType,
+                        TypeCategories.Attribute
+                    })
+                    {
+                        if (targetCat == (cat & targetCat))
+                        {
+                            return new IReadWriteMember[0]; 
+                        }
+                    }
+                    break;
             }
             return new TypeIntrospector(instance.GetType())
                 .GetMembers(ScanOptions.Instance | ScanOptions.Public)
@@ -280,7 +291,10 @@ namespace Axle.Text.StructuredData.Binding
             else
             {
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                if (type == typeof(ArrayList) || type == typeof (IList) || type == typeof(IEnumerable))
+                if (type == typeof(ArrayList) 
+                    || type == typeof(IList) 
+                    || type == typeof(ICollection) 
+                    || type == typeof(IEnumerable))
                 {
                     adapterIntrospector = new TypeIntrospector(typeof(RawListAdapter));
                 }
