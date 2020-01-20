@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Reflection;
-#if NETSTANDARD || NET35_OR_NEWER
-using System.Linq.Expressions;
-#endif
 
 
 namespace Axle.Reflection
@@ -27,6 +24,15 @@ namespace Axle.Reflection
         /// An instance of <see cref="IConstructor"/> representing the reflected constructor, or <c>null</c> if the lookup did not yield any results.
         /// </returns>
         IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);
+        /// <summary>
+        /// Creates a <see cref="IConstructor"/> instance from the provided <paramref name="reflectedConstructor"/>.
+        /// </summary>
+        /// <param name="reflectedConstructor">
+        /// An already reflected <see cref="ConstructorInfo"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IConstructor"/> instance created from the supplied <paramref name="reflectedConstructor"/>.
+        /// </returns>
         IConstructor GetConstructor(ConstructorInfo reflectedConstructor);
 
         /// <summary>
@@ -42,30 +48,57 @@ namespace Axle.Reflection
         IConstructor[] GetConstructors(ScanOptions scanOptions);
 
         IMethod GetMethod(ScanOptions scanOptions, string methodName);
+        /// <summary>
+        /// Creates a <see cref="IMethod"/> instance from the provided <paramref name="reflectedMethod"/>.
+        /// </summary>
+        /// <param name="reflectedMethod">
+        /// An already reflected <see cref="MethodInfo"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IMethod"/> instance created from the supplied <paramref name="reflectedMethod"/>.
+        /// </returns>
         IMethod GetMethod(MethodInfo reflectedMethod);
 
         IMethod[] GetMethods(ScanOptions scanOptions);
 
         IProperty GetProperty(ScanOptions scanOptions, string propertyName);
-        #if NETSTANDARD || NET35_OR_NEWER
-        IProperty GetProperty<TResult>(Expression<Func<TResult>> expression);
-        #endif
+        /// <summary>
+        /// Creates a <see cref="IProperty"/> instance from the provided <paramref name="reflectedProperty"/>.
+        /// </summary>
+        /// <param name="reflectedProperty">
+        /// An already reflected <see cref="PropertyInfo"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IProperty"/> instance created from the supplied <paramref name="reflectedProperty"/>.
+        /// </returns>
         IProperty GetProperty(PropertyInfo reflectedProperty);
 
         IProperty[] GetProperties(ScanOptions scanOptions);
 
         IField GetField(ScanOptions scanOptions, string fieldName);
-        #if NETSTANDARD || NET35_OR_NEWER
-        IField GetField<TResult>(Expression<Func<TResult>> expression);
-        #endif
+        /// <summary>
+        /// Creates a <see cref="IField"/> instance from the provided <paramref name="reflectedField"/>.
+        /// </summary>
+        /// <param name="reflectedField">
+        /// An already reflected <see cref="FieldInfo"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IField"/> instance created from the supplied <paramref name="reflectedField"/>.
+        /// </returns>
         IField GetField(FieldInfo reflectedField);
 
         IField[] GetFields(ScanOptions scanOptions);
 
         IEvent GetEvent(ScanOptions scanOptions, string eventName);
-        #if NETSTANDARD || NET35_OR_NEWER
-        IEvent GetEvent<TResult>(Expression<Func<TResult>> expression);
-        #endif
+        /// <summary>
+        /// Creates a <see cref="IEvent"/> instance from the provided <paramref name="reflectedEvent"/>.
+        /// </summary>
+        /// <param name="reflectedEvent">
+        /// An already reflected <see cref="EventInfo"/>.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IEvent"/> instance created from the supplied <paramref name="reflectedEvent"/>.
+        /// </returns>
         IEvent GetEvent(EventInfo reflectedEvent);
 
         IEvent[] GetEvents(ScanOptions scanOptions);
@@ -74,13 +107,14 @@ namespace Axle.Reflection
 
         /// <summary>
         /// Gets a <see cref="IGenericTypeIntrospector"/> for accessing the type's generic definition,
-        /// if the <see cref="IntrospectedType"/> is a generic type, or <c>null</c> otherwise.
+        /// if the <see cref="IntrospectedType"/> is a generic type, or <c><see langword="null"/></c> otherwise.
         /// </summary>
         /// <returns>
         /// A <see cref="IGenericTypeIntrospector"/> if the <see cref="IntrospectedType"/> is a generic type;
-        /// otherwise <c>null</c>
+        /// otherwise <c><see langword="null"/></c>
         /// </returns>
         /// <seealso cref="IsGenericType"/>
+        /// <seealso cref="IsGenericTypeDefinition"/>
         /// <seealso cref="IGenericTypeIntrospector"/>
         IGenericTypeIntrospector GetGenericTypeDefinition();
 
@@ -104,6 +138,15 @@ namespace Axle.Reflection
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         bool IsGenericType { get; }
+
+        /// <summary>
+        /// Checks whether the specified <see cref="IntrospectedType"/> is a generic type definition.
+        /// </summary>
+        /// <returns>
+        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a generic type definition; 
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        bool IsGenericTypeDefinition { get; }
 
         /// <summary>
         /// Determines if the <see cref="IntrospectedType"/> is a delegate.
@@ -142,14 +185,11 @@ namespace Axle.Reflection
         bool IsEnum { get; }
     }
 
-    public interface ITypeIntrospector<T> : ITypeIntrospector
-    {
-        #if NETSTANDARD || NET35_OR_NEWER
-        IProperty GetProperty<TResult>(Expression<Func<T, TResult>> expression);
-
-        IField GetField<TResult>(Expression<Func<T, TResult>> expression);
-
-        IEvent GetEvent<TResult>(Expression<Func<T, TResult>> expression);
-        #endif
-    }
+    /// <summary>
+    /// A generic version of the <see cref="ITypeIntrospector"/> interface.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The introspected by the current <see cref="ITypeIntrospector{T}"/> instance type.
+    /// </typeparam>
+    public interface ITypeIntrospector<T> : ITypeIntrospector { }
 }

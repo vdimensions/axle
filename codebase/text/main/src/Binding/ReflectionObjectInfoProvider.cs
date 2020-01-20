@@ -29,32 +29,79 @@ namespace Axle.Text.StructuredData.Binding
             public Type CollectionType { get; }
             public Type ElementType { get; }
         }
-        
-        internal sealed class GenericListAdapter : CollectionAdapter
-        {
-            private static Type GetElementType(Type genericType)
-            {
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                return genericType.GetGenericArguments()[0];
-                #else
-                return genericType.GetTypeInfo().GetGenericArguments()[0];
-                #endif
-            }
-            public GenericListAdapter(Type collectionType) : base(collectionType, GetElementType(collectionType)) { }
 
-            public override object SetItems(object collection, IEnumerable items)
+        internal abstract class GenericCollectionAdapter<T, TCollection> : CollectionAdapter
+            where TCollection: class, IEnumerable<T>
+        {
+            protected GenericCollectionAdapter() : base(typeof(TCollection), typeof(T)) { }
+
+            public sealed override object ItemAt(IEnumerable collection, int index)
             {
-                throw new NotImplementedException();
+                return ItemAt((TCollection) collection, index);
+            }
+            public virtual object ItemAt(TCollection collection, int index) => collection.Skip(index).Take(1);
+
+            public sealed override object SetItems(object collection, IEnumerable items)
+            {
+                return SetItems(collection as TCollection, (items as IEnumerable<T>) ?? items.Cast<T>());
+            }
+            public abstract TCollection SetItems(TCollection collection, IEnumerable<T> items);
+        }
+
+        internal abstract class AbstractGenericListAdapter<T, TList> : GenericCollectionAdapter<T, TList> where TList: class, IList<T>
+        {
+            public sealed override object ItemAt(TList collection, int index)
+            {
+                if (collection.Count > index)
+                {
+                    return collection[index];
+                }
+                else
+                {
+                    return null;
+                }
             }
         }
-        internal sealed class GenericArrayAdapter : CollectionAdapter
-        {
-            public GenericArrayAdapter(Type elementType) : base(elementType.MakeArrayType(1), elementType) { }
 
-            public override object SetItems(object collection, IEnumerable items)
+        internal sealed class GenericArrayAdapter<T> : AbstractGenericListAdapter<T, T[]>
+        {
+            public override T[] SetItems(T[] collection, IEnumerable<T> items)
             {
-                throw new NotImplementedException();
+                var data = items.ToArray();
+                if (collection == null || data.Length != collection.Length)
+                {
+                    return data;
+                }
+                
+                for (var i = 0; i < data.Length; i++)
+                {
+                    collection[i] = data[i];
+                }
+                return collection;
             }
+        }
+
+        internal sealed class GenericListAdapter<T> : AbstractGenericListAdapter<T, List<T>>
+        {
+            public override List<T> SetItems(List<T> collection, IEnumerable<T> items)
+            {
+                if (collection == null)
+                {
+                    return items.ToList();
+                }
+                collection.Clear();
+                collection.AddRange(items);
+                return collection;
+            }
+        }
+
+        private static Type GetElementType(Type genericType)
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            return genericType.GetGenericArguments()[0];
+            #else
+            return genericType.GetTypeInfo().GetGenericArguments()[0];
+            #endif
         }
         
         /// <inheritdoc/>

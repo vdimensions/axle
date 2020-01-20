@@ -2,11 +2,9 @@
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Linq;
-using System.Linq.Expressions;
 using System.Reflection;
 
 using Axle.Reflection.Extensions;
-
 
 namespace Axle.Reflection
 {
@@ -311,36 +309,6 @@ namespace Axle.Reflection
         /// Creates a new instance of the <see cref="TypeIntrospector{T}" /> class.
         /// </summary>
         public TypeIntrospector() : base(typeof(T)) { }
-
-        /// <inheritdoc />
-        public IProperty GetProperty<TResult>(Expression<Func<T, TResult>> expression)
-        {
-            if (ExtractMember(expression) is PropertyInfo prop)
-            {
-                return base.GetProperty(prop);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
-
-        /// <inheritdoc />
-        public IField GetField<TResult>(Expression<Func<T, TResult>> expression)
-        {
-            if (ExtractMember(expression) is FieldInfo field)
-            {
-                return base.GetField(field);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid field expression.", expression), nameof(expression));
-        }
-
-        /// <inheritdoc />
-        public IEvent GetEvent<TResult>(Expression<Func<T, TResult>> expression)
-        {
-            if (ExtractMember(expression) is EventInfo evt)
-            {
-                return base.GetEvent(evt);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid event expression.", expression), nameof(expression));
-        }
     }
 }
 #endif

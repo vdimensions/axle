@@ -13,57 +13,6 @@ namespace Axle.Reflection
 {
     public abstract class AbstractTypeIntrospector : ITypeIntrospector
     {
-        #if NETSTANDARD2_0 || NETFRAMEWORK
-        public bool IsEnum => _introspectedType.IsEnum;
-        #else
-        public bool IsEnum => _introspectedType.GetTypeInfo().IsEnum;
-        #endif
-        internal static MemberInfo ExtractMember<T>(Expression<T> expression)
-        {
-            var expr = expression.Body as MemberExpression;
-            if (expr == null)
-            {
-                if (expression.Body is UnaryExpression unary)
-                {
-                    expr = unary.Operand as MemberExpression;
-                    if (expr == null)
-                    {
-                        if (unary.NodeType == ExpressionType.Convert)
-                        {
-                            unary = (UnaryExpression) unary.Operand;
-                        }
-                        if (unary.NodeType == ExpressionType.ArrayLength)
-                        {
-                            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-                            var m = unary.Operand.Type.GetTypeInfo().GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #else
-                            var m = unary.Operand.Type.GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #endif
-                            return m[0];
-                        }
-                        expr = unary.Operand as MemberExpression;
-                    }
-                }
-            }
-
-            if (expr == null)
-            {
-                throw new ArgumentException(string.Format("The provided expression {0} is not a valid member expression.", expression), nameof(expression));
-            }
-
-            var member = expr.Member;
-            #if NETFRAMEWORK
-            var type = member.DeclaringType;
-            if (type != null && type != member.ReflectedType && null != member.ReflectedType && !(
-                type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))
-            {
-                throw new ArgumentException(string.Format("Expression '{0}' refers to a property that is not from type {1}.", expression, type), nameof(expression));
-            }
-            #endif
-
-            return member;
-        }
-        
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _introspectedType;
         
@@ -100,36 +49,12 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public abstract IProperty GetProperty(PropertyInfo reflectedProperty);
 
-        #if NETSTANDARD || NET35_OR_NEWER
-        /// <inheritdoc />
-        public IProperty GetProperty<TResult>(Expression<Func<TResult>> expression)
-        {
-            if (ExtractMember(expression) is PropertyInfo prop)
-            {
-                return GetProperty(prop);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
-        #endif
-
         /// <inheritdoc />
         public abstract IProperty[] GetProperties(ScanOptions scanOptions);
 
         /// <inheritdoc />
         public abstract IField GetField(ScanOptions scanOptions, string fieldName);
-
-        #if NETSTANDARD || NET35_OR_NEWER
-        /// <inheritdoc />
-        public IField GetField<TResult>(Expression<Func<TResult>> expression)
-        {
-            if (ExtractMember(expression) is FieldInfo field)
-            {
-                return GetField(field);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
-        #endif
-        
+       
         /// <inheritdoc />
         public abstract IField GetField(FieldInfo reflectedField);
 
@@ -140,19 +65,7 @@ namespace Axle.Reflection
         public abstract IEvent GetEvent(ScanOptions scanOptions, string eventName);
 
         /// <inheritdoc />
-        public abstract IEvent GetEvent(EventInfo reflectedEvent);
-        
-        #if NETSTANDARD || NET35_OR_NEWER
-        /// <inheritdoc />
-        public  IEvent GetEvent<TResult>(Expression<Func<TResult>> expression)
-        {
-            if (ExtractMember(expression) is EventInfo evt)
-            {
-                return new EventToken(evt);
-            }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
-        }
-        #endif
+        public abstract IEvent GetEvent(EventInfo reflectedEvent);        
 
         /// <inheritdoc />
         public abstract IEvent[] GetEvents(ScanOptions scanOptions);
@@ -201,15 +114,20 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public IGenericTypeIntrospector GetGenericTypeDefinition()
         {
-            if (!IsGenericType)
+            if (IsGenericTypeDefinition)
             {
-                return null;
+                return new GenericTypeIntrospector(_introspectedType);
             }
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            return new GenericTypeIntrospector(_introspectedType.GetGenericTypeDefinition());
-            #else
-            return new GenericTypeIntrospector(_introspectedType.GetTypeInfo().GetGenericTypeDefinition());
-            #endif
+            if (IsGenericType)
+            {
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                return new GenericTypeIntrospector(_introspectedType.GetGenericTypeDefinition());
+                #else
+                return new GenericTypeIntrospector(_introspectedType.GetTypeInfo().GetGenericTypeDefinition());
+                #endif
+            }
+            return null;
+
         }
 
         /// <inheritdoc />
@@ -226,8 +144,8 @@ namespace Axle.Reflection
             {
                 return typeof(MulticastDelegate)
                     #if NETSTANDARD || NET45_OR_NEWER
-                        .GetTypeInfo()
-                        .IsAssignableFrom(_introspectedType.GetTypeInfo().BaseType.GetTypeInfo())
+                    .GetTypeInfo()
+                    .IsAssignableFrom(_introspectedType.GetTypeInfo().BaseType.GetTypeInfo())
                     #else
                     .IsAssignableFrom(_introspectedType.BaseType)
                     #endif
@@ -255,6 +173,22 @@ namespace Axle.Reflection
 
         #if NETSTANDARD || NET35_OR_NEWER
         /// <inheritdoc />
+        public bool IsGenericTypeDefinition
+        {
+            get
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                var ti = _introspectedType.GetTypeInfo();
+                return ti.IsGenericTypeDefinition;
+                #else
+                return _introspectedType.IsGenericTypeDefinition;
+                #endif
+            }
+        }
+        #endif
+
+        #if NETSTANDARD || NET35_OR_NEWER
+        /// <inheritdoc />
         public bool IsNullableType
         {
             get
@@ -268,7 +202,13 @@ namespace Axle.Reflection
             }
         }
         #endif
-        
+
+        #if NETSTANDARD2_0 || NETFRAMEWORK
+        public bool IsEnum => _introspectedType.IsEnum;
+        #else
+        public bool IsEnum => _introspectedType.GetTypeInfo().IsEnum;
+        #endif
+
         /// <inheritdoc />
         #if NETSTANDARD2_0 || NETFRAMEWORK
         public bool IsAbstract => _introspectedType.IsAbstract;
