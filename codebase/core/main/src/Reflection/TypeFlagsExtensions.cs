@@ -104,6 +104,18 @@ namespace Axle.Reflection
                 result |= TypeFlags.Enumerable;
             }
 
+            if (typeof(IDisposable)
+                    #if NETSTANDARD || NET45_OR_NEWER
+                    .GetTypeInfo()
+                    .IsAssignableFrom(ti.BaseType.GetTypeInfo())
+                    #else
+                    .IsAssignableFrom(ti.BaseType)
+                    #endif
+                    )
+            {
+                result |= TypeFlags.Disposable;
+            }
+
             return result;
         }
         
@@ -121,6 +133,9 @@ namespace Axle.Reflection
         
         /// Checks if the <see cref="TypeFlags.Delegate"/> flag is set.
         public static bool IsDelegate(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Delegate);
+
+        /// Checks if the <see cref="TypeFlags.Disposable"/> flag is set.
+        public static bool IsDisposable(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Disposable);
 
         /// Checks if the <see cref="TypeFlags.Enum"/> flag is set.
         public static bool IsEnum(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Enum);

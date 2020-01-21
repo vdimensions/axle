@@ -17,6 +17,10 @@ namespace Axle.Reflection
         /// </summary>
         Unknown             =       0,
         /// <summary>
+        /// Represents disposable types.
+        /// </summary>
+        Disposable          =       1,
+        /// <summary>
         /// Represents value types.
         /// </summary>
         ValueType           = 1 <<  1,  // 2
