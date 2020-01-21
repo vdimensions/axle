@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
@@ -86,9 +87,21 @@ namespace Axle.Reflection
                 }
             }
 
+
             if (ti.IsArray)
             {
                 result |= TypeFlags.Array;
+            }
+            else if (typeof(IEnumerable)
+                    #if NETSTANDARD || NET45_OR_NEWER
+                    .GetTypeInfo()
+                    .IsAssignableFrom(ti.BaseType.GetTypeInfo())
+                    #else
+                    .IsAssignableFrom(ti.BaseType)
+                    #endif
+                    )
+            {
+                result |= TypeFlags.Enumerable;
             }
 
             return result;
@@ -111,7 +124,10 @@ namespace Axle.Reflection
 
         /// Checks if the <see cref="TypeFlags.Enum"/> flag is set.
         public static bool IsEnum(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Enum);
-        
+
+        /// Checks if the <see cref="TypeFlags.Enumerable"/> flag is set.
+        public static bool IsEnumerable(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Enumerable);
+
         /// Checks if the <see cref="TypeFlags.Generic"/> flag is set.
         public static bool IsGeneric(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Generic);
         
