@@ -255,53 +255,50 @@ namespace Axle.Text.StructuredData.Binding
         public IBindingCollectionAdapter GetCollectionAdapter(Type type)
         {
             var introspector = new TypeIntrospector(type);
-            ITypeIntrospector adapterIntrospector = null;
+            Type collectionType = type, elementType = null, adaperType = null;
+            var adapterTypesMap = new Dictionary<Type, Type>()
+            {
+                {typeof(List<>), typeof(GenericListAdapter<>)},
+                {typeof(ICollection<>), typeof(GenericListAdapter<>)},
+                {typeof(IEnumerable<>), typeof(GenericListAdapter<>)},
+                {typeof(LinkedList<>), typeof(GenericLinkedListAdapter<>)},
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                {typeof(ArrayList), typeof(RawListAdapter)},
+                {typeof(IList), typeof(RawListAdapter)},
+                {typeof(ICollection), typeof(RawListAdapter)},
+                {typeof(IEnumerable), typeof(RawListAdapter)},
+                #endif
+            };
             if (type.IsArray)
             {
-                adapterIntrospector = new TypeIntrospector(typeof(GenericArrayAdapter<>))
-                    .GetGenericTypeDefinition()
-                    .MakeGenericType(type)
-                    .GetIntrospector();
+                elementType = type.GetElementType();
+                adaperType = typeof(GenericArrayAdapter<>);
             }
-            else if (introspector.Flags.IsGeneric())
+            else if (introspector.GetGenericTypeDefinition() is IGenericTypeIntrospector genericIntrospector)
             {
-                var genericDefinition = introspector.GetGenericTypeDefinition();
-                var genericDefinitionType = genericDefinition.GenericDefinitionType;
-                var elementType = genericDefinition.GenericTypeArguments[0];
-                if (genericDefinitionType == typeof(List<>) 
-                    || genericDefinitionType == typeof(IList<>)
-                    || genericDefinitionType == typeof(ICollection<>)
-                    || genericDefinitionType == typeof(IEnumerable<>))
-                {
-                    adapterIntrospector = new TypeIntrospector(typeof(GenericListAdapter<>))
-                        .GetGenericTypeDefinition()
-                        .MakeGenericType(elementType)
-                        .GetIntrospector();
-                }
-                else if (genericDefinitionType == typeof(LinkedList<>))
-                {
-                    adapterIntrospector = new TypeIntrospector(typeof(GenericLinkedListAdapter<>))
-                        .GetGenericTypeDefinition()
-                        .MakeGenericType(elementType)
-                        .GetIntrospector();
-                }
+                var genericDefinitionType = genericIntrospector.GenericDefinitionType;
+                collectionType = genericDefinitionType;
+                elementType = genericIntrospector.GenericTypeArguments[0];
             }
             else
             {
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                if (type == typeof(ArrayList) 
-                    || type == typeof(IList) 
-                    || type == typeof(ICollection) 
-                    || type == typeof(IEnumerable))
-                {
-                    adapterIntrospector = new TypeIntrospector(typeof(RawListAdapter));
-                }
-                #endif
+                // raw collections do not need element type
+                elementType = null;
             }
 
-            return adapterIntrospector == null 
-                ? null 
-                : CreateInstance(adapterIntrospector) as IBindingCollectionAdapter;
+            if (adaperType == null && !adapterTypesMap.TryGetValue(collectionType, out adaperType))
+            {
+                return null;
+            }
+
+            var adapterIntrospector = elementType != null 
+                ? new TypeIntrospector(adaperType)
+                    .GetGenericTypeDefinition()
+                    .MakeGenericType(elementType)
+                    .GetIntrospector()
+                : new TypeIntrospector(adaperType);
+
+            return CreateInstance(adapterIntrospector) as IBindingCollectionAdapter;
         }
     }
 }

@@ -14,7 +14,7 @@ namespace Axle.Reflection
         
         public override ITypeIntrospector GetIntrospector()
         {
-            var size = GenericTypeConstraints.Length;
+            var size = GenericArguments.Length;
             return size == GenericTypeArguments.Length 
                 ? new TypeIntrospector(GenericDefinitionType.MakeGenericType(GenericTypeArguments)) 
                 : null;
@@ -30,21 +30,21 @@ namespace Axle.Reflection
             var concatenatedTypes = new Type[typeParameters.Length + GenericTypeArguments.Length];
             GenericTypeArguments.CopyTo(concatenatedTypes, 0);
             typeParameters.CopyTo(concatenatedTypes,GenericTypeArguments.Length);
-            if (concatenatedTypes.Length > GenericTypeConstraints.Length)
+            if (concatenatedTypes.Length > GenericArguments.Length)
             {
                 throw new InvalidOperationException("You have provided more types than the supported number of generic type arguments.");
             }
             return new GenericTypeIntrospector(GenericDefinitionType, RawTypeIntrospector, concatenatedTypes);
         }
 
-        private Type[] GenericTypeConstraints
+        private Type[] GenericArguments
         {
             get
             {
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                return  GenericDefinitionType.GetGenericParameterConstraints();
+                return  GenericDefinitionType.GetGenericArguments();
                 #else
-                return System.Reflection.IntrospectionExtensions.GetTypeInfo(GenericDefinitionType).GetGenericParameterConstraints();
+                return System.Reflection.IntrospectionExtensions.GetTypeInfo(GenericDefinitionType).GetGenericArguments();
                 #endif
             }
         }

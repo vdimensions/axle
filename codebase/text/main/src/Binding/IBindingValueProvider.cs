@@ -1,4 +1,9 @@
-﻿namespace Axle.Text.StructuredData.Binding
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Axle.Text.StructuredData.Binding
 {
     /// <summary>
     /// An interface representing a member value provider; that is an object which provides values for 
@@ -16,6 +21,4 @@
         /// </remarks>
         string Name { get; }
     }
-
-    
 }

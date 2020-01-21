@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>net45</TargetFramework>
     <OutputType>Library</OutputType>
@@ -16,6 +16,12 @@
 
   <ItemGroup>
     <PackageReference Include="Axle.Text.StructuredData" Version="$(PackageVersionRange)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
