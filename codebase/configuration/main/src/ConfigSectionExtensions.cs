@@ -54,8 +54,7 @@ namespace Axle.Configuration
         public static IConfigSection GetSection(this IConfigSection config, string sectionName)
         {
             config.VerifyArgument(nameof(config)).IsNotNull();
-            sectionName.VerifyArgument(nameof(sectionName)).IsNotNullOrEmpty();
-            return config[sectionName] as IConfigSection;
+            return string.IsNullOrEmpty(sectionName) ? config : (config[sectionName] as IConfigSection);
         }
 
         public static object GetSection(this IConfigSection config, string sectionName, Type sectionType)

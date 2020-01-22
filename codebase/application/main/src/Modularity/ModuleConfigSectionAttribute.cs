@@ -9,6 +9,7 @@ namespace Axle.Modularity
             Type = type;
             Name = name;
         }
+        public ModuleConfigSectionAttribute(Type type) : this(type, string.Empty) { }
 
         /// <summary>
         /// Gets the type of the configuration section object that addresses the target module.

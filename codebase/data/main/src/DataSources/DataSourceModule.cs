@@ -19,17 +19,18 @@ namespace Axle.Data.DataSources
     [Module]
     [Requires(typeof(DataModule))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [ModuleConfigSection(typeof(DataSourceConfiguration))]
     internal sealed class DataSourceModule : ISqlScriptLocationRegistry, IDataSourceRegistry
     {
         internal const string SqlScriptsBundle = "SqlScripts";
 
         private readonly IDbServiceProviderRegistry _dbServiceProviders;
-        private readonly IConfiguration _configuration;
+        private readonly DataSourceConfiguration _configuration;
         private readonly ResourceManager _dataSourceResourceManager;
         private readonly IResourceExtractor _scriptExtractor;
         private readonly IDictionary<string, DataSource> _dataSources = new ConcurrentDictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
-        public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
+        public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, DataSourceConfiguration configuration, ILogger logger)
         {
             Logger = logger;
             _dbServiceProviders = dbServiceProviderRegistry;
@@ -42,7 +43,7 @@ namespace Axle.Data.DataSources
         internal void OnInit(ModuleExporter exporter)
         {
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            foreach (var cs in _configuration.GetConnectionStrings())
+            foreach (var cs in _configuration.ConnectionStrings)
             {
                 RegisterDataSource(cs);
             }

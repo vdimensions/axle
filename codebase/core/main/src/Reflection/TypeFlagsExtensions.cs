@@ -63,7 +63,9 @@ namespace Axle.Reflection
                 {
                     result |= TypeFlags.Interface;
                 }
-                else if (typeof(Attribute)
+                else if (ti.BaseType != null)
+                {
+                    if (typeof(Attribute)
                         #if NETSTANDARD || NET45_OR_NEWER
                         .GetTypeInfo()
                         .IsAssignableFrom(ti.BaseType.GetTypeInfo())
@@ -71,10 +73,10 @@ namespace Axle.Reflection
                         .IsAssignableFrom(ti.BaseType)
                         #endif
                         )
-                {
-                    result |= TypeFlags.Attribute;
-                }
-                else if (typeof(MulticastDelegate)
+                    {
+                        result |= TypeFlags.Attribute;
+                    }
+                    else if (typeof(MulticastDelegate)
                         #if NETSTANDARD || NET45_OR_NEWER
                         .GetTypeInfo()
                         .IsAssignableFrom(ti.BaseType.GetTypeInfo())
@@ -82,8 +84,9 @@ namespace Axle.Reflection
                         .IsAssignableFrom(ti.BaseType)
                         #endif
                         )
-                {
-                    result |= TypeFlags.Delegate;
+                    {
+                        result |= TypeFlags.Delegate;
+                    }
                 }
             }
 
@@ -93,25 +96,21 @@ namespace Axle.Reflection
                 result |= TypeFlags.Array;
             }
             else if (typeof(IEnumerable)
-                    #if NETSTANDARD || NET45_OR_NEWER
-                    .GetTypeInfo()
-                    .IsAssignableFrom(ti.BaseType.GetTypeInfo())
-                    #else
-                    .IsAssignableFrom(ti.BaseType)
-                    #endif
-                    )
+                #if NETSTANDARD || NET45_OR_NEWER
+                .GetTypeInfo()
+                #endif
+                .IsAssignableFrom(ti)
+                )
             {
                 result |= TypeFlags.Enumerable;
             }
 
             if (typeof(IDisposable)
-                    #if NETSTANDARD || NET45_OR_NEWER
-                    .GetTypeInfo()
-                    .IsAssignableFrom(ti.BaseType.GetTypeInfo())
-                    #else
-                    .IsAssignableFrom(ti.BaseType)
-                    #endif
-                    )
+                #if NETSTANDARD || NET45_OR_NEWER
+                .GetTypeInfo()
+                #endif
+                .IsAssignableFrom(ti)
+                )
             {
                 result |= TypeFlags.Disposable;
             }
