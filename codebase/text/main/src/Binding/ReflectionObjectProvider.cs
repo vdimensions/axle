@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using Axle.Reflection;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     /// <summary>
-    /// An implementation of the <see cref="IBindingObjectInfoProvider"/> that uses reflection.
+    /// An implementation of the <see cref="IObjectProvider"/> that uses reflection.
     /// </summary>
-    public sealed class ReflectionObjectInfoProvider : IBindingObjectInfoProvider
+    public sealed class ReflectionObjectProvider : IObjectProvider
     {
         internal abstract class CollectionAdapter : IBindingCollectionAdapter
         {

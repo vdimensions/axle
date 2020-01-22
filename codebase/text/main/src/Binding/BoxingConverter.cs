@@ -1,7 +1,7 @@
 ﻿using Axle.Conversion;
 using Axle.Verification;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     internal sealed class BoxingConverter<T> : IConverter<string, object>
     {

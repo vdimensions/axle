@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using System.Linq;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     /// <summary>
     /// A general-purpose implementation of the <see cref="IBinder"/> interface.
@@ -13,50 +13,50 @@ namespace Axle.Text.StructuredData.Binding
     {
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultBinder"/> class using the specified 
-        /// <paramref name="objectInfoProvider"/> and <paramref name="converter"/>.
+        /// <paramref name="objectProvider"/> and <paramref name="converter"/>.
         /// </summary>
-        /// <param name="objectInfoProvider">
-        /// A <see cref="IBindingObjectInfoProvider"/> instance that enables creation and member access 
+        /// <param name="objectProvider">
+        /// A <see cref="IObjectProvider"/> instance that enables creation and member access 
         /// to the object instance being bound.
         /// </param>
         /// <param name="converter">
         /// A <see cref="IBindingConverter"/> instance that handles the conversion of the raw data values
         /// during the binding process.
         /// </param>
-        public DefaultBinder(IBindingObjectInfoProvider objectInfoProvider, IBindingConverter converter)
+        public DefaultBinder(IObjectProvider objectProvider, IBindingConverter converter)
         {
-            ObjectInfoProvider = Verifier.IsNotNull(Verifier.VerifyArgument(objectInfoProvider, nameof(objectInfoProvider))).Value;
+            ObjectProvider = Verifier.IsNotNull(Verifier.VerifyArgument(objectProvider, nameof(objectProvider))).Value;
             Converter = Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter))).Value;
         }
         #if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultBinder"/> class using a 
-        /// <see cref="ReflectionObjectInfoProvider"/> and a <see cref="DefaultBindingConverter"/>
+        /// <see cref="ReflectionObjectProvider"/> and a <see cref="DefaultBindingConverter"/>
         /// </summary>
-        public DefaultBinder() : this(new ReflectionObjectInfoProvider(), new DefaultBindingConverter()) { }
+        public DefaultBinder() : this(new ReflectionObjectProvider(), new DefaultBindingConverter()) { }
         #endif
 
         private static bool TryBind(
-                IBindingObjectInfoProvider objectInfoProvider, 
+                IObjectProvider objectProvider, 
                 IBindingConverter converter, 
-                IBindingValueProvider valueProvider, 
+                IBoundValueProvider valueProvider, 
                 object instance, 
                 Type targetType, 
                 out object boundValue)
         {
             switch (valueProvider)
             {
-                case ISimpleMemberValueProvider svp:
+                case IBoundSimpleValueProvider svp:
                     return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
                 
-                case ICollectionMemberValueProvider collectionProvider:
+                case IBoundCollectionProvider collectionProvider:
                     var collectionAdapter = collectionProvider.CollectionAdapter ??
-                                            objectInfoProvider.GetCollectionAdapter(targetType);
+                                            objectProvider.GetCollectionAdapter(targetType);
                     if (collectionAdapter != null)
                     {
                         var items = collectionProvider.Select(
                             (provider, i) => TryBind(
-                                objectInfoProvider,
+                                objectProvider,
                                 converter,
                                 provider,
                                 instance != null ? collectionAdapter.ItemAt((IEnumerable) instance, i) : null,
@@ -66,30 +66,30 @@ namespace Axle.Text.StructuredData.Binding
                         return true;
                     }
                     return TryBind(
-                        objectInfoProvider, 
+                        objectProvider, 
                         converter, 
                         collectionProvider.Last(), 
                         instance, 
                         targetType, 
                         out boundValue);
 
-                case IComplexMemberValueProvider complexProvider:
-                    var cAdapter = objectInfoProvider.GetCollectionAdapter(targetType);
+                case IBoundComplexValueProvider complexProvider:
+                    var cAdapter = objectProvider.GetCollectionAdapter(targetType);
                     if (cAdapter != null)
                     {
                         return TryBind(
-                            objectInfoProvider,
+                            objectProvider,
                             converter,
-                            new CollectionValueProvider(complexProvider.Name, cAdapter, complexProvider),
+                            new BoundCollectionProvider(complexProvider.Name, cAdapter, complexProvider),
                             instance,
                             targetType,
                             out boundValue);
                     }
                     if (instance == null)
                     {
-                        instance = objectInfoProvider.CreateInstance(targetType);
+                        instance = objectProvider.CreateInstance(targetType);
                     }
-                    var members = objectInfoProvider.GetMembers(instance);
+                    var members = objectProvider.GetMembers(instance);
                     foreach (var member in members)
                     {
                         if (complexProvider.TryGetValue(member.Name, out var memberValueProvider))
@@ -98,7 +98,7 @@ namespace Axle.Text.StructuredData.Binding
                             var memberInstance = member.GetAccessor?.GetValue(instance);
 
                             if (TryBind(
-                                objectInfoProvider,
+                                objectProvider,
                                 converter,
                                 memberValueProvider,
                                 memberInstance,
@@ -117,12 +117,12 @@ namespace Axle.Text.StructuredData.Binding
         }
 
         /// <inheritdoc />
-        public object Bind(IBindingValueProvider memberValueProvider, object instance)
+        public object Bind(IBoundValueProvider memberValueProvider, object instance)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(instance, nameof(instance)));
             return TryBind(
-                    ObjectInfoProvider, 
+                    ObjectProvider, 
                     Converter, 
                     memberValueProvider, 
                     instance, 
@@ -133,21 +133,21 @@ namespace Axle.Text.StructuredData.Binding
         }
 
         /// <inheritdoc />
-        public object Bind(IBindingValueProvider memberValueProvider, Type type)
+        public object Bind(IBoundValueProvider memberValueProvider, Type type)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            var instance = ObjectInfoProvider.CreateInstance(type);
-            return TryBind(ObjectInfoProvider, Converter, memberValueProvider, instance, type, out var boundValue) 
+            var instance = ObjectProvider.CreateInstance(type);
+            return TryBind(ObjectProvider, Converter, memberValueProvider, instance, type, out var boundValue) 
                 ? boundValue 
                 : instance;
         }
 
         /// <summary>
-        /// Gets the current <see cref="IBindingObjectInfoProvider"/> instance that enables creation and member access 
+        /// Gets the current <see cref="IObjectProvider"/> instance that enables creation and member access 
         /// to the object instance being bound.
         /// </summary>
-        public IBindingObjectInfoProvider ObjectInfoProvider { get; }
+        public IObjectProvider ObjectProvider { get; }
 
         /// <summary>
         /// Gets the current <see cref="IBindingConverter"/> instance that handles the conversion of the raw data 

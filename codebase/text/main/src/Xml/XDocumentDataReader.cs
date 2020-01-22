@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Xml.Linq;
 
-namespace Axle.Text.StructuredData.Xml
+namespace Axle.Text.Data.Xml
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class XDocumentDataReader : AbstractXmlDataReader<XDocument>

@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Xml.Linq;
-using Axle.Text.StructuredData.Binding;
-using Axle.Text.StructuredData.Xml;
+using Axle.Text.Data.Binding;
+using Axle.Text.Data.Xml;
 using NUnit.Framework;
 
-namespace Axle.Text.StructuredData.Tests.Binding
+namespace Axle.Text.Data.Tests.Binding
 {
     [TestFixture]
     public class BinderTests
@@ -37,11 +36,10 @@ namespace Axle.Text.StructuredData.Tests.Binding
             const string petName = "Lion";
             const string petType = "cat";
 
-            var xmlBindingSource = String.Format(XmlFormat, ownerName, petName, petType);
-            var provider = new TextDataProvider(new XDocumentDataReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource));
+            var xmlBindingSource = string.Format(XmlFormat, ownerName, petName, petType);
             var binder = new DefaultBinder();
             Owner owner = new Owner();
-            owner = (Owner) binder.Bind(provider, owner);
+            owner = (Owner) binder.Bind(new XDocumentDataReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource), owner);
 
             Assert.AreEqual(ownerName, owner.Name, "Owner name does not match");
             Assert.AreEqual(1, owner.Pets.Length, "Pet's count does not match");

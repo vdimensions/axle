@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     /// <summary>
     /// A binding converter is an object which is used by a <see cref="IBinder"/>

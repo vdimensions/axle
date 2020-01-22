@@ -4,7 +4,7 @@ using Axle.Verification;
 using System;
 using System.Collections.Concurrent;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     public sealed class BindingConverter : IBindingConverter
     {

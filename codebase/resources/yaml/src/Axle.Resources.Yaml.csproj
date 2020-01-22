@@ -28,7 +28,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Text.StructuredData.Yaml" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Text.Data.Yaml" Version="$(PackageVersionRange)" />
     <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
   </ItemGroup>
   

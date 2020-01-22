@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     /// <summary>
     /// A <see cref="IBindingConverter"/> implementation supporting the conversion of a handful of primitive types. 

@@ -1,4 +1,4 @@
-project='Axle.StructuredData.Binding.Tests'
+project='Axle.Text.Data.Tests'
 project_format='csproj'
 
 dotnet restore $project.$project_format

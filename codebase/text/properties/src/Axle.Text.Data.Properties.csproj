@@ -6,7 +6,7 @@
 
   <ItemGroup>
     <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Text.StructuredData" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Text.Data" Version="$(PackageVersionRange)" />
     <PackageReference Include="Kajabity.Tools.Java" Version="0.2.6862.30334" />
   </ItemGroup>
 

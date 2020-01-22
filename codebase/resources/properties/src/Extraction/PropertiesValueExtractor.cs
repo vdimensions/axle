@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Axle.Extensions.String;
 using Axle.References;
 using Axle.Resources.Extraction;
-using Axle.Resources.StructuredData;
+using Axle.Resources.Text.Data;
 
 namespace Axle.Resources.Properties.Extraction
 {
@@ -40,7 +40,7 @@ namespace Axle.Resources.Properties.Extraction
                 }
                 switch (propertyResource.Value)
                 {
-                    case StructuredDataResourceInfo jp:
+                    case TextDataResourceInfo jp:
                         props = jp.Data;
                         break;
                     default:

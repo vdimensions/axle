@@ -3,82 +3,69 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
-    public sealed class TextDataProvider : IComplexMemberValueProvider
+    internal sealed class TextDataProvider : IBoundComplexValueProvider
     {
-        private static IBindingValueProvider GetProvider(IStructuredDataNode node)
+        private sealed class BCVP : IBoundComplexValueProvider
         {
-            switch (node)
-            {
-                case IStructuredDataValue v:
-                    return new SVP(v);
-                case IStructuredDataObject o:
-                    return new SOP(o);
-            }
-            throw new NotSupportedException($"Unsupported node type {node.GetType().FullName}");
-        }
+            private readonly ITextDataObject _provider;
 
-        private sealed class SOP : IComplexMemberValueProvider
-        {
-            private readonly IStructuredDataObject _provider;
-
-            public SOP(IStructuredDataObject provider)
+            public BCVP(ITextDataObject provider)
             {
                 _provider = provider;
             }
 
-            public bool TryGetValue(string member, out IBindingValueProvider value)
+            public bool TryGetValue(string member, out IBoundValueProvider value)
             {
-                value = new CVP(member, _provider.GetChildren(member).Select(GetProvider));
+                value = new BCP(member, _provider.GetChildren(member).Select(GetProvider));
                 return true;
             }
 
             public string Name => _provider.Key;
 
-            public IBindingValueProvider this[string member] => TryGetValue(member, out var value) ? value : null;
+            public IBoundValueProvider this[string member] => TryGetValue(member, out var value) ? value : null;
         }
 
-        private sealed class SVP : ISimpleMemberValueProvider
+        private sealed class BCP : IBoundCollectionProvider
         {
-            private readonly IStructuredDataValue _provider;
+            private readonly IEnumerable<IBoundValueProvider> _providers;
 
-            public SVP(IStructuredDataValue provider)
-            {
-                _provider = provider;
-            }
-
-            public string Name => _provider.Key;
-            public string Value => _provider.Value;
-        }
-
-        private sealed class CVP : ICollectionMemberValueProvider
-        {
-            private readonly IEnumerable<IBindingValueProvider> _providers;
-
-            public CVP(string name, IEnumerable<IBindingValueProvider> providers)
+            public BCP(string name, IEnumerable<IBoundValueProvider> providers)
             {
                 _providers = providers;
                 Name = name;
             }
 
-            public IEnumerator<IBindingValueProvider> GetEnumerator() => _providers.GetEnumerator();
+            public IEnumerator<IBoundValueProvider> GetEnumerator() => _providers.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
             public string Name { get; }
 
-            IBindingCollectionAdapter ICollectionMemberValueProvider.CollectionAdapter => null;
+            IBindingCollectionAdapter IBoundCollectionProvider.CollectionAdapter => null;
         }
 
-        private readonly SOP _inner;
+        private static IBoundValueProvider GetProvider(ITextDataNode node)
+        {
+            switch (node)
+            {
+                case ITextDataValue v:
+                    return new BoundSimpleValueProvider(v.Key, v.Value);
+                case ITextDataObject o:
+                    return new BCVP(o);
+            }
+            throw new NotSupportedException($"Unsupported node type {node.GetType().FullName}");
+        }
 
-        public TextDataProvider(IStructuredDataRoot structuredData) { _inner = (SOP) GetProvider(structuredData); }
+        private readonly BCVP _inner;
 
-        public bool TryGetValue(string member, out IBindingValueProvider value) => _inner.TryGetValue(member, out value);
+        public TextDataProvider(ITextDataRoot structuredData) { _inner = (BCVP) GetProvider(structuredData); }
 
-        public string Name => "";
+        public bool TryGetValue(string member, out IBoundValueProvider value) => _inner.TryGetValue(member, out value);
 
-        public IBindingValueProvider this[string member] => _inner[member];
+        public string Name => _inner.Name;
+
+        public IBoundValueProvider this[string member] => _inner[member];
     }
 }

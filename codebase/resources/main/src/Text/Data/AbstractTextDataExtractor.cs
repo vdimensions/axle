@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using Axle.References;
 using Axle.Resources.Extraction;
-using Axle.Text.StructuredData;
+using Axle.Text.Data;
 
-namespace Axle.Resources.StructuredData
+namespace Axle.Resources.Text.Data
 {
-    public abstract class AbstractStructuredDataExtractor : AbstractResourceExtractor
+    public abstract class AbstractTextDataExtractor : AbstractResourceExtractor
     {
         private void ReadData(Stream stream, IDictionary<string, string> finalProperties) => ReadData(stream, finalProperties, Encoding.UTF8);
         private void ReadData(Stream stream, IDictionary<string, string> finalProperties, Encoding encoding)
@@ -21,15 +21,15 @@ namespace Axle.Resources.StructuredData
                 finalProperties);
         }
 
-        private static void ExtractData(string prefix, IStructuredDataNode structure, IDictionary<string, string> finalProperties)
+        private static void ExtractData(string prefix, ITextDataNode structure, IDictionary<string, string> finalProperties)
         {
             var key = string.IsNullOrEmpty(prefix) ? structure.Key : $"{prefix}.{structure.Key}";
             switch (structure)
             {
-                case IStructuredDataValue v:
+                case ITextDataValue v:
                     finalProperties[key] = v.Value;
                     break;
-                case IStructuredDataObject obj:
+                case ITextDataObject obj:
                     foreach (var child in obj.GetChildren())
                     {
                         ExtractData(key, child, finalProperties);
@@ -58,9 +58,9 @@ namespace Axle.Resources.StructuredData
             return finalProperties.Count == 0 ? null : CreateResourceInfo(name, context.Culture, finalProperties);
         }
 
-        protected abstract IStructuredDataReader GetReader(StringComparer comparer);
+        protected abstract ITextDataReader GetReader(StringComparer comparer);
         
-        protected abstract StructuredDataResourceInfo CreateResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data);
+        protected abstract TextDataResourceInfo CreateResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data);
         
         protected abstract StringComparer KeyComparer { get; }
     }

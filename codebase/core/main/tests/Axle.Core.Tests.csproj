@@ -19,6 +19,10 @@
     <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Reflection\" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

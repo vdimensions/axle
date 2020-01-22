@@ -2,18 +2,18 @@
 using System.IO;
 using System.Text;
 
-namespace Axle.Text.StructuredData.Xml
+namespace Axle.Text.Data.Xml
 {
-    public abstract class AbstractXmlDataReader : AbstractStructuredDataReader
+    public abstract class AbstractXmlDataReader : AbstractTextDataReader
     {
         protected AbstractXmlDataReader(StringComparer comparer) : base(comparer) { }
 
         internal abstract XmlNodeAdapter GetXmlRoot(Stream stream, Encoding encoding);
         internal abstract XmlNodeAdapter GetXmlRoot(string xml);
 
-        protected sealed override IStructuredDataAdapter CreateAdapter(Stream stream, Encoding encoding) 
+        protected sealed override ITextDataAdapter CreateAdapter(Stream stream, Encoding encoding) 
             => GetXmlRoot(stream, encoding);
-        protected sealed override IStructuredDataAdapter CreateAdapter(string data) => GetXmlRoot(data);
+        protected sealed override ITextDataAdapter CreateAdapter(string data) => GetXmlRoot(data);
     }
 
     public abstract class AbstractXmlDataReader<TXml> : AbstractXmlDataReader

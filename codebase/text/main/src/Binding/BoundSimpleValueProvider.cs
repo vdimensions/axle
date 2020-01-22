@@ -1,16 +1,16 @@
-﻿namespace Axle.Text.StructuredData.Binding
+﻿namespace Axle.Text.Data.Binding
 {
     /// <summary>
-    /// The default implementation of the <see cref="ISimpleMemberValueProvider"/> interface.
+    /// The default implementation of the <see cref="IBoundSimpleValueProvider"/> interface.
     /// </summary>
-    public sealed class SimpleMemberValueProvider : ISimpleMemberValueProvider
+    public sealed class BoundSimpleValueProvider : IBoundSimpleValueProvider
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="SimpleMemberValueProvider"/> class.
+        /// Creates a new instance of the <see cref="BoundSimpleValueProvider"/> class.
         /// </summary>
         /// <param name="name">The name of the represented member.</param>
         /// <param name="value">The raw value of the represented member.</param>
-        public SimpleMemberValueProvider(string name, string value)
+        public BoundSimpleValueProvider(string name, string value)
         {
             Name = name;
             Value = value;

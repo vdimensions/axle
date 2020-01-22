@@ -1,16 +1,15 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using Axle.Reflection;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     /// <summary>
     /// An interface representing an object information provider. An object information provider is 
     /// used by a <see cref="IBinder"/> to obtain means for creating instances of a particular object
     /// or to access an object instance's members.
     /// </summary>
-    public interface IBindingObjectInfoProvider
+    public interface IObjectProvider
     {
         /// <summary>
         /// Finds an object <paramref name="instance"/>'s member with the specified <paramref name="name"/>.

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Axle.Text.StructuredData.Xml
+namespace Axle.Text.Data.Xml
 {
-    internal sealed class XmlNodeAdapter : IStructuredDataAdapter
+    internal sealed class XmlNodeAdapter : ITextDataAdapter
     {
         public XmlNodeAdapter(string name, string value, ICollection<XmlNodeAdapter> children)
         {
@@ -15,6 +15,6 @@ namespace Axle.Text.StructuredData.Xml
         public string Key { get; }
         public string Value { get; }
         public IEnumerable<XmlNodeAdapter> Children { get; }
-        IEnumerable<IStructuredDataAdapter> IStructuredDataAdapter.Children => Children.Cast<IStructuredDataAdapter>();
+        IEnumerable<ITextDataAdapter> ITextDataAdapter.Children => Children.Cast<ITextDataAdapter>();
     }
 }

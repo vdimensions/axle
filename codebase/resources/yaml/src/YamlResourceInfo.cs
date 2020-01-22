@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Axle.Resources.StructuredData;
+using Axle.Resources.Text.Data;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -13,7 +13,7 @@ namespace Axle.Resources.Yaml
     /// <summary>
     /// A class representing a YAML file as a resource.
     /// </summary>
-    public sealed class YamlResourceInfo : StructuredDataResourceInfo
+    public sealed class YamlResourceInfo : TextDataResourceInfo
     {
         /// <summary>
         /// Gets the content (MIME) type of a java properties file.

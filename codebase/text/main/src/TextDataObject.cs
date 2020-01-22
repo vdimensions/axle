@@ -4,19 +4,19 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using Axle.Text.Expressions.Regular;
 
-namespace Axle.Text.StructuredData
+namespace Axle.Text.Data
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class StructuredDataObject : StructuredDataNode, IStructuredDataObject
+    public sealed class TextDataObject : TextDataNode, ITextDataObject
     {
         private const string NameTokenRegexPattern =
             "(?:(?:(?<=\\[)(?:[^\\]]+)(?=\\]))|(?:(?<=\\\")(?:[^\\\"]+)(?=\\\"))|(?:(?<=\\')(?:[^\\']+)(?=\\'))|(?:[^\\.\\n\\[\\]\\\"\\'\\:\\s]+))";
 
         private static readonly IRegularExpression _NameTokenRegex;
 
-        static StructuredDataObject()
+        static TextDataObject()
         {
             _NameTokenRegex = new RegularExpression(
                 NameTokenRegexPattern, 
@@ -34,12 +34,12 @@ namespace Axle.Text.StructuredData
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Runtime.Serialization.DataMember]
         #endif
-        private readonly IEnumerable<IStructuredDataNode> _children;
+        private readonly IEnumerable<ITextDataNode> _children;
         
-        public StructuredDataObject(
+        public TextDataObject(
                 string key, 
-                IStructuredDataObject parent, 
-                IEnumerable<IStructuredDataNode> children, 
+                ITextDataObject parent, 
+                IEnumerable<ITextDataNode> children, 
                 bool recursiveParentMapping = false) : base(key, parent)
         {
             var p = this;
@@ -49,10 +49,10 @@ namespace Axle.Text.StructuredData
                     {
                         switch (child)
                         {
-                            case StructuredDataValue value:
-                                return new StructuredDataValue(value.Key, p, value.Value);
-                            case StructuredDataObject obj:
-                                return new StructuredDataObject(obj.Key, p, obj.GetChildren(), true);
+                            case ITextDataValue value:
+                                return new TextDataValue(value.Key, p, value.Value);
+                            case ITextDataObject obj:
+                                return new TextDataObject(obj.Key, p, obj.GetChildren(), true);
                             default:
                                 return child;
                         }
@@ -60,14 +60,14 @@ namespace Axle.Text.StructuredData
                 : children;
         }
 
-        public StructuredDataObject(
+        public TextDataObject(
                 string key, 
-                IStructuredDataObject parent, 
-                IEnumerable<IStructuredDataNode> children) 
+                ITextDataObject parent, 
+                IEnumerable<ITextDataNode> children) 
             : this(key, parent, children, true) { }
 
-        public IEnumerable<IStructuredDataNode> GetChildren() => _children;
-        public IEnumerable<IStructuredDataNode> GetChildren(string name)
+        public IEnumerable<ITextDataNode> GetChildren() => _children;
+        public IEnumerable<ITextDataNode> GetChildren(string name)
         {
             var directMatches = GetChildrenByTokens(new[]{name}, 0, _children);
             if (directMatches.Length > 0)
@@ -78,9 +78,9 @@ namespace Axle.Text.StructuredData
             return GetChildrenByTokens(tokens, 0, _children);
         }
 
-        private IStructuredDataNode[] GetChildrenByTokens(string[] tokens, int startIndex, IEnumerable<IStructuredDataNode> children)
+        private ITextDataNode[] GetChildrenByTokens(string[] tokens, int startIndex, IEnumerable<ITextDataNode> children)
         {
-            var comparer = ((IStructuredDataNode) this).KeyComparer;
+            var comparer = ((ITextDataNode) this).KeyComparer;
             while (true)
             {
                 var token = tokens[startIndex];
@@ -90,7 +90,7 @@ namespace Axle.Text.StructuredData
                     return matchingChildren.ToArray();
                 }
                 startIndex = 1 + startIndex;
-                children = matchingChildren.OfType<IStructuredDataObject>() .SelectMany(c => c.GetChildren());
+                children = matchingChildren.OfType<ITextDataObject>() .SelectMany(c => c.GetChildren());
             }
         }
     }

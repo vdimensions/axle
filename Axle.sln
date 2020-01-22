@@ -105,13 +105,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "codebase", "codebase", "{D2
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "text", "text", "{20FBBA2C-3EF5-463F-924B-0752FF21041A}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.StructuredData", "codebase\text\main\src\Axle.Text.StructuredData.csproj", "{3AB027FE-770C-4495-9C22-A47A1AF547CC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Data", "codebase\text\main\src\Axle.Text.Data.csproj", "{3AB027FE-770C-4495-9C22-A47A1AF547CC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.StructuredData.Yaml", "codebase\text\yaml\src\Axle.Text.StructuredData.Yaml.csproj", "{84468961-0B3A-42C9-91A8-4566FC4296CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Data.Yaml", "codebase\text\yaml\src\Axle.Text.Data.Yaml.csproj", "{84468961-0B3A-42C9-91A8-4566FC4296CF}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.StructuredData.Properties", "codebase\text\properties\src\Axle.Text.StructuredData.Properties.csproj", "{3A911D54-E803-4DD0-9522-0024E152D65F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Data.Properties", "codebase\text\properties\src\Axle.Text.Data.Properties.csproj", "{3A911D54-E803-4DD0-9522-0024E152D65F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Text.StructuredData.Properties.Tests", "codebase\text\properties\tests\Axle.Text.StructuredData.Properties.Tests.csproj", "{2F8DD6CD-BAFF-4271-A03E-BB67DC53B9E8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Text.Data.Properties.Tests", "codebase\text\properties\tests\Axle.Text.Data.Properties.Tests.csproj", "{2F8DD6CD-BAFF-4271-A03E-BB67DC53B9E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{4F419519-E206-4CDD-89E0-B28F5313C51B}"
 EndProject
@@ -123,11 +123,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "json", "json", "{BB0568A7-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hocon", "hocon", "{A6F69C52-8C65-41ED-A81E-5A606785C436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Text.StructuredData.Yaml.Tests", "codebase\text\yaml\tests\Axle.Text.StructuredData.Yaml.Tests.csproj", "{1BA8759B-EEF5-44DC-AB60-8FCF4FF4FFD9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Text.Data.Yaml.Tests", "codebase\text\yaml\tests\Axle.Text.Data.Yaml.Tests.csproj", "{1BA8759B-EEF5-44DC-AB60-8FCF4FF4FFD9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{791AB91C-2E6F-48D0-A68C-A1E6DFAFB245}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.StructuredData.Tests", "codebase\text\main\tests\Axle.Text.StructuredData.Tests.csproj", "{D4C56580-5C6F-4D05-A519-95E6B1F59F1F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Data.Tests", "codebase\text\main\tests\Axle.Text.Data.Tests.csproj", "{D4C56580-5C6F-4D05-A519-95E6B1F59F1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

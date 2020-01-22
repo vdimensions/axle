@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using Axle.Globalization;
-using Axle.Text.StructuredData.Binding;
+using Axle.Text.Data.Binding;
 using NUnit.Framework;
 
-namespace Axle.Text.StructuredData.Tests.Binding
+namespace Axle.Text.Data.Tests.Binding
 {
     [TestFixture]
     public class SimpleTypeBindingConverterTests

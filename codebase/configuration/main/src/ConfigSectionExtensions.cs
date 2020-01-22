@@ -1,7 +1,7 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Linq;
-using Axle.Text.StructuredData.Binding;
+using Axle.Text.Data.Binding;
 using Axle.Verification;
 
 namespace Axle.Configuration
@@ -11,7 +11,7 @@ namespace Axle.Configuration
     /// </summary>
     public static class ConfigSectionExtensions
     {
-        private sealed class ConfigurationBindingValueProvider : IComplexMemberValueProvider
+        private sealed class ConfigurationBindingValueProvider : IBoundComplexValueProvider
         {
             private readonly IConfigSection _config;
 
@@ -20,13 +20,13 @@ namespace Axle.Configuration
                 _config = config;
             }
 
-            public bool TryGetValue(string member, out IBindingValueProvider value)
+            public bool TryGetValue(string member, out IBoundValueProvider value)
             {
                 value = this[member];
                 return value != null;
             }
 
-            public IBindingValueProvider this[string member]
+            public IBoundValueProvider this[string member]
             {
                 get
                 {
@@ -43,7 +43,7 @@ namespace Axle.Configuration
                         case IConfigSection cs:
                             return new ConfigurationBindingValueProvider(cs);
                         default:
-                            return new SimpleMemberValueProvider(member, setting.Value);
+                            return new BoundSimpleValueProvider(member, setting.Value);
                     }
                 }
             }

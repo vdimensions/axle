@@ -5,14 +5,14 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace Axle.Text.StructuredData
+namespace Axle.Text.Data
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public abstract class AbstractStructuredDataReader : IStructuredDataReader
+    public abstract class AbstractTextDataReader : ITextDataReader
     {
-        private static IEnumerable<IStructuredDataNode> FixHierarchy(string key, IEnumerable<IStructuredDataNode> nodes)
+        private static IEnumerable<ITextDataNode> FixHierarchy(string key, IEnumerable<ITextDataNode> nodes)
         {
-            var tokenizedKey = StructuredDataObject.Tokenize(key);
+            var tokenizedKey = TextDataObject.Tokenize(key);
             var currentNodes = nodes;
             if (tokenizedKey.Length > 1)
             {
@@ -22,10 +22,10 @@ namespace Axle.Text.StructuredData
                     {
                         switch (node)
                         {
-                            case IStructuredDataValue v:
-                                return new StructuredDataValue(fixedKey, null, v.Value);
-                            case IStructuredDataObject o:
-                                return new StructuredDataObject(fixedKey, null, o.GetChildren(), false);
+                            case ITextDataValue v:
+                                return new TextDataValue(fixedKey, null, v.Value);
+                            case ITextDataObject o:
+                                return new TextDataObject(fixedKey, null, o.GetChildren(), false);
                             default:
                                 return node;
                         }
@@ -33,29 +33,29 @@ namespace Axle.Text.StructuredData
             }
             for (var i = tokenizedKey.Length - 2; i >= 0; i--)
             {
-                currentNodes = new[] {new StructuredDataObject(tokenizedKey[i], null, currentNodes, false)};
+                currentNodes = new[] {new TextDataObject(tokenizedKey[i], null, currentNodes, false)};
             }
             return currentNodes;
         }
         
         private readonly StringComparer _comparer;
 
-        protected AbstractStructuredDataReader(StringComparer comparer)
+        protected AbstractTextDataReader(StringComparer comparer)
         {
             _comparer = comparer;
         }
 
-        protected abstract IStructuredDataAdapter CreateAdapter(Stream stream, Encoding encoding);
-        protected abstract IStructuredDataAdapter CreateAdapter(string data);
+        protected abstract ITextDataAdapter CreateAdapter(Stream stream, Encoding encoding);
+        protected abstract ITextDataAdapter CreateAdapter(string data);
         
-        private IStructuredDataRoot ReadStructuredData(
-            IStructuredDataAdapter adapter, 
+        private ITextDataRoot ReadStructuredData(
+            ITextDataAdapter adapter, 
             StringComparer comparer)
         {
-            return new StructuredDataObjectRoot(ReadStructuredData(string.Empty, adapter), comparer);
+            return new TextDataObjectRoot(ReadStructuredData(string.Empty, adapter), comparer);
         }
 
-        private IEnumerable<IStructuredDataNode> ExpandChildren(IStructuredDataAdapter adapter)
+        private IEnumerable<ITextDataNode> ExpandChildren(ITextDataAdapter adapter)
         {
             foreach (var childGroup in adapter.Children.GroupBy(x => x.Key))
             foreach (var child in childGroup)
@@ -65,9 +65,9 @@ namespace Axle.Text.StructuredData
             }
         }
         
-        private IEnumerable<IStructuredDataNode> ReadStructuredData(
+        private IEnumerable<ITextDataNode> ReadStructuredData(
             string key,
-            IStructuredDataAdapter adapter)
+            ITextDataAdapter adapter)
         {
             var isRoot = key.Length == 0;
             if (isRoot)
@@ -81,20 +81,20 @@ namespace Axle.Text.StructuredData
             {
                 if (adapter.Value != null)
                 {
-                    yield return new StructuredDataValue(key, null, adapter.Value);
+                    yield return new TextDataValue(key, null, adapter.Value);
                 }
                 var children = ExpandChildren(adapter);
                 if (children.Any())
                 {
-                    yield return new StructuredDataObject(key, null, children, false);
+                    yield return new TextDataObject(key, null, children, false);
                 }
             }
         }
 
-        public IStructuredDataRoot Read(Stream stream, Encoding encoding) 
+        public ITextDataRoot Read(Stream stream, Encoding encoding) 
             => ReadStructuredData(CreateAdapter(stream, encoding), _comparer);
 
-        public IStructuredDataRoot Read(string data) => ReadStructuredData(CreateAdapter(data), _comparer);
+        public ITextDataRoot Read(string data) => ReadStructuredData(CreateAdapter(data), _comparer);
 
         protected StringComparer Comparer => _comparer;
     }

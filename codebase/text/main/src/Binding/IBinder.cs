@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Axle.Text.StructuredData.Binding
+namespace Axle.Text.Data.Binding
 {
     /// <summary>
     /// An interface representing a binder; that is an object which is used to bind a structured data format to
@@ -13,7 +13,7 @@ namespace Axle.Text.StructuredData.Binding
         /// <paramref name="memberValueProvider"/>.
         /// </summary>
         /// <param name="memberValueProvider">
-        /// The <see cref="IBindingValueProvider"/> instance that is supplying values for the binding process.
+        /// The <see cref="IBoundValueProvider"/> instance that is supplying values for the binding process.
         /// </param>
         /// <param name="instance">
         /// An <see cref="object"/> instance that will be updated with the provided by the 
@@ -22,13 +22,13 @@ namespace Axle.Text.StructuredData.Binding
         /// <returns>
         /// A reference to the data-bound object.
         /// </returns>
-        object Bind(IBindingValueProvider memberValueProvider, object instance);
+        object Bind(IBoundValueProvider memberValueProvider, object instance);
         /// <summary>
         /// Binds an object instance of the provided <paramref name="type"/> with the data available in the given 
         /// <paramref name="memberValueProvider"/>.
         /// </summary>
         /// <param name="memberValueProvider">
-        /// The <see cref="IBindingValueProvider"/> instance that is supplying values for the binding process.
+        /// The <see cref="IBoundValueProvider"/> instance that is supplying values for the binding process.
         /// </param>
         /// <param name="type">
         /// The <see cref="Type"/> of the object instance that will be updated with the provided by the 
@@ -37,6 +37,6 @@ namespace Axle.Text.StructuredData.Binding
         /// <returns>
         /// A reference to the data-bound object.
         /// </returns>
-        object Bind(IBindingValueProvider memberValueProvider, Type type);
+        object Bind(IBoundValueProvider memberValueProvider, Type type);
     }
 }

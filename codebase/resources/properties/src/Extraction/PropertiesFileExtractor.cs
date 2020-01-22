@@ -2,23 +2,23 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using Axle.Resources.Extraction;
-using Axle.Resources.StructuredData;
-using Axle.Text.StructuredData;
-using Axle.Text.StructuredData.Properties;
+using Axle.Resources.Text.Data;
+using Axle.Text.Data;
+using Axle.Text.Data.Properties;
 
 namespace Axle.Resources.Properties.Extraction
 {
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementations capable of creating Java properties files.
     /// </summary>
-    internal sealed class PropertiesFileExtractor : AbstractStructuredDataExtractor
+    internal sealed class PropertiesFileExtractor : AbstractTextDataExtractor
     {
         internal static readonly StringComparer DefaultKeyComparer = StringComparer.OrdinalIgnoreCase;
             
-        protected override IStructuredDataReader GetReader(StringComparer comparer) 
+        protected override ITextDataReader GetReader(StringComparer comparer) 
             => new PropertiesDataReader(comparer);
 
-        protected override StructuredDataResourceInfo CreateResourceInfo(
+        protected override TextDataResourceInfo CreateResourceInfo(
             string name, 
             CultureInfo culture, 
             IDictionary<string, string> data)

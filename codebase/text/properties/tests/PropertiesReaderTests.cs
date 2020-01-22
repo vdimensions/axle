@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Text;
 using NUnit.Framework;
 
-namespace Axle.Text.StructuredData.Properties.Tests
+namespace Axle.Text.Data.Properties.Tests
 {
     [TestFixture]
     public class PropertiesReaderTests
@@ -19,13 +19,13 @@ namespace Axle.Text.StructuredData.Properties.Tests
             var reader = new PropertiesDataReader(StringComparer.OrdinalIgnoreCase);
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
-            var item1 = data.GetChildren("SingleKey").SingleOrDefault() as IStructuredDataValue;
+            var item1 = data.GetChildren("SingleKey").SingleOrDefault() as ITextDataValue;
             var item2 = data.GetChildren("System");
             var item3 = data.GetChildren("System.Text");
-            var item4 = data.GetChildren("System.Text.Encoding").SingleOrDefault() as IStructuredDataValue;
-            var item5 = data.GetChildren("System.Text.DefaultEncoding").SingleOrDefault() as IStructuredDataValue;
-            var item6 = item3.OfType<IStructuredDataObject>().Take(1).SingleOrDefault()?.GetChildren("Encoding").SingleOrDefault() as IStructuredDataValue;
-            var item7 = item3.OfType<IStructuredDataObject>().Skip(1).Take(1).SingleOrDefault()?.GetChildren("DefaultEncoding").SingleOrDefault() as IStructuredDataValue;
+            var item4 = data.GetChildren("System.Text.Encoding").SingleOrDefault() as ITextDataValue;
+            var item5 = data.GetChildren("System.Text.DefaultEncoding").SingleOrDefault() as ITextDataValue;
+            var item6 = item3.OfType<ITextDataObject>().Take(1).SingleOrDefault()?.GetChildren("Encoding").SingleOrDefault() as ITextDataValue;
+            var item7 = item3.OfType<ITextDataObject>().Skip(1).Take(1).SingleOrDefault()?.GetChildren("DefaultEncoding").SingleOrDefault() as ITextDataValue;
             
             Assert.IsNotNull(item1, "Lookup for value failed for simple key {0}", "SingleKey");
             Assert.IsNotNull(item2, "Lookup for object failed for simple key {0}", "System");

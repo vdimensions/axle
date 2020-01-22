@@ -1,27 +1,25 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <ProjectGuid>{1BA8759B-EEF5-44DC-AB60-8FCF4FF4FFD9}</ProjectGuid>
+    <TargetFramework>net45</TargetFramework>
     <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Axle.Text.StructuredData.Yaml.Tests</RootNamespace>
-    <AssemblyName>Axle.Text.StructuredData.Yaml.Tests</AssemblyName>
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
+
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
+
   <ItemGroup>
     <None Include="build.sh" />
     <None Include="restore.sh" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Text.StructuredData.Yaml" Version="$(PackageVersionRange)" />
+    <PackageReference Include="Axle.Text.Data" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="data.yaml">
+    <Content Include="data.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

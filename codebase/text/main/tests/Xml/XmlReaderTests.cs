@@ -6,7 +6,7 @@ using System.Text;
 using NUnit.Framework;
 
 
-namespace Axle.Text.StructuredData.Xml.Tests
+namespace Axle.Text.Data.Xml.Tests
 {
     [TestFixture]
     public class XmlReaderTests
@@ -31,17 +31,17 @@ namespace Axle.Text.StructuredData.Xml.Tests
             TestData(reader, propertiesPath);
         }
 
-        private static void TestData(IStructuredDataReader reader, string propertiesPath)
+        private static void TestData(ITextDataReader reader, string propertiesPath)
         {
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
-            var item1 = data.GetChildren("SingleKey").SingleOrDefault() as IStructuredDataValue;
+            var item1 = data.GetChildren("SingleKey").SingleOrDefault() as ITextDataValue;
             var item2 = data.GetChildren("System");
-            var item3 = data.GetChildren("System.Text").OfType<IStructuredDataObject>();
-            var item4 = data.GetChildren("System.Text.Encoding").FirstOrDefault() as IStructuredDataValue;
-            var item5 = data.GetChildren("System.Text.DefaultEncoding").FirstOrDefault() as IStructuredDataValue;
-            var item6 = item3.FirstOrDefault()?.GetChildren("Encoding").FirstOrDefault() as IStructuredDataValue;
-            var item7 = item3.FirstOrDefault()?.GetChildren("DefaultEncoding").FirstOrDefault() as IStructuredDataValue;
+            var item3 = data.GetChildren("System.Text").OfType<ITextDataObject>();
+            var item4 = data.GetChildren("System.Text.Encoding").FirstOrDefault() as ITextDataValue;
+            var item5 = data.GetChildren("System.Text.DefaultEncoding").FirstOrDefault() as ITextDataValue;
+            var item6 = item3.FirstOrDefault()?.GetChildren("Encoding").FirstOrDefault() as ITextDataValue;
+            var item7 = item3.FirstOrDefault()?.GetChildren("DefaultEncoding").FirstOrDefault() as ITextDataValue;
 
             Assert.IsNotNull(item1, "Lookup for value failed for simple key {0}", "SingleKey");
             Assert.IsNotNull(item2, "Lookup for object failed for simple key {0}", "System");

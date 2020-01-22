@@ -7,19 +7,19 @@ using System.Text;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-namespace Axle.Text.StructuredData.Yaml
+namespace Axle.Text.Data.Yaml
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class YamlDataReader : AbstractStructuredDataReader
+    public sealed class YamlDataReader : AbstractTextDataReader
     {
-        private sealed class Adapter : AbstractStructuredDataAdapter
+        private sealed class Adapter : AbstractTextDataAdapter
         {
-            internal static IEnumerable<IStructuredDataAdapter> ToChildren(string name, object o)
+            internal static IEnumerable<ITextDataAdapter> ToChildren(string name, object o)
             {
                 switch (o)
                 {
                     case string v:
-                        yield return new Adapter(name, Enumerable.Empty<IStructuredDataAdapter>(), v);
+                        yield return new Adapter(name, Enumerable.Empty<ITextDataAdapter>(), v);
                         break;
                     case IDictionary<object, object> dict:
                         var children = dict.SelectMany(x => ToChildren(x.Key.ToString(), x.Value));
@@ -34,7 +34,7 @@ namespace Axle.Text.StructuredData.Yaml
                 }
             }
 
-            private Adapter(string name, IEnumerable<IStructuredDataAdapter> children, string value)
+            private Adapter(string name, IEnumerable<ITextDataAdapter> children, string value)
             {
                 Key = name;
                 Children = children;
@@ -43,12 +43,12 @@ namespace Axle.Text.StructuredData.Yaml
 
             public override string Key { get; }
             public override string Value { get; }
-            public override IEnumerable<IStructuredDataAdapter> Children { get; }
+            public override IEnumerable<ITextDataAdapter> Children { get; }
         }
         
         public YamlDataReader(StringComparer comparer) : base(comparer) { }
 
-        protected override IStructuredDataAdapter CreateAdapter(Stream stream, Encoding encoding)
+        protected override ITextDataAdapter CreateAdapter(Stream stream, Encoding encoding)
         {
             var deserializer = new DeserializerBuilder().Build();
             try
@@ -68,7 +68,7 @@ namespace Axle.Text.StructuredData.Yaml
             }
         }
 
-        protected override IStructuredDataAdapter CreateAdapter(string data)
+        protected override ITextDataAdapter CreateAdapter(string data)
         {
             var deserializer = new DeserializerBuilder().Build();
             try

@@ -18,9 +18,6 @@
   <ItemGroup>
     <None Include="build.sh" />
     <EmbeddedResource Include="Properties\Messages.yml" />
-    <None Include="paket.dependencies" />
-    <None Include="paket.lock" />
-    <None Include="paket.references" />
     <None Include="restore.sh" />
   </ItemGroup>
 

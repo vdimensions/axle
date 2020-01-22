@@ -1,5 +1,5 @@
 msbuild="../../../../submodules/btw/msbuild.sh"
-project='Axle.StructuredData.Binding.Tests'
+project='Axle.Text.Data.Tests'
 
 ./restore.sh
 

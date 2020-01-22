@@ -3,21 +3,21 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 
-namespace Axle.Resources.StructuredData
+namespace Axle.Resources.Text.Data
 {
     /// <summary>
     /// A class representing a Java properties file as a resource.
     /// </summary>
-    public abstract class StructuredDataResourceInfo : ResourceInfo
+    public abstract class TextDataResourceInfo : ResourceInfo
     {
         private readonly IDictionary<string, string> _data;
         private readonly ResourceInfo _originalResource;
 
-        protected StructuredDataResourceInfo(string name, CultureInfo culture, string mimeType, IDictionary<string, string> data) : base(name, culture, mimeType)
+        protected TextDataResourceInfo(string name, CultureInfo culture, string mimeType, IDictionary<string, string> data) : base(name, culture, mimeType)
         {
             _data = data;
         }
-        protected StructuredDataResourceInfo(string name, CultureInfo culture, string mimeType, IDictionary<string, string> data, ResourceInfo originalResource) : this(name, culture, mimeType, data)
+        protected TextDataResourceInfo(string name, CultureInfo culture, string mimeType, IDictionary<string, string> data, ResourceInfo originalResource) : this(name, culture, mimeType, data)
         {
             _originalResource = originalResource;
         }
