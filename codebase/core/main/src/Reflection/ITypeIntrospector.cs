@@ -73,6 +73,17 @@ namespace Axle.Reflection
         /// </returns>
         IProperty GetProperty(PropertyInfo reflectedProperty);
 
+        /// <summary>
+        /// Gets an array representing the properties that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <returns>
+        /// An array representing the properties that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IProperty[] GetProperties(ScanOptions scanOptions);
 
         IField GetField(ScanOptions scanOptions, string fieldName);
@@ -87,11 +98,22 @@ namespace Axle.Reflection
         /// </returns>
         IField GetField(FieldInfo reflectedField);
 
+        /// <summary>
+        /// Gets an array representing the fields that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <returns>
+        /// An array representing the fields that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IField[] GetFields(ScanOptions scanOptions);
 
         IEvent GetEvent(ScanOptions scanOptions, string eventName);
         /// <summary>
-        /// Creates a <see cref="IEvent"/> instance from the provided <paramref name="reflectedEvent"/>.
+        /// Creates an <see cref="IEvent"/> instance from the provided <paramref name="reflectedEvent"/>.
         /// </summary>
         /// <param name="reflectedEvent">
         /// An already reflected <see cref="EventInfo"/>.
@@ -101,6 +123,17 @@ namespace Axle.Reflection
         /// </returns>
         IEvent GetEvent(EventInfo reflectedEvent);
 
+        /// <summary>
+        /// Gets an array representing the events that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <returns>
+        /// An array representing the events that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IEvent[] GetEvents(ScanOptions scanOptions);
 
         IMember[] GetMembers(ScanOptions scanOptions);
@@ -119,16 +152,44 @@ namespace Axle.Reflection
         IGenericTypeIntrospector GetGenericTypeDefinition();
 
         /// <summary>
+        /// Creates an instance of the <see cref="IntrospectedType"/> using the constructor
+        /// that best matches the specified parameters via <paramref name="args"/>
+        /// </summary>
+        /// <param name="args">
+        /// An array of arguments that match in count, order and type the parameters
+        /// of the constructor to invoke.
+        /// </param>
+        /// <returns>
+        /// A new instance of the <see cref="IntrospectedType"/>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The <see cref="IntrospectedType"/> is <c><see langword="abstract"/></c> or an interface type.
+        /// -OR-
+        /// The <see cref="IntrospectedType"/> is a generic definition with unbound type arguments.
+        /// </exception>
+        /// <exception cref="TargetInvocationException">
+        /// The constructor being called throws an exception.
+        /// </exception>
+        object CreateInstance(params object[] args);
+
+        /// <summary>
         /// The <see cref="Type"/> which the current <see cref="IIntrospector"/> instance provides reflected information for.
         /// </summary>
         Type IntrospectedType { get; }
 
         /// <summary>
-        /// Gets a value representing one or a combination of several <see cref="TypeFlags"/> values which describe
+        /// Gets a value representing one or a combination of several <see cref="Axle.Reflection.TypeFlags"/> values which describe
         /// the <see cref="IntrospectedType"/> properties;
         /// </summary>
-        /// <seealso cref="TypeFlags"/>
-        TypeFlags Flags { get; }
+        /// <seealso cref="Axle.Reflection.TypeFlags"/>
+        TypeFlags TypeFlags { get; }
+
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Gets the <see cref="AccessModifier"/> for the given type.
+        /// </summary>
+        AccessModifier AccessModifier { get; }
+        #endif
 
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         /// <summary>

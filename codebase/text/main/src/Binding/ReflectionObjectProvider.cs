@@ -170,7 +170,7 @@ namespace Axle.Text.Data.Binding
         {
             try
             {
-                return introspector.GetConstructor(ScanOptions.Instance | ScanOptions.Public)?.Invoke();
+                return introspector.CreateInstance();
             }
             catch
             {
@@ -214,7 +214,7 @@ namespace Axle.Text.Data.Binding
                     return new IReadWriteMember[0]; 
                 case object obj:
                     var introspector = new TypeIntrospector(obj.GetType());
-                    var flags = introspector.Flags;
+                    var flags = introspector.TypeFlags;
                     var unusableObjectFlags = new[]
                     {
                         TypeFlags.Delegate,
@@ -295,7 +295,7 @@ namespace Axle.Text.Data.Binding
                 ? new TypeIntrospector(adaperType)
                     .GetGenericTypeDefinition()
                     .MakeGenericType(elementType)
-                    .GetIntrospector()
+                    .Introspect()
                 : new TypeIntrospector(adaperType);
 
             return CreateInstance(adapterIntrospector) as IBindingCollectionAdapter;

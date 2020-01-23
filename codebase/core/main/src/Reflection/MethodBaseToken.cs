@@ -110,7 +110,7 @@ namespace Axle.Reflection
         #endif
 
         public static AccessModifier GetAccessModifier(MethodBase methodBase) =>
-            GetAccessModifier(
+            AccessModifierExtensions.GetAccessModifier(
                 methodBase.IsPublic, 
                 methodBase.IsAssembly, 
                 methodBase.IsFamily, 

@@ -76,7 +76,7 @@ namespace Axle.Reflection
                     {
                         result |= TypeFlags.Attribute;
                     }
-                    else if (typeof(MulticastDelegate)
+                    else if (typeof(Delegate)
                         #if NETSTANDARD || NET45_OR_NEWER
                         .GetTypeInfo()
                         .IsAssignableFrom(ti.BaseType.GetTypeInfo())
@@ -89,7 +89,6 @@ namespace Axle.Reflection
                     }
                 }
             }
-
 
             if (ti.IsArray)
             {
@@ -113,6 +112,16 @@ namespace Axle.Reflection
                 )
             {
                 result |= TypeFlags.Disposable;
+            }
+
+            if (ti.IsGenericParameter)
+            {
+                result |= TypeFlags.GenericParameter;
+            }
+
+            if (ti.IsNested)
+            {
+                result |= TypeFlags.Nested;
             }
 
             return result;
@@ -147,10 +156,16 @@ namespace Axle.Reflection
         
         /// Checks if the <see cref="TypeFlags.GenericDefinition"/> flag is set.
         public static bool IsGenericDefinition(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.GenericDefinition);
-        
+
+        /// Checks if the <see cref="TypeFlags.GenericParameter"/> flag is set.
+        public static bool IsGenericParameter(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.GenericParameter);
+
         /// Checks if the <see cref="TypeFlags.Interface"/> flag is set.
         public static bool IsInterface(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Interface);
-        
+
+        /// Checks if the <see cref="TypeFlags.Nested"/> flag is set.
+        public static bool IsNested(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Nested);
+
         /// Checks if the <see cref="TypeFlags.NullableValueType"/> flag is set.
         public static bool IsNullableValueType(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.NullableValueType);
         

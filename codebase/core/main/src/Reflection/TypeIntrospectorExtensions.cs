@@ -26,11 +26,11 @@ namespace Axle.Reflection
                         }
                         if (unary.NodeType == ExpressionType.ArrayLength)
                         {
-                            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
-                            var m = unary.Operand.Type.GetTypeInfo().GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #else
-                            var m = unary.Operand.Type.GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
-                            #endif
+                            var m = unary.Operand.Type
+                                #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+                                .GetTypeInfo()
+                                #endif
+                                .GetMember(nameof(Array.Length), BindingFlags.Instance | BindingFlags.Public);
                             return m[0];
                         }
                         expr = unary.Operand as MemberExpression;

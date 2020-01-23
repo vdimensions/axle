@@ -12,6 +12,22 @@ namespace Axle.Reflection
 {
     public abstract class AbstractTypeIntrospector : ITypeIntrospector
     {
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        private static AccessModifier GetAccessModifier(Type type)
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NET45_OR_NEWER
+            var t = type.GetTypeInfo();
+            #else
+            var t = type;
+            #endif
+            var isPublic = t.IsPublic || t.IsNestedPublic;
+            var isAssembly = t.IsNested ? t.IsNestedAssembly : t.IsNotPublic;
+            var isFamily = t.IsNested && t.IsNestedFamily;
+            var isPrivate = t.IsNested && t.IsNestedPrivate;
+            return AccessModifierExtensions.GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
+        }
+        #endif
+
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _introspectedType;
 
@@ -22,6 +38,9 @@ namespace Axle.Reflection
         {
             _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             _flags = TypeFlagsExtensions.Determine(type);
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            AccessModifier = GetAccessModifier(type);
+            #endif
         }
 
         public abstract IAttributeInfo[] GetAttributes();
@@ -136,13 +155,33 @@ namespace Axle.Reflection
         }
 
         /// <inheritdoc />
+        public object CreateInstance(params object[] args)
+        {
+            if (TypeFlags.IsAbstract())
+            {
+                throw new InvalidOperationException("Instances of abstract types cannot be instantiated");
+            }
+            if (TypeFlags.IsGenericDefinition())
+            {
+                throw new InvalidOperationException("Unable to instantiate a generic definition type. You need to supply type arguments first.");
+            }
+            return Activator.CreateInstance(IntrospectedType, args);
+        }
+
+        /// <inheritdoc />
         public TypeCode TypeCode => Type.GetTypeCode(_introspectedType);
 
         /// <inheritdoc />
         public Type IntrospectedType => _introspectedType;
 
         /// <inheritdoc />
-        public TypeFlags Flags => _flags;
+        public TypeFlags TypeFlags => _flags;
+
+
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+        public AccessModifier AccessModifier { get; }
+        #endif
 
 
 

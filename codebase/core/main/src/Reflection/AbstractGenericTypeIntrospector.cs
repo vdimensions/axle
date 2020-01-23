@@ -5,13 +5,14 @@ using Axle.Verification;
 
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// An abstract class aiding the implementation of the <see cref="IGenericTypeIntrospector"/> interface.
+    /// </summary>
     public abstract class AbstractGenericTypeIntrospector : IGenericTypeIntrospector
     {
-        private readonly IGenericTypeIntrospector _rawTypeIntrospector;
-
         protected AbstractGenericTypeIntrospector(
                 Type genericDefinitionType, 
-                IGenericTypeIntrospector rawTypeIntrospector, 
+                IGenericTypeIntrospector genericDefinitionIntrospector, 
                 Type[] genericTypeArguments)
         {
             Verifier.IsTrue(
@@ -24,14 +25,23 @@ namespace Axle.Reflection
                 "The provided type must be a generic type definition.");
             GenericDefinitionType = genericDefinitionType;
             GenericTypeArguments = genericTypeArguments;
+            GenericDefinitionIntrospector = genericDefinitionIntrospector;
         }
 
-        public abstract ITypeIntrospector GetIntrospector();
+        /// <inheritdoc />
+        public abstract ITypeIntrospector Introspect();
+
+        /// <inheritdoc />
         public abstract IGenericTypeIntrospector MakeGenericType(params Type[] typeParameters);
 
-        public Type[] GenericTypeArguments { get; }
+        /// <inheritdoc />
         public Type GenericDefinitionType { get; }
-        public IGenericTypeIntrospector RawTypeIntrospector { get; }
+
+        /// <inheritdoc />
+        public Type[] GenericTypeArguments { get; }
+
+        /// <inheritdoc />
+        public IGenericTypeIntrospector GenericDefinitionIntrospector { get; }
     }
 }
 #endif
