@@ -19,7 +19,6 @@ namespace Axle.Data.DataSources
     [Module]
     [Requires(typeof(DataModule))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    [ModuleConfigSection(typeof(DataSourceConfiguration))]
     internal sealed class DataSourceModule : ISqlScriptLocationRegistry, IDataSourceRegistry
     {
         internal const string SqlScriptsBundle = "SqlScripts";
@@ -30,11 +29,11 @@ namespace Axle.Data.DataSources
         private readonly IResourceExtractor _scriptExtractor;
         private readonly IDictionary<string, DataSource> _dataSources = new ConcurrentDictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
-        public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, DataSourceConfiguration configuration, ILogger logger)
+        public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
         {
             Logger = logger;
             _dbServiceProviders = dbServiceProviderRegistry;
-            _configuration = configuration;
+            _configuration = new DataSourceConfiguration(configuration.GetConnectionStrings());
             _dataSourceResourceManager = new DefaultResourceManager();
             _scriptExtractor = new SqlScriptSourceExtractor(Enumerable.Select(dbServiceProviderRegistry, x => x.DialectName));
         }

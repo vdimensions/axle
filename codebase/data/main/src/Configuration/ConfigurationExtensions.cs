@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -31,8 +31,8 @@ namespace Axle.Data.Configuration
         /// </returns>
         public static IEnumerable<ConnectionStringInfo> GetConnectionStrings(this IConfigSection config)
         {
-            return config
-                .GetSection<List<ConnectionStringData>>("connectionStrings")
+            var section = config.GetSection("ConnectionStrings");
+            return section.Keys.Select(k => section.GetSection<ConnectionStringData>(k))
                 .Select(x => new ConnectionStringInfo(x.Name, x.ProviderName, x.ConnectionString))
                 .ToArray();
         }
