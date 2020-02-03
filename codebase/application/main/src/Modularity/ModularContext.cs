@@ -299,8 +299,8 @@ namespace Axle.Modularity
                         }
                     }
 
-                    var baseModuleConfig = 
-                        // TODO:
+                    var baseModuleConfig =
+                        // TODO: prepend a module's embedded configuration file
                         // config.Prepend(...);
                         config;
                     IConfiguration moduleConfig = 
