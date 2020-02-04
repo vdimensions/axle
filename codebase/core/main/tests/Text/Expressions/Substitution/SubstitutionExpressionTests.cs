@@ -51,6 +51,20 @@ namespace Axle.Core.Tests.Text.Expressions.Substitution
         }
 
         [Test]
+        public void TestStandardSubstitutionExpressionMultipleFallbackEscapes()
+        {
+            const string sourceText = "GNU's homepage is: ${GNU_HOMEPAGE:https\\://www.gnu.org:gnu.org}";
+            const string targetText = "GNU's homepage is: gnu.org";
+        
+            var replacement = new Dictionary<string, string>(StringComparer.Ordinal) { };
+            var expr = new StandardSubstitutionExpression();
+            var replacedText = expr.Replace(sourceText, new DictionarySubstitutionProvider(replacement));
+        
+            Assert.IsNotNull(replacedText);
+            Assert.AreEqual(targetText, replacedText);
+        }
+
+        [Test]
         public void TestMSBuildSubstitutionExpression()
         {
             const string sourceText = "Hello, $(target)";
