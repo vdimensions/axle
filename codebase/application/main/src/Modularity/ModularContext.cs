@@ -279,7 +279,7 @@ namespace Axle.Modularity
                 var requiredModules = moduleInfo.RequiredModules.ToArray();
                 using (var moduleInitializationContainer = _containerProvider.Create(_rootContainer))
                 {
-                    var moduleLogger = _loggingServiceProvider.Create(moduleType);
+                    var moduleLogger = _loggingServiceProvider.CreateLogger(moduleType);
                     var moduleContainer = _containerProvider.Create(_rootContainer);
                     moduleInitializationContainer
                         .RegisterType(moduleType)          // register the module type to be instantiated via DI
