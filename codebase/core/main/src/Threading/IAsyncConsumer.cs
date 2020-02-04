@@ -7,18 +7,18 @@ namespace Axle.Threading
     /// An interface representing an async consumer. An async consumer is 
     /// used in conjunction with an instance of <see cref="AsyncProducer{T}"/>
     /// where the consumer's role is to process the data which is pushed to the
-    /// <see cref="AsyncProducer{T}"/> asyncronously.
+    /// <see cref="AsyncProducer{T}"/> asynchronously.
     /// <remarks>
-    /// The consumer itself works in syncrhonous context.
+    /// The consumer itself works in synchronous context.
     /// </remarks>
     /// </summary>
     /// <typeparam name="T">
     /// The type of the consumed data.
     /// </typeparam>
-    public interface IAsyncConsumer<T>
+    public interface IAsyncConsumer<in T>
     {
         /// <summary>
-        /// A method invoked when data suppied by an <see cref="AsyncProducer{T}"/> is available.
+        /// A method invoked when data supplied by an <see cref="AsyncProducer{T}"/> is available.
         /// </summary>
         /// <param name="data">
         /// An instance of <typeparamref name="T"/> provided by an <see cref="AsyncProducer{T}"/>

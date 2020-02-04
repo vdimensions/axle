@@ -237,12 +237,15 @@ namespace Axle.Reflection.Extensions.Type
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
+        /// <seealso cref="ITypeIntrospector.IsDelegate"/>
         public static bool IsDelegate(
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
                 Type type)
         {
+            // TODO:
+            //return new TypeIntrospector(type).IsDelegate;
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             return typeof(MulticastDelegate)
                 #if NETSTANDARD || NET45_OR_NEWER
@@ -268,20 +271,23 @@ namespace Axle.Reflection.Extensions.Type
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
+        /// <seealso cref="ITypeIntrospector.IsNullableType"/>
         public static bool IsNullableType(
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                Type type)
-        {
-            type.VerifyArgument(nameof(type)).IsNotNull();
-            #if NETSTANDARD || NET45_OR_NEWER
-            var ti = type.GetTypeInfo();
-            return ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>);
-            #else
-            return type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>);
-            #endif
-        }
+                Type type) 
+            {
+                //TODO
+                //return new TypeIntrospector(type).IsNullableType;
+                type.VerifyArgument(nameof(type)).IsNotNull();
+                #if NETSTANDARD || NET45_OR_NEWER
+                var ti = type.GetTypeInfo();
+                return ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>);
+                #else
+                return type.IsGenericType && type.GetGenericTypeDefinition() == typeof (Nullable<>);
+                #endif
+            }
         #endif
     }
 }

@@ -4,9 +4,10 @@
 namespace Axle.Reflection
 {
     /// <summary>
-    /// An enumeration with all the possible flags that can be used when reflecting a type member with an <see cref="IIntrospector" >introspector</see> instance.
+    /// An enumeration with all the possible flags that can be used when introspecting 
+    /// a type member.
     /// </summary>
-    /// <seealso cref="IIntrospector"/>
+    /// <seealso cref="ITypeIntrospector"/>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif

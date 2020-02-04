@@ -12,36 +12,13 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
+
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
         where T: MemberInfo
     {
-        #if NETSTANDARD
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        protected static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
-        {
-            if (isPublic)
-            {
-                return AccessModifier.Public;
-            }
-            if (isPrivate)
-            {
-                return AccessModifier.Private;
-            }
-            if (isFamily && !isAssembly)
-            {
-                return AccessModifier.Protected;
-            }
-            if (isAssembly && !isFamily)
-            {
-                return AccessModifier.Internal;
-            }
-            return AccessModifier.ProtectedInternal;
-        }
-
         public IAttributeInfo[] GetAttributes(T reflectedMember) => CustomAttributeProviderExtensions.GetEffectiveAttributes(reflectedMember) ?? new IAttributeInfo[0];
         public IAttributeInfo[] GetAttributes(T reflectedMember, Type attributeType)
         {

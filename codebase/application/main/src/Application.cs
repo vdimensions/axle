@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
-using Axle.Verification;
 
 
 namespace Axle
@@ -19,21 +17,19 @@ namespace Axle
         private readonly string[] _args;
 
         private readonly object _syncRoot = new object();
-        private readonly ModuleCatalogWrapper _moduleCatalog;
+        private readonly ModuleCatalogWrapper _moduleCatalog = new ModuleCatalogWrapper(new DefaultModuleCatalog());
         private readonly IList<Type> _moduleTypes = new List<Type>();
         private readonly IList<Action<IContainer>> _onContainerReadyHandlers = new List<Action<IContainer>>();
 
+        private LayeredConfigManager _config = new LayeredConfigManager();
         private ILoggingServiceProvider _loggingService;
         private IDependencyContainerProvider _dependencyContainerProvider;
         private volatile ModularContext _modularContext;
-        private LayeredConfigManager _config;
 
         private Application()
         {
             _dependencyContainerProvider = new DefaultDependencyContainerProvider();
             _loggingService = new DefaultLoggingServiceProvider();
-            _moduleCatalog = new ModuleCatalogWrapper(new DefaultModuleCatalog());
-            _config = new LayeredConfigManager();
         }
 
         [Obsolete]
@@ -45,32 +41,39 @@ namespace Axle
         private void ThrowIfStarted()
         {
             lock (_syncRoot)
-            if (_modularContext != null)
             {
-                throw new InvalidOperationException("Application already started. ");
+                if (_modularContext != null)
+                {
+                    throw new InvalidOperationException("Application already started. ");
+                }
             }
         }
         private void ThrowIfNotStarted()
         {
             lock (_syncRoot)
-            if (_modularContext == null)
             {
-                throw new InvalidOperationException("Application not initialized yet. You must first call the Run method.");
+                if (_modularContext == null)
+                {
+                    throw new InvalidOperationException(
+                        "Application not initialized yet. You must first call the Run method.");
+                }
             }
         }
 
-        private ModularContext InitModularContext(IModuleCatalog c, string[] args)
+        private ModularContext InitModularContext(IConfigManager config, string[] args)
         {
             if (_modularContext != null)
             {
                 return _modularContext;
             }
             lock (_syncRoot)
-            if (_modularContext == null)
             {
-                var ctx = new ModularContext(c, _dependencyContainerProvider, _loggingService, _config, args);
-                ctx.Container.RegisterInstance(this);
-                _modularContext = ctx;
+                if (_modularContext == null)
+                {
+                    var ctx = new ModularContext(_dependencyContainerProvider, _loggingService, config, args);
+                    ctx.Container.RegisterInstance(this);
+                    _modularContext = ctx;
+                }
             }
             return _modularContext;
         }
@@ -91,12 +94,27 @@ namespace Axle
         public Application Run(params string[] args)
         {
             ThrowIfStarted();
-            var ctx = InitModularContext(_moduleCatalog, args);
+            var finalConfig = _config.Append(EnvironmentConfigSource.Instance);            
+            var modulesConfigSection = finalConfig
+                .LoadConfiguration()
+                .GetSection("axle")?.GetSection("application")?.GetSection("modules");
+            var includedModules = modulesConfigSection?.GetSection("include");
+            var excludedModules = modulesConfigSection?.GetSection("exclude");
+            if (includedModules != null)
+            {
+                // TODO: add modules to _moduleTypes
+            }
+            if (excludedModules != null)
+            {
+                // TODO: remove excluded modules from _moduleTypes
+            }
+
+            var ctx = InitModularContext(finalConfig, args);
             foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
             {
                 onContainerReadyHandler.Invoke(ctx.Container);
             }
-            ctx.Launch(_moduleTypes.ToArray()).Run();
+            ctx.Launch(_moduleCatalog, finalConfig, _moduleTypes.ToArray()).Run();
             return this;
         }
 
@@ -112,11 +130,5 @@ namespace Axle
         public IContainer CreateContainer(IContainer parent) => _dependencyContainerProvider.Create(parent);
 
         void IDisposable.Dispose() => ShutDown();
-
-        [Obsolete]
-        public IDependencyContainerProvider DependencyContainerProvider
-        {
-            get => _dependencyContainerProvider;
-        }
     }
 }

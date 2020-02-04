@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-
 using Axle.Extensions.String;
 using Axle.References;
 using Axle.Resources.Extraction;
@@ -30,7 +28,7 @@ namespace Axle.Resources.Yaml.Extraction
                 return Nullsafe<ResourceInfo>.None;
             }
 
-            IEnumerable<IDictionary<string, string>> data;
+            IDictionary<string, string> data;
             var yamlRes = context.ExtractionChain.Extract(fileName);
             if (!yamlRes.HasValue)
             {
@@ -42,26 +40,23 @@ namespace Axle.Resources.Yaml.Extraction
                     data = yaml.Data;
                     break;
                 default:
-                    using (var stream = yamlRes.Value.Open())
-                        if (stream != null)
-                        {
-                            var p = new List<IDictionary<string, string>>();
-                            YamlFileExtractor.ReadData(stream, p);
-                            data = p;
-                        }
-                        else
-                        {
-                            data = Enumerable.Empty<IDictionary<string, string>>();
-                        }
+                    //using (var stream = yamlRes.Value.Open())
+                        //if (stream != null)
+                        //{
+                        //    var p = new Dictionary<string, string>();
+                        //    YamlFileExtractor.ReadData(stream, p);
+                        //    data = p;
+                        //}
+                        //else
+                        //{
+                            data = new Dictionary<string, string>(YamlFileExtractor.DefaultKeyComparer);
+                        //}
                     break;
             }
 
-            foreach (var props in data)
-            {                    
-                if (props != null && props.TryGetValue($"{keyPrefix}{name}", out var result))
-                {
-                    return new TextResourceInfo(name, context.Culture, result);
-                }
+            if (data != null && data.TryGetValue($"{keyPrefix}{name}", out var result))
+            {
+                return new TextResourceInfo(name, context.Culture, result);
             }
 
             return null;

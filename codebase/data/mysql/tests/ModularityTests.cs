@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Axle;
 using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources;
@@ -12,6 +11,15 @@ namespace Axle.Data.MySql.Tests
 {
     public class ModularityTests
     {
+        [Module]
+        private class SqlScriptsConfigurer : ISqlScriptLocationConfigurer
+        {
+            public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
+            {
+                registry.Register("test", GetType().Assembly, "SqlScripts/");
+            }
+        }
+        
         [Test]
         public void TestMySqlProviderIsRegistered()
         {
@@ -27,6 +35,7 @@ namespace Axle.Data.MySql.Tests
                 Assert.AreEqual(providers[0].ProviderName, MySqlServiceProvider.Name);
             }
         }
+        
         [Test]
         public void TestConnectionStringBinding()
         {
@@ -44,6 +53,7 @@ namespace Axle.Data.MySql.Tests
                 Assert.IsNotNull(defaultConnectionString);
             }
         }
+        
         [Test]
         public void TestConnectionStringsBinding()
         {
@@ -88,15 +98,6 @@ namespace Axle.Data.MySql.Tests
             }
         }
 
-        [Module]
-        private class X : ISqlScriptLocationConfigurer
-        {
-            public void RegisterScriptLocations(ISqlScriptLocationRegistry registry)
-            {
-                registry.Register("test", GetType().Assembly, "SqlScripts/");
-            }
-        }
-
         [Test]
         public void TestDataSourceCmdDiscovery()
         {
@@ -106,7 +107,7 @@ namespace Axle.Data.MySql.Tests
                 .EnableLegacyConfig()
                 .UseDataSources()
                 .UseMySql()
-                .ConfigureModules(m => m.Load<X>());
+                .ConfigureModules(m => m.Load<SqlScriptsConfigurer>());
             using (appBuilder.Run())
             {
                 var testDataSource = container.Resolve<IDataSource>("default");

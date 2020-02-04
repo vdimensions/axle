@@ -47,8 +47,8 @@ namespace Axle.Data.Common
         public virtual long GetInt64(int i) => Target.GetInt64(i);
         public virtual long GetInt64(string name) => Target.GetInt64(name);
 
-        public virtual float GetFloat(int i) => Target.GetFloat(i);
-        public virtual float GetFloat(string name) => Target.GetFloat(name);
+        public virtual float GetSingle(int i) => Target.GetSingle(i);
+        public virtual float GetSingle(string name) => Target.GetSingle(name);
 
         public virtual double GetDouble(int i) => Target.GetDouble(i);
         public virtual double GetDouble(string name) => Target.GetDouble(name);

@@ -42,7 +42,7 @@ namespace Axle.Reflection
             var isAssembly = !isPublic && Enumerable.All(m, x => (x == null) || x.IsAssembly);
             var isFamily = !isPublic && Enumerable.All(m, x => (x == null) || x.IsFamily);
             var isPrivate = !(isPublic || isFamily || isAssembly) && m.All(x => (x == null) || x.IsPrivate);
-            _accessModifier = GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
+            _accessModifier = AccessModifierExtensions.GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
         }
 
         public override bool Equals(object obj) => obj is EventToken && base.Equals(obj);

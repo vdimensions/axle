@@ -46,7 +46,7 @@ namespace Axle.Reflection
             var isAssembly = gm.IsAssembly && sm.IsAssembly && !isPublic;
             var isFamily = gm.IsFamily && sm.IsFamily && !isPublic;
             var isPrivate = gm.IsPrivate && sm.IsPrivate && !(isPublic || isFamily || isAssembly);
-            _accessModifier = GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
+            _accessModifier = AccessModifierExtensions.GetAccessModifier(isPublic, isAssembly, isFamily, isPrivate);
             _declaration = ReflectionExtensions.GetDeclarationTypeUnchecked(gm, sm);
         }
 
