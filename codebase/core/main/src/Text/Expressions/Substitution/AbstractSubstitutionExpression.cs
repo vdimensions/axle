@@ -24,13 +24,14 @@ namespace Axle.Text.Expressions.Substitution
         private readonly string _exprStart;
         private readonly string _exprEnd;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        private const RegexOptions Options = RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.IgnoreCase|RegexOptions.Multiline|RegexOptions.ExplicitCapture;
-        #else
-        private const RegexOptions Options = RegexOptions.CultureInvariant|RegexOptions.IgnoreCase|RegexOptions.Multiline|RegexOptions.ExplicitCapture;
-        #endif
+        private const RegexOptions Options = 
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            RegexOptions.Compiled|
+            #endif
+            RegexOptions.CultureInvariant|RegexOptions.IgnoreCase|RegexOptions.Multiline|RegexOptions.ExplicitCapture;
 
         private readonly Regex _expression;
+        private readonly Regex _fallbackSplitExpression = new Regex(@"((?:(?<!\\)\:)+)", Options);
 
         private static string[] GetCaptures(Regex regex, string input, StringComparer comparer)
         {
@@ -131,7 +132,13 @@ namespace Axle.Text.Expressions.Substitution
             return sb.ToString();
         }
 
-        protected virtual string[] GetTokenAndFallbacks(string nakedToken) => new[] { nakedToken };
+        protected virtual string[] GetTokenAndFallbacks(string nakedToken)
+        {
+            return Enumerable.ToArray(
+                    Enumerable.Select(
+                        _fallbackSplitExpression.Split(nakedToken), 
+                        x => x.Replace(@"\:", ":")));
+        }
     }
 }
 #endif

@@ -2,9 +2,6 @@
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Axle.Core.Tests.Text.Expressions.Substitution
 {
@@ -21,6 +18,34 @@ namespace Axle.Core.Tests.Text.Expressions.Substitution
             var expr = new StandardSubstitutionExpression();
             var replacedText = expr.Replace(sourceText, new DictionarySubstitutionProvider(replacement));
 
+            Assert.IsNotNull(replacedText);
+            Assert.AreEqual(targetText, replacedText);
+        }
+
+        [Test]
+        public void TestStandardSubstitutionExpressionFallbacks()
+        {
+            const string sourceText = "Hello, ${target:Universe}";
+            const string targetText = "Hello, Universe";
+        
+            var replacement = new Dictionary<string, string>(StringComparer.Ordinal) { };
+            var expr = new StandardSubstitutionExpression();
+            var replacedText = expr.Replace(sourceText, new DictionarySubstitutionProvider(replacement));
+        
+            Assert.IsNotNull(replacedText);
+            Assert.AreEqual(targetText, replacedText);
+        }
+
+        [Test]
+        public void TestStandardSubstitutionExpressionFallbackEscapes()
+        {
+            const string sourceText = "GNU's homepage is: ${GNU_HOMEPAGE:https\\://www.gnu.org}";
+            const string targetText = "GNU's homepage is: https://www.gnu.org";
+        
+            var replacement = new Dictionary<string, string>(StringComparer.Ordinal) { };
+            var expr = new StandardSubstitutionExpression();
+            var replacedText = expr.Replace(sourceText, new DictionarySubstitutionProvider(replacement));
+        
             Assert.IsNotNull(replacedText);
             Assert.AreEqual(targetText, replacedText);
         }
