@@ -18,7 +18,10 @@ namespace Axle.Web.AspNetCore.Logging
             _loggerFactory = loggerFactory.VerifyArgument(nameof(loggerFactory)).IsNotNull().Value;
         }
 
-        public Axle.Logging.ILogger Create<T>() => new MicrosoftLogger(typeof(T), _loggerFactory.CreateLogger<T>());
-        public Axle.Logging.ILogger Create(Type t) => new MicrosoftLogger(t, _loggerFactory.CreateLogger(t));
+        Axle.Logging.ILogger Axle.Logging.ILoggingServiceProvider.Create<T>() => CreateLogger<T>();
+        Axle.Logging.ILogger Axle.Logging.ILoggingServiceProvider.Create(Type t) => CreateLogger(t);
+
+        public Axle.Logging.ILogger CreateLogger<T>() => new MicrosoftLogger(typeof(T), _loggerFactory.CreateLogger<T>());
+        public Axle.Logging.ILogger CreateLogger(Type t) => new MicrosoftLogger(t, _loggerFactory.CreateLogger(t));
     }
 }

@@ -75,10 +75,5 @@
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
-  <!-- Paket paths -->
-  <PropertyGroup>
-    <PaketExePath>$(MSBuildProjectDirectory)\..\..\..\.paket\paket.exe</PaketExePath>
-  </PropertyGroup>
-
   <Import Project="Dependency.Versions.props" />
 </Project>
