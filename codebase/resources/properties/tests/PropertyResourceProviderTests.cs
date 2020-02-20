@@ -18,7 +18,32 @@ namespace Axle.Resources.Properties.Tests
     public class PropertyResourceProviderTests
     {
         [Test]
-        public void TestPropertyValueRetrieval()
+        public void TestValueRetrievalFromExplicitlyDefinedPropertiesFile()
+        {
+            var parser = new UriParser();
+            var resourceManager = new DefaultResourceManager();
+            resourceManager.Bundles
+                .Configure("testBundle")
+                .Register(parser.Parse("invalid"))
+                .Register(GetType().Assembly, "./Properties/");
+            resourceManager.Extractors.Register(new PropertiesExtractor("Messages.properties"));
+
+            var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
+
+            Assert.IsNotNull(resource, "Unable to find Greeting message");
+            Assert.AreEqual("testBundle", resource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resource.Culture);
+
+            using (var stream = resource.Open())
+            {
+                var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
+                Assert.IsNotNull(data);
+                Console.Write(data);
+            }
+        }
+        
+        [Test]
+        public void TestValueRetrievalFromImplicitlyDiscoveredPropertiesFile()
         {
             var parser = new UriParser();
             var resourceManager = new DefaultResourceManager();
@@ -49,9 +74,8 @@ namespace Axle.Resources.Properties.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(parser.Parse("Messages.properties"))
                 .Register(GetType().Assembly, "./Properties/");
-            resourceManager.Extractors.Register(new PropertiesExtractor());
+            resourceManager.Extractors.Register(new PropertiesExtractor("Messages.properties"));
 
             var resource = resourceManager.Load("testBundle", "Alternative.Greeting", CultureInfo.CurrentCulture);
 

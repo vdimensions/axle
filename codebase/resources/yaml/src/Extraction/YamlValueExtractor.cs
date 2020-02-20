@@ -1,34 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using Axle.Extensions.String;
+﻿using System.Collections.Generic;
 using Axle.Resources.Extraction;
 
 
 namespace Axle.Resources.Yaml.Extraction
 {
-    internal sealed class YamlValueExtractor : AbstractResourceExtractor
+    public sealed class YamlValueExtractor : AbstractResourceExtractor
     {
-        private static bool GetYamlFileData(Uri location, out string yamlFileName, out string keyPrefix)
-        {
-            yamlFileName = keyPrefix = null;
-            const string ext = YamlResourceInfo.FileExtension;
-            const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
-            var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterFirst(ext, cmp);
-            yamlFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
+        private readonly string _yamlFile;
+        private readonly string _keyPrefix;
 
-            return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
+        public YamlValueExtractor(string yamlFile, string keyPrefix)
+        {
+            _yamlFile = yamlFile;
+            _keyPrefix = keyPrefix;
         }
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            if (!GetYamlFileData(context.Location, out var fileName, out var keyPrefix))
-            {
-                return null;
-            }
-
             IDictionary<string, string> data;
-            switch (context.Extract(fileName))
+            switch (context.Extract(_yamlFile))
             {
                 case null:
                     return null;
@@ -50,7 +40,7 @@ namespace Axle.Resources.Yaml.Extraction
                     break;
             }
 
-            if (data != null && data.TryGetValue($"{keyPrefix}{name}", out var result))
+            if (data != null && data.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
                 return new TextResourceInfo(name, context.Culture, result);
             }

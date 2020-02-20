@@ -11,27 +11,27 @@ namespace Axle.Resources.Extraction
 
         private sealed class CompositeResourceContext : IResourceContext
         {
-            private readonly IResourceContext _defaultResourceContext;
-            private readonly IResourceExtractor _extractor;
+            private readonly IResourceContext _sourceContext;
+            private readonly IResourceExtractor _composedExtractor;
 
-            public CompositeResourceContext(IResourceContext defaultResourceContext, IResourceExtractor extractor)
+            public CompositeResourceContext(IResourceContext sourceContext, IResourceExtractor composedExtractor)
             {
-                _defaultResourceContext = defaultResourceContext;
-                _extractor = extractor;
+                _sourceContext = sourceContext;
+                _composedExtractor = composedExtractor;
             }
 
-            public ResourceInfo Extract(string name) => _extractor.Extract(_defaultResourceContext, name);
+            public ResourceInfo Extract(string name) => _composedExtractor.Extract(_sourceContext, name);
 
             public IEnumerable<ResourceInfo> ExtractAll(string name)
             {
                 var currentValue = Extract(name);
-                var delegatedResults = _defaultResourceContext.ExtractAll(name);
+                var delegatedResults = _sourceContext.ExtractAll(name);
                 return currentValue == null ? delegatedResults : new[] {currentValue}.Union(delegatedResults);
             }
 
-            public string Bundle => _defaultResourceContext.Bundle;
-            public Uri Location => _defaultResourceContext.Location;
-            public CultureInfo Culture => _defaultResourceContext.Culture;
+            public string Bundle => _sourceContext.Bundle;
+            public Uri Location => _sourceContext.Location;
+            public CultureInfo Culture => _sourceContext.Culture;
         }
 
         public static IResourceExtractor Compose(IEnumerable<IResourceExtractor> extractors)

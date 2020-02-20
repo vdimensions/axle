@@ -16,10 +16,35 @@ namespace Axle.Resources.Yaml.Tests
     using UriParser = Axle.Conversion.Parsing.UriParser;
 
     [TestFixture]
-    public class TestClass
+    public class YamlResourceTests
     {
         [Test]
-        public void TestMethod()
+        public void TestValueRetrievalFromExplicitlyDefinedYamlFile()
+        {
+            var uriParser = new UriParser();
+            var resourceManager = new DefaultResourceManager();
+            resourceManager.Bundles
+                .Configure("testBundle")
+                .Register(uriParser.Parse("invalid"))
+                .Register(GetType().Assembly, "./Properties/");
+            resourceManager.Extractors.Register(new YamlExtractor("Messages.yml"));
+
+            var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
+
+            Assert.IsNotNull(resource, "Unable to find Greeting message");
+            Assert.AreEqual("testBundle", resource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resource.Culture);
+
+            using (var stream = resource.Open())
+            {
+                var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
+                Assert.IsNotNull(data);
+                Console.Write(data);
+            }
+        }
+        
+        [Test]
+        public void TestValueRetrievalFromImplicitlyDiscoveredYamlFile()
         {
             var uriParser = new UriParser();
             var resourceManager = new DefaultResourceManager();
