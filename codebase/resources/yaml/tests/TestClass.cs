@@ -11,7 +11,6 @@ using Axle.Resources.Yaml.Extraction;
 using NUnit.Framework;
 
 
-
 namespace Axle.Resources.Yaml.Tests
 {
     using UriParser = Axle.Conversion.Parsing.UriParser;
