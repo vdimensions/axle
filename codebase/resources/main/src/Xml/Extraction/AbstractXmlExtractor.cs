@@ -1,6 +1,5 @@
 ﻿using System;
 
-using Axle.References;
 using Axle.Resources.Extraction;
 
 
@@ -10,7 +9,8 @@ namespace Axle.Resources.Xml.Extraction
     /// <summary>
     /// An abstract class to serve as a base for creating XML resource marshaller implementations.
     /// <para>
-    /// Known implementations of this class are the <see cref="XDocumentExtractor" /> and <see cref="XmlDocumentExtractor"/>.
+    /// Known implementations of this class are the <see cref="XDocumentExtractor" /> and
+    /// <see cref="XmlDocumentExtractor"/>.
     /// </para>
     /// </summary>
     /// <typeparam name="TX">
@@ -47,15 +47,15 @@ namespace Axle.Resources.Xml.Extraction
         /// <returns>
         /// An instance of <typeparamref name="TX"/> representing the XML resource. 
         /// </returns>
-        protected abstract TX ExtractXml(ResourceContext context, string name, ResourceInfo resource);
+        protected abstract TX ExtractXml(IResourceContext context, string name, ResourceInfo resource);
 
         /// <inheritdoc />
-        protected sealed override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected sealed override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var xmlResource = context.ExtractionChain.Extract(name);
+            var xmlResource = context.Extract(name);
             try
             {
-                return xmlResource.HasValue ? ExtractXml(context, name, xmlResource.Value) : Nullsafe<ResourceInfo>.None;
+                return xmlResource != null ? ExtractXml(context, name, xmlResource) : null;
             }
             catch (Exception e)
             {

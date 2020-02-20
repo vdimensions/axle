@@ -25,6 +25,6 @@ namespace Axle.Resources.Bundling
         /// </exception>
         IConfigurableBundleContent Register(Uri location);
 
-        IResourceExtractorRegistry Extractors { get; }
+        new IResourceExtractorRegistry Extractors { get; }
     }
 }

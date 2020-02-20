@@ -6,92 +6,72 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
-    public class ResourceExtractionChain : IResourceExtractionChain
+    /// <summary>
+    /// A class representing the resource extraction chain for a <see cref="ResourceContext">resource context</see>.
+    /// It allows to obtain other required resources up the chain while in the process of extracting a particular resource.
+    /// </summary>
+    /// <seealso cref="IResourceExtractor"/>
+    public sealed class ResourceExtractionChain
     {
-        private sealed class ResourceExtractionChainLink : IResourceExtractor
+        private readonly ResourceContext _ownerContext;
+        private readonly IEnumerable<ResourceContext> _subContexts;
+        internal readonly IEnumerable<IResourceExtractor> extractors;
+
+        internal ResourceExtractionChain(ResourceContext ownerContext, IEnumerable<ResourceContext> subContexts, IEnumerable<IResourceExtractor> extractors)
         {
-            private readonly IResourceExtractor _a, _b;
+            _ownerContext = ownerContext;
+            _subContexts = subContexts;
+            this.extractors = extractors;
+        }
 
-            public ResourceExtractionChainLink(IResourceExtractor a, IResourceExtractor b)
+        internal IEnumerable<ResourceInfo> DoExtractAll(string name)
+        {
+            var extractorContext = _ownerContext;
+            foreach (var extractor in extractors)
             {
-                _a = a;
-                _b = b;
-            }
-
-            public ResourceInfo Extract(ResourceContext context, string name)
-            {
-                if (_a is IResourceExtractionChain c)
+                extractorContext = extractorContext.MoveOneExtractorForward();
+                var resource = extractor.Extract(extractorContext, name);
+                if (resource == null)
                 {
-                    return c.Extract(context, name, _b);
+                    continue;
                 }
-                return _a.Extract(context, name) ?? _b.Extract(context, name);
+                resource.Bundle = _ownerContext.Bundle;
+                yield return resource;
             }
-        }
-
-        private readonly IResourceExtractor _next;
-
-        public ResourceExtractionChain(IEnumerable<IResourceExtractor> extractors) 
-            : this(extractors.VerifyArgument(nameof(extractors)).IsNotNull().Value.ToArray()) { }
-        public ResourceExtractionChain(params IResourceExtractor[] extractors)
-        {
-            switch (extractors.Length)
+            foreach (var subContext in _subContexts)
             {
-                case 0:
-                    _next = null;
-                    break;
-                case 1:
-                    _next = extractors[0];
-                    break;
-                default:
-                    var collapsed = extractors[extractors.Length - 1];
-                    for (var i = extractors.Length - 2; i >= 0; i--)
-                    {
-                        collapsed = new ResourceExtractionChainLink(extractors[i], collapsed);
-                    }
-                    _next = collapsed;
-                    break;
+                foreach (var resource in subContext.ExtractionChain.DoExtractAll(name))
+                {
+                    yield return resource;
+                }
             }
         }
 
-        //protected virtual ResourceInfo DoExtract(ResourceContext contex, string name, IResourceExtractor nextInChain) => null;
+        /// <summary>
+        /// Attempts to extract a resource from the current <see cref="ResourceExtractionChain">extraction chain</see>
+        /// that matches the given <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the resource to lookup.
+        /// </param>
+        /// <returns>
+        /// A <see cref="ResourceInfo"/> instance representing the located resource if found; <c>null</c> otherwise.
+        /// </returns>
+        public ResourceInfo Extract(string name) => 
+            DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault(x => x != null);
 
-        public ResourceInfo Extract(ResourceContext context, string name) => _next != null ? Extract(context, name, _next) : null;
-        public virtual ResourceInfo Extract(ResourceContext context, string name, IResourceExtractor nextInChain)
-        {
-            //var items = context.Extract(
-            //    name,
-            //    (location, culture, n) =>
-            //    {
-            //        //var currentResult = DoExtract(context, n, nextInChain);
-            //        //if (currentResult != null)
-            //        //{
-            //        //    return currentResult;
-            //        //}
-            //        var tmpContext = new ResourceContext(
-            //            context.Bundle,
-            //            context.LookupLocations.Except(new[]{location}), 
-            //            culture);
-            //        return nextInChain.Extract(tmpContext, n);
-            //    });
-            //return items.SingleOrDefault();
-            return nextInChain.Extract(context, name);
-        }
+        /// <summary>
+        /// Attempts to extract all resources from the current <see cref="ResourceExtractionChain">extraction chain</see>
+        /// that match the given <paramref name="name"/>.
+        /// </summary>
+        /// <param name="name">
+        /// The name of the resource to lookup.
+        /// </param>
+        /// <returns>
+        /// A collection of <see cref="ResourceInfo"/> instances representing resources that have successfully been extracted from 
+        /// the current <see cref="ResourceExtractionChain">chain</see>.
+        /// </returns>
+        public IEnumerable<ResourceInfo> ExtractAll(string name) => 
+            DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).Where(x => x != null);
     }
 }
-/**
- *  |______________
- *  | ?GreetingText
- *  V
- * [chain]->[properties]->[embedded resources]->[resx]->[filesystem]
- * [en-us]           (1)
- *                    |_________________
- *                    | ?some.properties
- *                    V
- *               [chain]->[embedded resources]->[resx]->[filesystem]
- *               [en-us]                   (3)      4            (5) 
- *          -----------------------------------------------------------
- *    [en]->[properties]->[embedded resources]->[resx]->[filesystem]
- *      []          
- *                 
- *                 
- */

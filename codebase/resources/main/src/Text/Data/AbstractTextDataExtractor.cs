@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Text;
-using Axle.References;
 using Axle.Resources.Extraction;
 using Axle.Text.Data;
 
@@ -40,10 +38,10 @@ namespace Axle.Resources.Text.Data
 
         /// <inheritdoc />
         /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             var finalProperties = new Dictionary<string, string>(KeyComparer);
-            foreach (var propertiesFileResourceInfo in context.ExtractionChain.ExtractAll(name).Where(x => x.HasValue).Select(x => x.Value))
+            foreach (var propertiesFileResourceInfo in context.ExtractAll(name))
             {
                 using (var stream = propertiesFileResourceInfo.Open())
                 {

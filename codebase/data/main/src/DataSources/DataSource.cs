@@ -32,7 +32,7 @@ namespace Axle.Data.DataSources
         private ICommandBuilder BuildScriptedCommand(string bundle, string scriptPath, CommandType commandType)
         {
             var res = _resourceManager.Load(bundle, scriptPath, CultureInfo.InvariantCulture);
-            if (res.HasValue && res.Value is SqlScriptSourceInfo scriptSourceInfo)
+            if (res != null && res is SqlScriptSourceInfo scriptSourceInfo)
             {
                 var commandText = scriptSourceInfo.Value.ResolveScript(_serviceProvider);
                 return BuildCommand(commandText, commandType);

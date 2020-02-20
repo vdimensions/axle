@@ -1,12 +1,10 @@
 ﻿using System.Threading.Tasks;
 
-using Axle.References;
-
-
 namespace Axle.Resources.Extraction
 {
     /// <summary>
-    /// An interface representing a resource extractor; that is, an object responsible for locating raw resources before being unmarshaled.
+    /// An interface representing a resource extractor; that is, an object responsible for locating raw resources before
+    /// being unmarshalled.
     /// </summary>
     public interface IResourceExtractor
     {
@@ -21,11 +19,12 @@ namespace Axle.Resources.Extraction
         /// A <see cref="string"/> object used to identify the requested resource.
         /// </param>
         /// <returns>
-        /// A <see cref="ResourceInfo"/> instance representing the extracted resource, or <c>null</c> if the resource was not found. 
+        /// A <see cref="ResourceInfo"/> instance representing the extracted resource, or <c>null</c> if the resource
+        /// was not found. 
         /// </returns>
         /// <seealso cref="ExtractAsync"/>
         /// <seealso cref="ResourceContext"/>
-        Nullsafe<ResourceInfo> Extract(ResourceContext context, string name);
+        ResourceInfo Extract(IResourceContext context, string name);
 
         /// <summary>
         /// Attempts to asynchronously locate a resource based on the provided parameters.
@@ -38,10 +37,11 @@ namespace Axle.Resources.Extraction
         /// A <see cref="string"/> object used to identify the requested resource.
         /// </param>
         /// <returns>
-        /// A <see cref="Task{ResourceInfo}"/> instance representing the asynchronous operation for retrieving the resource. 
+        /// A <see cref="Task{ResourceInfo}"/> instance representing the asynchronous operation for retrieving the
+        /// resource. 
         /// </returns>
         /// <seealso cref="Extract"/>
         /// <seealso cref="ResourceContext"/>
-        Task<Nullsafe<ResourceInfo>> ExtractAsync(ResourceContext context, string name);
+        Task<ResourceInfo> ExtractAsync(IResourceContext context, string name);
     }
 }

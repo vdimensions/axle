@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Axle.Verification;
 
 
 namespace Axle.Resources.Extraction
@@ -14,7 +15,7 @@ namespace Axle.Resources.Extraction
     /// </summary>
     /// <seealso cref="IResourceExtractor"/>
     /// <seealso cref="ResourceManager"/>
-    public sealed class ResourceContext
+    public sealed class ResourceContext : IResourceContext
     {
         private readonly Uri[] _locations;
         private readonly int _currentLocationIndex;
@@ -30,7 +31,7 @@ namespace Axle.Resources.Extraction
             Culture = culture;
 
             var subContexts = GetSubContexts(extractors).ToArray();
-            ExtractionChain = new ContextExtractionChain(this, subContexts, extractors);
+            ExtractionChain = new ResourceExtractionChain(this, subContexts, extractors);
         }
 
         private IEnumerable<ResourceContext> GetSubContexts(IEnumerable<IResourceExtractor> extractors)
@@ -47,28 +48,28 @@ namespace Axle.Resources.Extraction
             return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, ex);
         }
 
-        /// <summary>
-        /// Gets the name of the resource bundle this <see cref="ResourceContext">resource context</see> instance is representing.
-        /// </summary>
+        /// <inheritdoc />
+        public ResourceInfo Extract(string name) => 
+            ExtractionChain.DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault(x => x != null);
+
+        /// <inheritdoc />
+        public IEnumerable<ResourceInfo> ExtractAll(string name) => 
+            ExtractionChain.DoExtractAll(name.VerifyArgument(nameof(name))).Where(x => x != null);
+
+        /// <inheritdoc />
         public string Bundle { get; }
 
-        /// <summary>
-        /// Gets the <see cref="Uri"/> for the resource lookup location of the current <see cref="ResourceContext"/> instance.
-        /// </summary>
+        /// <inheritdoc />
         public Uri Location => _currentLocationIndex < 0 ? null :_locations[_currentLocationIndex];
 
-        /// <summary>
-        /// Gets the <see cref="CultureInfo"/> representing the culture that the current <see cref="ResourceContext"/> instance will use
-        /// for resource lookup.
-        /// </summary>
+        /// <inheritdoc />
         public CultureInfo Culture { get; }
 
         /// <summary>
-        /// Gets the <see cref="ContextExtractionChain"/> associated with the current <see cref="ResourceContext"/> instance.
+        /// Gets the <see cref="ResourceExtractionChain"/> associated with the current <see cref="ResourceContext"/> instance.
         /// The extraction chain can be accessed during resource extraction to obtain any additional resources that may be required to 
         /// construct the final resource.
         /// </summary>
-        public ContextExtractionChain ExtractionChain { get; }
+        internal ResourceExtractionChain ExtractionChain { get; }
     }
 }
-

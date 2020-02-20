@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using Axle.Extensions.String;
-using Axle.References;
 using Axle.Resources.Extraction;
 using Axle.Resources.Text.Data;
 
@@ -28,18 +27,15 @@ namespace Axle.Resources.Properties.Extraction
         /// <summary>
         /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java properties file. 
         /// </summary>
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             if (GetPropertiesFileData(context.Location, out var propertyFileName, out var keyPrefix))
             {
                 IDictionary<string, string> props = null;
-                var propertyResource = context.ExtractionChain.Extract(propertyFileName);
-                if (!propertyResource.HasValue)
+                switch (context.Extract(propertyFileName))
                 {
-                    return Nullsafe<ResourceInfo>.None;
-                }
-                switch (propertyResource.Value)
-                {
+                    case null:
+                        return null;
                     case TextDataResourceInfo jp:
                         props = jp.Data;
                         break;
@@ -58,7 +54,8 @@ namespace Axle.Resources.Properties.Extraction
                     return new TextResourceInfo(name, context.Culture, result);
                 }
             }
-            return Nullsafe<ResourceInfo>.None;
+
+            return null;
         }
     }
 }

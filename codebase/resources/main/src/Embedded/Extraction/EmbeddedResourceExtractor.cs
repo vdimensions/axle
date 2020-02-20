@@ -3,7 +3,6 @@ using System.Reflection;
 using Axle.Environment;
 using Axle.Extensions.String;
 using Axle.Extensions.Uri;
-using Axle.References;
 using Axle.Resources.Extraction;
 using Axle.Verification;
 
@@ -11,12 +10,14 @@ namespace Axle.Resources.Embedded.Extraction
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     /// <summary>
-    /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded resources.
+    /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded
+    /// resources.
     /// </summary>
     /// <seealso cref="EmbeddedResourceInfo"/>
     #else
     /// <summary>
-    /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded resources.
+    /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded
+    /// resources.
     /// </summary>
     #endif
     public class EmbeddedResourceExtractor : AbstractResourceExtractor
@@ -31,7 +32,7 @@ namespace Axle.Resources.Embedded.Extraction
         /// <summary>
         /// Attempts to read an embedded resource.
         /// </summary>
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();

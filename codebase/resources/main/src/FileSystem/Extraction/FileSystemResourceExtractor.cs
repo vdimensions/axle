@@ -1,7 +1,6 @@
 ﻿using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
-using Axle.References;
 using Axle.Resources.Extraction;
 using Axle.Verification;
 
@@ -12,7 +11,7 @@ namespace Axle.Resources.FileSystem.Extraction
     /// </summary>
     public class FileSystemResourceExtractor : AbstractResourceExtractor
     {
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
@@ -20,7 +19,9 @@ namespace Axle.Resources.FileSystem.Extraction
             #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
             var location = context.Location.Resolve(name);
             var culture = context.Culture;
-            if (CultureInfo.InvariantCulture.Equals(culture) && location.IsAbsoluteUri && File.Exists(location.AbsolutePath))
+            if (CultureInfo.InvariantCulture.Equals(culture) 
+                && location.IsAbsoluteUri 
+                && File.Exists(location.AbsolutePath))
             {
                 return new FileSystemResourceInfo(context.Location, name, culture);
             }

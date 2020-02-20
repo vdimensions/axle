@@ -4,7 +4,6 @@ using System;
 using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
-using Axle.References;
 
 namespace Axle.Resources.ResX.Extraction
 {
@@ -16,7 +15,7 @@ namespace Axle.Resources.ResX.Extraction
     /// </remarks>
     internal sealed class SimpleResXResourceExtractor : AbstractResXResourceExtractor
     {
-        protected override Nullsafe<ResourceInfo> ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
+        protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
             location = location.Resolve(name);
             var resolver = new ResXResourceResolver(resxType);
@@ -31,7 +30,7 @@ namespace Axle.Resources.ResX.Extraction
                     // This will avoid issues when the resource is latter being marshaled to another form.
                     return new ResXStreamResourceInfo(resolver, location, name, culture);
                 default:
-                    return Nullsafe<ResourceInfo>.None;
+                    return null;
             }
         }
     }

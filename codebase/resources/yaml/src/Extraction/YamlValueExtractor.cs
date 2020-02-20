@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using Axle.Extensions.String;
-using Axle.References;
 using Axle.Resources.Extraction;
 
 
@@ -21,21 +20,18 @@ namespace Axle.Resources.Yaml.Extraction
             return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }
 
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             if (!GetYamlFileData(context.Location, out var fileName, out var keyPrefix))
             {
-                return Nullsafe<ResourceInfo>.None;
+                return null;
             }
 
             IDictionary<string, string> data;
-            var yamlRes = context.ExtractionChain.Extract(fileName);
-            if (!yamlRes.HasValue)
+            switch (context.Extract(fileName))
             {
-                return Nullsafe<ResourceInfo>.None;
-            }
-            switch (yamlRes.Value)
-            {
+                case null:
+                    return null;
                 case YamlResourceInfo yaml:
                     data = yaml.Data;
                     break;

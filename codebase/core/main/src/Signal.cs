@@ -91,7 +91,8 @@ namespace Axle
         {
             if (action != null)
             {
-                // TODO: keep a map between the original action and the actual wrapper action, so that unsubscription will work for subscribe once calls
+                // TODO: keep a map between the original action and the actual wrapper action,
+                // so that external unsubscription will work for subscribe once calls
                 var realAction = new Action[] { null };
                 realAction[0] = () =>
                 {

@@ -25,18 +25,18 @@ namespace Axle.Resources.Yaml.Tests
             var uriParser = new UriParser();
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
-                           .Configure("testBundle")
-                               .Register(uriParser.Parse("Messages.yml"))
-                               .Register(GetType().Assembly, "./Properties/");
+                .Configure("testBundle")
+                .Register(uriParser.Parse("Messages.yml"))
+                .Register(GetType().Assembly, "./Properties/");
             resourceManager.Extractors.Register(new YamlExtractor());
 
-            var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
+            var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
-            Assert.IsTrue(resxResource.HasValue, "Unable to find Greeting message");
-            Assert.AreEqual("testBundle", resxResource.Value.Bundle);
-            Assert.AreEqual(CultureInfo.InvariantCulture, resxResource.Value.Culture);
+            Assert.IsNotNull(resource, "Unable to find Greeting message");
+            Assert.AreEqual("testBundle", resource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resource.Culture);
 
-            using (var stream = resxResource.Value.Open())
+            using (var stream = resource.Open())
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);

@@ -31,11 +31,11 @@ namespace Axle.Resources.Tests
             var resourceManager = CreateResourceManager();
             var fileResource = resourceManager.Load("testBundle", "FileSystemTestFile.txt", CultureInfo.CurrentCulture);
 
-            Assert.IsTrue(fileResource.HasValue, "Unable to find LL2H.txt");
-            Assert.AreEqual("testBundle", fileResource.Value.Bundle);
-            Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Value.Culture);
+            Assert.IsNotNull(fileResource, "Unable to find LL2H.txt");
+            Assert.AreEqual("testBundle", fileResource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Culture);
 
-            using (var stream = fileResource.Value.Open())
+            using (var stream = fileResource.Open())
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);
@@ -50,11 +50,11 @@ namespace Axle.Resources.Tests
 
             var fileResource = resourceManager.Load("testBundle", "EmbeddedText.txt", CultureInfo.CurrentCulture);
 
-            Assert.IsTrue(fileResource.HasValue, "Unable to find EmbeddedText.txt");
-            Assert.AreEqual("testBundle", fileResource.Value.Bundle);
-            Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Value.Culture);
+            Assert.IsNotNull(fileResource, "Unable to find EmbeddedText.txt");
+            Assert.AreEqual("testBundle", fileResource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Culture);
 
-            using (var stream = fileResource.Value.Open())
+            using (var stream = fileResource.Open())
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);
@@ -69,11 +69,11 @@ namespace Axle.Resources.Tests
 
             var resxResource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
-            Assert.IsTrue(resxResource.HasValue, "Unable to find Greeting message");
-            Assert.AreEqual("testBundle", resxResource.Value.Bundle);
-            Assert.AreEqual(CultureInfo.InvariantCulture, resxResource.Value.Culture);
+            Assert.IsNotNull(resxResource, "Unable to find Greeting message");
+            Assert.AreEqual("testBundle", resxResource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resxResource.Culture);
 
-            using (var stream = resxResource.Value.Open())
+            using (var stream = resxResource.Open())
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);

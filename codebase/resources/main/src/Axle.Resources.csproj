@@ -11,11 +11,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Extraction\IResourceExtractionChain.cs" />
-    <Compile Remove="Extraction\ResourceExtractionChain.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
     <PackageReference Include="Axle.Text.Data" Version="$(PackageVersionRange)" />
   </ItemGroup>

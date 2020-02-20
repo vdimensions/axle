@@ -2,7 +2,6 @@
 using System;
 using System.Globalization;
 using Axle.Extensions.String;
-using Axle.References;
 using Axle.Resources.Extraction;
 using Axle.Verification;
 
@@ -45,18 +44,22 @@ namespace Axle.Resources.ResX.Extraction
         protected AbstractResXResourceExtractor() : base() { }
 
         /// <inheritdoc />
-        protected sealed override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected sealed override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             var location = context.Location;
             var culture = context.Culture;
             if (TryGetResXType(location, out var type, out var prefix))
             {
-                return ExtractResource(new Uri($"{prefix}/", UriKind.Relative), culture, type, name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+                return ExtractResource(
+                    new Uri($"{prefix}/", UriKind.Relative), 
+                    culture, 
+                    type, 
+                    name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
             }
             return null;
         }
 
-        protected abstract Nullsafe<ResourceInfo> ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
+        protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
     }
 }
 #endif

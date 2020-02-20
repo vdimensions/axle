@@ -13,9 +13,6 @@ namespace Axle
     {
         public static IApplicationBuilder Build() => new Application();
 
-        [Obsolete]
-        private readonly string[] _args;
-
         private readonly object _syncRoot = new object();
         private readonly ModuleCatalogWrapper _moduleCatalog = new ModuleCatalogWrapper(new DefaultModuleCatalog());
         private readonly IList<Type> _moduleTypes = new List<Type>();
@@ -30,12 +27,6 @@ namespace Axle
         {
             _dependencyContainerProvider = new DefaultDependencyContainerProvider();
             _loggingService = new DefaultLoggingServiceProvider();
-        }
-
-        [Obsolete]
-        public Application(params string[] args) : this()
-        {
-            _args = args;
         }
 
         private void ThrowIfStarted()

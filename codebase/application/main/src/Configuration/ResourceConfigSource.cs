@@ -14,11 +14,11 @@ namespace Axle.Configuration
         {
             var culture = CultureInfo.InvariantCulture;
             var resource = _resourceManager.Load(ConfigurationModule.BundleName, _resourcePath, culture);
-            if (!resource.HasValue)
+            if (resource == null)
             {
                 throw new ResourceNotFoundException(_resourcePath, ConfigurationModule.BundleName, culture);
             }
-            var stream = resource.Value.Open();
+            var stream = resource.Open();
             return new StreamedFileConfigSource<T>(stream).LoadConfiguration();
         }
     }

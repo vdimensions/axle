@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Axle.References;
 using Axle.Resources;
 using Axle.Resources.Extraction;
 
@@ -22,7 +21,7 @@ namespace Axle.Data.DataSources.Resources.Extraction
             _dialects = dialects;
         }
 
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             string[] nameVariants;
             if (!name.EndsWith(SqlScriptSourceInfo.FileExtension, StringComparison.OrdinalIgnoreCase))
@@ -47,10 +46,8 @@ namespace Axle.Data.DataSources.Resources.Extraction
             {
                 var queryResource = nameVariants
                     .Select(p => Path.Combine(Path.Combine(Path.GetDirectoryName(p), dialect), Path.GetFileName(p)))
-                    .Select(context.ExtractionChain.Extract)
-                    .Where(r => r.HasValue)
-                    .Select(r => r.Value)
-                    .FirstOrDefault();
+                    .Select(context.Extract)
+                    .FirstOrDefault(r => r != null);
                 if (queryResource == null)
                 {
                     continue;

@@ -4,7 +4,6 @@ using System.Drawing;
 using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
-using Axle.References;
 
 namespace Axle.Resources.ResX.Extraction
 {
@@ -18,7 +17,7 @@ namespace Axle.Resources.ResX.Extraction
     internal sealed class CompleteResXResourceExtractor : AbstractResXResourceExtractor
     {
         /// <inheritdoc />
-        protected override Nullsafe<ResourceInfo> ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
+        protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
             location = location.Resolve(name);
             var resolver = new ResXResourceResolver(resxType);

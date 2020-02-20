@@ -21,9 +21,9 @@ namespace Axle.Resources.Extraction
         IEnumerator IEnumerable.GetEnumerator() => _extractors.GetEnumerator();
 
         /// <inheritdoc />
-        public IResourceExtractorRegistry Register(Nullsafe<IResourceExtractor> extractor)
+        public IResourceExtractorRegistry Register(IResourceExtractor extractor)
         {
-            _extractors.AddFirst(extractor.VerifyRefArg(nameof(extractor)).IsNotNull().Value);
+            _extractors.AddFirst(extractor.VerifyArgument(nameof(extractor)).IsNotNull().Value);
             return this;
         }
     }

@@ -24,6 +24,6 @@ namespace Axle.Resources.Extraction
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="extractor"/> is <c>null</c>.
         /// </exception>
-        IResourceExtractorRegistry Register(Nullsafe<IResourceExtractor> extractor);
+        IResourceExtractorRegistry Register(IResourceExtractor extractor);
     }
 }
