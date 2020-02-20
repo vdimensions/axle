@@ -5,8 +5,8 @@ using System.Globalization;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of 
-    /// a <see cref="sbyte">signed byte</see> to a valid <see cref="sbyte"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of a <see cref="sbyte">signed byte</see>
+    /// to a valid <see cref="sbyte"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]

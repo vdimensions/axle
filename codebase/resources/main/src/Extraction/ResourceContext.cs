@@ -30,8 +30,9 @@ namespace Axle.Resources.Extraction
             _currentLocationIndex = currentLocationIndex;
             Culture = culture;
 
-            var subContexts = GetSubContexts(extractors).ToArray();
-            ExtractionChain = new ResourceExtractionChain(this, subContexts, extractors);
+            var extArr = extractors as IResourceExtractor[] ?? extractors.ToArray();
+            var subContexts = GetSubContexts(extArr).ToArray();
+            ExtractionChain = new ResourceExtractionChain(this, subContexts, extArr);
         }
 
         private IEnumerable<ResourceContext> GetSubContexts(IEnumerable<IResourceExtractor> extractors)
@@ -44,13 +45,14 @@ namespace Axle.Resources.Extraction
 
         internal ResourceContext MoveOneExtractorForward()
         {
-            var ex = ExtractionChain.extractors.Skip(1);
-            return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, ex);
+            var extractors = ExtractionChain.extractors.Skip(1);
+            return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, extractors);
         }
 
         /// <inheritdoc />
         public ResourceInfo Extract(string name) => 
-            ExtractionChain.DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault(x => x != null);
+            ExtractionChain.DoExtractAll(
+                name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault(x => x != null);
 
         /// <inheritdoc />
         public IEnumerable<ResourceInfo> ExtractAll(string name) => 
@@ -66,9 +68,10 @@ namespace Axle.Resources.Extraction
         public CultureInfo Culture { get; }
 
         /// <summary>
-        /// Gets the <see cref="ResourceExtractionChain"/> associated with the current <see cref="ResourceContext"/> instance.
-        /// The extraction chain can be accessed during resource extraction to obtain any additional resources that may be required to 
-        /// construct the final resource.
+        /// Gets the <see cref="ResourceExtractionChain"/> associated with the current <see cref="ResourceContext"/>
+        /// instance.
+        /// The extraction chain can be accessed during resource extraction to obtain any additional resources that may
+        /// be required to construct the final resource.
         /// </summary>
         internal ResourceExtractionChain ExtractionChain { get; }
     }

@@ -66,11 +66,6 @@ namespace Axle.Conversion.Parsing
                 throw new ArgumentNullException(nameof(value));
             }
 
-            //if (format == null)
-            //{
-            //    throw new ArgumentNullException("forma");
-            //}
-
             if (string.IsNullOrEmpty(format) || !ValidateExact(value, format, formatProvider))
             {
                 output = default(T);

@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 namespace Axle.Threading
 {
     /// <summary>
-    /// A producer-consumer queue implementation that allows externalization
-    /// of the consumer logic.
+    /// A producer-consumer queue implementation that allows externalization of the consumer logic.
     /// </summary>
     /// <typeparam name="T">
     /// The type of object representing the data being consumed.
@@ -20,8 +19,8 @@ namespace Axle.Threading
         private readonly IAsyncConsumer<T> _consumer;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="AsyncProducer{T}"/> class
-        /// using the specified <paramref name="consumer"/>.
+        /// Creates a new instance of the <see cref="AsyncProducer{T}"/> class using the specified
+        /// <paramref name="consumer"/>.
         /// </summary>
         /// <param name="consumer">
         /// A <see cref="IAsyncConsumer{T}"/> object to process
@@ -74,8 +73,7 @@ namespace Axle.Threading
         }
 
         /// <summary>
-        /// Adds an <paramref name="item"/> to the queue to be processed
-        /// by the consumer.
+        /// Adds an <paramref name="item"/> to the queue to be processed by the consumer.
         /// </summary>
         /// <param name="item">
         /// The item to be added for processing.
@@ -89,8 +87,8 @@ namespace Axle.Threading
         /// Disposes of the current <see cref="AsyncProducer{T}"/> instance.
         /// </summary>
         /// <param name="disposing">
-        /// A <see cref="bool"/> value indicating whether the dispose call is
-        /// being sent by a finalizer, or a manual dispose call.
+        /// A <see cref="bool"/> value indicating whether the dispose call is being sent by a finalizer, or a manual
+        /// dispose call.
         /// </param>
         protected virtual void Dispose(bool disposing)
         {

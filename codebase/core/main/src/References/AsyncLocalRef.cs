@@ -7,7 +7,8 @@ using Axle.Reflection;
 namespace Axle.References
 {
     /// <summary>
-    /// Represents a reference to ambient data, that is local to a given asynchronous control flow, such as asynchronous method. 
+    /// Represents a reference to ambient data, that is local to a given asynchronous control flow, such as asynchronous
+    /// method. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -76,7 +77,8 @@ namespace Axle.References
         }
 
         /// <summary>
-        /// Gets a value that indicates whether a <see cref="Value"/> has been initialized for the current asynchronous context.
+        /// Gets a value that indicates whether a <see cref="Value"/> has been initialized for the current asynchronous
+        /// context.
         /// </summary>
         public bool HasValue => _t.Value.HasValue;
 

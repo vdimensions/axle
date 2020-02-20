@@ -13,7 +13,8 @@ namespace Axle.IO
     public sealed class TemporaryStreamDump : IDisposable
     {
         /// <summary>
-        /// Writes the contents of the provided <paramref name="stream"/> to a temporary file in the given <paramref name="location"/>.
+        /// Writes the contents of the provided <paramref name="stream"/> to a temporary file in the given
+        /// <paramref name="location"/>.
         /// </summary>
         /// <param name="stream">
         /// The stream object to dump.

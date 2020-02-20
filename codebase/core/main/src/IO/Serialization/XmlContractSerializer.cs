@@ -8,8 +8,8 @@ using System.Xml;
 namespace Axle.IO.Serialization
 {
     /// <summary>
-    /// An implementation of the <see cref="ISerializer"/> interface using <see cref="DataContractSerializer">data contract</see>
-    /// serialization as the underlying implementation.
+    /// An implementation of the <see cref="ISerializer"/> interface using
+    /// <see cref="DataContractSerializer">data contract</see> serialization as the underlying implementation.
     /// </summary>
     /// <seealso cref="DataContractSerializer"/>
     /// <seealso cref="ISerializer"/>

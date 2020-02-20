@@ -3,10 +3,11 @@
 namespace Axle.Conversion
 {
     /// <summary>
-    /// A class representing a combination of two separate <see cref="IConverter{TSource,TTarget}">one-way converter</see> instances.
+    /// A class representing a combination of two separate
+    /// <see cref="IConverter{TSource,TTarget}">one-way converter</see> instances.
     /// </summary>
     /// <typeparam name="T1">
-    /// The source type to convert into a <typeparamref name="T2"/>  (and back)
+    /// The source type to convert into a <typeparamref name="T2"/> (and back)
     /// </typeparam>
     /// <typeparam name="T2">
     /// The target type to convert a <typeparamref name="T1"/> instance to (and back)
@@ -20,10 +21,12 @@ namespace Axle.Conversion
         /// Creates a new instance of the <see cref="CombinedConverter{T1,T2}"/> class.
         /// </summary>
         /// <param name="primaryConverter">
-        /// The <see cref="IConverter{TSource,TTarget}"/> to be used for conversion from <typeparamref name="T1"/> to <typeparamref name="T2"/>
+        /// The <see cref="IConverter{TSource,TTarget}"/> to be used for conversion from <typeparamref name="T1"/> to
+        /// <typeparamref name="T2"/>
         /// </param>
         /// <param name="reverseConverter">
-        /// The <see cref="IConverter{TSource,TTarget}"/> to be used for conversion from <typeparamref name="T2"/> to <typeparamref name="T1"/>
+        /// The <see cref="IConverter{TSource,TTarget}"/> to be used for conversion from <typeparamref name="T2"/> to
+        /// <typeparamref name="T1"/>
         /// </param>
         public CombinedConverter(IConverter<T1, T2> primaryConverter, IConverter<T2, T1> reverseConverter)
         {

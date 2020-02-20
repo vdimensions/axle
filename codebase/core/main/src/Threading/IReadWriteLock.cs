@@ -59,7 +59,8 @@ namespace Axle.Threading
         void ExitReadLock();
 
         /// <summary>
-        /// Reduces the recursion count for upgradeable mode, and exits upgradeable mode if the resulting count is <c>0</c> (zero).
+        /// Reduces the recursion count for upgradeable mode, and exits upgradeable mode if the resulting count is
+        /// <c>0</c> (zero).
         /// </summary>
         /// <exception cref="System.Threading.SynchronizationLockException">
         /// The current thread has not entered the lock in upgradeable mode.
@@ -78,7 +79,8 @@ namespace Axle.Threading
         /// Tries to enter the lock in read mode, with an optional integer time-out.
         /// </summary>
         /// <param name="millisecondsTimeout">
-        /// The number of milliseconds to wait, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+        /// The number of milliseconds to wait, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait
+        /// indefinitely.
         /// </param>
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
@@ -93,7 +95,8 @@ namespace Axle.Threading
         /// Tries to enter the lock in read mode, with an optional time-out.
         /// </summary>
         /// <param name="timeout">
-        /// The interval to wait, or <c>-1</c> milliseconds (<see cref="System.Threading.Timeout.InfiniteTimeSpan"/>) to wait indefinitely.
+        /// The interval to wait, or <c>-1</c> milliseconds (<see cref="System.Threading.Timeout.InfiniteTimeSpan"/>) to
+        /// wait indefinitely.
         /// </param>
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
@@ -127,7 +130,8 @@ namespace Axle.Threading
         /// Tries to enter the lock in upgradeable mode, with an optional integer time-out.
         /// </summary>
         /// <param name="millisecondsTimeout">
-        /// The number of milliseconds to wait, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+        /// The number of milliseconds to wait, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait
+        /// indefinitely.
         /// </param>
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
@@ -142,7 +146,8 @@ namespace Axle.Threading
         /// Tries to enter the lock in upgradeable mode, with an optional time-out.
         /// </summary>
         /// <param name="timeout">
-        /// The interval to wait, or <c>-1</c> milliseconds (<see cref="System.Threading.Timeout.InfiniteTimeSpan"/>) to wait indefinitely.
+        /// The interval to wait, or <c>-1</c> milliseconds (<see cref="System.Threading.Timeout.InfiniteTimeSpan"/>) to
+        /// wait indefinitely.
         /// </param>
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
@@ -176,7 +181,8 @@ namespace Axle.Threading
         /// Tries to enter the lock in write mode, with an optional integer time-out.
         /// </summary>
         /// <param name="millisecondsTimeout">
-        /// The number of milliseconds to wait, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+        /// The number of milliseconds to wait, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait
+        /// indefinitely.
         /// </param>
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
@@ -191,7 +197,8 @@ namespace Axle.Threading
         /// Tries to enter the lock in write mode, with an optional time-out.
         /// </summary>
         /// <param name="timeout">
-        /// The interval to wait, or <c>-1</c> milliseconds (<see cref="System.Threading.Timeout.InfiniteTimeSpan"/>) to wait indefinitely.
+        /// The interval to wait, or <c>-1</c> milliseconds (<see cref="System.Threading.Timeout.InfiniteTimeSpan"/>) to
+        /// wait indefinitely.
         /// </param>
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.

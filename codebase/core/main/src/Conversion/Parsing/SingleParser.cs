@@ -5,8 +5,8 @@ using System.Globalization;
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// A class that can parse <see cref="string">string</see> representations of
-    /// a <see cref="float">single precision floating point number</see> to a valid <see cref="float"/> value.
+    /// A class that can parse <see cref="string">string</see> representations of a
+    /// <see cref="float">single precision floating point number</see> to a valid <see cref="float"/> value.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]

@@ -136,13 +136,15 @@ namespace Axle.IO
         /// A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.
         /// </param>
         /// <returns>
-        /// An unshared <see cref="FileStream"/> that provides access to the specified file with the specified <paramref name="access"/> options.
+        /// An unshared <see cref="FileStream"/> that provides access to the specified file with the specified
+        /// <paramref name="access"/> options.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="path"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid characters
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid
+        /// characters
         /// as defined by <see cref="Path.GetInvalidPathChars"/>.
         /// </exception>
         /// <exception cref="IOException">
@@ -175,7 +177,8 @@ namespace Axle.IO
         /// <paramref name="path"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid characters
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid
+        /// characters
         /// as defined by <see cref="Path.GetInvalidPathChars"/>.
         /// </exception>
         /// <exception cref="IOException">
@@ -196,7 +199,8 @@ namespace Axle.IO
         }
 
         /// <summary>
-        /// A <see cref="DirectoryInfo"/> reference to the represented by the current <see cref="StorageInfo"/> drive or directory.
+        /// A <see cref="DirectoryInfo"/> reference to the represented by the current <see cref="StorageInfo"/> drive or
+        /// directory.
         /// </summary>
         public DirectoryInfo Directory { get; }
 

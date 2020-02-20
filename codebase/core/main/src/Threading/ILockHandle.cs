@@ -4,7 +4,8 @@
 namespace Axle.Threading
 {
     /// <summary>
-    /// A <see cref="IDisposable">disposable</see> handle for a <see cref="ILock">synchronization lock</see> that is currently taking place.
+    /// A <see cref="IDisposable">disposable</see> handle for a <see cref="ILock">synchronization lock</see> that is
+    /// currently taking place.
     /// </summary>
     /// <remarks>
     /// Disposal of this instance will release the held lock.

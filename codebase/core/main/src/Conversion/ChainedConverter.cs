@@ -5,16 +5,24 @@ namespace Axle.Conversion
 {
     /// <summary>
     /// A special converter implementation that chains together two <see cref="IConverter{TSource,TTarget}"/> instances.
-    /// Useful if the conversion from an instance of a given type <typeparamref name="T" /> must be converted to an intermediate
-    /// type <typeparamref name="TIntermediate"/> with one <see cref="IConverter{T,T1}">converter</see> before that conversion result
-    /// is converted to the desired type <typeparamref name="TResult"/> with <see cref="IConverter{T1,TResult}">another converter</see>.
+    /// Useful if the conversion from an instance of a given type <typeparamref name="T" /> must be converted to an
+    /// intermediate type <typeparamref name="TIntermediate"/> with one <see cref="IConverter{T,T1}">converter</see>
+    /// before that conversion result is converted to the desired type <typeparamref name="TResult"/> with
+    /// <see cref="IConverter{T1,TResult}">another converter</see>.
     /// <para>
-    /// Multiple chained converters can be used together to cover a more complex conversion with more than one intermediate object.
+    /// Multiple chained converters can be used together to cover a more complex conversion with more than one
+    /// intermediate object.
     /// </para>
     /// </summary>
-    /// <typeparam name="T">The type of the source object to be converted. </typeparam>
-    /// <typeparam name="TIntermediate">The type of an intermediate object to convert the source object to. </typeparam>
-    /// <typeparam name="TResult">The resulting type of the conversion, produced by converting the intermediate object. </typeparam>
+    /// <typeparam name="T">
+    /// The type of the source object to be converted.
+    /// </typeparam>
+    /// <typeparam name="TIntermediate">
+    /// The type of an intermediate object to convert the source object to.
+    /// </typeparam>
+    /// <typeparam name="TResult">
+    /// The resulting type of the conversion, produced by converting the intermediate object.
+    /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
@@ -23,7 +31,9 @@ namespace Axle.Conversion
         private readonly IConverter<T, TIntermediate> _converter1;
         private readonly IConverter<TIntermediate, TResult> _converter2;
 
-        internal ChainedConverter(IConverter<T, TIntermediate> converter1, IConverter<TIntermediate, TResult> converter2)
+        internal ChainedConverter(
+            IConverter<T, TIntermediate> converter1, 
+            IConverter<TIntermediate, TResult> converter2)
         {
             _converter1 = Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1))).Value;
             _converter2 = Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2))).Value;
@@ -39,7 +49,8 @@ namespace Axle.Conversion
     public static class ChainedConverter
     {
         /// <summary>
-        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/> implementation.
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/>
+        /// implementation.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the source object to be converted
@@ -59,12 +70,15 @@ namespace Axle.Conversion
         /// <returns>
         /// Series of converters interfaced as a single <see cref="IConverter{T,TResult}"/> implementation
         /// </returns>
-        public static IConverter<T, TResult> Create<T, T1, TResult>(IConverter<T, T1> converter1, IConverter<T1, TResult> converter2)
+        public static IConverter<T, TResult> Create<T, T1, TResult>(
+            IConverter<T, T1> converter1, 
+            IConverter<T1, TResult> converter2)
         {
             return new ChainedConverter<T, T1, TResult>(converter1, converter2);
         }
         /// <summary>
-        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/> implementation.
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/>
+        /// implementation.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the source object to be converted
@@ -90,12 +104,16 @@ namespace Axle.Conversion
         /// <returns>
         /// Series of converters interfaced as a single <see cref="IConverter{T,TResult}"/> implementation
         /// </returns>
-        public static IConverter<T, TResult> Create<T, T1, T2, TResult>(IConverter<T, T1> converter1, IConverter<T1, T2> converter2, IConverter<T2, TResult> converter3)
+        public static IConverter<T, TResult> Create<T, T1, T2, TResult>(
+            IConverter<T, T1> converter1, 
+            IConverter<T1, T2> converter2, 
+            IConverter<T2, TResult> converter3)
         {
             return Create(Create(converter1, converter2), converter3);
         }
         /// <summary>
-        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/> implementation.
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="IConverter{T,TResult}"/>
+        /// implementation.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the source object to be converted

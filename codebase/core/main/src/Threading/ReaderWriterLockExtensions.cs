@@ -24,7 +24,8 @@ namespace Axle.Threading
             /// The function to be executed inside a read lock.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="T"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="T"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static T Read<T>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -62,7 +63,8 @@ namespace Axle.Threading
             /// The parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -106,7 +108,8 @@ namespace Axle.Threading
             /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T1, T2, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -156,7 +159,8 @@ namespace Axle.Threading
             /// The third parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T1, T2, T3, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -212,7 +216,8 @@ namespace Axle.Threading
             /// The fourth parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T1, T2, T3, T4, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -234,7 +239,8 @@ namespace Axle.Threading
 
             #region Write(...)
             /// <summary>
-            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write lock.
+            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write
+            /// lock.
             /// </summary>
             /// <param name="lock">
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
@@ -260,7 +266,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write lock.
+            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write
+            /// lock.
             /// </summary>
             /// <typeparam name="T">
             /// The type of the sole parameter to the <paramref name="action"/> delegate.
@@ -292,7 +299,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write lock.
+            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write
+            /// lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="action"/> delegate.
@@ -330,7 +338,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write lock.
+            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write
+            /// lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="action"/> delegate.
@@ -374,7 +383,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write lock.
+            /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write
+            /// lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="action"/> delegate.
@@ -436,7 +446,8 @@ namespace Axle.Threading
             /// The function to be executed inside a write lock.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="T"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="T"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static T Write<T>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -474,7 +485,8 @@ namespace Axle.Threading
             /// The parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -518,7 +530,8 @@ namespace Axle.Threading
             /// The second parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T1, T2, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -568,7 +581,8 @@ namespace Axle.Threading
             /// The third parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T1, T2, T3, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -624,7 +638,8 @@ namespace Axle.Threading
             /// The fourth parameter to pass to the <paramref name="func"/> delegate upon invocation.
             /// </param>
             /// <returns>
-            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the <paramref name="func"/> parameter delegate.
+            /// The result (of type <typeparamref name="TResult"/>) from the execution of the provided by the
+            /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T1, T2, T3, T4, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -646,7 +661,8 @@ namespace Axle.Threading
 
             #region TryRead(...)
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// read lock.
             /// </summary>
             /// <typeparam name="T">
             /// The return type of the <paramref name="func"/> delegate.
@@ -655,7 +671,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -689,7 +706,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// read lock.
             /// </summary>
             /// <typeparam name="T">
             /// The type of the sole parameter to the <paramref name="func"/> delegate.
@@ -701,7 +719,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -715,7 +734,12 @@ namespace Axle.Threading
             /// <returns>
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
-            public static bool TryRead<T, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T, TResult> func, T arg, out TResult result)
+            public static bool TryRead<T, TResult>(
+                    this IReadWriteLock @lock, 
+                    int millisecondsTimeout, 
+                    Func<T, TResult> func, 
+                    T arg, 
+                    out TResult result)
             {
                 if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
@@ -734,7 +758,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// read lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="func"/> delegate.
@@ -749,7 +774,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -766,7 +792,13 @@ namespace Axle.Threading
             /// <returns>
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
-            public static bool TryRead<T1, T2, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T1, T2, TResult> func, T1 arg1, T2 arg2, out TResult result)
+            public static bool TryRead<T1, T2, TResult>(
+                    this IReadWriteLock @lock, 
+                    int millisecondsTimeout, 
+                    Func<T1, T2, TResult> func, 
+                    T1 arg1, 
+                    T2 arg2, 
+                    out TResult result)
             {
                 if (!@lock.TryEnterReadLock(millisecondsTimeout))
                 {
@@ -785,7 +817,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// read lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="func"/> delegate.
@@ -803,7 +836,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -849,7 +883,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a read lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// read lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="func"/> delegate.
@@ -870,7 +905,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -922,7 +958,8 @@ namespace Axle.Threading
 
             #region TryWrite(...)
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// write lock.
             /// </summary>
             /// <typeparam name="T">
             /// The return type of the <paramref name="func"/> delegate.
@@ -931,7 +968,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -965,7 +1003,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// write lock.
             /// </summary>
             /// <typeparam name="T">
             /// The type of the sole parameter to the <paramref name="func"/> delegate.
@@ -977,7 +1016,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -991,7 +1031,12 @@ namespace Axle.Threading
             /// <returns>
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
-            public static bool TryWrite<T, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T, TResult> func, T arg, out TResult result)
+            public static bool TryWrite<T, TResult>(
+                    this IReadWriteLock @lock, 
+                    int millisecondsTimeout, 
+                    Func<T, TResult> func, 
+                    T arg, 
+                    out TResult result)
             {
                 if (!@lock.TryEnterWriteLock(millisecondsTimeout))
                 {
@@ -1010,7 +1055,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// write lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="func"/> delegate.
@@ -1025,7 +1071,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -1042,7 +1089,13 @@ namespace Axle.Threading
             /// <returns>
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
-            public static bool TryWrite<T1, T2, TResult>(this IReadWriteLock @lock, int millisecondsTimeout, Func<T1, T2, TResult> func, T1 arg1, T2 arg2, out TResult result)
+            public static bool TryWrite<T1, T2, TResult>(
+                    this IReadWriteLock @lock, 
+                    int millisecondsTimeout, 
+                    Func<T1, T2, TResult> func, 
+                    T1 arg1, 
+                    T2 arg2, 
+                    out TResult result)
             {
                 if (!@lock.TryEnterWriteLock(millisecondsTimeout))
                 {
@@ -1061,7 +1114,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// write lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="func"/> delegate.
@@ -1079,7 +1133,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -1125,7 +1180,8 @@ namespace Axle.Threading
             }
 
             /// <summary>
-            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a write lock.
+            /// Attempts to execute the code provided by the <paramref name="func"/> parameter within the confines of a
+            /// write lock.
             /// </summary>
             /// <typeparam name="T1">
             /// The type of the first parameter to the <paramref name="func"/> delegate.
@@ -1146,7 +1202,8 @@ namespace Axle.Threading
             /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
-            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c> (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
+            /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
+            /// (<see cref="System.Threading.Timeout.Infinite"/>) to wait indefinitely.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -1233,14 +1290,16 @@ namespace Axle.Threading
             #endregion
 
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is needed.
-            /// The need for a lock is determined by first executing <paramref name="isLockNeeded"/> function.
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// needed. The necessity for a lock is determined by first executing <paramref name="isLockNeeded"/>
+            /// function.
             /// </summary>
             /// <param name="lock">
             /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
             /// </param>
             /// <param name="isLockNeeded">
-            /// A <see cref="Func{TResult}"/> returning <see cref="bool"/> that is used to determine if a write lock is needed.
+            /// A <see cref="Func{TResult}"/> returning <see cref="bool"/> that is used to determine if a write lock is
+            /// needed.
             /// </param>
             /// <param name="workAction">
             /// An <see cref="Action"/> delegate that will perform an operation within the confines of a write lock.
@@ -1272,10 +1331,10 @@ namespace Axle.Threading
                 }
             }
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is needed.
-            /// The need for a lock is determined by first executing <paramref name="readFunc"/> function within the confines
-            /// of a read lock in an attempt to obtain a result, and then validating that result against a
-            /// <paramref name="isLockNeeded"/> function outside of a lock.
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// needed. The necessity for a lock is determined by first executing <paramref name="readFunc"/> function
+            /// within the confines of a read lock in an attempt to obtain a result, and then validating that result
+            /// against a <paramref name="isLockNeeded"/> function outside of a lock.
             /// </summary>
             /// <typeparam name="T">
             /// The type of result to eventually be produced within the confines of a write lock.
@@ -1287,14 +1346,16 @@ namespace Axle.Threading
             /// A <see cref="Func{T}"/> that is used to return the result without entering a write lock.
             /// </param>
             /// <param name="isLockNeeded">
-            /// A <see cref="Func{T, TResult}"/> returning <see cref="bool"/> that is used to determine if a write lock is needed.
+            /// A <see cref="Func{T, TResult}"/> returning <see cref="bool"/> that is used to determine if a write lock
+            /// is needed.
             /// </param>
             /// <param name="workFunc">
             /// A <see cref="Func{T}"/> delegate that will produce the result while a write lock is being held.
             /// This function is not called in case <paramref name="isLockNeeded"/> returns <c>true</c>.
             /// </param>
             /// <returns>
-            /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result, depending on whether a lock was required.
+            /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result,
+            /// depending on whether a lock was required.
             /// </returns>
             public static T Invoke<T>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -1325,9 +1386,10 @@ namespace Axle.Threading
                 }
             }
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is needed.
-            /// The need for a lock is determined by executing <paramref name="readFunc"/> operation within the confines
-            /// of a read lock.
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// needed.
+            /// The necessity for a lock is determined by executing <paramref name="readFunc"/> operation within the
+            /// confines of a read lock.
             /// </summary>
             /// <typeparam name="T">
             /// The type of result to eventually be produced within the confines of a write lock.
@@ -1336,14 +1398,16 @@ namespace Axle.Threading
             /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
             /// </param>
             /// <param name="readFunc">
-            /// A <see cref="Attempt{T}"/> that is used to determine whether the result can be obtained without issuing a write lock.
+            /// A <see cref="Attempt{T}"/> that is used to determine whether the result can be obtained without issuing
+            /// a write lock.
             /// </param>
             /// <param name="workFunc">
             /// A <see cref="Func{T}"/> delegate that will produce the result while a write lock is being held.
             /// This function is not called in case <paramref name="readFunc"/> returns <c>true</c>.
             /// </param>
             /// <returns>
-            /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result, depending on whether a lock was required.
+            /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result,
+            /// depending on whether a lock was required.
             /// </returns>
             public static T Invoke<T>(
                 #if NETSTANDARD || NET35_OR_NEWER
@@ -1373,9 +1437,9 @@ namespace Axle.Threading
                 return result;
             }
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is needed.
-            /// The need for a lock is determined by executing <paramref name="readFunc"/> operation within the confines
-            /// of a read lock.
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// needed. The necessity for a lock is determined by executing <paramref name="readFunc"/> operation within
+            /// the confines of a read lock.
             /// </summary>
             /// <typeparam name="T">
             /// The type of argument to pass to the read and work functions.
@@ -1387,17 +1451,20 @@ namespace Axle.Threading
             /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
             /// </param>
             /// <param name="arg">
-            /// The argument for the <paramref name="readFunc"/> operation and the <paramref name="workFunc"/> operation.
+            /// The argument for the <paramref name="readFunc"/> operation and the <paramref name="workFunc"/>
+            /// operation.
             /// </param>
             /// <param name="readFunc">
-            /// A <see cref="Attempt{T, TResult}"/> that is used to determine whether the result can be obtained without issuing a write lock.
+            /// A <see cref="Attempt{T, TResult}"/> that is used to determine whether the result can be obtained without
+            /// issuing a write lock.
             /// </param>
             /// <param name="workFunc">
             /// A <see cref="Func{T,TResult}"/> delegate that will produce the result while a write lock is being held.
             /// This function is not called in case <paramref name="readFunc"/> returns <c>true</c>.
             /// </param>
             /// <returns>
-            /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result, depending on whether a lock was required.
+            /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result,
+            /// depending on whether a lock was required.
             /// </returns>
             public static TResult Invoke<T, TResult>(
                 #if NETSTANDARD || NET35_OR_NEWER

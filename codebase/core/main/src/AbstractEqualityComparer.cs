@@ -123,13 +123,15 @@ namespace Axle
         }
 
         /// <summary>
-        /// Determines whether the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />.
+        /// Determines whether the specified <see cref="T:System.Object" /> is equal to the current
+        /// <see cref="T:System.Object" />.
         /// </summary>
         /// <param name="obj">
         /// The object to compare with the current object.
         /// </param>
         /// <returns>
-        /// <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current <see cref="T:System.Object" />; otherwise, <c>false</c>.
+        /// <c>true</c> if the specified <see cref="T:System.Object" /> is equal to the current
+        /// <see cref="T:System.Object" />; otherwise, <c>false</c>.
         /// </returns>
         // ReSharper disable BaseObjectEqualsIsObjectEquals
         public override bool Equals(object obj) => base.Equals(obj);

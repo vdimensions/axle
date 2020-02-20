@@ -15,7 +15,7 @@ namespace Axle.Conversion.Parsing
         /// <inheritdoc />
         protected override Version DoParse(string value, IFormatProvider formatProvider)
         {
-            // TOOD: Specify version format provider
+            // TODO: Specify version format provider
 
             return new Version(value);
         }

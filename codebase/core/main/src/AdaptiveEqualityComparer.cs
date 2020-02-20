@@ -11,7 +11,7 @@ namespace Axle
     /// An implementation of the <see cref="IEqualityComparer{T1}"/> interface, that can compare instances of 
     /// <typeparamref name="T1"/>. The comparer works by delegating the comparison logic to another 
     /// <see cref="IEqualityComparer{T2}"/> implementation that can handle instances of <typeparamref name="T2"/>. 
-    /// The delegation is aided by invoking a user-defined adaptation function which maps the souce 
+    /// The delegation is aided by invoking a user-defined adaptation function which maps the source 
     /// comparable object (of type <typeparamref name="T1"/>) to an instance of the <typeparamref name="T2"/>
     /// type, before passing it to the other comparer.
     /// </summary>

@@ -43,7 +43,9 @@ namespace Axle
         /// <param name="update">
         /// A function that updates the underlying signal reference. Used for the signal's internal processing. 
         /// </param>
-        public static Signal<T1, T2> Create<T1, T2>(Func<Action<T1, T2>> dereference, Func<Action<T1, T2>, Action<T1, T2>> update)
+        public static Signal<T1, T2> Create<T1, T2>(
+            Func<Action<T1, T2>> dereference, 
+            Func<Action<T1, T2>, Action<T1, T2>> update)
         {
             return new Signal<T1, T2>(dereference, update);
         }

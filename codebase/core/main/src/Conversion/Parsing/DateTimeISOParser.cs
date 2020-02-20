@@ -14,12 +14,11 @@ namespace Axle.Conversion.Parsing
         /// <inheritdoc />
         protected override DateTime DoParse(string value, IFormatProvider formatProvider)
         {
-            var dtoParser = new DateTimeOffsetParser();
-            var dateOffset = dtoParser.ParseExact(
+            var dateOffset = new DateTimeOffsetParser().ParseExact(
                 value,
                 "yyyy-MM-dd'T'HH:mm:ss.FFFK",
                 formatProvider);
-            DateTime dt = dateOffset.DateTime.AddMilliseconds(dateOffset.Offset.TotalMilliseconds);
+            var dt = dateOffset.DateTime.AddMilliseconds(dateOffset.Offset.TotalMilliseconds);
             return dt;
         }
     }

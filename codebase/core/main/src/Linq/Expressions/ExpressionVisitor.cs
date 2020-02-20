@@ -9,6 +9,10 @@ using System.Linq.Expressions;
 
 namespace Axle.Linq.Expressions
 {
+    /// <summary>
+    /// An abstract class to serve as a base for custom implementations of an expression visitor.
+    /// An expression visitor is a visitor or rewriter for expression trees. 
+    /// </summary>
     #if NETSTANDARD || NET40_OR_NEWER
     public abstract class AbstractExpressionVisitor : ExpressionVisitor { }
     #else

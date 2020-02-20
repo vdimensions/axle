@@ -2,7 +2,8 @@
 namespace Axle.References
 {
     /// <summary>
-    /// An interface representing a reference to ambient data, that is local to a given asynchronous control flow, such as asynchronous method. 
+    /// An interface representing a reference to ambient data, that is local to a given asynchronous control flow, such
+    /// as asynchronous method. 
     /// </summary>
     /// <typeparam name="T">
     /// The type of the value.

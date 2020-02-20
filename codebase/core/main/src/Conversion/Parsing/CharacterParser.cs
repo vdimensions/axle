@@ -14,7 +14,7 @@ namespace Axle.Conversion.Parsing
     {
         /// <inheritdoc />
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
-        protected override char DoParse(string value, IFormatProvider formatProvider) { return char.Parse(value); }
+        protected override char DoParse(string value, IFormatProvider formatProvider) => char.Parse(value);
         #elif NETSTANDARD1_0_OR_NEWER
         protected override char DoParse(string value, IFormatProvider formatProvider)
         {
@@ -45,6 +45,7 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out char output) => char.TryParse(value, out output);
+        public override bool TryParse(string value, IFormatProvider formatProvider, out char output) 
+            => char.TryParse(value, out output);
     }
 }

@@ -76,7 +76,8 @@ namespace Axle.IO.Extensions.Stream
             Stream stream) => TemporaryStreamDump.Dump(stream, true);
 
         /// <summary>
-        /// Writes the contents of the target <paramref name="stream"/> to a temporary file in the given <paramref name="location"/>.
+        /// Writes the contents of the target <paramref name="stream"/> to a temporary file in the given
+        /// <paramref name="location"/>.
         /// </summary>
         /// <param name="stream">
         /// The stream object to dump.
@@ -97,8 +98,8 @@ namespace Axle.IO.Extensions.Stream
         #endif
 
         /// <summary>
-        /// Sets the position of the target <paramref name="stream"/> to its start. The call is equivalent to the following code:
-        /// <code>stream.Seek(0, SeekOrigin.Begin)</code>
+        /// Sets the position of the target <paramref name="stream"/> to its start. The call is equivalent to the
+        /// following code: <code>stream.Seek(0, SeekOrigin.Begin)</code>
         /// </summary>
         /// <param name="stream">
         /// The target stream to set position to. 
@@ -131,8 +132,8 @@ namespace Axle.IO.Extensions.Stream
         }
 
         /// <summary>
-        /// Sets the position of the target <paramref name="stream"/> to its end. The call is equivalent to the following code:
-        /// <code>stream.Seek(0, SeekOrigin.End)</code>
+        /// Sets the position of the target <paramref name="stream"/> to its end. The call is equivalent to the
+        /// following code: <code>stream.Seek(0, SeekOrigin.End)</code>
         /// </summary>
         /// <param name="stream">
         /// The target stream to set position to. 

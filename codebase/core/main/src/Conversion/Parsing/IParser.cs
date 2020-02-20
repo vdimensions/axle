@@ -8,9 +8,10 @@ namespace Axle.Conversion.Parsing
     /// representation of a given type to an instance of that type.
     /// </summary>
     /// <remarks>
-    /// This interface is not intended for direct implementation. Its purpose is to allow a <see cref="IParser{T}">generic parser</see> instance
-    /// to be used in code where the generic type parameter cannot be inferred or supplied. Therefore, it is assumed that implementations of this
-    /// interface also implement the <see cref="IParser{T}">generic parser</see> interface.
+    /// This interface is not intended for direct implementation. Its purpose is to allow a
+    /// <see cref="IParser{T}">generic parser</see> instance to be used in code where the generic type parameter cannot
+    /// be inferred or supplied. Therefore, it is assumed that implementations of this interface also implement the
+    /// <see cref="IParser{T}">generic parser</see> interface.
     /// </remarks>
     /// <seealso cref="IParser{T}"/>
     public interface IParser
@@ -22,7 +23,8 @@ namespace Axle.Conversion.Parsing
         /// The <see cref="string">string</see> value to be parsed.
         /// </param>
         /// <param name="formatProvider">
-        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition.
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
         /// </param>
         /// <returns>
         /// An instance created by the <see cref="IParser{T}">generic parser</see> implementation behind this interface.
@@ -51,12 +53,15 @@ namespace Axle.Conversion.Parsing
         /// <param name="value">
         /// A <see cref="string">string</see> containing the value to convert.
         /// </param>
-        /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format recognition.</param>
+        /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format
+        /// recognition.</param>
         /// <param name="result">
-        /// When this method returns, <paramref name="result"/> contains the parsed value created by the <see cref="IParser{T}">generic parser</see> implementation behind this interface,
-        /// (see remarks in the <see cref="IParser"/> interface for more info) that is the equivalent to
-        /// the string passed in <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// When this method returns, <paramref name="result"/> contains the parsed value created by the
+        /// <see cref="IParser{T}">generic parser</see> implementation behind this interface, (see remarks in the
+        /// <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in
+        /// <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
@@ -73,10 +78,12 @@ namespace Axle.Conversion.Parsing
         /// A string containing the value to convert.
         /// </param>
         /// <param name="result">
-        /// When this method returns, <paramref name="result"/> contains the parsed value created by the <see cref="IParser{T}">generic parser</see> implementation behind this interface,
-        /// (see remarks in the <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in <paramref name="value" />,
-        /// if the conversion succeeded, or <c>null</c> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// When this method returns, <paramref name="result"/> contains the parsed value created by the
+        /// <see cref="IParser{T}">generic parser</see> implementation behind this interface, (see remarks in the
+        /// <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in
+        /// <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
@@ -107,7 +114,8 @@ namespace Axle.Conversion.Parsing
         /// The <see cref="string">string</see> value to be parsed.
         /// </param>
         /// <param name="formatProvider">
-        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition.
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
         /// </param>
         /// <returns>
         /// An instance of <typeparamref name="T" /> that is the result of parsing <paramref name="value"/>.
@@ -134,13 +142,15 @@ namespace Axle.Conversion.Parsing
         /// A <see cref="string">string</see> containing the value to convert.
         /// </param>
         /// <param name="formatProvider">
-        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific format recognition.
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
         /// </param>
         /// <param name="output">
-        /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent to
-        /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
+        /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent
+        /// to the string passed in <paramref name="value" />, if the conversion succeeded, or the default
         /// value for <typeparamref name="T"/> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
@@ -156,10 +166,11 @@ namespace Axle.Conversion.Parsing
         /// A <see cref="string">string</see> containing the value to convert.
         /// </param>
         /// <param name="output">
-        /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent to
-        /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
-        /// value for <typeparamref name="T"/> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent
+        /// to the string passed in <paramref name="value" />, if the conversion succeeded, or the default value for
+        /// <typeparamref name="T"/> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>

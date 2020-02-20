@@ -20,7 +20,7 @@ namespace Axle.Conversion.Parsing
 
         bool IParser.TryParse(string value, IFormatProvider formatProvider, out object result)
         {
-            if (TryParse(value, formatProvider, out T genericResult))
+            if (TryParse(value, formatProvider, out var genericResult))
             {
                 result = genericResult;
                 return true;

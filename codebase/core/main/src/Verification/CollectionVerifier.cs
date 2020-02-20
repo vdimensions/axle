@@ -17,8 +17,8 @@ namespace Axle.Verification
         /// Ensures the specified argument is not an empty collection.
         /// </summary>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="message">
         /// An optional error message to be passed to the exception in case the given argument is an empty collection.
@@ -44,8 +44,8 @@ namespace Axle.Verification
         /// Ensures the specified argument is not an empty collection.
         /// </summary>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the argument being verified.

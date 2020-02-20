@@ -16,7 +16,8 @@ namespace Axle.References
         new T Value { get; set; }
 
         /// <summary>
-        /// Gets a value that indicates whether a <see cref="IReference{T}.Value"/> has been initialized for the current thread.
+        /// Gets a value that indicates whether a <see cref="IReference{T}.Value"/> has been initialized for the current
+        /// thread.
         /// </summary>
         bool HasValue { get; }
     }

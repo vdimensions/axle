@@ -200,7 +200,8 @@ namespace Axle.Threading
         /// <exception cref="ObjectDisposedException">
         /// The current <see cref="ReadWriteLock"/> instance has been disposed.
         /// </exception>
-        public bool TryEnterUpgradeableReadLock(int millisecondsTimeout) => _innerLock.TryEnterUpgradeableReadLock(millisecondsTimeout);
+        public bool TryEnterUpgradeableReadLock(int millisecondsTimeout) => 
+            _innerLock.TryEnterUpgradeableReadLock(millisecondsTimeout);
         /// <inheritdoc />
         /// <exception cref="System.Threading.LockRecursionException">
         /// <para>

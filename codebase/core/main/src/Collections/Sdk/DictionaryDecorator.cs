@@ -87,7 +87,7 @@ namespace Axle.Collections.Sdk
         /// Removes the first occurence of the specified <paramref name="item"/> of the collection.
         /// </summary>
         /// <param name="item">
-        /// The elemet to remove from the collection.
+        /// The element to remove from the collection.
         /// </param>
         /// <returns>
         /// <c>true</c> if an item was removed from the collection; <c>false</c> otherwise.

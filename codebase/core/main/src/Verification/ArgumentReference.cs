@@ -59,8 +59,8 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by
-        /// the <paramref name="expectedType"/> parameter.
+        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the
+        /// type specified by the <paramref name="expectedType"/> parameter.
         /// </summary>
         /// <param name="expectedType">
         /// The expected type for the argument represented by the current <see cref="ArgumentReference{T}"/> instance.
@@ -78,8 +78,8 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the type specified by
-        /// the <typeparamref name="TExpected"/> generic parameter.
+        /// Determines whether the argument represented by this <see cref="ArgumentReference{T}"/> instance is of the
+        /// type specified by the <typeparamref name="TExpected"/> generic parameter.
         /// </summary>
         /// <typeparam name="TExpected">
         /// The expected type for the argument represented by the current <see cref="ArgumentReference{T}"/> instance.

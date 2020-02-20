@@ -6,8 +6,8 @@ using Axle.Verification;
 namespace Axle.References
 {
     /// <summary>
-    /// A stator is a special type of a decorator around a <see langword="class"/>, which allows
-    /// for exposing the class functionality without referring to the actual implementation type.
+    /// A stator is a special type of a decorator around a <see langword="class"/>, which allows for exposing the class
+    /// functionality without referring to the actual implementation type.
     /// The actual implementation type could be provided from an external source (such as dependency
     /// injection container) when available.
     /// </summary>

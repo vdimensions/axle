@@ -25,14 +25,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is a non-empty string.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is a non-empty string.
         /// </summary>
         /// <param name="argument">
         /// The argument that is being verified.
         /// </param>
         /// <param name="message">
-        /// An optional exception message to be used for the generated exception in case the argument is an empty string.
+        /// An optional exception message to be used for the generated exception in case the argument is an empty
+        /// string.
         /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
@@ -48,8 +49,8 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is a non-empty string.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is a non-empty string.
         /// </summary>
         /// <param name="argument">
         /// The argument that is being verified.
@@ -65,8 +66,8 @@ namespace Axle.Verification
             ArgumentReference<string> argument) => IsNotEmpty(argument, null);
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is not <c>null</c> or an empty string.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is not <c>null</c> or an empty string.
         /// </summary>
         /// <param name="argument">
         /// The argument that is being verified.
@@ -82,8 +83,8 @@ namespace Axle.Verification
             ArgumentReference<string> argument) => IsNotEmpty(Verifier.IsNotNull(argument));
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is not <c>null</c> or an empty string.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is not <c>null</c> or an empty string.
         /// </summary>
         /// <param name="argument">
         /// The argument that is being verified.
@@ -92,7 +93,8 @@ namespace Axle.Verification
         /// An optional exception message to be used for the generated exception in case the argument is <c>null</c>.
         /// </param>
         /// <param name="emptyMessage">
-        /// An optional exception message to be used for the generated exception in case the argument is an empty string.
+        /// An optional exception message to be used for the generated exception in case the argument is an empty
+        /// string.
         /// </param>
         /// <returns>
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.

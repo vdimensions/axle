@@ -4,8 +4,8 @@
 namespace Axle.Conversion.Parsing
 {
     /// <summary>
-    /// An interface for a strict parser; that is, a parser which may use additional format specifications for a raw string value
-    /// in order to parse it into an object instance.
+    /// An interface for a strict parser; that is, a parser which may use additional format specifications for a raw
+    /// string value in order to parse it into an object instance.
     /// </summary>
     /// <seealso cref="IParser" />
     public interface IStrictParser : IParser
@@ -47,8 +47,9 @@ namespace Axle.Conversion.Parsing
         /// </param>
         /// <param name="result">
         /// When this method returns, <paramref name="result"/> contains the parsed object value equivalent to
-        /// the string passed in <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// the string passed in <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the
+        /// conversion has failed. The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is
+        /// not of the correct format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
@@ -99,10 +100,11 @@ namespace Axle.Conversion.Parsing
         /// culture-specific format recognition.
         /// </param>
         /// <param name="result">
-        /// When this method returns, <paramref name="result"/> contains the <typeparamref name="T"/> value equivalent to
-        /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
-        /// value for <typeparamref name="T"/> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct format.
+        /// When this method returns, <paramref name="result"/> contains the <typeparamref name="T"/> value equivalent
+        /// to the string passed in <paramref name="value" />, if the conversion succeeded, or the default value for
+        /// <typeparamref name="T"/> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>

@@ -38,7 +38,8 @@ namespace Axle.Threading.Extensions.AggregateException
             return result;
         }
 
-        public static IEnumerable<Exception> Resolve(this AggregateException e) => Resolve(e, new LinkedList<Exception>());
+        public static IEnumerable<Exception> Resolve(this AggregateException e) 
+            => Resolve(e, new LinkedList<Exception>());
 
         public static Exception ResolveFirst(this AggregateException e)
         {
