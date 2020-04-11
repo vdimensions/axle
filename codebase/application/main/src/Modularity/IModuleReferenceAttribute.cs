@@ -2,9 +2,9 @@
 
 namespace Axle.Modularity
 {
-    internal interface IUsesAttribute
+    internal interface IModuleReferenceAttribute
     {
         Type ModuleType { get; }
-        bool Required { get; }
+        bool Mandatory { get; }
     }
 }

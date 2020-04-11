@@ -18,7 +18,7 @@ namespace Axle.Modularity
             IEnumerable<ModuleCallback> terminateCallbacks, 
             ModuleMethod terminateMethod, 
             ModuleEntryMethod entryPointMethod,
-            IUsesAttribute[] utilizedModules,
+            IModuleReferenceAttribute[] utilizedModules,
             ReportsToAttribute[] reportsToModules,
             ModuleCommandLineTriggerAttribute commandLineTrigger, 
             ModuleConfigSectionAttribute configSectionInfo, 
@@ -59,7 +59,7 @@ namespace Axle.Modularity
         public Assembly Assembly => Type.Assembly;
         #endif
 
-        public IUsesAttribute[] UtilizedModules { get; }
+        public IModuleReferenceAttribute[] UtilizedModules { get; }
 
         public ReportsToAttribute[] ReportsToModules { get; }
 
