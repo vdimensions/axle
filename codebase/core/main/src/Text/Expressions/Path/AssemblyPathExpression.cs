@@ -26,7 +26,7 @@ namespace Axle.Text.Expressions.Path
             {@" ", @"_"}
         };
 
-        private const string SingleAsterisGlobkWinRegex = @"(?<=[\.]{0,1})(?:[^\.]+)(?=[\.]{0,1})";
+        private const string SingleAsteriskGlobWinRegex = @"(?<=[\.]{0,1})(?:[^\.]+)(?=[\.]{0,1})";
         private const string DoubleAsteriskGlobRegex = @"(?:.{0,})";
 
         private static Regex CreateRegex(string pattern, RegexOptions options)
@@ -38,7 +38,7 @@ namespace Axle.Text.Expressions.Path
 
             var res = Enumerable.Aggregate(Replacements, EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
             //options |= RegexOptions.IgnoreCase;
-            res = res.Replace("**", DoubleAsteriskGlobRegex).Replace("*", SingleAsterisGlobkWinRegex);
+            res = res.Replace("**", DoubleAsteriskGlobRegex).Replace("*", SingleAsteriskGlobWinRegex);
             return new Regex(res, options);
         }
 

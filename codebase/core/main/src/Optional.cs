@@ -14,31 +14,31 @@ namespace Axle
     /// A static class that aids the functionality of <see cref="Optional{T}"/> instances.
     /// </summary>
     /// <seealso cref="Optional{T}"/>
-    [Obsolete()]
+    [Obsolete]
     public static class Optional
     {
-        [Obsolete()]
+        [Obsolete]
         public static Optional<T> Create<T>() { return Optional<T>.Undefined; }
 
-        [Obsolete()]
+        [Obsolete]
         public static Optional<T> From<T>(T value)
         {
             return value == null ? Optional<T>.Undefined : new Optional<T>(value);
         }
 
-        [Obsolete()]
+        [Obsolete]
         public static Optional<T> From<T>(T? value) where T : struct
         {
             return value.HasValue ? new Optional<T>(value.Value) : Optional<T>.Undefined;
         }
 
-        [Obsolete()]
+        [Obsolete]
         public static Optional<T> Unwrap<T>(Optional<T?> value) where T : struct
         {
             return value.HasValue ? From(value.Value) : Optional<T>.Undefined;
         }
 
-        [Obsolete()]
+        [Obsolete]
         public static IEnumerable<T> FilterPresent<T>(this IEnumerable<Optional<T>> collection)
         {
             return Enumerable.Select(
@@ -48,12 +48,12 @@ namespace Axle
                 x => x.Value);
         }
 
-        [Obsolete()]
+        [Obsolete]
         public static Optional<TResult> Next<T, TResult>(this Optional<T> arg, Func<T, TResult> map)
         {
             return arg ? Optional.From(map(arg.Value)) : Optional.Create<TResult>();
         }
-        [Obsolete()]
+        [Obsolete]
         public static Optional<TResult> Next<T, TResult>(this Optional<T> arg, Func<T, Optional<TResult>> map)
         {
             return arg ? map(arg.Value) : Optional.Create<TResult>();

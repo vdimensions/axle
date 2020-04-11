@@ -16,6 +16,7 @@ namespace Axle.Text.Expressions.Path
     #endif
     public abstract class AbstractPathExpression : IPathExpression
     {
+        /// The <see cref="RegExOptions"/> to use for the underlying <see cref="Regex"/> instance.
         protected const RegexOptions RegExOptions = RegexOptions.CultureInvariant;
         //private const string EscapedRegexTerminals = @"\!:?.&=-+%[](){}^$";
         private const string EscapedRegexTerminals = @"\!:?.&=%^$";
