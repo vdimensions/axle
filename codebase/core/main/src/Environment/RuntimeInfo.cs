@@ -38,7 +38,7 @@ namespace Axle.Environment
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Version _frameworkVersion;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly RuntimeImplementation _impl = RuntimeImplementation.Unknown;
+        private readonly RuntimeImplementation _impl;
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         internal RuntimeInfo()

@@ -31,7 +31,7 @@ namespace Axle.Modularity
             var substExpr = new StandardSubstitutionExpression();
             IConfiguration globalAppConfig = new SubstitutionResolvingConfig(config.LoadConfiguration(), substExpr);
 
-            rootDependencyContainer.RegisterInstance(globalAppConfig);
+            rootDependencyContainer.Export(globalAppConfig);
 
             // TODO: strip ranked modules from non-activated
             
@@ -55,12 +55,21 @@ namespace Axle.Modularity
                         var moduleLogger = host.LoggingService.CreateLogger(moduleType);
                         var moduleContainer = host.DependencyContainerFactory.CreateContainer(rootDependencyContainer);
                         moduleInitializationContainer
-                            .RegisterType(moduleType)          // register the module type to be instantiated via DI
-                            .RegisterInstance(moduleInfo)      // register moduleInfo so that a module can reflect on itself
-                            .RegisterInstance(moduleLogger)    // register the module's dedicated logger
-                            .RegisterInstance(moduleContainer);// register the module's dedicated DI container
-                            //TODO: remove
-                            //.RegisterInstance(rootExporter);   // register the global dependencies exporter
+                            // Register the module type to be instantiated via DI
+                            .RegisterType(moduleType);
+                        moduleInitializationContainer
+                            // Register moduleInfo so that a module can reflect on itself
+                            .Export(moduleInfo)
+                            // Register the module's dedicated logger
+                            .Export(moduleLogger)
+                            // Register the module's dedicated DI container.
+                            // The `AsDependencyContext` ensures that the context will not be in conflict
+                            // with the exporter defined below.
+                            .Export(moduleContainer.AsDependencyContext())
+                            // Register the root container as dependency exporter.
+                            // The `AsDependencyExporter` ensures that the exporter will not be in conflict
+                            // with the context defined above.
+                            .Export(rootDependencyContainer.AsDependencyExporter());    
 
                         //
                         // Make all required modules injectable
@@ -69,7 +78,7 @@ namespace Axle.Modularity
                         {
                             if (modules.TryGetValue(requiredModules[k].Type, out var rmm))
                             {
-                                moduleInitializationContainer.RegisterInstance(rmm.ModuleInstance);
+                                moduleInitializationContainer.Export(rmm.ModuleInstance);
                             }
                         }
 
@@ -81,7 +90,7 @@ namespace Axle.Modularity
                             new SubstitutionResolvingConfig(
                                 baseModuleConfig.LoadConfiguration(),
                                 substExpr);
-                        moduleInitializationContainer.RegisterInstance(moduleConfig);
+                        moduleInitializationContainer.Export(moduleConfig);
 
                         if (moduleInfo.ConfigSectionInfo != null)
                         {   //
@@ -92,7 +101,7 @@ namespace Axle.Modularity
                             var moduleConfigSection = ConfigSectionExtensions.GetSection(moduleConfig, csi.Name, csi.Type);
                             if (moduleConfigSection != null)
                             {
-                                moduleInitializationContainer.RegisterInstance(moduleConfigSection);
+                                moduleInitializationContainer.Export(moduleConfigSection);
                             }
                         }
 
@@ -133,7 +142,7 @@ namespace Axle.Modularity
                                 disposable.Dispose();
                             }
 
-                            // TODO: throw proper exception
+                            // TODO: throw better exception
                             throw;
                         }
                     }

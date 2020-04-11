@@ -22,7 +22,7 @@ namespace Axle
             string[] args)
         {
             _host = host;
-            _rootDependencyContainer = rootDependencyContainer.RegisterInstance(this);
+            (_rootDependencyContainer = rootDependencyContainer).Export(this);
             _modularityEngine = ModularityEngine.Launch(this, rankedModules, _host, _rootDependencyContainer, config, args);
         }
 

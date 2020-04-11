@@ -179,7 +179,7 @@ namespace Axle.Modularity
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
                     new List<UtilizesAttribute>(),
                     //
-                    // Note - the `UtilizesAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `UtilizesAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
                     true)
                 .ToArray();
@@ -191,7 +191,7 @@ namespace Axle.Modularity
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
                     new List<ReportsToAttribute>(),
                     //
-                    // Note - the `ReportsToAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `ReportsToAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
                     true)
                 .ToArray();
@@ -212,7 +212,7 @@ namespace Axle.Modularity
                     TypeAndInterfaces(moduleType, new HashSet<Type>()), 
                     new List<RequiresAttribute>(), 
                     //
-                    // Note - the `RequiresAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `RequiresAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
                     true);
             for (var i = 0; i < attributes.Count; i++)

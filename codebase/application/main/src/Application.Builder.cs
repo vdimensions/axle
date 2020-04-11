@@ -64,10 +64,11 @@ namespace Axle
                 var host = new AxleApplicationHost(_dependencyContainerFactory, aggregatingLoggingService);
                 try
                 {
-                    var rootContainer = host.DependencyContainerFactory.CreateContainer()
-                        .RegisterInstance(aggregatingLoggingService)
-                        .RegisterInstance(host.DependencyContainerFactory)
-                        .RegisterInstance(host);
+                    var rootContainer = host.DependencyContainerFactory.CreateContainer();
+                    rootContainer
+                        .Export(aggregatingLoggingService)
+                        .Export(host.DependencyContainerFactory)
+                        .Export(host);
                     foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
                     {
                         onContainerReadyHandler.Invoke(rootContainer);

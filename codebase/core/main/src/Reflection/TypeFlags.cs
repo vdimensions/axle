@@ -10,7 +10,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public enum TypeFlags : int
+    public enum TypeFlags
     {
         /// <summary>
         /// The type flags cannot be determined.
@@ -50,11 +50,11 @@ namespace Axle.Reflection
         /// <summary>
         /// Represents enumeration types.
         /// </summary>
-        /// <seealso cref="ValueTuple"/>
+        /// <seealso cref="ValueType"/>
         Enum                = 1 <<  6 | ValueType, // 66
         /// <summary>
         /// Represents nullable value types. Nullable value types are generic type wrapper with
-        /// the type <see cref="Nullable{}"/> as its <see cref="GenericDefinition">generic type definition</see>
+        /// the type <see cref="Nullable{T}"/> as its <see cref="GenericDefinition">generic type definition</see>
         /// and a regular <see cref="ValueType"/> as the generic parameter. While semantically this is no different
         /// than other value types, the compiler permits assignment of a <c><see langword="null"/></c> value to instances
         /// of such nullable types.
@@ -91,7 +91,7 @@ namespace Axle.Reflection
         /// </summary>
         Attribute           = 1 << 12 | ReferenceType, // 5000
         /// <summary>
-        /// Represents a generic type definition. This is a non-instantiateable representation of a generic type with
+        /// Represents a generic type definition. This is a non-instantiatable representation of a generic type with
         /// placeholder types in place of the type parameters.
         /// </summary>
         /// <seealso cref="Generic"/>

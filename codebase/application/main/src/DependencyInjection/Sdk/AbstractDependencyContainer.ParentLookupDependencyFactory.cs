@@ -6,9 +6,9 @@ namespace Axle.DependencyInjection.Sdk
         private sealed class ParentLookupDependencyResolver : IDependencyResolver
         {
             private readonly DependencyMap _map;
-            private readonly Axle.DependencyInjection.IDependencyContext _parentDependencyContainer;
+            private readonly IDependencyContext _parentDependencyContainer;
 
-            public ParentLookupDependencyResolver(DependencyMap map, Axle.DependencyInjection.IDependencyContext parentDependencyContainer)
+            public ParentLookupDependencyResolver(DependencyMap map, IDependencyContext parentDependencyContainer)
             {
                 _map = map;
                 _parentDependencyContainer = parentDependencyContainer;

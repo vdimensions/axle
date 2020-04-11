@@ -58,6 +58,7 @@ namespace Axle.Reflection
             }
         }
 
+        /// <inheritdoc />
         public override int GetHashCode() => base.GetHashCode();
 
         public override AccessModifier AccessModifier => _accessModifier;

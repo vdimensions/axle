@@ -5,7 +5,7 @@ namespace Axle.DependencyInjection.Sdk
     {
         IDependencyExporter IDependencyExporter.Export(object instance, string name)
         {
-            return this.RegisterInstance(instance, name);
+            return RegisterInstance(instance, name);
         }
     }
 }

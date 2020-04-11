@@ -10,6 +10,9 @@ using Axle.Verification;
 
 namespace Axle.Threading.Extensions.Tasks
 {
+    /// <summary>
+    /// A static class containing extension methods to the <see cref="Task"/> <see cref="Task{TResult}"/> classes.
+    /// </summary>
     public static class TaskExtensions
     {
         #region ContinueWith(...)
