@@ -6,9 +6,9 @@ using Axle.DependencyInjection.Sdk;
 
 namespace Axle.DependencyInjection
 {
-    public class Container : AbstractContainer, IDisposable
+    public class DependencyContainer : AbstractDependencyContainer, IDisposable
     {
-        public Container(IContainer parent) : base(parent)
+        public DependencyContainer(IDependencyContext parent) : base(parent)
         {
             DependencyDescriptorProvider = new DefaultDependencyDescriptorProvider();
         }

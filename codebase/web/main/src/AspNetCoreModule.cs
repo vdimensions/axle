@@ -3,10 +3,13 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration;
+using Axle.Logging;
 using Axle.Modularity;
 using Axle.Web.AspNetCore.Lifecycle;
+using Axle.Web.AspNetCore.Logging;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 
 namespace Axle.Web.AspNetCore
@@ -23,13 +26,17 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IAspNetCoreApplicationStartHandler> _appStartHandlers = new List<IAspNetCoreApplicationStartHandler>();
         private readonly IList<IAspNetCoreApplicationStoppedHandler> _appStoppedHandlers = new List<IAspNetCoreApplicationStoppedHandler>();
         private readonly IList<IAspNetCoreApplicationStoppingHandler> _appStoppingHandlers = new List<IAspNetCoreApplicationStoppingHandler>();
+        private readonly ILoggingServiceProvider _loggingServiceProvider;
 
-        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
+        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host, ILoggingServiceProvider loggingServiceProvider)
         {
             _host = host;
             _app = app;
             _appConfig = appConfig;
+            _loggingServiceProvider = loggingServiceProvider;
         }
+        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
+            : this(app, appConfig, host, null) { }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleInit]
@@ -105,6 +112,13 @@ namespace Axle.Web.AspNetCore
             {
                 var cfg = _appConfigurers[i];
                 cfg.Configure(app, hostingEnvironment);
+            }
+
+            if (_loggingServiceProvider != null)
+            {
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+                var msLog = new MicrosoftLoggingService(loggerFactory);
+                _loggingServiceProvider.AddLoggingService(msLog);
             }
         }
 

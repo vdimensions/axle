@@ -89,6 +89,13 @@ namespace Axle.Modularity
             return result.ToArray();
         }
 
+        public Type GetRequiredApplicationHostType(Type moduleType)
+        {
+            return CollectAttributes(new[] {moduleType}, new List<ModuleAttribute>())
+                .Select(ma => ma.HostableBy)
+                .SingleOrDefault();
+        }
+
         public ModuleMethod GetInitMethod(Type moduleType)
         {
             var introspector = new TypeIntrospector(moduleType);
@@ -174,13 +181,13 @@ namespace Axle.Modularity
                 .ToArray();
         }
 
-        public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType)
+        public ReportsToAttribute[] GetReportsToModules(Type moduleType)
         {
             return CollectAttributes(
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
-                    new List<UtilizedByAttribute>(),
+                    new List<ReportsToAttribute>(),
                     //
-                    // Note - the `UtilizedByAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `ReportsToAttribute` can be subclassed and we must take into accounts any derived attribute types.
                     //
                     true)
                 .ToArray();

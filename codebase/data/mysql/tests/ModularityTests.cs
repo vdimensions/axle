@@ -23,13 +23,13 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestMySqlProviderIsRegistered()
         {
-            IContainer container = null;
+            IContainer dependencyContainer = null;
             var appBuilder = Application.Build()
-                .ConfigureDependencies(c => container = c)
+                .ConfigureDependencies(c => dependencyContainer = c)
                 .UseMySql();
             using (appBuilder.Run())
             {
-                var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
+                var providers = dependencyContainer.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
                 Assert.IsNotEmpty(providers, "No database service providers have been registered");
                 Assert.True(providers.Length == 1, "Only one database service provider is expected.");
                 Assert.AreEqual(providers[0].ProviderName, MySqlServiceProvider.Name);
@@ -39,14 +39,14 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestConnectionStringBinding()
         {
-            IContainer container = null;
+            IContainer dependencyContainer = null;
             var appBuilder = Application.Build()
-                .ConfigureDependencies(c => container = c)
+                .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
                 .UseMySql();
             using (appBuilder.Run())
             {
-                var cfg = container.Resolve<IConfiguration>();
+                var cfg = dependencyContainer.Resolve<IConfiguration>();
                 var connectionStrings = cfg.GetConnectionStrings();
                 var defaultConnectionString = connectionStrings.Where(x => x.Name.Equals("default"));
 
@@ -57,14 +57,14 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestConnectionStringsBinding()
         {
-            IContainer container = null;
+            IContainer dependencyContainer = null;
             var appBuilder = Application.Build()
-                .ConfigureDependencies(c => container = c)
+                .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
                 .UseMySql();
             using (appBuilder.Run())
             {
-                var cfg = container.Resolve<IConfiguration>();
+                var cfg = dependencyContainer.Resolve<IConfiguration>();
                 var connectionStrings = cfg.GetConnectionStrings();
 
                 Assert.IsNotNull(connectionStrings);
@@ -75,22 +75,22 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestDataSourceDiscovery()
         {
-            IContainer container = null;
+            IContainer dependencyContainer = null;
             var appBuilder = Application.Build()
-                .ConfigureDependencies(c => container = c)
+                .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
                 .UseDataSources()
                 .UseMySql();
             using (appBuilder.Run())
             {
-                var cfg = container.Resolve<IConfiguration>();
+                var cfg = dependencyContainer.Resolve<IConfiguration>();
                 var connectionStrings = cfg.GetConnectionStrings();
 
                 Assert.IsNotNull(connectionStrings);
 
                 foreach (var connectionStringInfo in connectionStrings)
                 {
-                    var resolved = container.TryResolve<DataSource>(out var dataSource, connectionStringInfo.Name);
+                    var resolved = dependencyContainer.TryResolve<DataSource>(out var dataSource, connectionStringInfo.Name);
                     Assert.IsTrue(resolved);
                     Assert.IsNotNull(dataSource);
                     Assert.AreEqual(dataSource.Name, connectionStringInfo.Name);
@@ -101,16 +101,16 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestDataSourceCmdDiscovery()
         {
-            IContainer container = null;
+            IContainer dependencyContainer = null;
             var appBuilder = Application.Build()
-                .ConfigureDependencies(c => container = c)
+                .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
                 .UseDataSources()
                 .UseMySql()
                 .ConfigureModules(m => m.Load<SqlScriptsConfigurer>());
             using (appBuilder.Run())
             {
-                var testDataSource = container.Resolve<IDataSource>("default");
+                var testDataSource = dependencyContainer.Resolve<IDataSource>("default");
                 var script = testDataSource.GetScript("test", "MySqlTestScript");
                 Assert.IsNotNull(script);
             }

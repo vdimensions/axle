@@ -4,6 +4,11 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Axle.IO.Extensions.Stream;
+#if NETSTANDARD && !NETSTANDARD1_3_OR_NEWER
+using Axle.Text.Extensions.Encoding;
+#endif
+using Axle.Verification;
 
 namespace Axle.Text.Data
 {
@@ -45,7 +50,10 @@ namespace Axle.Text.Data
             _comparer = comparer;
         }
 
-        protected abstract ITextDataAdapter CreateAdapter(Stream stream, Encoding encoding);
+        protected virtual ITextDataAdapter CreateAdapter(Stream stream, Encoding encoding)
+        {
+            return CreateAdapter(encoding.GetString(stream.ToByteArray()));
+        }
         protected abstract ITextDataAdapter CreateAdapter(string data);
         
         private ITextDataRoot ReadStructuredData(
@@ -65,9 +73,7 @@ namespace Axle.Text.Data
             }
         }
         
-        private IEnumerable<ITextDataNode> ReadStructuredData(
-            string key,
-            ITextDataAdapter adapter)
+        private IEnumerable<ITextDataNode> ReadStructuredData(string key, ITextDataAdapter adapter)
         {
             var isRoot = key.Length == 0;
             if (isRoot)
@@ -91,10 +97,18 @@ namespace Axle.Text.Data
             }
         }
 
-        public ITextDataRoot Read(Stream stream, Encoding encoding) 
-            => ReadStructuredData(CreateAdapter(stream, encoding), _comparer);
+        public ITextDataRoot Read(Stream stream, Encoding encoding)
+        {
+            stream.VerifyArgument(nameof(stream)).IsNotNull();
+            encoding.VerifyArgument(nameof(encoding)).IsNotNull();
+            return ReadStructuredData(CreateAdapter(stream, encoding), _comparer);
+        }
 
-        public ITextDataRoot Read(string data) => ReadStructuredData(CreateAdapter(data), _comparer);
+        public ITextDataRoot Read(string data)
+        {
+            data.VerifyArgument(nameof(data)).IsNotNull();
+            return ReadStructuredData(CreateAdapter(data), _comparer);
+        }
 
         protected StringComparer Comparer => _comparer;
     }

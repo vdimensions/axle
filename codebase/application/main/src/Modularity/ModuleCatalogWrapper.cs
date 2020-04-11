@@ -23,11 +23,12 @@ namespace Axle.Modularity
             _originalCatalog = originalCatalog;
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public Type[] DiscoverModuleTypes() => _originalCatalog.DiscoverModuleTypes();
-        #endif
-
         public Type[] DiscoverModuleTypes(Assembly assembly) => _originalCatalog.DiscoverModuleTypes(assembly);
+
+        public Type GetRequiredApplicationHostType(Type moduleType)
+        {
+            return _originalCatalog.GetRequiredApplicationHostType(moduleType);
+        }
 
         public Type[] GetRequiredModules(Type moduleType)
         {
@@ -48,7 +49,7 @@ namespace Axle.Modularity
         public ModuleMethod GetTerminateMethod(Type moduleType) => _originalCatalog.GetTerminateMethod(moduleType);
 
         public UtilizesAttribute[] GetUtilizedModules(Type moduleType) => _originalCatalog.GetUtilizedModules(moduleType);
-        public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType) => _originalCatalog.GetUtilizedByModules(moduleType);
+        public ReportsToAttribute[] GetReportsToModules(Type moduleType) => _originalCatalog.GetReportsToModules(moduleType);
         public ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType) => _originalCatalog.GetCommandLineTrigger(moduleType);
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType) => _originalCatalog.GetEntryPointMethod(moduleType);

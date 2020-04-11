@@ -12,30 +12,34 @@ namespace Axle.Modularity
     {
         internal ModuleInfo(
             Type type, 
+            Type requiredApplicationHostType,
             ModuleMethod initMethod, 
             IEnumerable<ModuleCallback> initCallbacks, 
             IEnumerable<ModuleCallback> terminateCallbacks, 
             ModuleMethod terminateMethod, 
             ModuleEntryMethod entryPointMethod,
             IUsesAttribute[] utilizedModules,
-            UtilizedByAttribute[] utilizedByModules,
+            ReportsToAttribute[] reportsToModules,
             ModuleCommandLineTriggerAttribute commandLineTrigger, 
             ModuleConfigSectionAttribute configSectionInfo, 
             params ModuleInfo[] requiredModules)
         {
             Type = type.VerifyArgument(nameof(type)).IsNotAbstract();
+            requiredApplicationHostType?
+                .VerifyArgument(nameof(requiredApplicationHostType))
+                .IsOfType<IApplicationHost>();
+            RequiredApplicationHostType = requiredApplicationHostType;
             InitMethod = initMethod;
             DependencyInitializedMethods = initCallbacks.OrderBy(x => x.Priority).ToArray();
             DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
             TerminateMethod = terminateMethod;
             EntryPointMethod = entryPointMethod;
             UtilizedModules = utilizedModules;
-            UtilizedByModules = utilizedByModules;
+            ReportsToModules = reportsToModules;
             RequiredModules = requiredModules;
             CommandLineTrigger = commandLineTrigger;
             ConfigSectionInfo = configSectionInfo;
         }
-
         
         internal ModuleMethod InitMethod { get; }
         internal ModuleCallback[] DependencyInitializedMethods { get; }
@@ -44,6 +48,8 @@ namespace Axle.Modularity
         internal ModuleEntryMethod EntryPointMethod { get; }
         internal ModuleCommandLineTriggerAttribute CommandLineTrigger { get; }
         internal ModuleConfigSectionAttribute ConfigSectionInfo { get; }
+        
+        internal Type RequiredApplicationHostType { get; }
 
         public Type Type { get; }
 
@@ -55,7 +61,7 @@ namespace Axle.Modularity
 
         public IUsesAttribute[] UtilizedModules { get; }
 
-        public UtilizedByAttribute[] UtilizedByModules { get; }
+        public ReportsToAttribute[] ReportsToModules { get; }
 
         public ModuleInfo[] RequiredModules { get; internal set; }
     }

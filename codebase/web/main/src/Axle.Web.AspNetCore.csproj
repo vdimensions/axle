@@ -13,7 +13,7 @@
     <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2' OR '$(TargetFramework)' == 'netstandard2.0'" >
+  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2' OR '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.*" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.*" />
     <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="2.2.*" />

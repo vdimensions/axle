@@ -4,13 +4,8 @@
 namespace Axle.Logging.Log4net
 {
     // ReSharper disable once InconsistentNaming
-    public sealed class Log4netLoggingServiceProvider : ILoggingServiceProvider
+    public sealed class Log4netLoggingService : ILoggingService
     {
-        [Obsolete]
-        ILogger ILoggingServiceProvider.Create(Type targetType) => CreateLogger(targetType);
-        [Obsolete]
-        ILogger ILoggingServiceProvider.Create<T>() => CreateLogger<T>();
-
         public ILogger CreateLogger(Type targetType)
         {
             if (targetType == null)

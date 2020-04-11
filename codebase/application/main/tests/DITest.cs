@@ -24,7 +24,7 @@ namespace Axle.ApplicationTests
         [Test]
         public void TestContainerInstantiation()
         {
-            var c = new Container(null);
+            var c = new DependencyContainer(null);
             Assert.IsNotNull(c);
             Assert.IsNull(c.Parent);
         }
@@ -34,7 +34,7 @@ namespace Axle.ApplicationTests
         {
             const string name = "World";
 
-            var c = new Container(null);
+            var c = new DependencyContainer(null);
             c.RegisterInstance(name);
             c.RegisterType<Person>();
 
@@ -51,7 +51,7 @@ namespace Axle.ApplicationTests
         {
             const string name = "World";
 
-            var c = new Container(null);
+            var c = new DependencyContainer(null);
             c.RegisterInstance(name);
             c.RegisterType<Vip>();
 
@@ -71,7 +71,7 @@ namespace Axle.ApplicationTests
                 {
                     const string name = "World";
 
-                    var c = new Container(null);
+                    var c = new DependencyContainer(null);
                     c.RegisterInstance(name);
                     c.RegisterType<Person>();
                     c.RegisterType<Vip>();
@@ -87,7 +87,7 @@ namespace Axle.ApplicationTests
                 () =>
                 {
                     const string name = "World";
-                    var c = new Container(null);
+                    var c = new DependencyContainer(null);
                     c.RegisterInstance(name);
                     c.RegisterInstance(name);
                 });

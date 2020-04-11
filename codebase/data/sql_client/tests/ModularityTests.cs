@@ -10,10 +10,10 @@ namespace Axle.Data.SqlClient.Tests
         [Test]
         public void TestSqlClientProviderIsRegistered()
         {
-            IContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).UseSqlClient().Run())
+            IContainer dependencyContainer = null;
+            using (Application.Build().ConfigureDependencies(c => dependencyContainer = c).UseSqlClient().Run())
             {
-                var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
+                var providers = dependencyContainer.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
                 Assert.IsNotEmpty(providers, "No database service providers have been registered");
                 Assert.True(providers.Length == 1, "Only one database service provider is expected.");
                 Assert.AreEqual(providers[0].ProviderName, SqlServiceProvider.Name);

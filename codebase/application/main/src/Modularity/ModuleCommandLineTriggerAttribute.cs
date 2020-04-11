@@ -9,10 +9,6 @@ namespace Axle.Modularity
         private int _argumentIndex = 0;
         private string _argumentValue = string.Empty;
 
-        public ModuleCommandLineTriggerAttribute()
-        {
-        }
-
         public int ArgumentIndex
         {
             get => _argumentIndex;

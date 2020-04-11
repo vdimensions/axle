@@ -19,10 +19,7 @@ namespace Axle.Modularity
             AllowParallelInvoke = allowParallelInvoke;
         }
 
-        public void Invoke(object module, object arg)
-        {
-            _invokable.Invoke(module, arg);
-        }
+        public void Invoke(object module, object arg) => _invokable.Invoke(module, arg);
 
         public int Priority { get; }
         public Type ArgumentType { get; }

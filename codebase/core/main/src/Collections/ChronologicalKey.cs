@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
 namespace Axle.Collections
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

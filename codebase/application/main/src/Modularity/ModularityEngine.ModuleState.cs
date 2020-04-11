@@ -3,10 +3,10 @@
 
 namespace Axle.Modularity
 {
-    partial class ModularContext
+    partial class ModularityEngine
     {
         [Flags]
-        private enum ModuleState : sbyte
+        internal enum ModuleState : sbyte
         {
             Hollow = 0,
             Instantiated = 1,

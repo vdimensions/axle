@@ -7,7 +7,7 @@ namespace Axle.DependencyInjection
 {
     /// <summary>
     /// A class that describes a candidate dependency which can satisfy a dependency when a 
-    /// <see cref="IContainer">dependency container</see> is instantiating an object.
+    /// <see cref="IDependencyContainer">dependency container</see> is instantiating an object.
     /// </summary>
     public sealed class DependencyCandidate
     {

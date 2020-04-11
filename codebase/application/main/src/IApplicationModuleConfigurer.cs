@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Axle
 {
-    public interface IApplicationModuleConfigurer : IApplicationBuilder
+    public interface IApplicationModuleConfigurer
     {
         IApplicationModuleConfigurer Load(IEnumerable<Type> types);
         IApplicationModuleConfigurer Load(Assembly assembly);

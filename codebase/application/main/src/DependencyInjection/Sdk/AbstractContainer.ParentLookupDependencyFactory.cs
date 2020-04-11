@@ -1,17 +1,17 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 namespace Axle.DependencyInjection.Sdk
 {
-    public abstract partial class AbstractContainer
+    public abstract partial class AbstractDependencyContainer
     {
         private sealed class ParentLookupDependencyResolver : IDependencyResolver
         {
             private readonly DependencyMap _map;
-            private readonly IContainer _parentContainer;
+            private readonly Axle.DependencyInjection.IDependencyContext _parentDependencyContainer;
 
-            public ParentLookupDependencyResolver(DependencyMap map, IContainer parentContainer)
+            public ParentLookupDependencyResolver(DependencyMap map, Axle.DependencyInjection.IDependencyContext parentDependencyContainer)
             {
                 _map = map;
-                _parentContainer = parentContainer;
+                _parentDependencyContainer = parentDependencyContainer;
             }
 
             public object Resolve(DependencyInfo dependency)
@@ -34,13 +34,13 @@ namespace Axle.DependencyInjection.Sdk
                 }
                 catch (DependencyResolutionException)
                 {
-                    if (_parentContainer == null)
+                    if (_parentDependencyContainer == null)
                     {
                         throw;
                     }
 
                     DependencyResolutionException lastEx;
-                    var pc = _parentContainer;
+                    var pc = _parentDependencyContainer;
                     do
                     {
                         if (!string.IsNullOrEmpty(dependency.DependencyName))

@@ -4,11 +4,11 @@ using System;
 
 namespace Axle.DependencyInjection.Sdk
 {
-    public abstract partial class AbstractContainer : IContainer
+    public abstract partial class AbstractDependencyContainer : IDependencyContainer
     {
         private readonly DependencyMap _dependencyMap = new DependencyMap();
 
-        protected AbstractContainer(IContainer parent)
+        protected AbstractDependencyContainer(IDependencyContext parent)
         {
             Parent = parent;
         }
@@ -24,7 +24,7 @@ namespace Axle.DependencyInjection.Sdk
         public void Dispose() => Dispose(true);
         void IDisposable.Dispose() => Dispose(true);
 
-        public IContainer RegisterInstance(object instance, string name, params string[] aliases)
+        public IDependencyContainer RegisterInstance(object instance, string name, params string[] aliases)
         {
             _dependencyMap.RegisterConstant(name, instance);
             foreach (var alias in aliases)
@@ -34,7 +34,7 @@ namespace Axle.DependencyInjection.Sdk
             return this;
         }
 
-        public IContainer RegisterType(Type type, string name, params string[] aliases)
+        public IDependencyContainer RegisterType(Type type, string name, params string[] aliases)
         {
             var resolver = new ParentLookupDependencyResolver(_dependencyMap, Parent);
             _dependencyMap.RegisterSingletion(name, type, DependencyDescriptorProvider, resolver);
@@ -47,7 +47,7 @@ namespace Axle.DependencyInjection.Sdk
 
         public object Resolve(Type type, string name) => _dependencyMap.Resolve(name, type);
 
-        public IContainer Parent { get; }
+        public IDependencyContext Parent { get; }
         protected abstract IDependencyDescriptorProvider DependencyDescriptorProvider { get; }
     }
 }

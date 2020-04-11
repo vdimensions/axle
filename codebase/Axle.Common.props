@@ -35,6 +35,10 @@
     <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
   </PropertyGroup>
 
+  <PropertyGroup Condition="Exists('$(PackageOutputPath)\restore')">
+    <RestoreSources>$(MSBuildProjectDirectory)\..\..\..\..\..\axle\dist\restore;$(RestoreSources)</RestoreSources>
+  </PropertyGroup>
+
   <!-- Configure VDimensions MSBuild Sdk -->
   <PropertyGroup>
     <!-- Enable local nuget feed for packages produced by this project -->

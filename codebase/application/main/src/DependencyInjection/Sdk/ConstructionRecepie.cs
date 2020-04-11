@@ -11,7 +11,7 @@ namespace Axle.DependencyInjection.Sdk
     /// <summary>
     /// A class representing a construction recepie; that is the constructor/factory method, 
     /// properties and fields of an object type that need to be populated by a 
-    /// <see cref="IContainer">dependency container</see> during the object construction.
+    /// <see cref="IDependencyContainer">dependency container</see> during the object construction.
     /// </summary>
     public class ConstructionRecepie
     {

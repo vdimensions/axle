@@ -12,42 +12,64 @@ using Axle.Threading.Extensions.Tasks;
 
 namespace Axle.Modularity
 {
-    partial class ModularContext
+    partial class ModularityEngine
     {
-        private sealed class ModuleMetadata
+        private sealed class ModuleContext
         {
-            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, ILogger logger)
+            private ModuleContext(
+                ModuleInfo moduleInfo, 
+                object instance, 
+                IDependencyContainer dependencyContainer, 
+                ModuleExporter exporter, 
+                ILogger logger,
+                string[] args)
             {
                 ModuleInfo = moduleInfo;
                 ModuleInstance = instance;
-                Container = container;
+                DependencyContainer = dependencyContainer;
+                Exporter = exporter;
                 Logger = logger;
+                Args = args;
             }
-            public ModuleMetadata(ModuleInfo moduleInfo) : this(moduleInfo, null, null, null) { }
-            private ModuleMetadata(ModuleInfo moduleInfo, object instance, IContainer container, ILogger logger, ModuleState state) : this(moduleInfo, instance, container, logger)
+
+            public ModuleContext(ModuleInfo moduleInfo) : this(moduleInfo, null, null, null, null, new string[0]) { }
+            private ModuleContext(
+                    ModuleInfo moduleInfo, 
+                    object instance, 
+                    IDependencyContainer dependencyContainer, 
+                    ModuleExporter exporter, 
+                    ILogger logger, 
+                    string[] args, 
+                    ModuleState state) 
+                : this(moduleInfo, instance, dependencyContainer, exporter, logger, args)
             {
                 State = state;
             }
 
-            public ModuleMetadata UpdateInstance(object moduleInstance, IContainer container, ILogger logger) => new ModuleMetadata(ModuleInfo, moduleInstance, container, logger, State|ModuleState.Instantiated);
+            public ModuleContext UpdateInstance(
+                object moduleInstance, 
+                IDependencyContainer dependencyContainer, 
+                ModuleExporter exporter, 
+                ILogger logger,
+                string[] args) => new ModuleContext(ModuleInfo, moduleInstance, dependencyContainer, exporter, logger, args, State|ModuleState.Instantiated);
 
-            private ModuleMetadata ChangeState(ModuleState state) => new ModuleMetadata(ModuleInfo, ModuleInstance, Container, Logger, state);
+            private ModuleContext ChangeState(ModuleState state) => new ModuleContext(ModuleInfo, ModuleInstance, DependencyContainer, Exporter, Logger, Args, state);
 
-            private void Notify(ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
+            private void Notify(IList<ModuleInfo> requiredModules, IDictionary<Type, ModuleContext> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
             {
-                if (requiredModules.Length <= 0)
+                if (requiredModules.Count <= 0)
                 {
                     return;
                 }
-                for (var k = 0; k < requiredModules.Length; k++)
+                for (var k = 0; k < requiredModules.Count; k++)
                 {
                     var rm = requiredModules[k];
-                    if (!moduleMetadata.TryGetValue(rm.Type, out var rmm))
+                    if (!moduleMetadata.TryGetValue(rm.Type, out var targetContext))
                     {
                         continue;
                     }
 
-                    var callbacks = callbackProvider(rmm.ModuleInfo);
+                    var callbacks = callbackProvider(targetContext.ModuleInfo);
                     var parallelCallbacks = new List<Task>(callbacks.Length);
                     var sequentialCallbacks = new List<Task>(callbacks.Length);
                     for (var l = 0; l < callbacks.Length; l++)
@@ -63,7 +85,7 @@ namespace Axle.Modularity
                         }
 
                         var listToAddTaskTo = callback.AllowParallelInvoke ? parallelCallbacks : sequentialCallbacks;
-                        listToAddTaskTo.Add(new Task(() => callback.Invoke(rmm.ModuleInstance, ModuleInstance)));
+                        listToAddTaskTo.Add(new Task(() => callback.Invoke(targetContext.ModuleInstance, ModuleInstance)));
 
                         //parallelCallbacks.StartAll();
 
@@ -85,8 +107,11 @@ namespace Axle.Modularity
                 }
             }
 
-            public ModuleMetadata Init(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, string[] args)
+            public ModuleContext Init(IDictionary<Type, ModuleContext> moduleMetadata)
             {
+                var exporter = Exporter;
+                var requiredModules = ModuleInfo.RequiredModules;
+                var args = Args;
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it has been terminated.");
@@ -112,7 +137,7 @@ namespace Axle.Modularity
                 return result;
             }
 
-            public ModuleMetadata Run(params string[] args)
+            public ModuleContext Run()
             {
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {
@@ -133,12 +158,15 @@ namespace Axle.Modularity
                     Logger.Warn("Execution attempted, but module `{0}` was already executed. ", ModuleInfo.Type.FullName);
                     return this;
                 }
-                ModuleInfo.EntryPointMethod?.Invoke(ModuleInstance, args);
+                ModuleInfo.EntryPointMethod?.Invoke(ModuleInstance, Args);
                 return ChangeState(State | ModuleState.Ran);
             }
 
-            public ModuleMetadata Terminate(ModuleExporter exporter, ModuleInfo[] requiredModules, IDictionary<Type, ModuleMetadata> moduleMetadata, string[] args)
+            public ModuleContext Terminate(IDictionary<Type, ModuleContext> moduleMetadata)
             {
+                var exporter = Exporter;
+                var requiredModules = ModuleInfo.RequiredModules;
+                var args = Args;
                 if ((State & ModuleState.Terminated) == ModuleState.Terminated)
                 {   //
                     // Module is already terminated
@@ -152,6 +180,12 @@ namespace Axle.Modularity
                 Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
 
                 ModuleInfo.TerminateMethod?.Invoke(ModuleInstance, exporter, args);
+                
+                if (ModuleInstance is IDisposable d)
+                {
+                    d.Dispose();
+                }
+                
                 var result = ChangeState(State | ModuleState.Terminated);
 
                 Logger.Write(LogSeverity.Info, "Module `{0}` terminated. ", ModuleInfo.Type.FullName);
@@ -161,9 +195,11 @@ namespace Axle.Modularity
 
             public ModuleInfo ModuleInfo { get; }
             public object ModuleInstance { get; }
-            public IContainer Container { get; }
+            public IDependencyContainer DependencyContainer { get; }
+            public ModuleExporter Exporter { get; }
             public ILogger Logger { get; }
             public ModuleState State { get; } = ModuleState.Hollow;
+            public string[] Args { get; }
         }
     }
 }

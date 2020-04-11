@@ -65,15 +65,15 @@ namespace Axle.ApplicationTests.Modularity
         {
             var cfgPath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\appconfig.json";
             var configSource = new StreamedFileConfigSource<JsonConfigurationSource>(File.OpenRead(cfgPath));
-            IContainer container = null;
+            IDependencyContainer dependencyContainer = null;
             using (Application
                     .Build()
-                    .ConfigureDependencies(c => container = c)
+                    .ConfigureDependencies(c => dependencyContainer = c)
                     .ConfigureApplication(c => c.Append(configSource))
                     .ConfigureModules(c => c.Load<ConfiguredModule>())
                     .Run())
             {
-                var config = container.Resolve<ConfiguredModuleSection>();
+                var config = dependencyContainer.Resolve<ConfiguredModuleSection>();
 
                 Assert.IsNotNull(config);
                 Assert.IsTrue(config.Configured);
@@ -85,15 +85,15 @@ namespace Axle.ApplicationTests.Modularity
         {
             var cfgPath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\appconfig.json";
             var configSource = new StreamedFileConfigSource<JsonConfigurationSource>(File.OpenRead(cfgPath));
-            IContainer container = null;
+            IDependencyContainer dependencyContainer = null;
             using (Application
                     .Build()
-                    .ConfigureDependencies(c => container = c)
+                    .ConfigureDependencies(c => dependencyContainer = c)
                     .ConfigureApplication(c => c.Append(configSource))
                     .ConfigureModules(c => c.Load<ConfiguredModule2>())
                     .Run())
             {
-                var config2 = container.Resolve<ConfiguredModuleSection2>();
+                var config2 = dependencyContainer.Resolve<ConfiguredModuleSection2>();
 
                 Assert.IsNotNull(config2);
                 Assert.IsTrue(config2.Configured);
@@ -104,14 +104,14 @@ namespace Axle.ApplicationTests.Modularity
         [Test]
         public void TestConfigurationSectionNotDefinedScenario()
         {
-            IContainer container = null;
+            IDependencyContainer dependencyContainer = null;
             using (Application
                     .Build()
-                    .ConfigureDependencies(c => container = c)
+                    .ConfigureDependencies(c => dependencyContainer = c)
                     .ConfigureModules(c => c.Load<ConfiguredModule>())
                     .Run())
             {
-                var configResolved = container.TryResolve<ConfiguredModuleSection>(out var config);
+                var configResolved = dependencyContainer.TryResolve<ConfiguredModuleSection>(out var config);
                 Assert.IsFalse(configResolved);
                 Assert.IsNull(config);
             }

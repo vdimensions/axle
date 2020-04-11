@@ -1,27 +1,16 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 
-using Axle.Verification;
-
 
 namespace Axle.Modularity
 {
+    [Obsolete("Use `ReportsToAttribute` instead")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
-    public class UtilizedByAttribute : Attribute
+    public class UtilizedByAttribute : ReportsToAttribute
     {
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public UtilizedByAttribute(string module)
-        {
-            Module = module.VerifyArgument(nameof(module)).IsNotNullOrEmpty();
-        }
+        public UtilizedByAttribute(string module) : base(module) { }
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public UtilizedByAttribute(Type moduleType)
-        {
-            Module = UtilizesAttribute.TypeToString(moduleType.VerifyArgument(nameof(moduleType)).IsNotNull());
-        }
-
-        internal bool Accepts(Type type) => UtilizesAttribute.TypeToString(type.VerifyArgument(nameof(type))).Equals(Module, StringComparison.Ordinal);
-
-        public string Module { get; }
+        public UtilizedByAttribute(Type moduleType) : base(moduleType) { }
     }
 }

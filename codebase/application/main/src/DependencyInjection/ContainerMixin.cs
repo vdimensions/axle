@@ -7,50 +7,50 @@ namespace Axle.DependencyInjection
 {
     public static class ContainerMixin
     {
-        public static IContainer RegisterInstance(this IContainer container, object instance)
+        public static IDependencyContainer RegisterInstance(this IDependencyContainer dependencyContainer, object instance)
         {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.RegisterInstance(instance, string.Empty);
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.RegisterInstance(instance, string.Empty);
         }
-        public static IContainer RegisterInstance<T>(this IContainer container, T instance, string name, params string[] aliases)
+        public static IDependencyContainer RegisterInstance<T>(this IDependencyContainer dependencyContainer, T instance, string name, params string[] aliases)
         {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.RegisterInstance(instance, name, aliases);
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.RegisterInstance(instance, name, aliases);
         }
-        public static IContainer RegisterInstance<T>(this IContainer container, T instance)
+        public static IDependencyContainer RegisterInstance<T>(this IDependencyContainer dependencyContainer, T instance)
         {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.RegisterInstance(instance, string.Empty);
-        }
-
-        public static IContainer RegisterType(this IContainer container, Type type)
-        {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.RegisterType(type, string.Empty);
-        }
-        public static IContainer RegisterType<T>(this IContainer container, string name, params string[] aliases)
-        {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.RegisterType(typeof(T), name, aliases);
-        }
-        public static IContainer RegisterType<T>(this IContainer container)
-        {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.RegisterType(typeof(T), string.Empty);
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.RegisterInstance(instance, string.Empty);
         }
 
-        public static object Resolve(this IContainer container, Type type)
+        public static IDependencyContainer RegisterType(this IDependencyContainer dependencyContainer, Type type)
         {
-            return container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(type, string.Empty);
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.RegisterType(type, string.Empty);
         }
-        public static T Resolve<T>(this IContainer container, string name)
+        public static IDependencyContainer RegisterType<T>(this IDependencyContainer dependencyContainer, string name, params string[] aliases)
         {
-            return (T) container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(typeof(T), name.VerifyArgument(nameof(name)).IsNotNull().Value);
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.RegisterType(typeof(T), name, aliases);
         }
-        public static T Resolve<T>(this IContainer container)
+        public static IDependencyContainer RegisterType<T>(this IDependencyContainer dependencyContainer)
         {
-            return Resolve<T>(container, string.Empty);
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.RegisterType(typeof(T), string.Empty);
         }
 
-        public static bool TryResolve(this IContainer container, Type type, out object value, string name)
+        public static object Resolve(this IDependencyContainer dependencyContainer, Type type)
+        {
+            return dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.Resolve(type, string.Empty);
+        }
+        public static T Resolve<T>(this IDependencyContainer dependencyContainer, string name)
+        {
+            return (T) dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.Resolve(typeof(T), name.VerifyArgument(nameof(name)).IsNotNull().Value);
+        }
+        public static T Resolve<T>(this IDependencyContainer dependencyContainer)
+        {
+            return Resolve<T>(dependencyContainer, string.Empty);
+        }
+
+        public static bool TryResolve(this IDependencyContainer dependencyContainer, Type type, out object value, string name)
         {
             try
             {
-                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(type, name);
+                value = dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.Resolve(type, name);
                 return true;
             }
             catch
@@ -59,11 +59,11 @@ namespace Axle.DependencyInjection
                 return false;
             }
         }
-        public static bool TryResolve(this IContainer container, Type type, out object value)
+        public static bool TryResolve(this IDependencyContainer dependencyContainer, Type type, out object value)
         {
             try
             {
-                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve(type);
+                value = dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.Resolve(type);
                 return true;
             }
             catch
@@ -72,11 +72,11 @@ namespace Axle.DependencyInjection
                 return false;
             }
         }
-        public static bool TryResolve<T>(this IContainer container, out T value, string name)
+        public static bool TryResolve<T>(this IDependencyContainer dependencyContainer, out T value, string name)
         {
             try
             {
-                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve<T>(name);
+                value = dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.Resolve<T>(name);
                 return true;
             }
             catch
@@ -85,11 +85,11 @@ namespace Axle.DependencyInjection
                 return false;
             }
         }
-        public static bool TryResolve<T>(this IContainer container, out T value)
+        public static bool TryResolve<T>(this IDependencyContainer dependencyContainer, out T value)
         {
             try
             {
-                value = container.VerifyArgument(nameof(container)).IsNotNull().Value.Resolve<T>();
+                value = dependencyContainer.VerifyArgument(nameof(dependencyContainer)).IsNotNull().Value.Resolve<T>();
                 return true;
             }
             catch
