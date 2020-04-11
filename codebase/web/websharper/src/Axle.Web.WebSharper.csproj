@@ -18,12 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Web.AspNetCore" Version="1.7.2472.34664" />
-
     <PackageReference Include="WebSharper.UI" Version="4.5.8.161" />
     <PackageReference Include="WebSharper.AspNetCore" Version="4.5.4.109" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="[2.2, 3.0)" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Web.AspNetCore.targets" />
 </Project>

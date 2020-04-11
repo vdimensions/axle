@@ -27,10 +27,7 @@
     <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Text.Data.Yaml" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-  
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Resources.targets" />
+  <Import Project="../../../Reference.Axle.Text.Data.Yaml.targets" />
 </Project>

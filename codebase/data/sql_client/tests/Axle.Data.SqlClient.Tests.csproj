@@ -10,10 +10,7 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Data.SqlClient" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Data.SqlClient.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

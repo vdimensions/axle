@@ -10,11 +10,7 @@
     <Description>Axle's data access library for ODBC</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Data.targets" />
   <Import Project="../Odbc.Package.targets" />
 </Project>

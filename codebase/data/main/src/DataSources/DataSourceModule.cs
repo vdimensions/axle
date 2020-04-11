@@ -7,6 +7,7 @@ using System.Reflection;
 using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources.Resources.Extraction;
+using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
 using Axle.Resources;
@@ -39,7 +40,7 @@ namespace Axle.Data.DataSources
         }
 
         [ModuleInit]
-        internal void OnInit(ModuleExporter exporter)
+        internal void OnInit(IDependencyExporter exporter)
         {
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             foreach (var cs in _configuration.ConnectionStrings)

@@ -33,10 +33,7 @@
     <Compile Include="DateTime\DateTime.fs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Core.targets" />
   <Import Project="../../../FSharp.Core.Packages.targets" />
 </Project>

@@ -5,8 +5,8 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="[2.2, 3)" />
-    <PackageReference Include="Axle.Web.AspNetCore" Version="$(PackageVersionRange)" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Web.AspNetCore.targets" />
 </Project>

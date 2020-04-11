@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
     <PackageReference Include="System.Data.SQLite.Core" Version="1.0" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Data.targets" />
 </Project>

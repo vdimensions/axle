@@ -33,9 +33,6 @@ namespace Axle.Modularity
 
             rootDependencyContainer.RegisterInstance(globalAppConfig);
 
-            var rootExporter = new ContainerExporter(rootDependencyContainer);
-            rootDependencyContainer.RegisterInstance(rootExporter);
-
             // TODO: strip ranked modules from non-activated
             
             var initializedModules = new List<Type>();
@@ -61,8 +58,9 @@ namespace Axle.Modularity
                             .RegisterType(moduleType)          // register the module type to be instantiated via DI
                             .RegisterInstance(moduleInfo)      // register moduleInfo so that a module can reflect on itself
                             .RegisterInstance(moduleLogger)    // register the module's dedicated logger
-                            .RegisterInstance(moduleContainer) // register the module's dedicated DI container
-                            .RegisterInstance(rootExporter);   // register the global dependencies exporter
+                            .RegisterInstance(moduleContainer);// register the module's dedicated DI container
+                            //TODO: remove
+                            //.RegisterInstance(rootExporter);   // register the global dependencies exporter
 
                         //
                         // Make all required modules injectable
@@ -103,7 +101,7 @@ namespace Axle.Modularity
                             moduleType,
                             _ =>
                             {
-                                var result = new ModuleContext(moduleInfo).UpdateInstance(moduleInstance, moduleInitializationContainer, rootExporter, moduleLogger, args);
+                                var result = new ModuleContext(moduleInfo).UpdateInstance(moduleInstance, moduleInitializationContainer, rootDependencyContainer, moduleLogger, args);
                                 instantiatedModules.Push(moduleType);
                                 return result;
                             },
@@ -114,7 +112,7 @@ namespace Axle.Modularity
                                     return ctx;
                                 }
 
-                                var result = ctx.UpdateInstance(moduleInstance, moduleInitializationContainer, rootExporter, moduleLogger, args);
+                                var result = ctx.UpdateInstance(moduleInstance, moduleInitializationContainer, rootDependencyContainer, moduleLogger, args);
                                 instantiatedModules.Push(mt);
                                 return result;
                             });

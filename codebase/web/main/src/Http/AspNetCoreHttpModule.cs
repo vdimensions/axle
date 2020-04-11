@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+using Axle.DependencyInjection;
 using Axle.Modularity;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -13,7 +14,7 @@ namespace Axle.Web.AspNetCore.Http
         
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleInit]
-        internal void Init(ModuleExporter exporter)
+        internal void Init(IDependencyExporter exporter)
         {
             exporter.Export<IHttpContextAccessor>(_httpContextAccessor);
         }

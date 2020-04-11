@@ -20,7 +20,7 @@ namespace Axle.Modularity
                 ModuleInfo moduleInfo, 
                 object instance, 
                 IDependencyContainer dependencyContainer, 
-                ModuleExporter exporter, 
+                IDependencyExporter exporter, 
                 ILogger logger,
                 string[] args)
             {
@@ -37,7 +37,7 @@ namespace Axle.Modularity
                     ModuleInfo moduleInfo, 
                     object instance, 
                     IDependencyContainer dependencyContainer, 
-                    ModuleExporter exporter, 
+                    IDependencyExporter exporter, 
                     ILogger logger, 
                     string[] args, 
                     ModuleState state) 
@@ -49,7 +49,7 @@ namespace Axle.Modularity
             public ModuleContext UpdateInstance(
                 object moduleInstance, 
                 IDependencyContainer dependencyContainer, 
-                ModuleExporter exporter, 
+                IDependencyExporter exporter, 
                 ILogger logger,
                 string[] args) => new ModuleContext(ModuleInfo, moduleInstance, dependencyContainer, exporter, logger, args, State|ModuleState.Instantiated);
 
@@ -196,7 +196,7 @@ namespace Axle.Modularity
             public ModuleInfo ModuleInfo { get; }
             public object ModuleInstance { get; }
             public IDependencyContainer DependencyContainer { get; }
-            public ModuleExporter Exporter { get; }
+            public IDependencyExporter Exporter { get; }
             public ILogger Logger { get; }
             public ModuleState State { get; } = ModuleState.Hollow;
             public string[] Args { get; }

@@ -17,12 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Configuration" Version="$(PackageVersionRange)" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.*" />
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.*" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Configuration.targets" />
   <Import Project="../Axle.Configuration.Dependencies.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

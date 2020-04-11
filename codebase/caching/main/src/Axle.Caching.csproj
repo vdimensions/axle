@@ -9,9 +9,6 @@
     <Description>Axle framework caching library</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Core.targets" />
 </Project>

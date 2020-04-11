@@ -16,15 +16,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Text.Data.Properties" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="data.properties">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Text.Data.Properties.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

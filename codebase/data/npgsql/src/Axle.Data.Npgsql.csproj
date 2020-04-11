@@ -10,10 +10,7 @@
     <Description>Axle's data access library for PostgreSQL</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Data.targets" />
   <Import Project="../Npgsql.Package.targets" />
 </Project>

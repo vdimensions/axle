@@ -17,10 +17,7 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Data.MySql" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Data.MySql.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

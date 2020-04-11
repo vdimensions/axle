@@ -15,11 +15,7 @@
     <Reference Include="System.Data.DataSetExtensions" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Application.targets" />
   <Import Project="../System.Data.Package.targets" />
 </Project>

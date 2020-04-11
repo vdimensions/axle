@@ -11,9 +11,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Application.targets" />
 </Project>

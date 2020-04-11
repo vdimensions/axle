@@ -33,10 +33,7 @@
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\Axle.Resources.csproj" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Resources.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

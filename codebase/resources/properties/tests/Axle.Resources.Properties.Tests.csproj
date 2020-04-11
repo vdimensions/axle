@@ -16,10 +16,7 @@
     <None Include="restore.sh" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Resources.Properties" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Resources.Properties.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

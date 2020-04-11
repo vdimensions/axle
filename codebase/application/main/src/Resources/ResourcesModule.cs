@@ -1,4 +1,5 @@
-﻿using Axle.Modularity;
+﻿using Axle.DependencyInjection;
+using Axle.Modularity;
 using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 
@@ -11,7 +12,7 @@ namespace Axle.Resources
         private readonly ResourceManager _resourceManager = new DefaultResourceManager();
 
         [ModuleInit]
-        internal void Init(ModuleExporter exporter)
+        internal void Init(IDependencyExporter exporter)
         {
             OnResourceBundleConfigurerInit(this);
             OnResourceExtractorConfigurerInit(this);

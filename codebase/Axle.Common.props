@@ -36,7 +36,7 @@
   </PropertyGroup>
 
   <PropertyGroup Condition="Exists('$(PackageOutputPath)\restore')">
-    <RestoreSources>$(MSBuildProjectDirectory)\..\..\..\..\..\axle\dist\restore;$(RestoreSources)</RestoreSources>
+    <RestoreSources>$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
   </PropertyGroup>
 
   <!-- Configure VDimensions MSBuild Sdk -->

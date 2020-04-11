@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using Axle.DependencyInjection;
 using Axle.Modularity;
 using Axle.Verification;
 
@@ -14,7 +15,7 @@ namespace Axle.Data
         private readonly ConcurrentDictionary<string, IDbServiceProvider> _providers = new ConcurrentDictionary<string, IDbServiceProvider>(StringComparer.Ordinal);
 
         [ModuleInit]
-        internal void Init(ModuleExporter exporter)
+        internal void Init(IDependencyExporter exporter)
         {
             exporter.Export(this);
         }

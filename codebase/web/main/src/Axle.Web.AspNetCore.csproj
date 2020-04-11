@@ -9,10 +9,6 @@
     <Description>Axle Framework ASP.NET Core Library.</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2' OR '$(TargetFramework)' == 'netstandard2.0'">
     <PackageReference Include="Microsoft.AspNetCore" Version="2.2.*" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.*" />
@@ -40,4 +36,5 @@
 <!--  </ItemGroup>-->
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Application.targets" />
 </Project>

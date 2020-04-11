@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration;
+using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
 using Axle.Web.AspNetCore.Lifecycle;
@@ -40,7 +41,7 @@ namespace Axle.Web.AspNetCore
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleInit]
-        internal void Init(ModuleExporter exporter)
+        internal void Init(IDependencyExporter exporter)
         {
         }
 

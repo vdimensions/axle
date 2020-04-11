@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Axle.Conversion.Parsing;
 using Axle.Extensions.Uri;
 using NUnit.Framework;
@@ -11,10 +10,10 @@ namespace Axle.Core.Tests.Extensions
     [TestFixture]
     public class UriExtensions
     {
-        private IParser<Uri> _uriParser = new UriParser();
+        private readonly IParser<Uri> _uriParser = new UriParser();
 
         [Test]
-        public void TestUriResolveAppend()
+        public void TestResolveUriAppend()
         {
             var u1 = _uriParser.Parse("http://someuri.org");
             var u2 = _uriParser.Parse("./home");
@@ -22,7 +21,7 @@ namespace Axle.Core.Tests.Extensions
             Assert.AreEqual("http://someuri.org/home", resolved.ToString());
         }
         [Test]
-        public void TestUriResolveAppendNoSlash()
+        public void TestResolveUriAppendNoSlash()
         {
             var u1 = _uriParser.Parse("http://someuri.org");
             var u2 = _uriParser.Parse("home");
@@ -31,7 +30,7 @@ namespace Axle.Core.Tests.Extensions
         }
 
         [Test]
-        public void TestUriResolveReplace()
+        public void TestResolveUriReplace()
         {
             var u1 = _uriParser.Parse("http://someuri.org/home");
             var u2 = _uriParser.Parse("../about");
@@ -41,7 +40,7 @@ namespace Axle.Core.Tests.Extensions
 
 
         [Test]
-        public void TestUriResolveAbsolute()
+        public void TestResolveAbsoluteUri()
         {
             var u1 = _uriParser.Parse("http://someuri.org/home");
             var u2 = _uriParser.Parse("http://anotheruri.org/home");
@@ -50,27 +49,27 @@ namespace Axle.Core.Tests.Extensions
         }
         
         [Test]
-        public void TestUriTryGetRelativePathFromAbsoluteUriSources()
+        public void TestTryGetRelativePathFromAbsoluteUriSources()
         {
             var u1 = _uriParser.Parse("http://someuri.org/a/b/c/d/e/f");
             var u2 = _uriParser.Parse("http://someuri.org/a/b/c/1/2/3");
             var gotRelativePath = u1.TryGetRelativePathFrom(u2, out var result);
             Assert.IsTrue(gotRelativePath);
-            Assert.AreEqual("../../../1/2/3",  result.ToString());
+            Assert.AreEqual("../../../1/2/3", result.ToString());
         }
         
         [Test]
-        public void TestUriTryGetRelativePathFromRelativeUriSources()
+        public void TestTryGetRelativePathFromRelativeUriSources()
         {
             var u1 = _uriParser.Parse("../a/b/c/d/e/f");
             var u2 = _uriParser.Parse("../a/b/c/1/2/3");
             var gotRelativePath = u1.TryGetRelativePathFrom(u2, out var result);
             Assert.IsTrue(gotRelativePath);
-            Assert.AreEqual("../../../1/2/3",  result.ToString());
+            Assert.AreEqual("../../../1/2/3", result.ToString());
         }
         
         [Test]
-        public void TestUriTryGetRelativePathFromInvalidInput()
+        public void TestTryGetRelativePathFromInvalidInput()
         {
             Assert.IsFalse(Axle.Extensions.Uri.UriExtensions.TryGetRelativePathFrom(
                 _uriParser.Parse("http://someuri.org/a/b/c/d/e/f"),

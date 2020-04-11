@@ -1,4 +1,5 @@
-﻿using Axle.Reflection;
+﻿using Axle.DependencyInjection;
+using Axle.Reflection;
 using Axle.Verification;
 
 
@@ -15,7 +16,7 @@ namespace Axle.Modularity
             _params = invokable.GetParameters();
         }
 
-        public void Invoke(object module, ModuleExporter exporter, string[] args)
+        public void Invoke(object module, IDependencyExporter exporter, string[] args)
         {
             switch (_params.Length)
             {

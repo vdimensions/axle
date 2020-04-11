@@ -12,9 +12,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
     <PackageReference Include="MySqlConnector" Version="0.59" />
   </ItemGroup>
   
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Data.targets" />
 </Project>

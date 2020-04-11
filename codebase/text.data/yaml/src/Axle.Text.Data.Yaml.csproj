@@ -5,11 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Text.Data" Version="$(PackageVersionRange)" />
     <PackageReference Include="YamlDotNet" Version="5.0.0" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Core.targets" />
+  <Import Project="../../../Reference.Axle.Text.Data.targets" />
 
 </Project>

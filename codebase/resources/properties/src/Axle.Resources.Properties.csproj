@@ -35,11 +35,9 @@
     <Folder Include="Properties\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Text.Data.Properties" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Core.targets" />
+  <Import Project="../../../Reference.Axle.Text.Data.targets" />
+  <Import Project="../../../Reference.Axle.Text.Data.Properties.targets" />
+  <Import Project="../../../Reference.Axle.Resources.targets" />
 </Project>
