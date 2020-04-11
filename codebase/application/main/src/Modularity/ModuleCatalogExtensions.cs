@@ -182,15 +182,12 @@ namespace Axle.Modularity
                         moduleType,
                         moduleCatalog.GetRequiredApplicationHostType(moduleType),
                         moduleCatalog.GetInitMethod(moduleType),
+                        moduleCatalog.GetEntryPointMethod(moduleType),
+                        moduleCatalog.GetTerminateMethod(moduleType),
                         moduleCatalog.GetDependencyInitializedMethods(moduleType),
                         moduleCatalog.GetDependencyTerminatedMethods(moduleType),
-                        moduleCatalog.GetTerminateMethod(moduleType),
-                        moduleCatalog.GetEntryPointMethod(moduleType),
                         utilizedModules,
-                        reportsToModules,
-                        moduleCatalog.GetCommandLineTrigger(moduleType),
-                        configurationInfo,
-                        requiredModules);
+                        reportsToModules, moduleCatalog.GetCommandLineTrigger(moduleType), configurationInfo, requiredModules);
                 }
                 catch (Exception e)
                 {

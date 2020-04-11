@@ -40,7 +40,7 @@ namespace Axle.Modularity
                     IDependencyExporter exporter, 
                     ILogger logger, 
                     string[] args, 
-                    ModuleState state) 
+                    ModuleStates state) 
                 : this(moduleInfo, instance, dependencyContainer, exporter, logger, args)
             {
                 State = state;
@@ -51,9 +51,9 @@ namespace Axle.Modularity
                 IDependencyContainer dependencyContainer, 
                 IDependencyExporter exporter, 
                 ILogger logger,
-                string[] args) => new ModuleContext(ModuleInfo, moduleInstance, dependencyContainer, exporter, logger, args, State|ModuleState.Instantiated);
+                string[] args) => new ModuleContext(ModuleInfo, moduleInstance, dependencyContainer, exporter, logger, args, State|ModuleStates.Instantiated);
 
-            private ModuleContext ChangeState(ModuleState state) => new ModuleContext(ModuleInfo, ModuleInstance, DependencyContainer, Exporter, Logger, Args, state);
+            private ModuleContext ChangeState(ModuleStates state) => new ModuleContext(ModuleInfo, ModuleInstance, DependencyContainer, Exporter, Logger, Args, state);
 
             private void Notify(IList<ModuleInfo> requiredModules, IDictionary<Type, ModuleContext> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
             {
@@ -112,15 +112,15 @@ namespace Axle.Modularity
                 var exporter = Exporter;
                 var requiredModules = ModuleInfo.RequiredModules;
                 var args = Args;
-                if ((State & ModuleState.Terminated) == ModuleState.Terminated)
+                if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it has been terminated.");
                 }
-                if ((State & ModuleState.Instantiated) != ModuleState.Instantiated)
+                if ((State & ModuleStates.Instantiated) != ModuleStates.Instantiated)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be initialized since it has not been instantiated.");
                 }
-                if ((State & ModuleState.Initialized) == ModuleState.Initialized)
+                if ((State & ModuleStates.Initialized) == ModuleStates.Initialized)
                 {
                     Logger.Warn("Initialization attempted, but module `{0}` was already initialized. ", ModuleInfo.Type.FullName);
                     return this;
@@ -129,29 +129,29 @@ namespace Axle.Modularity
                 Logger.Debug("Initializing module `{0}`...", ModuleInfo.Type.FullName);
 
                 ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter, args);
-                var result = ChangeState(State | ModuleState.Initialized);
+                var result = ChangeState(State | ModuleStates.Initialized);
                 Notify(requiredModules, moduleMetadata, m => m.DependencyInitializedMethods);
 
                 Logger.Write(LogSeverity.Info, "Module `{0}` initialized.", ModuleInfo.Type.FullName);
 
                 return result;
             }
-
+            
             public ModuleContext Run()
             {
-                if ((State & ModuleState.Terminated) == ModuleState.Terminated)
+                if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed since it has been terminated.");
                 }
-                if ((State & ModuleState.Instantiated) != ModuleState.Instantiated)
+                if ((State & ModuleStates.Instantiated) != ModuleStates.Instantiated)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be instantiated first. ");
                 }
-                if ((State & ModuleState.Initialized) != ModuleState.Initialized)
+                if ((State & ModuleStates.Initialized) != ModuleStates.Initialized)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be initialized first.");
                 }
-                if ((State & ModuleState.Ran) == ModuleState.Ran)
+                if ((State & ModuleStates.Ran) == ModuleStates.Ran)
                 {   //
                     // Module is already ran
                     //
@@ -159,7 +159,7 @@ namespace Axle.Modularity
                     return this;
                 }
                 ModuleInfo.EntryPointMethod?.Invoke(ModuleInstance, Args);
-                return ChangeState(State | ModuleState.Ran);
+                return ChangeState(State | ModuleStates.Ran);
             }
 
             public ModuleContext Terminate(IDictionary<Type, ModuleContext> moduleMetadata)
@@ -167,7 +167,7 @@ namespace Axle.Modularity
                 var exporter = Exporter;
                 var requiredModules = ModuleInfo.RequiredModules;
                 var args = Args;
-                if ((State & ModuleState.Terminated) == ModuleState.Terminated)
+                if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
                 {   //
                     // Module is already terminated
                     //
@@ -186,7 +186,7 @@ namespace Axle.Modularity
                     d.Dispose();
                 }
                 
-                var result = ChangeState(State | ModuleState.Terminated);
+                var result = ChangeState(State | ModuleStates.Terminated);
 
                 Logger.Write(LogSeverity.Info, "Module `{0}` terminated. ", ModuleInfo.Type.FullName);
 
@@ -198,7 +198,7 @@ namespace Axle.Modularity
             public IDependencyContainer DependencyContainer { get; }
             public IDependencyExporter Exporter { get; }
             public ILogger Logger { get; }
-            public ModuleState State { get; } = ModuleState.Hollow;
+            public ModuleStates State { get; } = ModuleStates.Hollow;
             public string[] Args { get; }
         }
     }

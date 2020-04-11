@@ -6,7 +6,7 @@ namespace Axle.Modularity
     partial class ModularityEngine
     {
         [Flags]
-        internal enum ModuleState : sbyte
+        internal enum ModuleStates : sbyte
         {
             Hollow = 0,
             Instantiated = 1,

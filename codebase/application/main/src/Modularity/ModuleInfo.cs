@@ -10,18 +10,17 @@ namespace Axle.Modularity
 {
     internal sealed class ModuleInfo
     {
-        internal ModuleInfo(
-            Type type, 
+        internal ModuleInfo(Type type,
             Type requiredApplicationHostType,
-            ModuleMethod initMethod, 
-            IEnumerable<ModuleCallback> initCallbacks, 
-            IEnumerable<ModuleCallback> terminateCallbacks, 
-            ModuleMethod terminateMethod, 
+            ModuleMethod initMethod,
             ModuleEntryMethod entryPointMethod,
+            ModuleMethod terminateMethod,
+            IEnumerable<ModuleCallback> initCallbacks,
+            IEnumerable<ModuleCallback> terminateCallbacks,
             IModuleReferenceAttribute[] utilizedModules,
             ReportsToAttribute[] reportsToModules,
-            ModuleCommandLineTriggerAttribute commandLineTrigger, 
-            ModuleConfigSectionAttribute configSectionInfo, 
+            ModuleCommandLineTriggerAttribute commandLineTrigger,
+            ModuleConfigSectionAttribute configSectionInfo,
             params ModuleInfo[] requiredModules)
         {
             Type = type.VerifyArgument(nameof(type)).IsNotAbstract();
@@ -29,23 +28,28 @@ namespace Axle.Modularity
                 .VerifyArgument(nameof(requiredApplicationHostType))
                 .IsOfType<IApplicationHost>();
             RequiredApplicationHostType = requiredApplicationHostType;
+            
             InitMethod = initMethod;
+            EntryPointMethod = entryPointMethod;
+            TerminateMethod = terminateMethod;
+            
             DependencyInitializedMethods = initCallbacks.OrderBy(x => x.Priority).ToArray();
             DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
-            TerminateMethod = terminateMethod;
-            EntryPointMethod = entryPointMethod;
+            
             UtilizedModules = utilizedModules;
             ReportsToModules = reportsToModules;
             RequiredModules = requiredModules;
+            
             CommandLineTrigger = commandLineTrigger;
+            
             ConfigSectionInfo = configSectionInfo;
         }
         
         internal ModuleMethod InitMethod { get; }
+        internal ModuleEntryMethod EntryPointMethod { get; }
+        internal ModuleMethod TerminateMethod { get; }
         internal ModuleCallback[] DependencyInitializedMethods { get; }
         internal ModuleCallback[] DependencyTerminatedMethods { get; }
-        internal ModuleMethod TerminateMethod { get; }
-        internal ModuleEntryMethod EntryPointMethod { get; }
         internal ModuleCommandLineTriggerAttribute CommandLineTrigger { get; }
         internal ModuleConfigSectionAttribute ConfigSectionInfo { get; }
         

@@ -105,6 +105,24 @@ namespace Axle.Modularity
             return method == null ? null : new ModuleMethod(method);
         }
 
+        public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
+        {
+            var introspector = new TypeIntrospector(moduleType);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
+            return method == null ? null : new ModuleEntryMethod(method);
+        }
+
+        public ModuleMethod GetTerminateMethod(Type moduleType)
+        {
+            var introspector = new TypeIntrospector(moduleType);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
+            return method == null ? null : new ModuleMethod(method);
+        }
+
         public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
         {
             return TypeAndInterfaces(moduleType, new HashSet<Type>())
@@ -147,26 +165,12 @@ namespace Axle.Modularity
                     .ToArray();
         }
 
-        public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
-        {
-            var introspector = new TypeIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
-            return m == null ? null : new ModuleEntryMethod(m);
-        }
-
         public ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType)
         {
             return CollectAttributes(
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
                     new List<ModuleConfigSectionAttribute>())
                 .LastOrDefault();
-        }
-
-        public ModuleMethod GetTerminateMethod(Type moduleType)
-        {
-            var introspector = new TypeIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
-            return m == null ? null : new ModuleMethod(m);
         }
 
         public UtilizesAttribute[] GetUtilizedModules(Type moduleType)
