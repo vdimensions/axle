@@ -182,6 +182,7 @@ namespace Axle.Modularity
                         moduleType,
                         moduleCatalog.GetRequiredApplicationHostType(moduleType),
                         moduleCatalog.GetInitMethod(moduleType),
+                        moduleCatalog.GetReadyMethod(moduleType),
                         moduleCatalog.GetEntryPointMethod(moduleType),
                         moduleCatalog.GetTerminateMethod(moduleType),
                         moduleCatalog.GetDependencyInitializedMethods(moduleType),

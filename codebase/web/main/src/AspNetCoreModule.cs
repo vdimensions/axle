@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Threading.Tasks;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
@@ -16,9 +17,9 @@ using Microsoft.Extensions.Logging;
 namespace Axle.Web.AspNetCore
 {
     [Module]
-    internal sealed class AspNetCoreModule
+    internal sealed class AspNetCoreModule : ILoggingServiceConfigurer
     {
-        private readonly IWebHostBuilder _host;
+        private readonly IWebHostBuilder _hostBuilder;
         private readonly Application _app;
         private readonly IConfiguration _appConfig;
         private readonly IList<IWebHostConfigurer> _hostConfigurers = new List<IWebHostConfigurer>();
@@ -27,17 +28,15 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IAspNetCoreApplicationStartHandler> _appStartHandlers = new List<IAspNetCoreApplicationStartHandler>();
         private readonly IList<IAspNetCoreApplicationStoppedHandler> _appStoppedHandlers = new List<IAspNetCoreApplicationStoppedHandler>();
         private readonly IList<IAspNetCoreApplicationStoppingHandler> _appStoppingHandlers = new List<IAspNetCoreApplicationStoppingHandler>();
-        private readonly ILoggingServiceProvider _loggingServiceProvider;
+        private ILoggingServiceProvider _loggingServiceProvider;
+        private Task _runTask;
 
-        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host, ILoggingServiceProvider loggingServiceProvider)
+        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder hostBuilder)
         {
-            _host = host;
+            _hostBuilder = hostBuilder;
             _app = app;
             _appConfig = appConfig;
-            _loggingServiceProvider = loggingServiceProvider;
         }
-        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
-            : this(app, appConfig, host, null) { }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleInit]
@@ -154,22 +153,32 @@ namespace Axle.Web.AspNetCore
                 _app.ShutDown();
             }
         }
-
-        [ModuleEntryPoint]
+        
+        public void Configure(ILoggingServiceProvider loggingServiceProvider)
+        {
+            _loggingServiceProvider = loggingServiceProvider;
+        }
+        
+        [ModuleReady]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        internal void Run(string[] args)
+        internal void Ready(string[] args)
+        {
+            _runTask = RunAsync();
+        }
+
+        private async Task RunAsync()
         {
             Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new Axle.Configuration.Adapters.AxleConfigurationProvider(_appConfig);
             string startupAssemblyKey = null, applicationKey = null, entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
-            var host = _host
+            var hostBuilder = _hostBuilder
                 // configure the web host with a re-adapted Axle application configuration
                 .UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }))
                 // ensure ApplicationKey setting is passed, and fallback to the executing assembly name
-                .UseSetting(WebHostDefaults.ApplicationKey, applicationKey = (_host.GetSetting(WebHostDefaults.ApplicationKey) ?? entryAssemblyName))
+                .UseSetting(WebHostDefaults.ApplicationKey, applicationKey = (_hostBuilder.GetSetting(WebHostDefaults.ApplicationKey) ?? entryAssemblyName))
                 // ensure StartupAssemblyKey setting is passed, and fallback to the executing assembly name
-                .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey = (_host.GetSetting(WebHostDefaults.StartupAssemblyKey) ?? entryAssemblyName));
+                .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey = (_hostBuilder.GetSetting(WebHostDefaults.StartupAssemblyKey) ?? entryAssemblyName));
             
-            ConfigureHost(host)
+            await ConfigureHost(hostBuilder)
                 .ConfigureServices(ConfigureServices)
                 .Configure(ConfigureApp)
                 // we need to restore the ApplicationKey/StartupAssemblyKey as they are being reset by the `Configure` method.
@@ -177,9 +186,16 @@ namespace Axle.Web.AspNetCore
                 .UseSetting(WebHostDefaults.ApplicationKey, applicationKey)
                 .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey)
                 .Build()
-                .Run();
+                .RunAsync();
         }
-        
+
+        [ModuleEntryPoint]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        internal void Run(string[] args)
+        {
+            _runTask.Wait();
+        }
+
         [ModuleTerminate]
         internal void Terminate()
         {

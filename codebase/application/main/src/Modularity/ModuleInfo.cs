@@ -13,6 +13,7 @@ namespace Axle.Modularity
         internal ModuleInfo(Type type,
             Type requiredApplicationHostType,
             ModuleMethod initMethod,
+            ModuleMethod readyMethod,
             ModuleEntryMethod entryPointMethod,
             ModuleMethod terminateMethod,
             IEnumerable<ModuleCallback> initCallbacks,
@@ -30,6 +31,7 @@ namespace Axle.Modularity
             RequiredApplicationHostType = requiredApplicationHostType;
             
             InitMethod = initMethod;
+            ReadyMethod = readyMethod;
             EntryPointMethod = entryPointMethod;
             TerminateMethod = terminateMethod;
             
@@ -46,6 +48,7 @@ namespace Axle.Modularity
         }
         
         internal ModuleMethod InitMethod { get; }
+        internal ModuleMethod ReadyMethod { get; }
         internal ModuleEntryMethod EntryPointMethod { get; }
         internal ModuleMethod TerminateMethod { get; }
         internal ModuleCallback[] DependencyInitializedMethods { get; }

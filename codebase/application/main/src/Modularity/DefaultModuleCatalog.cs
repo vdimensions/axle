@@ -104,6 +104,15 @@ namespace Axle.Modularity
                 .SingleOrDefault(x => x.IsDefined<ModuleInitAttribute>(true));
             return method == null ? null : new ModuleMethod(method);
         }
+        
+        public ModuleMethod GetReadyMethod(Type moduleType)
+        {
+            var introspector = new TypeIntrospector(moduleType);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleReadyAttribute>(true));
+            return method == null ? null : new ModuleMethod(method);
+        }
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
         {

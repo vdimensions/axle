@@ -1,24 +1,27 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration;
+using Axle.Logging;
+using Axle.Modularity;
 
-
-namespace Axle.Modularity
+namespace Axle
 {
-    internal sealed class ModuleCatalogWrapper : IModuleCatalog
+    internal sealed class ApplicationModuleCatalog : IModuleCatalog
     {
         private readonly IModuleCatalog _originalCatalog;
-        private readonly Type[] _parentModuleTypes =
-        {
-            typeof(StatisticsModule),
-            //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            //typeof(DynamicModuleLoader)
-            //#endif
-            typeof(ConfigurationModule)
-        };
+        private readonly HashSet<Type> _applicationModuleTypes = new HashSet<Type>
+            {
+                typeof(StatisticsModule),
+                //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                //typeof(DynamicModuleLoader)
+                //#endif
+                typeof(ConfigurationModule),
+                typeof(LoggingModule),
+            };
 
-        public ModuleCatalogWrapper(IModuleCatalog originalCatalog)
+        public ApplicationModuleCatalog(IModuleCatalog originalCatalog)
         {
             _originalCatalog = originalCatalog;
         }
@@ -32,15 +35,14 @@ namespace Axle.Modularity
 
         public Type[] GetRequiredModules(Type moduleType)
         {
-            var result = _originalCatalog.GetRequiredModules(moduleType);
-            if (_parentModuleTypes.All(t => t != moduleType))
-            {
-                result = result.Union(_parentModuleTypes).ToArray();
-            }
-            return result;
+            return _applicationModuleTypes.Contains(moduleType)
+                ? _originalCatalog.GetRequiredModules(moduleType)
+                : _applicationModuleTypes.Union(_originalCatalog.GetRequiredModules(moduleType)).ToArray();
         }
 
         public ModuleMethod GetInitMethod(Type moduleType) => _originalCatalog.GetInitMethod(moduleType);
+        
+        public ModuleMethod GetReadyMethod(Type moduleType) => _originalCatalog.GetReadyMethod(moduleType);
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType) => _originalCatalog.GetEntryPointMethod(moduleType);
 

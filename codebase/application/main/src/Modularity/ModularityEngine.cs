@@ -174,6 +174,15 @@ namespace Axle.Modularity
                 _modules.AddOrUpdate(
                     initializedModule,
                     _ => throw new InvalidOperationException(),
+                    (_, m) =>  m.Prepare());
+            }
+            
+            // TODO: runnable modules cause blocking. We need to delegate running to the app host
+            foreach (var initializedModule in _initializedModules)
+            {
+                _modules.AddOrUpdate(
+                    initializedModule,
+                    _ => throw new InvalidOperationException(),
                     (_, m) =>  m.Run());
             }
             _initializedModules.Clear();

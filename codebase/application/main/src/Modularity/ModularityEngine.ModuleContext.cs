@@ -137,6 +137,31 @@ namespace Axle.Modularity
                 return result;
             }
             
+            public ModuleContext Prepare()
+            {
+                if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed since it has been terminated.");
+                }
+                if ((State & ModuleStates.Instantiated) != ModuleStates.Instantiated)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be instantiated first. ");
+                }
+                if ((State & ModuleStates.Initialized) != ModuleStates.Initialized)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be initialized first.");
+                }
+                if ((State & ModuleStates.Prepared) == ModuleStates.Prepared)
+                {   //
+                    // Module is already ran
+                    //
+                    Logger.Warn("Preparation attempted, but module `{0}` was already prepared. ", ModuleInfo.Type.FullName);
+                    return this;
+                }
+                ModuleInfo.ReadyMethod?.Invoke(ModuleInstance, Exporter, Args);
+                return ChangeState(State | ModuleStates.Prepared);
+            }
+            
             public ModuleContext Run()
             {
                 if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
@@ -150,6 +175,10 @@ namespace Axle.Modularity
                 if ((State & ModuleStates.Initialized) != ModuleStates.Initialized)
                 {
                     throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be initialized first.");
+                }
+                if ((State & ModuleStates.Prepared) != ModuleStates.Prepared)
+                {
+                    throw new InvalidOperationException($"Module `{ModuleInfo.Type.FullName}` cannot be executed. It must be prepared first.");
                 }
                 if ((State & ModuleStates.Ran) == ModuleStates.Ran)
                 {   //

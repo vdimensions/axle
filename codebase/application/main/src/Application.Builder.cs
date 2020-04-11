@@ -13,7 +13,7 @@ namespace Axle
         private sealed partial class Builder
         {
             private readonly object _syncRoot = new object();
-            private readonly ModuleCatalogWrapper _moduleCatalog = new ModuleCatalogWrapper(new DefaultModuleCatalog());
+            private readonly ApplicationModuleCatalog _moduleCatalog = new ApplicationModuleCatalog(new DefaultModuleCatalog());
             private readonly IList<Type> _moduleTypes = new List<Type>();
             private readonly IList<Action<IDependencyContainer>> _onContainerReadyHandlers = new List<Action<IDependencyContainer>>();
 
@@ -74,7 +74,6 @@ namespace Axle
                         onContainerReadyHandler.Invoke(rootContainer);
                     }
                     var app = new Application(rankedModules, host, rootContainer, finalConfig, args);
-                    aggregatingLoggingService.FlushMessages();
                     app.Run();
                     return app;
                 }

@@ -11,7 +11,8 @@ namespace Axle.Modularity
             Hollow = 0,
             Instantiated = 1,
             Initialized = 2,
-            Ran = 4,
+            Prepared = 4,
+            Ran = 8,
             Terminated = -1,
         }
     }
