@@ -21,6 +21,10 @@ namespace Axle.DependencyInjection
         /// </exception>
         object Resolve(Type type, string name);
         
+        /// <summary>
+        /// Gets a reference to the parent <see cref="IDependencyContext"/> of the dependency context hierarchy.
+        /// In case the current instance is the root of the context hierarchy, the value returned will be <c>null</c>.
+        /// </summary>
         IDependencyContext Parent { get; }
     }
 }
