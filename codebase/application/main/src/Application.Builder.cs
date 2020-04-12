@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
@@ -8,6 +7,73 @@ using Axle.Modularity;
 
 namespace Axle
 {
+    /*
+    internal sealed class ApplicationContainer
+    {
+        private Application _app;
+
+        private readonly IDependencyContainerFactory _dependencyContainerFactory;
+        private readonly IDependencyContext _rootContext;
+        private readonly ILoggingService _loggingService;
+
+        public ApplicationContainer(
+            IDependencyContainerFactory dependencyContainerFactory, 
+            IDependencyContext rootContext, 
+            ILoggingService loggingService)
+        {
+            _rootContext = rootContext;
+            _loggingService = loggingService;
+            _dependencyContainerFactory = new ApplicationContainerFactory(dependencyContainerFactory, _rootContext);
+        }
+
+
+        [ModuleEntryPoint]
+        public void Run()
+        {
+            var aggregatingLoggingService = new AggregatingLoggingService(_loggingService == null ? new ILoggingService[0] : new[]{_loggingService});
+            var host = new AxleApplicationHost(_dependencyContainerFactory, aggregatingLoggingService);
+            try
+            {
+                var rootContainer = host.DependencyContainerFactory.CreateContainer();
+                rootContainer
+                    .Export(aggregatingLoggingService)
+                    .Export(new ApplicationContainerFactory(host.DependencyContainerFactory, rootContainer))
+                    .Export(host);
+                
+                var finalConfig = _config.Append(EnvironmentConfigSource.Instance);            
+                var modulesConfigSection = finalConfig
+                    .LoadConfiguration()
+                    .GetSection("axle")?.GetSection("application")?.GetSection("modules");
+                
+                var includedModules = modulesConfigSection?.GetSection("include");
+                var excludedModules = modulesConfigSection?.GetSection("exclude");
+                if (includedModules != null)
+                {
+                    // TODO: add modules to _moduleTypes
+                }
+                if (excludedModules != null)
+                {
+                    // TODO: remove excluded modules from _moduleTypes
+                }
+                
+                foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
+                {
+                    onContainerReadyHandler.Invoke(rootContainer);
+                }
+                // TODO: remove the host usage here
+                var app = Application.Launch(_moduleCatalog, _moduleTypes, host, rootContainer, finalConfig, args);
+                app.Run();
+                return app;
+            }
+            catch (Exception)
+            {
+                host.Dispose();
+                throw;
+            }
+        }
+    }
+    */
+    
     partial class Application
     {
         private sealed partial class Builder
@@ -19,8 +85,7 @@ namespace Axle
 
             private LayeredConfigManager _config = new LayeredConfigManager();
             private ILoggingService _loggingService;
-            private IDependencyContainerFactory _dependencyContainerFactory;
-            private volatile IApplicationHost _host;
+            private IDependencyContainerFactory _dependencyContainerFactory = new AxleDependencyContainerFactory();
 
             private Builder Load(IEnumerable<Type> types)
             {
@@ -36,30 +101,6 @@ namespace Axle
 
             public Application Run(params string[] args)
             {
-                var finalConfig = _config.Append(EnvironmentConfigSource.Instance);            
-                var modulesConfigSection = finalConfig
-                    .LoadConfiguration()
-                    .GetSection("axle")?.GetSection("application")?.GetSection("modules");
-                var includedModules = modulesConfigSection?.GetSection("include");
-                var excludedModules = modulesConfigSection?.GetSection("exclude");
-                if (includedModules != null)
-                {
-                    // TODO: add modules to _moduleTypes
-                }
-                if (excludedModules != null)
-                {
-                    // TODO: remove excluded modules from _moduleTypes
-                }
-
-                var loadedModules = _moduleCatalog.GetModules(
-                    _moduleTypes.ToArray(),
-                    _host?.GetType(), 
-                    args);
-                
-                var rankedModules = _moduleCatalog
-                    .RankModules(loadedModules)
-                    .ToArray();
-
                 var aggregatingLoggingService = new AggregatingLoggingService(_loggingService == null ? new ILoggingService[0] : new[]{_loggingService});
                 var host = new AxleApplicationHost(_dependencyContainerFactory, aggregatingLoggingService);
                 try
@@ -67,13 +108,31 @@ namespace Axle
                     var rootContainer = host.DependencyContainerFactory.CreateContainer();
                     rootContainer
                         .Export(aggregatingLoggingService)
-                        .Export(host.DependencyContainerFactory)
+                        .Export(new ApplicationContainerFactory(host.DependencyContainerFactory, rootContainer))
                         .Export(host);
+                    
+                    var finalConfig = _config.Append(EnvironmentConfigSource.Instance);            
+                    var modulesConfigSection = finalConfig
+                        .LoadConfiguration()
+                        .GetSection("axle")?.GetSection("application")?.GetSection("modules");
+                    
+                    var includedModules = modulesConfigSection?.GetSection("include");
+                    var excludedModules = modulesConfigSection?.GetSection("exclude");
+                    if (includedModules != null)
+                    {
+                        // TODO: add modules to _moduleTypes
+                    }
+                    if (excludedModules != null)
+                    {
+                        // TODO: remove excluded modules from _moduleTypes
+                    }
+                    
                     foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
                     {
                         onContainerReadyHandler.Invoke(rootContainer);
                     }
-                    var app = new Application(rankedModules, host, rootContainer, finalConfig, args);
+                    // TODO: remove the host usage here
+                    var app = Launch(_moduleCatalog, _moduleTypes, host, rootContainer, finalConfig, args);
                     app.Run();
                     return app;
                 }

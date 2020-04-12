@@ -4,19 +4,19 @@ using System.Collections.Generic;
 using System.Reflection;
 #endif
 using System.Threading.Tasks;
-
 using Axle.DependencyInjection;
 using Axle.Logging;
+using Axle.Modularity;
 using Axle.Threading.Extensions.Tasks;
 
 
-namespace Axle.Modularity
+namespace Axle
 {
-    partial class ModularityEngine
+    partial class Application
     {
-        private sealed class ModuleContext
+        private sealed class ModuleWrapper
         {
-            private ModuleContext(
+            private ModuleWrapper(
                 ModuleInfo moduleInfo, 
                 object instance, 
                 IDependencyContainer dependencyContainer, 
@@ -32,8 +32,8 @@ namespace Axle.Modularity
                 Args = args;
             }
 
-            public ModuleContext(ModuleInfo moduleInfo) : this(moduleInfo, null, null, null, null, new string[0]) { }
-            private ModuleContext(
+            public ModuleWrapper(ModuleInfo moduleInfo) : this(moduleInfo, null, null, null, null, new string[0]) { }
+            private ModuleWrapper(
                     ModuleInfo moduleInfo, 
                     object instance, 
                     IDependencyContainer dependencyContainer, 
@@ -46,16 +46,16 @@ namespace Axle.Modularity
                 State = state;
             }
 
-            public ModuleContext UpdateInstance(
+            public ModuleWrapper UpdateInstance(
                 object moduleInstance, 
                 IDependencyContainer dependencyContainer, 
                 IDependencyExporter exporter, 
                 ILogger logger,
-                string[] args) => new ModuleContext(ModuleInfo, moduleInstance, dependencyContainer, exporter, logger, args, State|ModuleStates.Instantiated);
+                string[] args) => new ModuleWrapper(ModuleInfo, moduleInstance, dependencyContainer, exporter, logger, args, State|ModuleStates.Instantiated);
 
-            private ModuleContext ChangeState(ModuleStates state) => new ModuleContext(ModuleInfo, ModuleInstance, DependencyContainer, Exporter, Logger, Args, state);
+            private ModuleWrapper ChangeState(ModuleStates state) => new ModuleWrapper(ModuleInfo, ModuleInstance, DependencyContainer, Exporter, Logger, Args, state);
 
-            private void Notify(IList<ModuleInfo> requiredModules, IDictionary<Type, ModuleContext> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
+            private void Notify(IList<ModuleInfo> requiredModules, IDictionary<Type, ModuleWrapper> moduleMetadata, Func<ModuleInfo, ModuleCallback[]> callbackProvider)
             {
                 if (requiredModules.Count <= 0)
                 {
@@ -107,7 +107,7 @@ namespace Axle.Modularity
                 }
             }
 
-            public ModuleContext Init(IDictionary<Type, ModuleContext> moduleMetadata)
+            public ModuleWrapper Init(IDictionary<Type, ModuleWrapper> moduleMetadata)
             {
                 var exporter = Exporter;
                 var requiredModules = ModuleInfo.RequiredModules;
@@ -137,7 +137,7 @@ namespace Axle.Modularity
                 return result;
             }
             
-            public ModuleContext Prepare()
+            public ModuleWrapper Prepare()
             {
                 if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
                 {
@@ -162,7 +162,7 @@ namespace Axle.Modularity
                 return ChangeState(State | ModuleStates.Prepared);
             }
             
-            public ModuleContext Run()
+            public ModuleWrapper Run()
             {
                 if ((State & ModuleStates.Terminated) == ModuleStates.Terminated)
                 {
@@ -191,7 +191,7 @@ namespace Axle.Modularity
                 return ChangeState(State | ModuleStates.Ran);
             }
 
-            public ModuleContext Terminate(IDictionary<Type, ModuleContext> moduleMetadata)
+            public ModuleWrapper Terminate(IDictionary<Type, ModuleWrapper> moduleMetadata)
             {
                 var exporter = Exporter;
                 var requiredModules = ModuleInfo.RequiredModules;

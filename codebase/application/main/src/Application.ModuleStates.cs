@@ -1,9 +1,9 @@
 ﻿using System;
 
 
-namespace Axle.Modularity
+namespace Axle
 {
-    partial class ModularityEngine
+    partial class Application
     {
         [Flags]
         internal enum ModuleStates : sbyte

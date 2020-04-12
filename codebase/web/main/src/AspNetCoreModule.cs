@@ -2,6 +2,7 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
 using System.Threading.Tasks;
 using Axle.Configuration;
 using Axle.DependencyInjection;
@@ -20,7 +21,6 @@ namespace Axle.Web.AspNetCore
     internal sealed class AspNetCoreModule : ILoggingServiceConfigurer
     {
         private readonly IWebHostBuilder _hostBuilder;
-        private readonly Application _app;
         private readonly IConfiguration _appConfig;
         private readonly IList<IWebHostConfigurer> _hostConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
@@ -28,13 +28,13 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IAspNetCoreApplicationStartHandler> _appStartHandlers = new List<IAspNetCoreApplicationStartHandler>();
         private readonly IList<IAspNetCoreApplicationStoppedHandler> _appStoppedHandlers = new List<IAspNetCoreApplicationStoppedHandler>();
         private readonly IList<IAspNetCoreApplicationStoppingHandler> _appStoppingHandlers = new List<IAspNetCoreApplicationStoppingHandler>();
-        private ILoggingServiceProvider _loggingServiceProvider;
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private ILoggingServiceRegistry _loggingServiceRegistry;
         private Task _runTask;
 
-        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder hostBuilder)
+        public AspNetCoreModule(IConfiguration appConfig, IWebHostBuilder hostBuilder)
         {
             _hostBuilder = hostBuilder;
-            _app = app;
             _appConfig = appConfig;
         }
 
@@ -114,11 +114,11 @@ namespace Axle.Web.AspNetCore
                 cfg.Configure(app, hostingEnvironment);
             }
 
-            if (_loggingServiceProvider != null)
+            if (_loggingServiceRegistry != null)
             {
                 var loggerFactory = services.GetRequiredService<ILoggerFactory>();
                 var msLog = new MicrosoftLoggingService(loggerFactory);
-                _loggingServiceProvider.AddLoggingService(msLog);
+                _loggingServiceRegistry.RegisterLoggingService(msLog);
             }
         }
 
@@ -150,13 +150,14 @@ namespace Axle.Web.AspNetCore
             }
             finally
             {
-                _app.ShutDown();
+                _cancellationTokenSource.Cancel();
+                //_cancellationToken.a()
             }
         }
         
-        public void Configure(ILoggingServiceProvider loggingServiceProvider)
+        public void Configure(ILoggingServiceRegistry loggingServiceRegistry)
         {
-            _loggingServiceProvider = loggingServiceProvider;
+            _loggingServiceRegistry = loggingServiceRegistry;
         }
         
         [ModuleReady]
@@ -186,14 +187,14 @@ namespace Axle.Web.AspNetCore
                 .UseSetting(WebHostDefaults.ApplicationKey, applicationKey)
                 .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey)
                 .Build()
-                .RunAsync();
+                .RunAsync(_cancellationTokenSource.Token);
         }
 
         [ModuleEntryPoint]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Run(string[] args)
         {
-            _runTask.Wait();
+            _runTask.Wait(_cancellationTokenSource.Token);
         }
 
         [ModuleTerminate]
@@ -202,6 +203,12 @@ namespace Axle.Web.AspNetCore
             _appStartHandlers.Clear();
             _appStoppingHandlers.Clear();
             _appStoppedHandlers.Clear();
+            _runTask?.Dispose();
+            if (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                _cancellationTokenSource.Cancel(false);
+            }
+            _cancellationTokenSource.Dispose();
         }
     }
 }

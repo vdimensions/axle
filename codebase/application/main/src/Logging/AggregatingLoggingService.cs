@@ -8,7 +8,7 @@ using Axle.Threading.ReaderWriterLock;
 
 namespace Axle.Logging
 {
-    internal sealed class AggregatingLoggingService : ILoggingService, IDisposable, ILoggingServiceProvider
+    internal sealed class AggregatingLoggingService : ILoggingService, IDisposable, ILoggingServiceRegistry
     {
         internal sealed class AggregatingLogger : ILogger
         {
@@ -94,7 +94,7 @@ namespace Axle.Logging
             _accumulatingLoggingService?.Dispose();
         }
 
-        void ILoggingServiceProvider.AddLoggingService(ILoggingService service)
+        void ILoggingServiceRegistry.RegisterLoggingService(ILoggingService service)
         {
             _loggingServices.Enqueue(service);
             Interlocked.Increment(ref _version);
@@ -103,13 +103,13 @@ namespace Axle.Logging
         public void FlushMessages()
         {
             var acc = _accumulatingLoggingService;
-            Interlocked.Exchange(ref _accumulatingLoggingService, null);
-            Interlocked.Increment(ref _version);
             if (_loggingServices.IsEmpty)
             {
                 _loggingServices.Enqueue(new AxleLoggingService());
                 Interlocked.Increment(ref _version);
             }
+            Interlocked.Exchange(ref _accumulatingLoggingService, null);
+            Interlocked.Increment(ref _version);
             acc.FlushTo(this);
         }
     }

@@ -28,6 +28,7 @@ namespace Axle
                 string.Empty
                 #endif
                 ) { }
+        
         public AxleApplicationHost() : this(new AxleDependencyContainerFactory(), new AxleLoggingService()) { }
 
         public void Dispose()

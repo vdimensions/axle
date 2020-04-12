@@ -17,6 +17,7 @@ namespace Axle.Configuration.Tests
         {
             public string Default { get; set; }
         }
+        
         [Test]
         public void Test()
         {

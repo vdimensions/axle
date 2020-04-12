@@ -61,9 +61,7 @@ namespace Axle.Configuration
         {
             var configSection = GetSection(config, sectionName);
             return configSection != null 
-                ? new DefaultBinder().Bind(
-                    new ConfigurationBindingValueProvider(configSection), 
-                    sectionType)
+                ? new DefaultBinder().Bind(new ConfigurationBindingValueProvider(configSection), sectionType)
                 : null;
         }
 
@@ -71,9 +69,7 @@ namespace Axle.Configuration
         {
             var configSection = GetSection(config, sectionName);
             return configSection != null
-                ? (T) new DefaultBinder().Bind(
-                    new ConfigurationBindingValueProvider(configSection), 
-                    new T())
+                ? (T) new DefaultBinder().Bind(new ConfigurationBindingValueProvider(configSection), new T())
                 : null;
         }
     }

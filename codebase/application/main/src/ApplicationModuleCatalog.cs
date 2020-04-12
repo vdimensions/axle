@@ -17,8 +17,9 @@ namespace Axle
                 //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 //typeof(DynamicModuleLoader)
                 //#endif
-                typeof(ConfigurationModule),
-                typeof(LoggingModule),
+                typeof(ConfigSourceRegistry),   // allow registering custom config providers
+                //typeof(ConfigurationModule),    // makes sure config providers are registered before this module 
+                typeof(LoggingModule),          // guarantees the log messages during app initialization will be flushed 
             };
 
         public ApplicationModuleCatalog(IModuleCatalog originalCatalog)
