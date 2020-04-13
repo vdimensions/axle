@@ -7,6 +7,11 @@ using Axle.Verification;
 
 namespace Axle.References
 {
+    /// <summary>
+    /// A container object for a non-null value. This object has the same semantics as the <see cref="Nullable{T}"/>
+    /// struct, but is relevant only on reference types.
+    /// The <see cref="Nullsafe{T}.HasValue"/> property indicates whether there is a value available.
+    /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif

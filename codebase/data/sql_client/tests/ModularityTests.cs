@@ -10,7 +10,7 @@ namespace Axle.Data.SqlClient.Tests
         [Test]
         public void TestSqlClientProviderIsRegistered()
         {
-            IContainer dependencyContainer = null;
+            IDependencyContainer dependencyContainer = null;
             using (Application.Build().ConfigureDependencies(c => dependencyContainer = c).UseSqlClient().Run())
             {
                 var providers = dependencyContainer.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();

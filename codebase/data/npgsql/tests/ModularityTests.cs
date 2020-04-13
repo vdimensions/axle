@@ -10,7 +10,7 @@ namespace Axle.Data.Npgsql.Tests
         [Test]
         public void TestNpgsqlProviderIsRegistered()
         {
-            IContainer container = null;
+            IDependencyContainer container = null;
             using (Application.Build().ConfigureDependencies(c => container = c).UsePostgreSql().Run())
             {
                 var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();

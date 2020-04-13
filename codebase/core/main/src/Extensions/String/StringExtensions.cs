@@ -1578,15 +1578,6 @@ namespace Axle.Extensions.String
             this
             #endif
             char separator, params string[] values) => JoinInternal(values, separator.ToString());
-
-        #if NETSTANDARD || NET35_OR_NEWER
-        [Obsolete] public static string Join(this IEnumerable<string> @this, string separator) { return JoinInternal(@this, separator); }
-        [Obsolete] public static string Join(this IEnumerable<string> @this, char separator) { return JoinInternal(@this, separator.ToString()); }
-        [Obsolete] public static string Join(this IEnumerable<string> @this) { return JoinInternal(@this, string.Empty); }
-        [Obsolete] public static string Join(this string[] @this, string separator) { return JoinInternal(@this, separator); }
-        [Obsolete] public static string Join(this string[] @this, char separator) { return JoinInternal(@this, separator.ToString()); }
-        [Obsolete] public static string Join(this string[] @this) { return JoinInternal(@this, string.Empty); }
-        #endif
     }
 }
 #endif

@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -221,6 +222,17 @@ namespace Axle.Extensions.Uri
             return new System.Uri(baseUri, uri);
         }
 
+        /// <summary>
+        /// Creates a new <see cref="System.Uri">URI</see> using the address of an existing
+        /// <see cref="System.Uri">URI</see>, but with a different <see cref="Uri.Host">host</see>.
+        /// </summary>
+        /// <param name="uri">The <see cref="System.Uri">URI</see> form which the address will be taken. </param>
+        /// <param name="hostname">The hostname to be used for the new <see cref="System.Uri">URI</see>.</param>
+        /// <returns>
+        /// A new <see cref="System.Uri">URI</see> using the address of an existing <see cref="System.Uri">URI</see>,
+        /// that uses the <see cref="System.Uri.Scheme">scheme</see> provided by the <paramref name="hostname"/>
+        /// parameter.
+        /// </returns>
         public static System.Uri ChangeHost(this System.Uri uri, string hostname) 
         {
             Verifier.IsTrue(Verifier.IsNotNull(Verifier.VerifyArgument(uri, nameof(uri))), x => x.IsAbsoluteUri, "Specified URI must be absolute!");
@@ -496,7 +508,7 @@ namespace Axle.Extensions.Uri
             var comparer = StringComparer.OrdinalIgnoreCase;
 
             if (baseUri.IsAbsoluteUri && targetUri.IsAbsoluteUri 
-            && (!comparer.Equals(baseUri.Scheme, targetUri.Scheme) || !comparer.Equals(baseUri.Host, targetUri.Host)))
+                && (!comparer.Equals(baseUri.Scheme, targetUri.Scheme) || !comparer.Equals(baseUri.Host, targetUri.Host)))
             {
                 result = null;
                 return false;

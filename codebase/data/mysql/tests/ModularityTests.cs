@@ -23,7 +23,7 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestMySqlProviderIsRegistered()
         {
-            IContainer dependencyContainer = null;
+            IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .UseMySql();
@@ -39,7 +39,7 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestConnectionStringBinding()
         {
-            IContainer dependencyContainer = null;
+            IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
@@ -57,7 +57,7 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestConnectionStringsBinding()
         {
-            IContainer dependencyContainer = null;
+            IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
@@ -75,7 +75,7 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestDataSourceDiscovery()
         {
-            IContainer dependencyContainer = null;
+            IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()
@@ -101,7 +101,7 @@ namespace Axle.Data.MySql.Tests
         [Test]
         public void TestDataSourceCmdDiscovery()
         {
-            IContainer dependencyContainer = null;
+            IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .EnableLegacyConfig()

@@ -203,12 +203,12 @@ namespace Axle.Web.AspNetCore
             _appStartHandlers.Clear();
             _appStoppingHandlers.Clear();
             _appStoppedHandlers.Clear();
-            _runTask?.Dispose();
             if (!_cancellationTokenSource.IsCancellationRequested)
             {
                 _cancellationTokenSource.Cancel(false);
             }
             _cancellationTokenSource.Dispose();
+            _runTask?.Dispose();
         }
     }
 }

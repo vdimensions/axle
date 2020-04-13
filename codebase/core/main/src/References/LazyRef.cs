@@ -19,8 +19,7 @@ namespace Axle.References
             : this(new Lazy<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value, mode)) { }
         public LazyRef(Func<T> valueFactory)
             : this(new Lazy<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value)) { }
-
-        internal LazyRef(){}
+        internal LazyRef() { }
 
         /// <summary>
         /// Tries to retrieve the value that is referenced by the current <see cref="ILazyReference{T}"/> object.
