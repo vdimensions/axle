@@ -151,7 +151,6 @@ namespace Axle.Web.AspNetCore
             finally
             {
                 _cancellationTokenSource.Cancel();
-                //_cancellationToken.a()
             }
         }
         
