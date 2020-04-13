@@ -3,6 +3,12 @@
 
 namespace Axle.Conversion
 {
+    /// <summary>
+    /// An abstract class to serve as a basis in implementing the <see cref="ITwoWayConverter{TSource,TTarget}"/>
+    /// interface.
+    /// </summary>
+    /// <typeparam name="TS">The source type of the conversion.</typeparam>.
+    /// <typeparam name="TD">The destination type of the conversion</typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
@@ -48,6 +54,14 @@ namespace Axle.Conversion
             }
         }
 
+        /// <summary>
+        /// Returns an instance of <see cref="ReverseConverter{T, T}"/>. This is effectively the same converter
+        /// instance exposed under an interface where the <typeparam name="TS"></typeparam> and
+        /// <typeparam name="TS"></typeparam> have been swapped.
+        /// </summary>
+        /// <returns>
+        /// An instance of <see cref="ReverseConverter{T, T}"/>.
+        /// </returns>
         public IConverter<TD, TS> Invert() => new ReverseConverter<TD, TS>(this);
 
         /// <summary>

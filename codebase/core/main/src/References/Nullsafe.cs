@@ -23,6 +23,18 @@ namespace Axle.References
         /// </summary>
         public static readonly Nullsafe<T> None = new Nullsafe<T>();
 
+        /// <summary>
+        /// Creates a new <see cref="Nullsafe{T}"/> instance with the provided <paramref name="value"/>. 
+        /// </summary>
+        /// <param name="value">
+        /// The value for the <see cref="Nullsafe{T}"/> instance to be created
+        /// </param>
+        /// <returns>
+        /// A new <see cref="Nullsafe{T}"/> instance with the provided <paramref name="value"/>. 
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="value"/> is <c>null</c>.
+        /// </exception>
         public static Nullsafe<T> Some(T value)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value)));
@@ -44,6 +56,7 @@ namespace Axle.References
             _value = value;
         }
 
+        /// <inheritdoc />
         public override bool Equals(object other)
         {
             switch (other)

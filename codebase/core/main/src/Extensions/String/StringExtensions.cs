@@ -30,7 +30,8 @@ namespace Axle.Extensions.String
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
-        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c>
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
@@ -65,7 +66,8 @@ namespace Axle.Extensions.String
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
-        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c>
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
@@ -104,7 +106,8 @@ namespace Axle.Extensions.String
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
-        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c>
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
@@ -198,7 +201,8 @@ namespace Axle.Extensions.String
         /// <para>-or-</para>
         /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
         /// <para>-or-</para>
-        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
+        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus
+        /// <paramref name="startIndex"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
@@ -246,7 +250,8 @@ namespace Axle.Extensions.String
         /// <para>-or-</para>
         /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
         /// <para>-or-</para>
-        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
+        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus
+        /// <paramref name="startIndex"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int, int)"/>
         public static bool Contains(
@@ -268,7 +273,8 @@ namespace Axle.Extensions.String
         /// </summary>
         /// <param name="str">The target <see cref="string"/>.</param>
         /// <returns>
-        /// <c>true</c> if the <paramref name="str">target string</paramref> is an empty string instance; false otherwise.
+        /// <c>true</c> if the <paramref name="str">target string</paramref> is an empty string instance; false
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>.
@@ -292,7 +298,8 @@ namespace Axle.Extensions.String
         /// </summary>
         /// <param name="str">The target <see cref="string"/>.</param>
         /// <returns>
-        /// <c>true</c> if the <paramref name="str">target string</paramref> is <c>null</c> or an empty string instance; false otherwise.
+        /// <c>true</c> if the <paramref name="str">target string</paramref> is <c>null</c> or an empty string instance;
+        /// false otherwise.
         /// </returns>
         /// <seealso cref="string.Empty"/>
         /// <seealso cref="string.IsNullOrEmpty(string)"/>
@@ -304,9 +311,11 @@ namespace Axle.Extensions.String
             string str) => string.IsNullOrEmpty(str);
 
         /// <summary>
-        /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed order.
+        /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed
+        /// order.
         /// </summary>
-        /// <param name="str">The <see cref="string">string instance</see> upon which the extension method is called upon.</param>
+        /// <param name="str">The <see cref="string">string instance</see> upon which the extension method is called
+        /// upon.</param>
         /// <returns>
         /// A new string instance using all the characters from a target string instance, but in a reversed order.
         /// </returns>
@@ -560,7 +569,8 @@ namespace Axle.Extensions.String
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private static string CutFromIndex(Func<string, char, int> searchFunc, string stringToTrim, char charToSearch, bool trimEnd)
+        private static string CutFromIndex(
+            Func<string, char, int> searchFunc, string stringToTrim, char charToSearch, bool trimEnd)
         {
             var index = searchFunc(stringToTrim, charToSearch);
             if (index < 0)

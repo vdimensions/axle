@@ -384,22 +384,22 @@ namespace Axle.Extensions.Uri
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
         /// </summary>
         /// <param name="uri">The base <see cref="System.Uri">URI</see></param>
-        /// <param name="other">A string representation of the relative <see cref="System.Uri">URI</see>
+        /// <param name="path">A string representation of the relative <see cref="System.Uri">URI</see>
         /// to be combined with <paramref name="uri"/></param>
         /// <returns>
         /// An absolute <see cref="System.Uri">URI</see> instance based on the combination of
         /// a base <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
         /// </returns>
         /// <remarks>
-        /// This method will immediately return the <paramref name="other"/> in case it represents an
+        /// This method will immediately return the <paramref name="path"/> in case it represents an
         /// <see cref="System.Uri.IsAbsoluteUri">absolute</see> URI.
         /// </remarks>
-        public static System.Uri Resolve(this System.Uri uri, string other)
+        public static System.Uri Resolve(this System.Uri uri, string path)
         {
             return Resolve(
                 uri,
                 new System.Uri(
-                    StringVerifier.IsNotEmpty(Verifier.IsNotNull(Verifier.VerifyArgument(other, nameof(other)))).Value,
+                    StringVerifier.IsNotEmpty(Verifier.IsNotNull(Verifier.VerifyArgument(path, nameof(path)))).Value,
                     UriKind.RelativeOrAbsolute));
         }
 

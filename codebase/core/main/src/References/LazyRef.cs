@@ -1,7 +1,6 @@
 ﻿#if NETSTANDARD || NET40_OR_NEWER
 using System;
 using System.Threading;
-
 using Axle.Verification;
 
 
@@ -22,14 +21,14 @@ namespace Axle.References
         internal LazyRef() { }
 
         /// <summary>
-        /// Tries to retrieve the value that is referenced by the current <see cref="ILazyReference{T}"/> object.
+        /// Tries to retrieve the value that is referenced by the current <see cref="LazyRef{T}"/> object.
         /// <remarks>
         /// Calling this method will not enforce the lazy value initialization.
         /// </remarks>
         /// </summary>
         /// <param name="value">
-        /// When this method returns, contains the reference value, if it is available.
-        /// This parameter is treated as uninitialized.
+        /// When this method returns, contains the value that has been created for the current <see cref="LazyRef{T}"/>
+        /// instance, if it is available. This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
         /// <c>true</c> if the target value was retrieved; <c>false</c> otherwise.
@@ -45,11 +44,14 @@ namespace Axle.References
             return false;
         }
 
+        /// <summary>
+        /// Gets the lazily initialized value of the current <see cref="LazyRef{T}"/> instance.
+        /// </summary>
         public T Value => _lazy.Value;
 
         /// <summary>
-        /// Gets a boolean value that indicates whether the current
-        /// <see cref="ILazyReference{T}"/> has a <see cref="Value"/> created.
+        /// Gets a boolean value that indicates whether a value has been created for the current
+        /// <see cref="LazyRef{T}"/> instance.
         /// </summary>
         public bool HasValue => _lazy.IsValueCreated;
 

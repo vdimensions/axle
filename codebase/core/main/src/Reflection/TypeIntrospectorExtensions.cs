@@ -7,6 +7,10 @@ using Axle.Verification;
 
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// A static class providing extension methods to instance of the
+    /// <see cref="ITypeIntrospector"/> and <see cref="ITypeIntrospector{T}"/> interfaces. 
+    /// </summary>
     public static class TypeIntrospectorExtensions
     {
         #if NETSTANDARD || NET35_OR_NEWER
@@ -87,7 +91,6 @@ namespace Axle.Reflection
             throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
         }
 
-
         public static IProperty GetProperty<T, TResult>(
             this ITypeIntrospector<T> typeIntrospector, 
             Expression<Func<T, TResult>> expression)
@@ -98,7 +101,9 @@ namespace Axle.Reflection
             {
                 return typeIntrospector.GetProperty(prop);
             }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid property expression.", expression), nameof(expression));
+            throw new ArgumentException(
+                string.Format("Argument {0} is not a valid property expression.", expression), 
+                nameof(expression));
         }
 
         public static IField GetField<T, TResult>(
@@ -111,7 +116,9 @@ namespace Axle.Reflection
             {
                 return typeIntrospector.GetField(field);
             }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid field expression.", expression), nameof(expression));
+            throw new ArgumentException(
+                string.Format("Argument {0} is not a valid field expression.", expression), 
+                nameof(expression));
         }
 
         public static IEvent GetEvent<T, TResult>(
@@ -124,7 +131,9 @@ namespace Axle.Reflection
             {
                 return typeIntrospector.GetEvent(evt);
             }
-            throw new ArgumentException(string.Format("Argument {0} is not a valid event expression.", expression), nameof(expression));
+            throw new ArgumentException(
+                string.Format("Argument {0} is not a valid event expression.", expression), 
+                nameof(expression));
         }
         #endif
     }

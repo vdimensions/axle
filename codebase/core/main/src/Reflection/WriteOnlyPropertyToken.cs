@@ -6,6 +6,11 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// Represents a reflected write-only property member. 
+    /// </summary>
+    /// <seealso cref="IWriteOnlyProperty"/>
+    /// <seealso cref="PropertyToken"/>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
@@ -18,6 +23,16 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DeclarationType _declaration;
 
+        /// <summary>
+        /// Creates a new instance of the <see cref="WriteOnlyPropertyToken"/> class using the specified by the
+        /// <paramref name="propertyInfo"/> parameter <see cref="PropertyInfo">value</see>.
+        /// </summary>
+        /// <param name="propertyInfo">
+        /// A <see cref="PropertyInfo"/> representing the reflected write-only property.
+        /// </param>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="propertyInfo"/> does not represent a writeable property.
+        /// </exception>
         public WriteOnlyPropertyToken(PropertyInfo propertyInfo) : base(propertyInfo)
         {
             #if NETSTANDARD
@@ -28,7 +43,9 @@ namespace Axle.Reflection
 
             if (sm == null)
             {
-                throw new ArgumentException("The property is not writable. ",  nameof(propertyInfo));
+                throw new ArgumentException(
+                    string.Format("The property '{0}' is not writable. ", propertyInfo.Name), 
+                    nameof(propertyInfo));
             }
             _setAccessor = new PropertySetAccessor(this, new MethodToken(sm));
 
@@ -51,8 +68,13 @@ namespace Axle.Reflection
 
         IEnumerable<IAccessor> IAccessible.Accessors => new IAccessor[] { SetAccessor };
 
+        /// <inheritdoc />
         public override AccessModifier AccessModifier => _accessModifier;
+        
+        /// <inheritdoc />
         public override DeclarationType Declaration => _declaration;
+
+        /// <inheritdoc />
         public ISetAccessor SetAccessor => _setAccessor;
     }
 }
