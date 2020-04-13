@@ -12,7 +12,7 @@ namespace Axle.References
     /// The type of the object that will be weakly referenced. This must be a reference type.
     /// </typeparam>
     /// <seealso cref="WeakReference"/>
-    public interface IWeakReference<T> : IReference<T> where T: class
+    public interface IWeakReference<T> : IReference<T>, IEquatable<T>, IEquatable<IWeakReference<T>> where T: class
     {
         /// <summary>
         /// Gets or sets the object (the <see cref="Value">target</see>) referenced by the current

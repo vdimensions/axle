@@ -1,4 +1,6 @@
-﻿#if NETSTANDARD || NET40_OR_NEWER
+﻿using System;
+
+#if NETSTANDARD || NET40_OR_NEWER
 namespace Axle.References
 {
     /// <summary>
@@ -8,7 +10,7 @@ namespace Axle.References
     /// The type of the value.
     /// </typeparam>
     /// <seealso cref="System.Threading.ThreadLocal{T}"/>
-    public interface IThreadLocalReference<T> : IReference<T>
+    public interface IThreadLocalReference<T> : IReference<T>, IEquatable<IThreadLocalReference<T>>, IEquatable<T>
     {
         /// <summary>
         /// Gets or sets the value of this instance on the current thread.

@@ -71,11 +71,27 @@ namespace Axle.References
                     return false;
             }
         }
-        public bool Equals(Nullsafe<T> other) => _isSet ? other._isSet && Equals(_value, other._value) : !other._isSet;
+        public bool Equals(Nullsafe<T> other) => 
+            _isSet 
+                ? other._isSet && Equals(_value, other._value) 
+                : !other._isSet;
         bool IEquatable<T>.Equals(T other) => Equals(_value, other);
 
+        /// <inheritdoc />
         public override int GetHashCode() => _value == null ? 0 : _value.GetHashCode();
 
+        /// <summary>
+        /// Attempts to retrieve the value that is referenced by the current <see cref="Nullsafe{T}"/> object.
+        /// </summary>
+        /// <param name="value">
+        /// When this method returns, contains the value that has been created for the current <see cref="Nullsafe{T}"/>
+        /// instance, if it was not a <c>null</c> reference.
+        /// This parameter is treated as uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the value was retrieved;
+        /// <c>false</c> otherwise.
+        /// </returns>
         public bool TryGetValue(out T value)
         {
             value = _value;
@@ -92,10 +108,12 @@ namespace Axle.References
         object IReference.Value => _value;
 
         /// <summary>
-        /// Gets a <see cref="bool"/> value indicating whether this <see cref="Nullsafe{T}"/> instance has any value.
+        /// Gets a <see cref="bool"/> value indicating whether this <see cref="Nullsafe{T}"/> instance's value is not a
+        /// <c>null</c> reference.
         /// </summary>
         /// <value>
-        /// <c>true</c> if this instance has value; otherwise, <c>false</c>.
+        /// <c>true</c> if this instance's <see cref="Value"/> is <em>not</em> a <c>null</c> reference;
+        /// <c>false</c> otherwise.
         /// </value>
         public bool HasValue => _isSet;
     }

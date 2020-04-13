@@ -1,4 +1,6 @@
-﻿#if NETSTANDARD || NET40_OR_NEWER
+﻿using System;
+
+#if NETSTANDARD || NET40_OR_NEWER
 namespace Axle.References
 {
     /// <summary>
@@ -8,7 +10,7 @@ namespace Axle.References
     /// The type of the value that is lazy-initialized.
     /// </typeparam>
     /// <seealso cref="System.Lazy{T}"/>
-    public interface ILazyReference<T> : IReference<T>
+    public interface ILazyReference<T> : IReference<T>, IEquatable<ILazyReference<T>>, IEquatable<T>
     {
         /// <summary>
         /// Tries to retrieve the value that is referenced by the current <see cref="ILazyReference{T}"/> object.
