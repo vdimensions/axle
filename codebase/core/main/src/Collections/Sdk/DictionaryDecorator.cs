@@ -5,22 +5,15 @@ using System.Collections.Generic;
 namespace Axle.Collections.Sdk
 {
     /// <summary>
-    /// An abstract base class that can be used as a wrapper over an <see cref="IDictionary{TKey, TValue}"/> instance.
-    /// Can be used as a base class for dictionary-based key/value collections. The initial implementation delegates all
-    /// <see cref="IDictionary{TKey, TValue}"/> logic to the provided inner dictionary class.
+    /// An abstract class that acts as a wrapper around an <see cref="IDictionary{TKey, TValue}"/> instance.
+    /// Can be used as a base class for dictionary-based key/value collections which delegate their implementation
+    /// to an internal <see cref="IDictionary{TKey, TValue}"/> member.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
-    public abstract class DictionaryDecorator<TKey, TValue> : IDictionary<TKey, TValue>
+    public abstract class DictionaryDecorator<TKey, TValue> 
+        : DictionaryDecorator<TKey, TValue, IDictionary<TKey, TValue>>
     {
-        /// <summary>
-        /// A reference to the decorated <see cref="IDictionary{TKey, TValue}"/>.
-        /// </summary>
-        protected readonly IDictionary<TKey, TValue> Target;
-
         /// <summary>
         /// Creates a new instance of the <see cref="DictionaryDecorator{TKey, TValue}"/>
         /// class.
@@ -28,7 +21,36 @@ namespace Axle.Collections.Sdk
         /// <param name="target">
         /// The decorated <see cref="IDictionary{TKey, TValue}"/> instance.
         /// </param>
-        protected DictionaryDecorator(IDictionary<TKey, TValue> target)
+        protected DictionaryDecorator(IDictionary<TKey, TValue> target) : base(target) { }
+    }
+    
+    /// <summary>
+    /// An abstract class that acts as a wrapper around an <see cref="IDictionary{TKey, TValue}"/> instance.
+    /// Can be used as a base class for dictionary-based key/value collections which delegate their implementation
+    /// to an internal <see cref="IDictionary{TKey, TValue}"/> member.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+    /// <typeparam name="TDict">The type of dictionary implementation to delegate calls to.</typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    [System.Serializable]
+    #endif
+    public abstract class DictionaryDecorator<TKey, TValue, TDict> : IDictionary<TKey, TValue>
+        where TDict: class, IDictionary<TKey, TValue>
+    {
+        /// <summary>
+        /// A reference to the decorated <see cref="IDictionary{TKey, TValue}"/>.
+        /// </summary>
+        protected readonly TDict Target;
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="DictionaryDecorator{TKey, TValue, TDict}"/>
+        /// class.
+        /// </summary>
+        /// <param name="target">
+        /// The decorated <see cref="IDictionary{TKey, TValue}"/> instance.
+        /// </param>
+        protected DictionaryDecorator(TDict target)
         {
             Target = target;
         }

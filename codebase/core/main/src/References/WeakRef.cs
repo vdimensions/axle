@@ -83,16 +83,17 @@ namespace Axle.References
         /// <inheritdoc />
         public override bool Equals(object other)
         {
+            var hasValue = false;
             switch (other)
             {
-                case null when !IsAlive:
+                case null when !TryGetValue(out _):
                     return true;
                 case T otherVal:
                     return TryGetValue(out var val) && Equals(val, otherVal);
-                case WeakRef<T> otherLazyRef:
-                    return EqualityComparer.Create().Equals(this, otherLazyRef);
-                case IWeakReference<T> otherLazy:
-                    return EqualityComparer.Create().Equals(this, otherLazy);
+                case WeakRef<T> otherRef:
+                    return EqualityComparer.Create().Equals(this, otherRef);
+                case IWeakReference<T> otherWR:
+                    return EqualityComparer.Create().Equals(this, otherWR);
                 default:
                     return false;
             }

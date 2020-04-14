@@ -54,6 +54,7 @@ namespace Axle.References
             : this(new Lazy<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value, mode)) { }
         public LazyRef(Func<T> valueFactory)
             : this(new Lazy<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value)) { }
+        /// This constructor is used for deserialization
         internal LazyRef() { }
         
         /// <inheritdoc />
