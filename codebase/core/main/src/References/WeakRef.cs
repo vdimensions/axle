@@ -83,7 +83,6 @@ namespace Axle.References
         /// <inheritdoc />
         public override bool Equals(object other)
         {
-            var hasValue = false;
             switch (other)
             {
                 case null when !TryGetValue(out _):

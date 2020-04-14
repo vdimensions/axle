@@ -1,13 +1,11 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Verification;
 
-namespace Axle.Configuration.Adapters
+namespace Axle.Configuration.Microsoft.Adapters
 {
-    using IMSConfiguration = Microsoft.Extensions.Configuration.IConfiguration;
-    using IMSConfigurationSection = Microsoft.Extensions.Configuration.IConfigurationSection;
+    using IMSConfiguration = global::Microsoft.Extensions.Configuration.IConfiguration;
 
     public abstract class MicrosoftConfigAdapter<T> : IConfigSection where T: IMSConfiguration
     {
@@ -23,8 +21,18 @@ namespace Axle.Configuration.Adapters
             return section == null ? null : new MicrosoftConfigSectionAdapter(section);
         }
 
+        internal T UnderlyingConfiguration { get; }
+        
+        /// <inheritdoc />
         public IEnumerable<string> Keys => UnderlyingConfiguration.GetChildren().Select(x => x.Key);
 
+        /// <inheritdoc />
+        public abstract string Value { get; }
+
+        /// <inheritdoc />
+        public abstract string Name { get; }
+
+        /// <inheritdoc />
         public IConfigSetting this[string key]
         {
             get
@@ -47,20 +55,6 @@ namespace Axle.Configuration.Adapters
                 return null;
             }
         }
-
-        internal T UnderlyingConfiguration { get; }
-        public abstract string Value { get; }
-        public abstract string Name { get; }
-    }
-
-    public sealed class MicrosoftConfigSectionAdapter : MicrosoftConfigAdapter<IMSConfigurationSection>
-    {
-        public MicrosoftConfigSectionAdapter(IMSConfigurationSection configuration) : base(configuration)
-        {
-        }
-
-        public override string Value => UnderlyingConfiguration.Value;
-        public override string Name => UnderlyingConfiguration.Key;
     }
 }
 #endif

@@ -1,6 +1,7 @@
 using System.IO;
 using System.Reflection;
 using Axle.Configuration.Legacy;
+using Axle.Configuration.Microsoft;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using NUnit.Framework;

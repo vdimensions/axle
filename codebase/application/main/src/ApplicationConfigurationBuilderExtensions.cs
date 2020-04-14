@@ -2,6 +2,9 @@
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using Axle.Configuration.Legacy;
 #endif
+#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
+using Axle.Configuration.Microsoft;
+#endif
 using Axle.Verification;
 
 namespace Axle
@@ -15,7 +18,7 @@ namespace Axle
             Microsoft.Extensions.Configuration.FileConfigurationSource configurationSource)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
-            return builder.Prepend(new Axle.Configuration.FileConfigSource(configurationSource));
+            return builder.Prepend(new FileConfigSource(configurationSource));
         }
         #endif
 
@@ -34,7 +37,7 @@ namespace Axle
             Microsoft.Extensions.Configuration.FileConfigurationSource configurationSource)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
-            return builder.Append(new Axle.Configuration.FileConfigSource(configurationSource));
+            return builder.Append(new FileConfigSource(configurationSource));
         }
         #endif
 

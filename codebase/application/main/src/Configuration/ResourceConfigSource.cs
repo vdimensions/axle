@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
 using System.Globalization;
+using Axle.Configuration.Microsoft;
 using Axle.Resources;
 using Microsoft.Extensions.Configuration;
 

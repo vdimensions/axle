@@ -1,10 +1,10 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
-using Axle.Configuration.Adapters;
+using Axle.Configuration.Microsoft.Adapters;
 using Axle.Verification;
 
-namespace Axle.Configuration
+namespace Axle.Configuration.Microsoft
 {
-    using MSFileConfigurationSource = Microsoft.Extensions.Configuration.FileConfigurationSource;
+    using MSFileConfigurationSource = global::Microsoft.Extensions.Configuration.FileConfigurationSource;
 
     public sealed class FileConfigSource : IConfigSource
     {

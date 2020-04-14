@@ -3,10 +3,11 @@ using System.IO;
 using System.Reflection;
 using Axle.IO.Extensions.Stream;
 
-namespace Axle.Configuration
+namespace Axle.Configuration.Microsoft
 {
-    using MSFileConfigurationSource = Microsoft.Extensions.Configuration.FileConfigurationSource;
+    using MSFileConfigurationSource = global::Microsoft.Extensions.Configuration.FileConfigurationSource;
 
+    // TODO: move to ms config adapters
     public sealed class StreamedFileConfigSource<T> : IConfigSource
         where T: MSFileConfigurationSource, new()
     {

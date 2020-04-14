@@ -1,14 +1,16 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
 using System.Collections.Generic;
-using Microsoft.Extensions.Configuration;
 
-namespace Axle.Configuration.Adapters
+namespace Axle.Configuration.Microsoft.Adapters
 {
-    using MSConfigurationProvider = Microsoft.Extensions.Configuration.ConfigurationProvider;
+    using IMSConfiguration = global::Microsoft.Extensions.Configuration.IConfiguration;
+    using IMSConfigurationProvider = global::Microsoft.Extensions.Configuration.IConfigurationProvider;
+    using MSConfigurationProvider = global::Microsoft.Extensions.Configuration.ConfigurationProvider;
+    using MSConfigurationPath = global::Microsoft.Extensions.Configuration.ConfigurationPath;
 
     /// <summary>
-    /// An implementation of the <see cref="IConfigurationProvider"/> which exposes an instance of <see cref="IConfigSection"/>
-    /// to be used as configuration source where <see cref="Microsoft.Extensions.Configuration.IConfiguration"/> objects
+    /// An implementation of the <see cref="IMSConfigurationProvider"/> which exposes an instance of
+    /// <see cref="IConfigSection"/> to be used as configuration source where <see cref="IMSConfiguration"/> objects
     /// are required.
     /// </summary>
     internal class AxleConfigurationProvider : MSConfigurationProvider
@@ -28,7 +30,7 @@ namespace Axle.Configuration.Adapters
             {
                 foreach (var sectionKey in section.Keys)
                 {
-                    var parsedKey = isValidKey ? ConfigurationPath.Combine(key, sectionKey) : sectionKey;
+                    var parsedKey = isValidKey ? MSConfigurationPath.Combine(key, sectionKey) : sectionKey;
                     Parse(parsedKey, section[sectionKey], data);
                 }
             }

@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using Axle.Configuration;
+using Axle.Configuration.Microsoft.Adapters;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
@@ -168,7 +169,7 @@ namespace Axle.Web.AspNetCore
 
         private async Task RunAsync()
         {
-            Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new Axle.Configuration.Adapters.AxleConfigurationProvider(_appConfig);
+            Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new AxleConfigurationProvider(_appConfig);
             string startupAssemblyKey = null, applicationKey = null, entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
             var hostBuilder = _hostBuilder
                 // configure the web host with a re-adapted Axle application configuration

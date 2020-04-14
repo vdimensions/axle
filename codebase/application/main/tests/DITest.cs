@@ -35,7 +35,7 @@ namespace Axle.ApplicationTests
             const string name = "World";
 
             var c = new DependencyContainer(null);
-            c.RegisterInstance(name);
+            c.Export(name);
             c.RegisterType<Person>();
 
             var p = c.Resolve<Person>();
@@ -52,7 +52,7 @@ namespace Axle.ApplicationTests
             const string name = "World";
 
             var c = new DependencyContainer(null);
-            c.RegisterInstance(name);
+            c.Export(name);
             c.RegisterType<Vip>();
 
             var p = c.Resolve<Person>();
@@ -72,7 +72,7 @@ namespace Axle.ApplicationTests
                     const string name = "World";
 
                     var c = new DependencyContainer(null);
-                    c.RegisterInstance(name);
+                    c.Export(name);
                     c.RegisterType<Person>();
                     c.RegisterType<Vip>();
 
@@ -87,9 +87,7 @@ namespace Axle.ApplicationTests
                 () =>
                 {
                     const string name = "World";
-                    var c = new DependencyContainer(null);
-                    c.RegisterInstance(name);
-                    c.RegisterInstance(name);
+                    new DependencyContainer(null).Export(name).Export(name);
                 });
         }
     }

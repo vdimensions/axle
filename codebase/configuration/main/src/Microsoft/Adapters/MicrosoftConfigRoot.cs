@@ -1,13 +1,12 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
-using System;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
-using Microsoft.Extensions.Configuration;
 
-namespace Axle.Configuration.Adapters
+namespace Axle.Configuration.Microsoft.Adapters
 {
-    using IMSConfigurationRoot = Microsoft.Extensions.Configuration.IConfigurationRoot;
-    using IMSConfigurationSource = Microsoft.Extensions.Configuration.IConfigurationSource;
+    using IMSConfigurationRoot = global::Microsoft.Extensions.Configuration.IConfigurationRoot;
+    using IMSConfigurationSource = global::Microsoft.Extensions.Configuration.IConfigurationSource;
+    using MSConfigurationBuilder = global::Microsoft.Extensions.Configuration.ConfigurationBuilder;
 
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class MicrosoftConfigRoot : MicrosoftConfigAdapter<IMSConfigurationRoot>, IConfiguration
@@ -21,13 +20,17 @@ namespace Axle.Configuration.Adapters
         {
             source.VerifyArgument(nameof(source)).IsNotNull();
 
-            var b = new ConfigurationBuilder();
+            var b = new MSConfigurationBuilder();
             b.Sources.Add(source);
             return b.Build();
         }
 
         public MicrosoftConfigRoot(IMSConfigurationRoot configuration) : base(configuration) { }
+
+        /// <inheritdoc />
         public override string Value => null;
+
+        /// <inheritdoc />
         public override string Name => string.Empty;
     }
 }

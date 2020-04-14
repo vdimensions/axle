@@ -11,7 +11,7 @@ namespace Axle.ApplicationTests.Modularity
         public abstract class AbstractModule
         {
             [ModuleInit]
-            internal void Init(ModuleExporter mex)
+            internal void Init(IDependencyExporter mex)
             {
                 mex.Export(this);
             }
@@ -30,7 +30,7 @@ namespace Axle.ApplicationTests.Modularity
         public class C
         {
             [ModuleInit]
-            internal void Init(ModuleExporter mex, string[] cmdArgs)
+            internal void Init(IDependencyExporter mex, string[] cmdArgs)
             {
                 mex.Export(this);
                 System.Console.WriteLine("Triggering command argument: {0}", cmdArgs[1]);

@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
-using Axle.Modularity;
 using System.Reflection;
 using System.IO;
-using Axle.Configuration;
-using Microsoft.Extensions.Configuration.Json;
+using Axle.Configuration.Microsoft;
 using Axle.DependencyInjection;
+using Axle.Modularity;
+using Microsoft.Extensions.Configuration.Json;
 
 namespace Axle.ApplicationTests.Modularity
 {
@@ -32,7 +32,7 @@ namespace Axle.ApplicationTests.Modularity
             }
 
             [ModuleInit]
-            internal void Init(ModuleExporter exporter)
+            internal void Init(IDependencyExporter exporter)
             {
                 if (_config != null)
                 {
@@ -51,7 +51,7 @@ namespace Axle.ApplicationTests.Modularity
             }
 
             [ModuleInit]
-            internal void Init(ModuleExporter exporter)
+            internal void Init(IDependencyExporter exporter)
             {
                 if (_config != null)
                 {
