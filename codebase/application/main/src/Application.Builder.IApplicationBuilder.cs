@@ -9,27 +9,7 @@ namespace Axle
     {
         private sealed partial class Builder : IApplicationBuilder
         {
-            [Obsolete]
-            IApplicationBuilder IApplicationBuilder.SetDependencyContainerProvider(IDependencyContainerFactory containerFactory)
-            {
-                lock (_syncRoot)
-                {
-                    _dependencyContainerFactory = containerFactory;
-                }
-                return this;
-            }
-
-            [Obsolete]
-            IApplicationBuilder IApplicationBuilder.SetLoggingService(ILoggingService loggingService)
-            {
-                lock (_syncRoot)
-                {
-                    _loggingService = loggingService;
-                }
-                return this;
-            }
-
-            IApplicationBuilder IApplicationBuilder.SetApplicationHost(IApplicationHost host)
+            IApplicationBuilder IApplicationBuilder.UseApplicationHost(IApplicationHost host)
             {
                 Verifier.IsNotNull(Verifier.VerifyArgument(host, nameof(host)));
                 _host = host;

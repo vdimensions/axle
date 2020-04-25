@@ -18,7 +18,7 @@ namespace Axle
             private readonly IList<Action<IDependencyContainer>> _onContainerReadyHandlers = new List<Action<IDependencyContainer>>();
 
             private LayeredConfigManager _config = new LayeredConfigManager();
-            private IApplicationHost _host = new AxleApplicationHost();
+            private IApplicationHost _host = new DefaultApplicationHost();
             private ILoggingService _loggingService;
             private IDependencyContainerFactory _dependencyContainerFactory = new AxleDependencyContainerFactory();
 

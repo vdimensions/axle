@@ -7,6 +7,13 @@ using Axle.Verification;
 
 namespace Axle.References
 {
+    /// <summary>
+    /// The default implementation of the <see cref="ILazyReference{T}"/> interface. This class acts as a wrapper to 
+    /// <see cref="Lazy{T}"/>.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of object that is being lazily initialized.
+    /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || !NETSTANDARD
     [Serializable]
     #endif
@@ -50,8 +57,25 @@ namespace Axle.References
         private readonly Lazy<T> _lazy;
 
         private LazyRef(Lazy<T> t) => _lazy = t;
+        /// <summary>
+        /// Creates a new instance of the <see cref="LazyRef{T}"/> class using the provided
+        /// <paramref name="valueFactory"/> and thread-safety <paramref name="mode"/>.
+        /// </summary>
+        /// <param name="valueFactory">
+        /// The delegate that is used to produce the lazily-initialized value when needed
+        /// </param>
+        /// <param name="mode">
+        /// One of the <see cref="LazyThreadSafetyMode"/> enumeration values that specifies the thread-safety mode. 
+        /// </param>
         public LazyRef(Func<T> valueFactory, LazyThreadSafetyMode mode)
             : this(new Lazy<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value, mode)) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="LazyRef{T}"/> class using the provided
+        /// <paramref name="valueFactory"/>.
+        /// </summary>
+        /// <param name="valueFactory">
+        /// The delegate that is used to produce the lazily-initialized value when needed
+        /// </param>
         public LazyRef(Func<T> valueFactory)
             : this(new Lazy<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value)) { }
         /// This constructor is used for deserialization

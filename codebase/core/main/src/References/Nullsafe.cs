@@ -41,7 +41,28 @@ namespace Axle.References
             return new Nullsafe<T>(value);
         }
 
+        /// <summary>
+        /// Enables implicit conversion between a <see cref="Nullsafe{T}"/> instance and the underlying type
+        /// <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="ns">
+        /// The <see cref="Nullsafe{T}"/> operand.
+        /// </param>
+        /// <returns>
+        /// An instance of the <typeparamref name="T"/> obtained from the value of the <see cref="Nullsafe{T}"/>
+        /// operand.
+        /// </returns>
         public static explicit operator T(Nullsafe<T> ns) => ns.Value;
+        /// <summary>
+        /// Enables implicit conversion between an instance of <typeparamref name="T"/> and <see cref="Nullsafe{T}"/>.
+        /// </summary>
+        /// <param name="value">
+        /// The value operand.
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="Nullsafe{T}"/> obtained from the provided <paramref name="value"/>
+        /// operand.
+        /// </returns>
         public static implicit operator Nullsafe<T>(T value) => new Nullsafe<T>(value);
         //public static implicit operator Nullsafe<T>(Nullable<Nullsafe<T>> nv) => nv.GetValueOrDefault();
 
@@ -71,6 +92,8 @@ namespace Axle.References
                     return false;
             }
         }
+
+        /// <inheritdoc />
         public bool Equals(Nullsafe<T> other) => 
             _isSet 
                 ? other._isSet && Equals(_value, other._value) 

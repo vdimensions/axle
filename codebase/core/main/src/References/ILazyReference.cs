@@ -7,7 +7,7 @@ namespace Axle.References
     /// An interface representing a reference to a lazily initialized value.
     /// </summary>
     /// <typeparam name="T">
-    /// The type of the value that is lazy-initialized.
+    /// The type of the value that is being lazily-initialized.
     /// </typeparam>
     /// <seealso cref="System.Lazy{T}"/>
     public interface ILazyReference<T> : IReference<T>, IEquatable<ILazyReference<T>>, IEquatable<T>

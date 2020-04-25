@@ -1,6 +1,6 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
-using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 #if NETSTANDARD || NET35_OR_NEWER
 using System.Linq;
 #endif
@@ -58,19 +58,21 @@ namespace Axle.References
         // The allocator will cause lazy initialization when first accessed by the runtime.
         private static class LazySingletonAllocator
         {
-            [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-            private static readonly T _instance = CreateInstance();
-            public static T Instance => _instance;
+            public static T AllocatedInstance { get; } = CreateInstance();
         }
 
-        private static readonly object _syncRoot = new object();
-        private static readonly Singleton<T> _instance = new Singleton<T>();
-        public static Singleton<T> Instance => _instance;
+        [SuppressMessage("ReSharper", "StaticMemberInGenericType")] 
+        private static readonly object SyncRoot = new object();
 
         /// <summary>
-        /// Gets the sole instance of the type <typeparamref name="T"/>.
+        /// Gets the sole instance of the <see cref="Singleton{T}"/> object.
         /// </summary>
-        public T Value => LazySingletonAllocator.Instance;
+        public static Singleton<T> Instance { get; } = new Singleton<T>();
+
+        /// <summary>
+        /// Gets the value behind the sole instance of the type <typeparamref name="T"/>.
+        /// </summary>
+        public T Value => LazySingletonAllocator.AllocatedInstance;
 
         bool IReference<T>.TryGetValue(out T value)
         {
@@ -82,17 +84,27 @@ namespace Axle.References
 
         private Singleton()
         {
-            lock (_syncRoot)
+            lock (SyncRoot)
             {
                 // guarantees single instance
-                if (_instance != null)
+                if (Instance != null)
                 {
                     throw new InvalidOperationException(
-                        "Cannot create more than one instance of singleton type " + _instance.GetType().FullName);
+                        "Cannot create more than one instance of singleton type " + Instance.GetType().FullName);
                 }
             }
         }
 
+        /// <summary>
+        /// Allows for implicit conversion between a <see cref="Singleton{T}"/> and the underlying type
+        /// <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="singleton">
+        /// The singleton object holding the value.
+        /// </param>
+        /// <returns>
+        /// The underlying value of the <see cref="Singleton{T}"/> object.
+        /// </returns>
         public static implicit operator T(Singleton<T> singleton) => singleton.Value;
     }
 
@@ -140,6 +152,15 @@ namespace Axle.References
             return constructor;
         }
 
+        /// <summary>
+        /// Gets a singleton instance for the provided <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">
+        /// The type to create a singleton instance from.
+        /// </param>
+        /// <returns>
+        /// A singleton instance for the provided <paramref name="type"/>.
+        /// </returns>
         public static object GetSingletonInstance(Type type)
         {
             var constructor = GetSingletonConstructor(type);
@@ -159,11 +180,29 @@ namespace Axle.References
             return ((IReference) res)?.Value;
         }
 
+        /// <summary>
+        /// Gets a singleton instance for the provided <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">
+        /// The type to create a singleton instance from.
+        /// </param>
+        /// <returns>
+        /// A singleton instance for the provided <paramref name="type"/>.
+        /// </returns>
         public static T GetSingletonInstance<T>(Type type) => (T) GetSingletonInstance(type);
         
+        /// <summary>
+        /// Gets a singleton instance for the provided type <typeparamref name="T"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type to create a singleton instance from.
+        /// </typeparam>
+        /// <returns>
+        /// A singleton instance for the provided type <typeparamref name="T"/>.
+        /// </returns>
         public static T GetSingletonInstance<T>(ISingletonReference<T> singleton)
         {
-            singleton.VerifyArgument(nameof(singleton)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(singleton, nameof(singleton)));
             return singleton.Value;
         }
     }
