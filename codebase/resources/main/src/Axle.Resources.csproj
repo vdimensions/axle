@@ -14,5 +14,5 @@
   <Import Project="../../Resources.Package.targets" />
 
   <Import Project="../../../Reference.Axle.Core.targets" />
-  <Import Project="../../../Reference.Axle.Text.Data.targets" />
+  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
 </Project>

@@ -40,5 +40,7 @@
 
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../Reference.Axle.Resources.targets" />
+  <Import Project="../../../Reference.Axle.Resources.Properties.targets" />
+  <Import Project="../../../Reference.Axle.Resources.Yaml.targets" />
   <Import Project="../../../Reference.Axle.Configuration.targets" />
 </Project>

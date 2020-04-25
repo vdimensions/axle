@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Diagnostics.CodeAnalysis;
-using Axle.Builder;
 using Axle.Verification;
 
 namespace Axle.Data
@@ -17,7 +16,7 @@ namespace Axle.Data
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
             Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
             var p = buildFunc(builder.CreateParameter(name, ParameterDirection.Input));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
+            return ((DbParameterBuilder) p).Build();
         }
 
         public static IDataParameter CreateInputOutputParameter(this IDbParameterBuilder builder, string name, Func<IDbParameterValueBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
@@ -25,7 +24,7 @@ namespace Axle.Data
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
             Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
             var p = buildFunc(builder.CreateParameter(name, ParameterDirection.InputOutput));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
+            return ((DbParameterBuilder) p).Build();
         }
 
         public static IDataParameter CreateOutputParameter(this IDbParameterBuilder builder, string name, Func<IDbParameterTypeBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
@@ -33,7 +32,7 @@ namespace Axle.Data
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
             Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
             var p = buildFunc(builder.CreateParameter(name, ParameterDirection.Output));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
+            return ((DbParameterBuilder) p).Build();
         }
 
         public static IDataParameter CreateReturnParameter(this IDbParameterBuilder builder, string name, Func<IDbParameterTypeBuilder, IDbParameterOptionalPropertiesBuilder> buildFunc)
@@ -41,7 +40,7 @@ namespace Axle.Data
             Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
             Verifier.IsNotNull(Verifier.VerifyArgument(buildFunc, nameof(buildFunc)));
             var p = buildFunc(builder.CreateParameter(name, ParameterDirection.ReturnValue));
-            return ((IFluentBuilder<IDataParameter>) p).Build();
+            return ((DbParameterBuilder) p).Build();
         }
     }
 }

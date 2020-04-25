@@ -8,6 +8,9 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
+    /// <summary>
+    /// An object that acts as a descriptor for an application module. 
+    /// </summary>
     internal sealed class ModuleInfo
     {
         internal ModuleInfo(Type type,

@@ -4,13 +4,12 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
-using Axle.Builder;
 using Axle.Conversion.Parsing;
 
 namespace Axle.Configuration.Legacy.Sdk
 {
     [Serializable]
-    public sealed class ConfigurationPropertyBuilder : IFluentBuilder<ConfigurationProperty>
+    public sealed class ConfigurationPropertyBuilder
 	{
         public static ConfigurationPropertyBuilder Create(string name) => new ConfigurationPropertyBuilder(name);
 	    public static ConfigurationPropertyBuilder Create(string name, Type type) => Create(name).OfType(type);
@@ -132,7 +131,7 @@ namespace Axle.Configuration.Legacy.Sdk
 	}
 
     [Serializable]
-    public sealed class ConfigurationPropertyBuilder<T> : IFluentBuilder<ConfigurationProperty>
+    public sealed class ConfigurationPropertyBuilder<T>
     {
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]

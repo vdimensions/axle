@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <ProjectGuid>{1BA8759B-EEF5-44DC-AB60-8FCF4FF4FFD9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="build.sh" />
+    <None Include="restore.sh" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data.yaml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../Reference.Axle.Text.Documents.Yaml.targets" />
+  <Import Project="../../../NUnit.Packages.targets" />
+</Project>

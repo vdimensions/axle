@@ -13,7 +13,7 @@ namespace Axle
     {
         public static IApplicationBuilder Build() => new Builder();
 
-        private readonly IDependencyContainer _rootDependencyContainer;
+        private readonly IDependencyContainer _rootContainer;
         private readonly ConcurrentStack<Type> _instantiatedModules;
         private readonly IList<Type> _initializedModules;
         private readonly ConcurrentDictionary<Type, ModuleWrapper> _modules;
@@ -32,7 +32,7 @@ namespace Axle
                 args);
             
             var rankedModules = moduleCatalog
-                .RankModules(loadedModules)
+                .RankModules(loadedModules, new List<Type>())
                 .ToArray();
             
             var modules = new ConcurrentDictionary<Type, ModuleWrapper>();
@@ -163,13 +163,13 @@ namespace Axle
         }
 
         private Application(
-            IDependencyContainer rootDependencyContainer,
+            IDependencyContainer rootContainer,
             ConcurrentStack<Type> instantiatedModules,
             IList<Type> initializedModules,
             ConcurrentDictionary<Type, ModuleWrapper> modules, 
             IApplicationHost host)
         {
-            _rootDependencyContainer = rootDependencyContainer;
+            _rootContainer = rootContainer;
             _instantiatedModules = instantiatedModules;
             _initializedModules = initializedModules;
             _modules = modules;
@@ -207,7 +207,7 @@ namespace Axle
                     (_, module) => module.Terminate(_modules));
             }
             _modules.Clear();
-            _rootDependencyContainer?.Dispose();
+            _rootContainer?.Dispose();
             if (Host is IDisposable disposableHost)
             {
                 disposableHost.Dispose();

@@ -11,7 +11,7 @@ namespace Axle.Configuration.Legacy
         public IConfiguration LoadConfiguration()
         {
             var cfg = System.Configuration.ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-            return new LegacyConfigAdapter(cfg);
+            return new LegacyConfiguration2ConfigurationAdapter(cfg);
         }
     }
 }

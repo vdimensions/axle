@@ -6,9 +6,13 @@ namespace Axle
 {
     public interface IApplicationBuilder
     {
+        [Obsolete]
         IApplicationBuilder SetDependencyContainerProvider(IDependencyContainerFactory containerFactory);
         
+        [Obsolete]
         IApplicationBuilder SetLoggingService(ILoggingService loggingService);
+
+        IApplicationBuilder SetApplicationHost(IApplicationHost host);
 
         IApplicationBuilder ConfigureDependencies(Action<IDependencyContainer> setupContainerAction);
 

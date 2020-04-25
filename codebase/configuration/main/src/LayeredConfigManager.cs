@@ -60,6 +60,7 @@ namespace Axle.Configuration
             return new LayeredConfigManager(newConfigs);
         }
 
+        /// <inheritdoc />
         public IConfiguration LoadConfiguration() => new LayeredConfiguration(_configs);
     }
 }

@@ -1,7 +1,7 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Linq;
-using Axle.Text.Data.Binding;
+using Axle.Text.Documents.Binding;
 using Axle.Verification;
 
 namespace Axle.Configuration
@@ -20,11 +20,7 @@ namespace Axle.Configuration
                 _config = config;
             }
 
-            public bool TryGetValue(string member, out IBoundValueProvider value)
-            {
-                value = this[member];
-                return value != null;
-            }
+            public bool TryGetValue(string member, out IBoundValueProvider value) => (value = this[member]) != null;
 
             public IBoundValueProvider this[string member]
             {
@@ -34,7 +30,10 @@ namespace Axle.Configuration
                     if (setting == null)
                     {
                         var cmp = StringComparer.OrdinalIgnoreCase;
-                        setting = _config.Keys.Where(x => cmp.Equals(x, member)).Select(x => _config[x]).SingleOrDefault();
+                        setting = _config.Keys
+                            .Where(x => cmp.Equals(x, member))
+                            .Select(x => _config[x])
+                            .SingleOrDefault();
                     }
                     switch (setting)
                     {

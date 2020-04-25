@@ -9,6 +9,7 @@ namespace Axle
     {
         private sealed partial class Builder : IApplicationBuilder
         {
+            [Obsolete]
             IApplicationBuilder IApplicationBuilder.SetDependencyContainerProvider(IDependencyContainerFactory containerFactory)
             {
                 lock (_syncRoot)
@@ -18,12 +19,20 @@ namespace Axle
                 return this;
             }
 
+            [Obsolete]
             IApplicationBuilder IApplicationBuilder.SetLoggingService(ILoggingService loggingService)
             {
                 lock (_syncRoot)
                 {
                     _loggingService = loggingService;
                 }
+                return this;
+            }
+
+            IApplicationBuilder IApplicationBuilder.SetApplicationHost(IApplicationHost host)
+            {
+                Verifier.IsNotNull(Verifier.VerifyArgument(host, nameof(host)));
+                _host = host;
                 return this;
             }
         

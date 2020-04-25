@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using Axle.Resources.Properties.Extraction;
-using Axle.Resources.Text.Data;
+using Axle.Resources.Text.Documents;
 using Kajabity.Tools.Java;
 
 namespace Axle.Resources.Properties
@@ -11,7 +11,7 @@ namespace Axle.Resources.Properties
     /// <summary>
     /// A class representing a Java properties file as a resource.
     /// </summary>
-    public class PropertiesResourceInfo : TextDataResourceInfo
+    public class PropertiesResourceInfo : TextDocumentResourceInfo
     {
         /// <summary>
         /// Gets the content (MIME) type of a java properties file.

@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Axle.Resources.Extraction;
-using Axle.Resources.Text.Data;
+using Axle.Resources.Text.Documents;
 
 namespace Axle.Resources.Properties.Extraction
 {
@@ -29,7 +29,7 @@ namespace Axle.Resources.Properties.Extraction
             {
                 case null:
                     return null;
-                case TextDataResourceInfo jp:
+                case TextDocumentResourceInfo jp:
                     props = jp.Data;
                     break;
                 default:

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using Axle.Configuration;
 using Axle.Logging;
 using Axle.Modularity;
 
@@ -17,8 +16,8 @@ namespace Axle
                 //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 //typeof(DynamicModuleLoader)
                 //#endif
-                typeof(ConfigSourceRegistry),   // allow registering custom config providers
-                //typeof(ConfigurationModule),    // makes sure config providers are registered before this module 
+                //typeof(ConfigSourceRegistry),   // allow registering custom config providers
+                //typeof(ConfigurationModule),  // makes sure config providers are registered before this module 
                 typeof(LoggingModule),          // guarantees the log messages during app initialization will be flushed 
             };
 
@@ -57,5 +56,7 @@ namespace Axle
         public ReportsToAttribute[] GetReportsToModules(Type moduleType) => _originalCatalog.GetReportsToModules(moduleType);
         public ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType) => _originalCatalog.GetCommandLineTrigger(moduleType);
         public ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType) => _originalCatalog.GetConfigurationInfo(moduleType);
+
+        internal IEnumerable<Type> ApplicationModuleTypes => _applicationModuleTypes;
     }
 }

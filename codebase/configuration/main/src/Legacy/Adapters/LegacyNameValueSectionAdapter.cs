@@ -3,7 +3,7 @@ using System.Configuration;
 
 namespace Axle.Configuration.Legacy.Adapters
 {
-    internal sealed class LegacyNameValueSectionAdapter : AbstractLegacySection
+    internal sealed class LegacyNameValueSectionAdapter : AbstractLegacyConfig2ConfigSectionAdapter
     {
         public LegacyNameValueSectionAdapter(NameValueConfigurationCollection nvc, string name) : base(name)
         {

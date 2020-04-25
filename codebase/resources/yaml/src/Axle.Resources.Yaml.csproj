@@ -29,5 +29,6 @@
 
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../Reference.Axle.Resources.targets" />
-  <Import Project="../../../Reference.Axle.Text.Data.Yaml.targets" />
+  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../Reference.Axle.Text.Documents.Yaml.targets" />
 </Project>

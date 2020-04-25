@@ -6,12 +6,38 @@ using System.Linq;
 #endif
 using System.Reflection;
 using System.Runtime.InteropServices;
+using Axle.Verification;
 
 
 namespace Axle.References
 {
+    /// <summary>
+    /// A generic singleton object, exposing a sole instance of the provided type.
+    /// According to the singleton design pattern definition, the supplied generic type <typeparamref name="T"/> must
+    /// conform to certain requirements, such as to have a <c>private</c> default constructor, and no alternative means
+    /// for producing an instance (excluding reflection).
+    /// <remarks>
+    /// Using the <see cref="Singleton{T}"/> class for obtaining singleton instances provides a guarantee that the
+    /// singleton requirements have been met (where an exception will be thrown if the provided type
+    /// <typeparamref name="T"/> is not compatible). It also provides an optimisation where the singleton instance is
+    /// going to be instantiated only when used.
+    /// <para>
+    /// However, it may be still possible to obtain multiple instance of the <typeparamref name="T"/> class, if it by
+    /// itself implements the singleton pattern in its user code, or if the type's constructor is called via reflection.
+    /// </para>
+    /// <para>
+    /// In order to overcome these limitations, it is encouraged to use the <see cref="ISingletonReference{T}"/> instead
+    /// of <typeparamref name="T"/> directly, in order to enforce the singleton semantics. Also, if possible,
+    /// user-defined singletons should also implement the <see cref="ISingletonReference{T}"/> interface, thus allowing
+    /// for their safe co-existence with <see cref="Singleton{T}"/> singletons.  
+    /// </para>
+    /// </remarks>
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of the singleton object instance represented by the current <see cref="Singleton{T}"/> reference.
+    /// </typeparam>
     [ComVisible(false)]
-    public sealed class Singleton<T> : ISingetonReference<T> where T: class
+    public sealed class Singleton<T> : ISingletonReference<T> where T: class
     {
         internal static T CreateInstance()
         {
@@ -41,6 +67,9 @@ namespace Axle.References
         private static readonly Singleton<T> _instance = new Singleton<T>();
         public static Singleton<T> Instance => _instance;
 
+        /// <summary>
+        /// Gets the sole instance of the type <typeparamref name="T"/>.
+        /// </summary>
         public T Value => LazySingletonAllocator.Instance;
 
         bool IReference<T>.TryGetValue(out T value)
@@ -131,6 +160,12 @@ namespace Axle.References
         }
 
         public static T GetSingletonInstance<T>(Type type) => (T) GetSingletonInstance(type);
+        
+        public static T GetSingletonInstance<T>(ISingletonReference<T> singleton)
+        {
+            singleton.VerifyArgument(nameof(singleton)).IsNotNull();
+            return singleton.Value;
+        }
     }
 }
 #endif
