@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Axle.Configuration.Microsoft.Adapters
 {
@@ -31,7 +32,10 @@ namespace Axle.Configuration.Microsoft.Adapters
                 foreach (var sectionKey in section.Keys)
                 {
                     var parsedKey = isValidKey ? MSConfigurationPath.Combine(key, sectionKey) : sectionKey;
-                    Parse(parsedKey, section[sectionKey], data);
+                    foreach (var configSetting in section[sectionKey].Reverse())
+                    {
+                        Parse(parsedKey, configSetting, data);
+                    }
                 }
             }
         }

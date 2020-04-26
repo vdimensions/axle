@@ -14,7 +14,7 @@ namespace Axle.Resources.Yaml.Extraction
 
         protected override ITextDocumentReader GetReader(StringComparer comparer)
         {
-            return new YamlDataReader(comparer);
+            return new YamlDocumentReader(comparer);
         }
 
         protected override TextDocumentResourceInfo CreateResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data)

@@ -3,7 +3,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
+using System.Linq;
 using Axle.Environment;
+using Axle.Verification;
 
 namespace Axle.Reflection.Extensions.Assembly
 {
@@ -41,6 +43,32 @@ namespace Axle.Reflection.Extensions.Assembly
         {
             return Platform.Runtime.LoadSatelliteAssembly(assembly, culture);
         }
+
+        #if NET35_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
+        /// <summary>
+        /// Gets the custom attributes for this assembly as specified by <typeparamref name="TAttribute" />.
+        /// </summary>
+        /// <param name="assembly">
+        /// The <see cref="Assembly"/> to be searched for attributes.
+        /// </param>
+        /// <typeparam name="TAttribute">
+        /// The <see cref="Type"/> for which the custom attributes are to be returned.
+        /// </typeparam>
+        /// <returns>
+        /// An array of type <typeparamref name="TAttribute" /> containing the custom attributes for this assembly of
+        /// that type.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="assembly"/> is <c>null</c>.
+        /// </exception>
+        public static TAttribute[] GetCustomAttributes<TAttribute>(this Assembly assembly) where TAttribute : Attribute
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(assembly, nameof(assembly)));
+            return Enumerable.ToArray(
+                Enumerable.Cast<TAttribute>(
+                    assembly.GetCustomAttributes(typeof(TAttribute), true)));
+        }
+        #endif
     }
 }
 #endif

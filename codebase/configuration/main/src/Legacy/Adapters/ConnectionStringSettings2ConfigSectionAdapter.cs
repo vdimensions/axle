@@ -10,17 +10,17 @@ namespace Axle.Configuration.Legacy.Adapters
         {
             if (!string.IsNullOrEmpty(settings.Name))
             {
-                Data.Add(nameof(ConnectionStringSettings.Name), ConfigSetting.Create(settings.Name));
+                Data.Add(nameof(ConnectionStringSettings.Name), new[] { ConfigSetting.Create(settings.Name) });
             }
             if (!string.IsNullOrEmpty(settings.ConnectionString))
             {
                 Data.Add(
                     nameof(ConnectionStringSettings.ConnectionString), 
-                    ConfigSetting.Create(settings.ConnectionString));
+                    new[] { ConfigSetting.Create(settings.ConnectionString) });
             }
             if (!string.IsNullOrEmpty(settings.ProviderName))
             {
-                Data.Add(nameof(ConnectionStringSettings.ProviderName), ConfigSetting.Create(settings.ProviderName));
+                Data.Add(nameof(ConnectionStringSettings.ProviderName), new[]{ ConfigSetting.Create(settings.ProviderName) });
             }
         }
     }

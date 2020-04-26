@@ -16,7 +16,7 @@ namespace Axle.Text.Documents.Properties.Tests
             var propertiesPath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "data.properties");
-            var reader = new PropertiesDataReader(StringComparer.OrdinalIgnoreCase);
+            var reader = new PropertiesDocumentReader(StringComparer.OrdinalIgnoreCase);
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
             var item1 = data.GetChildren("SingleKey").SingleOrDefault() as ITextDocumentValue;

@@ -10,7 +10,7 @@ using YamlDotNet.Serialization;
 namespace Axle.Text.Documents.Yaml
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class YamlDataReader : AbstractTextDocumentReader
+    public sealed class YamlDocumentReader : AbstractTextDocumentReader
     {
         private sealed class Adapter : AbstractTextDocumentAdapter
         {
@@ -46,7 +46,7 @@ namespace Axle.Text.Documents.Yaml
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
         }
         
-        public YamlDataReader(StringComparer comparer) : base(comparer) { }
+        public YamlDocumentReader(StringComparer comparer) : base(comparer) { }
 
         protected override ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding)
         {

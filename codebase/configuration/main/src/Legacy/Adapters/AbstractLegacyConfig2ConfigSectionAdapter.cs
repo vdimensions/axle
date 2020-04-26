@@ -19,16 +19,16 @@ namespace Axle.Configuration.Legacy.Adapters
 
         public IEnumerable<string> Keys => Sections.Keys.Union(Properties.Keys).Distinct(StringComparer.OrdinalIgnoreCase);
 
-        public IConfigSetting this[string key]
+        public IEnumerable<IConfigSetting> this[string key]
         {
             get
             {
                 key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
                 return Sections.TryGetValue(key, out var section) 
-                    ? section
+                    ? new IConfigSetting[] { section }
                     : Properties.TryGetValue(key, out var result) 
-                        ? result 
-                        : null;
+                        ? new []{ result }
+                        : Enumerable.Empty<IConfigSetting>();
             }
         }
 

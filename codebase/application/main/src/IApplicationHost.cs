@@ -1,4 +1,5 @@
-﻿using Axle.DependencyInjection;
+﻿using Axle.Configuration;
+using Axle.DependencyInjection;
 using Axle.Logging;
 
 namespace Axle
@@ -8,5 +9,7 @@ namespace Axle
         IDependencyContainerFactory DependencyContainerFactory { get; }
         ILoggingService LoggingService { get; }
         string EnvironmentName { get; }
+        IConfiguration Configuration { get; }
+        string[] Logo { get; }
     }
 }

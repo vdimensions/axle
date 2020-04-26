@@ -11,7 +11,7 @@ namespace Axle.Configuration.Text.Documents
     /// </summary>
     /// <seealso cref="IConfigSource"/>
     /// <seealso cref="ITextDocumentRoot"/>
-    public abstract class AbstractTextDocumentsConfigSource : IConfigSource
+    public abstract class AbstractTextDocumentConfigSource : IConfigSource
     {
         private abstract class AbstractTextDocumentConfig<TNode> where TNode: ITextDocumentNode
         {
@@ -45,22 +45,28 @@ namespace Axle.Configuration.Text.Documents
         {
             public TextDocumentConfigSection(ITextDocumentObject documentNode) : base(documentNode) { }
 
-            public IConfigSetting this[string key]
+            public IEnumerable<IConfigSetting> this[string key]
             {
                 get
                 {
-                    var node = DocumentNode.GetChildren().SingleOrDefault(c => DocumentNode.KeyComparer.Equals(key, c.Key));
-                    switch (node)
-                    {
-                        case null:
-                            return null;
-                        case ITextDocumentObject o:
-                            return new TextDocumentConfigSection(o);
-                        case ITextDocumentValue v:
-                            return new TextDocumentConfigSetting(v);
-                        default:
-                            throw new InvalidOperationException($"Unknown document node type {node.GetType()}");
-                    }
+                    var nodes = DocumentNode
+                        .GetChildren(key)
+                        .Select<ITextDocumentNode, IConfigSetting>(
+                            node =>
+                            {
+                                switch (node)
+                                {
+                                    case null:
+                                        return null;
+                                    case ITextDocumentObject o:
+                                        return new TextDocumentConfigSection(o);
+                                    case ITextDocumentValue v:
+                                        return new TextDocumentConfigSetting(v);
+                                    default:
+                                        throw new InvalidOperationException($"Unknown document node type {node.GetType()}");
+                                }
+                            });
+                    return nodes.Where(x => x != null);
                 }
             }
 
@@ -79,13 +85,16 @@ namespace Axle.Configuration.Text.Documents
             public IEnumerable<string> Keys => _configSection.Keys;
             public string Name => _configSection.Name;
 
-            public IConfigSetting this[string key] => _configSection[key];
+            public IEnumerable<IConfigSetting> this[string key] => _configSection[key];
         }
 
         /// <inheritdoc />
-        public IConfiguration LoadConfiguration() => new TextDocumentConfiguration(ReadDocument());
-        
+        public IConfiguration LoadConfiguration()
+        {
+            var doc = ReadDocument();
+            return doc == null ? null : new TextDocumentConfiguration(doc);
+        }
+
         protected abstract ITextDocumentRoot ReadDocument();
-        //ITextDocumentReader
     }
 }

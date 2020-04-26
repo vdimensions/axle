@@ -16,7 +16,7 @@ namespace Axle.Resources.Properties.Extraction
         internal static readonly StringComparer DefaultKeyComparer = StringComparer.OrdinalIgnoreCase;
             
         protected override ITextDocumentReader GetReader(StringComparer comparer) 
-            => new PropertiesDataReader(comparer);
+            => new PropertiesDocumentReader(comparer);
 
         protected override TextDocumentResourceInfo CreateResourceInfo(
             string name, 

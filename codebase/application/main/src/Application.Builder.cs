@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.IO;
+using System.Reflection;
 using Axle.Configuration;
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using Axle.Configuration.Legacy;
+#endif
 using Axle.DependencyInjection;
-using Axle.Logging;
 using Axle.Modularity;
 
 namespace Axle
@@ -18,9 +21,7 @@ namespace Axle
             private readonly IList<Action<IDependencyContainer>> _onContainerReadyHandlers = new List<Action<IDependencyContainer>>();
 
             private LayeredConfigManager _config = new LayeredConfigManager();
-            private IApplicationHost _host = new DefaultApplicationHost();
-            private ILoggingService _loggingService;
-            private IDependencyContainerFactory _dependencyContainerFactory = new AxleDependencyContainerFactory();
+            private IApplicationHost _host = DefaultApplicationHost.Instance;
 
             private Builder Load(IEnumerable<Type> types)
             {
@@ -34,51 +35,64 @@ namespace Axle
                 return this;
             }
 
+            private Stream LoadConfigFile(string file)
+            {
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+                #else
+                var appDir = Path.GetDirectoryName(typeof(Application).GetTypeInfo().Assembly.Location);
+                #endif
+                return File.OpenRead(Path.Combine(appDir, file));
+            }
+
+            private void PrintLogo()
+            {
+                foreach (var logoLine in _host.Logo)
+                {
+                    Console.WriteLine(logoLine);
+                }
+            }
+
             public Application Run(params string[] args)
             {
-                var aggregatingLoggingService = new AggregatingLoggingService(_loggingService == null ? new ILoggingService[0] : new[]{_loggingService});
-                var hostContainer = _host.DependencyContainerFactory.CreateContainer();
-                hostContainer
-                    .Export(_dependencyContainerFactory)
-                    .Export(aggregatingLoggingService);
-                var rootM = new[]
-                {
-                    typeof(ConfigSourceRegistry),
-                    typeof(LoggingModule)
-                };
-                
+                PrintLogo();
                 try 
                 {
-                    var rootContainer = _host.DependencyContainerFactory.CreateContainer(hostContainer);
+                    var rootContainer = _host.DependencyContainerFactory.CreateContainer();
                     rootContainer
-                        //.Export(aggregatingLoggingService)
                         .Export(new ApplicationContainerFactory(_host.DependencyContainerFactory, rootContainer))
+                        .Export(_host.LoggingService)
                         .Export(_host);
+                    
+                    var generalConfig = Configure(new LayeredConfigManager(), LoadConfigFile, string.Empty);
+                    var envSpecificConfig = Configure(new LayeredConfigManager(), LoadConfigFile, _host.EnvironmentName);
                     
                     var config = _config
                         .Append(EnvironmentConfigSource.Instance)
-                        //TODO: .Append() application.xxx
-                        ;            
-                    var modulesConfigSection = config
-                        .LoadConfiguration()
-                        .GetSection("axle")?.GetSection("application")?.GetSection("modules");
+                        .Append(new PreloadedConfigSource(_host.Configuration))
+                        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                        .Append(new LegacyConfigSource())
+                        #endif
+                        .Append(generalConfig)
+                        .Append(envSpecificConfig)  
+                        ;
+                    var loadedConfig = config.LoadConfiguration();
+                    var modulesConfigSection = loadedConfig
+                        .GetIncludeExcludeCollection<Type>("axle.application.modules");
                     
-                    var includedModules = modulesConfigSection?.GetSection("include");
-                    var excludedModules = modulesConfigSection?.GetSection("exclude");
-                    if (includedModules != null)
+                    foreach (var moduleType in modulesConfigSection.IncludeElements)
                     {
-                        // TODO: add modules to _moduleTypes
+                        _moduleTypes.Add(moduleType);
                     }
-                    if (excludedModules != null)
+                    foreach (var moduleType in modulesConfigSection.ExcludeElements)
                     {
-                        // TODO: remove excluded modules from _moduleTypes
+                        _moduleTypes.Remove(moduleType);
                     }
                     
                     foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
                     {
                         onContainerReadyHandler.Invoke(rootContainer);
                     }
-                    // TODO: remove the host usage here
                     var app = Launch(
                         new ApplicationModuleCatalog(_moduleCatalog), _moduleTypes, _host, rootContainer, config, args);
                     app.Run();

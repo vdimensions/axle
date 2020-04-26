@@ -16,7 +16,7 @@ namespace Axle.Text.Documents.Yaml.Tests
             var propertiesPath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
                 "data.yaml");
-            var reader = new YamlDataReader(StringComparer.OrdinalIgnoreCase);
+            var reader = new YamlDocumentReader(StringComparer.OrdinalIgnoreCase);
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
             var item1 = data.GetChildren("SingleKey").SingleOrDefault() as ITextDocumentValue;

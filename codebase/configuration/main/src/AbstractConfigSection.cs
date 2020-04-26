@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using Axle.Verification;
 
 namespace Axle.Configuration
 {
     public abstract class AbstractConfigSection : IConfigSection
     {
-        protected IDictionary<string, IConfigSetting> Data { get; } = new Dictionary<string, IConfigSetting>(StringComparer.OrdinalIgnoreCase);
+        protected IDictionary<string, IList<IConfigSetting>> Data { get; } = new Dictionary<string, IList<IConfigSetting>>(StringComparer.OrdinalIgnoreCase);
 
         protected AbstractConfigSection(string name)
         {
@@ -17,12 +18,12 @@ namespace Axle.Configuration
         public string Name { get; }
         string IConfigSetting.Value => null;
 
-        public IConfigSetting this[string key]
+        public IEnumerable<IConfigSetting> this[string key]
         {
             get
             {
                 key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
-                return Data.TryGetValue(key, out var val) ? val : null;
+                return Data.TryGetValue(key, out var val) ? val : Enumerable.Empty<IConfigSetting>();
             }
         }
     }

@@ -97,6 +97,15 @@ namespace Axle.Resources
                 result = new StreamReader(Open());
                 return true;
             }
+            
+            if (targetType == typeof(string))
+            {
+                using (var sr = new StreamReader(Open()))
+                {
+                    result = sr.ReadToEnd();
+                }
+                return true;
+            }
 
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             var serializer = new BinarySerializer();

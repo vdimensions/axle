@@ -9,7 +9,7 @@ using Kajabity.Tools.Java;
 namespace Axle.Text.Documents.Properties
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class PropertiesDataReader : AbstractTextDocumentReader
+    public sealed class PropertiesDocumentReader : AbstractTextDocumentReader
     {
         private sealed class Adapter : AbstractTextDocumentAdapter
         {
@@ -28,7 +28,7 @@ namespace Axle.Text.Documents.Properties
             public override string Value { get; }
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
         }
-        public PropertiesDataReader(StringComparer comparer) : base(comparer) { }
+        public PropertiesDocumentReader(StringComparer comparer) : base(comparer) { }
 
         protected override ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding)
         {

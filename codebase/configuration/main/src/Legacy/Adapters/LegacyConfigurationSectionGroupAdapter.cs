@@ -29,7 +29,7 @@ namespace Axle.Configuration.Legacy.Adapters
 
         public IEnumerable<string> Keys => _sections.Keys;
 
-        public IConfigSetting this[string key] => GetSection(key);
+        public IEnumerable<IConfigSetting> this[string key] => new[] { GetSection(key) };
         string IConfigSetting.Value => null;
 
         public string Name { get; }

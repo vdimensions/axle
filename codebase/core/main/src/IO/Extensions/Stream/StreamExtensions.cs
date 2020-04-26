@@ -57,46 +57,6 @@ namespace Axle.IO.Extensions.Stream
             stream.Seek(position, SeekOrigin.Begin);
         }
 
-        #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
-        /// <summary>
-        /// Writes the contents of the provided <paramref name="stream"/> to a temporary file.
-        /// </summary>
-        /// <param name="stream">
-        /// The stream object to dump.
-        /// </param>
-        /// <returns>
-        /// A <see cref="TemporaryStreamDump"/> instance pointing to the file containing the dumped data.
-        /// </returns>
-        /// <seealso cref="TemporaryStreamDump"/>
-        /// <seealso cref="TemporaryStreamDump.Dump(Stream, bool)"/>
-        public static TemporaryStreamDump Dump(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Stream stream) => TemporaryStreamDump.Dump(stream, true);
-
-        /// <summary>
-        /// Writes the contents of the target <paramref name="stream"/> to a temporary file in the given
-        /// <paramref name="location"/>.
-        /// </summary>
-        /// <param name="stream">
-        /// The stream object to dump.
-        /// </param>
-        /// <param name="location">
-        /// The location of the file to dump the stream into.
-        /// </param>
-        /// <returns>
-        /// A <see cref="TemporaryStreamDump"/> instance pointing to the file containing the dumped data.
-        /// </returns>
-        /// <seealso cref="TemporaryStreamDump"/>
-        /// <seealso cref="TemporaryStreamDump.Dump(Stream, string, bool)"/>
-        public static TemporaryStreamDump DumpTo(
-            #if NETSTANDARD || NET35_OR_NEWER
-            this
-            #endif
-            Stream stream, string location) => TemporaryStreamDump.Dump(stream, location, true);
-        #endif
-
         /// <summary>
         /// Sets the position of the target <paramref name="stream"/> to its start. The call is equivalent to the
         /// following code: <code>stream.Seek(0, SeekOrigin.Begin)</code>

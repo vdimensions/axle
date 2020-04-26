@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Axle.Text.Expressions.Substitution;
 using Axle.Verification;
 
@@ -34,7 +35,7 @@ namespace Axle.Configuration
             return false;
         }
 
-        public IConfigSetting this[string key]
+        public IEnumerable<IConfigSetting> this[string key]
         {
             get
             {
@@ -45,22 +46,26 @@ namespace Axle.Configuration
                     // prevent recursive lookup
                     return originalResult;
                 }
-                switch (originalResult)
-                {
-                    case IConfigSection cs:
+                return originalResult.Select(
+                    item =>
                     {
-                        return GetSafeSubstitutionProvider(key, cs);
-                    }
-                    case IConfigSetting cv:
-                    {
-                        var substitutedValue = _expression.Replace(cv.Value, GetSafeSubstitutionProvider(key, _originalConfig));
-                        return ConfigSetting.Create(substitutedValue);
-                    }
-                    default:
-                    {
-                        return originalResult;
-                    }
-                }
+                        switch (item)
+                        {
+                            case IConfigSection cs:
+                            {
+                                return GetSafeSubstitutionProvider(key, cs);
+                            }
+                            case IConfigSetting cv:
+                            {
+                                var substitutedValue = _expression.Replace(cv.Value, GetSafeSubstitutionProvider(key, _originalConfig));
+                                return ConfigSetting.Create(substitutedValue);
+                            }
+                            default:
+                            {
+                                return item;
+                            }
+                        }
+                    });
             }
         }
 

@@ -1,7 +1,7 @@
 #if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
 using System.IO;
-using System.Reflection;
 using Axle.IO.Extensions.Stream;
+using Microsoft.Extensions.FileProviders;
 
 namespace Axle.Configuration.Microsoft
 {
@@ -10,26 +10,30 @@ namespace Axle.Configuration.Microsoft
     public sealed class StreamedFileConfigSource<T> : IConfigSource
         where T: MSFileConfigurationSource, new()
     {
-        private readonly Stream _stream;
+        private readonly FileConfigSource _fileConfigSource;
 
         public StreamedFileConfigSource(Stream stream)
         {
-            _stream = stream;
+            var tempFile = Path.GetTempFileName();
+            using (stream)
+            using (var fileStr = File.OpenWrite(tempFile))
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+                StreamExtensions.WriteTo(stream, fileStr, 8192);
+                fileStr.Flush();
+            }
+
+            _fileConfigSource = new FileConfigSource(
+                new T
+                {
+                    Path = Path.GetFileName(tempFile), 
+                    FileProvider = new PhysicalFileProvider(Path.GetDirectoryName(tempFile))
+                });
         }
 
         public IConfiguration LoadConfiguration()
         {
-            var randomFileName = Path.GetFileName(Path.GetTempFileName());
-            var tmpFileName =
-                Path.Combine(
-                    Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location), 
-                    randomFileName
-                );
-            using (_stream)
-            using (_stream.DumpTo(tmpFileName))
-            {
-                return new FileConfigSource(new T { Path = randomFileName }).LoadConfiguration();
-            }
+            return _fileConfigSource.LoadConfiguration();
         }
     }
 }

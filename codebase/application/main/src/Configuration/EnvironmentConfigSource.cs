@@ -28,7 +28,15 @@ namespace Axle.Configuration
 
         public IConfiguration LoadConfiguration() => this;
 
-        IConfigSetting IConfigSection.this[string key] => _env.TryGetValue(key, out var val) ? ConfigSetting.Create(val) : null;
+        IEnumerable<IConfigSetting> IConfigSection.this[string key]
+        {
+            get
+            {
+                return _env.TryGetValue(key, out var val) 
+                    ? new[]{ ConfigSetting.Create(val) } 
+                    : Enumerable.Empty<IConfigSetting>();
+            }
+        }
 
         IEnumerable<string> IConfigSection.Keys => _env.Keys;
 

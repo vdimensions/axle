@@ -12,7 +12,7 @@ namespace Axle
         private readonly IModuleCatalog _originalCatalog;
         private readonly HashSet<Type> _applicationModuleTypes = new HashSet<Type>
             {
-                typeof(StatisticsModule),
+                //typeof(StatisticsModule),
                 //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 //typeof(DynamicModuleLoader)
                 //#endif

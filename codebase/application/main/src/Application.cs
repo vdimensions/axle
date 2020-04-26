@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Modularity;
+using Axle.Resources;
+using Axle.Resources.Bundling;
 using Axle.Text.Expressions.Substitution;
 
 namespace Axle
 {
     public sealed partial class Application : IDisposable
     {
+        internal const string ConfigBundleName = "$Config";
+        
         public static IApplicationBuilder Build() => new Builder();
 
         private readonly IDependencyContainer _rootContainer;
@@ -18,12 +25,17 @@ namespace Axle
         private readonly IList<Type> _initializedModules;
         private readonly ConcurrentDictionary<Type, ModuleWrapper> _modules;
 
+        internal static Stream LoadResourceConfig(ResourceManager resourceManager, string prefix, string configFile)
+        {
+            return resourceManager.Load(ConfigBundleName, Path.Combine(prefix, configFile), CultureInfo.InvariantCulture)?.Open();
+        }
+
         internal static Application Launch(
             IModuleCatalog moduleCatalog,
             IEnumerable<Type> moduleTypes, 
             IApplicationHost host,
             IDependencyContainer rootContainer,
-            IConfigManager config, 
+            LayeredConfigManager config, 
             string[] args)
         {
             var loadedModules = moduleCatalog.GetModules(
@@ -92,14 +104,32 @@ namespace Axle
                             }
                         }
 
-                        var baseModuleConfig =
-                            // TODO: prepend a module's embedded configuration data
-                            // config.Prepend(...);
-                            config;
-                        var moduleConfig = 
-                            new SubstitutionResolvingConfig(
-                                baseModuleConfig.LoadConfiguration(),
-                                substExpr);
+                        var moduleAssembly = 
+                            moduleType
+                            #if NETSTANDARD || NET45_OR_NEWER
+                            .GetTypeInfo()
+                            #endif
+                            .Assembly;
+                        var moduleTypeName = 
+                            moduleType
+                            #if NETSTANDARD || NET45_OR_NEWER
+                            .GetTypeInfo()
+                            #endif
+                            .Name;
+                        var moduleResourceManager = new DefaultResourceManager();
+                        moduleResourceManager.Bundles.Configure(ConfigBundleName).Register(moduleAssembly);
+                        
+                        var generalConfig = Configure(
+                            new LayeredConfigManager(), 
+                            f => LoadResourceConfig(moduleResourceManager, moduleTypeName, f), 
+                            string.Empty);
+                        var envSpecificConfig = Configure(
+                            new LayeredConfigManager(), 
+                            f => LoadResourceConfig(moduleResourceManager, moduleTypeName, f), 
+                            host.EnvironmentName);
+
+                        var baseModuleConfig = config.Prepend(envSpecificConfig).Prepend(generalConfig);
+                        var moduleConfig = new SubstitutionResolvingConfig(baseModuleConfig.LoadConfiguration(), substExpr);
                         moduleInitializationContainer.Export(moduleConfig);
 
                         if (moduleInfo.ConfigSectionInfo != null)
@@ -158,7 +188,7 @@ namespace Axle
                     }
                 }
             }
-
+            
             return new Application(rootContainer, instantiatedModules, initializedModules, modules, host);
         }
 

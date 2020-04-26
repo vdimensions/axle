@@ -27,11 +27,13 @@ namespace Axle.Configuration.Microsoft.Adapters
             UnderlyingConfiguration = configuration.VerifyArgument(nameof(configuration)).IsNotNull();
         }
 
-        public IConfigSection GetSection(string key)
+        public IEnumerable<IConfigSection> GetSections(string key)
         {
             key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
             var section = UnderlyingConfiguration.GetSection(key);
-            return section == null ? null : new Microsoft2AxleConfigSectionAdapter(section);
+            return section == null 
+                ? Enumerable.Empty<IConfigSection>() 
+                : new IConfigSection[]{ new Microsoft2AxleConfigSectionAdapter(section) };
         }
 
         /// A reference to the source configuration object that is being adapted.
@@ -47,7 +49,7 @@ namespace Axle.Configuration.Microsoft.Adapters
         public abstract string Name { get; }
 
         /// <inheritdoc />
-        public IConfigSetting this[string key]
+        public IEnumerable<IConfigSetting> this[string key]
         {
             get
             {
@@ -55,7 +57,7 @@ namespace Axle.Configuration.Microsoft.Adapters
                 var value = UnderlyingConfiguration[key];
                 if (value != null)
                 {
-                    return ConfigSetting.Create(value);
+                    return new[] { ConfigSetting.Create(value) };
                 }
                 var section = UnderlyingConfiguration.GetSection(key);
                 if (section != null)
@@ -63,10 +65,10 @@ namespace Axle.Configuration.Microsoft.Adapters
                     var result = new Microsoft2AxleConfigSectionAdapter(section);
                     if (!string.IsNullOrEmpty(result.Value) || result.Keys.Any())
                     {
-                        return result;
+                        return new[] { result };
                     }
                 }
-                return null;
+                return Enumerable.Empty<IConfigSection>();
             }
         }
     }

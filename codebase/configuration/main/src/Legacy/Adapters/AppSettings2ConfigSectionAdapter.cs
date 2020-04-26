@@ -9,7 +9,7 @@ namespace Axle.Configuration.Legacy.Adapters
         {
             foreach (var k in appSettings.Settings.AllKeys)
             {
-                Data.Add(k, ConfigSetting.Create(appSettings.Settings[k].Value));
+                Data.Add(k, new[] { ConfigSetting.Create(appSettings.Settings[k].Value) });
             }
         }
     }

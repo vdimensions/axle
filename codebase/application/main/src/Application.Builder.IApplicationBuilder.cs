@@ -1,6 +1,5 @@
 ﻿using System;
 using Axle.DependencyInjection;
-using Axle.Logging;
 using Axle.Verification;
 
 namespace Axle

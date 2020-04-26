@@ -17,12 +17,20 @@ namespace Axle.Configuration
                 _configurations = configurations;
             }
 
-            public IConfigSetting this[string key]
+            public IEnumerable<IConfigSetting> this[string key]
             {
                 get
                 {
                     key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
-                    return _configurations.Select(x => x[key]).FirstOrDefault(x => x != null);
+                    var results = _configurations
+                        .Select(x => x[key].Where(y => y != null))
+                        .SelectMany(x => x)
+                        .ToList();
+                    // in case we have found a collection of simple setting values, take only the newest
+                    var overridingSetting = results.FirstOrDefault(x => !(x is IConfigSection));
+                    return overridingSetting != null
+                        ? new[] {overridingSetting}
+                        : (IEnumerable<IConfigSetting>) results;
                 }
             }
 
@@ -39,7 +47,7 @@ namespace Axle.Configuration
         {
             _configs = configs;
         }
-        public LayeredConfigManager() : this(new List<IConfiguration>()) { }
+        public LayeredConfigManager() : this(Enumerable.Empty<IConfiguration>()) { }
 
         public LayeredConfigManager Prepend(IConfigSource source)
         {
@@ -47,7 +55,12 @@ namespace Axle.Configuration
             // NB prepends configs to the end, as they are being prioritized by order
             //
             source.VerifyArgument(nameof(source)).IsNotNull();
-            var newConfigs = _configs.Union(new[] {source.LoadConfiguration()});
+            var cfg = source.LoadConfiguration();
+            if (cfg == null)
+            {
+                return this;
+            }
+            var newConfigs = _configs.ToArray().Union(new[] {cfg});
             return new LayeredConfigManager(newConfigs);
         }
         public LayeredConfigManager Append(IConfigSource source)
@@ -56,7 +69,12 @@ namespace Axle.Configuration
             // NB appends configs to the beginning, as they are being prioritized by order
             //
             source.VerifyArgument(nameof(source)).IsNotNull();
-            var newConfigs = new[] {source.LoadConfiguration()}.Union(_configs);
+            var cfg = source.LoadConfiguration();
+            if (cfg == null)
+            {
+                return this;
+            }
+            var newConfigs = new[] { cfg }.Union(_configs.ToArray()); 
             return new LayeredConfigManager(newConfigs);
         }
 

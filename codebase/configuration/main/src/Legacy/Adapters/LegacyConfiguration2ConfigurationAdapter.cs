@@ -77,7 +77,16 @@ namespace Axle.Configuration.Legacy.Adapters
 
         public IEnumerable<string> Keys => _sections.Keys.Union(_appSettings.Keys).Distinct(StringComparer.OrdinalIgnoreCase);
 
-        public IConfigSetting this[string key] => GetSection(key) ?? _appSettings[key];
+        public IEnumerable<IConfigSetting> this[string key]
+        {
+            get
+            {
+                var result = GetSection(key);
+                return result == null
+                    ? _appSettings[key]
+                    : new IConfigSetting[] {result};
+            }
+        }
 
         string IConfigSection.Name => string.Empty;
         string IConfigSetting.Value => null;

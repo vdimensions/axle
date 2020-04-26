@@ -1,0 +1,7 @@
+﻿Logging.LogLevel:
+  Axle: "Warning"
+  
+axle.application:
+  modules:
+    include:
+    - "Axle.Modularity.StatisticsModule, Axle.Application"

@@ -54,9 +54,6 @@ namespace Axle.Text.Documents.Binding
                 { typeof(DateTimeOffset),   new BoxingConverter<DateTimeOffset>(dateTimeOffsetParser) },
                 { typeof(TimeSpan),         new BoxingConverter<TimeSpan>(timeSpanParser) },
                 { typeof(Guid),             new BoxingConverter<Guid>(guidParser) },
-                { typeof(Version),          new BoxingConverter<Version>(new VersionParser()) },
-                { typeof(Uri),              new BoxingConverter<Uri>(new Axle.Conversion.Parsing.UriParser()) },
-                { typeof(Assembly),         new BoxingConverter<Assembly>(new AssemblyParser()) },
                 #if NETSTANDARD || NET35_OR_NEWER
                 { typeof(bool?),            new BoxingConverter<bool?>(booleanParser.GetNullableParser()) },
                 { typeof(char?),            new BoxingConverter<char?>(characterParser.GetNullableParser()) },
@@ -76,6 +73,10 @@ namespace Axle.Text.Documents.Binding
                 { typeof(TimeSpan?),        new BoxingConverter<TimeSpan?>(timeSpanParser.GetNullableParser()) },
                 { typeof(Guid?),            new BoxingConverter<Guid?>(guidParser.GetNullableParser()) },
                 #endif
+                { typeof(Uri),              new BoxingConverter<Uri>(new Axle.Conversion.Parsing.UriParser()) },
+                { typeof(Type),             new BoxingConverter<Type>(new TypeParser()) },
+                { typeof(Assembly),         new BoxingConverter<Assembly>(new AssemblyParser()) },
+                { typeof(Version),          new BoxingConverter<Version>(new VersionParser()) },
             };
         }
 

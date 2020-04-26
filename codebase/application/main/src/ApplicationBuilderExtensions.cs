@@ -15,13 +15,5 @@ namespace Axle
             return builder.ConfigureApplication(a => a.Append(configurationSource));
         }
         #endif
-
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public static IApplicationBuilder EnableLegacyConfig(this IApplicationBuilder builder)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(builder, nameof(builder)));
-            return builder.ConfigureApplication(a => a.AppendLegacyConfig());
-        }
-        #endif
     }
 }

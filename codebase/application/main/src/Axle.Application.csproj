@@ -35,7 +35,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Properties" />
     <Folder Include="Properties\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Application\Host\application.Development.yml" />
+    <EmbeddedResource Include="Application\Host\application.yml" />
+    <EmbeddedResource Include="Application\logo.txt" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

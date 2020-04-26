@@ -13,7 +13,7 @@ namespace Axle.Configuration
         /// <returns>
         /// A <see cref="IConfigSetting"/> instance representing the retrieved configuration value.
         /// </returns>
-        IConfigSetting this[string key] { get; }
+        IEnumerable<IConfigSetting> this[string key] { get; }
         string Name { get; }
         IEnumerable<string> Keys { get; }
     }
