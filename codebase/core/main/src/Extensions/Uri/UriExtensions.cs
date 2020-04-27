@@ -242,7 +242,7 @@ namespace Axle.Extensions.Uri
 
         /// <summary>
         /// Creates a new <see cref="System.Uri">URI</see> using the address of an existing
-        /// <see cref="System.Uri">URI</see>, but with a different <see cref="Uri.Host">host</see>.
+        /// <see cref="System.Uri">URI</see>, but with a different <see cref="System.Uri.Host">host</see>.
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> form which the address will be taken. </param>
         /// <param name="hostname">The hostname to be used for the new <see cref="System.Uri">URI</see>.</param>

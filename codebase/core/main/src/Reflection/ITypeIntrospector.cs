@@ -11,8 +11,9 @@ namespace Axle.Reflection
     public interface ITypeIntrospector : IAttributeTarget
     {
         /// <summary>
-        /// Looks up a <see cref="IConstructor"/> for the <see cref="IntrospectedType">introspected type</see>
-        /// that matches the provided <paramref name="scanOptions"/> and a signature conforming to the specified <paramref name="argumentTypes"/>.
+        /// Looks up a <see cref="IConstructor"/> for the <see cref="IntrospectedType">introspected type</see> that
+        /// matches the provided <paramref name="scanOptions"/> and a signature conforming to the specified
+        /// <paramref name="argumentTypes"/>.
         /// </summary>
         /// <param name="scanOptions">
         /// One of the <see cref="ScanOptions"/> values, representing the reflection lookup flags.
@@ -21,7 +22,8 @@ namespace Axle.Reflection
         /// An array of types to match the signature of the constructor being looked up.
         /// </param>
         /// <returns>
-        /// An instance of <see cref="IConstructor"/> representing the reflected constructor, or <c>null</c> if the lookup did not yield any results.
+        /// An instance of <see cref="IConstructor"/> representing the reflected constructor, or <c>null</c> if the
+        /// lookup did not yield any results.
         /// </returns>
         IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);
         /// <summary>
@@ -36,14 +38,15 @@ namespace Axle.Reflection
         IConstructor GetConstructor(ConstructorInfo reflectedConstructor);
 
         /// <summary>
-        /// Looks up a collection of <see cref="IConstructor">constructors</see> for the <see cref="IntrospectedType">introspected type</see>
-        /// that match the provided <paramref name="scanOptions"/>.
+        /// Looks up a collection of <see cref="IConstructor">constructors</see> for the
+        /// <see cref="IntrospectedType">introspected type</see> that match the provided <paramref name="scanOptions"/>.
         /// </summary>
         /// <param name="scanOptions">
         /// One of the <see cref="ScanOptions"/> values, representing the reflection lookup flags.
         /// </param>
         /// <returns>
-        /// An array of <see cref="IConstructor"/> representing the reflected constructors, or an empty array if the lookup did not yield any results.
+        /// An array of <see cref="IConstructor"/> representing the reflected constructors, or an empty array if the
+        /// lookup did not yield any results.
         /// </returns>
         IConstructor[] GetConstructors(ScanOptions scanOptions);
 
@@ -74,8 +77,8 @@ namespace Axle.Reflection
         IProperty GetProperty(PropertyInfo reflectedProperty);
 
         /// <summary>
-        /// Gets an array representing the properties that are declared or inherited by the <see cref="IntrospectedType"/>,
-        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// Gets an array representing the properties that are declared or inherited by the
+        /// <see cref="IntrospectedType"/>, filtered in accordance to the provided <paramref name="scanOptions"/>.
         /// </summary>
         /// <param name="scanOptions">
         /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
@@ -173,13 +176,14 @@ namespace Axle.Reflection
         object CreateInstance(params object[] args);
 
         /// <summary>
-        /// The <see cref="Type"/> which the current <see cref="IIntrospector"/> instance provides reflected information for.
+        /// The <see cref="Type"/> which the current <see cref="ITypeIntrospector"/> instance provides reflected
+        /// information for.
         /// </summary>
         Type IntrospectedType { get; }
 
         /// <summary>
-        /// Gets a value representing one or a combination of several <see cref="Axle.Reflection.TypeFlags"/> values which describe
-        /// the <see cref="IntrospectedType"/> properties;
+        /// Gets a value representing one or a combination of several <see cref="Axle.Reflection.TypeFlags"/> values
+        /// which describe the <see cref="IntrospectedType"/> properties;
         /// </summary>
         /// <seealso cref="Axle.Reflection.TypeFlags"/>
         TypeFlags TypeFlags { get; }
