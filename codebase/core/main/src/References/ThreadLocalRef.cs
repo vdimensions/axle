@@ -83,8 +83,8 @@ namespace Axle.References
                     return TryGetValue(out var val) && Equals(val, otherVal);
                 case ThreadLocalRef<T> otherRef:
                     return EqualityComparer.Create().Equals(this, otherRef);
-                case IThreadLocalReference<T> otherTLR:
-                    return EqualityComparer.Create().Equals(this, otherTLR);
+                case IThreadLocalReference<T> otherReference:
+                    return EqualityComparer.Create().Equals(this, otherReference);
                 default:
                     return false;
             }

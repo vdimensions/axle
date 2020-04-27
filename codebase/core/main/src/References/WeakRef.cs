@@ -91,8 +91,8 @@ namespace Axle.References
                     return TryGetValue(out var val) && Equals(val, otherVal);
                 case WeakRef<T> otherRef:
                     return EqualityComparer.Create().Equals(this, otherRef);
-                case IWeakReference<T> otherWR:
-                    return EqualityComparer.Create().Equals(this, otherWR);
+                case IWeakReference<T> otherReference:
+                    return EqualityComparer.Create().Equals(this, otherReference);
                 default:
                     return false;
             }

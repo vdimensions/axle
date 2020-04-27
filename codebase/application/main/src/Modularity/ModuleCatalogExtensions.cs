@@ -161,17 +161,17 @@ namespace Axle.Modularity
             {
                 var requiredModuleTypes = moduleCatalog.GetRequiredModules(moduleType).Except(new []{moduleType});
                 var requiredModules = requiredModuleTypes
-                        .Select(
-                            t =>
+                    .Select(
+                        t =>
+                        {
+                            if (!knownModules.TryGetValue(t, out var m))
                             {
-                                if (!knownModules.TryGetValue(t, out var m))
-                                {
-                                    m = ExtractModules(moduleCatalog, new[] {t}, knownModules).Single(x => x.Type == t);
-                                    knownModules.Add(t, m);
-                                }
-                                return m;
-                            })
-                        .ToArray();
+                                m = ExtractModules(moduleCatalog, new[] {t}, knownModules).Single(x => x.Type == t);
+                                knownModules.Add(t, m);
+                            }
+                            return m;
+                        })
+                    .ToArray();
                 var utilizedModules = moduleCatalog.GetUtilizedModules(moduleType);
                 var reportsToModules = moduleCatalog.GetReportsToModules(moduleType);
                 var configurationInfo = moduleCatalog.GetConfigurationInfo(moduleType);
@@ -203,8 +203,8 @@ namespace Axle.Modularity
         }
 
         /// <summary>
-        /// Creates a list of modules, grouped by and sorted by a rank integer. The rank determines
-        /// the order for bootstrapping the modules -- those with lower rank will be initialized earlier. 
+        /// Creates a list of modules, grouped by and sorted by a rank integer. The rank determines the order for
+        /// bootstrapping the modules -- those with lower rank will be initialized earlier. 
         /// A module with particular rank does not have module dependencies with a higher rank. 
         /// Modules of the same rank can be simultaneously initialized in multiple threads, if parallel option is
         /// specified.
@@ -217,7 +217,6 @@ namespace Axle.Modularity
         /// </returns>
         internal static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(this IModuleCatalog moduleCatalog, IList<ModuleInfo> modulesToLaunch)
         {
-            var loadedModulesSafe = new List<Type>();
             IDictionary<Type, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<Type, Tuple<ModuleInfo, int>>();
             var remainingCount = int.MaxValue;
             while (modulesToLaunch.Count > 0)
@@ -245,13 +244,6 @@ namespace Axle.Modularity
                         if (modulesWithRank.TryGetValue(moduleDependency.Type, out var parentRank))
                         {
                             rank = Math.Max(rank, parentRank.Item2);
-                        }
-                        else if (loadedModulesSafe.Contains(moduleDependency.Type))
-                        {   //
-                            // The module depends on an already loaded module. This will not contribute to rank
-                            // increments.
-                            //
-                            rank = Math.Max(rank, 0);
                         }
                         else
                         {   //

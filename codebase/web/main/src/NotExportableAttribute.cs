@@ -1,6 +1,7 @@
 ﻿using System;
 using Axle.DependencyInjection;
 using Axle.Reflection;
+using Axle.Verification;
 
 namespace Axle.Web.AspNetCore
 {
@@ -21,11 +22,21 @@ namespace Axle.Web.AspNetCore
     [AttributeUsage(AttributeTargets.Class)]
     public sealed class NotExportableAttribute : Attribute
     {
+        /// <summary>
+        /// Determines if the <see cref="NotExportableAttribute"/> has been defined for the target
+        /// <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">
+        /// The type to check if has a <see cref="NotExportableAttribute"/> defined on.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the <see cref="NotExportableAttribute"/> has been defined for the target
+        /// <paramref name="type"/>; <c>false</c> otherwise.
+        /// </returns>
         public static bool IsDefinedFor(Type type)
         {
+            type.VerifyArgument(nameof(type)).IsNotNull();
             return new TypeIntrospector(type).GetAttributes(typeof(NotExportableAttribute)).Length == 1; 
         }
-        
-        public NotExportableAttribute() { }
     }
 }

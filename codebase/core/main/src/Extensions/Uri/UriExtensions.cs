@@ -1,7 +1,6 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
 
@@ -213,6 +212,25 @@ namespace Axle.Extensions.Uri
             return SchemeEquals(uri, UriSchemeAssembly) || SchemeEquals(uri, UriSchemeResource);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="System.Uri"/> class based on the combination of a specified
+        /// base <see cref="System.Uri"/> instance and a relative <see cref="System.Uri"/> instance.
+        /// </summary>
+        /// <param name="uri">
+        /// A relative <see cref="System.Uri"/> instance that is combined with <paramref name="baseUri"/>.
+        /// </param>
+        /// <param name="baseUri">
+        /// An absolute <see cref="System.Uri"/> that is the base for the new <see cref="System.Uri"/> instance.
+        /// </param>
+        /// <returns>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="uri"/> or <paramref name="baseUri"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="baseUri"/> is not an <see cref="System.Uri.IsAbsoluteUri">absolute</see>
+        /// <see cref="System.Uri"/> instance.
+        /// </exception>
         public static System.Uri ChangeBase(this System.Uri uri, System.Uri baseUri)
         {
             if (uri == null)
@@ -517,7 +535,7 @@ namespace Axle.Extensions.Uri
             var pathBuilder = new StringBuilder();
             var baseSegments = GetSegments(baseUri);
             var targetSegments = GetSegments(targetUri);
-            int i = 0, length = Math.Min(baseSegments.Length, targetSegments.Length);
+            int i, length = Math.Min(baseSegments.Length, targetSegments.Length);
             if (length > 0 && !baseUri.IsAbsoluteUri && !comparer.Equals(baseSegments[0], targetSegments[0]))
             {
                 result = null;

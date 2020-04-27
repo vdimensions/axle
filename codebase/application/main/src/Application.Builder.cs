@@ -67,12 +67,13 @@ namespace Axle
                     var generalConfig = Configure(new LayeredConfigManager(), LoadConfigFile, string.Empty);
                     var envSpecificConfig = Configure(new LayeredConfigManager(), LoadConfigFile, _host.EnvironmentName);
                     
-                    var config = _config
+                    var config = new LayeredConfigManager()
                         .Append(EnvironmentConfigSource.Instance)
                         .Append(new PreloadedConfigSource(_host.Configuration))
                         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                         .Append(new LegacyConfigSource())
                         #endif
+                        .Append(_config)
                         .Append(generalConfig)
                         .Append(envSpecificConfig)
                         .LoadConfiguration()

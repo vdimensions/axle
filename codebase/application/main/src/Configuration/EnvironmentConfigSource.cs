@@ -15,7 +15,7 @@ namespace Axle.Configuration
         private EnvironmentConfigSource()
         {
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            var env = System.Environment.GetEnvironmentVariables(System.EnvironmentVariableTarget.Process);
+            var env = System.Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Process);
             #else
             var env = System.Environment.GetEnvironmentVariables();
             #endif

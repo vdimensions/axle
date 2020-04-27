@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
 
 
@@ -75,6 +76,7 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// </exception>
         /// <seealso cref="string.IndexOf(string)"/>
+        [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.1")]
         public static bool Contains(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -84,6 +86,10 @@ namespace Axle.Extensions.String
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
             }
             return str.IndexOf(value) >= 0;
         }
@@ -130,6 +136,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(str));
             }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
             return str.IndexOf(value, startIndex, comparison) >= 0;
         }
 
@@ -157,6 +167,7 @@ namespace Axle.Extensions.String
         /// <paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="str"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int)"/>
+        [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.2")]
         public static bool Contains(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -166,6 +177,10 @@ namespace Axle.Extensions.String
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
             }
             return str.IndexOf(value, startIndex) >= 0;
         }
@@ -254,6 +269,7 @@ namespace Axle.Extensions.String
         /// <paramref name="startIndex"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int, int)"/>
+        [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.3")]
         public static bool Contains(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -1568,21 +1584,89 @@ namespace Axle.Extensions.String
             return string.Join(separator, strArr);
         }
 
+        /// <summary>
+        /// Concatenates all the elements of a string collection, using the specified <paramref name="separator"/>
+        /// between each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="string"/> to use as a separator. The <paramref name="separator"/> is included in the returned
+        /// string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// A collection that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> string.
+        /// If the <paramref name="values"/> collection is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             string separator, IEnumerable<string> values) => JoinInternal(values, separator);
+        /// <summary>
+        /// Concatenates all the elements of a string collection, using the specified <paramref name="separator"/>
+        /// between each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="char">character</see> to use as a separator. The <paramref name="separator"/> is included in
+        /// the returned string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// A collection that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> character.
+        /// If the <paramref name="values"/> collection is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             char separator, IEnumerable<string> values) => JoinInternal(values, separator.ToString());
+        /// <summary>
+        /// Concatenates all the elements of a string array, using the specified <paramref name="separator"/> between
+        /// each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="string"/> to use as a separator. The <paramref name="separator"/> is included in the returned
+        /// string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// An array that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> string.
+        /// If the <paramref name="values"/> array is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             string separator, params string[] values) => JoinInternal(values, separator);
+        /// <summary>
+        /// Concatenates all the elements of a string array, using the specified <paramref name="separator"/> between
+        /// each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="char">character</see> to use as a separator. The <paramref name="separator"/> is included in
+        /// the returned string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// An array that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> character.
+        /// If the <paramref name="values"/> array is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
