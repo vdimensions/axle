@@ -38,10 +38,24 @@ namespace Axle
         /// configuration process, or to <see cref="Run">run</see> the application.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="setupDependencies"/> is <c>null</c>
+        /// <paramref name="setupDependencies"/> is <c>null</c>.
         /// </exception>
         IApplicationBuilder ConfigureDependencies(Action<IDependencyContainer> setupDependencies);
 
+        /// <summary>
+        /// Allows for programmatically registering additional configuration sources for configuring the
+        /// <see cref="Application">application</see>.  
+        /// </summary>
+        /// <param name="setupConfiguration">
+        /// A delegate that is used to alter the configuration of the <see cref="Application">application</see>.  
+        /// </param>
+        /// <returns>
+        /// A reference to an <see cref="IApplicationBuilder">application builder</see> to proceed with the application
+        /// configuration process, or to <see cref="Run">run</see> the application.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="setupConfiguration"/> is <c>null</c>.
+        /// </exception>
         IApplicationBuilder ConfigureApplication(Action<IApplicationConfigurationBuilder> setupConfiguration);
 
         /// <summary>
@@ -56,7 +70,7 @@ namespace Axle
         /// configuration process, or to <see cref="Run">run</see> the application.
         /// </returns>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="setupModules"/> is <c>null</c>
+        /// <paramref name="setupModules"/> is <c>null</c>.
         /// </exception>
         IApplicationBuilder ConfigureModules(Action<IApplicationModuleConfigurer> setupModules);
 
