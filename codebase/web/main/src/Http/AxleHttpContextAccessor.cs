@@ -1,10 +1,9 @@
 ﻿using System;
-
 using Microsoft.AspNetCore.Http;
 
-
-namespace Axle.Web.AspNetCore
+namespace Axle.Web.AspNetCore.Http
 {
+    [NotExportable]
     internal sealed class AxleHttpContextAccessor : IHttpContextAccessor
     {
         private readonly object _syncRoot = new object();

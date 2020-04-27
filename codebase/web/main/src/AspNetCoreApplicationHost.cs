@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.References;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Axle.Web.AspNetCore
 {
     /// <summary>
     /// The <see cref="IApplicationHost"/> implementation designed for use with aspnetcore.
     /// </summary>
-    public sealed class AspNetCoreApplicationHost : IApplicationHost
+    public sealed class AspNetCoreApplicationHost : IApplicationHost, IServiceConfigurer
     {
         public static AspNetCoreApplicationHost Instance => Singleton<AspNetCoreApplicationHost>.Instance.Value;
         
@@ -18,13 +20,13 @@ namespace Axle.Web.AspNetCore
         private readonly IDependencyContainerFactory _dependencyContainerFactory;
         private readonly IConfiguration _configuration;
         private readonly string[] _logo;
+        private readonly ConcurrentDictionary<Type, object> _exportedObjects = new ConcurrentDictionary<Type, object>();
         
         private AspNetCoreApplicationHost()
         {
             var defaultAppHost = DefaultApplicationHost.Instance;
             
-            // TODO: use delegating factory that will also duplicate dependencies in ASPNET DI containers
-            _dependencyContainerFactory = defaultAppHost.DependencyContainerFactory;
+            _dependencyContainerFactory = new AspNetCoreDependencyContainerFactory(defaultAppHost.DependencyContainerFactory, _exportedObjects);
             
             _loggingService = defaultAppHost.LoggingService;
             
@@ -36,6 +38,14 @@ namespace Axle.Web.AspNetCore
 
             _configuration = defaultAppHost.Configuration;
             _logo = defaultAppHost.Logo;
+        }
+        
+        public void Configure(IServiceCollection services)
+        {
+            foreach (var pair in _exportedObjects.ToArray())
+            {
+                services.AddSingleton(pair.Key, pair.Value);
+            }
         }
 
         IDependencyContainerFactory IApplicationHost.DependencyContainerFactory => _dependencyContainerFactory;

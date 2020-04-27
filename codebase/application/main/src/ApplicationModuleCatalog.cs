@@ -12,12 +12,10 @@ namespace Axle
         private readonly IModuleCatalog _originalCatalog;
         private readonly HashSet<Type> _applicationModuleTypes = new HashSet<Type>
             {
-                //typeof(StatisticsModule),
+                typeof(StatisticsModule),
                 //#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 //typeof(DynamicModuleLoader)
                 //#endif
-                //typeof(ConfigSourceRegistry),   // allow registering custom config providers
-                //typeof(ConfigurationModule),  // makes sure config providers are registered before this module 
                 typeof(LoggingModule),          // guarantees the log messages during app initialization will be flushed 
             };
 

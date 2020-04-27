@@ -4,4 +4,3 @@
 axle.application:
   modules:
     include:
-    - "Axle.Modularity.StatisticsModule, Axle.Application"

@@ -43,6 +43,10 @@ namespace Axle.Web.AspNetCore
         [ModuleInit]
         internal void Init(IDependencyExporter exporter)
         {
+            if (Host != null)
+            {
+                _serviceConfigurers.Add(Host);
+            }
         }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -210,5 +214,7 @@ namespace Axle.Web.AspNetCore
             _cancellationTokenSource.Dispose();
             _runTask?.Dispose();
         }
+        
+        public AspNetCoreApplicationHost Host { get; set; }
     }
 }
