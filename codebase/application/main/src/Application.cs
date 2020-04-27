@@ -14,10 +14,21 @@ using Axle.Text.Expressions.Substitution;
 
 namespace Axle
 {
+    /// <summary>
+    /// A representing an axle application.
+    /// </summary>
     public sealed partial class Application : IDisposable
     {
         internal const string ConfigBundleName = "$Config";
         
+        /// <summary>
+        /// Initiates the configuration of an axle <see cref="Application">application</see> by providing a reference to
+        /// an <see cref="IApplicationBuilder"/> instance.
+        /// </summary>
+        /// <returns>
+        /// An <see cref="IApplicationBuilder"/> instance that is used to configure and run an axle
+        /// <see cref="Application">application</see>.
+        /// </returns>
         public static IApplicationBuilder Build() => new Builder();
 
         private readonly IDependencyContainer _rootContainer;
@@ -35,28 +46,22 @@ namespace Axle
             IEnumerable<Type> moduleTypes, 
             IApplicationHost host,
             IDependencyContainer rootContainer,
-            LayeredConfigManager config, 
+            IConfiguration config, 
             string[] args)
         {
-            var loadedModules = moduleCatalog.GetModules(
-                moduleTypes.ToArray(),
-                host.GetType(), 
-                args);
-            
             var rankedModules = moduleCatalog
-                .RankModules(loadedModules, new List<Type>())
+                .RankModules(moduleCatalog.GetModules(
+                    moduleTypes.ToArray(),
+                    host.GetType(), 
+                    args))
                 .ToArray();
             
             var modules = new ConcurrentDictionary<Type, ModuleWrapper>();
-            var existingModuleTypes = new HashSet<Type>(modules.Keys);
-            
             var substExpr = new StandardSubstitutionExpression();
-            IConfiguration globalAppConfig = new SubstitutionResolvingConfig(config.LoadConfiguration(), substExpr);
+            IConfiguration globalAppConfig = new SubstitutionResolvingConfig(config, substExpr);
 
             rootContainer.Export(globalAppConfig);
 
-            // TODO: strip ranked modules from non-activated
-            
             var initializedModules = new List<Type>();
             var instantiatedModules = new ConcurrentStack<Type>();
             for (var i = 0; i < rankedModules.Length; i++)
@@ -64,13 +69,6 @@ namespace Axle
                 foreach (var moduleInfo in rankedModules[i])
                 {
                     var moduleType = moduleInfo.Type;
-                    if (existingModuleTypes.Contains(moduleType))
-                    {   //
-                        // the module was initialized before
-                        //
-                        continue;
-                    }
-
                     var requiredModules = moduleInfo.RequiredModules.ToArray();
                     using (var moduleInitializationContainer = host.DependencyContainerFactory.CreateContainer(rootContainer))
                     {
@@ -128,7 +126,10 @@ namespace Axle
                             f => LoadResourceConfig(moduleResourceManager, moduleTypeName, f), 
                             host.EnvironmentName);
 
-                        var baseModuleConfig = config.Prepend(envSpecificConfig).Prepend(generalConfig);
+                        var baseModuleConfig = new LayeredConfigManager()
+                            .Append(new PreloadedConfigSource(config))
+                            .Append(generalConfig)
+                            .Append(envSpecificConfig);
                         var moduleConfig = new SubstitutionResolvingConfig(baseModuleConfig.LoadConfiguration(), substExpr);
                         moduleInitializationContainer.Export(moduleConfig);
 
@@ -206,7 +207,7 @@ namespace Axle
             Host = host;
         }
 
-        public void Run()
+        private void Run()
         {
             foreach (var initializedModule in _initializedModules)
             {
@@ -227,6 +228,9 @@ namespace Axle
             _initializedModules.Clear();
         }
         
+        /// <summary>
+        /// Shuts down the current <see cref="Application"/> instance, gracefully disposing of its allocated resources.
+        /// </summary>
         public void ShutDown()
         {
             while (_instantiatedModules.TryPop(out var moduleType))
@@ -246,6 +250,12 @@ namespace Axle
 
         void IDisposable.Dispose() => ShutDown();
         
-        public IApplicationHost Host { get; }
+        /// <summary>
+        /// Gets a reference to the <see cref="IApplicationHost"/> responsible for supplying the
+        /// <see cref="Application">application</see> with environment settings and basic building blocks,
+        /// such as a <see cref="IDependencyContainerFactory">dependency container factory</see> and
+        /// <see cref="Axle.Logging.ILoggingService">logging support</see>. 
+        /// </summary>
+        internal IApplicationHost Host { get; }
     }
 }

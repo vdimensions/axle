@@ -188,7 +188,10 @@ namespace Axle.Modularity
                         moduleCatalog.GetDependencyInitializedMethods(moduleType),
                         moduleCatalog.GetDependencyTerminatedMethods(moduleType),
                         utilizedModules,
-                        reportsToModules, moduleCatalog.GetCommandLineTrigger(moduleType), configurationInfo, requiredModules);
+                        reportsToModules, 
+                        moduleCatalog.GetCommandLineTrigger(moduleType), 
+                        configurationInfo, 
+                        requiredModules);
                 }
                 catch (Exception e)
                 {
@@ -209,18 +212,12 @@ namespace Axle.Modularity
         /// <param name="modulesToLaunch">
         /// An collection of modules to be ranked.
         /// </param>
-        /// <param name="loadedModules">
-        /// A list of already loaded modules, which will aid in ranking a subsequent set of modules to be loaded at runtime.
-        /// </param>
         /// <returns>
         /// A collection of module groups, sorted by their rank in ascending order. 
         /// </returns>
-        internal static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(
-            this IModuleCatalog moduleCatalog, 
-            IList<ModuleInfo> modulesToLaunch, 
-            ICollection<Type> loadedModules = null)
+        internal static IEnumerable<IGrouping<int, ModuleInfo>> RankModules(this IModuleCatalog moduleCatalog, IList<ModuleInfo> modulesToLaunch)
         {
-            var loadedModulesSafe = loadedModules ?? new List<Type>();
+            var loadedModulesSafe = new List<Type>();
             IDictionary<Type, Tuple<ModuleInfo, int>> modulesWithRank = new Dictionary<Type, Tuple<ModuleInfo, int>>();
             var remainingCount = int.MaxValue;
             while (modulesToLaunch.Count > 0)

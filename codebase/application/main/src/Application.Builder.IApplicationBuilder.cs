@@ -15,16 +15,16 @@ namespace Axle
                 return this;
             }
         
-            IApplicationBuilder IApplicationBuilder.ConfigureDependencies(Action<IDependencyContainer> setupContainerAction)
+            IApplicationBuilder IApplicationBuilder.ConfigureDependencies(Action<IDependencyContainer> setupDependencies)
             {
-                Verifier.IsNotNull(Verifier.VerifyArgument(setupContainerAction, nameof(setupContainerAction)));
-                _onContainerReadyHandlers.Add(setupContainerAction);
+                Verifier.IsNotNull(Verifier.VerifyArgument(setupDependencies, nameof(setupDependencies)));
+                _onContainerReadyHandlers.Add(setupDependencies);
                 return this;
             }
 
-            IApplicationBuilder IApplicationBuilder.ConfigureApplication(Action<IApplicationConfigurationBuilder> setupConfigurationAction)
+            IApplicationBuilder IApplicationBuilder.ConfigureApplication(Action<IApplicationConfigurationBuilder> setupConfiguration)
             {
-                setupConfigurationAction(this);
+                setupConfiguration(this);
                 return this;
             }
 

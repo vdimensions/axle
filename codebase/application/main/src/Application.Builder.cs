@@ -13,6 +13,16 @@ namespace Axle
 {
     partial class Application
     {
+        private static Stream LoadConfigFile(string file)
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            #else
+            var appDir = Path.GetDirectoryName(typeof(Application).GetTypeInfo().Assembly.Location);
+            #endif
+            return File.OpenRead(Path.Combine(appDir, file));
+        }
+            
         private sealed partial class Builder
         {
             private readonly object _syncRoot = new object();
@@ -33,16 +43,6 @@ namespace Axle
                     }
                 }
                 return this;
-            }
-
-            private Stream LoadConfigFile(string file)
-            {
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                var appDir = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
-                #else
-                var appDir = Path.GetDirectoryName(typeof(Application).GetTypeInfo().Assembly.Location);
-                #endif
-                return File.OpenRead(Path.Combine(appDir, file));
             }
 
             private void PrintLogo()
@@ -74,10 +74,10 @@ namespace Axle
                         .Append(new LegacyConfigSource())
                         #endif
                         .Append(generalConfig)
-                        .Append(envSpecificConfig)  
+                        .Append(envSpecificConfig)
+                        .LoadConfiguration()
                         ;
-                    var loadedConfig = config.LoadConfiguration();
-                    var modulesConfigSection = loadedConfig
+                    var modulesConfigSection = config
                         .GetIncludeExcludeCollection<Type>("axle.application.modules");
                     
                     foreach (var moduleType in modulesConfigSection.IncludeElements)
