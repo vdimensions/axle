@@ -1,8 +1,5 @@
 ﻿using System.Collections.Generic;
 
-using Axle.References;
-
-
 namespace Axle.Resources.Extraction
 {
     /// <summary>

@@ -4,7 +4,6 @@ namespace Axle
 {
     public interface IApplicationConfigurationBuilder
     {
-        IApplicationConfigurationBuilder Prepend(IConfigSource configSource);
-        IApplicationConfigurationBuilder Append(IConfigSource configSource);
+        IApplicationConfigurationBuilder Add(IConfigSource configSource);
     }
 }

@@ -8,17 +8,7 @@ namespace Axle
     {
         sealed partial class Builder : IApplicationConfigurationBuilder
         {
-            IApplicationConfigurationBuilder IApplicationConfigurationBuilder.Prepend(IConfigSource configSource)
-            {
-                configSource.VerifyArgument(nameof(configSource)).IsNotNull();
-                lock (_syncRoot)
-                {
-                    _config = _config.Prepend(configSource);
-                }
-                return this;
-            }
-
-            IApplicationConfigurationBuilder IApplicationConfigurationBuilder.Append(IConfigSource configSource)
+            IApplicationConfigurationBuilder IApplicationConfigurationBuilder.Add(IConfigSource configSource)
             {
                 configSource.VerifyArgument(nameof(configSource)).IsNotNull();
                 lock (_syncRoot)

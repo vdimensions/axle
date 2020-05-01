@@ -12,10 +12,6 @@ namespace Axle.DependencyInjection
     public class DependencyNotFoundException : DependencyResolutionException
     {
         public DependencyNotFoundException() { }
-        [Obsolete]
-        public DependencyNotFoundException(string message) : base(message) { }
-        [Obsolete]
-        public DependencyNotFoundException(string message, Exception inner) : base(message, inner) { }
         public DependencyNotFoundException(Type type, string name) : this(type, name, null) { }
         public DependencyNotFoundException(Type type, string name, Exception inner) : base(type, name, "Could not find suitable candidate to inject.", inner) { }
         //[Obsolete]

@@ -75,8 +75,6 @@ namespace Axle.Configuration
             public string Name => _config.Name;
         }
 
-        
-
         private sealed class IncludeExcludeElementCollection<T> : IIncludeExcludeElementCollection<T>
         {
             public IncludeExcludeElementCollection(IEnumerable<T> includeElements, IEnumerable<T> excludeElements)

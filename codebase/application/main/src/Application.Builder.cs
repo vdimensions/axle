@@ -70,9 +70,6 @@ namespace Axle
                     var config = new LayeredConfigManager()
                         .Append(EnvironmentConfigSource.Instance)
                         .Append(new PreloadedConfigSource(_host.Configuration))
-                        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                        .Append(new LegacyConfigSource())
-                        #endif
                         .Append(_config)
                         .Append(generalConfig)
                         .Append(envSpecificConfig)

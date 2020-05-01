@@ -10,6 +10,7 @@ using Axle.DependencyInjection;
 using Axle.Modularity;
 using Axle.Resources;
 using Axle.Resources.Bundling;
+using Axle.Resources.Extraction;
 using Axle.Text.Expressions.Substitution;
 
 namespace Axle
@@ -17,7 +18,7 @@ namespace Axle
     /// <summary>
     /// A representing an axle application.
     /// </summary>
-    public sealed partial class Application : IDisposable
+    public sealed partial class Application : IDisposable, IDependencyContext
     {
         internal const string ConfigBundleName = "$Config";
         
@@ -36,9 +37,9 @@ namespace Axle
         private readonly IList<Type> _initializedModules;
         private readonly ConcurrentDictionary<Type, ModuleWrapper> _modules;
 
-        internal static Stream LoadResourceConfig(ResourceManager resourceManager, string prefix, string configFile)
+        internal static Stream LoadResourceConfig(ResourceManager resourceManager, string configFile)
         {
-            return resourceManager.Load(ConfigBundleName, Path.Combine(prefix, configFile), CultureInfo.InvariantCulture)?.Open();
+            return resourceManager.Load(ConfigBundleName, configFile, CultureInfo.InvariantCulture)?.Open();
         }
 
         internal static Application Launch(
@@ -115,15 +116,18 @@ namespace Axle
                             #endif
                             .Name;
                         var moduleResourceManager = new DefaultResourceManager();
-                        moduleResourceManager.Bundles.Configure(ConfigBundleName).Register(moduleAssembly);
+                        moduleResourceManager.Bundles
+                            .Configure(ConfigBundleName)
+                            .Register(moduleAssembly)
+                            .Extractors.Register(new PathForwardingResourceExtractor(moduleTypeName));
                         
                         var generalConfig = Configure(
                             new LayeredConfigManager(), 
-                            f => LoadResourceConfig(moduleResourceManager, moduleTypeName, f), 
+                            f => LoadResourceConfig(moduleResourceManager, f), 
                             string.Empty);
                         var envSpecificConfig = Configure(
                             new LayeredConfigManager(), 
-                            f => LoadResourceConfig(moduleResourceManager, moduleTypeName, f), 
+                            f => LoadResourceConfig(moduleResourceManager, f), 
                             host.EnvironmentName);
 
                         var baseModuleConfig = new LayeredConfigManager()
@@ -249,6 +253,9 @@ namespace Axle
         }
 
         void IDisposable.Dispose() => ShutDown();
+
+        object IDependencyContext.Resolve(Type type, string name) => _rootContainer.Resolve(type, name);
+        IDependencyContext IDependencyContext.Parent => null;
         
         /// <summary>
         /// Gets a reference to the <see cref="IApplicationHost"/> responsible for supplying the
