@@ -40,8 +40,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Application\Host\application.Development.yml" />
-    <EmbeddedResource Include="Application\Host\application.yml" />
+    <EmbeddedResource Include="Application\host.Development.yml" />
+    <EmbeddedResource Include="Application\host.yml" />
     <EmbeddedResource Include="Application\logo.txt" />
   </ItemGroup>
 

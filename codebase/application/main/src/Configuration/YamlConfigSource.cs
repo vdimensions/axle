@@ -3,27 +3,29 @@ using System.Collections.Generic;
 using System.Linq;
 using Axle.Configuration.Text.Documents;
 using Axle.Text.Documents.Yaml;
+using Axle.Verification;
 
 namespace Axle.Configuration
 {
     public sealed class YamlConfigSource : IConfigSource
     {
-        private const string DefaultConfigFileName = "application{0}.yml";
-        private const string AlternateConfigFileName = "application{0}.yaml";
+        private const string DefaultConfigFileName = "{0}{1}.yml";
+        private const string AlternateConfigFileName = "{0}{1}.yaml";
         
         private readonly IList<string> _fileNames;
         private readonly IConfigurationStreamProvider _configStreamProvider;
 
-        private YamlConfigSource(IConfigurationStreamProvider configStreamProvider, string env, params string[] fileNames)
+        private YamlConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env, params string[] fileNameFormats)
         {
+            Verifier.IsNotNull(Verifier.VerifyArgument(fileName, nameof(fileName)));
             _configStreamProvider = configStreamProvider;
             var envFormat = string.IsNullOrEmpty(env) ? string.Empty : $".{env}";
-            _fileNames = fileNames.Select(fileName => string.Format(fileName, envFormat)).ToList();
+            _fileNames = fileNameFormats.Select(f => string.Format(f, fileName, envFormat)).ToList();
         }
-        public YamlConfigSource(IConfigurationStreamProvider configStreamProvider, string env)
-            : this(configStreamProvider, env, DefaultConfigFileName, AlternateConfigFileName) { }
-        public YamlConfigSource(IConfigurationStreamProvider configStreamProvider)
-            : this(configStreamProvider, null, DefaultConfigFileName, AlternateConfigFileName) { }
+        public YamlConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env)
+            : this(fileName, configStreamProvider, env, DefaultConfigFileName, AlternateConfigFileName) { }
+        public YamlConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider)
+            : this(fileName, configStreamProvider, null, DefaultConfigFileName, AlternateConfigFileName) { }
 
         public IConfiguration LoadConfiguration()
         {

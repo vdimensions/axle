@@ -10,7 +10,6 @@ using Axle.Reflection.Extensions.Assembly;
 #endif
 using Axle.Resources;
 using Axle.Resources.Bundling;
-using Axle.Resources.Extraction;
 using Axle.Text;
 
 namespace Axle
@@ -25,8 +24,16 @@ namespace Axle
         private readonly string[] _logo;
 
         protected AbstractApplicationHost(
+                IDependencyContainerFactory dependencyContainerFactory, 
+                ILoggingService loggingService,
+                string environmentName,
+                params string[] profiles) 
+            : this(dependencyContainerFactory, loggingService, null, null, environmentName, profiles) { }
+        protected AbstractApplicationHost(
             IDependencyContainerFactory dependencyContainerFactory, 
             ILoggingService loggingService, 
+            string applicationConfigName,
+            string hostConfigName,
             string environmentName,
             params string[] profiles)
         {
@@ -37,38 +44,42 @@ namespace Axle
                 ((ILoggingServiceRegistry) LoggingService).RegisterLoggingService(loggingService);
             }
             EnvironmentName = environmentName;
-            LoadConfiguration(out _configuration, out _logo, EnvironmentName, profiles);
+            ApplicationConfigFileName = applicationConfigName ?? "application";
+            LoadConfiguration(HostConfigFileName = hostConfigName ?? "host", out _configuration, out _logo, environmentName, profiles);
         }
         
         private void LoadConfiguration(
+            string configFileName, 
             out IConfiguration config, 
             out string[] logo, 
             string environmentName, 
             params string[] profiles)
         {
-            var assembly = typeof(DefaultApplicationHost)
-                #if NETSTANDARD || NET45_OR_NEWER
-                .GetTypeInfo()
-                #endif
-                .Assembly;
-            var asmName = assembly.GetName();
+            
             var resourceManager = new DefaultResourceManager();
-            SetupConfigurationResourceBundle(resourceManager.Bundles.Configure(Application.ConfigBundleName));
+            SetupConfigurationResourceBundle(
+                resourceManager.Bundles
+                    .Configure(Application.ConfigBundleName));
             var configStreamProvider = new ResourceConfigurationStreamProvider(resourceManager);
             
-            var tmpConfig = Application.Configure(new LayeredConfigManager(), configStreamProvider, string.Empty);
+            var tmpConfig = Application.Configure(new LayeredConfigManager(), configFileName, configStreamProvider, string.Empty);
             foreach (var profile in profiles)
             {
-                tmpConfig = Application.Configure(tmpConfig, configStreamProvider, profile);
+                tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, profile);
             }
-            tmpConfig = Application.Configure(tmpConfig, configStreamProvider, environmentName);
+            tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, environmentName);
             config = tmpConfig.LoadConfiguration();
             
             var logoStr = resourceManager.Load<string>(Application.ConfigBundleName, "logo.txt", CultureInfo.InvariantCulture);
             if (logoStr != null)
             {
+                var assembly = GetType()
+                    #if NETSTANDARD || NET45_OR_NEWER
+                    .GetTypeInfo()
+                    #endif
+                    .Assembly;
                 var versionAttr = assembly.GetCustomAttributes<AssemblyInformationalVersionAttribute>().SingleOrDefault();
-                var formattedLogo = string.Format(logoStr, $"Version {versionAttr?.InformationalVersion ?? asmName.Version.ToString()}");
+                var formattedLogo = string.Format(logoStr, $"Version {versionAttr?.InformationalVersion ?? assembly.GetName().Version.ToString()}");
                 logo = LineEndings.Split(formattedLogo);
             }
             else
@@ -86,7 +97,13 @@ namespace Axle
         /// </param>
         protected virtual void SetupConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {
-            bundle.Extractors.Register(new PathForwardingResourceExtractor("Host"));
+            var assembly = GetType()
+                #if NETSTANDARD || NET45_OR_NEWER
+                .GetTypeInfo()
+                #endif
+                .Assembly;
+            var asmName = assembly.GetName();
+            bundle.Register(new Uri($"assembly://{asmName.Name}", UriKind.Absolute));
         }
         
         /// <summary>
@@ -111,13 +128,31 @@ namespace Axle
                 }
             }
         }
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
         public void Dispose() => Dispose(true);
         void IDisposable.Dispose() => Dispose(true);
 
+        /// <inheritdoc />
         public IDependencyContainerFactory DependencyContainerFactory { get; }
+
+        /// <inheritdoc />
         public ILoggingService LoggingService { get; }
+
+        /// <inheritdoc />
         public string EnvironmentName { get; }
+
+        /// <inheritdoc />
+        public string ApplicationConfigFileName { get; }
+
+        /// <inheritdoc />
+        public string HostConfigFileName { get; }
+
+        /// <inheritdoc />
         public IConfiguration Configuration => _configuration;
-        public string[] Logo => _logo;
+
+        /// <inheritdoc />
+        public string[] AsciiLogo => _logo;
     }
 }

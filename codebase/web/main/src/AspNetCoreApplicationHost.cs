@@ -21,23 +21,24 @@ namespace Axle.Web.AspNetCore
         private readonly IConfiguration _configuration;
         private readonly string[] _logo;
         private readonly ConcurrentDictionary<Type, object> _exportedObjects = new ConcurrentDictionary<Type, object>();
-        
+        private readonly string _applicationConfigFileName;
+        private readonly string _hostConfigFileName;
+
         private AspNetCoreApplicationHost()
         {
             var defaultAppHost = DefaultApplicationHost.Instance;
             
             _dependencyContainerFactory = new AspNetCoreDependencyContainerFactory(defaultAppHost.DependencyContainerFactory, _exportedObjects);
-            
             _loggingService = defaultAppHost.LoggingService;
-            
             _environmentName = System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Process);
             if (string.IsNullOrEmpty(_environmentName))
             {
                 _environmentName = defaultAppHost.EnvironmentName; 
             }
-
+            _applicationConfigFileName = defaultAppHost.ApplicationConfigFileName;
+            _hostConfigFileName = defaultAppHost.HostConfigFileName;
             _configuration = defaultAppHost.Configuration;
-            _logo = defaultAppHost.Logo;
+            _logo = defaultAppHost.AsciiLogo;
         }
         
         public void Configure(IServiceCollection services)
@@ -51,7 +52,9 @@ namespace Axle.Web.AspNetCore
         IDependencyContainerFactory IApplicationHost.DependencyContainerFactory => _dependencyContainerFactory;
         ILoggingService IApplicationHost.LoggingService => _loggingService;
         string IApplicationHost.EnvironmentName => _environmentName;
+        string IApplicationHost.ApplicationConfigFileName => _applicationConfigFileName;
+        string IApplicationHost.HostConfigFileName => _hostConfigFileName;
         IConfiguration IApplicationHost.Configuration => _configuration;
-        string[] IApplicationHost.Logo => _logo;
+        string[] IApplicationHost.AsciiLogo => _logo;
     }
 }

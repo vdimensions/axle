@@ -16,21 +16,22 @@ namespace Axle
 
         internal static LayeredConfigManager Configure(
             LayeredConfigManager configManager,
+            string configFileName,
             IConfigurationStreamProvider configStreamProvider, 
             string environmentName)
         {
             if (string.IsNullOrEmpty(environmentName))
             {
                 return configManager
-                    .Append(new YamlConfigSource(configStreamProvider))
+                    .Append(new YamlConfigSource(configFileName, configStreamProvider))
                     // TODO: JSON
-                    .Append(new PropertiesConfigSource(configStreamProvider))
+                    .Append(new PropertiesConfigSource(configFileName, configStreamProvider))
                     ;
             }
             return configManager
-                .Append(new YamlConfigSource(configStreamProvider, environmentName))
+                .Append(new YamlConfigSource(configFileName, configStreamProvider, environmentName))
                 // TODO: JSON
-                .Append(new PropertiesConfigSource(configStreamProvider, environmentName))
+                .Append(new PropertiesConfigSource(configFileName, configStreamProvider, environmentName))
                 ;
         }
     }

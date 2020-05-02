@@ -7,20 +7,20 @@ namespace Axle.Configuration
 {
     public sealed class PropertiesConfigSource : IConfigSource
     {
-        private const string DefaultConfigFileName = "application{0}.properties";
+        private const string DefaultConfigFileName = "{0}{1}.properties";
         
         private readonly string _fileName;
         private readonly IConfigurationStreamProvider _configStreamProvider;
 
-        public PropertiesConfigSource(IConfigurationStreamProvider configStreamProvider, string env)
+        public PropertiesConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(configStreamProvider, nameof(configStreamProvider)));
             _configStreamProvider = configStreamProvider;
             var envFormat = string.IsNullOrEmpty(env) ? string.Empty : $".{env}";
-            _fileName = string.Format(DefaultConfigFileName, envFormat);
+            _fileName = string.Format(DefaultConfigFileName, fileName, envFormat);
         }
-        public PropertiesConfigSource(IConfigurationStreamProvider configStreamProvider) 
-            : this(configStreamProvider, string.Empty) { }
+        public PropertiesConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider) 
+            : this(fileName, configStreamProvider, string.Empty) { }
 
         public IConfiguration LoadConfiguration()
         {

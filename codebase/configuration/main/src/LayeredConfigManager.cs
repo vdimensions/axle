@@ -23,13 +23,12 @@ namespace Axle.Configuration
                 {
                     key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
                     var results = _configurations
-                        .Select(x => x[key].Where(y => y != null))
-                        .SelectMany(x => x)
+                        .SelectMany(x => x[key].Where(y => y != null))
                         .ToList();
                     // in case we have found a collection of simple setting values, take only the newest
                     var overridingSetting = results.FirstOrDefault(x => !(x is IConfigSection));
                     return overridingSetting != null
-                        ? new[] {overridingSetting}
+                        ? new[] { overridingSetting }
                         : (IEnumerable<IConfigSetting>) results;
                 }
             }
@@ -41,28 +40,14 @@ namespace Axle.Configuration
             public string Value => null;
         }
 
-        private readonly IEnumerable<IConfiguration> _configs;
+        private readonly IConfiguration[] _configs;
 
-        private LayeredConfigManager(IEnumerable<IConfiguration> configs)
+        private LayeredConfigManager(IConfiguration[] configs)
         {
             _configs = configs;
         }
-        public LayeredConfigManager() : this(Enumerable.Empty<IConfiguration>()) { }
+        public LayeredConfigManager() : this(new IConfiguration[0]) { }
 
-        public LayeredConfigManager Prepend(IConfigSource source)
-        {
-            //
-            // NB prepends configs to the end, as they are being prioritized by order
-            //
-            source.VerifyArgument(nameof(source)).IsNotNull();
-            var cfg = source.LoadConfiguration();
-            if (cfg == null)
-            {
-                return this;
-            }
-            var newConfigs = _configs.ToArray().Union(new[] {cfg});
-            return new LayeredConfigManager(newConfigs);
-        }
         public LayeredConfigManager Append(IConfigSource source)
         {
             //
@@ -74,11 +59,10 @@ namespace Axle.Configuration
             {
                 return this;
             }
-            var newConfigs = new[] { cfg }.Union(_configs.ToArray()); 
-            return new LayeredConfigManager(newConfigs);
+            return new LayeredConfigManager(new[] { cfg }.Union(_configs).ToArray());
         }
 
         /// <inheritdoc />
-        public IConfiguration LoadConfiguration() => new LayeredConfiguration(_configs);
+        public IConfiguration LoadConfiguration() => _configs.Length == 0 ? null : new LayeredConfiguration(_configs);
     }
 }

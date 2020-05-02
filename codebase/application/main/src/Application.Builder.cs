@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
 using Axle.Configuration;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-using Axle.Configuration.Legacy;
-#endif
 using Axle.DependencyInjection;
 using Axle.Modularity;
 
@@ -17,7 +12,7 @@ namespace Axle
         {
             private readonly object _syncRoot = new object();
             private readonly IModuleCatalog _moduleCatalog = new DefaultModuleCatalog();
-            private readonly IList<Type> _moduleTypes = new List<Type>();
+            private readonly ICollection<Type> _moduleTypes = new HashSet<Type>();
             private readonly IList<Action<IDependencyContainer>> _onContainerReadyHandlers = new List<Action<IDependencyContainer>>();
 
             private LayeredConfigManager _config = new LayeredConfigManager();
@@ -37,7 +32,7 @@ namespace Axle
 
             private void PrintLogo()
             {
-                foreach (var logoLine in _host.Logo)
+                foreach (var logoLine in _host.AsciiLogo)
                 {
                     Console.WriteLine(logoLine);
                 }
@@ -53,21 +48,18 @@ namespace Axle
                         .Export(new ApplicationContainerFactory(_host.DependencyContainerFactory, rootContainer))
                         .Export(_host.LoggingService)
                         .Export(_host);
-                    
-                    var generalConfig = Configure(new LayeredConfigManager(), this, string.Empty);
-                    var envSpecificConfig = Configure(new LayeredConfigManager(), this, _host.EnvironmentName);
-                    
-                    var config = new LayeredConfigManager()
+                    var configMgr = new LayeredConfigManager()
                         .Append(EnvironmentConfigSource.Instance)
                         .Append(new PreloadedConfigSource(_host.Configuration))
                         .Append(_config)
-                        .Append(generalConfig)
-                        .Append(envSpecificConfig)
-                        .LoadConfiguration()
-                        ;
-                    var modulesConfigSection = config
-                        .GetIncludeExcludeCollection<Type>("axle.application.modules");
+                        .Append(Configure(new LayeredConfigManager(), _host.ApplicationConfigFileName, this, string.Empty));
+                    if (!string.IsNullOrEmpty(_host.EnvironmentName))
+                    {
+                        configMgr = configMgr.Append(Configure(new LayeredConfigManager(), _host.ApplicationConfigFileName, this, _host.EnvironmentName));
+                    }
+                    var config = configMgr.LoadConfiguration();
                     
+                    var modulesConfigSection = config.GetIncludeExcludeCollection<Type>("axle.application.modules");
                     foreach (var moduleType in modulesConfigSection.IncludeElements)
                     {
                         _moduleTypes.Add(moduleType);

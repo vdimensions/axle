@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration;
@@ -19,6 +20,7 @@ namespace Axle
     public sealed partial class Application : IDisposable, IDependencyContext
     {
         internal const string ConfigBundleName = "$Config";
+        private const string ModuleConfigFileName = "module";
         
         /// <summary>
         /// Initiates the configuration of an axle <see cref="Application">application</see> by providing a reference to
@@ -35,6 +37,7 @@ namespace Axle
         private readonly IList<Type> _initializedModules;
         private readonly ConcurrentDictionary<Type, ModuleWrapper> _modules;
 
+        [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
         internal static Application Launch(
             IModuleCatalog moduleCatalog,
             IEnumerable<Type> moduleTypes, 
@@ -116,17 +119,24 @@ namespace Axle
 
                         var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         
-                        var generalConfig = Configure(new LayeredConfigManager(), moduleConfigurationStreamProvider, string.Empty);
-                        var envSpecificConfig = Configure(
-                            new LayeredConfigManager(), 
-                            moduleConfigurationStreamProvider, 
-                            host.EnvironmentName);
-
-                        var baseModuleConfig = new LayeredConfigManager()
-                            .Append(new PreloadedConfigSource(config))
-                            .Append(generalConfig)
-                            .Append(envSpecificConfig);
-                        var moduleConfig = new SubstitutionResolvingConfig(baseModuleConfig.LoadConfiguration(), substExpr);
+                        var baseModuleConfig = new LayeredConfigManager().Append(
+                            Configure(
+                                new LayeredConfigManager(), 
+                                ModuleConfigFileName,
+                                moduleConfigurationStreamProvider, 
+                                string.Empty));
+                        if (!string.IsNullOrEmpty(host.EnvironmentName))
+                        {
+                            baseModuleConfig = baseModuleConfig.Append(
+                                Configure(
+                                    new LayeredConfigManager(), 
+                                    ModuleConfigFileName,
+                                    moduleConfigurationStreamProvider, 
+                                    host.EnvironmentName));
+                        }
+                        var moduleConfig = new SubstitutionResolvingConfig(
+                            baseModuleConfig.Append(new PreloadedConfigSource(config)).LoadConfiguration(), 
+                            substExpr);
                         moduleInitializationContainer.Export(moduleConfig);
 
                         if (moduleInfo.ConfigSectionInfo != null)
