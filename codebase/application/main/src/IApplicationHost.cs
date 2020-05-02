@@ -5,7 +5,10 @@ using Axle.Logging;
 namespace Axle
 {
     /// <summary>
-    /// An interface representing an application host. An application host
+    /// An interface representing an application host. An application host is responsible for supplying an application
+    /// with environment-specific information and vital infrastructure objects, such as a 
+    /// <see="IDependencyContainerFactory">dependency container factory</see>.
+
     /// </summary>
     public interface IApplicationHost
     {
