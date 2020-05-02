@@ -19,8 +19,7 @@ namespace Axle.Configuration
             {
                 throw new ResourceNotFoundException(_resourcePath, ConfigurationModule.BundleName, culture);
             }
-            var stream = resource.Open();
-            return new StreamedFileConfigSource<T>(stream).LoadConfiguration();
+            return new StreamedFileConfigSource<T>(resource.Open()).LoadConfiguration();
         }
     }
 }
