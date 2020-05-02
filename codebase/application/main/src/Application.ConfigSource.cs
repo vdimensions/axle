@@ -1,9 +1,8 @@
-﻿using System;
-using System.IO;
-using Axle.Configuration;
+﻿using Axle.Configuration;
 
 namespace Axle
 {
+    
     partial class Application
     {
         internal class PreloadedConfigSource : IConfigSource
@@ -17,7 +16,7 @@ namespace Axle
 
         internal static LayeredConfigManager Configure(
             LayeredConfigManager configManager,
-            Func<string, Stream> configStreamProvider, 
+            IConfigurationStreamProvider configStreamProvider, 
             string environmentName)
         {
             if (string.IsNullOrEmpty(environmentName))

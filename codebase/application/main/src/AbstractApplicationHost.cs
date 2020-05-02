@@ -15,6 +15,10 @@ using Axle.Text;
 
 namespace Axle
 {
+    /// <summary>
+    /// An abstract class to serve as a base for implementing a custom application host.
+    /// </summary>
+    /// <seealso cref="IApplicationHost"/>
     public abstract class AbstractApplicationHost : IApplicationHost, IDisposable
     {
         private readonly IConfiguration _configuration;
@@ -27,7 +31,11 @@ namespace Axle
             params string[] profiles)
         {
             DependencyContainerFactory = dependencyContainerFactory ?? new AxleDependencyContainerFactory();
-            LoggingService = loggingService ?? new AggregatingLoggingService();
+            LoggingService = new AggregatingLoggingService();
+            if (loggingService != null)
+            {
+                ((ILoggingServiceRegistry) LoggingService).RegisterLoggingService(loggingService);
+            }
             EnvironmentName = environmentName;
             LoadConfiguration(out _configuration, out _logo, EnvironmentName, profiles);
         }
@@ -46,16 +54,14 @@ namespace Axle
             var asmName = assembly.GetName();
             var resourceManager = new DefaultResourceManager();
             SetupConfigurationResourceBundle(resourceManager.Bundles.Configure(Application.ConfigBundleName));
+            var configStreamProvider = new ResourceConfigurationStreamProvider(resourceManager);
             
-            var tmpConfig = Application.Configure(new LayeredConfigManager(), x => Application.LoadResourceConfig(resourceManager, x), string.Empty);
+            var tmpConfig = Application.Configure(new LayeredConfigManager(), configStreamProvider, string.Empty);
             foreach (var profile in profiles)
             {
-                tmpConfig = Application.Configure(
-                    tmpConfig,
-                    x => Application.LoadResourceConfig(resourceManager, x),
-                    profile);
+                tmpConfig = Application.Configure(tmpConfig, configStreamProvider, profile);
             }
-            tmpConfig = Application.Configure(tmpConfig, x => Application.LoadResourceConfig(resourceManager, x), environmentName);
+            tmpConfig = Application.Configure(tmpConfig, configStreamProvider, environmentName);
             config = tmpConfig.LoadConfiguration();
             
             var logoStr = resourceManager.Load<string>(Application.ConfigBundleName, "logo.txt", CultureInfo.InvariantCulture);
@@ -71,11 +77,26 @@ namespace Axle
             }
         }
 
-        protected virtual void SetupConfigurationResourceBundle(IConfigurableBundleContent resourceManager)
+        /// <summary>
+        /// Allows configuring resource providers for loading the application-host specific configuration.
+        /// </summary>
+        /// <param name="bundle">
+        /// A reference to the <see cref="IConfigurableBundleContent"/> that is used to obtain the application-host
+        /// configuration.
+        /// </param>
+        protected virtual void SetupConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {
-            resourceManager.Extractors.Register(new PathForwardingResourceExtractor("Host"));
+            bundle.Extractors.Register(new PathForwardingResourceExtractor("Host"));
         }
         
+        /// <summary>
+        /// Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+        /// </summary>
+        /// <param name="disposing">
+        /// A boolean flag indicating whether the current method is invoked as part of a
+        /// <see cref="IDisposable.Dispose"/> call. In that case, its value is passed in as <c>true</c> and any
+        /// resources allocated by the current instance will be released.
+        /// </param>
         protected virtual void Dispose(bool disposing)
         {
             if (disposing)
@@ -92,7 +113,7 @@ namespace Axle
         }
         public void Dispose() => Dispose(true);
         void IDisposable.Dispose() => Dispose(true);
-        
+
         public IDependencyContainerFactory DependencyContainerFactory { get; }
         public ILoggingService LoggingService { get; }
         public string EnvironmentName { get; }

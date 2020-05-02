@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration;
@@ -36,11 +34,6 @@ namespace Axle
         private readonly ConcurrentStack<Type> _instantiatedModules;
         private readonly IList<Type> _initializedModules;
         private readonly ConcurrentDictionary<Type, ModuleWrapper> _modules;
-
-        internal static Stream LoadResourceConfig(ResourceManager resourceManager, string configFile)
-        {
-            return resourceManager.Load(ConfigBundleName, configFile, CultureInfo.InvariantCulture)?.Open();
-        }
 
         internal static Application Launch(
             IModuleCatalog moduleCatalog,
@@ -120,14 +113,13 @@ namespace Axle
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)
                             .Extractors.Register(new PathForwardingResourceExtractor(moduleTypeName));
+
+                        var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         
-                        var generalConfig = Configure(
-                            new LayeredConfigManager(), 
-                            f => LoadResourceConfig(moduleResourceManager, f), 
-                            string.Empty);
+                        var generalConfig = Configure(new LayeredConfigManager(), moduleConfigurationStreamProvider, string.Empty);
                         var envSpecificConfig = Configure(
                             new LayeredConfigManager(), 
-                            f => LoadResourceConfig(moduleResourceManager, f), 
+                            moduleConfigurationStreamProvider, 
                             host.EnvironmentName);
 
                         var baseModuleConfig = new LayeredConfigManager()

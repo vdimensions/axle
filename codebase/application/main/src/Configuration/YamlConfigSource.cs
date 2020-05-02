@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using Axle.Configuration.Text.Documents;
 using Axle.Text.Documents.Yaml;
@@ -13,17 +12,17 @@ namespace Axle.Configuration
         private const string AlternateConfigFileName = "application{0}.yaml";
         
         private readonly IList<string> _fileNames;
-        private readonly Func<string, Stream> _configStreamProvider;
+        private readonly IConfigurationStreamProvider _configStreamProvider;
 
-        private YamlConfigSource(Func<string, Stream> configStreamProvider, string env, params string[] fileNames)
+        private YamlConfigSource(IConfigurationStreamProvider configStreamProvider, string env, params string[] fileNames)
         {
             _configStreamProvider = configStreamProvider;
             var envFormat = string.IsNullOrEmpty(env) ? string.Empty : $".{env}";
             _fileNames = fileNames.Select(fileName => string.Format(fileName, envFormat)).ToList();
         }
-        public YamlConfigSource(Func<string, Stream> configStreamProvider, string env)
+        public YamlConfigSource(IConfigurationStreamProvider configStreamProvider, string env)
             : this(configStreamProvider, env, DefaultConfigFileName, AlternateConfigFileName) { }
-        public YamlConfigSource(Func<string, Stream> configStreamProvider)
+        public YamlConfigSource(IConfigurationStreamProvider configStreamProvider)
             : this(configStreamProvider, null, DefaultConfigFileName, AlternateConfigFileName) { }
 
         public IConfiguration LoadConfiguration()
@@ -33,7 +32,9 @@ namespace Axle.Configuration
             var yamlReader = new YamlDocumentReader(comparer);
             foreach (var fileName in _fileNames)
             {
-                configManager = configManager.Append(new SafeConfigSource(new StreamDocumentConfigSource(yamlReader, () => _configStreamProvider(fileName))));
+                configManager = configManager.Append(
+                    new SafeConfigSource(
+                        new StreamDocumentConfigSource(yamlReader, () => _configStreamProvider.LoadConfiguration(fileName))));
             }
             return configManager.LoadConfiguration();
         }
