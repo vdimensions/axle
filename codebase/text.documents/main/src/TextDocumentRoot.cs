@@ -11,19 +11,19 @@ namespace Axle.Text.Documents
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Runtime.Serialization.DataMember]
         #endif
-        private readonly StringComparer _comparer;
+        private readonly IEqualityComparer<string> _comparer;
         
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly TextDocumentObject _inner;
 
-        private TextDocumentRoot(TextDocumentObject inner, StringComparer comparer)
+        private TextDocumentRoot(TextDocumentObject inner, IEqualityComparer<string> comparer)
         {
             _inner = inner;
             _comparer = comparer;
         }
-        public TextDocumentRoot(IEnumerable<ITextDocumentNode> children, StringComparer comparer)
+        public TextDocumentRoot(IEnumerable<ITextDocumentNode> children, IEqualityComparer<string> comparer)
             : this(new TextDocumentObject(String.Empty, null, children, true), comparer) { }
 
         public IEnumerable<ITextDocumentNode> GetChildren() => _inner.GetChildren();
@@ -31,6 +31,6 @@ namespace Axle.Text.Documents
 
         public ITextDocumentObject Parent => _inner.Parent;
         public string Key => _inner.Key;
-        StringComparer ITextDocumentNode.KeyComparer => _comparer;
+        IEqualityComparer<string> ITextDocumentNode.KeyComparer => _comparer;
     }
 }

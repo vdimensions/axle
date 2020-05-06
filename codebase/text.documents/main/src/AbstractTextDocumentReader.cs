@@ -46,9 +46,9 @@ namespace Axle.Text.Documents
             return currentNodes;
         }
         
-        private readonly StringComparer _comparer;
+        private readonly IEqualityComparer<string> _comparer;
 
-        protected AbstractTextDocumentReader(StringComparer comparer)
+        protected AbstractTextDocumentReader(IEqualityComparer<string> comparer)
         {
             _comparer = comparer;
         }
@@ -61,7 +61,7 @@ namespace Axle.Text.Documents
         
         private ITextDocumentRoot ReadStructuredData(
             ITextDocumentAdapter adapter, 
-            StringComparer comparer)
+            IEqualityComparer<string> comparer)
         {
             return new TextDocumentRoot(ReadStructuredData(string.Empty, adapter), comparer);
         }
@@ -113,6 +113,6 @@ namespace Axle.Text.Documents
             return ReadStructuredData(CreateAdapter(data), _comparer);
         }
 
-        protected StringComparer Comparer => _comparer;
+        protected IEqualityComparer<string> Comparer => _comparer;
     }
 }

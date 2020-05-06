@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 
 namespace Axle.Text.Documents
 {
@@ -6,6 +6,6 @@ namespace Axle.Text.Documents
     {
         ITextDocumentObject Parent { get; }
         string Key { get; }
-        StringComparer KeyComparer { get; }
+        IEqualityComparer<string> KeyComparer { get; }
     }
 }

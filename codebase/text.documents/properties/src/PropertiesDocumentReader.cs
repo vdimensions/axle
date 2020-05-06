@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -8,6 +7,9 @@ using Kajabity.Tools.Java;
 
 namespace Axle.Text.Documents.Properties
 {
+    /// <summary>
+    /// A text document reader implementation that handles properties files.
+    /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class PropertiesDocumentReader : AbstractTextDocumentReader
     {
@@ -28,7 +30,14 @@ namespace Axle.Text.Documents.Properties
             public override string Value { get; }
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
         }
-        public PropertiesDocumentReader(StringComparer comparer) : base(comparer) { }
+        
+        /// <summary>
+        /// Creates a new instance of the <see cref="PropertiesDocumentReader"/> class.
+        /// </summary>
+        /// <param name="comparer">
+        /// A <see cref="IEqualityComparer{T}"/> instance that will be used to compare the document node keys.
+        /// </param>
+        public PropertiesDocumentReader(IEqualityComparer<string> comparer) : base(comparer) { }
 
         protected override ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding)
         {

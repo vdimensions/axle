@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Axle.Text.Documents
 {
@@ -23,7 +24,7 @@ namespace Axle.Text.Documents
             _key = key;
         }
 
-        StringComparer ITextDocumentNode.KeyComparer => Parent?.KeyComparer ?? StringComparer.OrdinalIgnoreCase;
+        IEqualityComparer<string> ITextDocumentNode.KeyComparer => Parent?.KeyComparer ?? StringComparer.OrdinalIgnoreCase;
         public string Key => _key;
         public ITextDocumentObject Parent => _parent;
     }
