@@ -8,7 +8,7 @@ using Kajabity.Tools.Java;
 namespace Axle.Text.Documents.Properties
 {
     /// <summary>
-    /// A text document reader implementation that handles properties files.
+    /// A text document reader implementation that handles java properties files.
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class PropertiesDocumentReader : AbstractTextDocumentReader

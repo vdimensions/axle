@@ -228,7 +228,7 @@ namespace Axle.Modularity
                     //
                     throw new InvalidOperationException(
                         string.Format(
-                            "Circular dependencies exist between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.GetType().FullName))));
+                            "Circular dependencies exist between some of the following modules: [{0}]", ", ".Join(modulesToLaunch.Select(x => x.Type.FullName))));
                 }
 
                 remainingCount = modulesToLaunch.Count;
