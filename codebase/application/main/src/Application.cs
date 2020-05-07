@@ -8,6 +8,7 @@ using System.Reflection;
 #endif
 using Axle.Configuration;
 using Axle.DependencyInjection;
+using Axle.Logging;
 using Axle.Modularity;
 using Axle.Resources;
 using Axle.Resources.Bundling;
@@ -44,6 +45,7 @@ namespace Axle
             IModuleCatalog moduleCatalog,
             IEnumerable<Type> moduleTypes, 
             IApplicationHost host,
+            AggregatingLoggingService loggingService,
             IDependencyContainer rootContainer,
             IConfiguration config, 
             string[] args)
@@ -71,7 +73,7 @@ namespace Axle
                     var requiredModules = moduleInfo.RequiredModules.ToArray();
                     using (var moduleInitializationContainer = host.DependencyContainerFactory.CreateContainer(rootContainer))
                     {
-                        var moduleLogger = host.LoggingService.CreateLogger(moduleType);
+                        var moduleLogger = loggingService.CreateLogger(moduleType);
                         var moduleContainer = host.DependencyContainerFactory.CreateContainer(rootContainer);
                         moduleInitializationContainer
                             // Register the module type to be instantiated via DI

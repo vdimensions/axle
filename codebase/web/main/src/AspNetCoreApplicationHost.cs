@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
-using Axle.Configuration;
 using Axle.References;
 using Axle.Resources.Bundling;
 using Microsoft.Extensions.DependencyInjection;
@@ -11,7 +10,7 @@ namespace Axle.Web.AspNetCore
     /// <summary>
     /// The <see cref="IApplicationHost"/> implementation designed for use with aspnetcore.
     /// </summary>
-    public sealed class AspNetCoreApplicationHost : AbstractApplicationHost, IServiceConfigurer
+    public sealed class AspNetCoreApplicationHost : ExtendingApplicationHost, IServiceConfigurer
     {
         public static AspNetCoreApplicationHost Instance => Singleton<AspNetCoreApplicationHost>.Instance.Value;
 
@@ -22,15 +21,14 @@ namespace Axle.Web.AspNetCore
             : this(new AspNetCoreDependencyContainerFactory(DefaultApplicationHost.Instance.DependencyContainerFactory))
         { }
         private AspNetCoreApplicationHost(AspNetCoreDependencyContainerFactory dependencyContainerFactory) : base(
+            DefaultApplicationHost.Instance, 
             dependencyContainerFactory,
-            DefaultApplicationHost.Instance.LoggingService,
-            DefaultApplicationHost.Instance.AppConfigFileName,
-            DefaultApplicationHost.Instance.HostConfigFileName,
-            System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Process) ??
-            DefaultApplicationHost.Instance.EnvironmentName)
+            null,
+            null,
+            null,
+            System.Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT", EnvironmentVariableTarget.Process))
         {
             _exportedObjects = dependencyContainerFactory.ExportedObjects;
-            
         }
         
         public void Configure(IServiceCollection services)
@@ -48,23 +46,6 @@ namespace Axle.Web.AspNetCore
         protected override void SetupHostConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {
             base.SetupAppConfigurationResourceBundle(bundle.Register(new Uri("./", UriKind.Relative)));
-        }
-
-        public override IConfiguration HostConfiguration
-        {
-            get
-            {
-                var baseCfg = base.HostConfiguration;
-                if (baseCfg == null)
-                {
-                    return DefaultApplicationHost.Instance.HostConfiguration;
-                }
-                return new LayeredConfigManager()
-                    .Append(baseCfg)
-                    .Append(DefaultApplicationHost.Instance.HostConfiguration)
-                    .LoadConfiguration()
-                    ;
-            }
         }
     }
 }

@@ -37,11 +37,7 @@ namespace Axle
             params string[] profiles)
         {
             DependencyContainerFactory = dependencyContainerFactory ?? new AxleDependencyContainerFactory();
-            LoggingService = new AggregatingLoggingService();
-            if (loggingService != null)
-            {
-                ((ILoggingServiceRegistry) LoggingService).RegisterLoggingService(loggingService);
-            }
+            LoggingService = loggingService;
             EnvironmentName = environmentName;
             LoadConfiguration(
                 HostConfigFileName = hostConfigName ?? "host", 

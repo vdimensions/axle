@@ -42,7 +42,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Application\host.Development.yml" />
     <EmbeddedResource Include="Application\host.yml" />
-    <EmbeddedResource Include="Application\logo.txt" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

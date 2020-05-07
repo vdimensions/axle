@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Axle.Configuration;
 using Axle.DependencyInjection;
+using Axle.Logging;
 using Axle.Modularity;
 
 namespace Axle
@@ -33,10 +33,9 @@ namespace Axle
 
             private void PrintLogo(IConfiguration config)
             {
-                var logo = config.GetSections("axle.application.logo").Select(x => x.Value).ToArray();
-                foreach (var logoLine in logo)
+                foreach (var logoLine in config.GetSections("axle.application.asciilogo"))
                 {
-                    Console.WriteLine(logoLine);
+                    Console.WriteLine(logoLine.Value);
                 }
             }
 
@@ -44,10 +43,16 @@ namespace Axle
             {
                 try 
                 {
+                    var loggingService = new AggregatingLoggingService();
+                    if (_host.LoggingService != null)
+                    {
+                        ((ILoggingServiceRegistry) loggingService).RegisterLoggingService(_host.LoggingService);
+                    }
+                    
                     var rootContainer = _host.DependencyContainerFactory.CreateContainer();
                     rootContainer
                         .Export(new ApplicationContainerFactory(_host.DependencyContainerFactory, rootContainer))
-                        .Export(_host.LoggingService)
+                        .Export(loggingService)
                         .Export(_host);
                     var configMgr = new LayeredConfigManager()
                         .Append(EnvironmentConfigSource.Instance)
@@ -73,7 +78,7 @@ namespace Axle
                         onContainerReadyHandler.Invoke(rootContainer);
                     }
                     var app = Launch(
-                        new ApplicationModuleCatalog(_moduleCatalog), _moduleTypes, _host, rootContainer, config, args);
+                        new ApplicationModuleCatalog(_moduleCatalog), _moduleTypes, _host, loggingService, rootContainer, config, args);
                     app.Run();
                     return app;
                 }
