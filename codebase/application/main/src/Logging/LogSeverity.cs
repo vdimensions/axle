@@ -8,6 +8,7 @@
     #endif
     public enum LogSeverity : byte
     {
+        
         None = 0,
 
         /// <summary>

@@ -6,6 +6,10 @@ using Axle.Verification;
 
 namespace Axle
 {
+    /// <summary>
+    /// A static class containing extension methods for instances of the <see cref="IApplicationConfigurationBuilder"/>
+    /// interface.
+    /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class ApplicationConfigurationBuilderExtensions
     {

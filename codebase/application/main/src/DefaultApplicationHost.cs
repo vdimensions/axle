@@ -30,10 +30,14 @@ namespace Axle
             }
         }
         
+        /// <summary>
+        /// Returns the sole instance of the <see cref="DefaultApplicationHost"/> class.
+        /// </summary>
         public static DefaultApplicationHost Instance => Singleton<DefaultApplicationHost>.Instance;
 
         private DefaultApplicationHost() : base(null, null, InferredEnvironmentName) { }
 
+        /// <inheritdoc />
         protected override void SetupAppConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {
             base.SetupAppConfigurationResourceBundle(bundle.Register(new Uri("./", UriKind.Relative)));

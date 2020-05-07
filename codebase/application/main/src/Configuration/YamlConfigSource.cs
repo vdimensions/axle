@@ -7,7 +7,7 @@ using Axle.Verification;
 
 namespace Axle.Configuration
 {
-    public sealed class YamlConfigSource : IConfigSource
+    internal sealed class YamlConfigSource : IConfigSource
     {
         private const string DefaultConfigFileName = "{0}{1}.yml";
         private const string AlternateConfigFileName = "{0}{1}.yaml";

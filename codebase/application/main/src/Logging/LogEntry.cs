@@ -91,6 +91,12 @@ namespace Axle.Logging
         public LogEntry(LogSeverity severity, Type type, Exception exception) : this(DateTime.Now, severity, type, exception.Message, exception) { }
         #endif
 
+        /// <summary>
+        /// Returns a string representation of the current <see cref="LogEntry"/> instance.
+        /// </summary>
+        /// <returns>
+        /// A string representation of the current <see cref="LogEntry"/> instance.
+        /// </returns>
         public override string ToString()
         {
             var messageToWrite = _exception == null ? _message : $"{_message}\n{_exception.StackTrace}";
@@ -101,13 +107,19 @@ namespace Axle.Logging
             #endif
         }
 
+        /// <inheritdoc />
         public DateTime Timestamp => _timestamp;
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+        /// <inheritdoc />
         public string ThreadID => _threadID;
         #endif
+        /// <inheritdoc />
         public LogSeverity Severity => _severity;
+        /// <inheritdoc />
         public Type Type => _type;
+        /// <inheritdoc />
         public string Message => _message;
+        /// <inheritdoc />
         public Exception Exception => _exception;
     }
 }

@@ -5,7 +5,7 @@ using Axle.Verification;
 
 namespace Axle.Configuration
 {
-    public sealed class PropertiesConfigSource : IConfigSource
+    internal sealed class PropertiesConfigSource : IConfigSource
     {
         private const string DefaultConfigFileName = "{0}{1}.properties";
         

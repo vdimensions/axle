@@ -6,8 +6,8 @@ using Axle.Verification;
 namespace Axle.Logging
 {
     /// <summary>
-    /// A static class to act as a mixin to the <see cref="ILogger"/> interface. 
-    /// Provides convenient overloads for logging methods based on the default behavior defined by the <see cref="ILogger"/> interface.
+    /// A static class that adds convenient extension methods to the <see cref="ILogger"/> interface. 
+    /// Provides various overloads of the logging API as defined by the <see cref="ILogger"/> interface.
     /// </summary>
     public static class LoggerExtensions
     {
@@ -21,11 +21,15 @@ namespace Axle.Logging
         }
         public static void Write(this ILogger logger, LogSeverity severity, string message)
         {
-            logger.VerifyArgument(nameof(logger)).IsNotNull().Value.Write(new LogEntry(severity, logger.TargetType, message));
+            Verifier.IsNotNull(Verifier.VerifyArgument(logger, nameof(logger)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(message, nameof(message)));
+            logger.Write(new LogEntry(severity, logger.TargetType, message));
         }
         public static void Write(this ILogger logger, LogSeverity severity, string format, params object[] args)
         {
-            logger.VerifyArgument(nameof(logger)).IsNotNull().Value.Write(new LogEntry(severity, logger.TargetType, string.Format(format, args)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(logger, nameof(logger)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(format, nameof(format)));
+            logger.Write(new LogEntry(severity, logger.TargetType, string.Format(format, args)));
         }
         public static void Write(this ILogger logger, LogSeverity severity, IFormatProvider formatProvider, string format, params object[] args)
         {
@@ -33,7 +37,8 @@ namespace Axle.Logging
         }
 
         /// <summary>
-        /// Writes the provided <paramref name="exception"/> exception as a <see cref="LogSeverity.Debug">debug</see> message.
+        /// Writes the provided <paramref name="exception"/> exception as a <see cref="LogSeverity.Debug">debug</see>
+        /// message.
         /// </summary>
         /// <param name="logger">The <see cref="ILogger">logger</see> instance used to log the message.</param>
         /// <param name="exception">The <see cref="Exception"/> to be written to the log.</param>
@@ -51,6 +56,22 @@ namespace Axle.Logging
         {
             Write(logger, LogSeverity.Debug, exception); 
         }
+        /// <summary>
+        /// Writes the provided <paramref name="exception"/> exception as a <see cref="LogSeverity.Debug">debug</see>
+        /// message.
+        /// </summary>
+        /// <param name="logger">The <see cref="ILogger">logger</see> instance used to log the message.</param>
+        /// <param name="exception">The <see cref="Exception"/> to be written to the log.</param>
+        /// <returns>
+        /// A reference to the <see cref="ILogger">logger</see> instance that wrote the message.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="logger" /> or <paramref name="exception"/> is <c>null</c>.
+        /// </exception>
+        /// <seealso cref="ILogger"/>
+        /// <seealso cref="LogSeverity"/>
+        /// <seealso cref="LogSeverity.Debug"/>
+        /// <seealso cref="Exception"/>
         public static void Debug(this ILogger logger, Exception exception, string message) 
         {
             Write(logger, LogSeverity.Debug, message, exception); 
