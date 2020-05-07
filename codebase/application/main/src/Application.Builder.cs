@@ -55,10 +55,16 @@ namespace Axle
                         .Export(loggingService)
                         .Export(_host);
                     var configMgr = new LayeredConfigManager()
-                        .Append(EnvironmentConfigSource.Instance)
-                        .Append(_host.HostConfiguration)
-                        .Append(_config)
-                        .Append(_host.AppConfiguration);
+                        .Append(EnvironmentConfigSource.Instance);
+                    if (_host.HostConfiguration != null)
+                    {
+                        configMgr = configMgr.Append(_host.HostConfiguration);
+                    }
+                    configMgr = configMgr.Append(_config);
+                    if (_host.AppConfiguration != null)
+                    {
+                        configMgr = configMgr.Append(_host.AppConfiguration);
+                    }
                     var config = configMgr.LoadConfiguration();
                     
                     PrintLogo(config);
