@@ -19,6 +19,7 @@ namespace Axle.Data.DataSources
 {
     [Module]
     [Requires(typeof(DataModule))]
+    [Requires(typeof(DbServiceProviderRegistry))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal sealed class DataSourceModule : ISqlScriptLocationRegistry, IDataSourceRegistry
     {

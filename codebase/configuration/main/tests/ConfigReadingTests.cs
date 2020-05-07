@@ -1,4 +1,5 @@
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using Axle.Configuration.Legacy;
 using Axle.Configuration.Microsoft;
@@ -82,7 +83,7 @@ namespace Axle.Configuration.Tests
 
             var subject = cfg.GetSection<SubjectSection>("subject");
             var greeting = cfg.GetSection<GreetingsSection>("greetings");
-            var messageFormat = cfg["messageFormat"]?.Value;
+            var messageFormat = cfg["messageFormat"].Select(x => x.Value).SingleOrDefault();
             Assert.IsNotNull(messageFormat);
             Assert.AreEqual("Hello, World", string.Format(messageFormat, greeting.Default, subject.Name));
         }

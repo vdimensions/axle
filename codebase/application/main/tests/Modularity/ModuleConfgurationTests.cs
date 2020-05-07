@@ -69,7 +69,7 @@ namespace Axle.ApplicationTests.Modularity
             using (Application
                     .Build()
                     .ConfigureDependencies(c => dependencyContainer = c)
-                    .ConfigureApplication(c => c.Append(configSource))
+                    .ConfigureApplication(c => c.Add(configSource))
                     .ConfigureModules(c => c.Load<ConfiguredModule>())
                     .Run())
             {
@@ -89,7 +89,7 @@ namespace Axle.ApplicationTests.Modularity
             using (Application
                     .Build()
                     .ConfigureDependencies(c => dependencyContainer = c)
-                    .ConfigureApplication(c => c.Append(configSource))
+                    .ConfigureApplication(c => c.Add(configSource))
                     .ConfigureModules(c => c.Load<ConfiguredModule2>())
                     .Run())
             {

@@ -42,7 +42,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .EnableLegacyConfig()
+                .ConfigureApplication(c => c.EnableLegacyConfig())
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -60,7 +60,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .EnableLegacyConfig()
+                .ConfigureApplication(c => c.EnableLegacyConfig())
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -78,7 +78,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .EnableLegacyConfig()
+                .ConfigureApplication(c => c.EnableLegacyConfig())
                 .UseDataSources()
                 .UseMySql();
             using (appBuilder.Run())
@@ -104,7 +104,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .EnableLegacyConfig()
+                .ConfigureApplication(c => c.EnableLegacyConfig())
                 .UseDataSources()
                 .UseMySql()
                 .ConfigureModules(m => m.Load<SqlScriptsConfigurer>());

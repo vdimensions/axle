@@ -1,4 +1,5 @@
-﻿using Axle.Configuration;
+﻿using System.Linq;
+using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
@@ -73,11 +74,14 @@ namespace Axle.ApplicationTests.Modularity
         public void TestModuleConfig()
         {
             IDependencyContainer dependencyContainer = null;
-            using (Application.Build().ConfigureDependencies(c => dependencyContainer = c).EnableLegacyConfig().Run())
+            using (Application.Build()
+                .ConfigureDependencies(c => dependencyContainer = c)
+                .ConfigureApplication(c => c.EnableLegacyConfig())
+                .Run())
             {
                 var configuration = dependencyContainer.Resolve<IConfiguration>();
-                var message = configuration["message"].Value;
-                var messageFormat = configuration["messageFormat"].Value;
+                var message = configuration["message"].Select(x => x.Value).SingleOrDefault();
+                var messageFormat = configuration["messageFormat"].Select(x => x.Value).SingleOrDefault();
                 var user = System.Environment.UserName;
                 Assert.IsNotNull(configuration);
                 Assert.IsNotNull(message);

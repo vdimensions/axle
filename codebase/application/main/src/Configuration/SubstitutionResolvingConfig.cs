@@ -26,9 +26,10 @@ namespace Axle.Configuration
         bool ISubstitutionProvider.TrySubstitute(string token, out string value)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(token, nameof(token)));
-            if (_substSource[token] is IConfigSetting cv)
+            var settingValue = _substSource[token].Select(x => x.Value).SingleOrDefault(x => !string.IsNullOrEmpty(x));
+            if (settingValue != null)
             {
-                value = cv.Value;
+                value = settingValue;
                 return true;
             }
             value = null;

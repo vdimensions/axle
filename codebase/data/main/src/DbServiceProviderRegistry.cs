@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Axle.DependencyInjection;
 using Axle.Modularity;
 using Axle.Verification;
@@ -13,14 +14,14 @@ namespace Axle.Data
     internal sealed class DbServiceProviderRegistry : IDbServiceProviderRegistry
     {
         private readonly ConcurrentDictionary<string, IDbServiceProvider> _providers = new ConcurrentDictionary<string, IDbServiceProvider>(StringComparer.Ordinal);
-
+        
         [ModuleInit]
         internal void Init(IDependencyExporter exporter)
         {
             exporter.Export(this);
         }
-
         [ModuleDependencyInitialized]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnDbServiceProviderInitialized(DatabaseServiceProviderModule module)
         {
             var provider = module.Provider;
@@ -28,6 +29,7 @@ namespace Axle.Data
         }
 
         [ModuleDependencyTerminated]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnDbServiceProviderTerminated(DatabaseServiceProviderModule module)
         {
             var provider = module.Provider;
@@ -38,8 +40,6 @@ namespace Axle.Data
         IEnumerator IEnumerable.GetEnumerator() => _providers.Values.GetEnumerator();
 
         IDbServiceProvider IDbServiceProviderRegistry.this[string name]
-        {
-            get => _providers.TryGetValue(name.VerifyArgument(nameof(name)), out var res) ? res : null;
-        }
+            => _providers.TryGetValue(name.VerifyArgument(nameof(name)), out var res) ? res : null;
     }
 }
