@@ -77,17 +77,19 @@ namespace Axle.Web.AspNetCore
         private readonly AspNetCoreDependencyContainer _rootContainer;
 
         public AspNetCoreDependencyContainerFactory(
-            IDependencyContainerFactory dependencyContainerFactory,
-            ConcurrentDictionary<Type, object> exportedObjects)
+            IDependencyContainerFactory dependencyContainerFactory)
         {
             _dependencyContainerFactory = dependencyContainerFactory;
-            _rootContainer =
-                new AspNetCoreDependencyContainer(dependencyContainerFactory.CreateContainer(), exportedObjects);
+            _rootContainer = new AspNetCoreDependencyContainer(
+                dependencyContainerFactory.CreateContainer(), 
+                ExportedObjects = new ConcurrentDictionary<Type, object>());
         }
 
         IDependencyContainer IDependencyContainerFactory.CreateContainer() => _rootContainer;
 
         IDependencyContainer IDependencyContainerFactory.CreateContainer(IDependencyContext parent) 
             => _dependencyContainerFactory.CreateContainer(parent);
+
+        public ConcurrentDictionary<Type, object> ExportedObjects { get; }
     }
 }

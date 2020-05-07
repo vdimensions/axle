@@ -7,8 +7,7 @@ namespace Axle
     /// <summary>
     /// An interface representing an application host. An application host is responsible for supplying an application
     /// with environment-specific information and vital infrastructure objects, such as a 
-    /// <see="IDependencyContainerFactory">dependency container factory</see>.
-
+    /// <see cref="IDependencyContainerFactory">dependency container factory</see>.
     /// </summary>
     public interface IApplicationHost
     {
@@ -29,18 +28,20 @@ namespace Axle
         /// <summary>
         /// Gets a <see cref="IConfiguration"/> object representing setting defaults influenced by the application host.
         /// </summary>
-        IConfiguration Configuration { get; }
+        IConfiguration HostConfiguration { get; }
+        /// <summary>
+        /// Gets a <see cref="IConfiguration"/> object representing the application settings defined in the
+        /// configuration file specified by the <see cref="AppConfigFileName"/> with respect to the selected
+        /// <see cref="EnvironmentName">environment name</see>.
+        /// </summary>
+        IConfiguration AppConfiguration { get; }
         /// <summary>
         /// Gets the application configuration filename (without the extension).
         /// </summary>
-        string ApplicationConfigFileName { get; }
+        string AppConfigFileName { get; }
         /// <summary>
         /// Gets the application host configuration filename (without the extension).
         /// </summary>
         string HostConfigFileName { get; }
-        /// <summary>
-        /// Gets a <see cref="string">string</see> array of an ASCII logo to print to the console when the app starts.
-        /// </summary>
-        string[] AsciiLogo { get; }
     }
 }

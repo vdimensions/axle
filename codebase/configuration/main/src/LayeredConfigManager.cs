@@ -6,8 +6,19 @@ using Axle.Verification;
 
 namespace Axle.Configuration
 {
+    
+    
     public sealed class LayeredConfigManager : IConfigManager
     {
+        private class PreloadedConfigSource : IConfigSource
+        {
+            private readonly IConfiguration _config;
+
+            public PreloadedConfigSource(IConfiguration config) => _config = config;
+
+            public IConfiguration LoadConfiguration() => _config;
+            
+        }
         internal sealed class LayeredConfiguration : IConfiguration
         {
             private readonly IEnumerable<IConfiguration> _configurations;
@@ -23,13 +34,16 @@ namespace Axle.Configuration
                 {
                     key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
                     var results = _configurations
-                        .SelectMany(x => x[key].Where(y => y != null))
+                        .SelectMany(x => x[key].Where(y => y is IConfigSection))
                         .ToList();
-                    // in case we have found a collection of simple setting values, take only the newest
-                    var overridingSetting = results.FirstOrDefault(x => !(x is IConfigSection));
-                    return overridingSetting != null
-                        ? new[] { overridingSetting }
-                        : (IEnumerable<IConfigSetting>) results;
+                    if (results.Count == 0)
+                    {
+                        results = (_configurations
+                            .Select(x => x[key].ToArray())
+                            .FirstOrDefault(x => x.Length > 0 && x.All(y => !(y is IConfigSection))) ?? new IConfigSetting[0])
+                            .ToList();
+                    }
+                    return results;
                 }
             }
 
@@ -50,9 +64,6 @@ namespace Axle.Configuration
 
         public LayeredConfigManager Append(IConfigSource source)
         {
-            //
-            // NB appends configs to the beginning, as they are being prioritized by order
-            //
             source.VerifyArgument(nameof(source)).IsNotNull();
             var cfg = source.LoadConfiguration();
             if (cfg == null)
@@ -60,6 +71,12 @@ namespace Axle.Configuration
                 return this;
             }
             return new LayeredConfigManager(new[] { cfg }.Union(_configs).ToArray());
+        }
+
+        public LayeredConfigManager Append(IConfiguration config)
+        {
+            config.VerifyArgument(nameof(config)).IsNotNull();
+            return new LayeredConfigManager(new[] { config }.Union(_configs).ToArray());
         }
 
         /// <inheritdoc />

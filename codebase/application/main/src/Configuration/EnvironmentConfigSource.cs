@@ -6,41 +6,49 @@ using Axle.References;
 
 namespace Axle.Configuration
 {
-    internal sealed class EnvironmentConfigSource : IConfigSource, IConfiguration
+    internal sealed class EnvironmentConfigSource : IConfigSource
     {
+        private sealed class EnvironmentConfig : IConfiguration
+        {
+            private readonly IDictionary<string, string> _env;
+
+            public EnvironmentConfig(IDictionary<string, string> env)
+            {
+                _env = env;
+            }
+
+            IEnumerable<string> IConfigSection.Keys => _env.Keys;
+            string IConfigSection.Name => string.Empty;
+            string IConfigSetting.Value => null;
+
+            IEnumerable<IConfigSetting> IConfigSection.this[string key]
+            {
+                get
+                {
+                    return _env.TryGetValue(key, out var val) 
+                        ? new[]{ ConfigSetting.Create(val) } 
+                        : Enumerable.Empty<IConfigSetting>();
+                }
+            }
+        }
+        
         public static EnvironmentConfigSource Instance => Singleton<EnvironmentConfigSource>.Instance;
 
-        private readonly IDictionary<string, string> _env;
+        private EnvironmentConfigSource() { }
 
-        private EnvironmentConfigSource()
+        public IConfiguration LoadConfiguration()
         {
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            var env = System.Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Process);
+            var envData = System.Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Process);
             #else
-            var env = System.Environment.GetEnvironmentVariables();
+            var envData = System.Environment.GetEnvironmentVariables();
             #endif
-            _env = Enumerable.ToDictionary(
-                Enumerable.OfType<DictionaryEntry>(env), 
+            var env = Enumerable.ToDictionary(
+                Enumerable.OfType<DictionaryEntry>(envData), 
                 x => x.Key.ToString(), 
                 x => x.Value.ToString(), 
                 StringComparer.OrdinalIgnoreCase);
+            return new EnvironmentConfig(env);
         }
-
-        public IConfiguration LoadConfiguration() => this;
-
-        IEnumerable<IConfigSetting> IConfigSection.this[string key]
-        {
-            get
-            {
-                return _env.TryGetValue(key, out var val) 
-                    ? new[]{ ConfigSetting.Create(val) } 
-                    : Enumerable.Empty<IConfigSetting>();
-            }
-        }
-
-        IEnumerable<string> IConfigSection.Keys => _env.Keys;
-
-        public string Name => string.Empty;
-        public string Value => null;
     }
 }

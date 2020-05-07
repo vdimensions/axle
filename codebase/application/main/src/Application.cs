@@ -3,7 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+#if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
+#endif
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Modularity;
@@ -135,7 +137,7 @@ namespace Axle
                                     host.EnvironmentName));
                         }
                         var moduleConfig = new SubstitutionResolvingConfig(
-                            baseModuleConfig.Append(new PreloadedConfigSource(config)).LoadConfiguration(), 
+                            baseModuleConfig.Append(config).LoadConfiguration(), 
                             substExpr);
                         moduleInitializationContainer.Export(moduleConfig);
 

@@ -5,15 +5,6 @@ namespace Axle
     
     partial class Application
     {
-        internal class PreloadedConfigSource : IConfigSource
-        {
-            private readonly IConfiguration _config;
-
-            public PreloadedConfigSource(IConfiguration config) => _config = config;
-
-            public IConfiguration LoadConfiguration() => _config;
-        }
-
         internal static LayeredConfigManager Configure(
             LayeredConfigManager configManager,
             string configFileName,

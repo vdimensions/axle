@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Globalization;
-using System.Linq;
+using System.IO;
 using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
@@ -10,7 +9,6 @@ using Axle.Reflection.Extensions.Assembly;
 #endif
 using Axle.Resources;
 using Axle.Resources.Bundling;
-using Axle.Text;
 
 namespace Axle
 {
@@ -20,7 +18,8 @@ namespace Axle
     /// <seealso cref="IApplicationHost"/>
     public abstract class AbstractApplicationHost : IApplicationHost, IDisposable
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration _hostConfiguration;
+        private readonly IConfiguration _appConfiguration;
         private readonly string[] _logo;
 
         protected AbstractApplicationHost(
@@ -44,48 +43,58 @@ namespace Axle
                 ((ILoggingServiceRegistry) LoggingService).RegisterLoggingService(loggingService);
             }
             EnvironmentName = environmentName;
-            ApplicationConfigFileName = applicationConfigName ?? "application";
-            LoadConfiguration(HostConfigFileName = hostConfigName ?? "host", out _configuration, out _logo, environmentName, profiles);
+            LoadConfiguration(
+                HostConfigFileName = hostConfigName ?? "host", 
+                AppConfigFileName = applicationConfigName ?? "application", 
+                environmentName, 
+                profiles, 
+                out _hostConfiguration, 
+                out _appConfiguration);
         }
         
         private void LoadConfiguration(
-            string configFileName, 
-            out IConfiguration config, 
-            out string[] logo, 
+            string hostConfigFileName, 
+            string appConfigFileName, 
             string environmentName, 
-            params string[] profiles)
+            string[] profiles, 
+            out IConfiguration hostConfig, 
+            out IConfiguration appConfig)
         {
-            
-            var resourceManager = new DefaultResourceManager();
-            SetupConfigurationResourceBundle(
-                resourceManager.Bundles
+            var hostConfigResourceMgr = new DefaultResourceManager();
+            SetupHostConfigurationResourceBundle(
+                hostConfigResourceMgr.Bundles
                     .Configure(Application.ConfigBundleName));
-            var configStreamProvider = new ResourceConfigurationStreamProvider(resourceManager);
+            var hostConfigStreamProvider = new ResourceConfigurationStreamProvider(hostConfigResourceMgr);
             
-            var tmpConfig = Application.Configure(new LayeredConfigManager(), configFileName, configStreamProvider, string.Empty);
+            hostConfig = LoadConfig(hostConfigFileName, hostConfigStreamProvider, environmentName, profiles);
+            
+            var appConfigResourceMgr = new DefaultResourceManager();
+            SetupAppConfigurationResourceBundle(
+                appConfigResourceMgr.Bundles
+                    .Configure(Application.ConfigBundleName));
+            var appConfigStreamProvider = new ResourceConfigurationStreamProvider(appConfigResourceMgr);
+            
+            appConfig = LoadConfig(appConfigFileName, appConfigStreamProvider, environmentName, profiles);
+        }
+
+        private static IConfiguration LoadConfig(
+            string configFileName, 
+            ResourceConfigurationStreamProvider configStreamProvider, 
+            string environmentName, 
+            string[] profiles)
+        {
+            var tmpConfig = Application.Configure(
+                new LayeredConfigManager(), 
+                configFileName, 
+                configStreamProvider,
+                string.Empty);
             foreach (var profile in profiles)
             {
                 tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, profile);
             }
+
             tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, environmentName);
-            config = tmpConfig.LoadConfiguration();
-            
-            var logoStr = resourceManager.Load<string>(Application.ConfigBundleName, "logo.txt", CultureInfo.InvariantCulture);
-            if (logoStr != null)
-            {
-                var assembly = GetType()
-                    #if NETSTANDARD || NET45_OR_NEWER
-                    .GetTypeInfo()
-                    #endif
-                    .Assembly;
-                var versionAttr = assembly.GetCustomAttributes<AssemblyInformationalVersionAttribute>().SingleOrDefault();
-                var formattedLogo = string.Format(logoStr, $"Version {versionAttr?.InformationalVersion ?? assembly.GetName().Version.ToString()}");
-                logo = LineEndings.Split(formattedLogo);
-            }
-            else
-            {
-                logo = new string[0];
-            }
+            return tmpConfig.LoadConfiguration();
         }
 
         /// <summary>
@@ -95,7 +104,7 @@ namespace Axle
         /// A reference to the <see cref="IConfigurableBundleContent"/> that is used to obtain the application-host
         /// configuration.
         /// </param>
-        protected virtual void SetupConfigurationResourceBundle(IConfigurableBundleContent bundle)
+        protected virtual void SetupHostConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {
             var assembly = GetType()
                 #if NETSTANDARD || NET45_OR_NEWER
@@ -104,6 +113,33 @@ namespace Axle
                 .Assembly;
             var asmName = assembly.GetName();
             bundle.Register(new Uri($"assembly://{asmName.Name}", UriKind.Absolute));
+        }
+        
+        /// <summary>
+        /// Allows configuring resource providers for loading the application-host specific configuration.
+        /// </summary>
+        /// <param name="bundle">
+        /// A reference to the <see cref="IConfigurableBundleContent"/> that is used to obtain the application-host
+        /// configuration.
+        /// </param>
+        protected virtual void SetupAppConfigurationResourceBundle(IConfigurableBundleContent bundle)
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            var assembly = Assembly.GetEntryAssembly();
+            if (assembly == null)
+            {
+                return;
+            }
+            var asmName = assembly.GetName();
+            var asmLoc = Path.GetDirectoryName(assembly.Location);
+            if (asmLoc != null)
+            {
+                bundle.Register(new Uri(asmLoc, UriKind.Absolute));
+            }
+            bundle.Register(new Uri($"assembly://{asmName.Name}", UriKind.Absolute));
+            #else
+            return;
+            #endif
         }
         
         /// <summary>
@@ -144,15 +180,15 @@ namespace Axle
         public string EnvironmentName { get; }
 
         /// <inheritdoc />
-        public string ApplicationConfigFileName { get; }
+        public string AppConfigFileName { get; }
 
         /// <inheritdoc />
         public string HostConfigFileName { get; }
 
         /// <inheritdoc />
-        public IConfiguration Configuration => _configuration;
+        public virtual IConfiguration HostConfiguration => _hostConfiguration;
 
         /// <inheritdoc />
-        public string[] AsciiLogo => _logo;
+        public virtual IConfiguration AppConfiguration => _appConfiguration;
     }
 }

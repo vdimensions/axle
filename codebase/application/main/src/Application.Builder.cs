@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Modularity;
@@ -30,9 +31,10 @@ namespace Axle
                 return this;
             }
 
-            private void PrintLogo()
+            private void PrintLogo(IConfiguration config)
             {
-                foreach (var logoLine in _host.AsciiLogo)
+                var logo = config.GetSections("axle.application.logo").Select(x => x.Value).ToArray();
+                foreach (var logoLine in logo)
                 {
                     Console.WriteLine(logoLine);
                 }
@@ -40,7 +42,6 @@ namespace Axle
 
             public Application Run(params string[] args)
             {
-                PrintLogo();
                 try 
                 {
                     var rootContainer = _host.DependencyContainerFactory.CreateContainer();
@@ -50,14 +51,12 @@ namespace Axle
                         .Export(_host);
                     var configMgr = new LayeredConfigManager()
                         .Append(EnvironmentConfigSource.Instance)
-                        .Append(new PreloadedConfigSource(_host.Configuration))
+                        .Append(_host.HostConfiguration)
                         .Append(_config)
-                        .Append(Configure(new LayeredConfigManager(), _host.ApplicationConfigFileName, this, string.Empty));
-                    if (!string.IsNullOrEmpty(_host.EnvironmentName))
-                    {
-                        configMgr = configMgr.Append(Configure(new LayeredConfigManager(), _host.ApplicationConfigFileName, this, _host.EnvironmentName));
-                    }
+                        .Append(_host.AppConfiguration);
                     var config = configMgr.LoadConfiguration();
+                    
+                    PrintLogo(config);
                     
                     var modulesConfigSection = config.GetIncludeExcludeCollection<Type>("axle.application.modules");
                     foreach (var moduleType in modulesConfigSection.IncludeElements)

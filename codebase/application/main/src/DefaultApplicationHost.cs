@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using Axle.References;
+using Axle.Resources.Bundling;
 
 namespace Axle
 {
@@ -32,6 +33,11 @@ namespace Axle
         public static DefaultApplicationHost Instance => Singleton<DefaultApplicationHost>.Instance;
 
         private DefaultApplicationHost() : base(null, null, InferredEnvironmentName) { }
+
+        protected override void SetupAppConfigurationResourceBundle(IConfigurableBundleContent bundle)
+        {
+            base.SetupAppConfigurationResourceBundle(bundle.Register(new Uri("./", UriKind.Relative)));
+        }
     }
 }
 #endif
