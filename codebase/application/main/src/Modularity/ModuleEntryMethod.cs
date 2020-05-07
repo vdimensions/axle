@@ -3,7 +3,7 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
-    public sealed class ModuleEntryMethod
+    internal sealed class ModuleEntryMethod
     {
         private readonly IInvokable _invokable;
         private readonly bool _hasParams;

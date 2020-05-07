@@ -7,7 +7,7 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
-    public sealed class ModuleCallback
+    internal sealed class ModuleCallback
     {
         private readonly IInvokable _invokable;
 

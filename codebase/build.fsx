@@ -20,7 +20,7 @@ let dir = Shell.pwd()
 
 let projectLocations = [
     "core/main"; "core/fsharp"
-    "text.data/main"; "text.data/properties"; "text.data/yaml"
+    "text.documents/main"; "text.documents/properties"; "text.documents/yaml"
     "resources/main"; "resources/properties"; "resources/yaml"
     "caching/main"
     "security/main"

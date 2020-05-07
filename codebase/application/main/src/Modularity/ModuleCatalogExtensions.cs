@@ -7,7 +7,7 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
-    public static class ModuleCatalogExtensions
+    internal static class ModuleCatalogExtensions
     {
         private static IList<ModuleInfo> ExpandRequiredModules(IList<ModuleInfo> modulesToLaunch)
         {
