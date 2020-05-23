@@ -43,7 +43,10 @@ namespace Axle.Extensions.Object
         public static int CalculateHashCode<T>(this T obj, int magic, params object[] args)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(obj, nameof(obj)));
-            return (magic == 0 ? 1 : magic) * Enumerable.Aggregate(args, 0, (x, y) => x ^ (y?.GetHashCode() ?? 0));
+            unchecked
+            {
+                return (magic == 0 ? 1 : magic) * Enumerable.Aggregate(args, 0, (x, y) => x ^ (y?.GetHashCode() ?? 0));
+            }
         }
 
         /// <summary>
