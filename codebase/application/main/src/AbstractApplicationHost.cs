@@ -4,9 +4,6 @@ using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
-#if NET35_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
-using Axle.Reflection.Extensions.Assembly;
-#endif
 using Axle.Resources;
 using Axle.Resources.Bundling;
 
@@ -20,7 +17,6 @@ namespace Axle
     {
         private readonly IConfiguration _hostConfiguration;
         private readonly IConfiguration _appConfiguration;
-        private readonly string[] _logo;
 
         protected AbstractApplicationHost(
                 IDependencyContainerFactory dependencyContainerFactory, 
@@ -58,16 +54,14 @@ namespace Axle
         {
             var hostConfigResourceMgr = new DefaultResourceManager();
             SetupHostConfigurationResourceBundle(
-                hostConfigResourceMgr.Bundles
-                    .Configure(Application.ConfigBundleName));
+                hostConfigResourceMgr.Bundles.Configure(Application.ConfigBundleName));
             var hostConfigStreamProvider = new ResourceConfigurationStreamProvider(hostConfigResourceMgr);
             
             hostConfig = LoadConfig(hostConfigFileName, hostConfigStreamProvider, environmentName, profiles);
             
             var appConfigResourceMgr = new DefaultResourceManager();
             SetupAppConfigurationResourceBundle(
-                appConfigResourceMgr.Bundles
-                    .Configure(Application.ConfigBundleName));
+                appConfigResourceMgr.Bundles.Configure(Application.ConfigBundleName));
             var appConfigStreamProvider = new ResourceConfigurationStreamProvider(appConfigResourceMgr);
             
             appConfig = LoadConfig(appConfigFileName, appConfigStreamProvider, environmentName, profiles);

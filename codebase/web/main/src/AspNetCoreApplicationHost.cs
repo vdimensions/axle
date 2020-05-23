@@ -45,7 +45,7 @@ namespace Axle.Web.AspNetCore
         }
         protected override void SetupHostConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {
-            base.SetupAppConfigurationResourceBundle(bundle.Register(new Uri("./", UriKind.Relative)));
+            base.SetupHostConfigurationResourceBundle(bundle.Register(new Uri("./", UriKind.Relative)));
         }
     }
 }
