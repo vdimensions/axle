@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Axle.Web.AspNetCore.Mvc.ModelBinding
 {
     public interface IModelResolver
     {
-        Task<object> Resolve(IReadOnlyDictionary<string, object> routeData, ModelResolutionContext next);
+        Task<object> Resolve(IMvcMetadata mvcMetadata, ModelResolutionContext next);
     }
 }
