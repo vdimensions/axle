@@ -8,7 +8,7 @@ namespace Axle.Text.Documents
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
-    public sealed class TextDocumentObject : TextDocumentNode, ITextDocumentObject
+    internal sealed class TextDocumentObject : TextDocumentNode, ITextDocumentObject
     {
         private const string NameTokenRegexPattern =
             "(?:(?:(?<=\\[)(?:[^\\]]+)(?=\\]))|(?:(?<=\\\")(?:[^\\\"]+)(?=\\\"))|(?:(?<=\\')(?:[^\\']+)(?=\\'))|(?:[^\\.\\n\\[\\]\\\"\\'\\:\\s]+))";
@@ -34,8 +34,8 @@ namespace Axle.Text.Documents
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly IEnumerable<ITextDocumentNode> _children;
-        
-        public TextDocumentObject(
+
+        internal TextDocumentObject(
                 string key, 
                 ITextDocumentObject parent, 
                 IEnumerable<ITextDocumentNode> children, 
@@ -58,12 +58,6 @@ namespace Axle.Text.Documents
                     })
                 : children;
         }
-
-        public TextDocumentObject(
-                string key, 
-                ITextDocumentObject parent, 
-                IEnumerable<ITextDocumentNode> children) 
-            : this(key, parent, children, true) { }
 
         public IEnumerable<ITextDocumentNode> GetChildren() => _children;
         public IEnumerable<ITextDocumentNode> GetChildren(string name)

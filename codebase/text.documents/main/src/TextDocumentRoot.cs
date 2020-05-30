@@ -6,7 +6,7 @@ namespace Axle.Text.Documents
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class TextDocumentRoot : ITextDocumentRoot
+    internal sealed class TextDocumentRoot : ITextDocumentRoot
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Runtime.Serialization.DataMember]
@@ -23,7 +23,7 @@ namespace Axle.Text.Documents
             _inner = inner;
             _comparer = comparer;
         }
-        public TextDocumentRoot(IEnumerable<ITextDocumentNode> children, IEqualityComparer<string> comparer)
+        internal TextDocumentRoot(IEnumerable<ITextDocumentNode> children, IEqualityComparer<string> comparer)
             : this(new TextDocumentObject(String.Empty, null, children, true), comparer) { }
 
         public IEnumerable<ITextDocumentNode> GetChildren() => _inner.GetChildren();

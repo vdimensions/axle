@@ -68,7 +68,7 @@ namespace Axle.Text.Documents
 
         private IEnumerable<ITextDocumentNode> ExpandChildren(ITextDocumentAdapter adapter)
         {
-            foreach (var childGroup in adapter.Children.GroupBy(x => x.Key))
+            foreach (var childGroup in adapter.Children.GroupBy(x => x.Key, _comparer))
             foreach (var child in childGroup)
             foreach (var node in FixHierarchy(childGroup.Key, ReadStructuredData(childGroup.Key, child)))
             {
