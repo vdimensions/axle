@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -53,10 +52,8 @@ namespace Axle.Text.Documents
             _comparer = comparer;
         }
 
-        protected virtual ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding)
-        {
-            return CreateAdapter(encoding.GetString(stream.ToByteArray()));
-        }
+        protected virtual ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding) 
+            => CreateAdapter(encoding.GetString(stream.ToByteArray()));
         protected abstract ITextDocumentAdapter CreateAdapter(string data);
         
         private ITextDocumentRoot ReadStructuredData(

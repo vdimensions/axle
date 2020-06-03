@@ -24,7 +24,6 @@ namespace Axle.Text.Documents.Binding
         /// A <see cref="IReadWriteMember"/> representing the <paramref name="instance"/>'s member with the 
         /// provided <paramref name="name"/>, or <c><see langword="null"/></c> if no such member was found.
         /// </returns>
-        /// 
         IReadWriteMember GetMember(object instance, string name);
         /// <summary>
         /// Lists all members of an object <paramref name="instance"/>.

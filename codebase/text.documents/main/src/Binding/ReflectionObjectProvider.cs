@@ -255,7 +255,7 @@ namespace Axle.Text.Documents.Binding
         public IBindingCollectionAdapter GetCollectionAdapter(Type type)
         {
             var introspector = new TypeIntrospector(type);
-            Type collectionType = type, elementType = null, adaperType = null;
+            Type collectionType = type, elementType = null, adapterType = null;
             var adapterTypesMap = new Dictionary<Type, Type>()
             {
                 {typeof(List<>), typeof(GenericListAdapter<>)},
@@ -272,7 +272,7 @@ namespace Axle.Text.Documents.Binding
             if (type.IsArray)
             {
                 elementType = type.GetElementType();
-                adaperType = typeof(GenericArrayAdapter<>);
+                adapterType = typeof(GenericArrayAdapter<>);
             }
             else if (introspector.GetGenericTypeDefinition() is IGenericTypeIntrospector genericIntrospector)
             {
@@ -286,17 +286,17 @@ namespace Axle.Text.Documents.Binding
                 elementType = null;
             }
 
-            if (adaperType == null && !adapterTypesMap.TryGetValue(collectionType, out adaperType))
+            if (adapterType == null && !adapterTypesMap.TryGetValue(collectionType, out adapterType))
             {
                 return null;
             }
 
             var adapterIntrospector = elementType != null 
-                ? new TypeIntrospector(adaperType)
+                ? new TypeIntrospector(adapterType)
                     .GetGenericTypeDefinition()
                     .MakeGenericType(elementType)
                     .Introspect()
-                : new TypeIntrospector(adaperType);
+                : new TypeIntrospector(adapterType);
 
             return CreateInstance(adapterIntrospector) as IBindingCollectionAdapter;
         }
