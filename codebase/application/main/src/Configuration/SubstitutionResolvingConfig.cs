@@ -26,11 +26,14 @@ namespace Axle.Configuration
         bool ISubstitutionProvider.TrySubstitute(string token, out string value)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(token, nameof(token)));
-            var settingValue = _substSource[token].Select(x => x.Value).SingleOrDefault(x => !string.IsNullOrEmpty(x));
-            if (settingValue != null)
+            if (token.Length > 0)
             {
-                value = settingValue;
-                return true;
+                var settingValue = _substSource[token].Select(x => x.Value).SingleOrDefault(x => !string.IsNullOrEmpty(x));
+                if (settingValue != null)
+                {
+                    value = settingValue;
+                    return true;
+                }
             }
             value = null;
             return false;
