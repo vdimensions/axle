@@ -45,7 +45,7 @@ namespace Axle.Threading
             return Task.Run(() =>
             #endif
             {
-                while (!_dataItems.IsCompleted && !_wasDisposed)
+                while (!_dataItems.IsCompleted)
                 {
                     try
                     {
