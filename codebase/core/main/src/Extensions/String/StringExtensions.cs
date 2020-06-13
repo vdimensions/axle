@@ -1468,7 +1468,8 @@ namespace Axle.Extensions.String
             #endif
             string str, string value, StringComparison comparison)
         {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.StartsWith(value, comparison)
+            Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str)));
+            return str.StartsWith(value, comparison)
                 ? TakeAfterFirst(str, value, 0, comparison)
                 : str;
         }

@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 
@@ -21,14 +22,14 @@ namespace Axle.Reflection
             private abstract class BaseCastOperator : ICastOperator<T1, T2>
             {
                 [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-                private readonly MethodInfo method;
+                private readonly MethodInfo _method;
 
-                public bool IsDefined => method != null;
+                public bool IsDefined => _method != null;
 
                 protected BaseCastOperator(string operatorName)
                 {
                     const BindingFlags flags = BindingFlags.Static | BindingFlags.Public;
-                    method = FindMethod(typeof(T1), operatorName, typeof(T2), flags);
+                    _method = FindMethod(typeof(T1), operatorName, typeof(T2), flags);
                 }
 
                 private object Invoke(object target)
@@ -39,7 +40,7 @@ namespace Axle.Reflection
                             typeof(T1).FullName,
                             typeof(T2).FullName));
                     }
-                    return (T2) method.Invoke(null, new[] { target });
+                    return (T2) _method.Invoke(null, new[] { target });
                 }
 
                 object ICastOperator.Invoke(object target) { return Invoke(target); }
@@ -82,10 +83,14 @@ namespace Axle.Reflection
                     }
                 }
             }
+            
+            [SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
             private sealed class ExplicitCastOperator : BaseCastOperator
             {
                 private ExplicitCastOperator() : base("op_Explicit") { }
             }
+            
+            [SuppressMessage("ReSharper", "ClassNeverInstantiated.Local")]
             private sealed class ImplicitCastOperator : BaseCastOperator
             {
                 private ImplicitCastOperator() : base("op_Implicit") { }
@@ -93,7 +98,7 @@ namespace Axle.Reflection
 
             public static CastOp<T1, T2> Instance => Singleton<CastOp<T1, T2>>.Instance;
 
-            private CastOp() {}
+            private CastOp() { }
 
             private static MethodInfo FindMethod(Type targetType, string methodName, Type returnType, BindingFlags bindingFlags)
             {
@@ -193,6 +198,16 @@ namespace Axle.Reflection
         /// </remarks>
         public static ICastOperator<T, TResult> For<T, TResult>() => CastOp<T, TResult>.Instance;
 
+        /// <summary>
+        /// Performs a cast operation on the <paramref name="target"/> instance of <typeparamref name="T"/> to
+        /// produce an instance of <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <param name="target">
+        /// The target object to be cast.
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="TResult"/> that is the result of the type casting.
+        /// </returns>
         public static TResult Cast<T, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
             this
