@@ -18,12 +18,88 @@ namespace Axle
         private readonly IConfiguration _hostConfiguration;
         private readonly IConfiguration _appConfiguration;
 
+        /// <summary>
+        /// Initializes a new instance of an implementation of <see cref="AbstractApplicationHost"/> with
+        /// the specified parameters
+        /// </summary>
+        /// <param name="dependencyContainerFactory">
+        /// The <see cref="IDependencyContainerFactory"/> that will be used to provide the application that will be
+        /// created with this <see cref="AbstractApplicationHost"/> implementation with
+        /// <see cref="IDependencyContainer"/> instances. 
+        /// </param>
+        /// <param name="loggingService">
+        /// A <see cref="ILoggingService"/> to handle creation of <see cref="ILogger"/> objects for the application.
+        /// </param>
+        /// <param name="environmentName">
+        /// A <see cref="string"/> representing the current environment's name. This is often used in conjunction with
+        /// the application's <see cref="IConfiguration">configuration</see> as particular configuration entries
+        /// may need to be overriden for different environments.
+        /// </param>
+        /// <param name="profiles">
+        /// An optional list of activated profile names. Similar to the <paramref name="environmentName"/>, each profile
+        /// could be associated with configuration entries that will get overriden with profile-specific values. Profile
+        /// listing order determines overriding order, where the latest profile in the list determines which values to
+        /// be resolved at runtime.
+        /// </param>
         protected AbstractApplicationHost(
                 IDependencyContainerFactory dependencyContainerFactory, 
                 ILoggingService loggingService,
                 string environmentName,
                 params string[] profiles) 
             : this(dependencyContainerFactory, loggingService, null, null, environmentName, profiles) { }
+        /// <summary>
+        /// Initializes a new instance of an implementation of <see cref="AbstractApplicationHost"/> with
+        /// the specified parameters
+        /// </summary>
+        /// <param name="dependencyContainerFactory">
+        /// The <see cref="IDependencyContainerFactory"/> that will be used to provide the application that will be
+        /// created with this <see cref="AbstractApplicationHost"/> implementation with
+        /// <see cref="IDependencyContainer"/> instances. 
+        /// </param>
+        /// <param name="loggingService">
+        /// A <see cref="ILoggingService"/> to handle creation of <see cref="ILogger"/> objects for the application.
+        /// </param>
+        /// <param name="applicationConfigName">
+        /// A string representing the filename (without extension) of the application's configuration file.
+        /// <para>
+        /// Application configuration filename is formatted as <c>${applicationConfigName}.${extension}</c>.
+        /// </para>
+        /// <para>
+        /// Environment-specific configuration filename is formatted as
+        /// <c>${applicationConfigName}.${environmentName}.${extension}</c>.
+        /// </para>
+        /// <para>
+        /// Profile-specific configuration filename is formatted as
+        /// <c>${applicationConfigName}.${profile}.${extension}</c>.
+        /// </para>
+        /// </param>
+        /// <param name="hostConfigName">
+        /// A string representing the filename (without extension) of the application host configuration file. The host
+        /// configuration serves to provide defaults to most application configuration settings, and may also vary based
+        /// on the environment or the activate profiles.
+        /// <para>
+        /// Host configuration filename is formatted as <c>${hostConfigName}.${extension}</c>.
+        /// </para>
+        /// <para>
+        /// Environment-specific host configuration filename is formatted as
+        /// <c>${hostConfigName}.${environmentName}.${extension}</c>.
+        /// </para>
+        /// <para>
+        /// Profile-specific host configuration filename is formatted as
+        /// <c>${hostConfigName}.${profile}.${extension}</c>.
+        /// </para>
+        /// </param>
+        /// <param name="environmentName">
+        /// A <see cref="string"/> representing the current environment's name. This is often used in conjunction with
+        /// the application's <see cref="IConfiguration">configuration</see> as particular configuration entries
+        /// may need to be overriden for different environments.
+        /// </param>
+        /// <param name="profiles">
+        /// An optional list of activated profile names. Similar to the <paramref name="environmentName"/>, each profile
+        /// could be associated with configuration entries that will get overriden with profile-specific values. Profile
+        /// listing order determines overriding order, where the latest profile in the list determines which values to
+        /// be resolved at runtime.
+        /// </param>
         protected AbstractApplicationHost(
             IDependencyContainerFactory dependencyContainerFactory, 
             ILoggingService loggingService, 

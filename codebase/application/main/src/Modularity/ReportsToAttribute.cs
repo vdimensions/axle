@@ -12,11 +12,26 @@ namespace Axle.Modularity
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class ReportsToAttribute : Attribute
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReportsToAttribute"/> class with
+        /// a <see cref="string">string</see> representation of the module type the target module will be come a
+        /// dependency to.
+        /// </summary>
+        /// <param name="module">
+        /// A <see cref="string">string</see> representation of the module type the target module will be come a
+        /// dependency to.
+        /// </param>
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public ReportsToAttribute(string module)
         {
             Module = module.VerifyArgument(nameof(module)).IsNotNullOrEmpty();
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ReportsToAttribute"/> class.
+        /// </summary>
+        /// <param name="moduleType">
+        /// The type of the module that the target module will become a dependency to.
+        /// </param>
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public ReportsToAttribute(Type moduleType)
         {
