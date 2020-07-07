@@ -9,6 +9,10 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
+    /// <summary>
+    /// An attribute that is used to establish a specified module as an optional dependency on the target module.
+    /// </summary>
+    /// <seealso cref="RequiresAttribute"/>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class UtilizesAttribute : Attribute, IModuleReferenceAttribute
     {
@@ -18,21 +22,21 @@ namespace Axle.Modularity
         internal static string TypeToString(Type type) => $"{type.FullName}, {type.Assembly.GetName().Name}";
         #endif
 
-        [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        public UtilizesAttribute(string module)
-        {
-            Module = module.VerifyArgument(nameof(module)).IsNotNullOrEmpty();
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UtilizesAttribute"/> class.
+        /// </summary>
+        /// <param name="moduleType">
+        /// The type of the module that will become a dependency for the target module.
+        /// </param>
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public UtilizesAttribute(Type moduleType)
         {
-            Module = TypeToString(moduleType.VerifyArgument(nameof(moduleType)).IsNotNull());
+            moduleType.VerifyArgument(nameof(moduleType)).IsNotNull();
+            ModuleType = moduleType;
         }
 
-        public string Module { get; }
-
-        Type IModuleReferenceAttribute.ModuleType => Type.GetType(Module);
+        /// <inheritdoc />
+        public Type ModuleType { get; }
 
         bool IModuleReferenceAttribute.Mandatory => false;
     }

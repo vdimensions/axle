@@ -38,8 +38,8 @@ namespace Axle.Modularity
             EntryPointMethod = entryPointMethod;
             TerminateMethod = terminateMethod;
             
-            DependencyInitializedMethods = initCallbacks.OrderBy(x => x.Priority).ToArray();
-            DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
+            DependencyInitializedMethods = initCallbacks.OrderByDescending(x => x.Priority).ToArray();
+            DependencyTerminatedMethods = terminateCallbacks.OrderByDescending(x => x.Priority).ToArray();
             
             UtilizedModules = utilizedModules;
             ReportsToModules = reportsToModules;

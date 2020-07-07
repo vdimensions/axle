@@ -5,7 +5,7 @@ using Axle.Verification;
 
 namespace Axle.Modularity
 {
-    public sealed class ModuleMethod
+    internal sealed class ModuleMethod
     {
         private readonly IInvokable _invokable;
         private readonly IParameter[] _params;
