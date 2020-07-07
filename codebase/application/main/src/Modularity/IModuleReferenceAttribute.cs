@@ -8,6 +8,7 @@ namespace Axle.Modularity
         /// Gets the type of the module that is being referenced by the target module.
         /// </summary>
         Type ModuleType { get; }
+        
         /// <summary>
         /// Gets a <see cref="bool">boolean</see> value indicating if the dependency established by the current
         /// <see cref="IModuleReferenceAttribute"/> implementation is mandatory.

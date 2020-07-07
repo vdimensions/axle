@@ -5,7 +5,7 @@ namespace Axle.Modularity
     /// <summary>
     /// An exception that is thrown when an application module is discovered but cannot be made usable by the
     /// module loader. For example, if an abstract type has been passed for initialization, or a module attribute is
-    /// incorrectly applied (like when a lifecycle method indicator attribute placed on a method with incompatible
+    /// incorrectly applied (like when a lifecycle method indicator attribute is placed on a method with incompatible
     /// signature).
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
