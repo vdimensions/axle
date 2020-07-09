@@ -23,6 +23,7 @@
 
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../Reference.Axle.Configuration.targets" />
-  <Import Project="../Axle.Configuration.Dependencies.targets" />
+  <Import Project="../../../Reference.Axle.Configuration.Microsoft.targets" />
+  <Import Project="../Axle.Configuration.Microsoft.Dependencies.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>
