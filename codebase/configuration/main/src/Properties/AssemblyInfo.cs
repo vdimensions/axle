@@ -6,4 +6,3 @@ using System.Runtime.InteropServices;
 #endif
 
 [assembly: ComVisible(false)]
-[assembly: InternalsVisibleTo("Axle.Web.AspNetCore")]
