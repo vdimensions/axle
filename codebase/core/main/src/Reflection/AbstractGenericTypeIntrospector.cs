@@ -10,6 +10,20 @@ namespace Axle.Reflection
     /// </summary>
     public abstract class AbstractGenericTypeIntrospector : IGenericTypeIntrospector
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbstractGenericTypeIntrospector"/> class.
+        /// </summary>
+        /// <param name="genericDefinitionType">
+        /// The type representing the generic type definition being introspected. 
+        /// </param>
+        /// <param name="genericDefinitionIntrospector">
+        /// An instance of <see cref="IGenericTypeIntrospector"/> that is used to handle generic type substitution.
+        /// </param>
+        /// <param name="genericTypeArguments">
+        /// A <see cref="Type"/> array representing the current type substitutions of this
+        /// <see cref="IGenericTypeIntrospector"/> implementation, or an empty array if the current instance represents
+        /// a naked generic type.
+        /// </param>
         protected AbstractGenericTypeIntrospector(
                 Type genericDefinitionType, 
                 IGenericTypeIntrospector genericDefinitionIntrospector, 

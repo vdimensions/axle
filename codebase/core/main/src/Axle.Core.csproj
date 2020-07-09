@@ -46,6 +46,11 @@
     <Compile Remove="Linq\SequenceExtensions.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Collections\Extensions\Queue" />
+    <Folder Include="Collections\Extensions\Stack" />
+  </ItemGroup>
+
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../Axle.Core.Dependencies.targets" />
 </Project>

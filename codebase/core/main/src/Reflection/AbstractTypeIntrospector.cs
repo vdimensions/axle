@@ -7,9 +7,11 @@ using System.Reflection;
 
 using Axle.Verification;
 
-
 namespace Axle.Reflection
 {
+    /// <summary>
+    /// An abstract class that serves as a base for implementing the <see cref="ITypeIntrospector"/> interface.
+    /// </summary>
     public abstract class AbstractTypeIntrospector : ITypeIntrospector
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -34,6 +36,13 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly TypeFlags _flags;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AbstractTypeIntrospector"/> class using the provided
+        /// <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">
+        /// The type to be introspected by the current <see cref="AbstractTypeIntrospector"/> implementation.
+        /// </param>
         protected AbstractTypeIntrospector(Type type)
         {
             _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
@@ -43,13 +52,18 @@ namespace Axle.Reflection
             #endif
         }
 
+        /// <inheritdoc />
         public abstract IAttributeInfo[] GetAttributes();
+        
+        /// <inheritdoc />
         public abstract IAttributeInfo[] GetAttributes(Type attributeType);
+        
+        /// <inheritdoc />
         public abstract IAttributeInfo[] GetAttributes(Type attributeType, bool inherit);
 
         /// <inheritdoc />
         public abstract IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);
-
+        
         /// <inheritdoc />
         public abstract IConstructor GetConstructor(ConstructorInfo reflectedConstructor);
 
@@ -130,7 +144,21 @@ namespace Axle.Reflection
         /// <inheritdoc />
         bool IAttributeTarget.IsDefined(Type attributeType, bool inherit) => IsAttributeDefined(attributeType, inherit);
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Determines whether a given attribute type is defined for the introspected by the
+        /// current <see cref="ITypeIntrospector{T}"/> implementation.
+        /// </summary>
+        /// <param name="attributeType">
+        /// The type of the attributed to look for.
+        /// </param>
+        /// <param name="inherit">
+        /// A <see cref="bool">boolean</see> flag indicating whether to include attributes defined
+        /// on a supertype of the introspected type.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if an attribute of the specified type and matching inheritance criteria is found for the
+        /// introspected type; <c>false</c> otherwise.
+        /// </returns>
         public abstract bool IsAttributeDefined(Type attributeType, bool inherit);
         
         /// <inheritdoc />
@@ -179,6 +207,7 @@ namespace Axle.Reflection
 
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        /// <inheritdoc />
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public AccessModifier AccessModifier { get; }
         #endif
@@ -207,6 +236,7 @@ namespace Axle.Reflection
         public bool IsNullableType => _flags.IsNullableValueType();
         #endif
 
+        /// <inheritdoc />
         public bool IsEnum => _flags.IsEnum();
 
         /// <inheritdoc />

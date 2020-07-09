@@ -3,9 +3,11 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.Linq;
 using Axle.Environment;
+#if NET35_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
+using System.Linq;
 using Axle.Verification;
+#endif
 
 namespace Axle.Reflection.Extensions.Assembly
 {

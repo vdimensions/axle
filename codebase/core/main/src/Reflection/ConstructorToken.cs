@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Reflection;
 
-
 namespace Axle.Reflection
 {
     /// <summary>

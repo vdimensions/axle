@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using Axle.Verification;
 
-
 namespace Axle.References
 {
     /// <inheritdoc cref="IWeakReference{T}"/>
@@ -70,7 +69,24 @@ namespace Axle.References
         private readonly WeakReference<T> _reference;
 
         private WeakRef(WeakReference<T> reference) { _reference = reference; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WeakRef{T}"/> class using the provided
+        /// <paramref name="target"/> reference and uses the specified resurrection tracking. 
+        /// </summary>
+        /// <param name="target">
+        /// The object to reference, or <c>null</c>. 
+        /// </param>
+        /// <param name="trackResurrection">
+        /// <c>true</c> to track the object after finalization; <c>false</c> to track the object until finalization.
+        /// </param>
         public WeakRef(T target, bool trackResurrection) : this(new WeakReference<T>(target, trackResurrection)) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="WeakRef{T}"/> class using the provided
+        /// <paramref name="target"/> reference. 
+        /// </summary>
+        /// <param name="target">
+        /// The object to reference, or <c>null</c>. 
+        /// </param>
         public WeakRef(T target) : this(new WeakReference<T>(target)) { }
         #else
         private readonly WeakReference _reference;

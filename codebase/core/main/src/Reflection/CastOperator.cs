@@ -7,7 +7,6 @@ using System.Reflection;
 
 using Axle.References;
 
-
 namespace Axle.Reflection
 {
     /// <summary>
