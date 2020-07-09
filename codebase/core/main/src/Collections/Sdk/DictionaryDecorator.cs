@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-
 namespace Axle.Collections.Sdk
 {
     /// <summary>
@@ -10,7 +9,7 @@ namespace Axle.Collections.Sdk
     /// to an internal <see cref="IDictionary{TKey, TValue}"/> member.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
-    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary. </typeparam>
     public abstract class DictionaryDecorator<TKey, TValue> 
         : DictionaryDecorator<TKey, TValue, IDictionary<TKey, TValue>>
     {

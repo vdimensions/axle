@@ -9,7 +9,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class ReadWritePropertyToken : PropertyToken, IReadWriteProperty
+    internal sealed class ReadWritePropertyToken : PropertyToken, IReadWriteProperty
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PropertyGetAccessor _getAccessor;

@@ -1,6 +1,6 @@
 ﻿namespace Axle.Reflection
 {
-    public abstract partial class MemberTokenBase<T>
+    abstract partial class MemberTokenBase<T>
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         [System.Serializable]
@@ -27,7 +27,7 @@
     }
 
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    public abstract partial class MemberTokenBase<T, THandle>
+    abstract partial class MemberTokenBase<T, THandle>
     {
         [System.Serializable]
         private sealed class MethodHandleBaseEqualityComparer : AbstractEqualityComparer<MemberTokenBase<T, THandle>>

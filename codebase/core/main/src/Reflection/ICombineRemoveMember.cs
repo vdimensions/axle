@@ -3,19 +3,33 @@
     /// <summary>
     /// An interface representing a class member of a delegate type, that
     /// supports adding and removing delegates.
-    /// Usually, this an event handler qualifies for this definition.
+    /// Typically, this is a representation event handlers.
     /// </summary>
-    public interface ICombineRemoveMember : ICombinableMember, IRemoveableMember
+    public interface ICombineRemoveMember : ICombinableMember, IRemovableMember
     {
     }
 
+    /// <summary>
+    /// An interface representing a class member of a delegate type, that
+    /// supports delegate additivity.
+    /// </summary>
     public interface ICombinableMember : IMember, IAccessible
     {
+        /// <summary>
+        /// Gets a reference to the <see cref="ICombineAccessor"/> which enables delegate additivity.
+        /// </summary>
         ICombineAccessor CombineAccessor { get; }
     }
 
-    public interface IRemoveableMember : IMember, IAccessible
+    /// <summary>
+    /// An interface representing a class member of a delegate type, that
+    /// supports delegate subtraction.
+    /// </summary>
+    public interface IRemovableMember : IMember, IAccessible
     {
+        /// <summary>
+        /// Gets a reference to the <see cref="IRemoveAccessor"/> which enables delegate subtraction.
+        /// </summary>
         IRemoveAccessor RemoveAccessor { get; }
     }
 }

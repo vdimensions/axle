@@ -9,7 +9,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class GenericMethodToken : MethodToken, IGenericMethod
+    internal sealed class GenericMethodToken : MethodToken, IGenericMethod
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly MethodToken _rawMethod;

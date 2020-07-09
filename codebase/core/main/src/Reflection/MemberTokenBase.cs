@@ -12,11 +12,10 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
-
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
+    internal abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
         where T: MemberInfo
     {
         public IAttributeInfo[] GetAttributes(T reflectedMember) => CustomAttributeProviderExtensions.GetEffectiveAttributes(reflectedMember) ?? new IAttributeInfo[0];
@@ -94,7 +93,7 @@ namespace Axle.Reflection
 
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
-    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>,
+    internal abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>,
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
         where THandle: struct

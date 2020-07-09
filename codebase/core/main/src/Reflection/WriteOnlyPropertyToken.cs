@@ -14,7 +14,7 @@ namespace Axle.Reflection
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class WriteOnlyPropertyToken : PropertyToken, IWriteOnlyProperty
+    internal sealed class WriteOnlyPropertyToken : PropertyToken, IWriteOnlyProperty
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PropertySetAccessor _setAccessor;

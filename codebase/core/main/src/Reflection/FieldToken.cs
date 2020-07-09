@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-
 namespace Axle.Reflection
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
-    public class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
+    internal class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
     #else
-    public class FieldToken : MemberTokenBase<FieldInfo>,
+    internal class FieldToken : MemberTokenBase<FieldInfo>,
     #endif
         IEquatable<FieldToken>, IField
     {

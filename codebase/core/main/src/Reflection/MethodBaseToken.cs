@@ -21,9 +21,9 @@ namespace Axle.Reflection
     [Serializable]
     #endif
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
+    internal abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
     #else
-    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>>
+    internal abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>>
     #endif
         where T: MethodBase
     {
