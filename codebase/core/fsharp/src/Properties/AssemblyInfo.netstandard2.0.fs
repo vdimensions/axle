@@ -13,10 +13,10 @@ open System.Reflection
 [<assembly: AssemblyCompany("Virtual Dimensions")>]
 [<assembly: AssemblyCopyright("Copyright © Virtual Dimensions 2013-2020")>]
 [<assembly: AssemblyTrademark("")>]
-[<assembly: AssemblyConfiguration("Debug")>]
+[<assembly: AssemblyConfiguration("Release")>]
 [<assembly: AssemblyCulture("")>]
 [<assembly: System.Runtime.InteropServices.GuidAttribute("{058DA5D4-BE62-4A66-AC23-DD162E113EBF}")>]
-[<assembly: AssemblyVersion("1.10.2746.20929")>]
+[<assembly: AssemblyVersion("1.10.2746.32010")>]
 [<assembly: AssemblyFileVersion("")>]
 [<assembly: AssemblyInformationalVersion("")>]
 do()

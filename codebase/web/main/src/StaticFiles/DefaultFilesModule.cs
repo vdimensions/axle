@@ -6,10 +6,9 @@ using Microsoft.AspNetCore.Hosting;
 namespace Axle.Web.AspNetCore.StaticFiles
 {
     [Module]
-    [Utilizes(typeof(DefaultFilesModule))]
-    public sealed class StaticFilesModule : IApplicationConfigurer
+    public sealed class DefaultFilesModule : IApplicationConfigurer
     {
-        public StaticFilesModule(IConfiguration configuration)
+        public DefaultFilesModule(IConfiguration configuration)
         {
 
         }
@@ -18,7 +17,7 @@ namespace Axle.Web.AspNetCore.StaticFiles
             Microsoft.AspNetCore.Builder.IApplicationBuilder app, 
             IHostingEnvironment env)
         {
-            app.UseStaticFiles();
+            app.UseDefaultFiles();
         }
     }
 }

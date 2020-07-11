@@ -104,7 +104,7 @@ namespace Axle.Web.AspNetCore
             }
         }
 
-        void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
+        private void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
             var services = app.ApplicationServices;
             var lifeTime = services.GetRequiredService<IApplicationLifetime>();
@@ -173,8 +173,10 @@ namespace Axle.Web.AspNetCore
 
         private async Task RunAsync()
         {
-            Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new AxleConfigurationProvider(_appConfig);
-            string startupAssemblyKey = null, applicationKey = null, entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            var axleConfigurationProvider = new AxleConfigurationProvider(_appConfig);
+            string startupAssemblyKey = null, 
+                   applicationKey = null, 
+                   entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
             var hostBuilder = _hostBuilder
                 // configure the web host with a re-adapted Axle application configuration
                 .UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }))

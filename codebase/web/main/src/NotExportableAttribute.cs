@@ -27,7 +27,7 @@ namespace Axle.Web.AspNetCore
         /// <paramref name="type"/>.
         /// </summary>
         /// <param name="type">
-        /// The type to check if has a <see cref="NotExportableAttribute"/> defined on.
+        /// The type to check if the <see cref="NotExportableAttribute"/> has been defined for.
         /// </param>
         /// <returns>
         /// <c>true</c> if the <see cref="NotExportableAttribute"/> has been defined for the target

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
+using Axle.DependencyInjection;
 using Axle.References;
 using Axle.Resources.Bundling;
 using Microsoft.Extensions.DependencyInjection;
@@ -17,9 +18,11 @@ namespace Axle.Web.AspNetCore
         private readonly ConcurrentDictionary<Type, object> _exportedObjects;
 
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
-        private AspNetCoreApplicationHost() 
-            : this(new AspNetCoreDependencyContainerFactory(DefaultApplicationHost.Instance.DependencyContainerFactory))
-        { }
+        private AspNetCoreApplicationHost() : this(DefaultApplicationHost.Instance.DependencyContainerFactory) { }
+        private AspNetCoreApplicationHost(IDependencyContainerFactory dependencyContainerFactory) : this(
+            dependencyContainerFactory is AspNetCoreDependencyContainerFactory aspnetcoreDCFactory 
+                ? aspnetcoreDCFactory 
+                : new AspNetCoreDependencyContainerFactory(dependencyContainerFactory)) { }
         private AspNetCoreApplicationHost(AspNetCoreDependencyContainerFactory dependencyContainerFactory) : base(
             DefaultApplicationHost.Instance, 
             dependencyContainerFactory,
