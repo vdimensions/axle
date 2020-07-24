@@ -10,7 +10,7 @@ using Axle.Verification;
 namespace Axle.Modularity
 {
     /// <summary>
-    /// An attribute that is used to establish a specified module as an optional dependency on the target module.
+    /// An attribute that is used to establish a specified module as an optional dependency to the target module.
     /// </summary>
     /// <seealso cref="RequiresAttribute"/>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]

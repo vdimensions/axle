@@ -21,15 +21,10 @@ namespace Axle.Configuration
             string IConfigSection.Name => string.Empty;
             string IConfigSetting.Value => null;
 
-            IEnumerable<IConfigSetting> IConfigSection.this[string key]
-            {
-                get
-                {
-                    return _env.TryGetValue(key, out var val) 
-                        ? new[]{ ConfigSetting.Create(val) } 
-                        : Enumerable.Empty<IConfigSetting>();
-                }
-            }
+            IEnumerable<IConfigSetting> IConfigSection.this[string key] =>
+                _env.TryGetValue(key, out var val) 
+                    ? Enumerable.Repeat(ConfigSetting.Create(val), 1) 
+                    : Enumerable.Empty<IConfigSetting>();
         }
         
         public static EnvironmentConfigSource Instance => Singleton<EnvironmentConfigSource>.Instance;

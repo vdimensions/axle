@@ -2,7 +2,7 @@
 
 namespace Axle.Configuration
 {
-    public interface IConfigurationStreamProvider
+    internal interface IConfigurationStreamProvider
     {
         Stream LoadConfiguration(string configurationName);
     }

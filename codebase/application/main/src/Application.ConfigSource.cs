@@ -2,7 +2,6 @@
 
 namespace Axle
 {
-    
     partial class Application
     {
         internal static LayeredConfigManager Configure(

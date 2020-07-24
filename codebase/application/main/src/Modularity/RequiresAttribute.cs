@@ -22,6 +22,7 @@ namespace Axle.Modularity
         }
 
         bool IModuleReferenceAttribute.Mandatory => true;
+        
         /// <summary>
         /// Gets the type of the module that is set as a dependency on the target module.
         /// </summary>
