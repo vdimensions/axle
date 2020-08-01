@@ -1,7 +1,7 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Environment;
 using Axle.References;
 
 namespace Axle.Configuration
@@ -33,17 +33,8 @@ namespace Axle.Configuration
 
         public IConfiguration LoadConfiguration()
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            var envData = System.Environment.GetEnvironmentVariables(EnvironmentVariableTarget.Process);
-            #else
-            var envData = System.Environment.GetEnvironmentVariables();
-            #endif
-            var env = Enumerable.ToDictionary(
-                Enumerable.OfType<DictionaryEntry>(envData), 
-                x => x.Key.ToString(), 
-                x => x.Value.ToString(), 
-                StringComparer.OrdinalIgnoreCase);
-            return new EnvironmentConfig(env);
+            var env = Platform.Environment.GetEnvironmentVariables();
+            return new EnvironmentConfig(new Dictionary<string, string>(env, StringComparer.OrdinalIgnoreCase));
         }
     }
 }

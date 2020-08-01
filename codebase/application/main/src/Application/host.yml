@@ -1,5 +1,5 @@
-﻿Logging.LogLevel:
-  Axle: "Warning"
+﻿logging.logLevel:
+  axle: "Warning"
   
 axle.application:
   asciilogo:

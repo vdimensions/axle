@@ -1,5 +1,8 @@
 #if NETSTANDARD || NET20_OR_NEWER
 using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Globalization;
 using System.Text;
@@ -59,6 +62,61 @@ namespace Axle.Environment
             OperatingSystem = System.Environment.OSVersion;
             #endif
         }
+        
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        private EnvironmentVariableTarget ScopeToTarget(EnvironmentVariableScope scope)
+        {
+            switch (scope)
+            {
+                case EnvironmentVariableScope.System:
+                    return EnvironmentVariableTarget.Machine;
+                case EnvironmentVariableScope.User:
+                    return EnvironmentVariableTarget.User;
+                default:
+                    return EnvironmentVariableTarget.Process;
+            }
+        }
+        #endif
+
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        public string GetEnvironmentVariable(string name) 
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            => GetEnvironmentVariable(name, EnvironmentVariableScope.Process);
+            #else
+            => System.Environment.GetEnvironmentVariable(name);
+            #endif
+        #endif
+        
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        public string GetEnvironmentVariable(string name, EnvironmentVariableScope scope) 
+            => System.Environment.GetEnvironmentVariable(name, ScopeToTarget(scope));
+        #endif
+        
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        public IDictionary<string, string> GetEnvironmentVariables()
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            return GetEnvironmentVariables(EnvironmentVariableScope.Process);
+            #else
+            return Enumerable.ToDictionary(
+                Enumerable.OfType<DictionaryEntry>(System.Environment.GetEnvironmentVariables()), 
+                x => x.Key.ToString(), 
+                x => x.Value.ToString(), 
+                StringComparer.Ordinal);
+            #endif
+        }
+        #endif
+        
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        public IDictionary<string, string> GetEnvironmentVariables(EnvironmentVariableScope scope)
+        {
+            return Enumerable.ToDictionary(
+                Enumerable.OfType<DictionaryEntry>(System.Environment.GetEnvironmentVariables(ScopeToTarget(scope))), 
+                x => x.Key.ToString(), 
+                x => x.Value.ToString(), 
+                StringComparer.Ordinal);
+        }
+        #endif
 
         public Endianness Endianness { get; }
         public int ProcessorCount { get; }
@@ -75,6 +133,10 @@ namespace Axle.Environment
         public Encoding DefaultEncoding { get; }
         public OperatingSystem OperatingSystem { get; }
         public OperatingSystemID OperatingSystemID => GetOSID(OperatingSystem);
+        #endif
+        
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        public string this[string name] => GetEnvironmentVariable(name);
         #endif
     }
 }

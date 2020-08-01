@@ -3,6 +3,11 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
+using Axle.Extensions.String;
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using Axle.Conversion.Parsing;
+using Axle.Verification;
+#endif
 #if NETFRAMEWORK
 using System.Security.Policy;
 #endif
@@ -10,11 +15,6 @@ using System.Security.Policy;
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyModel;
 #endif
-
-using Axle.Conversion.Parsing;
-using Axle.Extensions.String;
-using Axle.Verification;
-
 
 namespace Axle.Environment
 {

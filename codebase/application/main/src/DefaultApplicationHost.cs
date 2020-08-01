@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
+using Axle.Environment;
 using Axle.References;
 using Axle.Resources.Bundling;
 
@@ -14,11 +15,7 @@ namespace Axle
         {
             get
             {
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                var dotnetEnv = System.Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT", EnvironmentVariableTarget.Process);
-                #else
-                var dotnetEnv = System.Environment.GetEnvironmentVariable("DOTNET_ENVIRONMENT");
-                #endif
+                var dotnetEnv = Platform.Environment["DOTNET_ENVIRONMENT"];
                 if (!string.IsNullOrEmpty(dotnetEnv))
                 {
                     return dotnetEnv;
