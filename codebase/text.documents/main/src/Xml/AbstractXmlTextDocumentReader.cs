@@ -13,8 +13,8 @@ namespace Axle.Text.Documents.Xml
     public abstract class AbstractXmlTextDocumentReader : AbstractTextDocumentReader
     {
         /// <summary>
-        /// When called from a derived class, initializes the new <see cref="AbstractXmlTextDocumentReader"/> implementation
-        /// with the provided string <paramref name="comparer"/>.
+        /// When called from a derived class, initializes the new <see cref="AbstractXmlTextDocumentReader"/>
+        /// implementation with the provided string <paramref name="comparer"/>.
         /// </summary>
         /// <param name="comparer">
         /// A <see cref="StringComparer"/> instance used for comparison of the xml node keys when they are interpreted

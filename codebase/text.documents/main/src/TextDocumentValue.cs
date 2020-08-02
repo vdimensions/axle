@@ -3,9 +3,9 @@
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
-    internal sealed class TextDocumentValue : TextDocumentNode, ITextDocumentValue
+    public sealed class TextDocumentValue : TextDocumentNode, ITextDocumentValue
     {
-        internal TextDocumentValue(string key, ITextDocumentObject parent, string value) : base(key, parent)
+        public TextDocumentValue(string key, ITextDocumentObject parent, string value) : base(key, parent)
         {
             Value = value;
         }

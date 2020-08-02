@@ -179,12 +179,6 @@ namespace Axle.Text.Documents.Binding
         }
         
         /// <inheritdoc/>
-        public IReadWriteMember GetMember(object instance, string member)
-        {
-            return GetMembers(instance).SingleOrDefault(x => StringComparer.Ordinal.Equals(member, x.Name));
-        }
-
-        /// <inheritdoc/>
         public IReadWriteMember[] GetMembers(object instance)
         {
             switch (instance)

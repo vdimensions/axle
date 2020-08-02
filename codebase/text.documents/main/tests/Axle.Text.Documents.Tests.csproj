@@ -10,11 +10,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="data.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

@@ -15,7 +15,7 @@ namespace Axle.Reflection
     /// <seealso cref="IEvent"/>
     /// <seealso cref="IReadableMember"/>
     /// <seealso cref="IWriteableMember"/>
-    public interface IMember
+    public interface IMember : IAttributeTarget
     {
         /// <summary>
         /// The <see cref="Type">type</see> that declares the reflected <see cref="IMember">member</see>.

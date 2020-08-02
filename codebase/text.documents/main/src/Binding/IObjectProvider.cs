@@ -12,20 +12,6 @@ namespace Axle.Text.Documents.Binding
     public interface IObjectProvider
     {
         /// <summary>
-        /// Finds an object <paramref name="instance"/>'s member with the specified <paramref name="name"/>.
-        /// </summary>
-        /// <param name="instance">
-        /// The object instance to find the member on.
-        /// </param>
-        /// <param name="name">
-        /// The name of the member to be found on the object instance.
-        /// </param>
-        /// <returns>
-        /// A <see cref="IReadWriteMember"/> representing the <paramref name="instance"/>'s member with the 
-        /// provided <paramref name="name"/>, or <c><see langword="null"/></c> if no such member was found.
-        /// </returns>
-        IReadWriteMember GetMember(object instance, string name);
-        /// <summary>
         /// Lists all members of an object <paramref name="instance"/>.
         /// </summary>
         /// <param name="instance">
