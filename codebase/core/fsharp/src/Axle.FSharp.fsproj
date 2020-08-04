@@ -17,11 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Include="Option\Option.fs" />
     <Compile Include="Option\Nullable.fs" />
     <Compile Include="Option\OptionExtensions.fs" />
