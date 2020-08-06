@@ -2,6 +2,7 @@
 using Axle.Reflection;
 using Axle.Verification;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace Axle.References
@@ -9,6 +10,7 @@ namespace Axle.References
     /// <summary>
     /// A class that is used for creating a shallow copy of an object instance.
     /// </summary>
+    [SuppressMessage("ReSharper", "ClassCannotBeInstantiated")]
     public sealed class ShallowCopy
     {
         /// <summary>
@@ -48,7 +50,7 @@ namespace Axle.References
         /// A side effect in this context means a modification of either the original object, or its 
         /// cloned instance, which propagates to the other.
         /// The object's shallow copy is determined to be safe when the object is a <see cref="ValueType"/>, 
-        /// or all of the object's mebers are either value types or known immutable objects 
+        /// or all of the object's members are either value types or known immutable objects 
         /// (such as <see cref="string"/>.
         /// </summary>
         /// <param name="type">
@@ -63,6 +65,7 @@ namespace Axle.References
             var introspector = new TypeIntrospector(type);
             return introspector
                 .GetMembers(ScanOptions.Public|ScanOptions.NonPublic|ScanOptions.Instance)
+                .Where(m => m is IReadWriteMember)
                 .Select(m => new TypeIntrospector(m.MemberType))
                 .All(IsSafeFromSideEffects);
         }
@@ -109,7 +112,15 @@ namespace Axle.References
                 .GetMethod(ScanOptions.Instance | ScanOptions.NonPublic, nameof(MemberwiseClone));
         }
 
-        private object DoCreate(object obj) => _memberwiseClone.Invoke(obj);
+        private object DoCreate(object obj)
+        {
+            if (IsSafeFromSideEffects(new TypeIntrospector(obj.GetType())))
+            {
+                return obj;
+            }
+            // TODO: handle collections
+            return _memberwiseClone.Invoke(obj);
+        }
     }
 }
 #endif
