@@ -41,7 +41,7 @@ namespace Axle.References
                 case TypeCode.DateTime:
                     return true;
                 default:
-                    return introspector.TypeFlags.HasFlag(TypeFlags.ValueType);
+                    return introspector.TypeFlags.HasAnyFlag(TypeFlags.ValueType, TypeFlags.Primitive);
             }
         }
 
