@@ -216,7 +216,7 @@ namespace Axle.Text.Documents.Binding
                         TypeFlags.NullableValueType,
                         TypeFlags.Attribute
                     };
-                    if (unusableObjectFlags.Any(x => flags.HasFlag(x)))
+                    if (flags.HasAnyFlag(unusableObjectFlags))
                     {
                         return new IReadWriteMember[0]; 
                     }
