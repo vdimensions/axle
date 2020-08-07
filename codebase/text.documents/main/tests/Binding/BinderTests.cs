@@ -23,14 +23,14 @@ namespace Axle.Text.Documents.Tests.Binding
         <Owner>
             <Name>{0}</Name>
             <Pets>
-                <Name>{1}</Name>
                 <Type>{2}</Type>
+                <Name>{1}</Name>
             </Pets>
         </Owner>
         ";
 
         [Test]
-        public void TestDefaultBinder()
+        public void TestDefaultBinderWithXmlTextDocumentReader()
         {
             const string ownerName = "Diana";
             const string petName = "Lion";
@@ -38,8 +38,28 @@ namespace Axle.Text.Documents.Tests.Binding
 
             var xmlBindingSource = string.Format(XmlFormat, ownerName, petName, petType);
             var binder = new DefaultBinder();
-            Owner owner = new Owner();
-            owner = (Owner) binder.Bind(new XDocumentReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource), owner);
+            var owner = (Owner) binder.Bind(
+                new XmlTextDocumentReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource), 
+                new Owner());
+
+            Assert.AreEqual(ownerName, owner.Name, "Owner name does not match");
+            Assert.AreEqual(1, owner.Pets.Length, "Pet's count does not match");
+            Assert.AreEqual(petName, owner.Pets[0].Name, "Pet name does not match");
+            Assert.AreEqual(petType, owner.Pets[0].Type, "Pet type does not match");
+        }
+        
+        [Test]
+        public void TestDefaultBinderWithXDocumentReader()
+        {
+            const string ownerName = "Diana";
+            const string petName = "Lion";
+            const string petType = "cat";
+
+            var xmlBindingSource = string.Format(XmlFormat, ownerName, petName, petType);
+            var binder = new DefaultBinder();
+            var owner = (Owner) binder.Bind(
+                new XDocumentReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource), 
+                new Owner());
 
             Assert.AreEqual(ownerName, owner.Name, "Owner name does not match");
             Assert.AreEqual(1, owner.Pets.Length, "Pet's count does not match");

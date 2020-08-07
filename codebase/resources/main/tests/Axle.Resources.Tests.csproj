@@ -17,8 +17,6 @@
     <None Include="build.sh" />
     <None Include="restore.sh" />
     <None Include="paket.dependencies" />
-    <None Include="paket.lock" />
-    <None Include="paket.references" />
   </ItemGroup>
 
   <ItemGroup>
