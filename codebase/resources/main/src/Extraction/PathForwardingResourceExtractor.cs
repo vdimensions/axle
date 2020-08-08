@@ -6,17 +6,17 @@ using Axle.Verification;
 namespace Axle.Resources.Extraction
 {
     /// <summary>
-    /// A special type of <see cref="IResourceExtractor">resource extractor</see> implementation that causes resource
-    /// delegates resource lookup to the extraction chain, but modifies the lookup location for the resources being
+    /// A special type of <see cref="IResourceExtractor">resource extractor</see> implementation that delegates
+    /// the resource lookup to the extraction chain, but modifies the lookup location for the resources being
     /// looked up. 
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class PathForwardingResourceExtractor : AbstractResourceExtractor
     {
-        public PathForwardingResourceExtractor(string prefixPath)
+        public PathForwardingResourceExtractor(string pathPrefix)
         {
-            Verifier.IsNotNull(Verifier.VerifyArgument(prefixPath, nameof(prefixPath)));
-            PathPrefix = new Uri(prefixPath, UriKind.Relative);
+            Verifier.IsNotNull(Verifier.VerifyArgument(pathPrefix, nameof(pathPrefix)));
+            PathPrefix = new Uri(pathPrefix, UriKind.Relative);
         }
         public PathForwardingResourceExtractor(Uri pathPrefix)
         {
@@ -26,10 +26,13 @@ namespace Axle.Resources.Extraction
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var path = PathPrefix.Resolve(name);
+            var path = UriExtensions.Resolve(PathPrefix, name);
             return context.Extract(path.ToString());
         }
 
+        /// <summary>
+        /// Gets a <see cref="Uri"/>
+        /// </summary>
         public Uri PathPrefix { get; }
     }
 }

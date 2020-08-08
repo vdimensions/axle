@@ -16,8 +16,7 @@ namespace Axle.Resources.Extraction
         {
             return registry.Register(CompositeResourceExtractor.Compose(extractors));
         }
-        
-        
+
         /// <summary>
         /// Stores the provided <see cref="IResourceExtractor"/>.
         /// </summary>

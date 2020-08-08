@@ -1,10 +1,10 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+using Axle.Caching;
 using Axle.Resources.Bundling;
 using Axle.Resources.Embedded.Extraction;
 using Axle.Resources.Extraction;
 using Axle.Resources.FileSystem.Extraction;
 using Axle.Resources.ResX.Extraction;
-
 
 namespace Axle.Resources
 {
@@ -22,13 +22,25 @@ namespace Axle.Resources
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.
         /// </summary>
-        public DefaultResourceManager() : base(new DefaultResourceBundleRegistry(), new DefaultResourceExtractorRegistry())
+        /// <param name="cacheManager">
+        /// An <see cref="ICacheManager"/> instance to be used by the current <see cref="ResourceManager"/>
+        /// implementation improving the performance of subsequently looked up resources.
+        /// </param>
+        public DefaultResourceManager(ICacheManager cacheManager) 
+            : base(
+                new DefaultResourceBundleRegistry(), 
+                new DefaultResourceExtractorRegistry(), 
+                cacheManager)
         {
             Extractors
                 .Register(new EmbeddedResourceExtractor())
                 .Register(new ResXResourceExtractor())
                 .Register(new FileSystemResourceExtractor());
         }
+        /// <summary>
+        /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.
+        /// </summary>
+        public DefaultResourceManager() : this(new WeakReferenceCacheManager()) { }
     }
 }
 #endif

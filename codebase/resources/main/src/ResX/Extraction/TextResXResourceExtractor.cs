@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
-
 using System;
 using System.Globalization;
 using Axle.Extensions.Uri;

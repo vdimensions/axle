@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Concurrent;
-
+using System.Collections.Generic;
 using Axle.Verification;
-
 
 namespace Axle.Caching
 {
@@ -13,5 +12,7 @@ namespace Axle.Caching
         public ICache GetCache(string name) => _caches.GetOrAdd(name.VerifyArgument(nameof(name)).IsNotNull(), x => new WeakReferenceCache());
 
         public void Invalidate(string name) => _caches.TryRemove(name.VerifyArgument(nameof(name)).IsNotNull(), out var _);
+        
+        public IEnumerable<string> Caches => _caches.Keys;
     }
 }

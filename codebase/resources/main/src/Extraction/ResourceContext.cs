@@ -2,11 +2,46 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using Axle.Caching;
 using Axle.Verification;
-
 
 namespace Axle.Resources.Extraction
 {
+    internal sealed class CachingResourceContext : IResourceContext
+    {
+        private readonly ResourceContext _impl;
+        private readonly ICache _cache;
+
+        public CachingResourceContext(ResourceContext impl, ICache cache)
+        {
+            _impl = impl;
+            _cache = cache;
+        }
+
+        public ResourceInfo Extract(string name) => 
+            ExtractAll(name).FirstOrDefault(x => x != null);
+
+        public IEnumerable<ResourceInfo> ExtractAll(string name)
+        {
+            return _cache != null
+                ? _cache.GetOrAdd(Tuple.Create(Bundle, name), ExtractAllNoCache)
+                : _impl.ExtractAll(name);
+        }
+        
+        private IEnumerable<ResourceInfo> ExtractAllNoCache(object key)
+        {
+            var tuple = (Tuple<string, string>) key;
+            return _impl.ExtractAll(tuple.Item2).ToList();
+        }
+
+        public string Bundle => _impl.Bundle;
+
+        public Uri Location => _impl.Location;
+
+        public CultureInfo Culture => _impl.Culture;
+
+        internal ResourceExtractionChain ExtractionChain => _impl.ExtractionChain;
+    }
     /// <summary>
     /// A class that provides the context for resource lookup and extraction, including the <see cref="Location">location</see>
     /// where the resource should be looked up, the <see cref="Culture">culture</see> for which the resource has been requested, 
@@ -15,27 +50,36 @@ namespace Axle.Resources.Extraction
     /// </summary>
     /// <seealso cref="IResourceExtractor"/>
     /// <seealso cref="ResourceManager"/>
-    public sealed class ResourceContext : IResourceContext
+    internal sealed class ResourceContext : IResourceContext
     {
         private readonly Uri[] _locations;
         private readonly int _currentLocationIndex;
 
-        internal ResourceContext(string bundle, Uri[] locations, CultureInfo culture, IEnumerable<IResourceExtractor> extractors)
+        internal ResourceContext(
+                string bundle, 
+                Uri[] locations, 
+                CultureInfo culture, 
+                IEnumerable<IResourceExtractor> extractors)
             : this(bundle, locations, 0, culture, extractors) { }
             //: this(bundle, locations, -1, culture, extractors) { }
-        private ResourceContext(string bundle, Uri[] locations, int currentLocationIndex, CultureInfo culture, IEnumerable<IResourceExtractor> extractors)
+        private ResourceContext(
+                string bundle, 
+                Uri[] locations, 
+                int currentLocationIndex, 
+                CultureInfo culture, 
+                IEnumerable<IResourceExtractor> extractors)
         {
             Bundle = bundle;
             _locations = locations;
             _currentLocationIndex = currentLocationIndex;
             Culture = culture;
 
-            var extArr = extractors as IResourceExtractor[] ?? extractors.ToArray();
+            var extArr = extractors.ToArray();
             var subContexts = GetSubContexts(extArr).ToArray();
             ExtractionChain = new ResourceExtractionChain(this, subContexts, extArr);
         }
 
-        private IEnumerable<ResourceContext> GetSubContexts(IEnumerable<IResourceExtractor> extractors)
+        private IEnumerable<ResourceContext> GetSubContexts(IResourceExtractor[] extractors)
         {
             for (var i = _currentLocationIndex + 1; i < _locations.Length; i++)
             {
@@ -45,14 +89,17 @@ namespace Axle.Resources.Extraction
 
         internal ResourceContext MoveOneExtractorForward()
         {
-            var extractors = ExtractionChain.extractors.Skip(1);
+            var extractors = ExtractionChain.Extractors.Skip(1);
             return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, extractors);
         }
 
         /// <inheritdoc />
-        public ResourceInfo Extract(string name) => 
-            ExtractionChain.DoExtractAll(
-                name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).FirstOrDefault(x => x != null);
+        public ResourceInfo Extract(string name)
+        {
+            return ExtractionChain
+                .DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty())
+                .FirstOrDefault(x => x != null);
+        }
 
         /// <inheritdoc />
         public IEnumerable<ResourceInfo> ExtractAll(string name) => 
@@ -62,7 +109,7 @@ namespace Axle.Resources.Extraction
         public string Bundle { get; }
 
         /// <inheritdoc />
-        public Uri Location => _currentLocationIndex < 0 ? null :_locations[_currentLocationIndex];
+        public Uri Location => _currentLocationIndex < 0 ? null : _locations[_currentLocationIndex];
 
         /// <inheritdoc />
         public CultureInfo Culture { get; }

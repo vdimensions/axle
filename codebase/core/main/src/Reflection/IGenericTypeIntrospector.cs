@@ -20,7 +20,7 @@ namespace Axle.Reflection
         /// A <see cref="ITypeIntrospector"/> instance produced from the current <see cref="IGenericTypeIntrospector"/>'s
         /// <see cref="GenericDefinitionType"/> and <see cref="GenericTypeArguments"/>
         /// - OR -
-        /// <c>null</c> if the current <see cref="IGenericMethod"/> has no or partially applied generic types.
+        /// <c>null</c> if the current <see cref="IGenericTypeIntrospector"/> has no or partially applied generic types.
         /// </returns>
         ITypeIntrospector Introspect();
 
@@ -49,11 +49,13 @@ namespace Axle.Reflection
         /// Gets an array of the currently applied generic type arguments.
         /// </summary>
         Type[] GenericTypeArguments { get; }
+        
         /// <summary>
         /// Gets a reference to the generic type definition represented by the current
         /// <see cref="IGenericTypeIntrospector"/> instance.
         /// </summary>
         Type GenericDefinitionType { get; }
+        
         /// <summary>
         /// Gets the <see cref="IGenericTypeIntrospector"/> for the <see cref="GenericDefinitionType"/>.
         /// </summary>

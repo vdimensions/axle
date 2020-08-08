@@ -22,12 +22,14 @@ namespace Axle.Resources.Embedded.Extraction
     #endif
     public class EmbeddedResourceExtractor : AbstractResourceExtractor
     {
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         private static Assembly GetAssembly(IRuntime runtime, Uri uri)
         {
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
             var assemblyName = uri.IsResource() ? uri.Host.TrimEnd(".dll", cmp).TrimEnd(".exe", cmp) : uri.Host;
             return runtime.LoadAssembly(assemblyName);
         }
+        #endif
 
         /// <summary>
         /// Attempts to read an embedded resource.
@@ -41,7 +43,7 @@ namespace Axle.Resources.Embedded.Extraction
             var location = context.Location;
             var culture = context.Culture;
 
-            if (location.IsAbsoluteUri && location.IsEmbeddedResource())
+            if (Accepts(location))
             {
                 var runtime = Platform.Runtime;
                 var assembly = GetAssembly(runtime, location);
@@ -62,5 +64,8 @@ namespace Axle.Resources.Embedded.Extraction
 
             return null;
         }
+
+        /// <inheritdoc />
+        public override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsEmbeddedResource();
     }
 }

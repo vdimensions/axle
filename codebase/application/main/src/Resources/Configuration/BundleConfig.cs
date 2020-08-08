@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Axle.Resources.Configuration
 {
     internal sealed class BundleConfig
     {
         public string Name { get; set; }
-        public Uri[] Locations { get; set; }
+        public IList<Uri> Locations { get; set; } = new List<Uri>();
     }
 }

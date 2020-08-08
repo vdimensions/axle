@@ -42,27 +42,27 @@ namespace Axle.Caching
         }
 
         public object GetOrAdd(object key, object valueToAdd) { return GetOrAdd<object>(key, valueToAdd); }
-        public object GetOrAdd(object key, Func<object> valueFactory) { return GetOrAdd<object>(key, valueFactory); }
-        public T GetOrAdd<T>(object key, T valueToAdd) { return GetOrAdd(key, () => valueToAdd); }
-        public T GetOrAdd<T>(object key, Func<T> valueFactory)
+        public object GetOrAdd(object key, Func<object, object> valueFactory) { return GetOrAdd<object>(key, valueFactory); }
+        public T GetOrAdd<T>(object key, T valueToAdd) { return GetOrAdd(key, _ => valueToAdd); }
+        public T GetOrAdd<T>(object key, Func<object, T> valueFactory)
         {
             ClearExpired();
             WeakReferenceCacheNode resultNode;
             var result = (T) _nodes.AddOrUpdate(
                 key,
-                _ =>
+                k =>
                 {
-                    var v = new WeakReferenceCacheNode {Key = key, Value = valueFactory()};
+                    var v = new WeakReferenceCacheNode {Key = key, Value = valueFactory(k)};
                     return new WeakRef<WeakReferenceCacheNode>(resultNode = v);
                 },
-                (_, existing) =>
+                (k, existing) =>
                 {
                     resultNode = existing.Value;
                     if (existing.IsAlive && (resultNode != null))
                     {
                         return existing;
                     }
-                    var v = new WeakReferenceCacheNode { Key = key, Value = valueFactory() };
+                    var v = new WeakReferenceCacheNode { Key = key, Value = valueFactory(k) };
                     return new WeakRef<WeakReferenceCacheNode>(resultNode = v);
                 }).Value.Value;
             return result;

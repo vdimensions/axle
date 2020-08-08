@@ -252,10 +252,11 @@ namespace Axle.Text.Documents.Binding
             Type collectionType = type, elementType = null, adapterType = null;
             var adapterTypesMap = new Dictionary<Type, Type>()
             {
+                {typeof(LinkedList<>), typeof(GenericLinkedListAdapter<>)},
                 {typeof(List<>), typeof(GenericListAdapter<>)},
+                {typeof(IList<>), typeof(GenericListAdapter<>)},
                 {typeof(ICollection<>), typeof(GenericListAdapter<>)},
                 {typeof(IEnumerable<>), typeof(GenericListAdapter<>)},
-                {typeof(LinkedList<>), typeof(GenericLinkedListAdapter<>)},
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 {typeof(ArrayList), typeof(RawListAdapter)},
                 {typeof(IList), typeof(RawListAdapter)},

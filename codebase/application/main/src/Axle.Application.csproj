@@ -44,6 +44,8 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
+  
+  <Import Project="../../../Reference.Axle.Caching.targets" />
   <Import Project="../../../Reference.Axle.Resources.targets" />
   <Import Project="../../../Reference.Axle.Resources.Properties.targets" />
   <Import Project="../../../Reference.Axle.Resources.Yaml.targets" />

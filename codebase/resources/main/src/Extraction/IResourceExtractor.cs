@@ -1,10 +1,11 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 namespace Axle.Resources.Extraction
 {
     /// <summary>
     /// An interface representing a resource extractor; that is, an object responsible for locating raw resources before
-    /// being unmarshalled.
+    /// being unmarshalled to a suitable resource representation.
     /// </summary>
     public interface IResourceExtractor
     {
@@ -43,5 +44,18 @@ namespace Axle.Resources.Extraction
         /// <seealso cref="Extract"/>
         /// <seealso cref="ResourceContext"/>
         Task<ResourceInfo> ExtractAsync(IResourceContext context, string name);
+
+        /// <summary>
+        /// Determines if the current <see cref="IResourceExtractor"/> implementation can handle resources
+        /// represented by the provided <paramref name="location"/>.
+        /// </summary>
+        /// <param name="location">
+        /// A location representing a resource source.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the current <see cref="IResourceExtractor"/> implementation can handle resources
+        /// represented by the provided <paramref name="location"/>; <c>false</c> otherwise.
+        /// </returns>
+        bool Accepts(Uri location);
     }
 }

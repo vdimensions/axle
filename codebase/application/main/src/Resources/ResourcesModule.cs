@@ -1,4 +1,5 @@
-﻿using Axle.DependencyInjection;
+﻿using System.Linq;
+using Axle.DependencyInjection;
 using Axle.Modularity;
 using Axle.Resources.Bundling;
 using Axle.Resources.Configuration;
@@ -43,7 +44,7 @@ namespace Axle.Resources
 
         void IResourceBundleConfigurer.Configure(IResourceBundleRegistry registry)
         {
-            foreach (var bundleConfig in _config.Bundles)
+            foreach (var bundleConfig in _config.Bundles.Union(new[]{_config.DefaultBundle}))
             {
                 var bundleContent = registry.Configure(bundleConfig.Name);
                 foreach (var location in bundleConfig.Locations)

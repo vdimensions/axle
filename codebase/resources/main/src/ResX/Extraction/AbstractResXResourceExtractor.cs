@@ -16,11 +16,17 @@ namespace Axle.Resources.ResX.Extraction
     {
         private const string UriSchemeResX = "resx";
 
+        private static bool IsResX(Uri location)
+        {
+            return location.IsAbsoluteUri &&
+                   location.Scheme.Equals(UriSchemeResX, StringComparison.OrdinalIgnoreCase);
+        }
+
         private static bool TryGetResXType(Uri location, out Type type, out string prefix)
         {
             type = null;
             prefix = string.Empty;
-            if (!location.IsAbsoluteUri || !location.Scheme.Equals(UriSchemeResX, StringComparison.OrdinalIgnoreCase))
+            if (!IsResX(location))
             {
                 return false;
             }
@@ -60,6 +66,8 @@ namespace Axle.Resources.ResX.Extraction
         }
 
         protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
+
+        public override bool Accepts(Uri location) => IsResX(location);
     }
 }
 #endif

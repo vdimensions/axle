@@ -115,7 +115,7 @@ namespace Axle
                             .GetTypeInfo()
                             #endif
                             .Name;
-                        var moduleResourceManager = new DefaultResourceManager();
+                        var moduleResourceManager = new DefaultResourceManager(null);
                         moduleResourceManager.Bundles
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)

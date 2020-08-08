@@ -37,7 +37,7 @@ namespace Axle.Resources.Extraction
         public static IResourceExtractor Compose(IEnumerable<IResourceExtractor> extractors)
         {
             var composerArray = extractors.ToArray();
-            if (composerArray.Length <= 0)
+            if (composerArray.Length == 0)
             {
                 return new DelegatingExtractor();
             }
@@ -62,5 +62,7 @@ namespace Axle.Resources.Extraction
             var ctx = new CompositeResourceContext(context, _extractor1);
             return _extractor2.Extract(ctx, name);
         }
+
+        public override bool Accepts(Uri location) => _extractor2.Accepts(location);
     }
 }

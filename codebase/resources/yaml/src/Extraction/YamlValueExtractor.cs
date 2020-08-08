@@ -27,16 +27,16 @@ namespace Axle.Resources.Yaml.Extraction
                     break;
                 default:
                     //using (var stream = yamlRes.Value.Open())
-                        //if (stream != null)
-                        //{
-                        //    var p = new Dictionary<string, string>();
-                        //    YamlFileExtractor.ReadData(stream, p);
-                        //    data = p;
-                        //}
-                        //else
-                        //{
-                            data = new Dictionary<string, string>(YamlFileExtractor.DefaultKeyComparer);
-                        //}
+                    //if (stream != null)
+                    //{
+                    //    var p = new Dictionary<string, string>();
+                    //    YamlFileExtractor.ReadData(stream, p);
+                    //    data = p;
+                    //}
+                    //else
+                    //{
+                        data = new Dictionary<string, string>(YamlFileExtractor.DefaultKeyComparer);
+                    //}
                     break;
             }
 

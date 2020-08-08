@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 
 using Axle.Verification;
 
@@ -9,10 +10,12 @@ namespace Axle.Resources.Extraction
     public abstract class AbstractResourceExtractor : IResourceExtractor
     {
         /// <inheritdoc />
-        public ResourceInfo Extract(IResourceContext context, string name) =>
-            DoExtract(
-                context.VerifyArgument(nameof(context)).IsNotNull().Value, 
-                name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+        public ResourceInfo Extract(IResourceContext context, string name)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(context, nameof(context)));
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
+            return Accepts(context.Location) ? DoExtract(context, name) : null;
+        }
 
         /// <inheritdoc />
         #if NETSTANDARD || NET45_OR_NEWER
@@ -21,8 +24,20 @@ namespace Axle.Resources.Extraction
         public virtual Task<ResourceInfo> ExtractAsync(IResourceContext context, string name)
         #endif
         {
-            context.VerifyArgument(nameof(context)).IsNotNull();
-            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
+            Verifier.IsNotNull(Verifier.VerifyArgument(context, nameof(context)));
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
+            if (!Accepts(context.Location))
+            {
+                #if NETSTANDARD || NET45_OR_NEWER
+                return await Task.FromResult<ResourceInfo>(null);
+                #elif NET40
+                var taskCompletionSource = new TaskCompletionSource<ResourceInfo>();
+                taskCompletionSource.SetResult(null);
+                return taskCompletionSource.Task;
+                #else
+                return Task.FromResult<ResourceInfo>(null);
+                #endif
+            }
             #if NETSTANDARD || NET45_OR_NEWER
             return await Task.Run(() => DoExtract(context, name));
             #elif NET40
@@ -31,6 +46,9 @@ namespace Axle.Resources.Extraction
             return Task.Run(() => DoExtract(context, name));
             #endif
         }
+
+        /// <inheritdoc />
+        public virtual bool Accepts(Uri location) => true;
 
         /// <summary>
         /// Override this method to implement the actual resource extraction logic for the current

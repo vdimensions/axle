@@ -54,8 +54,7 @@ namespace Axle
                         .Export(new ApplicationContainerFactory(_host.DependencyContainerFactory, rootContainer))
                         .Export(loggingService)
                         .Export(_host);
-                    var configMgr = new LayeredConfigManager()
-                        .Append(EnvironmentConfigSource.Instance);
+                    var configMgr = new LayeredConfigManager().Append(EnvironmentConfigSource.Instance);
                     if (_host.HostConfiguration != null)
                     {
                         configMgr = configMgr.Append(_host.HostConfiguration);

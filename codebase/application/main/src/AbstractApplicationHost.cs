@@ -128,14 +128,14 @@ namespace Axle
             out IConfiguration hostConfig, 
             out IConfiguration appConfig)
         {
-            var hostConfigResourceMgr = new DefaultResourceManager();
+            var hostConfigResourceMgr = new DefaultResourceManager(null);
             SetupHostConfigurationResourceBundle(
                 hostConfigResourceMgr.Bundles.Configure(Application.ConfigBundleName));
             var hostConfigStreamProvider = new ResourceConfigurationStreamProvider(hostConfigResourceMgr);
             
             hostConfig = LoadConfig(hostConfigFileName, hostConfigStreamProvider, environmentName, profiles);
             
-            var appConfigResourceMgr = new DefaultResourceManager();
+            var appConfigResourceMgr = new DefaultResourceManager(null);
             SetupAppConfigurationResourceBundle(
                 appConfigResourceMgr.Bundles.Configure(Application.ConfigBundleName));
             var appConfigStreamProvider = new ResourceConfigurationStreamProvider(appConfigResourceMgr);

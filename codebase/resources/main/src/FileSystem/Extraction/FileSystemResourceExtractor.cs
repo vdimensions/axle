@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
 using Axle.Resources.Extraction;
@@ -19,9 +20,7 @@ namespace Axle.Resources.FileSystem.Extraction
             #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
             var location = context.Location.Resolve(name);
             var culture = context.Culture;
-            if (CultureInfo.InvariantCulture.Equals(culture) 
-                && location.IsAbsoluteUri 
-                && File.Exists(location.AbsolutePath))
+            if (CultureInfo.InvariantCulture.Equals(culture) && File.Exists(location.AbsolutePath))
             {
                 return new FileSystemResourceInfo(context.Location, name, culture);
             }
@@ -29,5 +28,7 @@ namespace Axle.Resources.FileSystem.Extraction
 
             return null;
         }
+
+        public override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsFile();
     }
 }

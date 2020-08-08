@@ -1,8 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-
 using Axle.Verification;
-
 
 namespace Axle.Resources.Extraction
 {
@@ -15,24 +13,36 @@ namespace Axle.Resources.Extraction
     {
         private readonly ResourceContext _ownerContext;
         private readonly IEnumerable<ResourceContext> _subContexts;
-        internal readonly IEnumerable<IResourceExtractor> extractors;
+        private readonly IEnumerable<IResourceExtractor> _extractors;
+        internal readonly IEnumerable<IResourceExtractor> Extractors;
 
-        internal ResourceExtractionChain(ResourceContext ownerContext, IEnumerable<ResourceContext> subContexts, IEnumerable<IResourceExtractor> extractors)
+        internal ResourceExtractionChain(
+            ResourceContext ownerContext, 
+            IEnumerable<ResourceContext> subContexts, 
+            IEnumerable<IResourceExtractor> extractors)
         {
             _ownerContext = ownerContext;
             _subContexts = subContexts;
-            this.extractors = extractors;
+            _extractors = (Extractors = extractors).Where(e => e.Accepts(_ownerContext.Location));
         }
 
         internal IEnumerable<ResourceInfo> DoExtractAll(string name)
         {
             var extractorContext = _ownerContext;
-            foreach (var extractor in extractors)
+            foreach (var extractor in _extractors)
             {
                 extractorContext = extractorContext.MoveOneExtractorForward();
                 var resource = extractor.Extract(extractorContext, name);
                 if (resource == null)
                 {
+                    // System.Console.WriteLine(
+                    //     "Extracting resource [{0}] {1}::{2} {3} for location {4}.", 
+                    //     _ownerContext.Culture.Name, 
+                    //     _ownerContext.Bundle, 
+                    //     name, 
+                    //     resource == null ? "failed" : "succeeded",
+                    //     _ownerContext.Location
+                    // );
                     continue;
                 }
                 resource.Bundle = _ownerContext.Bundle;
