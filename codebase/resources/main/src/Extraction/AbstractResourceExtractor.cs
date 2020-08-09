@@ -47,8 +47,7 @@ namespace Axle.Resources.Extraction
             #endif
         }
 
-        /// <inheritdoc />
-        public virtual bool Accepts(Uri location) => true;
+        protected virtual bool Accepts(Uri location) => true;
 
         /// <summary>
         /// Override this method to implement the actual resource extraction logic for the current

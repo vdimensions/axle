@@ -67,7 +67,7 @@ namespace Axle.Resources.ResX.Extraction
 
         protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
 
-        public override bool Accepts(Uri location) => IsResX(location);
+        protected override bool Accepts(Uri location) => IsResX(location);
     }
 }
 #endif

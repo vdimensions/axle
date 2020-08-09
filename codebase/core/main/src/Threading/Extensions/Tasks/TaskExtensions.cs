@@ -44,11 +44,13 @@ namespace Axle.Threading.Extensions.Tasks
 
         public static IEnumerable<Task> ContinueWith<T>(this IEnumerable<Task<T>> tasks, Action<T> action)
         {
-            return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => x.ContinueWith(action));
+            tasks.VerifyArgument(nameof(tasks)).IsNotNull();
+            return tasks.Select(x => x.ContinueWith(action));
         }
         public static IEnumerable<Task<TResult>> ContinueWith<T, TResult>(this IEnumerable<Task<T>> tasks, Func<T, TResult> action)
         {
-            return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => x.ContinueWith(action));
+            tasks.VerifyArgument(nameof(tasks)).IsNotNull();
+            return tasks.Select(x => x.ContinueWith(action));
         }
         #endregion
 
@@ -165,19 +167,23 @@ namespace Axle.Threading.Extensions.Tasks
         #region Start(...)
         public static IEnumerable<Task> Start(this IEnumerable<Task> tasks)
         {
-            return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => { x.Start(); return x; }).ToArray();
+            tasks.VerifyArgument(nameof(tasks)).IsNotNull();
+            return tasks.Select(x => { x.Start(); return x; }).ToArray();
         }
         public static IEnumerable<Task> Start(this IEnumerable<Task> tasks, TaskScheduler scheduler)
         {
-            return tasks.VerifyArgument(nameof(tasks)).IsNotNull().IsNotNull().Value.Select(x => { x.Start(scheduler); return x; }).ToArray();
+            tasks.VerifyArgument(nameof(tasks)).IsNotNull().IsNotNull();
+            return tasks.Select(x => { x.Start(scheduler); return x; }).ToArray();
         }
         public static IEnumerable<Task<TResult>> Start<TResult>(this IEnumerable<Task<TResult>> tasks)
         {
-            return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => { x.Start(); return x; }).ToArray();
+            tasks.VerifyArgument(nameof(tasks)).IsNotNull();
+            return tasks.Select(x => { x.Start(); return x; }).ToArray();
         }
         public static IEnumerable<Task<TResult>> Start<TResult>(this IEnumerable<Task<TResult>> tasks, TaskScheduler scheduler)
         {
-            return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => { x.Start(scheduler); return x; }).ToArray();
+            tasks.VerifyArgument(nameof(tasks)).IsNotNull();
+            return tasks.Select(x => { x.Start(scheduler); return x; }).ToArray();
         }
         public static IEnumerable<Task<TResult>> Start<TResult>(this Task<TResult>[] tasks) => Start(tasks as IEnumerable<Task<TResult>>);
         public static IEnumerable<Task<TResult>> Start<TResult>(this Task<TResult>[] tasks, TaskScheduler scheduler)

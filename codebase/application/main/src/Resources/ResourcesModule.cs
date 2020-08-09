@@ -16,6 +16,7 @@ namespace Axle.Resources
         private readonly ResourceManager _resourceManager = new DefaultResourceManager();
         private readonly ResourcesConfig _config;
 
+        public ResourcesModule() : this(new ResourcesConfig() { Bundles = new BundleConfig[0] }) { }
         public ResourcesModule(ResourcesConfig config)
         {
             _config = config;

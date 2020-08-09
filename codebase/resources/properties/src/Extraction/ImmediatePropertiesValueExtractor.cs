@@ -17,6 +17,12 @@ namespace Axle.Resources.Properties.Extraction
             var locStr = location.ToString();
             keyPrefix = locStr.TakeAfterFirst(ext, cmp);
             propertyFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
+            const char slash = '/';
+            keyPrefix = keyPrefix.TrimStart(slash);
+            if (keyPrefix.EndsWith(slash.ToString()))
+            {
+                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
+            }
 
             return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }
@@ -27,12 +33,11 @@ namespace Axle.Resources.Properties.Extraction
         /// </summary>
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            if (!GetPropertiesFileData(context.Location, out var propertyFileName, out var keyPrefix))
+            if (!GetPropertiesFileData(context.Location, out var fileName, out var keyPrefix))
             {
                 return null;
             }
-
-            return new PropertiesValueExtractor(propertyFileName, keyPrefix).Extract(context, name);
+            return new PropertiesValueExtractor(fileName, keyPrefix).Extract(context, name);
         }
     }
 }

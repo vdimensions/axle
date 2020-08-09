@@ -14,6 +14,12 @@ namespace Axle.Resources.Yaml.Extraction
             var locStr = location.ToString();
             keyPrefix = locStr.TakeAfterFirst(ext, cmp);
             yamlFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
+            const char slash = '/';
+            keyPrefix = keyPrefix.TrimStart(slash);
+            if (keyPrefix.EndsWith(slash.ToString()))
+            {
+                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
+            }
 
             return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }

@@ -13,7 +13,6 @@ namespace Axle.Resources.Extraction
     {
         private readonly ResourceContext _ownerContext;
         private readonly IEnumerable<ResourceContext> _subContexts;
-        private readonly IEnumerable<IResourceExtractor> _extractors;
         internal readonly IEnumerable<IResourceExtractor> Extractors;
 
         internal ResourceExtractionChain(
@@ -23,13 +22,13 @@ namespace Axle.Resources.Extraction
         {
             _ownerContext = ownerContext;
             _subContexts = subContexts;
-            _extractors = (Extractors = extractors).Where(e => e.Accepts(_ownerContext.Location));
+            Extractors = extractors;
         }
 
         internal IEnumerable<ResourceInfo> DoExtractAll(string name)
         {
             var extractorContext = _ownerContext;
-            foreach (var extractor in _extractors)
+            foreach (var extractor in Extractors)
             {
                 extractorContext = extractorContext.MoveOneExtractorForward();
                 var resource = extractor.Extract(extractorContext, name);
@@ -78,8 +77,8 @@ namespace Axle.Resources.Extraction
         /// The name of the resource to lookup.
         /// </param>
         /// <returns>
-        /// A collection of <see cref="ResourceInfo"/> instances representing resources that have successfully been extracted from 
-        /// the current <see cref="ResourceExtractionChain">chain</see>.
+        /// A collection of <see cref="ResourceInfo"/> instances representing resources that have successfully been
+        /// extracted from the current <see cref="ResourceExtractionChain">chain</see>.
         /// </returns>
         public IEnumerable<ResourceInfo> ExtractAll(string name) => 
             DoExtractAll(name.VerifyArgument(nameof(name)).IsNotNullOrEmpty()).Where(x => x != null);

@@ -67,5 +67,30 @@ namespace Axle.Resources.Yaml.Tests
                 Console.Write(data);
             }
         }
+        
+        [Test]
+        public void TestValueRetrievalFromImplicitlyDiscoveredYamlFileWithKeyPrefix()
+        {
+            var uriParser = new UriParser();
+            var resourceManager = new DefaultResourceManager();
+            resourceManager.Bundles
+                .Configure("testBundle")
+                .Register(uriParser.Parse("Messages.yml/Prefixed/"))
+                .Register(GetType().Assembly, "./Properties/");
+            resourceManager.Extractors.Register(new YamlExtractor());
+
+            var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
+
+            Assert.IsNotNull(resource, "Unable to find Greeting message");
+            Assert.AreEqual("testBundle", resource.Bundle);
+            Assert.AreEqual(CultureInfo.InvariantCulture, resource.Culture);
+
+            using (var stream = resource.Open())
+            {
+                var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
+                Assert.IsNotNull(data);
+                Console.Write(data);
+            }
+        }
     }
 }

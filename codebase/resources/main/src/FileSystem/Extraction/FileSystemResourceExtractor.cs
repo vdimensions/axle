@@ -29,6 +29,6 @@ namespace Axle.Resources.FileSystem.Extraction
             return null;
         }
 
-        public override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsFile();
+        protected override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsFile();
     }
 }

@@ -38,6 +38,16 @@ namespace Axle.Threading.Extensions.AggregateException
             return result;
         }
 
+        /// <summary>
+        /// Expands the list of exception causes for an <see cref="AggregateException"/>.
+        /// </summary>
+        /// <param name="e">
+        /// The <see cref="AggregateException"/> instance to expand.
+        /// </param>
+        /// <returns>
+        /// A collection of <see cref="Exception"/> instances, that are collectively responsible for the throwing of
+        /// the <see cref="AggregateException"/>.
+        /// </returns>
         public static IEnumerable<Exception> Resolve(this AggregateException e) 
             => Resolve(e, new LinkedList<Exception>());
 

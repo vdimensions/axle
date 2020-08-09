@@ -16,9 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build.sh" />
     <EmbeddedResource Include="Properties\Messages.yml" />
-    <None Include="restore.sh" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

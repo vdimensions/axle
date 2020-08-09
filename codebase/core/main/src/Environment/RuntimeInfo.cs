@@ -235,7 +235,9 @@ namespace Axle.Environment
             {
                 return result;
             }
-            throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
+            throw new ArgumentException(
+                string.Format("Unable to load assembly, the given assembly name is invalid: '{0}'", assemblyName), 
+                nameof(assemblyName));
         }
         #endif
 

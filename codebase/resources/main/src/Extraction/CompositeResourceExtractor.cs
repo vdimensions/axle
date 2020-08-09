@@ -62,7 +62,5 @@ namespace Axle.Resources.Extraction
             var ctx = new CompositeResourceContext(context, _extractor1);
             return _extractor2.Extract(ctx, name);
         }
-
-        public override bool Accepts(Uri location) => _extractor2.Accepts(location);
     }
 }

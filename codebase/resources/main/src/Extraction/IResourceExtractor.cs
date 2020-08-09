@@ -44,18 +44,5 @@ namespace Axle.Resources.Extraction
         /// <seealso cref="Extract"/>
         /// <seealso cref="ResourceContext"/>
         Task<ResourceInfo> ExtractAsync(IResourceContext context, string name);
-
-        /// <summary>
-        /// Determines if the current <see cref="IResourceExtractor"/> implementation can handle resources
-        /// represented by the provided <paramref name="location"/>.
-        /// </summary>
-        /// <param name="location">
-        /// A location representing a resource source.
-        /// </param>
-        /// <returns>
-        /// <c>true</c> if the current <see cref="IResourceExtractor"/> implementation can handle resources
-        /// represented by the provided <paramref name="location"/>; <c>false</c> otherwise.
-        /// </returns>
-        bool Accepts(Uri location);
     }
 }

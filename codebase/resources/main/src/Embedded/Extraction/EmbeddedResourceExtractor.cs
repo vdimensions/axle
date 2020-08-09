@@ -66,6 +66,6 @@ namespace Axle.Resources.Embedded.Extraction
         }
 
         /// <inheritdoc />
-        public override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsEmbeddedResource();
+        protected override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsEmbeddedResource();
     }
 }
