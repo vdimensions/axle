@@ -18,9 +18,11 @@ namespace Axle.Resources.Bundling
         {
             private readonly LinkedList<Uri> _locations;
             private readonly IResourceExtractorRegistry _extractors;
+            private readonly string _bundle;
 
-            public ConfigurableBundleContent()
+            public ConfigurableBundleContent(string bundle)
             {
+                _bundle = bundle;
                 _locations = new LinkedList<Uri>();
                 _extractors = new DefaultResourceExtractorRegistry();
             }
@@ -35,6 +37,7 @@ namespace Axle.Resources.Bundling
 
             IEnumerable<Uri> IResourceBundleContent.Locations => _locations;
             IEnumerable<IResourceExtractor> IResourceBundleContent.Extractors => _extractors;
+            string IResourceBundleContent.Bundle => _bundle;
         }
 
         private readonly IDictionary<string, IConfigurableBundleContent> _perBundleContent;
@@ -61,7 +64,7 @@ namespace Axle.Resources.Bundling
         {
             if (!_perBundleContent.TryGetValue(bundle, out var contentRegistry))
             {
-                _perBundleContent.Add(bundle, contentRegistry = new ConfigurableBundleContent());
+                _perBundleContent.Add(bundle, contentRegistry = new ConfigurableBundleContent(bundle));
             }
             return contentRegistry;
         }
@@ -73,6 +76,9 @@ namespace Axle.Resources.Bundling
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public IResourceBundleContent this[string bundle] => _perBundleContent.TryGetValue(bundle, out var result) ? result : new ConfigurableBundleContent();
+        public IResourceBundleContent this[string bundle] => 
+            _perBundleContent.TryGetValue(bundle, out var result) 
+                ? result 
+                : new ConfigurableBundleContent(bundle);
     }
 }

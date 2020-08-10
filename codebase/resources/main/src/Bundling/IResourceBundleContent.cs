@@ -10,5 +10,10 @@ namespace Axle.Resources.Bundling
     {
         IEnumerable<Uri> Locations { get; }
         IEnumerable<IResourceExtractor> Extractors { get; }
+        
+        /// <summary>
+        /// Gets the name of the current bundle
+        /// </summary>
+        string Bundle { get; }
     }
 }
