@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.Threading.Tasks;
 using Axle.Caching;
 using Axle.Globalization.Extensions.CultureInfo;
 using Axle.Resources.Bundling;
@@ -96,7 +97,30 @@ namespace Axle.Resources
 
             IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _impl).GetEnumerator();
         }
-        
+
+        private sealed class CachingExtractor : AbstractResourceExtractor
+        {
+            private readonly IResourceExtractor _impl;
+            private readonly ICache _cache;
+            private readonly int _index;
+
+            public CachingExtractor(IResourceExtractor impl, ICache cache, int index)
+            {
+                _impl = impl;
+                _cache = cache;
+                _index = index;
+            }
+
+            protected override ResourceInfo DoExtract(IResourceContext context, string name)
+            {
+                var key = Tuple.Create(name, _index, context.Culture.Name, context.Location);
+                return _cache.GetOrAdd(key, k => _impl.Extract(context, ((Tuple<string, int, string, Uri>) k).Item1));
+            }
+        }
+
+        private static IResourceExtractor CreateCachingExtractor(IResourceExtractor extractor, ICache cache, int index) 
+            => new CachingExtractor(extractor, cache, index);
+
         private readonly ICacheManager _cacheManager;
         
         /// <summary>
@@ -175,12 +199,16 @@ namespace Axle.Resources
             {
                 return null;
             }
-            var extractors = bundleRegistry.Extractors.Union(Extractors).ToArray();
+            var cache = _cacheManager?.GetCache(bundle);
+            var extractors = cache == null
+                ? bundleRegistry.Extractors.Union(Extractors).ToArray()
+                : bundleRegistry.Extractors.Union(Extractors)
+                    .Select((e, i) => CreateCachingExtractor(e, cache, i))
+                    .ToArray();
             foreach (var ci in culture.ExpandHierarchy())
             {
                 var context = new ResourceContext(bundle, locations, ci, extractors);
-                var cache = _cacheManager?.GetCache(bundle);
-                var result =  cache == null
+                var result = cache == null
                     ? context.ExtractionChain.Extract(name)
                     : cache.GetOrAdd(Tuple.Create(ci.Name, name), t => context.ExtractionChain.Extract(((Tuple<string, string>) t).Item2));
                 if (result != null)

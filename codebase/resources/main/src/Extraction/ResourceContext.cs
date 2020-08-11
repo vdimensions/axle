@@ -2,46 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using Axle.Caching;
 using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
-    internal sealed class CachingResourceContext : IResourceContext
-    {
-        private readonly ResourceContext _impl;
-        private readonly ICache _cache;
-
-        public CachingResourceContext(ResourceContext impl, ICache cache)
-        {
-            _impl = impl;
-            _cache = cache;
-        }
-
-        public ResourceInfo Extract(string name) => 
-            ExtractAll(name).FirstOrDefault(x => x != null);
-
-        public IEnumerable<ResourceInfo> ExtractAll(string name)
-        {
-            return _cache != null
-                ? _cache.GetOrAdd(Tuple.Create(Bundle, name), ExtractAllNoCache)
-                : _impl.ExtractAll(name);
-        }
-        
-        private IEnumerable<ResourceInfo> ExtractAllNoCache(object key)
-        {
-            var tuple = (Tuple<string, string>) key;
-            return _impl.ExtractAll(tuple.Item2).ToList();
-        }
-
-        public string Bundle => _impl.Bundle;
-
-        public Uri Location => _impl.Location;
-
-        public CultureInfo Culture => _impl.Culture;
-
-        internal ResourceExtractionChain ExtractionChain => _impl.ExtractionChain;
-    }
     /// <summary>
     /// A class that provides the context for resource lookup and extraction, including the <see cref="Location">location</see>
     /// where the resource should be looked up, the <see cref="Culture">culture</see> for which the resource has been requested, 
