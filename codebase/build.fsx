@@ -21,11 +21,11 @@ let dir = Shell.pwd()
 let projectLocations = [
     "core/main"; "core/fsharp"
     "text.documents/main"; "text.documents/properties"; "text.documents/yaml"
-    "resources/main"; "resources/properties"; "resources/yaml"
     "caching/main"
+    "configuration/main"; "configuration/microsoft"
+    "resources/main"; "resources/properties"; "resources/yaml"
     "security/main"
     "security/cryptography"
-    "configuration/main"; "configuration/microsoft"
     "application/main"
     "data/main"; "data/fsharp"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/sqlite"; "data/sqlite.microsoft"; "data/mysql"
     "logging/log4net"
