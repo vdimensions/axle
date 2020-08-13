@@ -4,7 +4,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using Axle.Caching;
 using Axle.Globalization.Extensions.CultureInfo;
 using Axle.Resources.Bundling;
@@ -210,7 +209,7 @@ namespace Axle.Resources
                 var context = new ResourceContext(bundle, locations, ci, extractors);
                 var result = cache == null
                     ? context.ExtractionChain.Extract(name)
-                    : cache.GetOrAdd(Tuple.Create(ci.Name, name), t => context.ExtractionChain.Extract(((Tuple<string, string>) t).Item2));
+                    : cache.GetOrAdd(Tuple.Create(name, ci.Name), t => context.ExtractionChain.Extract(((Tuple<string, string>) t).Item1));
                 if (result != null)
                 {
                     return result;
