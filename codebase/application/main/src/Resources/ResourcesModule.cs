@@ -19,7 +19,7 @@ namespace Axle.Resources
         private readonly ResourceManager _resourceManager = new DefaultResourceManager();
         private readonly ResourcesConfig _config;
 
-        public ResourcesModule() : this(new ResourcesConfig() { Bundles = new BundleConfig[0] }) { }
+        public ResourcesModule() : this(new ResourcesConfig()) { }
         public ResourcesModule(ResourcesConfig config)
         {
             _config = config;
@@ -48,9 +48,9 @@ namespace Axle.Resources
 
         void IResourceBundleConfigurer.Configure(IResourceBundleRegistry registry)
         {
-            foreach (var bundleConfig in _config.Bundles.Union(new[]{_config.DefaultBundle}))
+            foreach (var bundleConfig in _config.Bundles.Cast<BundleConfig>().Union(new[]{_config.DefaultBundle}))
             {
-                var bundleContent = registry.Configure(bundleConfig.Name);
+                var bundleContent = registry.Configure(bundleConfig is CustomBundleConfig cb ? cb.Name : string.Empty);
                 foreach (var location in bundleConfig.Locations)
                 {
                     bundleContent.Register(location);

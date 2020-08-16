@@ -4,7 +4,7 @@ namespace Axle.Resources.Configuration
 {
     internal sealed class ResourcesConfig
     {
-        public BundleConfig DefaultBundle { get; } = new BundleConfig { Name = string.Empty };
-        public IList<BundleConfig> Bundles { get; set; } = new List<BundleConfig>();
+        public DefaultBundleConfig DefaultBundle { get; } = new DefaultBundleConfig { };
+        public IList<CustomBundleConfig> Bundles { get; set; } = new List<CustomBundleConfig>();
     }
 }
