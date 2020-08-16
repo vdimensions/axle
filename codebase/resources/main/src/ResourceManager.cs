@@ -199,11 +199,12 @@ namespace Axle.Resources
                 return null;
             }
             var cache = _cacheManager?.GetCache(bundle);
-            var extractors = cache == null
-                ? bundleRegistry.Extractors.Union(Extractors).ToArray()
-                : bundleRegistry.Extractors.Union(Extractors)
-                    .Select((e, i) => CreateCachingExtractor(e, cache, i))
-                    .ToArray();
+            // TODO: change extractor iteration order
+            var extractors = (cache == null
+                ? Extractors.Union(bundleRegistry.Extractors)
+                : Extractors.Union(bundleRegistry.Extractors).Select((e, i) => CreateCachingExtractor(e, cache, i)))
+                .Reverse()
+                .ToArray();
             foreach (var ci in culture.ExpandHierarchy())
             {
                 var context = new ResourceContext(bundle, locations, ci, extractors);

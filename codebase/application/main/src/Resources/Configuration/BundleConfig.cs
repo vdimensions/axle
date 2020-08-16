@@ -7,5 +7,6 @@ namespace Axle.Resources.Configuration
     {
         public string Name { get; set; }
         public IList<Uri> Locations { get; set; } = new List<Uri>();
+        public IList<Type> Extractors { get; set; } = new List<Type>();
     }
 }

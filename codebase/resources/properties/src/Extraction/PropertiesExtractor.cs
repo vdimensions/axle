@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Text;
+using System.Threading.Tasks;
 using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Properties.Extraction
@@ -7,26 +7,28 @@ namespace Axle.Resources.Properties.Extraction
     /// <summary>
     /// A class representing the resource extractor chain for the contents of a java properties file.
     /// </summary>
-    public sealed class PropertiesExtractor : IEnumerable<IResourceExtractor>
+    public sealed class PropertiesExtractor : IResourceExtractor
     {
-        private readonly IResourceExtractor _propertiesValueExtractor;
+        private readonly IResourceExtractor _impl;
 
-        private PropertiesExtractor(IResourceExtractor propertiesValueExtractor)
+        private PropertiesExtractor(Encoding encoding, IResourceExtractor propertiesValueExtractor)
         {
-            _propertiesValueExtractor = propertiesValueExtractor;
+            _impl = CompositeResourceExtractor.Create(
+                new PropertiesFileExtractor(encoding),
+                propertiesValueExtractor);
         }
+        private PropertiesExtractor(Encoding encoding, string fileName, string keyPrefix = null)
+            : this(encoding, new PropertiesValueExtractor(encoding, fileName, keyPrefix ?? string.Empty)) { }
+        private PropertiesExtractor(Encoding encoding) 
+            : this(encoding, new ImmediatePropertiesValueExtractor(encoding)) { }
 
-        public PropertiesExtractor(string propertiesFileName, string keyPrefix = null)
-            : this(new PropertiesValueExtractor(propertiesFileName, keyPrefix ?? string.Empty)) { }
-        public PropertiesExtractor() : this(new ImmediatePropertiesValueExtractor()) { }
-        
-        /// <inheritdoc />
-        public IEnumerator<IResourceExtractor> GetEnumerator()
-        {
-            yield return new PropertiesFileExtractor();
-            yield return _propertiesValueExtractor;
-        }
+        public PropertiesExtractor(string fileName, string keyPrefix = null) : this(Encoding.UTF8, fileName, keyPrefix) { }
+        public PropertiesExtractor() : this(Encoding.UTF8) { }
 
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        ResourceInfo IResourceExtractor.Extract(IResourceContext context, string name) 
+            => _impl.Extract(context, name);
+
+        Task<ResourceInfo> IResourceExtractor.ExtractAsync(IResourceContext context, string name) 
+            => _impl.ExtractAsync(context, name);
     }
 }

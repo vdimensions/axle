@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using Axle.Resources.Extraction;
 using Axle.Resources.Text.Documents;
 using Axle.Text.Documents;
@@ -14,6 +15,8 @@ namespace Axle.Resources.Properties.Extraction
     internal sealed class PropertiesFileExtractor : AbstractTextDocumentExtractor
     {
         internal static readonly StringComparer DefaultKeyComparer = StringComparer.OrdinalIgnoreCase;
+
+        public PropertiesFileExtractor(Encoding encoding) : base(encoding) { }
             
         protected override ITextDocumentReader GetReader(StringComparer comparer) 
             => new PropertiesDocumentReader(comparer);

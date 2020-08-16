@@ -14,7 +14,7 @@ namespace Axle.Resources.Extraction
     {
         private static IResourceExtractorRegistry DoRegister(IResourceExtractorRegistry registry, IEnumerable<IResourceExtractor> extractors)
         {
-            return registry.Register(CompositeResourceExtractor.Compose(extractors));
+            return registry.Register(CompositeResourceExtractor.Create(extractors));
         }
 
         /// <summary>

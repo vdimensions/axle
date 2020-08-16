@@ -33,9 +33,9 @@ namespace Axle.Resources
                 cacheManager)
         {
             Extractors
-                .Register(new EmbeddedResourceExtractor())
+                .Register(new FileSystemResourceExtractor())
                 .Register(new ResXResourceExtractor())
-                .Register(new FileSystemResourceExtractor());
+                .Register(new EmbeddedResourceExtractor());
         }
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.

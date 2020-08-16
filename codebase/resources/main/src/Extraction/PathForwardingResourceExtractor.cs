@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using Axle.Extensions.Uri;
+using System.Globalization;
 using Axle.Verification;
 
 namespace Axle.Resources.Extraction
@@ -11,28 +12,43 @@ namespace Axle.Resources.Extraction
     /// looked up. 
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class PathForwardingResourceExtractor : AbstractResourceExtractor
+    public class PathForwardingResourceExtractor : AbstractResourceExtractor
     {
-        public PathForwardingResourceExtractor(string pathPrefix)
+        private sealed class PathForwardingResourceContext : IResourceContext
         {
-            Verifier.IsNotNull(Verifier.VerifyArgument(pathPrefix, nameof(pathPrefix)));
-            PathPrefix = new Uri(pathPrefix, UriKind.Relative);
-        }
-        public PathForwardingResourceExtractor(Uri pathPrefix)
-        {
-            Verifier.IsNotNull(Verifier.VerifyArgument(pathPrefix, nameof(pathPrefix)));
-            PathPrefix = pathPrefix;
+            private readonly IResourceContext _impl;
+
+            public PathForwardingResourceContext(IResourceContext impl, Uri location)
+            {
+                _impl = impl;
+                Location = location ?? _impl.Location;
+            }
+
+            ResourceInfo IResourceContext.Extract(string name) => _impl.Extract(name);
+
+            IEnumerable<ResourceInfo> IResourceContext.ExtractAll(string name) => _impl.ExtractAll(name);
+
+            string IResourceContext.Bundle => _impl.Bundle;
+            public Uri Location { get; }
+            CultureInfo IResourceContext.Culture => _impl.Culture;
         }
 
-        protected override ResourceInfo DoExtract(IResourceContext context, string name)
+        private readonly IResourceExtractor _extractor;
+        
+        public PathForwardingResourceExtractor(IResourceExtractor extractor)
         {
-            var path = UriExtensions.Resolve(PathPrefix, name);
-            return context.Extract(path.ToString());
+            Verifier.IsNotNull(Verifier.VerifyArgument(extractor, nameof(extractor)));
+            _extractor = extractor;
         }
 
-        /// <summary>
-        /// Gets a <see cref="Uri"/>
-        /// </summary>
-        public Uri PathPrefix { get; }
+        protected virtual Uri GetForwardedLocation(Uri location) => location;
+
+        protected sealed override ResourceInfo DoExtract(IResourceContext context, string name)
+        {
+            var pathForwardingContext = new PathForwardingResourceContext(
+                context, 
+                GetForwardedLocation(context.Location));
+            return _extractor.Extract(pathForwardingContext, name);
+        }
     }
 }

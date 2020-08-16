@@ -119,7 +119,7 @@ namespace Axle
                         moduleResourceManager.Bundles
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)
-                            .Extractors.Register(new PathForwardingResourceExtractor(moduleTypeName));
+                            .Extractors.Register(new NameForwardingResourceExtractor(moduleTypeName));
 
                         var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         

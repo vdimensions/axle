@@ -10,15 +10,6 @@ namespace Axle.Resources.Text.Documents
 {
     public abstract class AbstractTextDocumentExtractor : AbstractResourceExtractor
     {
-        private void ReadData(Stream stream, IDictionary<string, string> finalProperties) => ReadData(stream, finalProperties, Encoding.UTF8);
-        private void ReadData(Stream stream, IDictionary<string, string> finalProperties, Encoding encoding)
-        {
-            ExtractData(
-                string.Empty, 
-                GetReader(KeyComparer).Read(stream, encoding), 
-                finalProperties);
-        }
-
         private static void ExtractData(string prefix, ITextDocumentNode structure, IDictionary<string, string> finalProperties)
         {
             var key = string.IsNullOrEmpty(prefix) ? structure.Key : $"{prefix}.{structure.Key}";
@@ -34,6 +25,16 @@ namespace Axle.Resources.Text.Documents
                     }
                     break;
             }
+        }
+
+        protected AbstractTextDocumentExtractor(Encoding encoding)
+        {
+            Encoding = encoding;
+        }
+
+        private void ReadData(Stream stream, IDictionary<string, string> finalProperties)
+        {
+            ExtractData(string.Empty, GetReader(KeyComparer).Read(stream, Encoding), finalProperties);
         }
 
         /// <inheritdoc />
@@ -57,9 +58,9 @@ namespace Axle.Resources.Text.Documents
         }
 
         protected abstract ITextDocumentReader GetReader(StringComparer comparer);
-        
         protected abstract TextDocumentResourceInfo CreateResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data);
         
         protected abstract StringComparer KeyComparer { get; }
+        protected Encoding Encoding { get; }
     }
 }

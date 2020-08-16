@@ -640,6 +640,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
@@ -679,6 +683,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
@@ -853,6 +861,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
@@ -892,6 +904,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
@@ -1066,6 +1082,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             return CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, false);
         }
 
@@ -1104,6 +1124,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             return CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, false);
         }
@@ -1275,6 +1299,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             return CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, false);
         }
 
@@ -1313,6 +1341,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             return CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, false);
         }

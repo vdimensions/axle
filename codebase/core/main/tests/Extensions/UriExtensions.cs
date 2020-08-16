@@ -84,5 +84,30 @@ namespace Axle.Core.Tests.Extensions
                 _uriParser.Parse("../a/b/c/1/2/3"),
                 out _));
         }
+
+        [Test]
+        public void TestAbsoluteUriNormalization()
+        {
+            var rawUri = "http://www.yahoo.com/%3a/search?term=123";
+            var normalizedUri = "http://www.yahoo.com/%3A/search?term=123";
+            Assert.AreEqual(
+                _uriParser.Parse(normalizedUri).Normalize().ToString(),
+                _uriParser.Parse(rawUri).Normalize().ToString());
+        }
+        
+        [Test]
+        public void TestRelativeUriNormalization()
+        {
+            var rawUri1 = ".././there/was/some/path/../../../is/another/path?query=123";
+            var normalizedUri = "../there/is/another/path?query=123";
+            Assert.AreEqual(
+                _uriParser.Parse(normalizedUri).Normalize().ToString(),
+                _uriParser.Parse(rawUri1).Normalize().ToString());
+            
+            var rawUri2 = "./../there/is/some/path/../../another/path?query=123";
+            Assert.AreEqual(
+                _uriParser.Parse(normalizedUri).Normalize().ToString(),
+                _uriParser.Parse(rawUri2).Normalize().ToString());
+        }
     }
 }

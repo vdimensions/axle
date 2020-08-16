@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Axle.Resources.Extraction;
 
 
@@ -8,11 +9,13 @@ namespace Axle.Resources.Yaml.Extraction
     {
         private readonly string _yamlFile;
         private readonly string _keyPrefix;
+        private readonly Encoding _encoding;
 
-        public YamlValueExtractor(string yamlFile, string keyPrefix)
+        public YamlValueExtractor(Encoding encoding, string yamlFile, string keyPrefix)
         {
             _yamlFile = yamlFile;
             _keyPrefix = keyPrefix;
+            _encoding = encoding;
         }
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
@@ -42,7 +45,7 @@ namespace Axle.Resources.Yaml.Extraction
 
             if (data != null && data.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
-                return new TextResourceInfo(name, context.Culture, result);
+                return new TextResourceInfo(name, context.Culture, result, _encoding);
             }
 
             return null;

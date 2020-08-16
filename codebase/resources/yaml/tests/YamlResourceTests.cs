@@ -25,8 +25,8 @@ namespace Axle.Resources.Yaml.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(uriParser.Parse("invalid"))
-                .Register(GetType().Assembly, "./Properties/");
+                .Register(GetType().Assembly, "./Properties/")
+                .Register(uriParser.Parse("invalid"));
             resourceManager.Extractors.Register(new YamlExtractor("Messages.yml"));
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
@@ -50,8 +50,8 @@ namespace Axle.Resources.Yaml.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(uriParser.Parse("Messages.yml"))
-                .Register(GetType().Assembly, "./Properties/");
+                .Register(GetType().Assembly, "./Properties/")
+                .Register(uriParser.Parse("Messages.yml"));
             resourceManager.Extractors.Register(new YamlExtractor());
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
@@ -75,8 +75,8 @@ namespace Axle.Resources.Yaml.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(uriParser.Parse("Messages.yml/Prefixed/"))
-                .Register(GetType().Assembly, "./Properties/");
+                .Register(GetType().Assembly, "./Properties/")
+                .Register(uriParser.Parse("Messages.yml/Prefixed/"));
             resourceManager.Extractors.Register(new YamlExtractor());
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);

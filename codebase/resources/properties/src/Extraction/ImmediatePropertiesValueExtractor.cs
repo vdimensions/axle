@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Axle.Extensions.String;
 using Axle.Resources.Extraction;
 
@@ -27,6 +28,13 @@ namespace Axle.Resources.Properties.Extraction
             return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
         }
 
+        private readonly Encoding _encoding;
+
+        public ImmediatePropertiesValueExtractor(Encoding encoding)
+        {
+            _encoding = encoding;
+        }
+
         /// <inheritdoc />
         /// <summary>
         /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java properties file. 
@@ -37,7 +45,7 @@ namespace Axle.Resources.Properties.Extraction
             {
                 return null;
             }
-            return new PropertiesValueExtractor(fileName, keyPrefix).Extract(context, name);
+            return new PropertiesValueExtractor(_encoding, fileName, keyPrefix).Extract(context, name);
         }
     }
 }

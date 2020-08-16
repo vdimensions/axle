@@ -5,10 +5,8 @@ using System.Linq;
 
 namespace Axle.Resources.Extraction
 {
-    internal sealed class CompositeResourceExtractor : AbstractResourceExtractor
+    public sealed class CompositeResourceExtractor : AbstractResourceExtractor
     {
-        internal sealed class DelegatingExtractor : AbstractResourceExtractor { }
-
         private sealed class CompositeResourceContext : IResourceContext
         {
             private readonly IResourceContext _sourceContext;
@@ -34,7 +32,9 @@ namespace Axle.Resources.Extraction
             public CultureInfo Culture => _sourceContext.Culture;
         }
 
-        public static IResourceExtractor Compose(IEnumerable<IResourceExtractor> extractors)
+        public static IResourceExtractor Create(params IResourceExtractor[] extractors) 
+            => Create(extractors as IEnumerable<IResourceExtractor>);
+        public static IResourceExtractor Create(IEnumerable<IResourceExtractor> extractors)
         {
             var composerArray = extractors.ToArray();
             if (composerArray.Length == 0)

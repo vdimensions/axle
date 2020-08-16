@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 #endif
 using System.Text.RegularExpressions;
+using Axle.Verification;
 
 
 namespace Axle.Text.Expressions.Regular
@@ -76,6 +77,51 @@ namespace Axle.Text.Expressions.Regular
             return array;
         }
         #endif
+
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(matchEvaluator, nameof(matchEvaluator)));
+            return _regex.Replace(input, matchEvaluator);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator, int count)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(matchEvaluator, nameof(matchEvaluator)));
+            return _regex.Replace(input, matchEvaluator, count);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator, int count, int startIndex)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(matchEvaluator, nameof(matchEvaluator)));
+            ComparableVerifier.IsLessThan(Verifier.VerifyArgument(startIndex, nameof(startIndex)), input.Length);
+            return _regex.Replace(input, matchEvaluator, count, startIndex);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, string replacement)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(replacement, nameof(replacement)));
+            return _regex.Replace(input, replacement);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, string replacement, int count)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(replacement, nameof(replacement)));
+            return _regex.Replace(input, replacement, count);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, string replacement, int count, int startIndex)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(replacement, nameof(replacement)));
+            ComparableVerifier.IsLessThan(Verifier.VerifyArgument(startIndex, nameof(startIndex)), input.Length);
+            return _regex.Replace(input, replacement, count, startIndex);
+        }
 
         /// <inheritdoc />
         public string[] Split(string input) => _regex.Split(input);

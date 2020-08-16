@@ -1,8 +1,10 @@
-﻿namespace Axle.Resources.Configuration
+﻿using System.Collections.Generic;
+
+namespace Axle.Resources.Configuration
 {
     internal sealed class ResourcesConfig
     {
         public BundleConfig DefaultBundle { get; } = new BundleConfig { Name = string.Empty };
-        public BundleConfig[] Bundles { get; set; }
+        public IList<BundleConfig> Bundles { get; set; } = new List<BundleConfig>();
     }
 }

@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Axle.Extensions.String;
+using Axle.Text.Expressions.Regular;
 using Axle.Verification;
 
 
@@ -421,6 +422,36 @@ namespace Axle.Extensions.Uri
                     UriKind.RelativeOrAbsolute));
         }
 
+        private static string GetQueryStringInternal(System.Uri uri)
+        {
+            if (uri.IsAbsoluteUri)
+            {
+                return uri.Query;
+            }
+            return StringExtensions.TakeAfterLast(uri.ToString(), '?');
+        }
+        /// <summary>
+        /// Gets the query string of a <see cref="System.Uri"/> instance.
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="System.Uri">URI</see> to get the query string of.
+        /// </param>
+        /// <returns>
+        /// A string that contains any query information included in the specified The <see cref="System.Uri">URI</see>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="uri"/> is <c>null</c>.
+        /// </exception>
+        public static string GetQueryString(this System.Uri uri)
+        {
+            if (uri == null)
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            return GetQueryStringInternal(uri);
+        }
+
         /// <summary>
         /// Gets a dictionary of key-value pairs representing the query parameters of the given <paramref name="uri"/>.
         /// </summary>
@@ -436,9 +467,10 @@ namespace Axle.Extensions.Uri
             {
                 throw new ArgumentNullException(nameof(uri));
             }
-
+            
+            var query = GetQueryStringInternal(uri);
             var comparer = StringComparer.OrdinalIgnoreCase;
-            if (uri.Query.Length == 0)
+            if (query.Length == 0)
             {
                 return new Dictionary<string, string>(comparer);
             }
@@ -446,7 +478,7 @@ namespace Axle.Extensions.Uri
             return Enumerable.ToDictionary(
                 Enumerable.GroupBy(
                     Enumerable.Select(
-                        uri.Query.TrimStart('?').Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries), 
+                        query.TrimStart('?').Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries), 
                         parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries)), 
                     parts => parts[0], 
                     parts => parts.Length > 2 
@@ -485,7 +517,7 @@ namespace Axle.Extensions.Uri
             else
             {
                 const char slash = '/';
-                var uriString = uri.ToString();
+                var uriString = StringExtensions.TrimEnd(uri.ToString(), GetQueryStringInternal(uri), StringComparison.Ordinal);
                 var originalStringEndsInSlash = uriString[uriString.Length - 1] == slash;
                 var parts = uriString.Split(slash);
                 return parts
@@ -558,6 +590,85 @@ namespace Axle.Extensions.Uri
             }
             result = new System.Uri(pathBuilder.ToString(), UriKind.Relative);
             return true;
+        }
+
+        /// <summary>
+        /// Processes the target <paramref name="uri"/> and performs various URI normalization changes, such as:
+        /// <list type="bullet">
+        ///   <item>
+        ///      Convert the scheme and host to lowercase.
+        ///   </item>
+        ///   <item>
+        ///      Convert percent-encoded triplets (e.g., '%3a' versus '%3A') to uppercase.
+        ///   </item>
+        ///   <item>
+        ///      Remove dot segments ("./" and "../")  along with the relevant path node.
+        ///   </item>
+        ///   <item>
+        ///      Remove the default port.
+        ///   </item>
+        /// </list>
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="System.Uri"/> instance to normalize.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="System.Uri"/> instance with the normalization changes applied. 
+        /// </returns>
+        public static System.Uri Normalize(this System.Uri uri)
+        {
+            var normalizedSegments = new List<string>();
+            var currentSegments = GetSegments(uri);
+            var currentNormalizedSegmentIndex = 0;
+            foreach (var segment in currentSegments)
+            {
+                if (segment.Equals("../") && currentNormalizedSegmentIndex > 0)
+                {
+                    currentNormalizedSegmentIndex--;
+                    for (var j = currentNormalizedSegmentIndex; j < normalizedSegments.Count; ++j)
+                    {
+                        normalizedSegments[j] = string.Empty;
+                    }
+                    continue;
+                }
+                if (segment.Equals("./"))
+                {
+                    continue;
+                }
+                if (currentNormalizedSegmentIndex >= normalizedSegments.Count)
+                {
+                    normalizedSegments.Add(segment);
+                    currentNormalizedSegmentIndex++;
+                }
+                else
+                {
+                    normalizedSegments[currentNormalizedSegmentIndex++] = segment;
+                }
+            }
+            var stringBuilder = new StringBuilder();
+            if (uri.IsAbsoluteUri)
+            {
+                stringBuilder
+                    .Append(uri.Scheme.ToLowerInvariant())
+                    .Append("://")
+                    .Append(uri.Host.ToLowerInvariant());
+                if (!uri.IsDefaultPort)
+                {
+                    stringBuilder.AppendFormat(":{0}", uri.Port);
+                }
+            }
+
+            stringBuilder
+                .Append(StringExtensions.Join(string.Empty, normalizedSegments))
+                .Append(GetQueryStringInternal(uri));
+
+            var regex = new RegularExpression(@"(\%[0-9A-Fa-f][0-9A-Fa-f])");
+            var normalizedUriString = regex.Replace(
+                stringBuilder.ToString(), 
+                x => x.Value.ToUpper());
+            return new System.Uri(
+                normalizedUriString,
+                UriKind.RelativeOrAbsolute);
         }
     }
 }

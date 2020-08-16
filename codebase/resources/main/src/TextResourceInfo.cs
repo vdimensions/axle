@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-
 using Axle.Conversion;
-using Axle.Globalization.Extensions.TextInfo;
 using Axle.Reflection.Extensions.Type;
 using Axle.Verification;
-
 
 namespace Axle.Resources
 {
@@ -18,19 +15,25 @@ namespace Axle.Resources
     public sealed class TextResourceInfo : ResourceInfo
     {
         private readonly string _value;
+        private readonly Encoding _encoding;
 
         /// <summary>
         /// Creates a new instance of the <seealso cref="TextResourceInfo"/> class.
         /// </summary>
-        public TextResourceInfo(string name, CultureInfo culture, string value) : base(name, culture, "text/plain")
+        public TextResourceInfo(string name, CultureInfo culture, string value, Encoding encoding) : base(name, culture, "text/plain")
         {
             _value = value.VerifyArgument(nameof(value)).IsNotNull();
+            _encoding = encoding ?? Encoding.UTF8;
         }
+        /// <summary>
+        /// Creates a new instance of the <seealso cref="TextResourceInfo"/> class.
+        /// </summary>
+        public TextResourceInfo(string name, CultureInfo culture, string value) : this(name, culture, value, null) { }
 
         /// <inheritdoc />
         public override Stream Open()
         {
-            return new MemoryStream(new BytesToStringConverter(Culture.TextInfo.GetEncoding()).ConvertBack(_value));
+            return new MemoryStream(new BytesToStringConverter(_encoding).ConvertBack(_value));
         }
 
         /// <inheritdoc />

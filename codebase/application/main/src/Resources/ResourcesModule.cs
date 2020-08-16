@@ -1,6 +1,9 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Axle.DependencyInjection;
+using Axle.Logging;
 using Axle.Modularity;
+using Axle.Reflection;
 using Axle.Resources.Bundling;
 using Axle.Resources.Configuration;
 using Axle.Resources.Extraction;
@@ -52,6 +55,21 @@ namespace Axle.Resources
                 {
                     bundleContent.Register(location);
                 }
+                foreach (var extractorType in bundleConfig.Extractors)
+                {
+                    var extractorIntrospector = new TypeIntrospector(extractorType);
+                    try
+                    {
+                        var extractorInstance = (IResourceExtractor) extractorIntrospector.CreateInstance();
+                        bundleContent.Extractors.Register(extractorInstance);
+                    }
+                    catch (Exception e)
+                    {
+                        var message = $"Unable to create an instance of configured resource extractor type `{extractorType}`.";
+                        Logger.Warn(message);
+                        Logger.Debug(message, e);
+                    }
+                }
             }
         }
 
@@ -61,5 +79,7 @@ namespace Axle.Resources
                 .Register(new PropertiesExtractor())
                 .Register(new YamlExtractor());
         }
+        
+        internal ILogger Logger { get; set; }
     }
 }

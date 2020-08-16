@@ -44,12 +44,11 @@ namespace Axle.Text.Documents
             }
             return currentNodes;
         }
-        
-        private readonly IEqualityComparer<string> _comparer;
 
         protected AbstractTextDocumentReader(IEqualityComparer<string> comparer)
         {
-            _comparer = comparer;
+            Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer)));
+            Comparer = comparer;
         }
 
         protected virtual ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding) 
@@ -65,7 +64,7 @@ namespace Axle.Text.Documents
 
         private IEnumerable<ITextDocumentNode> ExpandChildren(ITextDocumentAdapter adapter)
         {
-            foreach (var childGroup in adapter.Children.GroupBy(x => x.Key, _comparer))
+            foreach (var childGroup in adapter.Children.GroupBy(x => x.Key, Comparer))
             foreach (var child in childGroup)
             foreach (var node in FixHierarchy(childGroup.Key, ReadStructuredData(childGroup.Key, child)))
             {
@@ -101,15 +100,15 @@ namespace Axle.Text.Documents
         {
             stream.VerifyArgument(nameof(stream)).IsNotNull();
             encoding.VerifyArgument(nameof(encoding)).IsNotNull();
-            return ReadStructuredData(CreateAdapter(stream, encoding), _comparer);
+            return ReadStructuredData(CreateAdapter(stream, encoding), Comparer);
         }
 
         public ITextDocumentRoot Read(string data)
         {
             data.VerifyArgument(nameof(data)).IsNotNull();
-            return ReadStructuredData(CreateAdapter(data), _comparer);
+            return ReadStructuredData(CreateAdapter(data), Comparer);
         }
 
-        protected IEqualityComparer<string> Comparer => _comparer;
+        protected IEqualityComparer<string> Comparer { get; }
     }
 }

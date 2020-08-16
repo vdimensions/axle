@@ -24,8 +24,8 @@ namespace Axle.Resources.Properties.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(parser.Parse("invalid"))
-                .Register(GetType().Assembly, "./Properties/");
+                .Register(GetType().Assembly, "./Properties/")
+                .Register(parser.Parse("invalid"));
             resourceManager.Extractors.Register(new PropertiesExtractor("Messages.properties"));
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
@@ -49,8 +49,8 @@ namespace Axle.Resources.Properties.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(parser.Parse("Messages.properties"))
-                .Register(GetType().Assembly, "./Properties/");
+                .Register(GetType().Assembly, "./Properties/")
+                .Register(parser.Parse("Messages.properties"));
             resourceManager.Extractors.Register(new PropertiesExtractor());
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
@@ -73,8 +73,8 @@ namespace Axle.Resources.Properties.Tests
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
                 .Configure("testBundle")
-                .Register(parser.Parse("Messages.properties/Alternative/"))
-                .Register(GetType().Assembly, "./Properties/");
+                .Register(GetType().Assembly, "./Properties/")
+                .Register(parser.Parse("Messages.properties/Alternative/"));
             resourceManager.Extractors.Register(new PropertiesExtractor());
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
@@ -94,12 +94,10 @@ namespace Axle.Resources.Properties.Tests
         [Test]
         public void TestComplexPropertyValueRetrieval()
         {
-            var parser = new UriParser();
             var resourceManager = new DefaultResourceManager();
             resourceManager.Bundles
-                .Configure("testBundle")
-                .Register(GetType().Assembly, "./Properties/");
-            resourceManager.Extractors.Register(new PropertiesExtractor("Messages.properties"));
+                .Configure("testBundle").Register(GetType().Assembly, "./Properties/")
+                .Extractors.Register(new PropertiesExtractor("Messages.properties"));
 
             var resource = resourceManager.Load("testBundle", "Alternative.Greeting", CultureInfo.CurrentCulture);
 

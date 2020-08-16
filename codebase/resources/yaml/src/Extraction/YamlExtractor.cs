@@ -1,35 +1,34 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-
+﻿using System.Text;
+using System.Threading.Tasks;
 using Axle.Resources.Extraction;
-
 
 namespace Axle.Resources.Yaml.Extraction
 {
     /// <summary>
     /// A class representing the resource extractor chain for the contents of a YAML file.
     /// </summary>
-    public sealed class YamlExtractor : IEnumerable<IResourceExtractor>
+    public sealed class YamlExtractor : IResourceExtractor
     {
-        private readonly IResourceExtractor _valueResourceExtractor;
+        private readonly IResourceExtractor _impl;
 
-        private YamlExtractor(IResourceExtractor valueResourceExtractor)
+        private YamlExtractor(Encoding encoding, IResourceExtractor valueResourceExtractor)
         {
-            _valueResourceExtractor = valueResourceExtractor;
+            _impl = CompositeResourceExtractor.Create(
+                new YamlFileExtractor(encoding),
+                valueResourceExtractor);
         }
-        public YamlExtractor() 
-            : this(new ImmediateYamlValueExtractor()) { }
-        public YamlExtractor(string yamlFile, string keyPrefix = null) 
-            : this(new YamlValueExtractor(yamlFile, keyPrefix ?? string.Empty)) { }
+        private YamlExtractor(Encoding encoding) 
+            : this(encoding, new ImmediateYamlValueExtractor(encoding)) { }
+        private YamlExtractor(Encoding encoding, string fileName, string keyPrefix = null) 
+            : this(encoding, new YamlValueExtractor(encoding, fileName, keyPrefix ?? string.Empty)) { }
+        
+        public YamlExtractor()  : this(Encoding.UTF8) { }
+        public YamlExtractor(string fileName, string keyPrefix = null)  : this(Encoding.UTF8, fileName, keyPrefix) { }
 
-        /// <inheritdoc />
-        public IEnumerator<IResourceExtractor> GetEnumerator()
-        {
-            yield return new YamlFileExtractor();
-            yield return _valueResourceExtractor;
-        }
+        public ResourceInfo Extract(IResourceContext context, string name) 
+            => _impl.Extract(context, name);
 
-        /// <inheritdoc />
-        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+        public Task<ResourceInfo> ExtractAsync(IResourceContext context, string name) 
+            => _impl.ExtractAsync(context, name);
     }
 }
