@@ -1,0 +1,834 @@
+### YamlMime:ManagedReference
+items:
+- uid: Axle.Resources.Properties.PropertiesResourceInfo
+  commentId: T:Axle.Resources.Properties.PropertiesResourceInfo
+  id: PropertiesResourceInfo
+  parent: Axle.Resources.Properties
+  children:
+  - Axle.Resources.Properties.PropertiesResourceInfo.FileExtension
+  - Axle.Resources.Properties.PropertiesResourceInfo.MimeType
+  - Axle.Resources.Properties.PropertiesResourceInfo.Open
+  - Axle.Resources.Properties.PropertiesResourceInfo.TryResolve(System.Type,System.Object@)
+  langs:
+  - csharp
+  - vb
+  name: PropertiesResourceInfo
+  nameWithType: PropertiesResourceInfo
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo
+  type: Class
+  source:
+    remote:
+      path: codebase/resources/properties/src/PropertiesFileResourceInfo.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: PropertiesResourceInfo
+    path: ../src/PropertiesFileResourceInfo.cs
+    startLine: 13
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties
+  summary: "\nA class representing a Java properties file as a resource.\n"
+  example: []
+  syntax:
+    content: 'public class PropertiesResourceInfo : TextDocumentResourceInfo'
+    content.vb: >-
+      Public Class PropertiesResourceInfo
+          Inherits TextDocumentResourceInfo
+  inheritance:
+  - System.Object
+  - Axle.Resources.ResourceInfo
+  - Axle.Resources.Text.Documents.TextDocumentResourceInfo
+  inheritedMembers:
+  - Axle.Resources.Text.Documents.TextDocumentResourceInfo.Data
+  - Axle.Resources.ResourceInfo.Resolve(System.Type)
+  - Axle.Resources.ResourceInfo.Resolve``1
+  - Axle.Resources.ResourceInfo.TryResolve``1({T}@)
+  - Axle.Resources.ResourceInfo.Bundle
+  - Axle.Resources.ResourceInfo.Name
+  - Axle.Resources.ResourceInfo.Culture
+  - Axle.Resources.ResourceInfo.ContentType
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - class
+  modifiers.vb:
+  - Public
+  - Class
+- uid: Axle.Resources.Properties.PropertiesResourceInfo.MimeType
+  commentId: F:Axle.Resources.Properties.PropertiesResourceInfo.MimeType
+  id: MimeType
+  parent: Axle.Resources.Properties.PropertiesResourceInfo
+  langs:
+  - csharp
+  - vb
+  name: MimeType
+  nameWithType: PropertiesResourceInfo.MimeType
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo.MimeType
+  type: Field
+  source:
+    remote:
+      path: codebase/resources/properties/src/PropertiesFileResourceInfo.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: MimeType
+    path: ../src/PropertiesFileResourceInfo.cs
+    startLine: 18
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties
+  summary: "\nGets the content (MIME) type of a java properties file.\n"
+  example: []
+  syntax:
+    content: public const string MimeType = "text/x-java-properties"
+    return:
+      type: System.String
+    content.vb: Public Const MimeType As String = "text/x-java-properties"
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Axle.Resources.Properties.PropertiesResourceInfo.FileExtension
+  commentId: F:Axle.Resources.Properties.PropertiesResourceInfo.FileExtension
+  id: FileExtension
+  parent: Axle.Resources.Properties.PropertiesResourceInfo
+  langs:
+  - csharp
+  - vb
+  name: FileExtension
+  nameWithType: PropertiesResourceInfo.FileExtension
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo.FileExtension
+  type: Field
+  source:
+    remote:
+      path: codebase/resources/properties/src/PropertiesFileResourceInfo.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: FileExtension
+    path: ../src/PropertiesFileResourceInfo.cs
+    startLine: 23
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties
+  summary: "\nGets the file extension for a Java properties file.\n"
+  example: []
+  syntax:
+    content: public const string FileExtension = ".properties"
+    return:
+      type: System.String
+    content.vb: Public Const FileExtension As String = ".properties"
+  modifiers.csharp:
+  - public
+  - const
+  modifiers.vb:
+  - Public
+  - Const
+- uid: Axle.Resources.Properties.PropertiesResourceInfo.Open
+  commentId: M:Axle.Resources.Properties.PropertiesResourceInfo.Open
+  id: Open
+  parent: Axle.Resources.Properties.PropertiesResourceInfo
+  langs:
+  - csharp
+  - vb
+  name: Open()
+  nameWithType: PropertiesResourceInfo.Open()
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo.Open()
+  type: Method
+  source:
+    remote:
+      path: codebase/resources/properties/src/PropertiesFileResourceInfo.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: Open
+    path: ../src/PropertiesFileResourceInfo.cs
+    startLine: 36
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties
+  summary: "\nOpens a <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> object for reading the contents of the properties file.\n"
+  example: []
+  syntax:
+    content: public override Stream Open()
+    return:
+      type: System.IO.Stream
+      description: "\nA <xref href=\"System.IO.Stream\" data-throw-if-not-resolved=\"false\"></xref> object for reading the contents of the properties file.\n"
+    content.vb: Public Overrides Function Open As Stream
+  overridden: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+  overload: Axle.Resources.Properties.PropertiesResourceInfo.Open*
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+- uid: Axle.Resources.Properties.PropertiesResourceInfo.TryResolve(System.Type,System.Object@)
+  commentId: M:Axle.Resources.Properties.PropertiesResourceInfo.TryResolve(System.Type,System.Object@)
+  id: TryResolve(System.Type,System.Object@)
+  parent: Axle.Resources.Properties.PropertiesResourceInfo
+  langs:
+  - csharp
+  - vb
+  name: TryResolve(Type, out Object)
+  nameWithType: PropertiesResourceInfo.TryResolve(Type, out Object)
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo.TryResolve(System.Type, out System.Object)
+  type: Method
+  source:
+    remote:
+      path: codebase/resources/properties/src/PropertiesFileResourceInfo.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: TryResolve
+    path: ../src/PropertiesFileResourceInfo.cs
+    startLine: 52
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties
+  syntax:
+    content: public override bool TryResolve(Type targetType, out object result)
+    parameters:
+    - id: targetType
+      type: System.Type
+    - id: result
+      type: System.Object
+    return:
+      type: System.Boolean
+    content.vb: Public Overrides Function TryResolve(targetType As Type, ByRef result As Object) As Boolean
+  overridden: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  overload: Axle.Resources.Properties.PropertiesResourceInfo.TryResolve*
+  nameWithType.vb: PropertiesResourceInfo.TryResolve(Type, ByRef Object)
+  modifiers.csharp:
+  - public
+  - override
+  modifiers.vb:
+  - Public
+  - Overrides
+  fullName.vb: Axle.Resources.Properties.PropertiesResourceInfo.TryResolve(System.Type, ByRef System.Object)
+  name.vb: TryResolve(Type, ByRef Object)
+references:
+- uid: Axle.Resources.Properties
+  commentId: N:Axle.Resources.Properties
+  name: Axle.Resources.Properties
+  nameWithType: Axle.Resources.Properties
+  fullName: Axle.Resources.Properties
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Axle.Resources.ResourceInfo
+  commentId: T:Axle.Resources.ResourceInfo
+  parent: Axle.Resources
+  name: ResourceInfo
+  nameWithType: ResourceInfo
+  fullName: Axle.Resources.ResourceInfo
+- uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo
+  commentId: T:Axle.Resources.Text.Documents.TextDocumentResourceInfo
+  parent: Axle.Resources.Text.Documents
+  name: TextDocumentResourceInfo
+  nameWithType: TextDocumentResourceInfo
+  fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo
+- uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Data
+  commentId: P:Axle.Resources.Text.Documents.TextDocumentResourceInfo.Data
+  parent: Axle.Resources.Text.Documents.TextDocumentResourceInfo
+  name: Data
+  nameWithType: TextDocumentResourceInfo.Data
+  fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Data
+- uid: Axle.Resources.ResourceInfo.Resolve(System.Type)
+  commentId: M:Axle.Resources.ResourceInfo.Resolve(System.Type)
+  parent: Axle.Resources.ResourceInfo
+  isExternal: true
+  name: Resolve(Type)
+  nameWithType: ResourceInfo.Resolve(Type)
+  fullName: Axle.Resources.ResourceInfo.Resolve(System.Type)
+  spec.csharp:
+  - uid: Axle.Resources.ResourceInfo.Resolve(System.Type)
+    name: Resolve
+    nameWithType: ResourceInfo.Resolve
+    fullName: Axle.Resources.ResourceInfo.Resolve
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.ResourceInfo.Resolve(System.Type)
+    name: Resolve
+    nameWithType: ResourceInfo.Resolve
+    fullName: Axle.Resources.ResourceInfo.Resolve
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Axle.Resources.ResourceInfo.Resolve``1
+  commentId: M:Axle.Resources.ResourceInfo.Resolve``1
+  parent: Axle.Resources.ResourceInfo
+  name: Resolve<T>()
+  nameWithType: ResourceInfo.Resolve<T>()
+  fullName: Axle.Resources.ResourceInfo.Resolve<T>()
+  nameWithType.vb: ResourceInfo.Resolve(Of T)()
+  fullName.vb: Axle.Resources.ResourceInfo.Resolve(Of T)()
+  name.vb: Resolve(Of T)()
+  spec.csharp:
+  - uid: Axle.Resources.ResourceInfo.Resolve``1
+    name: Resolve<T>
+    nameWithType: ResourceInfo.Resolve<T>
+    fullName: Axle.Resources.ResourceInfo.Resolve<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.ResourceInfo.Resolve``1
+    name: Resolve(Of T)
+    nameWithType: ResourceInfo.Resolve(Of T)
+    fullName: Axle.Resources.ResourceInfo.Resolve(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Axle.Resources.ResourceInfo.TryResolve``1({T}@)
+  commentId: M:Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+  parent: Axle.Resources.ResourceInfo
+  definition: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+  name: TryResolve<T>(T)
+  nameWithType: ResourceInfo.TryResolve<T>(T)
+  fullName: Axle.Resources.ResourceInfo.TryResolve<T>(T)
+  nameWithType.vb: ResourceInfo.TryResolve(Of T)(T)
+  fullName.vb: Axle.Resources.ResourceInfo.TryResolve(Of T)(T)
+  name.vb: TryResolve(Of T)(T)
+  spec.csharp:
+  - uid: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+    name: TryResolve<T>
+    nameWithType: ResourceInfo.TryResolve<T>
+    fullName: Axle.Resources.ResourceInfo.TryResolve<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+    name: TryResolve(Of T)
+    nameWithType: ResourceInfo.TryResolve(Of T)
+    fullName: Axle.Resources.ResourceInfo.TryResolve(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Axle.Resources.ResourceInfo.Bundle
+  commentId: P:Axle.Resources.ResourceInfo.Bundle
+  parent: Axle.Resources.ResourceInfo
+  name: Bundle
+  nameWithType: ResourceInfo.Bundle
+  fullName: Axle.Resources.ResourceInfo.Bundle
+- uid: Axle.Resources.ResourceInfo.Name
+  commentId: P:Axle.Resources.ResourceInfo.Name
+  parent: Axle.Resources.ResourceInfo
+  name: Name
+  nameWithType: ResourceInfo.Name
+  fullName: Axle.Resources.ResourceInfo.Name
+- uid: Axle.Resources.ResourceInfo.Culture
+  commentId: P:Axle.Resources.ResourceInfo.Culture
+  parent: Axle.Resources.ResourceInfo
+  name: Culture
+  nameWithType: ResourceInfo.Culture
+  fullName: Axle.Resources.ResourceInfo.Culture
+- uid: Axle.Resources.ResourceInfo.ContentType
+  commentId: P:Axle.Resources.ResourceInfo.ContentType
+  parent: Axle.Resources.ResourceInfo
+  name: ContentType
+  nameWithType: ResourceInfo.ContentType
+  fullName: Axle.Resources.ResourceInfo.ContentType
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Axle.Resources
+  commentId: N:Axle.Resources
+  name: Axle.Resources
+  nameWithType: Axle.Resources
+  fullName: Axle.Resources
+- uid: Axle.Resources.Text.Documents
+  commentId: N:Axle.Resources.Text.Documents
+  name: Axle.Resources.Text.Documents
+  nameWithType: Axle.Resources.Text.Documents
+  fullName: Axle.Resources.Text.Documents
+- uid: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+  commentId: M:Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+  name: TryResolve<T>(T)
+  nameWithType: ResourceInfo.TryResolve<T>(T)
+  fullName: Axle.Resources.ResourceInfo.TryResolve<T>(T)
+  nameWithType.vb: ResourceInfo.TryResolve(Of T)(T)
+  fullName.vb: Axle.Resources.ResourceInfo.TryResolve(Of T)(T)
+  name.vb: TryResolve(Of T)(T)
+  spec.csharp:
+  - uid: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+    name: TryResolve<T>
+    nameWithType: ResourceInfo.TryResolve<T>
+    fullName: Axle.Resources.ResourceInfo.TryResolve<T>
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.ResourceInfo.TryResolve``1(``0@)
+    name: TryResolve(Of T)
+    nameWithType: ResourceInfo.TryResolve(Of T)
+    fullName: Axle.Resources.ResourceInfo.TryResolve(Of T)
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: T
+    nameWithType: T
+    fullName: T
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: System.IO.Stream
+  commentId: T:System.IO.Stream
+  parent: System.IO
+  isExternal: true
+  name: Stream
+  nameWithType: Stream
+  fullName: System.IO.Stream
+- uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+  commentId: M:Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+  parent: Axle.Resources.Text.Documents.TextDocumentResourceInfo
+  name: Open()
+  nameWithType: TextDocumentResourceInfo.Open()
+  fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open()
+  spec.csharp:
+  - uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+    name: Open
+    nameWithType: TextDocumentResourceInfo.Open
+    fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+    name: Open
+    nameWithType: TextDocumentResourceInfo.Open
+    fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.Open
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Axle.Resources.Properties.PropertiesResourceInfo.Open*
+  commentId: Overload:Axle.Resources.Properties.PropertiesResourceInfo.Open
+  name: Open
+  nameWithType: PropertiesResourceInfo.Open
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo.Open
+- uid: System.IO
+  commentId: N:System.IO
+  isExternal: true
+  name: System.IO
+  nameWithType: System.IO
+  fullName: System.IO
+- uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  commentId: M:Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+  parent: Axle.Resources.Text.Documents.TextDocumentResourceInfo
+  isExternal: true
+  name: TryResolve(Type, Object)
+  nameWithType: TextDocumentResourceInfo.TryResolve(Type, Object)
+  fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve(System.Type, System.Object)
+  spec.csharp:
+  - uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+    name: TryResolve
+    nameWithType: TextDocumentResourceInfo.TryResolve
+    fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve(System.Type,System.Object@)
+    name: TryResolve
+    nameWithType: TextDocumentResourceInfo.TryResolve
+    fullName: Axle.Resources.Text.Documents.TextDocumentResourceInfo.TryResolve
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Type
+    name: Type
+    nameWithType: Type
+    fullName: System.Type
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Axle.Resources.Properties.PropertiesResourceInfo.TryResolve*
+  commentId: Overload:Axle.Resources.Properties.PropertiesResourceInfo.TryResolve
+  name: TryResolve
+  nameWithType: PropertiesResourceInfo.TryResolve
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo.TryResolve
+- uid: System.Type
+  commentId: T:System.Type
+  parent: System
+  isExternal: true
+  name: Type
+  nameWithType: Type
+  fullName: System.Type
+- uid: System.Boolean
+  commentId: T:System.Boolean
+  parent: System
+  isExternal: true
+  name: Boolean
+  nameWithType: Boolean
+  fullName: System.Boolean

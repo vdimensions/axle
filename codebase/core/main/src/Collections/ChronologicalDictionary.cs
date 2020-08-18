@@ -44,15 +44,20 @@ namespace Axle.Collections
                 _comparer = comparer;
             }
             public TimestampDictionary() : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), EqualityComparer<TKey>.Default) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), 
+                    EqualityComparer<TKey>.Default) { }
             public TimestampDictionary(int capacity) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), EqualityComparer<TKey>.Default) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), 
+                    EqualityComparer<TKey>.Default) { }
             public TimestampDictionary(int capacity, IEqualityComparer<TKey> comparer) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), comparer) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), 
+                    comparer) { }
             public TimestampDictionary(IEqualityComparer<TKey> comparer) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), comparer) { }
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), 
+                    comparer) { }
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            internal TimestampDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext) : base(serializationInfo, streamingContext)
+            internal TimestampDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext) 
+                : base(serializationInfo, streamingContext)
             {
                 _collection = this;
             }
@@ -63,11 +68,15 @@ namespace Axle.Collections
             private IEnumerable<KeyValuePair<TKey, TValue>> Enumerate()
             {
                 return Enumerable.Select(
-                    Enumerable.OrderBy(_collection, x => x.Key, new ChronologicalKeyComparer<TKey>()), x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
+                    Enumerable.OrderBy(
+                        _collection, 
+                        x => x.Key, 
+                        new ChronologicalKeyComparer<TKey>()), x => new KeyValuePair<TKey, TValue>(x.Key.Key, x.Value));
             }
 
             #region Implementation of IEnumerable<KeyValuePair<TKey,TValue>>
-            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() => Enumerate().GetEnumerator();
+            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator() 
+                => Enumerate().GetEnumerator();
             #endregion
 
             #region Implementation of ICollection<KeyValuePair<TKey,TValue>>

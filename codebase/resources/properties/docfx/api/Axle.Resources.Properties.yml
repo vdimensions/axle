@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Axle.Resources.Properties
+  commentId: N:Axle.Resources.Properties
+  id: Axle.Resources.Properties
+  children:
+  - Axle.Resources.Properties.PropertiesResourceInfo
+  langs:
+  - csharp
+  - vb
+  name: Axle.Resources.Properties
+  nameWithType: Axle.Resources.Properties
+  fullName: Axle.Resources.Properties
+  type: Namespace
+  assemblies:
+  - Axle.Resources.Properties
+references:
+- uid: Axle.Resources.Properties.PropertiesResourceInfo
+  commentId: T:Axle.Resources.Properties.PropertiesResourceInfo
+  name: PropertiesResourceInfo
+  nameWithType: PropertiesResourceInfo
+  fullName: Axle.Resources.Properties.PropertiesResourceInfo

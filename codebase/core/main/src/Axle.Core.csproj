@@ -31,8 +31,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Collections\Extensions\Queue\**" />
+    <Compile Remove="Collections\Extensions\Stack\**" />
     <Compile Remove="_Experimental\**" />
+    <EmbeddedResource Remove="Collections\Extensions\Queue\**" />
+    <EmbeddedResource Remove="Collections\Extensions\Stack\**" />
     <EmbeddedResource Remove="_Experimental\**" />
+    <None Remove="Collections\Extensions\Queue\**" />
+    <None Remove="Collections\Extensions\Stack\**" />
     <None Remove="_Experimental\**" />
   </ItemGroup>
 
@@ -44,11 +50,6 @@
     <Compile Remove="Linq\ISequence.cs" />
     <Compile Remove="Linq\Sequence.cs" />
     <Compile Remove="Linq\SequenceExtensions.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Collections\Extensions\Queue" />
-    <Folder Include="Collections\Extensions\Stack" />
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />

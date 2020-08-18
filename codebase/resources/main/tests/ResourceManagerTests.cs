@@ -13,7 +13,7 @@ namespace Axle.Resources.Tests
     using UriParser = Axle.Conversion.Parsing.UriParser;
 
     [TestFixture]
-    public class TestClass
+    public class ResourceManagerTests
     {
         private static ResourceManager CreateResourceManager()
         {
@@ -26,7 +26,7 @@ namespace Axle.Resources.Tests
             return resourceManager;
         }
         [Test]
-        public void TestFileResourceAccess()
+        public void TestFileSystemResourceExtraction()
         {            
             var resourceManager = CreateResourceManager();
             var fileResource = resourceManager.Load("testBundle", "FileSystemTestFile.txt", CultureInfo.CurrentCulture);
@@ -44,7 +44,7 @@ namespace Axle.Resources.Tests
         }
 
         [Test]
-        public void TestEmbeddedResourceAccess()
+        public void TestEmbeddedResourceExtraction()
         {
             var resourceManager = CreateResourceManager();
 
@@ -63,7 +63,7 @@ namespace Axle.Resources.Tests
         }
 
         [Test]
-        public void TestResXResourceAccess()
+        public void TestResXResourceExtraction()
         {
             var resourceManager = CreateResourceManager();
 

@@ -1,0 +1,22 @@
+### YamlMime:ManagedReference
+items:
+- uid: Axle.Resources.Properties.Extraction
+  commentId: N:Axle.Resources.Properties.Extraction
+  id: Axle.Resources.Properties.Extraction
+  children:
+  - Axle.Resources.Properties.Extraction.PropertiesExtractor
+  langs:
+  - csharp
+  - vb
+  name: Axle.Resources.Properties.Extraction
+  nameWithType: Axle.Resources.Properties.Extraction
+  fullName: Axle.Resources.Properties.Extraction
+  type: Namespace
+  assemblies:
+  - Axle.Resources.Properties
+references:
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  commentId: T:Axle.Resources.Properties.Extraction.PropertiesExtractor
+  name: PropertiesExtractor
+  nameWithType: PropertiesExtractor
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor
