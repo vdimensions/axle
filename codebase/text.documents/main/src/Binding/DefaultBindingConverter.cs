@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Reflection;
 using Axle.Conversion;
 using Axle.Conversion.Parsing;
@@ -77,6 +78,9 @@ namespace Axle.Text.Documents.Binding
                 { typeof(Type),             new BoxingConverter<Type>(new TypeParser()) },
                 { typeof(Assembly),         new BoxingConverter<Assembly>(new AssemblyParser()) },
                 { typeof(Version),          new BoxingConverter<Version>(new VersionParser()) },
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                { typeof(CultureInfo),      new BoxingConverter<CultureInfo>(new CultureInfoParser()) },
+                #endif
             };
         }
 

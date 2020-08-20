@@ -44,8 +44,18 @@
     <!-- Enable local nuget feed for packages produced by this project -->
     <EnableLocalPackageRestore>true</EnableLocalPackageRestore>
   </PropertyGroup>
-  
+
+  <PropertyGroup>
+    <!-- 
+      Disable multi-targeting inclusion from the VDimensions.MSBuild.Sdk.targets because it now
+      comes from a nuget package
+    -->
+    <EnableMultitargeting>false</EnableMultitargeting>
+  </PropertyGroup>
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\VDimensions.MSBuild.Sdk.targets" />
+  <ItemGroup>
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="0.2.*" PrivateAssets="All" />
+  </ItemGroup>
 
   <!-- Versioning properties (after sdk) -->
   <PropertyGroup>
@@ -78,6 +88,15 @@
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="packages\**" />
+    <Compile Remove="paket-files\**" />
+    <EmbeddedResource Remove="packages\**" />
+    <EmbeddedResource Remove="paket-files\**" />
+    <None Remove="packages\**" />
+    <None Remove="paket-files\**" />
+  </ItemGroup>
 
   <Import Project="Dependency.Versions.props" />
 </Project>
