@@ -14,7 +14,7 @@ namespace Axle.References
         /// <summary>
         /// An <see cref="IEqualityComparer{T}"/> implementation that can compare weak references.
         /// Two weak references are deemed equal in case both are not alive or if their values are considered
-        /// equal by the <see cref="EqualityComparer.ValueComparer"/>. 
+        /// equal by the <see cref="P:WeakRef{T}.EqualityComparer.ValueComparer"/>. 
         /// </summary>
         /// <seealso cref="IEqualityComparer{T}"/>
         /// <seealso cref="WeakRef{T}"/>
@@ -56,7 +56,7 @@ namespace Axle.References
                     return true;
                 }
 
-                if (! (ReferenceEquals(xTarget, null) || ReferenceEquals(yTarget, null)))
+                if (! (xTarget is null || yTarget is null))
                 {
                     return ValueComparer.Equals(xTarget, yTarget);
                 }

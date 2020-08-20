@@ -55,8 +55,13 @@ namespace Axle.Collections.Sdk
         }
 
         #region Implementation of IEnumerable
-        /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        /// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.</returns>
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the 
+        /// collection.
+        /// </returns>
         /// <filterpriority>1</filterpriority>
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => Target.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -90,7 +95,8 @@ namespace Axle.Collections.Sdk
         /// </returns>
         protected virtual bool Contains(KeyValuePair<TKey, TValue> item) => Target.Contains(item);
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => CopyTo(array, arrayIndex);
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) 
+            => CopyTo(array, arrayIndex);
         /// <summary>
         /// Copies the elements of the collection to the provided <paramref name="array"/>, starting from the specified
         /// <paramref name="arrayIndex"/>.
@@ -101,7 +107,8 @@ namespace Axle.Collections.Sdk
         /// <param name="arrayIndex">
         /// The start index of the array to store copying values.
         /// </param>
-        protected virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => Target.CopyTo(array, arrayIndex);
+        protected virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) 
+            => Target.CopyTo(array, arrayIndex);
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) => Remove(item);
         /// <summary>

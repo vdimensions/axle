@@ -22,7 +22,7 @@ namespace Axle.References
         /// <summary>
         /// An <see cref="IEqualityComparer{T}"/> implementation that can compare lazy references.
         /// Two lazy references are deemed equal in when both are not initialized or if their values are considered
-        /// equal by the <see cref="EqualityComparer.ValueComparer"/>. 
+        /// equal by the <see cref="P:LazyRef{T}.EqualityComparer.ValueComparer"/>. 
         /// </summary>
         /// <seealso cref="IEqualityComparer{T}"/>
         /// <seealso cref="WeakRef{T}"/>

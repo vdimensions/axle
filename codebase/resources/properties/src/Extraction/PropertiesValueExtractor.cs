@@ -8,7 +8,7 @@ namespace Axle.Resources.Properties.Extraction
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementation that can access the values defined in a Java properties file.
     /// </summary>
-    public sealed class PropertiesValueExtractor : AbstractResourceExtractor
+    internal sealed class PropertiesValueExtractor : AbstractResourceExtractor
     {
         private readonly Encoding _encoding;
         private readonly string _propertyFileName;
