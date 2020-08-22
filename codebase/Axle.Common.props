@@ -39,6 +39,14 @@
     <RestoreSources>$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
   </PropertyGroup>
 
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DefineConstants>$(DefineConstants);TRACE;DEBUG</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
+  </PropertyGroup>
+
   <!-- Configure VDimensions MSBuild Sdk -->
   <PropertyGroup>
     <!-- Enable local nuget feed for packages produced by this project -->

@@ -113,7 +113,7 @@ namespace Axle.Resources
             protected override ResourceInfo DoExtract(IResourceContext context, string name)
             {
                 var key = Tuple.Create(name, _index, context.Culture.Name, context.Location);
-                return _cache.GetOrAdd(key, k => _impl.Extract(context, ((Tuple<string, int, string, Uri>) k).Item1));
+                return _cache.GetOrAdd(key, k => _impl.Extract(context, k.Item1));
             }
         }
 
@@ -210,7 +210,7 @@ namespace Axle.Resources
                 var context = new ResourceContext(bundle, locations, ci, extractors);
                 var result = cache == null
                     ? context.ExtractionChain.Extract(name)
-                    : cache.GetOrAdd(Tuple.Create(name, ci.Name), t => context.ExtractionChain.Extract(((Tuple<string, string>) t).Item1));
+                    : cache.GetOrAdd(Tuple.Create(name, ci.Name), t => context.ExtractionChain.Extract(t.Item1));
                 if (result != null)
                 {
                     return result;

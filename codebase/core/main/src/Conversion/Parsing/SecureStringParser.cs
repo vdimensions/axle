@@ -26,6 +26,7 @@ namespace Axle.Conversion.Parsing
     #endif
     public sealed class SecureStringParser : AbstractParser<SecureString>
     {
+        
         /// <inheritdoc />
         public override bool Validate(CharSequence value, IFormatProvider formatProvider)
         {

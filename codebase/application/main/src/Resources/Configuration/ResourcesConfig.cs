@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Axle.Resources.Configuration
 {
@@ -6,5 +7,6 @@ namespace Axle.Resources.Configuration
     {
         public DefaultBundleConfig DefaultBundle { get; } = new DefaultBundleConfig { };
         public IList<CustomBundleConfig> Bundles { get; set; } = new List<CustomBundleConfig>();
+        public Type CacheManager { get; set; }
     }
 }

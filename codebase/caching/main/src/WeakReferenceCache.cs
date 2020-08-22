@@ -27,6 +27,8 @@ namespace Axle.Caching
             _nodes.Where(x => !x.Value.IsAlive).Select(x => x.Key).ToArray().All(x => _nodes.TryRemove(x, out var _));
         }
 
+        public void Evict() => _nodes.Clear();
+
         public bool Delete(object key)
         {
             var result = _nodes.TryRemove(key, out var _);
@@ -43,8 +45,9 @@ namespace Axle.Caching
 
         public object GetOrAdd(object key, object valueToAdd) { return GetOrAdd<object>(key, valueToAdd); }
         public object GetOrAdd(object key, Func<object, object> valueFactory) { return GetOrAdd<object>(key, valueFactory); }
-        public T GetOrAdd<T>(object key, T valueToAdd) { return GetOrAdd(key, _ => valueToAdd); }
-        public T GetOrAdd<T>(object key, Func<object, T> valueFactory)
+        
+        private T GetOrAdd<T>(object key, T valueToAdd) { return GetOrAdd(key, _ => valueToAdd); }
+        private T GetOrAdd<T>(object key, Func<object, T> valueFactory)
         {
             ClearExpired();
             WeakReferenceCacheNode resultNode;

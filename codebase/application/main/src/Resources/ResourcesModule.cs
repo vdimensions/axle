@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Axle.Caching;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
@@ -16,13 +17,17 @@ namespace Axle.Resources
     [ModuleConfigSection(typeof(ResourcesConfig), "Axle.Application.Resources")]
     internal sealed class ResourcesModule : IResourceBundleConfigurer, IResourceExtractorConfigurer
     {
-        private readonly ResourceManager _resourceManager = new DefaultResourceManager();
+        private readonly ResourceManager _resourceManager;
         private readonly ResourcesConfig _config;
 
         public ResourcesModule() : this(new ResourcesConfig()) { }
         public ResourcesModule(ResourcesConfig config)
         {
             _config = config;
+            _resourceManager = new DefaultResourceManager(
+                config.CacheManager != null
+                    ? (ICacheManager) new TypeIntrospector(config.CacheManager).CreateInstance()
+                    : new WeakReferenceCacheManager());
         }
 
         [ModuleInit]

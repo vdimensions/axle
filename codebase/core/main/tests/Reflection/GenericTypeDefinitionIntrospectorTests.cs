@@ -43,10 +43,11 @@ namespace Axle.Core.Tests.Reflection
             var type = typeof(KeyValuePair<,>);
             var introspector = new TypeIntrospector(type);
             var genericTypeDefinitionIntrospector = introspector.GetGenericTypeDefinition();
-            var genericTypeDefinitionTypeIntrospector = genericTypeDefinitionIntrospector
-                .MakeGenericType(typeof(int))
-                .Introspect();
+            var partiallyGenericType = genericTypeDefinitionIntrospector.MakeGenericType(typeof(int));
+            var genericTypeDefinitionTypeIntrospector = partiallyGenericType.Introspect();
+            var fullyGenericType = partiallyGenericType.MakeGenericType(typeof(string)).Introspect();
             Assert.IsNull(genericTypeDefinitionTypeIntrospector);
+            Assert.IsNotNull(fullyGenericType);
         }
 
         [Test]
