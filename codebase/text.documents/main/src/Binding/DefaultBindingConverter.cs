@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Reflection;
+using System.Security;
 using Axle.Conversion;
 using Axle.Conversion.Parsing;
 using Axle.Verification;
@@ -13,7 +14,7 @@ namespace Axle.Text.Documents.Binding
     /// </summary>
     public sealed class DefaultBindingConverter : IBindingConverter
     {
-        private static readonly IDictionary<Type, IConverter<string, object>> _fallbackConverters;
+        private static readonly IDictionary<Type, IConverter<string, object>> _converters;
 
         static DefaultBindingConverter() 
         {
@@ -35,7 +36,7 @@ namespace Axle.Text.Documents.Binding
             var timeSpanParser = new TimeSpanParser();
             var guidParser = new GuidParser();
 
-            _fallbackConverters = new Dictionary<Type, IConverter<string, object>>
+            _converters = new Dictionary<Type, IConverter<string, object>>
             {
                 { typeof(bool),             new BoxingConverter<bool>(booleanParser) },
                 { typeof(char),             new BoxingConverter<char>(characterParser) },
@@ -80,6 +81,7 @@ namespace Axle.Text.Documents.Binding
                 { typeof(Version),          new BoxingConverter<Version>(new VersionParser()) },
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 { typeof(CultureInfo),      new BoxingConverter<CultureInfo>(new CultureInfoParser()) },
+                { typeof(SecureString),     new BoxingConverter<SecureString>(new SecureStringParser()) },
                 #endif
             };
         }
@@ -89,7 +91,7 @@ namespace Axle.Text.Documents.Binding
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(targetType, nameof(targetType)));
             boundValue = null;
-            return _fallbackConverters.TryGetValue(targetType, out var converter) && converter.TryConvert(rawValue, out boundValue);
+            return _converters.TryGetValue(targetType, out var converter) && converter.TryConvert(rawValue, out boundValue);
         }
     }
 }

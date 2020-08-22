@@ -129,8 +129,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Tests",
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Axle.FSharp", "codebase\core\fsharp\src\Axle.FSharp.fsproj", "{058DA5D4-BE62-4A66-AC23-DD162E113EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.Microsoft", "codebase\configuration\microsoft\src\Axle.Configuration.Microsoft.csproj", "{FDA82935-6451-468E-A3DC-DA5E681C652F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

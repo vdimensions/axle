@@ -14,8 +14,19 @@ namespace Axle.Conversion.Parsing
     #endif
     public abstract class AbstractStrictParser<T> : AbstractParser<T>, IStrictParser<T>
     {
+        object IStrictParser.ParseExact(char[] value, string format, IFormatProvider formatProvider) => ParseExact(value, format, formatProvider);
         object IStrictParser.ParseExact(string value, string format, IFormatProvider formatProvider) => ParseExact(value, format, formatProvider);
 
+        bool IStrictParser.TryParseExact(char[] value, string format, IFormatProvider formatProvider, out object result)
+        {
+            if (TryParseExact(value, format, formatProvider, out var res))
+            {
+                result = res;
+                return true;
+            }
+            result = null;
+            return false;
+        }
         bool IStrictParser.TryParseExact(string value, string format, IFormatProvider formatProvider, out object result)
         {
             if (TryParseExact(value, format, formatProvider, out var res))
@@ -27,6 +38,41 @@ namespace Axle.Conversion.Parsing
             return false;
         }
 
+        /// <inheritdoc />
+        public T ParseExact(char[] value, string format, IFormatProvider formatProvider)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
+            if (format == null)
+            {
+                throw new ArgumentNullException(nameof(format));
+            }
+            if (format.Length == 0)
+            {
+                throw new ArgumentException("Format must not be an empty string", nameof(format));
+            }
+
+            if (!ValidateExact(value, format, formatProvider))
+            {
+                throw new ParseException(
+                    string.Format("Unable to parse a character array to the desired type `{0}`.", typeof(T)));
+            }
+
+            try
+            {
+                return DoParseExact(value, format, formatProvider);
+            }
+            catch (Exception ex)
+            {
+                throw new ParseException(
+                    string.Format(
+                        "An error occurred while parsing a character array to the desired type `{0}`. See the inner exception for more details.", 
+                        typeof(T)), 
+                    ex);
+            }
+        }
         /// <inheritdoc />
         public T ParseExact(string value, string format, IFormatProvider formatProvider)
         {
@@ -57,7 +103,32 @@ namespace Axle.Conversion.Parsing
                 throw new ParseException(value, format, typeof(T), ex);
             }
         }
+        
+        /// <inheritdoc />
+        public virtual bool TryParseExact(char[] value, string format, IFormatProvider formatProvider, out T output)
+        {
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
+            }
 
+            if (string.IsNullOrEmpty(format) || !ValidateExact(value, format, formatProvider))
+            {
+                output = default(T);
+                return false;
+            }
+            var result = true;
+            try
+            {
+                output = DoParseExact(value, format, formatProvider);
+            }
+            catch
+            {
+                output = default(T);
+                result = false;
+            }
+            return result;
+        }
         /// <inheritdoc />
         public virtual bool TryParseExact(string value, string format, IFormatProvider formatProvider, out T output)
         {
@@ -85,6 +156,28 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <summary>
+        /// This method is called within the <see cref="TryParseExact(char[],string,System.IFormatProvider,out T)"/> to
+        /// further validate the provided value and format, before the parsing is attempted.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="char">character</see> array containing the value to convert. 
+        /// </param>
+        /// <param name="format">
+        /// A format string specifying the format of the value to parse. 
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific 
+        /// format recognition. 
+        /// </param>
+        /// <returns>
+        /// <c><see langword="true"/></c>, if the validation logic determines that the value is a valid representation 
+        /// of <typeparamref name="T"/>;
+        /// <c><see langword="false"/></c> otherwise.
+        /// </returns>
+        public virtual bool ValidateExact(char[] value, string format, IFormatProvider formatProvider) 
+            => ValidateExact(new string(value), format, formatProvider);
+
+        /// <summary>
         /// This method is called within the <see cref="TryParseExact(string,string,System.IFormatProvider,out T)"/> to
         /// further validate the provided value and format, before the parsing is attempted.
         /// </summary>
@@ -103,11 +196,30 @@ namespace Axle.Conversion.Parsing
         /// of <typeparamref name="T"/>;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public virtual bool ValidateExact(string value, string format, IFormatProvider formatProvider)
-        {
-            return true;
-        }
+        public virtual bool ValidateExact(string value, string format, IFormatProvider formatProvider) => true;
 
+        /// <summary>
+        /// Attempts to create an instance of the specified type, but does not perform any validation of the input 
+        /// string.
+        /// <remarks>
+        /// This method is intended to be used after a string validation was performed.
+        /// </remarks> 
+        /// </summary>
+        /// <param name="value">
+        /// The character array value to be parsed.
+        /// </param>
+        /// <param name="format">
+        /// A format string specifying the format of the value to parse. 
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific 
+        /// format recognition. 
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="T" />.
+        /// </returns>
+        protected virtual T DoParseExact(char[] value, string format, IFormatProvider formatProvider)
+            => DoParseExact(new string(value), format, formatProvider);
         /// <summary>
         /// Attempts to create an instance of the specified type, but does not perform any validation of the input 
         /// string.
