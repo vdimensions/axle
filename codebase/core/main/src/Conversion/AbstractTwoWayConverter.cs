@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Axle.Conversion
 {
     /// <summary>
@@ -56,8 +55,8 @@ namespace Axle.Conversion
 
         /// <summary>
         /// Returns an instance of <see cref="ReverseConverter{T, T}"/>. This is effectively the same converter
-        /// instance exposed under an interface where the <typeparam name="TS"></typeparam> and
-        /// <typeparam name="TS"></typeparam> have been swapped.
+        /// instance exposed under an interface where the <typeparamref name="TS" /> and <typeparamref name="TS" />
+        /// have been swapped.
         /// </summary>
         /// <returns>
         /// An instance of <see cref="ReverseConverter{T, T}"/>.

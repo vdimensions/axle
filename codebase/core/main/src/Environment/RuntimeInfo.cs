@@ -28,7 +28,11 @@ namespace Axle.Environment
         {
             var displayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
             return displayNameMethod != null
-                ? new VersionParser().Parse(StringExtensions.TakeBeforeFirst(displayNameMethod.Invoke(null, null).ToString(), " ", StringComparison.OrdinalIgnoreCase).Trim())
+                ? new VersionParser().Parse(
+                    StringExtensions.TakeBeforeFirst(
+                        displayNameMethod.Invoke(null, null).ToString(), 
+                        " ", 
+                        StringComparison.OrdinalIgnoreCase).Trim())
                 : null;
         }
         #endif
@@ -69,8 +73,7 @@ namespace Axle.Environment
         }
 
         #if NETFRAMEWORK
-        public Assembly LoadAssembly(string assemblyName) => LoadAssembly(assemblyName, null);
-        public Assembly LoadAssembly(string assemblyName, Evidence securityEvidence)
+        public Assembly LoadAssembly(string assemblyName)
         {
             if (assemblyName == null)
             {
@@ -86,13 +89,13 @@ namespace Axle.Environment
             const string ext = ".dll";
             var hasExt = assemblyName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
 
-            ICollection<Attempt<string, Evidence, Assembly>> chain = new List<Attempt<string, Evidence, Assembly>>(4)
+            ICollection<Attempt<string, Assembly>> chain = new List<Attempt<string, Assembly>>(4)
                 {
-                    (string a, Evidence e, out Assembly res) =>
+                    (string a, out Assembly res) =>
                     {
                         try
                         {
-                            res = e == null ? Assembly.Load(a) : Assembly.Load(a, e);
+                            res = Assembly.Load(a);
                             return res != null;
                         }
                         catch
@@ -101,12 +104,12 @@ namespace Axle.Environment
                             return false;
                         }
                     },
-                    (string a, Evidence e, out Assembly res) =>
+                    (string a, out Assembly res) =>
                     {
                         var name = !hasExt ? a : a + ext;
                         try
                         {
-                            res = e == null ? Assembly.LoadFrom(name) : Assembly.LoadFrom(name, e);
+                            res = Assembly.LoadFrom(name);
                             return res != null;
                         }
                         catch
@@ -115,12 +118,12 @@ namespace Axle.Environment
                             return false;
                         }
                     },
-                    (string a, Evidence e, out Assembly res) =>
+                    (string a, out Assembly res) =>
                     {
                         var name = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), hasExt ? a : a + ext);
                         try
                         {
-                            res = e == null ? Assembly.LoadFrom(name) : Assembly.LoadFrom(name, e);
+                            res = Assembly.LoadFrom(name);
                             return res != null;
                         }
                         catch
@@ -134,7 +137,7 @@ namespace Axle.Environment
             var noExtName = hasExt ? StringExtensions.TakeBeforeLast(assemblyName, '.') : assemblyName;
             foreach (var attempt in chain)
             {
-                if (attempt.Invoke(noExtName, securityEvidence, out var result))
+                if (attempt.Invoke(noExtName, out var result))
                 {
                     return result;
                 }

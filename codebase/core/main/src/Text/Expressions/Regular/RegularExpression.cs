@@ -21,7 +21,8 @@ namespace Axle.Text.Expressions.Regular
         private readonly Regex _regex;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="RegularExpression"/> class using the provided <see cref="Regex"/> object.
+        /// Creates a new instance of the <see cref="RegularExpression"/> class using the provided <see cref="Regex"/>
+        /// object.
         /// </summary>
         /// <param name="regex">
         /// Teh underlying <see cref="Regex"/> object.
@@ -131,19 +132,29 @@ namespace Axle.Text.Expressions.Regular
         public string[] Split(string input, int count, int startIndex) => _regex.Split(input, count, startIndex);
 
         /// <summary>
-        /// Converts an instance of <see cref="RegularExpression"/> to the corresponding <see cref="Regex" /> equivalent
+        /// Converts an instance of <see cref="RegularExpression"/> to the corresponding <see cref="Regex" />
+        /// equivalent.
         /// </summary>
-        /// <param name="expr">The <see cref="RegularExpression"/> instance to convert.</param>
-        /// <returns>An instance of <see cref="Regex" /> equivalent the current <see cref="RegularExpression"/> instance</returns>
+        /// <param name="expr">
+        /// The <see cref="RegularExpression"/> instance to convert.
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="Regex" /> equivalent the current <see cref="RegularExpression"/> instance.
+        /// </returns>
         /// <seealso cref="RegularExpression"/>
         /// <seealso cref="Regex"/>
         public static implicit operator Regex (RegularExpression expr) => expr._regex;
 
         /// <summary>
-        /// Converts an instance of <see cref="Regex" /> to the corresponding <see cref="RegularExpression"/> equivalent.
+        /// Converts an instance of <see cref="Regex" /> to the corresponding <see cref="RegularExpression"/>
+        /// equivalent.
         /// </summary>
-        /// <param name="expr">The <see cref="Regex"/> instance to convert.</param>
-        /// <returns>An instance of <see cref="RegularExpression" /> equivalent the current <see cref="Regex"/> instance</returns>
+        /// <param name="expr">
+        /// The <see cref="Regex"/> instance to convert.
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="RegularExpression" /> equivalent the current <see cref="Regex"/> instance.
+        /// </returns>
         /// <seealso cref="RegularExpression"/>
         /// <seealso cref="Regex"/>
         public static explicit operator RegularExpression(Regex expr) => new RegularExpression(expr);
