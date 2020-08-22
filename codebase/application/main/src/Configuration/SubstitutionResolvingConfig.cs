@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Text;
 using Axle.Text.Expressions.Substitution;
 using Axle.Verification;
 
@@ -28,10 +29,13 @@ namespace Axle.Configuration
             Verifier.IsNotNull(Verifier.VerifyArgument(token, nameof(token)));
             if (token.Length > 0)
             {
-                var settingValue = _substSource[token].Select(x => x.Value).SingleOrDefault(x => !string.IsNullOrEmpty(x));
+                var settingValue = _substSource[token]
+                    .Select(x => x.Value)
+                    .SingleOrDefault(x => x != null && x.Length > 0);
                 if (settingValue != null)
                 {
-                    value = settingValue;
+                    // TODO: avoid calling .ToString() on CharSequence instance `settingValue`
+                    value = settingValue.ToString();
                     return true;
                 }
             }
@@ -61,7 +65,8 @@ namespace Axle.Configuration
                             }
                             case IConfigSetting cv:
                             {
-                                var substitutedValue = _expression.Replace(cv.Value, GetSafeSubstitutionProvider(key, _originalConfig));
+                                // TODO: avoid calling .ToString() on the CharSequence cv
+                                var substitutedValue = _expression.Replace(cv.Value.ToString(), GetSafeSubstitutionProvider(key, _originalConfig));
                                 return ConfigSetting.Create(substitutedValue);
                             }
                             default:
@@ -81,12 +86,13 @@ namespace Axle.Configuration
         public IEnumerable<string> Keys => _originalConfig.Keys;
 
         public string Name => _originalConfig.Name;
-        public string Value
+        public CharSequence Value
         {
             get
             {
                 var val = _originalConfig.Value;
-                return val == null ? null : _expression.Replace(val, this);
+                // TODO: avoid calling .ToString() on the CharSequence val
+                return val == null ? null : _expression.Replace(val.ToString(), this);
             }
         }
     }

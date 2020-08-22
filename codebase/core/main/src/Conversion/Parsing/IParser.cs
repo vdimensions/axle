@@ -1,4 +1,5 @@
 using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -16,6 +17,34 @@ namespace Axle.Conversion.Parsing
     /// <seealso cref="IParser{T}"/>
     public interface IParser
     {
+        /// <summary>
+        /// Parses a <see cref="char">character</see> sequence <paramref name="value"/> to the specified type.
+        /// </summary>
+        /// <param name="value">
+        /// The <see cref="char">character</see> sequence value to be parsed.
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
+        /// </param>
+        /// <returns>
+        /// An instance created by the <see cref="IParser{T}">generic parser</see> implementation behind this interface.
+        /// See remarks in the <see cref="IParser"/> interface for more info.
+        /// </returns>
+        /// <seealso cref="IParser{T}"/>
+        object Parse(CharSequence value, IFormatProvider formatProvider);
+        /// <summary>
+        /// Parses a <see cref="char">character</see> sequence to the specified type.
+        /// </summary>
+        /// <param name="value">
+        /// The <see cref="char">character</see> sequence value to be parsed.
+        /// </param>
+        /// <returns>
+        /// An instance created by the <see cref="IParser{T}">generic parser</see> implementation behind this interface.
+        /// See remarks in the <see cref="IParser"/> interface for more info.
+        /// </returns>
+        /// <seealso cref="IParser{T}"/>
+        object Parse(CharSequence value);
         /// <summary>
         /// Parses a <see cref="char">character</see> array <paramref name="value"/> to the specified type.
         /// </summary>
@@ -72,7 +101,99 @@ namespace Axle.Conversion.Parsing
         /// </returns>
         /// <seealso cref="IParser{T}"/>
         object Parse(string value);
-
+        
+        /// <summary>
+        /// Converts the specified <see cref="char">character</see> sequence representation of a logical
+        /// <paramref name="value"/> to its <see cref="TargetType"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="char">character</see> sequence containing the value to convert.
+        /// </param>
+        /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format
+        /// recognition.</param>
+        /// <param name="result">
+        /// When this method returns, <paramref name="result"/> contains the parsed value created by the
+        /// <see cref="IParser{T}">generic parser</see> implementation behind this interface, (see remarks in the
+        /// <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in
+        /// <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="value"/> was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        /// <seealso cref="IParser{T}"/>
+        bool TryParse(CharSequence value, IFormatProvider formatProvider, out object result);
+        /// <summary>
+        /// Converts the specified <see cref="char">character</see> sequence representation of a logical
+        /// <paramref name="value"/> to its <see cref="TargetType"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A character sequence containing the value to convert.
+        /// </param>
+        /// <param name="result">
+        /// When this method returns, <paramref name="result"/> contains the parsed value created by the
+        /// <see cref="IParser{T}">generic parser</see> implementation behind this interface, (see remarks in the
+        /// <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in
+        /// <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="value"/> was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        /// <seealso cref="IParser{T}"/>
+        bool TryParse(CharSequence value, out object result);
+        /// <summary>
+        /// Converts the specified <see cref="char">character</see> array representation of a logical
+        /// <paramref name="value"/> to its <see cref="TargetType"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="char">character</see> array containing the value to convert.
+        /// </param>
+        /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format
+        /// recognition.</param>
+        /// <param name="result">
+        /// When this method returns, <paramref name="result"/> contains the parsed value created by the
+        /// <see cref="IParser{T}">generic parser</see> implementation behind this interface, (see remarks in the
+        /// <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in
+        /// <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="value"/> was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        /// <seealso cref="IParser{T}"/>
+        bool TryParse(char[] value, IFormatProvider formatProvider, out object result);
+        /// <summary>
+        /// Converts the specified <see cref="char">character</see> array representation of a logical
+        /// <paramref name="value"/> to its <see cref="TargetType"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A character array containing the value to convert.
+        /// </param>
+        /// <param name="result">
+        /// When this method returns, <paramref name="result"/> contains the parsed value created by the
+        /// <see cref="IParser{T}">generic parser</see> implementation behind this interface, (see remarks in the
+        /// <see cref="IParser"/> interface for more info) that is the equivalent to the string passed in
+        /// <paramref name="value" />, if the conversion succeeded, or <c>null</c> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if <paramref name="value"/> was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        /// <seealso cref="IParser{T}"/>
+        bool TryParse(char[] value, out object result);
         /// <summary>
         /// Converts the specified <see cref="string">string</see> representation of a logical <paramref name="value"/>
         /// to its <see cref="TargetType"/> equivalent.
@@ -133,8 +254,32 @@ namespace Axle.Conversion.Parsing
     /// <typeparam name="T">
     /// The result type of the parsing.
     /// </typeparam>
-    public interface IParser<T> : IParser, IConverter<string, T>, IConverter<char[], T>
+    public interface IParser<T> : IParser, IConverter<CharSequence, T>, IConverter<string, T>, IConverter<char[], T>
     {
+        /// <summary>
+        /// Parses a given <see cref="char">character</see> sequence <paramref name="value"/> to the specified type.
+        /// </summary>
+        /// <param name="value">
+        /// The <see cref="char">character</see> sequence value to be parsed.
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="T" /> that is the result of parsing <paramref name="value"/>.
+        /// </returns>
+        new T Parse(CharSequence value, IFormatProvider formatProvider);
+        /// <summary>
+        /// Parses a given <see cref="char">character</see> sequence <paramref name="value"/> to the specified type.
+        /// </summary>
+        /// <param name="value">
+        /// The <see cref="char">character</see> sequence value to be parsed.
+        /// </param>
+        /// <returns>
+        /// An instance of <typeparamref name="T" /> that is the result of parsing <paramref name="value"/>.
+        /// </returns>
+        new T Parse(CharSequence value);
         /// <summary>
         /// Parses a given <see cref="char">character</see> array <paramref name="value"/> to the specified type.
         /// </summary>
@@ -183,7 +328,51 @@ namespace Axle.Conversion.Parsing
         /// An instance of <typeparamref name="T" /> that is the result of parsing <paramref name="value"/>.
         /// </returns>
         new T Parse(string value);
-
+        
+        /// <summary>
+        /// Converts the specified <see cref="char">character</see> sequence representation of a logical
+        /// <paramref name="value"/> to its <typeparamref name="T"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="char">character</see> sequence containing the value to convert.
+        /// </param>
+        /// <param name="formatProvider">
+        /// A <see cref="IFormatProvider">format provider</see> used to assist parsing and/or provide culture-specific
+        /// format recognition.
+        /// </param>
+        /// <param name="output">
+        /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent
+        /// to the string passed in <paramref name="value" />, if the conversion succeeded, or the default
+        /// value for <typeparamref name="T"/> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if value was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        bool TryParse(CharSequence value, IFormatProvider formatProvider, out T output);
+        /// <summary>
+        /// Converts the specified <see cref="char">character</see> sequence representation of a logical
+        /// <paramref name="value"/> to its <typeparamref name="T"/> equivalent.
+        /// A return value indicates whether the conversion succeeded or failed.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="char">character</see> sequence containing the value to convert.
+        /// </param>
+        /// <param name="output">
+        /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent
+        /// to the string passed in <paramref name="value" />, if the conversion succeeded, or the default value for
+        /// <typeparamref name="T"/> if the conversion has failed.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c>null</c> or is not of the correct
+        /// format.
+        /// This parameter is passed uninitialized.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if value was converted successfully; otherwise, <c>false</c>.
+        /// </returns>
+        bool TryParse(CharSequence value, out T output);
         /// <summary>
         /// Converts the specified <see cref="char">character</see> array representation of a logical
         /// <paramref name="value"/> to its <typeparamref name="T"/> equivalent.
@@ -214,7 +403,7 @@ namespace Axle.Conversion.Parsing
         /// A return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
-        /// A <see cref="char">character</see> containing the value to convert.
+        /// A <see cref="char">character</see> array containing the value to convert.
         /// </param>
         /// <param name="output">
         /// When this method returns, <paramref name="output"/> contains the <typeparamref name="T"/> value equivalent

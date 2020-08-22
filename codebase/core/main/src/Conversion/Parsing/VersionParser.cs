@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -13,11 +14,11 @@ namespace Axle.Conversion.Parsing
     public sealed class VersionParser : AbstractParser<Version>
     {
         /// <inheritdoc />
-        protected override Version DoParse(string value, IFormatProvider formatProvider)
+        protected override Version DoParse(CharSequence value, IFormatProvider formatProvider)
         {
             // TODO: Specify version format provider
 
-            return new Version(value);
+            return new Version(value.ToString());
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 namespace Axle.Conversion.Parsing
 {
@@ -12,9 +13,9 @@ namespace Axle.Conversion.Parsing
     public sealed class TypeParser : AbstractParser<Type>
     {
         /// <inheritdoc />
-        protected override Type DoParse(string value, IFormatProvider formatProvider)
+        protected override Type DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return Type.GetType(value);
+            return Type.GetType(value.ToString());
         }
     }
 }

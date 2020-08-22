@@ -1,7 +1,9 @@
-﻿namespace Axle.Configuration
+﻿using Axle.Text;
+
+namespace Axle.Configuration
 {
     public interface IConfigSetting
     {
-        string Value { get; }
+        CharSequence Value { get; }
     }
 }

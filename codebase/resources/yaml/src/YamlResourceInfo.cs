@@ -4,6 +4,7 @@ using System.Globalization;
 using System.IO;
 using System.Text;
 using Axle.Resources.Text.Documents;
+using Axle.Text;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -25,11 +26,18 @@ namespace Axle.Resources.Yaml
         /// </summary>
         public const string FileExtension = ".yml";
 
-        internal YamlResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data) 
+        internal YamlResourceInfo(
+                string name, 
+                CultureInfo culture, 
+                IDictionary<string, CharSequence> data) 
             : base(name, culture, MimeType, data)
         {
         }
-        internal YamlResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data, ResourceInfo originalResource) 
+        internal YamlResourceInfo(
+                string name, 
+                CultureInfo culture, 
+                IDictionary<string, CharSequence> data, 
+                ResourceInfo originalResource) 
             : base(name, culture, MimeType, data, originalResource)
         {
         }

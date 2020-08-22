@@ -10,7 +10,7 @@
         /// </summary>
         /// <param name="name">The name of the represented member.</param>
         /// <param name="value">The raw value of the represented member.</param>
-        public BoundSimpleValueProvider(string name, string value)
+        public BoundSimpleValueProvider(string name, CharSequence value)
         {
             Name = name;
             Value = value;
@@ -20,6 +20,6 @@
         public string Name { get; }
 
         /// <inheritdoc />
-        public string Value { get; }
+        public CharSequence Value { get; }
     }
 }

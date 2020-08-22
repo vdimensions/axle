@@ -2,6 +2,6 @@
 {
     public interface ITextDocumentValue : ITextDocumentNode
     {
-        string Value { get; }
+        CharSequence Value { get; }
     }
 }

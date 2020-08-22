@@ -1,7 +1,6 @@
 ﻿using System;
-
+using Axle.Text;
 using Axle.Verification;
-
 
 namespace Axle.Conversion.Parsing
 {
@@ -29,18 +28,18 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <inheritdoc />
-        protected override T? DoParse(string value, IFormatProvider formatProvider)
+        protected override T? DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return string.IsNullOrEmpty(value)
+            return value == null || value.Length == 0
                 ? null as T?
                 : _actualParser.Parse(value, formatProvider);
         }
 
         /// <inheritdoc />
-        public override bool TryParse(string value, IFormatProvider formatProvider, out T? output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out T? output)
         {
             output = null;
-            if (string.IsNullOrEmpty(value))
+            if (value == null || value.Length == 0)
             {
                 return true;
             }

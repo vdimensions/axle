@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
+using Axle.Text;
 
 namespace Axle.Conversion.Parsing
 {
@@ -14,11 +15,11 @@ namespace Axle.Conversion.Parsing
     public sealed class CultureInfoParser : AbstractParser<CultureInfo>
     {
         /// <inheritdoc />
-        protected override CultureInfo DoParse(string value, IFormatProvider formatProvider)
+        protected override CultureInfo DoParse(CharSequence value, IFormatProvider formatProvider)
         {
             // see https://stackoverflow.com/questions/986754/when-to-use-cultureinfo-getcultureinfostring-or-cultureinfo-createspecificcult
             // for info why not using `CultureInfo.CreateSpecificCulture`
-            return CultureInfo.GetCultureInfo(value);
+            return CultureInfo.GetCultureInfo(value.ToString());
         }
     }
 }

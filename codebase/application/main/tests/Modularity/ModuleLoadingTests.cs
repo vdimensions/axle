@@ -81,7 +81,7 @@ namespace Axle.ApplicationTests.Modularity
             {
                 var configuration = dependencyContainer.Resolve<IConfiguration>();
                 var message = configuration["message"].Select(x => x.Value).SingleOrDefault();
-                var messageFormat = configuration["messageFormat"].Select(x => x.Value).SingleOrDefault();
+                var messageFormat = (string) configuration["messageFormat"].Select(x => x.Value).SingleOrDefault();
                 var user = System.Environment.UserName;
                 Assert.IsNotNull(configuration);
                 Assert.IsNotNull(message);

@@ -23,9 +23,10 @@ namespace Axle.Configuration.Microsoft.Adapters
                 return;
             }
             var isValidKey = !string.IsNullOrEmpty(key);
-            if (isValidKey && !string.IsNullOrEmpty(setting.Value))
+            if (isValidKey && setting.Value != null && setting.Value.Length > 0)
             {
-                data[key] = setting.Value;
+                // TODO: calls on `CharSequence.ToString()` are a bad idea
+                data[key] = setting.Value.ToString();
             }
             if (setting is IConfigSection section)
             {

@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Text;
 using Axle.Resources.Extraction;
 using Axle.Resources.Text.Documents;
+using Axle.Text;
 
 namespace Axle.Resources.Properties.Extraction
 {
@@ -27,7 +28,7 @@ namespace Axle.Resources.Properties.Extraction
         /// </summary>
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            IDictionary<string, string> props = null;
+            IDictionary<string, CharSequence> props = null;
             switch (context.Extract(_propertyFileName))
             {
                 case null:
@@ -47,7 +48,8 @@ namespace Axle.Resources.Properties.Extraction
 
             if (props != null && props.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
-                return new TextResourceInfo(name, context.Culture, result, _encoding);
+                // TODO: avoid calling `result.ToString()` on a CharSequence. Change resource info type appropriately
+                return new TextResourceInfo(name, context.Culture, result.ToString(), _encoding);
             }
 
             return null;

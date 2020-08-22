@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using Axle.Resources.Extraction;
+using Axle.Text;
 
 
 namespace Axle.Resources.Yaml.Extraction
 {
-    public sealed class YamlValueExtractor : AbstractResourceExtractor
+    internal sealed class YamlValueExtractor : AbstractResourceExtractor
     {
         private readonly string _yamlFile;
         private readonly string _keyPrefix;
@@ -20,7 +21,7 @@ namespace Axle.Resources.Yaml.Extraction
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            IDictionary<string, string> data;
+            IDictionary<string, CharSequence> data;
             switch (context.Extract(_yamlFile))
             {
                 case null:
@@ -38,14 +39,15 @@ namespace Axle.Resources.Yaml.Extraction
                     //}
                     //else
                     //{
-                        data = new Dictionary<string, string>(YamlFileExtractor.DefaultKeyComparer);
+                        data = new Dictionary<string, CharSequence>(YamlFileExtractor.DefaultKeyComparer);
                     //}
                     break;
             }
 
             if (data != null && data.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
-                return new TextResourceInfo(name, context.Culture, result, _encoding);
+                // TODO: avoid calling `result.ToString()` on a CharSequence. Change resource info type appropriately
+                return new TextResourceInfo(name, context.Culture, result.ToString(), _encoding);
             }
 
             return null;

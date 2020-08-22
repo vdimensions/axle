@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Text;
 using Axle.Verification;
 
 namespace Axle.Configuration
@@ -16,7 +17,7 @@ namespace Axle.Configuration
 
         public IEnumerable<string> Keys => Data.Keys;
         public string Name { get; }
-        string IConfigSetting.Value => null;
+        CharSequence IConfigSetting.Value => null;
 
         public IEnumerable<IConfigSetting> this[string key]
         {

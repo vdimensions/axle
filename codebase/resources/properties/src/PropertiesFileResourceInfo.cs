@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using System.Linq;
 using Axle.Resources.Properties.Extraction;
 using Axle.Resources.Text.Documents;
+using Axle.Text;
 using Kajabity.Tools.Java;
 
 namespace Axle.Resources.Properties
@@ -23,9 +25,16 @@ namespace Axle.Resources.Properties
         /// </summary>
         public const string FileExtension = ".properties";
 
-        internal PropertiesResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data) 
+        internal PropertiesResourceInfo(
+                string name, 
+                CultureInfo culture, 
+                IDictionary<string, CharSequence> data) 
             : base(name, culture, MimeType, data) { }
-        internal PropertiesResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data, ResourceInfo originalResource) 
+        internal PropertiesResourceInfo(
+                string name, 
+                CultureInfo culture, 
+                IDictionary<string, CharSequence> data, 
+                ResourceInfo originalResource) 
             : base(name, culture, MimeType, data, originalResource) { }
 
         /// <summary>
@@ -45,7 +54,13 @@ namespace Axle.Resources.Properties
             // ReSharper restore EmptyGeneralCatchClause
 
             var result = new MemoryStream();
-            new JavaPropertyWriter(new Dictionary<string, string>(Data, PropertiesFileExtractor.DefaultKeyComparer)).Write(result, null);
+            // TODO: add support for char[]
+            new JavaPropertyWriter(
+                Data.ToDictionary(
+                    x => x.Key,
+                    x => x.Value.ToString(),
+                    PropertiesFileExtractor.DefaultKeyComparer)
+                ).Write(result, null);
             result.Seek(0, SeekOrigin.Begin);
             return result;
         }

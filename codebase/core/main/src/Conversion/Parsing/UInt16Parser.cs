@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Globalization;
-
+using Axle.Text;
 
 namespace Axle.Conversion.Parsing
 {
@@ -14,17 +14,19 @@ namespace Axle.Conversion.Parsing
     public sealed class UInt16Parser : AbstractParser<ushort>
     {
         /// <inheritdoc />
-        protected override UInt16 DoParse(string value, IFormatProvider formatProvider)
+        protected override UInt16 DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? UInt16.Parse(value, formatProvider) : UInt16.Parse(value);
+            return formatProvider != null 
+                ? UInt16.Parse(value.ToString(), formatProvider) 
+                : UInt16.Parse(value.ToString());
         }
 
         /// <inheritdoc />
-        public override bool TryParse(string value, IFormatProvider formatProvider, out UInt16 output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out UInt16 output)
         {
             return formatProvider != null
-                ? UInt16.TryParse(value, NumberStyles.Any, formatProvider, out output)
-                : UInt16.TryParse(value, out output);
+                ? UInt16.TryParse(value.ToString(), NumberStyles.Any, formatProvider, out output)
+                : UInt16.TryParse(value.ToString(), out output);
         }
     }
 }

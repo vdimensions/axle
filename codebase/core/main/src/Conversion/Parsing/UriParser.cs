@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -13,13 +14,13 @@ namespace Axle.Conversion.Parsing
     public sealed class UriParser : AbstractParser<Uri>
     {
         /// <inheritdoc />
-        protected override Uri DoParse(string value, IFormatProvider formatProvider) => 
-            new Uri(value, UriKind.RelativeOrAbsolute);
+        protected override Uri DoParse(CharSequence value, IFormatProvider formatProvider) => 
+            new Uri(value.ToString(), UriKind.RelativeOrAbsolute);
 
         /// <inheritdoc />
-        public override bool TryParse(string value, IFormatProvider formatProvider, out Uri output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out Uri output)
         {
-            return Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out output);
+            return Uri.TryCreate(value.ToString(), UriKind.RelativeOrAbsolute, out output);
         }
     }
 }

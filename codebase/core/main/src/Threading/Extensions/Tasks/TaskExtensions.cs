@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD || NET35_OR_NEWER
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
@@ -193,6 +194,16 @@ namespace Axle.Threading.Extensions.Tasks
         #endregion
 
         #region WaitForAll(...)
+        /// <summary>
+        /// Waits for all of the provided <see cref="Task"/> objects to complete execution.
+        /// </summary>
+        /// <param name="tasks">
+        /// An collection of <see cref="Task"/> instances on which to wait.
+        /// </param>
+        /// <returns>
+        /// A collection of <see cref="Task"/> representing the completed tasks.
+        /// </returns>
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<Task> WaitForAll(this IEnumerable<Task> tasks)
         {
             var t = tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value as Task[] ?? tasks.ToArray();
@@ -202,6 +213,19 @@ namespace Axle.Threading.Extensions.Tasks
             }
             return t;
         }
+        /// <summary>
+        /// Waits for all of the provided <see cref="Task{TResult}"/> objects to complete execution.
+        /// </summary>
+        /// <param name="tasks">
+        /// An collection of <see cref="Task{TResult}"/> instances on which to wait.
+        /// </param>
+        /// <typeparam name="TResult">
+        /// The type of result a particular task from the <paramref name="tasks"/> would produce.
+        /// </typeparam>
+        /// <returns>
+        /// A collection of <see cref="Task{TResult}"/> representing the completed tasks.
+        /// </returns>
+        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<Task<TResult>> WaitForAll<TResult>(this IEnumerable<Task<TResult>> tasks)
         {
             var t = tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value as Task<TResult>[] ?? tasks.ToArray();
@@ -214,25 +238,27 @@ namespace Axle.Threading.Extensions.Tasks
         #endregion
 
         #region WaitForAny(...)
-        public static IEnumerable<Task> WaitForAny(this IEnumerable<Task> tasks)
+        public static Task WaitForAny(this IEnumerable<Task> tasks)
         {
             tasks.VerifyArgument(nameof(tasks)).IsNotNull();
             var t = tasks as Task[] ?? tasks.ToArray();
             if (t.Length > 0)
             {
-                Task.WaitAny(t);
+                var index = Task.WaitAny(t);
+                return t[index];
             }
-            return t;
+            return null;
         }
-        public static IEnumerable<Task<TResult>> WaitForAny<TResult>(this IEnumerable<Task<TResult>> tasks)
+        public static Task<TResult> WaitForAny<TResult>(this IEnumerable<Task<TResult>> tasks)
         {
             tasks.VerifyArgument(nameof(tasks)).IsNotNull();
             var t = tasks as Task<TResult>[] ?? tasks.ToArray();
             if (t.Length > 0)
             {
-                Task.WaitAny(t);
+                var index = Task.WaitAny(t);
+                return t[index];
             }
-            return t;
+            return null;
         }
         #endregion
     }

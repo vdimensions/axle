@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
+using Axle.Text;
 
 namespace Axle.Resources.Text.Documents
 {
@@ -10,14 +11,14 @@ namespace Axle.Resources.Text.Documents
     /// </summary>
     public abstract class TextDocumentResourceInfo : ResourceInfo
     {
-        private readonly IDictionary<string, string> _data;
+        private readonly IDictionary<string, CharSequence> _data;
         private readonly ResourceInfo _originalResource;
 
         protected TextDocumentResourceInfo(
                 string name, 
                 CultureInfo culture, 
                 string mimeType, 
-                IDictionary<string, string> data) 
+                IDictionary<string, CharSequence> data) 
             : base(name, culture, mimeType)
         {
             _data = data;
@@ -26,7 +27,7 @@ namespace Axle.Resources.Text.Documents
                 string name, 
                 CultureInfo culture, 
                 string mimeType, 
-                IDictionary<string, string> data, 
+                IDictionary<string, CharSequence> data, 
                 ResourceInfo originalResource) 
             : this(name, culture, mimeType, data)
         {
@@ -56,6 +57,6 @@ namespace Axle.Resources.Text.Documents
         /// Gets a <see cref="IDictionary{TKey,TValue}"/> representing the contents of the properties file.
         /// </summary>
         //TODO: make the data read-only; pass appropriate comparer
-        public IDictionary<string, string> Data => new Dictionary<string, string>(_data);
+        public IDictionary<string, CharSequence> Data => new Dictionary<string, CharSequence>(_data);
     }
 }

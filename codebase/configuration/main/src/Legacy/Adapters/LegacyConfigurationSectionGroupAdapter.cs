@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Axle.Text;
 using Axle.Verification;
 
 namespace Axle.Configuration.Legacy.Adapters
@@ -30,7 +31,7 @@ namespace Axle.Configuration.Legacy.Adapters
         public IEnumerable<string> Keys => _sections.Keys;
 
         public IEnumerable<IConfigSetting> this[string key] => new[] { GetSection(key) };
-        string IConfigSetting.Value => null;
+        CharSequence IConfigSetting.Value => null;
 
         public string Name { get; }
     }

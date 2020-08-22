@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Text;
 using Axle.Verification;
 
 namespace Axle.Configuration.Microsoft.Adapters
@@ -43,7 +44,7 @@ namespace Axle.Configuration.Microsoft.Adapters
         public IEnumerable<string> Keys => UnderlyingConfiguration.GetChildren().Select(x => x.Key);
 
         /// <inheritdoc />
-        public abstract string Value { get; }
+        public abstract CharSequence Value { get; }
 
         /// <inheritdoc />
         public abstract string Name { get; }
@@ -63,7 +64,7 @@ namespace Axle.Configuration.Microsoft.Adapters
                 if (section != null)
                 {
                     var result = new Microsoft2AxleConfigSectionAdapter(section);
-                    if (!string.IsNullOrEmpty(result.Value) || result.Keys.Any())
+                    if ((result.Value != null && result.Value.Length > 0) || result.Keys.Any())
                     {
                         return new[] { result };
                     }

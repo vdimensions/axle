@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Axle.Environment;
 using Axle.References;
+using Axle.Text;
 
 namespace Axle.Configuration
 {
@@ -19,7 +20,7 @@ namespace Axle.Configuration
 
             IEnumerable<string> IConfigSection.Keys => _env.Keys;
             string IConfigSection.Name => string.Empty;
-            string IConfigSetting.Value => null;
+            CharSequence IConfigSetting.Value => null;
 
             IEnumerable<IConfigSetting> IConfigSection.this[string key] =>
                 _env.TryGetValue(key, out var val) 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -14,15 +15,15 @@ namespace Axle.Conversion.Parsing
     public sealed class SByteParser : AbstractParser<sbyte>
     {
         /// <inheritdoc />
-        protected override SByte DoParse(string value, IFormatProvider formatProvider)
+        protected override SByte DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return SByte.Parse(value, formatProvider);
+            return SByte.Parse(value.ToString(), formatProvider);
         }
 
         /// <inheritdoc />
-        public override bool TryParse(string value, IFormatProvider formatProvider, out SByte output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out SByte output)
         {
-            return SByte.TryParse(value, NumberStyles.Any, formatProvider, out output);
+            return SByte.TryParse(value.ToString(), NumberStyles.Any, formatProvider, out output);
         }
     }
 }

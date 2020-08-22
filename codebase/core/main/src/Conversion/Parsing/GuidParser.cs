@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -13,6 +14,6 @@ namespace Axle.Conversion.Parsing
     public sealed class GuidParser : AbstractParser<Guid>
     {
         /// <inheritdoc />
-        protected override Guid DoParse(string value, IFormatProvider formatProvider) => new Guid(value);
+        protected override Guid DoParse(CharSequence value, IFormatProvider formatProvider) => new Guid(value.ToString());
     }
 }

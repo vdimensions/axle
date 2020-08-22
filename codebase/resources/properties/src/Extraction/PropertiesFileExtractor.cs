@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Text;
 using Axle.Resources.Extraction;
 using Axle.Resources.Text.Documents;
+using Axle.Text;
 using Axle.Text.Documents;
 using Axle.Text.Documents.Properties;
 
@@ -24,7 +25,7 @@ namespace Axle.Resources.Properties.Extraction
         protected override TextDocumentResourceInfo CreateResourceInfo(
             string name, 
             CultureInfo culture, 
-            IDictionary<string, string> data)
+            IDictionary<string, CharSequence> data)
         {
             return new PropertiesResourceInfo(name, culture, data);
         }

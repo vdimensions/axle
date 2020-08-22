@@ -2,6 +2,9 @@
 
 namespace Axle.Configuration
 {
+    /// <summary>
+    /// An interface representing a configuration section object.
+    /// </summary>
     public interface IConfigSection : IConfigSetting
     {
         /// <summary>

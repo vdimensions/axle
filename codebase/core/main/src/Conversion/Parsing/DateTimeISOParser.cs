@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 namespace Axle.Conversion.Parsing
 {
@@ -12,10 +13,10 @@ namespace Axle.Conversion.Parsing
     public sealed class DateTimeISOParser : AbstractParser<DateTime>
     {
         /// <inheritdoc />
-        protected override DateTime DoParse(string value, IFormatProvider formatProvider)
+        protected override DateTime DoParse(CharSequence value, IFormatProvider formatProvider)
         {
             var dateOffset = new DateTimeOffsetParser().ParseExact(
-                value,
+                value.ToString(),
                 "yyyy-MM-dd'T'HH:mm:ss.FFFK",
                 formatProvider);
             var dt = dateOffset.DateTime.AddMilliseconds(dateOffset.Offset.TotalMilliseconds);

@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -13,15 +14,15 @@ namespace Axle.Conversion.Parsing
     public sealed class DateTimeParser : AbstractStrictParser<DateTime>
     {
         /// <inheritdoc />
-        protected override DateTime DoParse(string value, IFormatProvider formatProvider)
+        protected override DateTime DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? DateTime.Parse(value, formatProvider) : DateTime.Parse(value);
+            return formatProvider != null ? DateTime.Parse(value.ToString(), formatProvider) : DateTime.Parse(value.ToString());
         }
 
         /// <inheritdoc />
-        protected override DateTime DoParseExact(string value, string format, IFormatProvider formatProvider)
+        protected override DateTime DoParseExact(CharSequence value, string format, IFormatProvider formatProvider)
         {
-            return DateTime.ParseExact(value, format, formatProvider);
+            return DateTime.ParseExact(value.ToString(), format, formatProvider);
         }
     }
 }

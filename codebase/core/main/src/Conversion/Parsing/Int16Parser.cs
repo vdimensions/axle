@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -14,9 +15,9 @@ namespace Axle.Conversion.Parsing
     public sealed class Int16Parser : AbstractParser<short>
     {
         /// <inheritdoc />
-        protected override Int16 DoParse(string value, IFormatProvider formatProvider)
+        protected override Int16 DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? Int16.Parse(value, formatProvider) : Int16.Parse(value);
+            return formatProvider != null ? Int16.Parse(value.ToString(), formatProvider) : Int16.Parse(value.ToString());
         }
 
         /// <summary>
@@ -43,11 +44,11 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out Int16 output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out Int16 output)
         {
             return formatProvider != null
-                ? Int16.TryParse(value, NumberStyles.Any, formatProvider, out output)
-                : Int16.TryParse(value, out output);
+                ? Int16.TryParse(value.ToString(), NumberStyles.Any, formatProvider, out output)
+                : Int16.TryParse(value.ToString(), out output);
         }
     }
 }

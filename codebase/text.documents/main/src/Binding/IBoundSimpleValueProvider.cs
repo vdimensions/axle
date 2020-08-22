@@ -10,6 +10,6 @@
         /// A string representation of the value represented by the current <see cref="IBoundSimpleValueProvider"/>   
         /// implementation.
         /// </summary>
-        string Value { get; }
+        CharSequence Value { get; }
     }
 }

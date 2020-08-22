@@ -2,6 +2,7 @@
 using System.Reflection;
 
 using Axle.Environment;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -16,9 +17,9 @@ namespace Axle.Conversion.Parsing
     public sealed class AssemblyParser : AbstractParser<Assembly>
     {
         /// <inheritdoc />
-        protected override Assembly DoParse(string value, IFormatProvider formatProvider)
+        protected override Assembly DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return Platform.Runtime.LoadAssembly(value);
+            return Platform.Runtime.LoadAssembly(value.ToString());
         }
     }
 }

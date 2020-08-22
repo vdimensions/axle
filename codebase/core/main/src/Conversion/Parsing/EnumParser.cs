@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -15,12 +16,12 @@ namespace Axle.Conversion.Parsing
     public sealed class EnumParser<T> : AbstractParser<T> where T: struct
     {
         /// <inheritdoc />
-        protected override T DoParse(string value, IFormatProvider formatProvider)
+        protected override T DoParse(CharSequence value, IFormatProvider formatProvider)
         {
             try
             {
                 // TODO: Create enum format provider specifying case option
-                return (T) Enum.Parse(typeof(T), value);
+                return (T) Enum.Parse(typeof(T), value.ToString());
             }
             catch (ArgumentNullException)
             {
@@ -28,7 +29,7 @@ namespace Axle.Conversion.Parsing
             }
             catch (ArgumentException)
             {
-                if (value.Trim().StartsWith("-", StringComparison.Ordinal))
+                if (value.ToString().Trim().StartsWith("-", StringComparison.Ordinal))
                 {
                     var longParser = new Int64Parser();
                     if (longParser.TryParse(value, formatProvider, out var res))

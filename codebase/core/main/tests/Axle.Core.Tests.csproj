@@ -10,11 +10,6 @@
     <Reference Include="System" />
   </ItemGroup>
 
-  <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../Reference.Axle.Core.targets" />
   <Import Project="../../../NUnit.Packages.targets" />

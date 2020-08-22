@@ -26,6 +26,6 @@ namespace Axle.Text.Documents.Binding
         /// <c><see langword="true"/></c> if the conversion was successful and the <paramref name="boundValue"/> was set;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        bool TryConvertMemberValue(string rawValue, Type type, out object boundValue);
+        bool TryConvertMemberValue(CharSequence rawValue, Type type, out object boundValue);
     }
 }

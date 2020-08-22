@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -14,9 +15,11 @@ namespace Axle.Conversion.Parsing
     public sealed class Int64Parser : AbstractParser<Int64>
     {
         /// <inheritdoc />
-        protected override Int64 DoParse(string value, IFormatProvider formatProvider)
+        protected override Int64 DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? Int64.Parse(value, formatProvider) : Int64.Parse(value);
+            return formatProvider != null 
+                ? Int64.Parse(value.ToString(), formatProvider) 
+                : Int64.Parse(value.ToString());
         }
 
         /// <summary>
@@ -43,11 +46,11 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out Int64 output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out Int64 output)
         {
             return formatProvider != null
-                ? Int64.TryParse(value, NumberStyles.Any, formatProvider, out output)
-                : Int64.TryParse(value, out output);
+                ? Int64.TryParse(value.ToString(), NumberStyles.Any, formatProvider, out output)
+                : Int64.TryParse(value.ToString(), out output);
         }
     }
 }

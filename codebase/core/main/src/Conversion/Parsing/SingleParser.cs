@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -32,9 +33,9 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <inheritdoc />
-        protected override Single DoParse(string value, IFormatProvider formatProvider)
+        protected override Single DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return Single.Parse(value, _numberStyles, formatProvider);
+            return Single.Parse(value.ToString(), _numberStyles, formatProvider);
         }
 
         /// <summary>
@@ -60,9 +61,9 @@ namespace Axle.Conversion.Parsing
         /// <returns>
         /// <c>true</c> if value was converted successfully; otherwise, <c>false</c>.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out Single output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out Single output)
         {
-            return Single.TryParse(value, _numberStyles, formatProvider, out output);
+            return Single.TryParse(value.ToString(), _numberStyles, formatProvider, out output);
         }
     }
 }

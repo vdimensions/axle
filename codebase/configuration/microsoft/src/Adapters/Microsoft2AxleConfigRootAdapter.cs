@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
 using System.Diagnostics.CodeAnalysis;
+using Axle.Text;
 using Axle.Verification;
 
 namespace Axle.Configuration.Microsoft.Adapters
@@ -51,7 +52,7 @@ namespace Axle.Configuration.Microsoft.Adapters
         public Microsoft2AxleConfigRootAdapter(IMSConfigurationRoot configuration) : base(configuration) { }
 
         /// <inheritdoc />
-        public override string Value => null;
+        public override CharSequence Value => null;
 
         /// <inheritdoc />
         public override string Name => string.Empty;

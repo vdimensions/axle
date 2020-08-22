@@ -1,16 +1,18 @@
-﻿using Axle.Verification;
+﻿using Axle.Text;
+using Axle.Verification;
 
 namespace Axle.Configuration
 {
     public sealed class ConfigSetting : IConfigSetting
     {
-        public static IConfigSetting Create(string value) => new ConfigSetting(Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))));
+        public static IConfigSetting Create(CharSequence value) => new ConfigSetting(
+            Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))));
 
-        private ConfigSetting(string value)
+        private ConfigSetting(CharSequence value)
         {
             Value = value;
         }
 
-        public string Value { get; }
+        public CharSequence Value { get; }
     }
 }

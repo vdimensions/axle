@@ -1,6 +1,6 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
-
+using Axle.Text;
 
 namespace Axle.Conversion.Parsing
 {
@@ -14,10 +14,8 @@ namespace Axle.Conversion.Parsing
     public sealed class BooleanParser : AbstractParser<bool>
     {
         /// <inheritdoc />
-        protected override bool DoParse(string value, IFormatProvider formatProvider)
-        {
-            return bool.Parse(value);
-        }
+        protected override bool DoParse(CharSequence value, IFormatProvider formatProvider) 
+            => bool.Parse(value.ToString());
 
         /// <summary>
         /// Converts the specified <see cref="string">string</see> representation of a logical <paramref name="value"/>
@@ -43,8 +41,8 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out bool output) => 
-            bool.TryParse(value, out output);
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out bool output) 
+            => bool.TryParse(value.ToString(), out output);
 
         /// <summary>
         /// Converts the specified <see cref="string">string</see> representation of a logical <paramref name="value"/>
@@ -66,7 +64,8 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, out bool output) => bool.TryParse(value, out output);
+        public override bool TryParse(CharSequence value, out bool output) 
+            => bool.TryParse(value.ToString(), out output);
     }
 }
 #endif

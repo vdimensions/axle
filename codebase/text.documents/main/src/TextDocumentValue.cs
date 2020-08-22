@@ -5,11 +5,11 @@
     #endif
     public sealed class TextDocumentValue : TextDocumentNode, ITextDocumentValue
     {
-        public TextDocumentValue(string key, ITextDocumentObject parent, string value) : base(key, parent)
+        public TextDocumentValue(string key, ITextDocumentObject parent, CharSequence value) : base(key, parent)
         {
             Value = value;
         }
 
-        public string Value { get; }
+        public CharSequence Value { get; }
     }
 }

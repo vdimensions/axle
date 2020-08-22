@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Text;
 using Axle.Verification;
 
 namespace Axle.Configuration.Legacy.Adapters
@@ -33,6 +34,6 @@ namespace Axle.Configuration.Legacy.Adapters
         }
 
         public string Name { get; }
-        string IConfigSetting.Value => null;
+        CharSequence IConfigSetting.Value => null;
     }
 }

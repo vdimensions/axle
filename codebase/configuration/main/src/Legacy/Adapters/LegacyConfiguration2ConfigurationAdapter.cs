@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using Axle.Text;
 using Axle.Verification;
 
 namespace Axle.Configuration.Legacy.Adapters
@@ -89,7 +90,7 @@ namespace Axle.Configuration.Legacy.Adapters
         }
 
         string IConfigSection.Name => string.Empty;
-        string IConfigSetting.Value => null;
+        CharSequence IConfigSetting.Value => null;
     }
 }
 #endif

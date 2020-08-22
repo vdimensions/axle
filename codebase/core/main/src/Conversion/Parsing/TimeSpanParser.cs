@@ -1,4 +1,5 @@
 ﻿using System;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -17,29 +18,30 @@ namespace Axle.Conversion.Parsing
     #endif
     {
         /// <inheritdoc />
-        protected override TimeSpan DoParse(string value, IFormatProvider formatProvider)
+        protected override TimeSpan DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return TimeSpan.Parse(value);
+            return TimeSpan.Parse(value.ToString());
         }
 
         /// <inheritdoc />
-        public override bool TryParse(string value, IFormatProvider formatProvider, out TimeSpan output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out TimeSpan output)
         {
-            return TimeSpan.TryParse(value, out output);
+            return TimeSpan.TryParse(value.ToString(), out output);
         }
 
         #if NETSTANDARD1_0_OR_NEWER || NET40_OR_NEWER
         /// <inheritdoc />
-        protected override TimeSpan DoParseExact(string value, string format, IFormatProvider formatProvider)
+        protected override TimeSpan DoParseExact(CharSequence value, string format, IFormatProvider formatProvider)
         {
-            return TimeSpan.ParseExact(value, format, formatProvider, System.Globalization.TimeSpanStyles.None);
+            return TimeSpan.ParseExact(
+                value.ToString(), format, formatProvider, System.Globalization.TimeSpanStyles.None);
         }
 
         public override bool TryParseExact(
-            string value, string format, IFormatProvider formatProvider, out TimeSpan output)
+            CharSequence value, string format, IFormatProvider formatProvider, out TimeSpan output)
         {
             return TimeSpan.TryParseExact(
-                value, format, formatProvider, System.Globalization.TimeSpanStyles.None, out output);
+                value.ToString(), format, formatProvider, System.Globalization.TimeSpanStyles.None, out output);
         }
         #endif
     }

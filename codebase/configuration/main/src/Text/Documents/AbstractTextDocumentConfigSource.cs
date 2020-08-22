@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Text;
 using Axle.Text.Documents;
 
 namespace Axle.Configuration.Text.Documents
@@ -39,7 +40,7 @@ namespace Axle.Configuration.Text.Documents
         {
             public TextDocumentConfigSetting(ITextDocumentValue documentNode) : base(documentNode) { }
             
-            public string Value => DocumentNode.Value;
+            public CharSequence Value => DocumentNode.Value;
         }
         private sealed class TextDocumentConfigSection : AbstractTextDocumentConfig<ITextDocumentObject>, IConfigSection
         {
@@ -70,7 +71,7 @@ namespace Axle.Configuration.Text.Documents
                 }
             }
 
-            public string Value => null;
+            public CharSequence Value => null;
         }
         private sealed class TextDocumentConfiguration : IConfiguration
         {
@@ -81,7 +82,7 @@ namespace Axle.Configuration.Text.Documents
                 _configSection = new TextDocumentConfigSection(documentNode);
             }
 
-            public string Value => _configSection.Value;
+            public CharSequence Value => _configSection.Value;
             public IEnumerable<string> Keys => _configSection.Keys;
             public string Name => _configSection.Name;
 

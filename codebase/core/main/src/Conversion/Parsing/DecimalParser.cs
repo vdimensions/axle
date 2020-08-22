@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -32,9 +33,9 @@ namespace Axle.Conversion.Parsing
         }
 
         /// <inheritdoc />
-        protected override Decimal DoParse(string value, IFormatProvider formatProvider)
+        protected override Decimal DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return Decimal.Parse(value, _numberStyles, formatProvider);
+            return Decimal.Parse(value.ToString(), _numberStyles, formatProvider);
         }
 
         /// <summary>
@@ -61,9 +62,9 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out Decimal output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out Decimal output)
         {
-            return Decimal.TryParse(value, _numberStyles, formatProvider, out output);
+            return Decimal.TryParse(value.ToString(), _numberStyles, formatProvider, out output);
         }
     }
 }

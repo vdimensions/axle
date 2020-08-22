@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Text;
 using Axle.Verification;
 
 
 namespace Axle.Configuration
 {
-    
-    
     public sealed class LayeredConfigManager : IConfigManager
     {
         private class PreloadedConfigSource : IConfigSource
@@ -51,7 +50,7 @@ namespace Axle.Configuration
 
             public string Name => string.Empty;
 
-            public string Value => null;
+            public CharSequence Value => null;
         }
 
         private readonly IConfiguration[] _configs;

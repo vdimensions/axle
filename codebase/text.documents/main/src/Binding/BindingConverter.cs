@@ -9,9 +9,9 @@ namespace Axle.Text.Documents.Binding
     public sealed class BindingConverter : IBindingConverter
     {
         private readonly IBindingConverter _fallbackConverter = new DefaultBindingConverter();
-        private readonly ConcurrentDictionary<Type, IConverter<string, object>> _converters = new ConcurrentDictionary<Type, IConverter<string, object>>();
+        private readonly ConcurrentDictionary<Type, IConverter<CharSequence, object>> _converters = new ConcurrentDictionary<Type, IConverter<CharSequence, object>>();
 
-        public void RegisterConverter<T>(IConverter<string, T> converter)
+        public void RegisterConverter<T>(IConverter<CharSequence, T> converter)
         {
             var boxingConverter = new BoxingConverter<T>(converter);
             _converters.AddOrUpdate(
@@ -21,7 +21,7 @@ namespace Axle.Text.Documents.Binding
         }
 
         /// <inheritdoc />
-        public bool TryConvertMemberValue(string rawValue, Type targetType, out object boundValue)
+        public bool TryConvertMemberValue(CharSequence rawValue, Type targetType, out object boundValue)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(targetType, nameof(targetType)));
             return _converters.TryGetValue(targetType, out var converter)

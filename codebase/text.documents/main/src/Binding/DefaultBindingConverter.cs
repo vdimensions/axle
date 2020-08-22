@@ -14,7 +14,7 @@ namespace Axle.Text.Documents.Binding
     /// </summary>
     public sealed class DefaultBindingConverter : IBindingConverter
     {
-        private static readonly IDictionary<Type, IConverter<string, object>> _converters;
+        private static readonly IDictionary<Type, IConverter<CharSequence, object>> _converters;
 
         static DefaultBindingConverter() 
         {
@@ -36,7 +36,7 @@ namespace Axle.Text.Documents.Binding
             var timeSpanParser = new TimeSpanParser();
             var guidParser = new GuidParser();
 
-            _converters = new Dictionary<Type, IConverter<string, object>>
+            _converters = new Dictionary<Type, IConverter<CharSequence, object>>
             {
                 { typeof(bool),             new BoxingConverter<bool>(booleanParser) },
                 { typeof(char),             new BoxingConverter<char>(characterParser) },
@@ -51,7 +51,7 @@ namespace Axle.Text.Documents.Binding
                 { typeof(float),            new BoxingConverter<float>(singleParser) },
                 { typeof(double),           new BoxingConverter<double>(doubleParser) },
                 { typeof(decimal),          new BoxingConverter<decimal>(decimalParser) },
-                { typeof(string),           new BoxingConverter<string>(new IdentityConverter<string>()) },
+                { typeof(string),           new BoxingConverter<string>(new StringToCharSequenceConverter().Invert()) },
                 { typeof(DateTime),         new BoxingConverter<DateTime>(dateTimeParser) },
                 { typeof(DateTimeOffset),   new BoxingConverter<DateTimeOffset>(dateTimeOffsetParser) },
                 { typeof(TimeSpan),         new BoxingConverter<TimeSpan>(timeSpanParser) },
@@ -87,7 +87,7 @@ namespace Axle.Text.Documents.Binding
         }
 
         /// <inheritdoc/>
-        public bool TryConvertMemberValue(string rawValue, Type targetType, out object boundValue)
+        public bool TryConvertMemberValue(CharSequence rawValue, Type targetType, out object boundValue)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(targetType, nameof(targetType)));
             boundValue = null;

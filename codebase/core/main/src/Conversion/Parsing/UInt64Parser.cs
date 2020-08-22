@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -14,17 +15,19 @@ namespace Axle.Conversion.Parsing
     public sealed class UInt64Parser : AbstractParser<UInt64>
     {
         /// <inheritdoc />
-        protected override UInt64 DoParse(string value, IFormatProvider formatProvider)
+        protected override UInt64 DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? UInt64.Parse(value, formatProvider) : UInt64.Parse(value);
+            return formatProvider != null 
+                ? UInt64.Parse(value.ToString(), formatProvider) 
+                : UInt64.Parse(value.ToString());
         }
 
         /// <inheritdoc />
-        public override bool TryParse(string value, IFormatProvider formatProvider, out UInt64 output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out UInt64 output)
         {
             return formatProvider != null
-                ? UInt64.TryParse(value, NumberStyles.Any, formatProvider, out output)
-                : UInt64.TryParse(value, out output);
+                ? UInt64.TryParse(value.ToString(), NumberStyles.Any, formatProvider, out output)
+                : UInt64.TryParse(value.ToString(), out output);
         }
     }
 }

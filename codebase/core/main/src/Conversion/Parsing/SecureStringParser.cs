@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Security;
+using Axle.Text;
 
 namespace Axle.Conversion.Parsing
 {
@@ -26,18 +27,20 @@ namespace Axle.Conversion.Parsing
     public sealed class SecureStringParser : AbstractParser<SecureString>
     {
         /// <inheritdoc />
-        public override bool Validate(char[] value, IFormatProvider formatProvider) => true;
-
-        /// <inheritdoc />
-        public override bool Validate(string value, IFormatProvider formatProvider)
+        public override bool Validate(CharSequence value, IFormatProvider formatProvider)
         {
             // Do not allow managed string values to be parsed
-            return false;
+            return !(value is StringCharSequence);
         }
 
         /// <inheritdoc />
-        protected override SecureString DoParse(char[] value, IFormatProvider formatProvider)
+        protected override SecureString DoParse(CharSequence value, IFormatProvider formatProvider)
         {
+            if (value is StringCharSequence)
+            {
+                throw new SecurityException(
+                    "Parsing a secured string from a managed string instance is not allowed -- it defeats the purpose of the SecureString class. ");
+            }
             var result = new SecureString();
             foreach (var c in value)
             {
@@ -45,13 +48,6 @@ namespace Axle.Conversion.Parsing
             }
             result.MakeReadOnly();
             return result;
-        }
-
-        /// <inheritdoc />
-        protected override SecureString DoParse(string value, IFormatProvider formatProvider)
-        {
-            throw new SecurityException(
-                "Parsing a secured string from a managed string instance is not allowed -- it defeats the purpose of the SecureString class. ");
         }
     }
 }

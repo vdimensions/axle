@@ -1,4 +1,6 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
+using Axle.Text;
+
 namespace Axle.Configuration.Microsoft.Adapters
 {
     using IMSConfigurationSection = global::Microsoft.Extensions.Configuration.IConfigurationSection;
@@ -13,7 +15,7 @@ namespace Axle.Configuration.Microsoft.Adapters
         public Microsoft2AxleConfigSectionAdapter(IMSConfigurationSection configuration) : base(configuration) { }
 
         /// <inheritdoc />
-        public override string Value => UnderlyingConfiguration.Value;
+        public override CharSequence Value => UnderlyingConfiguration.Value;
 
         /// <inheritdoc />
         public override string Name => UnderlyingConfiguration.Key;

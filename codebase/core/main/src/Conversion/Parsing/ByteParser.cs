@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using Axle.Text;
 
 
 namespace Axle.Conversion.Parsing
@@ -14,9 +15,9 @@ namespace Axle.Conversion.Parsing
     public sealed class ByteParser : AbstractParser<byte>
     {
         /// <inheritdoc />
-        protected override Byte DoParse(string value, IFormatProvider formatProvider)
+        protected override Byte DoParse(CharSequence value, IFormatProvider formatProvider)
         {
-            return formatProvider != null ? Byte.Parse(value, formatProvider) : Byte.Parse(value);
+            return formatProvider != null ? Byte.Parse(value.ToString(), formatProvider) : Byte.Parse(value.ToString());
         }
 
         /// <summary>
@@ -43,11 +44,11 @@ namespace Axle.Conversion.Parsing
         /// <c><see langword="true"/></c> if value was converted successfully; 
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
-        public override bool TryParse(string value, IFormatProvider formatProvider, out Byte output)
+        public override bool TryParse(CharSequence value, IFormatProvider formatProvider, out Byte output)
         {
             return formatProvider != null
-                ? Byte.TryParse(value, NumberStyles.None, formatProvider, out output)
-                : Byte.TryParse(value, out output);
+                ? Byte.TryParse(value.ToString(), NumberStyles.None, formatProvider, out output)
+                : Byte.TryParse(value.ToString(), out output);
         }
     }
 }

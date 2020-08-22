@@ -3,18 +3,18 @@ using Axle.Verification;
 
 namespace Axle.Text.Documents.Binding
 {
-    internal sealed class BoxingConverter<T> : IConverter<string, object>
+    internal sealed class BoxingConverter<T> : IConverter<CharSequence, object>
     {
-        private readonly IConverter<string, T> _actualConverter;
+        private readonly IConverter<CharSequence, T> _actualConverter;
 
-        public BoxingConverter(IConverter<string, T> converter)
+        public BoxingConverter(IConverter<CharSequence, T> converter)
         {
             _actualConverter = Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter))).Value;
         }
 
-        public object Convert(string source) => _actualConverter.Convert(source);
+        public object Convert(CharSequence source) => _actualConverter.Convert(source);
 
-        public bool TryConvert(string source, out object target)
+        public bool TryConvert(CharSequence source, out object target)
         {
             if (_actualConverter.TryConvert(source, out var result))
             {
