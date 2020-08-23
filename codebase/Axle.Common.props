@@ -59,10 +59,19 @@
       comes from a nuget package
     -->
     <EnableMultitargeting>false</EnableMultitargeting>
+    <EnableProjectMetadata>false</EnableProjectMetadata>
   </PropertyGroup>
+
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\VDimensions.MSBuild.Sdk.targets" />
   <ItemGroup>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="0.2.*" PrivateAssets="All" />
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="0.2.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="0.2.*">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <!-- Versioning properties (after sdk) -->

@@ -8,23 +8,12 @@
     <ProjectGuid>{43919C97-BCFD-4802-95D7-76435E066962}</ProjectGuid>
     <RootNamespace>Axle</RootNamespace>
     <Description>Axle Framework Core Library</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+
+  <Import Project="../../../Axle.Common.props" />
 
   <Import Project="../../../targets/stator/src/Stator.props" />
-
-  <PropertyGroup>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DefineConstants>$(DefineConstants);UNSAFE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>$(DefineConstants);UNSAFE</DefineConstants>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-  </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
     <Reference Remove="System.Data" />
@@ -53,7 +42,6 @@
     <Compile Remove="Linq\Sequence.cs" />
     <Compile Remove="Linq\SequenceExtensions.cs" />
   </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
+  
   <Import Project="../Axle.Core.Dependencies.targets" />
 </Project>
