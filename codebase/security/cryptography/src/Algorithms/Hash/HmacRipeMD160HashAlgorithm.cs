@@ -1,7 +1,7 @@
 #if NETFRAMEWORK
 using System.Security.Cryptography;
-
 using Axle.Security.Cryptography.Algorithms.Hash.Sdk;
+using Axle.Verification;
 
 
 namespace Axle.Security.Cryptography.Algorithms.Hash
@@ -15,6 +15,8 @@ namespace Axle.Security.Cryptography.Algorithms.Hash
     public sealed class HmacRipeMD160HashAlgorithm : AbstractHashAlgorithm
     {
         public HmacRipeMD160HashAlgorithm() : base(new HMACRIPEMD160()) { }
+        public HmacRipeMD160HashAlgorithm(byte[] key) 
+            : base(new HMACRIPEMD160(Verifier.IsNotNull(Verifier.VerifyArgument(key, nameof(key))).Value)) { }
     }
 }
 #endif

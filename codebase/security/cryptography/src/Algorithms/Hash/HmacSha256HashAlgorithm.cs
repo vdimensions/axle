@@ -1,7 +1,6 @@
 using System.Security.Cryptography;
-
 using Axle.Security.Cryptography.Algorithms.Hash.Sdk;
-
+using Axle.Verification;
 
 namespace Axle.Security.Cryptography.Algorithms.Hash
 {
@@ -14,5 +13,7 @@ namespace Axle.Security.Cryptography.Algorithms.Hash
     public sealed class HmacSha256HashAlgorithm : AbstractHashAlgorithm
     {
         public HmacSha256HashAlgorithm() : base(new HMACSHA256()) { }
+        public HmacSha256HashAlgorithm(byte[] key) 
+            : base(new HMACSHA256(Verifier.IsNotNull(Verifier.VerifyArgument(key, nameof(key))).Value)) { }
     }
 }
