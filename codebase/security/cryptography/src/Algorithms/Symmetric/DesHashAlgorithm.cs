@@ -1,7 +1,5 @@
 ﻿using System.Security.Cryptography;
 
-using Axle.Security.Cryptography.Algorithms.Symmetric.Sdk;
-
 
 namespace Axle.Security.Cryptography.Algorithms.Symmetric
 {

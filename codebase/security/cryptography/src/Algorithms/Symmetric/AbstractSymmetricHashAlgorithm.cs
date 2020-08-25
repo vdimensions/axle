@@ -4,10 +4,7 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 
-using Axle.Security.Cryptography.Algorithms.Sdk;
-
-
-namespace Axle.Security.Cryptography.Algorithms.Symmetric.Sdk
+namespace Axle.Security.Cryptography.Algorithms.Symmetric
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]

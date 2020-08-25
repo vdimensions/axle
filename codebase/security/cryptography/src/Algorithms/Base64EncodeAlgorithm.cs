@@ -2,8 +2,6 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-using Axle.Security.Cryptography.Algorithms.Sdk;
-
 
 namespace Axle.Security.Cryptography.Algorithms
 {
@@ -37,7 +35,7 @@ namespace Axle.Security.Cryptography.Algorithms
             {
                 return string.Empty;
             }
-            return ToString(encoding.GetBytes(value));
+            return Convert.ToBase64String(encoding.GetBytes(value));
         }
 
         public byte[] Decrypt(string value) => Convert.FromBase64String(value);

@@ -1,5 +1,4 @@
 using System.Security.Cryptography;
-using Axle.Security.Cryptography.Algorithms.Hash.Sdk;
 using Axle.Verification;
 
 namespace Axle.Security.Cryptography.Algorithms.Hash

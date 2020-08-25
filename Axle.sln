@@ -129,6 +129,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Tests",
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Axle.FSharp", "codebase\core\fsharp\src\Axle.FSharp.fsproj", "{058DA5D4-BE62-4A66-AC23-DD162E113EBF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.Cryptography.Tests", "codebase\security\cryptography\tests\Axle.Security.Cryptography.Tests.csproj", "{0312335E-6302-47CC-A384-5802A82779C0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -279,6 +281,10 @@ Global
 		{058DA5D4-BE62-4A66-AC23-DD162E113EBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{058DA5D4-BE62-4A66-AC23-DD162E113EBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{058DA5D4-BE62-4A66-AC23-DD162E113EBF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0312335E-6302-47CC-A384-5802A82779C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0312335E-6302-47CC-A384-5802A82779C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0312335E-6302-47CC-A384-5802A82779C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0312335E-6302-47CC-A384-5802A82779C0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -340,6 +346,7 @@ Global
 		{791AB91C-2E6F-48D0-A68C-A1E6DFAFB245} = {ECC0AFD7-5709-4003-81DF-196F9BC3D158}
 		{D4C56580-5C6F-4D05-A519-95E6B1F59F1F} = {941D0991-5914-4A8A-9F75-1D84E10B7A49}
 		{058DA5D4-BE62-4A66-AC23-DD162E113EBF} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
+		{0312335E-6302-47CC-A384-5802A82779C0} = {6706277F-4174-433D-B3F3-57E0C6E15402}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

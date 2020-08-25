@@ -1,7 +1,6 @@
 ﻿using System.Text;
 
-
-namespace Axle.Security.Cryptography.Algorithms.Sdk
+namespace Axle.Security.Cryptography.Algorithms
 {
     #if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
     [System.Serializable]
@@ -16,8 +15,8 @@ namespace Axle.Security.Cryptography.Algorithms.Sdk
         public byte[] Decrypt(byte[] value) => DoDecrypt(value);
 
         protected abstract string DoDecrypt(string value, Encoding encoding);
+        protected abstract byte[] DoDecrypt(byte[] value);
 
         protected virtual string DoDecrypt(byte[] value, Encoding encoding) => encoding.GetString(DoDecrypt(value));
-        protected abstract byte[] DoDecrypt(byte[] value);
     }
 }

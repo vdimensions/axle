@@ -3,6 +3,7 @@
   <ItemGroup>
     <PackageReference Include="Nunit" Version="3.12" />
     <PackageReference Include="Nunit3TestAdapter" Version="3.15.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0"/>
   </ItemGroup>
   
   <!-- Automatically enable binding redirects for test projects -->

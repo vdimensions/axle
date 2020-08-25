@@ -2,8 +2,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-
-namespace Axle.Security.Cryptography.Algorithms.Sdk
+namespace Axle.Security.Cryptography.Algorithms
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -34,7 +33,7 @@ namespace Axle.Security.Cryptography.Algorithms.Sdk
             {
                 throw new ArgumentNullException(nameof(encoding));
             }
-            return value.Length == 0 ? string.Empty : ToString(Encrypt(encoding.GetBytes(value)));
+            return value.Length == 0 ? string.Empty : _hex.Convert(Encrypt(encoding.GetBytes(value)));
         }
         public abstract byte[] Encrypt(byte[] value);
 

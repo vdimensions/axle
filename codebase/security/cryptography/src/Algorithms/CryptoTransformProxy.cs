@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Security.Cryptography;
 
-namespace Axle.Security.Cryptography.Algorithms.Sdk
+namespace Axle.Security.Cryptography.Algorithms
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
