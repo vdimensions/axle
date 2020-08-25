@@ -37,7 +37,7 @@ namespace Axle.Text
         public override IEnumerator<char> GetEnumerator() => _value.GetEnumerator();
 
         /// <inheritdoc />
-        public override int Length => _value.Count();
+        public override int Length => _value.Count;
 
         /// <inheritdoc />
         public override char this[int index]
