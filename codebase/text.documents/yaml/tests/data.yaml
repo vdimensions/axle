@@ -10,3 +10,6 @@ axle:
     encoding: UTF-8
 - text:
     encoding: UTF-16
+    
+# the test will validate that this can be parsed to a SecureString without instantiating a managed string
+secret: ['a', 'b', 'c'] 

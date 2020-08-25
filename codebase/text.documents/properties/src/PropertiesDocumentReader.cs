@@ -19,7 +19,7 @@ namespace Axle.Text.Documents.Properties
             {
                 Children = propertiesFile.Select(x => new Adapter(x.Key, x.Value) as ITextDocumentAdapter);
             }
-            private Adapter(string key, string value)
+            private Adapter(string key, CharSequence value)
             {
                 Key = key;
                 Value = value;
@@ -27,7 +27,7 @@ namespace Axle.Text.Documents.Properties
             }
 
             public override string Key { get; }
-            public override string Value { get; }
+            public override CharSequence Value { get; }
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
         }
         

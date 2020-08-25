@@ -84,19 +84,22 @@ namespace Axle.Security.Extensions.SecureString
         #if UNSAFE
         /// <summary>
         /// Temporarily copies a <see cref="SecureString"/> data to the managed memory into a <see cref="string"/>
-        /// value, and invokes the provided <paramref name="action"/> delegate with the managed copy,
+        /// value, and invokes the provided <paramref name="func"/> delegate with the managed copy,
         /// and then de-allocates the managed memory.
         /// </summary>
         /// <param name="secureString">
         /// The <see cref="SecureString"/> to use.
         /// </param>
-        /// <param name="action">
-        /// An <see cref="Action{T}"/> delegate that accepts the managed copy of the secured string.
+        /// <param name="func">
+        /// A <see cref="Func{T,TResult}"/> delegate that accepts the managed copy of the secured string and produces
+        /// the result of the current method.
         /// <para>
-        /// It is recommended that the action code exist as quickly as possible, to prevent the sensitive string data
-        /// from being present in managed memory.
+        /// It is recommended that the function exist as quickly as possible, to prevent the sensitive string data
+        /// from residing in managed memory for too long.
         /// It is strongly undesirable to make managed copies of the passed-in string value, as the current method
-        /// will be unable to deallocate them.
+        /// will be unable to deallocate them. In the same direction of thinking, it is discouraged to use the passed-in
+        /// to the function parameter string as its return value, or to return an object that keeps the unsecured value 
+        /// as a direct managed reference (e.g. a field of a complex object).
         /// </para>
         /// </param>
         /// <remarks>
@@ -127,13 +130,13 @@ namespace Axle.Security.Extensions.SecureString
         [SuppressMessage("ReSharper", "SuggestVarOrType_Elsewhere")]
         [SuppressMessage("ReSharper", "SuggestVarOrType_BuiltInTypes")]
         [SuppressMessage("ReSharper", "SuggestVarOrType_SimpleTypes")]
-        public static unsafe void With(this System.Security.SecureString secureString, Action<string> action)
+        public static unsafe T Map<T>(this System.Security.SecureString secureString, Func<string, T> func)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(secureString, nameof(secureString)));
-            Verifier.IsNotNull(Verifier.VerifyArgument(action, nameof(action)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(func, nameof(func)));
             if (secureString.Length == 0)
             {
-                action(string.Empty);
+                func(string.Empty);
             }
 
             Exception e = null;
@@ -143,6 +146,7 @@ namespace Axle.Security.Extensions.SecureString
 
             GCHandle gcHandle = new GCHandle();
             IntPtr stringPtr = IntPtr.Zero;
+            var result = default(T);
             RuntimeHelpers.ExecuteCodeWithGuaranteedCleanup(
                 delegate
                 {
@@ -179,7 +183,7 @@ namespace Axle.Security.Extensions.SecureString
                             {
                                 try
                                 {
-                                    action(str);
+                                    result = func(str);
                                 }
                                 catch (Exception ex)
                                 {
@@ -222,7 +226,52 @@ namespace Axle.Security.Extensions.SecureString
                 // throw the exception that happened while we invoked the action.
                 throw e;
             }
+            return result;
         }
+        
+        /// <summary>
+        /// Temporarily copies a <see cref="SecureString"/> data to the managed memory into a <see cref="string"/>
+        /// value, and invokes the provided <paramref name="func"/> delegate with the managed copy,
+        /// and then de-allocates the managed memory.
+        /// </summary>
+        /// <param name="secureString">
+        /// The <see cref="SecureString"/> to use.
+        /// </param>
+        /// <param name="action">
+        /// An <see cref="Action{T}"/> delegate that accepts the managed copy of the secured string.
+        /// <para>
+        /// It is recommended that the function exist as quickly as possible, to prevent the sensitive string data
+        /// from residing in managed memory for too long.
+        /// It is strongly undesirable to make managed copies of the passed-in string value, as the current method
+        /// will be unable to deallocate them.
+        /// </para>
+        /// </param>
+        /// <remarks>
+        /// <para>
+        /// Parts of this method implementation are authored by Douglas Day and released under MIT license.
+        /// Below is the original copyright and the source from where the code is obtained.
+        /// <list type="none">
+        /// <item>
+        /// <term>Original copyright note</term>
+        /// <description>
+        /// <para>Copyright (C) 2010 Douglas Day</para>
+        /// <para>All rights reserved.</para>
+        /// <para>MIT-licensed: http://www.opensource.org/licenses/mit-license.php</para>
+        /// </description>
+        /// </item>
+        /// <item>
+        /// <term>Source</term>
+        /// <description>Stack Overflow</description>
+        /// </item>
+        /// <item>
+        /// <term>URL</term>
+        /// <description>https://stackoverflow.com/a/3567531/795158</description>
+        /// </item>
+        /// </list>
+        /// </para>
+        /// </remarks>
+        public static void With(this System.Security.SecureString secureString, Action<string> action) 
+            => Map<object>(secureString, str => { action(str); return null; });
         #endif
     }
 }

@@ -26,6 +26,18 @@ namespace Axle.Text.Documents.Yaml
                         yield return new Adapter(name, children, null);
                         break;
                     case IList<object> list:
+                        //
+                        // Special handling of character lists, they could contain a secure string and we do not want to 
+                        // create a managed string instance
+                        //
+                        if (list.All(x => x is string s && s.Length == 1))
+                        {
+                            yield return new Adapter(
+                                name, 
+                                Enumerable.Empty<ITextDocumentAdapter>(), 
+                                CharSequence.Create(list.Select(x => x.ToString()[0])));
+                            break;
+                        }
                         foreach (var adapter in list.SelectMany(x => ToChildren(name, x)))
                         {
                             yield return adapter;
@@ -34,7 +46,7 @@ namespace Axle.Text.Documents.Yaml
                 }
             }
 
-            private Adapter(string name, IEnumerable<ITextDocumentAdapter> children, string value)
+            private Adapter(string name, IEnumerable<ITextDocumentAdapter> children, CharSequence value)
             {
                 Key = name;
                 Children = children;
@@ -42,7 +54,7 @@ namespace Axle.Text.Documents.Yaml
             }
 
             public override string Key { get; }
-            public override string Value { get; }
+            public override CharSequence Value { get; }
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
         }
         

@@ -7,7 +7,7 @@ namespace Axle.Text.Documents
         /// <inheritdoc />
         public abstract string Key { get; }
         /// <inheritdoc />
-        public abstract string Value { get; }
+        public abstract CharSequence Value { get; }
         /// <inheritdoc />
         public abstract IEnumerable<ITextDocumentAdapter> Children { get; }
     }

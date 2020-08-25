@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -14,27 +15,41 @@ namespace Axle.Text
     [StructLayout((LayoutKind.Sequential))]
     public sealed class EnumerableCharSequence : CharSequence
     {
-        private readonly char[] _value;
+        private readonly LinkedList<char> _value;
 
         internal EnumerableCharSequence(IEnumerable<char> value)
         {
-            _value = value is char[] c ? c : Enumerable.ToArray(value);
+            _value = value is LinkedList<char> ls ? ls : new LinkedList<char>(value);
         }
         internal EnumerableCharSequence(char[] value)
+        {
+            _value = new LinkedList<char>(value);
+        }
+        internal EnumerableCharSequence(LinkedList<char> value)
         {
             _value = value;
         }
 
         /// <inheritdoc />
-        public override string ToString() => new string(_value);
+        public override string ToString() => new string(_value.ToArray());
 
         /// <inheritdoc />
-        public override IEnumerator<char> GetEnumerator() => ((IEnumerable<char>) _value).GetEnumerator();
+        public override IEnumerator<char> GetEnumerator() => _value.GetEnumerator();
 
         /// <inheritdoc />
-        public override int Length => _value.Length;
+        public override int Length => _value.Count();
 
         /// <inheritdoc />
-        public override char this[int index] => _value[index];
+        public override char this[int index]
+        {
+            get
+            {
+                if (index < 0 || index >= Length)
+                {
+                    throw new ArgumentOutOfRangeException(nameof(index));
+                }
+                return _value.Skip(index).Take(1).Single();
+            }
+        }
     }
 }

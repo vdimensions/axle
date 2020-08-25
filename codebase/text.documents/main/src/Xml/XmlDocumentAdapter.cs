@@ -13,7 +13,7 @@ namespace Axle.Text.Documents.Xml
         }
 
         public string Key { get; }
-        public string Value { get; }
+        public CharSequence Value { get; }
         public IEnumerable<XmlDocumentAdapter> Children { get; }
         IEnumerable<ITextDocumentAdapter> ITextDocumentAdapter.Children => Children.Cast<ITextDocumentAdapter>();
     }

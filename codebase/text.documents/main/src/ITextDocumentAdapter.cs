@@ -5,7 +5,7 @@ namespace Axle.Text.Documents
     public interface ITextDocumentAdapter
     {
         string Key { get; }
-        string Value { get; }
+        CharSequence Value { get; }
         IEnumerable<ITextDocumentAdapter> Children { get; }
     }
 }
