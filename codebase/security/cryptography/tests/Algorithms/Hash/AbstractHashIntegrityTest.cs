@@ -12,7 +12,7 @@ namespace Axle.Security.Cryptography.Tests.Algorithms.Hash
         [Test]
         public void TestHashedStringIntegrity()
         {
-            var calculatedHash = CreateAlgorithmInstance().Encrypt(Value, Encoding).ToLower();
+            var calculatedHash = CreateAlgorithmInstance().Encrypt(Value, Encoding);
             Assert.AreEqual(ExpectedResultHash, calculatedHash);
         }
         [Test]
