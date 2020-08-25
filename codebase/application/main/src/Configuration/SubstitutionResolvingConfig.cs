@@ -65,9 +65,16 @@ namespace Axle.Configuration
                             }
                             case IConfigSetting cv:
                             {
-                                // TODO: avoid calling .ToString() on the CharSequence cv
-                                var substitutedValue = _expression.Replace(cv.Value.ToString(), GetSafeSubstitutionProvider(key, _originalConfig));
-                                return ConfigSetting.Create(substitutedValue);
+                                // we avoid calling .ToString() on the non-string CharSequence values
+                                if (cv.Value is StringCharSequence)
+                                {
+                                    var substitutedValue = _expression.Replace(cv.Value.ToString(), GetSafeSubstitutionProvider(key, _originalConfig));
+                                    return ConfigSetting.Create(substitutedValue);
+                                }
+                                else 
+                                {
+                                    return cv;
+                                }
                             }
                             default:
                             {
@@ -91,8 +98,10 @@ namespace Axle.Configuration
             get
             {
                 var val = _originalConfig.Value;
-                // TODO: avoid calling .ToString() on the CharSequence val
-                return val == null ? null : _expression.Replace(val.ToString(), this);
+                //
+                // avoid calling .ToString() on the CharSequence val if not StringCharSequence
+                //
+                return val == null || !(val is StringCharSequence) ? null : _expression.Replace(val.ToString(), this);
             }
         }
     }
