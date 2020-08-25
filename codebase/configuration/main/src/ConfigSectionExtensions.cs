@@ -13,26 +13,27 @@ namespace Axle.Configuration
     /// </summary>
     public static class ConfigSectionExtensions
     {
-        private sealed class ConfigurationBindingCollectionProvider : IBoundCollectionProvider
+        private sealed class ConfigurationBindingCollectionProvider : IDocumentCollectionProvider
         {
-            private readonly IEnumerable<IBoundValueProvider> _valueProviders;
+            private readonly IEnumerable<IDocumentValueProvider> _valueProviders;
             
-            public ConfigurationBindingCollectionProvider(string name, IEnumerable<IBoundValueProvider> valueProviders)
+            public ConfigurationBindingCollectionProvider(string name, IEnumerable<IDocumentValueProvider> valueProviders)
             {
                 Name = name;
                 _valueProviders = valueProviders;
             }
 
-            public IEnumerator<IBoundValueProvider> GetEnumerator() => _valueProviders.GetEnumerator();
+            public IEnumerator<IDocumentValueProvider> GetEnumerator() => _valueProviders.GetEnumerator();
 
             IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
-            public IBindingCollectionAdapter CollectionAdapter => null;
+            public IDocumentCollectionValueAdapter CollectionValueAdapter => null;
             public string Name { get; }
         }
-        private sealed class ConfigurationBindingValueProvider : IBoundComplexValueProvider
+        
+        private sealed class ConfigurationBindingValueProvider : IDocumentComplexValueProvider
         {
-            public static IBoundValueProvider Get(IConfigSetting setting)
+            public static IDocumentValueProvider Get(IConfigSetting setting)
             {
                 switch (setting)
                 {
@@ -41,7 +42,7 @@ namespace Axle.Configuration
                     case IConfigSection section:
                         return new ConfigurationBindingValueProvider(section);
                     case IConfigSetting _:
-                        return new BoundSimpleValueProvider(string.Empty, setting.Value);
+                        return new DocumentSimpleValueProvider(string.Empty, setting.Value);
                 }
             }
             private readonly IConfigSection _config;
@@ -51,10 +52,10 @@ namespace Axle.Configuration
                 _config = config;
             }
 
-            public bool TryGetValue(string member, out IBoundValueProvider value) 
+            public bool TryGetValue(string member, out IDocumentValueProvider value) 
                 => (value = this[member]) != null;
 
-            public IBoundValueProvider this[string member]
+            public IDocumentValueProvider this[string member]
             {
                 get
                 {
@@ -103,7 +104,7 @@ namespace Axle.Configuration
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             var configSection = GetSetting(config, sectionName);
             return configSection != null 
-                ? new DefaultBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType)
+                ? new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType)
                 : null;
         }
 
@@ -112,7 +113,7 @@ namespace Axle.Configuration
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             var configSection = GetSetting(config, sectionName);
             return configSection != null
-                ? (T) new DefaultBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T())
+                ? (T) new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T())
                 : null;
         }
         
@@ -126,13 +127,13 @@ namespace Axle.Configuration
         {
             return GetSections(config, sectionName).Select<IConfigSetting, object>(
                 configSection =>
-                    new DefaultBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType));
+                    new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType));
         }
 
         public static IEnumerable<T> GetSections<T>(this IConfigSection config, string sectionName) where T: class, new()
         {
             return GetSections(config, sectionName)
-                .Select<IConfigSetting, object>(configSection => new DefaultBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T()))
+                .Select<IConfigSetting, object>(configSection => new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T()))
                 .Cast<T>();
         }
 

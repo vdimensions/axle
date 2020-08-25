@@ -6,7 +6,7 @@ namespace Axle.Text.Documents.Binding
 {
     /// <summary>
     /// An interface representing an object information provider. An object information provider is 
-    /// used by a <see cref="IBinder"/> to obtain means for creating instances of a particular object
+    /// used by a <see cref="IDocumentBinder"/> to obtain means for creating instances of a particular object
     /// or to access an object instance's members.
     /// </summary>
     public interface IObjectProvider
@@ -33,10 +33,10 @@ namespace Axle.Text.Documents.Binding
         /// </returns>
         object CreateInstance(Type type);
 
-        IBindingCollectionAdapter GetCollectionAdapter(Type type);
+        IDocumentCollectionValueAdapter GetCollectionAdapter(Type type);
     }
 
-    public interface IBindingCollectionAdapter
+    public interface IDocumentCollectionValueAdapter
     {
         object ItemAt(IEnumerable collection, int index);
         object SetItems(object collection, IEnumerable items);

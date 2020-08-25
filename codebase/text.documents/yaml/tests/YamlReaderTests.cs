@@ -12,9 +12,18 @@ namespace Axle.Text.Documents.Yaml.Tests
     [TestFixture]
     public class YamlReaderTests
     {
+        private class Wrapper
+        {
+            public SecureStringHolderWithOtherMembers Nested { get; internal set; }
+        }
+        private class SecureStringHolderWithOtherMembers : SecureStringHolder
+        {
+            public long Data { get; internal set; }
+            public string OtherData { get; internal set; }
+        }
         private class SecureStringHolder
         {
-            public SecureString Secret { get; set; }
+            public SecureString Secret { get; internal set; }
         }
         
         [Test]
@@ -45,7 +54,7 @@ namespace Axle.Text.Documents.Yaml.Tests
         }
 
         [Test]
-        public void TestIfSecureStringCanBeResolved()
+        public void TestIfSecureStringMemberCanBeResolved()
         {
             var propertiesPath = Path.Combine(
                 Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
@@ -53,11 +62,28 @@ namespace Axle.Text.Documents.Yaml.Tests
             var reader = new YamlDocumentReader(StringComparer.OrdinalIgnoreCase);
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
             
-            var binder = new DefaultBinder();
+            var binder = new DefaultDocumentBinder();
             var secureValueHolder = (SecureStringHolder) binder.Bind(data, new SecureStringHolder());
             Assert.IsNotNull(secureValueHolder);
             Assert.IsNotNull(secureValueHolder.Secret);
             Assert.AreEqual(new[]{'a', 'b', 'c'}.Length, secureValueHolder.Secret.Length);
+        }
+        
+        [Test]
+        public void TestIfNestedSecureStringMemberCanBeResolved()
+        {
+            var propertiesPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "data.yaml");
+            var reader = new YamlDocumentReader(StringComparer.OrdinalIgnoreCase);
+            var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
+            
+            var binder = new DefaultDocumentBinder();
+            var secureValueHolderWrapper = (Wrapper) binder.Bind(data, new Wrapper());
+            Assert.IsNotNull(secureValueHolderWrapper);
+            Assert.IsNotNull(secureValueHolderWrapper.Nested);
+            Assert.IsNotNull(secureValueHolderWrapper.Nested.Secret);
+            Assert.AreEqual(new[]{'a', 'b', 'c'}.Length, secureValueHolderWrapper.Nested.Secret.Length);
         }
     }
 }

@@ -37,7 +37,7 @@ namespace Axle.Text.Documents.Tests.Binding
             const string petType = "cat";
 
             var xmlBindingSource = string.Format(XmlFormat, ownerName, petName, petType);
-            var binder = new DefaultBinder();
+            var binder = new DefaultDocumentBinder();
             var owner = (Owner) binder.Bind(
                 new XmlTextDocumentReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource), 
                 new Owner());
@@ -56,7 +56,7 @@ namespace Axle.Text.Documents.Tests.Binding
             const string petType = "cat";
 
             var xmlBindingSource = string.Format(XmlFormat, ownerName, petName, petType);
-            var binder = new DefaultBinder();
+            var binder = new DefaultDocumentBinder();
             var owner = (Owner) binder.Bind(
                 new XDocumentReader(StringComparer.OrdinalIgnoreCase).Read(xmlBindingSource), 
                 new Owner());

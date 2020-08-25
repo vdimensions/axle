@@ -12,9 +12,9 @@ namespace Axle.Text.Documents.Binding
     /// </summary>
     public sealed class ReflectionObjectProvider : IObjectProvider
     {
-        internal abstract class CollectionAdapter : IBindingCollectionAdapter
+        internal abstract class CollectionValueAdapter : IDocumentCollectionValueAdapter
         {
-            protected CollectionAdapter(Type collectionType, Type elementType)
+            protected CollectionValueAdapter(Type collectionType, Type elementType)
             {
                 CollectionType = collectionType;
                 ElementType = elementType;
@@ -29,10 +29,10 @@ namespace Axle.Text.Documents.Binding
             public Type ElementType { get; }
         }
 
-        internal abstract class RawCollectionAdapter< TCollection> : CollectionAdapter
+        internal abstract class RawCollectionValueAdapter< TCollection> : CollectionValueAdapter
             where TCollection : class, IEnumerable
         {
-            protected RawCollectionAdapter() : base(typeof(TCollection), typeof(object)) { }
+            protected RawCollectionValueAdapter() : base(typeof(TCollection), typeof(object)) { }
 
             public sealed override object ItemAt(IEnumerable collection, int index)
             {
@@ -47,10 +47,10 @@ namespace Axle.Text.Documents.Binding
             public abstract TCollection SetItems(TCollection collection, IEnumerable items);
         }
 
-        internal abstract class GenericCollectionAdapter<T, TCollection> : CollectionAdapter
+        internal abstract class GenericCollectionValueAdapter<T, TCollection> : CollectionValueAdapter
             where TCollection: class, IEnumerable<T>
         {
-            protected GenericCollectionAdapter() : base(typeof(TCollection), typeof(T)) { }
+            protected GenericCollectionValueAdapter() : base(typeof(TCollection), typeof(T)) { }
 
             public sealed override object ItemAt(IEnumerable collection, int index)
             {
@@ -65,7 +65,7 @@ namespace Axle.Text.Documents.Binding
             public abstract TCollection SetItems(TCollection collection, IEnumerable<T> items);
         }
 
-        internal abstract class AbstractGenericListAdapter<T, TList> : GenericCollectionAdapter<T, TList> where TList: class, IList<T>
+        internal abstract class AbstractGenericListValueAdapter<T, TList> : GenericCollectionValueAdapter<T, TList> where TList: class, IList<T>
         {
             public sealed override object ItemAt(TList collection, int index)
             {
@@ -80,7 +80,7 @@ namespace Axle.Text.Documents.Binding
             }
         }
 
-        internal sealed class GenericArrayAdapter<T> : AbstractGenericListAdapter<T, T[]>
+        internal sealed class GenericArrayValueAdapter<T> : AbstractGenericListValueAdapter<T, T[]>
         {
             public override T[] SetItems(T[] collection, IEnumerable<T> items)
             {
@@ -98,7 +98,7 @@ namespace Axle.Text.Documents.Binding
             }
         }
 
-        internal sealed class GenericListAdapter<T> : AbstractGenericListAdapter<T, List<T>>
+        internal sealed class GenericListValueAdapter<T> : AbstractGenericListValueAdapter<T, List<T>>
         {
             public override List<T> SetItems(List<T> collection, IEnumerable<T> items)
             {
@@ -112,28 +112,28 @@ namespace Axle.Text.Documents.Binding
             }
         }
 
-        internal sealed class GenericLinkedListAdapter<T> : GenericCollectionAdapter<T, LinkedList<T>>
+        internal sealed class GenericLinkedListValueAdapter<T> : GenericCollectionValueAdapter<T, LinkedList<T>>
         {
             public override LinkedList<T> SetItems(LinkedList<T> collection, IEnumerable<T> items)
             {
                 if (collection != null)
                 {
                     collection.Clear();
+                    foreach (var item in items)
+                    {
+                        collection.AddLast(item);
+                    }
                 } 
                 else
                 {
-                    collection = new LinkedList<T>();
-                }
-                foreach (var item in items)
-                {
-                    collection.AddLast(item);
+                    collection = new LinkedList<T>(items);
                 }
                 return collection;
             }
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        internal sealed class RawListAdapter : RawCollectionAdapter<ArrayList>
+        internal sealed class RawListValueAdapter : RawCollectionValueAdapter<ArrayList>
         {
             public sealed override object ItemAt(ArrayList collection, int index)
             {
@@ -246,28 +246,28 @@ namespace Axle.Text.Documents.Binding
             return introspector;
         }
 
-        public IBindingCollectionAdapter GetCollectionAdapter(Type type)
+        public IDocumentCollectionValueAdapter GetCollectionAdapter(Type type)
         {
             var introspector = new TypeIntrospector(type);
             Type collectionType = type, elementType = null, adapterType = null;
             var adapterTypesMap = new Dictionary<Type, Type>()
             {
-                {typeof(LinkedList<>), typeof(GenericLinkedListAdapter<>)},
-                {typeof(List<>), typeof(GenericListAdapter<>)},
-                {typeof(IList<>), typeof(GenericListAdapter<>)},
-                {typeof(ICollection<>), typeof(GenericListAdapter<>)},
-                {typeof(IEnumerable<>), typeof(GenericListAdapter<>)},
+                {typeof(LinkedList<>), typeof(GenericLinkedListValueAdapter<>)},
+                {typeof(List<>), typeof(GenericListValueAdapter<>)},
+                {typeof(IList<>), typeof(GenericListValueAdapter<>)},
+                {typeof(ICollection<>), typeof(GenericListValueAdapter<>)},
+                {typeof(IEnumerable<>), typeof(GenericListValueAdapter<>)},
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-                {typeof(ArrayList), typeof(RawListAdapter)},
-                {typeof(IList), typeof(RawListAdapter)},
-                {typeof(ICollection), typeof(RawListAdapter)},
-                {typeof(IEnumerable), typeof(RawListAdapter)},
+                {typeof(ArrayList), typeof(RawListValueAdapter)},
+                {typeof(IList), typeof(RawListValueAdapter)},
+                {typeof(ICollection), typeof(RawListValueAdapter)},
+                {typeof(IEnumerable), typeof(RawListValueAdapter)},
                 #endif
             };
             if (type.IsArray)
             {
                 elementType = type.GetElementType();
-                adapterType = typeof(GenericArrayAdapter<>);
+                adapterType = typeof(GenericArrayValueAdapter<>);
             }
             else if (introspector.GetGenericTypeDefinition() is IGenericTypeIntrospector genericIntrospector)
             {
@@ -293,7 +293,7 @@ namespace Axle.Text.Documents.Binding
                     .Introspect()
                 : new TypeIntrospector(adapterType);
 
-            return CreateInstance(adapterIntrospector) as IBindingCollectionAdapter;
+            return CreateInstance(adapterIntrospector) as IDocumentCollectionValueAdapter;
         }
     }
 }

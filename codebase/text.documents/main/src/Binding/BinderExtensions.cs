@@ -5,18 +5,18 @@ namespace Axle.Text.Documents.Binding
 {
     public static class BinderExtensions
     {
-        public static object Bind(this IBinder binder, ITextDocumentRoot document, Type type)
+        public static object Bind(this IDocumentBinder documentBinder, ITextDocumentRoot document, Type type)
         {
-            binder.VerifyArgument(nameof(binder)).IsNotNull();
+            documentBinder.VerifyArgument(nameof(documentBinder)).IsNotNull();
             document.VerifyArgument(nameof(document)).IsNotNull();
-            return binder.Bind(new TextDataProvider(document), type);
+            return documentBinder.Bind(new DocumentValueProvider(document), type);
         }
 
-        public static object Bind(this IBinder binder, ITextDocumentRoot document, object instance)
+        public static object Bind(this IDocumentBinder documentBinder, ITextDocumentRoot document, object instance)
         {
-            binder.VerifyArgument(nameof(binder)).IsNotNull();
+            documentBinder.VerifyArgument(nameof(documentBinder)).IsNotNull();
             document.VerifyArgument(nameof(document)).IsNotNull();
-            return binder.Bind(new TextDataProvider(document), instance);
+            return documentBinder.Bind(new DocumentValueProvider(document), instance);
         }
     }
 }

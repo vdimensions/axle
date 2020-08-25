@@ -3,7 +3,7 @@
 namespace Axle.Text.Documents.Binding
 {
     /// <summary>
-    /// A binding converter is an object which is used by a <see cref="IBinder"/>
+    /// A binding converter is an object which is used by a <see cref="IDocumentBinder"/>
     /// to convert a raw <see cref="string"/> value to an instance of a specified type.
     /// </summary>
     public interface IBindingConverter

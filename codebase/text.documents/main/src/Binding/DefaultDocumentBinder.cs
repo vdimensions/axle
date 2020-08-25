@@ -6,13 +6,13 @@ using Axle.Verification;
 namespace Axle.Text.Documents.Binding
 {
     /// <summary>
-    /// A general-purpose implementation of the <see cref="IBinder"/> interface.
+    /// A general-purpose implementation of the <see cref="IDocumentBinder"/> interface.
     /// </summary>
-    /// <seealso cref="IBinder"/>
-    public class DefaultBinder : IBinder
+    /// <seealso cref="IDocumentBinder"/>
+    public class DefaultDocumentBinder : IDocumentBinder
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="DefaultBinder"/> class using the specified 
+        /// Creates a new instance of the <see cref="DefaultDocumentBinder"/> class using the specified 
         /// <paramref name="objectProvider"/> and <paramref name="converter"/>.
         /// </summary>
         /// <param name="objectProvider">
@@ -23,34 +23,34 @@ namespace Axle.Text.Documents.Binding
         /// A <see cref="IBindingConverter"/> instance that handles the conversion of the raw data values
         /// during the binding process.
         /// </param>
-        public DefaultBinder(IObjectProvider objectProvider, IBindingConverter converter)
+        public DefaultDocumentBinder(IObjectProvider objectProvider, IBindingConverter converter)
         {
             ObjectProvider = Verifier.IsNotNull(Verifier.VerifyArgument(objectProvider, nameof(objectProvider))).Value;
             Converter = Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter))).Value;
         }
         #if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
         /// <summary>
-        /// Creates a new instance of the <see cref="DefaultBinder"/> class using a 
+        /// Creates a new instance of the <see cref="DefaultDocumentBinder"/> class using a 
         /// <see cref="ReflectionObjectProvider"/> and a <see cref="DefaultBindingConverter"/>
         /// </summary>
-        public DefaultBinder() : this(new ReflectionObjectProvider(), new DefaultBindingConverter()) { }
+        public DefaultDocumentBinder() : this(new ReflectionObjectProvider(), new DefaultBindingConverter()) { }
         #endif
 
         private static bool TryBind(
                 IObjectProvider objectProvider, 
                 IBindingConverter converter, 
-                IBoundValueProvider valueProvider, 
+                IDocumentValueProvider valueProvider, 
                 object instance, 
                 Type targetType, 
                 out object boundValue)
         {
             switch (valueProvider)
             {
-                case IBoundSimpleValueProvider svp:
+                case IDocumentSimpleValueProvider svp:
                     return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
                 
-                case IBoundCollectionProvider collectionProvider:
-                    var collectionAdapter = collectionProvider.CollectionAdapter ??
+                case IDocumentCollectionProvider collectionProvider:
+                    var collectionAdapter = collectionProvider.CollectionValueAdapter ??
                                             objectProvider.GetCollectionAdapter(targetType);
                     if (collectionAdapter != null)
                     {
@@ -73,14 +73,14 @@ namespace Axle.Text.Documents.Binding
                         targetType, 
                         out boundValue);
 
-                case IBoundComplexValueProvider complexProvider:
+                case IDocumentComplexValueProvider complexProvider:
                     var cAdapter = objectProvider.GetCollectionAdapter(targetType);
                     if (cAdapter != null)
                     {
                         return TryBind(
                             objectProvider,
                             converter,
-                            new BoundCollectionProvider(complexProvider.Name, cAdapter, complexProvider),
+                            new DocumentCollectionProvider(complexProvider.Name, cAdapter, complexProvider),
                             instance,
                             targetType,
                             out boundValue);
@@ -117,7 +117,7 @@ namespace Axle.Text.Documents.Binding
         }
 
         /// <inheritdoc />
-        public object Bind(IBoundValueProvider memberValueProvider, object instance)
+        public object Bind(IDocumentValueProvider memberValueProvider, object instance)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(instance, nameof(instance)));
@@ -133,7 +133,7 @@ namespace Axle.Text.Documents.Binding
         }
 
         /// <inheritdoc />
-        public object Bind(IBoundValueProvider memberValueProvider, Type type)
+        public object Bind(IDocumentValueProvider memberValueProvider, Type type)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));

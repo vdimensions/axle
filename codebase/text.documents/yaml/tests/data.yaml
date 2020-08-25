@@ -13,3 +13,7 @@ axle:
     
 # the test will validate that this can be parsed to a SecureString without instantiating a managed string
 secret: ['a', 'b', 'c'] 
+nested:
+  data: 123
+  secret: [ 'd', 'e', 'f' ]
+  otherData: "string"
