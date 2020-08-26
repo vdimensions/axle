@@ -25,7 +25,7 @@ let projectLocations = [
     "configuration/main"; "configuration/microsoft"
     "resources/main"; "resources/properties"; "resources/yaml"
     "security/main"
-    "security/cryptography"
+    "security/access_control"
     "application/main"
     "data/main"; "data/fsharp"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/sqlite"; "data/sqlite.microsoft"; "data/mysql"
     "logging/log4net"

@@ -8,7 +8,6 @@
     <ProjectGuid>{43919C97-BCFD-4802-95D7-76435E066962}</ProjectGuid>
     <RootNamespace>Axle</RootNamespace>
     <Description>Axle Framework Core Library</Description>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
@@ -41,6 +40,10 @@
     <Compile Remove="Linq\ISequence.cs" />
     <Compile Remove="Linq\Sequence.cs" />
     <Compile Remove="Linq\SequenceExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Security" />
   </ItemGroup>
   
   <Import Project="../Axle.Core.Dependencies.targets" />

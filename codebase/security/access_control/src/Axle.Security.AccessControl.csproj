@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard1.6;net45;net40;net35</TargetFrameworks>
+  </PropertyGroup>
+  
+  <PropertyGroup>
+    <ProjectGuid>7CDEE3ED-184E-497A-BD14-F949D544D52F</ProjectGuid>
+    <Description>Axle Framework security library focused on access control</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Auditing\" />
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../Reference.Axle.Core.targets" />
+</Project>

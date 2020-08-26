@@ -28,7 +28,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Resources.Yaml.Tests",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "security", "security", "{6706277F-4174-433D-B3F3-57E0C6E15402}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.Cryptography", "codebase\security\cryptography\src\Axle.Security.Cryptography.csproj", "{AB4D08D0-AE39-4992-96DA-FDD3676E806B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security", "codebase\security\main\src\Axle.Security.csproj", "{AB4D08D0-AE39-4992-96DA-FDD3676E806B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "logging", "logging", "{D70A7D36-32CB-4359-8210-D3F6DEC3D04A}"
 EndProject
@@ -129,7 +129,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Tests",
 EndProject
 Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Axle.FSharp", "codebase\core\fsharp\src\Axle.FSharp.fsproj", "{058DA5D4-BE62-4A66-AC23-DD162E113EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.Cryptography.Tests", "codebase\security\cryptography\tests\Axle.Security.Cryptography.Tests.csproj", "{0312335E-6302-47CC-A384-5802A82779C0}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.Tests", "codebase\security\main\tests\Axle.Security.Tests.csproj", "{0312335E-6302-47CC-A384-5802A82779C0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.AccessControl", "codebase\security\access_control\src\Axle.Security.AccessControl.csproj", "{7CDEE3ED-184E-497A-BD14-F949D544D52F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -285,6 +287,10 @@ Global
 		{0312335E-6302-47CC-A384-5802A82779C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0312335E-6302-47CC-A384-5802A82779C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0312335E-6302-47CC-A384-5802A82779C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -347,6 +353,7 @@ Global
 		{D4C56580-5C6F-4D05-A519-95E6B1F59F1F} = {941D0991-5914-4A8A-9F75-1D84E10B7A49}
 		{058DA5D4-BE62-4A66-AC23-DD162E113EBF} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 		{0312335E-6302-47CC-A384-5802A82779C0} = {6706277F-4174-433D-B3F3-57E0C6E15402}
+		{7CDEE3ED-184E-497A-BD14-F949D544D52F} = {6706277F-4174-433D-B3F3-57E0C6E15402}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}
