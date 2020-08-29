@@ -86,21 +86,9 @@ namespace Axle
 
                         var listToAddTaskTo = callback.AllowParallelInvoke ? parallelCallbacks : sequentialCallbacks;
                         listToAddTaskTo.Add(new Task(() => callback.Invoke(targetContext.ModuleInstance, ModuleInstance)));
-
-                        //parallelCallbacks.StartAll();
-
-                        //try
-                        //{
-                        //    callback.Invoke(rmm.ModuleInstance, ModuleInstance);
-                        //}
-                        //catch (Exception e)
-                        //{
-                        //    // TODO: wrap exception
-                        //    throw;
-                        //}
                     }
 
-                    parallelCallbacks.Start();
+                    parallelCallbacks.Start(TaskScheduler.Default);
                     sequentialCallbacks.RunSynchronously();
                     parallelCallbacks.WaitForAll();
                     sequentialCallbacks.WaitForAll();
