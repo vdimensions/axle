@@ -133,6 +133,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.Tests", "code
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.AccessControl", "codebase\security\access_control\src\Axle.Security.AccessControl.csproj", "{7CDEE3ED-184E-497A-BD14-F949D544D52F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.Microsoft", "codebase\configuration\microsoft\src\Axle.Configuration.Microsoft.csproj", "{FDA82935-6451-468E-A3DC-DA5E681C652F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.Microsoft.Tests", "codebase\configuration\microsoft\tests\Axle.Configuration.Microsoft.Tests.csproj", "{9BD3B615-072A-463C-9B2E-84F1E6B9889D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -291,6 +295,14 @@ Global
 		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7CDEE3ED-184E-497A-BD14-F949D544D52F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDA82935-6451-468E-A3DC-DA5E681C652F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDA82935-6451-468E-A3DC-DA5E681C652F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDA82935-6451-468E-A3DC-DA5E681C652F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDA82935-6451-468E-A3DC-DA5E681C652F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9BD3B615-072A-463C-9B2E-84F1E6B9889D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9BD3B615-072A-463C-9B2E-84F1E6B9889D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9BD3B615-072A-463C-9B2E-84F1E6B9889D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9BD3B615-072A-463C-9B2E-84F1E6B9889D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -354,6 +366,8 @@ Global
 		{058DA5D4-BE62-4A66-AC23-DD162E113EBF} = {2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}
 		{0312335E-6302-47CC-A384-5802A82779C0} = {6706277F-4174-433D-B3F3-57E0C6E15402}
 		{7CDEE3ED-184E-497A-BD14-F949D544D52F} = {6706277F-4174-433D-B3F3-57E0C6E15402}
+		{FDA82935-6451-468E-A3DC-DA5E681C652F} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
+		{9BD3B615-072A-463C-9B2E-84F1E6B9889D} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

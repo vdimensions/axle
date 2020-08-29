@@ -2,12 +2,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration.Legacy;
-using Axle.Configuration.Microsoft;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using NUnit.Framework;
 
-namespace Axle.Configuration.Tests
+namespace Axle.Configuration.Microsoft.Tests
 {
     public class ConfigReadingTests
     {
@@ -85,7 +84,7 @@ namespace Axle.Configuration.Tests
             var greeting = cfg.GetSection<GreetingsSection>("greetings");
             var messageFormat = cfg["messageFormat"].Select(x => x.Value).SingleOrDefault();
             Assert.IsNotNull(messageFormat);
-            Assert.AreEqual("Hello, World", string.Format(messageFormat, greeting.Default, subject.Name));
+            Assert.AreEqual("Hello, World", string.Format(messageFormat.ToString(), greeting.Default, subject.Name));
         }
 
         [Test]
