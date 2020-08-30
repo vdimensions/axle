@@ -1,6 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System.Diagnostics;
-
+﻿using System.Diagnostics;
 
 namespace Axle.Threading
 {
@@ -23,8 +21,5 @@ namespace Axle.Threading
             _readWriteLock.ExitUpgradeableReadLock();
             _readWriteLock = null;
         }
-
-        ILock ILockHandle.Lock => _readWriteLock;
     }
 }
-#endif

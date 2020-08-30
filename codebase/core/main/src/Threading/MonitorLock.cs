@@ -56,10 +56,12 @@ namespace Axle.Threading
         internal void Pulse() => Monitor.Pulse(_obj);
         internal void PulseAll() => Monitor.PulseAll(_obj);
 
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Determines whether the current thread holds the current <see cref="MonitorLock"/>.
         /// </summary>
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public bool IsLocked => Monitor.IsEntered(_obj);
+        #endif
     }
 }

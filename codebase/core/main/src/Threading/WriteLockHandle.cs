@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-
 namespace Axle.Threading
 {
     internal struct WriteLockHandle : ILockHandle
@@ -23,7 +22,5 @@ namespace Axle.Threading
             _readWriteLock.ExitWriteLock();
             _readWriteLock = null;
         }
-
-        ILock ILockHandle.Lock => _readWriteLock;
     }
 }

@@ -22,7 +22,5 @@ namespace Axle.Threading
             _readWriteLock.ExitReadLock();
             _readWriteLock = null;
         }
-
-        ILock ILockHandle.Lock => _readWriteLock;
     }
 }

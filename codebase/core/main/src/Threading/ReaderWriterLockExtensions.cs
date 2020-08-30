@@ -1254,6 +1254,19 @@ namespace Axle.Threading
             #endregion TryWrite(...)
 
             #region CreateReadLockHandle(...)
+            /// <summary>
+            /// Creates a <see cref="IDisposable">disposable</see> read <see cref="ILockHandle">lock handle</see> for
+            /// the current <paramref name="lock" /> object, effectively causing the lock to enter in read-mode.
+            /// </summary>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> to provide a read-lock handle for.
+            /// </param>
+            /// <returns>
+            /// A <see cref="IDisposable">disposable</see> read <see cref="ILockHandle">lock handle</see> to be used to
+            /// control the lock duration.
+            /// </returns>
+            /// <seealso cref="IReadWriteLock"/>
+            /// <seealso cref="ILockHandle"/>
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
@@ -1268,6 +1281,20 @@ namespace Axle.Threading
             #endregion CreateReadLockHandle(...)
 
             #region CreateUpgradeableReadLockHandle(...)
+            /// <summary>
+            /// Creates a <see cref="IDisposable">disposable</see> upgradeable read <see cref="ILockHandle">lock handle
+            /// </see> for the current <paramref name="lock" /> object, effectively causing the lock to enter in
+            /// upgradeable-read-mode.
+            /// </summary>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> to provide an upgradeable-read-lock handle for.
+            /// </param>
+            /// <returns>
+            /// A <see cref="IDisposable">disposable</see> upgradeable read <see cref="ILockHandle">lock handle</see> to
+            /// be used to control the lock duration.
+            /// </returns>
+            /// <seealso cref="IReadWriteLock"/>
+            /// <seealso cref="ILockHandle"/>
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
@@ -1279,6 +1306,19 @@ namespace Axle.Threading
             #endregion CreateUpgradeableReadLockHandle(...)
 
             #region CreateWriteLockHandle(...)
+            /// <summary>
+            /// Creates a <see cref="IDisposable">disposable</see> write <see cref="ILockHandle">lock handle</see> for
+            /// the current <paramref name="lock" /> object, effectively causing the lock to enter in write-mode.
+            /// </summary>
+            /// <param name="lock">
+            /// The <see cref="IReadWriteLock"/> to provide a write-lock handle for.
+            /// </param>
+            /// <returns>
+            /// A <see cref="IDisposable">disposable</see> write <see cref="ILockHandle">lock handle</see> to be used to
+            /// control the lock duration.
+            /// </returns>
+            /// <seealso cref="IReadWriteLock"/>
+            /// <seealso cref="ILockHandle"/>
             #if NETSTANDARD || NET45_OR_NEWER
             [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
             #endif
