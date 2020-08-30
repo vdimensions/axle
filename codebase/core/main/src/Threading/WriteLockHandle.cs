@@ -8,7 +8,7 @@ namespace Axle.Threading
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IReadWriteLock _readWriteLock;
 
-        public WriteLockHandle(IReadWriteLock readWriteLock)
+        internal WriteLockHandle(IReadWriteLock readWriteLock)
         {
             _readWriteLock = readWriteLock;
             _readWriteLock.EnterWriteLock();

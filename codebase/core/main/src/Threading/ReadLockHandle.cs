@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 
-
 namespace Axle.Threading
 {
     internal struct ReadLockHandle : ILockHandle
@@ -8,7 +7,7 @@ namespace Axle.Threading
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private IReadWriteLock _readWriteLock;
 
-        public ReadLockHandle(IReadWriteLock readWriteLock)
+        internal ReadLockHandle(IReadWriteLock readWriteLock)
         {
             _readWriteLock = readWriteLock;
             _readWriteLock.EnterReadLock();
