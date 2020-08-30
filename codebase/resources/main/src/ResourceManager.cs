@@ -199,7 +199,6 @@ namespace Axle.Resources
                 return null;
             }
             var cache = _cacheManager?.GetCache(bundle);
-            // TODO: change extractor iteration order
             var extractors = (cache == null
                 ? Extractors.Union(bundleRegistry.Extractors)
                 : Extractors.Union(bundleRegistry.Extractors).Select((e, i) => CreateCachingExtractor(e, cache, i)))

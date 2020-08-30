@@ -1,49 +1,65 @@
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
-
 using Axle.References;
-
 
 namespace Axle.Caching
 {
+    /// <summary>
+    /// An implementation of the <see cref="ICache"/> interface that stores its values as <see cref="IWeakReference{T}">
+    /// weak references</see>, leveraging the garbage collector of the .NET runtime as the enforcer of the caching
+    /// expiration policy.
+    /// </summary>
     public sealed class WeakReferenceCache : ICache
     {
-        private sealed class WeakReferenceCacheNode : IEquatable<object>
+        private sealed class WeakReferenceCacheNode
         {
-            public override bool Equals(object obj)
-            {
-                return Equals(obj, this.Key);
-            }
-
-            public object Key { get; internal set; }
             public object Value { get; internal set; }
         }
 
-        private readonly ConcurrentDictionary<object, WeakRef<WeakReferenceCacheNode>> _nodes = new ConcurrentDictionary<object, WeakRef<WeakReferenceCacheNode>>();
+        private readonly ConcurrentDictionary<object, WeakRef<WeakReferenceCacheNode>> _nodes 
+            = new ConcurrentDictionary<object, WeakRef<WeakReferenceCacheNode>>();
 
         private void ClearExpired()
         {
-            _nodes.Where(x => !x.Value.IsAlive).Select(x => x.Key).ToArray().All(x => _nodes.TryRemove(x, out var _));
+            var items = _nodes
+                .Select(x =>
+                    new // Storing the weak reference value in a temp object here makes sure the GC wont destroy it
+                    {
+                        x.Key,
+                        x.Value.Value,
+                        x.Value.IsAlive
+                    })
+                .Where(x => !x.IsAlive)
+                .ToArray();
+            foreach (var item in items)
+            {
+                _nodes.TryRemove(item.Key, out _);
+            }
         }
 
+        /// <inheritdoc />
         public void Evict() => _nodes.Clear();
 
+        /// <inheritdoc />
         public bool Delete(object key)
         {
-            var result = _nodes.TryRemove(key, out var _);
+            var result = _nodes.TryRemove(key, out var existing) && existing.IsAlive;
             ClearExpired();
             return result;
         }
 
-        public ICache Add(object key, object value) { return Add<object>(key, value); }
-        public ICache Add<T>(object key, T value)
+        /// <inheritdoc />
+        public ICache Add(object key, object value)
         {
-            _nodes[key] = new WeakRef<WeakReferenceCacheNode>(new WeakReferenceCacheNode { Key = key, Value = value });
+            _nodes[key] = new WeakRef<WeakReferenceCacheNode>(new WeakReferenceCacheNode { Value = value });
             return this;
         }
 
+        /// <inheritdoc />
         public object GetOrAdd(object key, object valueToAdd) { return GetOrAdd<object>(key, valueToAdd); }
+
+        /// <inheritdoc />
         public object GetOrAdd(object key, Func<object, object> valueFactory) { return GetOrAdd<object>(key, valueFactory); }
         
         private T GetOrAdd<T>(object key, T valueToAdd) { return GetOrAdd(key, _ => valueToAdd); }
@@ -55,7 +71,7 @@ namespace Axle.Caching
                 key,
                 k =>
                 {
-                    var v = new WeakReferenceCacheNode {Key = key, Value = valueFactory(k)};
+                    var v = new WeakReferenceCacheNode { Value = valueFactory(k)};
                     return new WeakRef<WeakReferenceCacheNode>(resultNode = v);
                 },
                 (k, existing) =>
@@ -65,18 +81,19 @@ namespace Axle.Caching
                     {
                         return existing;
                     }
-                    var v = new WeakReferenceCacheNode { Key = key, Value = valueFactory(k) };
+                    var v = new WeakReferenceCacheNode { Value = valueFactory(k) };
                     return new WeakRef<WeakReferenceCacheNode>(resultNode = v);
                 }).Value.Value;
             return result;
         }
 
+        /// <inheritdoc />
         public object this[object key]
         {
-            get => _nodes.TryGetValue(key, out var res) && res.TryGetValue(out WeakReferenceCacheNode node) ? node.Value : null;
+            get => _nodes.TryGetValue(key, out var res) && res.TryGetValue(out var node) ? node.Value : null;
             set
             {
-                var node = new WeakReferenceCacheNode {Key = key, Value = value};
+                var node = new WeakReferenceCacheNode { Value = value};
                 _nodes[key] = new WeakRef<WeakReferenceCacheNode>(node);
             }
         }
