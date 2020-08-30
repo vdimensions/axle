@@ -237,7 +237,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
-        /// <seealso cref="ITypeIntrospector.IsDelegate"/>
+        /// <seealso cref="TypeFlags.Delegate"/>
         public static bool IsDelegate(
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
@@ -271,7 +271,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
-        /// <seealso cref="ITypeIntrospector.IsNullableType"/>
+        /// <seealso cref="TypeFlags.NullableValueType"/>
         public static bool IsNullableType(
                 #if NETSTANDARD || NET35_OR_NEWER
                 this

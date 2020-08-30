@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using System.Reflection;
 using Axle.Verification;
@@ -13,6 +14,7 @@ namespace Axle.Reflection
     public static class TypeIntrospectorExtensions
     {
         #if NETSTANDARD || NET35_OR_NEWER
+        [SuppressMessage("ReSharper", "CognitiveComplexity")]
         private static MemberInfo ExtractMember<T>(Expression<T> expression)
         {
             var expr = expression.Body as MemberExpression;
@@ -306,6 +308,49 @@ namespace Axle.Reflection
                 nameof(expression));
         }
         #endif
+
+        /// <summary>
+        /// A generic alternative to the <see cref="ITypeIntrospector.CreateInstance"/> method.
+        /// </summary>
+        /// <param name="typeIntrospector">
+        /// The <see cref="ITypeIntrospector{T}"/> instance to perform the instantiation.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of the produced result object.
+        /// </typeparam>
+        /// <returns>
+        /// A new instance of the introspected type <typeparamref name="T"/>.
+        /// </returns>
+        /// <seealso cref="ITypeIntrospector.CreateInstance"/>
+        /// <seealso cref="CreateInstance{T}(Axle.Reflection.ITypeIntrospector{T},object[])"/>
+        public static T CreateInstance<T>(this ITypeIntrospector<T> typeIntrospector)
+        {
+            typeIntrospector.VerifyArgument(nameof(typeIntrospector)).IsNotNull();
+            return (T) typeIntrospector.CreateInstance();
+        }
+
+        /// <summary>
+        /// A generic alternative to the <see cref="ITypeIntrospector.CreateInstance(object[])"/> method.
+        /// </summary>
+        /// <param name="typeIntrospector">
+        /// The <see cref="ITypeIntrospector{T}"/> instance to perform the instantiation.
+        /// </param>
+        /// <param name="args">
+        /// An array of arguments that match in count, order and type the parameters of the constructor to invoke.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of the produced result object.
+        /// </typeparam>
+        /// <returns>
+        /// A new instance of the introspected type <typeparamref name="T"/>.
+        /// </returns>
+        /// <seealso cref="ITypeIntrospector.CreateInstance(object[])"/>
+        /// <seealso cref="CreateInstance{T}(Axle.Reflection.ITypeIntrospector{T})"/>
+        public static T CreateInstance<T>(this ITypeIntrospector<T> typeIntrospector, params  object[] args)
+        {
+            typeIntrospector.VerifyArgument(nameof(typeIntrospector)).IsNotNull();
+            return (T) typeIntrospector.CreateInstance(args);
+        }
     }
 }
 #endif

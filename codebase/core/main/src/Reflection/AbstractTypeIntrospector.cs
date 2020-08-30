@@ -3,6 +3,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 
 using Axle.Verification;
@@ -107,6 +108,7 @@ namespace Axle.Reflection
         public abstract IEvent[] GetEvents(ScanOptions scanOptions);
 
         /// <inheritdoc />
+        [SuppressMessage("ReSharper", "ForCanBeConvertedToForeach")]
         public IMember[] GetMembers(ScanOptions scanOptions)
         {
             var constructors = GetConstructors(scanOptions);

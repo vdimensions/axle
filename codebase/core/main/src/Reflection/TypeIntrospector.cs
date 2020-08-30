@@ -192,7 +192,7 @@ namespace Axle.Reflection
             #else
             var methods = IntrospectedType.GetMethods(bindingFlags);
             #endif
-            return methods.Select<MethodInfo, IMethod>(GetMethod).ToArray();
+            return methods.Select(GetMethod).ToArray();
         }
 
         /// <inheritdoc />
@@ -207,6 +207,7 @@ namespace Axle.Reflection
             return property != null ? GetProperty(property) : null;
         }
 
+        /// <inheritdoc />
         public override IProperty GetProperty(PropertyInfo reflectedProperty) => PropertyToken.Create(reflectedProperty);
 
         /// <inheritdoc />
