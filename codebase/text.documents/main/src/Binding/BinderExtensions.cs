@@ -5,17 +5,27 @@ namespace Axle.Text.Documents.Binding
 {
     public static class BinderExtensions
     {
-        public static object Bind(this IDocumentBinder documentBinder, ITextDocumentRoot document, Type type)
+        public static object Bind(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IDocumentBinder documentBinder,
+            ITextDocumentRoot document, Type type)
         {
-            documentBinder.VerifyArgument(nameof(documentBinder)).IsNotNull();
-            document.VerifyArgument(nameof(document)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(documentBinder, nameof(documentBinder)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(document, nameof(document)));
             return documentBinder.Bind(new DocumentValueProvider(document), type);
         }
 
-        public static object Bind(this IDocumentBinder documentBinder, ITextDocumentRoot document, object instance)
+        public static object Bind(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IDocumentBinder documentBinder, 
+            ITextDocumentRoot document, object instance)
         {
-            documentBinder.VerifyArgument(nameof(documentBinder)).IsNotNull();
-            document.VerifyArgument(nameof(document)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(documentBinder, nameof(documentBinder)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(document, nameof(document)));
             return documentBinder.Bind(new DocumentValueProvider(document), instance);
         }
     }

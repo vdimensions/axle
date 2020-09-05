@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -33,3 +34,4 @@ namespace Axle.Text.Documents.Xml
         }
     }
 }
+#endif

@@ -4,12 +4,20 @@ using System.Text;
 
 namespace Axle.Text.Documents.Xml
 {
+    #if NETSTANDARD || NET35_OR_NEWER
     /// <summary>
     /// An abstract class serving as a base for implementing the <see cref="AbstractTextDocumentReader"/> with
     /// support for the XML format.
     /// </summary>
     /// <seealso cref="XDocumentReader"/>
     /// <seealso cref="XmlTextDocumentReader"/>
+    #else
+    /// <summary>
+    /// An abstract class serving as a base for implementing the <see cref="AbstractTextDocumentReader"/> with
+    /// support for the XML format.
+    /// </summary>
+    /// <seealso cref="XmlTextDocumentReader"/>
+    #endif
     public abstract class AbstractXmlTextDocumentReader : AbstractTextDocumentReader
     {
         /// <summary>

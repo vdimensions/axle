@@ -17,7 +17,8 @@ namespace Axle.Text.Documents
             return _textDocument.GetChildren(Prefix);
         }
 
-        public IEnumerable<ITextDocumentNode> GetChildren(string name) => GetChildren().OfType<ITextDocumentObject>().SelectMany(x => x.GetChildren(name));
+        public IEnumerable<ITextDocumentNode> GetChildren(string name) => 
+            GetChildren().OfType<ITextDocumentObject>().SelectMany(x => x.GetChildren(name));
 
         public IEqualityComparer<string> KeyComparer => _textDocument.KeyComparer;
         public ITextDocumentObject Parent => null;

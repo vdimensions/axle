@@ -13,6 +13,7 @@ namespace Axle.IO.Extensions.Stream
     /// A static class providing extension methods to  instances of the <see cref="Stream"/> class.
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public static class StreamExtensions
     {
         private const int DefaultBufferSize = 4096;

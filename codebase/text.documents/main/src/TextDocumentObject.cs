@@ -30,7 +30,7 @@ namespace Axle.Text.Documents
             return _NameTokenRegex.Match(name).Select(x => x.Value).ToArray();
         }
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly IEnumerable<ITextDocumentNode> _children;

@@ -10,6 +10,9 @@
             Value = value;
         }
 
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
+        [System.Runtime.Serialization.DataMember]
+        #endif
         public CharSequence Value { get; }
     }
 }

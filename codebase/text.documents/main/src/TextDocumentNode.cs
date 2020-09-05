@@ -8,12 +8,12 @@ namespace Axle.Text.Documents
     #endif
     public abstract class TextDocumentNode : ITextDocumentNode
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly string _key;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly ITextDocumentObject _parent;

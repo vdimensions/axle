@@ -24,19 +24,18 @@ namespace Axle.Text.Documents
             if (tokenizedKey.Length > 1)
             {
                 var fixedKey = tokenizedKey[tokenizedKey.Length - 1];
-                currentNodes = currentNodes.Select(
-                    node =>
+                currentNodes = Enumerable.Select(currentNodes, node =>
+                {
+                    switch (node)
                     {
-                        switch (node)
-                        {
-                            case ITextDocumentValue v:
-                                return new TextDocumentValue(fixedKey, null, v.Value);
-                            case ITextDocumentObject o:
-                                return new TextDocumentObject(fixedKey, null, o.GetChildren(), false);
-                            default:
-                                return node;
-                        }
-                    });
+                        case ITextDocumentValue v:
+                            return new TextDocumentValue(fixedKey, null, v.Value);
+                        case ITextDocumentObject o:
+                            return new TextDocumentObject(fixedKey, null, o.GetChildren(), false);
+                        default:
+                            return node;
+                    }
+                });
             }
             for (var i = tokenizedKey.Length - 2; i >= 0; i--)
             {
@@ -52,7 +51,7 @@ namespace Axle.Text.Documents
         }
 
         protected virtual ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding) 
-            => CreateAdapter(encoding.GetString(stream.ToByteArray()));
+            => CreateAdapter(encoding.GetString(StreamExtensions.ToByteArray(stream)));
         protected abstract ITextDocumentAdapter CreateAdapter(string data);
         
         private ITextDocumentRoot ReadStructuredData(
@@ -64,7 +63,7 @@ namespace Axle.Text.Documents
 
         private IEnumerable<ITextDocumentNode> ExpandChildren(ITextDocumentAdapter adapter)
         {
-            foreach (var childGroup in adapter.Children.GroupBy(x => x.Key, Comparer))
+            foreach (var childGroup in Enumerable.GroupBy(adapter.Children, x => x.Key, Comparer))
             foreach (var child in childGroup)
             foreach (var node in FixHierarchy(childGroup.Key, ReadStructuredData(childGroup.Key, child)))
             {
@@ -89,7 +88,7 @@ namespace Axle.Text.Documents
                     yield return new TextDocumentValue(key, null, adapter.Value);
                 }
                 var children = ExpandChildren(adapter);
-                if (children.Any())
+                if (Enumerable.Any(children))
                 {
                     yield return new TextDocumentObject(key, null, children, false);
                 }
@@ -98,14 +97,14 @@ namespace Axle.Text.Documents
 
         public ITextDocumentRoot Read(Stream stream, Encoding encoding)
         {
-            stream.VerifyArgument(nameof(stream)).IsNotNull();
-            encoding.VerifyArgument(nameof(encoding)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(stream, nameof(stream)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(encoding, nameof(encoding)));
             return ReadStructuredData(CreateAdapter(stream, encoding), Comparer);
         }
 
         public ITextDocumentRoot Read(string data)
         {
-            data.VerifyArgument(nameof(data)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(data, nameof(data)));
             return ReadStructuredData(CreateAdapter(data), Comparer);
         }
 
