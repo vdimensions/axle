@@ -2,7 +2,6 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using Axle.Configuration.ConfigurationManager;
-using Axle.Configuration.Legacy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
 using NUnit.Framework;
