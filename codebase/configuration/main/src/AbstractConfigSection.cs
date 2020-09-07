@@ -23,7 +23,7 @@ namespace Axle.Configuration
         {
             get
             {
-                key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
+                StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(key, nameof(key)));
                 return Data.TryGetValue(key, out var val) ? val : Enumerable.Empty<IConfigSetting>();
             }
         }

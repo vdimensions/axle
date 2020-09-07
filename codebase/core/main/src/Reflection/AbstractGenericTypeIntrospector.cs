@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using Axle.Verification;

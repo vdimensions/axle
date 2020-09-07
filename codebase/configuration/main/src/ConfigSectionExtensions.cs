@@ -91,15 +91,27 @@ namespace Axle.Configuration
         private const string IncludeExcludeElementCollectionIncludeSection = "include";
         private const string IncludeExcludeElementCollectionExcludeSection = "exclude";
         
-        private static IConfigSetting GetSetting(this IConfigSection config, string sectionName)
+        private static IConfigSetting GetSetting(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IConfigSection config, string sectionName)
         {
             return string.IsNullOrEmpty(sectionName) ? config : config[sectionName].FirstOrDefault();
         }
         
-        public static IConfigSection GetSection(this IConfigSection config, string sectionName) 
-            => GetSections(config, sectionName).OfType<IConfigSection>().FirstOrDefault();
+        public static IConfigSection GetSection(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IConfigSection config, string sectionName) 
+            => Enumerable.FirstOrDefault(Enumerable.OfType<IConfigSection>(GetSections(config, sectionName)));
 
-        public static object GetSection(this IConfigSection config, string sectionName, Type sectionType)
+        public static object GetSection(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            IConfigSection config, string sectionName, Type sectionType)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             var configSection = GetSetting(config, sectionName);
@@ -108,7 +120,11 @@ namespace Axle.Configuration
                 : null;
         }
 
-        public static T GetSection<T>(this IConfigSection config, string sectionName) where T: class, new()
+        public static T GetSection<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            IConfigSection config, string sectionName) where T: class, new()
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             var configSection = GetSetting(config, sectionName);
@@ -117,31 +133,56 @@ namespace Axle.Configuration
                 : null;
         }
         
-        public static IEnumerable<IConfigSetting> GetSections(this IConfigSection config, string sectionName)
+        public static IEnumerable<IConfigSetting> GetSections(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            IConfigSection config, string sectionName)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             return string.IsNullOrEmpty(sectionName) ? new[]{config} : config[sectionName];
         }
         
-        public static IEnumerable<object> GetSections(this IConfigSection config, string sectionName, Type sectionType)
+        public static IEnumerable<object> GetSections(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            IConfigSection config, string sectionName, Type sectionType)
         {
-            return GetSections(config, sectionName).Select<IConfigSetting, object>(
-                configSection =>
+            return Enumerable.Select(
+                GetSections(config, sectionName), 
+                configSection => 
                     new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType));
         }
 
-        public static IEnumerable<T> GetSections<T>(this IConfigSection config, string sectionName) where T: class, new()
+        public static IEnumerable<T> GetSections<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            IConfigSection config, string sectionName) where T: class, new()
         {
-            return GetSections(config, sectionName)
-                .Select<IConfigSetting, object>(configSection => new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T()))
-                .Cast<T>();
+            return Enumerable.Cast<T>(
+                Enumerable.Select(
+                    GetSections(config, sectionName), 
+                    configSection => 
+                        new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T())));
         }
 
-        public static IIncludeExcludeElementCollection<T> GetIncludeExcludeCollection<T>(this IConfigSection config, string sectionName)
+        public static IIncludeExcludeElementCollection<T> GetIncludeExcludeCollection<T>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            IConfigSection config, string sectionName)
         {
-            var sections = GetSections(config, sectionName).OfType<IConfigSection>().ToList();
-            var includeElements = sections.SelectMany(section => GetSections(section, IncludeExcludeElementCollectionIncludeSection, typeof(T)).Cast<T>());
-            var excludeElements = sections.SelectMany(section => GetSections(section, IncludeExcludeElementCollectionExcludeSection, typeof(T)).Cast<T>());
+            var sections = Enumerable.ToList(Enumerable.OfType<IConfigSection>(GetSections(config, sectionName)));
+            var includeElements = Enumerable.SelectMany(
+                sections, 
+                section => Enumerable.Cast<T>(
+                    GetSections(section, IncludeExcludeElementCollectionIncludeSection, typeof(T))));
+            var excludeElements = Enumerable.SelectMany(
+                sections, 
+                section => Enumerable.Cast<T>(
+                    GetSections(section, IncludeExcludeElementCollectionExcludeSection, typeof(T))));
             return new IncludeExcludeElementCollection<T>(includeElements, excludeElements);
         }
     }

@@ -31,22 +31,26 @@ namespace Axle.Configuration
             {
                 get
                 {
-                    key.VerifyArgument(nameof(key)).IsNotNullOrEmpty();
-                    var results = _configurations
-                        .SelectMany(x => x[key].Where(y => y is IConfigSection))
-                        .ToList();
+                    StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(key, nameof(key)));
+                    var results = Enumerable.ToList(
+                        Enumerable.SelectMany(
+                            _configurations, 
+                            x => Enumerable.Where(x[key], y => y is IConfigSection)));
                     if (results.Count == 0)
                     {
-                        results = (_configurations
-                            .Select(x => x[key].ToArray())
-                            .FirstOrDefault(x => x.Length > 0 && x.All(y => !(y is IConfigSection))) ?? new IConfigSetting[0])
-                            .ToList();
+                        results = Enumerable.ToList(
+                            Enumerable.FirstOrDefault(
+                                Enumerable.Select(
+                                    _configurations, 
+                                    x => Enumerable.ToArray(x[key])), 
+                                x => x.Length > 0 && Enumerable.All(x, y => !(y is IConfigSection))) ?? new IConfigSetting[0]);
                     }
                     return results;
                 }
             }
 
-            public IEnumerable<string> Keys => _configurations.SelectMany(c => c.Keys).Distinct(StringComparer.OrdinalIgnoreCase);
+            public IEnumerable<string> Keys => Enumerable.Distinct(
+                Enumerable.SelectMany(_configurations, c => c.Keys), StringComparer.OrdinalIgnoreCase);
 
             public string Name => string.Empty;
 
@@ -63,19 +67,19 @@ namespace Axle.Configuration
 
         public LayeredConfigManager Append(IConfigSource source)
         {
-            source.VerifyArgument(nameof(source)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(source, nameof(source)));
             var cfg = source.LoadConfiguration();
             if (cfg == null)
             {
                 return this;
             }
-            return new LayeredConfigManager(new[] { cfg }.Union(_configs).ToArray());
+            return new LayeredConfigManager(Enumerable.ToArray(Enumerable.Union(new[] { cfg }, _configs)));
         }
 
         public LayeredConfigManager Append(IConfiguration config)
         {
-            config.VerifyArgument(nameof(config)).IsNotNull();
-            return new LayeredConfigManager(new[] { config }.Union(_configs).ToArray());
+            Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
+            return new LayeredConfigManager(Enumerable.ToArray(Enumerable.Union(new[] { config }, _configs)));
         }
 
         /// <inheritdoc />

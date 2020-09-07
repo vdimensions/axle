@@ -28,7 +28,7 @@ namespace Axle.Text.Documents.Binding
             ObjectProvider = Verifier.IsNotNull(Verifier.VerifyArgument(objectProvider, nameof(objectProvider))).Value;
             Converter = Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter))).Value;
         }
-        #if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || NET20_OR_NEWER
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultDocumentBinder"/> class using a 
         /// <see cref="ReflectionObjectProvider"/> and a <see cref="DefaultBindingConverter"/>

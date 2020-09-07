@@ -22,7 +22,7 @@ let projectLocations = [
     "core/main"; "core/fsharp"
     "text.documents/main"; "text.documents/properties"; "text.documents/yaml"
     "caching/main"
-    "configuration/main"; "configuration/microsoft"; "configuration/configuration_manager"
+    "configuration/main"; "configuration/configuration_manager"; "configuration/microsoft"
     "resources/main"; "resources/properties"; "resources/yaml"
     "security/main"
     "security/access_control"

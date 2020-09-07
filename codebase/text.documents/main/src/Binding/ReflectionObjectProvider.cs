@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
+﻿#if NETSTANDARD1_5_OR_NEWER || NET20_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;

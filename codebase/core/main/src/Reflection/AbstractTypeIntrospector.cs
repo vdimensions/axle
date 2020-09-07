@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Collections.Generic;
@@ -223,17 +223,17 @@ namespace Axle.Reflection
         public bool IsDelegate => _flags.IsDelegate();
         #endif
         
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET20_OR_NEWER
         /// <inheritdoc />
         public bool IsGenericType => _flags.IsGeneric();
         #endif
 
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET20_OR_NEWER
         /// <inheritdoc />
         public bool IsGenericTypeDefinition => _flags.IsGenericDefinition();
         #endif
 
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET20_OR_NEWER
         /// <inheritdoc />
         public bool IsNullableType => _flags.IsNullableValueType();
         #endif

@@ -295,7 +295,7 @@ namespace Axle.Reflection
         /// <c>true</c> if the current <see cref="IntrospectedType"/> is a generic type; 
         /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsGenericType { get; }
 
         /// <summary>
@@ -305,7 +305,7 @@ namespace Axle.Reflection
         /// <c>true</c> if the current <see cref="IntrospectedType"/> is a generic type definition; 
         /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsGenericTypeDefinition { get; }
 
         /// <summary>
@@ -315,7 +315,7 @@ namespace Axle.Reflection
         /// <c>true</c> if the provided <see cref="IntrospectedType"/> is a delegate;
         /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsDelegate { get; }
 
         /// <summary>
@@ -325,7 +325,7 @@ namespace Axle.Reflection
         /// <c>true</c> if the current <see cref="IntrospectedType"/> is a nullable type; 
         /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsNullableType { get; }
 
         /// <summary>
@@ -335,7 +335,7 @@ namespace Axle.Reflection
         /// <c>true</c> if the current <see cref="IntrospectedType"/> is abstract; 
         /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsAbstract { get; }
 
         /// <summary>
@@ -345,7 +345,7 @@ namespace Axle.Reflection
         /// <c>true</c> if the current <see cref="IntrospectedType"/> represents an enumeration; 
         /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsEnum { get; }
     }
 

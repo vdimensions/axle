@@ -1,6 +1,7 @@
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Axle.Configuration.ConfigurationManager;
 using Axle.Configuration.Legacy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Configuration.Json;
@@ -53,7 +54,7 @@ namespace Axle.Configuration.Microsoft.Tests
             var cfgPath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\jsconfig.json";
             var cfg = new LayeredConfigManager()
                 .Append(new StreamedFileConfigSource<JsonConfigurationSource>(File.OpenRead(cfgPath)))
-                .Append(new LegacyConfigSource())
+                .Append(new ConfigurationManagerConfigSource())
                 .LoadConfiguration();
 
             // present in appSettings
@@ -77,7 +78,7 @@ namespace Axle.Configuration.Microsoft.Tests
             var cfgPath = $"{Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location)}\\jsconfig.json";
             var cfg = new LayeredConfigManager()
                 .Append(new StreamedFileConfigSource<JsonConfigurationSource>(File.OpenRead(cfgPath)))
-                .Append(new LegacyConfigSource())
+                .Append(new ConfigurationManagerConfigSource())
                 .LoadConfiguration();
 
             var subject = cfg.GetSection<SubjectSection>("subject");
@@ -90,7 +91,7 @@ namespace Axle.Configuration.Microsoft.Tests
         [Test]
         public void TestMSConfig()
         {
-            var cfg = new LegacyConfigSource().LoadConfiguration();
+            var cfg = new ConfigurationManagerConfigSource().LoadConfiguration();
             Assert.IsNotNull(cfg);
 
             var message = cfg["messageFormat"];
