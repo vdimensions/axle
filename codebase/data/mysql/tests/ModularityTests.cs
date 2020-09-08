@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Configuration;
+using Axle.Configuration.ConfigurationManager;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources;
 using Axle.DependencyInjection;
@@ -42,7 +43,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .ConfigureApplication(c => c.EnableLegacyConfig())
+                .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -60,7 +61,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .ConfigureApplication(c => c.EnableLegacyConfig())
+                .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseMySql();
             using (appBuilder.Run())
             {
@@ -78,7 +79,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .ConfigureApplication(c => c.EnableLegacyConfig())
+                .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseDataSources()
                 .UseMySql();
             using (appBuilder.Run())
@@ -104,7 +105,7 @@ namespace Axle.Data.MySql.Tests
             IDependencyContainer dependencyContainer = null;
             var appBuilder = Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .ConfigureApplication(c => c.EnableLegacyConfig())
+                .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseDataSources()
                 .UseMySql()
                 .ConfigureModules(m => m.Load<SqlScriptsConfigurer>());

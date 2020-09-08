@@ -46,10 +46,10 @@ namespace Axle.Text.Documents.Properties
             return new Adapter(propertiesFile);
         }
 
-        protected override ITextDocumentAdapter CreateAdapter(string data)
+        protected override ITextDocumentAdapter CreateAdapter(string document)
         {
             var enc = Encoding.UTF8;
-            return CreateAdapter(new MemoryStream(enc.GetBytes(data)), enc);
+            return CreateAdapter(new MemoryStream(enc.GetBytes(document)), enc);
         }
     }
 }

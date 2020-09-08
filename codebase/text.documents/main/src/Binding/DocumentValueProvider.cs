@@ -18,10 +18,10 @@ namespace Axle.Text.Documents.Binding
 
             public bool TryGetValue(string member, out IDocumentValueProvider value)
             {
-                var providers = _documentNode.GetChildren(member).Select(GetProvider).ToArray();
+                var providers = _documentNode.GetValues(member).Select(GetProvider).ToArray();
                 value = providers.Length == 1 
                     ? providers[0] 
-                    : new DocumentCollectionValueProvider(member, _documentNode.GetChildren(member).Select(GetProvider));
+                    : new DocumentCollectionValueProvider(member, _documentNode.GetValues(member).Select(GetProvider));
                 return true;
             }
 

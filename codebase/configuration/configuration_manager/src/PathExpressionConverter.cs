@@ -14,6 +14,7 @@ namespace Axle.Configuration.ConfigurationManager
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class PathExpressionConverter : ConfigurationConverter<PathExpression>
     {
+        /// <inheritdoc />
         protected override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, PathExpression value, Type destinationType)
         {
             if (destinationType == typeof(PathExpression))
@@ -27,6 +28,7 @@ namespace Axle.Configuration.ConfigurationManager
             throw new NotSupportedException(string.Format("Cannot convert an instance of {0} to type {1}.", value.GetType().FullName, destinationType.FullName));
         }
 
+        /// <inheritdoc />
         protected override PathExpression ConvertFrom(ITypeDescriptorContext ctx, CultureInfo culture, string value) => new PathExpression(value);
     }
 }

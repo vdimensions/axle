@@ -60,7 +60,7 @@ namespace Axle.Text.Documents
         }
 
         public IEnumerable<ITextDocumentNode> GetChildren() => _children;
-        public IEnumerable<ITextDocumentNode> GetChildren(string name)
+        public IEnumerable<ITextDocumentNode> GetValues(string name)
         {
             var directMatches = GetChildrenByTokens(new[]{name}, 0, _children);
             if (directMatches.Length > 0)

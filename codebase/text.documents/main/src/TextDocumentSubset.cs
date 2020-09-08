@@ -14,11 +14,11 @@ namespace Axle.Text.Documents
         }
         public IEnumerable<ITextDocumentNode> GetChildren()
         {
-            return _textDocument.GetChildren(Prefix);
+            return _textDocument.GetValues(Prefix);
         }
 
-        public IEnumerable<ITextDocumentNode> GetChildren(string name) => 
-            GetChildren().OfType<ITextDocumentObject>().SelectMany(x => x.GetChildren(name));
+        public IEnumerable<ITextDocumentNode> GetValues(string name) => 
+            GetChildren().OfType<ITextDocumentObject>().SelectMany(x => x.GetValues(name));
 
         public IEqualityComparer<string> KeyComparer => _textDocument.KeyComparer;
         public ITextDocumentObject Parent => null;

@@ -35,7 +35,7 @@ namespace Axle.Text.Documents.Xml
 
         protected sealed override ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding) 
             => GetXmlRoot(stream, encoding);
-        protected sealed override ITextDocumentAdapter CreateAdapter(string data) => GetXmlRoot(data);
+        protected sealed override ITextDocumentAdapter CreateAdapter(string document) => GetXmlRoot(document);
     }
 
     public abstract class AbstractXmlTextDocumentReader<TXml> : AbstractXmlTextDocumentReader

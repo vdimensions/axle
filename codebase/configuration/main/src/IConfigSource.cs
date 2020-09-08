@@ -7,11 +7,11 @@ namespace Axle.Configuration
     public interface IConfigSource
     {
         /// <summary>
-        /// Loads the <see cref="IConfigSection"/> instance from the origins represented by the current
+        /// Loads the <see cref="IConfiguration"/> instance from the origins represented by the current
         /// <see cref="IConfigSource"/> implementation.
         /// </summary>
         /// <returns>
-        /// An <see cref="IConfigSection"/> instance representing the loaded configuration.
+        /// An <see cref="IConfiguration"/> instance representing the loaded configuration.
         /// </returns>
         IConfiguration LoadConfiguration();
     }

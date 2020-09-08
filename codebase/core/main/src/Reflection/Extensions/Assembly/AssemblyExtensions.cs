@@ -1,10 +1,10 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using Axle.Environment;
-#if NET35_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
+#if NET20_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
 using System.Linq;
 using Axle.Verification;
 #endif
@@ -41,12 +41,17 @@ namespace Axle.Reflection.Extensions.Assembly
         /// Either the <paramref name="assembly"/> or <paramref name="culture"/> parameter is <c>null</c>.
         /// </exception>
         /// <seealso cref="IRuntime.LoadSatelliteAssembly"/>
-        public static Assembly LoadSatelliteAssembly(this Assembly assembly, CultureInfo culture)
+        public static Assembly LoadSatelliteAssembly(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            Assembly assembly, 
+            CultureInfo culture)
         {
             return Platform.Runtime.LoadSatelliteAssembly(assembly, culture);
         }
 
-        #if NET35_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
+        #if NET20_OR_NEWER && !NET45_OR_NEWER && !NETSTANDARD
         /// <summary>
         /// Gets the custom attributes for this assembly as specified by <typeparamref name="TAttribute" />.
         /// </summary>
@@ -63,7 +68,11 @@ namespace Axle.Reflection.Extensions.Assembly
         /// <exception cref="ArgumentNullException">
         /// <paramref name="assembly"/> is <c>null</c>.
         /// </exception>
-        public static TAttribute[] GetCustomAttributes<TAttribute>(this Assembly assembly) where TAttribute : Attribute
+        public static TAttribute[] GetCustomAttributes<TAttribute>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            Assembly assembly) where TAttribute : Attribute
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(assembly, nameof(assembly)));
             return Enumerable.ToArray(

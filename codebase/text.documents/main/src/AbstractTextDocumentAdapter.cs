@@ -2,6 +2,9 @@
 
 namespace Axle.Text.Documents
 {
+    /// <summary>
+    /// An abstract class to serve as a base for implementing the <see cref="ITextDocumentAdapter"/> interface.
+    /// </summary>
     public abstract class AbstractTextDocumentAdapter : ITextDocumentAdapter
     {
         /// <inheritdoc />

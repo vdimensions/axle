@@ -24,6 +24,7 @@ namespace Axle.Text.Documents
         /// An instance of <see cref="ITextDocumentRoot"/> representing the interpreted document structure.
         /// </returns>
         ITextDocumentRoot Read(Stream stream, Encoding encoding);
+        
         /// <summary>
         /// Reads the provided raw text <paramref name="document"/> and produces an instance of
         /// <see cref="ITextDocumentRoot"/> representing the interpreted document structure.

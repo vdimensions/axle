@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using Axle.Configuration;
+using Axle.Configuration.ConfigurationManager;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
@@ -76,7 +77,7 @@ namespace Axle.ApplicationTests.Modularity
             IDependencyContainer dependencyContainer = null;
             using (Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
-                .ConfigureApplication(c => c.EnableLegacyConfig())
+                .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .Run())
             {
                 var configuration = dependencyContainer.Resolve<IConfiguration>();

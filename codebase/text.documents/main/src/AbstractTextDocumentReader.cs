@@ -31,7 +31,7 @@ namespace Axle.Text.Documents
                         case ITextDocumentValue v:
                             return new TextDocumentValue(fixedKey, null, v.Value);
                         case ITextDocumentObject o:
-                            return new TextDocumentObject(fixedKey, null, o.GetChildren(), false);
+                            return new TextDocumentObject(fixedKey, null, o.GetChildren());
                         default:
                             return node;
                     }
@@ -39,7 +39,7 @@ namespace Axle.Text.Documents
             }
             for (var i = tokenizedKey.Length - 2; i >= 0; i--)
             {
-                currentNodes = new[] {new TextDocumentObject(tokenizedKey[i], null, currentNodes, false)};
+                currentNodes = new[] {new TextDocumentObject(tokenizedKey[i], null, currentNodes)};
             }
             return currentNodes;
         }
@@ -50,9 +50,37 @@ namespace Axle.Text.Documents
             Comparer = comparer;
         }
 
+        /// <summary>
+        /// Creates an <see cref="ITextDocumentAdapter"/> instance that is based on the structure of the text document
+        /// being read.
+        /// </summary>
+        /// <param name="stream">
+        /// A <see cref="Stream"/> representing the raw contents of the text document. 
+        /// </param>
+        /// <param name="encoding">
+        /// The <see cref="Encoding"/> object that is used for reading the streamed document as text. 
+        /// </param>
+        /// <returns>
+        /// An <see cref="ITextDocumentAdapter"/> instance that is used to represent the text document format into a
+        /// logical data structure.
+        /// </returns>
+        /// <see cref="ITextDocumentAdapter"/>
         protected virtual ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding) 
             => CreateAdapter(encoding.GetString(StreamExtensions.ToByteArray(stream)));
-        protected abstract ITextDocumentAdapter CreateAdapter(string data);
+        
+        /// <summary>
+        /// When overriden in a derived class, creates an <see cref="ITextDocumentAdapter"/> instance that is based on
+        /// the structure of the text document being read.
+        /// </summary>
+        /// <param name="document">
+        /// A <see cref="string"/> value representing the raw text document.
+        /// </param>
+        /// <returns>
+        /// An <see cref="ITextDocumentAdapter"/> instance that is used to represent the text document format into a
+        /// logical data structure.
+        /// </returns>
+        /// <see cref="ITextDocumentAdapter"/>
+        protected abstract ITextDocumentAdapter CreateAdapter(string document);
         
         private ITextDocumentRoot ReadStructuredData(
             ITextDocumentAdapter adapter, 
@@ -90,11 +118,12 @@ namespace Axle.Text.Documents
                 var children = ExpandChildren(adapter);
                 if (Enumerable.Any(children))
                 {
-                    yield return new TextDocumentObject(key, null, children, false);
+                    yield return new TextDocumentObject(key, null, children);
                 }
             }
         }
 
+        /// <inheritdoc />
         public ITextDocumentRoot Read(Stream stream, Encoding encoding)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(stream, nameof(stream)));
@@ -102,6 +131,7 @@ namespace Axle.Text.Documents
             return ReadStructuredData(CreateAdapter(stream, encoding), Comparer);
         }
 
+        /// <inheritdoc />
         public ITextDocumentRoot Read(string data)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(data, nameof(data)));

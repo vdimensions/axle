@@ -8,7 +8,7 @@ namespace Axle.Configuration.ConfigurationManager
     using UriParser = Conversion.Parsing.UriParser;
 
     /// <summary>
-    /// A configuration converter class that can handle <see cref="Version" /> instances.
+    /// A configuration converter class that can handle <see cref="Uri" /> values.
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class UriConverter : GenericConverter<Uri, UriParser> { }

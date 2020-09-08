@@ -12,5 +12,6 @@
 
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../Reference.Axle.Data.Npgsql.targets" />
+  <Import Project="../../../Reference.Axle.Configuration.ConfigurationManager.targets" />
   <Import Project="../../../NUnit.Packages.targets" />
 </Project>

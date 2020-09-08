@@ -80,12 +80,12 @@ namespace Axle.Text.Documents.Yaml
             }
         }
 
-        protected override ITextDocumentAdapter CreateAdapter(string data)
+        protected override ITextDocumentAdapter CreateAdapter(string document)
         {
             var deserializer = new DeserializerBuilder().Build();
             try
             {
-                var result = deserializer.Deserialize<object>(new StringReader(data));
+                var result = deserializer.Deserialize<object>(new StringReader(document));
                 return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
             }
             catch (YamlException e)
@@ -94,7 +94,7 @@ namespace Axle.Text.Documents.Yaml
                 {
                     throw;
                 }
-                var result = deserializer.Deserialize<List<object>>(new StringReader(data));
+                var result = deserializer.Deserialize<List<object>>(new StringReader(document));
                 return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
             }
         }

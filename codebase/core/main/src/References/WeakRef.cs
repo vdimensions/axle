@@ -5,7 +5,10 @@ using Axle.Verification;
 
 namespace Axle.References
 {
-    /// <inheritdoc cref="IWeakReference{T}"/>
+    /// Represents a weak reference; that is, a reference to an object that still allows the referenced
+    /// object instance to be reclaimed by the garbage collector.
+    /// This is the default implementation of the <see cref="IWeakReference{T}"/> interface.
+    /// <seealso cref="IWeakReference{T}"/>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
@@ -92,7 +95,29 @@ namespace Axle.References
         private readonly WeakReference _reference;
 
         private WeakRef(WeakReference reference) { _reference = reference; }
+        /// <summary>
+        /// Initializes a new <see cref="WeakRef{T}"/> instance that references the given <paramref name="target"/>
+        /// object using the specified by the <paramref name="trackResurrection"/> resurrection tracking behavior. 
+        /// </summary>
+        /// <param name="target">
+        /// The target object of this <see cref="WeakRef{T}"/>.
+        /// </param>
+        /// <param name="trackResurrection">
+        /// Indicates when to stop tracking the <paramref name="target"/> object. <c>true</c> specifies that the object
+        /// is tracked after finalization; <c>false</c> means the object is tracked until finalization.
+        /// </param>
         public WeakRef(T target, bool trackResurrection) : this(new WeakReference(target, trackResurrection)) { }
+        /// <summary>
+        /// Initializes a new <see cref="WeakRef{T}"/> instance that references the given <paramref name="target"/>
+        /// object using the default resurrection tracking. 
+        /// </summary>
+        /// <param name="target">
+        /// The target object of this <see cref="WeakRef{T}"/>.
+        /// </param>
+        /// <remarks>
+        /// Using this constructor is equivalent to calling the constructor overload
+        /// <see cref="WeakRef{T}(T, Boolean)"/> with the <c>trackResurrection</c> parameter set to <c>false</c>.
+        /// </remarks>
         public WeakRef(T target) : this(new WeakReference(target)) { }
         #endif
         

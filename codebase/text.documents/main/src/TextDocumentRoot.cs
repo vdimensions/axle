@@ -27,7 +27,7 @@ namespace Axle.Text.Documents
             : this(new TextDocumentObject(string.Empty, null, children, true), comparer) { }
 
         public IEnumerable<ITextDocumentNode> GetChildren() => _inner.GetChildren();
-        public IEnumerable<ITextDocumentNode> GetChildren(string name) => _inner.GetChildren(name);
+        public IEnumerable<ITextDocumentNode> GetValues(string name) => _inner.GetValues(name);
 
         public ITextDocumentObject Parent => _inner.Parent;
         public string Key => _inner.Key;

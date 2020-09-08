@@ -15,9 +15,11 @@ namespace Axle.Configuration.ConfigurationManager.Sdk
         private const string ExcludeElementTagName = "exclude";
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly ConfigurationProperty _includeElements = CreateProperty<TIncludeCollection>(IncludeElementTagName).UseDefaultValue(new TIncludeCollection());
+        private static readonly ConfigurationProperty _includeElements = CreateProperty<TIncludeCollection>(IncludeElementTagName)
+            .UseDefaultValue(new TIncludeCollection());
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private static readonly ConfigurationProperty _excludeElements = CreateProperty<TExcludeCollection>(ExcludeElementTagName).UseDefaultValue(new TExcludeCollection());
+        private static readonly ConfigurationProperty _excludeElements = CreateProperty<TExcludeCollection>(ExcludeElementTagName)
+            .UseDefaultValue(new TExcludeCollection());
         
         protected override void RegisterProperties(ConfigurationPropertyCollection properties)
         {

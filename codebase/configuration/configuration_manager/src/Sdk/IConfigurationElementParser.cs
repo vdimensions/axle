@@ -15,20 +15,30 @@ namespace Axle.Configuration.ConfigurationManager.Sdk
     public interface IConfigurationElementParser
     {
         /// <summary>
-        /// Determines if an element is supported by the current <see cref="IConfigurationElementParser"/> implementation.
+        /// Determines if an element is supported by the current <see cref="IConfigurationElementParser"/>
+        /// implementation.
         /// </summary>
-        /// <param name="elementName">The element's tag name.</param>
+        /// <param name="elementName">
+        /// The element's tag name.
+        /// </param>
         /// <returns>
-        /// true if the element can be parsed by this <see cref="IConfigurationElementParser"/> instance; otherwise false.
+        /// <c>true</c> if the element can be parsed by this <see cref="IConfigurationElementParser"/> instance;
+        /// <c>false</c> otherwise.
         /// </returns>
         bool Accept(string elementName);
 
         /// <summary>
         /// Parses the contents of the configuration <see cref="XmlReader" /> to produce a valid configuration element.
         /// </summary>
-        /// <param name="reader">The <see cref="System.Xml.XmlReader"/> that reads from the configuration file</param>
-        /// <param name="serializeCollectionKey">true to serialize only the collection key properties; otherwise, false.</param>
-        /// <returns>A successfully parsed configuration element instance.</returns>
+        /// <param name="reader">
+        /// The <see cref="System.Xml.XmlReader"/> that reads from the configuration file.
+        /// </param>
+        /// <param name="serializeCollectionKey">
+        /// <c>true</c> to serialize only the collection key properties; <c>false</c> otherwise.
+        /// </param>
+        /// <returns>
+        /// A configuration element instance that is a result of the parsing.
+        /// </returns>
         /// <see also="System.Xml.XmlReader"/>
         ConfigurationElement Parse(XmlReader reader, bool serializeCollectionKey);
     }
@@ -50,9 +60,15 @@ namespace Axle.Configuration.ConfigurationManager.Sdk
         /// <summary>
         /// Parses the contents of the configuration <see cref="XmlReader" /> to produce a valid configuration element.
         /// </summary>
-        /// <param name="reader">The <see cref="System.Xml.XmlReader"/> that reads from the configuration file</param>
-        /// <param name="serializeCollectionKey">true to serialize only the collection key properties; otherwise, false.</param>
-        /// <returns>A successfully parsed configuration element instance.</returns>
+        /// <param name="reader">
+        /// The <see cref="System.Xml.XmlReader"/> that reads from the configuration file.
+        /// </param>
+        /// <param name="serializeCollectionKey">
+        /// <c>true</c> to serialize only the collection key properties; <c>false</c> otherwise.
+        /// </param>
+        /// <returns>
+        /// A configuration element instance that is a result of the parsing.
+        /// </returns>
         /// <see also="System.Xml.XmlReader"/>
         new T Parse(XmlReader reader, bool serializeCollectionKey);
     }

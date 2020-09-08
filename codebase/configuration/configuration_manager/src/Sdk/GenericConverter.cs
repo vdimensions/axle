@@ -6,16 +6,16 @@ using Axle.Conversion.Parsing;
 
 namespace Axle.Configuration.ConfigurationManager.Sdk
 {
-    /// <summary>
-    /// A configuration converter class that can handle <see cref="Version" /> instances.
-    /// </summary>
     public class GenericConverter<T, TParser> : ConfigurationConverter<T> where TParser: IParser<T>, new()
     {
+        /// <inheritdoc />
         protected override T ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, string value)
         {
             var version = new TParser().Parse(value, culture);
             return version;
         }
+
+        /// <inheritdoc />
         protected override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, T value, Type destinationType)
         {
             if (destinationType == typeof(string))

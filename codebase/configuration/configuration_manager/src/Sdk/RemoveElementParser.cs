@@ -5,8 +5,9 @@ using System.Configuration;
 namespace Axle.Configuration.ConfigurationManager.Sdk
 {
     /// <summary>
-    /// The default parser for configuration elements within an <see cref="AbstractAddRemoveElementCollection{TAdd,TRemove,T}"/>
-    /// implementation that reside in the <c>remove</c> section.
+    /// The default parser for configuration elements within an
+    /// <see cref="AbstractAddRemoveElementCollection{TAdd,TRemove,T}"/> implementation that reside in the <c>remove</c>
+    /// section.
     /// </summary>
     /// <typeparam name="T">
     /// The type of the configuration element within the collection.

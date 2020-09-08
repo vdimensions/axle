@@ -19,13 +19,13 @@ namespace Axle.Text.Documents.Properties.Tests
             var reader = new PropertiesDocumentReader(StringComparer.OrdinalIgnoreCase);
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
-            var item1 = data.GetChildren("SingleKey").SingleOrDefault() as ITextDocumentValue;
-            var item2 = data.GetChildren("System");
-            var item3 = data.GetChildren("System.Text");
-            var item4 = data.GetChildren("System.Text.Encoding").SingleOrDefault() as ITextDocumentValue;
-            var item5 = data.GetChildren("System.Text.DefaultEncoding").SingleOrDefault() as ITextDocumentValue;
-            var item6 = item3.OfType<ITextDocumentObject>().Take(1).SingleOrDefault()?.GetChildren("Encoding").SingleOrDefault() as ITextDocumentValue;
-            var item7 = item3.OfType<ITextDocumentObject>().Skip(1).Take(1).SingleOrDefault()?.GetChildren("DefaultEncoding").SingleOrDefault() as ITextDocumentValue;
+            var item1 = data.GetValues("SingleKey").SingleOrDefault() as ITextDocumentValue;
+            var item2 = data.GetValues("System");
+            var item3 = data.GetValues("System.Text");
+            var item4 = data.GetValues("System.Text.Encoding").SingleOrDefault() as ITextDocumentValue;
+            var item5 = data.GetValues("System.Text.DefaultEncoding").SingleOrDefault() as ITextDocumentValue;
+            var item6 = item3.OfType<ITextDocumentObject>().Take(1).SingleOrDefault()?.GetValues("Encoding").SingleOrDefault() as ITextDocumentValue;
+            var item7 = item3.OfType<ITextDocumentObject>().Skip(1).Take(1).SingleOrDefault()?.GetValues("DefaultEncoding").SingleOrDefault() as ITextDocumentValue;
             
             Assert.IsNotNull(item1, "Lookup for value failed for simple key {0}", "SingleKey");
             Assert.IsNotNull(item2, "Lookup for object failed for simple key {0}", "System");

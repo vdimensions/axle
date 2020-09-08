@@ -6,7 +6,8 @@ using System.Diagnostics.CodeAnalysis;
 namespace Axle.Configuration.ConfigurationManager.Sdk
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public class GenericConfigurationElementParser<T> : AbstractConfigurationElementParser<T> where T: ConfigurationElement, new()
+    public class GenericConfigurationElementParser<T> : AbstractConfigurationElementParser<T> 
+        where T: ConfigurationElement, new()
     {
         private readonly string _name;
 
