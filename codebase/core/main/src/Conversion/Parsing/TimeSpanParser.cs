@@ -37,6 +37,7 @@ namespace Axle.Conversion.Parsing
                 value.ToString(), format, formatProvider, System.Globalization.TimeSpanStyles.None);
         }
 
+        /// <inheritdoc />
         public override bool TryParseExact(
             CharSequence value, string format, IFormatProvider formatProvider, out TimeSpan output)
         {

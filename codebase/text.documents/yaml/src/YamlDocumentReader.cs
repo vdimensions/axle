@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -9,11 +8,15 @@ using YamlDotNet.Serialization;
 
 namespace Axle.Text.Documents.Yaml
 {
+    /// <summary>
+    /// An <see cref="ITextDocumentAdapter"/> implementation capable of handling yaml files.
+    /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class YamlDocumentReader : AbstractTextDocumentReader
     {
         private sealed class Adapter : AbstractTextDocumentAdapter
         {
+            [SuppressMessage("ReSharper", "CognitiveComplexity")]
             internal static IEnumerable<ITextDocumentAdapter> ToChildren(string name, object o)
             {
                 switch (o)
@@ -58,8 +61,15 @@ namespace Axle.Text.Documents.Yaml
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
         }
         
-        public YamlDocumentReader(StringComparer comparer) : base(comparer) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="YamlDocumentReader"/> class using the provided <paramref name="comparer"/>.
+        /// </summary>
+        /// <param name="comparer">
+        /// An <see cref="IEqualityComparer{T}"/> that is used to compare document node keys.
+        /// </param>
+        public YamlDocumentReader(IEqualityComparer<string> comparer) : base(comparer) { }
 
+        /// <inheritdoc />
         protected override ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding)
         {
             var deserializer = new DeserializerBuilder().Build();
@@ -80,6 +90,7 @@ namespace Axle.Text.Documents.Yaml
             }
         }
 
+        /// <inheritdoc />
         protected override ITextDocumentAdapter CreateAdapter(string document)
         {
             var deserializer = new DeserializerBuilder().Build();

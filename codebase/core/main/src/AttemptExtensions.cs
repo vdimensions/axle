@@ -15,7 +15,7 @@ namespace Axle
     {
         /// <summary>
         /// Executes the collection of <see cref="Attempt{TResult}"/> in the provided by 
-        /// collection order until any of the delegates returns <c><see langword="true"/></c>.
+        /// collection order until any of the delegates returns <c>true</c>.
         /// </summary>
         /// <typeparam name="TResult">
         /// The type of the result of the <see cref="Attempt{TResult}"/> delegate.
@@ -27,8 +27,8 @@ namespace Axle
         /// An output parameter containing the result of the first delegate to return <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
-        /// delegate succeeds (returns <c><see langword="true"/></c> itself); 
+        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegate succeeds (returns <c>true</c> itself); 
         /// <c>false</c> otherwise.
         /// </returns>
         public static bool Any<TResult>(
@@ -47,7 +47,7 @@ namespace Axle
         }
         /// <summary>
         /// Executes the collection of <see cref="Attempt{T, TResult}"/> in the provided by 
-        /// the collection order until any of the delegates returns <c><see langword="true"/></c>.
+        /// the collection order until any of the delegates returns <c>true</c>.
         /// </summary>
         /// <typeparam name="T">
         /// The type of the argument to the <see cref="Attempt{T, TResult}"/> delegate.
@@ -65,9 +65,9 @@ namespace Axle
         /// An output parameter containing the result of the first delegate to return <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if any of the provided by the 
+        /// <c>true</c> if any of the provided by the 
         /// <paramref name="attempts"/> delegate succeeds (returns <c>true</c> itself); 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>false</c> otherwise.
         /// </returns>
         public static bool Any<T, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -85,7 +85,7 @@ namespace Axle
         }
         /// <summary>
         /// Executes the collection of <see cref="Attempt{T1, T2, TResult}"/> in the provided 
-        /// by the collection order until any of the delegates returns <c><see langword="true"/></c>.
+        /// by the collection order until any of the delegates returns <c>true</c>.
         /// </summary>
         /// <typeparam name="T1">
         /// The type of the first argument to the <see cref="Attempt{T1, T2, TResult}"/> 
@@ -110,12 +110,12 @@ namespace Axle
         /// </param>
         /// <param name="result">
         /// An output parameter containing the result of the first delegate to return 
-        /// <c><see langword="true"/></c>.
+        /// <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
-        /// delegates succeeds (returns <c><see langword="true"/></c> itself); 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegates succeeds (returns <c>true</c> itself); 
+        /// <c>false</c> otherwise.
         /// </returns>
         public static bool Any<T1, T2, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -133,7 +133,7 @@ namespace Axle
         }
         /// <summary>
         /// Executes the collection of <see cref="Attempt{T1, T2, T3, TResult}"/> in the provided by 
-        /// the collection order until any of the delegates returns <c><see langword="true"/></c>.
+        /// the collection order until any of the delegates returns <c>true</c>.
         /// </summary>
         /// <typeparam name="T1">
         /// The type of the first argument to the <see cref="Attempt{T1, T2, T3, TResult}"/> delegate.
@@ -161,12 +161,12 @@ namespace Axle
         /// </param>
         /// <param name="result">
         /// An output parameter containing the result of the first delegate to return 
-        /// <c><see langword="true"/></c>.
+        /// <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
-        /// delegate succeeds (returns <c><see langword="true"/></c> itself); 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegate succeeds (returns <c>true</c> itself); 
+        /// <c>false</c> otherwise.
         /// </returns>
         public static bool Any<T1, T2, T3, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER
@@ -184,7 +184,7 @@ namespace Axle
         }
         /// <summary>
         /// Executes the collection of <see cref="Attempt{T1, T2, T3, T4, TResult}"/> in the provided 
-        /// by the collection order until any of the delegates returns <c><see langword="true"/></c>.
+        /// by the collection order until any of the delegates returns <c>true</c>.
         /// </summary>
         /// <typeparam name="T1">
         /// The type of the first argument to the <see cref="Attempt{T1, T2, T3, T4, TResult}"/> delegate.
@@ -220,9 +220,9 @@ namespace Axle
         /// An output parameter containing the result of the first delegate to return <c>true</c>.
         /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if any of the provided by the <paramref name="attempts"/> 
-        /// delegate succeeds (returns <c><see langword="true"/></c> itself);
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if any of the provided by the <paramref name="attempts"/> 
+        /// delegate succeeds (returns <c>true</c> itself);
+        /// <c>false</c> otherwise.
         /// </returns>
         public static bool Any<T1, T2, T3, T4, TResult>(
             #if NETSTANDARD || NET35_OR_NEWER

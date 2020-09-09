@@ -51,8 +51,8 @@ namespace Axle.Threading
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public MonitorLockHandle CreateHandle() => new MonitorLockHandle(this);
 
-        internal void Wait(TimeSpan timeout) => Monitor.Wait(_obj, timeout);
-        internal void Wait() => Monitor.Wait(_obj);
+        internal bool Wait(TimeSpan timeout) => Monitor.Wait(_obj, timeout);
+        internal bool Wait() => Monitor.Wait(_obj);
         internal void Pulse() => Monitor.Pulse(_obj);
         internal void PulseAll() => Monitor.PulseAll(_obj);
 

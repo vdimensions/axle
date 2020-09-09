@@ -11,8 +11,10 @@ namespace Axle.Conversion
     #endif
     public sealed class StringToCharSequenceConverter : AbstractTwoWayConverter<string, CharSequence>
     {
+        /// <inheritdoc />
         protected override CharSequence DoConvert(string source) => source;
-        
+
+        /// <inheritdoc />
         protected override string DoConvertBack(CharSequence source) => source.ToString();
     }
 }

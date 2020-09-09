@@ -24,13 +24,22 @@ namespace Axle.Threading
         /// <param name="timeout">
         /// A <see cref="TimeSpan"/> representing the amount of time to wait before the thread enters the ready queue.
         /// </param>
-        public void Wait(TimeSpan timeout) => _lock.Wait(timeout);
+        /// <returns>
+        /// <c>true</c> if the lock was reacquired before the specified time elapsed;
+        /// <c>false</c> if the lock was reacquired after the specified time elapsed.
+        /// The method does not return until the lock is reacquired.
+        /// </returns>
+        public bool Wait(TimeSpan timeout) => _lock.Wait(timeout);
         /// <summary>
         /// Releases the lock held by the <see cref="MonitorLock"/> object that owns the current
         /// <see cref="MonitorLockHandle">lock handle</see> and blocks the current thread until
         /// it reacquires the lock.
         /// </summary>
-        public void Wait() => _lock.Wait();
+        /// <returns>
+        /// <c>true</c> if the call returned because the caller reacquired the lock for the specified object.
+        /// This method does not return if the lock is not reacquired.
+        /// </returns>
+        public bool Wait() => _lock.Wait();
         
         /// <summary>
         /// Notifies a thread in the waiting queue of a change in the lock's state.

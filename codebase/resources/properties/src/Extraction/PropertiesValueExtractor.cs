@@ -24,7 +24,8 @@ namespace Axle.Resources.Properties.Extraction
         
         /// <inheritdoc />
         /// <summary>
-        /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java properties file. 
+        /// Attempts to locate a string value with the given <paramref name="name"/> that is defined into a Java
+        /// properties file. 
         /// </summary>
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {

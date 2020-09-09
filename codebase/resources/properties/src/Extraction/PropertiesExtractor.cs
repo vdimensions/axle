@@ -22,7 +22,17 @@ namespace Axle.Resources.Properties.Extraction
         private PropertiesExtractor(Encoding encoding) 
             : this(encoding, new ImmediatePropertiesValueExtractor(encoding)) { }
 
-        public PropertiesExtractor(string fileName, string keyPrefix = null) : this(Encoding.UTF8, fileName, keyPrefix) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="PropertiesExtractor"/> class using the specified
+        /// <paramref name="fileName"/>.
+        /// </summary>
+        /// <param name="fileName">
+        /// The name of the properties file containing the values to extract.
+        /// </param>
+        public PropertiesExtractor(string fileName) : this(Encoding.UTF8, fileName) { }
+        /// <summary>
+        /// Creates a new instance of the <see cref="PropertiesExtractor"/> class.
+        /// </summary>
         public PropertiesExtractor() : this(Encoding.UTF8) { }
 
         ResourceInfo IResourceExtractor.Extract(IResourceContext context, string name) 

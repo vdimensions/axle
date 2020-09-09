@@ -39,6 +39,7 @@ namespace Axle.Text.Documents.Properties
         /// </param>
         public PropertiesDocumentReader(IEqualityComparer<string> comparer) : base(comparer) { }
 
+        /// <inheritdoc />
         protected override ITextDocumentAdapter CreateAdapter(Stream stream, Encoding encoding)
         {
             var propertiesFile = new JavaProperties();
@@ -46,6 +47,7 @@ namespace Axle.Text.Documents.Properties
             return new Adapter(propertiesFile);
         }
 
+        /// <inheritdoc />
         protected override ITextDocumentAdapter CreateAdapter(string document)
         {
             var enc = Encoding.UTF8;
