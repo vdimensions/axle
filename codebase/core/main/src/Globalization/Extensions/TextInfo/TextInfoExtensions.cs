@@ -147,7 +147,8 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// The <see cref="TextInfo"/> instance to get the encoding for.
         /// </param>
         /// <returns>
-        /// A reference to the default encoding for the writing system represented by the current <see cref="TextInfo"/>. 
+        /// A reference to the default encoding for the writing system represented by the current
+        /// <see cref="TextInfo"/>. 
         /// In .NET Standard this method returns <see cref="Encoding.UTF8"/>.
         /// </returns>
         /// <seealso cref="Encoding" />

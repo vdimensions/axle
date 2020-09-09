@@ -25,7 +25,6 @@
   <!-- Common props -->
   <PropertyGroup>
     <AppDesignerFolder Condition=" '$(AppDesignerFolder)' == '' ">Properties</AppDesignerFolder>
-    <DocumentationFile Condition=" '$(DocumentationFile)' == '' ">$(BaseOutputPath)\$(AssemblyName).xml</DocumentationFile>
     <GenerateAssemblyInfo Condition=" '$(GenerateAssemblyInfo)' == '' ">true</GenerateAssemblyInfo>
     <MultiProcessorCompilation>false</MultiProcessorCompilation>
   </PropertyGroup>
@@ -91,8 +90,6 @@
     <AssemblyCopyright>$(Copyright)</AssemblyCopyright>  
     <AssemblyTrademark>$(Trademark)</AssemblyTrademark>
     <AssemblyVersion>$(Version)</AssemblyVersion>
-    <AssemblyFileVersion Condition=" '$(AssemblyFileVersion)' == '' ">$(Version)</AssemblyFileVersion>
-    <AssemblyInformationalVersion Condition=" '$(AssemblyInformationalVersion)' == '' ">$(Version)</AssemblyInformationalVersion>
   </PropertyGroup>
 
   <!-- NuGet package properties -->

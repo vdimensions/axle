@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 using Axle.Verification;
-
 
 namespace Axle.Reflection
 {
@@ -91,6 +90,7 @@ namespace Axle.Reflection
             return method is MethodInfo mi && IsOverrideUnchecked(mi);
         }
 
+        [SuppressMessage("ReSharper", "CognitiveComplexity")]
         internal static DeclarationType GetDeclarationTypeUnchecked(MethodInfo gm, MethodInfo sm)
         {
             var isStatic = (gm ?? sm).IsStatic;

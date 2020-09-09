@@ -47,8 +47,5 @@ namespace Axle.Threading
         /// <inheritdoc cref="IDisposable.Dispose()"/>
         public void Dispose() => _lock?.Exit();
         void IDisposable.Dispose() => Dispose();
-
-        /// <inheritdoc />
-        public ILock Lock => _lock;
     }
 }

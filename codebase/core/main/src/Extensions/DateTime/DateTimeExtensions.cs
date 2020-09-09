@@ -35,7 +35,8 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the first day of the same week as the
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value from the same week to get the first day of week from.
@@ -44,7 +45,8 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="CultureInfo"/> instance representing the culture to obtain date-time settings from.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/>
+        /// date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
@@ -58,7 +60,8 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the first day of the same week as the
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value from the same week to get the first day of week from.
@@ -67,7 +70,8 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DayOfWeek"/> value telling which day of the week is considered the first.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the first day of the same week as the <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the first day of the same week as the
+        /// <paramref name="current"/> date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.DayOfWeek)"/>
@@ -93,13 +97,15 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the first day of the same month as <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the first day of the same month as
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value in the same month to get the first day from.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the first day of the same month as <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the first day of the same month as <paramref name="current"/>
+        /// date time is in.
         /// </returns>
         /// <seealso cref="LastDayOfMonth"/>
         public static DateTime FirstDayOfMonth(
@@ -112,13 +118,15 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the first day of the same year as <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the first day of the same year as
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value in the same year to get the first day from.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the first day of the same year as <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the first day of the same year as <paramref name="current"/>
+        /// date time is in.
         /// </returns>
         /// <seealso cref="LastDayOfYear"/>
         public static DateTime FirstDayOfYear(
@@ -131,7 +139,8 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the last day of the same week as the
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value from the same week to get the last day of week from.
@@ -140,7 +149,8 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="CultureInfo"/> instance representing the culture to obtain date-time settings from.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/>
+        /// date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
@@ -154,7 +164,8 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the last day of the same week as the
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value from the same week to get the last day of week from.
@@ -163,7 +174,8 @@ namespace Axle.Extensions.DateTime
         /// A <see cref="DayOfWeek"/> value telling which day of the week is considered the first.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the last day of the same week as the <paramref name="current"/>
+        /// date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.DayOfWeek)"/>
@@ -177,13 +189,15 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the last day of the same month as <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the last day of the same month as
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value in the same month to get the last day from.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the last day of the same month as <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the last day of the same month as <paramref name="current"/>
+        /// date time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfMonth"/>
         public static DateTime LastDayOfMonth(
@@ -196,13 +210,15 @@ namespace Axle.Extensions.DateTime
         }
 
         /// <summary>
-        /// Returns a <see cref="DateTime"/> value representing the last day of the same year as <paramref name="current"/> date time is in.
+        /// Returns a <see cref="DateTime"/> value representing the last day of the same year as
+        /// <paramref name="current"/> date time is in.
         /// </summary>
         /// <param name="current">
         /// A <see cref="DateTime"/> value in the same year to get the last day from.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value representing the last day of the same year as <paramref name="current"/> date time is in.
+        /// A <see cref="DateTime"/> value representing the last day of the same year as <paramref name="current"/> date
+        /// time is in.
         /// </returns>
         /// <seealso cref="FirstDayOfYear"/>
         public static DateTime LastDayOfYear(
@@ -276,7 +292,7 @@ namespace Axle.Extensions.DateTime
             DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
 
         /// <summary>
-        /// Convers the value of the current <paramref name="dateTime"/> to its ISO 8601 string representation.
+        /// Converts the value of the current <paramref name="dateTime"/> to its ISO 8601 string representation.
         /// </summary>
         /// <param name="dateTime">
         /// The <see cref="DateTime"/> value to convert to <see cref="string"/>

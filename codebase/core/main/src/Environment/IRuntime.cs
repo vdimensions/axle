@@ -23,11 +23,17 @@ namespace Axle.Environment
         /// <paramref name="assemblyName"/> parameter.
         /// </summary>
         /// <param name="assemblyName">
-        /// The name of the assembly to be loaded.
+        /// The long form of the assembly name.
         /// </param>
         /// <returns>
         /// An <see cref="Assembly"/> object corresponding to the given <paramref name="assemblyName"/> parameter.
         /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="assemblyName"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="assemblyName"/> is an <see cref="string.Empty">empty string</see>.
+        /// </exception>
         Assembly LoadAssembly(string assemblyName);
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

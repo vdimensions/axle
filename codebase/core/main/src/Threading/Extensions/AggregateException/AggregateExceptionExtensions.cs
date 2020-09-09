@@ -2,7 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Axle.Verification;
 
 namespace Axle.Threading.Extensions.AggregateException
 {
@@ -48,11 +48,32 @@ namespace Axle.Threading.Extensions.AggregateException
         /// A collection of <see cref="Exception"/> instances, that are collectively responsible for the throwing of
         /// the <see cref="AggregateException"/>.
         /// </returns>
-        public static IEnumerable<Exception> Resolve(this AggregateException e) 
-            => Resolve(e, new LinkedList<Exception>());
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="e"/> is <c>null</c>
+        /// </exception>
+        public static IEnumerable<Exception> Resolve(this AggregateException e)
+        {
+            e.VerifyArgument(nameof(e)).IsNotNull();
+            return Resolve(e, new LinkedList<Exception>());
+        }
 
+        /// <summary>
+        /// Expands the list of exception causes for an <see cref="AggregateException"/> and returns the first
+        /// exception.
+        /// </summary>
+        /// <param name="e">
+        /// The <see cref="AggregateException"/> instance to resolve.
+        /// </param>
+        /// <returns>
+        /// The first <see cref="Exception"/> that was in the cause list of the provided
+        /// <see cref="AggregateException"/> <paramref name="e"/>, or <c>null</c> if no exception causes were found.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="e"/> is <c>null</c>
+        /// </exception>
         public static Exception ResolveFirst(this AggregateException e)
         {
+            e.VerifyArgument(nameof(e)).IsNotNull();
             var exceptions = new List<Exception>();
             Resolve(e, exceptions);
             return exceptions.Count > 0 ? exceptions[0] : null;

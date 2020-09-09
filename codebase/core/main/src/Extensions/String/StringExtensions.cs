@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
 
-
 namespace Axle.Extensions.String
 {
     using StringComparison = System.StringComparison;

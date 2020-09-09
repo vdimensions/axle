@@ -1,5 +1,6 @@
 #if NETSTANDARD || NET20_OR_NEWER
 using System;
+using System.Diagnostics.CodeAnalysis;
 #if NETSTANDARD || NET35_OR_NEWER
 using System.Collections.Generic;
 #else
@@ -71,6 +72,7 @@ namespace Axle.Text.Expressions.Substitution
         }
 
         /// <inheritdoc />
+        [SuppressMessage("ReSharper", "CognitiveComplexity")]
         public string Replace(string input, ISubstitutionProvider sp)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(sp, nameof(sp)));
