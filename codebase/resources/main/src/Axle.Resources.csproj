@@ -11,8 +11,9 @@
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../Resources.Package.targets" />
-
+  <Import Project="../../../../references/Reference.System.Resources.ResourceManager.props" />
+  <Import Project="../../../../references/Reference.System.Xml.XDocument.props" />
+  <Import Project="../../../../references/Reference.System.Xml.XmlDocument.props" />
   <Import Project="../../../Reference.Axle.Core.targets" />
   <Import Project="../../../Reference.Axle.Text.Documents.targets" />
   <Import Project="../../../Reference.Axle.Caching.targets" />

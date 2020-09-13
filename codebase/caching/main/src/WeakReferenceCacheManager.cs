@@ -1,3 +1,4 @@
+#if NETSTANDARD || NET35_OR_NEWER
 namespace Axle.Caching
 {
     /// <summary>
@@ -18,3 +19,4 @@ namespace Axle.Caching
         protected override ICache CreateCache(string cacheName) => new WeakReferenceCache();
     }
 }
+#endif

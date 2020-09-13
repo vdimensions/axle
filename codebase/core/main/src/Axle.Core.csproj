@@ -12,6 +12,12 @@
 
   <Import Project="../../../Axle.Common.props" />
 
+  <Import Project="../../../../references/Reference.System.Diagnostics.TraceSource.props" />
+  <Import Project="../../../../references/Reference.System.Linq.props" />
+  <Import Project="../../../../references/Reference.System.Threading.Tasks.props" />
+  <Import Project="../../../../references/Reference.System.Threading.Thread.props" />
+  <Import Project="../../../../references/Reference.System.Xml.XmlSerializer.props" />
+
   <Import Project="../../../targets/stator/src/Stator.props" />
 
   <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
@@ -24,15 +30,6 @@
     <Compile Remove="Collections\Extensions\Queue\**" />
     <Compile Remove="Collections\Extensions\Stack\**" />
     <Compile Remove="_Experimental\**" />
-    <EmbeddedResource Remove="Collections\Extensions\Queue\**" />
-    <EmbeddedResource Remove="Collections\Extensions\Stack\**" />
-    <EmbeddedResource Remove="_Experimental\**" />
-    <None Remove="Collections\Extensions\Queue\**" />
-    <None Remove="Collections\Extensions\Stack\**" />
-    <None Remove="_Experimental\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="IO\Serialization\SoapSerializer.cs" />
@@ -40,7 +37,11 @@
     <Compile Remove="Linq\ISequence.cs" />
     <Compile Remove="Linq\Sequence.cs" />
     <Compile Remove="Linq\SequenceExtensions.cs" />
+    <EmbeddedResource Remove="Collections\Extensions\Queue\**" />
+    <EmbeddedResource Remove="Collections\Extensions\Stack\**" />
+    <EmbeddedResource Remove="_Experimental\**" />
+    <None Remove="Collections\Extensions\Queue\**" />
+    <None Remove="Collections\Extensions\Stack\**" />
+    <None Remove="_Experimental\**" />
   </ItemGroup>
-
-  <Import Project="../Axle.Core.Dependencies.targets" />
 </Project>

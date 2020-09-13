@@ -16,19 +16,6 @@
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="Modularity\DynamicModuleLoader.cs" />
     <Compile Remove="Modularity\IAssemblyLoadListener.cs" />
@@ -44,7 +31,6 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  
   <Import Project="../../../Reference.Axle.Caching.targets" />
   <Import Project="../../../Reference.Axle.Resources.targets" />
   <Import Project="../../../Reference.Axle.Resources.Properties.targets" />

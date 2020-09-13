@@ -9,11 +9,6 @@
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.*" />

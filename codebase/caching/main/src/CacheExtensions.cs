@@ -30,7 +30,11 @@ namespace Axle.Caching
         /// A <typeparamref name="TValue"/> object representing the stored value.
         /// </returns>
         /// <seealso cref="ICache.GetOrAdd(object,object)"/>
-        public static TValue GetOrAdd<TKey, TValue>(this ICache cache, TKey key, TValue valueToAdd)
+        public static TValue GetOrAdd<TKey, TValue>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ICache cache, TKey key, TValue valueToAdd)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(cache, nameof(cache)));
             Verifier.IsNotNull(Verifier.VerifyArgument(key, nameof(key)));
@@ -60,7 +64,11 @@ namespace Axle.Caching
         /// A <typeparamref name="TValue"/> object representing the stored value.
         /// </returns>
         /// <seealso cref="ICache.GetOrAdd(object,Func{object, object})"/>
-        public static TValue GetOrAdd<TKey, TValue>(this ICache cache, TKey key, Func<TKey, TValue> valueFactory)
+        public static TValue GetOrAdd<TKey, TValue>(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this 
+            #endif
+            ICache cache, TKey key, Func<TKey, TValue> valueFactory)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(cache, nameof(cache)));
             Verifier.IsNotNull(Verifier.VerifyArgument(key, nameof(key)));

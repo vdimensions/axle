@@ -1,3 +1,4 @@
+#if NETSTANDARD || NET35_OR_NEWER
 using System;
 using System.Collections.Concurrent;
 using System.Linq;
@@ -99,3 +100,4 @@ namespace Axle.Caching
         }
     }
 }
+#endif

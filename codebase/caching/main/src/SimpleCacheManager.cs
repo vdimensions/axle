@@ -1,4 +1,5 @@
-﻿namespace Axle.Caching
+﻿#if NETSTANDARD || NET35_OR_NEWER
+namespace Axle.Caching
 {
     /// <summary>
     /// A <see cref="ICacheManager"/> implementation using <see cref="SimpleCache"/> as an <see cref="ICache"/>
@@ -18,3 +19,4 @@
         protected override ICache CreateCache(string cacheName) => new SimpleCache();
     }
 }
+#endif

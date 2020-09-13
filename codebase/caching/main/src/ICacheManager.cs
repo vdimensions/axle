@@ -2,11 +2,18 @@
 
 namespace Axle.Caching
 {
+    #if NETSTANDARD || NET35_OR_NEWER
     /// <summary>
     /// An interface that represents a cache manager. The cache manager is responsible for providing
     /// <see cref="ICache">cache objects</see> identified by a name, as well as invalidating such caches.  
     /// </summary>
     /// <seealso cref="AbstractCacheManager"/>
+    #else
+    /// <summary>
+    /// An interface that represents a cache manager. The cache manager is responsible for providing
+    /// <see cref="ICache">cache objects</see> identified by a name, as well as invalidating such caches.  
+    /// </summary>
+    #endif
     public interface ICacheManager : IDisposable
     {
         /// <summary>

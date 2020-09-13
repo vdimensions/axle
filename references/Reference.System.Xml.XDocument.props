@@ -7,56 +7,49 @@
   </PropertyGroup>
   
   <Choose>
+    <When Condition="'$(TargetFramework)' == 'netstandard2.1'">
+      <ItemGroup>
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
+      </ItemGroup>
+    </When>
     <When Condition="'$(TargetFramework)' == 'netstandard2.0'">
       <ItemGroup>
-        <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3" />
-        <PackageReference Include="System.Threading.Thread" Version="4.3" />
-        <PackageReference Include="System.Xml.XmlSerializer" Version="4.3" />
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.6'">
       <ItemGroup>
-        <PackageReference Include="System.Diagnostics.TraceSource" Version="4.3" />
-        <PackageReference Include="System.Threading.Thread" Version="4.3" />
-        <PackageReference Include="System.Xml.XmlSerializer" Version="4.3" />
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.5'">
       <ItemGroup>
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.4'">
       <ItemGroup>
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.3'">
       <ItemGroup>
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.2'">
       <ItemGroup>
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.1'">
       <ItemGroup>
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
     <When Condition="'$(TargetFramework)' == 'netstandard1.0'">
       <ItemGroup>
-      </ItemGroup>
-    </When>
-    <When Condition="'$(TargetFramework)' == 'net35'">
-      <PropertyGroup>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="System.Threading.Tasks.Unofficial" Version="3.1" />
-      </ItemGroup>
-    </When>
-    <When Condition="'$(TargetFramework)' == 'net20'">
-      <PropertyGroup>
-      </PropertyGroup>
-      <ItemGroup>
-        <PackageReference Include="LinqBridge" Version="1.3" />
+        <PackageReference Include="System.Xml.XDocument" Version="4.3" />
       </ItemGroup>
     </When>
   </Choose>

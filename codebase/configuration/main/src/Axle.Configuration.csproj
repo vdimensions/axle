@@ -9,13 +9,7 @@
     <Description>Axle framework configuration library</Description>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-
   <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../Reference.Axle.Core.targets" />
   <Import Project="../../../Reference.Axle.Text.Documents.targets" />
-  
-  <Import Project="../../../core/main/Axle.Core.Dependencies.targets" />
 </Project>
