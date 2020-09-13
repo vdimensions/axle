@@ -6,7 +6,7 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric
     [System.Serializable]
     #endif
     [System.Obsolete("Consider using AES. The DES cipher is considered broken. ")]
-    public sealed class DesHashAlgorithm : AbstractSymmetricHashAlgorithm
+    public sealed class DesHashAlgorithm : AbstractSymmetricHashAlgorithm<DESCryptoServiceProvider>
     {
         public DesHashAlgorithm() : base(new DESCryptoServiceProvider()) { }
     }

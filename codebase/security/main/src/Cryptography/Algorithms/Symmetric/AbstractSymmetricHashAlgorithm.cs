@@ -9,10 +9,11 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public abstract class AbstractSymmetricHashAlgorithm : AbstractCryptographicAlgorithm, ISymmetricHashAlgorithm
+    public abstract class AbstractSymmetricHashAlgorithm<T> : AbstractCryptographicAlgorithm, ISymmetricHashAlgorithm
+        where T: SymmetricAlgorithm
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly SymmetricAlgorithm _hash;
+        private readonly T _hash;
 
         public override ICryptoTransform CreateEncryptor() => _hash.CreateEncryptor();
         public override ICryptoTransform CreateDecryptor() => _hash.CreateDecryptor();
@@ -78,7 +79,7 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric
             set => _hash.Padding = value;
         }
 
-        protected AbstractSymmetricHashAlgorithm(SymmetricAlgorithm algorithm) : base()
+        protected AbstractSymmetricHashAlgorithm(T algorithm) : base()
         {
             _hash = algorithm;
             _hash.GenerateKey();
