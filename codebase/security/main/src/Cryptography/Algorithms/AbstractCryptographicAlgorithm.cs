@@ -2,9 +2,6 @@
 
 namespace Axle.Security.Cryptography.Algorithms
 {
-    #if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
-    [System.Serializable]
-    #endif
     public abstract class AbstractCryptographicAlgorithm : AbstractEncryptionAlgorithm, ICryptographicAlgorithm
     {
         protected AbstractCryptographicAlgorithm() : base() { }

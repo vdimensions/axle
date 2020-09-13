@@ -6,9 +6,6 @@ using System.Text;
 
 namespace Axle.Security.Cryptography.Algorithms.Symmetric
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public abstract class AbstractSymmetricHashAlgorithm<T> : AbstractCryptographicAlgorithm, ISymmetricHashAlgorithm
         where T: SymmetricAlgorithm
     {

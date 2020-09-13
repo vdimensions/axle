@@ -4,14 +4,8 @@ using System.Text;
 
 namespace Axle.Security.Cryptography.Algorithms
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public abstract class AbstractEncryptionAlgorithm : IEncryptionAlgorithm, IDisposable
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        [NonSerialized]
-        #endif
         private static readonly HexConverter _hex = new HexConverter();
 
         protected AbstractEncryptionAlgorithm() { }

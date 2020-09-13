@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 
-
 namespace Axle.Security.Cryptography.Algorithms
 {
     public interface ICryptographicAlgorithm : IEncryptionAlgorithm, IDisposable

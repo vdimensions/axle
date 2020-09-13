@@ -10,9 +10,6 @@ namespace Axle.Security.Cryptography.Algorithms.Hash.Hmac
     /// <summary>
     /// Computes a Hash-based Message Authentication Code (HMAC) using the RIPEMD160 hash function.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     public sealed class HmacRIPEMD160HashAlgorithm : AbstractHashAlgorithm
     {
         public HmacRIPEMD160HashAlgorithm() : base(new HMACRIPEMD160()) { }

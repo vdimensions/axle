@@ -7,9 +7,6 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric
     /// This class cannot be inherited.
     /// </summary>
     /// <seealso cref="TripleDESCryptoServiceProvider"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     public sealed class TripleDesHashAlgorithm : AbstractSymmetricHashAlgorithm<TripleDESCryptoServiceProvider>
     {
         /// <summary>

@@ -4,9 +4,6 @@ using System.Security.Cryptography;
 
 namespace Axle.Security.Cryptography.Algorithms.Hash
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public abstract class AbstractHashAlgorithm : AbstractEncryptionAlgorithm, IHashAlgorithm
     {
         private sealed class HashCryptoTransform : CryptoTransformProxy, IHashCryptoTransform

@@ -2,12 +2,8 @@ using System;
 using System.Security.Cryptography;
 using System.Text;
 
-
 namespace Axle.Security.Cryptography.Algorithms
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public sealed class Base64EncodeAlgorithm : AbstractCryptographicAlgorithm
     {
         public Base64EncodeAlgorithm() : base() { }
