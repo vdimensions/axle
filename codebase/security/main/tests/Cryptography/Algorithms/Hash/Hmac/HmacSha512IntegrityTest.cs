@@ -1,7 +1,8 @@
 ﻿using Axle.Security.Cryptography.Algorithms.Hash;
+using Axle.Security.Cryptography.Algorithms.Hash.Hmac;
 using NUnit.Framework;
 
-namespace Axle.Security.Cryptography.Tests.Algorithms.Hash
+namespace Axle.Security.Cryptography.Tests.Algorithms.Hash.Hmac
 {
     [TestFixture]
     public sealed class HmacSha512IntegrityTest : AbstractSignedHashIntegrityTest
