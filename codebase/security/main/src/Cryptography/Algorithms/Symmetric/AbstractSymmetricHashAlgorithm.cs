@@ -17,32 +17,50 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric
         public override ICryptoTransform CreateEncryptor() => _hash.CreateEncryptor();
         public override ICryptoTransform CreateDecryptor() => _hash.CreateDecryptor();
 
+        /// <summary>
+        /// Gets or sets the block size, in bits, of the cryptographic operation.
+        /// </summary>
         public int BlockSize
         {
             get => _hash.BlockSize;
             set => _hash.BlockSize = value;
         }
 
+        /// <summary>
+        /// Gets or sets the initialization vector (IV) for the symmetric algorithm.
+        /// </summary>
         public byte[] IV
         {
             get => _hash.IV;
             set => _hash.IV = value;
         }
 
+        /// <summary>
+        /// Gets or sets the secret key for the symmetric algorithm.
+        /// </summary>
         public byte[] Key
         {
             get => _hash.Key;
             set => _hash.Key = value;
         }
 
+        /// <summary>
+        /// Gets or sets the size, in bits, of the secret key used by the symmetric algorithm.
+        /// </summary>
         public int KeySize
         {
             get => _hash.KeySize;
             set => _hash.KeySize = value;
         }
 
+        /// <summary>
+        /// Gets the block sizes, in bits, that are supported by the symmetric algorithm.
+        /// </summary>
         public KeySizes[] LegalBlockKeySizes => _hash.LegalBlockSizes;
 
+        /// <summary>
+        /// Gets the key sizes, in bits, that are supported by the symmetric algorithm.
+        /// </summary>
         public KeySizes[] LegalKeySizes => _hash.LegalKeySizes;
 
         public CipherMode Mode
@@ -51,6 +69,9 @@ namespace Axle.Security.Cryptography.Algorithms.Symmetric
             set => _hash.Mode = value;
         }
 
+        /// <summary>
+        /// Gets or sets the padding mode used in the symmetric algorithm.
+        /// </summary>
         public PaddingMode Padding
         {
             get => _hash.Padding;

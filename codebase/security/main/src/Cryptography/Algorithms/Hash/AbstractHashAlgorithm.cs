@@ -11,14 +11,14 @@ namespace Axle.Security.Cryptography.Algorithms.Hash
     {
         private sealed class HashCryptoTransform : CryptoTransformProxy, IHashCryptoTransform
         {
-            private readonly System.Security.Cryptography.HashAlgorithm hash;
+            private readonly System.Security.Cryptography.HashAlgorithm _hash;
 
             public HashCryptoTransform(System.Security.Cryptography.HashAlgorithm target) : base(target)
             {
-                this.hash = target;
+                _hash = target;
             }
 
-            public byte[] Hash => hash.Hash;
+            public byte[] Hash => _hash.Hash;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

@@ -1,6 +1,5 @@
-#if NETFRAMEWORK
+#if NETFRAMEWORK && NET35_OR_NEWER
 using System.Security.Cryptography;
-
 
 namespace Axle.Security.Cryptography.Algorithms.Hash
 {

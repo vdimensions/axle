@@ -1,6 +1,5 @@
 ﻿using System.Security.Cryptography;
 
-
 namespace Axle.Security.Cryptography.Algorithms.Symmetric
 {
     /// <summary>

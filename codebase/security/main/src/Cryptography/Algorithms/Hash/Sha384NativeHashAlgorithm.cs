@@ -1,5 +1,5 @@
+#if NETFRAMEWORK && NET35_OR_NEWER
 using System.Security.Cryptography;
-
 
 namespace Axle.Security.Cryptography.Algorithms.Hash
 {
@@ -11,3 +11,4 @@ namespace Axle.Security.Cryptography.Algorithms.Hash
         public Sha384NativeHashAlgorithm() : base(new SHA384CryptoServiceProvider()) { }
     }
 }
+#endif

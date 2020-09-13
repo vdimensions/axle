@@ -4,7 +4,7 @@ using System.Text;
 using Axle.Security.Extensions.SecureString;
 using Axle.Verification;
 
-namespace Axle.Security.Cryptography.Algorithms.Hash
+namespace Axle.Security.Cryptography.Algorithms.Hash.Hmac
 {
     /// <summary>
     /// Computes a Hash-based Message Authentication Code (HMAC) using the SHA1 hash function.

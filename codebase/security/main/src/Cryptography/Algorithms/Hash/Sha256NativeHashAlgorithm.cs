@@ -1,3 +1,4 @@
+#if NETSTANDARD2_0_OR_NEWER || NET35_OR_NEWER
 using System.Security.Cryptography;
 
 namespace Axle.Security.Cryptography.Algorithms.Hash
@@ -10,3 +11,4 @@ namespace Axle.Security.Cryptography.Algorithms.Hash
         public Sha256NativeHashAlgorithm() : base(new SHA256CryptoServiceProvider()) { }
     }
 }
+#endif
