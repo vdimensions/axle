@@ -47,13 +47,13 @@ namespace Axle.Resources
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(Image))
+            if (type == typeof(Image))
             {
                 return (result = _icon) != null;
             }
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <summary>

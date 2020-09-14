@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System.Text;
 using System.Xml.Linq;
-
 using Axle.Resources.Extraction;
-
 
 namespace Axle.Resources.Xml.Extraction
 {

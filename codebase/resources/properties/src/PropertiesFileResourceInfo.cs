@@ -65,11 +65,11 @@ namespace Axle.Resources.Properties
             return result;
         }
 
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
             // TODO: implement java properties (de)serializer and use it here as well.
 
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
     }
 }

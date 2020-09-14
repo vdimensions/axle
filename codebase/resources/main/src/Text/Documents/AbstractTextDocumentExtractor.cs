@@ -42,7 +42,9 @@ namespace Axle.Resources.Text.Documents
         }
 
         /// <inheritdoc />
-        /// <summary>Attempts to locate a Java properties resource based on the provided parameters. </summary>
+        /// <summary>
+        /// Attempts to locate a text document resource based on the provided parameters.
+        /// </summary>
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             var finalProperties = new Dictionary<string, CharSequence>(KeyComparer);

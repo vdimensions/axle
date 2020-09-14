@@ -39,15 +39,16 @@ namespace Axle.Resources.FileSystem
             }
         }
 
-        public override bool TryResolve(Type targetType, out object result)
+        /// <inheritdoc />
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(FileInfo))
+            if (type == typeof(FileInfo))
             {
                 var file = new FileInfo(_location.AbsolutePath);
                 result = file;
                 return file.Exists;
             }
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
     }
 }

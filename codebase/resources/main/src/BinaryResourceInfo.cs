@@ -1,9 +1,7 @@
 using System;
 using System.Globalization;
 using System.IO;
-
 using Axle.Verification;
-
 
 namespace Axle.Resources
 {
@@ -29,19 +27,19 @@ namespace Axle.Resources
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(byte[]))
+            if (type == typeof(byte[]))
             {
                 result = _value;
                 return true;
             }
-            if (targetType == typeof(BinaryReader))
+            if (type == typeof(BinaryReader))
             {
                 result = new BinaryReader(Open());
                 return true;
             }
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <summary>

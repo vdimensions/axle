@@ -1,5 +1,4 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-
 using System;
 using System.Globalization;
 using Axle.Verification;

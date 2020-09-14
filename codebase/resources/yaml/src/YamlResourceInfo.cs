@@ -66,7 +66,7 @@ namespace Axle.Resources.Yaml
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
             try
             {
@@ -74,13 +74,13 @@ namespace Axle.Resources.Yaml
                 using (var stream = Open())
                 using (var reader = new StreamReader(stream))
                 {
-                    result = deserializer.Deserialize(new Parser(reader), targetType);
+                    result = deserializer.Deserialize(new Parser(reader), type);
                     return true;
                 }
             }
             catch
             {
-                if (base.TryResolve(targetType, out result))
+                if (base.TryResolve(type, out result))
                 {
                     return true;
                 }

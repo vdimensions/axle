@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
-
 using Axle.Verification;
-
 
 namespace Axle.Resources.Extraction
 {
@@ -47,6 +45,21 @@ namespace Axle.Resources.Extraction
             #endif
         }
 
+        /// <summary>
+        /// Attempts to determine if the current <see cref="AbstractResourceExtractor"/> implementation is capable of
+        /// extracting the resource represented by the provided <paramref name="location"/>.
+        /// <para>
+        /// This method is called prior to the <see cref="Extract"/> or <see cref="ExtractAsync"/> methods, and in case
+        /// it returns <c>false</c>, the later may not be invoked.
+        /// </para>
+        /// </summary>
+        /// <param name="location">
+        /// The <see cref="Uri"/> representing the resource's location.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the current <see cref="AbstractResourceExtractor"/> implementation is capable of extracting
+        /// the resource represented by the provided <paramref name="location"/>; <c>false</c> otherwise.
+        /// </returns>
         protected virtual bool Accepts(Uri location) => true;
 
         /// <summary>
