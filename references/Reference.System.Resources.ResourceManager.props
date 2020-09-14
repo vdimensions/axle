@@ -27,5 +27,20 @@
         <PackageReference Include="System.Resources.ResourceManager" Version="4.3" />
       </ItemGroup>
     </When>
+    <When Condition="'$(TargetFramework)' == 'netstandard1.2'">
+      <ItemGroup>
+        <PackageReference Include="System.Resources.ResourceManager" Version="4.3" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'netstandard1.1'">
+      <ItemGroup>
+        <PackageReference Include="System.Resources.ResourceManager" Version="4.3" />
+      </ItemGroup>
+    </When>
+    <When Condition="'$(TargetFramework)' == 'netstandard1.0'">
+      <ItemGroup>
+        <PackageReference Include="System.Resources.ResourceManager" Version="4.3" />
+      </ItemGroup>
+    </When>
   </Choose>
 </Project>

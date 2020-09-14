@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+using System;
 using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
@@ -32,3 +33,4 @@ namespace Axle.Resources.FileSystem.Extraction
         protected override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsFile();
     }
 }
+#endif

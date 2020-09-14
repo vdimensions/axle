@@ -15,10 +15,10 @@ namespace Axle.Reflection
     /// </summary>
     public abstract class AbstractTypeIntrospector : ITypeIntrospector
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         private static AccessModifier GetAccessModifier(Type type)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_6_OR_NEWER || NET45_OR_NEWER
             var t = type.GetTypeInfo();
             #else
             var t = type;
@@ -48,7 +48,7 @@ namespace Axle.Reflection
         {
             _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             _flags = TypeFlagsExtensions.Determine(type);
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
             AccessModifier = GetAccessModifier(type);
             #endif
         }
@@ -208,12 +208,11 @@ namespace Axle.Reflection
         public TypeFlags TypeFlags => _flags;
 
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         /// <inheritdoc />
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public AccessModifier AccessModifier { get; }
         #endif
-
 
 
 

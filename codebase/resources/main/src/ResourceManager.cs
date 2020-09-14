@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ namespace Axle.Resources
     /// </summary>
     public abstract class ResourceManager
     {
+        #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
         private sealed class CacheAwareBundleRegistry : IResourceBundleRegistry
         {
             private sealed class CacheAwareConfigurableBundleContent : IConfigurableBundleContent
@@ -121,6 +122,7 @@ namespace Axle.Resources
             => new CachingExtractor(extractor, cache, index);
 
         private readonly ICacheManager _cacheManager;
+        #endif
         
         /// <summary>
         /// Creates a new instance of the current <see cref="ResourceManager"/> implementation with the provided
@@ -159,6 +161,7 @@ namespace Axle.Resources
         {
             bundles.VerifyArgument(nameof(bundles)).IsNotNull();
             extractors.VerifyArgument(nameof(extractors)).IsNotNull();
+            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
             if ((_cacheManager = cacheManager) != null)
             {
                 Bundles = new CacheAwareBundleRegistry(bundles, _cacheManager);
@@ -169,6 +172,10 @@ namespace Axle.Resources
                 Bundles = bundles;
                 Extractors = extractors;
             }
+            #else
+            Bundles = bundles;
+            Extractors = extractors;
+            #endif
         }
 
         /// <summary>
@@ -198,18 +205,26 @@ namespace Axle.Resources
             {
                 return null;
             }
+            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
             var cache = _cacheManager?.GetCache(bundle);
             var extractors = (cache == null
                 ? Extractors.Union(bundleRegistry.Extractors)
                 : Extractors.Union(bundleRegistry.Extractors).Select((e, i) => CreateCachingExtractor(e, cache, i)))
-                .Reverse()
-                .ToArray();
+            #else
+            var extractors = Extractors.Union(bundleRegistry.Extractors)
+            #endif
+                    .Reverse()
+                    .ToArray();
             foreach (var ci in culture.ExpandHierarchy())
             {
                 var context = new ResourceContext(bundle, locations, ci, extractors);
+                #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
                 var result = cache == null
                     ? context.ExtractionChain.Extract(name)
                     : cache.GetOrAdd(Tuple.Create(name, ci.Name), t => context.ExtractionChain.Extract(t.Item1));
+                #else
+                var result = context.ExtractionChain.Extract(name);
+                #endif
                 if (result != null)
                 {
                     return result;

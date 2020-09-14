@@ -1,11 +1,11 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-
+﻿#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Axle.Extensions.String;
+using Axle.Reflection;
 using Axle.Verification;
 
 namespace Axle.Resources.Embedded
@@ -60,8 +60,9 @@ namespace Axle.Resources.Embedded
              * The namespaces will be tested sorted by length.
              */
             var stream = asm.GetManifestResourceStream(manifestResourceName) ?? asm.GetTypes()
-                .Where(type => type.IsPublic && !type.IsNested)
-                .Select(type => type.Namespace ?? string.Empty)
+                .Select(t => new TypeIntrospector(t))
+                .Where(ti => ti.AccessModifier == AccessModifier.Public && !ti.TypeFlags.HasFlag(TypeFlags.Nested))
+                .Select(ti => ti.IntrospectedType.Namespace ?? string.Empty)
                 .OrderBy(ns => ns.Length)
                 .Select(ns => asm.GetManifestResourceStream(ns.Length > 0 ? $"{ns}.{escapedResourceName}" : escapedResourceName))
                 .FirstOrDefault(x => x != null);

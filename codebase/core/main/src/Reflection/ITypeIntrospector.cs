@@ -274,7 +274,7 @@ namespace Axle.Reflection
         /// <seealso cref="Axle.Reflection.TypeFlags"/>
         TypeFlags TypeFlags { get; }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the <see cref="AccessModifier"/> for the given type.
         /// </summary>

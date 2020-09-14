@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+using System;
 using System.Reflection;
 using Axle.Environment;
 using Axle.Extensions.String;
@@ -22,7 +23,7 @@ namespace Axle.Resources.Embedded.Extraction
     #endif
     public class EmbeddedResourceExtractor : AbstractResourceExtractor
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
         private static Assembly GetAssembly(IRuntime runtime, Uri uri)
         {
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
@@ -39,7 +40,6 @@ namespace Axle.Resources.Embedded.Extraction
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
 
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             var location = context.Location;
             var culture = context.Culture;
 
@@ -47,10 +47,14 @@ namespace Axle.Resources.Embedded.Extraction
             {
                 var runtime = Platform.Runtime;
                 var assembly = GetAssembly(runtime, location);
+                var actualName = location.Resolve(name).AbsolutePath.TrimStart('/');
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 var actualAssembly = culture.Equals(System.Globalization.CultureInfo.InvariantCulture)
                     ? assembly
                     : runtime.LoadSatelliteAssembly(assembly, culture);
-                var actualName = location.Resolve(name).AbsolutePath.TrimStart('/');
+                #else
+                var actualAssembly = assembly;
+                #endif
                 /*
                  * Only create resource if there is a satellite assembly when the culture is not invariant.
                  * Also, never create an adapter if the assembly does not contain the requested resource.
@@ -60,7 +64,6 @@ namespace Axle.Resources.Embedded.Extraction
                     return new EmbeddedResourceInfo(actualAssembly, name, actualName, culture);
                 }
             }
-            #endif
 
             return null;
         }
@@ -69,3 +72,4 @@ namespace Axle.Resources.Embedded.Extraction
         protected override bool Accepts(Uri location) => location.IsAbsoluteUri && location.IsEmbeddedResource();
     }
 }
+#endif

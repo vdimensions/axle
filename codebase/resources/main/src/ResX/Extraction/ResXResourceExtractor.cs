@@ -22,7 +22,7 @@ namespace Axle.Resources.ResX.Extraction
             actualExtractor = new CompleteResXResourceExtractor();
             #elif NETSTANDARD2_0_OR_NEWER
             actualExtractor = new SimpleResXResourceExtractor();
-            #elif NETSTANDARD1_3_OR_NEWER
+            #elif NETSTANDARD1_0_OR_NEWER
             actualExtractor = new TextResXResourceExtractor();
             #endif
             return actualExtractor.Extract(context, name);

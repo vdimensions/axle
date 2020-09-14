@@ -1,22 +1,44 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
 using Axle.Caching;
 using Axle.Resources.Bundling;
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using Axle.Resources.Embedded.Extraction;
+#endif
 using Axle.Resources.Extraction;
+#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using Axle.Resources.FileSystem.Extraction;
+#endif
 using Axle.Resources.ResX.Extraction;
 
 namespace Axle.Resources
 {
+    #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// The default implementation of the <see cref="ResourceManager"/> base class.
     /// It is capable of handling file system, resx and embedded resources in the given order,
     /// and can be further configured to deal with other resource extraction implementations.
     /// </summary>
     /// <seealso cref="IResourceExtractor"/>
-    /// <seealso cref="FileSystemResourceExtractor"/>
     /// <seealso cref="ResXResourceExtractor"/>
     /// <seealso cref="EmbeddedResourceExtractor"/>
+    /// <seealso cref="FileSystemResourceExtractor"/>
+    #elif NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+    /// <summary>
+    /// The default implementation of the <see cref="ResourceManager"/> base class.
+    /// It is capable of handling file system, resx and embedded resources in the given order,
+    /// and can be further configured to deal with other resource extraction implementations.
+    /// </summary>
+    /// <seealso cref="IResourceExtractor"/>
+    /// <seealso cref="ResXResourceExtractor"/>
+    /// <seealso cref="FileSystemResourceExtractor"/>
+    #else
+    /// <summary>
+    /// The default implementation of the <see cref="ResourceManager"/> base class.
+    /// It is capable of handling file system, resx and embedded resources in the given order,
+    /// and can be further configured to deal with other resource extraction implementations.
+    /// </summary>
+    /// <seealso cref="IResourceExtractor"/>
+    #endif
     public sealed class DefaultResourceManager : ResourceManager
     {
         /// <summary>
@@ -33,14 +55,24 @@ namespace Axle.Resources
                 cacheManager)
         {
             Extractors
+                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
                 .Register(new FileSystemResourceExtractor())
+                #endif
                 .Register(new ResXResourceExtractor())
-                .Register(new EmbeddedResourceExtractor());
+                #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+                .Register(new EmbeddedResourceExtractor())
+                #endif
+                ;
         }
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.
         /// </summary>
-        public DefaultResourceManager() : this(new WeakReferenceCacheManager()) { }
+        public DefaultResourceManager()
+            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+            : this(new WeakReferenceCacheManager()) { }
+            #else
+            : this(null) { }
+            #endif
     }
 }
 #endif
