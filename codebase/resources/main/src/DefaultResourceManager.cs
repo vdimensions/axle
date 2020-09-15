@@ -38,6 +38,7 @@ namespace Axle.Resources
     /// and can be further configured to deal with other resource extraction implementations.
     /// </summary>
     /// <seealso cref="IResourceExtractor"/>
+    /// <seealso cref="ResXResourceExtractor"/>
     #endif
     public sealed class DefaultResourceManager : ResourceManager
     {

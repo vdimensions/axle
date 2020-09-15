@@ -42,15 +42,16 @@ namespace Axle.Resources.Text.Documents
         /// </returns>
         public override Stream Open() => _originalResource?.Open();
 
-        public override bool TryResolve(Type targetType, out object result)
+        /// <inheritdoc />
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(IDictionary<string, string>))
+            if (type == typeof(IDictionary<string, string>))
             {
                 result = Data;
                 return true;
             }
             
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <summary>

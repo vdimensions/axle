@@ -37,30 +37,30 @@ namespace Axle.Resources
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(string))
+            if (type == typeof(string))
             {
                 result = _value;
                 return true;
             }
-            if (targetType == typeof(StringBuilder))
+            if (type == typeof(StringBuilder))
             {
                 result = new StringBuilder(_value);
                 return true;
             }
-            if (targetType == typeof(TextReader) || targetType == typeof(StringReader))
+            if (type == typeof(TextReader) || type == typeof(StringReader))
             {
                 result = new StringReader(_value);
                 return true;
             }
-            if (targetType.ExtendsOrImplements<IEnumerable<char>>())
+            if (type.ExtendsOrImplements<IEnumerable<char>>())
             {
                 result = _value.ToCharArray();
                 return true;
             }
 
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <summary>

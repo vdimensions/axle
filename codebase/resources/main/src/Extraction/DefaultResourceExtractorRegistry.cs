@@ -21,7 +21,8 @@ namespace Axle.Resources.Extraction
         /// <inheritdoc />
         public IResourceExtractorRegistry Register(IResourceExtractor extractor)
         {
-            _extractors.AddLast(extractor.VerifyArgument(nameof(extractor)).IsNotNull().Value);
+            Verifier.IsNotNull(Verifier.VerifyArgument(extractor, nameof(extractor)));
+            _extractors.AddLast(extractor);
             return this;
         }
     }

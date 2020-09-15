@@ -1,10 +1,10 @@
-using System;
 using System.Globalization;
 using System.IO;
 using System.Xml;
-
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+using System;
 using Axle.IO.Serialization;
-
+#endif
 
 namespace Axle.Resources.Xml
 {
@@ -28,7 +28,7 @@ namespace Axle.Resources.Xml
         /// Creates a new instance of the <see cref="XmlResourceInfo"/> class.
         /// </summary>
         /// <param name="name">
-        /// The unque name of the resource within the current resource bundle.
+        /// The unique name of the resource within the current resource bundle.
         /// </param>
         /// <param name="culture">
         /// The <see cref="CultureInfo"/> for which the resource was requested. 
@@ -38,14 +38,14 @@ namespace Axle.Resources.Xml
         /// Creates a new instance of the <see cref="XmlResourceInfo"/> class.
         /// </summary>
         /// <param name="name">
-        /// The unque name of the resource within the current resource bundle.
+        /// The unique name of the resource within the current resource bundle.
         /// </param>
         /// <param name="culture">
         /// The <see cref="CultureInfo"/> for which the resource was requested. 
         /// </param>
         /// <param name="originalResource">
-        /// A reference to the original <see cref="ResourceInfo"/> the current <see cref="XmlResourceInfo"/> implementation
-        /// was streamed from.
+        /// A reference to the original <see cref="ResourceInfo"/> the current <see cref="XmlResourceInfo"/>
+        /// implementation was streamed from.
         /// </param>
         protected XmlResourceInfo(string name, CultureInfo culture, ResourceInfo originalResource) : this(name, culture)
         {
@@ -54,7 +54,8 @@ namespace Axle.Resources.Xml
 
         /// <inheritdoc />
         /// <summary>
-        /// Opens a new <see cref="Stream"/> to read the xml contents represented by the current <see cref="XmlResourceInfo"/> implementation. 
+        /// Opens a new <see cref="Stream"/> to read the xml contents represented by the current
+        /// <see cref="XmlResourceInfo"/> implementation. 
         /// </summary>
         public sealed override Stream Open()
         {
@@ -80,21 +81,22 @@ namespace Axle.Resources.Xml
         }
 
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-        public override bool TryResolve(Type targetType, out object result)
+        /// <inheritdoc />
+        public override bool TryResolve(Type type, out object result)
         {
             var serializer = new XmlSerializer();
             try
             {
                 using (var stream = Open())
                 {
-                    result = serializer.Deserialize(stream, targetType);
+                    result = serializer.Deserialize(stream, type);
                 }
 
                 return true;
             }
             catch
             {
-                if (base.TryResolve(targetType, out result))
+                if (base.TryResolve(type, out result))
                 {
                     return true;
                 }

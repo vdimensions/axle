@@ -9,7 +9,7 @@ using Axle.Verification;
 
 namespace Axle.Resources.Embedded.Extraction
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An implementation of the <see cref="IResourceExtractor"/> interface that is capable of reading embedded
     /// resources.

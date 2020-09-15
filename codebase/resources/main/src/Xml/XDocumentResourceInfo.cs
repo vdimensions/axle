@@ -3,7 +3,6 @@ using System.Globalization;
 using System.Xml;
 using System.Xml.Linq;
 
-
 namespace Axle.Resources.Xml
 {
     /// <summary>
@@ -18,14 +17,14 @@ namespace Axle.Resources.Xml
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(XDocument))
+            if (type == typeof(XDocument))
             {
                 result = Value;
                 return true;
             }
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <inheritdoc />
