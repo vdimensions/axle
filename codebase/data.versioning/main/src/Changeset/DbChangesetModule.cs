@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
-using Axle.Data.DataSources;
-using Axle.Data.Versioning.Migrations;
 using Axle.Extensions.Uri;
 using Axle.Modularity;
 using Axle.Resources;
@@ -17,11 +14,11 @@ namespace Axle.Data.Versioning.Changeset
     [Module]
     internal sealed class DbChangesetModule : IDbChangesetRegistry, IEnumerable<DbChangelog>
     {
-        private ConcurrentBag<DbChangelog> _dbChangelogs;
+        private readonly ConcurrentQueue<DbChangelog> _dbChangelogs;
 
         public DbChangesetModule()
         {
-            _dbChangelogs = new ConcurrentBag<DbChangelog>();
+            _dbChangelogs = new ConcurrentQueue<DbChangelog>();
         }
 
         private IDbChangesetRegistry DoRegister(IEnumerable<IDbChangeset> migrationChangesets)
@@ -41,7 +38,7 @@ namespace Axle.Data.Versioning.Changeset
                     }));
             foreach (var changelog in changelogs)
             {
-                _dbChangelogs.Add(changelog);
+                _dbChangelogs.Enqueue(changelog);
             }
             return this;
         }
