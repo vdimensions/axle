@@ -15,6 +15,6 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Resources.Properties.targets" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

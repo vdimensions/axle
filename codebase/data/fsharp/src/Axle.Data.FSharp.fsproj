@@ -24,7 +24,7 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Data.targets" />
-  <Import Project="../../../Reference.Axle.FSharp.targets" />
   <Import Project="../../../FSharp.Core.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Data.targets" />
+  <Import Project="../../../../ref/Reference.Axle.FSharp.targets" />
 </Project>

@@ -28,7 +28,7 @@ let projectLocations = [
     "security/access_control"
     "application/main"
     "data/main"; "data/fsharp"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/sqlite"; "data/sqlite.microsoft"; "data/mysql"
-    "data.migrations/main"
+    "data.versioning/main"
     "logging/log4net"
     "web/main"; "web/mvc"; "web/websharper"
 ]

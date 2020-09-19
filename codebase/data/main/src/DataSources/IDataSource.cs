@@ -4,8 +4,8 @@ namespace Axle.Data.DataSources
 {
     /// <summary>
     /// An interface representing a data source object. The data source object is responsible for
-    /// interacting with an underlying ADO.NET implementation and exposing means for 
-    /// connecting to a database and executing queries.
+    /// interacting with an underlying ADO.NET implementation and exposing means for connecting to a database and
+    /// executing queries in a way agnostic of the underlying database engine.
     /// </summary>
     public interface IDataSource : IDbParameterBuilder
     {
@@ -22,7 +22,7 @@ namespace Axle.Data.DataSources
         IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, BuildCommandCallback buildCommandCallback);
 
         /// <summary>
-        /// Gets a string value representing the SQL dialect used by the represented data source.
+        /// Gets a string value representing the SQL dialect used by the current data source.
         /// </summary>
         string DialectName { get; }
         /// <summary>

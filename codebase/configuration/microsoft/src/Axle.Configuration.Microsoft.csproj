@@ -10,9 +10,9 @@
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../../references/Reference.Microsoft.Extensions.Configuration.Binder.props" />
-  <Import Project="../../../../references/Reference.Microsoft.Extensions.Configuration.FileExtensions.props" />
-  <Import Project="../../../Reference.Axle.Core.targets" />
-  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
-  <Import Project="../../../Reference.Axle.Configuration.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
+  <Import Project="../../../../ref/ext/Reference.Microsoft.Extensions.Configuration.Binder.props" />
+  <Import Project="../../../../ref/ext/Reference.Microsoft.Extensions.Configuration.FileExtensions.props" />
 </Project>

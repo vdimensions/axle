@@ -15,5 +15,5 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Application.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Application.targets" />
 </Project>

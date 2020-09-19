@@ -38,16 +38,16 @@ namespace Axle.Modularity
                 // in order to make sure the `UtilizedBy` module is not loaded before any of them.
                 //
                 var requiredSoFar = moduleInfo.RequiredModules;
-                foreach (var utilizedBy in modulesToLaunch
-                    .SelectMany(x => x.ReportsToModules.Select(u => new { UtilizedBy = u, Module = x }))
-                    .Where(x => x.UtilizedBy.Accepts(moduleInfo.Type))
+                foreach (var providedFor in modulesToLaunch
+                    .SelectMany(x => x.ProvidesForModules.Select(pf => new { ProvideFor = pf, Module = x }))
+                    .Where(x => x.ProvideFor.Accepts(moduleInfo.Type))
                     .Select(x => x.Module))
                 {
                     for (var j = 0; j < requiredSoFar.Length; j++)
                     {
-                        requiredModules[utilizedBy].Add(requiredSoFar[j]);
+                        requiredModules[providedFor].Add(requiredSoFar[j]);
                     }
-                    expandedRequiredModules.Add(utilizedBy);
+                    expandedRequiredModules.Add(providedFor);
                 }
             }
 

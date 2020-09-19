@@ -13,7 +13,7 @@
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Resources.targets" />
-  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
-  <Import Project="../../../Reference.Axle.Text.Documents.Yaml.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.Yaml.targets" />
 </Project>

@@ -18,7 +18,7 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
-  <Import Project="../../../Reference.Axle.Text.Documents.Yaml.targets" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.Yaml.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

@@ -11,12 +11,11 @@
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
-
-  <Import Project="../../../../references/Reference.System.Diagnostics.TraceSource.props" />
-  <Import Project="../../../../references/Reference.System.Linq.props" />
-  <Import Project="../../../../references/Reference.System.Threading.Tasks.props" />
-  <Import Project="../../../../references/Reference.System.Threading.Thread.props" />
-  <Import Project="../../../../references/Reference.System.Xml.XmlSerializer.props" />
+  <Import Project="../../../../ref/ext/Reference.System.Diagnostics.TraceSource.props" />
+  <Import Project="../../../../ref/ext/Reference.System.Linq.props" />
+  <Import Project="../../../../ref/ext/Reference.System.Threading.Tasks.props" />
+  <Import Project="../../../../ref/ext/Reference.System.Threading.Thread.props" />
+  <Import Project="../../../../ref/ext/Reference.System.Xml.XmlSerializer.props" />
 
   <Import Project="../../../targets/stator/src/Stator.props" />
 

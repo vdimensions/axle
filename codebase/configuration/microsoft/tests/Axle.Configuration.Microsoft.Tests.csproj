@@ -22,8 +22,8 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Configuration.targets" />
-  <Import Project="../../../Reference.Axle.Configuration.ConfigurationManager.targets" />
-  <Import Project="../../../Reference.Axle.Configuration.Microsoft.targets" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.ConfigurationManager.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

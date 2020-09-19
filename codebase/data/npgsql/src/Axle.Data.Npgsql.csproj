@@ -11,6 +11,6 @@
   </PropertyGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Data.targets" />
-  <Import Project="../Axle.Data.Npgsql.Dependencies.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Data.targets" />
+  <Import Project="../../../../ref/ext/Reference.Npgsql.props" />
 </Project>

@@ -9,7 +9,7 @@
     <Description>Axle framework caching library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../../references/Reference.System.Linq.props" />
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/ext/Reference.System.Linq.props" />
 </Project>

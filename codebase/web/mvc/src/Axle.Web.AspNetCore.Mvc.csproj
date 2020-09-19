@@ -8,5 +8,5 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Web.AspNetCore.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Web.AspNetCore.targets" />
 </Project>

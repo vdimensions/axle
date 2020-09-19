@@ -194,11 +194,11 @@ namespace Axle.Modularity
                 .ToArray();
         }
 
-        public ReportsToAttribute[] GetReportsToModules(Type moduleType)
+        public ProvidesForAttribute[] GetReportsToModules(Type moduleType)
         {
             return CollectAttributes(
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
-                    new List<ReportsToAttribute>(),
+                    new List<ProvidesForAttribute>(),
                     //
                     // Note - the `ReportsToAttribute` can be subclassed and we must take into account any derived attribute types.
                     //

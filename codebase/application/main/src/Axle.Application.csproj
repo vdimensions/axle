@@ -31,9 +31,9 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Caching.targets" />
-  <Import Project="../../../Reference.Axle.Resources.targets" />
-  <Import Project="../../../Reference.Axle.Resources.Properties.targets" />
-  <Import Project="../../../Reference.Axle.Resources.Yaml.targets" />
-  <Import Project="../../../Reference.Axle.Configuration.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Caching.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Yaml.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
 </Project>

@@ -17,8 +17,8 @@
   </ItemGroup>
 
   <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../Reference.Axle.Core.targets" />
-  <Import Project="../../../Reference.Axle.Text.Documents.targets" />
-  <Import Project="../../../Reference.Axle.Text.Documents.Properties.targets" />
-  <Import Project="../../../Reference.Axle.Resources.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.Properties.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
 </Project>

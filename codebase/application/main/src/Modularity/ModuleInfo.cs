@@ -22,7 +22,7 @@ namespace Axle.Modularity
             IEnumerable<ModuleCallback> initCallbacks,
             IEnumerable<ModuleCallback> terminateCallbacks,
             IModuleReferenceAttribute[] utilizedModules,
-            ReportsToAttribute[] reportsToModules,
+            ProvidesForAttribute[] providesForModules,
             ModuleCommandLineTriggerAttribute commandLineTrigger,
             ModuleConfigSectionAttribute configSectionInfo,
             params ModuleInfo[] requiredModules)
@@ -42,7 +42,7 @@ namespace Axle.Modularity
             DependencyTerminatedMethods = terminateCallbacks.OrderByDescending(x => x.Priority).ToArray();
             
             UtilizedModules = utilizedModules;
-            ReportsToModules = reportsToModules;
+            ProvidesForModules = providesForModules;
             RequiredModules = requiredModules;
             
             CommandLineTrigger = commandLineTrigger;
@@ -71,7 +71,7 @@ namespace Axle.Modularity
 
         public IModuleReferenceAttribute[] UtilizedModules { get; }
 
-        public ReportsToAttribute[] ReportsToModules { get; }
+        public ProvidesForAttribute[] ProvidesForModules { get; }
 
         public ModuleInfo[] RequiredModules { get; internal set; }
     }

@@ -23,7 +23,6 @@ namespace Axle
     public sealed partial class Application : IDisposable, IDependencyContext
     {
         internal const string ConfigBundleName = "$Config";
-        private const string ModuleConfigFileName = "module";
         
         /// <summary>
         /// Initiates the configuration of an axle <see cref="Application">application</see> by providing a reference to
@@ -115,18 +114,24 @@ namespace Axle
                             .GetTypeInfo()
                             #endif
                             .Name;
+                        var moduleTypeNamespace = 
+                            moduleType
+                            #if NETSTANDARD || NET45_OR_NEWER
+                            .GetTypeInfo()
+                            #endif
+                            .Namespace;
                         var moduleResourceManager = new DefaultResourceManager(null);
                         moduleResourceManager.Bundles
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)
-                            .Extractors.Register(new NameForwardingResourceExtractor(moduleTypeName));
+                            .Extractors.Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}."));
 
                         var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         
                         var baseModuleConfig = new LayeredConfigManager().Append(
                             Configure(
                                 new LayeredConfigManager(), 
-                                ModuleConfigFileName,
+                                moduleTypeName,
                                 moduleConfigurationStreamProvider, 
                                 string.Empty));
                         if (!string.IsNullOrEmpty(host.EnvironmentName))
@@ -134,7 +139,7 @@ namespace Axle
                             baseModuleConfig = baseModuleConfig.Append(
                                 Configure(
                                     new LayeredConfigManager(), 
-                                    ModuleConfigFileName,
+                                    moduleTypeName,
                                     moduleConfigurationStreamProvider, 
                                     host.EnvironmentName));
                         }
