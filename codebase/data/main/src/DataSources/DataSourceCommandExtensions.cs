@@ -31,7 +31,11 @@ namespace Axle.Data.DataSources
             switch (resultType.TypeCode)
             {
                 default:
+                    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                     return (T) Convert.ChangeType(obj, targetType.TypeCode);
+                    #else
+                    return (T) Convert.ChangeType(obj, targetType.IntrospectedType);
+                    #endif
             }
         }
         
