@@ -4,5 +4,5 @@ set
     `status` = @status, 
     `execution_duration` = @executionDuration, 
     `date_performed` = @datePerformed
-where 
+ where 
     `id` = @id; 

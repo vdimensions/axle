@@ -65,10 +65,11 @@ namespace Axle.Text.Documents.Binding
                         boundValue = collectionAdapter.SetItems(instance, items);
                         return true;
                     }
+
                     return TryBind(
                         objectProvider, 
                         converter, 
-                        collectionProvider.Last(), 
+                        collectionProvider.LastOrDefault(), 
                         instance, 
                         targetType, 
                         out boundValue);

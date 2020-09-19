@@ -114,7 +114,7 @@ namespace Axle
                     return this;
                 }
 
-                Logger.Debug("Initializing module `{0}`...", ModuleInfo.Type.FullName);
+                //Logger.Debug("Initializing module `{0}`...", ModuleInfo.Type.FullName);
 
                 ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter, args);
                 var result = ChangeState(State | ModuleStates.Initialized);
@@ -192,7 +192,7 @@ namespace Axle
                     return this;
                 }
 
-                Logger.Debug("Terminating module `{0}` ...", ModuleInfo.Type.FullName);
+                //Logger.Debug("Terminating module `{0}` ...", ModuleInfo.Type.FullName);
 
                 Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
 

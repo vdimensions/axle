@@ -7,6 +7,7 @@ using System.Linq;
 using Axle.Conversion;
 using Axle.Data.Common;
 using Axle.Data.Conversion;
+using Axle.Reflection;
 using Axle.Verification;
 
 
@@ -19,6 +20,21 @@ namespace Axle.Data.DataSources
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class DataSourceCommandExtensions
     {
+        private static T SafeCast<T>(object obj)
+        {
+            var targetType = new TypeIntrospector<T>();
+            var resultType = new TypeIntrospector(obj.GetType());
+            if (resultType.Equals(targetType) || resultType.TypeCode == targetType.TypeCode)
+            {
+                return (T) obj;
+            }
+            switch (resultType.TypeCode)
+            {
+                default:
+                    return (T) Convert.ChangeType(obj, targetType.TypeCode);
+            }
+        }
+        
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public static T[] ExecuteQuery<T>(this IDataSourceCommand command, IDataSourceConnection connection, DataTable results, IConverter<IDbRecord, T> converter, params IDataParameter[] parameters)
         {
@@ -89,7 +105,8 @@ namespace Axle.Data.DataSources
         public static T ExecuteScalar<T>(this IDataSourceCommand command, IDataSourceConnection connection, params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
-            return (T) command.ExecuteScalar(connection, parameters);
+            var result = command.ExecuteScalar(connection, parameters);
+            return SafeCast<T>(result);
         }
         public static TResult ExecuteScalar<T, TResult>(this IDataSourceCommand command, IDataSourceConnection connection, IConverter<T, TResult> converter, params IDataParameter[] parameters)
         {

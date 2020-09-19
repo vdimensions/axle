@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -34,6 +35,10 @@ namespace Axle.Data.Versioning.Changeset
                         scriptsResourceManager.Bundles.Configure(dataSourceName).Register(location);
                         var resource =
                             scriptsResourceManager.Load(dataSourceName, fileName, CultureInfo.InvariantCulture);
+                        if (resource == null)
+                        {
+                            throw new InvalidOperationException($"Unable to locate migration script '{c}'. ");
+                        }
                         return new DbChangelog(dataSourceName, resource, x.MigrationEngine);
                     }));
             foreach (var changelog in changelogs)
@@ -49,6 +54,14 @@ namespace Axle.Data.Versioning.Changeset
             migrationChangesets.VerifyArgument(nameof(migrationChangesets)).IsNotNull();
             return DoRegister(migrationChangesets);
         }
+
+        [ModuleDependencyInitialized]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        internal void OnDependencyInitialized(_DbChangesetConfigurer configurer) => configurer.Configure(this);
+        
+        [ModuleDependencyInitialized]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        internal void OnDependencyInitialized(IDbChangesetConfigurer configurer) => configurer.Configure(this);
 
         public IEnumerator<DbChangelog> GetEnumerator()
         {

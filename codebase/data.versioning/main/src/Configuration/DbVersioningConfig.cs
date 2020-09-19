@@ -1,7 +1,9 @@
-﻿namespace Axle.Data.Versioning.Configuration
+﻿using System.Collections.Generic;
+
+namespace Axle.Data.Versioning.Configuration
 {
     public class DbVersioningConfig
     {
-        public DbChangesetConfig[] Migrations { get; set; }
+        public List<DbChangesetConfig> Migrations { get; set; }
     }
 }

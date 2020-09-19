@@ -23,7 +23,7 @@ namespace Axle.Data.Versioning.Migrations
             using (var connection = dataSource.OpenConnection())
             using (var transaction = connection.BeginTransaction(IsolationLevel.Serializable))
             {
-                Logger.Warn("Ensuring required database objects for migration changelog support are created...");
+                Logger.Trace("Ensuring required database objects for migration changelog support are created...");
                 try
                 {
                     createCommand.ExecuteNonQuery(connection);
@@ -82,11 +82,8 @@ namespace Axle.Data.Versioning.Migrations
                 }
                 catch (Exception e)
                 {
-                    Logger.Error("Error creating migration '{0}''. Rolling back changes...", name);
+                    Logger.Error($"Error creating migration '{name}''. Rolling back changes...", e);
                     transaction.Rollback();
-                    Logger.Trace(
-                        "Error creating record for migration '{0}' while performing '{1} operation'. Changes have been rolled back.",
-                        name);
                     throw new MigrationEngineException(string.Format("Could not execute migration '{0}'.", name), e);
                 }
             }

@@ -13,7 +13,7 @@ namespace Axle
     /// An abstract class to serve as a base for implementing a custom application host.
     /// </summary>
     /// <seealso cref="IApplicationHost"/>
-    public abstract class AbstractApplicationHost : IApplicationHost, IDisposable
+    public abstract class AbstractApplicationHost : IApplicationHost, IDisposable, ISetLoggingService
     {
         private readonly IConfiguration _hostConfiguration;
         private readonly IConfiguration _appConfiguration;
@@ -240,7 +240,12 @@ namespace Axle
         public IDependencyContainerFactory DependencyContainerFactory { get; }
 
         /// <inheritdoc />
-        public ILoggingService LoggingService { get; }
+        public ILoggingService LoggingService { get; private set; }
+        ILoggingService ISetLoggingService.LoggingService
+        {
+            get => LoggingService;
+            set => LoggingService = value;
+        }
 
         /// <inheritdoc />
         public string EnvironmentName { get; }

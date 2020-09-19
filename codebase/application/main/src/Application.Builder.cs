@@ -48,10 +48,15 @@ namespace Axle
                     {
                         ((ILoggingServiceRegistry) loggingService).RegisterLoggingService(_host.LoggingService);
                     }
+                    if (_host is ISetLoggingService sls)
+                    {
+                        sls.LoggingService = loggingService;
+                    }
                     
                     var rootContainer = _host.DependencyContainerFactory.CreateContainer();
                     rootContainer
                         .Export(new ApplicationContainerFactory(_host.DependencyContainerFactory, rootContainer))
+                        // TODO consider not exporting this service
                         .Export(loggingService)
                         .Export(_host);
                     var configMgr = new LayeredConfigManager().Append(EnvironmentConfigSource.Instance);

@@ -5,6 +5,7 @@ using Axle.Data.DataSources;
 using Axle.Data.Versioning.Changeset;
 using Axle.Data.Versioning.Configuration;
 using Axle.DependencyInjection;
+using Axle.Logging;
 using Axle.Modularity;
 
 namespace Axle.Data.Versioning.Migrations
@@ -13,16 +14,17 @@ namespace Axle.Data.Versioning.Migrations
     [Requires(typeof(DbChangesetModule))]
     [Requires(typeof(MigratorDbScriptsModule))]
     [ModuleConfigSection(typeof(DbVersioningConfig), "axle.data.versioning")]
-    internal sealed class MigratorModule : IDbChangesetConfigurer
+    [RequiresDataSources]
+    internal sealed class MigratorModule
     {
         private readonly DbVersioningConfig _config;
-        private readonly IDependencyContainer _container;
+        private readonly IDependencyContext _container;
         private readonly IApplicationHost _host;
         private readonly DbChangesetModule _dbChangesetModule;
 
         public MigratorModule(
             DbChangesetModule dbChangesetModule,
-            IDependencyContainer container,
+            IDependencyContext container,
             IApplicationHost host, 
             DbVersioningConfig config)
         {
@@ -33,7 +35,7 @@ namespace Axle.Data.Versioning.Migrations
         }
         public MigratorModule(
                 DbChangesetModule dbChangesetModule,
-                IDependencyContainer container,
+                IDependencyContext container,
                 IApplicationHost host) 
             : this(dbChangesetModule, container, host, null) { }
 
@@ -48,7 +50,14 @@ namespace Axle.Data.Versioning.Migrations
                 var dataSourceName = changelog.DataSourceName;
                 if (!dataSourcesByName.TryGetValue(dataSourceName, out var dataSource))
                 {
-                    dataSourcesByName[dataSourceName] = dataSource = _container.Resolve<IDataSource>(dataSourceName);
+                    if (_container.TryResolve(out dataSource, dataSourceName) || _container.Parent.TryResolve(out dataSource, dataSourceName))
+                    {
+                        dataSourcesByName[dataSourceName] = dataSource;
+                    }
+                    else
+                    {
+                        throw new InvalidOperationException($"Unable to resolve datasource '{dataSourceName}. ");
+                    }
                 }
                 
                 var migrationEngineType = changelog.MigrationEngineType ?? typeof(AxleMigrationEngine);
@@ -67,14 +76,6 @@ namespace Axle.Data.Versioning.Migrations
                 {
                     migrationEngine.Migrate(dataSource, res.Name, stream); 
                 }
-            }
-        }
-
-        void IDbChangesetConfigurer.Configure(IDbChangesetRegistry registry)
-        {
-            if (_config?.Migrations != null)
-            {
-                registry.Register(_config.Migrations);
             }
         }
     }

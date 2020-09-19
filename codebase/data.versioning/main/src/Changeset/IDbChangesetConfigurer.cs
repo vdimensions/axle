@@ -10,4 +10,10 @@ namespace Axle.Data.Versioning.Changeset
     {
         void Configure(IDbChangesetRegistry dbChangesetRegistry);
     }
+    [Module]
+    [Requires(typeof(DbChangesetModule))]
+    public interface _DbChangesetConfigurer
+    {
+        void Configure(IDbChangesetRegistry dbChangesetRegistry);
+    }
 }
