@@ -1,12 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlTypes;
 
-
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class SqlDecimalConverter : SqlDbTypeConverter<decimal?, SqlDecimal>
     {
         public SqlDecimalConverter() : base(DbType.Decimal, SqlDbType.Decimal) { }

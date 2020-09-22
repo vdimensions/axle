@@ -1,6 +1,5 @@
 ﻿using System.Data;
 
-
 namespace Axle.Data.SQLite.Conversion
 {
     internal abstract class SQLiteSameTypeConverter<T> : SQLiteDbTypeConverter<T, T>

@@ -3,7 +3,6 @@ using System.Data;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
 
-
 namespace Axle.Data
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]

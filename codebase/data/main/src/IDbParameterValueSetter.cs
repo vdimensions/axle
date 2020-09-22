@@ -1,6 +1,5 @@
 ﻿using System.Data;
 
-
 namespace Axle.Data
 {
     public interface IDbParameterValueSetter

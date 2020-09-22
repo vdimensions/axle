@@ -1,6 +1,5 @@
 using Axle.Conversion;
 
-
 namespace Axle.Data.Conversion
 {
     /// <summary>

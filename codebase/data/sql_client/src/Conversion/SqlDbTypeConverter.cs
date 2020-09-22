@@ -1,14 +1,9 @@
 ﻿using System.Data;
 using System.Diagnostics;
-
 using Axle.Data.Conversion;
-
 
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal abstract class SqlDbTypeConverter<T1, T2> : DbTypeConverter<T1, T2>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

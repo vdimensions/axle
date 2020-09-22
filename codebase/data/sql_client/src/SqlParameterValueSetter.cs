@@ -1,22 +1,14 @@
 ﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-
 using Axle.Data.Common;
 using Axle.Data.Conversion;
 using Axle.Data.SqlClient.Conversion;
 
-
 namespace Axle.Data.SqlClient
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class SqlParameterValueSetter : DbParameterValueSetter<SqlParameter, SqlDbType>
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        [System.Serializable]
-        #endif
         private class SqlDbTypeEqualityComparer : IEqualityComparer<SqlDbType>
         {
             public bool Equals(SqlDbType x, SqlDbType y) => x == y;

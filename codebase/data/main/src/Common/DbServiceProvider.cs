@@ -31,9 +31,6 @@ namespace Axle.Data.Common
     /// <typeparam name="TDbParameter"></typeparam>
     /// <typeparam name="TDbType"></typeparam>
     #endif
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public abstract class DbServiceProvider<
             TDbConnection, 
             TDbTransaction,

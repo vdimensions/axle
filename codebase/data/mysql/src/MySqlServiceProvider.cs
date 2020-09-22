@@ -3,12 +3,8 @@ using Axle.Data.Common;
 using Axle.References;
 using MySql.Data.MySqlClient;
 
-
 namespace Axle.Data.MySql
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     public sealed class MySqlServiceProvider : DbServiceProvider<
         MySqlConnection,
         MySqlTransaction,

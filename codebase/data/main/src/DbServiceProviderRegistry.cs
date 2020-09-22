@@ -7,7 +7,6 @@ using Axle.DependencyInjection;
 using Axle.Modularity;
 using Axle.Verification;
 
-
 namespace Axle.Data
 {
     [Module]

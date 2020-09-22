@@ -1,14 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-
 using Axle.Data.Common;
 using Axle.Data.Conversion;
 using Axle.Data.Npgsql.Conversion;
-
 using Npgsql;
-
 using NpgsqlTypes;
-
 
 namespace Axle.Data.Npgsql
 {

@@ -59,7 +59,7 @@ namespace Axle.Data.Npgsql
             return command;
         }
 
-        #if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override NpgsqlCommandBuilder CreateCommandBuilder(NpgsqlDataAdapter dataAdapter) => new NpgsqlCommandBuilder(dataAdapter);
 
         protected override NpgsqlDataAdapter CreateDataAdapter(NpgsqlCommand command) => new NpgsqlDataAdapter(command);

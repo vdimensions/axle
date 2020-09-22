@@ -2,12 +2,8 @@
 using System.Data;
 using System.Data.SqlTypes;
 
-
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class SqlDateTimeConverter : SqlDbTypeConverter<DateTime?, SqlDateTime>
     {
         public SqlDateTimeConverter() : base(DbType.DateTime, SqlDbType.DateTime) { }

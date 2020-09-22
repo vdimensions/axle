@@ -1,12 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlTypes;
 
-
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class SqlByteConverter : SqlDbTypeConverter<byte?, SqlByte>
     {
         public SqlByteConverter() : base(DbType.Byte, SqlDbType.TinyInt) { }

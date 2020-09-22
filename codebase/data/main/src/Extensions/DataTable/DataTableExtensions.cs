@@ -1,6 +1,6 @@
-﻿using Axle.Verification;
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using Axle.Verification;
 
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 namespace Axle.Data.Extensions.DataTable
 {
     using DataTable = System.Data.DataTable;

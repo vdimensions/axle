@@ -1,8 +1,9 @@
-﻿using System;
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using System;
 using System.Data;
 using System.Data.Common;
 using Axle.Verification;
-
+#endif
 
 namespace Axle.Data.Extensions.DbCommand
 {

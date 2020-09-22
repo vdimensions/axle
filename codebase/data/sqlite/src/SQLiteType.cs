@@ -4,6 +4,9 @@ namespace Axle.Data.SQLite
     /// Taken as is from Faithlife/System.Data.SQLite library, where the type is left internal.
     /// see: https://github.com/Faithlife/System.Data.SQLite/blob/master/src/System.Data.SQLite/SQLiteColumnType.cs
     /// </summary>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    [System.Serializable]
+    #endif
     public enum SQLiteType
     {
         /// <summary>

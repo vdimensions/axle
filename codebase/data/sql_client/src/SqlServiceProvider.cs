@@ -4,12 +4,8 @@ using System.Diagnostics;
 using Axle.Data.Common;
 using Axle.References;
 
-
 namespace Axle.Data.SqlClient
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     public sealed class SqlServiceProvider : DbServiceProvider<
             SqlConnection,
             SqlTransaction,

@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-
 using Axle.Data.Common;
 using Axle.Data.Conversion;
 using Axle.Data.Sqlite.Microsoft.Conversion;
@@ -11,9 +10,6 @@ using SqliteType      = Microsoft.Data.Sqlite.SqliteType;
 
 namespace Axle.Data.Sqlite.Microsoft
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class SqliteParameterValueSetter : DbParameterValueSetter<SqliteParameter, SqliteType>
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

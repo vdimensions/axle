@@ -1,12 +1,8 @@
 ﻿using System.Data;
 using System.Data.SqlTypes;
 
-
 namespace Axle.Data.SqlClient.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class SqlDoubleConverter : SqlDbTypeConverter<double?, SqlDouble>
     {
         public SqlDoubleConverter() : base(DbType.Double, SqlDbType.Float) { }

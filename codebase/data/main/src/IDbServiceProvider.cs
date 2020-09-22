@@ -1,7 +1,6 @@
 using System.Data;
 using System.Data.Common;
 
-
 namespace Axle.Data
 {
     public interface IDbServiceProvider

@@ -10,7 +10,6 @@ using Axle.Data.Conversion;
 using Axle.Reflection;
 using Axle.Verification;
 
-
 namespace Axle.Data.DataSources
 {
     /// <summary>

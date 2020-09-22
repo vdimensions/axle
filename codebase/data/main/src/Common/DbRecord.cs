@@ -1,4 +1,3 @@
-using System.Data;
 using System.Data.Common;
 
 using Axle.Verification;
@@ -9,7 +8,7 @@ namespace Axle.Data.Common
     public sealed class DbRecord : DbRecordDecorator
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public static DbRecord FromDataRow(DataRow dataRow)
+        public static DbRecord FromDataRow(System.Data.DataRow dataRow)
         {
             return new DbRecord(new DataRowAdapter(dataRow.VerifyArgument(nameof(dataRow)).IsNotNull()));
         }
@@ -22,7 +21,7 @@ namespace Axle.Data.Common
             new DbRecord(new DataRecordAdapter(dataReader.VerifyArgument(nameof(dataReader)).IsNotNull().Value));
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public static implicit operator DbRecord(DataRow dataRow) => FromDataRow(dataRow);
+        public static implicit operator DbRecord(System.Data.DataRow dataRow) => FromDataRow(dataRow);
         #endif
 
         public static implicit operator DbRecord(DbDataRecord dataRecord) => FromDataRecord(dataRecord);

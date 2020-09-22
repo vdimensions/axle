@@ -1,13 +1,8 @@
 ﻿using System.Data;
-
 using NpgsqlTypes;
-
 
 namespace Axle.Data.Npgsql.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal abstract class NpgsqlSameTypeConverter<T> : NpgsqlDbTypeConverter<T, T>
     {
         protected NpgsqlSameTypeConverter(DbType dbType, NpgsqlDbType npgsqlDbType, bool registerAbstractDbType) : base(dbType, npgsqlDbType, registerAbstractDbType) { }

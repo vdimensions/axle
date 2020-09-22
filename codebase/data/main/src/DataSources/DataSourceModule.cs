@@ -43,12 +43,10 @@ namespace Axle.Data.DataSources
         [ModuleInit]
         internal void OnInit(IDependencyExporter exporter)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             foreach (var cs in _configuration.ConnectionStrings)
             {
                 RegisterDataSource(cs);
             }
-            #endif
 
             foreach (var dataSource in _dataSources.Values)
             {

@@ -19,9 +19,6 @@ using Microsoft.Data.Sqlite;
 
 namespace Axle.Data.Sqlite.Microsoft
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public sealed class SqliteServiceProvider : DbServiceProvider<
             SqliteConnection,
             SqliteTransaction,

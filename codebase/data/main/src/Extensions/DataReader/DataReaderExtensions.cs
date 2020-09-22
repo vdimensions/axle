@@ -62,7 +62,7 @@ namespace Axle.Data.Extensions.DataReader
             return false;
         }
 
-        //NOT PERFORMANCE FRIENDLY
+        //NOT PERFORMANCE OPTIMAL
         //
         //private static bool TryGetData(IDbRecord reader, string columnName, out object result)
         //{

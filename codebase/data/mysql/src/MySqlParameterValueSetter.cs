@@ -7,14 +7,8 @@ using MySql.Data.MySqlClient;
 
 namespace Axle.Data.MySql
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class MySqlParameterValueSetter : DbParameterValueSetter<MySqlParameter, MySqlDbType>
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        [System.Serializable]
-        #endif
         private class MySqlDbTypeEqualityComparer : IEqualityComparer<MySqlDbType>
         {
             public bool Equals(MySqlDbType x, MySqlDbType y) => x == y;

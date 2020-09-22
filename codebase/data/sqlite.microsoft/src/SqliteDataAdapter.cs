@@ -1,9 +1,7 @@
-﻿#if (NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER)
+﻿#if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
 using System;
 using System.Data.Common;
-
 using Microsoft.Data.Sqlite;
-
 
 namespace Axle.Data.Sqlite.Microsoft
 {

@@ -1,8 +1,6 @@
 ﻿using System.Data;
 using System.Diagnostics;
-
 using Axle.Conversion;
-
 
 namespace Axle.Data.Conversion
 {
