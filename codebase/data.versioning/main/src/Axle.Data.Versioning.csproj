@@ -28,18 +28,21 @@
   <ItemGroup>
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\count.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\create.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\exists.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\insert.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\update.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\count.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\create.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\exists.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\insert.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\update.sql" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\count.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\create.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\exists.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\insert.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\update.sql" />
   </ItemGroup>

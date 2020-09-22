@@ -19,22 +19,29 @@ namespace Axle.Data.Versioning.Migrations
                 return;
             }
             
+            var existsCommand = dataSource.GetScript(MigratorDbScriptsModule.Bundle, "exists");
             var createCommand = dataSource.GetScript(MigratorDbScriptsModule.Bundle, "create");
             using (var connection = dataSource.OpenConnection())
-            using (var transaction = connection.BeginTransaction(IsolationLevel.Serializable))
             {
-                Logger.Trace("Ensuring required database objects for migration changelog support are created...");
-                try
+                if (existsCommand.ExecuteScalar<int>(connection) > 0)
                 {
-                    createCommand.ExecuteNonQuery(connection);
-                    transaction.Commit();
-                    Logger.Trace("Database migration changelog support is ready. ");
+                    return;
                 }
-                catch (Exception e)
+                using (var transaction = connection.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    transaction.Rollback();
-                    Logger.Fail(e, "An error has occurred while creating migration changelog. See inner exception for more details.");
-                    throw;
+                    Logger.Trace("Ensuring required database objects for migration changelog support are created...");
+                    try
+                    {
+                        createCommand.ExecuteNonQuery(connection);
+                        transaction.Commit();
+                        Logger.Trace("Database migration changelog support is ready. ");
+                    }
+                    catch (Exception e)
+                    {
+                        transaction.Rollback();
+                        Logger.Fail(e, "An error has occurred while creating migration changelog. See inner exception for more details.");
+                        throw;
+                    }
                 }
             }
         }
@@ -124,11 +131,6 @@ namespace Axle.Data.Versioning.Migrations
 
         public void Migrate(IDataSource dataSource, string name, Stream migrationStream)
         {
-            var hasError = false;
-            var id = -1;
-            var operation = Operation.Apply;
-            var isReversible = false;//migration is IReversibleMigration;
-
             InitializeMigrationSupport(dataSource);
 
             var selectMigrationCountQuery = dataSource.GetScript(MigratorDbScriptsModule.Bundle, "count");
@@ -157,7 +159,6 @@ namespace Axle.Data.Versioning.Migrations
                         {
                             migrationTransaction.Rollback();
                             failureCause = e;
-                            hasError = true;
                             status = MigrationStatus.Failed;
                         }
                     }
