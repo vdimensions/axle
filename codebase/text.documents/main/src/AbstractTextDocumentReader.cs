@@ -17,9 +17,11 @@ namespace Axle.Text.Documents
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public abstract class AbstractTextDocumentReader : ITextDocumentReader
     {
+        protected static string[] TokenizeKey(string key) => TextDocumentObject.Tokenize(key);
+        
         private static IEnumerable<ITextDocumentNode> FixHierarchy(string key, IEnumerable<ITextDocumentNode> nodes)
         {
-            var tokenizedKey = TextDocumentObject.Tokenize(key);
+            var tokenizedKey = TokenizeKey(key);
             var currentNodes = nodes;
             if (tokenizedKey.Length > 1)
             {

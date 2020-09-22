@@ -43,10 +43,10 @@ namespace Axle.Text.Documents.Yaml.Tests
             var item6 = item3.Take(1).FirstOrDefault()?.GetValues("Encoding").FirstOrDefault() as ITextDocumentValue;
             var item7 = item3.Take(1).FirstOrDefault()?.GetValues("DefaultEncoding").FirstOrDefault() as ITextDocumentValue;
             
-            
             Assert.IsNotNull(item1, "Lookup for value failed for simple key {0}", "SingleKey");
             Assert.IsNotNull(item2, "Lookup for object failed for simple key {0}", "System");
             Assert.IsNotNull(item3, "Lookup for object failed for complex key {0}", "System.Text");
+            Assert.IsTrue(item3.Count() > 1, "Lookup for object failed for complex key {0}", "System.Text");
             Assert.IsNotNull(item4, "Lookup for value failed for complex key {0}", "System.Text.Encoding");
             Assert.IsNotNull(item5, "Lookup for value failed for complex key {0}", "System.Text.DefaultEncoding");
             Assert.IsNotNull(item6, "Lookup for value in object {1} failed for simple key {0}", "Encoding", "System.Text");

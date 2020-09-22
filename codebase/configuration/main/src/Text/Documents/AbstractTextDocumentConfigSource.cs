@@ -50,8 +50,7 @@ namespace Axle.Configuration.Text.Documents
             {
                 get
                 {
-                    var nodes = DocumentNode
-                        .GetValues(key)
+                    var nodes = DocumentNode.GetValues(key)
                         .Select<ITextDocumentNode, IConfigSetting>(
                             node =>
                             {

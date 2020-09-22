@@ -54,15 +54,21 @@ namespace Axle.Text.Documents.Binding
                                             objectProvider.GetCollectionAdapter(targetType);
                     if (collectionAdapter != null)
                     {
-                        var items = collectionProvider.Select(
-                            (provider, i) => TryBind(
+                        var providers = collectionProvider.ToArray();
+                        var values = new object[providers.Length];
+                        for (var i = 0; i < providers.Length; ++i)
+                        {
+                            var provider = providers[i];
+                            var value = TryBind(
                                 objectProvider,
                                 converter,
                                 provider,
                                 instance != null ? collectionAdapter.ItemAt((IEnumerable) instance, i) : null,
                                 collectionAdapter.ElementType,
-                                out var item) ? item : null);
-                        boundValue = collectionAdapter.SetItems(instance, items);
+                                out var item) ? item : null;
+                            values[i] = value;
+                        }
+                        boundValue = collectionAdapter.SetItems(instance, values);
                         return true;
                     }
 

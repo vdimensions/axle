@@ -26,23 +26,20 @@
   </Target>
 
   <ItemGroup>
-    <Compile Remove="Old\*.cs" />
-    <Compile Remove="Old\**\*.cs" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\count.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\create.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\insert.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\update.sql" />
   </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties" />
-  </ItemGroup>
-
   <ItemGroup>
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\count.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\create.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\insert.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\update.sql" />
-    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\count.sql" />
-    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\insert.sql" />
-    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\update.sql" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\count.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\create.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\insert.sql" />
     <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\update.sql" />
   </ItemGroup>

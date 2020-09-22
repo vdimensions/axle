@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Axle.Extensions.String;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
@@ -16,17 +18,32 @@ namespace Axle.Text.Documents.Yaml
     {
         private sealed class Adapter : AbstractTextDocumentAdapter
         {
+            private static IEnumerable<ITextDocumentAdapter> ChangeKey(string newKey, IEnumerable<ITextDocumentAdapter> adapters, IEqualityComparer<string> keyComparer)
+            {
+                return adapters.Select(
+                    a =>
+                    {
+                        ITextDocumentAdapter adapter = new Adapter(
+                            newKey,
+                            a.Children,
+                            a.Value,
+                            ((Adapter) a).IsCollection,
+                            keyComparer);
+                        return adapter;
+                    });
+            }
             [SuppressMessage("ReSharper", "CognitiveComplexity")]
-            internal static IEnumerable<ITextDocumentAdapter> ToChildren(string name, object o)
+            internal static IEnumerable<ITextDocumentAdapter> ToChildren(string name, object o, IEqualityComparer<string> keyComparer)
             {
                 switch (o)
                 {
                     case string v:
-                        yield return new Adapter(name, Enumerable.Empty<ITextDocumentAdapter>(), v);
+                        yield return new Adapter(name, Enumerable.Empty<ITextDocumentAdapter>(), v, false, keyComparer);
                         break;
                     case IDictionary<object, object> dict:
-                        var children = dict.SelectMany(x => ToChildren(x.Key.ToString(), x.Value));
-                        yield return new Adapter(name, children, null);
+                        var children = dict
+                            .SelectMany(x => ToChildren(x.Key.ToString(), x.Value, keyComparer));
+                        yield return new Adapter(name, children, null, false, keyComparer);
                         break;
                     case IList<object> list:
                         //
@@ -38,27 +55,58 @@ namespace Axle.Text.Documents.Yaml
                             yield return new Adapter(
                                 name, 
                                 Enumerable.Empty<ITextDocumentAdapter>(), 
-                                CharSequence.Create(list.Select(x => x.ToString()[0])));
+                                CharSequence.Create(list.Select(x => x.ToString()[0])),
+                                false,
+                                keyComparer);
                             break;
                         }
-                        foreach (var adapter in list.SelectMany(x => ToChildren(name, x)))
+                        var adapters = list
+                            .SelectMany(x => ToChildren(name, x, keyComparer))
+                            .GroupBy(x => x.Key, keyComparer);
+                        foreach (var adapterGroup in adapters)
                         {
-                            yield return adapter;
+                            var key = adapterGroup.Key;
+                            var keyTokens = TokenizeKey(key);
+                            if (keyTokens.Length == 1)
+                            {
+                                foreach (var adapter in adapterGroup)
+                                {
+                                    yield return adapter;
+                                }
+                            }
+                            else
+                            {
+                                var parentKey = StringExtensions.Join(".", keyTokens.Take(keyTokens.Length - 1));
+                                var childrenKey = keyTokens[keyTokens.Length - 1];
+                                yield return new Adapter(
+                                    parentKey,
+                                    ChangeKey(childrenKey, adapterGroup, keyComparer),
+                                    null,
+                                    true,
+                                    keyComparer);
+                            }
                         }
                         break;
                 }
             }
 
-            private Adapter(string name, IEnumerable<ITextDocumentAdapter> children, CharSequence value)
+            private Adapter(
+                    string name, 
+                    IEnumerable<ITextDocumentAdapter> children, 
+                    CharSequence value, 
+                    bool isCollection, 
+                    IEqualityComparer<string> keyComparer)
             {
                 Key = name;
                 Children = children;
                 Value = value;
+                IsCollection = isCollection;
             }
 
             public override string Key { get; }
             public override CharSequence Value { get; }
             public override IEnumerable<ITextDocumentAdapter> Children { get; }
+            private bool IsCollection { get; }
         }
         
         /// <summary>
@@ -76,7 +124,7 @@ namespace Axle.Text.Documents.Yaml
             try
             {
                 var result = deserializer.Deserialize<object>(new StreamReader(stream, encoding, true));
-                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
+                return Adapter.ToChildren(string.Empty, result, Comparer).SingleOrDefault();
             }
             catch (YamlException e)
             {
@@ -86,7 +134,7 @@ namespace Axle.Text.Documents.Yaml
                 }
                 stream.Seek(0, SeekOrigin.Begin);
                 var result = deserializer.Deserialize<List<object>>(new StreamReader(stream, encoding, true));
-                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
+                return Adapter.ToChildren(string.Empty, result, Comparer).SingleOrDefault();
             }
         }
 
@@ -97,7 +145,7 @@ namespace Axle.Text.Documents.Yaml
             try
             {
                 var result = deserializer.Deserialize<object>(new StringReader(document));
-                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
+                return Adapter.ToChildren(string.Empty, result, Comparer).SingleOrDefault();
             }
             catch (YamlException e)
             {
@@ -106,7 +154,7 @@ namespace Axle.Text.Documents.Yaml
                     throw;
                 }
                 var result = deserializer.Deserialize<List<object>>(new StringReader(document));
-                return Adapter.ToChildren(string.Empty, result).SingleOrDefault();
+                return Adapter.ToChildren(string.Empty, result, Comparer).SingleOrDefault();
             }
         }
     }
