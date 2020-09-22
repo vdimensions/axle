@@ -22,6 +22,11 @@ namespace Axle.Data.DataSources
         IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, BuildCommandCallback buildCommandCallback);
 
         /// <summary>
+        /// Gets the name of the current <see cref="IDataSource"/> instance. Usually, this corresponds to the name of
+        /// the connection string that was used to initialize this instance.
+        /// </summary>
+        string Name { get; }
+        /// <summary>
         /// Gets a string value representing the SQL dialect used by the current data source.
         /// </summary>
         string DialectName { get; }

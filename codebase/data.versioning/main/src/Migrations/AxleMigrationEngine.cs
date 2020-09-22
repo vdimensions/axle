@@ -29,7 +29,7 @@ namespace Axle.Data.Versioning.Migrations
                 }
                 using (var transaction = connection.BeginTransaction(IsolationLevel.Serializable))
                 {
-                    Logger.Trace("Ensuring required database objects for migration changelog support are created...");
+                    Logger.Trace("Ensuring required database objects for migration changelog support are created on datasource {0}...", dataSource.Name);
                     try
                     {
                         createCommand.ExecuteNonQuery(connection);
@@ -64,7 +64,7 @@ namespace Axle.Data.Versioning.Migrations
                 if (count != 0)
                 {
                     // migration already ran
-                    Logger.Trace("Migration '{0}' has already been executed. ", name);
+                    Logger.Debug("Migration '{0}' has already been executed against '{1}' datasource. ", name, dataSource.Name);
                     return false;
                 }
 
@@ -84,12 +84,12 @@ namespace Axle.Data.Versioning.Migrations
                         dataSource.CreateInputParameter("datePerformed", b => b.SetValue(DateTime.UtcNow))
                     );
                     transaction.Commit();
-                    Logger.Debug("Record created for migration '{0}'. ", name);
+                    Logger.Debug("Record created for migration '{0}' on datasource '{1}'. ", name, dataSource.Name);
                     return true;
                 }
                 catch (Exception e)
                 {
-                    Logger.Error($"Error creating migration '{name}''. Rolling back changes...", e);
+                    Logger.Error($"Error creating migration '{name}' on datasource '{dataSource.Name}'. Rolling back changes...", e);
                     transaction.Rollback();
                     throw new MigrationEngineException(string.Format("Could not execute migration '{0}'.", name), e);
                 }

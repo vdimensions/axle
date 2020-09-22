@@ -67,6 +67,7 @@ namespace Axle.Data.DataSources
             return ((ICommandBuilderResult) b).Build();
         }
 
+        /// <inheritdoc />
         public string Name { get; }
         /// <inheritdoc />
         public string ConnectionString { get; }
