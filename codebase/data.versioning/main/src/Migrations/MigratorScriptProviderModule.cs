@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
+#if !(NETSTANDARD || NET40_OR_NEWER) 
+using System.Linq;
+#endif
 using Axle.Data.DataSources;
 using Axle.Data.Versioning.Changeset;
 using Axle.Data.Versioning.Configuration;
