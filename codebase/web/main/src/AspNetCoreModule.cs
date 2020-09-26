@@ -18,6 +18,9 @@ using Microsoft.Extensions.Logging;
 
 namespace Axle.Web.AspNetCore
 {
+    /// <summary>
+    /// A module that enables AspNetCore into the Axle application ecosystem. 
+    /// </summary>
     [Module]
     internal sealed class AspNetCoreModule : ILoggingServiceConfigurer
     {

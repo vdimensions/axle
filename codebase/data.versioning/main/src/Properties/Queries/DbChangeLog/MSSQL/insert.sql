@@ -1,4 +1,4 @@
-DECLARE @resultTable TABLE ( [ID] INT );
+DECLARE @resultTable TABLE ( [id] INT );
 INSERT INTO [migration_changelog] 
 ( 
     [name], 
@@ -6,7 +6,7 @@ INSERT INTO [migration_changelog]
     [execution_duration], 
     [date_performed] 
 )
-OUTPUT INSERTED.[ID] INTO @resultTable
+OUTPUT INSERTED.[id] INTO @resultTable
 VALUES 
 ( 
     @name, 
@@ -14,4 +14,4 @@ VALUES
     @executionDuration, 
     @datePerformed 
 );
-SELECT [ID] FROM @resultTable;
+SELECT [id] FROM @resultTable;

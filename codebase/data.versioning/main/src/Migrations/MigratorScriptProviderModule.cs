@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
 using Axle.Data.DataSources;
 using Axle.Data.Versioning.Changeset;
 using Axle.Data.Versioning.Configuration;
@@ -8,16 +8,18 @@ namespace Axle.Data.Versioning.Migrations
 {
     [Module]
     [ModuleConfigSection(typeof(DbVersioningConfig), "axle.data.versioning")]
-    internal sealed class MigratorDbScriptsModule : ISqlScriptLocationConfigurer, _DbChangesetConfigurer
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    internal sealed class MigratorScriptProviderModule : ISqlScriptLocationConfigurer, _DbChangesetConfigurer
     {
         public static readonly string Bundle = nameof(DbChangelog);
 
         private readonly DbVersioningConfig _config;
 
-        public MigratorDbScriptsModule(DbVersioningConfig config)
+        public MigratorScriptProviderModule(DbVersioningConfig config)
         {
             _config = config;
         }
+        public MigratorScriptProviderModule() : this(null) { }
 
         void ISqlScriptLocationConfigurer.RegisterScriptLocations(ISqlScriptLocationRegistry registry)
         {
@@ -28,7 +30,11 @@ namespace Axle.Data.Versioning.Migrations
         {
             if (_config?.Migrations != null)
             {
+                #if NETSTANDARD || NET40_OR_NEWER 
+                registry.Register(_config.Migrations);
+                #else
                 registry.Register(_config.Migrations.Cast<IDbChangeset>());
+                #endif
             }
         }
     }

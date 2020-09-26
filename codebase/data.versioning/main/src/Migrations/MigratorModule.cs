@@ -5,19 +5,17 @@ using Axle.Data.DataSources;
 using Axle.Data.Versioning.Changeset;
 using Axle.Data.Versioning.Configuration;
 using Axle.DependencyInjection;
-using Axle.Logging;
 using Axle.Modularity;
 
 namespace Axle.Data.Versioning.Migrations
 {
     [Module]
     [Requires(typeof(DbChangesetModule))]
-    [Requires(typeof(MigratorDbScriptsModule))]
+    [Requires(typeof(MigratorScriptProviderModule))]
     [ModuleConfigSection(typeof(DbVersioningConfig), "axle.data.versioning")]
     [RequiresDataSources]
     internal sealed class MigratorModule
     {
-        private readonly DbVersioningConfig _config;
         private readonly IDependencyContext _container;
         private readonly IApplicationHost _host;
         private readonly DbChangesetModule _dbChangesetModule;
@@ -25,19 +23,12 @@ namespace Axle.Data.Versioning.Migrations
         public MigratorModule(
             DbChangesetModule dbChangesetModule,
             IDependencyContext container,
-            IApplicationHost host, 
-            DbVersioningConfig config)
+            IApplicationHost host)
         {
-            _config = config;
             _container = container;
             _host = host;
             _dbChangesetModule = dbChangesetModule;
         }
-        public MigratorModule(
-                DbChangesetModule dbChangesetModule,
-                IDependencyContext container,
-                IApplicationHost host) 
-            : this(dbChangesetModule, container, host, null) { }
 
         [ModuleInit]
         internal void Init()

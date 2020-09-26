@@ -6,9 +6,11 @@ namespace Axle.Data.Versioning.Configuration
 {
     public class DbChangesetConfig : IDbChangeset
     {
+        /// <inheritdoc />
         public string DataSource { get; set; }
-        public List<Uri> Changelog { get; set; }
+        /// <inheritdoc />
         public Type MigrationEngine { get; set; }
+        public List<Uri> Changelog { get; set; }
         
         IEnumerable<Uri> IDbChangeset.Changelog => Changelog;
     }
