@@ -26,6 +26,7 @@ namespace Axle.Data.SQLite
             RegisterConverter(new SQLiteDoubleConverter());
             RegisterConverter(new SQLiteDecimalConverter());
             RegisterConverter(new SQLiteTextConverter());
+            RegisterConverter(new SQLiteDateTimeConverter());
         }
 
         private void RegisterConverter<T1, T2>(SQLiteDbTypeConverter<T1, T2> converter)
