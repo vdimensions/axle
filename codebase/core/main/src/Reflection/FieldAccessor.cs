@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class FieldAccessor : IGetAccessor, ISetAccessor, IReflected<FieldInfo>

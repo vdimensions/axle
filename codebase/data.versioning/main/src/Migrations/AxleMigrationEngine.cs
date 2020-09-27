@@ -13,7 +13,7 @@ namespace Axle.Data.Versioning.Migrations
     {
         private const int LockID = 1;
         
-        private HashSet<string> _migrationSupportPerDataSource = new HashSet<string>(StringComparer.Ordinal);
+        private readonly HashSet<string> _migrationSupportPerDataSource = new HashSet<string>(StringComparer.Ordinal);
         
         private void InitializeMigrationSupport(IDataSource dataSource)
         {
@@ -88,7 +88,9 @@ namespace Axle.Data.Versioning.Migrations
                     if (count != 0)
                     {
                         // migration already ran
-                        Logger.Debug("Migration '{0}' has already been executed against '{1}' datasource. ", name,
+                        Logger.Debug(
+                            "Migration '{0}' has already been executed against '{1}' datasource. ", 
+                            name,
                             dataSource.Name);
                         return false;
                     }
@@ -205,7 +207,15 @@ namespace Axle.Data.Versioning.Migrations
                 }
                 finally
                 {
-                    EndExecutingMigration(dataSource, updateMigrationQuery, unlockQuery, migrationId, name, status, migrationStopWatch.ElapsedMilliseconds, failureCause);
+                    EndExecutingMigration(
+                        dataSource, 
+                        updateMigrationQuery, 
+                        unlockQuery, 
+                        migrationId, 
+                        name, 
+                        status, 
+                        migrationStopWatch.ElapsedMilliseconds, 
+                        failureCause);
                     migrationStopWatch.Stop();
                 }
             }

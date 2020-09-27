@@ -2,19 +2,19 @@
 using System.Diagnostics.CodeAnalysis;
 using Axle.Modularity;
 
-namespace Axle.Data.SQLite
+namespace Axle.Data.Sqlite.Microsoft
 {
     /// <summary>
     /// An attribute that causes the annotated module to establish a dependency to the
-    /// <see cref="SQLiteServiceProvider"/>.
+    /// <see cref="SqliteServiceProvider"/>.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
-    public sealed class RequiresSQLiteAttribute : RequiresAttribute
+    public sealed class RequiresSqliteAttribute : RequiresAttribute
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="RequiresSQLiteAttribute"/> class.
+        /// Initializes a new instance of the <see cref="RequiresSqliteAttribute"/> class.
         /// </summary>
-        public RequiresSQLiteAttribute() : base(typeof(SQLiteModule)) { }
+        public RequiresSqliteAttribute() : base(typeof(SqliteServiceProvider)) { }
     }
 }

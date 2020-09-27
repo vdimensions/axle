@@ -8,9 +8,6 @@ using Axle.References;
 
 namespace Axle.Data.Npgsql
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     public sealed class NpgsqlServiceProvider : DbServiceProvider<
         NpgsqlConnection,
         NpgsqlTransaction,
