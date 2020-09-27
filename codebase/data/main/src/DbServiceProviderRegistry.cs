@@ -19,6 +19,7 @@ namespace Axle.Data
         {
             exporter.Export(this);
         }
+        
         [ModuleDependencyInitialized]
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void OnDbServiceProviderInitialized(DatabaseServiceProviderModule module)
@@ -38,7 +39,13 @@ namespace Axle.Data
         IEnumerator<IDbServiceProvider> IEnumerable<IDbServiceProvider>.GetEnumerator() => _providers.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _providers.Values.GetEnumerator();
 
-        IDbServiceProvider IDbServiceProviderRegistry.this[string name]
-            => _providers.TryGetValue(name.VerifyArgument(nameof(name)), out var res) ? res : null;
+        public IDbServiceProvider this[string name]
+        {
+            get
+            {
+                name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
+                return _providers.TryGetValue(name, out var res) ? res : null;
+            }
+        }
     }
 }

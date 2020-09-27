@@ -5,7 +5,7 @@ namespace Axle.Data.DataSources
 {
     /// <summary>
     /// A registry to keep locations of sql script files. The registry is
-    /// internally used by <see cref="IDataSourceConnection"/> implementations in order
+    /// internally used by <see cref="IDataSource"/> implementations in order
     /// to resolve dialect-specific sql scripts.
     /// </summary>
     /// <seealso cref="IDataSource"/>
