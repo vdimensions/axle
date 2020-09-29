@@ -19,7 +19,6 @@
     <EmbeddedResource Include="Properties\Messages.yml" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Resources.Yaml.targets" />
   <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

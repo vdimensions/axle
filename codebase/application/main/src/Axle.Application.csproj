@@ -30,7 +30,6 @@
     <EmbeddedResource Include="Application\host.yml" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Caching.targets" />
   <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
   <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />

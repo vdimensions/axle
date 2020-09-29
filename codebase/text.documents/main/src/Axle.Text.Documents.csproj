@@ -4,7 +4,6 @@
     <RootNamespace>Axle.Text.Documents</RootNamespace>
   </PropertyGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/ext/Reference.System.Runtime.Serialization.Primitives.props" />
   <Import Project="../../../../ref/ext/Reference.System.Xml.XmlDocument.props" />

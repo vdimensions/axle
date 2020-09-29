@@ -23,7 +23,6 @@
     <Compile Include="Option.fs" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../FSharp.Core.Packages.targets" />
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
   <Import Project="../../../../ref/Reference.Axle.FSharp.targets" />

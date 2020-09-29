@@ -7,7 +7,6 @@
     <Description>Axle's database migrations library</Description>
   </PropertyGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
 
   <Target Name="GenerateDefaultNamespaceAttribute" BeforeTargets="BeforeBuild">

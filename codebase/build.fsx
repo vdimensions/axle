@@ -41,7 +41,7 @@ Target.create "---Complete---" (fun _ ->
 )
 open Fake.Core.TargetOperators
 
-("---Prepare---")::(projectLocations |> List.map (VDBuild.createDynamicTarget "Axle.Common.props"))
+("---Prepare---")::(projectLocations |> List.map (VDBuild.createDynamicTarget "Directory.Build.props"))
 |> List.rev
 |> List.fold (fun a b -> b ==> a |> ignore; b) "---Complete---"
 |> ignore

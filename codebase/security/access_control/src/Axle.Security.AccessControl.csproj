@@ -13,6 +13,5 @@
     <Folder Include="Auditing\" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
 </Project>

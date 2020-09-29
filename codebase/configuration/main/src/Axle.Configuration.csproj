@@ -9,7 +9,6 @@
     <Description>Axle framework configuration library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
 </Project>

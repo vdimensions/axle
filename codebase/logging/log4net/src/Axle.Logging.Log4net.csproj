@@ -14,6 +14,5 @@
     <PackageReference Include="log4net" Version="2.0.8" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
 </Project>

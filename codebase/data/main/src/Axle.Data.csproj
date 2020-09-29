@@ -11,11 +11,7 @@
     <Description>Axle's data access library</Description>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Include="System.Data.DataSetExtensions" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
   <Import Project="../../../../ref/ext/Reference.System.Data.Common.props" />
+  <Import Project="../../../../ref/ext/Reference.System.Data.DataSetExtensions.props" />
 </Project>

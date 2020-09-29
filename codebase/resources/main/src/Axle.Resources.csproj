@@ -10,7 +10,6 @@
     <Description>Axle resource management library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Caching.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
