@@ -17,14 +17,6 @@
   <Import Project="../../../../ref/ext/Reference.System.Threading.Thread.props" />
   <Import Project="../../../../ref/ext/Reference.System.Xml.XmlSerializer.props" />
 
-  <Import Project="../../../targets/stator/src/Stator.props" />
-
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Remove="System.Data" />
-    <Reference Remove="System.Xml" />
-    <Reference Remove="System.Xml.Linq" />
-  </ItemGroup>
-
   <ItemGroup>
     <Compile Remove="Collections\Extensions\Queue\**" />
     <Compile Remove="Collections\Extensions\Stack\**" />

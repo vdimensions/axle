@@ -17,15 +17,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Modularity\DynamicModuleLoader.cs" />
-    <Compile Remove="Modularity\IAssemblyLoadListener.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Properties" />
-  </ItemGroup>
-
-  <ItemGroup>
     <EmbeddedResource Include="Application\host.Development.yml" />
     <EmbeddedResource Include="Application\host.yml" />
   </ItemGroup>
