@@ -17,7 +17,7 @@
         public T ConvertBack(T target) => target;
 
         /// <inheritdoc />
-        public IConverter<T, T> Invert() => this;
+        public ITwoWayConverter<T, T> Invert() => this;
 
         /// <inheritdoc />
         /// <remarks>

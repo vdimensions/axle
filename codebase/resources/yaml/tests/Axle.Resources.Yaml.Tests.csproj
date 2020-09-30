@@ -9,6 +9,7 @@
     <AssemblyName>Axle.Resources.Yaml.Tests</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <IsTestProject>true</IsTestProject>
+    <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

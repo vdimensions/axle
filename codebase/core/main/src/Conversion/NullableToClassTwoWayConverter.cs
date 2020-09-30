@@ -51,7 +51,7 @@ namespace Axle.Conversion
             return source != null ? new TSource?(_converter.ConvertBack(source)) : null;
         }
 
-        IConverter<TTarget, TSource?> ITwoWayConverter<TSource?, TTarget>.Invert() => new ReverseConverter<TTarget, TSource?>(this);
+        ITwoWayConverter<TTarget, TSource?> ITwoWayConverter<TSource?, TTarget>.Invert() => new ReverseConverter<TTarget, TSource?>(this);
 
         bool ITwoWayConverter<TSource?, TTarget>.TryConvertBack(TTarget source, out TSource? target)
         {

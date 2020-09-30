@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Globalization;
-using Axle.Conversion.Parsing;
+using Axle.Text.Parsing;
 
 namespace Axle.Data.SQLite.Conversion
 {

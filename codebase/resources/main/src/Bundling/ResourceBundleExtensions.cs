@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
-using Axle.Conversion.Parsing;
 using Axle.Extensions.Uri;
+using Axle.Text.Parsing;
 using Axle.Verification;
 
 namespace Axle.Resources.Bundling

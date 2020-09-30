@@ -61,7 +61,7 @@ namespace Axle.Conversion
         /// <returns>
         /// An instance of <see cref="ReverseConverter{T, T}"/>.
         /// </returns>
-        public IConverter<TD, TS> Invert() => new ReverseConverter<TD, TS>(this);
+        public ITwoWayConverter<TD, TS> Invert() => new ReverseConverter<TD, TS>(this);
 
         /// <summary>
         /// Attempts to convert of an instance of <typeparamref name="TD">the destination type</typeparamref>

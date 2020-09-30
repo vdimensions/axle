@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-
 using Axle.Conversion;
 using Axle.IO.Extensions.Stream;
 using Axle.Resources.Bundling;
 using NUnit.Framework;
 
-
 namespace Axle.Resources.Tests
 {
-    using UriParser = Axle.Conversion.Parsing.UriParser;
+    using UriParser = Axle.Text.Parsing.UriParser;
 
     [TestFixture]
     public class ResourceManagerTests

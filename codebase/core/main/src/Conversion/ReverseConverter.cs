@@ -39,7 +39,7 @@ namespace Axle.Conversion
         public TS ConvertBack(TD source) => _converter.Convert(source);
 
         /// <inheritdoc />
-        public IConverter<TD, TS> Invert() => _converter;
+        public ITwoWayConverter<TD, TS> Invert() => _converter;
 
         /// <inheritdoc />
         public bool TryConvert(TS source, out TD target) => _converter.TryConvertBack(source, out target);
