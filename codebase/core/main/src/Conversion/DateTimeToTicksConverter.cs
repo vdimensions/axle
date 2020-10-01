@@ -12,10 +12,20 @@ namespace Axle.Conversion
     {
         private readonly DateTimeKind _preferredDateTimeKind;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateTimeToTicksConverter"/> class. Converted
+        /// <see cref="DateTime"/> values will assume the provided <paramref name="preferredDateTimeKind"/> as their
+        /// <see cref="DateTime.Kind"/> value.
+        /// </summary>
         public DateTimeToTicksConverter(DateTimeKind preferredDateTimeKind)
         {
             _preferredDateTimeKind = preferredDateTimeKind;
         }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DateTimeToTicksConverter"/> class. Converted
+        /// <see cref="DateTime"/> values will assume <see cref="DateTimeKind.Unspecified"/> as their
+        /// <see cref="DateTime.Kind"/> value.
+        /// </summary>
         public DateTimeToTicksConverter() : this(DateTimeKind.Unspecified) { }
         
         /// <inheritdoc />
