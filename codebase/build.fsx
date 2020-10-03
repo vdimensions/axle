@@ -20,17 +20,18 @@ let dir = Shell.pwd()
 
 let projectLocations = [
     "core/main"; "core/fsharp"
-    "text.documents/main"; "text.documents/properties"; "text.documents/yaml"
+    "text.documents/main"; "text.documents/properties"; "text.documents/xml"; "text.documents/yaml"
     "caching/main"
     "configuration/main"; "configuration/configuration_manager"; "configuration/microsoft"
     "resources/main"; "resources/properties"; "resources/yaml"
     "security/main"
     "security/access_control"
     "application/main"
-    "data/main"; "data/fsharp"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/sqlite"; "data/sqlite.microsoft"; "data/mysql"
+    "data/main"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/mysql"; "data/sqlite"; "data/sqlite.microsoft"
+    "data.records/main"
     "data.versioning/main"
     "logging/log4net"
-    "web/main"; "web/mvc"; "web/websharper"
+    "web/main"; "web/mvc"
 ]
 
 Target.create "---Prepare---" VDBuild.cleanNupkg
