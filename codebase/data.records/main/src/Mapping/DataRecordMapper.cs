@@ -1,6 +1,7 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq.Expressions;
 using Axle.Conversion;
 using Axle.Data.Records.Mapping.Accessors;
@@ -18,61 +19,76 @@ namespace Axle.Data.Records.Mapping
     /// <typeparam name="T">
     /// The mapped type.
     /// </typeparam>
-    public abstract class DataRecordMapper<T> where T: class
+    public abstract class DataRecordMapper<T> : AbstractTwoWayConverter<T, DataRecord>
+        where T: class
     {
-        private interface IDataRowManipulator
+        private interface IDataRecordManipulator
         {
-            void GetValue(DataRecord dataRow, string fieldNameFormat, T obj);
-            void SetValue(DataRecord dataRow, string fieldNameFormat, T value);
+            void UpdateObject(DataRecord dataRow, string fieldNameFormat, T obj);
+            void UpdateRecord(DataRecord dataRow, string fieldNameFormat, T value);
+            
+            string RecordFieldName { get; }
+            Type FieldType { get; }
         }
 
-        private sealed class DataRowManipulator<TField> : IDataRowManipulator
+        private sealed class DataRecordManipulator<TField> : IDataRecordManipulator
         {
             private readonly IDataFieldAccessor<TField> _fieldAccessor;
             private readonly IObjectMemberAccessor<T, TField> _memberAccessor;
 
-            public DataRowManipulator(
+            public DataRecordManipulator(
                 string name, 
                 IDataFieldAccessor<TField> fieldAccessor, 
                 IObjectMemberAccessor<T, TField> memberAccessor)
             {
-                Name = name;
+                RecordFieldName = name;
                 _fieldAccessor = fieldAccessor;
                 _memberAccessor = memberAccessor;
             }
 
-            public void GetValue(DataRecord record, string fieldNameFormat, T obj)
+            public void UpdateObject(DataRecord record, string fieldNameFormat, T obj)
             {
                 #if NETSTANDARD || NET40_OR_NEWER
                 var key = string.IsNullOrWhiteSpace(fieldNameFormat)
                 #else
                 var key = string.IsNullOrEmpty(fieldNameFormat) || System.Linq.Enumerable.All(fieldNameFormat, char.IsWhiteSpace)
                 #endif
-                    ? Name 
-                    : string.Format(fieldNameFormat, Name);
+                    ? RecordFieldName 
+                    : string.Format(fieldNameFormat, RecordFieldName);
                 var value = _fieldAccessor.GetValue(record, key);
                 _memberAccessor.SetValue(obj, value);
             }
 
-            public void SetValue(DataRecord record, string fieldNameFormat, T value)
+            public void UpdateRecord(DataRecord record, string fieldNameFormat, T value)
             {
                 #if NETSTANDARD || NET40_OR_NEWER
                 var key = string.IsNullOrWhiteSpace(fieldNameFormat)
                 #else
                 var key = string.IsNullOrEmpty(fieldNameFormat) || System.Linq.Enumerable.All(fieldNameFormat, char.IsWhiteSpace)
                 #endif
-                    ? Name 
-                    : string.Format(fieldNameFormat, Name);
+                    ? RecordFieldName 
+                    : string.Format(fieldNameFormat, RecordFieldName);
                 _fieldAccessor.SetValue(record, key, _memberAccessor.GetValue(value));
             }
 
-            public string Name { get; }
+            public string RecordFieldName { get; }
+            public Type FieldType => typeof(T);
         }
         
-        private readonly IDictionary<string, IDataRowManipulator> _fieldMappers 
-            = new Dictionary<string, IDataRowManipulator>(StringComparer.Ordinal);
+        private readonly IDictionary<string, IDataRecordManipulator> _fieldMappers 
+            = new Dictionary<string, IDataRecordManipulator>(StringComparer.Ordinal);
 
-        protected abstract T Instantiate();
+        protected abstract T CreateObject();
+
+        protected virtual DataRecord CreateRecord()
+        {
+            var table = new DataTable();
+            foreach (var fieldMapper in _fieldMappers.Values)
+            {
+                table.Columns.Add(new DataColumn(fieldMapper.RecordFieldName, fieldMapper.FieldType));
+            }
+            return DataRecord.FromDataRow(table.NewRow());
+        }
         
         protected void RegisterFieldAccessor<TField>(
             string name, 
@@ -82,7 +98,7 @@ namespace Axle.Data.Records.Mapping
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
             dataFieldAccessor.VerifyArgument(nameof(dataFieldAccessor)).IsNotNull();
             memberAccessor.VerifyArgument(nameof(memberAccessor)).IsNotNull();
-            _fieldMappers[name] = new DataRowManipulator<TField>(name, dataFieldAccessor, memberAccessor);
+            _fieldMappers[name] = new DataRecordManipulator<TField>(name, dataFieldAccessor, memberAccessor);
         }
         protected void RegisterFieldAccessor<TField>(
                 string name, 
@@ -122,26 +138,29 @@ namespace Axle.Data.Records.Mapping
         protected void RegisterFieldAccessor(string name, Expression<Func<T, Guid>> expression)
             => RegisterFieldAccessor(name, new GuidDataFieldAccessor(), expression);
 
-        public virtual T ToObject(DataRecord record, string fieldNameFormat)
+        public virtual T Convert(DataRecord record, string fieldNameFormat)
         {
-            var result = Instantiate();
+            var result = CreateObject();
             foreach (var converter in _fieldMappers)
             {
-                converter.Value.GetValue(record, fieldNameFormat, result);
+                converter.Value.UpdateObject(record, fieldNameFormat, result);
             }
             return result;
         }
-        public T ToObject(DataRecord dataRow) => ToObject(dataRow, null);
 
-        public virtual DataRecord ToRecord(DataRecord record, T obj, string fieldNameFormat)
+        public virtual DataRecord ConvertBack(DataRecord record, T obj, string fieldNameFormat)
         {
             foreach (var converter in _fieldMappers)
             {
-                converter.Value.SetValue(record, fieldNameFormat, obj);
+                converter.Value.UpdateRecord(record, fieldNameFormat, obj);
             }
             return record;
         }
-        public DataRecord ToRecord(DataRecord record, T obj) => ToRecord(record, obj, null);
+        public DataRecord ConvertBack(DataRecord record, T obj) => ConvertBack(record, obj, null);
+        public DataRecord ConvertBack(T obj, string fieldNameFormat) => ConvertBack(CreateRecord(), obj, fieldNameFormat);
+
+        protected override DataRecord DoConvert(T source) => ConvertBack(CreateRecord(), source);
+        protected override T DoConvertBack(DataRecord source) => Convert(source, null);
     }
 }
 #endif
