@@ -1,12 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics.CodeAnalysis;
-using System.Linq;
 using Axle.Conversion;
-using Axle.Data.Common;
-using Axle.Data.Conversion;
 using Axle.Reflection;
 using Axle.Verification;
 
@@ -38,21 +34,33 @@ namespace Axle.Data.DataSources
             }
         }
         
+        public static void ExecuteReader(
+            this IDataSourceCommand command, 
+            IDataSourceConnection connection, Action<DbDataReader> readAction, params IDataParameter[] parameters)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
+            command.ExecuteReader(connection, CommandBehavior.Default, readAction, parameters);
+        }
         
-        
-        public static T ExecuteScalar<T>(this IDataSourceCommand command, IDataSourceConnection connection, params IDataParameter[] parameters)
+        public static T ExecuteScalar<T>(
+            this IDataSourceCommand command, 
+            IDataSourceConnection connection, params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
             var result = command.ExecuteScalar(connection, parameters);
             return SafeCast<T>(result);
         }
-        public static TResult ExecuteScalar<T, TResult>(this IDataSourceCommand command, IDataSourceConnection connection, IConverter<T, TResult> converter, params IDataParameter[] parameters)
+        public static TResult ExecuteScalar<T, TResult>(
+            this IDataSourceCommand command, 
+            IDataSourceConnection connection, IConverter<T, TResult> converter, params IDataParameter[] parameters)
         {
             converter.VerifyArgument(nameof(converter)).IsNotNull();
             return converter.Convert(ExecuteScalar<T>(command, connection, parameters));
         }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        public static TResult ExecuteScalar<T, TResult>(this IDataSourceCommand command, IDataSourceConnection connection, Converter<T, TResult> converter, params IDataParameter[] parameters)
+        public static TResult ExecuteScalar<T, TResult>(
+            this IDataSourceCommand command, 
+            IDataSourceConnection connection, Converter<T, TResult> converter, params IDataParameter[] parameters)
         {
             converter.VerifyArgument(nameof(converter)).IsNotNull();
             return converter(ExecuteScalar<T>(command, connection, parameters));

@@ -21,13 +21,13 @@ namespace Axle.Data.Records.Mapping
     /// </typeparam>
     public abstract class AbstractDataRecordMapper<T> where T: class
     {
-        internal interface IDataRowManipulator
+        private interface IDataRowManipulator
         {
             void GetValue(DataRecord dataRow, string fieldNameFormat, T obj);
             void SetValue(DataRecord dataRow, string fieldNameFormat, T value);
         }
-        
-        internal sealed class DataRowManipulator<TField> : IDataRowManipulator
+
+        private sealed class DataRowManipulator<TField> : IDataRowManipulator
         {
             private readonly IDataFieldAccessor<TField> _fieldAccessor;
             private readonly IObjectMemberAccessor<T, TField> _memberAccessor;

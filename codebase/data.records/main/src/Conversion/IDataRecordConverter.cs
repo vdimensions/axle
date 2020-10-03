@@ -9,7 +9,7 @@ namespace Axle.Data.Records.Conversion
     /// <typeparam name="T">
     /// The type of the object to covert a record from.
     /// </typeparam>
-    public interface IDbRecordConverter<T> : IConverter<DataRecord, T>
+    public interface IDataRecordConverter<T> : IConverter<DataRecord, T>
     {
         T Convert(DataRecord value, string fieldNameFormat);
     }

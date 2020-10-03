@@ -4,12 +4,12 @@ using Axle.Verification;
 namespace Axle.Data.Records.Conversion
 {
     /// <summary>
-    /// An abstract class to serve as a base for implementing the <see cref="IDbRecordConverter{T}"/> interface.
+    /// An abstract class to serve as a base for implementing the <see cref="IDataRecordConverter{T}"/> interface.
     /// </summary>
     /// <typeparam name="T">
     /// The type of the object to convert an instance of <see cref="DataRecord"/> to.
     /// </typeparam>
-    public abstract class DbRecordConverter<T> : AbstractConverter<DataRecord, T>, IDbRecordConverter<T>
+    public abstract class DataRecordConverter<T> : AbstractConverter<DataRecord, T>, IDataRecordConverter<T>
     {
         public T Convert(DataRecord value, string fieldNameFormat) =>
             DoConvert(value.VerifyArgument(nameof(value)).IsNotNull().Value, fieldNameFormat);
