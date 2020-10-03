@@ -3,10 +3,9 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
-using Axle.Text.Documents.Xml;
 using NUnit.Framework;
 
-namespace Axle.Text.Documents.Tests.Xml
+namespace Axle.Text.Documents.Xml.Tests
 {
     [TestFixture]
     public class XmlReaderTests

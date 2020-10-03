@@ -1,9 +1,8 @@
 ﻿using System;
 using Axle.Text.Documents.Binding;
-using Axle.Text.Documents.Xml;
 using NUnit.Framework;
 
-namespace Axle.Text.Documents.Tests.Binding
+namespace Axle.Text.Documents.Xml.Tests.Binding
 {
     [TestFixture]
     public class BinderTests
