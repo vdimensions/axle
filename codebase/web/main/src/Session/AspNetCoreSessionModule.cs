@@ -49,9 +49,9 @@ namespace Axle.Web.AspNetCore.Session
             app.UseSession(options).Use(_lt.Middleware);
         }
 
-        void ISessionEventListener.OnSessionStart(ISession session) => _logger.Trace("Started a new session '{0}'.", session.Id);
+        void ISessionEventListener.OnSessionStart(ISession session) => _logger.Info("Started a new session '{0}'.", session.Id);
 
-        void ISessionEventListener.OnSessionEnd(string sessionId) => _logger.Trace("Session '{0}' has expired.", sessionId);
+        void ISessionEventListener.OnSessionEnd(string sessionId) => _logger.Info("Session '{0}' has expired.", sessionId);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]

@@ -70,7 +70,7 @@ namespace Axle.Data.DataSources
                 else
                 {
                     var dataSource = new DataSource(cs.Name, provider, cs.ConnectionString, _dataSourceResourceManager);
-                    Logger.Trace(
+                    Logger.Info(
                         "A data source was successfully created for connection string '{0}', using the following data provider: {1}.",
                         cs.Name,
                         cs.ProviderName);

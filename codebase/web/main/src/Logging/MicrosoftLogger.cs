@@ -29,7 +29,7 @@ namespace Axle.Web.AspNetCore.Logging
                 case Axle.Logging.LogSeverity.Error:
                     _logger.LogError(entry.Message);
                     break;
-                case Axle.Logging.LogSeverity.Failure:
+                case Axle.Logging.LogSeverity.Fatal:
                     _logger.LogCritical(entry.Message);
                     break;
             }
@@ -51,7 +51,7 @@ namespace Axle.Web.AspNetCore.Logging
                 case Axle.Logging.LogSeverity.Error:
                     _logger.LogError(ex, entry.Message);
                     break;
-                case Axle.Logging.LogSeverity.Failure:
+                case Axle.Logging.LogSeverity.Fatal:
                     _logger.LogCritical(ex, entry.Message);
                     break;
             }
