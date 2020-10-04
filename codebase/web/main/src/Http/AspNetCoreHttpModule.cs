@@ -19,10 +19,7 @@ namespace Axle.Web.AspNetCore.Http
             exporter.Export<IHttpContextAccessor>(_httpContextAccessor);
         }
         
-        public void Configure(IServiceCollection services)
-        {
-            services.AddHttpContextAccessor();
-        }
+        public void Configure(IServiceCollection services) => services.AddHttpContextAccessor();
 
         public void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment env)
         {

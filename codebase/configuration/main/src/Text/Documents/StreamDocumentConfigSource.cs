@@ -75,6 +75,7 @@ namespace Axle.Configuration.Text.Documents
         public StreamDocumentConfigSource(ITextDocumentReader documentReader, Func<Stream> streamFunc)
             : this(documentReader, Encoding.UTF8, streamFunc) { }
 
+        /// <inheritdoc />
         protected sealed override ITextDocumentRoot ReadDocument()
         {
             var stream = _lazyStream.Value;

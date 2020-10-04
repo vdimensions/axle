@@ -22,12 +22,24 @@ namespace Axle.Resources.Yaml.Extraction
         private YamlExtractor(Encoding encoding, string fileName, string keyPrefix = null) 
             : this(encoding, new YamlValueExtractor(encoding, fileName, keyPrefix ?? string.Empty)) { }
         
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YamlExtractor"/> class.
+        /// </summary>
         public YamlExtractor()  : this(Encoding.UTF8) { }
-        public YamlExtractor(string fileName, string keyPrefix = null)  : this(Encoding.UTF8, fileName, keyPrefix) { }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="YamlExtractor"/> class using the specified
+        /// <paramref name="fileName"/>.
+        /// </summary>
+        /// <param name="fileName">
+        /// The name of the yaml file containing the values to extract.
+        /// </param>
+        public YamlExtractor(string fileName)  : this(Encoding.UTF8, fileName) { }
 
+        /// <inheritdoc />
         public ResourceInfo Extract(IResourceContext context, string name) 
             => _impl.Extract(context, name);
 
+        /// <inheritdoc />
         public Task<ResourceInfo> ExtractAsync(IResourceContext context, string name) 
             => _impl.ExtractAsync(context, name);
     }
