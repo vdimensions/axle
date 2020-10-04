@@ -16,8 +16,8 @@ namespace Axle.Web.AspNetCore.Mvc
 {
     [Module]
     [RequiresAspNetCore]
-    [UtilizesAspNetSession] // If Session is used, MVC must be initialized after Session
-    public sealed class AspNetMvcModule : IServiceConfigurer, IApplicationConfigurer, IModelTypeRegistry
+    [UtilizesAspNetCoreSession] // If Session is used, MVC must be initialized after Session
+    public sealed class AspNetCoreMvcModule : IServiceConfigurer, IApplicationConfigurer, IModelTypeRegistry
     {
         private readonly ILogger _logger;
         private readonly IList<IMvcConfigurer> _configurers;
@@ -26,7 +26,7 @@ namespace Axle.Web.AspNetCore.Mvc
         private readonly ICollection<Type> _modelResolverTypes = new HashSet<Type>();
 
 
-        public AspNetMvcModule(ILogger logger)
+        public AspNetCoreMvcModule(ILogger logger)
         {
             _logger = logger;
             _configurers = new List<IMvcConfigurer>();
@@ -99,11 +99,11 @@ namespace Axle.Web.AspNetCore.Mvc
             }
         }
 
+        void IModelTypeRegistry.Register(Type type) => _modelResolverTypes.Add(type);
+
         [ModuleTerminate]
         internal void Terminate()
         {
         }
-
-        void IModelTypeRegistry.Register(Type type) => _modelResolverTypes.Add(type);
     }
 }

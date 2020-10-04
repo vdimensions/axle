@@ -9,18 +9,17 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
-
 namespace Axle.Web.AspNetCore.Session
 {
     [Module]
     [RequiresAspNetCore]
-    [RequiresAspNetHttp]
-    public sealed class AspNetSessionModule : IServiceConfigurer, IApplicationConfigurer, ISessionEventListener
+    [RequiresAspNetCoreHttp]
+    internal sealed class AspNetCoreSessionModule : IServiceConfigurer, IApplicationConfigurer, ISessionEventListener
     {
         private readonly SessionLifetime _lt = new SessionLifetime(TimeSpan.FromMinutes(20));
         private readonly ILogger _logger;
 
-        public AspNetSessionModule(IConfiguration configuration, ILogger logger)
+        public AspNetCoreSessionModule(IConfiguration configuration, ILogger logger)
         {
             _logger = logger;
         }
@@ -34,6 +33,7 @@ namespace Axle.Web.AspNetCore.Session
 
         void IServiceConfigurer.Configure(IServiceCollection services)
         {
+            // TODO: move DistributedMemoryCache to separate module
             services.AddDistributedMemoryCache().AddSession();
         }
 

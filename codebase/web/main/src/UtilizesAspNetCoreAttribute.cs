@@ -8,6 +8,9 @@ namespace Axle.Web.AspNetCore
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class UtilizesAspNetCoreAttribute : UtilizesAttribute
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="UtilizesAspNetCoreAttribute"/> class. 
+        /// </summary>
         public UtilizesAspNetCoreAttribute() : base(typeof(AspNetCoreModule)) { }
     }
 }

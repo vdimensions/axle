@@ -3,13 +3,12 @@ using Axle.Modularity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 
-namespace Axle.Web.AspNetCore.StaticFiles
+namespace Axle.Web.AspNetCore.FileServer
 {
     [Module]
-    [Utilizes(typeof(DefaultFilesModule))]
-    public sealed class StaticFilesModule : IApplicationConfigurer
+    internal sealed class DefaultFilesModule : IApplicationConfigurer
     {
-        public StaticFilesModule(IConfiguration configuration)
+        public DefaultFilesModule(IConfiguration configuration)
         {
 
         }
@@ -18,7 +17,7 @@ namespace Axle.Web.AspNetCore.StaticFiles
             Microsoft.AspNetCore.Builder.IApplicationBuilder app, 
             IHostingEnvironment env)
         {
-            app.UseStaticFiles();
+            app.UseDefaultFiles();
         }
     }
 }

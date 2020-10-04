@@ -2,7 +2,7 @@
 
 namespace Axle.Web.AspNetCore.Mvc
 {
-    [RequiresAspNetMvc]
+    [RequiresAspNetCoreMvc]
     public interface IMvcConfigurer
     {
         void ConfigureMvc(IMvcBuilder builder);

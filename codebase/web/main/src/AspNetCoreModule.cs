@@ -9,6 +9,7 @@ using Axle.Configuration.Microsoft.Adapters;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
+using Axle.Web.AspNetCore.Hosting;
 using Axle.Web.AspNetCore.Lifecycle;
 using Axle.Web.AspNetCore.Logging;
 using Microsoft.AspNetCore.Hosting;

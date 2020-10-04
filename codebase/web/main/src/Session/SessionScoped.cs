@@ -2,11 +2,8 @@
 using System.Collections.Concurrent;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-
 using Axle.Verification;
-
 using Microsoft.AspNetCore.Http;
-
 
 namespace Axle.Web.AspNetCore.Session
 {

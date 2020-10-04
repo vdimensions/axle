@@ -1,17 +1,14 @@
 ﻿using System.Diagnostics.CodeAnalysis;
-
 using Axle.Modularity;
-
 using Microsoft.AspNetCore.Hosting;
 
-
-namespace Axle.Web.AspNetCore
+namespace Axle.Web.AspNetCore.Hosting
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
     [RequiresAspNetCore]
-    public sealed class KestrelModule : IWebHostConfigurer
+    internal sealed class KestrelModule : IWebHostConfigurer
     {
-        void IWebHostConfigurer.Configure(IWebHostBuilder host) => host.UseKestrel().UseIISIntegration();
+        void IWebHostConfigurer.Configure(IWebHostBuilder host) => host.UseKestrel();
     }
 }
