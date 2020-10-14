@@ -72,7 +72,7 @@ namespace Axle.Data.Records.Mapping
             }
 
             public string RecordFieldName { get; }
-            public Type FieldType => typeof(T);
+            public Type FieldType => typeof(TField);
         }
         
         private readonly IDictionary<string, IDataRecordManipulator> _fieldMappers 
