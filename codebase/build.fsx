@@ -31,7 +31,7 @@ let projectLocations = [
     "data.records/main"
     "data.versioning/main"
     "logging/log4net"
-    "web/main"; "web/mvc"
+    "web/main"; "web/cors"; "web/mvc"
 ]
 
 Target.create "---Prepare---" VDBuild.cleanNupkg
