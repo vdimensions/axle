@@ -4,6 +4,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Axle.Logging;
 using Axle.Modularity;
+using Axle.Web.AspNetCore.Cors;
 using Axle.Web.AspNetCore.Mvc.ModelBinding;
 using Axle.Web.AspNetCore.Session;
 using Microsoft.AspNetCore.Builder;
@@ -17,6 +18,7 @@ namespace Axle.Web.AspNetCore.Mvc
     [Module]
     [RequiresAspNetCore]
     [UtilizesAspNetCoreSession] // If Session is used, MVC must be initialized after Session
+    [UtilizesAspNetCoreCors]    // If Cors is used, MVC must be initialized after Cors
     public sealed class AspNetCoreMvcModule : IServiceConfigurer, IApplicationConfigurer, IModelTypeRegistry
     {
         private readonly ILogger _logger;

@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netcoreapp2.2;netstandard2.0</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProjectGuid>{6A38CBF9-103A-4093-B2F5-181B7717B9B6}</ProjectGuid>
+    <Description>Axle Framework ASP.NET Core CORS Library.</Description>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="[2.2, 3)" />
+  </ItemGroup>
+
+  <Import Project="../../../../ref/Reference.Axle.Web.AspNetCore.targets" />
+
+</Project>
