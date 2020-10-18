@@ -14,6 +14,7 @@ namespace Axle.Configuration.Text.Documents
         {
             private readonly Func<T> _factory;
             private T _value;
+            private bool _hasValue = true;
 
             public LazyRef(Func<T> factory)
             {
@@ -32,17 +33,19 @@ namespace Axle.Configuration.Text.Documents
                     catch
                     {
                         value = default(T);
+                        _hasValue = false;
                         return false;
                     }
                 }
 
                 value = _value;
-                return true;
+                return  true;
             }
 
             public T Value => TryGetValue(out var value) ? value : null;
 
             object IReference.Value => Value;
+            bool IReference.HasValue => _hasValue;
         }
         #endif
         

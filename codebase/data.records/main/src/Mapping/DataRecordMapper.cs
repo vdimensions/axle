@@ -117,11 +117,11 @@ namespace Axle.Data.Records.Mapping
             => RegisterFieldAccessor(name, new Int32DataFieldAccessor(), expression);
         protected void RegisterFieldAccessor(string name, Expression<Func<T, long>> expression)
             => RegisterFieldAccessor(name, new Int64DataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTime>> expression)
-            => RegisterFieldAccessor(
-                name, 
-                new Int64DataFieldAccessor().Transform(new DateTimeToTicksConverter(DateTimeKind.Utc).Invert()), 
-                expression);
+        // protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTime>> expression)
+        //     => RegisterFieldAccessor(
+        //         name, 
+        //         new Int64DataFieldAccessor().Transform(new DateTimeToTicksConverter(DateTimeKind.Utc).Invert()), 
+        //         expression);
         protected void RegisterFieldAccessor(string name, Expression<Func<T, TimeSpan>> expression)
             => RegisterFieldAccessor(
                 name, 
@@ -137,6 +137,10 @@ namespace Axle.Data.Records.Mapping
             => RegisterFieldAccessor(name, new StringDataFieldAccessor(), expression);
         protected void RegisterFieldAccessor(string name, Expression<Func<T, Guid>> expression)
             => RegisterFieldAccessor(name, new GuidDataFieldAccessor(), expression);
+        protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTime>> expression)
+            => RegisterFieldAccessor(name, new DateTimeDataFieldAccessor(), expression);
+        protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTimeOffset>> expression)
+            => RegisterFieldAccessor(name, new DateTimeOffsetDataFieldAccessor(), expression);
 
         public virtual T Convert(DataRecord record, string fieldNameFormat)
         {
