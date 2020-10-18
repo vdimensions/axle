@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Axle.Web.AspNetCore.Session
 {
-    internal sealed class SessionLifetime : IDisposable
+    internal sealed class SessionScope : IDisposable
     {
         const string SessionKey = "FirstSeen";
 
@@ -22,9 +22,9 @@ namespace Axle.Web.AspNetCore.Session
         private readonly TimeSpan _sessionDuration;
         private readonly Timer _timer;
         private readonly ConcurrentDictionary<string, DateTime> _sessionTimeouts = new ConcurrentDictionary<string, DateTime>();
-        private readonly IList<ISessionEventListener> _listeners = new List<ISessionEventListener>();
+        private readonly ConcurrentDictionary<ISessionEventListener, ISessionEventListener> _listeners = new ConcurrentDictionary<ISessionEventListener, ISessionEventListener>();
 
-        public SessionLifetime(TimeSpan sessionDuration)
+        public SessionScope(TimeSpan sessionDuration)
         {
             var resolution = sessionDuration.Minutes > 0 ? 10L : 1L;
             _sessionDuration = sessionDuration;
@@ -48,7 +48,7 @@ namespace Axle.Web.AspNetCore.Session
             {
                 if (_sessionTimeouts.TryRemove(key, out _))
                 {
-                    foreach (var listener in _listeners)
+                    foreach (var listener in _listeners.Values.ToArray())
                     {
                         listener.OnSessionEnd(key);
                     }
@@ -75,7 +75,7 @@ namespace Axle.Web.AspNetCore.Session
             if (!session.TryGetValue(SessionKey, out _))
             {
                 UpdateSessionVisit(session);
-                foreach (var listener in _listeners)
+                foreach (var listener in _listeners.Values.ToArray())
                 {
                     listener.OnSessionStart(session);
                 }
@@ -87,14 +87,14 @@ namespace Axle.Web.AspNetCore.Session
             return func.Invoke();
         }
 
-        public SessionLifetime Subscribe(ISessionEventListener listener)
+        public SessionScope Subscribe(ISessionEventListener listener)
         {
-            _listeners.Add(listener);
+            _listeners.TryAdd(listener, listener);
             return this;
         }
-        public SessionLifetime Unsubscribe(ISessionEventListener listener)
+        public SessionScope Unsubscribe(ISessionEventListener listener)
         {
-            _listeners.Remove(listener);
+            _listeners.TryRemove(listener, out _);
             return this;
         }
 

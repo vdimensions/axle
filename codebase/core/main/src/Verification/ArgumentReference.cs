@@ -122,6 +122,9 @@ namespace Axle.Verification
 
         /// <inheritdoc cref="IReference.Value"/>
         object IReference.Value => _value;
+
+        /// <inheritdoc />
+        bool IReference.HasValue => _value != null;
     }
 }
 #endif

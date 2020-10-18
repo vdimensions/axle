@@ -14,14 +14,16 @@ namespace Axle.Web.AspNetCore.Session
     [Module]
     [RequiresAspNetCore]
     [RequiresAspNetCoreHttp]
-    internal sealed class AspNetCoreSessionModule : IServiceConfigurer, IApplicationConfigurer, ISessionEventListener
+    internal sealed class AspNetCoreSessionModule : IServiceConfigurer, IApplicationConfigurer, ISessionEventListener, ISessionReferenceProvider
     {
-        private readonly SessionLifetime _lt = new SessionLifetime(TimeSpan.FromMinutes(20));
+        private readonly SessionScope _lt = new SessionScope(TimeSpan.FromMinutes(20));
         private readonly ILogger _logger;
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-        public AspNetCoreSessionModule(IConfiguration configuration, ILogger logger)
+        public AspNetCoreSessionModule(IConfiguration configuration, IHttpContextAccessor httpContextAccessor, ILogger logger)
         {
             _logger = logger;
+            _httpContextAccessor = httpContextAccessor;
         }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -52,6 +54,13 @@ namespace Axle.Web.AspNetCore.Session
         void ISessionEventListener.OnSessionStart(ISession session) => _logger.Info("Started a new session '{0}'.", session.Id);
 
         void ISessionEventListener.OnSessionEnd(string sessionId) => _logger.Info("Session '{0}' has expired.", sessionId);
+        
+        SessionReference<T> ISessionReferenceProvider.CreateSessionReference<T>()
+        {
+            var sessionRef = new SessionReference<T>(_httpContextAccessor);
+            _lt.Subscribe(sessionRef);
+            return sessionRef;
+        }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
