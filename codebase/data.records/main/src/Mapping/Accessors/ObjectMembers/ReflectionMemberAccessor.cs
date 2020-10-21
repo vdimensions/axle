@@ -92,6 +92,13 @@ namespace Axle.Data.Records.Mapping.Accessors.ObjectMembers
             switch (expression)
             {
                 case MemberExpression memberExpression:
+                    if (memberExpression.Expression != null)
+                    {
+                        foreach (var parentExpression in ExpandMemberChain(memberExpression.Expression))
+                        {
+                            yield return parentExpression;
+                        }
+                    }
                     yield return memberExpression;
                     break;
                 case LambdaExpression lambdaExpression:
