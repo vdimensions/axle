@@ -117,11 +117,6 @@ namespace Axle.Data.Records.Mapping
             => RegisterFieldAccessor(name, new Int32DataFieldAccessor(), expression);
         protected void RegisterFieldAccessor(string name, Expression<Func<T, long>> expression)
             => RegisterFieldAccessor(name, new Int64DataFieldAccessor(), expression);
-        // protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTime>> expression)
-        //     => RegisterFieldAccessor(
-        //         name, 
-        //         new Int64DataFieldAccessor().Transform(new DateTimeToTicksConverter(DateTimeKind.Utc).Invert()), 
-        //         expression);
         protected void RegisterFieldAccessor(string name, Expression<Func<T, TimeSpan>> expression)
             => RegisterFieldAccessor(
                 name, 
