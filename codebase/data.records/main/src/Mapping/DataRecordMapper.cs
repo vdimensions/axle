@@ -137,17 +137,20 @@ namespace Axle.Data.Records.Mapping
         protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTimeOffset>> expression)
             => RegisterFieldAccessor(name, new DateTimeOffsetDataFieldAccessor(), expression);
 
-        public virtual T Convert(DataRecord record, string fieldNameFormat)
+        public virtual T ConvertBack(T obj, DataRecord record, string fieldNameFormat)
         {
-            var result = CreateObject();
+            var result = obj;
             foreach (var converter in _fieldMappers)
             {
                 converter.Value.UpdateObject(record, fieldNameFormat, result);
             }
             return result;
         }
+        public T ConvertBack(T obj, DataRecord record) => ConvertBack(obj, record, null);
+        public T ConvertBack(DataRecord record, string fieldNameFormat) 
+            => ConvertBack(CreateObject(), record, fieldNameFormat);
 
-        public virtual DataRecord ConvertBack(DataRecord record, T obj, string fieldNameFormat)
+        public virtual DataRecord Convert(DataRecord record, T obj, string fieldNameFormat)
         {
             foreach (var converter in _fieldMappers)
             {
@@ -155,11 +158,11 @@ namespace Axle.Data.Records.Mapping
             }
             return record;
         }
-        public DataRecord ConvertBack(DataRecord record, T obj) => ConvertBack(record, obj, null);
-        public DataRecord ConvertBack(T obj, string fieldNameFormat) => ConvertBack(CreateRecord(), obj, fieldNameFormat);
+        public DataRecord Convert(DataRecord record, T obj) => Convert(record, obj, null);
+        public DataRecord Convert(T obj, string fieldNameFormat) => Convert(CreateRecord(), obj, fieldNameFormat);
 
-        protected override DataRecord DoConvert(T source) => ConvertBack(CreateRecord(), source);
-        protected override T DoConvertBack(DataRecord source) => Convert(source, null);
+        protected override DataRecord DoConvert(T source) => Convert(CreateRecord(), source);
+        protected override T DoConvertBack(DataRecord source) => ConvertBack(source, null);
     }
 }
 #endif
