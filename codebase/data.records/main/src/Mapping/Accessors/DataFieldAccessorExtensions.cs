@@ -1,4 +1,5 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using System;
 using Axle.Conversion;
 using Axle.Data.Records.Mapping.Accessors.DataFields;
 using Axle.Verification;
@@ -10,7 +11,7 @@ namespace Axle.Data.Records.Mapping.Accessors
     /// </summary>
     public static class DataFieldAccessorExtensions
     {
-        private sealed class DataFieldTransformingAccessor<T1, T2> : IDataFieldAccessor<T2>
+        private sealed class DataFieldTransformingAccessor<T1, T2> : IDataFieldAccessor<T2>, IFieldTypeOverride
         {
             private readonly IDataFieldAccessor<T1> _delegatingAccessor;
             private readonly ITwoWayConverter<T1, T2> _converter;
@@ -24,6 +25,7 @@ namespace Axle.Data.Records.Mapping.Accessors
             public T2 GetValue(DataRecord dataRow, string key) => _converter.Convert(_delegatingAccessor.GetValue(dataRow, key));
 
             public void SetValue(DataRecord dataRow, string key, T2 value) => _delegatingAccessor.SetValue(dataRow, key, _converter.ConvertBack(value));
+            Type IFieldTypeOverride.OverridenFieldType => typeof(T1);
         }
         
         /// <summary>

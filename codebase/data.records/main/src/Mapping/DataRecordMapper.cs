@@ -44,6 +44,7 @@ namespace Axle.Data.Records.Mapping
                 RecordFieldName = name;
                 _fieldAccessor = fieldAccessor;
                 _memberAccessor = memberAccessor;
+                FieldType = _fieldAccessor is IFieldTypeOverride o ? o.OverridenFieldType : typeof(TField);
             }
 
             public void UpdateObject(DataRecord record, string fieldNameFormat, T obj)
@@ -72,7 +73,7 @@ namespace Axle.Data.Records.Mapping
             }
 
             public string RecordFieldName { get; }
-            public Type FieldType => typeof(TField);
+            public Type FieldType { get; }
         }
         
         private readonly IDictionary<string, IDataRecordManipulator> _fieldMappers 
