@@ -26,7 +26,7 @@ let projectLocations = [
     "resources/main"; "resources/properties"; "resources/yaml"
     "security/main"
     "security/access_control"
-    "application/main"
+    "application/main"; "application/services"
     "data/main"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/mysql"; "data/sqlite"; "data/sqlite.microsoft"
     "data.records/main"
     "data.versioning/main"

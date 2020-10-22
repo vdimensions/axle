@@ -44,16 +44,16 @@ namespace Axle.Modularity
                 for (var i = 0; i < infos.Length; i++)
                 {
                     var a = infos[i];
-                    if (allowAnnotatedAttributeTypes)
-                    {
-                        return CollectAttributes(new[]{a.Attribute.GetType()}, attributes, allowInheritingAttributeTypes, false);
-                    }
-                    else if (a.Attribute is TAttribute t)
+                    if (a.Attribute is TAttribute t)
                     {
                         if (allowInheritingAttributeTypes || t.GetType() == typeof(TAttribute)) 
                         {
                             attributes.Add(t);
                         }
+                    }
+                    else if (allowAnnotatedAttributeTypes)
+                    {
+                        CollectAttributes(new[]{a.Attribute.GetType()}, attributes, allowInheritingAttributeTypes, false);
                     }
                 }
             }
@@ -199,6 +199,7 @@ namespace Axle.Modularity
                     //
                     // Note - the `UtilizesAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
+                    true,
                     true)
                 .ToArray();
         }
@@ -211,6 +212,7 @@ namespace Axle.Modularity
                     //
                     // Note - the `ReportsToAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
+                    true,
                     true)
                 .ToArray();
         }
@@ -232,6 +234,7 @@ namespace Axle.Modularity
                     //
                     // Note - the `RequiresAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
+                    true,
                     true);
             for (var i = 0; i < attributes.Count; i++)
             {
