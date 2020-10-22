@@ -21,7 +21,14 @@ namespace Axle.Web.AspNetCore.Http
         
         public void Configure(IServiceCollection services) => services.AddHttpContextAccessor();
 
-        public void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(
+            Microsoft.AspNetCore.Builder.IApplicationBuilder app,
+            #if NETSTANDARD2_1_OR_NEWER
+            IWebHostEnvironment env
+            #else
+            IHostingEnvironment env
+            #endif
+            )
         {
             _httpContextAccessor.Accessor = app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
         }

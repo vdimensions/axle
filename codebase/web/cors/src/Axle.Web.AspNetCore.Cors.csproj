@@ -1,11 +1,11 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFrameworks>netcoreapp2.2;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
-    <ProjectGuid>{6A38CBF9-103A-4093-B2F5-181B7717B9B6}</ProjectGuid>
+    <ProjectGuid>{C8770413-47D1-48B6-9438-0991B999EE8D}</ProjectGuid>
     <Description>Axle Framework ASP.NET Core CORS Library.</Description>
   </PropertyGroup>
 

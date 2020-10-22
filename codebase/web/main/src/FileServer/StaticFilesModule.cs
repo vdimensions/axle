@@ -14,8 +14,13 @@ namespace Axle.Web.AspNetCore.FileServer
         }
 
         void IApplicationConfigurer.Configure(
-            Microsoft.AspNetCore.Builder.IApplicationBuilder app, 
-            IHostingEnvironment env)
+            Microsoft.AspNetCore.Builder.IApplicationBuilder app,
+            #if NETSTANDARD2_1_OR_NEWER
+            IWebHostEnvironment env
+            #else
+            IHostingEnvironment env
+            #endif
+            )
         {
             app.UseStaticFiles();
         }

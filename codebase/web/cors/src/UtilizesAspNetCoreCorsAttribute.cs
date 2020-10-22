@@ -9,8 +9,6 @@ namespace Axle.Web.AspNetCore.Cors
         /// <summary>
         /// Initializes a new instance of the <see cref="UtilizesAspNetCoreCorsAttribute"/> class.
         /// </summary>
-        public UtilizesAspNetCoreCorsAttribute() : base(typeof(AspNetCoreCorsModule))
-        {
-        }
+        public UtilizesAspNetCoreCorsAttribute() : base(typeof(AspNetCoreCorsModule)) { }
     }
 }

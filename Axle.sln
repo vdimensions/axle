@@ -76,15 +76,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.Npgsql.Tests", "c
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.SqlClient.Tests", "codebase\data\sql_client\tests\Axle.Data.SqlClient.Tests.csproj", "{C9166C70-2584-4F00-89D9-F62DE9D2CDBE}"
 EndProject
-Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Axle.Data.FSharp", "codebase\data\fsharp\src\Axle.Data.FSharp.fsproj", "{5E088541-AAA7-427B-9C45-757C73875B2C}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration", "codebase\configuration\main\src\Axle.Configuration.csproj", "{8DBBA160-18F0-4268-890F-6D1C26AA0746}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration", "codebase\configuration\main\src\Axle.Configuration.csproj", "{161ADF9F-4E70-4968-971A-788057564219}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "web", "web", "{9DED733E-41FB-4B4C-A60D-F646D0079E12}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore", "codebase\web\main\src\Axle.Web.AspNetCore.csproj", "{6A38CBF9-103A-4093-B2F5-181B7717B9B6}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.WebSharper", "codebase\web\websharper\src\Axle.Web.WebSharper.csproj", "{06D29389-3DB1-4841-A74C-6905C870970B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.Sqlite.Microsoft", "codebase\data\sqlite.microsoft\src\Axle.Data.Sqlite.Microsoft.csproj", "{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}"
 EndProject
@@ -92,8 +88,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Mvc", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "codebase", "codebase", "{D256F73B-FD7E-4C68-B18F-192E81240F9B}"
 	ProjectSection(SolutionItems) = preProject
-		codebase\Directory.Build.props = codebase\Directory.Build.props
 		codebase\Dependency.Versions.props = codebase\Dependency.Versions.props
+		codebase\Directory.Build.props = codebase\Directory.Build.props
 		codebase\FSharp.Core.Packages.targets = codebase\FSharp.Core.Packages.targets
 		codebase\NUnit.Packages.targets = codebase\NUnit.Packages.targets
 	EndProjectSection
@@ -106,7 +102,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Yaml", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Properties", "codebase\text.documents\properties\src\Axle.Text.Documents.Properties.csproj", "{3A911D54-E803-4DD0-9522-0024E152D65F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Text.Documents.Properties.Tests", "codebase\text.documents\properties\tests\Axle.Text.Documents.Properties.Tests.csproj", "{2F8DD6CD-BAFF-4271-A03E-BB67DC53B9E8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Properties.Tests", "codebase\text.documents\properties\tests\Axle.Text.Documents.Properties.Tests.csproj", "{2F8DD6CD-BAFF-4271-A03E-BB67DC53B9E8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{4F419519-E206-4CDD-89E0-B28F5313C51B}"
 EndProject
@@ -118,25 +114,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "json", "json", "{BB0568A7-5
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "hocon", "hocon", "{A6F69C52-8C65-41ED-A81E-5A606785C436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Text.Documents.Yaml.Tests", "codebase\text.documents\yaml\tests\Axle.Text.Documents.Yaml.Tests.csproj", "{1BA8759B-EEF5-44DC-AB60-8FCF4FF4FFD9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Yaml.Tests", "codebase\text.documents\yaml\tests\Axle.Text.Documents.Yaml.Tests.csproj", "{1BA8759B-EEF5-44DC-AB60-8FCF4FF4FFD9}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "properties", "properties", "{791AB91C-2E6F-48D0-A68C-A1E6DFAFB245}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Text.Documents.Tests", "codebase\text.documents\main\tests\Axle.Text.Documents.Tests.csproj", "{D4C56580-5C6F-4D05-A519-95E6B1F59F1F}"
 EndProject
-Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Axle.FSharp", "codebase\core\fsharp\src\Axle.FSharp.fsproj", "{058DA5D4-BE62-4A66-AC23-DD162E113EBF}"
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "Axle.FSharp", "codebase\core\fsharp\src\Axle.FSharp.fsproj", "{058DA5D4-BE62-4A66-AC23-DD162E113EBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.Tests", "codebase\security\main\tests\Axle.Security.Tests.csproj", "{0312335E-6302-47CC-A384-5802A82779C0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.Tests", "codebase\security\main\tests\Axle.Security.Tests.csproj", "{0312335E-6302-47CC-A384-5802A82779C0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Security.AccessControl", "codebase\security\access_control\src\Axle.Security.AccessControl.csproj", "{7CDEE3ED-184E-497A-BD14-F949D544D52F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Security.AccessControl", "codebase\security\access_control\src\Axle.Security.AccessControl.csproj", "{7CDEE3ED-184E-497A-BD14-F949D544D52F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.Microsoft", "codebase\configuration\microsoft\src\Axle.Configuration.Microsoft.csproj", "{FDA82935-6451-468E-A3DC-DA5E681C652F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.Microsoft", "codebase\configuration\microsoft\src\Axle.Configuration.Microsoft.csproj", "{FDA82935-6451-468E-A3DC-DA5E681C652F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.Microsoft.Tests", "codebase\configuration\microsoft\tests\Axle.Configuration.Microsoft.Tests.csproj", "{9BD3B615-072A-463C-9B2E-84F1E6B9889D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.Microsoft.Tests", "codebase\configuration\microsoft\tests\Axle.Configuration.Microsoft.Tests.csproj", "{9BD3B615-072A-463C-9B2E-84F1E6B9889D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.ConfigurationManager.Dependencies", "codebase\configuration\configuration_manager\Axle.Configuration.ConfigurationManager.Dependencies.targets", "{37167926-EC8F-475F-9A37-9F1200C35CDA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.ConfigurationManager", "codebase\configuration\configuration_manager\src\Axle.Configuration.ConfigurationManager.csproj", "{82879460-CE50-4389-B986-92988BAF044B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.ConfigurationManager", "codebase\configuration\configuration_manager\src\Axle.Configuration.ConfigurationManager.csproj", "{82879460-CE50-4389-B986-92988BAF044B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Cors", "codebase\web\cors\src\Axle.Web.AspNetCore.Cors.csproj", "{C8770413-47D1-48B6-9438-0991B999EE8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -236,22 +234,14 @@ Global
 		{C9166C70-2584-4F00-89D9-F62DE9D2CDBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9166C70-2584-4F00-89D9-F62DE9D2CDBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9166C70-2584-4F00-89D9-F62DE9D2CDBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{5E088541-AAA7-427B-9C45-757C73875B2C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5E088541-AAA7-427B-9C45-757C73875B2C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5E088541-AAA7-427B-9C45-757C73875B2C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5E088541-AAA7-427B-9C45-757C73875B2C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8DBBA160-18F0-4268-890F-6D1C26AA0746}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8DBBA160-18F0-4268-890F-6D1C26AA0746}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8DBBA160-18F0-4268-890F-6D1C26AA0746}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8DBBA160-18F0-4268-890F-6D1C26AA0746}.Release|Any CPU.Build.0 = Release|Any CPU
+		{161ADF9F-4E70-4968-971A-788057564219}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{161ADF9F-4E70-4968-971A-788057564219}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{161ADF9F-4E70-4968-971A-788057564219}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{161ADF9F-4E70-4968-971A-788057564219}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6A38CBF9-103A-4093-B2F5-181B7717B9B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6A38CBF9-103A-4093-B2F5-181B7717B9B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6A38CBF9-103A-4093-B2F5-181B7717B9B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6A38CBF9-103A-4093-B2F5-181B7717B9B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{06D29389-3DB1-4841-A74C-6905C870970B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{06D29389-3DB1-4841-A74C-6905C870970B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{06D29389-3DB1-4841-A74C-6905C870970B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{06D29389-3DB1-4841-A74C-6905C870970B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -308,6 +298,10 @@ Global
 		{82879460-CE50-4389-B986-92988BAF044B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{82879460-CE50-4389-B986-92988BAF044B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{82879460-CE50-4389-B986-92988BAF044B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C8770413-47D1-48B6-9438-0991B999EE8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C8770413-47D1-48B6-9438-0991B999EE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C8770413-47D1-48B6-9438-0991B999EE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C8770413-47D1-48B6-9438-0991B999EE8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -348,11 +342,9 @@ Global
 		{0562EAB0-074F-40AD-A49D-812C80FFB316} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
 		{5F7161CA-2670-4CF9-AD95-00D91E6EBBBA} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
 		{C9166C70-2584-4F00-89D9-F62DE9D2CDBE} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
-		{5E088541-AAA7-427B-9C45-757C73875B2C} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
-		{8DBBA160-18F0-4268-890F-6D1C26AA0746} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
+		{161ADF9F-4E70-4968-971A-788057564219} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{9DED733E-41FB-4B4C-A60D-F646D0079E12} = {D256F73B-FD7E-4C68-B18F-192E81240F9B}
 		{6A38CBF9-103A-4093-B2F5-181B7717B9B6} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
-		{06D29389-3DB1-4841-A74C-6905C870970B} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 		{F8BBCA02-B194-4FB6-82B8-6E656A8B875A} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
 		{566538F3-C76F-41F1-986E-B282ADEB6D22} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 		{20FBBA2C-3EF5-463F-924B-0752FF21041A} = {D256F73B-FD7E-4C68-B18F-192E81240F9B}
@@ -375,6 +367,7 @@ Global
 		{9BD3B615-072A-463C-9B2E-84F1E6B9889D} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{37167926-EC8F-475F-9A37-9F1200C35CDA} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{82879460-CE50-4389-B986-92988BAF044B} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
+		{C8770413-47D1-48B6-9438-0991B999EE8D} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

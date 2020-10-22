@@ -115,8 +115,13 @@ namespace Axle.Web.AspNetCore
             lifeTime.ApplicationStarted.Register(OnApplicationStarted);
             lifeTime.ApplicationStopping.Register(OnApplicationStopping);
             lifeTime.ApplicationStopped.Register(OnApplicationStopped);
-            
+
+            #if NETSTANDARD2_1_OR_NEWER
+            var hostingEnvironment = services.GetService<IWebHostEnvironment>();
+            #else
             var hostingEnvironment = services.GetService<IHostingEnvironment>();
+            #endif
+            
             for (var i = 0; i < _appConfigurers.Count; i++)
             {
                 var cfg = _appConfigurers[i];

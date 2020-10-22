@@ -8,8 +8,7 @@ namespace Axle.Web.AspNetCore.Cors
     {
         private static IApplicationBuilder RegisterAspNetCoreCorsModule(IApplicationBuilder app)
         {
-            return app
-                .ConfigureModules(m => m.Load<AspNetCoreCorsModule>());
+            return app.ConfigureModules(m => m.Load<AspNetCoreCorsModule>());
         }
 
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]

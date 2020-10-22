@@ -5,7 +5,6 @@ using Axle.Logging;
 using Axle.Modularity;
 using Axle.Web.AspNetCore.Http;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -36,10 +35,16 @@ namespace Axle.Web.AspNetCore.Session
         void IServiceConfigurer.Configure(IServiceCollection services)
         {
             // TODO: move DistributedMemoryCache to separate module
-            services.AddDistributedMemoryCache().AddSession();
+            services
+                .AddDistributedMemoryCache()
+                .AddSession();
         }
 
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
+        #if NETSTANDARD2_1_OR_NEWER
+        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        #else
+        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        #endif
         {
             var options = new SessionOptions
             {
