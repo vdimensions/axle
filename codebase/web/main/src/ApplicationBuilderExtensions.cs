@@ -2,6 +2,8 @@
 using Axle.Verification;
 using Axle.Web.AspNetCore.FileServer;
 using Axle.Web.AspNetCore.Hosting;
+using Axle.Web.AspNetCore.Routing;
+
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -45,5 +47,10 @@ namespace Axle.Web.AspNetCore
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app) => 
             app.ConfigureModules(m => m.Load<StaticFilesModule>());
+
+
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public static IApplicationBuilder UseRouting(this IApplicationBuilder app) =>
+            app.ConfigureModules(m => m.Load<AspNetCoreRoutingModule>());
     }
 }

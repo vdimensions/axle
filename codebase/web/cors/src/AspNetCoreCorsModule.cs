@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-
-using Axle.Modularity;
-
+﻿using Axle.Modularity;
+using Axle.Web.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace Axle.Web.AspNetCore.Cors
 {
     [RequiresAspNetCore]
+    [UtilizesAspNetCoreRouting]
     [ModuleConfigSection(typeof(AspNetCoreCorsConfig), "cors")]
     internal sealed class AspNetCoreCorsModule : IServiceConfigurer, IApplicationConfigurer
     {

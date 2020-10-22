@@ -4,12 +4,18 @@ using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Axle.Logging;
 using Axle.Modularity;
+using Axle.Web.AspNetCore.Authentication;
+using Axle.Web.AspNetCore.Authorization;
 using Axle.Web.AspNetCore.Cors;
 using Axle.Web.AspNetCore.Mvc.ModelBinding;
+using Axle.Web.AspNetCore.Routing;
 using Axle.Web.AspNetCore.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+#if NETSTANDARD2_1_OR_NEWER
+#else
 using Microsoft.AspNetCore.Mvc;
+#endif
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -17,8 +23,11 @@ namespace Axle.Web.AspNetCore.Mvc
 {
     [Module]
     [RequiresAspNetCore]
-    [UtilizesAspNetCoreSession] // If Session is used, MVC must be initialized after Session
-    [UtilizesAspNetCoreCors]    // If Cors is used, MVC must be initialized after Cors
+    [UtilizesAspNetCoreSession]             // If Session is used, MVC must be initialized after Session
+    [UtilizesAspNetCoreCors]                // If Cors is used, MVC must be initialized after Cors
+    [UtilizesAspNetCoreAuthentication]      // If Authentication is used, MVC must be initialized after Authentication
+    [UtilizesAspNetCoreAuthorization]       // If Authorization is used, MVC must be initialized after Authorization
+    [RequiresAspNetCoreRouting]
     public sealed class AspNetCoreMvcModule : IServiceConfigurer, IApplicationConfigurer, IModelTypeRegistry
     {
         private readonly ILogger _logger;
@@ -65,13 +74,26 @@ namespace Axle.Web.AspNetCore.Mvc
         [ModuleDependencyTerminated]
         internal void OnDependencyTerminated(IModelResolverProvider configurer) => _modelResolverProviders.Remove(configurer);
 
+        #if NETSTANDARD2_1_OR_NEWER
+        void IServiceConfigurer.Configure(IServiceCollection services) 
+        {
+            // SEE: https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.1&tabs=visual-studio
+
+            services.AddControllersWithViews();
+            services.AddRazorPages();
+        }
+        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IWebHostEnvironment _) 
+        {
+            app.UseEndpoints(e => { });
+        }
+        #else
         void IServiceConfigurer.Configure(IServiceCollection services) => Configure(services.AddMvc());
 
         void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
         {
             app.UseMvc(Configure);
         }
-
+        
         private void Configure(IMvcBuilder builder)
         {
             for (var i = 0; i < _configurers.Count; ++i)
@@ -92,6 +114,7 @@ namespace Axle.Web.AspNetCore.Mvc
             //options.ModelBinderProviders.Clear();
             options.ModelBinderProviders.Insert(0, new AxleModelBinderProvider(_modelResolverTypes, _modelResolverProviders, bp));
         }
+        #endif
 
         private void Configure(IRouteBuilder routeBuilder)
         {

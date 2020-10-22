@@ -2,7 +2,10 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
+#if NETSTANDARD2_1_OR_NEWER
+#else
 using Microsoft.AspNetCore.Mvc.Internal;
+#endif
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Binders;
 
@@ -36,10 +39,13 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
                     .Where(b => (metadata.IsComplexType) && !(b is SimpleTypeModelBinder))
                     .FirstOrDefault(x => x != null);
                 var binder = candidateBinder ?? context.CreateBinder(metadata);
+                #if NETSTANDARD2_1_OR_NEWER
+                #else
                 if (binder is PlaceholderBinder)
                 {
                     continue;
                 }
+                #endif
                 tuples.AddOrUpdate(type, Tuple.Create(metadata, binder), (_, existing) => existing);
             }
 

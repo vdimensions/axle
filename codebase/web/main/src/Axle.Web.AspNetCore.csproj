@@ -9,6 +9,10 @@
     <Description>Axle Framework ASP.NET Core Library.</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Authorization\" />
+  </ItemGroup>
+
   <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.props" />
