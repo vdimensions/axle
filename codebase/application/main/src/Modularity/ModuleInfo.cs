@@ -2,9 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 using Axle.Verification;
-
 
 namespace Axle.Modularity
 {
@@ -13,7 +11,8 @@ namespace Axle.Modularity
     /// </summary>
     internal sealed class ModuleInfo
     {
-        internal ModuleInfo(Type type,
+        internal ModuleInfo(
+            Type type,
             Type requiredApplicationHostType,
             ModuleMethod initMethod,
             ModuleMethod readyMethod,

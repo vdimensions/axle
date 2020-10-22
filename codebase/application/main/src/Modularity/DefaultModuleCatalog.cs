@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using Axle.Environment;
 #endif
@@ -34,18 +33,28 @@ namespace Axle.Modularity
         private static IList<TAttribute> CollectAttributes<TAttribute>(
                 IEnumerable<Type> types, 
                 IList<TAttribute> attributes, 
-                bool allowInheritingAttributeTypes = false) 
+                bool allowInheritingAttributeTypes = false,
+                bool allowAnnotatedAttributeTypes = false) 
             where TAttribute: Attribute
         {
             foreach (var type in types)
             {
                 var introspector = new TypeIntrospector(type);
-                var introspectedAttributes = allowInheritingAttributeTypes
-                    ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
-                    : introspector.GetAttributes<TAttribute>();
-                for (var i = 0; i < introspectedAttributes.Length; i++)
+                var infos = introspector.GetAttributes();
+                for (var i = 0; i < infos.Length; i++)
                 {
-                    attributes.Add((TAttribute) introspectedAttributes[i].Attribute);
+                    var a = infos[i];
+                    if (allowAnnotatedAttributeTypes)
+                    {
+                        return CollectAttributes(new[]{a.Attribute.GetType()}, attributes, allowInheritingAttributeTypes, false);
+                    }
+                    else if (a.Attribute is TAttribute t)
+                    {
+                        if (allowInheritingAttributeTypes || t.GetType() == typeof(TAttribute)) 
+                        {
+                            attributes.Add(t);
+                        }
+                    }
                 }
             }
 
