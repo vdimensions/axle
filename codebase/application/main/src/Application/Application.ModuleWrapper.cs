@@ -9,8 +9,7 @@ using Axle.Logging;
 using Axle.Modularity;
 using Axle.Threading.Extensions.Tasks;
 
-
-namespace Axle
+namespace Axle.Application
 {
     partial class Application
     {

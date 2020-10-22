@@ -21,7 +21,7 @@ namespace Axle.Modularity
         /// <para>
         /// In case this value is set to <c>false</c>, then the <see cref="ModuleType"/> module will be set to
         /// initialize before the target module only if it was selected for initialization (see
-        /// <see cref="Application.Builder"/> for details on enlisting modules for loading). It is assumed the target
+        /// <see cref="Axle.Application.Application.Builder"/> for details on enlisting modules for loading). It is assumed the target
         /// module will be able to operate without non-mandatory dependencies, so in case any of those modules are not
         /// found, then no exception will be thrown.
         /// </para>

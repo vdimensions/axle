@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// A static class providing extension methods for instances of the <see cref="IApplicationModuleConfigurer"/>

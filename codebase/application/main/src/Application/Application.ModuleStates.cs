@@ -1,7 +1,7 @@
 ﻿using System;
 
 
-namespace Axle
+namespace Axle.Application
 {
     partial class Application
     {

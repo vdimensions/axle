@@ -1,6 +1,6 @@
 ﻿using Axle.Configuration;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// An interface that enables an axle application to use specific configuration sources programmatically.

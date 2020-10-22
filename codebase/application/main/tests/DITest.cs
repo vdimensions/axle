@@ -1,7 +1,7 @@
 ﻿using Axle.DependencyInjection;
 using NUnit.Framework;
 
-namespace Axle.ApplicationTests
+namespace Axle.Application.Tests
 {
     [TestFixture]
     public class DITests

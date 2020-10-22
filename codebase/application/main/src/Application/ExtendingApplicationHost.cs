@@ -2,7 +2,7 @@
 using Axle.DependencyInjection;
 using Axle.Logging;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// A class to serve as a base for application host implementations that need to be built upon an existing

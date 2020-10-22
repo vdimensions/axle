@@ -136,6 +136,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.Configur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Cors", "codebase\web\cors\src\Axle.Web.AspNetCore.Cors.csproj", "{C8770413-47D1-48B6-9438-0991B999EE8D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Application.Services", "codebase\application\services\src\Axle.Application.Services.csproj", "{80FBDEF8-7CB8-4749-B8AA-2884B6459260}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -302,6 +304,10 @@ Global
 		{C8770413-47D1-48B6-9438-0991B999EE8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8770413-47D1-48B6-9438-0991B999EE8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8770413-47D1-48B6-9438-0991B999EE8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -368,6 +374,7 @@ Global
 		{37167926-EC8F-475F-9A37-9F1200C35CDA} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{82879460-CE50-4389-B986-92988BAF044B} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{C8770413-47D1-48B6-9438-0991B999EE8D} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
+		{80FBDEF8-7CB8-4749-B8AA-2884B6459260} = {6DA33AEE-E60E-440F-8591-DC3B3404754C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

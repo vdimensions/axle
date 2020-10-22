@@ -7,7 +7,7 @@ using Axle.Logging;
 using Axle.Resources;
 using Axle.Resources.Bundling;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// An abstract class to serve as a base for implementing a custom application host.

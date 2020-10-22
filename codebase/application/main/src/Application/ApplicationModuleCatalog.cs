@@ -5,7 +5,7 @@ using System.Reflection;
 using Axle.Logging;
 using Axle.Modularity;
 
-namespace Axle
+namespace Axle.Application
 {
     internal sealed class ApplicationModuleCatalog : IModuleCatalog
     {

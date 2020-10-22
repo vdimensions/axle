@@ -3,7 +3,7 @@ using System.IO;
 using Axle.Configuration;
 using Axle.Resources;
 
-namespace Axle
+namespace Axle.Application
 {
     internal sealed class ResourceConfigurationStreamProvider : IConfigurationStreamProvider
     {

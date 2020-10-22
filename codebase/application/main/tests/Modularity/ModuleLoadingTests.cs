@@ -6,8 +6,7 @@ using Axle.Logging;
 using Axle.Modularity;
 using NUnit.Framework;
 
-
-namespace Axle.ApplicationTests.Modularity
+namespace Axle.Application.Tests.Modularity
 {
     [TestFixture]
     public class ModuleLoadingTests

@@ -5,7 +5,7 @@ using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
 
-namespace Axle
+namespace Axle.Application
 {
     partial class Application
     {

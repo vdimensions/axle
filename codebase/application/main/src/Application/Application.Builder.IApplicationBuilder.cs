@@ -2,7 +2,7 @@
 using Axle.DependencyInjection;
 using Axle.Verification;
 
-namespace Axle
+namespace Axle.Application
 {
     partial class Application
     {

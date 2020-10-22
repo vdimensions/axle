@@ -4,7 +4,7 @@ using Axle.Environment;
 using Axle.References;
 using Axle.Resources.Bundling;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// The default <see cref="IApplicationHost"/> implementation. 

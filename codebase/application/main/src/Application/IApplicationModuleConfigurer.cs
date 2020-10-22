@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// An interface that enables specifying which assemblies to be scanned for modules and which module types to be

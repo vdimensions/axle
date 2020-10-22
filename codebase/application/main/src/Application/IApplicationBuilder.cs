@@ -1,16 +1,16 @@
 ﻿using System;
 using Axle.DependencyInjection;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// An interface for an application builder. The application builder is used to configure and start
-    /// an axle <see cref="Application">application</see>.
+    /// an axle <see cref="Axle.Application.Application">application</see>.
     /// </summary>
     public interface IApplicationBuilder
     {
         /// <summary>
-        /// Enables the <see cref="Application">application</see> to use a specific <see cref="IApplicationHost"/>
+        /// Enables the <see cref="Axle.Application.Application">application</see> to use a specific <see cref="IApplicationHost"/>
         /// instance.
         /// </summary>
         /// <param name="host">
@@ -26,11 +26,11 @@ namespace Axle
         IApplicationBuilder UseApplicationHost(IApplicationHost host);
 
         /// <summary>
-        /// Allows for programmatically registering objects into the <see cref="Application">application</see>'s root
+        /// Allows for programmatically registering objects into the <see cref="Axle.Application.Application">application</see>'s root
         /// <see cref="IDependencyContainer">dependency container</see>.  
         /// </summary>
         /// <param name="setupDependencies">
-        /// A delegate that is used to register dependencies to the <see cref="Application">application</see>'s root
+        /// A delegate that is used to register dependencies to the <see cref="Axle.Application.Application">application</see>'s root
         /// <see cref="IDependencyContainer">dependency container</see>.  
         /// </param>
         /// <returns>
@@ -44,10 +44,10 @@ namespace Axle
 
         /// <summary>
         /// Allows for programmatically registering additional configuration sources for configuring the
-        /// <see cref="Application">application</see>.  
+        /// <see cref="Axle.Application.Application">application</see>.  
         /// </summary>
         /// <param name="setupConfiguration">
-        /// A delegate that is used to alter the configuration of the <see cref="Application">application</see>.  
+        /// A delegate that is used to alter the configuration of the <see cref="Axle.Application.Application">application</see>.  
         /// </param>
         /// <returns>
         /// A reference to an <see cref="IApplicationBuilder">application builder</see> to proceed with the application
@@ -60,7 +60,7 @@ namespace Axle
 
         /// <summary>
         /// Allows for programmatically enlisting application modules that should be ran by the 
-        /// <see cref="Application">application</see>.
+        /// <see cref="Axle.Application.Application">application</see>.
         /// </summary>
         /// <param name="setupModules">
         /// A delegate that is used to register application modules with the current <see cref="IApplicationBuilder"/>.  
@@ -75,13 +75,13 @@ namespace Axle
         IApplicationBuilder ConfigureModules(Action<IApplicationModuleConfigurer> setupModules);
 
         /// <summary>
-        /// Launches the <see cref="Application">application</see> application based on the accumulated settings.
+        /// Launches the <see cref="Axle.Application.Application">application</see> application based on the accumulated settings.
         /// </summary>
         /// <param name="args">
         /// A <see cref="string"/> array, containing the command-line arguments for running the application.
         /// </param>
         /// <returns>
-        /// A reference to the running <see cref="Application">application</see>.
+        /// A reference to the running <see cref="Axle.Application.Application">application</see>.
         /// </returns>
         Application Run(params string[] args);
     }

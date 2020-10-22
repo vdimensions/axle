@@ -1,12 +1,12 @@
-﻿using NUnit.Framework;
+﻿using System.IO;
 using System.Reflection;
-using System.IO;
 using Axle.Configuration.Microsoft;
 using Axle.DependencyInjection;
 using Axle.Modularity;
 using Microsoft.Extensions.Configuration.Json;
+using NUnit.Framework;
 
-namespace Axle.ApplicationTests.Modularity
+namespace Axle.Application.Tests.Modularity
 {
     [TestFixture]
     public class ModuleConfgurationTests

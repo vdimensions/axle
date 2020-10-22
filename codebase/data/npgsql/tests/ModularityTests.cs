@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Application;
 using Axle.DependencyInjection;
 using NUnit.Framework;
 
@@ -11,7 +12,7 @@ namespace Axle.Data.Npgsql.Tests
         public void TestNpgsqlProviderIsRegistered()
         {
             IDependencyContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).UsePostgreSql().Run())
+            using (Axle.Application.Application.Build().ConfigureDependencies(c => container = c).UsePostgreSql().Run())
             {
                 var providers = container.Resolve<IEnumerable<IDbServiceProvider>>().ToArray();
                 Assert.IsNotEmpty(providers, "No database service providers have been registered");

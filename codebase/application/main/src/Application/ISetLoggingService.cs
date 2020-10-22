@@ -1,6 +1,6 @@
 ﻿using Axle.Logging;
 
-namespace Axle
+namespace Axle.Application
 {
     internal interface ISetLoggingService
     {

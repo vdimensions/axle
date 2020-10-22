@@ -2,7 +2,7 @@
 using Axle.DependencyInjection;
 using Axle.Logging;
 
-namespace Axle
+namespace Axle.Application
 {
     /// <summary>
     /// An interface representing an application host. An application host is responsible for supplying an application

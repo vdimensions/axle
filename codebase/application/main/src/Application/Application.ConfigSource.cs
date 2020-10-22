@@ -1,6 +1,6 @@
 ﻿using Axle.Configuration;
 
-namespace Axle
+namespace Axle.Application
 {
     partial class Application
     {

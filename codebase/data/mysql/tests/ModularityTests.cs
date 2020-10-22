@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Configuration;
+using Axle.Application;
 using Axle.Configuration.ConfigurationManager;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources;
@@ -25,7 +26,7 @@ namespace Axle.Data.MySql.Tests
         public void TestMySqlProviderIsRegistered()
         {
             IDependencyContainer dependencyContainer = null;
-            var appBuilder = Application.Build()
+            var appBuilder = Axle.Application.Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .UseMySql();
             using (appBuilder.Run())
@@ -41,7 +42,7 @@ namespace Axle.Data.MySql.Tests
         public void TestConnectionStringBinding()
         {
             IDependencyContainer dependencyContainer = null;
-            var appBuilder = Application.Build()
+            var appBuilder = Axle.Application.Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseMySql();
@@ -59,7 +60,7 @@ namespace Axle.Data.MySql.Tests
         public void TestConnectionStringsBinding()
         {
             IDependencyContainer dependencyContainer = null;
-            var appBuilder = Application.Build()
+            var appBuilder = Axle.Application.Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseMySql();
@@ -77,7 +78,7 @@ namespace Axle.Data.MySql.Tests
         public void TestDataSourceDiscovery()
         {
             IDependencyContainer dependencyContainer = null;
-            var appBuilder = Application.Build()
+            var appBuilder = Axle.Application.Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseDataSources()
@@ -103,7 +104,7 @@ namespace Axle.Data.MySql.Tests
         public void TestDataSourceCmdDiscovery()
         {
             IDependencyContainer dependencyContainer = null;
-            var appBuilder = Application.Build()
+            var appBuilder = Axle.Application.Application.Build()
                 .ConfigureDependencies(c => dependencyContainer = c)
                 .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
                 .UseDataSources()
