@@ -11,7 +11,7 @@ namespace Axle.Modularity
     {
         private static IList<ModuleInfo> ExpandRequiredModules(IList<ModuleInfo> modulesToLaunch)
         {
-            var moduleInfoEqualityComparer = new AdaptiveEqualityComparer<ModuleInfo, Type>(x => x.Type);
+            var moduleInfoEqualityComparer = new LensingEqualityComparer<ModuleInfo, Type>(x => x.Type);
             var requiredModules = modulesToLaunch.ToDictionary(mi => mi, _ => new HashSet<ModuleInfo>(moduleInfoEqualityComparer), moduleInfoEqualityComparer);
             for (var i = 0; i < modulesToLaunch.Count; i++)
             {

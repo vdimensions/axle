@@ -10,71 +10,71 @@ namespace Axle.Data
     {
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, string value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.String, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.String);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, char value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.StringFixedLength, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.StringFixedLength);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, bool value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Boolean, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Boolean);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, byte value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Byte, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Byte);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, sbyte value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.SByte, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.SByte);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, short value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Int16, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Int16);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, ushort value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.UInt16, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.UInt16);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, int value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Int32, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Int32);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, uint value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.UInt32, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.UInt32);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, long value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Int64, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Int64);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, ulong value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.UInt64, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.UInt64);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, float value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Single, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Single);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, double value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Double, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Double);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, decimal value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Decimal, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Decimal);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, Guid value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Guid, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Guid);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, DateTime value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.DateTime, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.DateTime);
         }
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, byte[] value)
         {
-            return builder.VerifyArgument("builder").IsNotNull().Value.SetValue(DbType.Binary, value);
+            return builder.VerifyArgument(nameof(builder)).IsNotNull().Value.SetValue(value).SetType(DbType.Binary);
         }
     }
 }

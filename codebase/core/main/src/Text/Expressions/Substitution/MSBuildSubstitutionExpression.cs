@@ -11,6 +11,7 @@ namespace Axle.Text.Expressions.Substitution
         /// </summary>
         public MSBuildSubstitutionExpression() : base(@"$\(", @"\)"){}
 
+        /// <inheritdoc />
         protected override string ExtractTokenValue(string token)
         {
             const string exprStart = "$(", exprEnd = ")";

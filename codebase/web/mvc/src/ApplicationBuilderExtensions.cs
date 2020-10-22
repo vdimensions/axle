@@ -6,6 +6,7 @@ namespace Axle.Web.AspNetCore.Mvc
     public static class ApplicationBuilderExtensions
     {
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static IApplicationBuilder UseAspNetCoreMvc(this IApplicationBuilder app) => app.ConfigureModules(m => m.Load<AspNetMvcModule>());
+        public static IApplicationBuilder UseAspNetCoreMvc(this IApplicationBuilder app) 
+            => app.ConfigureModules(m => m.Load<AspNetCoreMvcModule>());
     }
 }

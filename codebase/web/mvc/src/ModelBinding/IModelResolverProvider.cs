@@ -7,7 +7,7 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
         void Register(Type type);
     }
 
-    [RequiresAspNetMvc]
+    [RequiresAspNetCoreMvc]
     public interface IModelResolverProvider
     {
         void RegisterTypes(IModelTypeRegistry registry);

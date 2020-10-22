@@ -203,6 +203,9 @@ namespace Axle.References
 
         /// <inheritdoc cref="IWeakReference{T}.Value" />
         object IReference.Value => Value;
+        
+        /// <inheritdoc />
+        bool IReference.HasValue => IsAlive;
 
         /// <summary>
         /// Gets a <see cref="bool"/> value indicating whether the current <see cref="WeakRef{T}"/> instance

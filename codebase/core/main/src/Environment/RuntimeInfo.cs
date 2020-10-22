@@ -6,7 +6,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Axle.Extensions.String;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-using Axle.Conversion.Parsing;
+using Axle.Text.Parsing;
 using Axle.Verification;
 #endif
 #if NETFRAMEWORK

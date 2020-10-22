@@ -41,7 +41,7 @@ namespace Axle.Conversion
         bool IConverter<T1, T2>.TryConvert(T1 source, out T2 target) => _primaryConverter.TryConvert(source, out target);
 
         /// <inheritdoc />
-        IConverter<T2, T1> ITwoWayConverter<T1, T2>.Invert() => new CombinedConverter<T2, T1>(_reverseConverter, _primaryConverter);
+        ITwoWayConverter<T2, T1> ITwoWayConverter<T1, T2>.Invert() => new CombinedConverter<T2, T1>(_reverseConverter, _primaryConverter);
 
         /// <inheritdoc />
         T1 ITwoWayConverter<T1, T2>.ConvertBack(T2 obj) => _reverseConverter.Convert(obj);

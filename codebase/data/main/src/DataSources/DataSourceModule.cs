@@ -25,13 +25,13 @@ namespace Axle.Data.DataSources
     {
         internal const string SqlScriptsBundle = "SqlScripts";
 
-        private readonly IDbServiceProviderRegistry _dbServiceProviders;
+        private readonly DbServiceProviderRegistry _dbServiceProviders;
         private readonly DataSourceConfiguration _configuration;
         private readonly ResourceManager _dataSourceResourceManager;
         private readonly IResourceExtractor _scriptExtractor;
         private readonly IDictionary<string, DataSource> _dataSources = new ConcurrentDictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
-        public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
+        public DataSourceModule(DbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
         {
             Logger = logger;
             _dbServiceProviders = dbServiceProviderRegistry;
@@ -70,7 +70,7 @@ namespace Axle.Data.DataSources
                 else
                 {
                     var dataSource = new DataSource(cs.Name, provider, cs.ConnectionString, _dataSourceResourceManager);
-                    Logger.Trace(
+                    Logger.Info(
                         "A data source was successfully created for connection string '{0}', using the following data provider: {1}.",
                         cs.Name,
                         cs.ProviderName);

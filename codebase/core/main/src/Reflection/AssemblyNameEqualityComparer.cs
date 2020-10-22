@@ -11,10 +11,7 @@ namespace Axle.Reflection
     /// An equality comparer for assembly name objects, that uses case-insensitive name comparison depending
     /// on the target OS. 
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
-    public sealed class AssemblyNameEqualityComparer : AdaptiveEqualityComparer<AssemblyName, string>
+    public sealed class AssemblyNameEqualityComparer : LensingEqualityComparer<AssemblyName, string>
     {
         /// <summary>
         /// Creates a new instance of the <see cref="AssemblyNameEqualityComparer"/> class. 

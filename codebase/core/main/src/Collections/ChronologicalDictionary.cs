@@ -44,16 +44,16 @@ namespace Axle.Collections
                 _comparer = comparer;
             }
             public TimestampDictionary() : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), 
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(new LensingEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), 
                     EqualityComparer<TKey>.Default) { }
             public TimestampDictionary(int capacity) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), 
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new LensingEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key)), 
                     EqualityComparer<TKey>.Default) { }
             public TimestampDictionary(int capacity, IEqualityComparer<TKey> comparer) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), 
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(capacity, new LensingEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), 
                     comparer) { }
             public TimestampDictionary(IEqualityComparer<TKey> comparer) : this(
-                    new Dictionary<ChronologicalKey<TKey>, TValue>(new AdaptiveEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), 
+                    new Dictionary<ChronologicalKey<TKey>, TValue>(new LensingEqualityComparer<ChronologicalKey<TKey>, TKey>(x => x.Key, comparer)), 
                     comparer) { }
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             internal TimestampDictionary(SerializationInfo serializationInfo, StreamingContext streamingContext) 

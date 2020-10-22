@@ -15,6 +15,5 @@
     <Compile Remove="Algorithms\Sdk\BaseXXEncryptionAlgorithm.cs" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
 </Project>

@@ -20,7 +20,6 @@
     </None>
   </ItemGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.ConfigurationManager.targets" />

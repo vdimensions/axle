@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;net45;net40;net35</TargetFrameworks>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <ProjectGuid>962248B8-23D3-4BA3-9459-DE484FE5C308</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <Description>A library from the Axle framework that deals with data records and provides data conversion apis</Description>
+  </PropertyGroup>
+
+  <Import Project="../../../../ref/Reference.Axle.Data.targets" />
+  <Import Project="../../../../ref/ext/Reference.System.Data.DataSetExtensions.props" />
+</Project>

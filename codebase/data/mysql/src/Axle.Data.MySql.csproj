@@ -15,6 +15,5 @@
     <PackageReference Include="MySqlConnector" Version="0.59" />
   </ItemGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
 </Project>

@@ -17,7 +17,7 @@ namespace Axle.Reflection
     /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member 
     /// for the current <see cref="MethodBaseToken{T}"/> instance.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -27,7 +27,7 @@ namespace Axle.Reflection
     #endif
         where T: MethodBase
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETFRAMEWORK
         [Serializable]
         #endif
         internal sealed class Parameter : IParameter

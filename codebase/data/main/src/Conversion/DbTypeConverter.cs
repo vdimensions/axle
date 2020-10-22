@@ -33,7 +33,7 @@ namespace Axle.Data.Conversion
 
         public object ConvertBack(object source) => DoConvertBack((T2) source);
 
-        IConverter<object, object> ITwoWayConverter<object, object>.Invert() => new ReverseConverter<object, object>(this);
+        ITwoWayConverter<object, object> ITwoWayConverter<object, object>.Invert() => new ReverseConverter<object, object>(this);
 
         public bool TryConvert(object source, out object target)
         {

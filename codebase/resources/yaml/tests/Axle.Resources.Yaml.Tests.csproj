@@ -9,6 +9,7 @@
     <AssemblyName>Axle.Resources.Yaml.Tests</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <IsTestProject>true</IsTestProject>
+    <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,7 +20,6 @@
     <EmbeddedResource Include="Properties\Messages.yml" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Resources.Yaml.targets" />
   <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

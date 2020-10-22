@@ -12,7 +12,7 @@ using NUnit.Framework;
 
 namespace Axle.Resources.Properties.Tests
 {
-    using UriParser = Axle.Conversion.Parsing.UriParser;
+    using UriParser = Axle.Text.Parsing.UriParser;
 
     [TestFixture]
     public class PropertyResourceProviderTests

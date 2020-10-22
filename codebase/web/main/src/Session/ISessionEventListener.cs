@@ -3,7 +3,7 @@
 
 namespace Axle.Web.AspNetCore.Session
 {
-    [RequiresAspNetSession]
+    [RequiresAspNetCoreSession]
     public interface ISessionEventListener
     {
         void OnSessionStart(ISession session);

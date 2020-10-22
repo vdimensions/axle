@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 
-
 namespace Axle.Web.AspNetCore.Mvc.ModelBinding
 {
     internal sealed class AxleModelBinder : IModelBinder
@@ -33,7 +32,7 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
                 uriBuilder.Query = request.QueryString.Value;
             }
 
-            return new Axle.Conversion.Parsing.UriParser().Parse(uriBuilder.ToString());
+            return new Axle.Text.Parsing.UriParser().Parse(uriBuilder.ToString());
         }
         
         private readonly IModelResolver[] _resolvers;

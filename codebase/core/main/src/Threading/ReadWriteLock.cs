@@ -9,7 +9,12 @@ namespace Axle.Threading
     /// <summary>
     /// An implementation of the <see cref="IReadWriteLock"/> interface which acts as a
     /// wrapper to the <see cref="ReaderWriterLockSlim"/> class.
+    /// <remarks>
+    /// This implementation does not permit re-entrant access to the locked code block form the thread
+    /// owning the lock. For re-entrant lock implementation refer to the <see cref="ReentrantReadWriteLock"/> class.
+    /// </remarks>
     /// </summary>
+    /// <seealso cref="ReentrantReadWriteLock"/>
     public class ReadWriteLock : IDisposable, IReadWriteLock
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

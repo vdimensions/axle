@@ -6,7 +6,9 @@ using System.Reflection;
 namespace Axle.Reflection
 {
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
+    #endif 
     internal class FieldToken : MemberTokenBase<FieldInfo, RuntimeFieldHandle>,
     #else
     internal class FieldToken : MemberTokenBase<FieldInfo>,

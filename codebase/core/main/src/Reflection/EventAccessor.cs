@@ -4,7 +4,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [System.Serializable]
     #endif
     internal abstract class EventAccessor : IAccessor, IReflected<MethodInfo>
@@ -21,10 +21,10 @@ namespace Axle.Reflection
             OperationMethod = operationMethod;
         }
 
-        DeclarationType IAccessor.Declaration => OperationMethod.Declaration;
-        AccessModifier IAccessor.AccessModifier => OperationMethod.AccessModifier;
         public IMember Member => _event;
         public abstract AccessorType AccessorType { get; }
+        DeclarationType IAccessor.Declaration => OperationMethod.Declaration;
+        AccessModifier IAccessor.AccessModifier => OperationMethod.AccessModifier;
         MemberInfo IReflected.ReflectedMember => OperationMethod.ReflectedMember;
         MethodInfo IReflected<MethodInfo>.ReflectedMember => OperationMethod.ReflectedMember;
     }

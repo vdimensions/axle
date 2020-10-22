@@ -1,5 +1,4 @@
 ﻿using System;
-
 using Axle.Verification;
 
 namespace Axle.Reflection

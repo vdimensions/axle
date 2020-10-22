@@ -12,6 +12,7 @@ namespace Axle.Threading.Extensions.Tasks
     /// <summary>
     /// A static class containing extension methods to the <see cref="Task"/> <see cref="Task{TResult}"/> classes.
     /// </summary>
+    [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
     public static class TaskExtensions
     {
         #region ContinueWith(...)
@@ -642,7 +643,6 @@ namespace Axle.Threading.Extensions.Tasks
         /// <returns>
         /// A collection of <see cref="Task"/> representing the completed tasks.
         /// </returns>
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static IEnumerable<Task> WaitForAll(this IEnumerable<Task> tasks)
         {
             var t = tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value as Task[] ?? tasks.ToArray();
@@ -664,7 +664,7 @@ namespace Axle.Threading.Extensions.Tasks
         /// <returns>
         /// A collection of <see cref="Task{TResult}"/> representing the completed tasks.
         /// </returns>
-        [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
+        [SuppressMessage("ReSharper", "CoVariantArrayConversion")]
         public static IEnumerable<Task<TResult>> WaitForAll<TResult>(this IEnumerable<Task<TResult>> tasks)
         {
             var t = tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value as Task<TResult>[] ?? tasks.ToArray();
@@ -677,6 +677,15 @@ namespace Axle.Threading.Extensions.Tasks
         #endregion
 
         #region WaitForAny(...)
+        /// <summary>
+        /// Waits for any of the provided <see cref="Task"/> objects to complete execution.
+        /// </summary>
+        /// <param name="tasks">
+        /// An collection of <see cref="Task"/> instances on which to wait.
+        /// </param>
+        /// <returns>
+        /// The completed <see cref="Task"/> instance.
+        /// </returns>
         public static Task WaitForAny(this IEnumerable<Task> tasks)
         {
             tasks.VerifyArgument(nameof(tasks)).IsNotNull();
@@ -688,6 +697,16 @@ namespace Axle.Threading.Extensions.Tasks
             }
             return null;
         }
+        /// <summary>
+        /// Waits for any of the provided <see cref="Task{TResult}"/> objects to complete execution.
+        /// </summary>
+        /// <param name="tasks">
+        /// An collection of <see cref="Task{TResult}"/> instances on which to wait.
+        /// </param>
+        /// <returns>
+        /// The completed <see cref="Task{TResult}"/> instance.
+        /// </returns>
+        [SuppressMessage("ReSharper", "CoVariantArrayConversion")]
         public static Task<TResult> WaitForAny<TResult>(this IEnumerable<Task<TResult>> tasks)
         {
             tasks.VerifyArgument(nameof(tasks)).IsNotNull();

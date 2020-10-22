@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
-
 using Axle.Verification;
-
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal abstract class PropertyToken : MemberTokenBase<PropertyInfo>, IProperty, IEquatable<PropertyToken>

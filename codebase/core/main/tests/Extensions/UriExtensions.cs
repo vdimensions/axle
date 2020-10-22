@@ -1,11 +1,11 @@
 ﻿using System;
-using Axle.Conversion.Parsing;
 using Axle.Extensions.Uri;
+using Axle.Text.Parsing;
 using NUnit.Framework;
 
 namespace Axle.Core.Tests.Extensions
 {
-    using UriParser = Axle.Conversion.Parsing.UriParser;
+    using UriParser = Axle.Text.Parsing.UriParser;
 
     [TestFixture]
     public class UriExtensions

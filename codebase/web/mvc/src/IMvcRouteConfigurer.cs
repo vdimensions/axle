@@ -2,7 +2,7 @@
 
 namespace Axle.Web.AspNetCore.Mvc
 {
-    [RequiresAspNetMvc]
+    [RequiresAspNetCoreMvc]
     public interface IMvcRouteConfigurer
     {
         void ConfigureRoutes(IRouteBuilder routeBuilder);

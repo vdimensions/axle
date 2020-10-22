@@ -4,9 +4,7 @@ using System.Linq;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
-
 using Axle.Verification;
-
 
 namespace Axle.Reflection.Extensions
 {

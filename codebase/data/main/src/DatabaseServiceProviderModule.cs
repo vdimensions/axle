@@ -2,6 +2,10 @@
 
 namespace Axle.Data
 {
+    /// <summary>
+    /// An abstract module class to serve as a base for implementing a module that registers
+    /// <see cref="IDbServiceProvider"/>
+    /// </summary>
     [Module]
     [Requires(typeof(DbServiceProviderRegistry))]
     [ProvidesForDataModule]

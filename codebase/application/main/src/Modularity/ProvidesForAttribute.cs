@@ -5,9 +5,9 @@ using Axle.Verification;
 namespace Axle.Modularity
 {
     /// <summary>
-    /// An attribute that allows a target module to become a dependency of the specified module.
-    /// The target module itself will receive as dependencies all the required dependencies
-    /// of the specified module.
+    /// An attribute that allows the annotated module to become a dependency of the module specified by the attribute.
+    /// The annotated module itself will receive as dependencies all the required dependencies of the module that was
+    /// specified.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
     public class ProvidesForAttribute : Attribute

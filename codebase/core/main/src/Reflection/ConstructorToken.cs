@@ -6,7 +6,7 @@ namespace Axle.Reflection
     /// <summary>
     /// The default <see cref="IConstructor"/> implementation. Serves as a wrapper around <see cref="ConstructorInfo"/>.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal sealed class ConstructorToken : MethodBaseToken<ConstructorInfo>, IEquatable<ConstructorToken>, IConstructor

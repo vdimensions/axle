@@ -17,7 +17,6 @@
     </EmbeddedResource>
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Data.MySql.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.ConfigurationManager.targets" />
   <Import Project="../../../../ref/ext/NUnit.Packages.targets" />

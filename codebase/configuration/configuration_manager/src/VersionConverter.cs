@@ -2,7 +2,7 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Configuration.ConfigurationManager.Sdk;
-using Axle.Conversion.Parsing;
+using Axle.Text.Parsing;
 
 namespace Axle.Configuration.ConfigurationManager
 {

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal sealed class ReadWritePropertyToken : PropertyToken, IReadWriteProperty

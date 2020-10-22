@@ -26,12 +26,6 @@ namespace Axle.References
         /// <c>true</c> if the target value was retrieved; <c>false</c> otherwise.
         /// </returns>
         new bool TryGetValue(out T value);
-
-        /// <summary>
-        /// Gets a boolean value that indicates whether the current
-        /// <see cref="ILazyReference{T}"/> has a <see cref="IReference{T}.Value"/> created.
-        /// </summary>
-        bool HasValue { get; }
     }
 }
 #endif

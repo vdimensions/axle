@@ -9,6 +9,5 @@
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="[2.2, 3)" />
   </ItemGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Web.AspNetCore.Mvc.targets" />
 </Project>

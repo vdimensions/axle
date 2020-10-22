@@ -21,13 +21,15 @@ namespace Axle.Data
         where TDbType: struct
     {
         /// <summary>
-        /// Creates a new instance of <typeparamref name="TDbParameter"/> using the provided value and definition settings.
+        /// Creates a new instance of <typeparamref name="TDbParameter"/> using the provided value and definition
+        /// settings.
         /// </summary>
         /// <param name="name">
         /// The name of the parameter.
         /// </param>
         /// <param name="type">
-        /// An optional parameter of <typeparamref name="TDbType"/> type, specifying the database-specific type of the parameter.
+        /// An optional parameter of <typeparamref name="TDbType"/> type, specifying the database-specific type of the
+        /// parameter.
         /// </param>
         /// <param name="size">
         /// An optional <see cref="int">integer</see> value specifying the size of the parameter.

@@ -4,7 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
-using Axle.Conversion.Parsing;
+using Axle.Text.Parsing;
 
 namespace Axle.Configuration.ConfigurationManager.Sdk
 {
