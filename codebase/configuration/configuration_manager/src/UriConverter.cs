@@ -5,7 +5,7 @@ using Axle.Configuration.ConfigurationManager.Sdk;
 
 namespace Axle.Configuration.ConfigurationManager
 {
-    using UriParser = Conversion.Parsing.UriParser;
+    using UriParser = Axle.Text.Parsing.UriParser;
 
     /// <summary>
     /// A configuration converter class that can handle <see cref="Uri" /> values.

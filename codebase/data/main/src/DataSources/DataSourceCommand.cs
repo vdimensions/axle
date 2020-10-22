@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Common;
-using System.Linq;
 using Axle.Data.Extensions.DbCommand;
 using Axle.Verification;
-
 
 namespace Axle.Data.DataSources
 {
@@ -28,9 +26,14 @@ namespace Axle.Data.DataSources
         {
             using (var command = _commandFactory(CommandText, connection))
             {
+                IDataParameter returnValueParameter = null;
                 foreach (var dataParameter in parameters)
                 {
                     command.Parameters.Add(dataParameter);
+                    if (dataParameter.Direction == ParameterDirection.ReturnValue)
+                    {
+                        returnValueParameter = dataParameter;
+                    }
                 }
                 returnValue = 0;
                 TResult result;
@@ -38,7 +41,6 @@ namespace Axle.Data.DataSources
                 {
                     result = operation(command);
                     #warning use return value output parameter
-                    var returnValueParameter = Enumerable.SingleOrDefault(parameters, p => p.Direction == ParameterDirection.ReturnValue);
                     if (returnValueParameter != null)
                     {
                         var outValue = returnValueParameter.Value;
@@ -59,7 +61,6 @@ namespace Axle.Data.DataSources
             connection.VerifyArgument(nameof(connection)).IsNotNull();
             return Execute(c => c.ExecuteNonQuery(), connection, out _, parameters);
         }
-
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public int ExecuteQuery(IDataSourceConnection connection, DataSet results, params IDataParameter[] parameters)

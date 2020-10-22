@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Globalization;
-using Axle.Conversion.Parsing;
 using Axle.Text.Formatting.Extensions;
+using Axle.Text.Parsing;
 using NUnit.Framework;
 
 namespace Axle.Core.Tests.Conversion.Parsing

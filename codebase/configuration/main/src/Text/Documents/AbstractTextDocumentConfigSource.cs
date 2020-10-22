@@ -7,8 +7,8 @@ using Axle.Text.Documents;
 namespace Axle.Configuration.Text.Documents
 {
     /// <summary>
-    /// A class to serve as a base for implementing the <see cref="IConfigSource"/> interface that is based on a
-    /// <see cref="ITextDocumentRoot"/>.
+    /// An abstract class to serve as a base for implementing the <see cref="IConfigSource"/> interface which reads
+    /// configuration data from a <see cref="ITextDocumentRoot"/>.
     /// </summary>
     /// <seealso cref="IConfigSource"/>
     /// <seealso cref="ITextDocumentRoot"/>
@@ -72,6 +72,7 @@ namespace Axle.Configuration.Text.Documents
 
             public CharSequence Value => null;
         }
+        
         private sealed class TextDocumentConfiguration : IConfiguration
         {
             private readonly TextDocumentConfigSection _configSection;
@@ -95,6 +96,14 @@ namespace Axle.Configuration.Text.Documents
             return doc == null ? null : new TextDocumentConfiguration(doc);
         }
 
+        /// <summary>
+        /// When implemented in a derived class, obtains the <see cref="ITextDocumentRoot"/> upon which the current
+        /// <see cref="AbstractTextDocumentConfigSource"/> is based on. 
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ITextDocumentRoot"/> upon which the current <see cref="AbstractTextDocumentConfigSource"/>
+        /// is based on.
+        /// </returns>
         protected abstract ITextDocumentRoot ReadDocument();
     }
 }

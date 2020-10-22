@@ -10,7 +10,6 @@
     <Description>Axle Framework Core Library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/ext/Reference.System.Diagnostics.TraceSource.props" />
   <Import Project="../../../../ref/ext/Reference.System.Linq.props" />
   <Import Project="../../../../ref/ext/Reference.System.Threading.Tasks.props" />
@@ -20,19 +19,12 @@
   <ItemGroup>
     <Compile Remove="Collections\Extensions\Queue\**" />
     <Compile Remove="Collections\Extensions\Stack\**" />
-    <Compile Remove="_Experimental\**" />
-    <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
+    <Compile Remove="Text\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="IO\Serialization\SoapSerializer.cs" />
-    <Compile Remove="Linq\Collection.cs" />
-    <Compile Remove="Linq\ISequence.cs" />
-    <Compile Remove="Linq\Sequence.cs" />
-    <Compile Remove="Linq\SequenceExtensions.cs" />
     <EmbeddedResource Remove="Collections\Extensions\Queue\**" />
     <EmbeddedResource Remove="Collections\Extensions\Stack\**" />
-    <EmbeddedResource Remove="_Experimental\**" />
     <None Remove="Collections\Extensions\Queue\**" />
     <None Remove="Collections\Extensions\Stack\**" />
-    <None Remove="_Experimental\**" />
   </ItemGroup>
 </Project>

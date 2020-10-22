@@ -12,7 +12,6 @@
     <PackageTags>Axle.Resources.Yaml</PackageTags>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.Yaml.targets" />

@@ -1,5 +1,5 @@
 ﻿using System;
-using Axle.Conversion.Parsing;
+using Axle.Text.Parsing;
 using Axle.Verification;
 
 namespace Axle.Text.Formatting.Extensions

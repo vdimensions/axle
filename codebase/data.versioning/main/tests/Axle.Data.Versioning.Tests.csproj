@@ -12,7 +12,6 @@
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.4.0" />
   </ItemGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Data.Versioning.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
   <!-- <Import Project="../../../../ref/ext/NUnit.Packages.targets" /> -->

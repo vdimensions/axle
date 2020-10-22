@@ -47,7 +47,7 @@ namespace Axle.Configuration
             }
             private readonly IConfigSection _config;
 
-            public ConfigurationBindingValueProvider(IConfigSection config)
+            private ConfigurationBindingValueProvider(IConfigSection config)
             {
                 _config = config;
             }
@@ -100,34 +100,88 @@ namespace Axle.Configuration
             return string.IsNullOrEmpty(sectionName) ? config : config[sectionName].FirstOrDefault();
         }
         
+        /// <summary>
+        /// Obtains the <see cref="IConfigSection">configuration section</see> child of a given
+        /// <paramref name="config"/> object that corresponds to the specified section <paramref name="name"/>.
+        /// </summary>
+        /// <param name="config">
+        /// The <see cref="IConfigSection"/> instance to obtain the section from.
+        /// </param>
+        /// <param name="name">
+        /// The name of the section to obtain.
+        /// </param>
+        /// <returns>
+        /// A <see cref="IConfigSection"/> that corresponds to the configuration section child of the current
+        /// <paramref name="config"/> with the specified <paramref name="name"/>, or <c>null</c> if a configuration
+        /// section with that name does not exist.
+        /// </returns>
         public static IConfigSection GetSection(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
-            IConfigSection config, string sectionName) 
-            => Enumerable.FirstOrDefault(Enumerable.OfType<IConfigSection>(GetSections(config, sectionName)));
+            IConfigSection config, string name) 
+            => Enumerable.FirstOrDefault(Enumerable.OfType<IConfigSection>(GetSections(config, name)));
 
+        /// <summary>
+        /// Obtains a strongly-typed representation for the <see cref="IConfigSection">configuration section</see> child
+        /// of a given <paramref name="config"/> object that corresponds to the specified section
+        /// <paramref name="name"/>.
+        /// </summary>
+        /// <param name="config">
+        /// The <see cref="IConfigSection"/> instance to obtain the section from.
+        /// </param>
+        /// <param name="name">
+        /// The name of the section to obtain.
+        /// </param>
+        /// <param name="sectionType">
+        /// The type of the object representing the requested configuration section.
+        /// </param>
+        /// <returns>
+        /// An instance of the <paramref name="sectionType"/> that corresponds to the configuration section child of the
+        /// current <paramref name="config"/> with the specified <paramref name="name"/>, or <c>null</c> if a
+        /// configuration section with that name does not exist.
+        /// </returns>
         public static object GetSection(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
-            IConfigSection config, string sectionName, Type sectionType)
+            IConfigSection config, string name, Type sectionType)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
-            var configSection = GetSetting(config, sectionName);
+            var configSection = GetSetting(config, name);
             return configSection != null 
                 ? new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType)
                 : null;
         }
 
+        /// <summary>
+        /// Obtains a strongly-typed representation for the <see cref="IConfigSection">configuration section</see> child
+        /// of a given <paramref name="config"/> object that corresponds to the specified section
+        /// <paramref name="name"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the object representing the requested configuration section.
+        /// It must be a reference type, and must have a public default constructor.  
+        /// </typeparam>
+        /// <param name="config">
+        /// The <see cref="IConfigSection"/> instance to obtain the section from.
+        /// </param>
+        /// <param name="name">
+        /// The name of the section to obtain.
+        /// </param>
+        /// <returns>
+        /// An instance of the <typeparamref name="T"/> that corresponds to the configuration section child of the
+        /// current <paramref name="config"/> with the specified <paramref name="name"/>, or <c>null</c> if a
+        /// configuration section with that name does not exist.
+        /// </returns>
         public static T GetSection<T>(
             #if NETSTANDARD || NET35_OR_NEWER
             this 
             #endif
-            IConfigSection config, string sectionName) where T: class, new()
+            IConfigSection config, string name) where T: class, new()
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
-            var configSection = GetSetting(config, sectionName);
+            var configSection = GetSetting(config, name);
             return configSection != null
                 ? (T) new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T())
                 : null;

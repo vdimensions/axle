@@ -23,7 +23,7 @@ namespace Axle.Resources.Properties.Extraction
             : this(encoding, new ImmediatePropertiesValueExtractor(encoding)) { }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="PropertiesExtractor"/> class using the specified
+        /// Initializes a new instance of the <see cref="PropertiesExtractor"/> class using the specified
         /// <paramref name="fileName"/>.
         /// </summary>
         /// <param name="fileName">
@@ -31,7 +31,7 @@ namespace Axle.Resources.Properties.Extraction
         /// </param>
         public PropertiesExtractor(string fileName) : this(Encoding.UTF8, fileName) { }
         /// <summary>
-        /// Creates a new instance of the <see cref="PropertiesExtractor"/> class.
+        /// Initializes a new instance of the <see cref="PropertiesExtractor"/> class.
         /// </summary>
         public PropertiesExtractor() : this(Encoding.UTF8) { }
 

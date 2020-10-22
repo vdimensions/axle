@@ -13,7 +13,7 @@ namespace Axle.Data.Versioning.Migrations
     {
         private const int LockID = 1;
         
-        private HashSet<string> _migrationSupportPerDataSource = new HashSet<string>(StringComparer.Ordinal);
+        private readonly HashSet<string> _migrationSupportPerDataSource = new HashSet<string>(StringComparer.Ordinal);
         
         private void InitializeMigrationSupport(IDataSource dataSource)
         {
@@ -32,17 +32,17 @@ namespace Axle.Data.Versioning.Migrations
                     return;
                 }
 
-                Logger.Trace("Ensuring required database objects for migration changelog support are created on datasource {0}...", dataSource.Name);
+                Logger.Info("Ensuring required database objects for migration changelog support are created on datasource {0}...", dataSource.Name);
                 try
                 {
                     createCommand.ExecuteNonQuery(connection);
                     transaction.Commit();
-                    Logger.Trace("Database migration changelog support is ready. ");
+                    Logger.Info("Database migration changelog support is ready. ");
                 }
                 catch (Exception e)
                 {
                     transaction.Rollback();
-                    Logger.Fail(e, "An error has occurred while creating migration changelog. See inner exception for more details.");
+                    Logger.Fatal(e, "An error has occurred while creating migration changelog. See inner exception for more details.");
                     throw;
                 }
             }
@@ -88,7 +88,9 @@ namespace Axle.Data.Versioning.Migrations
                     if (count != 0)
                     {
                         // migration already ran
-                        Logger.Debug("Migration '{0}' has already been executed against '{1}' datasource. ", name,
+                        Logger.Debug(
+                            "Migration '{0}' has already been executed against '{1}' datasource. ", 
+                            name,
                             dataSource.Name);
                         return false;
                     }
@@ -157,7 +159,7 @@ namespace Axle.Data.Versioning.Migrations
                 switch (status)
                 {
                     case MigrationStatus.Successful:
-                        Logger.Trace("Migration '{0}' successfully executed in {1} ms. ", name, duration);
+                        Logger.Info("Migration '{0}' successfully executed in {1} ms. ", name, duration);
                         break;
                     case MigrationStatus.Failed:
                         var errorMessage = $"Migration '{name}' failed. ";
@@ -205,7 +207,15 @@ namespace Axle.Data.Versioning.Migrations
                 }
                 finally
                 {
-                    EndExecutingMigration(dataSource, updateMigrationQuery, unlockQuery, migrationId, name, status, migrationStopWatch.ElapsedMilliseconds, failureCause);
+                    EndExecutingMigration(
+                        dataSource, 
+                        updateMigrationQuery, 
+                        unlockQuery, 
+                        migrationId, 
+                        name, 
+                        status, 
+                        migrationStopWatch.ElapsedMilliseconds, 
+                        failureCause);
                     migrationStopWatch.Stop();
                 }
             }

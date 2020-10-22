@@ -33,7 +33,7 @@
         /// A <see cref="IConverter{TTarget,TSource}"/> instance which represents the inverted direction
         /// of the current <see cref="ITwoWayConverter{TSource,TTarget}"/>.
         /// </returns>
-        IConverter<TTarget, TSource> Invert();
+        ITwoWayConverter<TTarget, TSource> Invert();
 
         /// <summary>
         /// Performs the reverse conversion operation of the inherited <see cref="IConverter{TSource,TTarget}.TryConvert"/> method.

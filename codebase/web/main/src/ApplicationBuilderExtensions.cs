@@ -1,5 +1,7 @@
 ﻿using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
+using Axle.Web.AspNetCore.FileServer;
+using Axle.Web.AspNetCore.Hosting;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
@@ -24,12 +26,24 @@ namespace Axle.Web.AspNetCore
         }
         
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app, string[] args) => UseAspNetCore(app, WebHost.CreateDefaultBuilder(args));
+        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app, string[] args) 
+            => UseAspNetCore(app, WebHost.CreateDefaultBuilder(args));
         
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app) => UseAspNetCore(app, WebHost.CreateDefaultBuilder());
+        public static IApplicationBuilder UseAspNetCore(this IApplicationBuilder app) 
+            => UseAspNetCore(app, WebHost.CreateDefaultBuilder());
         
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
-        public static IApplicationBuilder UseKestrel(this IApplicationBuilder app) => app.ConfigureModules(m => m.Load<KestrelModule>());
+        public static IApplicationBuilder UseIISIntegration(this IApplicationBuilder app) 
+            => app.ConfigureModules(m => m.Load<IISIntegrationModule>());
+        
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public static IApplicationBuilder UseKestrel(this IApplicationBuilder app) 
+            => app.ConfigureModules(m => m.Load<KestrelModule>());
+        
+        
+        [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+        public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app) => 
+            app.ConfigureModules(m => m.Load<StaticFilesModule>());
     }
 }

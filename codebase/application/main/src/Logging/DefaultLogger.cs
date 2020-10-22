@@ -50,7 +50,7 @@ namespace Axle.Logging
                         case LogSeverity.Debug:
                             Console.ForegroundColor = ConsoleColor.DarkGray;
                             break;
-                        case LogSeverity.Trace:
+                        case LogSeverity.Info:
                             Console.ForegroundColor = ConsoleColor.Green;
                             break;
                         case LogSeverity.Warning:

@@ -81,6 +81,7 @@ namespace Axle.References
         }
         T IReference<T>.Value => Value;
         object IReference.Value => Value;
+        bool IReference.HasValue => true;
 
         private Singleton()
         {

@@ -13,7 +13,7 @@ using NUnit.Framework;
 
 namespace Axle.Resources.Yaml.Tests
 {
-    using UriParser = Axle.Conversion.Parsing.UriParser;
+    using UriParser = Axle.Text.Parsing.UriParser;
 
     [TestFixture]
     public class YamlResourceTests

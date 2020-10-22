@@ -11,7 +11,7 @@ namespace Axle.Reflection
     /// </summary>
     /// <seealso cref="IWriteOnlyProperty"/>
     /// <seealso cref="PropertyToken"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal sealed class WriteOnlyPropertyToken : PropertyToken, IWriteOnlyProperty

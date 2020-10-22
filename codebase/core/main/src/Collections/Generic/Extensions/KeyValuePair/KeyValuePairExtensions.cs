@@ -18,7 +18,7 @@ namespace Axle.Collections.Generic.Extensions.KeyValuePair
         /// </param>
         /// <param name="mappingFunc">
         /// A <see cref="Func{TValue,TMappedValue}"/> instance that will be used to map the key of the
-        /// <see cref="pair"/>.
+        /// <paramref name="pair"/>.
         /// </param>
         /// <typeparam name="TKey">
         /// The original key type of the <see cref="KeyValuePair{TKey,TValue}"/>.
@@ -64,7 +64,7 @@ namespace Axle.Collections.Generic.Extensions.KeyValuePair
         /// </param>
         /// <param name="mappingFunc">
         /// A <see cref="Func{TValue,TMappedValue}"/> instance that will be used to map the value of the
-        /// <see cref="pair"/>.
+        /// <paramref name="pair"/>.
         /// </param>
         /// <typeparam name="TKey">
         /// The key type of the <see cref="KeyValuePair{TKey,TValue}"/>.

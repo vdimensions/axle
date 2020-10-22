@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal sealed class GenericMethodToken : MethodToken, IGenericMethod

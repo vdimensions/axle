@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod

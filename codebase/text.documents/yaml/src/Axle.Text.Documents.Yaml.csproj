@@ -8,7 +8,6 @@
     <PackageReference Include="YamlDotNet" Version="5.0.0" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
 

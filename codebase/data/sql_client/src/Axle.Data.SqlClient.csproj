@@ -10,7 +10,6 @@
     <Description>Axle's data access library for Microsoft SQL Server</Description>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
   <Import Project="../../../../ref/ext/Reference.System.Data.SqlClient.props" />
 </Project>

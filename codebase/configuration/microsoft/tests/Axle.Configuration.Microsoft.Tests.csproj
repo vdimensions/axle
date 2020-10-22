@@ -21,7 +21,6 @@
     <PackageReference Include="Microsoft.Extensions.Configuration.EnvironmentVariables" Version="2.2.*" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.ConfigurationManager.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />

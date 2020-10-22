@@ -28,7 +28,6 @@
     <Compile Include="DateTime\DateTime.fs" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../FSharp.Core.Packages.targets" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
 </Project>

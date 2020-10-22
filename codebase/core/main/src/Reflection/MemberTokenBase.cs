@@ -12,7 +12,7 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
@@ -85,14 +85,22 @@ namespace Axle.Reflection
         public RuntimeTypeHandle TypeHandle => _typeHandle;
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Gets a reference to the <see cref="MemberInfo"/> obtained from the .NET framework.
+        /// </summary>
         public abstract T ReflectedMember { get; }
         #else
+        /// <summary>
+        /// Gets a reference to the <see cref="MemberInfo"/> obtained from the .NET framework.
+        /// </summary>
         public virtual T ReflectedMember { get; }
         #endif
     }
 
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
+    #endif
     internal abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>,
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo

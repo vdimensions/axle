@@ -92,7 +92,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Mvc", "
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "codebase", "codebase", "{D256F73B-FD7E-4C68-B18F-192E81240F9B}"
 	ProjectSection(SolutionItems) = preProject
-		codebase\Axle.Common.props = codebase\Axle.Common.props
+		codebase\Directory.Build.props = codebase\Directory.Build.props
 		codebase\Dependency.Versions.props = codebase\Dependency.Versions.props
 		codebase\FSharp.Core.Packages.targets = codebase\FSharp.Core.Packages.targets
 		codebase\NUnit.Packages.targets = codebase\NUnit.Packages.targets

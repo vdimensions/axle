@@ -33,7 +33,7 @@ namespace Axle.Security.AccessControl.Authorization
         }
         private IEnumerable<IPrincipal> ExpandPrincipals(string principal)
         {
-            var hashSet = new HashSet<IPrincipal>(StringComparer.Ordinal.Adapt((IPrincipal p) => p.Name));
+            var hashSet = new HashSet<IPrincipal>(StringComparer.Ordinal.Lens((IPrincipal p) => p.Name));
             ExpandPrincipals(principal, hashSet);
             return hashSet;
         }

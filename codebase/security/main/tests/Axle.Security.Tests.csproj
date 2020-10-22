@@ -11,7 +11,6 @@
     <Folder Include="Cryptography" />
   </ItemGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Security.targets" />
   <Import Project="../../../../ref/ext/NUnit.Packages.targets" />

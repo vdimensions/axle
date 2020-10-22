@@ -10,7 +10,7 @@ namespace Axle.Reflection
     /// A class representing an event object obtained via reflection. 
     /// </summary>
     /// <seealso cref="IEvent"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal class EventToken : MemberTokenBase<EventInfo>, IEquatable<EventToken>, IEvent
@@ -84,6 +84,7 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IEnumerable<IAccessor> IAccessible.Accessors => new IAccessor[] { _combineAccessor, _removeAccessor };
         
+        /// <inheritdoc />
         public override EventInfo ReflectedMember => _eventInfo;
     }
 }

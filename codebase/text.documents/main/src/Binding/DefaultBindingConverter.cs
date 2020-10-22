@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Reflection;
 using System.Security;
 using Axle.Conversion;
-using Axle.Conversion.Parsing;
+using Axle.Text.Parsing;
 using Axle.Verification;
 
 namespace Axle.Text.Documents.Binding
@@ -75,7 +75,7 @@ namespace Axle.Text.Documents.Binding
                 { typeof(TimeSpan?),        new BoxingConverter<TimeSpan?>(timeSpanParser.GetNullableParser()) },
                 { typeof(Guid?),            new BoxingConverter<Guid?>(guidParser.GetNullableParser()) },
                 #endif
-                { typeof(Uri),              new BoxingConverter<Uri>(new Axle.Conversion.Parsing.UriParser()) },
+                { typeof(Uri),              new BoxingConverter<Uri>(new Axle.Text.Parsing.UriParser()) },
                 { typeof(Type),             new BoxingConverter<Type>(new TypeParser()) },
                 { typeof(Assembly),         new BoxingConverter<Assembly>(new AssemblyParser()) },
                 { typeof(Version),          new BoxingConverter<Version>(new VersionParser()) },

@@ -4,7 +4,6 @@
     <TargetFrameworks>netstandard2.1;netstandard2.0;net45;net40;net35;net20</TargetFrameworks>
   </PropertyGroup>
   
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />

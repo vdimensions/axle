@@ -10,6 +10,5 @@
     <Description>Axle's data access library for OLE DB</Description>
   </PropertyGroup>
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
 </Project>

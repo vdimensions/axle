@@ -35,7 +35,6 @@
 <!--    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.*" />-->
 <!--  </ItemGroup>-->
 
-  <Import Project="../../../Axle.Common.props" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
 </Project>
