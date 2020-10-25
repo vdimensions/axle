@@ -1,4 +1,5 @@
-﻿using Axle.DependencyInjection;
+﻿using System.Diagnostics.CodeAnalysis;
+using Axle.DependencyInjection;
 using Axle.Modularity;
 
 namespace Axle.Application.Services
@@ -15,11 +16,12 @@ namespace Axle.Application.Services
         }
         
         [ModuleInit]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         internal void Initialize(IDependencyExporter exporter)
         {
             foreach (var service in _serviceCollector)
             {
-                exporter.Export(service.Instance);
+                exporter.Export(service.Instance, service.Name ?? string.Empty);
             }
         }
     }

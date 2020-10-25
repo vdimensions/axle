@@ -16,21 +16,30 @@ namespace Axle.Application.Services
                 #else
                 .Union(type.GetInterfaces())
                 #endif
-                .SingleOrDefault(t => new TypeIntrospector(t).GetAttributes<ServiceAttribute>().Length > 0);
-            result = serviceType == null ? null : new ServiceInfo(instance, serviceType);
+                .Select(
+                    t => new
+                    {
+                        Type = t, 
+                        Attribute = new TypeIntrospector(t).GetAttributes<ServiceAttribute>().Cast<ServiceAttribute>().SingleOrDefault()
+                    })
+                .SingleOrDefault(x => x.Attribute != null);
+            result = serviceType == null ? null : new ServiceInfo(instance, serviceType.Type, serviceType.Attribute.Name);
             return result != null;
         }
         
         private readonly object _instance;
         private readonly Type _serviceType;
+        private readonly string _name;
 
-        private ServiceInfo(object instance, Type serviceType)
+        private ServiceInfo(object instance, Type serviceType, string name)
         {
             _instance = instance;
             _serviceType = serviceType;
+            _name = name;
         }
 
         public object Instance => _instance;
         public Type ServiceType => _serviceType;
+        public string Name => _name;
     }
 }
