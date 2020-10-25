@@ -29,7 +29,7 @@ namespace Axle.Resources.Tests
             var resourceManager = CreateResourceManager();
             var fileResource = resourceManager.Load("testBundle", "FileSystemTestFile.txt", CultureInfo.CurrentCulture);
 
-            Assert.IsNotNull(fileResource, "Unable to find LL2H.txt");
+            Assert.IsNotNull(fileResource, "Unable to find FileSystemTestFile.txt");
             Assert.AreEqual("testBundle", fileResource.Bundle);
             Assert.AreEqual(CultureInfo.InvariantCulture, fileResource.Culture);
 

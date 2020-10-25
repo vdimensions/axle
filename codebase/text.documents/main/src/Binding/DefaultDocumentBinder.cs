@@ -117,21 +117,28 @@ namespace Axle.Text.Documents.Binding
                             var dictionaryValueProviders = new DocumentDictionaryValueProvider(collectionProvider)
                                 .GetChildren()
                                 .ToArray();
-                            var dictionaryValues = new Dictionary<string, object>(StringComparer.Ordinal);
+                            var dictionaryValues = new Dictionary<object, object>();
                             for (var i = 0; i < dictionaryValueProviders.Length; ++i)
                             {
                                 var provider = dictionaryValueProviders[i];
-                                var value = TryBind(
-                                    objectProvider,
-                                    converter,
-                                    provider,
-                                    false,
-                                    instance != null ? dva.ItemAt((IDictionary) instance, provider.Name) : null,
-                                    collectionAdapter.ElementType,
-                                    out var item)
-                                    ? item
-                                    : null;
-                                dictionaryValues[provider.Name] = value;
+                                
+                                if (converter.TryConvertMemberValue(
+                                    CharSequence.Create(provider.Name),
+                                    dva.KeyType,
+                                    out var key))
+                                {
+                                    var value = TryBind(
+                                            objectProvider,
+                                            converter,
+                                            provider,
+                                            false,
+                                            instance != null ? dva.ItemAt((IDictionary) instance, key) : null,
+                                            collectionAdapter.ElementType,
+                                            out var item)
+                                        ? item
+                                        : null;
+                                    dictionaryValues[key] = value; 
+                                }
                             }
 
                             boundValue = dva.SetItems(instance, dictionaryValues);

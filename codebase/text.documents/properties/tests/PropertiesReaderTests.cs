@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using Axle.Text.Documents.Binding;
+using Axle.Text.Parsing;
 using NUnit.Framework;
 
 namespace Axle.Text.Documents.Properties.Tests
@@ -14,7 +15,11 @@ namespace Axle.Text.Documents.Properties.Tests
     {
         private sealed class HasDictionaryProperty
         {
-            public Dictionary<string, Dictionary<string, string>> System { get; set; } = new Dictionary<string, Dictionary<string, string>>(StringComparer.Ordinal);
+            public enum Key
+            {
+                Text
+            }
+            public Dictionary<Key, Dictionary<string, string>> System { get; set; } = new Dictionary<Key, Dictionary<string, string>>();
         }
         
         [Test]
@@ -59,6 +64,7 @@ namespace Axle.Text.Documents.Properties.Tests
             Assert.IsNotNull(dictionary);
             Assert.IsNotEmpty(dictionary);
         }
+        
         [Test]
         public void TestNestedDictionaryBinding()
         {
@@ -68,13 +74,15 @@ namespace Axle.Text.Documents.Properties.Tests
             var reader = new PropertiesDocumentReader(StringComparer.OrdinalIgnoreCase);
             var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
 
-            var binder = new DefaultDocumentBinder();
+            var converter = new BindingConverter();
+            var binder = new DefaultDocumentBinder(new ReflectionObjectProvider(), converter);
+            converter.RegisterConverter<HasDictionaryProperty.Key>(new EnumParser<HasDictionaryProperty.Key>());
 
             var result = new HasDictionaryProperty();
             binder.Bind(data, result);
             Assert.IsNotNull(result.System);
             Assert.IsNotEmpty(result.System);
-            Assert.IsNotEmpty(result.System["Text"]);
+            Assert.IsNotEmpty(result.System[HasDictionaryProperty.Key.Text]);
         }
     }
 }

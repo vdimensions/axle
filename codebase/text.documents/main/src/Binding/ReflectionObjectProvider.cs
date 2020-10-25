@@ -164,17 +164,17 @@ namespace Axle.Text.Documents.Binding
         }
         #endif
         
-        internal sealed class GenericDictionaryAdapter<T> : IDocumentDictionaryValueAdapter
+        internal sealed class GenericDictionaryAdapter<TKey, T> : IDocumentDictionaryValueAdapter
         {
             object IDocumentCollectionValueAdapter.ItemAt(IEnumerable collection, int index) => throw new NotSupportedException();
-            public object ItemAt(IDictionary dictionary, string key) => dictionary.Contains(key) ? dictionary[key] : null;
+            public object ItemAt(IDictionary dictionary, object key) => dictionary.Contains(key) ? dictionary[key] : null;
 
             object IDocumentCollectionValueAdapter.SetItems(object collection, IEnumerable items) => SetItems(collection as IDictionary, items as IDictionary);
             public object SetItems(IDictionary dictionary, IDictionary items)
             {
                 if (dictionary == null)
                 {
-                    dictionary = new Dictionary<string, T>();
+                    dictionary = new Dictionary<TKey, T>();
                 }
                 else
                 {
@@ -187,6 +187,7 @@ namespace Axle.Text.Documents.Binding
                 return dictionary;
             }
 
+            public Type KeyType => typeof(TKey);
             public Type ElementType => typeof(T);
         }
 
@@ -273,7 +274,8 @@ namespace Axle.Text.Documents.Binding
         public IDocumentCollectionValueAdapter GetCollectionAdapter(Type type)
         {
             var introspector = new TypeIntrospector(type);
-            Type collectionType = type, elementType = null, adapterType = null;
+            Type collectionType = type, adapterType = null;
+            var elementTypes = new Type[0];
             var adapterTypesMap = new Dictionary<Type, Type>()
             {
                 {typeof(LinkedList<>), typeof(GenericLinkedListValueAdapter<>)},
@@ -281,7 +283,7 @@ namespace Axle.Text.Documents.Binding
                 {typeof(IList<>), typeof(GenericListValueAdapter<>)},
                 {typeof(ICollection<>), typeof(GenericListValueAdapter<>)},
                 {typeof(IEnumerable<>), typeof(GenericListValueAdapter<>)},
-                {typeof(IDictionary<,>), typeof(GenericDictionaryAdapter<>)},
+                {typeof(IDictionary<,>), typeof(GenericDictionaryAdapter<,>)},
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 {typeof(ArrayList), typeof(RawListValueAdapter)},
                 {typeof(IList), typeof(RawListValueAdapter)},
@@ -291,24 +293,24 @@ namespace Axle.Text.Documents.Binding
             };
             if (type.IsArray)
             {
-                elementType = type.GetElementType();
+                elementTypes = new[]{ type.GetElementType() };
                 adapterType = typeof(GenericArrayValueAdapter<>);
             }
             else if (introspector.GetGenericTypeDefinition() is IGenericTypeIntrospector genericIntrospector)
             {
                 var genericDefinitionType = genericIntrospector.GenericDefinitionType;
-                var dictValueType = introspector.GetInterfaces()
+                var dictValueTypes = introspector.GetInterfaces()
                     .Select(i => i.GetGenericTypeDefinition())
-                    .Where(i => i != null && i.GenericDefinitionType == typeof(IDictionary<,>) && i.GenericTypeArguments[0] == typeof(string))
-                    .Select(x => x.GenericTypeArguments[1])
+                    .Where(i => i != null && i.GenericDefinitionType == typeof(IDictionary<,>))
+                    .Select(x => x.GenericTypeArguments)
                     .SingleOrDefault();
-                elementType = dictValueType ?? genericIntrospector.GenericTypeArguments[0];
-                collectionType = dictValueType != null ? typeof(IDictionary<,>) : genericDefinitionType;
+                elementTypes = dictValueTypes ?? new[]{ genericIntrospector.GenericTypeArguments[0] };
+                collectionType = dictValueTypes != null ? typeof(IDictionary<,>) : genericDefinitionType;
             }
             else
             {
                 // raw collections do not need element type
-                elementType = null;
+                elementTypes = null;
             }
 
             if (adapterType == null && !adapterTypesMap.TryGetValue(collectionType, out adapterType))
@@ -316,10 +318,10 @@ namespace Axle.Text.Documents.Binding
                 return null;
             }
 
-            var adapterIntrospector = elementType != null 
+            var adapterIntrospector = elementTypes != null 
                 ? new TypeIntrospector(adapterType)
                     .GetGenericTypeDefinition()
-                    .MakeGenericType(elementType)
+                    .MakeGenericType(elementTypes)
                     .Introspect()
                 : new TypeIntrospector(adapterType);
 
