@@ -1,10 +1,59 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using Axle.Verification;
 
 namespace Axle.Text.Documents.Binding
 {
+    internal sealed class DocumentDictionaryValueProvider : IDocumentComplexValueProvider
+    {
+        private static IEnumerable<IDocumentValueProvider> ExpandChildren(IDocumentValueProvider documentValueProvider)
+        {
+            switch (documentValueProvider)
+            {
+                case IDocumentComplexValueProvider complexValueProvider:
+                    foreach (var child in complexValueProvider.GetChildren())
+                    {
+                        yield return child;
+                    }
+                    break;
+                case IDocumentCollectionValueProvider collectionValueProvider:
+                    foreach (var sibling in collectionValueProvider)
+                    {
+                        foreach (var child in ExpandChildren(sibling))
+                        {
+                            yield return child;
+                        }
+                    }
+                    break;
+            }
+        }
+        
+        private readonly Dictionary<string, IDocumentValueProvider> _valueValueProviders;
+
+        public DocumentDictionaryValueProvider(IDocumentCollectionValueProvider valueProvider)
+        {
+            Name = valueProvider.Name;
+            var comparer = StringComparer.Ordinal;
+            _valueValueProviders = valueProvider
+                .SelectMany(ExpandChildren)
+                .GroupBy(x => x.Name, comparer)
+                .ToDictionary(
+                    x => x.Key,
+                    x => (IDocumentValueProvider) new DocumentCollectionValueProvider(x.Key, x.ToArray()),
+                    comparer);
+        }
+
+        public bool TryGetValue(string member, out IDocumentValueProvider value) => _valueValueProviders.TryGetValue(member, out value);
+
+        public IEnumerable<IDocumentValueProvider> GetChildren() => _valueValueProviders.Values;
+
+        public string Name { get; }
+
+        public IDocumentValueProvider this[string member] => TryGetValue(member, out var value) ? value : null;
+    }
+    
     /// <summary>
     /// A general-purpose implementation of the <see cref="IDocumentBinder"/> interface.
     /// </summary>
@@ -40,6 +89,7 @@ namespace Axle.Text.Documents.Binding
                 IObjectProvider objectProvider, 
                 IBindingConverter converter, 
                 IDocumentValueProvider valueProvider, 
+                bool isDictionary,
                 object instance, 
                 Type targetType, 
                 out object boundValue)
@@ -49,53 +99,83 @@ namespace Axle.Text.Documents.Binding
                 case IDocumentSimpleValueProvider svp:
                     return converter.TryConvertMemberValue(svp.Value, targetType, out boundValue);
                 
-                case IDocumentCollectionProvider collectionProvider:
-                    var collectionAdapter = collectionProvider.CollectionValueAdapter ??
+                case IDocumentCollectionValueProvider collectionProvider:
+                    var collectionAdapter = collectionProvider.ValueAdapter ??
                                             objectProvider.GetCollectionAdapter(targetType);
-                    if (collectionAdapter != null)
+                    switch (collectionAdapter)
                     {
-                        var providers = collectionProvider.ToArray();
-                        var values = new object[providers.Length];
-                        for (var i = 0; i < providers.Length; ++i)
-                        {
-                            var provider = providers[i];
-                            var value = TryBind(
+                        case null:
+                            return TryBind(
                                 objectProvider,
                                 converter,
-                                provider,
-                                instance != null ? collectionAdapter.ItemAt((IEnumerable) instance, i) : null,
-                                collectionAdapter.ElementType,
-                                out var item) ? item : null;
-                            values[i] = value;
-                        }
-                        boundValue = collectionAdapter.SetItems(instance, values);
-                        return true;
+                                collectionProvider.LastOrDefault(),
+                                false,
+                                instance,
+                                targetType,
+                                out boundValue);
+                        case IDocumentDictionaryValueAdapter dva:
+                            var dictionaryValueProviders = new DocumentDictionaryValueProvider(collectionProvider)
+                                .GetChildren()
+                                .ToArray();
+                            var dictionaryValues = new Dictionary<string, object>(StringComparer.Ordinal);
+                            for (var i = 0; i < dictionaryValueProviders.Length; ++i)
+                            {
+                                var provider = dictionaryValueProviders[i];
+                                var value = TryBind(
+                                    objectProvider,
+                                    converter,
+                                    provider,
+                                    false,
+                                    instance != null ? dva.ItemAt((IDictionary) instance, provider.Name) : null,
+                                    collectionAdapter.ElementType,
+                                    out var item)
+                                    ? item
+                                    : null;
+                                dictionaryValues[provider.Name] = value;
+                            }
+
+                            boundValue = dva.SetItems(instance, dictionaryValues);
+                            return true;
+                        default:
+                            var collectionValueProviders = collectionProvider.ToArray();
+                            var collectionValues = new object[collectionValueProviders.Length];
+                            for (var i = 0; i < collectionValueProviders.Length; ++i)
+                            {
+                                var provider = collectionValueProviders[i];
+                                var value = TryBind(
+                                    objectProvider,
+                                    converter,
+                                    provider,
+                                    false,
+                                    instance != null ? collectionAdapter.ItemAt((IEnumerable) instance, i) : null,
+                                    collectionAdapter.ElementType,
+                                    out var item)
+                                    ? item
+                                    : null;
+                                collectionValues[i] = value;
+                            }
+
+                            boundValue = collectionAdapter.SetItems(instance, collectionValues);
+                            return true;
                     }
-
-                    return TryBind(
-                        objectProvider, 
-                        converter, 
-                        collectionProvider.LastOrDefault(), 
-                        instance, 
-                        targetType, 
-                        out boundValue);
-
                 case IDocumentComplexValueProvider complexProvider:
                     var cAdapter = objectProvider.GetCollectionAdapter(targetType);
+                    if (instance == null)
+                    {
+                        instance = objectProvider.CreateInstance(targetType);
+                    }
                     if (cAdapter != null)
                     {
                         return TryBind(
                             objectProvider,
                             converter,
-                            new DocumentCollectionProvider(complexProvider.Name, cAdapter, complexProvider),
+                            new DocumentCollectionValueProvider(complexProvider.Name, cAdapter, complexProvider),
+                            false,
                             instance,
                             targetType,
                             out boundValue);
                     }
-                    if (instance == null)
-                    {
-                        instance = objectProvider.CreateInstance(targetType);
-                    }
+
                     var members = objectProvider.GetMembers(instance);
                     foreach (var member in members)
                     {
@@ -108,6 +188,7 @@ namespace Axle.Text.Documents.Binding
                                 objectProvider,
                                 converter,
                                 memberValueProvider,
+                                false,
                                 memberInstance,
                                 memberType,
                                 out var memberValue))
@@ -116,6 +197,7 @@ namespace Axle.Text.Documents.Binding
                             }
                         }
                     }
+
                     boundValue = instance;
                     return true;
             }
@@ -132,6 +214,7 @@ namespace Axle.Text.Documents.Binding
                     ObjectProvider, 
                     Converter, 
                     memberValueProvider, 
+                    false,
                     instance, 
                     instance.GetType(), 
                     out var boundValue) 
@@ -145,7 +228,7 @@ namespace Axle.Text.Documents.Binding
             Verifier.IsNotNull(Verifier.VerifyArgument(memberValueProvider, nameof(memberValueProvider)));
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             var instance = ObjectProvider.CreateInstance(type);
-            return TryBind(ObjectProvider, Converter, memberValueProvider, instance, type, out var boundValue) 
+            return TryBind(ObjectProvider, Converter, memberValueProvider, false, instance, type, out var boundValue) 
                 ? boundValue 
                 : instance;
         }

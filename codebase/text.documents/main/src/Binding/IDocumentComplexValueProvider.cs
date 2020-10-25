@@ -1,4 +1,6 @@
-﻿namespace Axle.Text.Documents.Binding
+﻿using System.Collections.Generic;
+
+namespace Axle.Text.Documents.Binding
 {
     /// <summary>
     /// An interface representing an binder object provider; that is a type of <see cref="IDocumentValueProvider"/> 
@@ -21,6 +23,13 @@
         /// <c>true</c>, if there are values for the given <paramref name="member"/>; <c>false</c> otherwise.
         /// </returns>
         bool TryGetValue(string member, out IDocumentValueProvider value);
+
+        /// <summary>
+        /// Gets a collection of values representing the logical children of the node represented by the current
+        /// <see cref="IDocumentComplexValueProvider"/> instance.
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<IDocumentValueProvider> GetChildren();
 
         /// <summary>
         /// Gets the value(s) associated for the given <paramref name="member"/>.

@@ -14,7 +14,7 @@ namespace Axle.Text.Documents.Binding
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(documentBinder, nameof(documentBinder)));
             Verifier.IsNotNull(Verifier.VerifyArgument(document, nameof(document)));
-            return documentBinder.Bind(new DocumentValueProvider(document), type);
+            return documentBinder.Bind((IDocumentComplexValueProvider) DocumentValueProvider.Get(document), type);
         }
 
         public static object Bind(
@@ -26,7 +26,7 @@ namespace Axle.Text.Documents.Binding
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(documentBinder, nameof(documentBinder)));
             Verifier.IsNotNull(Verifier.VerifyArgument(document, nameof(document)));
-            return documentBinder.Bind(new DocumentValueProvider(document), instance);
+            return documentBinder.Bind((IDocumentComplexValueProvider) DocumentValueProvider.Get(document), instance);
         }
     }
 }

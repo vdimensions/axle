@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using System.Reflection;
 
 using Axle.Verification;
@@ -196,6 +197,18 @@ namespace Axle.Reflection
                 throw new InvalidOperationException("Unable to instantiate a generic definition type. You need to supply type arguments first.");
             }
             return Activator.CreateInstance(IntrospectedType, args);
+        }
+        
+        /// <inheritdoc />
+        public ITypeIntrospector[] GetInterfaces()
+        {
+            return IntrospectedType
+                #if NETSTANDARD
+                .GetTypeInfo()
+                #endif
+                .GetInterfaces()
+                .Select(i => new TypeIntrospector(i))
+                .ToArray();
         }
 
         /// <inheritdoc />

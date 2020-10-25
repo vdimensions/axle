@@ -13,11 +13,11 @@ namespace Axle.Configuration
     /// </summary>
     public static class ConfigSectionExtensions
     {
-        private sealed class ConfigurationBindingCollectionProvider : IDocumentCollectionProvider
+        private sealed class ConfigurationBindingCollectionValueProvider : IDocumentCollectionValueProvider
         {
             private readonly IEnumerable<IDocumentValueProvider> _valueProviders;
             
-            public ConfigurationBindingCollectionProvider(string name, IEnumerable<IDocumentValueProvider> valueProviders)
+            public ConfigurationBindingCollectionValueProvider(string name, IEnumerable<IDocumentValueProvider> valueProviders)
             {
                 Name = name;
                 _valueProviders = valueProviders;
@@ -27,7 +27,7 @@ namespace Axle.Configuration
 
             IEnumerator IEnumerable.GetEnumerator() { return GetEnumerator(); }
 
-            public IDocumentCollectionValueAdapter CollectionValueAdapter => null;
+            public IDocumentCollectionValueAdapter ValueAdapter => null;
             public string Name { get; }
         }
         
@@ -41,7 +41,7 @@ namespace Axle.Configuration
                         return null;
                     case IConfigSection section:
                         return new ConfigurationBindingValueProvider(section);
-                    case IConfigSetting _:
+                    default:
                         return new DocumentSimpleValueProvider(string.Empty, setting.Value);
                 }
             }
@@ -54,6 +54,15 @@ namespace Axle.Configuration
 
             public bool TryGetValue(string member, out IDocumentValueProvider value) 
                 => (value = this[member]) != null;
+
+            public IEnumerable<IDocumentValueProvider> GetChildren()
+            {
+                return _config.Keys
+                    .SelectMany(x => _config[x])
+                    .Select(Get)
+                    .Where(x => x != null)
+                    .ToList();
+            }
 
             public IDocumentValueProvider this[string member]
             {
@@ -69,7 +78,7 @@ namespace Axle.Configuration
                             .ToList();
                     }
 
-                    return new ConfigurationBindingCollectionProvider(member, settings.Select(Get));
+                    return new ConfigurationBindingCollectionValueProvider(member, settings.Select(Get));
                 }
             }
         

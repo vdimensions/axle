@@ -262,6 +262,12 @@ namespace Axle.Reflection
         object CreateInstance(params object[] args);
 
         /// <summary>
+        /// When overridden in a derived class, gets all the interfaces implemented or inherited by the
+        /// <see cref="IntrospectedType"/>.
+        /// </summary>
+        ITypeIntrospector[] GetInterfaces();
+
+        /// <summary>
         /// The <see cref="Type"/> which the current <see cref="ITypeIntrospector"/> instance provides reflected
         /// information for.
         /// </summary>

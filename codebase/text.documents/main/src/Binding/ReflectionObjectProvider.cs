@@ -14,9 +14,8 @@ namespace Axle.Text.Documents.Binding
     {
         internal abstract class CollectionValueAdapter : IDocumentCollectionValueAdapter
         {
-            protected CollectionValueAdapter(Type collectionType, Type elementType)
+            protected CollectionValueAdapter(Type elementType)
             {
-                CollectionType = collectionType;
                 ElementType = elementType;
             }
 
@@ -25,14 +24,13 @@ namespace Axle.Text.Documents.Binding
 
             public abstract object SetItems(object collection, IEnumerable items);
 
-            public Type CollectionType { get; }
             public Type ElementType { get; }
         }
 
-        internal abstract class RawCollectionValueAdapter< TCollection> : CollectionValueAdapter
+        internal abstract class RawCollectionValueAdapter<TCollection> : CollectionValueAdapter
             where TCollection : class, IEnumerable
         {
-            protected RawCollectionValueAdapter() : base(typeof(TCollection), typeof(object)) { }
+            protected RawCollectionValueAdapter() : base(typeof(object)) { }
 
             public sealed override object ItemAt(IEnumerable collection, int index)
             {
@@ -50,7 +48,7 @@ namespace Axle.Text.Documents.Binding
         internal abstract class GenericCollectionValueAdapter<T, TCollection> : CollectionValueAdapter
             where TCollection: class, IEnumerable<T>
         {
-            protected GenericCollectionValueAdapter() : base(typeof(TCollection), typeof(T)) { }
+            protected GenericCollectionValueAdapter() : base(typeof(T)) { }
 
             public sealed override object ItemAt(IEnumerable collection, int index)
             {
@@ -165,6 +163,32 @@ namespace Axle.Text.Documents.Binding
             }
         }
         #endif
+        
+        internal sealed class GenericDictionaryAdapter<T> : IDocumentDictionaryValueAdapter
+        {
+            object IDocumentCollectionValueAdapter.ItemAt(IEnumerable collection, int index) => throw new NotSupportedException();
+            public object ItemAt(IDictionary dictionary, string key) => dictionary.Contains(key) ? dictionary[key] : null;
+
+            object IDocumentCollectionValueAdapter.SetItems(object collection, IEnumerable items) => SetItems(collection as IDictionary, items as IDictionary);
+            public object SetItems(IDictionary dictionary, IDictionary items)
+            {
+                if (dictionary == null)
+                {
+                    dictionary = new Dictionary<string, T>();
+                }
+                else
+                {
+                    dictionary.Clear();
+                }
+                foreach (DictionaryEntry entry in items)
+                {
+                    dictionary.Add(entry.Key, entry.Value);
+                }
+                return dictionary;
+            }
+
+            public Type ElementType => typeof(T);
+        }
 
         private static object CreateInstance(ITypeIntrospector introspector)
         {
@@ -257,6 +281,7 @@ namespace Axle.Text.Documents.Binding
                 {typeof(IList<>), typeof(GenericListValueAdapter<>)},
                 {typeof(ICollection<>), typeof(GenericListValueAdapter<>)},
                 {typeof(IEnumerable<>), typeof(GenericListValueAdapter<>)},
+                {typeof(IDictionary<,>), typeof(GenericDictionaryAdapter<>)},
                 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
                 {typeof(ArrayList), typeof(RawListValueAdapter)},
                 {typeof(IList), typeof(RawListValueAdapter)},
@@ -272,8 +297,13 @@ namespace Axle.Text.Documents.Binding
             else if (introspector.GetGenericTypeDefinition() is IGenericTypeIntrospector genericIntrospector)
             {
                 var genericDefinitionType = genericIntrospector.GenericDefinitionType;
-                collectionType = genericDefinitionType;
-                elementType = genericIntrospector.GenericTypeArguments[0];
+                var dictValueType = introspector.GetInterfaces()
+                    .Select(i => i.GetGenericTypeDefinition())
+                    .Where(i => i != null && i.GenericDefinitionType == typeof(IDictionary<,>) && i.GenericTypeArguments[0] == typeof(string))
+                    .Select(x => x.GenericTypeArguments[1])
+                    .SingleOrDefault();
+                elementType = dictValueType ?? genericIntrospector.GenericTypeArguments[0];
+                collectionType = dictValueType != null ? typeof(IDictionary<,>) : genericDefinitionType;
             }
             else
             {

@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using Axle.Text.Documents.Binding;
 using NUnit.Framework;
 
 namespace Axle.Text.Documents.Properties.Tests
@@ -10,6 +12,11 @@ namespace Axle.Text.Documents.Properties.Tests
     [TestFixture]
     public class PropertiesReaderTests
     {
+        private sealed class HasDictionaryProperty
+        {
+            public Dictionary<string, Dictionary<string, string>> System { get; set; } = new Dictionary<string, Dictionary<string, string>>(StringComparer.Ordinal);
+        }
+        
         [Test]
         public void TestDataLookup()
         {
@@ -34,6 +41,40 @@ namespace Axle.Text.Documents.Properties.Tests
             Assert.IsNotNull(item5, "Lookup for value failed for complex key {0}", "System.Text.DefaultEncoding");
             Assert.IsNotNull(item6, "Lookup for value in object {1} failed for simple key {0}", "Encoding", "System.Text");
             Assert.IsNotNull(item7, "Lookup for value in object {1} failed for simple key {0}", "DefaultEncoding", "System.Text");
+        }
+        
+        [Test]
+        public void TestDictionaryBinding()
+        {
+            var propertiesPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "data.properties");
+            var reader = new PropertiesDocumentReader(StringComparer.OrdinalIgnoreCase);
+            var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
+
+            var dictionary = new Dictionary<string, string>();
+            var binder = new DefaultDocumentBinder();
+            binder.Bind(data, dictionary);
+            
+            Assert.IsNotNull(dictionary);
+            Assert.IsNotEmpty(dictionary);
+        }
+        [Test]
+        public void TestNestedDictionaryBinding()
+        {
+            var propertiesPath = Path.Combine(
+                Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location),
+                "data.properties");
+            var reader = new PropertiesDocumentReader(StringComparer.OrdinalIgnoreCase);
+            var data = reader.Read(File.OpenRead(propertiesPath), Encoding.UTF8);
+
+            var binder = new DefaultDocumentBinder();
+
+            var result = new HasDictionaryProperty();
+            binder.Bind(data, result);
+            Assert.IsNotNull(result.System);
+            Assert.IsNotEmpty(result.System);
+            Assert.IsNotEmpty(result.System["Text"]);
         }
     }
 }

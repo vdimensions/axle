@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using Axle.Reflection;
 
 namespace Axle.Text.Documents.Binding
@@ -34,13 +33,5 @@ namespace Axle.Text.Documents.Binding
         object CreateInstance(Type type);
 
         IDocumentCollectionValueAdapter GetCollectionAdapter(Type type);
-    }
-
-    public interface IDocumentCollectionValueAdapter
-    {
-        object ItemAt(IEnumerable collection, int index);
-        object SetItems(object collection, IEnumerable items);
-        Type CollectionType { get; }
-        Type ElementType { get; }
     }
 }
