@@ -20,7 +20,7 @@ namespace Axle.Application.Services
                     t => new
                     {
                         Type = t, 
-                        Attribute = new TypeIntrospector(t).GetAttributes<ServiceAttribute>().Cast<ServiceAttribute>().SingleOrDefault()
+                        Attribute = new TypeIntrospector(t).GetAttributes<ServiceAttribute>().Select(x => x.Attribute).Cast<ServiceAttribute>().SingleOrDefault()
                     })
                 .SingleOrDefault(x => x.Attribute != null);
             result = serviceType == null ? null : new ServiceInfo(instance, serviceType.Type, serviceType.Attribute.Name);
