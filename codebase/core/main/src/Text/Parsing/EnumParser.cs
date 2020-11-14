@@ -11,7 +11,12 @@ namespace Axle.Text.Parsing
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class EnumParser<T> : AbstractParser<T> where T: struct
+    public sealed class EnumParser<T> : AbstractParser<T> 
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        where T: struct, IComparable, IConvertible, IFormattable
+        #else
+        where T: struct, IComparable, IFormattable
+        #endif
     {
         /// <inheritdoc />
         protected override T DoParse(CharSequence value, IFormatProvider formatProvider)

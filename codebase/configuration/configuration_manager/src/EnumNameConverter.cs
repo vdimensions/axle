@@ -14,7 +14,12 @@ namespace Axle.Configuration.ConfigurationManager
     /// <typeparam name="T">
     /// A valid enum type.
     /// </typeparam>
-    public sealed class EnumNameConverter<T> : ConfigurationConverter<T> where T: struct, IComparable, IFormattable
+    public sealed class EnumNameConverter<T> : ConfigurationConverter<T> 
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        where T: struct, IComparable, IConvertible, IFormattable
+        #else
+        where T: struct, IComparable, IFormattable
+        #endif
     {
         private readonly EnumParser<T> enumParser = new EnumParser<T>();
 
