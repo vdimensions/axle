@@ -24,14 +24,15 @@ namespace Axle.Resources.Extraction
                 Uri[] locations, 
                 CultureInfo culture, 
                 IEnumerable<IResourceExtractor> extractors)
-            : this(bundle, locations, 0, culture, extractors) { }
+            : this(bundle, locations, 0, culture, extractors, null) { }
             //: this(bundle, locations, -1, culture, extractors) { }
         private ResourceContext(
                 string bundle, 
                 Uri[] locations, 
                 int currentLocationIndex, 
                 CultureInfo culture, 
-                IEnumerable<IResourceExtractor> extractors)
+                IEnumerable<IResourceExtractor> extractors,
+                IDictionary<Tuple<string, int>, ResourceContext> contextCache)
         {
             Bundle = bundle;
             _locations = locations;
@@ -39,22 +40,27 @@ namespace Axle.Resources.Extraction
             Culture = culture;
 
             var extArr = extractors.ToArray();
-            var subContexts = GetSubContexts(extArr).ToArray();
+            var subContexts = GetSubContexts(extArr, contextCache ?? new Dictionary<Tuple<string, int>, ResourceContext>()).ToArray();
             ExtractionChain = new ResourceExtractionChain(this, subContexts, extArr);
         }
 
-        private IEnumerable<ResourceContext> GetSubContexts(IResourceExtractor[] extractors)
+        private IEnumerable<ResourceContext> GetSubContexts(IResourceExtractor[] extractors, IDictionary<Tuple<string, int>, ResourceContext> contextCache)
         {
             for (var i = _currentLocationIndex + 1; i < _locations.Length; i++)
             {
-                yield return new ResourceContext(Bundle, _locations, i, Culture, extractors);
+                var cacheKey = Tuple.Create(Bundle, i);
+                if (!contextCache.TryGetValue(cacheKey, out var result))
+                {
+                    contextCache[cacheKey] = result = new ResourceContext(Bundle, _locations, i, Culture, extractors, contextCache);
+                }
+                yield return result;
             }
         }
 
         internal ResourceContext MoveOneExtractorForward()
         {
             var extractors = ExtractionChain.Extractors.Skip(1);
-            return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, extractors);
+            return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, extractors, null);
         }
 
         /// <inheritdoc />

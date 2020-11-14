@@ -3,7 +3,7 @@ using Axle.Modularity;
 
 namespace Axle.Application.Services
 {
-    [Requires(typeof(ServiceCollector))]
+    [Requires(typeof(ServiceRegistry.ServiceCollector))]
     [ProvidesFor(typeof(ServiceRegistry))]
     public sealed class ServiceAttribute : Attribute
     {
