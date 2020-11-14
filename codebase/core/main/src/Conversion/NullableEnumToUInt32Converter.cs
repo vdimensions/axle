@@ -10,19 +10,28 @@ namespace Axle.Conversion
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class NullableEnumToUInt32Converter<T> : IConverter<T?, uint?> 
+    public sealed class NullableEnumToUInt32Converter<T> : ITwoWayConverter<T?, uint?> 
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         where T: struct, IComparable, IConvertible, IFormattable
         #else
         where T: struct, IComparable, IFormattable
         #endif
     {
-        private IConverter<T?, uint?> _converter = new NullableToStructConverter<T, uint>(new EnumToUInt32Converter<T>());
+        private ITwoWayConverter<T?, uint?> _converter = new NullableToStructTwoWayConverter<T, uint>(new EnumToUInt32Converter<T>());
 
         /// <inheritdoc />
         public uint? Convert(T? source) => _converter.Convert(source);
 
         /// <inheritdoc />
         public bool TryConvert(T? source, out uint? target) => _converter.TryConvert(source, out target);
+
+        /// <inheritdoc />
+        public T? ConvertBack(uint? obj) => _converter.ConvertBack(obj);
+
+        /// <inheritdoc />
+        public bool TryConvertBack(uint? obj, out T? result) => _converter.TryConvertBack(obj, out result);
+
+        /// <inheritdoc />
+        public ITwoWayConverter<uint?, T?> Invert() => _converter.Invert();
     }
 }

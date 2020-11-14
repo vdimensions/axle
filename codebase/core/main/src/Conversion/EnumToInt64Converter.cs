@@ -10,7 +10,7 @@ namespace Axle.Conversion
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class EnumToInt64Converter<T> : AbstractConverter<T, long> 
+    public sealed class EnumToInt64Converter<T> : AbstractTwoWayConverter<T, long> 
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         where T: struct, IComparable, IConvertible, IFormattable
         #else
@@ -19,5 +19,8 @@ namespace Axle.Conversion
     {
         /// <inheritdoc />
         protected override long DoConvert(T source) => (long) ((object) source);
+
+        /// <inheritdoc />
+        protected override T DoConvertBack(long source) => (T) (object) source;
     }
 }

@@ -10,7 +10,7 @@ namespace Axle.Conversion
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class EnumToByteConverter<T> : AbstractConverter<T, byte> 
+    public sealed class EnumToByteConverter<T> : AbstractTwoWayConverter<T, byte> 
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         where T: struct, IComparable, IConvertible, IFormattable
         #else
@@ -19,5 +19,8 @@ namespace Axle.Conversion
     {
         /// <inheritdoc />
         protected override byte DoConvert(T source) => (byte) ((object) source);
+
+        /// <inheritdoc />
+        protected override T DoConvertBack(byte source) => (T) (object) source;
     }
 }
