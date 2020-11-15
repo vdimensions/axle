@@ -4,15 +4,19 @@
 namespace Axle.Conversion
 {
     /// <summary>
-    /// A reverse converter swaps the <see cref="IConverter{TSource,TTarget}.Convert"/> and <see cref="ITwoWayConverter{TSource,TTarget}.ConvertBack"/>
-    /// methods and the <see cref="IConverter{TSource,TTarget}.TryConvert"/> and <see cref="ITwoWayConverter{TSource,TTarget}.TryConvertBack"/>
+    /// A reverse converter swaps the <see cref="IConverter{TSource,TTarget}.Convert"/> and
+    /// <see cref="ITwoWayConverter{TSource,TTarget}.ConvertBack"/>
+    /// methods and the <see cref="IConverter{TSource,TTarget}.TryConvert"/> and
+    /// <see cref="ITwoWayConverter{TSource,TTarget}.TryConvertBack"/>
     /// of a provided <see cref="ITwoWayConverter{TSource,TTarget}"/> object.
     /// </summary>
     /// <typeparam name="TS">
-    /// The source type for the reversed converter (same as the destination type of the underlying <see cref="ITwoWayConverter{TD,TS}"/>.
+    /// The source type for the reversed converter (same as the destination type of the underlying
+    /// <see cref="ITwoWayConverter{TD,TS}"/>.
     /// </typeparam>
     /// <typeparam name="TD">
-    /// The destination type for the reversed converter (same as the source type of the underlying <see cref="ITwoWayConverter{TD,TS}"/>.
+    /// The destination type for the reversed converter (same as the source type of the underlying
+    /// <see cref="ITwoWayConverter{TD,TS}"/>.
     /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]

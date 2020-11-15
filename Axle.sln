@@ -130,13 +130,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.Microsof
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.Microsoft.Tests", "codebase\configuration\microsoft\tests\Axle.Configuration.Microsoft.Tests.csproj", "{9BD3B615-072A-463C-9B2E-84F1E6B9889D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Configuration.ConfigurationManager.Dependencies", "codebase\configuration\configuration_manager\Axle.Configuration.ConfigurationManager.Dependencies.targets", "{37167926-EC8F-475F-9A37-9F1200C35CDA}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.ConfigurationManager", "codebase\configuration\configuration_manager\src\Axle.Configuration.ConfigurationManager.csproj", "{82879460-CE50-4389-B986-92988BAF044B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Cors", "codebase\web\cors\src\Axle.Web.AspNetCore.Cors.csproj", "{C8770413-47D1-48B6-9438-0991B999EE8D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Application.Services", "codebase\application\services\src\Axle.Application.Services.csproj", "{80FBDEF8-7CB8-4749-B8AA-2884B6459260}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Data.Records", "codebase\data.records\main\src\Axle.Data.Records.csproj", "{962248B8-23D3-4BA3-9459-DE484FE5C308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -308,6 +308,10 @@ Global
 		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80FBDEF8-7CB8-4749-B8AA-2884B6459260}.Release|Any CPU.Build.0 = Release|Any CPU
+		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -371,10 +375,10 @@ Global
 		{7CDEE3ED-184E-497A-BD14-F949D544D52F} = {6706277F-4174-433D-B3F3-57E0C6E15402}
 		{FDA82935-6451-468E-A3DC-DA5E681C652F} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{9BD3B615-072A-463C-9B2E-84F1E6B9889D} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
-		{37167926-EC8F-475F-9A37-9F1200C35CDA} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{82879460-CE50-4389-B986-92988BAF044B} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{C8770413-47D1-48B6-9438-0991B999EE8D} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 		{80FBDEF8-7CB8-4749-B8AA-2884B6459260} = {6DA33AEE-E60E-440F-8591-DC3B3404754C}
+		{962248B8-23D3-4BA3-9459-DE484FE5C308} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

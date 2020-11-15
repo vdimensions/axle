@@ -1,4 +1,5 @@
-﻿using Axle.Verification;
+﻿using System.Diagnostics.CodeAnalysis;
+using Axle.Verification;
 
 
 namespace Axle.Conversion
@@ -26,7 +27,7 @@ namespace Axle.Conversion
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
-    public sealed class ChainedConverter<T, TIntermediate, TResult> : AbstractConverter<T,TResult>
+    internal sealed class ChainedConverter<T, TIntermediate, TResult> : AbstractConverter<T,TResult>
     {
         private readonly IConverter<T, TIntermediate> _converter1;
         private readonly IConverter<TIntermediate, TResult> _converter2;
@@ -35,8 +36,8 @@ namespace Axle.Conversion
             IConverter<T, TIntermediate> converter1, 
             IConverter<TIntermediate, TResult> converter2)
         {
-            _converter1 = Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1))).Value;
-            _converter2 = Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2))).Value;
+            _converter1 = converter1;
+            _converter2 = converter2;
         }
 
         /// <inheritdoc />
@@ -44,8 +45,10 @@ namespace Axle.Conversion
     }
 
     /// <summary>
-    /// A static class providing helper methods related to the <see cref="ChainedConverter{T1,T2,T3}"/> class.
+    /// A static class containing utilities for creating <see cref="ChainedConverter{T,TIntermediate,TResult}"/>
+    /// instances.
     /// </summary>
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public static class ChainedConverter
     {
         /// <summary>
@@ -74,6 +77,8 @@ namespace Axle.Conversion
             IConverter<T, T1> converter1, 
             IConverter<T1, TResult> converter2)
         {
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2)));
             return new ChainedConverter<T, T1, TResult>(converter1, converter2);
         }
         /// <summary>
@@ -109,6 +114,9 @@ namespace Axle.Conversion
             IConverter<T1, T2> converter2, 
             IConverter<T2, TResult> converter3)
         {
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter3, nameof(converter3)));
             return Create(Create(converter1, converter2), converter3);
         }
         /// <summary>
@@ -151,6 +159,127 @@ namespace Axle.Conversion
             IConverter<T2, T3> converter3, 
             IConverter<T3, TResult> converter4)
         {
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter3, nameof(converter3)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter4, nameof(converter4)));
+            return Create(Create(converter1, converter2), Create(converter3, converter4));
+        }
+        
+        /// <summary>
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="ITwoWayConverter{T,TResult}"/>
+        /// implementation.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the source object to be converted
+        /// </typeparam>
+        /// <typeparam name="T1">
+        /// A type that is the result of an intermediate conversion.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the final conversion result
+        /// </typeparam>
+        /// <param name="converter1">
+        /// The first converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter2">
+        /// The last converter to put to the conversion chain.
+        /// </param>
+        /// <returns>
+        /// Series of converters interfaced as a single <see cref="ITwoWayConverter{T,TResult}"/> implementation
+        /// </returns>
+        public static ITwoWayConverter<T, TResult> Create<T, T1, TResult>(
+            ITwoWayConverter<T, T1> converter1, 
+            ITwoWayConverter<T1, TResult> converter2)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2)));
+            var chain1 = new ChainedConverter<T, T1, TResult>(converter1, converter2);
+            var chain2 = new ChainedConverter<TResult, T1, T>(converter2.Invert(), converter1.Invert());
+            return CombinedConverter.Create(chain1, chain2);
+        }
+        /// <summary>
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="ITwoWayConverter{T,TResult}"/>
+        /// implementation.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the source object to be converted
+        /// </typeparam>
+        /// <typeparam name="T1">
+        /// A type that is the result of an intermediate conversion.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// A type that is the result of an intermediate conversion.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the final conversion result
+        /// </typeparam>
+        /// <param name="converter1">
+        /// The first converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter2">
+        /// The second converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter3">
+        /// The last converter to put to the conversion chain.
+        /// </param>
+        /// <returns>
+        /// Series of converters interfaced as a single <see cref="ITwoWayConverter{T,TResult}"/> implementation
+        /// </returns>
+        public static ITwoWayConverter<T, TResult> Create<T, T1, T2, TResult>(
+            ITwoWayConverter<T, T1> converter1, 
+            ITwoWayConverter<T1, T2> converter2, 
+            ITwoWayConverter<T2, TResult> converter3)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter3, nameof(converter3)));
+            return Create(Create(converter1, converter2), converter3);
+        }
+        /// <summary>
+        /// Chains a series of converters to allow them to be interfaced as a single <see cref="ITwoWayConverter{T,TResult}"/>
+        /// implementation.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of the source object to be converted
+        /// </typeparam>
+        /// <typeparam name="T1">
+        /// A type that is the result of an intermediate conversion.
+        /// </typeparam>
+        /// <typeparam name="T2">
+        /// A type that is the result of an intermediate conversion.
+        /// </typeparam>
+        /// <typeparam name="T3">
+        /// A type that is the result of an intermediate conversion.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The type of the final conversion result
+        /// </typeparam>
+        /// <param name="converter1">
+        /// The first converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter2">
+        /// The second converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter3">
+        /// The third converter to put to the conversion chain.
+        /// </param>
+        /// <param name="converter4">
+        /// The last converter to put to the conversion chain.
+        /// </param>
+        /// <returns>
+        /// Series of converters interfaced as a single <see cref="ITwoWayConverter{T,TResult}"/> implementation
+        /// </returns>
+        public static ITwoWayConverter<T, TResult> Create<T, T1, T2, T3, TResult>(
+            ITwoWayConverter<T, T1> converter1, 
+            ITwoWayConverter<T1, T2> converter2, 
+            ITwoWayConverter<T2, T3> converter3, 
+            ITwoWayConverter<T3, TResult> converter4)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter1, nameof(converter1)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter2, nameof(converter2)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter3, nameof(converter3)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(converter4, nameof(converter4)));
             return Create(Create(converter1, converter2), Create(converter3, converter4));
         }
     }

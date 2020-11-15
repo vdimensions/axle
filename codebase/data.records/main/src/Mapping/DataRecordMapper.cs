@@ -91,7 +91,7 @@ namespace Axle.Data.Records.Mapping
             return DataRecord.FromDataRow(table.NewRow());
         }
         
-        protected void RegisterFieldAccessor<TField>(
+        protected internal void RegisterFieldAccessor<TField>(
             string name, 
             IDataFieldAccessor<TField> dataFieldAccessor, 
             IObjectMemberAccessor<T,TField> memberAccessor)
@@ -101,42 +101,12 @@ namespace Axle.Data.Records.Mapping
             memberAccessor.VerifyArgument(nameof(memberAccessor)).IsNotNull();
             _fieldMappers[name] = new DataRecordManipulator<TField>(name, dataFieldAccessor, memberAccessor);
         }
-        protected void RegisterFieldAccessor<TField>(
+        protected internal void RegisterFieldAccessor<TField>(
                 string name, 
                 IDataFieldAccessor<TField> dataFieldAccessor, 
                 Expression<Func<T, TField>> expression) 
             => RegisterFieldAccessor(name, dataFieldAccessor, ReflectedMemberAccessor.Create(expression));
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, bool>> expression)
-            => RegisterFieldAccessor(name, new BooleanDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, char>> expression)
-            => RegisterFieldAccessor(name, new CharacterDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, byte>> expression)
-            => RegisterFieldAccessor(name, new ByteDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, short>> expression)
-            => RegisterFieldAccessor(name, new Int16DataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, int>> expression)
-            => RegisterFieldAccessor(name, new Int32DataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, long>> expression)
-            => RegisterFieldAccessor(name, new Int64DataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, TimeSpan>> expression)
-            => RegisterFieldAccessor(
-                name, 
-                new Int64DataFieldAccessor().Transform(new TimeSpanToTicksConverter().Invert()), 
-                expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, float>> expression)
-            => RegisterFieldAccessor(name, new SingleDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, double>> expression)
-            => RegisterFieldAccessor(name, new DoubleDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, decimal>> expression)
-            => RegisterFieldAccessor(name, new DecimalDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, string>> expression)
-            => RegisterFieldAccessor(name, new StringDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, Guid>> expression)
-            => RegisterFieldAccessor(name, new GuidDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTime>> expression)
-            => RegisterFieldAccessor(name, new DateTimeDataFieldAccessor(), expression);
-        protected void RegisterFieldAccessor(string name, Expression<Func<T, DateTimeOffset>> expression)
-            => RegisterFieldAccessor(name, new DateTimeOffsetDataFieldAccessor(), expression);
+        
 
         public virtual T ConvertBack(T obj, DataRecord record, string fieldNameFormat)
         {
