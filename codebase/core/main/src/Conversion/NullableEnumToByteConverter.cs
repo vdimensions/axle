@@ -17,6 +17,9 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Initialized a new instance of the <see cref="NullableEnumToByteConverter{T}"/> class.
+        /// </summary>
         public NullableEnumToByteConverter() 
             : base(new NullableToStructTwoWayConverter<T, byte>(new EnumToByteConverter<T>())) { }
     }

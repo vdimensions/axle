@@ -17,6 +17,9 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Initialized a new instance of the <see cref="NullableEnumToUInt64Converter{T}"/> class.
+        /// </summary>
         public NullableEnumToUInt64Converter() 
             : base(new NullableToStructTwoWayConverter<T, ulong>(new EnumToUInt64Converter<T>())) { }
     }

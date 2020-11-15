@@ -4,9 +4,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "core", "core", "{2BAE7732-F440-4B68-8AC3-9A6B6B4198F5}"
-	ProjectSection(SolutionItems) = preProject
-		codebase\core\main\Axle.Core.Dependencies.targets = codebase\core\main\Axle.Core.Dependencies.targets
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Core", "codebase\core\main\src\Axle.Core.csproj", "{43919C97-BCFD-4802-95D7-76435E066962}"
 EndProject

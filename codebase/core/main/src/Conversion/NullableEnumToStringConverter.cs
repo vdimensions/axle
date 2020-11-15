@@ -17,6 +17,9 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Initialized a new instance of the <see cref="NullableEnumToStringConverter{T}"/> class.
+        /// </summary>
         public NullableEnumToStringConverter() 
             : base(new NullableToClassConverter<T, string>(new EnumToStringConverter<T>())) { }
     }
