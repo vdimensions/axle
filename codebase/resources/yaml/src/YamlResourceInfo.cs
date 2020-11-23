@@ -8,7 +8,6 @@ using Axle.Text;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
 
-
 namespace Axle.Resources.Yaml
 {
     /// <summary>
@@ -30,17 +29,13 @@ namespace Axle.Resources.Yaml
                 string name, 
                 CultureInfo culture, 
                 IDictionary<string, CharSequence> data) 
-            : base(name, culture, MimeType, data)
-        {
-        }
+            : base(name, culture, MimeType, data) { }
         internal YamlResourceInfo(
                 string name, 
                 CultureInfo culture, 
                 IDictionary<string, CharSequence> data, 
                 ResourceInfo originalResource) 
-            : base(name, culture, MimeType, data, originalResource)
-        {
-        }
+            : base(name, culture, MimeType, data, originalResource) { }
 
         /// <summary>
         /// Opens a <see cref="Stream">stream</see> object for reading the contents of the YAML file.

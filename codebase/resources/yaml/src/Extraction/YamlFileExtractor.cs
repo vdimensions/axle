@@ -7,7 +7,6 @@ using Axle.Text;
 using Axle.Text.Documents;
 using Axle.Text.Documents.Yaml;
 
-
 namespace Axle.Resources.Yaml.Extraction
 {
     internal sealed class YamlFileExtractor : AbstractTextDocumentExtractor

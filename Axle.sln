@@ -88,7 +88,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "codebase", "codebase", "{D2
 		codebase\Dependency.Versions.props = codebase\Dependency.Versions.props
 		codebase\Directory.Build.props = codebase\Directory.Build.props
 		codebase\FSharp.Core.Packages.targets = codebase\FSharp.Core.Packages.targets
-		codebase\NUnit.Packages.targets = codebase\NUnit.Packages.targets
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "text", "text", "{20FBBA2C-3EF5-463F-924B-0752FF21041A}"

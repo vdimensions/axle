@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Text;
-
 using Axle.Conversion;
 using Axle.IO.Extensions.Stream;
 using Axle.Resources.Bundling;
-using Axle.Resources.Extraction;
 using Axle.Resources.Yaml.Extraction;
-
 using NUnit.Framework;
-
 
 namespace Axle.Resources.Yaml.Tests
 {

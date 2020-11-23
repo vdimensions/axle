@@ -3,7 +3,6 @@ using System.Text;
 using Axle.Resources.Extraction;
 using Axle.Text;
 
-
 namespace Axle.Resources.Yaml.Extraction
 {
     internal sealed class YamlValueExtractor : AbstractResourceExtractor
