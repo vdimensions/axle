@@ -390,14 +390,15 @@ namespace Axle.Extensions
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
-            Func<T1, T2, TResult> func, T1 arg) => arg2 =>
+            Func<T1, T2, TResult> func, T1 arg)
         {
             if (func == null)
             {
                 throw new ArgumentNullException(nameof(func));
             }
-            return func(arg, arg2);
-        };
+            return arg2 => func(arg, arg2);
+        }
+
         /// <summary>
         /// Applies a value to the first (leftmost) argument of the provided delegate, and returns a a new
         /// delegate representing the partially-applied (curried) version of the original.
@@ -430,14 +431,14 @@ namespace Axle.Extensions
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
-            Func<T1, T2, T3, TResult> func, T1 arg) => (arg2, arg3) =>
+            Func<T1, T2, T3, TResult> func, T1 arg)
         {
             if (func == null)
             {
                 throw new ArgumentNullException(nameof(func));
             }
-            return func(arg, arg2, arg3);
-        };
+            return  (arg2, arg3) => func(arg, arg2, arg3);
+        } 
         /// <summary>
         /// Applies a value to the first (leftmost) argument of the provided delegate, and returns a a new
         /// delegate representing the partially-applied (curried) version of the original.

@@ -310,14 +310,14 @@ namespace Axle.Extensions
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
-            Func<T1, T2, TResult> func) => (arg2, arg1) =>
+            Func<T1, T2, TResult> func)
         {
             if (func == null)
             {
                 throw new ArgumentNullException(nameof(func));
             }
-            return func(arg1, arg2);
-        };
+            return (arg2, arg1) => func(arg1, arg2);
+        }
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="func"/> that accepts the same formal arguments but
         /// in reverse order.
@@ -348,14 +348,14 @@ namespace Axle.Extensions
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
-            Func<T1, T2, T3, TResult> func) => (arg3, arg2, arg1) =>
+            Func<T1, T2, T3, TResult> func)
         {
             if (func == null)
             {
                 throw new ArgumentNullException(nameof(func));
             }
-            return func(arg1, arg2, arg3);
-        };
+            return (arg3, arg2, arg1) => func(arg1, arg2, arg3);
+        }
 
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="func"/> that accepts the same formal arguments but
