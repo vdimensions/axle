@@ -10,6 +10,8 @@ namespace Axle.Threading
     /// </summary>
     public class MonitorLock : ILock
     {
+        public static void Create() => new MonitorLock();
+        
         private readonly object _obj;
 
         /// <summary>
@@ -50,6 +52,7 @@ namespace Axle.Threading
         /// <seealso cref="MonitorLockHandle"/>
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public MonitorLockHandle CreateHandle() => new MonitorLockHandle(this);
+        ILockHandle ILock.CreateHandle() => CreateHandle();
 
         internal bool Wait(TimeSpan timeout) => Monitor.Wait(_obj, timeout);
         internal bool Wait() => Monitor.Wait(_obj);

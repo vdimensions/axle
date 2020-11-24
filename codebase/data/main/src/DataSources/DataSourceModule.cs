@@ -19,25 +19,24 @@ namespace Axle.Data.DataSources
 {
     [Module]
     [Requires(typeof(DataModule))]
-    [Requires(typeof(DbServiceProviderRegistry))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal sealed class DataSourceModule : ISqlScriptLocationRegistry, IDataSourceRegistry
     {
         internal const string SqlScriptsBundle = "SqlScripts";
 
-        private readonly DbServiceProviderRegistry _dbServiceProviders;
+        private readonly DataModule _dataModule;
         private readonly DataSourceConfiguration _configuration;
         private readonly ResourceManager _dataSourceResourceManager;
         private readonly IResourceExtractor _scriptExtractor;
         private readonly IDictionary<string, DataSource> _dataSources = new ConcurrentDictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
-        public DataSourceModule(DbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
+        public DataSourceModule(DataModule dataModule, IConfiguration configuration, ILogger logger)
         {
             Logger = logger;
-            _dbServiceProviders = dbServiceProviderRegistry;
+            _dataModule = dataModule;
             _configuration = new DataSourceConfiguration(configuration.GetConnectionStrings());
             _dataSourceResourceManager = new DefaultResourceManager();
-            _scriptExtractor = new SqlScriptSourceExtractor(Enumerable.Select(dbServiceProviderRegistry, x => x.DialectName));
+            _scriptExtractor = new SqlScriptSourceExtractor(Enumerable.Select(dataModule, x => x.DialectName));
         }
 
         [ModuleInit]
@@ -59,7 +58,7 @@ namespace Axle.Data.DataSources
             var dataSources = _dataSources;
             if (!string.IsNullOrEmpty(cs.ProviderName))
             {
-                var provider = _dbServiceProviders[cs.ProviderName];
+                var provider = _dataModule[cs.ProviderName];
                 if (provider == null)
                 {
                     Logger.Warn(

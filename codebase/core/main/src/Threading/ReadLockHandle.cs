@@ -5,22 +5,22 @@ namespace Axle.Threading
     internal struct ReadLockHandle : ILockHandle
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IReadWriteLock _readWriteLock;
+        private AbstractReadWriteLockProvider _readWriteLockProvider;
 
-        internal ReadLockHandle(IReadWriteLock readWriteLock)
+        internal ReadLockHandle(AbstractReadWriteLockProvider readWriteLockProvider)
         {
-            _readWriteLock = readWriteLock;
-            _readWriteLock.EnterReadLock();
+            _readWriteLockProvider = readWriteLockProvider;
+            _readWriteLockProvider.EnterReadLock();
         }
 
         public void Dispose()
         {
-            if (_readWriteLock == null)
+            if (_readWriteLockProvider == null)
             {
                 return;
             }
-            _readWriteLock.ExitReadLock();
-            _readWriteLock = null;
+            _readWriteLockProvider.ExitReadLock();
+            _readWriteLockProvider = null;
         }
     }
 }

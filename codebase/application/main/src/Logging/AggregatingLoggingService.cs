@@ -12,7 +12,7 @@ namespace Axle.Logging
     {
         internal sealed class AggregatingLogger : ILogger
         {
-            private readonly IReadWriteLock _lock;
+            private readonly IReadWriteLockProvider _lockProvider;
             private readonly AggregatingLoggingService _aggregatingLoggingService;
             private volatile int _version;
             private volatile IList<ILogger> _loggers = new List<ILogger>();
@@ -20,7 +20,7 @@ namespace Axle.Logging
             public AggregatingLogger(AggregatingLoggingService aggregatingLoggingService, Type targetType)
             {
                 _aggregatingLoggingService = aggregatingLoggingService;
-                _lock = new ReadWriteLock();
+                _lockProvider = new ReadWriteLockProvider();
                 _version = -1;  // always at -1, to be different than the value of `_aggregatingLoggingService._version`
                 TargetType = targetType;
             }
@@ -28,7 +28,7 @@ namespace Axle.Logging
             public void Write(ILogEntry entry)
             {
                 var expectedVersion = _aggregatingLoggingService._version;
-                using (_lock.CreateReadLockHandle())
+                using (_lockProvider.ReadLock.CreateHandle())
                 {
                     if (_version == expectedVersion)
                     {
@@ -39,11 +39,11 @@ namespace Axle.Logging
                         return;
                     }
                 }
-                using (_lock.CreateUpgradeableReadLockHandle())
+                using (_lockProvider.UpgradeableReadLock.CreateHandle())
                 {
                     if (Interlocked.Exchange(ref _version, expectedVersion) != expectedVersion)
                     {
-                        using (_lock.CreateWriteLockHandle())
+                        using (_lockProvider.WriteLock.CreateHandle())
                         {
                             var accumulatingLoggingService = _aggregatingLoggingService._accumulatingLoggingService;
                             if (accumulatingLoggingService != null)

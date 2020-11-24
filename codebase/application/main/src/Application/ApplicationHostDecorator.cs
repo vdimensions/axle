@@ -8,11 +8,11 @@ namespace Axle.Application
     /// A class to serve as a base for application host implementations that need to be built upon an existing
     /// application host and to partially extend its features
     /// </summary>
-    public abstract class ExtendingApplicationHost : AbstractApplicationHost
+    public abstract class ApplicationHostDecorator : AbstractApplicationHost
     {
         private readonly IApplicationHost _targetHost;
 
-        protected ExtendingApplicationHost(
+        protected ApplicationHostDecorator(
                 IApplicationHost targetHost, 
                 IDependencyContainerFactory dependencyContainerFactory,
                 ILoggingService loggingService,

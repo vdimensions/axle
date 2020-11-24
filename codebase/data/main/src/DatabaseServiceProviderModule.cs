@@ -7,8 +7,7 @@ namespace Axle.Data
     /// <see cref="IDbServiceProvider"/>
     /// </summary>
     [Module]
-    [Requires(typeof(DbServiceProviderRegistry))]
-    [ProvidesForDataModule]
+    [DbServiceProvider]
     public abstract class DatabaseServiceProviderModule
     {
         protected DatabaseServiceProviderModule(IDbServiceProvider provider)

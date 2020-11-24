@@ -43,7 +43,7 @@ namespace Axle.Modularity
         ModuleCallback[] GetDependencyInitializedMethods(Type moduleType);
         ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType);
         UtilizesAttribute[] GetUtilizedModules(Type moduleType);
-        ProvidesForAttribute[] GetReportsToModules(Type moduleType);
+        ProvidesForAttribute[] GetProvidesForModules(Type moduleType);
         ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType);
         ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType);
     }

@@ -1,25 +1,26 @@
 ﻿using System.Diagnostics;
+using System.Threading;
 
 namespace Axle.Threading
 {
     internal sealed class UpgradeableReadLockHandle : ILockHandle
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IReadWriteLock _readWriteLock;
+        private AbstractReadWriteLockProvider _readWriteLockProvider;
 
-        internal UpgradeableReadLockHandle(IReadWriteLock readWriteLock)
+        internal UpgradeableReadLockHandle(AbstractReadWriteLockProvider readWriteLockProvider)
         {
-            (_readWriteLock = readWriteLock).EnterUpgradeableReadLock();
+            (_readWriteLockProvider = readWriteLockProvider).EnterUpgradeableReadLock();
         }
 
         public void Dispose()
         {
-            if (_readWriteLock == null)
+            if (_readWriteLockProvider == null)
             {
                 return;
             }
-            _readWriteLock.ExitUpgradeableReadLock();
-            _readWriteLock = null;
+            _readWriteLockProvider.ExitUpgradeableReadLock();
+            _readWriteLockProvider = null;
         }
     }
 }

@@ -1,0 +1,30 @@
+﻿#if NETSTANDARD || NET35_OR_NEWER
+using System;
+using System.Threading;
+
+
+namespace Axle.Threading
+{
+    /// <summary>
+    /// An implementation of the <see cref="IReadWriteLockProvider"/> interface which acts as a
+    /// wrapper to the <see cref="ReaderWriterLockSlim"/> class.
+    /// <remarks>
+    /// This implementation does not permit re-entrant access to the locked code block form the thread
+    /// owning the lock. For re-entrant lock implementation refer to the <see cref="ReentrantReadWriteLockProvider"/> class.
+    /// </remarks>
+    /// </summary>
+    /// <seealso cref="ReentrantReadWriteLockProvider"/>
+    public sealed class ReadWriteLockProvider : IDisposable, IReadWriteLockProvider
+    {
+        private readonly ReadWriteLockSlimProvider _readWriteLockProvider = new ReadWriteLockSlimProvider(false);
+
+        void IDisposable.Dispose() => ((IDisposable) _readWriteLockProvider)?.Dispose();
+        
+        public ReadLock ReadLock => _readWriteLockProvider.ReadLock;
+
+        public UpgradeableReadLock UpgradeableReadLock => _readWriteLockProvider.UpgradeableReadLock;
+
+        public WriteLock WriteLock => _readWriteLockProvider.WriteLock;
+    }
+}
+#endif

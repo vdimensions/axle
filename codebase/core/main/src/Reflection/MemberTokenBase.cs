@@ -42,7 +42,7 @@ namespace Axle.Reflection
         #if NET20
         protected internal readonly ILock Lock = new MonitorLock();
         #else
-        protected readonly IReadWriteLock Lock = new ReadWriteLock();
+        protected readonly IReadWriteLockProvider LockProvider = new ReadWriteLockProvider();
         #endif
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -133,10 +133,11 @@ namespace Axle.Reflection
                 T item = null;
                 #if NET20
                 return LockExtensions.Invoke(
-                #else
-                return ReaderWriterLockExtensions.Invoke(
-                #endif
                     Lock,
+                #else
+                return ReadWritLockProviderExtensions.Invoke(
+                    LockProvider,
+                #endif
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
                     #if NETSTANDARD

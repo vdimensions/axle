@@ -1,26 +1,27 @@
 ﻿using System.Diagnostics;
+using System.Threading;
 
 namespace Axle.Threading
 {
     internal struct WriteLockHandle : ILockHandle
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IReadWriteLock _readWriteLock;
+        private AbstractReadWriteLockProvider _readWriteLockProvider;
 
-        internal WriteLockHandle(IReadWriteLock readWriteLock)
+        internal WriteLockHandle(AbstractReadWriteLockProvider readWriteLockProvider)
         {
-            _readWriteLock = readWriteLock;
-            _readWriteLock.EnterWriteLock();
+            _readWriteLockProvider = readWriteLockProvider;
+            _readWriteLockProvider.EnterWriteLock();
         }
 
         public void Dispose()
         {
-            if (_readWriteLock == null)
+            if (_readWriteLockProvider == null)
             {
                 return;
             }
-            _readWriteLock.ExitWriteLock();
-            _readWriteLock = null;
+            _readWriteLockProvider.ExitWriteLock();
+            _readWriteLockProvider = null;
         }
     }
 }

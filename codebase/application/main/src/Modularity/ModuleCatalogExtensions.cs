@@ -139,7 +139,7 @@ namespace Axle.Modularity
             {
                 return;
             }
-            var modules = catalog.GetRequiredModules(moduleType);
+            var modules = catalog.GetRequiredModules(moduleType).Union(catalog.GetProvidesForModules(moduleType).Select(x => x.ModuleType)).ToArray();
             for (var i = 0; i < modules.Length; i++)
             {
                 ExpandModules(catalog, modules[i], types);
@@ -173,7 +173,7 @@ namespace Axle.Modularity
                         })
                     .ToArray();
                 var utilizedModules = moduleCatalog.GetUtilizedModules(moduleType);
-                var reportsToModules = moduleCatalog.GetReportsToModules(moduleType);
+                var reportsToModules = moduleCatalog.GetProvidesForModules(moduleType);
                 var configurationInfo = moduleCatalog.GetConfigurationInfo(moduleType);
                 ModuleInfo moduleInfo = null;
                 try

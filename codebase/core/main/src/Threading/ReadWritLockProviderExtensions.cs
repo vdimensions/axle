@@ -6,9 +6,9 @@ namespace Axle.Threading
     namespace ReaderWriterLock
     {
         /// <summary>
-        /// A class containing extension methods for instances of the <see cref="IReadWriteLock"/> type.
+        /// A class containing extension methods for instances of the <see cref="IReadWriteLockProvider"/> type.
         /// </summary>
-        public static class ReaderWriterLockExtensions
+        public static class ReadWritLockProviderExtensions
         {
             #region Read(...)
             /// <summary>
@@ -17,8 +17,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -31,16 +31,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T> func)
+                IReadWriteLockProvider lockProvider, Func<T> func)
             {
-                @lock.EnterReadLock();
+                lockProvider.ReadLock.Enter();
                 try
                 {
                     return func();
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -53,8 +53,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -70,16 +70,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T, TResult> func, T arg)
+                IReadWriteLockProvider lockProvider, Func<T, TResult> func, T arg)
             {
-                @lock.EnterReadLock();
+                lockProvider.ReadLock.Enter();
                 try
                 {
                     return func(arg);
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -95,8 +95,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -115,16 +115,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T1, T2, TResult> func, T1 arg1, T2 arg2)
+                IReadWriteLockProvider lockProvider, Func<T1, T2, TResult> func, T1 arg1, T2 arg2)
             {
-                @lock.EnterReadLock();
+                lockProvider.ReadLock.Enter();
                 try
                 {
                     return func(arg1, arg2);
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -143,8 +143,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -166,16 +166,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T1, T2, T3, TResult> func, T1 arg1, T2 arg2, T3 arg3)
+                IReadWriteLockProvider lockProvider, Func<T1, T2, T3, TResult> func, T1 arg1, T2 arg2, T3 arg3)
             {
-                @lock.EnterReadLock();
+                lockProvider.ReadLock.Enter();
                 try
                 {
                     return func(arg1, arg2, arg3);
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -197,8 +197,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a read lock.
@@ -223,16 +223,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T1, T2, T3, T4, TResult> func, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+                IReadWriteLockProvider lockProvider, Func<T1, T2, T3, T4, TResult> func, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
             {
-                @lock.EnterReadLock();
+                lockProvider.ReadLock.Enter();
                 try
                 {
                     return func(arg1, arg2, arg3, arg4);
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
             #endregion Read(...)
@@ -242,8 +242,8 @@ namespace Axle.Threading
             /// Executes the code provided by the <paramref name="action"/> parameter within the confines of a write
             /// lock.
             /// </summary>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="action">
             /// The action delegate to be executed inside a write lock.
@@ -252,16 +252,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock,  Action action)
+                IReadWriteLockProvider lockProvider,  Action action)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     action();
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -272,8 +272,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The type of the sole parameter to the <paramref name="action"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="action">
             /// The action delegate to be executed inside a write lock.
@@ -285,16 +285,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Action<T> action, T arg)
+                IReadWriteLockProvider lockProvider, Action<T> action, T arg)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     action(arg);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -308,8 +308,8 @@ namespace Axle.Threading
             /// <typeparam name="T2">
             /// The type of the second parameter to the <paramref name="action"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="action">
             /// The action delegate to be executed inside a write lock.
@@ -324,16 +324,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Action<T1, T2> action, T1 arg1, T2 arg2)
+                IReadWriteLockProvider lockProvider, Action<T1, T2> action, T1 arg1, T2 arg2)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     action(arg1, arg2);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -350,8 +350,8 @@ namespace Axle.Threading
             /// <typeparam name="T3">
             /// The type of the third parameter to the <paramref name="action"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="action">
             /// The action delegate to be executed inside a write lock.
@@ -369,16 +369,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
+                IReadWriteLockProvider lockProvider, Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     action(arg1, arg2, arg3);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -398,8 +398,8 @@ namespace Axle.Threading
             /// <typeparam name="T4">
             /// The type of the fourth parameter to the <paramref name="action"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="action">
             /// The action delegate to be executed inside a write lock.
@@ -420,16 +420,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Action<T1, T2, T3, T4> action, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+                IReadWriteLockProvider lockProvider, Action<T1, T2, T3, T4> action, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     action(arg1, arg2, arg3, arg4);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -439,8 +439,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -453,16 +453,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T> func)
+                IReadWriteLockProvider lockProvider, Func<T> func)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     return func();
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -475,8 +475,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -492,16 +492,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T, TResult> func, T arg)
+                IReadWriteLockProvider lockProvider, Func<T, TResult> func, T arg)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     return func(arg);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -517,8 +517,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -537,16 +537,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T1, T2, TResult> func, T1 arg1, T2 arg2)
+                IReadWriteLockProvider lockProvider, Func<T1, T2, TResult> func, T1 arg1, T2 arg2)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     return func(arg1, arg2);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -565,8 +565,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -588,16 +588,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T1, T2, T3, TResult> func, T1 arg1, T2 arg2, T3 arg3)
+                IReadWriteLockProvider lockProvider, Func<T1, T2, T3, TResult> func, T1 arg1, T2 arg2, T3 arg3)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     return func(arg1, arg2, arg3);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -619,8 +619,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="func">
             /// The function to be executed inside a write lock.
@@ -645,16 +645,16 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T1, T2, T3, T4, TResult> func, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
+                IReadWriteLockProvider lockProvider, Func<T1, T2, T3, T4, TResult> func, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
             {
-                @lock.EnterWriteLock();
+                lockProvider.WriteLock.Enter();
                 try
                 {
                     return func(arg1, arg2, arg3, arg4);
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
             #endregion Write(...)
@@ -667,8 +667,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -687,9 +687,9 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, int millisecondsTimeout, Func<T> func, out T result)
+                IReadWriteLockProvider lockProvider, int millisecondsTimeout, Func<T> func, out T result)
             {
-                if (!@lock.TryEnterReadLock(millisecondsTimeout))
+                if (!lockProvider.ReadLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(T);
                     return false;
@@ -701,7 +701,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -715,8 +715,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -735,13 +735,13 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryRead<T, TResult>(
-                    this IReadWriteLock @lock, 
+                    this IReadWriteLockProvider lockProvider, 
                     int millisecondsTimeout, 
                     Func<T, TResult> func, 
                     T arg, 
                     out TResult result)
             {
-                if (!@lock.TryEnterReadLock(millisecondsTimeout))
+                if (!lockProvider.ReadLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -753,7 +753,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -770,8 +770,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -793,14 +793,14 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryRead<T1, T2, TResult>(
-                    this IReadWriteLock @lock, 
+                    this IReadWriteLockProvider lockProvider, 
                     int millisecondsTimeout, 
                     Func<T1, T2, TResult> func, 
                     T1 arg1, 
                     T2 arg2, 
                     out TResult result)
             {
-                if (!@lock.TryEnterReadLock(millisecondsTimeout))
+                if (!lockProvider.ReadLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -812,7 +812,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -832,8 +832,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -858,7 +858,7 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryRead<T1, T2, T3, TResult>(
-                this IReadWriteLock @lock,
+                this IReadWriteLockProvider lockProvider,
                 int millisecondsTimeout,
                 Func<T1, T2, T3, TResult> func,
                 T1 arg1,
@@ -866,7 +866,7 @@ namespace Axle.Threading
                 T3 arg3,
                 out TResult result)
             {
-                if (!@lock.TryEnterReadLock(millisecondsTimeout))
+                if (!lockProvider.ReadLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -878,7 +878,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
 
@@ -901,8 +901,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -930,7 +930,7 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryRead<T1, T2, T3, T4, TResult>(
-                this IReadWriteLock @lock,
+                this IReadWriteLockProvider lockProvider,
                 int millisecondsTimeout,
                 Func<T1, T2, T3, T4, TResult> func,
                 T1 arg1,
@@ -939,7 +939,7 @@ namespace Axle.Threading
                 T4 arg4,
                 out TResult result)
             {
-                if (!@lock.TryEnterReadLock(millisecondsTimeout))
+                if (!lockProvider.ReadLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -951,7 +951,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitReadLock();
+                    lockProvider.ReadLock.Exit();
                 }
             }
             #endregion TryRead(...)
@@ -964,8 +964,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -984,9 +984,9 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, int millisecondsTimeout, Func<T> func, out T result)
+                IReadWriteLockProvider lockProvider, int millisecondsTimeout, Func<T> func, out T result)
             {
-                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                if (!lockProvider.WriteLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(T);
                     return false;
@@ -998,7 +998,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -1012,8 +1012,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -1032,13 +1032,13 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryWrite<T, TResult>(
-                    this IReadWriteLock @lock, 
+                    this IReadWriteLockProvider lockProvider, 
                     int millisecondsTimeout, 
                     Func<T, TResult> func, 
                     T arg, 
                     out TResult result)
             {
-                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                if (!lockProvider.WriteLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -1050,7 +1050,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -1067,8 +1067,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -1090,14 +1090,14 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryWrite<T1, T2, TResult>(
-                    this IReadWriteLock @lock, 
+                    this IReadWriteLockProvider lockProvider, 
                     int millisecondsTimeout, 
                     Func<T1, T2, TResult> func, 
                     T1 arg1, 
                     T2 arg2, 
                     out TResult result)
             {
-                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                if (!lockProvider.WriteLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -1109,7 +1109,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -1129,8 +1129,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -1155,7 +1155,7 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryWrite<T1, T2, T3, TResult>(
-                this IReadWriteLock @lock,
+                this IReadWriteLockProvider lockProvider,
                 int millisecondsTimeout,
                 Func<T1, T2, T3, TResult> func,
                 T1 arg1,
@@ -1163,7 +1163,7 @@ namespace Axle.Threading
                 T3 arg3,
                 out TResult result)
             {
-                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                if (!lockProvider.WriteLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -1175,7 +1175,7 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
 
@@ -1198,8 +1198,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The return type of the <paramref name="func"/> delegate.
             /// </typeparam>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> object to provide the synchronization mechanics.
+            /// <param name="lockProvider">
+            /// The <see cref="IReadWriteLockProvider"/> object to provide the synchronization mechanics.
             /// </param>
             /// <param name="millisecondsTimeout">
             /// The number of milliseconds to wait until acquiring the lock, or <c>-1</c>
@@ -1227,7 +1227,7 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryWrite<T1, T2, T3, T4, TResult>(
-                this IReadWriteLock @lock,
+                this IReadWriteLockProvider lockProvider,
                 int millisecondsTimeout,
                 Func<T1, T2, T3, T4, TResult> func,
                 T1 arg1,
@@ -1236,7 +1236,7 @@ namespace Axle.Threading
                 T4 arg4,
                 out TResult result)
             {
-                if (!@lock.TryEnterWriteLock(millisecondsTimeout))
+                if (!lockProvider.WriteLock.TryEnter(millisecondsTimeout))
                 {
                     result = default(TResult);
                     return false;
@@ -1248,94 +1248,18 @@ namespace Axle.Threading
                 }
                 finally
                 {
-                    @lock.ExitWriteLock();
+                    lockProvider.WriteLock.Exit();
                 }
             }
             #endregion TryWrite(...)
 
-            #region CreateReadLockHandle(...)
             /// <summary>
-            /// Creates a <see cref="IDisposable">disposable</see> read <see cref="ILockHandle">lock handle</see> for
-            /// the current <paramref name="lock" /> object, effectively causing the lock to enter in read-mode.
-            /// </summary>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> to provide a read-lock handle for.
-            /// </param>
-            /// <returns>
-            /// A <see cref="IDisposable">disposable</see> read <see cref="ILockHandle">lock handle</see> to be used to
-            /// control the lock duration.
-            /// </returns>
-            /// <seealso cref="IReadWriteLock"/>
-            /// <seealso cref="ILockHandle"/>
-            #if NETSTANDARD || NET45_OR_NEWER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            #endif
-            public static ILockHandle CreateReadLockHandle(
-                #if NETSTANDARD || NET35_OR_NEWER
-                this
-                #endif
-                IReadWriteLock @lock)
-            {
-                return new ReadLockHandle(@lock);
-            }
-            #endregion CreateReadLockHandle(...)
-
-            #region CreateUpgradeableReadLockHandle(...)
-            /// <summary>
-            /// Creates a <see cref="IDisposable">disposable</see> upgradeable read <see cref="ILockHandle">lock handle
-            /// </see> for the current <paramref name="lock" /> object, effectively causing the lock to enter in
-            /// upgradeable-read-mode.
-            /// </summary>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> to provide an upgradeable-read-lock handle for.
-            /// </param>
-            /// <returns>
-            /// A <see cref="IDisposable">disposable</see> upgradeable read <see cref="ILockHandle">lock handle</see> to
-            /// be used to control the lock duration.
-            /// </returns>
-            /// <seealso cref="IReadWriteLock"/>
-            /// <seealso cref="ILockHandle"/>
-            #if NETSTANDARD || NET45_OR_NEWER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            #endif
-            public static ILockHandle CreateUpgradeableReadLockHandle(
-                #if NETSTANDARD || NET35_OR_NEWER
-                this
-                #endif
-                IReadWriteLock @lock) => new UpgradeableReadLockHandle(@lock);
-            #endregion CreateUpgradeableReadLockHandle(...)
-
-            #region CreateWriteLockHandle(...)
-            /// <summary>
-            /// Creates a <see cref="IDisposable">disposable</see> write <see cref="ILockHandle">lock handle</see> for
-            /// the current <paramref name="lock" /> object, effectively causing the lock to enter in write-mode.
-            /// </summary>
-            /// <param name="lock">
-            /// The <see cref="IReadWriteLock"/> to provide a write-lock handle for.
-            /// </param>
-            /// <returns>
-            /// A <see cref="IDisposable">disposable</see> write <see cref="ILockHandle">lock handle</see> to be used to
-            /// control the lock duration.
-            /// </returns>
-            /// <seealso cref="IReadWriteLock"/>
-            /// <seealso cref="ILockHandle"/>
-            #if NETSTANDARD || NET45_OR_NEWER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-            #endif
-            public static ILockHandle CreateWriteLockHandle(
-                #if NETSTANDARD || NET35_OR_NEWER
-                this
-                #endif
-                IReadWriteLock @lock) => new WriteLockHandle(@lock);
-            #endregion
-
-            /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLockProvider"/> only if a write lock is
             /// needed. The necessity for a lock is determined by first executing <paramref name="isLockNeeded"/>
             /// function.
             /// </summary>
-            /// <param name="lock">
-            /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
+            /// <param name="lockProvider">
+            /// The current <see cref="IReadWriteLockProvider"/> object to provide the locking behavior.
             /// </param>
             /// <param name="isLockNeeded">
             /// A <see cref="Func{TResult}"/> returning <see cref="bool"/> that is used to determine if a write lock is
@@ -1349,29 +1273,29 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<bool> isLockNeeded, Action workAction)
+                IReadWriteLockProvider lockProvider, Func<bool> isLockNeeded, Action workAction)
             {
-                using (CreateReadLockHandle(@lock))
+                using (lockProvider.ReadLock.CreateHandle())
                 {
                     if (!isLockNeeded())
                     {
                         return;
                     }
                 }
-                using (CreateUpgradeableReadLockHandle(@lock))
+                using (lockProvider.UpgradeableReadLock.CreateHandle())
                 {
                     if (!isLockNeeded())
                     {
                         return;
                     }
-                    using (CreateWriteLockHandle(@lock))
+                    using (lockProvider.WriteLock.CreateHandle())
                     {
                         workAction();
                     }
                 }
             }
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLockProvider"/> only if a write lock is
             /// needed. The necessity for a lock is determined by first executing <paramref name="readFunc"/> function
             /// within the confines of a read lock in an attempt to obtain a result, and then validating that result
             /// against a <paramref name="isLockNeeded"/> function outside of a lock.
@@ -1379,8 +1303,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The type of result to eventually be produced within the confines of a write lock.
             /// </typeparam>
-            /// <param name="lock">
-            /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
+            /// <param name="lockProvider">
+            /// The current <see cref="IReadWriteLockProvider"/> object to provide the locking behavior.
             /// </param>
             /// <param name="readFunc">
             /// A <see cref="Func{T}"/> that is used to return the result without entering a write lock.
@@ -1401,9 +1325,9 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Func<T> readFunc, Func<T, bool> isLockNeeded, Func<T> workFunc)
+                IReadWriteLockProvider lockProvider, Func<T> readFunc, Func<T, bool> isLockNeeded, Func<T> workFunc)
             {
-                using (CreateReadLockHandle(@lock))
+                using (lockProvider.ReadLock.CreateHandle())
                 {
                     var result = readFunc();
                     if (!isLockNeeded(result))
@@ -1411,14 +1335,14 @@ namespace Axle.Threading
                         return result;
                     }
                 }
-                using (CreateUpgradeableReadLockHandle(@lock))
+                using (lockProvider.UpgradeableReadLock.CreateHandle())
                 {
                     var result = readFunc();
                     if (!isLockNeeded(result))
                     {
                         return result;
                     }
-                    using (CreateWriteLockHandle(@lock))
+                    using (lockProvider.WriteLock.CreateHandle())
                     {
                         result = workFunc();
                     }
@@ -1426,7 +1350,7 @@ namespace Axle.Threading
                 }
             }
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLockProvider"/> only if a write lock is
             /// needed.
             /// The necessity for a lock is determined by executing <paramref name="readFunc"/> operation within the
             /// confines of a read lock.
@@ -1434,8 +1358,8 @@ namespace Axle.Threading
             /// <typeparam name="T">
             /// The type of result to eventually be produced within the confines of a write lock.
             /// </typeparam>
-            /// <param name="lock">
-            /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
+            /// <param name="lockProvider">
+            /// The current <see cref="IReadWriteLockProvider"/> object to provide the locking behavior.
             /// </param>
             /// <param name="readFunc">
             /// A <see cref="Attempt{T}"/> that is used to determine whether the result can be obtained without issuing
@@ -1453,23 +1377,23 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, Attempt<T> readFunc, Func<T> workFunc)
+                IReadWriteLockProvider lockProvider, Attempt<T> readFunc, Func<T> workFunc)
             {
                 T result;
-                using (CreateReadLockHandle(@lock))
+                using (lockProvider.ReadLock.CreateHandle())
                 {
                     if (readFunc(out result))
                     {
                         return result;
                     }
                 }
-                using (CreateUpgradeableReadLockHandle(@lock))
+                using (lockProvider.UpgradeableReadLock.CreateHandle())
                 {
                     if (readFunc(out result))
                     {
                         return result;
                     }
-                    using (CreateWriteLockHandle(@lock))
+                    using (lockProvider.WriteLock.CreateHandle())
                     {
                         result = workFunc();
                     }
@@ -1477,7 +1401,7 @@ namespace Axle.Threading
                 return result;
             }
             /// <summary>
-            /// Invokes an operation withing the confines of a <see cref="IReadWriteLock"/> only if a write lock is
+            /// Invokes an operation withing the confines of a <see cref="IReadWriteLockProvider"/> only if a write lock is
             /// needed. The necessity for a lock is determined by executing <paramref name="readFunc"/> operation within
             /// the confines of a read lock.
             /// </summary>
@@ -1487,8 +1411,8 @@ namespace Axle.Threading
             /// <typeparam name="TResult">
             /// The type of result to eventually be produced within the confines of a write lock.
             /// </typeparam>
-            /// <param name="lock">
-            /// The current <see cref="IReadWriteLock"/> object to provide the locking behavior.
+            /// <param name="lockProvider">
+            /// The current <see cref="IReadWriteLockProvider"/> object to provide the locking behavior.
             /// </param>
             /// <param name="arg">
             /// The argument for the <paramref name="readFunc"/> operation and the <paramref name="workFunc"/>
@@ -1510,23 +1434,23 @@ namespace Axle.Threading
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
                 #endif
-                IReadWriteLock @lock, T arg, Attempt<T, TResult> readFunc, Func<T, TResult> workFunc)
+                IReadWriteLockProvider lockProvider, T arg, Attempt<T, TResult> readFunc, Func<T, TResult> workFunc)
             {
                 TResult result;
-                using (CreateReadLockHandle(@lock))
+                using (lockProvider.ReadLock.CreateHandle())
                 {
                     if (readFunc(arg, out result))
                     {
                         return result;
                     }
                 }
-                using (CreateUpgradeableReadLockHandle(@lock))
+                using (lockProvider.UpgradeableReadLock.CreateHandle())
                 {
                     if (readFunc(arg, out result))
                     {
                         return result;
                     }
-                    using (CreateWriteLockHandle(@lock))
+                    using (lockProvider.WriteLock.CreateHandle())
                     {
                         result = workFunc(arg);
                     }

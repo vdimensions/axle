@@ -51,7 +51,7 @@ namespace Axle.Application
         public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType) => _originalCatalog.GetDependencyTerminatedMethods(moduleType);
 
         public UtilizesAttribute[] GetUtilizedModules(Type moduleType) => _originalCatalog.GetUtilizedModules(moduleType);
-        public ProvidesForAttribute[] GetReportsToModules(Type moduleType) => _originalCatalog.GetReportsToModules(moduleType);
+        public ProvidesForAttribute[] GetProvidesForModules(Type moduleType) => _originalCatalog.GetProvidesForModules(moduleType);
         public ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType) => _originalCatalog.GetCommandLineTrigger(moduleType);
         public ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType) => _originalCatalog.GetConfigurationInfo(moduleType);
 

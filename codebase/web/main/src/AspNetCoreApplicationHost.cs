@@ -13,7 +13,7 @@ namespace Axle.Web.AspNetCore
     /// <summary>
     /// The <see cref="IApplicationHost"/> implementation designed for use with aspnetcore.
     /// </summary>
-    public sealed class AspNetCoreApplicationHost : ExtendingApplicationHost, IServiceConfigurer
+    public sealed class AspNetCoreApplicationHost : ApplicationHostDecorator, IServiceConfigurer
     {
         /// <summary>
         /// Gets the sole instance of the <see cref="AspNetCoreApplicationHost"/> class.

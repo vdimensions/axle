@@ -9,6 +9,15 @@ namespace Axle.Threading
     public interface ILock
     {
         /// <summary>
+        /// Acquires a lock and creates a <see cref="IDisposable">disposable</see> <see cref="ILockHandle"/> object to
+        /// control the duration of the obtained lock.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="ILockHandle"/> instance.
+        /// </returns>
+        ILockHandle CreateHandle();
+        
+        /// <summary>
         /// Acquires an exclusive lock.
         /// </summary>
         void Enter();

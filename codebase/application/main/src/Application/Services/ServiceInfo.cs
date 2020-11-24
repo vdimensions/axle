@@ -1,13 +1,15 @@
 ﻿using System;
 using System.Linq;
-using System.Reflection;
 using Axle.Reflection;
+#if NETSTANDARD
+using System.Reflection;
+#endif
 
 namespace Axle.Application.Services
 {
-    internal sealed class ServiceInfo
+    internal sealed class ServiceInfo<TService>
     {
-        public static bool TryGetServiceInfo(object instance, out ServiceInfo result)
+        public static bool TryGetServiceInfo(object instance, out ServiceInfo<TService> result)
         {
             var type = instance.GetType();
             var serviceType = new[]{type}
@@ -20,26 +22,31 @@ namespace Axle.Application.Services
                     t => new
                     {
                         Type = t, 
-                        Attribute = new TypeIntrospector(t).GetAttributes<ServiceAttribute>().Select(x => x.Attribute).Cast<ServiceAttribute>().SingleOrDefault()
+                        Attribute = new TypeIntrospector(t).GetAttributes<AbstractServiceAttribute>().Select(x => x.Attribute).Cast<AbstractServiceAttribute>().SingleOrDefault()
                     })
                 .SingleOrDefault(x => x.Attribute != null);
-            result = serviceType == null ? null : new ServiceInfo(instance, serviceType.Type, serviceType.Attribute.Name);
+            result = serviceType == null || !(instance is TService service)
+                ? null 
+                : new ServiceInfo<TService>(service, serviceType.Type, serviceType.Attribute.Name, serviceType.Attribute.IsPublic);
             return result != null;
         }
         
-        private readonly object _instance;
+        private readonly TService _instance;
         private readonly Type _serviceType;
         private readonly string _name;
+        private readonly bool _isPublic;
 
-        private ServiceInfo(object instance, Type serviceType, string name)
+        private ServiceInfo(TService instance, Type serviceType, string name, bool isPublic)
         {
             _instance = instance;
             _serviceType = serviceType;
             _name = name;
+            _isPublic = isPublic;
         }
 
-        public object Instance => _instance;
+        public TService Instance => _instance;
         public Type ServiceType => _serviceType;
         public string Name => _name;
+        public bool IsPublic  => _isPublic;
     }
 }
