@@ -10,7 +10,7 @@ namespace Axle.Threading
     /// </summary>
     public class MonitorLock : ILock
     {
-        public static void Create() => new MonitorLock();
+        public static MonitorLock Create() => new MonitorLock();
         
         private readonly object _obj;
 
