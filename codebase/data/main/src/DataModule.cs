@@ -12,15 +12,19 @@ namespace Axle.Data
     [Requires(typeof(ServiceRegistry))]
     internal sealed class DataModule : ServiceGroup<DataModule, DatabaseServiceProviderModule>, IEnumerable<IDbServiceProvider>
     {
-        private readonly ConcurrentDictionary<string, IDbServiceProvider> _providers = new ConcurrentDictionary<string, IDbServiceProvider>(StringComparer.Ordinal);
+        private readonly IDictionary<string, IDbServiceProvider> _providers = new Dictionary<string, IDbServiceProvider>(StringComparer.Ordinal);
         
         public DataModule(ServiceRegistry serviceRegistry) : base(serviceRegistry)
         {
             foreach (var providerModule in serviceRegistry)
             {
-                if (!_providers.TryAdd(providerModule.Provider.ProviderName, providerModule.Provider))
+                if (_providers.ContainsKey(providerModule.Provider.ProviderName))
                 {
                     throw new InvalidOperationException($"A database service provider '{providerModule.Provider.ProviderName}' is already registered!");
+                }
+                else 
+                {
+                    _providers.Add(providerModule.Provider.ProviderName, providerModule.Provider);
                 }
             }
         }

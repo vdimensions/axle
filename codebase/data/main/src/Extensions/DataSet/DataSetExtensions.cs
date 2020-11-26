@@ -10,6 +10,7 @@ namespace Axle.Data.Extensions.DataSet
     using DataSet = System.Data.DataSet;
     using DataTable = System.Data.DataTable;
 
+    /// A static class to contain common extension methods for the <see cref="System.Data.DataSet" /> type.
     public static class DataSetExtensions
     {
         public static bool IsEmpty(this DataSet dataSet)

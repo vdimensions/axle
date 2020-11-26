@@ -13,6 +13,8 @@ namespace Axle.Data.Extensions.DbCommand
     using DbCommand = System.Data.Common.DbCommand;
     using DataTable = System.Data.DataTable;
 
+    /// A static class to contain common extension methods for the <see cref="System.Data.IDbCommand" /> and
+    /// <see cref="System.Data.DbCommand" /> types.
     public static class DbCommandExtensions
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

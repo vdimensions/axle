@@ -9,6 +9,7 @@ namespace Axle.Data.Extensions.DataRow
 {
     using DataRow = System.Data.DataRow;
 
+    /// A static class to contain common extension methods for the <see cref="System.Data.DataRow" /> type.
     public static class DataRowExtensions
     {
         public static T Fetch<T>(this DataRow row, int columnIndex) => (T) GetData(row.VerifyArgument(nameof(row)).IsNotNull(), columnIndex);
