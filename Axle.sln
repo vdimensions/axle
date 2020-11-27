@@ -130,7 +130,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Configuration.Configur
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Cors", "codebase\web\cors\src\Axle.Web.AspNetCore.Cors.csproj", "{C8770413-47D1-48B6-9438-0991B999EE8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Axle.Data.Records", "codebase\data.records\main\src\Axle.Data.Records.csproj", "{962248B8-23D3-4BA3-9459-DE484FE5C308}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.Records", "codebase\data.records\main\src\Axle.Data.Records.csproj", "{962248B8-23D3-4BA3-9459-DE484FE5C308}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

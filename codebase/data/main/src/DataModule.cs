@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Concurrent;
 using System.Collections.Generic;
 using Axle.Application.Services;
 using Axle.DependencyInjection;
@@ -10,7 +9,7 @@ namespace Axle.Data
 {
     [Module]
     [Requires(typeof(ServiceRegistry))]
-    internal sealed class DataModule : ServiceGroup<DataModule, DatabaseServiceProviderModule>, IEnumerable<IDbServiceProvider>
+    internal sealed class DataModule : ServiceGroup<DataModule, IDbServiceProvider>, IEnumerable<IDbServiceProvider>
     {
         private readonly IDictionary<string, IDbServiceProvider> _providers = new Dictionary<string, IDbServiceProvider>(StringComparer.Ordinal);
         
@@ -18,13 +17,13 @@ namespace Axle.Data
         {
             foreach (var providerModule in serviceRegistry)
             {
-                if (_providers.ContainsKey(providerModule.Provider.ProviderName))
+                if (_providers.ContainsKey(providerModule.ProviderName))
                 {
-                    throw new InvalidOperationException($"A database service provider '{providerModule.Provider.ProviderName}' is already registered!");
+                    throw new InvalidOperationException($"A database service provider '{providerModule.ProviderName}' is already registered!");
                 }
                 else 
                 {
-                    _providers.Add(providerModule.Provider.ProviderName, providerModule.Provider);
+                    _providers.Add(providerModule.ProviderName, providerModule);
                 }
             }
         }
