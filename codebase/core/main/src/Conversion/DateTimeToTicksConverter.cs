@@ -5,6 +5,7 @@ namespace Axle.Conversion
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="DateTime"/> and <see cref="long"/>.
     /// </summary>
+    /// <seealso cref="DateTimeKind"/>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif

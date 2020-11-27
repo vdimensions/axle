@@ -24,19 +24,35 @@ namespace Axle.Data.Records.Mapping
         public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, byte>> expression)
             where T : class 
             => mapper.RegisterFieldAccessor(name, new ByteDataFieldAccessor(), expression);
-        
+
+        public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, sbyte>> expression)
+            where T : class
+            => mapper.RegisterFieldAccessor(name, new SByteDataFieldAccessor(), expression);
+
         public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, short>> expression)
             where T : class 
             => mapper.RegisterFieldAccessor(name, new Int16DataFieldAccessor(), expression);
-        
+
+        public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, ushort>> expression)
+            where T : class
+            => mapper.RegisterFieldAccessor(name, new UInt16DataFieldAccessor(), expression);
+
         public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, int>> expression)
             where T : class 
             => mapper.RegisterFieldAccessor(name, new Int32DataFieldAccessor(), expression);
-        
+
+        public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, uint>> expression)
+            where T : class
+            => mapper.RegisterFieldAccessor(name, new UInt32DataFieldAccessor(), expression);
+
         public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, long>> expression)
             where T : class 
             => mapper.RegisterFieldAccessor(name, new Int64DataFieldAccessor(), expression);
-        
+
+        public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, ulong>> expression)
+            where T : class
+            => mapper.RegisterFieldAccessor(name, new UInt64DataFieldAccessor(), expression);
+
         public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TimeSpan>> expression)
             where T : class 
             => mapper.RegisterFieldAccessor(
@@ -69,7 +85,7 @@ namespace Axle.Data.Records.Mapping
         
         public static void RegisterFieldAccessor<T>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, DateTimeOffset>> expression)
             where T : class 
-            => mapper.RegisterFieldAccessor(name, new DateTimeOffsetDataFieldAccessor(), expression);
+            => mapper.RegisterFieldAccessor(name, new DateTimeDataFieldAccessor().Transform(new DateTimeOffsetToDateTimeConverter()), expression);
 
         public static void RegisterEnumNameFieldAccessor<T, TEnum>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TEnum>> expression)
             where T: class
@@ -128,6 +144,20 @@ namespace Axle.Data.Records.Mapping
                 new Int16DataFieldAccessor().Transform(new EnumToInt16Converter<TEnum>()), 
                 expression);
         }
+        
+        public static void RegisterUInt16EnumFieldAccessor<T, TEnum>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TEnum>> expression)
+            where T: class
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+            where TEnum: struct, IComparable, IConvertible, IFormattable
+            #else
+            where TEnum: struct, IComparable, IFormattable
+            #endif
+        {
+            mapper.RegisterFieldAccessor(
+                name, 
+                new UInt16DataFieldAccessor().Transform(new EnumToUInt16Converter<TEnum>()), 
+                expression);
+        }
         public static void RegisterInt32EnumFieldAccessor<T, TEnum>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TEnum>> expression)
             where T: class
             #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
@@ -141,6 +171,19 @@ namespace Axle.Data.Records.Mapping
                 new Int32DataFieldAccessor().Transform(new EnumToInt32Converter<TEnum>()), 
                 expression);
         }
+        public static void RegisterUInt32EnumFieldAccessor<T, TEnum>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TEnum>> expression)
+            where T: class
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+            where TEnum: struct, IComparable, IConvertible, IFormattable
+            #else
+            where TEnum: struct, IComparable, IFormattable
+            #endif
+        {
+            mapper.RegisterFieldAccessor(
+                name, 
+                new UInt32DataFieldAccessor().Transform(new EnumToUInt32Converter<TEnum>()), 
+                expression);
+        }
         public static void RegisterInt64EnumFieldAccessor<T, TEnum>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TEnum>> expression)
             where T: class
             #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
@@ -152,6 +195,19 @@ namespace Axle.Data.Records.Mapping
             mapper.RegisterFieldAccessor(
                 name, 
                 new Int64DataFieldAccessor().Transform(new EnumToInt64Converter<TEnum>()), 
+                expression);
+        }
+        public static void RegisterUInt64EnumFieldAccessor<T, TEnum>(this DataRecordMapper<T> mapper, string name, Expression<Func<T, TEnum>> expression)
+            where T: class
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+            where TEnum: struct, IComparable, IConvertible, IFormattable
+            #else
+            where TEnum: struct, IComparable, IFormattable
+            #endif
+        {
+            mapper.RegisterFieldAccessor(
+                name, 
+                new UInt64DataFieldAccessor().Transform(new EnumToUInt64Converter<TEnum>()), 
                 expression);
         }
     }
