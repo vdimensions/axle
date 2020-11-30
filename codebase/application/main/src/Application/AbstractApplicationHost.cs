@@ -150,23 +150,18 @@ namespace Axle.Application
             string environmentName, 
             string[] profiles)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            using (CultureScope.CreateInvariant())
-            #endif
+            var tmpConfig = Application.Configure(
+                new LayeredConfigManager(), 
+                configFileName, 
+                configStreamProvider,
+                string.Empty);
+            foreach (var profile in profiles)
             {
-                var tmpConfig = Application.Configure(
-                    new LayeredConfigManager(), 
-                    configFileName, 
-                    configStreamProvider,
-                    string.Empty);
-                foreach (var profile in profiles)
-                {
-                    tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, profile);
-                }
-
-                tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, environmentName);
-                return tmpConfig.LoadConfiguration();
+                tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, profile);
             }
+
+            tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, environmentName);
+            return tmpConfig.LoadConfiguration();
         }
 
         /// <summary>

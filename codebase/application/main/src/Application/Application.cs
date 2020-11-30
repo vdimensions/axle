@@ -116,8 +116,7 @@ namespace Axle.Application
                         moduleResourceManager.Bundles
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)
-                            .Extractors
-                                .Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}."));
+                            .Extractors.Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}."));
 
                         var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         

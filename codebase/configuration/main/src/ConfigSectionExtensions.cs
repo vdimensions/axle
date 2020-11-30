@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Globalization;
 using Axle.Text.Documents.Binding;
 using Axle.Verification;
 
@@ -100,6 +101,26 @@ namespace Axle.Configuration
         private const string IncludeExcludeElementCollectionIncludeSection = "include";
         private const string IncludeExcludeElementCollectionExcludeSection = "exclude";
         
+        
+        private static object LoadConfiguration(IConfigSetting configSection, Type sectionType)
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            using (CultureScope.CreateInvariant())
+            #endif
+            {
+                return new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType);
+            }
+        }
+        private static T LoadConfiguration<T>(IConfigSetting configSection, T section)
+        {
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            using (CultureScope.CreateInvariant())
+            #endif
+            {
+                return (T) new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), section);
+            }
+        }
+        
         private static IConfigSetting GetSetting(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -159,7 +180,7 @@ namespace Axle.Configuration
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             var configSection = GetSetting(config, name);
             return configSection != null 
-                ? new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType)
+                ? LoadConfiguration(configSection, sectionType)
                 : null;
         }
 
@@ -192,7 +213,7 @@ namespace Axle.Configuration
             Verifier.IsNotNull(Verifier.VerifyArgument(config, nameof(config)));
             var configSection = GetSetting(config, name);
             return configSection != null
-                ? (T) new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), new T())
+                ? LoadConfiguration(configSection, new T())
                 : null;
         }
         
@@ -214,8 +235,7 @@ namespace Axle.Configuration
         {
             return Enumerable.Select(
                 GetSections(config, sectionName), 
-                configSection => 
-                    new DefaultDocumentBinder().Bind(ConfigurationBindingValueProvider.Get(configSection), sectionType));
+                configSection => LoadConfiguration(configSection, sectionType));
         }
 
         public static IEnumerable<T> GetSections<T>(
