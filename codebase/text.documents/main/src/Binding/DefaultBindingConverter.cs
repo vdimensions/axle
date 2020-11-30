@@ -14,9 +14,37 @@ namespace Axle.Text.Documents.Binding
     /// </summary>
     public sealed class DefaultBindingConverter : IBindingConverter
     {
+        private sealed class InvariantParser<T> : DelegatingConverter<CharSequence, T>
+        {
+            public static IConverter<CharSequence, T> Create(IParser<T> parser) => new InvariantParser<T>(parser);
+            
+            private readonly IParser<T> _parser;
+
+            private InvariantParser(IParser<T> parser) : base(parser)
+            {
+                _parser = parser;
+            }
+
+            public override T Convert(CharSequence source)
+            {
+                return _parser.Parse(source, CultureInfo.InvariantCulture);
+            }
+
+            public override bool TryConvert(CharSequence source, out T target)
+            {
+                return _parser.TryParse(source, CultureInfo.InvariantCulture, out target);
+            }
+        }
+
+        private static IConverter<CharSequence, T> CultureInvariant<T>(IParser<T> parser)
+            where T: IFormattable
+        {
+            return InvariantParser<T>.Create(parser);
+        }
+
         private static readonly IDictionary<Type, IConverter<CharSequence, object>> _converters;
 
-        static DefaultBindingConverter() 
+        static DefaultBindingConverter()
         {
             var booleanParser = new BooleanParser();
             var characterParser = new CharacterParser();
@@ -40,40 +68,45 @@ namespace Axle.Text.Documents.Binding
             {
                 { typeof(bool),             new BoxingConverter<bool>(booleanParser) },
                 { typeof(char),             new BoxingConverter<char>(characterParser) },
-                { typeof(sbyte),            new BoxingConverter<sbyte>(sbyteParser) },
-                { typeof(byte),             new BoxingConverter<byte>(byteParser) },
-                { typeof(short),            new BoxingConverter<short>(int16Parser) },
-                { typeof(ushort),           new BoxingConverter<ushort>(uInt16Parser) },
-                { typeof(int),              new BoxingConverter<int>(int32Parser) },
-                { typeof(uint),             new BoxingConverter<uint>(uInt32Parser) },
-                { typeof(long),             new BoxingConverter<long>(int64Parser) },
-                { typeof(ulong),            new BoxingConverter<ulong>(uInt64Parser) },
-                { typeof(float),            new BoxingConverter<float>(singleParser) },
-                { typeof(double),           new BoxingConverter<double>(doubleParser) },
-                { typeof(decimal),          new BoxingConverter<decimal>(decimalParser) },
+                { typeof(sbyte),            new BoxingConverter<sbyte>(CultureInvariant(sbyteParser)) },
+                { typeof(byte),             new BoxingConverter<byte>(CultureInvariant(byteParser)) },
+                { typeof(short),            new BoxingConverter<short>(CultureInvariant(int16Parser)) },
+                { typeof(ushort),           new BoxingConverter<ushort>(CultureInvariant(uInt16Parser)) },
+                { typeof(int),              new BoxingConverter<int>(CultureInvariant(int32Parser)) },
+                { typeof(uint),             new BoxingConverter<uint>(CultureInvariant(uInt32Parser)) },
+                { typeof(long),             new BoxingConverter<long>(CultureInvariant(int64Parser)) },
+                { typeof(ulong),            new BoxingConverter<ulong>(CultureInvariant(uInt64Parser)) },
+                { typeof(float),            new BoxingConverter<float>(CultureInvariant(singleParser)) },
+                { typeof(double),           new BoxingConverter<double>(CultureInvariant(doubleParser)) },
+                { typeof(decimal),          new BoxingConverter<decimal>(CultureInvariant(decimalParser)) },
                 { typeof(string),           new BoxingConverter<string>(new StringToCharSequenceConverter().Invert()) },
-                { typeof(DateTime),         new BoxingConverter<DateTime>(dateTimeParser) },
-                { typeof(DateTimeOffset),   new BoxingConverter<DateTimeOffset>(dateTimeOffsetParser) },
-                { typeof(TimeSpan),         new BoxingConverter<TimeSpan>(timeSpanParser) },
-                { typeof(Guid),             new BoxingConverter<Guid>(guidParser) },
+                { typeof(DateTime),         new BoxingConverter<DateTime>(CultureInvariant(dateTimeParser)) },
+                { typeof(DateTimeOffset),   new BoxingConverter<DateTimeOffset>(CultureInvariant(dateTimeOffsetParser)) },
+                #if !NETSTANDARD && !NET40_OR_NEWER
+                // Strangely enough, TimeSpan seems to not implement IFormattable before net40 
+                { typeof(TimeSpan),         new BoxingConverter<TimeSpan>(InvariantParser<TimeSpan>.Create(timeSpanParser)) },
+                #else
+                { typeof(TimeSpan),         new BoxingConverter<TimeSpan>(CultureInvariant(timeSpanParser)) },
+                #endif
+                { typeof(Guid),             new BoxingConverter<Guid>(CultureInvariant(guidParser)) },
                 #if NETSTANDARD || NET35_OR_NEWER
                 { typeof(bool?),            new BoxingConverter<bool?>(booleanParser.GetNullableParser()) },
                 { typeof(char?),            new BoxingConverter<char?>(characterParser.GetNullableParser()) },
-                { typeof(sbyte?),           new BoxingConverter<sbyte?>(sbyteParser.GetNullableParser()) },
-                { typeof(byte?),            new BoxingConverter<byte?>(byteParser.GetNullableParser()) },
-                { typeof(short?),           new BoxingConverter<short?>(int16Parser.GetNullableParser()) },
-                { typeof(ushort?),          new BoxingConverter<ushort?>(uInt16Parser.GetNullableParser()) },
-                { typeof(int?),             new BoxingConverter<int?>(int32Parser.GetNullableParser()) },
-                { typeof(uint?),            new BoxingConverter<uint?>(uInt32Parser.GetNullableParser()) },
-                { typeof(long?),            new BoxingConverter<long?>(int64Parser.GetNullableParser()) },
-                { typeof(ulong?),           new BoxingConverter<ulong?>(uInt64Parser.GetNullableParser()) },
-                { typeof(float?),           new BoxingConverter<float?>(singleParser.GetNullableParser()) },
-                { typeof(double?),          new BoxingConverter<double?>(doubleParser.GetNullableParser()) },
-                { typeof(decimal?),         new BoxingConverter<decimal?>(decimalParser.GetNullableParser()) },
-                { typeof(DateTime?),        new BoxingConverter<DateTime?>(dateTimeParser.GetNullableParser()) },
-                { typeof(DateTimeOffset?),  new BoxingConverter<DateTimeOffset?>(dateTimeOffsetParser.GetNullableParser()) },
-                { typeof(TimeSpan?),        new BoxingConverter<TimeSpan?>(timeSpanParser.GetNullableParser()) },
-                { typeof(Guid?),            new BoxingConverter<Guid?>(guidParser.GetNullableParser()) },
+                { typeof(sbyte?),           new BoxingConverter<sbyte?>(InvariantParser<sbyte?>.Create(sbyteParser.GetNullableParser())) },
+                { typeof(byte?),            new BoxingConverter<byte?>(InvariantParser<byte?>.Create(byteParser.GetNullableParser())) },
+                { typeof(short?),           new BoxingConverter<short?>(InvariantParser<short?>.Create(int16Parser.GetNullableParser())) },
+                { typeof(ushort?),          new BoxingConverter<ushort?>(InvariantParser<ushort?>.Create(uInt16Parser.GetNullableParser())) },
+                { typeof(int?),             new BoxingConverter<int?>(InvariantParser<int?>.Create(int32Parser.GetNullableParser())) },
+                { typeof(uint?),            new BoxingConverter<uint?>(InvariantParser<uint?>.Create(uInt32Parser.GetNullableParser())) },
+                { typeof(long?),            new BoxingConverter<long?>(InvariantParser<long?>.Create(int64Parser.GetNullableParser())) },
+                { typeof(ulong?),           new BoxingConverter<ulong?>(InvariantParser<ulong?>.Create(uInt64Parser.GetNullableParser())) },
+                { typeof(float?),           new BoxingConverter<float?>(InvariantParser<float?>.Create(singleParser.GetNullableParser())) },
+                { typeof(double?),          new BoxingConverter<double?>(InvariantParser<double?>.Create(doubleParser.GetNullableParser())) },
+                { typeof(decimal?),         new BoxingConverter<decimal?>(InvariantParser<decimal?>.Create(decimalParser.GetNullableParser())) },
+                { typeof(DateTime?),        new BoxingConverter<DateTime?>(InvariantParser<DateTime?>.Create(dateTimeParser.GetNullableParser())) },
+                { typeof(DateTimeOffset?),  new BoxingConverter<DateTimeOffset?>(InvariantParser<DateTimeOffset?>.Create(dateTimeOffsetParser.GetNullableParser())) },
+                { typeof(TimeSpan?),        new BoxingConverter<TimeSpan?>(InvariantParser<TimeSpan?>.Create(timeSpanParser.GetNullableParser())) },
+                { typeof(Guid?),            new BoxingConverter<Guid?>(InvariantParser<Guid?>.Create(guidParser.GetNullableParser())) },
                 #endif
                 { typeof(Uri),              new BoxingConverter<Uri>(new Axle.Text.Parsing.UriParser()) },
                 { typeof(Type),             new BoxingConverter<Type>(new TypeParser()) },

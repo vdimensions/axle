@@ -21,9 +21,9 @@ namespace Axle.Conversion
         protected DelegatingConverter(IConverter<TSrc, TDest> impl) => _impl = impl;
 
         /// <inheritdoc />
-        public TDest Convert(TSrc source) => _impl.Convert(source);
+        public virtual TDest Convert(TSrc source) => _impl.Convert(source);
 
         /// <inheritdoc />
-        public bool TryConvert(TSrc source, out TDest target) => _impl.TryConvert(source, out target);
+        public virtual bool TryConvert(TSrc source, out TDest target) => _impl.TryConvert(source, out target);
     }
 }
