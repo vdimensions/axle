@@ -6,7 +6,7 @@ namespace Axle.Data.Npgsql
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
     [DbServiceProvider(Name = NpgsqlServiceProvider.Name)]
-    internal sealed class NpgsqlModule : DatabaseServiceProviderModule
+    internal sealed class NpgsqlModule : DbServiceProvider
     {
         public NpgsqlModule() : base(NpgsqlServiceProvider.Instance) { }
     }

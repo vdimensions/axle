@@ -98,38 +98,31 @@ namespace Axle.Application
                         {
                             if (modules.TryGetValue(requiredModules[k].Type, out var rmm))
                             {
-                                moduleInitializationContainer.Export<object>(rmm.ModuleInstance);
+                                moduleInitializationContainer.Export(rmm.ModuleInstance);
                             }
                         }
 
-                        var moduleAssembly = 
-                            moduleType
+                        var mtype = moduleType
                             #if NETSTANDARD || NET45_OR_NEWER
                             .GetTypeInfo()
                             #endif
-                            .Assembly;
-                        var moduleTypeName = 
-                            moduleType
-                            #if NETSTANDARD || NET45_OR_NEWER
-                            .GetTypeInfo()
-                            #endif
-                            .Name;
-                        var moduleTypeNamespace = 
-                            moduleType
-                            #if NETSTANDARD || NET45_OR_NEWER
-                            .GetTypeInfo()
-                            #endif
-                            .Namespace;
+                            ;
+
+                        var moduleAssembly = mtype.Assembly;
+                        var moduleTypeName = mtype.Name;
+                        var moduleTypeNamespace = mtype.Namespace;
                         var moduleResourceManager = new DefaultResourceManager(null);
+
                         moduleResourceManager.Bundles
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)
-                            .Extractors.Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}."));
+                            .Extractors
+                                .Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}."));
 
                         var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         
                         var baseModuleConfig = new LayeredConfigManager().Append(
-                            (IConfigSource) Configure(
+                            Configure(
                                 new LayeredConfigManager(), 
                                 moduleTypeName,
                                 moduleConfigurationStreamProvider, 
@@ -137,7 +130,7 @@ namespace Axle.Application
                         if (!string.IsNullOrEmpty(host.EnvironmentName))
                         {
                             baseModuleConfig = baseModuleConfig.Append(
-                                (IConfigSource) Configure(
+                                Configure(
                                     new LayeredConfigManager(), 
                                     moduleTypeName,
                                     moduleConfigurationStreamProvider, 

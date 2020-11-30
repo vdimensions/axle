@@ -3,6 +3,7 @@ using System.IO;
 using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
+using Axle.Globalization;
 using Axle.Logging;
 using Axle.Resources;
 using Axle.Resources.Bundling;
@@ -149,18 +150,23 @@ namespace Axle.Application
             string environmentName, 
             string[] profiles)
         {
-            var tmpConfig = Application.Configure(
-                new LayeredConfigManager(), 
-                configFileName, 
-                configStreamProvider,
-                string.Empty);
-            foreach (var profile in profiles)
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            using (CultureScope.CreateInvariant())
+            #endif
             {
-                tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, profile);
-            }
+                var tmpConfig = Application.Configure(
+                    new LayeredConfigManager(), 
+                    configFileName, 
+                    configStreamProvider,
+                    string.Empty);
+                foreach (var profile in profiles)
+                {
+                    tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, profile);
+                }
 
-            tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, environmentName);
-            return tmpConfig.LoadConfiguration();
+                tmpConfig = Application.Configure(tmpConfig, configFileName, configStreamProvider, environmentName);
+                return tmpConfig.LoadConfiguration();
+            }
         }
 
         /// <summary>

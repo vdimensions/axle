@@ -6,7 +6,7 @@ namespace Axle.Data.MySql
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
     [DbServiceProvider(Name = MySqlServiceProvider.Name)]
-    internal sealed class MySqlModule : DatabaseServiceProviderModule
+    internal sealed class MySqlModule : DbServiceProvider
     {
         public MySqlModule() : base(MySqlServiceProvider.Instance) { }
     }

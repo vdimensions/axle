@@ -2,9 +2,9 @@
 using System.Data;
 using Axle.Verification;
 
-
 namespace Axle.Data.Extensions.DataReader
 {
+    /// A static class to contan common extension methods for the <see cref="IDataReader"/> interface.
     public static class DataReaderExtensions
     {
         #if NETSTANDARD || NET45_OR_NEWER
