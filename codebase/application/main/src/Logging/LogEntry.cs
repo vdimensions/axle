@@ -17,7 +17,16 @@ namespace Axle.Logging
     public sealed class LogEntry : ILogEntry
     {
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-        private static string ThreadName(Thread t) => t.Name ?? $"Thread-{t.ManagedThreadId}";
+        private static string ThreadName(Thread t)
+        {
+            string threadName = t.Name;
+            if (string.IsNullOrEmpty(threadName))
+            {
+                var threadIdString = t.ManagedThreadId.ToString();
+                return new System.Text.StringBuilder("thread-").Append(threadIdString).Append(' ', 3 - threadIdString.Length).ToString();
+            }
+            return threadName;
+        }
         #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -99,12 +108,7 @@ namespace Axle.Logging
         /// </returns>
         public override string ToString()
         {
-            var messageToWrite = _exception == null ? _message : $"{_message}\n{_exception.StackTrace}";
-            #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-            return $"{_timestamp:yyyy-MM-dd HH:mm:ss} {_threadID} [{_severity}] {_type.FullName}: {messageToWrite}";
-            #else
-            return $"{_timestamp:yyyy-MM-dd HH:mm:ss} [{_severity}] {_type.FullName}: {messageToWrite}";
-            #endif
+            return Message;
         }
 
         /// <inheritdoc />

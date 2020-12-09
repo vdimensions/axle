@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
-
+using System.IO;
 
 namespace Axle.Logging
 {
@@ -31,65 +31,96 @@ namespace Axle.Logging
             {
                 var oldText = Console.ForegroundColor;
                 var oldBg = Console.BackgroundColor;
+                ConsoleColor primaryColor, secondaryColor, 
+                             defaultColor = oldText, defaultBackground = oldBg,
+                             primaryBackground = oldBg, secondaryBackground = oldBg;
+                TextWriter writer = Console.Out;
+                var abbr = "MSG";
+
+                switch (message.Severity)
+                {
+                    case LogSeverity.Debug:
+                        primaryColor = ConsoleColor.Cyan;
+                        secondaryColor = ConsoleColor.Blue;
+                        primaryBackground = oldBg;
+                        secondaryBackground = oldBg;
+                        abbr = "debug";
+                        break;
+                    case LogSeverity.Info:
+                        primaryColor = ConsoleColor.Green;
+                        secondaryColor = ConsoleColor.Cyan;
+                        primaryBackground = oldBg;
+                        secondaryBackground = oldBg;
+                        abbr = " info";
+                        break;
+                    case LogSeverity.Warning:
+                        primaryColor = ConsoleColor.Yellow;
+                        secondaryColor = ConsoleColor.White;
+                        primaryBackground = oldBg;
+                        secondaryBackground = oldBg;
+                        abbr = " warn";
+                        break;
+                    case LogSeverity.Error:
+                        primaryColor = ConsoleColor.Red;
+                        secondaryColor = ConsoleColor.White;
+                        primaryBackground = oldBg;
+                        secondaryBackground = oldBg;
+                        abbr = "error";
+                        break;
+                    case LogSeverity.Fatal:
+                        primaryColor = ConsoleColor.Yellow;
+                        secondaryColor = ConsoleColor.White;
+                        primaryBackground = ConsoleColor.DarkRed;
+                        secondaryBackground = ConsoleColor.DarkRed;
+                        writer = Console.Error;
+                        abbr = "fatal";
+                        break;
+                    default:
+                        primaryColor = ConsoleColor.Cyan;
+                        secondaryColor = ConsoleColor.Blue;
+                        primaryBackground = oldBg;
+                        secondaryBackground = oldBg;
+                        break;
+                }
                 Console.ResetColor();
                 try
                 {
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Out.Write("{0:yyyy-MM-dd HH:mm:ss} ", message.Timestamp);
-                    Console.Out.Flush();
+                    Console.ForegroundColor = secondaryColor;
+                    Console.BackgroundColor = secondaryBackground;
+                    writer.Write("{0:yyyy-MM-dd HH:mm:ss} ", message.Timestamp);
+                    writer.Flush();
+
+                    Console.ForegroundColor = primaryColor;
+                    Console.BackgroundColor = primaryBackground;
+                    writer.Write("{0} ", abbr);
+                    writer.Flush();
+                            
                     #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Out.Write(message.ThreadID);
-                    Console.Out.Flush();
+                    Console.ForegroundColor = secondaryColor;
+                    Console.BackgroundColor = secondaryBackground;
+                    writer.Write("{0} ", message.ThreadID);
+                    writer.Flush();
                     #endif
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Out.Write(" [");
-                    Console.Out.Flush();
-                    switch (message.Severity)
-                    {
-                        case LogSeverity.Debug:
-                            Console.ForegroundColor = ConsoleColor.DarkGray;
-                            break;
-                        case LogSeverity.Info:
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            break;
-                        case LogSeverity.Warning:
-                            Console.ForegroundColor = ConsoleColor.Yellow;
-                            break;
-                        case LogSeverity.Error:
-                            Console.ForegroundColor = ConsoleColor.DarkRed;
-                            break;
-                        case LogSeverity.Fatal:
-                            Console.ForegroundColor = ConsoleColor.Red;
-                            break;
-                        default:
-                            Console.ForegroundColor = ConsoleColor.White;
-                            break;
-                    }
-                    Console.Out.Write(message.Severity);
-                    Console.Out.Flush();
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Out.Write("] ");
-                    Console.Out.Flush();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Out.Write(message.Type.FullName);
-                    Console.Out.Flush();
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.Out.Write(": ");
-                    Console.Out.Write(message.Message);
-                    Console.Out.Flush();
+
+                    Console.ForegroundColor = primaryColor;
+                    Console.BackgroundColor = primaryBackground;
+                    writer.Write("{0} ", message.Type.FullName);
+                    writer.Flush();
+
+                    Console.ForegroundColor = defaultColor;
+                    Console.BackgroundColor = defaultBackground;
+                    writer.Write(message.Message);
+                    writer.Flush();
                     if (message.Exception != null)
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkYellow;
-                        Console.Out.WriteLine();
-                        Console.Out.Write(message.Exception.StackTrace);
-                        Console.Out.Flush();
+                        writer.Write("\n{0}:{1}\n{1}", message.Exception.GetType().FullName, message.Exception.Message, message.Exception.StackTrace);
+                        writer.Flush();
                     }
                 }
                 finally
                 {
-                    Console.Out.WriteLine();
-                    Console.Out.Flush();
+                    writer.WriteLine();
+                    writer.Flush();
                     Console.ForegroundColor = oldText;
                     Console.BackgroundColor = oldBg;
                 }

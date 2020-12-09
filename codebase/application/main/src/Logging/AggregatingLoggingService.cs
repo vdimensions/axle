@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Axle.Threading;
-using Axle.Threading.ReaderWriterLock;
 
 namespace Axle.Logging
 {
