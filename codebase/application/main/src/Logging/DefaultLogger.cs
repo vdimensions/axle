@@ -55,23 +55,25 @@ namespace Axle.Logging
                         break;
                     case LogSeverity.Warning:
                         primaryColor = ConsoleColor.Yellow;
-                        secondaryColor = ConsoleColor.White;
+                        secondaryColor = ConsoleColor.DarkYellow;
                         primaryBackground = oldBg;
                         secondaryBackground = oldBg;
                         abbr = " warn";
                         break;
                     case LogSeverity.Error:
                         primaryColor = ConsoleColor.Red;
-                        secondaryColor = ConsoleColor.White;
+                        secondaryColor = ConsoleColor.DarkRed;
                         primaryBackground = oldBg;
                         secondaryBackground = oldBg;
                         abbr = "error";
                         break;
                     case LogSeverity.Fatal:
                         primaryColor = ConsoleColor.Yellow;
-                        secondaryColor = ConsoleColor.White;
+                        secondaryColor = ConsoleColor.DarkYellow;
+                        defaultColor = ConsoleColor.White;
                         primaryBackground = ConsoleColor.DarkRed;
                         secondaryBackground = ConsoleColor.DarkRed;
+                        defaultBackground = ConsoleColor.DarkRed;
                         writer = Console.Error;
                         abbr = "fatal";
                         break;
@@ -85,32 +87,38 @@ namespace Axle.Logging
                 Console.ResetColor();
                 try
                 {
-                    Console.ForegroundColor = secondaryColor;
-                    Console.BackgroundColor = secondaryBackground;
-                    writer.Write("{0:yyyy-MM-dd HH:mm:ss} ", message.Timestamp);
-                    writer.Flush();
 
-                    Console.ForegroundColor = primaryColor;
-                    Console.BackgroundColor = primaryBackground;
-                    writer.Write("{0} ", abbr);
-                    writer.Flush();
-                            
+                    var timestampText = string.Format("{0:yyyy MMM dd HH:mm:ss}", message.Timestamp);
                     #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-                    Console.ForegroundColor = secondaryColor;
-                    Console.BackgroundColor = secondaryBackground;
-                    writer.Write("{0} ", message.ThreadID);
-                    writer.Flush();
+                    var preLength = Math.Max(timestampText.Length, message.ThreadID.Length + abbr.Length + 1);
+                    var threadName = new System.Text.StringBuilder()
+                        .Append(message.ThreadID)
+                        .Append(' ', preLength - message.ThreadID.Length - abbr.Length - 1)
+                        .ToString();
+                    timestampText = new System.Text.StringBuilder()
+                        .Append(timestampText)
+                        .Append(' ', preLength - timestampText.Length)
+                        .ToString();
+                    #else
+                    var preLength = timestampText.Length;
+                    var threadName = string.Empty;
                     #endif
 
+                    Console.ForegroundColor = secondaryColor;
+                    Console.BackgroundColor = secondaryBackground;
+                    writer.Write("{0} {1}", timestampText, message.Type.FullName);
+                    writer.Flush();
+
                     Console.ForegroundColor = primaryColor;
                     Console.BackgroundColor = primaryBackground;
-                    writer.Write("{0} ", message.Type.FullName);
+                    writer.Write("\n{0} {1} ", threadName, abbr);
                     writer.Flush();
 
                     Console.ForegroundColor = defaultColor;
                     Console.BackgroundColor = defaultBackground;
                     writer.Write(message.Message);
                     writer.Flush();
+
                     if (message.Exception != null)
                     {
                         writer.Write("\n{0}:{1}\n{1}", message.Exception.GetType().FullName, message.Exception.Message, message.Exception.StackTrace);
@@ -126,9 +134,9 @@ namespace Axle.Logging
                 }
             }
         }
-        #endif
+#endif
 
-        private static void LogToDebug(ILogEntry message) => Debug.WriteLine(message);
+                            private static void LogToDebug(ILogEntry message) => Debug.WriteLine(message);
 
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         private static void LogToTrace(ILogEntry message) => Trace.WriteLine(message);

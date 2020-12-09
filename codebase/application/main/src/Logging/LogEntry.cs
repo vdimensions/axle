@@ -22,8 +22,7 @@ namespace Axle.Logging
             string threadName = t.Name;
             if (string.IsNullOrEmpty(threadName))
             {
-                var threadIdString = t.ManagedThreadId.ToString();
-                return new System.Text.StringBuilder("thread-").Append(threadIdString).Append(' ', 3 - threadIdString.Length).ToString();
+                return new System.Text.StringBuilder("thread-").Append(t.ManagedThreadId).ToString();
             }
             return threadName;
         }
