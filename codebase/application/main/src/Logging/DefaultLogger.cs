@@ -31,9 +31,9 @@ namespace Axle.Logging
             {
                 var oldText = Console.ForegroundColor;
                 var oldBg = Console.BackgroundColor;
-                ConsoleColor primaryColor, secondaryColor, 
-                             defaultColor = oldText, defaultBackground = oldBg,
-                             primaryBackground = oldBg, secondaryBackground = oldBg;
+                ConsoleColor primaryColor   = ConsoleColor.Magenta,       primaryBackground   = oldBg,
+                             secondaryColor = ConsoleColor.DarkMagenta,   secondaryBackground = oldBg,
+                             defaultColor   = oldText,                    defaultBackground   = oldBg;
                 TextWriter writer = Console.Out;
                 var abbr = "MSG";
 
