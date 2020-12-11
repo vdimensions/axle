@@ -28,14 +28,16 @@ namespace Axle.Logging
             lock (_syncRoot)
             lock (typeof(Console))
             lock (Console.Out)
+            lock (Console.Error)
             {
+                Console.ResetColor();
                 var oldText = Console.ForegroundColor;
                 var oldBg = Console.BackgroundColor;
                 ConsoleColor primaryColor   = ConsoleColor.Magenta,       primaryBackground   = oldBg,
                              secondaryColor = ConsoleColor.DarkMagenta,   secondaryBackground = oldBg,
                              defaultColor   = oldText,                    defaultBackground   = oldBg;
                 TextWriter writer = Console.Out;
-                var abbr = "MSG";
+                var abbr = "  msg";
 
                 switch (message.Severity)
                 {
@@ -84,10 +86,8 @@ namespace Axle.Logging
                         secondaryBackground = oldBg;
                         break;
                 }
-                Console.ResetColor();
                 try
                 {
-
                     var timestampText = string.Format("{0:yyyy MMM dd HH:mm:ss}", message.Timestamp);
                     #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
                     var preLength = Math.Max(timestampText.Length, message.ThreadID.Length + abbr.Length + 1);
@@ -121,7 +121,19 @@ namespace Axle.Logging
 
                     if (message.Exception != null)
                     {
-                        writer.Write("\n{0}:{1}\n{1}", message.Exception.GetType().FullName, message.Exception.Message, message.Exception.StackTrace);
+                        Console.ForegroundColor = secondaryColor;
+                        Console.BackgroundColor = secondaryBackground;
+                        const string exceptionPrefix = "exception";
+                        writer.Write(
+                            "\n{0} {1}",
+                            new System.Text.StringBuilder()
+                                .Append(exceptionPrefix)
+                                .Append(' ', preLength - exceptionPrefix.Length)
+                                .ToString(),
+                            message.Exception.GetType().FullName);
+                        Console.ForegroundColor = defaultColor;
+                        Console.BackgroundColor = defaultBackground;
+                        writer.Write("{0}\n{1}", message.Exception.Message, message.Exception.StackTrace);
                         writer.Flush();
                     }
                 }
@@ -134,9 +146,9 @@ namespace Axle.Logging
                 }
             }
         }
-#endif
+        #endif
 
-                            private static void LogToDebug(ILogEntry message) => Debug.WriteLine(message);
+        private static void LogToDebug(ILogEntry message) => Debug.WriteLine(message);
 
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         private static void LogToTrace(ILogEntry message) => Trace.WriteLine(message);

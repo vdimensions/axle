@@ -1,10 +1,10 @@
 Application bootstrapping order:
 
 1. Infrastructure components
-- Reflection Provider
-- DI Provider
-- Logging Provider
-- Configuration Provider
+- Reflection Provider - not quite necessary, Axle's reflection abstraction layer is perfectly sufficient
+- [Done] DI Provider
+- [Done] Logging Provider
+- [Done] Configuration Provider
 - Resources Provider
 
 2. Modularity Boostrap
