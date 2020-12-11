@@ -10,5 +10,11 @@ namespace Axle.Data.MySql
             app.VerifyArgument(nameof(app)).IsNotNull();
             return app.ConfigureModules(m => m.Load<MySqlModule>());
         }
+
+        public static IApplicationBuilder UseMariaDb(this IApplicationBuilder app)
+        {
+            app.VerifyArgument(nameof(app)).IsNotNull();
+            return app.ConfigureModules(m => m.Load<MariaDbModule>());
+        }
     }
 }
