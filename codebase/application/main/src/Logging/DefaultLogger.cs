@@ -40,7 +40,7 @@ namespace Axle.Logging
                 switch (message.Severity)
                 {
                     case LogSeverity.Debug:
-                        primaryColor = ConsoleColor.Cyan;
+                        primaryColor = ConsoleColor.DarkCyan;
                         secondaryColor = ConsoleColor.Blue;
                         primaryBackground = oldBg;
                         secondaryBackground = oldBg;

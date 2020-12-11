@@ -15,32 +15,39 @@ namespace Axle.Application
         /// Gets the <see cref="IDependencyContainerFactory"/> implementation supplied by the current application host.
         /// </summary>
         IDependencyContainerFactory DependencyContainerFactory { get; }
+
         /// <summary>
         /// Gets the <see cref="ILoggingService"/> implementation provided by the current application host.
         /// </summary>
         ILoggingService LoggingService { get; }
+
         /// <summary>
         /// Gets a string representing the current environment name. The environment name is used to load a
         /// configuration layer on top of the default configuration that is used to provide environment-specific
         /// overrides. 
         /// </summary>
         string EnvironmentName { get; }
+
         /// <summary>
-        /// Gets a <see cref="IConfiguration"/> object representing setting defaults influenced by the application host.
+        /// Gets a <see cref="IConfiguration"/> object representing the default configuration values influenced 
+        /// by the application host.
         /// </summary>
         IConfiguration HostConfiguration { get; }
+
         /// <summary>
         /// Gets a <see cref="IConfiguration"/> object representing the application settings defined in the
         /// configuration file specified by the <see cref="AppConfigFileName"/> with respect to the selected
         /// <see cref="EnvironmentName">environment name</see>.
         /// </summary>
         IConfiguration AppConfiguration { get; }
+
         /// <summary>
         /// Gets the application configuration filename (without the extension).
         /// </summary>
         string AppConfigFileName { get; }
+
         /// <summary>
-        /// Gets the application host configuration filename (without the extension).
+        /// Gets the host configuration filename (without the extension).
         /// </summary>
         string HostConfigFileName { get; }
     }

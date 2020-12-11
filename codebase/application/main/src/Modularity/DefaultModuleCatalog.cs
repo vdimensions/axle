@@ -144,43 +144,43 @@ namespace Axle.Modularity
         public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
         {
             return TypeAndInterfaces(moduleType, new HashSet<Type>())
-                    .Select(t => new TypeIntrospector(t))
-                    .SelectMany(introspector => introspector
-                        .GetMethods(MemberScanOptions)
-                        .Select(method => 
-                            new
-                            {
-                                Method = method, 
-                                Attribute = method
-                                    .GetAttributes<ModuleDependencyInitializedAttribute>()
-                                    .Select(a => a.Attribute)
-                                    .Cast<ModuleDependencyInitializedAttribute>()
-                                    .SingleOrDefault()
-                            })
-                        .Where(x => x.Attribute != null)
-                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
-                    .ToArray();
+                .Select(t => new TypeIntrospector(t))
+                .SelectMany(introspector => introspector
+                    .GetMethods(MemberScanOptions)
+                    .Select(method => 
+                        new
+                        {
+                            Method = method, 
+                            Attribute = method
+                                .GetAttributes<ModuleDependencyInitializedAttribute>()
+                                .Select(a => a.Attribute)
+                                .Cast<ModuleDependencyInitializedAttribute>()
+                                .SingleOrDefault()
+                        })
+                    .Where(x => x.Attribute != null)
+                    .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
+                .ToArray();
         }
 
         public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
         {
             return TypeAndInterfaces(moduleType, new HashSet<Type>())
-                    .Select(t => new TypeIntrospector(t))
-                    .SelectMany(introspector => introspector
-                        .GetMethods(MemberScanOptions)
-                        .Select(method => 
-                            new
-                            {
-                                Method = method, 
-                                Attribute = method
-                                    .GetAttributes<ModuleDependencyTerminatedAttribute>()
-                                    .Select(a => a.Attribute)
-                                    .Cast<ModuleDependencyTerminatedAttribute>()
-                                    .SingleOrDefault()
-                            })
-                        .Where(x => x.Attribute != null)
-                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
-                    .ToArray();
+                .Select(t => new TypeIntrospector(t))
+                .SelectMany(introspector => introspector
+                    .GetMethods(MemberScanOptions)
+                    .Select(method => 
+                        new
+                        {
+                            Method = method, 
+                            Attribute = method
+                                .GetAttributes<ModuleDependencyTerminatedAttribute>()
+                                .Select(a => a.Attribute)
+                                .Cast<ModuleDependencyTerminatedAttribute>()
+                                .SingleOrDefault()
+                        })
+                    .Where(x => x.Attribute != null)
+                    .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
+                .ToArray();
         }
 
         public ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType)
@@ -200,6 +200,9 @@ namespace Axle.Modularity
                     // Note - the `UtilizesAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
                     true,
+                    //
+                    // Note - the `UtilizesAttribute` can be applied on another attribute. We are also scanning for them.
+                    //
                     true)
                 .ToArray();
         }
@@ -213,6 +216,9 @@ namespace Axle.Modularity
                     // Note - the `ProvidesForAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
                     true,
+                    //
+                    // Note - the `ProvidesForAttribute` can be applied on another attribute. We are also scanning for them.
+                    //
                     true)
                 .ToArray();
         }
@@ -235,6 +241,9 @@ namespace Axle.Modularity
                     // Note - the `RequiresAttribute` can be subclassed and we must take into account any derived attribute types.
                     //
                     true,
+                    //
+                    // Note - the `RequiresAttribute` can be applied on another attribute. We are also scanning for them.
+                    //
                     true);
             for (var i = 0; i < attributes.Count; i++)
             {

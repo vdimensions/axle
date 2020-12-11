@@ -109,17 +109,17 @@ namespace Axle.Application
                 }
                 if ((State & ModuleStates.Initialized) == ModuleStates.Initialized)
                 {
-                    Logger.Warn("Initialization attempted, but module `{0}` was already initialized. ", ModuleInfo.Type.FullName);
+                    Logger.Warn("Attempted to initialize an already initialized module: `{0}`. ", ModuleInfo.Type.FullName);
                     return this;
                 }
 
-                //Logger.Debug("Initializing module `{0}`...", ModuleInfo.Type.FullName);
+                //Logger.Debug("Module `{0}` initializing...", ModuleInfo.Type.FullName);
 
                 ModuleInfo.InitMethod?.Invoke(ModuleInstance, exporter, args);
                 var result = ChangeState(State | ModuleStates.Initialized);
                 Notify(requiredModules, moduleMetadata, m => m.DependencyInitializedMethods);
 
-                Logger.Write(LogSeverity.Info, "Module `{0}` initialized.", ModuleInfo.Type.FullName);
+                Logger.Debug("Module `{0}` initialized.", ModuleInfo.Type.FullName);
 
                 return result;
             }
@@ -142,7 +142,7 @@ namespace Axle.Application
                 {   //
                     // Module is already ran
                     //
-                    Logger.Warn("Preparation attempted, but module `{0}` was already prepared. ", ModuleInfo.Type.FullName);
+                    Logger.Warn("Attempted to prepare an already prepared module: `{0}`. ", ModuleInfo.Type.FullName);
                     return this;
                 }
                 ModuleInfo.ReadyMethod?.Invoke(ModuleInstance, Exporter, Args);
@@ -171,7 +171,7 @@ namespace Axle.Application
                 {   //
                     // Module is already ran
                     //
-                    Logger.Warn("Execution attempted, but module `{0}` was already executed. ", ModuleInfo.Type.FullName);
+                    Logger.Warn("Attempted to execute an already executed module: `{0}`. ", ModuleInfo.Type.FullName);
                     return this;
                 }
                 ModuleInfo.EntryPointMethod?.Invoke(ModuleInstance, Args);
@@ -187,11 +187,11 @@ namespace Axle.Application
                 {   //
                     // Module is already terminated
                     //
-                    Logger.Warn("Termination attempted, but module `{0}` was already terminated. ", ModuleInfo.Type.FullName);
+                    Logger.Warn("Attempted to terminate an already terminated module: `{0}`. ", ModuleInfo.Type.FullName);
                     return this;
                 }
 
-                //Logger.Debug("Terminating module `{0}` ...", ModuleInfo.Type.FullName);
+                //Logger.Debug("Module `{0}` terminating...", ModuleInfo.Type.FullName);
 
                 Notify(requiredModules, moduleMetadata, m => m.DependencyTerminatedMethods);
 
@@ -204,7 +204,7 @@ namespace Axle.Application
                 
                 var result = ChangeState(State | ModuleStates.Terminated);
 
-                Logger.Write(LogSeverity.Info, "Module `{0}` terminated. ", ModuleInfo.Type.FullName);
+                Logger.Debug("Module `{0}` terminated. ", ModuleInfo.Type.FullName);
 
                 return result;
             }

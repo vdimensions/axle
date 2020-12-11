@@ -11,7 +11,10 @@ namespace Axle.Application
             IApplicationBuilder IApplicationBuilder.UseApplicationHost(IApplicationHost host)
             {
                 Verifier.IsNotNull(Verifier.VerifyArgument(host, nameof(host)));
-                _host = host;
+                lock (_syncRoot)
+                {
+                    _host = host;
+                }
                 return this;
             }
         
@@ -24,14 +27,21 @@ namespace Axle.Application
 
             IApplicationBuilder IApplicationBuilder.ConfigureApplication(Action<IApplicationConfigurationBuilder> setupConfiguration)
             {
-                setupConfiguration(this);
+                Verifier.IsNotNull(Verifier.VerifyArgument(setupConfiguration, nameof(setupConfiguration)));
+                lock (_syncRoot)
+                {
+                    setupConfiguration(this);
+                }
                 return this;
             }
 
             IApplicationBuilder IApplicationBuilder.ConfigureModules(Action<IApplicationModuleConfigurer> setupModules)
             {
-                setupModules.VerifyArgument(nameof(setupModules)).IsNotNull();
-                setupModules(this);
+                Verifier.IsNotNull(Verifier.VerifyArgument(setupModules, nameof(setupModules)));
+                lock (_syncRoot)
+                {
+                    setupModules(this);
+                }
                 return this;
             }
         }
