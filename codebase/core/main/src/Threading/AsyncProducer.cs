@@ -1,4 +1,5 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NET35_OR_NEWER
+using Axle.Threading.Extensions;
 using Axle.Verification;
 using System;
 using System.Collections.Concurrent;
@@ -37,40 +38,35 @@ namespace Axle.Threading
         /// </summary>
         ~AsyncProducer() => Dispose(false);
 
-        private Task StartWorker()
+        private void DoWork()
         {
-            #if NET35 || NET40
-            return Task.Factory.StartNew(() =>
-            #else
-            return Task.Run(() =>
-            #endif
+            while (!_dataItems.IsCompleted)
             {
-                while (!_dataItems.IsCompleted)
+                try
                 {
+                    var data = _dataItems.Take();
                     try
                     {
-                        var data = _dataItems.Take();
-                        try
-                        {
-                            _consumer.Consume(data);
-                        }
-                        catch (Exception e)
-                        {
-                            _consumer.HandleError(e, data);
-                        }
+                        _consumer.Consume(data);
                     }
-                    catch (InvalidOperationException)
+                    catch (Exception e)
                     {
-                        // IOE means that Take() was called on a completed collection.
-                        // Some other thread can call CompleteAdding after we pass the
-                        // IsCompleted check but before we call Take. 
-                        // Here, we can simply catch the exception since the 
-                        // loop will break on the next iteration.
+                        _consumer.HandleError(e, data);
                     }
                 }
-                _consumer.Complete();
-            });
+                catch (InvalidOperationException)
+                {
+                    // IOE means that Take() was called on a completed collection.
+                    // Some other thread can call CompleteAdding after we pass the
+                    // IsCompleted check but before we call Take. 
+                    // Here, we can simply catch the exception since the 
+                    // loop will break on the next iteration.
+                }
+            }
+            _consumer.Complete();
         }
+
+        private Task StartWorker() => new Action(DoWork).Run();
 
         /// <summary>
         /// Adds an <paramref name="item"/> to the queue to be processed by the consumer.

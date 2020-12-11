@@ -20,10 +20,13 @@ namespace Axle.Threading
 
         void IDisposable.Dispose() => ((IDisposable) _readWriteLockProvider)?.Dispose();
         
+        /// <inheritdoc/>
         public ReadLock ReadLock => _readWriteLockProvider.ReadLock;
 
+        /// <inheritdoc/>
         public UpgradeableReadLock UpgradeableReadLock => _readWriteLockProvider.UpgradeableReadLock;
 
+        /// <inheritdoc/>
         public WriteLock WriteLock => _readWriteLockProvider.WriteLock;
     }
 }

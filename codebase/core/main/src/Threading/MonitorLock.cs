@@ -10,6 +10,12 @@ namespace Axle.Threading
     /// </summary>
     public class MonitorLock : ILock
     {
+        /// <summary>
+        /// Creates a new instance of the <see cref="MonitorLock"/> class.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="MonitorLock"/> instance.
+        /// </returns>
         public static MonitorLock Create() => new MonitorLock();
         
         private readonly object _obj;

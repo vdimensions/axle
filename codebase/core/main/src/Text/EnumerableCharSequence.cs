@@ -7,7 +7,7 @@ namespace Axle.Text
 {
     /// <summary>
     /// Represents a <see cref="CharSequence"/> implementation, that is backed by a <see cref="char">character</see>
-    /// array.
+    /// collection.
     /// </summary>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
@@ -21,14 +21,11 @@ namespace Axle.Text
         {
             _value = value is LinkedList<char> ls ? ls : new LinkedList<char>(value);
         }
-        internal EnumerableCharSequence(char[] value)
-        {
-            _value = new LinkedList<char>(value);
-        }
         internal EnumerableCharSequence(LinkedList<char> value)
         {
             _value = value;
         }
+        internal EnumerableCharSequence(char[] value) : this(new LinkedList<char>(value)) { }
 
         /// <inheritdoc />
         public override string ToString() => new string(_value.ToArray());

@@ -19,11 +19,14 @@ namespace Axle.Threading
         private readonly ReadWriteLockSlimProvider _readWriteLockProvider = new ReadWriteLockSlimProvider(true);
 
         void IDisposable.Dispose() => ((IDisposable) _readWriteLockProvider)?.Dispose();
-        
+
+        /// <inheritdoc/>
         public ReadLock ReadLock => _readWriteLockProvider.ReadLock;
 
+        /// <inheritdoc/>
         public UpgradeableReadLock UpgradeableReadLock => _readWriteLockProvider.UpgradeableReadLock;
 
+        /// <inheritdoc/>
         public WriteLock WriteLock => _readWriteLockProvider.WriteLock;
     }
 }

@@ -22,8 +22,8 @@ namespace Axle.Extensions
         /// The type of the second argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -39,7 +39,7 @@ namespace Axle.Extensions
                 throw new ArgumentNullException(nameof(action));
             }
             return (arg2, arg1) => action(arg1, arg2);
-        } 
+        }
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="action"/> that accepts the same formal arguments
         /// but in reverse order.
@@ -57,8 +57,8 @@ namespace Axle.Extensions
         /// The type of the third argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T3, T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -95,8 +95,8 @@ namespace Axle.Extensions
         /// The type of the fourth argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T4, T3, T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -137,8 +137,8 @@ namespace Axle.Extensions
         /// The type of the fifth argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T5, T4, T3, T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -177,8 +177,8 @@ namespace Axle.Extensions
         /// The type of the sixth argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T6, T5, T4, T3, T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -220,8 +220,8 @@ namespace Axle.Extensions
         /// The type of the seventh argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T7, T6, T5, T4, T3, T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -266,8 +266,8 @@ namespace Axle.Extensions
         /// The type of the eighth argument of the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Action{T8, T7, T6, T5, T4, T3, T2, T1}"/> delegate produced from the original <paramref name="action"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="action"/> is <c>null</c>
@@ -282,7 +282,7 @@ namespace Axle.Extensions
                 action(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         }
         #endif
-        
+
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="func"/> that accepts the same formal arguments but
         /// in reverse order.
@@ -300,8 +300,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -338,8 +338,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -380,8 +380,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T4, T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -425,8 +425,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T5, T4, T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -468,8 +468,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T6, T5, T4, T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -514,8 +514,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T7, T6, T5, T4, T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -563,8 +563,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Func{T8, T7, T6, T5, T4, T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="func"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="func"/> is <c>null</c>
@@ -579,7 +579,7 @@ namespace Axle.Extensions
                 func(arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8);
         }
         #endif
-        
+
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="attempt"/> that accepts the same formal arguments
         /// but in reverse order.
@@ -597,8 +597,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Attempt{T2, T1, TResult}"/> delegate produced from the original <paramref name="attempt"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="attempt"/> is <c>null</c>
@@ -635,8 +635,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Attempt{T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="attempt"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="attempt"/> is <c>null</c>
@@ -676,8 +676,8 @@ namespace Axle.Extensions
         /// The type of the result returned by the original delegate.
         /// </typeparam>
         /// <returns>
-        /// A <see cref="Func{T2, T3, T4, T5, T6, T7, T8, TResult}"/> delegate representing the result of the partial
-        /// application.
+        /// A <see cref="Attempt{T4, T3, T2, T1, TResult}"/> delegate produced from the original <paramref name="attempt"/>
+        /// with flipped arguments.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="attempt"/> is <c>null</c>
