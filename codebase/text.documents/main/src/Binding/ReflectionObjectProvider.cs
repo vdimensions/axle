@@ -236,6 +236,8 @@ namespace Axle.Text.Documents.Binding
                     var flags = introspector.TypeFlags;
                     var unusableObjectFlags = new[]
                     {
+                        TypeFlags.Primitive,
+                        TypeFlags.ValueType,
                         TypeFlags.Delegate,
                         TypeFlags.Enum,
                         TypeFlags.NullableValueType,
