@@ -18,10 +18,10 @@ namespace Axle.References
         new T Value { get; set; }
 
         /// <summary>
-        /// Gets a value that indicates whether a <see cref="IReference{T}.Value"/> has been initialized for the current
+        /// Gets a value that indicates whether a <see cref="IThreadLocalReference{T}.Value"/> has been initialized for the current
         /// thread.
         /// </summary>
-        bool HasValue { get; }
+        new bool HasValue { get; }
     }
 }
 #endif

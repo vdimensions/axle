@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Threading
 {
@@ -8,6 +9,8 @@ namespace Axle.Threading
         /// <summary>
         /// A class containing extension methods for instances of the <see cref="IReadWriteLockProvider"/> type.
         /// </summary>
+        [SuppressMessage("ReSharper", "UnusedType.Global")]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public static class ReadWritLockProviderExtensions
         {
             #region Read(...)

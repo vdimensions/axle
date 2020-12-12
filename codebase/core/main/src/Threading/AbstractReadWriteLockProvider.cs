@@ -47,6 +47,7 @@ namespace Axle.Threading
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
         /// </returns>
         public abstract bool TryEnterReadLock(int millisecondsTimeout);
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in read mode.
         /// </summary>
@@ -57,6 +58,17 @@ namespace Axle.Threading
         /// <returns>
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
         /// </returns>
+        #else
+        /// <summary>
+        /// Tries to enter the lock in read mode.
+        /// </summary>
+        /// <param name="timeout">
+        /// The interval to wait, or -1 milliseconds to wait indefinitely.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
+        /// </returns>
+        #endif
         public abstract bool TryEnterReadLock(TimeSpan timeout);
 
         /// <summary>
@@ -70,6 +82,7 @@ namespace Axle.Threading
         /// <c>true</c> if the calling thread entered upgradeable mode, otherwise, <c>false</c>.
         /// </returns>
         public abstract bool TryEnterUpgradeableReadLock(int millisecondsTimeout);
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in upgradeable mode.
         /// </summary>
@@ -80,6 +93,17 @@ namespace Axle.Threading
         /// <returns>
         /// <c>true</c> if the calling thread entered upgradeable mode, otherwise, <c>false</c>.
         /// </returns>
+        #else
+        /// <summary>
+        /// Tries to enter the lock in upgradeable mode.
+        /// </summary>
+        /// <param name="timeout">
+        /// The interval to wait, or -1 milliseconds to wait indefinitely.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the calling thread entered upgradeable mode, otherwise, <c>false</c>.
+        /// </returns>
+        #endif
         public abstract bool TryEnterUpgradeableReadLock(TimeSpan timeout);
 
         /// <summary>
@@ -93,6 +117,7 @@ namespace Axle.Threading
         /// <c>true</c> if the calling thread entered write mode, otherwise, <c>false</c>.
         /// </returns>
         public abstract bool TryEnterWriteLock(int millisecondsTimeout);
+        #if NETSTANDARD || NET45_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in write mode.
         /// </summary>
@@ -103,6 +128,17 @@ namespace Axle.Threading
         /// <returns>
         /// <c>true</c> if the calling thread entered write mode, otherwise, <c>false</c>.
         /// </returns>
+        #else
+        /// <summary>
+        /// Tries to enter the lock in write mode.
+        /// </summary>
+        /// <param name="timeout">
+        /// The interval to wait, or -1 milliseconds to wait indefinitely.
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the calling thread entered write mode, otherwise, <c>false</c>.
+        /// </returns>
+        #endif
         public abstract bool TryEnterWriteLock(TimeSpan timeout);
         
         /// <inheritdoc/>

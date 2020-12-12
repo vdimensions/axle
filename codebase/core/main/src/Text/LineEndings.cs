@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Linq;
 using Axle.Environment;
 using Axle.Extensions.String;
 
@@ -7,23 +8,45 @@ namespace Axle.Text
     /// <summary>
     /// A static class containing the common line ending sequences.
     /// </summary>
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public static class LineEndings
     {
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the line ending character sequence that is common for the <see cref="OperatingSystemID.Windows"/>
         /// platforms. 
         /// </summary>
+        #else
+        /// <summary>
+        /// Gets the line ending character sequence that is common for the windows platforms. 
+        /// </summary>
+        #endif
         public const string CRLF = "\r\n";
+        
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the line ending character sequence that is common for the <see cref="OperatingSystemID.Mac"/>
         /// platforms. 
         /// </summary>
+        #else
+        /// <summary>
+        /// Gets the line ending character sequence that is common for the mac platforms. 
+        /// </summary>
+        #endif
         public const string CR = "\r";
+        
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the line ending character sequence that is common for the <see cref="OperatingSystemID.Unix"/>
         /// platforms. 
         /// </summary>
+        #else
+        /// <summary>
+        /// Gets the line ending character sequence that is common for the unix platforms. 
+        /// </summary>
+        #endif
         public const string LF = "\n";
+        
         /// <summary>
         /// Gets the line ending character sequence for the current platform. 
         /// </summary>

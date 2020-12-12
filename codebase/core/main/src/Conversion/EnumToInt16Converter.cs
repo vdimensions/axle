@@ -17,6 +17,7 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <inheritdoc />
         protected override short DoConvert(T source) => (short) ((object) source);
 
         /// <inheritdoc />

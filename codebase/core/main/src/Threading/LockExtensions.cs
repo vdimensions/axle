@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 
 namespace Axle.Threading
@@ -8,6 +9,8 @@ namespace Axle.Threading
         /// <summary>
         /// A class containing extension methods for instances of the <see cref="ILock"/> type.
         /// </summary>
+        [SuppressMessage("ReSharper", "UnusedType.Global")]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public static class LockExtensions
         {
             /// <summary>

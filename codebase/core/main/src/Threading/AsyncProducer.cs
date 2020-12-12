@@ -66,7 +66,7 @@ namespace Axle.Threading
             _consumer.Complete();
         }
 
-        private Task StartWorker() => new Action(DoWork).Run();
+        private Task StartWorker() => new Action(DoWork).InvokeAsync();
 
         /// <summary>
         /// Adds an <paramref name="item"/> to the queue to be processed by the consumer.

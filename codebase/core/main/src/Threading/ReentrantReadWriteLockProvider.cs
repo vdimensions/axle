@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD || NET35_OR_NEWER
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 
 namespace Axle.Threading
@@ -14,6 +15,7 @@ namespace Axle.Threading
     /// </remarks>
     /// </summary>
     /// <seealso cref="ReadWriteLockProvider"/>
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public sealed class ReentrantReadWriteLockProvider : IDisposable, IReentrantReadWriteLockProvider
     {
         private readonly ReadWriteLockSlimProvider _readWriteLockProvider = new ReadWriteLockSlimProvider(true);

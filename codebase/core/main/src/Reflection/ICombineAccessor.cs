@@ -4,8 +4,8 @@
 namespace Axle.Reflection
 {
     /// <summary>
-    /// An interface representing the acessor that allows adding a delegate to a delegate invocation list.
-    /// Usually, this repreents assigning an event handler to an event member.
+    /// An interface representing the accessor that allows adding a delegate to a delegate invocation list.
+    /// Usually, this represents assigning an event handler to an event member.
     /// </summary>
     /// <seealso cref="ICombinableMember"/>
     /// <seealso cref="IRemoveAccessor"/>

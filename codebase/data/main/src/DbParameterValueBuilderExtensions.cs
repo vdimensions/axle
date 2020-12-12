@@ -5,7 +5,13 @@ using Axle.Verification;
 
 namespace Axle.Data
 {
+    /// <summary>
+    /// A static class containing extension methods aiding the definition of values for db parameters
+    /// via the <see cref="IDbParameterValueBuilder"/> interface.
+    /// </summary>
+    /// <seealso cref="IDbParameterValueBuilder"/>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public static class DbParameterValueBuilderExtensions
     {
         public static IDbParameterOptionalPropertiesBuilder SetValue(this IDbParameterValueBuilder builder, string value)

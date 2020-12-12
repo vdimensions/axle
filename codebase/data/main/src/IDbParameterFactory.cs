@@ -16,7 +16,7 @@ namespace Axle.Data
     /// <seealso cref="IDbDataParameter"/>
     /// <seealso cref="IDataParameter"/>
     /// <seealso cref="DbParameter"/>
-    public interface IDbParameterFactory<TDbParameter, TDbType>
+    public interface IDbParameterFactory<out TDbParameter, TDbType>
         where TDbParameter: DbParameter
         where TDbType: struct
     {

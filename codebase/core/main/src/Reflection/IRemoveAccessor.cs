@@ -4,8 +4,8 @@
 namespace Axle.Reflection
 {
     /// <summary>
-    /// An interface representing the acessor that allows removing a delegate member from a delegate invocation list.
-    /// Usually, this repreents removing an event handler from an event member.
+    /// An interface representing the accessor that allows removing a delegate member from a delegate invocation list.
+    /// Usually, this represents removing an event handler from an event member.
     /// </summary>
     /// <seealso cref="IRemovableMember"/>
     /// <seealso cref="ICombineAccessor"/>
