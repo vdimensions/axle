@@ -20,6 +20,7 @@ namespace Axle.Application
                 {
                     return dotnetEnv;
                 }
+                // TODO: move DEBUG to a profile
                 #if DEBUG
                 return "Debug";
                 #endif

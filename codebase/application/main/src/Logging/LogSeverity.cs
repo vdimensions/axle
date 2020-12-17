@@ -14,24 +14,29 @@
         Debug = -1,
 
         /// <summary>
+        /// The entry is not logged at all.
+        /// </summary>
+        None = 0,
+
+        /// <summary>
         /// The entry is logged for informative purposes.
         /// </summary>
-        Info = 0,
+        Info = 1,
 
         /// <summary>
         /// The entry represents a warning. A warning indicates unexpected state detected by the application at runtime
         /// which can be worked around and the application would continue to operate.
         /// </summary>
-        Warning = 1,
+        Warning = 2,
 
         /// <summary>
         /// The entry represents an error.
         /// </summary>
-        Error = 2,
+        Error = 3,
 
         /// <summary>
         /// The entry represents a fatal condition that causes the application to terminate unexpectedly.
         /// </summary>
-        Fatal = 3   
+        Fatal = 4   
     }
 }

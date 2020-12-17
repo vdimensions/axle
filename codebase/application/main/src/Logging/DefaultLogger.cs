@@ -25,6 +25,10 @@ namespace Axle.Logging
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         private static void LogToConsole(ILogEntry message)
         {
+            if (message.Severity == LogSeverity.None)
+            {
+                return;
+            }
             lock (_syncRoot)
             lock (typeof(Console))
             lock (Console.Out)
