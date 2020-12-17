@@ -3,6 +3,7 @@ using System.Collections.Concurrent;
 
 namespace Axle.Logging
 {
+    [Obsolete]
     internal sealed class MessageAccumulatingLoggingService : ILoggingService, IDisposable
     {
         internal sealed class MessageAccumulatingLogger : ILogger
@@ -35,7 +36,6 @@ namespace Axle.Logging
                 targetLoggingService.CreateLogger(entry.Type).Write(entry);
             }
         }
-
         
         public void Dispose()
         {

@@ -13,7 +13,7 @@ namespace Axle.Logging.Microsoft
             _logger = logger;
         }
 
-        private void LogMessage(Axle.Logging.ILogEntry entry)
+        private void LogMessage(ILogEntry entry)
         {
             switch (entry.Severity)
             {
