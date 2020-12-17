@@ -3,7 +3,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Axle.Logging.Microsoft
 {
-    public sealed class MicrosoftLogger : Axle.Logging.ILogger
+    internal sealed class MicrosoftLogger : Axle.Logging.ILogger
     {
         private readonly global::Microsoft.Extensions.Logging.ILogger _logger;
 
