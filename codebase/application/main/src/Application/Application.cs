@@ -44,7 +44,7 @@ namespace Axle.Application
             IModuleCatalog moduleCatalog,
             IEnumerable<Type> moduleTypes, 
             IApplicationHost host,
-            AggregatingLoggingService loggingService,
+            MutableLoggingService loggingService,
             IDependencyContainer rootContainer,
             IConfiguration config, 
             string[] args)

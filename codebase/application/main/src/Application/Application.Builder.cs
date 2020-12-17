@@ -43,11 +43,8 @@ namespace Axle.Application
             {
                 try 
                 {
-                    var loggingService = new AggregatingLoggingService();
-                    if (_host.LoggingService != null)
-                    {
-                        ((ILoggingServiceRegistry) loggingService).RegisterLoggingService(_host.LoggingService);
-                    }
+                    var loggingService = new MutableLoggingService(_host.LoggingService ?? new AxleLoggingService());
+                    
                     if (_host is ISetLoggingService sls)
                     {
                         sls.LoggingService = loggingService;
