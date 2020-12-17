@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net461</TargetFrameworks>
+  </PropertyGroup>
+
+  <Import Project="../../../../ref/Reference.Axle.Application.targets" />
+  <Import Project="../../../../ref/ext/Reference.Microsoft.Extensions.Logging.props" />
+
+</Project>

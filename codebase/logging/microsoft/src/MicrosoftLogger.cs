@@ -1,13 +1,13 @@
 ﻿using System;
 using Microsoft.Extensions.Logging;
 
-namespace Axle.Web.AspNetCore.Logging
+namespace Axle.Logging.Microsoft
 {
-    internal sealed class MicrosoftLogger : Axle.Logging.ILogger
+    public sealed class MicrosoftLogger : Axle.Logging.ILogger
     {
-        private readonly ILogger _logger;
+        private readonly global::Microsoft.Extensions.Logging.ILogger _logger;
 
-        public MicrosoftLogger(Type targetType, ILogger logger)
+        public MicrosoftLogger(Type targetType, global::Microsoft.Extensions.Logging.ILogger logger)
         {
             TargetType = targetType;
             _logger = logger;

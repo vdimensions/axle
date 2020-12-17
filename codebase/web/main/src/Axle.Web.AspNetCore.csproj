@@ -14,6 +14,7 @@
   </ItemGroup>
 
   <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Logging.Microsoft.targets" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Authentication.Abstractions.props" />

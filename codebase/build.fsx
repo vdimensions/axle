@@ -30,7 +30,7 @@ let projectLocations = [
     "data/main"; "data/sql_client"; "data/odbc"; "data/oledb"; "data/npgsql"; "data/mysql"; "data/sqlite"; "data/sqlite.microsoft"
     "data.records/main"
     "data.versioning/main"
-    "logging/log4net"
+    "logging/log4net"; "logging/microsoft"
     "web/main"; "web/cors"; "web/mvc"
 ]
 

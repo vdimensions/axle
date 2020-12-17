@@ -132,6 +132,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Web.AspNetCore.Cors", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Data.Records", "codebase\data.records\main\src\Axle.Data.Records.csproj", "{962248B8-23D3-4BA3-9459-DE484FE5C308}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "microsoft", "microsoft", "{67291FB6-F986-4901-B795-96CA2EEBFCFD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Axle.Logging.Microsoft", "codebase\logging\microsoft\src\Axle.Logging.Microsoft.csproj", "{11600971-830C-4BC1-9945-B13135A5D870}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -302,6 +306,10 @@ Global
 		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{962248B8-23D3-4BA3-9459-DE484FE5C308}.Release|Any CPU.Build.0 = Release|Any CPU
+		{11600971-830C-4BC1-9945-B13135A5D870}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{11600971-830C-4BC1-9945-B13135A5D870}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{11600971-830C-4BC1-9945-B13135A5D870}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{11600971-830C-4BC1-9945-B13135A5D870}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -368,6 +376,8 @@ Global
 		{82879460-CE50-4389-B986-92988BAF044B} = {ACC06ECC-9DE1-4639-BE28-0F0B716E4BA5}
 		{C8770413-47D1-48B6-9438-0991B999EE8D} = {9DED733E-41FB-4B4C-A60D-F646D0079E12}
 		{962248B8-23D3-4BA3-9459-DE484FE5C308} = {67B8EC37-9671-4762-B363-333E6ED87FFD}
+		{67291FB6-F986-4901-B795-96CA2EEBFCFD} = {D70A7D36-32CB-4359-8210-D3F6DEC3D04A}
+		{11600971-830C-4BC1-9945-B13135A5D870} = {67291FB6-F986-4901-B795-96CA2EEBFCFD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {135C931B-3FFA-4D0B-BBCB-011DD1C8C226}

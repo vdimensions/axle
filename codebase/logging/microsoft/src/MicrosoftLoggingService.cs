@@ -4,7 +4,7 @@ using Axle.Verification;
 using Microsoft.Extensions.Logging;
 
 
-namespace Axle.Web.AspNetCore.Logging
+namespace Axle.Logging.Microsoft
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class MicrosoftLoggingService : Axle.Logging.ILoggingService
