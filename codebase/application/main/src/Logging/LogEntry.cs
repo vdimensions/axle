@@ -1,10 +1,8 @@
 using System;
 using System.Diagnostics;
-
 #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System.Threading;
 #endif
-
 
 namespace Axle.Logging
 {
@@ -29,7 +27,7 @@ namespace Axle.Logging
         #endif
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly DateTime _timestamp;
+        private readonly DateTimeOffset _timestamp;
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _threadID;
@@ -44,11 +42,11 @@ namespace Axle.Logging
         private readonly Exception _exception;
 
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-        public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, string message) 
+        public LogEntry(DateTimeOffset timestamp, string threadID, LogSeverity severity, Type type, string message) 
             : this(timestamp,threadID, severity, type, message, null) { }
-        public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, Exception exception) 
+        public LogEntry(DateTimeOffset timestamp, string threadID, LogSeverity severity, Type type, Exception exception) 
             : this(timestamp,threadID, severity, type, exception.Message, exception) { }
-        public LogEntry(DateTime timestamp, string threadID, LogSeverity severity, Type type, string message, Exception exception)
+        public LogEntry(DateTimeOffset timestamp, string threadID, LogSeverity severity, Type type, string message, Exception exception)
         {
             _timestamp = timestamp;
             _threadID = threadID;
@@ -66,19 +64,19 @@ namespace Axle.Logging
         }
 
         public LogEntry(string threadID, LogSeverity severity, Type type, string message)
-            : this(DateTime.Now, threadID, severity, type, message, null) { }
+            : this(DateTimeOffset.Now, threadID, severity, type, message, null) { }
         public LogEntry(string threadID, LogSeverity severity, Type type, string message, Exception exception)
-            : this(DateTime.Now, threadID, severity, type, message, exception) { }
+            : this(DateTimeOffset.Now, threadID, severity, type, message, exception) { }
         public LogEntry(string threadID, LogSeverity severity, Type type, Exception exception)
-            : this(DateTime.Now, threadID, severity, type, exception.Message, exception) { }
+            : this(DateTimeOffset.Now, threadID, severity, type, exception.Message, exception) { }
 
         public LogEntry(LogSeverity severity, Type type, string message) : this(ThreadName(Thread.CurrentThread), severity, type, message, null) { }
         public LogEntry(LogSeverity severity, Type type, string message, Exception exception) : this(ThreadName(Thread.CurrentThread), severity, type, message, exception) { }
         public LogEntry(LogSeverity severity, Type type, Exception exception) : this(ThreadName(Thread.CurrentThread), severity, type, exception.Message, exception) { }
         #else
-        public LogEntry(DateTime timestamp, LogSeverity severity, Type type, string message) : this(timestamp, severity, type, message, null) { }
-        public LogEntry(DateTime timestamp, LogSeverity severity, Type type, Exception exception) : this(timestamp, severity, type, exception.Message, exception) { }
-        public LogEntry(DateTime timestamp, LogSeverity severity, Type type, string message, Exception exception)
+        public LogEntry(DateTimeOffset timestamp, LogSeverity severity, Type type, string message) : this(timestamp, severity, type, message, null) { }
+        public LogEntry(DateTimeOffset timestamp, LogSeverity severity, Type type, Exception exception) : this(timestamp, severity, type, exception.Message, exception) { }
+        public LogEntry(DateTimeOffset timestamp, LogSeverity severity, Type type, string message, Exception exception)
         {
             _timestamp = timestamp;
             _severity = severity;
@@ -111,17 +109,22 @@ namespace Axle.Logging
         }
 
         /// <inheritdoc />
-        public DateTime Timestamp => _timestamp;
+        public DateTimeOffset Timestamp => _timestamp;
+        
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         /// <inheritdoc />
         public string ThreadID => _threadID;
         #endif
+        
         /// <inheritdoc />
         public LogSeverity Severity => _severity;
+        
         /// <inheritdoc />
         public Type Type => _type;
+        
         /// <inheritdoc />
         public string Message => _message;
+        
         /// <inheritdoc />
         public Exception Exception => _exception;
     }
