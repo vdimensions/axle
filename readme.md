@@ -1,5 +1,3 @@
-[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/vdimensions/axle)
-
 ```
                                            __~(```)~*``)~., __.__ __.__
                                      º~(``(_`)``(``(`)_(```)(`)o~,\__, \
@@ -10,6 +8,8 @@
                                                             \__,\_\^/_/ /\__\/
                                                                     \_\/
 ```
+
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/vdimensions/axle)
 
 # Axle Framework
 
