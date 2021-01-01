@@ -1,5 +1,5 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
@@ -42,7 +42,7 @@ namespace Axle.Reflection.Extensions.Assembly
         /// </exception>
         /// <seealso cref="IRuntime.LoadSatelliteAssembly"/>
         public static Assembly LoadSatelliteAssembly(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             Assembly assembly, 

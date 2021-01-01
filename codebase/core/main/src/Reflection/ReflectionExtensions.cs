@@ -56,7 +56,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="method"/> is <c>null</c></exception>
         public static bool IsOverride(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             MethodInfo method)
@@ -78,7 +78,7 @@ namespace Axle.Reflection
         /// </returns>
         /// <exception cref="ArgumentNullException"><paramref name="method"/> is <c>null</c></exception>
         public static bool IsOverride(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             MethodBase method)
@@ -122,7 +122,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="MethodBase"/>
         public static DeclarationType GetDeclarationType(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             MethodBase methodBase)
@@ -155,7 +155,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="FieldInfo"/>
         public static DeclarationType GetDeclarationType(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             FieldInfo field)
@@ -187,7 +187,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="MemberInfo"/>
         public static DeclarationType GetDeclarationType(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             MemberInfo member)
@@ -225,7 +225,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType.Instance"/>
         /// <seealso cref="DeclarationType"/>
         public static bool IsInstance(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Instance);
@@ -241,7 +241,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType.Static"/>
         /// <seealso cref="DeclarationType"/>
         public static bool IsStatic(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Static);
@@ -257,7 +257,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType.Abstract"/>
         /// <seealso cref="DeclarationType"/>
         public static bool IsAbstract(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Abstract);
@@ -273,7 +273,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType.Override"/>
         /// <seealso cref="DeclarationType"/>
         public static bool IsOverride(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Override);
@@ -289,7 +289,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType.HideBySig"/>
         /// <seealso cref="DeclarationType"/>
         public static bool IsHideBySig(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.HideBySig);
@@ -305,13 +305,13 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType.Sealed"/>
         /// <seealso cref="DeclarationType"/>
         public static bool IsSealed(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Sealed);
 
         public static object InvokeStatic(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IMethod @this, params object[] args)
@@ -324,12 +324,12 @@ namespace Axle.Reflection
             return @this.Invoke(null, args);
         }
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         #if NETSTANDARD
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         internal static BindingFlags GetFlagsUnsafe(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             MethodBase member)
@@ -351,7 +351,7 @@ namespace Axle.Reflection
         }
         #endif
 
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         private static bool IsOverrideUnchecked(MethodInfo mi) => mi.GetRuntimeBaseDefinition().DeclaringType != mi.DeclaringType;
         #else
@@ -370,7 +370,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="PropertyInfo"/>
         public static DeclarationType GetDeclarationType(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             PropertyInfo property)
@@ -379,7 +379,7 @@ namespace Axle.Reflection
             {
                 throw new ArgumentNullException(nameof(property));
             }
-            #if NETSTANDARD
+            #if NETSTANDARD || UNITY_2018_1_OR_NEWER
             var gm = property.GetMethod;
             var sm = property.SetMethod;
             #else
@@ -403,7 +403,7 @@ namespace Axle.Reflection
         /// <seealso cref="DeclarationType"/>
         /// <seealso cref="EventInfo"/>
         public static DeclarationType GetDeclarationType(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             EventInfo eventInfo)
@@ -412,7 +412,7 @@ namespace Axle.Reflection
             {
                 throw new ArgumentNullException(nameof(eventInfo));
             }
-            #if NETSTANDARD
+            #if NETSTANDARD || UNITY_2018_1_OR_NEWER
             var am = eventInfo.AddMethod;
             var rm = eventInfo.RemoveMethod;
             #else

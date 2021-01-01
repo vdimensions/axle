@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     #if NETFRAMEWORK
     [Serializable]
     #endif 
@@ -22,7 +22,7 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly FieldAccessor[] _accessors;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public FieldToken(FieldInfo info) : base(info, info.FieldHandle, info.DeclaringType, info.Name)
         #else
         public FieldToken(FieldInfo info) : base(info, info.DeclaringType, info.Name)
@@ -33,7 +33,7 @@ namespace Axle.Reflection
             _accessors = new FieldAccessor[] { new FieldGetAccessor(this), new FieldSetAccessor(this) };
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         protected override FieldInfo GetMember(RuntimeFieldHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)
         {
             return isGeneric ? FieldInfo.GetFieldFromHandle(handle, typeHandle) : FieldInfo.GetFieldFromHandle(handle);

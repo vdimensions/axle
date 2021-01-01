@@ -1,5 +1,5 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -16,7 +16,7 @@ namespace Axle.Reflection
     /// </summary>
     public abstract class AbstractTypeIntrospector : ITypeIntrospector
     {
-        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private static AccessModifier GetAccessModifier(Type type)
         {
             #if NETSTANDARD1_6_OR_NEWER || NET45_OR_NEWER
@@ -49,7 +49,7 @@ namespace Axle.Reflection
         {
             _introspectedType = Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             _flags = TypeFlagsExtensions.Determine(type);
-            #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             AccessModifier = GetAccessModifier(type);
             #endif
         }
@@ -173,7 +173,7 @@ namespace Axle.Reflection
             }
             if (_flags.IsGeneric())
             {
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 var ti = _introspectedType;
                 #else
                 var ti = _introspectedType.GetTypeInfo();
@@ -221,7 +221,7 @@ namespace Axle.Reflection
         public TypeFlags TypeFlags => _flags;
 
 
-        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         public AccessModifier AccessModifier { get; }
@@ -230,22 +230,22 @@ namespace Axle.Reflection
 
 
         
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         public bool IsDelegate => _flags.IsDelegate();
         #endif
         
-        #if NETSTANDARD || NET20_OR_NEWER
+        #if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         public bool IsGenericType => _flags.IsGeneric();
         #endif
 
-        #if NETSTANDARD || NET20_OR_NEWER
+        #if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         public bool IsGenericTypeDefinition => _flags.IsGenericDefinition();
         #endif
 
-        #if NETSTANDARD || NET20_OR_NEWER
+        #if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         public bool IsNullableType => _flags.IsNullableValueType();
         #endif

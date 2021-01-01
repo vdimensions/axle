@@ -21,7 +21,7 @@ namespace Axle.Reflection
         /// </param>
         public MethodToken(MethodInfo info) : base(info)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             _memberType = info.ReturnType;
             #else
             _memberType = (ReflectedMember = info).ReturnType;
@@ -55,7 +55,7 @@ namespace Axle.Reflection
             return new GenericMethodToken(this, types);
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         #else
         public override MethodInfo ReflectedMember { get; }
         #endif

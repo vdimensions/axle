@@ -47,7 +47,7 @@ namespace Axle.Threading
         /// <c>true</c> if the calling thread entered read mode, otherwise, <c>false</c>.
         /// </returns>
         public abstract bool TryEnterReadLock(int millisecondsTimeout);
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in read mode.
         /// </summary>
@@ -82,7 +82,7 @@ namespace Axle.Threading
         /// <c>true</c> if the calling thread entered upgradeable mode, otherwise, <c>false</c>.
         /// </returns>
         public abstract bool TryEnterUpgradeableReadLock(int millisecondsTimeout);
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in upgradeable mode.
         /// </summary>
@@ -117,7 +117,7 @@ namespace Axle.Threading
         /// <c>true</c> if the calling thread entered write mode, otherwise, <c>false</c>.
         /// </returns>
         public abstract bool TryEnterWriteLock(int millisecondsTimeout);
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Tries to enter the lock in write mode.
         /// </summary>

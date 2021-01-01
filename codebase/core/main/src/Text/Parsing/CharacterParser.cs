@@ -12,7 +12,7 @@ namespace Axle.Text.Parsing
     public sealed class CharacterParser : AbstractParser<char>
     {
         /// <inheritdoc />
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         protected override char DoParse(CharSequence value, IFormatProvider formatProvider) => char.Parse(value.ToString());
         #elif NETSTANDARD1_0_OR_NEWER
         protected override char DoParse(CharSequence value, IFormatProvider formatProvider)

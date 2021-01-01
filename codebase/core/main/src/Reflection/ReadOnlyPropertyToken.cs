@@ -19,7 +19,7 @@ namespace Axle.Reflection
 
         public ReadOnlyPropertyToken(PropertyInfo propertyInfo) : base(propertyInfo)
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var gm = propertyInfo.GetMethod;
             #else
             var gm = propertyInfo.GetGetMethod(true);

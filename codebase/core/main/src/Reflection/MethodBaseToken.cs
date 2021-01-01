@@ -20,7 +20,7 @@ namespace Axle.Reflection
     #if NETFRAMEWORK
     [Serializable]
     #endif
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     internal abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
     #else
     internal abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>>
@@ -62,7 +62,7 @@ namespace Axle.Reflection
             public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
             {
                 var reflectedMember = ReflectedMember;
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 var attrs = Enumerable.Cast<Attribute>(CustomAttributeExtensions.GetCustomAttributes(
                     reflectedMember, 
                     attributeType, 
@@ -77,7 +77,7 @@ namespace Axle.Reflection
 
             public bool IsDefined(Type attributeType, bool inherit)
             {
-                #if NETSTANDARD
+                #if NETSTANDARD || UNITY_2018_1_OR_NEWER
                 return CustomAttributeExtensions.IsDefined(ReflectedMember, attributeType);
                 #else
                 return ReflectedMember.IsDefined(attributeType, inherit);
@@ -92,7 +92,7 @@ namespace Axle.Reflection
             public ParameterDirection Direction => _direction;
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         protected internal MethodBaseToken(T info) : base(info, info.MethodHandle, info.DeclaringType, info.Name)
         #else
         protected internal MethodBaseToken(T info) : base(info, info.DeclaringType, info.Name)
@@ -102,7 +102,7 @@ namespace Axle.Reflection
             _declaration = ReflectionExtensions.GetDeclarationType(info);
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric) =>
             (T) (isGeneric 
                 ? MethodBase.GetMethodFromHandle(handle, typeHandle) 

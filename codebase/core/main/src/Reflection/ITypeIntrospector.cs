@@ -280,14 +280,14 @@ namespace Axle.Reflection
         /// <seealso cref="Axle.Reflection.TypeFlags"/>
         TypeFlags TypeFlags { get; }
 
-        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the <see cref="AccessModifier"/> for the given type.
         /// </summary>
         AccessModifier AccessModifier { get; }
         #endif
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the underlying <see cref="TypeCode"/> for the <see cref="IntrospectedType"/>.
         /// </summary>

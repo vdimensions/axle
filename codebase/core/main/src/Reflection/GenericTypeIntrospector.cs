@@ -1,5 +1,5 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 
 namespace Axle.Reflection
@@ -41,7 +41,7 @@ namespace Axle.Reflection
         {
             get
             {
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 return GenericDefinitionType.GetGenericArguments();
                 #else
                 return System.Reflection.IntrospectionExtensions.GetTypeInfo(GenericDefinitionType).GetGenericArguments();

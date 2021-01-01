@@ -6,7 +6,7 @@ using System.Reflection;
 using Axle.Reflection.Extensions;
 using Axle.Threading;
 using Axle.Threading.ReaderWriterLock;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using Axle.References;
 #endif
 
@@ -45,7 +45,7 @@ namespace Axle.Reflection
         protected readonly IReadWriteLockProvider LockProvider = new ReadWriteLockProvider();
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         protected MemberTokenBase(Type declaringType, string name)
         {
             _name = name;
@@ -59,7 +59,7 @@ namespace Axle.Reflection
             _name = name;
             _declaringType = declaringType;
             _typeHandle = declaringType.TypeHandle;
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             #else
             ReflectedMember = member;
             #endif
@@ -84,7 +84,7 @@ namespace Axle.Reflection
         public abstract AccessModifier AccessModifier { get; }
         public RuntimeTypeHandle TypeHandle => _typeHandle;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets a reference to the <see cref="MemberInfo"/> obtained from the .NET framework.
         /// </summary>
@@ -97,7 +97,7 @@ namespace Axle.Reflection
         #endif
     }
 
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     #if NETFRAMEWORK
     [Serializable]
     #endif
@@ -140,7 +140,7 @@ namespace Axle.Reflection
                 #endif
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
-                    #if NETSTANDARD
+                    #if NETSTANDARD || UNITY_2018_1_OR_NEWER
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType));
                     #else
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));

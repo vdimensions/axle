@@ -1,6 +1,6 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 using Axle.Verification;
@@ -16,7 +16,7 @@ namespace Axle.Reflection.Extensions.Type
     /// </summary>
     public static class TypeExtensions
     {
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the underlying <see cref="TypeCode">type code</see> of the specified <see cref="Type"/>.
         /// </summary>
@@ -29,7 +29,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
         public static TypeCode GetTypeCode(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type) => 
@@ -87,7 +87,7 @@ namespace Axle.Reflection.Extensions.Type
         /// Either <paramref name="type"/> or <paramref name="other"/> is <c><see langword="null"/></c>.
         /// </exception>
         public static bool ExtendsOrImplements(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type, 
@@ -95,7 +95,7 @@ namespace Axle.Reflection.Extensions.Type
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             Verifier.IsNotNull(Verifier.VerifyArgument(other, nameof(other)));
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return other.GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
             #else
             return other.IsAssignableFrom(type);
@@ -153,7 +153,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
         public static bool ExtendsOrImplements<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type)
@@ -181,7 +181,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool IsBaseOf(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type, 
@@ -189,7 +189,7 @@ namespace Axle.Reflection.Extensions.Type
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             Verifier.IsNotNull(Verifier.VerifyArgument(other, nameof(other)));
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return type.GetTypeInfo().IsAssignableFrom(other.GetTypeInfo());
             #else
             return type.IsAssignableFrom(other);
@@ -211,13 +211,13 @@ namespace Axle.Reflection.Extensions.Type
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool IsBaseOf<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return type.GetTypeInfo().IsAssignableFrom(typeof(T).GetTypeInfo());
             #else
             return type.IsAssignableFrom(typeof(T));
@@ -239,7 +239,7 @@ namespace Axle.Reflection.Extensions.Type
         /// </exception>
         /// <seealso cref="TypeFlags.Delegate"/>
         public static bool IsDelegate(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type)
@@ -248,7 +248,7 @@ namespace Axle.Reflection.Extensions.Type
             //return new TypeIntrospector(type).IsDelegate;
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             return typeof(MulticastDelegate)
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 .GetTypeInfo()
                 .IsAssignableFrom(type.GetTypeInfo().BaseType.GetTypeInfo())
                 #else
@@ -257,7 +257,7 @@ namespace Axle.Reflection.Extensions.Type
                 ;
         }
 
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Checks whether the specified <paramref name="type"/> is a nullable type.
         /// </summary>
@@ -273,7 +273,7 @@ namespace Axle.Reflection.Extensions.Type
         /// </exception>
         /// <seealso cref="TypeFlags.NullableValueType"/>
         public static bool IsNullableType(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 Type type) 
@@ -281,7 +281,7 @@ namespace Axle.Reflection.Extensions.Type
                 //TODO
                 //return new TypeIntrospector(type).IsNullableType;
                 type.VerifyArgument(nameof(type)).IsNotNull();
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 var ti = type.GetTypeInfo();
                 return ti.IsGenericType && ti.GetGenericTypeDefinition() == typeof(Nullable<>);
                 #else

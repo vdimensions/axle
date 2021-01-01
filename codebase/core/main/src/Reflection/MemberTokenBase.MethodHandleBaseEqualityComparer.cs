@@ -11,7 +11,7 @@
             protected override bool DoEquals(TT x, TT y) => x.ReflectedMember.Equals(y.ReflectedMember);
         }
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private static AbstractEqualityComparer<MemberTokenBase<T>> EqualityComparer
         {
             get => Axle.References.Singleton<MethodHandleBaseEqualityComparer<MemberTokenBase<T>>>.Instance;
@@ -23,7 +23,7 @@
         #endif
     }
 
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     abstract partial class MemberTokenBase<T, THandle>
     {
         [System.Serializable]
@@ -37,7 +37,7 @@
                 => x.Handle.Equals(y.Handle);
         }
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private static AbstractEqualityComparer<MemberTokenBase<T, THandle>> EqualityComparer
         {
             get => Axle.References.Singleton<MethodHandleBaseEqualityComparer>.Instance;
