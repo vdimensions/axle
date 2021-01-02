@@ -1,4 +1,4 @@
-#if NETSTANDARD || NET20_OR_NEWER
+#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,7 +13,7 @@ namespace Axle.Collections.Generic
     /// </typeparam>
     /// <seealso cref="IEnumerable{T}"/>
     /// <seealso cref="IEnumerable"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public class GenericEnumerable<T> : IEnumerable<T>

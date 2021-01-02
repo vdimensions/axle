@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,7 +15,7 @@ namespace Axle.Collections.Generic
     /// <seealso cref="IEnumerator"/>
     /// <seealso cref="GenericEnumerator{T}"/>
     /// <seealso cref="GenericEnumerator{T1, T2}"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     internal class GenericEnumerator : GenericEnumerator<object>
@@ -34,7 +34,7 @@ namespace Axle.Collections.Generic
     /// <seealso cref="IEnumerator"/>
     /// <seealso cref="GenericEnumerator{T1, T2}"/>
     /// <seealso cref="GenericEnumerator"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class GenericEnumerator<T> : IEnumerator<T>
@@ -86,7 +86,7 @@ namespace Axle.Collections.Generic
     /// <seealso cref="IEnumerator"/>
     /// <seealso cref="GenericEnumerator{T}"/>
     /// <seealso cref="GenericEnumerator"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class GenericEnumerator<T1, T2> : IEnumerator<T2>

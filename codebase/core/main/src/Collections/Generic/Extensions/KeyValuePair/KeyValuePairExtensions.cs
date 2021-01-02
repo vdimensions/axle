@@ -41,7 +41,7 @@ namespace Axle.Collections.Generic.Extensions.KeyValuePair
         /// The new key produced by invoking the <paramref name="mappingFunc"/> is <c>null</c>.
         /// </exception>
         public static KeyValuePair<TMappedKey, TValue> MapKey<TKey, TMappedKey, TValue>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             KeyValuePair<TKey, TValue> pair,
@@ -84,7 +84,7 @@ namespace Axle.Collections.Generic.Extensions.KeyValuePair
         /// <paramref name="mappingFunc"/> is <c>null</c>.
         /// </exception>
         public static KeyValuePair<TKey, TMappedValue> MapValue<TKey, TValue, TMappedValue>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             KeyValuePair<TKey, TValue> pair,

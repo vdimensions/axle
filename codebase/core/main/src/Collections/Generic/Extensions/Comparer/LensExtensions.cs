@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 
@@ -27,7 +27,7 @@ namespace Axle.Collections.Generic.Extensions.Comparer
         /// </returns>
         /// <seealso cref="LensingComparer{T2,T1}"/>
         public static LensingComparer<T2, T1> Lens<T1, T2>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IComparer<T1> comparer, Func<T2, T1> lensingFunction) => new LensingComparer<T2, T1>(lensingFunction, comparer);

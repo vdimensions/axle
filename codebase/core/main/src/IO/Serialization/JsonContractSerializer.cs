@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NET40_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NET40_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;

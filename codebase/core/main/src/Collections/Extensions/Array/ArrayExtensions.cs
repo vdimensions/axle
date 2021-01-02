@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using Axle.Verification;
 
@@ -28,7 +28,7 @@ namespace Axle.Collections.Extensions.Array
         /// <paramref name="type"/>.
         /// </exception>
         public static Array MakeGeneric(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             object[] array, Type type)

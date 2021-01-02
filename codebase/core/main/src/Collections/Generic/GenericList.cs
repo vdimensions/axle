@@ -1,9 +1,9 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
-#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Linq;
 #endif
 
@@ -18,7 +18,7 @@ namespace Axle.Collections.Generic
     /// </typeparam>
     /// <seealso cref="IList{T}"/>
     /// <seealso cref="IList"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class GenericList<T> : IList<T>, IList
@@ -67,7 +67,7 @@ namespace Axle.Collections.Generic
         }
 
         /// <inheritdoc />
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
         public IEnumerator<T> GetEnumerator() => _underlyingCollection.OfType<T>().GetEnumerator();
         #else
         public IEnumerator<T> GetEnumerator()

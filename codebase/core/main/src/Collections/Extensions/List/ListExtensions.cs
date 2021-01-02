@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,7 +28,7 @@ namespace Axle.Collections.Extensions.List
         /// provided by the <paramref name="type"/> parameter.
         /// </returns>
         public static IList MakeGeneric(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IList list, Type type)
