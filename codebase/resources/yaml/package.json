@@ -1,0 +1,17 @@
+{
+  "name": "com.vdimensions.axle.resources.yaml",
+  "version": "1.10.0",
+  "description": "Axle Framework resources support for the YAML format",
+  "unity": "2018.1",
+  "unityRelease": "1f1",
+  "dependencies": {
+    "yamldotnet": "5.0.0"
+  },
+  "keywords": [
+    "vdimensions",
+    "axle"
+  ],
+  "author": {
+    "name": "Virtual Dimensions"
+  }
+}
