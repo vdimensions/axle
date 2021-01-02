@@ -13,7 +13,7 @@ namespace Axle.Text
     /// </summary>
     /// <seealso cref="StringCharSequence"/>
     /// <seealso cref="EnumerableCharSequence"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     [StructLayout((LayoutKind.Sequential))]

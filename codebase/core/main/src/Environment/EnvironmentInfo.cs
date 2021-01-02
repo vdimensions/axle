@@ -1,9 +1,9 @@
-#if NETSTANDARD || NET20_OR_NEWER
+#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Globalization;
 using System.Text;
 #endif
@@ -13,8 +13,8 @@ namespace Axle.Environment
 {
     internal sealed class EnvironmentInfo : IEnvironment
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        #if NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         internal static OperatingSystemID GetOSID(OperatingSystem os)
@@ -41,7 +41,7 @@ namespace Axle.Environment
         }
         #endif
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private EnvironmentInfo()
         #else
         internal EnvironmentInfo()
@@ -63,7 +63,7 @@ namespace Axle.Environment
             #endif
         }
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private EnvironmentVariableTarget ScopeToTarget(EnvironmentVariableScope scope)
         {
             switch (scope)
@@ -78,7 +78,7 @@ namespace Axle.Environment
         }
         #endif
 
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public string GetEnvironmentVariable(string name) 
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             => GetEnvironmentVariable(name, EnvironmentVariableScope.Process);
@@ -87,12 +87,12 @@ namespace Axle.Environment
             #endif
         #endif
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public string GetEnvironmentVariable(string name, EnvironmentVariableScope scope) 
             => System.Environment.GetEnvironmentVariable(name, ScopeToTarget(scope));
         #endif
         
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public IDictionary<string, string> GetEnvironmentVariables()
         {
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -107,7 +107,7 @@ namespace Axle.Environment
         }
         #endif
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public IDictionary<string, string> GetEnvironmentVariables(EnvironmentVariableScope scope)
         {
             return Enumerable.ToDictionary(
@@ -122,20 +122,20 @@ namespace Axle.Environment
         public int ProcessorCount { get; }
         public string NewLine { get; }
 
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public char PathSeparator { get; }
         #endif
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public string MachineName { get; }
         #endif
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public CultureInfo Culture { get; }
         public Encoding DefaultEncoding { get; }
         public OperatingSystem OperatingSystem { get; }
         public OperatingSystemID OperatingSystemID => GetOSID(OperatingSystem);
         #endif
         
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public string this[string name] => GetEnvironmentVariable(name);
         #endif
     }

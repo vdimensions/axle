@@ -1,6 +1,6 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Runtime.Serialization;
 #endif
 
@@ -14,7 +14,7 @@ namespace Axle.Conversion
     /// </summary>
     /// <seealso cref="IConverter{TSource,TTarget}"/>
     /// <seealso cref="ITwoWayConverter{TSource,TTarget}"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class ConversionException : Exception
@@ -85,7 +85,7 @@ namespace Axle.Conversion
                 Verifier.IsNotNull(Verifier.VerifyArgument(destinationType, nameof(destinationType))).Value.FullName),
             inner) {}
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Initializes a new instance of the <see cref="ConversionException"/> class with serialized data.
         /// </summary>

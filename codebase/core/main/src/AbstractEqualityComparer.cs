@@ -1,7 +1,7 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
-#if NETSTANDARD
+#if NETSTANDARD || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -25,7 +25,7 @@ namespace Axle
         #if !DEBUG
         [System.Diagnostics.DebuggerBrowsable(System.Diagnostics.DebuggerBrowsableState.Never)]
         #endif
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         private static readonly bool _IsValueType = typeof(T).GetTypeInfo().IsValueType;
         #else
         private static readonly bool _IsValueType = typeof(T).IsValueType;

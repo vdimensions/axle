@@ -8,7 +8,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of an
     /// <see cref="Assembly">assembly</see> to a valid <see cref="Assembly"/> instance.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class AssemblyParser : AbstractParser<Assembly>

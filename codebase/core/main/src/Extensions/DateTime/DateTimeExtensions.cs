@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Globalization;
 
@@ -26,7 +26,7 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="System.DateTime.DaysInMonth" />
         public static int DaysInMonth(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current)
@@ -51,7 +51,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         public static DateTime FirstDayOfWeek(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current, CultureInfo culture)
@@ -76,7 +76,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         public static DateTime FirstDayOfWeek(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current, DayOfWeek firstDayOfWeek)
@@ -109,7 +109,7 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="LastDayOfMonth"/>
         public static DateTime FirstDayOfMonth(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current)
@@ -130,7 +130,7 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="LastDayOfYear"/>
         public static DateTime FirstDayOfYear(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current)
@@ -155,7 +155,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         public static DateTime LastDayOfWeek(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current, CultureInfo culture)
@@ -180,7 +180,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="FirstDayOfWeek(System.DateTime, System.Globalization.CultureInfo)"/>
         /// <seealso cref="LastDayOfWeek(System.DateTime, System.DayOfWeek)"/>
         public static DateTime LastDayOfWeek(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current, DayOfWeek firstDayOfWeek)
@@ -201,7 +201,7 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="FirstDayOfMonth"/>
         public static DateTime LastDayOfMonth(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current)
@@ -222,7 +222,7 @@ namespace Axle.Extensions.DateTime
         /// </returns>
         /// <seealso cref="FirstDayOfYear"/>
         public static DateTime LastDayOfYear(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime current)
@@ -248,7 +248,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
         public static DateTime ChangeKind(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime dateTime, DateTimeKind kind) { return new DateTime(dateTime.Ticks, kind); }
@@ -267,7 +267,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind.Local"/>
         public static DateTime ChangeKindToLocal(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Local);
@@ -286,7 +286,7 @@ namespace Axle.Extensions.DateTime
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind.Utc"/>
         public static DateTime ChangeKindToUtc(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
@@ -301,7 +301,7 @@ namespace Axle.Extensions.DateTime
         /// Am ISO 8601 string representation of the current <paramref name="dateTime"/> value.
         /// </returns>
         public static string ToISOString(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTime dateTime)

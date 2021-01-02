@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
 
@@ -12,7 +12,7 @@ namespace Axle.Verification
     /// <seealso cref="string"/>
     public static class StringVerifier
     {
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static ArgumentReference<string> UncheckedIsNotEmpty(ArgumentReference<string> argument, string message)
@@ -42,7 +42,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<string> argument, string message)
@@ -62,7 +62,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<string> argument) => IsNotEmpty(argument, null);
@@ -79,7 +79,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotNullOrEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<string> argument) => IsNotEmpty(Verifier.IsNotNull(argument));
@@ -103,7 +103,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<string> IsNotNullOrEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<string> argument,

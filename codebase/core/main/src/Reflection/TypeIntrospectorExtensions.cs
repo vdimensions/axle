@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER
+﻿#if NETSTANDARD1_5_OR_NEWER || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
@@ -13,7 +13,7 @@ namespace Axle.Reflection
     /// </summary>
     public static class TypeIntrospectorExtensions
     {
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
         [SuppressMessage("ReSharper", "CognitiveComplexity")]
         private static MemberInfo ExtractMember<T>(Expression<T> expression)
         {
@@ -49,7 +49,7 @@ namespace Axle.Reflection
             }
 
             var member = expr.Member;
-            #if NETFRAMEWORK
+            #if NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             var type = member.DeclaringType;
             if (type != null && type != member.ReflectedType && null != member.ReflectedType && !(
                 type.IsSubclassOf(member.ReflectedType) || member.ReflectedType.IsAssignableFrom(type)))

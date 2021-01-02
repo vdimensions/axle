@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 
@@ -24,7 +24,7 @@ namespace Axle
     /// The type of objects that the underlying <see cref="IEqualityComparer{T}"/> can handle.
     /// </typeparam>
     /// <seealso cref="LensingEqualityComparer{T1,T2}"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class LensingEqualityComparer<T1, T2> : IEqualityComparer<T1>

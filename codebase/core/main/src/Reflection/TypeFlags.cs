@@ -7,7 +7,7 @@ namespace Axle.Reflection
     /// An enumeration describing the possible categories of a <see cref="Type"/>.
     /// </summary>
     [Flags]
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public enum TypeFlags

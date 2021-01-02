@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Reflection;
@@ -36,7 +36,7 @@ namespace Axle.Environment
         /// </exception>
         Assembly LoadAssembly(string assemblyName);
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Loads a satellite assembly to the specified <paramref name="targetAssembly">target</paramref> assembly and
         /// <paramref name="culture"/>.
@@ -79,7 +79,7 @@ namespace Axle.Environment
         /// </summary>
         RuntimeImplementation Implementation { get; }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Returns a reference to the <see cref="AppDomain"/> instance hosting the current .NET runtime.
         /// </summary>

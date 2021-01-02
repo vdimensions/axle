@@ -159,7 +159,7 @@ namespace Axle.Reflection.Extensions.Type
                 Type type)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return typeof(T).GetTypeInfo().IsAssignableFrom(type.GetTypeInfo());
             #else
             return typeof(T).IsAssignableFrom(type);

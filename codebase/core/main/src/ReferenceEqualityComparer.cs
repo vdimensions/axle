@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Collections.Generic;
 
 namespace Axle
@@ -12,7 +12,7 @@ namespace Axle
     /// The type of objects to compare.
     /// </typeparam>
     /// <seealso cref="object.ReferenceEquals(object, object)"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public sealed class ReferenceEqualityComparer<T> : IEqualityComparer<T> where T: class

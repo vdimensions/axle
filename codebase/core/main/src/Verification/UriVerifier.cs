@@ -21,7 +21,7 @@ namespace Axle.Verification
         /// </exception>
         /// <seealso cref="Uri.IsAbsoluteUri"/>
         public static ArgumentReference<Uri> IsAbsoluteUri(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Uri> argument)
@@ -46,7 +46,7 @@ namespace Axle.Verification
         /// </exception>
         /// <seealso cref="Uri.IsAbsoluteUri"/>
         public static ArgumentReference<Uri> IsRelativeUri(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Uri> argument)
@@ -72,7 +72,7 @@ namespace Axle.Verification
         /// </exception>
         /// <seealso cref="Uri.IsFile"/>
         public static ArgumentReference<Uri> IsFile(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Uri> argument)

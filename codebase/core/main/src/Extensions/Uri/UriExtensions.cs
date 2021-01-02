@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,7 +34,7 @@ namespace Axle.Extensions.Uri
         /// <summary>
         /// The uri scheme for the http protocol.
         /// </summary>
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         public const string UriSchemeHttp = "http";
         #else
         public static readonly string UriSchemeHttp = System.Uri.UriSchemeHttp;
@@ -43,7 +43,7 @@ namespace Axle.Extensions.Uri
         /// <summary>
         /// The uri scheme for the https (secure http) protocol.
         /// </summary>
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         public const string UriSchemeHttps = "https";
         #else
         public static readonly string UriSchemeHttps = System.Uri.UriSchemeHttps;
@@ -52,7 +52,7 @@ namespace Axle.Extensions.Uri
         /// <summary>
         /// The uri scheme for a file system location.
         /// </summary>
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         public const string UriSchemeFile = "file";
         #else
         public static readonly string UriSchemeFile = System.Uri.UriSchemeFile;
@@ -61,20 +61,20 @@ namespace Axle.Extensions.Uri
         /// <summary>
         /// The uri scheme for ftp location.
         /// </summary>
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         public const string UriSchemeFtp = "ftp";
         #else
         public static readonly string UriSchemeFtp = System.Uri.UriSchemeFtp;
         #endif
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool SchemeEquals(System.Uri uri, string scheme)
         {
             return uri.IsAbsoluteUri && SchemeEqualsAssumeAbsolute(uri, scheme);
         }
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool SchemeEqualsAssumeAbsolute(System.Uri uri, string scheme)

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 
 
@@ -20,7 +20,7 @@ namespace Axle.Extensions.StringComparison
         /// <paramref name="stringComparison"/> value.
         /// </returns>
         public static StringComparer GetComparer(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             System.StringComparison stringComparison)
@@ -31,7 +31,7 @@ namespace Axle.Extensions.StringComparison
                     return StringComparer.CurrentCulture;
                 case System.StringComparison.CurrentCultureIgnoreCase:
                     return StringComparer.CurrentCultureIgnoreCase;
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 case System.StringComparison.InvariantCulture:
                     return StringComparer.InvariantCulture;
                 case System.StringComparison.InvariantCultureIgnoreCase:

@@ -1,7 +1,7 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -40,14 +40,14 @@ namespace Axle.Verification
             _value = value;
         }
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
         private ArgumentReference<T> IsOfTypeUnchecked(Type expectedType)
         {
             var actualType = Value.GetType();
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             if (!expectedType.GetTypeInfo().IsAssignableFrom(actualType.GetTypeInfo()))
             #else
             if (!expectedType.IsAssignableFrom(actualType))

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics.CodeAnalysis;
 
@@ -31,7 +31,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static T Read<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T> func)
@@ -70,7 +70,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T, TResult> func, T arg)
@@ -115,7 +115,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T1, T2, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T1, T2, TResult> func, T1 arg1, T2 arg2)
@@ -166,7 +166,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T1, T2, T3, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T1, T2, T3, TResult> func, T1 arg1, T2 arg2, T3 arg3)
@@ -223,7 +223,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Read<T1, T2, T3, T4, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T1, T2, T3, T4, TResult> func, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
@@ -252,7 +252,7 @@ namespace Axle.Threading
             /// The action delegate to be executed inside a write lock.
             /// </param>
             public static void Write(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider,  Action action)
@@ -285,7 +285,7 @@ namespace Axle.Threading
             /// The argument to pass to the <paramref name="action"/> delegate upon execution.
             /// </param>
             public static void Write<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Action<T> action, T arg)
@@ -324,7 +324,7 @@ namespace Axle.Threading
             /// The second argument to pass to the <paramref name="action"/> delegate upon execution.
             /// </param>
             public static void Write<T1, T2>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Action<T1, T2> action, T1 arg1, T2 arg2)
@@ -369,7 +369,7 @@ namespace Axle.Threading
             /// The third argument to pass to the <paramref name="action"/> delegate upon execution.
             /// </param>
             public static void Write<T1, T2, T3>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Action<T1, T2, T3> action, T1 arg1, T2 arg2, T3 arg3)
@@ -420,7 +420,7 @@ namespace Axle.Threading
             /// The fourth argument to pass to the <paramref name="action"/> delegate upon execution.
             /// </param>
             public static void Write<T1, T2, T3, T4>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Action<T1, T2, T3, T4> action, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
@@ -453,7 +453,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static T Write<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T> func)
@@ -492,7 +492,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T, TResult> func, T arg)
@@ -537,7 +537,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T1, T2, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T1, T2, TResult> func, T1 arg1, T2 arg2)
@@ -588,7 +588,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T1, T2, T3, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T1, T2, T3, TResult> func, T1 arg1, T2 arg2, T3 arg3)
@@ -645,7 +645,7 @@ namespace Axle.Threading
             /// <paramref name="func"/> parameter delegate.
             /// </returns>
             public static TResult Write<T1, T2, T3, T4, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T1, T2, T3, T4, TResult> func, T1 arg1, T2 arg2, T3 arg3, T4 arg4)
@@ -687,7 +687,7 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryRead<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, int millisecondsTimeout, Func<T> func, out T result)
@@ -984,7 +984,7 @@ namespace Axle.Threading
             /// <c>true</c> if the lock was successfully acquired within the specified timeout; <c>false</c> otherwise.
             /// </returns>
             public static bool TryWrite<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, int millisecondsTimeout, Func<T> func, out T result)
@@ -1273,7 +1273,7 @@ namespace Axle.Threading
             /// This action is not invoked in case <paramref name="isLockNeeded"/> returns <c>true</c>.
             /// </param>
             public static void Invoke(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<bool> isLockNeeded, Action workAction)
@@ -1325,7 +1325,7 @@ namespace Axle.Threading
             /// depending on whether a lock was required.
             /// </returns>
             public static T Invoke<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Func<T> readFunc, Func<T, bool> isLockNeeded, Func<T> workFunc)
@@ -1377,7 +1377,7 @@ namespace Axle.Threading
             /// depending on whether a lock was required.
             /// </returns>
             public static T Invoke<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, Attempt<T> readFunc, Func<T> workFunc)
@@ -1434,7 +1434,7 @@ namespace Axle.Threading
             /// depending on whether a lock was required.
             /// </returns>
             public static TResult Invoke<T, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 this
                 #endif
                 IReadWriteLockProvider lockProvider, T arg, Attempt<T, TResult> readFunc, Func<T, TResult> workFunc)

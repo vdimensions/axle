@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using Axle.Verification;
 
 
@@ -10,8 +10,8 @@ namespace Axle.Environment
     /// </summary>
     public static class EnvironmentExtensions
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        #if NETSTANDARD
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static bool IsOSInternal(IEnvironment environment, OperatingSystemID osID)
@@ -34,7 +34,7 @@ namespace Axle.Environment
         /// <seealso cref="IsOS(IEnvironment, OperatingSystemID)"/>
         /// <seealso cref="OperatingSystemID"/>
         public static bool IsMac(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IEnvironment environment) => IsOS(environment, OperatingSystemID.Mac);
@@ -55,11 +55,11 @@ namespace Axle.Environment
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         /// <seealso cref="OperatingSystemID"/>
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static bool IsOS(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IEnvironment environment, OperatingSystemID osID)
@@ -82,7 +82,7 @@ namespace Axle.Environment
         /// <seealso cref="IsOS(IEnvironment, OperatingSystemID)"/>
         /// <seealso cref="OperatingSystemID"/>
         public static bool IsUnix(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IEnvironment environment) => IsOS(environment, OperatingSystemID.Unix);
@@ -102,7 +102,7 @@ namespace Axle.Environment
         /// <seealso cref="IsOS(IEnvironment, OperatingSystemID)"/>
         /// <seealso cref="OperatingSystemID"/>
         public static bool IsWindows(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IEnvironment environment) => IsOS(environment, OperatingSystemID.Windows);

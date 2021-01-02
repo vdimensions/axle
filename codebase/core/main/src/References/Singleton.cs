@@ -1,7 +1,7 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics.CodeAnalysis;
-#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Linq;
 #endif
 using System.Reflection;
@@ -49,7 +49,7 @@ namespace Axle.References
                     string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
             }
             var instance = (T) constructor.Invoke(new object[0]);
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             System.Threading.Thread.MemoryBarrier();
             #endif
             return instance;
@@ -119,7 +119,7 @@ namespace Axle.References
 
         internal static ConstructorInfo GetSingletonConstructor(Type type)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || UNITY_2018_1_OR_NEWER
             var constructors = type.GetTypeInfo().GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
             #else
             var constructors = type.GetConstructors(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
@@ -172,7 +172,7 @@ namespace Axle.References
             }
             var instanceProperty = typeof(Singleton<>)
                 .MakeGenericType(type)
-                #if NETSTANDARD
+                #if NETSTANDARD || UNITY_2018_1_OR_NEWER
                 .GetTypeInfo()
                 #else
                 #endif

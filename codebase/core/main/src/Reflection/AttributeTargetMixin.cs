@@ -24,7 +24,7 @@ namespace Axle.Reflection
         /// <typeparamref name="T"/>, that the <see cref="IAttributeTarget"/> instance has defined.
         /// </returns>
         public static IAttributeInfo[] GetAttributes<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IAttributeTarget attributeTarget) where T: Attribute
@@ -56,7 +56,7 @@ namespace Axle.Reflection
         /// parameter.
         /// </returns>
         public static IAttributeInfo[] GetAttributes<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IAttributeTarget attributeTarget, bool inherit) where T: Attribute
@@ -84,7 +84,7 @@ namespace Axle.Reflection
         /// introspected type; <c>false</c> otherwise.
         /// </returns>
         public static bool IsDefined<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IAttributeTarget attributeTarget, bool inherit) where T : Attribute

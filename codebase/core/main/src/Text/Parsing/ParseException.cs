@@ -1,5 +1,5 @@
 ﻿using System;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Runtime.Serialization;
 #endif
 
@@ -8,7 +8,7 @@ namespace Axle.Text.Parsing
     /// <summary>
     /// An exception that is thrown when failing to parse a <see cref="string"/> expression into a meaningful value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class ParseException : FormatException
@@ -112,7 +112,7 @@ namespace Axle.Text.Parsing
         /// </param>
         public ParseException(string value, string format, Type type, Exception inner) 
             : this(string.Format(MessageFormatExact, type.FullName, value, format), inner) { }
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Creates a new instance of the <see cref="ParseException"/> class with serialized data.
         /// </summary>

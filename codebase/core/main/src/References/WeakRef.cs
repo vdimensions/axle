@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using Axle.Verification;
@@ -9,7 +9,7 @@ namespace Axle.References
     /// object instance to be reclaimed by the garbage collector.
     /// This is the default implementation of the <see cref="IWeakReference{T}"/> interface.
     /// <seealso cref="IWeakReference{T}"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class WeakRef<T> : IWeakReference<T>, IEquatable<WeakRef<T>> where T: class
@@ -68,7 +68,7 @@ namespace Axle.References
             }
         }
         
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         private readonly WeakReference<T> _reference;
 
         private WeakRef(WeakReference<T> reference) { _reference = reference; }
@@ -164,7 +164,7 @@ namespace Axle.References
         /// </returns>
         public bool TryGetValue(out T value)
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return _reference.TryGetTarget(out value);
             #else
             value = Value;
@@ -182,7 +182,7 @@ namespace Axle.References
         {
             get
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 return _reference.TryGetTarget(out var xTarget) ? xTarget : null;
                 #else
                 return (T) _reference.Target;
@@ -190,7 +190,7 @@ namespace Axle.References
             }
             set
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 _reference.SetTarget(value);
                 #else
                 _reference.Target = value;
@@ -215,7 +215,7 @@ namespace Axle.References
         {
             get
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 return _reference.TryGetTarget(out _);
                 #else
                 return _reference.IsAlive;

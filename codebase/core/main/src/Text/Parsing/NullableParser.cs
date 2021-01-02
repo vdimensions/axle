@@ -7,7 +7,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a nullable
     /// <typeparamref name="T"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class NullableParser<T> : AbstractParser<T?> where T: struct

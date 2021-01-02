@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 
 namespace Axle.Environment
@@ -82,7 +82,7 @@ namespace Axle.Environment
     ///   </item>
     /// </list>
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     [Flags]

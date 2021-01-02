@@ -19,7 +19,7 @@ namespace Axle.Text.Parsing
         /// A nullable type parser instance derived from the provided <paramref name="parser"/>.
         /// </returns>
         public static IParser<T?> GetNullableParser<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IParser<T> parser) where T: struct

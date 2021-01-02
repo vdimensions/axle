@@ -7,14 +7,13 @@ using System.Text.RegularExpressions;
 
 using Axle.Verification;
 
-
 namespace Axle.Text.Expressions.Path
 {
     /// <summary>
     /// An implementation of the <see cref="IPathExpression" /> interface that is used to match paths for
     /// assemblies or embedded resources inside assemblies.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class AssemblyPathExpression : AbstractPathExpression

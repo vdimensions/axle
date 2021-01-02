@@ -29,7 +29,7 @@ namespace Axle.Extensions
         /// <paramref name="action"/> is <c>null</c>
         /// </exception>
         public static Action<T2, T1> FlipArgs<T1, T2>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Action<T1, T2> action)
@@ -64,7 +64,7 @@ namespace Axle.Extensions
         /// <paramref name="action"/> is <c>null</c>
         /// </exception>
         public static Action<T3, T2, T1> FlipArgs<T1, T2, T3>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Action<T1, T2, T3> action) 
@@ -102,7 +102,7 @@ namespace Axle.Extensions
         /// <paramref name="action"/> is <c>null</c>
         /// </exception>
         public static Action<T4, T3, T2, T1> FlipArgs<T1, T2, T3, T4>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Action<T1, T2, T3, T4> action)
@@ -113,7 +113,7 @@ namespace Axle.Extensions
             }
             return (arg4, arg3, arg2, arg1) => action(arg1, arg2, arg3, arg4);
         }
-        #if NETSTANDARD || NET40_OR_NEWER
+        #if NETSTANDARD || NET40_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="action"/> that accepts the same formal arguments
         /// but in reverse order.
@@ -398,7 +398,7 @@ namespace Axle.Extensions
             }
             return (arg4, arg3, arg2, arg1) => func(arg1, arg2, arg3, arg4);
         }
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Creates a new delegate from the provided <paramref name="func"/> that accepts the same formal arguments but
         /// in reverse order.
@@ -604,7 +604,7 @@ namespace Axle.Extensions
         /// <paramref name="attempt"/> is <c>null</c>
         /// </exception>
         public static Attempt<T2, T1, TResult> FlipArgs<T1, T2, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Attempt<T1, T2, TResult> attempt) 
@@ -642,7 +642,7 @@ namespace Axle.Extensions
         /// <paramref name="attempt"/> is <c>null</c>
         /// </exception>
         public static Attempt<T3, T2, T1, TResult> FlipArgs<T1, T2, T3, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Attempt<T1, T2, T3, TResult> attempt) 
@@ -683,7 +683,7 @@ namespace Axle.Extensions
         /// <paramref name="attempt"/> is <c>null</c>
         /// </exception>
         public static Attempt<T4, T3, T2, T1, TResult> FlipArgs<T1, T2, T3, T4, TResult>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Attempt<T1, T2, T3, T4, TResult> attempt) 

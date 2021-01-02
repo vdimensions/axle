@@ -9,7 +9,7 @@ namespace Axle.Text
     /// Represents a <see cref="CharSequence"/> implementation, that is backed by a <see cref="char">character</see>
     /// collection.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     [StructLayout((LayoutKind.Sequential))]

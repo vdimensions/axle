@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Text.RegularExpressions;
 
@@ -11,7 +11,7 @@ namespace Axle.Text.Expressions.Path
     /// <summary>
     /// An abstract class aiding the implementation of the <see cref="IPathExpression"/> interface.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractPathExpression : IPathExpression

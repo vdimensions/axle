@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
 using System.Globalization;

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using Axle.Verification;
 
 
@@ -9,7 +9,7 @@ namespace Axle.Text.Extensions.Encoding
     /// </summary>
     public static class EncodingExtensions
     {
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Decodes a sequence of bytes from the specified byte array into a string.
         /// </summary>

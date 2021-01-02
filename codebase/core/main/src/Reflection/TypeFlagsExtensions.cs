@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -16,7 +16,7 @@ namespace Axle.Reflection
         {
             var result = TypeFlags.Unknown;
             
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var ti = type.GetTypeInfo();
             #else
             var ti = type;
@@ -72,7 +72,7 @@ namespace Axle.Reflection
                 else if (ti.BaseType != null)
                 {
                     if (typeof(Attribute)
-                        #if NETSTANDARD || NET45_OR_NEWER
+                        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                         .GetTypeInfo()
                         .IsAssignableFrom(ti.BaseType.GetTypeInfo())
                         #else
@@ -83,7 +83,7 @@ namespace Axle.Reflection
                         result |= TypeFlags.Attribute;
                     }
                     else if (typeof(Delegate)
-                        #if NETSTANDARD || NET45_OR_NEWER
+                        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                         .GetTypeInfo()
                         .IsAssignableFrom(ti.BaseType.GetTypeInfo())
                         #else
@@ -101,7 +101,7 @@ namespace Axle.Reflection
                 result |= TypeFlags.Array;
             }
             else if (typeof(IEnumerable)
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 .GetTypeInfo()
                 #endif
                 .IsAssignableFrom(ti)
@@ -111,7 +111,7 @@ namespace Axle.Reflection
             }
 
             if (typeof(IDisposable)
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 .GetTypeInfo()
                 #endif
                 .IsAssignableFrom(ti)

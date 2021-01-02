@@ -1,7 +1,7 @@
-#if NETSTANDARD || NET20_OR_NEWER
+#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics.CodeAnalysis;
-#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Collections.Generic;
 #else
 using System.Collections;
@@ -80,7 +80,7 @@ namespace Axle.Text.Expressions.Substitution
             var cmp = StringComparer.Ordinal;
             var result = input;
             var groupCaptures = GetCaptures(_expression, result, cmp);
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             var unresolved = new HashSet<string>(cmp);
             #else
             var unresolved = new Hashtable(cmp);
@@ -115,7 +115,7 @@ namespace Axle.Text.Expressions.Substitution
                         }
                         else
                         {
-                            #if NETSTANDARD || NET35_OR_NEWER
+                            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                             unresolved.Add(token);
                             #else
                             unresolved.Add(token, token);
@@ -125,7 +125,7 @@ namespace Axle.Text.Expressions.Substitution
                 }
                 groupCaptures = GetCaptures(_expression, result, cmp);
             }
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             while (Enumerable.Any(Enumerable.Except(groupCaptures, unresolved, cmp)));
             #else
             while (Enumerable.Any(Enumerable.Except(groupCaptures, Enumerable.Cast<string>(unresolved.Keys), cmp)));

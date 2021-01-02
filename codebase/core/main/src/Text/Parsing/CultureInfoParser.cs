@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Globalization;
 
@@ -8,7 +8,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of
     /// a <see cref="Version">version number</see> to a valid <see cref="Version"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class CultureInfoParser : AbstractParser<CultureInfo>

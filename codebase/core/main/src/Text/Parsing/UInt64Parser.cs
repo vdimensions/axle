@@ -7,7 +7,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of
     /// an <see cref="ulong">unsigned 64-bit integer</see> to a valid <see cref="ulong"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class UInt64Parser : AbstractParser<UInt64>

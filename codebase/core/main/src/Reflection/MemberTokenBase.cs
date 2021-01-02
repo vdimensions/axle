@@ -12,7 +12,7 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
-    #if NETFRAMEWORK
+    #if NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     internal abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget

@@ -1,6 +1,6 @@
-﻿using System;
+﻿#if NETSTANDARD || NET40_OR_NEWER || UNITY_2018_1_OR_NEWER
+using System;
 
-#if NETSTANDARD || NET40_OR_NEWER
 namespace Axle.References
 {
     /// <summary>

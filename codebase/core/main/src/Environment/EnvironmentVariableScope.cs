@@ -3,7 +3,7 @@
     /// <summary>
     /// An enumeration representing the scope of an environment variable.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public enum EnvironmentVariableScope : byte

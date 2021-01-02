@@ -1,5 +1,5 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Linq;
 using System.Reflection;
@@ -32,8 +32,8 @@ namespace Axle.Reflection
             return true;
         }
         
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static BindingFlags MemberScanOptionsToBindingFlags(ScanOptions scanOptions)
@@ -61,7 +61,7 @@ namespace Axle.Reflection
         }
         #endif
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         private static bool MatchesScanOptions(IMember member, ScanOptions options)
         {
             if ((options & ScanOptions.Static) != ScanOptions.Static && member.Declaration == DeclarationType.Static)
@@ -101,7 +101,7 @@ namespace Axle.Reflection
         /// <inheritdoc cref="GetAttributes()"/>
         public sealed override IAttributeInfo[] GetAttributes()
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes();
             #else
             return CustomAttributeProviderExtensions.GetEffectiveAttributes(IntrospectedType);
@@ -110,7 +110,7 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public sealed override IAttributeInfo[] GetAttributes(Type attributeType)
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes(attributeType);
             #else
             return CustomAttributeProviderExtensions.GetEffectiveAttributes(IntrospectedType, attributeType);
@@ -139,7 +139,7 @@ namespace Axle.Reflection
             var constructor = introspectedType.GetConstructor(argumentTypes)
                            ?? introspectedType.GetConstructor(bindingFlags, null, argumentTypes, new ParameterModifier[0]);
             return constructor != null ? new ConstructorToken(constructor) : null;
-            #elif NETSTANDARD1_5_OR_NEWER
+            #elif NETSTANDARD1_5_OR_NEWER || UNITY_2018_1_OR_NEWER
             var constructor = introspectedType.GetTypeInfo().GetConstructor(argumentTypes);
             var result = new ConstructorToken(constructor);
             return MatchesScanOptions(result, scanOptions) ? result : null;
@@ -159,7 +159,7 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public sealed override IConstructor[] GetConstructors(ScanOptions scanOptions)
         {
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var constructors = IntrospectedType.GetTypeInfo().GetConstructors(bindingFlags);
             #elif NETFRAMEWORK
@@ -173,7 +173,7 @@ namespace Axle.Reflection
         public sealed override IMethod GetMethod(ScanOptions scanOptions, string methodName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var method = IntrospectedType.GetTypeInfo().GetMethod(methodName, bindingFlags);
             #else
             var method = IntrospectedType.GetMethod(methodName, bindingFlags);
@@ -187,7 +187,7 @@ namespace Axle.Reflection
         public sealed override IMethod[] GetMethods(ScanOptions scanOptions)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var methods = IntrospectedType.GetTypeInfo().GetMethods(bindingFlags);
             #else
             var methods = IntrospectedType.GetMethods(bindingFlags);
@@ -199,7 +199,7 @@ namespace Axle.Reflection
         public sealed override IProperty GetProperty(ScanOptions scanOptions, string propertyName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var property = IntrospectedType.GetTypeInfo().GetProperty(propertyName, bindingFlags);
             #else
             var property = IntrospectedType.GetProperty(propertyName, bindingFlags);
@@ -215,7 +215,7 @@ namespace Axle.Reflection
         {
             var introspectedType = IntrospectedType;
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var properties = introspectedType.GetTypeInfo()
             #else
             var properties = introspectedType
@@ -230,7 +230,7 @@ namespace Axle.Reflection
         public sealed override IField GetField(ScanOptions scanOptions, string fieldName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var field = IntrospectedType.GetTypeInfo().GetField(fieldName, bindingFlags);
             #else
             var field = IntrospectedType.GetField(fieldName, bindingFlags);
@@ -246,7 +246,7 @@ namespace Axle.Reflection
         {
             var introspectedType = IntrospectedType;
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var fields = introspectedType.GetTypeInfo()
             #else
             var fields = introspectedType
@@ -261,7 +261,7 @@ namespace Axle.Reflection
         public sealed override IEvent GetEvent(ScanOptions scanOptions, string eventName)
         {
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
-            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+            #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             var @event = IntrospectedType.GetTypeInfo().GetEvent(eventName, bindingFlags);
             #else
             var @event = IntrospectedType.GetEvent(eventName, bindingFlags);
@@ -278,7 +278,7 @@ namespace Axle.Reflection
             var introspectedType = IntrospectedType;
             var bindingFlags = MemberScanOptionsToBindingFlags(scanOptions);
             var events = introspectedType
-                #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER
+                #if NETSTANDARD1_5_OR_NEWER || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 .GetTypeInfo()
                 #endif
                 .GetEvents(bindingFlags)
@@ -290,7 +290,7 @@ namespace Axle.Reflection
         /// <inheritdoc />
         public sealed override bool IsAttributeDefined(Type attributeType, bool inherit)
         {
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return IntrospectedType.GetTypeInfo().IsDefined(attributeType, inherit);
             #else
             return IntrospectedType.IsDefined(attributeType, inherit);

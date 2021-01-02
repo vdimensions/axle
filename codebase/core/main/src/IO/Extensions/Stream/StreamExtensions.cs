@@ -43,7 +43,7 @@ namespace Axle.IO.Extensions.Stream
         /// Methods were called after the stream was closed. 
         /// </exception>
         public static void Allocate(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream, int length)
@@ -78,7 +78,7 @@ namespace Axle.IO.Extensions.Stream
         /// Methods were called after the stream was closed. 
         /// </exception>
         public static long SeekToBeginning(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream)
@@ -112,7 +112,7 @@ namespace Axle.IO.Extensions.Stream
         /// Methods were called after the stream was closed. 
         /// </exception>
         public static long SeekToEnd(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream)
@@ -152,7 +152,7 @@ namespace Axle.IO.Extensions.Stream
         /// Methods were called after the stream was closed. 
         /// </exception>
         public static byte[] ToByteArray(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream, int bufferSize, bool leaveOpen)
@@ -209,7 +209,7 @@ namespace Axle.IO.Extensions.Stream
         /// Methods were called after the stream was closed. 
         /// </exception>
         public static byte[] ToByteArray(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream, bool leaveOpen) => ToByteArray(stream, DefaultBufferSize, leaveOpen);
@@ -238,7 +238,7 @@ namespace Axle.IO.Extensions.Stream
         /// Methods were called after the stream was closed. 
         /// </exception>
         public static byte[] ToByteArray(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream, int bufferSize) => ToByteArray(stream, bufferSize, false);
@@ -258,12 +258,12 @@ namespace Axle.IO.Extensions.Stream
         /// </exception>
         /// <exception cref="ObjectDisposedException">Methods were called after the stream was closed. </exception>
         public static byte[] ToByteArray(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream) => ToByteArray(stream, DefaultBufferSize, false);
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static long WriteToUnchecked(Stream stream, Stream target, byte[] buffer)
@@ -310,7 +310,7 @@ namespace Axle.IO.Extensions.Stream
         /// Parameter <paramref name="bufferSize"/> is not a positive number. 
         /// </exception>
         public static long WriteTo(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream, Stream target, int bufferSize)
@@ -350,7 +350,7 @@ namespace Axle.IO.Extensions.Stream
         /// The output target and the input target are the same instance.
         /// </exception>
         public static long WriteTo(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             Stream stream, Stream target, byte[] buffer)

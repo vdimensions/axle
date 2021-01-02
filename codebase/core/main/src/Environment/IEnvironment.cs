@@ -1,6 +1,6 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Collections.Generic;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Text;
 using System.Globalization;
@@ -14,7 +14,7 @@ namespace Axle.Environment
     /// </summary>
     public interface IEnvironment
     {
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Retrieves an environment variable value with a given <paramref name="name"/> for the scope of the current
         /// process.
@@ -29,7 +29,7 @@ namespace Axle.Environment
         string GetEnvironmentVariable(string name);
         #endif
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Retrieves an environment variable value with a given <paramref name="name"/> from the specified
         /// <paramref name="scope"/>.
@@ -52,7 +52,7 @@ namespace Axle.Environment
         string GetEnvironmentVariable(string name, EnvironmentVariableScope scope);
         #endif
         
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Retrieves all environment variable names and their values for the scope of the current process.
         /// </summary>
@@ -63,7 +63,7 @@ namespace Axle.Environment
         IDictionary<string, string> GetEnvironmentVariables();
         #endif
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Retrieves all environment variable names and their values from the specified <paramref name="scope"/>.
         /// </summary>
@@ -97,14 +97,14 @@ namespace Axle.Environment
         /// </summary>
         string NewLine { get; }
 
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the default path separator character for the current platform.
         /// </summary>
         char PathSeparator { get; }
         #endif
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 
         /// <summary>
         /// Gets the NetBIOS name of the current platform.
@@ -112,7 +112,7 @@ namespace Axle.Environment
         string MachineName { get; }
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the <see cref="CultureInfo"/> that represents the culture installed with the current operating system.
         /// </summary>
@@ -134,7 +134,7 @@ namespace Axle.Environment
         OperatingSystemID OperatingSystemID { get; }
         #endif
         
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Retrieves an environment variable value with a given <paramref name="name"/> for the scope of the current
         /// process.

@@ -10,7 +10,7 @@ namespace Axle.Reflection
     /// </summary>
     public static class ReflectionExtensions
     {
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         internal static DeclarationType GetDeclarationType(bool isStatic, bool isAbstract, bool isVirtual, bool isOverride, bool isHideBySig, bool isSealed)

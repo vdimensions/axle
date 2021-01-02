@@ -6,10 +6,10 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a
     /// <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
-    #if NETSTANDARD1_0_OR_NEWER || NET40_OR_NEWER
+    #if NETSTANDARD1_0_OR_NEWER || NET40_OR_NEWER || UNITY_2018_1_OR_NEWER
     public sealed class TimeSpanParser : AbstractStrictParser<TimeSpan>
     #else
     public sealed class TimeSpanParser : AbstractParser<TimeSpan>
@@ -27,7 +27,7 @@ namespace Axle.Text.Parsing
             return TimeSpan.TryParse(value.ToString(), out output);
         }
 
-        #if NETSTANDARD1_0_OR_NEWER || NET40_OR_NEWER
+        #if NETSTANDARD1_0_OR_NEWER || NET40_OR_NEWER || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         protected override TimeSpan DoParseExact(CharSequence value, string format, IFormatProvider formatProvider)
         {

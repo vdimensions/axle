@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Diagnostics;
@@ -35,11 +35,11 @@ namespace Axle.Verification
         /// Thrown if the verified <paramref name="argument"/> represents an empty collection.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, string message) where T: IEnumerable
@@ -84,11 +84,11 @@ namespace Axle.Verification
         /// Thrown if the verified <paramref name="argument"/> represents an empty collection.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsNotNullOrEmpty<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument) where T: IEnumerable

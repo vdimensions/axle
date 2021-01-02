@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 
 namespace Axle.Text.Parsing
@@ -7,7 +7,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a
     /// <see cref="bool">boolean</see> to a valid <see cref="bool"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class BooleanParser : AbstractParser<bool>

@@ -11,7 +11,7 @@ namespace Axle.Text
     [SuppressMessage("ReSharper", "UnusedType.Global")]
     public static class LineEndings
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the line ending character sequence that is common for the <see cref="OperatingSystemID.Windows"/>
         /// platforms. 
@@ -23,7 +23,7 @@ namespace Axle.Text
         #endif
         public const string CRLF = "\r\n";
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the line ending character sequence that is common for the <see cref="OperatingSystemID.Mac"/>
         /// platforms. 
@@ -35,7 +35,7 @@ namespace Axle.Text
         #endif
         public const string CR = "\r";
         
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the line ending character sequence that is common for the <see cref="OperatingSystemID.Unix"/>
         /// platforms. 

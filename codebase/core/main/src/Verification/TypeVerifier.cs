@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
 #if NETSTANDARD
@@ -61,7 +61,7 @@ namespace Axle.Verification
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Type> argument, Type expectedType)
@@ -118,7 +118,7 @@ namespace Axle.Verification
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> Is<TExpected>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Type> argument)
@@ -143,7 +143,7 @@ namespace Axle.Verification
         }
         #else
         private static ArgumentReference<Type> IsUnchecked(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Type> argument, Type expectedType)
@@ -157,7 +157,7 @@ namespace Axle.Verification
         }
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Verifies if an argument of type <see cref="Type"/> represents an <see cref="Type.IsAbstract">abstract</see> class.
         /// </summary>
@@ -180,12 +180,12 @@ namespace Axle.Verification
         /// </returns>
         /// <seealso cref="TypeInfo.IsAbstract"/>
         #endif
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         [DebuggerStepThrough]
         public static ArgumentReference<Type> IsNotAbstract(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<Type> argument)

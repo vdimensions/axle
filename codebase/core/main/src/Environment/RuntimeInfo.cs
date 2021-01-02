@@ -1,11 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Axle.Extensions.String;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using Axle.Text.Parsing;
 using Axle.Verification;
 #endif
@@ -19,12 +19,12 @@ using Microsoft.Extensions.DependencyModel;
 
 namespace Axle.Environment
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     internal sealed class RuntimeInfo : IRuntime
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private static Version GetMonoVersion()
         {
             var displayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
@@ -45,7 +45,7 @@ namespace Axle.Environment
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly RuntimeImplementation _impl;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         internal RuntimeInfo()
         {
             var monoVersion = GetMonoVersion();
@@ -57,7 +57,7 @@ namespace Axle.Environment
 
         public IEnumerable<Assembly> GetAssemblies()
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             return AppDomain.CurrentDomain.GetAssemblies();
             #else
             var assemblies = new List<Assembly>();
@@ -127,7 +127,7 @@ namespace Axle.Environment
                             return false;
                         }
                     },
-                    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                     (string a, out Assembly res) =>
                     {
                         var name = !hasExt ? a : $"{a}{ext}";
@@ -170,7 +170,7 @@ namespace Axle.Environment
             throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
         }
         
-        #if !NETSTANDARD2_0_OR_NEWER && !NETFRAMEWORK
+        #if !NETSTANDARD2_0_OR_NEWER && !NETFRAMEWORK && !UNITY_2018_1_OR_NEWER
         public IEnumerable<Assembly> GetReferencingAssemblies(string assemblyName)
         {
             var assemblies = new List<Assembly>();
@@ -199,7 +199,7 @@ namespace Axle.Environment
         #endif
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private string ResolveAssemblyName(string assemblyName)
         {
             if (!EnvironmentExtensions.IsWindows(Platform.Environment))
@@ -250,7 +250,7 @@ namespace Axle.Environment
         public Version FrameworkVersion => _frameworkVersion;
         public RuntimeImplementation Implementation => _impl;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         public AppDomain Domain => AppDomain.CurrentDomain;
         #endif
     }

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -42,7 +42,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="StringComparison"/>
         /// <seealso cref="string.IndexOf(string, StringComparison)"/>
         public static bool Contains(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -77,7 +77,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="string.IndexOf(string)"/>
         [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.1")]
         public static bool Contains(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value)
@@ -126,7 +126,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="StringComparison"/>
         /// <seealso cref="string.IndexOf(string, int, StringComparison)"/>
         public static bool Contains(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, StringComparison comparison)
@@ -168,7 +168,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="string.IndexOf(string, int)"/>
         [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.2")]
         public static bool Contains(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex)
@@ -224,7 +224,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="StringComparison"/>
         /// <seealso cref="string.IndexOf(string, int, int, StringComparison)"/>
         public static bool Contains(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, int count, StringComparison comparison)
@@ -270,7 +270,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="string.IndexOf(string, int, int)"/>
         [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.3")]
         public static bool Contains(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, int count)
@@ -296,7 +296,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Empty"/>
         public static bool IsEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str)
@@ -320,7 +320,7 @@ namespace Axle.Extensions.String
         /// <seealso cref="string.IsNullOrEmpty(string)"/>
         /// <seealso cref="IsEmpty(string)"/>
         public static bool IsNullOrEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str) => string.IsNullOrEmpty(str);
@@ -338,7 +338,7 @@ namespace Axle.Extensions.String
         /// <paramref name="str"/> is <c>null</c>.
         /// </exception>
         public static string Reverse(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str)
@@ -376,7 +376,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
         public static string[] Split(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, StringSplitOptions options, char separator)
@@ -411,7 +411,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
         public static string[] Split(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, StringSplitOptions options, params char[] separators)
@@ -452,7 +452,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
         public static string[] Split(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, StringSplitOptions options, int count, params char[] separators)
@@ -487,7 +487,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
         public static string[] Split(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, StringSplitOptions options, params string[] separators)
@@ -528,7 +528,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Split(char[], int, StringSplitOptions)"/>
         public static string[] Split(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, StringSplitOptions options, int count, params string[] separators)
@@ -555,7 +555,7 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Split(char[], StringSplitOptions)"/>
         public static string[] Split(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, params string[] separators)
@@ -564,7 +564,7 @@ namespace Axle.Extensions.String
         }
         #endregion Split(...)
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static string CutFromIndex(
@@ -581,7 +581,7 @@ namespace Axle.Extensions.String
             }
             return trimEnd ? stringToTrim.Substring(0, index) : stringToTrim.Substring(index + stringToSearch.Length);
         }
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static string CutFromIndex(
@@ -626,7 +626,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeBeforeFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, StringComparison comparison)
@@ -670,7 +670,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeBeforeFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -715,7 +715,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex)
@@ -740,7 +740,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeBeforeFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value)
@@ -772,7 +772,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value, int startIndex)
@@ -802,7 +802,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeBeforeFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value)
@@ -847,7 +847,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeBeforeLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, StringComparison comparison)
@@ -891,7 +891,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeBeforeLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -936,7 +936,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex)
@@ -961,7 +961,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeBeforeLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value)
@@ -993,7 +993,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeBeforeLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value, int startIndex)
@@ -1023,7 +1023,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeBeforeLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value)
@@ -1068,7 +1068,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeAfterFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, StringComparison comparison)
@@ -1111,7 +1111,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeAfterFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -1148,7 +1148,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeAfterFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value)
@@ -1180,7 +1180,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex)
@@ -1205,7 +1205,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeAfterFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value)
@@ -1241,7 +1241,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterFirst(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value, int startIndex)
@@ -1285,7 +1285,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeAfterLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex, StringComparison comparison)
@@ -1328,7 +1328,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TakeAfterLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -1365,7 +1365,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeAfterLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value)
@@ -1397,7 +1397,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, int startIndex)
@@ -1429,7 +1429,7 @@ namespace Axle.Extensions.String
         /// or is less than zero.
         /// </exception>
         public static string TakeAfterLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value, int startIndex)
@@ -1458,7 +1458,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TakeAfterLast(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, char value)
@@ -1494,7 +1494,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TrimStart(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -1521,7 +1521,7 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TrimStart(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value) => TrimStart(str, value, StringComparison.CurrentCulture);
@@ -1550,7 +1550,7 @@ namespace Axle.Extensions.String
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
         /// </exception>
         public static string TrimEnd(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value, StringComparison comparison)
@@ -1576,13 +1576,13 @@ namespace Axle.Extensions.String
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>.
         /// </exception>
         public static string TrimEnd(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str, string value) { return TrimEnd(str, value, StringComparison.CurrentCulture); }
         #endregion TrimEnd(...)
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Retrieves the system's reference for the specified string.
         /// </summary>
@@ -1596,18 +1596,18 @@ namespace Axle.Extensions.String
         /// </exception>
         /// <seealso cref="string.Intern(string)"/>
         public static string Intern(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string str) => string.Intern(Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))));
         #endif
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static string JoinInternal(string[] values, string separator) { return string.Join(separator, values); }
 
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static string JoinInternal(IEnumerable<string> values, string separator)
@@ -1634,7 +1634,7 @@ namespace Axle.Extensions.String
         /// <see cref="string.Empty">empty</see> string.
         /// </returns>
         public static string Join(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string separator, IEnumerable<string> values) => JoinInternal(values, separator);
@@ -1656,7 +1656,7 @@ namespace Axle.Extensions.String
         /// <see cref="string.Empty">empty</see> string.
         /// </returns>
         public static string Join(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             char separator, IEnumerable<string> values) => JoinInternal(values, separator.ToString());
@@ -1678,7 +1678,7 @@ namespace Axle.Extensions.String
         /// <see cref="string.Empty">empty</see> string.
         /// </returns>
         public static string Join(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             string separator, params string[] values) => JoinInternal(values, separator);
@@ -1700,7 +1700,7 @@ namespace Axle.Extensions.String
         /// <see cref="string.Empty">empty</see> string.
         /// </returns>
         public static string Join(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             char separator, params string[] values) => JoinInternal(values, separator.ToString());

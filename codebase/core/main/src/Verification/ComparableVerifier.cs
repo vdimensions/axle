@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
 
@@ -38,11 +38,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsGreaterThan<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
@@ -84,11 +84,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsGreaterThan<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T minValue) where T: IComparable<T>
@@ -123,11 +123,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T minValue, string message) where T: IComparable<T>
@@ -169,11 +169,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="minValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsGreaterThanOrEqualTo<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T minValue) where T: IComparable<T>
@@ -208,11 +208,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsLessThan<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
@@ -252,11 +252,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsLessThan<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T maxValue) where T: IComparable<T>
@@ -291,11 +291,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T maxValue, string message) where T: IComparable<T>
@@ -337,11 +337,11 @@ namespace Axle.Verification
         /// The argument value does not conform to the boundary provided by the <paramref name="maxValue"/> argument.
         /// </exception>
         [DebuggerStepThrough]
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         public static ArgumentReference<T> IsLessThanOrEqualTo<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T> argument, T maxValue) where T: IComparable<T>

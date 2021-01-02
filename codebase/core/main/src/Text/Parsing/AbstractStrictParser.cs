@@ -9,7 +9,7 @@ namespace Axle.Text.Parsing
     /// <typeparam name="T">
     /// The result type of the parsing.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractStrictParser<T> : AbstractParser<T>, IStrictParser<T>

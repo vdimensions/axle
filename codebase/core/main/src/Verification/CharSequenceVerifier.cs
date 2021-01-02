@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
 using Axle.Text;
@@ -13,7 +13,7 @@ namespace Axle.Verification
     /// <seealso cref="CharSequence"/>
     public static class CharSequenceVerifier
     {
-        #if NETSTANDARD
+        #if NETSTANDARD || UNITY_2018_1_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
         private static ArgumentReference<CharSequence> UncheckedIsNotEmpty(ArgumentReference<CharSequence> argument, string message)
@@ -41,7 +41,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<CharSequence> IsNotEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<CharSequence> argument, string message)
@@ -61,7 +61,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<CharSequence> IsNotEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<CharSequence> argument) => IsNotEmpty(argument, null);
@@ -78,7 +78,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<CharSequence> IsNotNullOrEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<CharSequence> argument) => IsNotEmpty(Verifier.IsNotNull(argument));
@@ -102,7 +102,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<CharSequence> IsNotNullOrEmpty(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<CharSequence> argument,

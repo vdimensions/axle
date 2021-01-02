@@ -1,11 +1,11 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 namespace Axle.Environment
 {
     /// <summary>
     /// Indicates the byte order ("endianness") in which data is stored in a computer architecture. 
     /// </summary>
     /// <seealso cref="System.BitConverter.IsLittleEndian" />
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     //[Maturity(CodeMaturity.Frozen)]

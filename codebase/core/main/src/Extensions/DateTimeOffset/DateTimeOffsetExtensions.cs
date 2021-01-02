@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Globalization;
 
 
@@ -22,7 +22,7 @@ namespace Axle.Extensions.DateTimeOffset
         /// Am ISO 8601 string representation of the current <paramref name="dateTimeOffset"/> value.
         /// </returns>
         public static string ToISOString(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             DateTimeOffset dateTimeOffset)

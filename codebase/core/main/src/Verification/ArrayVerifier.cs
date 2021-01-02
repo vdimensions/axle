@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Diagnostics;
 
@@ -27,7 +27,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<T[]> IsNotEmpty<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T[]> argument,
@@ -53,7 +53,7 @@ namespace Axle.Verification
         /// </returns>
         [DebuggerStepThrough]
         public static ArgumentReference<T[]> IsNotEmpty<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             ArgumentReference<T[]> argument) => IsNotEmpty(argument, null);

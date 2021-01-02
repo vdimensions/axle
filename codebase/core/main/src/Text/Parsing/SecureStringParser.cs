@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Security;
 
@@ -20,7 +20,7 @@ namespace Axle.Text.Parsing
     /// </para>
     /// </remarks>
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class SecureStringParser : AbstractParser<SecureString>

@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Linq;
-#if NETSTANDARD
+#if NETSTANDARD || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -66,7 +66,7 @@ namespace Axle.Reflection
         {
             TypeVerifier.Is<Attribute>(Verifier.IsNotNull(Verifier.VerifyArgument(attributeType, nameof(attributeType))));
             var attributes = Verifier.IsNotNull(Verifier.VerifyArgument(member, nameof(member))).Value.GetAttributes();
-            #if NETSTANDARD
+            #if NETSTANDARD || UNITY_2018_1_OR_NEWER
             return attributes.Any(x => attributeType.GetTypeInfo().IsAssignableFrom(x.Attribute.GetType().GetTypeInfo()));
             #else
             return Enumerable.Any(attributes, x => attributeType.IsInstanceOfType(x.Attribute));

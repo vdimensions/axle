@@ -1,6 +1,6 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Diagnostics;
-#if NETSTANDARD || NET35_OR_NEWER
+#if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Linq;
 #endif
 using System.Text.RegularExpressions;
@@ -12,7 +12,7 @@ namespace Axle.Text.Expressions.Regular
     /// <summary>
     /// Represents a regular expression. Acts as a wrapper around the <see cref="Regex" /> class.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public class RegularExpression : IRegularExpression
@@ -55,7 +55,7 @@ namespace Axle.Text.Expressions.Regular
         public bool IsMatch(string input, int startIndex) => _regex.IsMatch(input, startIndex);
 
         /// <inheritdoc />
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
         public Match[] Match(string input) => _regex.Matches(input).Cast<Match>().ToArray();
         #else
         public Match[] Match(string input)
@@ -67,7 +67,7 @@ namespace Axle.Text.Expressions.Regular
         }
         #endif
         /// <inheritdoc />
-        #if NETSTANDARD || NET35_OR_NEWER
+        #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
         public Match[] Match(string input, int startIndex) => _regex.Matches(input, startIndex).Cast<Match>().ToArray();
         #else
         public Match[] Match(string input, int startIndex)

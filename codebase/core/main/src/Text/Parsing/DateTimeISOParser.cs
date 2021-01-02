@@ -6,7 +6,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse ISO 8601 <see cref="string">string</see> representations of a
     /// <see cref="DateTime">time instant</see> to a valid <see cref="DateTime"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class DateTimeISOParser : AbstractParser<DateTime>

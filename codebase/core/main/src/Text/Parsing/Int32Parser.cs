@@ -7,7 +7,7 @@ namespace Axle.Text.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a
     /// <see cref="int">32-bit integer</see> to a valid <see cref="int"/> value.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class Int32Parser : AbstractParser<int>

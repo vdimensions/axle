@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD || NET45_OR_NEWER
+#if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 using Axle.Verification;
@@ -77,7 +77,7 @@ namespace Axle.Reflection.Extensions
             var result = new List<IAttributeInfo>();
             foreach (var attribute in notInherited)
             {
-                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
                 #else
                 var attributeUsage = Enumerable.SingleOrDefault(Enumerable.Cast<AttributeUsageAttribute>(attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false)));
@@ -97,7 +97,7 @@ namespace Axle.Reflection.Extensions
                 {
                     continue;
                 }
-                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 var attributeUsage = attribute.GetType().GetTypeInfo().GetCustomAttributes(typeof(AttributeUsageAttribute), false).Cast<AttributeUsageAttribute>().SingleOrDefault();
                 #else
                 var attributeUsage = Enumerable.Single(Enumerable.Cast<AttributeUsageAttribute>(attribute.GetType().GetCustomAttributes(typeof(AttributeUsageAttribute), false)));
