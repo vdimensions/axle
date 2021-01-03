@@ -1,0 +1,17 @@
+{
+  "name": "com.vdimensions.axle.text.documents.properties",
+  "version": "1.10.0",
+  "description": "Axle Framework support for the properties format",
+  "unity": "2018.1",
+  "unityRelease": "1f1",
+  "dependencies": {
+    "kajabity.tools.java": "0.2.0"
+  },
+  "keywords": [
+    "vdimensions",
+    "axle"
+  ],
+  "author": {
+    "name": "Virtual Dimensions"
+  }
+}
