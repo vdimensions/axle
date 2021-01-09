@@ -2,7 +2,7 @@
 
 namespace Axle.Caching
 {
-    #if NETSTANDARD1_1_OR_NEWER || NET35_OR_NEWER
+    #if NETSTANDARD1_1_OR_NEWER || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
     /// <summary>
     /// An interface that represents a cache manager. The cache manager is responsible for providing
     /// <see cref="ICache">cache objects</see> identified by a name, as well as invalidating such caches.  

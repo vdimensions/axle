@@ -1,6 +1,7 @@
 {
     "name": "Axle.Resources",
     "references": [
+        "Axle.Caching",
         "Axle.Core",
         "Axle.Text.Documents"
     ],
