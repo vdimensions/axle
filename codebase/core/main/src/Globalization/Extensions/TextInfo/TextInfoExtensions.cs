@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Text;
 
@@ -15,7 +15,7 @@ namespace Axle.Globalization.Extensions.TextInfo
     /// </summary>
     public static class TextInfoExtensions
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the encoding for the original equipment manufacturer OEM code page of the writing system represented by
         /// the current <see cref="TextInfo"/>. 
@@ -29,7 +29,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// </returns>
         /// <seealso cref="TextInfo.OEMCodePage"/>
         public static Encoding GetOemEncoding(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             TextInfo textInfo)
@@ -51,7 +51,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// </returns>
         /// <seealso cref="TextInfo.EBCDICCodePage"/>
         public static Encoding GetEbcdicEncoding(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             TextInfo textInfo)
@@ -73,7 +73,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// </returns>
         /// <seealso cref="TextInfo.ANSICodePage"/>
         public static Encoding GetAnsiEncoding(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             TextInfo textInfo)
@@ -95,7 +95,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// </returns>
         /// <seealso cref="TextInfo.MacCodePage"/>
         public static Encoding GetMacEncoding(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             TextInfo textInfo)
@@ -105,7 +105,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         }
         #endif
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Gets the default encoding for the writing system represented by the current <see cref="TextInfo"/>. 
         /// This would be equal to encoding for the <see cref="TextInfo.OEMCodePage"/> for non-invariant cultures.
@@ -129,7 +129,7 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// <paramref name="textInfo"/> is <c>null</c>.
         /// </exception>
         public static Encoding GetEncoding(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             TextInfo textInfo)

@@ -8,7 +8,8 @@
   },
   "keywords": [
     "vdimensions",
-    "axle"
+    "axle",
+    "axle.core"
   ],
   "author": {
     "name": "Virtual Dimensions"
