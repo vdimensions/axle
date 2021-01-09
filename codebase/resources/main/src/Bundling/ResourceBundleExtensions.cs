@@ -1,4 +1,4 @@
-﻿using System.Reflection;
+using System.Reflection;
 using Axle.Extensions.Uri;
 using Axle.Text.Parsing;
 using Axle.Verification;

@@ -1,4 +1,4 @@
-﻿using System.Runtime.InteropServices;
+using System.Runtime.InteropServices;
 
 [assembly: ComVisible(false)]
 #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK

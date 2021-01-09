@@ -1,4 +1,4 @@
-﻿using Axle.Resources.Extraction;
+using Axle.Resources.Extraction;
 using Axle.Verification;
 
 namespace Axle.Resources.ResX.Extraction
