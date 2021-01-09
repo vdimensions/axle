@@ -31,7 +31,7 @@ namespace Axle.Caching
         /// </returns>
         /// <seealso cref="ICache.GetOrAdd(object,object)"/>
         public static TValue GetOrAdd<TKey, TValue>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             ICache cache, TKey key, TValue valueToAdd)
@@ -65,7 +65,7 @@ namespace Axle.Caching
         /// </returns>
         /// <seealso cref="ICache.GetOrAdd(object,Func{object, object})"/>
         public static TValue GetOrAdd<TKey, TValue>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             ICache cache, TKey key, Func<TKey, TValue> valueFactory)

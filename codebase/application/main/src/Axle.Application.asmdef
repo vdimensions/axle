@@ -1,6 +1,7 @@
 {
     "name": "Axle.Application",
     "references": [
+        "Axle.Caching",
         "Axle.Configuration",
         "Axle.Core",
         "Axle.Resources",
