@@ -1,6 +1,6 @@
-﻿using System;
+using System;
 using System.Globalization;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Runtime.Serialization;
 #endif
 
@@ -12,7 +12,7 @@ namespace Axle.Resources
     /// <summary>
     /// Represents errors that occur while loading a resource object. 
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class ResourceLoadException : ResourceException
@@ -63,8 +63,7 @@ namespace Axle.Resources
                 string.Format("An error occurred while loading resource '{0}' from bundle '{1}' and culture '{2}' See the inner exception for more details.", resourceName, bundleName, culture.DisplayName),
                 inner.VerifyArgument(nameof(inner)).IsNotNull()) { }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <summary>
         /// Initializes a new instance of the <see cref="ResourceLoadException"/> class with serialized data.
         /// </summary>

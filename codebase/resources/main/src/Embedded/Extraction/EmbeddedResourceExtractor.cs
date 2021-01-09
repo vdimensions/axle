@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Reflection;
 using Axle.Environment;
