@@ -5,6 +5,8 @@
   "unity": "2018.1",
   "unityRelease": "1f1",
   "dependencies": {
+    "com.vdimensions.axle.resources.properties": "1.10.0",
+    "com.vdimensions.axle.resources.yaml": "1.10.0"
   },
   "keywords": [
     "vdimensions",

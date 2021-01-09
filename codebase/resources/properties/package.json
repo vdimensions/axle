@@ -6,6 +6,7 @@
   "unityRelease": "1f1",
   "dependencies": {
     "kajabity.tools.java": "0.2.0",
+    "com.vdimensions.axle.resources": "1.10.0",
     "com.vdimensions.axle.text.documents.properties": "1.10.0"
   },
   "keywords": [

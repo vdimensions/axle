@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Globalization;
 using System.IO;
@@ -18,7 +18,7 @@ namespace Axle.Resources.FileSystem.Extraction
             context.VerifyArgument(nameof(context)).IsNotNull();
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
 
-            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             var location = context.Location.Resolve(name);
             var culture = context.Culture;
             if (CultureInfo.InvariantCulture.Equals(culture) && File.Exists(location.AbsolutePath))

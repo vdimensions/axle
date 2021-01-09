@@ -1,11 +1,11 @@
-﻿#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using Axle.Caching;
 using Axle.Resources.Bundling;
-#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_6_OR_NEWER || NETFRAME
 using Axle.Resources.Embedded.Extraction;
 #endif
 using Axle.Resources.Extraction;
-#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using Axle.Resources.FileSystem.Extraction;
 #endif
 using Axle.Resources.ResX.Extraction;
@@ -22,7 +22,7 @@ namespace Axle.Resources
     /// <seealso cref="ResXResourceExtractor"/>
     /// <seealso cref="EmbeddedResourceExtractor"/>
     /// <seealso cref="FileSystemResourceExtractor"/>
-    #elif NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+    #elif NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     /// <summary>
     /// The default implementation of the <see cref="ResourceManager"/> base class.
     /// It is capable of handling file system, resx and embedded resources in the given order,
@@ -56,7 +56,7 @@ namespace Axle.Resources
                 cacheManager)
         {
             Extractors
-                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 .Register(new FileSystemResourceExtractor())
                 #endif
                 .Register(new ResXResourceExtractor())
@@ -69,7 +69,7 @@ namespace Axle.Resources
         /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.
         /// </summary>
         public DefaultResourceManager()
-            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             : this(new WeakReferenceCacheManager()) { }
             #else
             : this(null) { }

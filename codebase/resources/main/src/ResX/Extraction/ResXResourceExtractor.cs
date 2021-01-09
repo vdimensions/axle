@@ -20,7 +20,7 @@ namespace Axle.Resources.ResX.Extraction
             // The extent of ResX support varies depending on the target framework
             #if NETFRAMEWORK
             actualExtractor = new CompleteResXResourceExtractor();
-            #elif NETSTANDARD2_0_OR_NEWER
+            #elif NETSTANDARD2_0_OR_NEWER || UNITY_2018_1_OR_NEWER
             actualExtractor = new SimpleResXResourceExtractor();
             #else
             actualExtractor = new TextResXResourceExtractor();

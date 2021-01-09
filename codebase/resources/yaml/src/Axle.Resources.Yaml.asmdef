@@ -2,6 +2,7 @@
     "name": "Axle.Resources.Yaml",
     "references": [
         "Axle.Core",
+        "Axle.Resources",
         "Axle.Text.Documents",
         "Axle.Text.Documents.Yaml"
     ],

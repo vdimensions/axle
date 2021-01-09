@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -19,7 +19,7 @@ namespace Axle.Resources
     /// </summary>
     public abstract class ResourceManager
     {
-        #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         private sealed class CacheAwareBundleRegistry : IResourceBundleRegistry
         {
             private sealed class CacheAwareConfigurableBundleContent : IConfigurableBundleContent
@@ -161,7 +161,7 @@ namespace Axle.Resources
         {
             bundles.VerifyArgument(nameof(bundles)).IsNotNull();
             extractors.VerifyArgument(nameof(extractors)).IsNotNull();
-            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             if ((_cacheManager = cacheManager) != null)
             {
                 Bundles = new CacheAwareBundleRegistry(bundles, _cacheManager);
@@ -205,7 +205,7 @@ namespace Axle.Resources
             {
                 return null;
             }
-            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             var cache = _cacheManager?.GetCache(bundle);
             var extractors = (cache == null
                 ? Extractors.Union(bundleRegistry.Extractors)
@@ -218,7 +218,7 @@ namespace Axle.Resources
             foreach (var ci in culture.ExpandHierarchy())
             {
                 var context = new ResourceContext(bundle, locations, ci, extractors);
-                #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 var result = cache == null
                     ? context.ExtractionChain.Extract(name)
                     : cache.GetOrAdd(Tuple.Create(name, ci.Name), t => context.ExtractionChain.Extract(t.Item1));

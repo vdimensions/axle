@@ -16,7 +16,7 @@ namespace Axle.Resources.Extraction
         }
 
         /// <inheritdoc />
-        #if NETSTANDARD || NET45_OR_NEWER
+        #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         public virtual async Task<ResourceInfo> ExtractAsync(IResourceContext context, string name)
         #elif NET35_OR_NEWER
         public virtual Task<ResourceInfo> ExtractAsync(IResourceContext context, string name)
@@ -26,7 +26,7 @@ namespace Axle.Resources.Extraction
             StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
             if (!Accepts(context.Location))
             {
-                #if NETSTANDARD || NET45_OR_NEWER
+                #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
                 return await Task.FromResult<ResourceInfo>(null);
                 #elif NET40
                 var taskCompletionSource = new TaskCompletionSource<ResourceInfo>();
@@ -36,7 +36,7 @@ namespace Axle.Resources.Extraction
                 return Task.FromResult<ResourceInfo>(null);
                 #endif
             }
-            #if NETSTANDARD || NET45_OR_NEWER
+            #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
             return await Task.Run(() => DoExtract(context, name));
             #elif NET40
             return Task.Factory.StartNew(() => DoExtract(context, name));

@@ -6,6 +6,7 @@
   "unityRelease": "1f1",
   "dependencies": {
     "yamldotnet": "5.0.0",
+    "com.vdimensions.axle.resources": "1.10.0",
     "com.vdimensions.axle.text.documents.yaml": "1.10.0"
   },
   "keywords": [
