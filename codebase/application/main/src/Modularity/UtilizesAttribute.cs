@@ -3,14 +3,13 @@ using System.Diagnostics.CodeAnalysis;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
-
+using Axle.Text.Parsing;
 using Axle.Verification;
-
 
 namespace Axle.Modularity
 {
     /// <summary>
-    /// An attribute that is used to establish a specified module as an optional dependency to the target module.
+    /// An attribute that is used to establish the specified module as an optional dependency to the target module.
     /// </summary>
     /// <seealso cref="RequiresAttribute"/>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = true)]
@@ -31,8 +30,19 @@ namespace Axle.Modularity
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         public UtilizesAttribute(Type moduleType)
         {
-            moduleType.VerifyArgument(nameof(moduleType)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(moduleType, nameof(moduleType)));
             ModuleType = moduleType;
+        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RequiresAttribute"/> class.
+        /// </summary>
+        /// <param name="moduleTypeName">
+        /// The type of the module that will become a dependency for the target module.
+        /// </param>
+        public UtilizesAttribute(string moduleTypeName)
+        {
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(moduleTypeName, nameof(moduleTypeName)));
+            ModuleType = new TypeParser().Parse(moduleTypeName);
         }
 
         /// <inheritdoc />
