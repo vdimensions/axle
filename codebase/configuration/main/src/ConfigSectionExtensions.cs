@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -104,7 +104,7 @@ namespace Axle.Configuration
         
         private static object LoadConfiguration(IConfigSetting configSection, Type sectionType)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             using (CultureScope.CreateInvariant())
             #endif
             {
@@ -113,7 +113,7 @@ namespace Axle.Configuration
         }
         private static T LoadConfiguration<T>(IConfigSetting configSection, T section)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
             using (CultureScope.CreateInvariant())
             #endif
             {
@@ -122,7 +122,7 @@ namespace Axle.Configuration
         }
         
         private static IConfigSetting GetSetting(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IConfigSection config, string sectionName)
@@ -146,7 +146,7 @@ namespace Axle.Configuration
         /// section with that name does not exist.
         /// </returns>
         public static IConfigSection GetSection(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IConfigSection config, string name) 
@@ -172,7 +172,7 @@ namespace Axle.Configuration
         /// configuration section with that name does not exist.
         /// </returns>
         public static object GetSection(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IConfigSection config, string name, Type sectionType)
@@ -205,7 +205,7 @@ namespace Axle.Configuration
         /// configuration section with that name does not exist.
         /// </returns>
         public static T GetSection<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IConfigSection config, string name) where T: class, new()
@@ -218,7 +218,7 @@ namespace Axle.Configuration
         }
         
         public static IEnumerable<IConfigSetting> GetSections(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IConfigSection config, string sectionName)
@@ -228,7 +228,7 @@ namespace Axle.Configuration
         }
         
         public static IEnumerable<object> GetSections(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IConfigSection config, string sectionName, Type sectionType)
@@ -239,7 +239,7 @@ namespace Axle.Configuration
         }
 
         public static IEnumerable<T> GetSections<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IConfigSection config, string sectionName) where T: class, new()
@@ -252,7 +252,7 @@ namespace Axle.Configuration
         }
 
         public static IIncludeExcludeElementCollection<T> GetIncludeExcludeCollection<T>(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this 
             #endif
             IConfigSection config, string sectionName)
