@@ -1,0 +1,17 @@
+{
+  "name": "com.vdimensions.axle.application",
+  "version": "1.10.0",
+  "description": "Axle framework's application library",
+  "unity": "2018.1",
+  "unityRelease": "1f1",
+  "dependencies": {
+  },
+  "keywords": [
+    "vdimensions",
+    "axle",
+    "axle.application"
+  ],
+  "author": {
+    "name": "Virtual Dimensions"
+  }
+}

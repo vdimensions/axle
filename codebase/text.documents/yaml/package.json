@@ -9,7 +9,8 @@
   },
   "keywords": [
     "vdimensions",
-    "axle"
+    "axle",
+    "yaml"
   ],
   "author": {
     "name": "Virtual Dimensions"

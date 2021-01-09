@@ -3,7 +3,7 @@
     /// <summary>
     /// An enumeration that represents the importance (severity) of an application log's entries.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public enum LogSeverity : sbyte

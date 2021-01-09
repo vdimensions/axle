@@ -1,12 +1,12 @@
 ﻿using System;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Runtime.Serialization;
 #endif
 
 
 namespace Axle.DependencyInjection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class DependencyNotFoundException : DependencyResolutionException
@@ -26,7 +26,7 @@ namespace Axle.DependencyInjection
         //    inner) { }
         //public DependencyNotFoundException(Type type, string name, Exception inner) : base(type, name, inner) { }
         //public DependencyNotFoundException(Type type, string name, string message, Exception inner) : base(type, name, message, inner) { }
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         protected DependencyNotFoundException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif
     }

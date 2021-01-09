@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 namespace Axle.DependencyInjection.Sdk
 {
     public abstract partial class AbstractDependencyContainer

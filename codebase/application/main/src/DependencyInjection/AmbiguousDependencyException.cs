@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Runtime.Serialization;
 #endif
 
@@ -13,7 +13,7 @@ namespace Axle.DependencyInjection
     /// An exception that is thrown by an <see cref="IDependencyContainer"/> when resolving an object instance in case
     /// multiple objects can be used to satisfy a particular dependency.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public class AmbiguousDependencyException : DependencyResolutionException
@@ -37,7 +37,7 @@ namespace Axle.DependencyInjection
             Candidates = candidates.VerifyArgument(nameof(candidates)).IsNotNullOrEmpty().Value;
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         /// <inheritdoc />
         protected AmbiguousDependencyException(SerializationInfo info, StreamingContext context) : base(info, context) { }
         #endif

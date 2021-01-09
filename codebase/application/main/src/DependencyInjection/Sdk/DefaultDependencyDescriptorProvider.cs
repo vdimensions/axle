@@ -1,8 +1,8 @@
-#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD
+#if NETSTANDARD || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -54,7 +54,7 @@ namespace Axle.DependencyInjection.Sdk
         {
             var introspector = new TypeIntrospector(type.VerifyArgument(nameof(type)).IsNotNull());
             var staticFactories = introspector.GetMethods(FactoryScanOptions)
-                #if NETSTANDARD
+                #if NETSTANDARD || UNITY_2018_1_OR_NEWER
                 .Where(x => type.GetTypeInfo().IsAssignableFrom(x.ReturnType))
                 #else
                 .Where(x => type.IsAssignableFrom(x.ReturnType))

@@ -1,7 +1,8 @@
 {
     "name": "Axle.Text.Documents.Yaml",
     "references": [
-        "Axle.Core"
+        "Axle.Core",
+        "Axle.Text.Documents"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

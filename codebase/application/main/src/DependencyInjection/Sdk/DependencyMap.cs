@@ -1,9 +1,9 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD
+#if NETSTANDARD || UNITY_2018_1_OR_NEWER
 using System.Reflection;
 #endif
 
@@ -152,7 +152,7 @@ namespace Axle.DependencyInjection.Sdk
                 // TODO: assume prototyping
                 throw new DependencyNotFoundException(type, name);
             }
-            #if NETSTANDARD
+            #if NETSTANDARD || UNITY_2018_1_OR_NEWER
             var filtered = candidates.Where(c => type.GetTypeInfo().IsAssignableFrom(c.Type.GetTypeInfo())).ToArray();
             #else
             var filtered = candidates.Where(c => type.IsAssignableFrom(c.Type)).ToArray();

@@ -1,0 +1,16 @@
+{
+  "name": "com.vdimensions.axle.text.documents",
+  "version": "1.10.0",
+  "description": "Axle Framework support for text documents",
+  "unity": "2018.1",
+  "unityRelease": "1f1",
+  "dependencies": {
+  },
+  "keywords": [
+    "vdimensions",
+    "axle"
+  ],
+  "author": {
+    "name": "Virtual Dimensions"
+  }
+}

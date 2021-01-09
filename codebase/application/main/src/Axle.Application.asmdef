@@ -1,0 +1,21 @@
+{
+    "name": "Axle.Application",
+    "references": [
+        "Axle.Configuration",
+        "Axle.Core",
+        "Axle.Resources",
+        "Axle.Resources.Properties",
+        "Axle.Resources.Yaml",
+        "Axle.Text.Documents",
+        "Axle.Text.Documents.Properties",
+        "Axle.Text.Documents.Yaml"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": []
+}
