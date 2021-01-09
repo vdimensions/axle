@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using Axle.IO.Extensions.Stream;
 using Axle.Verification;
-#if NETSTANDARD && !NETSTANDARD1_3_OR_NEWER
+#if NETSTANDARD && !NETSTANDARD1_3_OR_NEWER || UNITY_2018_1_OR_NEWER
 using Axle.Text.Extensions.Encoding;
 #endif
 

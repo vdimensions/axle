@@ -5,7 +5,7 @@ using Axle.Text.Expressions.Regular;
 
 namespace Axle.Text.Documents
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     internal sealed class TextDocumentObject : TextDocumentNode, ITextDocumentObject
@@ -19,7 +19,7 @@ namespace Axle.Text.Documents
         {
             _NameTokenRegex = new RegularExpression(
                 NameTokenRegexPattern, 
-                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 RegexOptions.Compiled|
                 #endif
                 RegexOptions.CultureInvariant|RegexOptions.IgnoreCase);
@@ -30,7 +30,7 @@ namespace Axle.Text.Documents
             return _NameTokenRegex.Match(name).Select(x => x.Value).ToArray();
         }
         
-        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly IEnumerable<ITextDocumentNode> _children;

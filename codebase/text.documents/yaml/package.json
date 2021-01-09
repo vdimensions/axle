@@ -5,7 +5,8 @@
   "unity": "2018.1",
   "unityRelease": "1f1",
   "dependencies": {
-    "yamldotnet": "5.0.0"
+    "yamldotnet": "5.0.0",
+    "com.vdimensions.axle.text.documents": "1.10.0"
   },
   "keywords": [
     "vdimensions",

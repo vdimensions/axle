@@ -6,7 +6,7 @@ namespace Axle.Text.Documents.Binding
     public static class BinderExtensions
     {
         public static object Bind(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IDocumentBinder documentBinder,
@@ -18,7 +18,7 @@ namespace Axle.Text.Documents.Binding
         }
 
         public static object Bind(
-            #if NETSTANDARD || NET35_OR_NEWER
+            #if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
             this
             #endif
             IDocumentBinder documentBinder, 

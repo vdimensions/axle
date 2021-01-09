@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NET35_OR_NEWER
+﻿#if NETSTANDARD1_3_OR_NEWER || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using Axle.Conversion;
 using Axle.Verification;
 using System;

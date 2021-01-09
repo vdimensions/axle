@@ -3,17 +3,17 @@ using System.Collections.Generic;
 
 namespace Axle.Text.Documents
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     internal sealed class TextDocumentRoot : ITextDocumentRoot
     {
-        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly IEqualityComparer<string> _comparer;
         
-        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NET30_OR_NEWER || UNITY_2018_1_OR_NEWER
         [System.Runtime.Serialization.DataMember]
         #endif
         private readonly TextDocumentObject _inner;

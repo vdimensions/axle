@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_5_OR_NEWER || NET20_OR_NEWER
+﻿#if NETSTANDARD1_5_OR_NEWER || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -130,7 +130,7 @@ namespace Axle.Text.Documents.Binding
             }
         }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         internal sealed class RawListValueAdapter : RawCollectionValueAdapter<ArrayList>
         {
             public sealed override object ItemAt(ArrayList collection, int index)
@@ -227,7 +227,7 @@ namespace Axle.Text.Documents.Binding
                 case DateTimeOffset _:
                 case TimeSpan _:
                 case Guid _:
-                #if NETSTANDARD2_0_OR_NEWER || NET35_OR_NEWER
+                #if NETSTANDARD2_0_OR_NEWER || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
                 case DBNull _:
                 #endif
                     return new IReadWriteMember[0]; 
@@ -286,7 +286,7 @@ namespace Axle.Text.Documents.Binding
                 {typeof(ICollection<>), typeof(GenericListValueAdapter<>)},
                 {typeof(IEnumerable<>), typeof(GenericListValueAdapter<>)},
                 {typeof(IDictionary<,>), typeof(GenericDictionaryAdapter<,>)},
-                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
                 {typeof(ArrayList), typeof(RawListValueAdapter)},
                 {typeof(IList), typeof(RawListValueAdapter)},
                 {typeof(ICollection), typeof(RawListValueAdapter)},
