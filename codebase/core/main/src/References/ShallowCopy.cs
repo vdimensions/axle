@@ -13,10 +13,14 @@ namespace Axle.References
     [SuppressMessage("ReSharper", "ClassCannotBeInstantiated")]
     public sealed class ShallowCopy
     {
+        #if !UNITY_WEBGL
         /// <summary>
         /// Gets the sole instance of the <see cref="ShallowCopy"/> class.
         /// </summary>
         private static readonly ShallowCopy Instance = Singleton<ShallowCopy>.Instance.Value;
+        #else
+        private static readonly ShallowCopy Instance = new ShallowCopy();
+        #endif
 
         private readonly IMethod _memberwiseClone;
 

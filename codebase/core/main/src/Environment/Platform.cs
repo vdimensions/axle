@@ -1,6 +1,6 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Diagnostics;
-#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
 using Axle.References;
 #endif
 
@@ -11,7 +11,7 @@ namespace Axle.Environment
     /// </summary>
     public static class Platform
     {
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private static readonly IEnvironment _env = Singleton<EnvironmentInfo>.Instance.Value;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

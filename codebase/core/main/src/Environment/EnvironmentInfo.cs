@@ -41,7 +41,7 @@ namespace Axle.Environment
         }
         #endif
 
-        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+        #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         private EnvironmentInfo()
         #else
         internal EnvironmentInfo()

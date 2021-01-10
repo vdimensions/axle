@@ -1,7 +1,9 @@
 ﻿#if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System;
 using Axle.Environment;
+#if (UNITY_EDITOR || !UNITY_WEBGL)
 using Axle.References;
+#endif
 using Axle.Resources.Bundling;
 
 namespace Axle.Application
@@ -27,10 +29,14 @@ namespace Axle.Application
             }
         }
         
+        #if (UNITY_EDITOR || !UNITY_WEBGL)
         /// <summary>
         /// Returns the sole instance of the <see cref="DefaultApplicationHost"/> class.
         /// </summary>
         public static DefaultApplicationHost Instance => Singleton<DefaultApplicationHost>.Instance;
+        #else
+        public static readonly DefaultApplicationHost Instance = new DefaultApplicationHost();
+        #endif
 
         private DefaultApplicationHost() : base(null, null, InferredEnvironmentName) { }
 
