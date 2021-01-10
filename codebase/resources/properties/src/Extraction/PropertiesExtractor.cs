@@ -1,5 +1,7 @@
 ﻿using System.Text;
+#if !UNITY_WEBGL
 using System.Threading.Tasks;
+#endif
 using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Properties.Extraction
@@ -38,7 +40,9 @@ namespace Axle.Resources.Properties.Extraction
         ResourceInfo IResourceExtractor.Extract(IResourceContext context, string name) 
             => _impl.Extract(context, name);
 
+        #if !UNITY_WEBGL
         Task<ResourceInfo> IResourceExtractor.ExtractAsync(IResourceContext context, string name) 
             => _impl.ExtractAsync(context, name);
+        #endif
     }
 }

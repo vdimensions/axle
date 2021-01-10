@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿#if NETSTANDARD || NET20_OR_NEWER || (UNITY_2018_1_OR_NEWER && (UNITY_EDITOR || !UNITY_WEBGL))
+using System.Diagnostics;
 
 namespace Axle.Threading
 {
@@ -23,3 +24,4 @@ namespace Axle.Threading
         }
     }
 }
+#endif

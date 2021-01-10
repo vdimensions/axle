@@ -28,7 +28,7 @@ namespace Axle.Threading
             /// This action is not invoked in case <paramref name="isLockNeeded"/> returns <c>true</c>.
             /// </param>
             public static void Invoke(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || (UNITY_2018_1_OR_NEWER)
                 this
                 #endif
                 ILock @lock, Func<bool> isLockNeeded, Action workAction)
@@ -76,7 +76,7 @@ namespace Axle.Threading
             /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result, depending on whether a lock was required.
             /// </returns>
             public static T Invoke<T>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
                 this
                 #endif
                 ILock @lock, Func<T> readFunc, Func<T, bool> isLockNeeded, Func<T> workFunc)
@@ -134,7 +134,7 @@ namespace Axle.Threading
             /// Either the output of the <paramref name="readFunc"/> or the <paramref name="workFunc"/>'s result, depending on whether a lock was required.
             /// </returns>
             public static TResult Invoke<T, TResult>(
-                #if NETSTANDARD || NET35_OR_NEWER
+                #if NETSTANDARD || NET35_OR_NEWER || (UNITY_2018_1_OR_NEWER)
                 this
                 #endif
                 ILock @lock, T arg, Attempt<T, TResult> readFunc, Func<T, TResult> workFunc)

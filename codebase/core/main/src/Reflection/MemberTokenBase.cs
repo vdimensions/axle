@@ -4,15 +4,17 @@ using System.Linq;
 using System.Diagnostics;
 using System.Reflection;
 using Axle.Reflection.Extensions;
+#if (UNITY_EDITOR || !UNITY_WEBGL)
 using Axle.Threading;
 using Axle.Threading.ReaderWriterLock;
+#endif
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using Axle.References;
 #endif
 
 namespace Axle.Reflection
 {
-    #if NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     internal abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
@@ -38,10 +40,11 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _name;
 
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         #if NET20
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected internal readonly ILock Lock = new MonitorLock();
-        #else
+        #elif (UNITY_EDITOR || !UNITY_WEBGL)
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected readonly IReadWriteLockProvider LockProvider = new ReadWriteLockProvider();
         #endif
 
@@ -130,6 +133,7 @@ namespace Axle.Reflection
         {
             get
             {
+                #if (UNITY_EDITOR || !UNITY_WEBGL)
                 T item = null;
                 #if NET20
                 return LockExtensions.Invoke(
@@ -145,6 +149,9 @@ namespace Axle.Reflection
                     #else
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
                     #endif
+                #else
+                return _memberRef.Value = _memberRef.Value ?? GetMember(_handle, TypeHandle, DeclaringType.GetTypeInfo().IsGenericType);
+                #endif
             }
         }
     }

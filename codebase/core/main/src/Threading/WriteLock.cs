@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER || (UNITY_2018_1_OR_NEWER && (UNITY_EDITOR || !UNITY_WEBGL))
+using System;
 using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Threading
@@ -47,3 +48,4 @@ namespace Axle.Threading
         public bool TryEnter(TimeSpan timeout) => _lockProvider.TryEnterWriteLock(timeout);
     }
 }
+#endif

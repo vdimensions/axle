@@ -3,11 +3,16 @@ using System.Collections.Generic;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
+#if !UNITY_WEBGL
+using System.Linq;
 using System.Threading.Tasks;
+#endif
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
+#if !UNITY_WEBGL
 using Axle.Threading.Extensions.Tasks;
+#endif
 
 namespace Axle.Application
 {
@@ -69,8 +74,8 @@ namespace Axle.Application
                     }
 
                     var callbacks = callbackProvider(targetContext.ModuleInfo);
-                    var parallelCallbacks = new List<Task>(callbacks.Length);
-                    var sequentialCallbacks = new List<Task>(callbacks.Length);
+                    var parallelCallbacks = new List<Action>(callbacks.Length);
+                    var sequentialCallbacks = new List<Action>(callbacks.Length);
                     for (var l = 0; l < callbacks.Length; l++)
                     {
                         var callback = callbacks[l];
@@ -84,13 +89,27 @@ namespace Axle.Application
                         }
 
                         var listToAddTaskTo = callback.AllowParallelInvoke ? parallelCallbacks : sequentialCallbacks;
-                        listToAddTaskTo.Add(new Task(() => callback.Invoke(targetContext.ModuleInstance, ModuleInstance)));
+                        listToAddTaskTo.Add(() => callback.Invoke(targetContext.ModuleInstance, ModuleInstance));
                     }
-
-                    parallelCallbacks.Start(TaskScheduler.Default);
-                    sequentialCallbacks.RunSynchronously();
-                    parallelCallbacks.WaitForAll();
-                    sequentialCallbacks.WaitForAll();
+                    
+                    #if !UNITY_WEBGL
+                    var tasks = parallelCallbacks.Select(cb => new Task(cb));
+                    tasks.Start(TaskScheduler.Default);
+                    foreach (var callback in sequentialCallbacks)
+                    {
+                        callback();
+                    }
+                    tasks.WaitForAll();
+                    #else
+                    foreach (var callback in parallelCallbacks)
+                    {
+                        callback();
+                    }
+                    foreach (var callback in sequentialCallbacks)
+                    {
+                        callback();
+                    }
+                    #endif
                 }
             }
 

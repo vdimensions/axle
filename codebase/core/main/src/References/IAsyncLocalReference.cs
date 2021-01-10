@@ -1,4 +1,4 @@
-﻿#if (NETSTANDARD1_4_OR_NEWER || NET46_OR_NEWER || UNITY_2018_1_OR_NEWER) && !NET45
+﻿#if (NETSTANDARD1_4_OR_NEWER || NET46_OR_NEWER || UNITY_2018_1_OR_NEWER) && !(NET45 || UNITY_WEBGL)
 namespace Axle.References
 {
     /// <summary>

@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
 using System;
 using System.Diagnostics;
 using System.Globalization;

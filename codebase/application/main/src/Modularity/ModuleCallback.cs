@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Linq;
+#if !UNITY_WEBGL
 using System.Threading.Tasks;
+#endif
 using Axle.Reflection;
 using Axle.Verification;
 
@@ -20,11 +22,15 @@ namespace Axle.Modularity
 
         public void Invoke(object module, object arg)
         {
+            #if !UNITY_WEBGL
             if (_invokable.Invoke(module, arg) is Task task && !task.IsCompleted)
             {
                 // in case the method was async (returning a task), we should wait for it to complete
                 task.Wait();
             }
+            #else
+            _invokable.Invoke(module, arg);
+            #endif
         }
 
         public int Priority { get; }

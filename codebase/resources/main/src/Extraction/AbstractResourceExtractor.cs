@@ -15,6 +15,7 @@ namespace Axle.Resources.Extraction
             return Accepts(context.Location) ? DoExtract(context, name) : null;
         }
 
+        #if !UNITY_WEBGL
         /// <inheritdoc />
         #if NETSTANDARD || NET45_OR_NEWER || UNITY_2018_1_OR_NEWER
         public virtual async Task<ResourceInfo> ExtractAsync(IResourceContext context, string name)
@@ -44,6 +45,7 @@ namespace Axle.Resources.Extraction
             return Task.Run(() => DoExtract(context, name));
             #endif
         }
+        #endif
 
         /// <summary>
         /// Attempts to determine if the current <see cref="AbstractResourceExtractor"/> implementation is capable of

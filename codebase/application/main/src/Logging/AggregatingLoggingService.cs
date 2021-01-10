@@ -1,4 +1,5 @@
-﻿using System;
+﻿#if NETSTANDARD || NET20_OR_NEWER || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,3 +115,4 @@ namespace Axle.Logging
         }
     }
 }
+#endif

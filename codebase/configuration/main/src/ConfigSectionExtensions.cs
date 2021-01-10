@@ -3,7 +3,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+#if !UNITY_WEBGL
 using Axle.Globalization;
+#endif
 using Axle.Text.Documents.Binding;
 using Axle.Verification;
 
@@ -104,7 +106,7 @@ namespace Axle.Configuration
         
         private static object LoadConfiguration(IConfigSetting configSection, Type sectionType)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             using (CultureScope.CreateInvariant())
             #endif
             {
@@ -113,7 +115,7 @@ namespace Axle.Configuration
         }
         private static T LoadConfiguration<T>(IConfigSetting configSection, T section)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             using (CultureScope.CreateInvariant())
             #endif
             {

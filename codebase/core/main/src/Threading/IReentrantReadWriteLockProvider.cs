@@ -1,4 +1,5 @@
-﻿namespace Axle.Threading
+﻿#if NETSTANDARD || NET20_OR_NEWER || (UNITY_2018_1_OR_NEWER && (UNITY_EDITOR || !UNITY_WEBGL))
+namespace Axle.Threading
 {
     #if NET20
     /// <summary>
@@ -26,3 +27,4 @@
     #endif
     public interface IReentrantReadWriteLockProvider : IReadWriteLockProvider {}
 }
+#endif

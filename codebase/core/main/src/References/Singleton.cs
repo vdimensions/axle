@@ -49,7 +49,7 @@ namespace Axle.References
                     string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
             }
             var instance = (T) constructor.Invoke(new object[0]);
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             System.Threading.Thread.MemoryBarrier();
             #endif
             return instance;
