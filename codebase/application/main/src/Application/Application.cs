@@ -3,6 +3,9 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+#if NETSTANDARD || NET45_OR_NEWER
+using System.Reflection;
+#endif
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
@@ -11,9 +14,6 @@ using Axle.Resources;
 using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 using Axle.Text.Expressions.Substitution;
-#if NETSTANDARD || NET45_OR_NEWER
-using System.Reflection;
-#endif
 
 namespace Axle.Application
 {

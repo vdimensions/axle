@@ -4,6 +4,11 @@ using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
+#if UNITY_WEBGL && DEBUG
+using System.Linq;
+using System.Text;
+using UnityEngine;
+#endif
 
 namespace Axle.Application
 {
@@ -69,17 +74,24 @@ namespace Axle.Application
                     var config = configMgr.LoadConfiguration();
                     
                     PrintLogo(config);
+
+                    #if UNITY_WEBGL && DEBUG
+                    var moduleNames = config.GetIncludeExcludeCollection<string>("axle.application.modules");
+                    Debug.Log(moduleNames.IncludeElements.Aggregate(new StringBuilder(), (a, b) => a.AppendLine(b)));
+                    #endif
                     
                     var modulesConfigSection = config.GetIncludeExcludeCollection<Type>("axle.application.modules");
                     foreach (var moduleType in modulesConfigSection.IncludeElements)
                     {
+                        #if UNITY_WEBGL && DEBUG
+                        Debug.Log($"{moduleType?.FullName ?? "null"}");
+                        #endif
                         _moduleTypes.Add(moduleType);
                     }
                     foreach (var moduleType in modulesConfigSection.ExcludeElements)
                     {
                         _moduleTypes.Remove(moduleType);
                     }
-                    
                     foreach (var onContainerReadyHandler in _onContainerReadyHandlers)
                     {
                         onContainerReadyHandler.Invoke(rootContainer);

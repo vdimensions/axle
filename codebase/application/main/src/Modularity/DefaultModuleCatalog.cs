@@ -75,6 +75,7 @@ namespace Axle.Modularity
 
             var result = new List<Type>();
             var types = assembly.GetTypes();
+            
             for (var i = 0; i < types.Length; i++)
             {
                 #if NETSTANDARD
@@ -235,16 +236,16 @@ namespace Axle.Modularity
         {
             var result = new HashSet<Type>();
             var attributes = CollectAttributes(
-                    TypeAndInterfaces(moduleType, new HashSet<Type>()), 
-                    new List<RequiresAttribute>(), 
-                    //
-                    // Note - the `RequiresAttribute` can be subclassed and we must take into account any derived attribute types.
-                    //
-                    true,
-                    //
-                    // Note - the `RequiresAttribute` can be applied on another attribute. We are also scanning for them.
-                    //
-                    true);
+                TypeAndInterfaces(moduleType, new HashSet<Type>()), 
+                new List<RequiresAttribute>(), 
+                //
+                // Note - the `RequiresAttribute` can be subclassed and we must take into account any derived attribute types.
+                //
+                true,
+                //
+                // Note - the `RequiresAttribute` can be applied on another attribute. We are also scanning for them.
+                //
+                true);
             for (var i = 0; i < attributes.Count; i++)
             {
                 result.Add(attributes[i].ModuleType);

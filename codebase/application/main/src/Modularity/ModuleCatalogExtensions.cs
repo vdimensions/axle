@@ -4,7 +4,6 @@ using System.Linq;
 using Axle.Extensions.String;
 using Axle.Verification;
 
-
 namespace Axle.Modularity
 {
     internal static class ModuleCatalogExtensions
