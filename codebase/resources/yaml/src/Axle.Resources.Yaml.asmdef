@@ -1,5 +1,6 @@
 {
     "name": "Axle.Resources.Yaml",
+    "rootNamespace": "Axle.Resources.Yaml",
     "references": [
         "Axle.Core",
         "Axle.Resources",

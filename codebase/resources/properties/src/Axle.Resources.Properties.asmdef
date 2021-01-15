@@ -1,5 +1,6 @@
 {
     "name": "Axle.Resources.Properties",
+    "rootNamespace": "Axle.Resources.Properties",
     "references": [
         "Axle.Core",
         "Axle.Resources",

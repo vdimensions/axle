@@ -1,5 +1,6 @@
 {
     "name": "Axle.Resources",
+    "rootNamespace": "Axle.Resources",
     "references": [
         "Axle.Caching",
         "Axle.Core",

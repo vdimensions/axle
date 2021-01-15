@@ -1,5 +1,6 @@
 {
     "name": "Axle.Text.Documents.Yaml",
+    "rootNamespace": "Axle.Text.Documents.Yaml",
     "references": [
         "Axle.Core",
         "Axle.Text.Documents"

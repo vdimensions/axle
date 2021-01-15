@@ -1,5 +1,6 @@
 {
     "name": "Axle.Text.Documents.Properties",
+    "rootNamespace": "Axle.Text.Documents.Properties",
     "references": [
         "Axle.Core",
         "Axle.Text.Documents"
