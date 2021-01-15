@@ -71,7 +71,7 @@ namespace Axle.Collections.Immutable
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public IImmutableHashSet<T> Clear()
+        public ImmutableHashSet<T> Clear()
         {
             #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableHashSet.CreateRange(Comparer, _impl.Clear());
@@ -79,6 +79,7 @@ namespace Axle.Collections.Immutable
             return ImmutableHashSet.Create(Comparer);
             #endif
         }
+        IImmutableHashSet<T> IImmutableHashSet<T>.Clear() => Clear();
 
         /// <inheritdoc />
         public bool Contains(T value) => _impl.Contains(value);
