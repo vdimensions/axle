@@ -51,7 +51,7 @@ namespace Axle.Collections.Immutable
         /// </summary>
         /// <param name="value">The object to remove from the list.</param>
         /// <returns>A new list with the specified object removed.</returns>
-        ImmutableList<T> Remove(T value);
+        IImmutableList<T> Remove(T value);
 
         /// <summary>Removes all the elements that match the conditions defined by the specified predicate.</summary>
         /// <param name="match">The delegate that defines the conditions of the elements to remove.</param>
