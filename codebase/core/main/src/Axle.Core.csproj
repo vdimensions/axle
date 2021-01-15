@@ -10,6 +10,7 @@
     <Description>Axle Framework Core Library</Description>
   </PropertyGroup>
 
+  <Import Project="../../../../ref/ext/Reference.System.Collections.Immutable.props" />
   <Import Project="../../../../ref/ext/Reference.System.Diagnostics.TraceSource.props" />
   <Import Project="../../../../ref/ext/Reference.System.Linq.props" />
   <Import Project="../../../../ref/ext/Reference.System.Threading.Tasks.props" />

@@ -21,7 +21,11 @@ namespace Axle.Collections.Generic
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
+    #if NETSTANDARD
+    public sealed class GenericList<T> : IList<T>, IList, IReadOnlyList<T>
+    #else
     public sealed class GenericList<T> : IList<T>, IList
+    #endif
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IList _underlyingCollection;
@@ -132,6 +136,13 @@ namespace Axle.Collections.Generic
 
         /// <inheritdoc />
         int ICollection<T>.Count => _underlyingCollection.Count;
+        #endregion
+        
+        #region IRadOnlyCollection Implementation
+        #if NETSTANDARD
+        /// <inheritdoc />
+        int IReadOnlyCollection<T>.Count => _underlyingCollection.Count;
+        #endif
         #endregion
 
         #region IList Implementation
