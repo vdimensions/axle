@@ -4,7 +4,7 @@ using System.Linq;
 using System.Diagnostics;
 using System.Reflection;
 using Axle.Reflection.Extensions;
-#if (UNITY_EDITOR || !UNITY_WEBGL)
+#if !UNITY_WEBGL
 using Axle.Threading;
 using Axle.Threading.ReaderWriterLock;
 #endif
@@ -43,7 +43,7 @@ namespace Axle.Reflection
         #if NET20
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected internal readonly ILock Lock = new MonitorLock();
-        #elif (UNITY_EDITOR || !UNITY_WEBGL)
+        #elif !UNITY_WEBGL
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         protected readonly IReadWriteLockProvider LockProvider = new ReadWriteLockProvider();
         #endif
@@ -133,7 +133,7 @@ namespace Axle.Reflection
         {
             get
             {
-                #if (UNITY_EDITOR || !UNITY_WEBGL)
+                #if !UNITY_WEBGL
                 T item = null;
                 #if NET20
                 return LockExtensions.Invoke(

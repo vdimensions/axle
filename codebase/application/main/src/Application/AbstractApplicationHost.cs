@@ -115,7 +115,7 @@ namespace Axle.Application
                 HostConfigFileName = hostConfigName ?? "host", 
                 AppConfigFileName = applicationConfigName ?? "application", 
                 environmentName, 
-                profiles, 
+                profiles ?? new string[0], 
                 out _hostConfiguration, 
                 out _appConfiguration);
         }

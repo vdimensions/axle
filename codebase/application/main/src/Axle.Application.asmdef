@@ -1,5 +1,6 @@
 {
     "name": "Axle.Application",
+    "rootNamespace": "Axle",
     "references": [
         "Axle.Caching",
         "Axle.Configuration",

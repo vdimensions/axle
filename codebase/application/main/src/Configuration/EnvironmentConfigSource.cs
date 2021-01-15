@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Environment;
-#if (UNITY_EDITOR || !UNITY_WEBGL)
+#if !UNITY_WEBGL
 using Axle.References;
 #endif
 using Axle.Text;
@@ -30,7 +30,7 @@ namespace Axle.Configuration
                     : Enumerable.Empty<IConfigSetting>();
         }
         
-        #if (UNITY_EDITOR || !UNITY_WEBGL)
+        #if !UNITY_WEBGL
         public static EnvironmentConfigSource Instance => Singleton<EnvironmentConfigSource>.Instance;
         #else
         public static readonly EnvironmentConfigSource Instance = new EnvironmentConfigSource();
