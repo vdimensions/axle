@@ -128,7 +128,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableList<T> Remove(T value, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.Remove(value, equalityComparer));
-        IImmutableList<T> IImmutableList<T>.Remove(int value, IEqualityComparer<T> equalityComparer) => Remove(value, equalityComparer);
+        IImmutableList<T> IImmutableList<T>.Remove(T value, IEqualityComparer<T> equalityComparer) => Remove(value, equalityComparer);
         #endif
         
         /// <inheritdoc />
@@ -142,7 +142,7 @@ namespace Axle.Collections.Immutable
             return ImmutableList.CreateRange(result);
             #endif
         }
-        IImmutableList<T> IImmutableList<T>.Remove(int value) => Remove(value);
+        IImmutableList<T> IImmutableList<T>.Remove(T value) => Remove(value);
 
         /// <inheritdoc />
         public ImmutableList<T> RemoveAll(Predicate<T> match)
@@ -176,7 +176,7 @@ namespace Axle.Collections.Immutable
             return ImmutableList.CreateRange(result);
             #endif
         }
-        IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count) => RemoveRange(items, count);
+        IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count) => RemoveRange(index, count);
 
         /// <inheritdoc />
         public ImmutableList<T> RemoveAt(int index)
@@ -189,7 +189,7 @@ namespace Axle.Collections.Immutable
             return ImmutableList.CreateRange(result);
             #endif
         }
-        IImmutableList<T> IImmutableList<T>.RemoveAt(int index) => RemoveAt(items);
+        IImmutableList<T> IImmutableList<T>.RemoveAt(int index) => RemoveAt(index);
 
         /// <inheritdoc />
         public ImmutableList<T> SetItem(int index, T value)
@@ -200,7 +200,7 @@ namespace Axle.Collections.Immutable
             return ImmutableList.CreateRange(new List<T>(_impl) {[index] = value});
             #endif
         }
-        IImmutableList<T> IImmutableList<T>.SetItem(int index, T value) => SetItem(items, value);
+        IImmutableList<T> IImmutableList<T>.SetItem(int index, T value) => SetItem(index, value);
 
         #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
