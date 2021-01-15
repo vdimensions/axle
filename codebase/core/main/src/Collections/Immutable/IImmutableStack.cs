@@ -8,7 +8,7 @@ namespace Axle.Collections.Immutable
     /// <typeparam name="T">
     /// The type of elements in the stack.
     /// </typeparam>
-    #if NETSTANDARD
+    #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
     public interface IImmutableStack<T> : IReadOnlyCollection<T>
     #else
     public interface IImmutableStack<T> : IEnumerable<T>

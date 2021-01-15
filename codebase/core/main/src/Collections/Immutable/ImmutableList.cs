@@ -10,7 +10,7 @@ namespace Axle.Collections.Immutable
     {
         public static ImmutableList<T> Create<T>()
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return new ImmutableList<T>(System.Collections.Immutable.ImmutableList.Create<T>());
             #else
             return new ImmutableList<T>(new List<T>());
@@ -21,7 +21,7 @@ namespace Axle.Collections.Immutable
         public static ImmutableList<T> CreateRange<T>(IEnumerable<T> items)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(items, nameof(items)));
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return new ImmutableList<T>(System.Collections.Immutable.ImmutableList.CreateRange<T>(items));
             #else
             return new ImmutableList<T>(new List<T>(items));
@@ -33,7 +33,7 @@ namespace Axle.Collections.Immutable
     {
         public static readonly ImmutableList<T> Empty = ImmutableList.Create<T>();
         
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         private readonly System.Collections.Immutable.ImmutableList<T> _impl;
 
         internal ImmutableList(System.Collections.Immutable.ImmutableList<T> impl)
@@ -56,14 +56,14 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> Clear()
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.Clear());
             #else
             return ImmutableList.Create<T>();
             #endif
         }
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public int IndexOf(T item, int index, int count, IEqualityComparer<T> equalityComparer) 
             => _impl.IndexOf(item, index, count, equalityComparer);
@@ -76,7 +76,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> Add(T value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.Add(value));
             #else
             return ImmutableList.CreateRange(new List<T>(_impl) {value});
@@ -86,7 +86,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> AddRange(IEnumerable<T> items)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.AddRange(items));
             #else
             var result = new List<T>(_impl);
@@ -98,7 +98,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> Insert(int index, T element)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.Insert(index, element));
             #else
             var result = new List<T>(_impl);
@@ -110,7 +110,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> InsertRange(int index, IEnumerable<T> items)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.InsertRange(index, items));
             #else
             var result = new List<T>(_impl);
@@ -119,7 +119,7 @@ namespace Axle.Collections.Immutable
             #endif
         }
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public IImmutableList<T> Remove(T value, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.Remove(value, equalityComparer));
@@ -128,7 +128,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableList<T> Remove(T value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.Remove(value));
             #else
             var result = new List<T>(_impl);
@@ -140,7 +140,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> RemoveAll(Predicate<T> match)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.RemoveAll(match));
             #else
             var result = new List<T>(_impl);
@@ -149,7 +149,7 @@ namespace Axle.Collections.Immutable
             #endif
         }
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public IImmutableList<T> RemoveRange(IEnumerable<T> items, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.RemoveRange(items, equalityComparer));
@@ -158,7 +158,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> RemoveRange(int index, int count)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.RemoveRange(index, count));
             #else
             var result = new List<T>(_impl);
@@ -170,7 +170,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> RemoveAt(int index)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.RemoveAt(index));
             #else
             var result = new List<T>(_impl);
@@ -182,14 +182,14 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableList<T> SetItem(int index, T value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableList.CreateRange(_impl.SetItem(index, value));
             #else
             return ImmutableList.CreateRange(new List<T>(_impl) {[index] = value});
             #endif
         }
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public IImmutableList<T> Replace(T oldValue, T newValue, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.Replace(oldValue, newValue, equalityComparer));

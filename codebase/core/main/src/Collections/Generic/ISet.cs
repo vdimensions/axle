@@ -8,7 +8,7 @@ namespace Axle.Collections.Generic
     /// <typeparam name="T">
     /// The type of the elements.
     /// </typeparam>
-    #if NETSTANDARD
+    #if NETSTANDARD || UNITY_2018_1_OR_NEWER
     public interface ISet<T> : ICollection<T>, IReadOnlySet<T>
     #else
     public interface ISet<T> : ICollection<T>

@@ -8,7 +8,7 @@ namespace Axle.Collections.Generic
     /// <typeparam name="T">
     /// The type of the elements.
     /// </typeparam>
-    #if NETSTANDARD
+    #if NETSTANDARD || UNITY_2018_1_OR_NEWER
     public interface IReadOnlySet<T> : IReadOnlyCollection<T>
     #else
     public interface IReadOnlySet<T> : IEnumerable<T>
@@ -23,7 +23,7 @@ namespace Axle.Collections.Generic
         bool Contains(T value);
 
         // TODO: implement for pre-netstandard
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <summary>
         /// Determines whether the set contains a specified value.
         /// </summary>

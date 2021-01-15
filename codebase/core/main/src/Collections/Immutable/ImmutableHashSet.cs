@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET35_OR_NEWER || UNITY_2018_1_OR_NEWER
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
@@ -15,7 +15,7 @@ namespace Axle.Collections.Immutable
     {
         public static ImmutableHashSet<T> Create<T>()
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return new ImmutableHashSet<T>(System.Collections.Immutable.ImmutableHashSet.Create<T>());
             #else
             return new ImmutableHashSet<T>(new HashSet<T>());
@@ -25,7 +25,7 @@ namespace Axle.Collections.Immutable
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer)));
             
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return new ImmutableHashSet<T>(System.Collections.Immutable.ImmutableHashSet.Create<T>(comparer));
             #else
             return new ImmutableHashSet<T>(new HashSet<T>(comparer));
@@ -38,7 +38,7 @@ namespace Axle.Collections.Immutable
             Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer)));
             Verifier.IsNotNull(Verifier.VerifyArgument(items, nameof(items)));
             
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return new ImmutableHashSet<T>(System.Collections.Immutable.ImmutableHashSet.CreateRange(comparer, items));
             #else
             return new ImmutableHashSet<T>(new HashSet<T>(items, comparer));
@@ -50,7 +50,7 @@ namespace Axle.Collections.Immutable
     {
         public static readonly ImmutableHashSet<T> Empty = ImmutableHashSet.Create<T>();
         
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         private readonly System.Collections.Immutable.ImmutableHashSet<T> _impl;
 
         internal ImmutableHashSet(System.Collections.Immutable.ImmutableHashSet<T> impl)
@@ -73,7 +73,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public IImmutableHashSet<T> Clear()
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableHashSet.CreateRange(Comparer, _impl.Clear());
             #else
             return ImmutableHashSet.Create(Comparer);
@@ -86,7 +86,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableHashSet<T> Add(T value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableHashSet.CreateRange<T>(Comparer, _impl.Add(value));
             #else
             var result = new HashSet<T>(_impl, Comparer);
@@ -102,7 +102,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableHashSet<T> Remove(T value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableHashSet.CreateRange(Comparer, _impl.Remove(value));
             #else
             var result = new HashSet<T>(_impl, Comparer);
@@ -115,7 +115,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableHashSet<T> IImmutableHashSet<T>.Remove(T value) => Remove(value);
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public bool TryGetValue(T equalValue, out T actualValue) => _impl.TryGetValue(equalValue, out actualValue);
         bool IReadOnlySet<T>.TryGetValue(T equalValue, out T actualValue) => TryGetValue(equalValue, out actualValue);
@@ -135,7 +135,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableHashSet<T> IImmutableHashSet<T>.Except(IEnumerable<T> other) => Except(other);
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public ImmutableHashSet<T> SymmetricExcept(IEnumerable<T> other)
         {
@@ -170,7 +170,7 @@ namespace Axle.Collections.Immutable
         public bool Overlaps(IEnumerable<T> other) => _impl.Overlaps(other);
 
         /// <inheritdoc />
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         public IEqualityComparer<T> Comparer => _impl.KeyComparer;
         #else
         public IEqualityComparer<T> Comparer => _impl.Comparer;

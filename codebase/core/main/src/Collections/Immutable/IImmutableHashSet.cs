@@ -30,7 +30,7 @@ namespace Axle.Collections.Immutable
         IImmutableHashSet<T> Except(IEnumerable<T> other);
 
         // TODO: implement for pre-netstandard as well
-        #if NETSTANDARD 
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <summary>Creates an immutable set that contains only elements that are present either in the current set or in the specified collection, but not both.</summary>
         /// <param name="other">The collection to compare to the current set.</param>
         /// <returns>A new set that contains the elements that are present only in the current set or in the specified collection, but not both.</returns>

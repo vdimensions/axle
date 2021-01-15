@@ -55,7 +55,7 @@ namespace Axle.Collections.Immutable
         /// <returns>A new immutable dictionary with the specified element removed; or this instance if the specified key cannot be found in the dictionary.</returns>
         IImmutableDictionary<TKey, TValue> Remove(TKey key);
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <summary>Determines whether the immutable dictionary contains the specified key/value pair.</summary>
         /// <param name="pair">The key/value pair to locate.</param>
         /// <returns>

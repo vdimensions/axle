@@ -7,7 +7,7 @@ namespace Axle.Collections.Immutable
     public static class ImmutableDictionary
     {
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>()
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             => new ImmutableDictionary<TKey, TValue>(System.Collections.Immutable.ImmutableDictionary.Create<TKey, TValue>());
         #else
         {
@@ -18,7 +18,7 @@ namespace Axle.Collections.Immutable
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>(IEqualityComparer<TKey> keyComparer)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(keyComparer, nameof(keyComparer)));
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return new ImmutableDictionary<TKey, TValue>(
                 System.Collections.Immutable.ImmutableDictionary.Create<TKey, TValue>(keyComparer));
             #else
@@ -28,7 +28,7 @@ namespace Axle.Collections.Immutable
         public static ImmutableDictionary<TKey, TValue> CreateRange<TKey, TValue>(
             IEqualityComparer<TKey> keyComparer,
             IEnumerable<KeyValuePair<TKey, TValue>> items)
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             => new ImmutableDictionary<TKey, TValue>(System.Collections.Immutable.ImmutableDictionary.CreateRange(keyComparer, items));
         #else
         {
@@ -58,7 +58,7 @@ namespace Axle.Collections.Immutable
     {
         public static readonly ImmutableDictionary<TKey, TValue> Empty = ImmutableDictionary.Create<TKey, TValue>();
         
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         private readonly System.Collections.Immutable.ImmutableDictionary<TKey, TValue> _impl;
 
         internal ImmutableDictionary(System.Collections.Immutable.ImmutableDictionary<TKey, TValue> impl)
@@ -80,7 +80,7 @@ namespace Axle.Collections.Immutable
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => _impl.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         public bool Contains(KeyValuePair<TKey, TValue> pair) => _impl.Contains(pair);
 
@@ -88,12 +88,12 @@ namespace Axle.Collections.Immutable
         public bool TryGetKey(TKey equalKey, out TKey actualKey) => _impl.TryGetKey(equalKey, out actualKey);
         #endif
         
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         #endif
         public bool ContainsKey(TKey key) => _impl.ContainsKey(key);
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <inheritdoc />
         #endif
         public bool TryGetValue(TKey key, out TValue value) => _impl.TryGetValue(key, out value);
@@ -101,7 +101,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> Clear()
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.Clear());
             #else
             return ImmutableDictionary.Create<TKey, TValue>(KeyComparer);
@@ -112,7 +112,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> Add(TKey key, TValue value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.Add(key, value));
             #else
             return ImmutableDictionary.CreateRange(
@@ -126,7 +126,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.AddRange(pairs));
             #else
             var result = new Dictionary<TKey, TValue>(_impl, KeyComparer);
@@ -143,7 +143,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> SetItem(TKey key, TValue value)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.SetItem(key, value));
             #else
             return ImmutableDictionary.CreateRange(
@@ -157,7 +157,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.SetItems(items));
             #else
             var result = new Dictionary<TKey, TValue>(_impl, KeyComparer);
@@ -174,7 +174,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> RemoveRange(IEnumerable<TKey> keys)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.RemoveRange(keys));
             #else
             var result = new Dictionary<TKey, TValue>(_impl, KeyComparer);
@@ -191,7 +191,7 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public ImmutableDictionary<TKey, TValue> Remove(TKey key)
         {
-            #if NETSTANDARD
+            #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.Remove(key));
             #else
             var result = new Dictionary<TKey, TValue>(_impl, KeyComparer);
@@ -219,7 +219,7 @@ namespace Axle.Collections.Immutable
         #endif
         public int Count => _impl.Count;
 
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         public IEqualityComparer<TKey> KeyComparer => _impl.KeyComparer;
         #else
         public IEqualityComparer<TKey> KeyComparer => _keyComparer;

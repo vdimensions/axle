@@ -38,7 +38,7 @@ namespace Axle.Collections.Immutable
         IImmutableList<T> InsertRange(int index, IEnumerable<T> items);
 
         // TODO: implement for pre-netstandard
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <summary>Removes the first occurrence of a specified object from this immutable list.</summary>
         /// <param name="value">The object to remove from the list.</param>
         /// <param name="equalityComparer">The equality comparer to use to locate <paramref name="value" />.</param>
@@ -59,7 +59,7 @@ namespace Axle.Collections.Immutable
         IImmutableList<T> RemoveAll(Predicate<T> match);
 
         // TODO: implement for pre-netstandard
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <summary>Removes the specified object from the list.</summary>
         /// <param name="items">The objects to remove from the list.</param>
         /// <param name="equalityComparer">The equality comparer to use to determine if <paramref name="items" /> match any objects in the list.</param>
@@ -85,7 +85,7 @@ namespace Axle.Collections.Immutable
         IImmutableList<T> SetItem(int index, T value);
 
         // TODO: implement for pre-netstandard
-        #if NETSTANDARD
+        #if NETSTANDARD || (UNITY_2018_1_OR_NEWER && !UNITY_WEBGL)
         /// <summary>Returns a new list with the first matching element in the list replaced with the specified element.</summary>
         /// <param name="oldValue">The element to be replaced.</param>
         /// <param name="newValue">The element to replace the first occurrence of <paramref name="oldValue" /> with</param>
