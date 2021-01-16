@@ -115,9 +115,9 @@ namespace Axle.Collections.Immutable
             #if NETSTANDARD
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.Add(key, value));
             #else
-            return ImmutableDictionary.CreateRange(
-                KeyComparer, 
-                new Dictionary<TKey, TValue>(_impl, KeyComparer) {{key, value}});
+            return new ImmutableDictionary<TKey, TValue>(
+                new Dictionary<TKey, TValue>(_impl, KeyComparer) {{key, value}}, 
+                KeyComparer);
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.Add(TKey key, TValue value) 
@@ -134,7 +134,7 @@ namespace Axle.Collections.Immutable
             {
                 result.Add(pair.Key, pair.Value);
             }
-            return ImmutableDictionary.CreateRange(KeyComparer, result);
+            return new ImmutableDictionary<TKey, TValue>(result, KeyComparer);
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs) 
@@ -146,9 +146,9 @@ namespace Axle.Collections.Immutable
             #if NETSTANDARD
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.SetItem(key, value));
             #else
-            return ImmutableDictionary.CreateRange(
-                KeyComparer, 
-                new Dictionary<TKey, TValue>(_impl, KeyComparer) {[key] = value});
+            return new ImmutableDictionary<TKey, TValue>(
+                new Dictionary<TKey, TValue>(_impl, KeyComparer) {[key] = value}, 
+                KeyComparer);
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItem(TKey key, TValue value) 
@@ -165,7 +165,7 @@ namespace Axle.Collections.Immutable
             {
                 result[pair.Key] = pair.Value;
             }
-            return ImmutableDictionary.CreateRange(KeyComparer, result);
+            return new ImmutableDictionary<TKey, TValue>(result, KeyComparer);
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items) 
@@ -182,7 +182,7 @@ namespace Axle.Collections.Immutable
             {
                 result.Remove(key);
             }
-            return ImmutableDictionary.CreateRange(KeyComparer, result);
+            return new ImmutableDictionary<TKey, TValue>(result, KeyComparer);
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.RemoveRange(IEnumerable<TKey> keys) 
@@ -196,7 +196,7 @@ namespace Axle.Collections.Immutable
             #else
             var result = new Dictionary<TKey, TValue>(_impl, KeyComparer);
             result.Remove(key);
-            return ImmutableDictionary.CreateRange(KeyComparer, result);
+            return new ImmutableDictionary<TKey, TValue>(result, KeyComparer);;
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.Remove(TKey key)
