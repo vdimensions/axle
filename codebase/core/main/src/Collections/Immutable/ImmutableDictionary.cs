@@ -165,7 +165,7 @@ namespace Axle.Collections.Immutable
             {
                 result[pair.Key] = pair.Value;
             }
-            return ImmutableDictionary.CreateRange(KeyComparer, result);
+            return new ImmutableDictionary<TKey, TValue>(result, KeyComparer);
             #endif
         }
         IImmutableDictionary<TKey, TValue> IImmutableDictionary<TKey, TValue>.SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items) 

@@ -11,7 +11,7 @@ namespace Axle.Collections.Immutable
     /// <typeparam name="TValue">
     /// The type of the values in the dictionary.
     /// </typeparam>
-    #if NETSTANDARD
+    #if NETSTANDARD || UNITY_2018_1_OR_NEWER
     public interface IImmutableDictionary<TKey, TValue> : IReadOnlyDictionary<TKey, TValue>
     #else
     public interface IImmutableDictionary<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>

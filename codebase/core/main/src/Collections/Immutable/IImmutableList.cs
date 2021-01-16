@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Axle.Collections.Immutable
 {
-    #if NETSTANDARD
+    #if NETSTANDARD || UNITY_2018_1_OR_NEWER
     public interface IImmutableList<T> : IReadOnlyList<T>
     #else
     public interface IImmutableList<T> : IEnumerable<T>
