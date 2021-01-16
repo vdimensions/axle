@@ -147,7 +147,7 @@ namespace Axle.Collections.Immutable
             return ImmutableDictionary.CreateRange(KeyComparer, _impl.SetItem(key, value));
             #else
             return new ImmutableDictionary<TKey, TValue>(
-                new Dictionary<TKey, TValue>(_impl, KeyComparer) {[key] = value}), 
+                new Dictionary<TKey, TValue>(_impl, KeyComparer) {[key] = value}, 
                 KeyComparer);
             #endif
         }
