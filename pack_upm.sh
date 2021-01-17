@@ -13,7 +13,7 @@ dirs=(
     "codebase/text.documents/yaml"
 )
 base_dir=`pwd`
-version="1.10.1"
+version="1.10.2"
 registry="http://192.168.1.178:8373"
 
 for dir in ${dirs[@]}; do
