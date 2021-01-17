@@ -1,0 +1,28 @@
+{
+    "name": "Axle.Application.Unity.Editor",
+    "rootNamespace": "Axle.Application.Unity.Editor",
+    "references": [
+        "Axle.Application",
+        "Axle.Application.Unity",
+        "Axle.Caching",
+        "Axle.Configuration",
+        "Axle.Core",
+        "Axle.Resources",
+        "Axle.Resources.Properties",
+        "Axle.Resources.Yaml",
+        "Axle.Text.Documents",
+        "Axle.Text.Documents.Properties",
+        "Axle.Text.Documents.Yaml"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

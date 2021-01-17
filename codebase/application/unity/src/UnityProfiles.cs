@@ -18,6 +18,9 @@ namespace Axle.Application.Unity
             {
                 yield return UnityProfiles.Console;
             }
+            #if UNITY_WEBGL
+            yield return UnityProfiles.WebGL;
+            #endif
             yield return UnityEngine.Application.platform.ToString();
         }
         
@@ -25,5 +28,6 @@ namespace Axle.Application.Unity
         public const string Console = "Console";
         public const string Mobile = "Mobile";
         public const string Desktop = "Desktop";
+        public const string WebGL = "WebGL";
     }
 }
