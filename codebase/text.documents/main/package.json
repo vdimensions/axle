@@ -1,6 +1,6 @@
 {
   "name": "com.vdimensions.axle.text.documents",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "Axle Framework support for text documents",
   "unity": "2018.1",
   "unityRelease": "1f1",

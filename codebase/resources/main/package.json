@@ -1,6 +1,6 @@
 {
   "name": "com.vdimensions.axle.resources",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "Axle resource management library",
   "unity": "2018.1",
   "unityRelease": "1f1",

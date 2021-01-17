@@ -1,6 +1,6 @@
 {
   "name": "com.vdimensions.axle.caching",
-  "version": "1.10.0",
+  "version": "1.10.1",
   "description": "Axle framework caching library",
   "unity": "2018.1",
   "unityRelease": "1f1",
