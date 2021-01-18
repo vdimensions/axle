@@ -10,6 +10,9 @@ namespace Axle.Conversion
     /// <typeparam name="TDest">
     /// The destination type of the conversion.
     /// </typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    [System.Serializable]
+    #endif
     public abstract class DelegatingTwoWayConverter<TSrc, TDest> : ITwoWayConverter<TSrc, TDest>
     {
         private readonly ITwoWayConverter<TSrc, TDest> _impl;

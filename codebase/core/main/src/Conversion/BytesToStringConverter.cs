@@ -1,12 +1,9 @@
 ﻿using System.Diagnostics;
 using System.Text;
-
 using Axle.Verification;
-
 #if NETSTANDARD1_0
 using Axle.Text.Extensions.Encoding;
 #endif
-
 
 namespace Axle.Conversion
 {
