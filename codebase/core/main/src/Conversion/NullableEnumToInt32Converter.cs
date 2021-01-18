@@ -7,11 +7,11 @@ namespace Axle.Conversion
     /// and their <see cref="int"/> representation.
     /// </summary>
     /// <see cref="EnumToInt32Converter{T}"/>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public sealed class NullableEnumToInt32Converter<T> : DelegatingTwoWayConverter<T?, int?> 
-        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
         where T: struct, IComparable, IConvertible, IFormattable
         #else
         where T: struct, IComparable, IFormattable

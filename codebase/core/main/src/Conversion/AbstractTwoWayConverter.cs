@@ -8,7 +8,7 @@ namespace Axle.Conversion
     /// </summary>
     /// <typeparam name="TS">The source type of the conversion.</typeparam>.
     /// <typeparam name="TD">The destination type of the conversion</typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractTwoWayConverter<TS, TD> : AbstractConverter<TS, TD>, ITwoWayConverter<TS, TD>

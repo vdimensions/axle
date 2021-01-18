@@ -10,6 +10,9 @@ namespace Axle.Conversion
     /// <typeparam name="TDest">
     /// The destination type of the conversion.
     /// </typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+    [System.Serializable]
+    #endif
     public abstract class DelegatingConverter<TSrc, TDest> : IConverter<TSrc, TDest>
     {
         private readonly IConverter<TSrc, TDest> _impl;

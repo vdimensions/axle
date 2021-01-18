@@ -13,6 +13,9 @@ namespace Axle.Conversion
     /// The target type of the conversion, same as the target type of the original converter.
     /// This must be a reference type.
     /// </typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+    [System.Serializable]
+    #endif
     public sealed class NullableToClassTwoWayConverter<TSource, TTarget> : ITwoWayConverter<TSource?, TTarget>
         where TSource: struct
         where TTarget: class

@@ -18,7 +18,7 @@ namespace Axle.Conversion
     /// The destination type for the reversed converter (same as the source type of the underlying
     /// <see cref="ITwoWayConverter{TD,TS}"/>.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public sealed class ReverseConverter<TS, TD> : ITwoWayConverter<TS, TD>

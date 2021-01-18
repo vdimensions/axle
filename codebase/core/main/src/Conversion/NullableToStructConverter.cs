@@ -15,6 +15,9 @@ namespace Axle.Conversion
     /// The target type of the conversion, same as the target type of the original converter.
     /// This must be a value type.
     /// </typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
+    [Serializable]
+    #endif
     public sealed class NullableToStructConverter<TSource, TTarget> : IConverter<Nullable<TSource>, Nullable<TTarget>>
         where TSource: struct
         where TTarget: struct

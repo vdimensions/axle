@@ -14,7 +14,7 @@ namespace Axle.Conversion
     /// A converter class that can turn a byte sequence to a <see cref="string">string</see> representation, using a
     /// specified <see cref="System.Text.Encoding"/>
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public sealed class BytesToStringConverter : AbstractTwoWayConverter<byte[], string>

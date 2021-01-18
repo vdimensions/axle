@@ -1,6 +1,5 @@
 ﻿using System;
 
-
 namespace Axle.Conversion
 {
     /// <summary>
@@ -12,7 +11,7 @@ namespace Axle.Conversion
     /// <typeparam name="TD">
     /// The destination type of the conversion.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [Serializable]
     #endif
     public abstract class AbstractConverter<TS, TD> : IConverter<TS, TD>

@@ -24,7 +24,7 @@ namespace Axle.Conversion
     /// <typeparam name="TResult">
     /// The resulting type of the conversion, produced by converting the intermediate object.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     internal sealed class ChainedConverter<T, TIntermediate, TResult> : AbstractConverter<T,TResult>

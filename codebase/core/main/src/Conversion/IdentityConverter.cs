@@ -5,7 +5,7 @@
     /// an identity converter is an implementation of the <see cref="IConverter{T, T}"/> interface
     /// that returns the same object instance which was passed for conversion.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public sealed class IdentityConverter<T> : ITwoWayConverter<T, T>

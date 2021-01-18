@@ -6,7 +6,7 @@ namespace Axle.Conversion
     /// A converter class that can turn a <see cref="string">string</see> instance to a <see cref="CharSequence"/>
     /// instance and vice-versa.
     /// </summary>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
     [System.Serializable]
     #endif
     public sealed class StringToCharSequenceConverter : AbstractTwoWayConverter<string, CharSequence>
