@@ -3,9 +3,7 @@ using System;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK || UNITY_2018_1_OR_NEWER
 using System.Runtime.Serialization;
 #endif
-
 using Axle.Verification;
-
 
 namespace Axle.Conversion
 {
