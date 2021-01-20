@@ -13,6 +13,9 @@ namespace Axle.Conversion
     /// <typeparam name="T2">
     /// The target type to convert a <typeparamref name="T1"/> instance to (and back)
     /// </typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    [System.Serializable]
+    #endif
     internal sealed class CombinedConverter<T1, T2> : ITwoWayConverter<T1, T2>
     {
         private readonly IConverter<T1, T2> _sourceToDestinationConverter;
