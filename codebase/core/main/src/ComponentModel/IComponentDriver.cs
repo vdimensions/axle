@@ -7,7 +7,7 @@ namespace Axle.ComponentModel
     }
     public interface IComponentDriver<T> : IComponentDriver
     {
-        T Resolve();
+        new T Resolve();
     }
 }
 #endif

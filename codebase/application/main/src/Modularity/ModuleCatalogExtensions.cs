@@ -69,6 +69,7 @@ namespace Axle.Modularity
                         .ToArray();
                 var utilizedModules = moduleCatalog.GetUtilizedModules(moduleType);
                 var utilizedByModules = moduleCatalog.GetUtilizedByModules(moduleType);
+                var configurationInfo = moduleCatalog.GetConfigurationInfo(moduleType);
                 var module = new ModuleInfo(
                         moduleType,
                         moduleCatalog.GetInitMethod(moduleType),
@@ -79,6 +80,7 @@ namespace Axle.Modularity
                         utilizedModules,
                         utilizedByModules,
                         moduleCatalog.GetCommandLineTrigger(moduleType),
+                        configurationInfo,
                         requiredModules);
                 yield return module;
             }

@@ -7,7 +7,7 @@
     public interface ITwoWayConverter<TSource, TTarget> : IConverter<TSource, TTarget>
     {
         /// <summary>
-        /// Performs the reverse conversion operation of the <see cref="ITwoWayConverter{TSource,TTarget}.Convert"/> method.
+        /// Performs the reverse conversion operation of the inherited <see cref="IConverter{TSource,TTarget}.Convert"/> method.
         /// </summary>
         /// <param name="obj">
         /// The <typeparamref name="TTarget"/> instance to be re-converted back to an instance of <typeparamref name="TSource"/>.
@@ -36,7 +36,7 @@
         IConverter<TTarget, TSource> Invert();
 
         /// <summary>
-        /// Performs the reverse conversion operation of the <see cref="ITwoWayConverter{TSource,TTarget}.TryConvert"/> method.
+        /// Performs the reverse conversion operation of the inherited <see cref="IConverter{TSource,TTarget}.TryConvert"/> method.
         /// </summary>
         /// <param name="obj">
         /// The <typeparamref name="TTarget"/> instance to be re-converted back to an instance of <typeparamref name="TSource"/>.

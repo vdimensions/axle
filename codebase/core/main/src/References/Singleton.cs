@@ -19,7 +19,8 @@ namespace Axle.References
             var constructor = Singleton.GetSingletonConstructor(type);
             if (constructor == null)
             {
-                throw new InvalidOperationException(string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
+                throw new InvalidOperationException(
+                    string.Format(Singleton.CandidateConstructorNotFoundMessageFormat, type.FullName));
             }
             var instance = (T) constructor.Invoke(new object[0]);
             #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -57,7 +58,8 @@ namespace Axle.References
                 // guarantees single instance
                 if (_instance != null)
                 {
-                    throw new InvalidOperationException("Cannot create more than one instance of singleton type " + _instance.GetType().FullName);
+                    throw new InvalidOperationException(
+                        "Cannot create more than one instance of singleton type " + _instance.GetType().FullName);
                 }
             }
         }
@@ -65,9 +67,13 @@ namespace Axle.References
         public static implicit operator T(Singleton<T> singleton) => singleton.Value;
     }
 
+    /// <summary>
+    /// A static class containing utility methods for working with singleton objects.
+    /// </summary>
     public static class Singleton
     {
-        internal const string CandidateConstructorNotFoundMessageFormat = "The class '{0}' has one or more public constructors and cannot be used with the singleton pattern!";
+        internal const string CandidateConstructorNotFoundMessageFormat = 
+            "The class '{0}' has one or more public constructors and cannot be used with the singleton pattern!";
 
         internal static ConstructorInfo GetSingletonConstructor(Type type)
         {
@@ -124,7 +130,7 @@ namespace Axle.References
             return ((IReference) res)?.Value;
         }
 
-        public static T GetSingletonInstance<T>(Type type) { return (T) GetSingletonInstance(type); }
+        public static T GetSingletonInstance<T>(Type type) => (T) GetSingletonInstance(type);
     }
 }
 #endif

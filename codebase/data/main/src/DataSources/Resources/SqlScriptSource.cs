@@ -15,13 +15,14 @@ namespace Axle.Data.DataSources.Resources
 
         internal SqlScriptSource(string name, IDictionary<string, string> scripts)
         {
-            this.Name = StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
+            Name = StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(name, nameof(name)));
             _scripts = Verifier.IsNotNull(Verifier.VerifyArgument(scripts, nameof(scripts))).Value;
         }
 
         private string GetScript(string dialectName)
         {
-            if (_scripts.TryGetValue(dialectName.VerifyArgument(nameof(dialectName)).IsNotNullOrEmpty(), out var result) || _scripts.TryGetValue(string.Empty, out result))
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(dialectName, nameof(dialectName)));
+            if (_scripts.TryGetValue(dialectName, out var result) || _scripts.TryGetValue(string.Empty, out result))
             {
                 return result;
             }
@@ -30,7 +31,7 @@ namespace Axle.Data.DataSources.Resources
 
         public string ResolveScript(IDbServiceProvider dbProvider)
         {
-            dbProvider.VerifyArgument(nameof(dbProvider)).IsNotNull();
+            Verifier.IsNotNull(Verifier.VerifyArgument(dbProvider, nameof(dbProvider)));
             return GetScript(dbProvider.DialectName);
         }
 

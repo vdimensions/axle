@@ -7,7 +7,8 @@ namespace Axle.Extensions.DateTime
     using DateTime = System.DateTime;
 
     /// <summary>
-    /// A static class containing <see cref="DateTime"/> extensions methods for working with timezones.
+    /// A <see langword="static"/> class containing <see cref="DateTime"/> extensions 
+    /// methods for working with timezones.
     /// </summary>
     public static class DateTimeTimezoneExtensions
     {

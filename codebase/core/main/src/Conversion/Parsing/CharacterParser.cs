@@ -26,21 +26,24 @@ namespace Axle.Conversion.Parsing
 
         /// <summary>
         /// Converts the specified string representation of a logical value to its <see cref="char"/> equivalent.
-        /// A return value indicates whether the conversion succeeded or failed.
+        /// A <see cref="Boolean">boolean</see> return value indicates whether the conversion succeeded or failed.
         /// </summary>
         /// <param name="value">
         /// A string containing the value to convert.
         /// </param>
-        /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific format recognition.</param>
+        /// <param name="formatProvider">A format provider used to assist parsing and/or provide culture-specific 
+        /// format recognition.</param>
         /// <param name="output">
         /// When this method returns, contains the <see cref="char"/> value equivalent to
         /// the string passed in <paramref name="value" />, if the conversion succeeded, or the default
         /// value for <see cref="char"/> if the conversion has failed.
-        /// The conversion fails if the <paramref name="value"/> parameter is null or is not of the correct format.
+        /// The conversion fails if the <paramref name="value"/> parameter is <c><see langword="null"/></c> or is not 
+        /// of the correct format.
         /// This parameter is passed uninitialized.
         /// </param>
         /// <returns>
-        /// true if value was converted successfully; otherwise, false.
+        /// <c><see langword="true"/></c> if value was converted successfully;
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public override bool TryParse(string value, IFormatProvider formatProvider, out char output) => char.TryParse(value, out output);
     }

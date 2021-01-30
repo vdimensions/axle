@@ -58,7 +58,9 @@ namespace Axle.Threading.Extensions.Tasks
         /// resulting collection to execute them.
         /// </remarks>
         /// </summary>
-        /// <param name="tasks">A collection of delegates to be executed in parallel.</param>
+        /// <param name="tasks">
+        /// A collection of delegates to be executed in parallel.
+        /// </param>
         /// <returns>
         /// A collection of <see cref="Task">tasks</see> created from each delegate supplied by the <paramref name="tasks"/> collection.
         /// </returns>
@@ -66,6 +68,24 @@ namespace Axle.Threading.Extensions.Tasks
         {
             return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => new Task(x));
         }
+        /// <summary>
+        /// Creates a collection of <see cref="Task">tasks</see> from the supplied collection of delegates
+        /// and <see cref="CancellationToken"/>.
+        /// <remarks>
+        /// The created tasks are not yet started. Use the <see cref="Start(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task})">Start</see>
+        /// or the <see cref="RunSynchronously(System.Collections.Generic.IEnumerable{System.Threading.Tasks.Task})">RunSynchronously</see> methods upon the 
+        /// resulting collection to execute them.
+        /// </remarks>
+        /// </summary>
+        /// <param name="tasks">
+        /// A collection of delegates to be executed in parallel.
+        /// </param>
+        /// <param name="cancellationToken">
+        /// The <see cref="CancellationToken"/> the retutned tasks will observe.
+        /// </param>
+        /// <returns>
+        /// A collection of <see cref="Task">tasks</see> created from each delegate supplied by the <paramref name="tasks"/> collection.
+        /// </returns>
         public static IEnumerable<Task> Parallelize(this IEnumerable<Action> tasks, CancellationToken cancellationToken)
         {
             return tasks.VerifyArgument(nameof(tasks)).IsNotNull().Value.Select(x => new Task(x, cancellationToken));

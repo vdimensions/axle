@@ -5,8 +5,14 @@ namespace Axle.Logging
 {
     internal sealed class DefaultLoggingServiceProvider : ILoggingServiceProvider
     {
-        public ILogger Create(Type targetType) => new DefaultLogger(targetType);
+        [Obsolete]
+        ILogger ILoggingServiceProvider.Create(Type targetType) => CreateLogger(targetType);
+        
+        [Obsolete]
+        ILogger ILoggingServiceProvider.Create<T>() => CreateLogger<T>();
 
-        public ILogger Create<T>() => new DefaultLogger(typeof(T));
+        public ILogger CreateLogger(Type targetType) => new DefaultLogger(targetType);
+
+        public ILogger CreateLogger<T>() => new DefaultLogger(typeof(T));
     }
 }

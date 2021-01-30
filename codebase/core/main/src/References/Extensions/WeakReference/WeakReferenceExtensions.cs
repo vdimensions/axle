@@ -5,7 +5,8 @@ using Axle.Verification;
 namespace Axle.References.Extensions.WeakReference
 {
     /// <summary>
-    /// A static class containing common extensions to the <see cref="System.WeakReference"/> type.
+    /// A <see langword="static"/> class containing common extensions to the 
+    /// <see cref="System.WeakReference"/> type.
     /// </summary>
     public static class WeakReferenceExtensions
     {
@@ -19,7 +20,8 @@ namespace Axle.References.Extensions.WeakReference
         /// When this method returns, contains the target object, if it is available. This parameter is treated as uninitialized.
         /// </param>
         /// <returns>
-        /// <c>true</c> if the target was retrieved; <c>false</c> otherwise.
+        /// <c><see langword="true"/></c> if the target was retrieved; 
+        /// <c><see langword="false"/></c> otherwise.
         /// </returns>
         public static bool TryGetTarget(this System.WeakReference current, out object target)
         {

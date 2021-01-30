@@ -14,6 +14,12 @@ namespace Axle.Environment
     /// </summary>
     public partial interface IRuntime
     {
+        /// <summary>
+        /// Gets the assemblies that have been loaded into the execution context by the current app domain.
+        /// </summary>
+        /// <returns>
+        /// A collection of <see cref="Assembly"/> objects.
+        /// </returns>
         IEnumerable<Assembly> GetAssemblies();
 
         /// <summary>

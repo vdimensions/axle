@@ -8,7 +8,8 @@ namespace Axle.Extensions.DateTime
     using DateTime = System.DateTime;
 
     /// <summary>
-    /// A static class that contains extension methods for the <see cref="DateTime"/> <see langword="struct"/>
+    /// A <see langword="static"/> class that contains extension methods for the 
+    /// <see cref="DateTime"/> <see langword="struct"/>
     /// </summary>
     public static class DateTimeExtensions
     {
@@ -273,6 +274,24 @@ namespace Axle.Extensions.DateTime
             this
             #endif
             DateTime dateTime) => ChangeKind(dateTime, DateTimeKind.Utc);
+
+        /// <summary>
+        /// Convers the value of the current <paramref name="dateTime"/> to its ISO 8601 string representation.
+        /// </summary>
+        /// <param name="dateTime">
+        /// The <see cref="DateTime"/> value to convert to <see cref="string"/>
+        /// </param>
+        /// <returns>
+        /// Am ISO 8601 string representation of the current <paramref name="dateTime"/> value.
+        /// </returns>
+        public static string ToISOString(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            DateTime dateTime)
+        {
+            return dateTime.ToString("yyyy-MM-dd'T'HH:mm:ss.FFFK", CultureInfo.InvariantCulture);
+        }
     }
 }
 #endif

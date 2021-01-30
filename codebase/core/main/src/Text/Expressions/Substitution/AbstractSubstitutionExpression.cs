@@ -24,13 +24,14 @@ namespace Axle.Text.Expressions.Substitution
         private readonly string _exprStart;
         private readonly string _exprEnd;
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        private const RegexOptions Options = RegexOptions.Compiled|RegexOptions.CultureInvariant|RegexOptions.IgnoreCase|RegexOptions.Multiline|RegexOptions.ExplicitCapture;
-        #else
-        private const RegexOptions Options = RegexOptions.CultureInvariant|RegexOptions.IgnoreCase|RegexOptions.Multiline|RegexOptions.ExplicitCapture;
-        #endif
+        private const RegexOptions Options = 
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+            RegexOptions.Compiled|
+            #endif
+            RegexOptions.CultureInvariant|RegexOptions.IgnoreCase|RegexOptions.Multiline|RegexOptions.ExplicitCapture;
 
         private readonly Regex _expression;
+        private readonly Regex _fallbackSplitExpression = new Regex(@"((?:(?<!\\)\:)+)", Options);
 
         private static string[] GetCaptures(Regex regex, string input, StringComparer comparer)
         {
@@ -75,25 +76,40 @@ namespace Axle.Text.Expressions.Substitution
             {
                 foreach (var token in groupCaptures)
                 {
-                    var nakedToken = token.Substring(_exprStart.Length, token.Length - (_exprStart.Length + _exprEnd.Length));
-                    var ix = result.IndexOf(token, StringComparison.Ordinal);
-                    if (ix < 0 || !sp.TrySubstitute(nakedToken, out var replacement))
+                    var nakedToken = ExtractTokenValue(token);
+                    var replacementStartIndex = result.IndexOf(token, StringComparison.Ordinal);
+                    var resolved = false;
+                    if (replacementStartIndex > 0)
                     {
-                        #if NETSTANDARD || NET35_OR_NEWER
-                        unresolved.Add(token);
-                        #else
-                        unresolved.Add(token, token);
-                        #endif
-                        continue;
+                        resolved = false;
                     }
-
-                    var sb = new StringBuilder();
-                    sb.Append(result.Substring(0, ix));
-                    sb.Append(replacement);
-                    sb.Append(result.Substring(ix + token.Length));
-                    result = sb.ToString();
+                    var tokenAndFallbacks = GetTokenAndFallbacks(nakedToken);
+                    foreach (var tokenValue in tokenAndFallbacks)
+                    {
+                        if (sp.TrySubstitute(tokenValue, out var replacement))
+                        {
+                            result = ReplaceToken(result, replacement, replacementStartIndex, token);
+                            resolved = true;
+                            break;
+                        }
+                    }
+                    if (!resolved)
+                    {
+                        if (tokenAndFallbacks.Length > 1)
+                        {
+                            result = ReplaceToken(result, tokenAndFallbacks[tokenAndFallbacks.Length - 1], replacementStartIndex, token);
+                            resolved = true;
+                        }
+                        else
+                        {
+                            #if NETSTANDARD || NET35_OR_NEWER
+                            unresolved.Add(token);
+                            #else
+                            unresolved.Add(token, token);
+                            #endif
+                        }
+                    }
                 }
-
                 groupCaptures = GetCaptures(_expression, result, cmp);
             }
             #if NETSTANDARD || NET35_OR_NEWER
@@ -103,6 +119,25 @@ namespace Axle.Text.Expressions.Substitution
             #endif
 
             return result;
+        }
+
+        protected virtual string ExtractTokenValue(string token) => token.Substring(_exprStart.Length, token.Length - (_exprStart.Length + _exprEnd.Length));
+
+        private static string ReplaceToken(string text, string replacement, int replacementStartIndex, string token)
+        {
+            var sb = new StringBuilder();
+            sb.Append(text.Substring(0, replacementStartIndex));
+            sb.Append(replacement);
+            sb.Append(text.Substring(replacementStartIndex + token.Length));
+            return sb.ToString();
+        }
+
+        protected virtual string[] GetTokenAndFallbacks(string nakedToken)
+        {
+            return Enumerable.ToArray(
+                    Enumerable.Select(
+                        _fallbackSplitExpression.Split(nakedToken), 
+                        x => x.Replace(@"\:", ":")));
         }
     }
 }

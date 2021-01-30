@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Text;
 
@@ -10,7 +10,8 @@ namespace Axle.Globalization.Extensions.TextInfo
     using TextInfo = System.Globalization.TextInfo;
 
     /// <summary>
-    /// A static class providing extension methods for <see cref="System.Globalization.TextInfo"/> instances.
+    /// A <see langword="static"/> class providing extension methods for 
+    /// <see cref="System.Globalization.TextInfo"/> instances.
     /// </summary>
     public static class TextInfoExtensions
     {
@@ -25,9 +26,14 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// A reference to the encoding for the OEM code page of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.OEMCodePage"/>
-        public static Encoding GetOemEncoding(this TextInfo textInfo)
+        public static Encoding GetOemEncoding(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TextInfo textInfo)
         {
-            return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.OEMCodePage);
+            Verifier.IsNotNull(Verifier.VerifyArgument(textInfo, nameof(textInfo)));
+            return Encoding.GetEncoding(textInfo.OEMCodePage);
         }
 
         /// <summary>
@@ -40,9 +46,14 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// A reference to the encoding for the EBCDIC codepage of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.EBCDICCodePage"/>
-        public static Encoding GetEbcdicEncoding(this TextInfo textInfo)
+        public static Encoding GetEbcdicEncoding(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TextInfo textInfo)
         {
-            return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.EBCDICCodePage);
+            Verifier.IsNotNull(Verifier.VerifyArgument(textInfo, nameof(textInfo)));
+            return Encoding.GetEncoding(textInfo.EBCDICCodePage);
         }
 
         /// <summary>
@@ -55,9 +66,14 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// A reference to the encoding for the ANSI codepage of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.ANSICodePage"/>
-        public static Encoding GetAnsiEncoding(this TextInfo textInfo)
+        public static Encoding GetAnsiEncoding(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TextInfo textInfo)
         {
-            return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.ANSICodePage);
+            Verifier.IsNotNull(Verifier.VerifyArgument(textInfo, nameof(textInfo)));
+            return Encoding.GetEncoding(textInfo.ANSICodePage);
         }
 
         /// <summary>
@@ -70,9 +86,14 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// A reference to the encoding for the Mac codepage of the writing system represented by the current <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.MacCodePage"/>
-        public static Encoding GetMacEncoding(this TextInfo textInfo)
+        public static Encoding GetMacEncoding(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TextInfo textInfo)
         {
-            return Encoding.GetEncoding(textInfo.VerifyArgument(nameof(textInfo)).Value.MacCodePage);
+            Verifier.IsNotNull(Verifier.VerifyArgument(textInfo, nameof(textInfo)));
+            return Encoding.GetEncoding(textInfo.MacCodePage);
         }
         #endif
 
@@ -99,14 +120,18 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// <exception cref="ArgumentNullException">
         /// <paramref name="textInfo"/> is <c>null</c>.
         /// </exception>
-        public static Encoding GetEncoding(this TextInfo textInfo)
+        public static Encoding GetEncoding(
+            #if NETSTANDARD || NET35_OR_NEWER
+            this
+            #endif
+            TextInfo textInfo)
         {
-            return string.IsNullOrEmpty(textInfo.VerifyArgument(nameof(textInfo)).Value.CultureName) ? Encoding.UTF8 : GetOemEncoding(textInfo);
+            Verifier.IsNotNull(Verifier.VerifyArgument(textInfo, nameof(textInfo)));
+            return string.IsNullOrEmpty(textInfo.CultureName) ? Encoding.UTF8 : GetOemEncoding(textInfo);
         }
         #else
         /// <summary>
         /// Gets the default encoding for the writing system represented by the current <see cref="TextInfo"/>. 
-        /// This would be equal to encoding for the <see cref="TextInfo.OEMCodePage"/> for non-invariant cultures.
         /// In case the current <see cref="TextInfo"/> represents a culture-invariant writing system, this method
         /// returns <see cref="Encoding.UTF8"/>. 
         /// </summary>
@@ -121,11 +146,11 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// <seealso cref="TextInfo"/>
         /// <seealso cref="System.Globalization.CultureInfo.InvariantCulture" />
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="textInfo"/> is <c>null</c>.
+        /// <paramref name="textInfo"/> is <c><see langword="null"/></c>.
         /// </exception>
         public static Encoding GetEncoding(this TextInfo textInfo)
         {
-            textInfo.VerifyArgument(nameof(textInfo));
+            Verifier.IsNotNull(Verifier.VerifyArgument(textInfo, nameof(textInfo)));
             return Encoding.UTF8;
         }
         #endif

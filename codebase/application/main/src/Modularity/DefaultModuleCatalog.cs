@@ -31,12 +31,16 @@ namespace Axle.Modularity
             return types;
         }
 
-        private static IList<TAttribute> CollectAttributes<TAttribute>(IEnumerable<Type> types, IList<TAttribute> attributes, bool allowInheritingTypes = false) where TAttribute: Attribute
+        private static IList<TAttribute> CollectAttributes<TAttribute>(
+                IEnumerable<Type> types, 
+                IList<TAttribute> attributes, 
+                bool allowInheritingAttributeTypes = false) 
+            where TAttribute: Attribute
         {
             foreach (var type in types)
             {
-                var introspector = new DefaultIntrospector(type);
-                var introspectedAttributes = allowInheritingTypes
+                var introspector = new TypeIntrospector(type);
+                var introspectedAttributes = allowInheritingAttributeTypes
                     ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
                     : introspector.GetAttributes<TAttribute>();
                 for (var i = 0; i < introspectedAttributes.Length; i++)
@@ -80,54 +84,80 @@ namespace Axle.Modularity
                 {
                     continue;
                 }
-
                 result.Add(types[i]);
             }
-
             return result.ToArray();
         }
 
         public ModuleMethod GetInitMethod(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleInitAttribute>(true));
-            return m == null ? null : new ModuleMethod(m);
+            var introspector = new TypeIntrospector(moduleType);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleInitAttribute>(true));
+            return method == null ? null : new ModuleMethod(method);
         }
 
         public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
         {
-            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
-            return introspectors
-                   .SelectMany(i =>
-                       i.GetMethods(MemberScanOptions)
-                        .Select(x => new { Method = x, Attribute = x.GetAttributes<ModuleDependencyInitializedAttribute>().Select(a => a.Attribute).Cast<ModuleDependencyInitializedAttribute>().SingleOrDefault() })
+            return TypeAndInterfaces(moduleType, new HashSet<Type>())
+                    .Select(t => new TypeIntrospector(t))
+                    .SelectMany(introspector => introspector
+                        .GetMethods(MemberScanOptions)
+                        .Select(method => 
+                            new
+                            {
+                                Method = method, 
+                                Attribute = method
+                                    .GetAttributes<ModuleDependencyInitializedAttribute>()
+                                    .Select(a => a.Attribute)
+                                    .Cast<ModuleDependencyInitializedAttribute>()
+                                    .SingleOrDefault()
+                            })
                         .Where(x => x.Attribute != null)
                         .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
-                   .ToArray();
+                    .ToArray();
         }
 
         public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
         {
-            var introspectors = TypeAndInterfaces(moduleType, new HashSet<Type>()).Select(t => new DefaultIntrospector(t));
-            return introspectors
-                   .SelectMany(i => 
-                       i.GetMethods(MemberScanOptions)
-                        .Select(x => new { Method = x, Attribute = x.GetAttributes<ModuleDependencyTerminatedAttribute>().Select(a => a.Attribute).Cast<ModuleDependencyTerminatedAttribute>().SingleOrDefault() })
+            return TypeAndInterfaces(moduleType, new HashSet<Type>())
+                    .Select(t => new TypeIntrospector(t))
+                    .SelectMany(introspector => introspector
+                        .GetMethods(MemberScanOptions)
+                        .Select(method => 
+                            new
+                            {
+                                Method = method, 
+                                Attribute = method
+                                    .GetAttributes<ModuleDependencyTerminatedAttribute>()
+                                    .Select(a => a.Attribute)
+                                    .Cast<ModuleDependencyTerminatedAttribute>()
+                                    .SingleOrDefault()
+                            })
                         .Where(x => x.Attribute != null)
                         .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
-                   .ToArray();
+                    .ToArray();
         }
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
+            var introspector = new TypeIntrospector(moduleType);
             var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
             return m == null ? null : new ModuleEntryMethod(m);
         }
 
+        public ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType)
+        {
+            return CollectAttributes(
+                    TypeAndInterfaces(moduleType, new HashSet<Type>()),
+                    new List<ModuleConfigSectionAttribute>())
+                .LastOrDefault();
+        }
+
         public ModuleMethod GetTerminateMethod(Type moduleType)
         {
-            var introspector = new DefaultIntrospector(moduleType);
+            var introspector = new TypeIntrospector(moduleType);
             var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
             return m == null ? null : new ModuleMethod(m);
         }
@@ -147,21 +177,20 @@ namespace Axle.Modularity
         public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType)
         {
             return CollectAttributes(
-                        TypeAndInterfaces(moduleType, new HashSet<Type>()),
-                        new List<UtilizedByAttribute>(),
-                        //
-                        // Note - the `UtilizedByAttribute` can be subclassed and we must take into accounts any derived attribute types.
-                        //
-                        true)
+                    TypeAndInterfaces(moduleType, new HashSet<Type>()),
+                    new List<UtilizedByAttribute>(),
+                    //
+                    // Note - the `UtilizedByAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    //
+                    true)
                 .ToArray();
         }
 
         public ModuleCommandLineTriggerAttribute GetCommandLineTrigger(Type moduleType)
         {
             return CollectAttributes(
-                    new[]{moduleType},
-                    new List<ModuleCommandLineTriggerAttribute>(),
-                    true)
+                    new[] { moduleType },
+                    new List<ModuleCommandLineTriggerAttribute>())
                 .SingleOrDefault();
         }
 

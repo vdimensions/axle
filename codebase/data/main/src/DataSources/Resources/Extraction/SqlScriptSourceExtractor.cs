@@ -46,8 +46,7 @@ namespace Axle.Data.DataSources.Resources.Extraction
             foreach (var dialect in dialectList)
             {
                 var queryResource = nameVariants
-                    .Select(p => new { Path = Path.GetDirectoryName(p), File = Path.GetFileName(p) })
-                    .Select(p => Path.Combine(Path.Combine(p.Path, dialect), p.File))
+                    .Select(p => Path.Combine(Path.Combine(Path.GetDirectoryName(p), dialect), Path.GetFileName(p)))
                     .Select(context.ExtractionChain.Extract)
                     .Where(r => r.HasValue)
                     .Select(r => r.Value)

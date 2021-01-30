@@ -10,8 +10,8 @@ using Axle.References;
 namespace Axle.Reflection
 {
     /// <summary>
-    /// A static class for handling cast operator; that is, an operator defined on a type that allows instances of that type
-    /// to be converted to instances of another type.
+    /// A static class for handling cast operator; that is, an operator defined on a type that allows instances of that
+    /// type to be converted to instances of another type.
     /// </summary>
     /// <seealso cref="ICastOperator{T1, T2}"/>
     public static class CastOperator
@@ -149,10 +149,48 @@ namespace Axle.Reflection
             private ICastOperator<T1, T2> ExplicitOperator => Singleton<ExplicitCastOperator>.Instance.Value;
         }
 
+        /// <summary>
+        /// Gets a <see cref="ICastOperator"/> instance that can handle the casting from 
+        /// given <paramref name="source"/> type to a specified <paramref name="target"/> type.
+        /// </summary>
+        /// <param name="source">
+        /// The source type to cast from.
+        /// </param>
+        /// <param name="target">
+        /// The destination type of the casting.
+        /// </param>
+        /// <returns>
+        /// A <see cref="ICastOperator"/> instance that can handle the casting from 
+        /// the <paramref name="source"/> type to the <paramref name="target"/> type.
+        /// </returns>
+        /// <remarks>
+        /// In case a cast operator is not present for the provided types, this method will
+        /// still return an instance of the <see cref="ICastOperator"/>. However, in that case
+        /// its <see cref="ICastOperator.IsDefined"/> property will have a value of <c><see langword="false"/></c>.
+        /// </remarks>
         public static ICastOperator For(Type source, Type target)
         {
             return Singleton.GetSingletonInstance<ICastOperator>(typeof(CastOp<,>).MakeGenericType(source, target));
         }
+        /// <summary>
+        /// Gets a <see cref="ICastOperator"/> instance that can handle the casting from 
+        /// <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The source type to cast from.
+        /// </typeparam>
+        /// <typeparam name="TResult">
+        /// The destination type of the casting.
+        /// </typeparam>
+        /// <returns>
+        /// A <see cref="ICastOperator"/> instance that can handle the casting from 
+        /// <typeparamref name="T"/> to <typeparamref name="TResult"/>.
+        /// </returns>
+        /// <remarks>
+        /// In case a cast operator is not present for the provided types, this method will
+        /// still return an instance of the <see cref="ICastOperator"/>. However, in that case
+        /// its <see cref="ICastOperator.IsDefined"/> property will have a value of <c><see langword="false"/></c>.
+        /// </remarks>
         public static ICastOperator<T, TResult> For<T, TResult>() => CastOp<T, TResult>.Instance;
 
         public static TResult Cast<T, TResult>(

@@ -28,8 +28,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Axle.Text.Data.Yaml" Version="$(PackageVersionRange)" />
     <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
-    <PackageReference Include="YamlDotNet" Version="5.0.0" />
   </ItemGroup>
   
   <Import Project="../../../Axle.Common.props" />

@@ -53,7 +53,7 @@ namespace Axle.Conversion
         /// The destination type of the failed conversion.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Either the <see cref="sourceType"/> or <see cref="destinationType"/> is <c>null</c>.
+        /// Either the <paramref name="sourceType"/> or <paramref name="destinationType"/> is <c>null</c>.
         /// </exception>
         public ConversionException(Type sourceType, Type destinationType) : this(
             string.Format(
@@ -76,7 +76,7 @@ namespace Axle.Conversion
         /// if no inner exception is specified.
         /// </param>
         /// <exception cref="ArgumentNullException">
-        /// Either the <see cref="sourceType"/> or <see cref="destinationType"/> is <c>null</c>.
+        /// Either the <paramref name="sourceType"/> or <paramref name="destinationType"/> is <c>null</c>.
         /// </exception>
         public ConversionException(Type sourceType, Type destinationType, Exception inner) : this(
             string.Format(

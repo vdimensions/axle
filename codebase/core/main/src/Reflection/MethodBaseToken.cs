@@ -14,7 +14,8 @@ namespace Axle.Reflection
     /// An abstract class representing the common reflected data from a class method or constructor.
     /// </summary>
     /// <typeparam name="T">
-    /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member for the current <see cref="MethodBaseToken{T}"/> instance.
+    /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member 
+    /// for the current <see cref="MethodBaseToken{T}"/> instance.
     /// </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
@@ -54,13 +55,18 @@ namespace Axle.Reflection
                 }
             }
 
-            public IAttributeInfo[] GetAttributes() => CustomAttributeProviderExtensions.GetEffectiveAttributes(ReflectedMember);
-            public IAttributeInfo[] GetAttributes(Type attributeType) => CustomAttributeProviderExtensions.GetEffectiveAttributes(ReflectedMember, attributeType);
+            public IAttributeInfo[] GetAttributes() => 
+                CustomAttributeProviderExtensions.GetEffectiveAttributes(ReflectedMember);
+            public IAttributeInfo[] GetAttributes(Type attributeType) => 
+                CustomAttributeProviderExtensions.GetEffectiveAttributes(ReflectedMember, attributeType);
             public IAttributeInfo[] GetAttributes(Type attributeType, bool inherit)
             {
                 var reflectedMember = ReflectedMember;
                 #if NETSTANDARD || NET45_OR_NEWER
-                var attrs = Enumerable.Cast<Attribute>(CustomAttributeExtensions.GetCustomAttributes(reflectedMember, attributeType, inherit));
+                var attrs = Enumerable.Cast<Attribute>(CustomAttributeExtensions.GetCustomAttributes(
+                    reflectedMember, 
+                    attributeType, 
+                    inherit));
                 #else
                 var attrs = Enumerable.Cast<Attribute>(reflectedMember.GetCustomAttributes(attributeType, inherit));
                 #endif
@@ -83,8 +89,6 @@ namespace Axle.Reflection
             public bool IsOptional => _parameterInfo.IsOptional;
             public object DefaultValue => _parameterInfo.DefaultValue;
             public ParameterInfo ReflectedMember => _parameterInfo;
-            [Obsolete("Use GetAttributes instead.")]
-            public IEnumerable<IAttributeInfo> Attributes => GetAttributes();
             public ParameterDirection Direction => _direction;
         }
 
@@ -99,26 +103,30 @@ namespace Axle.Reflection
         }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric)
-        {
-            return (T)(isGeneric ? MethodBase.GetMethodFromHandle(handle, typeHandle) : MethodBase.GetMethodFromHandle(handle));
-        }
+        protected override T GetMember(RuntimeMethodHandle handle, RuntimeTypeHandle typeHandle, bool isGeneric) =>
+            (T) (isGeneric 
+                ? MethodBase.GetMethodFromHandle(handle, typeHandle) 
+                : MethodBase.GetMethodFromHandle(handle));
         #endif
 
-        public static AccessModifier GetAccessModifier(MethodBase methodBase)
-        {
-            return GetAccessModifier(methodBase.IsPublic, methodBase.IsAssembly, methodBase.IsFamily, methodBase.IsPrivate);
-        }
+        public static AccessModifier GetAccessModifier(MethodBase methodBase) =>
+            AccessModifierExtensions.GetAccessModifier(
+                methodBase.IsPublic, 
+                methodBase.IsAssembly, 
+                methodBase.IsFamily, 
+                methodBase.IsPrivate);
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly AccessModifier _accessModifier;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly DeclarationType _declaration;
 
-        public IParameter[] GetParameters() { return GetParameters(ReflectedMember.GetParameters()); }
+        public IParameter[] GetParameters() => GetParameters(ReflectedMember.GetParameters());
         protected virtual IParameter[] GetParameters(IEnumerable<ParameterInfo> reflectedParameters)
         {
-            return Enumerable.ToArray(Enumerable.Cast<IParameter>(Enumerable.Select(reflectedParameters, x => new Parameter(x))));
+            return Enumerable.ToArray(
+                Enumerable.Cast<IParameter>(
+                    Enumerable.Select(reflectedParameters, x => new Parameter(x))));
         }
 
         public bool Equals(MethodBaseToken<T> other) => base.Equals(other);

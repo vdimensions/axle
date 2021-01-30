@@ -12,36 +12,13 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
+
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
     public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
         where T: MemberInfo
     {
-        #if NETSTANDARD
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
-        #endif
-        protected static AccessModifier GetAccessModifier(bool isPublic, bool isAssembly, bool isFamily, bool isPrivate)
-        {
-            if (isPublic)
-            {
-                return AccessModifier.Public;
-            }
-            if (isPrivate)
-            {
-                return AccessModifier.Private;
-            }
-            if (isFamily && !isAssembly)
-            {
-                return AccessModifier.Protected;
-            }
-            if (isAssembly && !isFamily)
-            {
-                return AccessModifier.Internal;
-            }
-            return AccessModifier.ProtectedInternal;
-        }
-
         public IAttributeInfo[] GetAttributes(T reflectedMember) => CustomAttributeProviderExtensions.GetEffectiveAttributes(reflectedMember) ?? new IAttributeInfo[0];
         public IAttributeInfo[] GetAttributes(T reflectedMember, Type attributeType)
         {
@@ -61,9 +38,6 @@ namespace Axle.Reflection
         private readonly RuntimeTypeHandle _typeHandle;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly string _name;
-
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IEnumerable<IAttributeInfo> _attributes;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         #if NET20
@@ -110,27 +84,6 @@ namespace Axle.Reflection
         public abstract DeclarationType Declaration { get; }
         public abstract AccessModifier AccessModifier { get; }
         public RuntimeTypeHandle TypeHandle => _typeHandle;
-
-        [Obsolete("Use GetAttributes() method instead.")]
-        public IEnumerable<IAttributeInfo> Attributes
-        {
-            get
-            {   //
-                // The `ReflectedMember` property uses `Lock` internally.
-                // We call it before locking again to avoid recursive lock error.
-                //
-                var reflectedMember = ReflectedMember;
-                #if NET20
-                return LockExtensions.Invoke(
-                #else
-                return ReaderWriterLockExtensions.Invoke(
-                #endif
-                    Lock,
-                    () => _attributes,
-                    xx => xx == null,
-                    () => _attributes = GetAttributes(reflectedMember));
-            }
-        }
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public abstract T ReflectedMember { get; }
@@ -184,7 +137,6 @@ namespace Axle.Reflection
                     #else
                     () => _memberRef.Value = item = GetMember(_handle, TypeHandle, DeclaringType.IsGenericType));
                     #endif
-                return item;
             }
         }
     }

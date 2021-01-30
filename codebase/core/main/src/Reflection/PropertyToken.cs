@@ -18,7 +18,9 @@ namespace Axle.Reflection
 
             if (property.CanRead)
             {
-                return property.CanWrite ? new ReadWritePropertyToken(property) : new ReadOnlyPropertyToken(property) as PropertyToken;
+                return property.CanWrite 
+                    ? new ReadWritePropertyToken(property) 
+                    : new ReadOnlyPropertyToken(property) as PropertyToken;
             }
 
             if (property.CanWrite)
@@ -26,7 +28,8 @@ namespace Axle.Reflection
                 return new WriteOnlyPropertyToken(property);
             }
 
-            throw new InvalidOperationException("Cannot create a property token object from a property that cannot be read and written.");
+            throw new InvalidOperationException(
+                "Cannot create a property token object from a property that cannot be read and written.");
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -34,7 +37,8 @@ namespace Axle.Reflection
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _memberType;
 
-        protected PropertyToken(PropertyInfo propertyInfo) : base(propertyInfo, propertyInfo.DeclaringType, propertyInfo.Name)
+        protected PropertyToken(PropertyInfo propertyInfo) 
+            : base(propertyInfo, propertyInfo.DeclaringType, propertyInfo.Name)
         {
             _property = propertyInfo;
             _memberType = propertyInfo.PropertyType;

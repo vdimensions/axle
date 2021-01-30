@@ -19,7 +19,7 @@
   <PropertyGroup>
     <Deterministic>false</Deterministic>
     <VersionMajor>1</VersionMajor>
-    <VersionMinor>7</VersionMinor>
+    <VersionMinor>9</VersionMinor>
   </PropertyGroup>
 
   <!-- Common props -->
@@ -73,11 +73,6 @@
     <PackageVersion Condition=" '$(PackageVersion)' == '' ">$(Version)</PackageVersion>
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
     <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
-
-  <!-- Paket paths -->
-  <PropertyGroup>
-    <PaketExePath>$(MSBuildProjectDirectory)\..\..\..\.paket\paket.exe</PaketExePath>
   </PropertyGroup>
 
   <Import Project="Dependency.Versions.props" />

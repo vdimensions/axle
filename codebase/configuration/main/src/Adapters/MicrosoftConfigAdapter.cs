@@ -1,4 +1,5 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NET461_OR_NEWER
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Verification;
@@ -35,7 +36,15 @@ namespace Axle.Configuration.Adapters
                     return ConfigSetting.Create(value);
                 }
                 var section = UnderlyingConfiguration.GetSection(key);
-                return section == null ? null : new MicrosoftConfigSectionAdapter(section);
+                if (section != null)
+                {
+                    var result = new MicrosoftConfigSectionAdapter(section);
+                    if (!string.IsNullOrEmpty(result.Value) || result.Keys.Any())
+                    {
+                        return result;
+                    }
+                }
+                return null;
             }
         }
 

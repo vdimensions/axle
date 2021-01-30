@@ -7,7 +7,6 @@ namespace Axle.Conversion.Parsing
     /// A class that can parse <see cref="string">string</see> representations of a
     /// <see cref="TimeSpan">time interval</see> to a valid <see cref="TimeSpan"/> value.
     /// </summary>
-    //[Stateless]
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
@@ -36,9 +35,11 @@ namespace Axle.Conversion.Parsing
             return TimeSpan.ParseExact(value, format, formatProvider, System.Globalization.TimeSpanStyles.None);
         }
 
-        public override bool TryParseExact(string value, string format, IFormatProvider formatProvider, out TimeSpan output)
+        public override bool TryParseExact(
+            string value, string format, IFormatProvider formatProvider, out TimeSpan output)
         {
-            return TimeSpan.TryParseExact(value, format, formatProvider, System.Globalization.TimeSpanStyles.None, out output);
+            return TimeSpan.TryParseExact(
+                value, format, formatProvider, System.Globalization.TimeSpanStyles.None, out output);
         }
         #endif
     }

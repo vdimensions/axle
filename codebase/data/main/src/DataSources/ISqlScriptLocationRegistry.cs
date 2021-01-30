@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Reflection;
-using Axle.Verification;
 
 namespace Axle.Data.DataSources
 {
@@ -11,7 +10,7 @@ namespace Axle.Data.DataSources
     /// </summary>
     /// <seealso cref="IDataSource"/>
     /// <seealso cref="IDataSourceConnection"/>
-    /// <seealso cref="IDataSourceConnection.GetScript"/>
+    /// <seealso cref="IDataSource.GetScript"/>
     public interface ISqlScriptLocationRegistry
     {
         //ISqlScriptLocationRegistry Register(Uri location);

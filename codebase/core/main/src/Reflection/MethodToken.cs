@@ -41,11 +41,16 @@ namespace Axle.Reflection
             {
                 throw new InvalidOperationException("Cannot make a generic method - method does not accept type parameters.");
             }
-            if (this is GenericMethodToken)
+            if (this is IPartiallyGenericMethod pgm)
             {
-                // TODO: WHY NOT?
-                throw new InvalidOperationException(
-                    "This method is already generic. Cannot make a generic method out of a generic method. Perhaps you need a cast to `IGenericMethod` instead?");
+                var concatenatedTypes = new Type[pgm.GenericArguments.Length + types.Length];
+                pgm.GenericArguments.CopyTo(concatenatedTypes, 0);
+                types.CopyTo(concatenatedTypes, pgm.GenericArguments.Length);
+                return pgm.RawMethod.MakeGeneric(concatenatedTypes);
+            }
+            if (this is IGenericMethod gm)
+            {
+                return gm.RawMethod.MakeGeneric(types);
             }
             return new GenericMethodToken(this, types);
         }

@@ -26,8 +26,8 @@ namespace Axle.Text.Expressions.Path
             {@" ", @"_"}
         };
 
-        private const string AntSingleAsteriskWinRegex = @"(?<=[\.]{0,1})(?:[^\.]+)(?=[\.]{0,1})";
-        private const string AntDoubleAsteriskRegex = @"(?:.{0,})";
+        private const string SingleAsterisGlobkWinRegex = @"(?<=[\.]{0,1})(?:[^\.]+)(?=[\.]{0,1})";
+        private const string DoubleAsteriskGlobRegex = @"(?:.{0,})";
 
         private static Regex CreateRegex(string pattern, RegexOptions options)
         {
@@ -38,7 +38,7 @@ namespace Axle.Text.Expressions.Path
 
             var res = Enumerable.Aggregate(Replacements, EscapeRegex(pattern), (p, c) => p.Replace(EscapeRegex(c.Key), EscapeRegex(c.Value)));
             //options |= RegexOptions.IgnoreCase;
-            res = res.Replace("**", AntDoubleAsteriskRegex).Replace("*", AntSingleAsteriskWinRegex);
+            res = res.Replace("**", DoubleAsteriskGlobRegex).Replace("*", SingleAsterisGlobkWinRegex);
             return new Regex(res, options);
         }
 
@@ -59,7 +59,9 @@ namespace Axle.Text.Expressions.Path
         /// <summary>
         /// Indicates whether the provided <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">
+        /// The value to match against the current <see cref="AssemblyPathExpression"/> instance.
+        /// </param>
         /// <returns>
         /// <c>true</c> if the provided <see cref="Assembly"/> <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern;
         /// <c>false</c> otherwise.
@@ -68,7 +70,9 @@ namespace Axle.Text.Expressions.Path
         /// <summary>
         /// Indicates whether the provided <see cref="AssemblyName"/> <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern.
         /// </summary>
-        /// <param name="value"></param>
+        /// <param name="value">
+        /// The value to match against the current <see cref="AssemblyPathExpression"/> instance.
+        /// </param>
         /// <returns>
         /// <c>true</c> if the provided <paramref name="value"/> matches against the current <see cref="AssemblyPathExpression"/>'s pattern;
         /// <c>false</c> otherwise.

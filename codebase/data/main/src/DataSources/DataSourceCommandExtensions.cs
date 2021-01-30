@@ -13,7 +13,8 @@ using Axle.Verification;
 namespace Axle.Data.DataSources
 {
     /// <summary>
-    /// A static class containing extension methods for <see cref="IDataSourceCommand"/> instances.
+    /// A <see langword="static"/> class containing extension methods for 
+    /// the <see cref="IDataSourceCommand"/> interface.
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class DataSourceCommandExtensions
