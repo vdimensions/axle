@@ -1,8 +1,6 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Linq;
-
 using Axle.Verification;
-
 
 namespace Axle.Extensions.Object
 {
