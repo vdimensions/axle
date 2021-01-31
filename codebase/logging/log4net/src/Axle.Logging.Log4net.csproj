@@ -12,4 +12,10 @@
 
   <Import Project="../../../../ref/ext/Reference.log4net.props" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
+  <ItemGroup>
+    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
+    <PackageReference Include="log4net" Version="2.0.10" />
+  </ItemGroup>
+
+  <Import Project="../../../Axle.Common.props" />
 </Project>
