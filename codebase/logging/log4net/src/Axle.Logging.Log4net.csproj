@@ -10,9 +10,6 @@
     <Description>Axle framework's logging integration with popular log4net library</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="log4net" Version="2.0.8" />
-  </ItemGroup>
-
+  <Import Project="../../../../ref/ext/Reference.log4net.props" />
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
 </Project>

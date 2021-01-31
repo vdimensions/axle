@@ -54,15 +54,13 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- 
-      Disable multi-targeting inclusion from the VDimensions.MSBuild.Sdk.targets because it now
-      comes from a nuget package
-    -->
-    <EnableMultitargeting>false</EnableMultitargeting>
-    <EnableProjectMetadata>false</EnableProjectMetadata>
+    <!-- TODO: handle versioning in a different way later on -->
+    <EnableAutoVersioning Condition=" '$(EnableAutoVersioning)' == '' ">true</EnableAutoVersioning>
+    <EnablePackagingProperties Condition=" '$(EnablePackagingProperties)' == '' ">true</EnablePackagingProperties>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\VDimensions.MSBuild.Sdk.targets" />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Versioning\AutoVersioning.targets" Condition=" '$(EnableAutoVersioning)' == 'true' " />
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.targets" Condition=" '$(EnablePackagingProperties)' == 'true' " />
   <ItemGroup>
     <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="0.2.*">
       <PrivateAssets>all</PrivateAssets>
@@ -115,6 +113,4 @@
     <None Remove="packages\**" />
     <None Remove="paket-files\**" />
   </ItemGroup>
-
-  <Import Project="Dependency.Versions.props" />
 </Project>
