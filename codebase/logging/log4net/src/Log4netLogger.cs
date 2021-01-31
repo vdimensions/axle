@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
-
 using Axle.Verification;
-
 using log4net;
-
 
 namespace Axle.Logging.Log4net
 {

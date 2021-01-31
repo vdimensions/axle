@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
@@ -47,6 +48,7 @@ namespace Axle.Web.AspNetCore
         [ModuleInit]
         internal void Init(IDependencyExporter exporter)
         {
+            // TODO: modules must not be aware of the application host implementation!
             if (Host != null)
             {
                 _serviceConfigurers.Add(Host);
@@ -226,6 +228,7 @@ namespace Axle.Web.AspNetCore
             _runTask?.Dispose();
         }
         
+        [Obsolete("Modules must not be aware of the application host implementation")]
         public AspNetCoreApplicationHost Host { get; set; }
     }
 }

@@ -3,6 +3,9 @@ using System.Runtime.Serialization;
 
 namespace Axle.Data.Versioning
 {
+    /// <summary>
+    /// An exception thrown during the execution of a database migration.
+    /// </summary>
     [Serializable]
     public class MigrationEngineException : Exception
     {

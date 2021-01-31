@@ -7,7 +7,9 @@ namespace Axle.Resources
     /// <summary>
     /// An interface that enables an implementing module to configure the resource bundles of the application
     /// resource manager.
-    /// This interface introduces an implicit dependency on the <see cref="ResourcesModule"/>.  
+    /// <remarks>
+    /// This interface introduces an implicit dependency on the <see cref="ResourcesModule"/>.
+    /// </remarks>
     /// </summary>
     /// <seealso cref="IResourceBundleRegistry"/>
     /// <seealso cref="IResourceBundleContent"/>

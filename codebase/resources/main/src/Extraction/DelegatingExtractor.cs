@@ -1,4 +1,4 @@
-﻿namespace Axle.Resources.Extraction
+namespace Axle.Resources.Extraction
 {
     internal sealed class DelegatingExtractor : AbstractResourceExtractor { }
 }

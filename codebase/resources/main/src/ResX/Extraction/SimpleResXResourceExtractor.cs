@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using System.IO;

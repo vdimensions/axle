@@ -4,7 +4,7 @@ using System.IO;
 
 namespace Axle.Logging
 {
-    internal sealed class DefaultLogger : ILogger
+    internal sealed class AxleLogger : ILogger
     {
         #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
@@ -17,7 +17,7 @@ namespace Axle.Logging
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _targetType;
 
-        public DefaultLogger(Type targetType)
+        public AxleLogger(Type targetType)
         {
             _targetType = targetType ?? throw new ArgumentNullException(nameof(targetType));
         }

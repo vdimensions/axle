@@ -4,14 +4,15 @@
 namespace Axle.Logging
 {
     /// <summary>
-    /// Represents a log entry; that is, a representation of an application event that is to be written to the application log.
+    /// Represents a log entry; that is, a representation of an application event that is to be written to the
+    /// application log.
     /// </summary>
     public interface ILogEntry
     {
         /// <summary>
         /// The exact date and time of the occurrence of the application event.
         /// </summary>
-        DateTime Timestamp { get; }
+        DateTimeOffset Timestamp { get; }
 
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         /// <summary>

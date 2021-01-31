@@ -7,9 +7,9 @@ namespace Axle.Logging
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     internal sealed class LoggingModule
     {
-        private readonly AggregatingLoggingService _loggingService;
+        private readonly MutableLoggingService _loggingService;
 
-        public LoggingModule(AggregatingLoggingService loggingService)
+        public LoggingModule(MutableLoggingService loggingService)
         {
             _loggingService = loggingService;
         }
@@ -18,12 +18,6 @@ namespace Axle.Logging
         internal void DependencyInitialized(ILoggingServiceConfigurer loggingServiceConfigurer)
         {
             loggingServiceConfigurer.Configure(_loggingService);
-        }
-
-        [ModuleEntryPoint]
-        internal void Run()
-        {
-            _loggingService.FlushMessages();
         }
     }
 }

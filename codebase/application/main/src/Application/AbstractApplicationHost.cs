@@ -3,7 +3,6 @@ using System.IO;
 using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
-using Axle.Globalization;
 using Axle.Logging;
 using Axle.Resources;
 using Axle.Resources.Bundling;

@@ -5,7 +5,7 @@ using Axle.Modularity;
 namespace Axle.Data.DataSources
 {
     /// <summary>
-    /// Causes the annotated target module to be initialized after the data-source module is ready.
+    /// Causes the annotated target module to become dependent on the data-sources module.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class|AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]

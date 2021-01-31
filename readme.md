@@ -9,6 +9,8 @@
                                                                     \_\/
 ```
 
+[![Gitpod ready-to-code](https://img.shields.io/badge/Gitpod-ready--to--code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/vdimensions/axle)
+
 # Axle Framework
 
 |Build|Status|
@@ -36,9 +38,19 @@ Most of the _Axle Framework_ itself is designed in the same modular fashion.
 
 ## Enable Good Platform and Framework Coverage
 
-Axle is developed .NETStandard-first, meaning that the support of the various [`.NETStandard`](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) framework versions is handled with priority. This allows the framework to cover wide range of .NET-compatible platforms, as the .NETStandard itself evolves, and also guarantees a good degree of forward-compatibility, since future versions of the .NET framework will be incremental improvements of the .NETStandard.
+Axle is developed *.NETStandard-first*, meaning that the support of the various [`.NETStandard`](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) framework versions is handled with priority. This allows the framework to cover wide range of .NET-compatible platforms, as the .NETStandard itself evolves, and also guarantees a good degree of forward-compatibility, since future versions of the .NET framework will be incremental improvements of the .NETStandard.
 
 Additionally, in relation to earlier supported versions of the `.NETFramework`, Axle covers `net35` almost completely, and partially supports `net20`. You can refer to our [Multi-Targeting Support](./multitargeting.md) page where you can see how each __Axle Framework__ library supports the different .NETStandard and .NETFramework platforms.
+
+### Axle.Application
+
+If you are developing an application, you may maturally want to be up to date with newest technology developments and use .NET/ASPNET Core, which bring in its own application foundation features such as dependency injeciton, logging abstractions and application hosting. However, these goodies are not available for earlier .NET Framework versions (such as `net40` or earlier) and sometimes we may want to create a modern .NET application that can run on an environment with a legacy framework. Well, we have you covered, because Axle comes with its own foundation (referred to later as `Axle.Application`) that is designed to work well in the old .NET framework world and also to play nice along .NET/ASPNET Core.  
+
+Axle.Application is the core for creating a modern scalable application. It has been inspired by well-known solutions in the .NET world such as Prism/Unity, Smart client software factory, the appliaction bulding blocks introduced with .NET/ASPNET Core, as well as great fremeworks outside the .NET universe, such as Spring and Spring Boot which are among the preferred application frameworks by Java developers to date. The framework offers its own dependency container, logging abstraction and application hosting model which have been designed to enable a powerful modular framework. With Axle.Application you write re-usable components (modules) which enable you to use a modular architecture out of the box and benefit from strong decouping and better maintainability of the software you are creating. And all of these goodies offer you the same development experience, regardless if you are creating a desktop Windows Forms application, a microservice web API project or an ASPNET website.  
+
+Furthermore, the Axle Framework delivers its own set of modules in order to bootstrap your application development. For example, similar to the Spring Boot freamework in Java, you will benefit from automatic datasource discovery and a flexible abstraction on top your database interactions which is designed to play nice with most ORM solutions, as well as to make your life easier if you prefer to use ADO.NET directly. When you are developing an ASPNET Core application, you no longer need to worry of the ASPNETs' hosting model specifics, such as the order of activating the ASPNET Core features (for example -- if you need to use SessionState feature along MVC, the former must be initialized before the MVC feature). Axle provides a declarative approach where you just need to specify that you require the SessionState and MVC modules and it will figure out by itself the right order of their initialization.
+
+On top of the above, Axle.Application enables you to use your preferred DI containers, logging frameworks and to customize the application hosting model, so you have a better control of the infrastrucure layer of your application.
 
 ## Hassle-free
 

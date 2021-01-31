@@ -7,6 +7,7 @@ using Axle.Threading;
 
 namespace Axle.Logging
 {
+    [Obsolete]
     internal sealed class AggregatingLoggingService : ILoggingService, IDisposable, ILoggingServiceRegistry
     {
         internal sealed class AggregatingLogger : ILogger

@@ -1,7 +1,5 @@
 ﻿using System;
-
 using Axle.Modularity;
-
 
 namespace Axle.Resources
 {
