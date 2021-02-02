@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Concurrent;
 using System.Threading;
 
@@ -31,6 +31,7 @@ namespace Axle.Logging
                     if (_version == expectedVersion)
                     {
                         _logger.Write(entry);
+                        return;
                     }
                 }
                 using (_lockProvider.UpgradeableReadLock.CreateHandle())
