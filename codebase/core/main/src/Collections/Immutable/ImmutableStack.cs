@@ -31,6 +31,7 @@ namespace Axle.Collections.Immutable
             #endif
         }
     }
+
     public class ImmutableStack<T> : IImmutableStack<T>
     {
         public static readonly ImmutableStack<T> Empty = ImmutableStack.Create<T>();

@@ -1,0 +1,360 @@
+{
+  "version": 1,
+  "dependencies": {
+    ".NETFramework,Version=v3.5": {
+      "VDimensions.MSBuild.Sdk.Defaults": {
+        "type": "Direct",
+        "requested": "[0.2.*, )",
+        "resolved": "0.2.24",
+        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+      },
+      "VDimensions.MSBuild.Sdk.Multitargeting": {
+        "type": "Direct",
+        "requested": "[0.2.*, )",
+        "resolved": "0.2.24",
+        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q==",
+        "dependencies": {
+          "jnm2.ReferenceAssemblies.net35": "1.0.1"
+        }
+      },
+      "jnm2.ReferenceAssemblies.net35": {
+        "type": "Transitive",
+        "resolved": "1.0.1",
+        "contentHash": "v0inupvZNhNKp4ZiZjOm12dj/JLLOeFmtnXRP8qTWT/3SkJknXYgUosL2HRzYeVy7fXpX3WZq76BYEGrmIFc5w=="
+      },
+      "Kajabity.Tools.Java": {
+        "type": "Transitive",
+        "resolved": "0.2.6862.30334",
+        "contentHash": "luHhGK6T1K3g2dbuMvfsGnA79jwbx4K1yxjxdffav81c/SnHnSc8/iNF1TOkVZfdXnETPDaHb4SJyF57VIGTvw=="
+      },
+      "System.Threading.Tasks.Unofficial": {
+        "type": "Transitive",
+        "resolved": "3.1.0",
+        "contentHash": "WmFdoP/gOK334zn3AZnSw9+9ua4hBrZM7UEcchd13GMpa9eN4MyuAEQTyXgPW+dBILczhNigPQr76z7RTZcL3w=="
+      },
+      "YamlDotNet": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "KlRo7pZegyfNr2j2V27n3mDWKd6EoQkd3XBlBeF5RFwEkhyohmAF+ZHFKX1BVd6ixE97AsMoIkeQ1HqMCDDCSw=="
+      },
+      "axle.application": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Caching": "1.10.2968.18959",
+          "Axle.Configuration": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Resources.Properties": "1.10.2968.18959",
+          "Axle.Resources.Yaml": "1.10.2968.18959"
+        }
+      },
+      "axle.caching": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959"
+        }
+      },
+      "axle.configuration": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959"
+        }
+      },
+      "axle.core": {
+        "type": "Project",
+        "dependencies": {
+          "System.Threading.Tasks.Unofficial": "3.1.0"
+        }
+      },
+      "axle.data": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Application": "1.10.2968.18959"
+        }
+      },
+      "axle.resources": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Caching": "1.10.2968.18959",
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959"
+        }
+      },
+      "axle.resources.properties": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+        }
+      },
+      "axle.resources.yaml": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+        }
+      },
+      "axle.text.documents": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959"
+        }
+      },
+      "axle.text.documents.properties": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Kajabity.Tools.Java": "0.2.6862.30334"
+        }
+      },
+      "axle.text.documents.yaml": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "YamlDotNet": "5.0.0"
+        }
+      }
+    },
+    ".NETFramework,Version=v4.0": {
+      "VDimensions.MSBuild.Sdk.Defaults": {
+        "type": "Direct",
+        "requested": "[0.2.*, )",
+        "resolved": "0.2.24",
+        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+      },
+      "VDimensions.MSBuild.Sdk.Multitargeting": {
+        "type": "Direct",
+        "requested": "[0.2.*, )",
+        "resolved": "0.2.24",
+        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q==",
+        "dependencies": {
+          "jnm2.ReferenceAssemblies.net35": "1.0.1"
+        }
+      },
+      "jnm2.ReferenceAssemblies.net35": {
+        "type": "Transitive",
+        "resolved": "1.0.1",
+        "contentHash": "v0inupvZNhNKp4ZiZjOm12dj/JLLOeFmtnXRP8qTWT/3SkJknXYgUosL2HRzYeVy7fXpX3WZq76BYEGrmIFc5w=="
+      },
+      "Kajabity.Tools.Java": {
+        "type": "Transitive",
+        "resolved": "0.2.6862.30334",
+        "contentHash": "luHhGK6T1K3g2dbuMvfsGnA79jwbx4K1yxjxdffav81c/SnHnSc8/iNF1TOkVZfdXnETPDaHb4SJyF57VIGTvw=="
+      },
+      "YamlDotNet": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "KlRo7pZegyfNr2j2V27n3mDWKd6EoQkd3XBlBeF5RFwEkhyohmAF+ZHFKX1BVd6ixE97AsMoIkeQ1HqMCDDCSw=="
+      },
+      "axle.application": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Caching": "1.10.2968.18959",
+          "Axle.Configuration": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Resources.Properties": "1.10.2968.18959",
+          "Axle.Resources.Yaml": "1.10.2968.18959"
+        }
+      },
+      "axle.caching": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959"
+        }
+      },
+      "axle.configuration": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959"
+        }
+      },
+      "axle.core": {
+        "type": "Project"
+      },
+      "axle.data": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Application": "1.10.2968.18959"
+        }
+      },
+      "axle.resources": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Caching": "1.10.2968.18959",
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959"
+        }
+      },
+      "axle.resources.properties": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+        }
+      },
+      "axle.resources.yaml": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+        }
+      },
+      "axle.text.documents": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959"
+        }
+      },
+      "axle.text.documents.properties": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Kajabity.Tools.Java": "0.2.6862.30334"
+        }
+      },
+      "axle.text.documents.yaml": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "YamlDotNet": "5.0.0"
+        }
+      }
+    },
+    ".NETFramework,Version=v4.5": {
+      "VDimensions.MSBuild.Sdk.Defaults": {
+        "type": "Direct",
+        "requested": "[0.2.*, )",
+        "resolved": "0.2.24",
+        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+      },
+      "VDimensions.MSBuild.Sdk.Multitargeting": {
+        "type": "Direct",
+        "requested": "[0.2.*, )",
+        "resolved": "0.2.24",
+        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q==",
+        "dependencies": {
+          "jnm2.ReferenceAssemblies.net35": "1.0.1"
+        }
+      },
+      "jnm2.ReferenceAssemblies.net35": {
+        "type": "Transitive",
+        "resolved": "1.0.1",
+        "contentHash": "v0inupvZNhNKp4ZiZjOm12dj/JLLOeFmtnXRP8qTWT/3SkJknXYgUosL2HRzYeVy7fXpX3WZq76BYEGrmIFc5w=="
+      },
+      "Kajabity.Tools.Java": {
+        "type": "Transitive",
+        "resolved": "0.2.6862.30334",
+        "contentHash": "luHhGK6T1K3g2dbuMvfsGnA79jwbx4K1yxjxdffav81c/SnHnSc8/iNF1TOkVZfdXnETPDaHb4SJyF57VIGTvw=="
+      },
+      "System.Collections.Immutable": {
+        "type": "Transitive",
+        "resolved": "1.7.1",
+        "contentHash": "B43Zsz5EfMwyEbnObwRxW5u85fzJma3lrDeGcSAV1qkhSRTNY5uXAByTn9h9ddNdhM+4/YoLc/CI43umjwIl9Q=="
+      },
+      "System.Data.DataSetExtensions": {
+        "type": "Transitive",
+        "resolved": "4.5.0",
+        "contentHash": "221clPs1445HkTBZPL+K9sDBdJRB8UN8rgjO3ztB0CQ26z//fmJXtlsr6whGatscsKGBrhJl5bwJuKSA8mwFOw=="
+      },
+      "YamlDotNet": {
+        "type": "Transitive",
+        "resolved": "5.0.0",
+        "contentHash": "KlRo7pZegyfNr2j2V27n3mDWKd6EoQkd3XBlBeF5RFwEkhyohmAF+ZHFKX1BVd6ixE97AsMoIkeQ1HqMCDDCSw=="
+      },
+      "axle.application": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Caching": "1.10.2968.18959",
+          "Axle.Configuration": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Resources.Properties": "1.10.2968.18959",
+          "Axle.Resources.Yaml": "1.10.2968.18959"
+        }
+      },
+      "axle.caching": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959"
+        }
+      },
+      "axle.configuration": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959"
+        }
+      },
+      "axle.core": {
+        "type": "Project",
+        "dependencies": {
+          "System.Collections.Immutable": "1.7.0"
+        }
+      },
+      "axle.data": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Application": "1.10.2968.18959",
+          "System.Data.DataSetExtensions": "4.5.0"
+        }
+      },
+      "axle.resources": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Caching": "1.10.2968.18959",
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959"
+        }
+      },
+      "axle.resources.properties": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+        }
+      },
+      "axle.resources.yaml": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Resources": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+        }
+      },
+      "axle.text.documents": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959"
+        }
+      },
+      "axle.text.documents.properties": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "Kajabity.Tools.Java": "0.2.6862.30334"
+        }
+      },
+      "axle.text.documents.yaml": {
+        "type": "Project",
+        "dependencies": {
+          "Axle.Core": "1.10.2968.18959",
+          "Axle.Text.Documents": "1.10.2968.18959",
+          "YamlDotNet": "5.0.0"
+        }
+      }
+    }
+  }
+}
