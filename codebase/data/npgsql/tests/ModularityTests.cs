@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using System.Linq;
-using Axle.Application;
 using Axle.DependencyInjection;
 using NUnit.Framework;
 

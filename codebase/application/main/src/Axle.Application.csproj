@@ -21,6 +21,10 @@
     <EmbeddedResource Include="Application\host.yml" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Application\Hosting" />
+  </ItemGroup>
+
   <Import Project="../../../../ref/Reference.Axle.Caching.targets" />
   <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
   <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />

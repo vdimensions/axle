@@ -21,7 +21,7 @@ namespace Axle.Resources.Xml.Extraction
         /// Extracts a <typeparamref name="TX"/> representation of an XML resource.
         /// </summary>
         /// <param name="context">
-        /// The <see cref="ResourceContext"/> used for the extraction. 
+        /// The <see cref="IResourceContext"/> used for the extraction. 
         /// </param>
         /// <param name="name">
         /// A <see cref="string"/> object used to identify the requested resource. 

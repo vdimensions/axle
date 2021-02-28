@@ -25,8 +25,8 @@ namespace Axle.Resources.Properties.Tests
             resourceManager.Bundles
                 .Configure("testBundle")
                 .Register(GetType().Assembly, "./Properties/")
-                .Register(parser.Parse("invalid"));
-            resourceManager.Extractors.Register(new PropertiesExtractor("Messages.properties"));
+                .Register(parser.Parse("invalid"))
+                .Extractors.Register(new PropertiesExtractor("Messages.properties"));
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
@@ -50,8 +50,8 @@ namespace Axle.Resources.Properties.Tests
             resourceManager.Bundles
                 .Configure("testBundle")
                 .Register(GetType().Assembly, "./Properties/")
-                .Register(parser.Parse("Messages.properties"));
-            resourceManager.Extractors.Register(new PropertiesExtractor());
+                .Register(parser.Parse("Messages.properties"))
+                .Extractors.Register(new PropertiesExtractor());
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 
@@ -74,8 +74,8 @@ namespace Axle.Resources.Properties.Tests
             resourceManager.Bundles
                 .Configure("testBundle")
                 .Register(GetType().Assembly, "./Properties/")
-                .Register(parser.Parse("Messages.properties/Alternative/"));
-            resourceManager.Extractors.Register(new PropertiesExtractor());
+                .Register(parser.Parse("Messages.properties/Alternative/"))
+                .Extractors.Register(new PropertiesExtractor("Messages.properties"));
 
             var resource = resourceManager.Load("testBundle", "Greeting", CultureInfo.CurrentCulture);
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Axle.Application;
 using Axle.Caching;
 using Axle.DependencyInjection;
 using Axle.Logging;
@@ -20,11 +21,12 @@ namespace Axle.Resources
         private readonly ResourceManager _resourceManager;
         private readonly ResourcesConfig _config;
 
-        public ResourcesModule() : this(new ResourcesConfig()) { }
-        public ResourcesModule(ResourcesConfig config)
+        public ResourcesModule(IApplicationHost host) : this(new ResourcesConfig(), host) { }
+        public ResourcesModule(ResourcesConfig config, IApplicationHost host)
         {
             _config = config;
-            _resourceManager = new DefaultResourceManager(
+            _resourceManager = new ApplicationResourceManager(
+                host,
                 config.CacheManager != null
                     ? (ICacheManager) new TypeIntrospector(config.CacheManager).CreateInstance()
                     : new WeakReferenceCacheManager());

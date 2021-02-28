@@ -16,8 +16,8 @@ namespace Axle.Resources.Properties.Extraction
             const string ext = PropertiesResourceInfo.FileExtension;
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
             var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterFirst(ext, cmp);
-            propertyFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
+            keyPrefix = locStr.TakeAfterLast(ext, cmp);
+            propertyFileName = locStr.TakeBeforeLast(keyPrefix, cmp);
             const char slash = '/';
             keyPrefix = keyPrefix.TrimStart(slash);
             if (keyPrefix.EndsWith(slash.ToString()))

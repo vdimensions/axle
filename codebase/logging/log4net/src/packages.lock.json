@@ -10,15 +10,15 @@
       },
       "VDimensions.MSBuild.Sdk.Defaults": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "HR428NE+NuTPHbIo5YggyENvz5UYwcByFwghVYOc8NZBmXXqLT92BTfaAkr27nPZbBMDTSTAQIa9YQINlIsT9g=="
       },
       "VDimensions.MSBuild.Sdk.Multitargeting": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q==",
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "CxoUK9fEuARF9GUY+g4MTXAol5sbGTfeivuZQHFUqRawACcLIuFZ6ugcD35TvtPe8WmXm5NarbAFrCaXuHsgAg==",
         "dependencies": {
           "jnm2.ReferenceAssemblies.net35": "1.0.1"
         }
@@ -41,24 +41,24 @@
       "axle.application": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Configuration": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Resources.Properties": "1.10.2968.18959",
-          "Axle.Resources.Yaml": "1.10.2968.18959"
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Configuration": "1.10.2979.31192",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Resources.Properties": "1.10.2979.31192",
+          "Axle.Resources.Yaml": "1.10.2979.31192"
         }
       },
       "axle.caching": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.configuration": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192"
         }
       },
       "axle.core": {
@@ -67,47 +67,47 @@
       "axle.resources": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959"
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192"
         }
       },
       "axle.resources.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Properties": "1.10.2979.31192"
         }
       },
       "axle.resources.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Yaml": "1.10.2979.31192"
         }
       },
       "axle.text.documents": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.text.documents.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "Kajabity.Tools.Java": "0.2.6862.30334"
         }
       },
       "axle.text.documents.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "YamlDotNet": "5.0.0"
         }
       }
@@ -121,15 +121,15 @@
       },
       "VDimensions.MSBuild.Sdk.Defaults": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "HR428NE+NuTPHbIo5YggyENvz5UYwcByFwghVYOc8NZBmXXqLT92BTfaAkr27nPZbBMDTSTAQIa9YQINlIsT9g=="
       },
       "VDimensions.MSBuild.Sdk.Multitargeting": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q==",
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "CxoUK9fEuARF9GUY+g4MTXAol5sbGTfeivuZQHFUqRawACcLIuFZ6ugcD35TvtPe8WmXm5NarbAFrCaXuHsgAg==",
         "dependencies": {
           "jnm2.ReferenceAssemblies.net35": "1.0.1"
         }
@@ -157,24 +157,24 @@
       "axle.application": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Configuration": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Resources.Properties": "1.10.2968.18959",
-          "Axle.Resources.Yaml": "1.10.2968.18959"
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Configuration": "1.10.2979.31192",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Resources.Properties": "1.10.2979.31192",
+          "Axle.Resources.Yaml": "1.10.2979.31192"
         }
       },
       "axle.caching": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.configuration": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192"
         }
       },
       "axle.core": {
@@ -186,47 +186,47 @@
       "axle.resources": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959"
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192"
         }
       },
       "axle.resources.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Properties": "1.10.2979.31192"
         }
       },
       "axle.resources.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Yaml": "1.10.2979.31192"
         }
       },
       "axle.text.documents": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.text.documents.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "Kajabity.Tools.Java": "0.2.6862.30334"
         }
       },
       "axle.text.documents.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "YamlDotNet": "5.0.0"
         }
       }
@@ -323,15 +323,15 @@
       },
       "VDimensions.MSBuild.Sdk.Defaults": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "HR428NE+NuTPHbIo5YggyENvz5UYwcByFwghVYOc8NZBmXXqLT92BTfaAkr27nPZbBMDTSTAQIa9YQINlIsT9g=="
       },
       "VDimensions.MSBuild.Sdk.Multitargeting": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "CxoUK9fEuARF9GUY+g4MTXAol5sbGTfeivuZQHFUqRawACcLIuFZ6ugcD35TvtPe8WmXm5NarbAFrCaXuHsgAg=="
       },
       "Kajabity.Tools.Java": {
         "type": "Transitive",
@@ -1352,26 +1352,26 @@
       "axle.application": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Configuration": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Resources.Properties": "1.10.2968.18959",
-          "Axle.Resources.Yaml": "1.10.2968.18959",
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Configuration": "1.10.2979.31192",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Resources.Properties": "1.10.2979.31192",
+          "Axle.Resources.Yaml": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.caching": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.configuration": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
@@ -1386,9 +1386,9 @@
       "axle.resources": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Xml.XDocument": "4.3.0",
@@ -1398,34 +1398,34 @@
       "axle.resources.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Properties": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Properties": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.resources.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Yaml": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Yaml": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.text.documents": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.text.documents.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "Kajabity.Tools.Java": "0.2.6862.30334",
           "NETStandard.Library": "1.6.1"
         }
@@ -1433,8 +1433,8 @@
       "axle.text.documents.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1",
           "YamlDotNet": "5.0.0"
         }
@@ -1532,15 +1532,15 @@
       },
       "VDimensions.MSBuild.Sdk.Defaults": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "HR428NE+NuTPHbIo5YggyENvz5UYwcByFwghVYOc8NZBmXXqLT92BTfaAkr27nPZbBMDTSTAQIa9YQINlIsT9g=="
       },
       "VDimensions.MSBuild.Sdk.Multitargeting": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "CxoUK9fEuARF9GUY+g4MTXAol5sbGTfeivuZQHFUqRawACcLIuFZ6ugcD35TvtPe8WmXm5NarbAFrCaXuHsgAg=="
       },
       "Kajabity.Tools.Java": {
         "type": "Transitive",
@@ -2773,26 +2773,26 @@
       "axle.application": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Configuration": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Resources.Properties": "1.10.2968.18959",
-          "Axle.Resources.Yaml": "1.10.2968.18959",
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Configuration": "1.10.2979.31192",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Resources.Properties": "1.10.2979.31192",
+          "Axle.Resources.Yaml": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.caching": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.configuration": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
@@ -2809,9 +2809,9 @@
       "axle.resources": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1",
           "System.Resources.ResourceManager": "4.3.0",
           "System.Xml.XDocument": "4.3.0",
@@ -2821,34 +2821,34 @@
       "axle.resources.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Properties": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Properties": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.resources.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Yaml": "1.10.2968.18959",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Yaml": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.text.documents": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
           "NETStandard.Library": "1.6.1"
         }
       },
       "axle.text.documents.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "Kajabity.Tools.Java": "0.2.6862.30334",
           "NETStandard.Library": "1.6.1"
         }
@@ -2856,8 +2856,8 @@
       "axle.text.documents.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "NETStandard.Library": "1.6.1",
           "YamlDotNet": "5.0.0"
         }
@@ -2885,15 +2885,15 @@
       },
       "VDimensions.MSBuild.Sdk.Defaults": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "HR428NE+NuTPHbIo5YggyENvz5UYwcByFwghVYOc8NZBmXXqLT92BTfaAkr27nPZbBMDTSTAQIa9YQINlIsT9g=="
       },
       "VDimensions.MSBuild.Sdk.Multitargeting": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "CxoUK9fEuARF9GUY+g4MTXAol5sbGTfeivuZQHFUqRawACcLIuFZ6ugcD35TvtPe8WmXm5NarbAFrCaXuHsgAg=="
       },
       "Kajabity.Tools.Java": {
         "type": "Transitive",
@@ -3372,24 +3372,24 @@
       "axle.application": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Configuration": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Resources.Properties": "1.10.2968.18959",
-          "Axle.Resources.Yaml": "1.10.2968.18959"
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Configuration": "1.10.2979.31192",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Resources.Properties": "1.10.2979.31192",
+          "Axle.Resources.Yaml": "1.10.2979.31192"
         }
       },
       "axle.caching": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.configuration": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192"
         }
       },
       "axle.core": {
@@ -3404,9 +3404,9 @@
       "axle.resources": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "System.Xml.XDocument": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
         }
@@ -3414,39 +3414,39 @@
       "axle.resources.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Properties": "1.10.2979.31192"
         }
       },
       "axle.resources.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Yaml": "1.10.2979.31192"
         }
       },
       "axle.text.documents": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.text.documents.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "Kajabity.Tools.Java": "0.2.6862.30334"
         }
       },
       "axle.text.documents.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "YamlDotNet": "5.0.0"
         }
       }
@@ -3464,15 +3464,15 @@
       },
       "VDimensions.MSBuild.Sdk.Defaults": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "gsHvuNH9md1yYsMXBiU1uTOXz4vYDK6YaYCEavuvVRDtkZm++PhLQzW47g5wdwIPvCKPM3sx27MGRDR8JpMdHA=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "HR428NE+NuTPHbIo5YggyENvz5UYwcByFwghVYOc8NZBmXXqLT92BTfaAkr27nPZbBMDTSTAQIa9YQINlIsT9g=="
       },
       "VDimensions.MSBuild.Sdk.Multitargeting": {
         "type": "Direct",
-        "requested": "[0.2.*, )",
-        "resolved": "0.2.24",
-        "contentHash": "1dkuUUHXY2dBwbis44OBspxdqdPqMF4ZncqjM1nkvnYdjilMRKznA7tfYlmrp/+rpHkIEyphffZ+VrJRQX5D0Q=="
+        "requested": "[0.3.*, )",
+        "resolved": "0.3.25",
+        "contentHash": "CxoUK9fEuARF9GUY+g4MTXAol5sbGTfeivuZQHFUqRawACcLIuFZ6ugcD35TvtPe8WmXm5NarbAFrCaXuHsgAg=="
       },
       "Kajabity.Tools.Java": {
         "type": "Transitive",
@@ -3873,24 +3873,24 @@
       "axle.application": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Configuration": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Resources.Properties": "1.10.2968.18959",
-          "Axle.Resources.Yaml": "1.10.2968.18959"
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Configuration": "1.10.2979.31192",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Resources.Properties": "1.10.2979.31192",
+          "Axle.Resources.Yaml": "1.10.2979.31192"
         }
       },
       "axle.caching": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.configuration": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192"
         }
       },
       "axle.core": {
@@ -3904,9 +3904,9 @@
       "axle.resources": {
         "type": "Project",
         "dependencies": {
-          "Axle.Caching": "1.10.2968.18959",
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Caching": "1.10.2979.31192",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "System.Xml.XDocument": "4.3.0",
           "System.Xml.XmlDocument": "4.3.0"
         }
@@ -3914,39 +3914,39 @@
       "axle.resources.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Properties": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Properties": "1.10.2979.31192"
         }
       },
       "axle.resources.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Resources": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
-          "Axle.Text.Documents.Yaml": "1.10.2968.18959"
+          "Axle.Resources": "1.10.2979.31192",
+          "Axle.Text.Documents": "1.10.2979.31192",
+          "Axle.Text.Documents.Yaml": "1.10.2979.31192"
         }
       },
       "axle.text.documents": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959"
+          "Axle.Core": "1.10.2979.31186"
         }
       },
       "axle.text.documents.properties": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "Kajabity.Tools.Java": "0.2.6862.30334"
         }
       },
       "axle.text.documents.yaml": {
         "type": "Project",
         "dependencies": {
-          "Axle.Core": "1.10.2968.18959",
-          "Axle.Text.Documents": "1.10.2968.18959",
+          "Axle.Core": "1.10.2979.31186",
+          "Axle.Text.Documents": "1.10.2979.31192",
           "YamlDotNet": "5.0.0"
         }
       }

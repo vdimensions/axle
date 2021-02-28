@@ -6,6 +6,7 @@ using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Resources;
 using Axle.Resources.Bundling;
+using Axle.Resources.Extraction;
 
 namespace Axle.Application
 {
@@ -235,6 +236,9 @@ namespace Axle.Application
         /// </summary>
         public void Dispose() => Dispose(true);
         void IDisposable.Dispose() => Dispose(true);
+
+        public virtual IResourceExtractorRegistry ConfigureDefaultResourcePaths(IResourceExtractorRegistry extractors) 
+            => extractors;
 
         /// <inheritdoc />
         public IDependencyContainerFactory DependencyContainerFactory { get; }

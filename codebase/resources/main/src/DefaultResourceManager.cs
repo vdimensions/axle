@@ -1,6 +1,5 @@
 #if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
 using Axle.Caching;
-using Axle.Resources.Bundling;
 #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using Axle.Resources.Embedded.Extraction;
 #endif
@@ -49,22 +48,7 @@ namespace Axle.Resources
         /// An <see cref="ICacheManager"/> instance to be used by the current <see cref="ResourceManager"/>
         /// implementation improving the performance of subsequently looked up resources.
         /// </param>
-        public DefaultResourceManager(ICacheManager cacheManager) 
-            : base(
-                new DefaultResourceBundleRegistry(), 
-                new DefaultResourceExtractorRegistry(), 
-                cacheManager)
-        {
-            Extractors
-                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
-                .Register(new FileSystemResourceExtractor())
-                #endif
-                .Register(new ResXResourceExtractor())
-                #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-                .Register(new EmbeddedResourceExtractor())
-                #endif
-                ;
-        }
+        public DefaultResourceManager(ICacheManager cacheManager) : base(cacheManager) { }
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceManager"/> class.
         /// </summary>
@@ -74,6 +58,19 @@ namespace Axle.Resources
             #else
             : this(null) { }
             #endif
+
+        protected override IResourceExtractorRegistry ConfigureExtractors(IResourceExtractorRegistry extractors)
+        {
+            return extractors
+                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+                .Register(new FileSystemResourceExtractor())
+                #endif
+                .Register(new ResXResourceExtractor())
+                #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+                .Register(new EmbeddedResourceExtractor())
+                #endif
+                ;
+        }
     }
 }
 #endif

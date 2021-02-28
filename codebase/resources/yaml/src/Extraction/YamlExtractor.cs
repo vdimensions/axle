@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Threading.Tasks;
 using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Yaml.Extraction
@@ -7,16 +6,10 @@ namespace Axle.Resources.Yaml.Extraction
     /// <summary>
     /// A class representing the resource extractor chain for the contents of a YAML file.
     /// </summary>
-    public sealed class YamlExtractor : IResourceExtractor
+    public sealed class YamlExtractor : ResourceExtractorDecorator
     {
-        private readonly IResourceExtractor _impl;
-
         private YamlExtractor(Encoding encoding, IResourceExtractor valueResourceExtractor)
-        {
-            _impl = CompositeResourceExtractor.Create(
-                new YamlFileExtractor(encoding),
-                valueResourceExtractor);
-        }
+            : base(CompositeResourceExtractor.Create(new YamlFileExtractor(encoding), valueResourceExtractor)) { }
         private YamlExtractor(Encoding encoding) 
             : this(encoding, new ImmediateYamlValueExtractor(encoding)) { }
         private YamlExtractor(Encoding encoding, string fileName, string keyPrefix = null) 
@@ -34,13 +27,5 @@ namespace Axle.Resources.Yaml.Extraction
         /// The name of the yaml file containing the values to extract.
         /// </param>
         public YamlExtractor(string fileName)  : this(Encoding.UTF8, fileName) { }
-
-        /// <inheritdoc />
-        public ResourceInfo Extract(IResourceContext context, string name) 
-            => _impl.Extract(context, name);
-
-        /// <inheritdoc />
-        public Task<ResourceInfo> ExtractAsync(IResourceContext context, string name) 
-            => _impl.ExtractAsync(context, name);
     }
 }

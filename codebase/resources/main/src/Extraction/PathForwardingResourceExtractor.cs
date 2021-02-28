@@ -1,7 +1,5 @@
 using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using Axle.Verification;
 
 namespace Axle.Resources.Extraction
@@ -12,25 +10,40 @@ namespace Axle.Resources.Extraction
     /// looked up. 
     /// </summary>
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public class PathForwardingResourceExtractor : AbstractResourceExtractor
     {
-        private sealed class PathForwardingResourceContext : IResourceContext
+        private sealed class PathForwardingResourceContext : ResourceContextDecorator
         {
-            private readonly IResourceContext _impl;
-
-            public PathForwardingResourceContext(IResourceContext impl, Uri location)
+            public static IResourceContext Create(IResourceContext impl, Func<Uri, Uri> locationTransform)
             {
-                _impl = impl;
-                Location = location ?? _impl.Location;
+                var location = locationTransform(impl.Location);
+                if (location == null || location.Equals(impl.Location))
+                {
+                    return impl;
+                }
+
+                if (impl.Next == null)
+                {
+                    return new PathForwardingResourceContext(impl, location, null);
+                }
+                else
+                {
+                    return new PathForwardingResourceContext(impl, location, Create(impl.Next, locationTransform));
+                }
+            }
+            
+            private readonly Uri _location;
+            private readonly IResourceContext _next;
+
+            public PathForwardingResourceContext(IResourceContext impl, Uri location, IResourceContext next) : base(impl)
+            {
+                _location = location;
+                _next = next;
             }
 
-            ResourceInfo IResourceContext.Extract(string name) => _impl.Extract(name);
-
-            IEnumerable<ResourceInfo> IResourceContext.ExtractAll(string name) => _impl.ExtractAll(name);
-
-            string IResourceContext.Bundle => _impl.Bundle;
-            public Uri Location { get; }
-            CultureInfo IResourceContext.Culture => _impl.Culture;
+            public override Uri Location => _location;
+            public override IResourceContext Next => _next;
         }
 
         private readonly IResourceExtractor _extractor;
@@ -45,9 +58,7 @@ namespace Axle.Resources.Extraction
 
         protected sealed override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var pathForwardingContext = new PathForwardingResourceContext(
-                context, 
-                GetForwardedLocation(context.Location));
+            var pathForwardingContext = PathForwardingResourceContext.Create(context, GetForwardedLocation);
             return _extractor.Extract(pathForwardingContext, name);
         }
     }

@@ -2,6 +2,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
+#if !NETSTANDARD
+using System.Linq;
+#endif
 using Axle.Verification;
 
 namespace Axle.Collections.Immutable
@@ -31,6 +34,9 @@ namespace Axle.Collections.Immutable
     
     public class ImmutableList<T> : IImmutableList<T>
     {
+        /// <summary>
+        /// Gets a reference to an empty <see cref="ImmutableList{T}"/> instance.
+        /// </summary>
         public static readonly ImmutableList<T> Empty = ImmutableList.Create<T>();
         
         #if NETSTANDARD
@@ -53,7 +59,7 @@ namespace Axle.Collections.Immutable
         public IEnumerator<T> GetEnumerator() => _impl.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _impl).GetEnumerator();
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.Clear"/>
         public ImmutableList<T> Clear()
         {
             #if NETSTANDARD
@@ -74,7 +80,7 @@ namespace Axle.Collections.Immutable
             => _impl.LastIndexOf(item, index, count, equalityComparer);
         #endif
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.Add"/>
         public ImmutableList<T> Add(T value)
         {
             #if NETSTANDARD
@@ -85,7 +91,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableList<T> IImmutableList<T>.Add(T value) => Add(value);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.AddRange"/>
         public ImmutableList<T> AddRange(IEnumerable<T> items)
         {
             #if NETSTANDARD
@@ -98,7 +104,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableList<T> IImmutableList<T>.AddRange(IEnumerable<T> items) => AddRange(items);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.Insert"/>
         public ImmutableList<T> Insert(int index, T element)
         {
             #if NETSTANDARD
@@ -111,7 +117,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableList<T> IImmutableList<T>.Insert(int index, T element) => Insert(index, element);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.InsertRange"/>
         public ImmutableList<T> InsertRange(int index, IEnumerable<T> items)
         {
             #if NETSTANDARD
@@ -125,13 +131,13 @@ namespace Axle.Collections.Immutable
         IImmutableList<T> IImmutableList<T>.InsertRange(int index, IEnumerable<T> items) => InsertRange(index, items);
 
         #if NETSTANDARD
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.Remove(T,System.Collections.Generic.IEqualityComparer{T})"/>
         public ImmutableList<T> Remove(T value, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.Remove(value, equalityComparer));
         IImmutableList<T> IImmutableList<T>.Remove(T value, IEqualityComparer<T> equalityComparer) => Remove(value, equalityComparer);
         #endif
         
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.Remove(T)"/>
         public ImmutableList<T> Remove(T value)
         {
             #if NETSTANDARD
@@ -144,7 +150,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableList<T> IImmutableList<T>.Remove(T value) => Remove(value);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.RemoveAll"/>
         public ImmutableList<T> RemoveAll(Predicate<T> match)
         {
             #if NETSTANDARD
@@ -158,14 +164,14 @@ namespace Axle.Collections.Immutable
         IImmutableList<T> IImmutableList<T>.RemoveAll(Predicate<T> match) => RemoveAll(match);
 
         #if NETSTANDARD
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.RemoveRange(System.Collections.Generic.IEnumerable{T},System.Collections.Generic.IEqualityComparer{T})"/>
         public ImmutableList<T> RemoveRange(IEnumerable<T> items, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.RemoveRange(items, equalityComparer));
         IImmutableList<T> IImmutableList<T>.RemoveRange(IEnumerable<T> items, IEqualityComparer<T> equalityComparer) 
             => RemoveRange(items, equalityComparer);
         #endif
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.RemoveRange(System.Int32,System.Int32)"/>
         public ImmutableList<T> RemoveRange(int index, int count)
         {
             #if NETSTANDARD
@@ -178,7 +184,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableList<T> IImmutableList<T>.RemoveRange(int index, int count) => RemoveRange(index, count);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.RemoveAt" />
         public ImmutableList<T> RemoveAt(int index)
         {
             #if NETSTANDARD
@@ -190,8 +196,19 @@ namespace Axle.Collections.Immutable
             #endif
         }
         IImmutableList<T> IImmutableList<T>.RemoveAt(int index) => RemoveAt(index);
+        
+        /// <inheritdoc cref="IImmutableList{T}.Reverse" />
+        public ImmutableList<T> Reverse()
+        {
+            #if NETSTANDARD
+            return ImmutableList.CreateRange(_impl.Reverse());
+            #else
+            return ImmutableList.CreateRange(Enumerable.Reverse(_impl));
+            #endif
+        }
+        IImmutableList<T> IImmutableList<T>.Reverse() => Reverse();
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.SetItem" />
         public ImmutableList<T> SetItem(int index, T value)
         {
             #if NETSTANDARD
@@ -203,7 +220,7 @@ namespace Axle.Collections.Immutable
         IImmutableList<T> IImmutableList<T>.SetItem(int index, T value) => SetItem(index, value);
 
         #if NETSTANDARD
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableList{T}.Replace"/>
         public ImmutableList<T> Replace(T oldValue, T newValue, IEqualityComparer<T> equalityComparer) 
             => ImmutableList.CreateRange(_impl.Replace(oldValue, newValue, equalityComparer));
         IImmutableList<T> IImmutableList<T>.Replace(T oldValue, T newValue, IEqualityComparer<T> equalityComparer) 

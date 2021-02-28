@@ -94,7 +94,9 @@ namespace Axle.Resources.Embedded
                 namespaces.AddFirst(rootNamespace);
             }
             return namespaces
-                .Select(ns => asm.GetManifestResourceStream(ns.Length > 0 ? $"{ns}.{escapedResourceName}" : escapedResourceName))
+                .Select(ns => ns.Length > 0 ? $"{ns}.{escapedResourceName}" : escapedResourceName)
+                .Where(manifestResourceName => !string.IsNullOrEmpty(manifestResourceName))
+                .Select(manifestResourceName => asm.GetManifestResourceStream(manifestResourceName))
                 .FirstOrDefault(x => x != null);
         }
 

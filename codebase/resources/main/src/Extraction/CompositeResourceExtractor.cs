@@ -9,10 +9,24 @@ namespace Axle.Resources.Extraction
     {
         private sealed class CompositeResourceContext : IResourceContext
         {
+            private static IResourceContext CreateContextChain(CompositeResourceExtractor master, IResourceContext context)
+            {
+                if (context.Extractor is ResourceExtractorDecorator decorator && ReferenceEquals(master, decorator.Target))
+                {
+                    return context.Next;
+                }
+                return context;
+            }
+            
+            public static IResourceContext Create(CompositeResourceExtractor master, IResourceContext context, IResourceExtractor otherExtractor)
+            {
+                return new CompositeResourceContext(CreateContextChain(master, context), otherExtractor);
+            }
+            
             private readonly IResourceContext _sourceContext;
             private readonly IResourceExtractor _composedExtractor;
 
-            public CompositeResourceContext(IResourceContext sourceContext, IResourceExtractor composedExtractor)
+            private CompositeResourceContext(IResourceContext sourceContext, IResourceExtractor composedExtractor)
             {
                 _sourceContext = sourceContext;
                 _composedExtractor = composedExtractor;
@@ -30,6 +44,8 @@ namespace Axle.Resources.Extraction
             public string Bundle => _sourceContext.Bundle;
             public Uri Location => _sourceContext.Location;
             public CultureInfo Culture => _sourceContext.Culture;
+            public IResourceExtractor Extractor => _composedExtractor;
+            public IResourceContext Next => _sourceContext.Next;
         }
 
         public static IResourceExtractor Create(params IResourceExtractor[] extractors) 
@@ -39,7 +55,7 @@ namespace Axle.Resources.Extraction
             var composerArray = extractors.ToArray();
             if (composerArray.Length == 0)
             {
-                return new DelegatingExtractor();
+                return new NoopResourceExtractor();
             }
             var extractor = composerArray[0];
             for (var i = 1; i < composerArray.Length; ++i)
@@ -59,7 +75,7 @@ namespace Axle.Resources.Extraction
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var ctx = new CompositeResourceContext(context, _extractor1);
+            var ctx = CompositeResourceContext.Create(this, context, _extractor1);
             return _extractor2.Extract(ctx, name);
         }
     }

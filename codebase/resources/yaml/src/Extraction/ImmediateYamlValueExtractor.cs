@@ -13,8 +13,8 @@ namespace Axle.Resources.Yaml.Extraction
             const string ext = YamlResourceInfo.FileExtension;
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
             var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterFirst(ext, cmp);
-            yamlFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
+            keyPrefix = locStr.TakeAfterLast(ext, cmp);
+            yamlFileName = locStr.TakeBeforeLast(keyPrefix, cmp);
             const char slash = '/';
             keyPrefix = keyPrefix.TrimStart(slash);
             if (keyPrefix.EndsWith(slash.ToString()))

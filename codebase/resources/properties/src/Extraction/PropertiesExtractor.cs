@@ -7,16 +7,12 @@ namespace Axle.Resources.Properties.Extraction
     /// <summary>
     /// A class representing the resource extractor chain for the contents of a java properties file.
     /// </summary>
-    public sealed class PropertiesExtractor : IResourceExtractor
+    public sealed class PropertiesExtractor : ResourceExtractorDecorator
     {
-        private readonly IResourceExtractor _impl;
-
         private PropertiesExtractor(Encoding encoding, IResourceExtractor propertiesValueExtractor)
-        {
-            _impl = CompositeResourceExtractor.Create(
-                new PropertiesFileExtractor(encoding),
-                propertiesValueExtractor);
-        }
+            : base(CompositeResourceExtractor.Create(
+                new PropertiesFileExtractor(encoding), 
+                propertiesValueExtractor)) { }
         private PropertiesExtractor(Encoding encoding, string fileName, string keyPrefix = null)
             : this(encoding, new PropertiesValueExtractor(encoding, fileName, keyPrefix ?? string.Empty)) { }
         private PropertiesExtractor(Encoding encoding) 
@@ -34,11 +30,5 @@ namespace Axle.Resources.Properties.Extraction
         /// Initializes a new instance of the <see cref="PropertiesExtractor"/> class.
         /// </summary>
         public PropertiesExtractor() : this(Encoding.UTF8) { }
-
-        ResourceInfo IResourceExtractor.Extract(IResourceContext context, string name) 
-            => _impl.Extract(context, name);
-
-        Task<ResourceInfo> IResourceExtractor.ExtractAsync(IResourceContext context, string name) 
-            => _impl.ExtractAsync(context, name);
     }
 }

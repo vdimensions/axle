@@ -67,7 +67,7 @@ namespace Axle.Resources.Extraction
         /// <see cref="AbstractResourceExtractor"/> implementation.
         /// </summary>
         /// <param name="context">
-        /// A <see cref="ResourceContext"/> instance that represents the context of the current resource extraction. 
+        /// A <see cref="IResourceContext"/> instance that represents the context of the current resource extraction. 
         /// </param>
         /// <param name="name">
         /// A <see cref="string"/> value used to identify the requested resource. 

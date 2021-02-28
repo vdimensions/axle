@@ -1,6 +1,7 @@
 ﻿using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
+using Axle.Resources.Extraction;
 
 namespace Axle.Application
 {
@@ -11,6 +12,8 @@ namespace Axle.Application
     /// </summary>
     public interface IApplicationHost
     {
+        IResourceExtractorRegistry ConfigureDefaultResourcePaths(IResourceExtractorRegistry resourceExtractorRegistry);
+        
         /// <summary>
         /// Gets the <see cref="IDependencyContainerFactory"/> implementation supplied by the current application host.
         /// </summary>

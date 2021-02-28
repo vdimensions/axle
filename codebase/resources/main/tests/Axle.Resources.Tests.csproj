@@ -15,8 +15,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
     <None Include="paket.dependencies" />
   </ItemGroup>
 

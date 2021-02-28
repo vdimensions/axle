@@ -10,7 +10,7 @@ namespace Axle.Resources.Bundling
     /// <summary>
     /// The default implementation of the <see cref="IResourceBundleRegistry"/> interface.
     /// </summary>
-    public sealed class DefaultResourceBundleRegistry : IResourceBundleRegistry
+    internal sealed class DefaultResourceBundleRegistry : IResourceBundleRegistry
     {
         private sealed class ConfigurableBundleContent : IConfigurableBundleContent
         {
@@ -39,6 +39,7 @@ namespace Axle.Resources.Bundling
         }
 
         private readonly IDictionary<string, IConfigurableBundleContent> _perBundleContent;
+        private readonly IResourceBundleFactory _bundleFactory;
 
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class.
@@ -46,23 +47,24 @@ namespace Axle.Resources.Bundling
         /// <param name="caseSensitiveBundleNames">
         /// A <see cref="bool">boolean</see> value specifying whether the resource bundle names should be case-sensitive.
         /// </param>
-        public DefaultResourceBundleRegistry(bool caseSensitiveBundleNames)
+        public DefaultResourceBundleRegistry(bool caseSensitiveBundleNames, IResourceBundleFactory bundleFactory)
         {
             var comparer = caseSensitiveBundleNames ? StringComparer.Ordinal : StringComparer.OrdinalIgnoreCase;
             _perBundleContent = new ChronologicalDictionary<string, IConfigurableBundleContent>(comparer);
+            _bundleFactory = bundleFactory;
         }
 
         /// <summary>
         /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class that is case-insensitive towards the resource bundle names.
         /// </summary>
-        public DefaultResourceBundleRegistry() : this(false) { }
+        public DefaultResourceBundleRegistry(IResourceBundleFactory bundleFactory) : this(false, bundleFactory) { }
 
         /// <inheritdoc />
         public IConfigurableBundleContent Configure(string bundle)
         {
             if (!_perBundleContent.TryGetValue(bundle, out var contentRegistry))
             {
-                _perBundleContent.Add(bundle, contentRegistry = new ConfigurableBundleContent(bundle));
+                _perBundleContent.Add(bundle, contentRegistry = _bundleFactory.CreateBundleContent(bundle));
             }
             return contentRegistry;
         }
@@ -74,9 +76,15 @@ namespace Axle.Resources.Bundling
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         /// <inheritdoc />
-        public IResourceBundleContent this[string bundle] => 
-            _perBundleContent.TryGetValue(bundle, out var result) 
-                ? result 
-                : new ConfigurableBundleContent(bundle);
+        public IResourceBundleContent this[string bundle]
+        {
+            get
+            {
+                var bundleContent = _perBundleContent.TryGetValue(bundle, out var result)
+                    ? result
+                    : new ConfigurableBundleContent(bundle);
+                return new ReadOnlyResourceBundleContent(bundleContent);
+            }
+        }
     }
 }

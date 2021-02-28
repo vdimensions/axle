@@ -1,6 +1,5 @@
 #if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -19,8 +18,61 @@ namespace Axle.Resources
     /// </summary>
     public abstract class ResourceManager
     {
+        private sealed class ConfigurableResourceBundleFactory : ResourceBundleFactoryDecorator
+        {
+            private sealed class ConfigurableBundleContent : IConfigurableBundleContent
+            {
+                private readonly IConfigurableBundleContent _impl;
+                private readonly IResourceExtractorRegistry _extractors;
+
+                public ConfigurableBundleContent(IConfigurableBundleContent impl, ResourceManager resourceManager)
+                {
+                    _impl = impl;
+                    _extractors = resourceManager.ConfigureExtractors(_impl.Extractors);
+                }
+
+                public IConfigurableBundleContent Register(Uri location)
+                {
+                    _impl.Register(location);
+                    return this;
+                }
+
+                public IResourceExtractorRegistry Extractors => _extractors;
+                IEnumerable<IResourceExtractor> IResourceBundleContent.Extractors => _extractors;
+                public IEnumerable<Uri> Locations => _impl.Locations;
+                string IResourceBundleContent.Bundle => _impl.Bundle;
+            }
+            
+            private readonly ResourceManager _resourceManager;
+
+            public ConfigurableResourceBundleFactory(IResourceBundleFactory impl, ResourceManager resourceManager) 
+                : base(impl) 
+                => _resourceManager = resourceManager;
+
+            public override IConfigurableBundleContent CreateBundleContent(string bundle)
+            {
+                return new ConfigurableBundleContent(base.CreateBundleContent(bundle), _resourceManager);
+            }
+        }
+        
+        private sealed class ConfigurableResourceExtractorRegistry : ResourceExtractorRegistryDecorator
+        {
+            private readonly ResourceManager _resourceManager;
+
+            public ConfigurableResourceExtractorRegistry(IResourceExtractorRegistry impl, ResourceManager resourceManager) 
+                : base(impl)
+            {
+                _resourceManager = resourceManager;
+            }
+
+            public override IResourceExtractorRegistry Register(IResourceExtractor extractor)
+            {
+                return _resourceManager.ConfigureExtractors(base.Register(extractor));
+            }
+        }
+        
         #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
-        private sealed class CacheAwareBundleRegistry : IResourceBundleRegistry
+        private sealed class CacheAwareResourceBundleFactory : ResourceBundleFactoryDecorator
         {
             private sealed class CacheAwareConfigurableBundleContent : IConfigurableBundleContent
             {
@@ -48,54 +100,42 @@ namespace Axle.Resources
                 string IResourceBundleContent.Bundle => _impl.Bundle;
             }
             
-            private readonly IResourceBundleRegistry _impl;
             private readonly ICacheManager _cacheManager;
 
-            public CacheAwareBundleRegistry(IResourceBundleRegistry impl, ICacheManager cacheManager)
+            public CacheAwareResourceBundleFactory(IResourceBundleFactory impl, ICacheManager cacheManager) : base(impl)
             {
-                _impl = impl;
                 _cacheManager = cacheManager;
             }
 
-            public IEnumerator<IResourceBundleContent> GetEnumerator() => _impl.GetEnumerator();
-
-            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _impl).GetEnumerator();
-
-            public IConfigurableBundleContent Configure(string bundle) 
-                => new CacheAwareConfigurableBundleContent(bundle, _impl.Configure(bundle), _cacheManager);
-
-            public IResourceBundleContent this[string bundle] => _impl[bundle];
+            public override IConfigurableBundleContent CreateBundleContent(string bundle)
+            {
+                return new CacheAwareConfigurableBundleContent(bundle, base.CreateBundleContent(bundle), _cacheManager);
+            }
         }
         
-        private sealed class CacheAwareResourceExtractorRegistry : IResourceExtractorRegistry
+        private sealed class CacheAwareResourceExtractorRegistry : ResourceExtractorRegistryDecorator
         {
-            private readonly IResourceExtractorRegistry _impl;
             private readonly IEnumerable<IResourceBundleContent> _bundles;
             private readonly ICacheManager _cacheManager;
 
             public CacheAwareResourceExtractorRegistry(
                 IResourceExtractorRegistry impl, 
                 IEnumerable<IResourceBundleContent> bundles, 
-                ICacheManager cacheManager)
+                ICacheManager cacheManager) : base(impl)
             {
-                _impl = impl;
                 _bundles = bundles;
                 _cacheManager = cacheManager;
             }
 
-            public IEnumerator<IResourceExtractor> GetEnumerator() => _impl.GetEnumerator();
-            
-            public IResourceExtractorRegistry Register(IResourceExtractor extractor)
+            public override IResourceExtractorRegistry Register(IResourceExtractor extractor)
             {
-                var result = _impl.Register(extractor);
+                var result = base.Register(extractor);
                 foreach (var bundle in _bundles)
                 {
                     _cacheManager.Invalidate(bundle.Bundle);
                 }
                 return new CacheAwareResourceExtractorRegistry(result, _bundles, _cacheManager);
             }
-
-            IEnumerator IEnumerable.GetEnumerator() => ((IEnumerable) _impl).GetEnumerator();
         }
 
         private sealed class CachingExtractor : AbstractResourceExtractor
@@ -126,23 +166,23 @@ namespace Axle.Resources
         
         /// <summary>
         /// Creates a new instance of the current <see cref="ResourceManager"/> implementation with the provided
-        /// <paramref name="bundles"/> and <paramref name="extractors"/>.
+        /// <paramref name="bundleFactory"/> and <paramref name="extractors"/>.
         /// </summary>
-        /// <param name="bundles">
-        /// The <see cref="IResourceBundleRegistry"/> instance to be used by the current <see cref="ResourceManager"/>
+        /// <param name="bundleFactory">
+        /// The <see cref="IResourceBundleFactory"/> instance to be used by the current <see cref="ResourceManager"/>
         /// implementation.
         /// </param>
         /// <param name="extractors">
         /// The <see cref="IResourceExtractorRegistry"/> instance to be used by the current
         /// <see cref="ResourceManager"/> implementation.
         /// </param>
-        protected ResourceManager(IResourceBundleRegistry bundles, IResourceExtractorRegistry extractors)
-            : this(bundles, extractors, null) { }
+        private ResourceManager(IResourceBundleFactory bundleFactory, IResourceExtractorRegistry extractors)
+            : this(bundleFactory, extractors, null) { }
         /// <summary>
         /// Creates a new instance of the current <see cref="ResourceManager"/> implementation with the provided
-        /// <paramref name="bundles"/> and <paramref name="extractors"/>.
+        /// <paramref name="bundleFactory"/> and <paramref name="extractors"/>.
         /// </summary>
-        /// <param name="bundles">
+        /// <param name="bundleFactory">
         /// The <see cref="IResourceBundleRegistry"/> instance to be used by the current <see cref="ResourceManager"/>
         /// implementation.
         /// </param>
@@ -154,29 +194,50 @@ namespace Axle.Resources
         /// An <see cref="ICacheManager"/> instance to be used by the current <see cref="ResourceManager"/>
         /// implementation improving the performance of subsequently looked up resources.
         /// </param>
-        protected ResourceManager(
-                IResourceBundleRegistry bundles, 
+        private ResourceManager(
+                IResourceBundleFactory bundleFactory, 
                 IResourceExtractorRegistry extractors, 
                 ICacheManager cacheManager)
         {
-            bundles.VerifyArgument(nameof(bundles)).IsNotNull();
+            bundleFactory.VerifyArgument(nameof(bundleFactory)).IsNotNull();
             extractors.VerifyArgument(nameof(extractors)).IsNotNull();
+            IResourceBundleFactory factory = new ConfigurableResourceBundleFactory(bundleFactory, this);
             #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
             if ((_cacheManager = cacheManager) != null)
             {
-                Bundles = new CacheAwareBundleRegistry(bundles, _cacheManager);
-                Extractors = new CacheAwareResourceExtractorRegistry(extractors, bundles, _cacheManager);
+                factory = new CacheAwareResourceBundleFactory(factory, _cacheManager);
+                Bundles = new DefaultResourceBundleRegistry(factory);
+                Extractors = new CacheAwareResourceExtractorRegistry(new ConfigurableResourceExtractorRegistry(extractors, this), Bundles, _cacheManager);
             }
             else
             {
-                Bundles = bundles;
-                Extractors = extractors;
+                Bundles = new DefaultResourceBundleRegistry(factory);
+                Extractors = new ConfigurableResourceExtractorRegistry(extractors, this);
             }
             #else
-            Bundles = bundles;
-            Extractors = extractors;
+            Bundles = new DefaultResourceBundleRegistry(factory);
+            Extractors = new ConfigurableResourceExtractorRegistry(extractors, this);
             #endif
         }
+        
+        /// <summary>
+        /// Creates a new instance of the current <see cref="ResourceManager"/> implementation with the provided
+        /// <paramref name="cacheManager"/>.
+        /// </summary>
+        /// <param name="cacheManager">
+        /// An <see cref="ICacheManager"/> instance to be used by the current <see cref="ResourceManager"/>
+        /// implementation improving the performance of subsequently looked up resources.
+        /// </param>
+        protected ResourceManager(ICacheManager cacheManager) 
+            : this(DefaultResourceBundleFactory.Instance, new DefaultResourceExtractorRegistry(), cacheManager) { }
+        /// <summary>
+        /// Creates a new instance of the current <see cref="ResourceManager"/> implementation.
+        /// </summary>
+        protected ResourceManager() 
+            : this(DefaultResourceBundleFactory.Instance, new DefaultResourceExtractorRegistry(), null) { }
+        
+        protected virtual IResourceExtractorRegistry ConfigureExtractors(IResourceExtractorRegistry extractors) 
+            => extractors;
 
         /// <summary>
         /// Attempts to resolve a resource object based on the provided parameters.
@@ -199,8 +260,8 @@ namespace Axle.Resources
             name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
             culture.VerifyArgument(nameof(culture)).IsNotNull();
 
-            var bundleRegistry = Bundles[bundle];
-            var locations = bundleRegistry.Locations.ToArray();
+            var resourceBundle = Bundles[bundle];
+            var locations = resourceBundle.Locations.ToArray();
             if (locations.Length == 0)
             {
                 return null;
@@ -208,22 +269,30 @@ namespace Axle.Resources
             #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
             var cache = _cacheManager?.GetCache(bundle);
             var extractors = (cache == null
-                ? Extractors.Union(bundleRegistry.Extractors)
-                : Extractors.Union(bundleRegistry.Extractors).Select((e, i) => CreateCachingExtractor(e, cache, i)))
+                ? /*Extractors.Union*/(resourceBundle.Extractors)
+                : /*Extractors.Union*/(resourceBundle.Extractors).Select((e, i) => CreateCachingExtractor(e, cache, i)))
             #else
-            var extractors = Extractors.Union(bundleRegistry.Extractors)
+            var extractors = /*Extractors
+                .Union*/(resourceBundle.Extractors)
             #endif
-                    .Reverse()
-                    .ToArray();
+                .Reverse()
+                .ToArray();
+            
             foreach (var ci in culture.ExpandHierarchy())
             {
-                var context = new ResourceContext(bundle, locations, ci, extractors);
                 #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
+                var context = cache == null
+                    ? ResourceContext.Create(resourceBundle, ci)
+                    : cache.GetOrAdd<Tuple<string, Type>, IResourceContext>(
+                        Tuple.Create(ci.Name, typeof(ResourceContext)), 
+                        t => ResourceContext.Create(resourceBundle, ci));
                 var result = cache == null
-                    ? context.ExtractionChain.Extract(name)
-                    : cache.GetOrAdd(Tuple.Create(name, ci.Name), t => context.ExtractionChain.Extract(t.Item1));
+                    ? context.Extract(name)
+                    : cache.GetOrAdd(
+                        Tuple.Create(name, ci.Name, typeof(ResourceInfo)), 
+                        t => context.Extract(t.Item1));
                 #else
-                var result = context.ExtractionChain.Extract(name);
+                var result = ResourceContext.Create(resourceBundle, culture).Extract(name);
                 #endif
                 if (result != null)
                 {

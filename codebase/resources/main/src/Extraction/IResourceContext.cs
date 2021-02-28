@@ -40,21 +40,29 @@ namespace Axle.Resources.Extraction
         IEnumerable<ResourceInfo> ExtractAll(string name);
 
         /// <summary>
-        /// Gets the name of the resource bundle this <see cref="IResourceContext">resource context</see> instance is
-        /// representing.
+        /// Gets the name of the resource bundle associated with this context.
         /// </summary>
         string Bundle { get; }
 
         /// <summary>
-        /// Gets the <see cref="Uri"/> for the resource lookup location of
-        /// the current <see cref="IResourceContext"/> instance.
+        /// Gets the <see cref="Uri"/> for the resource lookup location associated with this context.
         /// </summary>
         Uri Location { get; }
 
         /// <summary>
-        /// Gets the <see cref="CultureInfo"/> representing the culture that
-        /// the current <see cref="IResourceContext"/> instance will use for resource lookup.
+        /// Gets the <see cref="CultureInfo"/> representing the culture  associated with this context.
         /// </summary>
         CultureInfo Culture { get; }
+        
+        /// <summary>
+        /// Gets the <see cref="IResourceExtractor">resource extractor</see> associated with this context.
+        /// </summary>
+        IResourceExtractor Extractor { get; }
+        
+        /// <summary>
+        /// Gets a reference to the next-in-chain <see cref="IResourceContext"/> instance, or <c>null</c> if this is
+        /// the last resource context in the chain.
+        /// </summary>
+        IResourceContext Next { get; }
     }
 }

@@ -77,6 +77,14 @@ namespace Axle.Collections.Immutable
         /// <param name="index">The index of the element to remove.</param>
         /// <returns>A new list with the element removed.</returns>
         IImmutableList<T> RemoveAt(int index);
+        
+        /// <summary>
+        /// Reverses the order of the elements in the entire immutable list.
+        /// </summary>
+        /// <returns>
+        /// The reversed list.
+        /// </returns>
+        IImmutableList<T> Reverse();
 
         /// <summary>Replaces an element in the list at a given position with the specified element.</summary>
         /// <param name="index">The position in the list of the element to replace.</param>

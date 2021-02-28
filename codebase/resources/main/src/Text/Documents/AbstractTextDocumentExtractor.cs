@@ -47,20 +47,20 @@ namespace Axle.Resources.Text.Documents
         /// </summary>
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var finalProperties = new Dictionary<string, CharSequence>(KeyComparer);
-            foreach (var propertiesFileResourceInfo in context.ExtractAll(name))
+            var textDocumentData = new Dictionary<string, CharSequence>(KeyComparer);
+            foreach (var resourceInfo in context.ExtractAll(name))
             {
-                using (var stream = propertiesFileResourceInfo.Open())
+                using (var stream = resourceInfo.Open())
                 {
                     if (stream == null)
                     {
                         continue;
                     }
 
-                    ReadData(stream, finalProperties);
+                    ReadData(stream, textDocumentData);
                 }
             }
-            return finalProperties.Count == 0 ? null : CreateResourceInfo(name, context.Culture, finalProperties);
+            return textDocumentData.Count == 0 ? null : CreateResourceInfo(name, context.Culture, textDocumentData);
         }
 
         protected abstract ITextDocumentReader GetReader(StringComparer comparer);

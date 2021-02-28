@@ -24,17 +24,19 @@ namespace Axle.Web.AspNetCore
 
         [SuppressMessage("ReSharper", "UnusedMember.Local")]
         private AspNetCoreApplicationHost() : this(DefaultApplicationHost.Instance.DependencyContainerFactory) { }
-        private AspNetCoreApplicationHost(IDependencyContainerFactory dependencyContainerFactory) : this(
-            dependencyContainerFactory is AspNetCoreDependencyContainerFactory aspNetCoreDependencyContainerFactory 
-                ? aspNetCoreDependencyContainerFactory 
-                : new AspNetCoreDependencyContainerFactory(dependencyContainerFactory)) { }
-        private AspNetCoreApplicationHost(AspNetCoreDependencyContainerFactory dependencyContainerFactory) : base(
-            DefaultApplicationHost.Instance, 
-            dependencyContainerFactory,
-            null,
-            null,
-            null,
-            Platform.Environment["ASPNETCORE_ENVIRONMENT"])
+        private AspNetCoreApplicationHost(IDependencyContainerFactory dependencyContainerFactory) 
+            : this(
+                dependencyContainerFactory is AspNetCoreDependencyContainerFactory aspNetCoreDependencyContainerFactory 
+                    ? aspNetCoreDependencyContainerFactory 
+                    : new AspNetCoreDependencyContainerFactory(dependencyContainerFactory)) { }
+        private AspNetCoreApplicationHost(AspNetCoreDependencyContainerFactory dependencyContainerFactory) 
+            : base(
+                DefaultApplicationHost.Instance, 
+                dependencyContainerFactory,
+                null,
+                null,
+                null,
+                Platform.Environment["ASPNETCORE_ENVIRONMENT"])
         {
             _exportedObjects = dependencyContainerFactory.ExportedObjects;
         }

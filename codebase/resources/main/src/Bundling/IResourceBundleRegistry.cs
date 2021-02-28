@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 
-
 namespace Axle.Resources.Bundling
 {
     /// <summary>
