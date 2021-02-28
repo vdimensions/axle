@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Linq;
+using Axle.Application;
 using Axle.Extensions.Uri;
 using Axle.Modularity;
-using Axle.Resources;
 using Axle.Verification;
 
 namespace Axle.Data.Versioning.Changeset
@@ -15,10 +15,12 @@ namespace Axle.Data.Versioning.Changeset
     [Module]
     internal sealed class DbChangesetModule : IDbChangesetRegistry, IEnumerable<DbChangelog>
     {
+        private readonly IApplicationHost _host;
         private readonly ConcurrentQueue<DbChangelog> _dbChangelogs;
 
-        public DbChangesetModule()
+        public DbChangesetModule(IApplicationHost host)
         {
+            _host = host;
             _dbChangelogs = new ConcurrentQueue<DbChangelog>();
         }
 
@@ -31,7 +33,7 @@ namespace Axle.Data.Versioning.Changeset
                         var fileName = c.Segments.LastOrDefault();
                         var location = c.Resolve("../");
                         var dataSourceName = x.DataSource;
-                        var scriptsResourceManager = new DefaultResourceManager();
+                        var scriptsResourceManager = _host.CreateResourceManager();
                         scriptsResourceManager.Bundles.Configure(dataSourceName).Register(location);
                         var resource =
                             scriptsResourceManager.Load(dataSourceName, fileName, CultureInfo.InvariantCulture);

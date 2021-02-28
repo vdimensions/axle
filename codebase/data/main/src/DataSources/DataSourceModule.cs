@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using Axle.Application;
+using Axle.Caching;
 using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources.Resources.Extraction;
@@ -17,6 +19,7 @@ using Axle.Verification;
 
 namespace Axle.Data.DataSources
 {
+    
     [Module]
     [Requires(typeof(DataModule))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -30,12 +33,12 @@ namespace Axle.Data.DataSources
         private readonly IResourceExtractor _scriptExtractor;
         private readonly IDictionary<string, DataSource> _dataSources = new ConcurrentDictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
-        public DataSourceModule(DataModule dataModule, IConfiguration configuration, ILogger logger)
+        public DataSourceModule(DataModule dataModule, IApplicationHost host, IConfiguration configuration, ILogger logger)
         {
             Logger = logger;
             _dataModule = dataModule;
             _configuration = new DataSourceConfiguration(configuration.GetConnectionStrings());
-            _dataSourceResourceManager = new DefaultResourceManager();
+            _dataSourceResourceManager = host.CreateResourceManager(new SimpleCacheManager());
             _scriptExtractor = new SqlScriptSourceExtractor(Enumerable.Select(dataModule, x => x.DialectName));
         }
 

@@ -9,24 +9,10 @@ namespace Axle.Resources.Extraction
     {
         private sealed class CompositeResourceContext : IResourceContext
         {
-            private static IResourceContext CreateContextChain(CompositeResourceExtractor master, IResourceContext context)
-            {
-                if (context.Extractor is ResourceExtractorDecorator decorator && ReferenceEquals(master, decorator.Target))
-                {
-                    return context.Next;
-                }
-                return context;
-            }
-            
-            public static IResourceContext Create(CompositeResourceExtractor master, IResourceContext context, IResourceExtractor otherExtractor)
-            {
-                return new CompositeResourceContext(CreateContextChain(master, context), otherExtractor);
-            }
-            
             private readonly IResourceContext _sourceContext;
             private readonly IResourceExtractor _composedExtractor;
 
-            private CompositeResourceContext(IResourceContext sourceContext, IResourceExtractor composedExtractor)
+            internal CompositeResourceContext(IResourceContext sourceContext, IResourceExtractor composedExtractor)
             {
                 _sourceContext = sourceContext;
                 _composedExtractor = composedExtractor;
@@ -75,7 +61,7 @@ namespace Axle.Resources.Extraction
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var ctx = CompositeResourceContext.Create(this, context, _extractor1);
+            var ctx = new CompositeResourceContext(context, _extractor1);
             return _extractor2.Extract(ctx, name);
         }
     }

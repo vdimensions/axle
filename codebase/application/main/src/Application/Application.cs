@@ -111,12 +111,12 @@ namespace Axle.Application
                         var moduleAssembly = mtype.Assembly;
                         var moduleTypeName = mtype.Name;
                         var moduleTypeNamespace = mtype.Namespace;
-                        var moduleResourceManager = new DefaultResourceManager(null);
+                        var moduleResourceManager = new ApplicationResourceManager(host, null);
 
                         moduleResourceManager.Bundles
                             .Configure(ConfigBundleName)
                             .Register(moduleAssembly)
-                            .Extractors.Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}."));
+                            .Extractors.Register(new NameForwardingResourceExtractor($"{moduleTypeNamespace}"));
 
                         var moduleConfigurationStreamProvider = new ResourceConfigurationStreamProvider(moduleResourceManager);
                         

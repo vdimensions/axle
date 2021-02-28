@@ -7,30 +7,35 @@ using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
-    public sealed class ResourceContext : IResourceContext
+    internal sealed class ResourceContext : IResourceContext
     {
-        private static IEnumerable<Tuple<CultureInfo, Uri, IResourceExtractor>> ObtainLookupMap(IResourceBundleContent resourceBundle, CultureInfo culture)
+        private static IEnumerable<Tuple<Uri, IResourceExtractor>> ObtainLookupMap(IResourceBundleContent resourceBundle)
         {
             foreach (var location in resourceBundle.Locations)
             foreach (var extractor in resourceBundle.Extractors.Reverse())
             {
-                yield return Tuple.Create(culture, location, extractor);
+                yield return Tuple.Create(location, extractor);
             }
         }
 
         public static IResourceContext Create(IResourceBundleContent resourceBundle, CultureInfo culture)
         {
-            IResourceContext result = null;
             var bundleName = resourceBundle.Bundle;
-            foreach (var rawData in ObtainLookupMap(resourceBundle, culture).Reverse())
+            var lookupMap = ObtainLookupMap(resourceBundle).Reverse().ToArray();
+            var location = lookupMap[0].Item1;
+            var extractor = lookupMap[0].Item2;
+            IResourceContext result = new ResourceContext(bundleName, location, new NoopResourceExtractor(), culture, null);
+            for (var i = 1; i < lookupMap.Length; i++)
             {
+                location = lookupMap[i].Item1;
                 var next = result;
-                result = new ResourceContext(bundleName, rawData.Item2, rawData.Item3, rawData.Item1, next);
+                result = new ResourceContext(bundleName, location, extractor, culture, next);
+                extractor = lookupMap[i].Item2;
             }
-            return result;
+            return new ResourceContext(bundleName, null, extractor, culture, result);
         }
 
-        internal ResourceContext(string bundle, Uri location, IResourceExtractor extractor, CultureInfo culture, IResourceContext next)
+        private ResourceContext(string bundle, Uri location, IResourceExtractor extractor, CultureInfo culture, IResourceContext next)
         {
             Bundle = bundle;
             Location = location;
@@ -41,18 +46,21 @@ namespace Axle.Resources.Extraction
 
         private IEnumerable<ResourceInfo> DoExtractAll(string name)
         {
-            var resource = Extractor.Extract(this, name);
-            if (resource != null)
-            {
-                resource.Bundle = Bundle;
-                yield return resource;
-            }
-
             if (Next != null)
             {
-                foreach (var extracted in Next.ExtractAll(name))
+                var resource = Extractor.Extract(Next, name);
+                if (resource != null)
                 {
-                    yield return extracted;
+                    resource.Bundle = Bundle;
+                    yield return resource;
+                }
+
+                if (Next.Next != null)
+                {
+                    foreach (var extracted in Next.ExtractAll(name))
+                    {
+                        yield return extracted;
+                    }
                 }
             }
         }
