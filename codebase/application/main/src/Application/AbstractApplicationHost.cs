@@ -177,8 +177,7 @@ namespace Axle.Application
                 .GetTypeInfo()
                 #endif
                 .Assembly;
-            var asmName = assembly.GetName();
-            bundle.Register(new Uri($"assembly://{asmName.Name}", UriKind.Absolute));
+            bundle.Register(assembly);
         }
         
         /// <summary>
@@ -196,13 +195,12 @@ namespace Axle.Application
             {
                 return;
             }
-            var asmName = assembly.GetName();
             var asmLoc = Path.GetDirectoryName(assembly.Location);
             if (asmLoc != null)
             {
                 bundle.Register(new Uri(asmLoc, UriKind.Absolute));
             }
-            bundle.Register(new Uri($"assembly://{asmName.Name}", UriKind.Absolute));
+            bundle.Register(assembly);
             #else
             return;
             #endif
