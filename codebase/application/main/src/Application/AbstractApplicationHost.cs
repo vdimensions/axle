@@ -4,7 +4,6 @@ using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
-using Axle.Resources;
 using Axle.Resources.Bundling;
 using Axle.Resources.Extraction;
 
@@ -129,14 +128,14 @@ namespace Axle.Application
             out IConfiguration hostConfig, 
             out IConfiguration appConfig)
         {
-            var hostConfigResourceMgr = new DefaultResourceManager(null);
+            var hostConfigResourceMgr = ApplicationHost.CreateResourceManager(this);
             SetupHostConfigurationResourceBundle(
                 hostConfigResourceMgr.Bundles.Configure(Application.ConfigBundleName));
             var hostConfigStreamProvider = new ResourceConfigurationStreamProvider(hostConfigResourceMgr);
             
             hostConfig = LoadConfig(hostConfigFileName, hostConfigStreamProvider, environmentName, profiles);
             
-            var appConfigResourceMgr = new DefaultResourceManager(null);
+            var appConfigResourceMgr = ApplicationHost.CreateResourceManager(this);
             SetupAppConfigurationResourceBundle(
                 appConfigResourceMgr.Bundles.Configure(Application.ConfigBundleName));
             var appConfigStreamProvider = new ResourceConfigurationStreamProvider(appConfigResourceMgr);
