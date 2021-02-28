@@ -1,5 +1,4 @@
-﻿using System;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Text;
 using Axle.Conversion;
 using Axle.IO.Extensions.Stream;
@@ -35,7 +34,7 @@ namespace Axle.Resources.Yaml.Tests
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);
-                Console.Write(data);
+                Assert.AreEqual("Hello", data);
             }
         }
         
@@ -60,7 +59,7 @@ namespace Axle.Resources.Yaml.Tests
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);
-                Console.Write(data);
+                Assert.AreEqual("Hello", data);
             }
         }
         
@@ -85,7 +84,7 @@ namespace Axle.Resources.Yaml.Tests
             {
                 var data = new BytesToStringConverter(Encoding.UTF8).Convert(stream.ToByteArray());
                 Assert.IsNotNull(data);
-                Console.Write(data);
+                Assert.AreEqual("Prefixed Hello", data);
             }
         }
     }

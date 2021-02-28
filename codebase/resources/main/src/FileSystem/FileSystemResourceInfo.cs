@@ -19,7 +19,7 @@ namespace Axle.Resources.FileSystem
         internal FileSystemResourceInfo(Uri location, string name, CultureInfo culture) : this(location, name, culture, "application/octet-stream") { }
         internal FileSystemResourceInfo(Uri location, string name, CultureInfo culture, string contentType) : base(name, culture, contentType)
         {
-            _location = location.VerifyArgument(nameof(location)).IsNotNull().Value.Resolve(name);
+            _location = location.VerifyArgument(nameof(location)).IsNotNull().Value;
         }
 
         /// <inheritdoc />

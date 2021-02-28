@@ -60,7 +60,7 @@ namespace Axle.Resources.ResX.Extraction
                     new Uri($"{prefix}/", UriKind.Relative), 
                     culture, 
                     type, 
-                    name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+                    name.VerifyArgument(nameof(name)).IsNotNullOrEmpty().Value);
             }
             return null;
         }

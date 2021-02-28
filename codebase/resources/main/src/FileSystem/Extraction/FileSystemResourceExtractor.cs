@@ -2,6 +2,7 @@
 using System;
 using System.Globalization;
 using System.IO;
+using Axle.Extensions.String;
 using Axle.Extensions.Uri;
 using Axle.Resources.Extraction;
 using Axle.Verification;
@@ -21,9 +22,16 @@ namespace Axle.Resources.FileSystem.Extraction
             #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
             var location = context.Location.Resolve(name);
             var culture = context.Culture;
-            if (CultureInfo.InvariantCulture.Equals(culture) && File.Exists(location.AbsolutePath))
+            if (!CultureInfo.InvariantCulture.Equals(culture))
             {
-                return new FileSystemResourceInfo(context.Location, name, culture);
+                var filePath = location.AbsolutePath;
+                var fileName = Path.GetFileNameWithoutExtension(filePath);
+                filePath = Path.Combine(filePath.TakeBeforeLast(fileName), $"{fileName}.{culture.Name}{Path.GetExtension(filePath)}");
+                location = new Uri(filePath, UriKind.Absolute);
+            }
+            if (File.Exists(location.AbsolutePath))
+            {
+                return new FileSystemResourceInfo(location, name, culture);
             }
             #endif
 

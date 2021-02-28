@@ -1,5 +1,6 @@
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
@@ -12,6 +13,7 @@ namespace Axle.Resources.ResX.Extraction
     /// <remarks>
     /// This implementation does not depend on the <see cref="System.Drawing">System.Drawing</see> assembly.
     /// </remarks>
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     internal sealed class SimpleResXResourceExtractor : AbstractResXResourceExtractor
     {
         protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)

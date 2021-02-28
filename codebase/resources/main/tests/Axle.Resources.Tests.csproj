@@ -25,6 +25,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Content\FileSystemTestFile.en.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\FileSystemTestFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

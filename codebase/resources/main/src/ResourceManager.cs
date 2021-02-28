@@ -268,15 +268,7 @@ namespace Axle.Resources
             }
             #if NETSTANDARD1_1_OR_NEWER || NETFRAMEWORK
             var cache = _cacheManager?.GetCache(bundle);
-            var extractors = (cache == null
-                ? /*Extractors.Union*/(resourceBundle.Extractors)
-                : /*Extractors.Union*/(resourceBundle.Extractors).Select((e, i) => CreateCachingExtractor(e, cache, i)))
-            #else
-            var extractors = /*Extractors
-                .Union*/(resourceBundle.Extractors)
             #endif
-                .Reverse()
-                .ToArray();
             
             foreach (var ci in culture.ExpandHierarchy())
             {

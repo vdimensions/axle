@@ -11,7 +11,7 @@ namespace Axle.Resources.ResX.Extraction
 
         internal ResXResourceResolver(Type resourceType) 
         {
-            _resourceType = resourceType.VerifyArgument(nameof(resourceType)).IsNotNull();
+            _resourceType = resourceType.VerifyArgument(nameof(resourceType)).IsNotNull().Value;
         }
 
         public object Resolve(Uri location, CultureInfo culture)
