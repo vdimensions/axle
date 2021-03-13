@@ -63,7 +63,7 @@ namespace Axle.Resources.Extraction
         protected virtual bool Accepts(Uri location) => true;
 
         /// <summary>
-        /// Override this method to implement the actual resource extraction logic for the current
+        /// When overriden in a derived class, this method performs the actual resource extraction logic for the current
         /// <see cref="AbstractResourceExtractor"/> implementation.
         /// </summary>
         /// <param name="context">

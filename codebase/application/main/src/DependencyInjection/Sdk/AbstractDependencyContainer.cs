@@ -1,5 +1,6 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using System;
+using Axle.Verification;
 
 
 namespace Axle.DependencyInjection.Sdk
@@ -26,6 +27,7 @@ namespace Axle.DependencyInjection.Sdk
 
         public IDependencyContainer RegisterInstance(object instance, string name, params string[] aliases)
         {
+            Verifier.IsNotNull(Verifier.VerifyArgument(instance, nameof(instance)));
             _dependencyMap.RegisterConstant(name, instance);
             foreach (var alias in aliases)
             {
@@ -36,6 +38,7 @@ namespace Axle.DependencyInjection.Sdk
 
         public IDependencyContainer RegisterType(Type type, string name, params string[] aliases)
         {
+            Verifier.IsNotNull(Verifier.VerifyArgument(type, nameof(type)));
             var resolver = new ParentLookupDependencyResolver(_dependencyMap, Parent);
             _dependencyMap.RegisterSingletion(name, type, DependencyDescriptorProvider, resolver);
             foreach (var alias in aliases)

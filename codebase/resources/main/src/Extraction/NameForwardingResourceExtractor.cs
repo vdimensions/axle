@@ -24,6 +24,7 @@ namespace Axle.Resources.Extraction
             PathPrefix = pathPrefix;
         }
 
+        /// <inheritdoc />
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             var path = UriExtensions.Resolve(PathPrefix, name);
