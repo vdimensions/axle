@@ -12,32 +12,6 @@ namespace Axle.Resources.Bundling
     /// </summary>
     internal sealed class DefaultResourceBundleRegistry : IResourceBundleRegistry
     {
-        private sealed class ConfigurableBundleContent : IConfigurableBundleContent
-        {
-            private readonly LinkedList<Uri> _locations;
-            private readonly IResourceExtractorRegistry _extractors;
-            private readonly string _bundle;
-
-            public ConfigurableBundleContent(string bundle)
-            {
-                _bundle = bundle;
-                _locations = new LinkedList<Uri>();
-                _extractors = new DefaultResourceExtractorRegistry();
-            }
-
-            IConfigurableBundleContent IConfigurableBundleContent.Register(Uri location)
-            {
-                _locations.AddFirst(location);
-                return this;
-            }
-
-            IResourceExtractorRegistry IConfigurableBundleContent.Extractors => _extractors;
-
-            IEnumerable<Uri> IResourceBundleContent.Locations => _locations;
-            IEnumerable<IResourceExtractor> IResourceBundleContent.Extractors => _extractors;
-            string IResourceBundleContent.Bundle => _bundle;
-        }
-
         private readonly IDictionary<string, IConfigurableBundleContent> _perBundleContent;
         private readonly IResourceBundleFactory _bundleFactory;
 
@@ -82,7 +56,7 @@ namespace Axle.Resources.Bundling
             {
                 var bundleContent = _perBundleContent.TryGetValue(bundle, out var result)
                     ? result
-                    : new ConfigurableBundleContent(bundle);
+                    : _bundleFactory.CreateBundleContent(bundle);
                 return new ReadOnlyResourceBundleContent(bundleContent);
             }
         }
