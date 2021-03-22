@@ -1,4 +1,5 @@
 ﻿using Axle.Modularity;
+using Axle.Web.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -6,6 +7,7 @@ namespace Axle.Web.AspNetCore.Authentication
 {
     [Module]
     [RequiresAspNetCore]
+    [UtilizesAspNetCoreRouting]
     internal sealed class AspNetCoreAuthenticationModule : IServiceConfigurer, IApplicationConfigurer
     {
         void IServiceConfigurer.Configure(IServiceCollection services)

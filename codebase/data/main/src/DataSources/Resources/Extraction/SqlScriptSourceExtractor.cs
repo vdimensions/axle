@@ -52,6 +52,12 @@ namespace Axle.Data.DataSources.Resources.Extraction
                 {
                     continue;
                 }
+
+                if (queryResource is SqlScriptSourceInfo)
+                {
+                    return queryResource;
+                }
+                
                 using (var stream = queryResource.Open())
                 using (var reader = new StreamReader(stream, Encoding.UTF8, true, BufferSize))
                 {

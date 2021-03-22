@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Axle.DependencyInjection;
 
 namespace Axle.Application

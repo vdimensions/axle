@@ -1,5 +1,6 @@
 ﻿using Axle.Modularity;
 using Axle.Web.AspNetCore.Authentication;
+using Axle.Web.AspNetCore.Routing;
 #if NETSTANDARD2_1_OR_NEWER
 using Microsoft.AspNetCore.Builder;
 #endif
@@ -9,6 +10,7 @@ namespace Axle.Web.AspNetCore.Authorization
 {
     [Module]
     [RequiresAspNetCore]
+    [UtilizesAspNetCoreRouting]
     [UtilizesAspNetCoreAuthentication]
     internal sealed class AspNetCoreAuthorizationModule : IServiceConfigurer, IApplicationConfigurer
     {

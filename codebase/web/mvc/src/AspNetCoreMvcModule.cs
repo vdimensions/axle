@@ -12,10 +12,7 @@ using Axle.Web.AspNetCore.Routing;
 using Axle.Web.AspNetCore.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-#if NETSTANDARD2_1_OR_NEWER
-#else
 using Microsoft.AspNetCore.Mvc;
-#endif
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -79,26 +76,37 @@ namespace Axle.Web.AspNetCore.Mvc
         {
             // SEE: https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.1&tabs=visual-studio
 
-            services.AddControllersWithViews();
-            services.AddRazorPages();
-        }
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IWebHostEnvironment _) 
-        {
-            app.UseEndpoints(e => { });
+            // TODO
+            // services.AddControllers();
+            // services.AddControllersWithViews();
+            // services.AddRazorPages();
+            Configure(services.AddMvc());
         }
         #else
         void IServiceConfigurer.Configure(IServiceCollection services) => Configure(services.AddMvc());
-
+        #endif
+        
+        #if NETSTANDARD2_1_OR_NEWER
+        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IWebHostEnvironment _)
+        {
+            app.UseMvc();
+        }
+        #else
         void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
         {
             app.UseMvc(Configure);
         }
+        #endif
         
         private void Configure(IMvcBuilder builder)
         {
-            for (var i = 0; i < _configurers.Count; ++i)
+            #if NETSTANDARD2_1_OR_NEWER
+            builder.AddMvcOptions(options => options.EnableEndpointRouting = false);
+            #endif
+            
+            foreach (var configurer in _configurers)
             {
-                _configurers[i].ConfigureMvc(builder);
+                configurer.ConfigureMvc(builder);
             }
 
             builder.AddMvcOptions(OverrideModelBinding);
@@ -114,13 +122,12 @@ namespace Axle.Web.AspNetCore.Mvc
             //options.ModelBinderProviders.Clear();
             options.ModelBinderProviders.Insert(0, new AxleModelBinderProvider(_modelResolverTypes, _modelResolverProviders, bp));
         }
-        #endif
 
         private void Configure(IRouteBuilder routeBuilder)
         {
-            for (var i = 0; i < _routeConfigurers.Count; ++i)
+            foreach (var configurer in _routeConfigurers)
             {
-                _routeConfigurers[i].ConfigureRoutes(routeBuilder);
+                configurer.ConfigureRoutes(routeBuilder);
             }
         }
 

@@ -24,7 +24,11 @@ namespace Axle.Resources.Bundling
 
             IConfigurableBundleContent IConfigurableBundleContent.Register(Uri location)
             {
-                _locations.AddFirst(location);
+                // Prevent issues if registering the same location twice in a row
+                if (_locations.Count == 0 || !location.Equals(_locations.First.Value))
+                {
+                    _locations.AddFirst(location);
+                }
                 return this;
             }
 

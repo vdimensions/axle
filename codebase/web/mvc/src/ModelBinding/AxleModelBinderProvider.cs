@@ -40,12 +40,13 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
                     .FirstOrDefault(x => x != null);
                 var binder = candidateBinder ?? context.CreateBinder(metadata);
                 #if NETSTANDARD2_1_OR_NEWER
+                if (binder.GetType().Name.Equals("PlaceholderBinder", StringComparison.Ordinal))
                 #else
                 if (binder is PlaceholderBinder)
+                #endif
                 {
                     continue;
                 }
-                #endif
                 tuples.AddOrUpdate(type, Tuple.Create(metadata, binder), (_, existing) => existing);
             }
 

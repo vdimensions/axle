@@ -42,19 +42,6 @@ namespace Axle.Application
 
         private DefaultApplicationHost() : base(null, null, InferredEnvironmentName) { }
 
-        public override IResourceExtractorRegistry ConfigureDefaultResourcePaths(IResourceExtractorRegistry extractors)
-        {
-            return extractors
-                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
-                .Register(new FileSystemResourceExtractor())
-                #endif
-                .Register(new ResXResourceExtractor())
-                #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-                .Register(new EmbeddedResourceExtractor())
-                #endif
-                ;
-        }
-
         /// <inheritdoc />
         protected override void SetupAppConfigurationResourceBundle(IConfigurableBundleContent bundle)
         {

@@ -1,11 +1,18 @@
 ﻿using System;
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.IO;
+#endif
 using System.Reflection;
 using Axle.Configuration;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Resources.Bundling;
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+using Axle.Resources.Embedded.Extraction;
+#endif
 using Axle.Resources.Extraction;
+using Axle.Resources.FileSystem.Extraction;
+using Axle.Resources.ResX.Extraction;
 
 namespace Axle.Application
 {
@@ -234,8 +241,18 @@ namespace Axle.Application
         public void Dispose() => Dispose(true);
         void IDisposable.Dispose() => Dispose(true);
 
-        public virtual IResourceExtractorRegistry ConfigureDefaultResourcePaths(IResourceExtractorRegistry extractors) 
-            => extractors;
+        public virtual IResourceExtractorRegistry ConfigureDefaultResourcePaths(IResourceExtractorRegistry extractors)
+        {
+            return extractors
+                #if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+                .Register(new FileSystemResourceExtractor())
+                #endif
+                .Register(new ResXResourceExtractor())
+                #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+                .Register(new EmbeddedResourceExtractor())
+                #endif
+                ;
+        }
 
         /// <inheritdoc />
         public IDependencyContainerFactory DependencyContainerFactory { get; }
