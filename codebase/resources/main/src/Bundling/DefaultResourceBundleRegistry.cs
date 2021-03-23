@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Axle.Collections;
-using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Bundling
 {

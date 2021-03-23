@@ -46,7 +46,6 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
             _binders = binders;
         }
 
-
         public async Task BindModelAsync(ModelBindingContext bindingContext)
         {
             ModelResolutionContext defaultResolutionContext = new ModelBinderResolutionContext(bindingContext, _metadata);

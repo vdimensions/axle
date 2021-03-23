@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Routing;
 
-namespace Axle.Web.AspNetCore.Mvc
+namespace Axle.Web.AspNetCore.Mvc.Routing
 {
     [RequiresAspNetCoreMvc]
-    public interface IMvcRouteConfigurer
+    public interface IRouteBuilderConfigurer
     {
         void ConfigureRoutes(IRouteBuilder routeBuilder);
     }

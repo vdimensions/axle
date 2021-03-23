@@ -1,9 +1,11 @@
 ﻿using Axle.Modularity;
 using Axle.Web.AspNetCore.Authentication;
+using Axle.Web.AspNetCore.Cors;
 using Axle.Web.AspNetCore.Routing;
-#if NETSTANDARD2_1_OR_NEWER
+using Axle.Web.AspNetCore.Sdk;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
-#endif
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Axle.Web.AspNetCore.Authorization
@@ -12,20 +14,24 @@ namespace Axle.Web.AspNetCore.Authorization
     [RequiresAspNetCore]
     [UtilizesAspNetCoreRouting]
     [UtilizesAspNetCoreAuthentication]
-    internal sealed class AspNetCoreAuthorizationModule : IServiceConfigurer, IApplicationConfigurer
+    [UtilizesAspNetCoreCors]
+    internal sealed class AspNetCoreAuthorizationModule 
+        : AbstractConfigurableAspNetCoreModule<IAuthorizationConfigurer, AuthorizationOptions>,
+          IServiceConfigurer, 
+          IApplicationConfigurer
     {
         void IServiceConfigurer.Configure(IServiceCollection services)
         {
-            //services.AddAuthorization();
+            services.AddAuthorization(Configure);
         }
 
         #if NETSTANDARD2_1_OR_NEWER
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env) 
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IWebHostEnvironment env) 
         {
             app.UseAuthorization();
         }
         #else
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env) { }
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IHostingEnvironment env) { }
         #endif
     }
 }

@@ -20,6 +20,8 @@
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Authentication.Abstractions.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Authentication.Core.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Authentication.OpenIdConnect.props" />
+  <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Authorization.props" />
+  <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Cors.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Hosting.Abstractions.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Hosting.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Http.props" />

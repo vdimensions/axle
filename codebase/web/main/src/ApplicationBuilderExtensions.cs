@@ -3,6 +3,8 @@ using Axle.Application;
 using Axle.Verification;
 using Axle.Web.AspNetCore.FileServer;
 using Axle.Web.AspNetCore.Hosting;
+using Axle.Web.AspNetCore.Hosting.IIS;
+using Axle.Web.AspNetCore.Hosting.Kestrel;
 using Axle.Web.AspNetCore.Routing;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
@@ -10,6 +12,7 @@ using Microsoft.AspNetCore.Hosting;
 namespace Axle.Web.AspNetCore
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     public static class ApplicationBuilderExtensions
     {
         private static IApplicationBuilder RegisterAspNetCoreModule(IApplicationBuilder app, IWebHostBuilder webHostBuilder)
@@ -41,8 +44,7 @@ namespace Axle.Web.AspNetCore
         
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IApplicationBuilder UseKestrel(this IApplicationBuilder app) 
-            => app.ConfigureModules(m => m.Load<KestrelModule>());
-        
+            => app.ConfigureModules(m => m.Load<KestrelServerModule>());
         
         [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
         public static IApplicationBuilder UseStaticFiles(this IApplicationBuilder app) => 

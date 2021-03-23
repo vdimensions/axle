@@ -8,11 +8,15 @@ using Axle.Web.AspNetCore.Authentication;
 using Axle.Web.AspNetCore.Authorization;
 using Axle.Web.AspNetCore.Cors;
 using Axle.Web.AspNetCore.Mvc.ModelBinding;
+using Axle.Web.AspNetCore.Mvc.RazorPages;
+using Axle.Web.AspNetCore.Mvc.Routing;
 using Axle.Web.AspNetCore.Routing;
+using Axle.Web.AspNetCore.Sdk;
 using Axle.Web.AspNetCore.Session;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,92 +32,130 @@ namespace Axle.Web.AspNetCore.Mvc
     public sealed class AspNetCoreMvcModule : IServiceConfigurer, IApplicationConfigurer, IModelTypeRegistry
     {
         private readonly ILogger _logger;
-        private readonly IList<IMvcConfigurer> _configurers;
-        private readonly IList<IMvcRouteConfigurer> _routeConfigurers;
-        private readonly IList<IModelResolverProvider> _modelResolverProviders;
+        private readonly IList<IRouteBuilderConfigurer> _routeBuilderConfigurers = new List<IRouteBuilderConfigurer>();
+        private readonly IList<IAspNetCoreConfigurer<IMvcBuilder>> _mvcBuilderConfigurers = new List<IAspNetCoreConfigurer<IMvcBuilder>>();
+        private readonly IList<IAspNetCoreConfigurer<MvcOptions>> _mvcConfigurers = new List<IAspNetCoreConfigurer<MvcOptions>>();
+        private readonly IList<IAspNetCoreConfigurer<RazorPagesOptions>> _razorPagesConfigurers = new List<IAspNetCoreConfigurer<RazorPagesOptions>>();
+        private readonly IList<IModelResolverProvider> _modelResolverProviders = new List<IModelResolverProvider>();
         private readonly ICollection<Type> _modelResolverTypes = new HashSet<Type>();
-
 
         public AspNetCoreMvcModule(ILogger logger)
         {
             _logger = logger;
-            _configurers = new List<IMvcConfigurer>();
-            _routeConfigurers = new List<IMvcRouteConfigurer>();
-            _modelResolverProviders = new List<IModelResolverProvider>();
         }
-
-        [ModuleInit]
-        internal void Init()
-        {
-        }
+        
+        #region Initialize
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyInitialized]
+        internal void OnDependencyInitialized(IRouteBuilderConfigurer configurer) => _routeBuilderConfigurers.Add(configurer);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
-        internal void OnDependencyInitialized(IMvcConfigurer configurer) => _configurers.Add(configurer);
+        internal void OnDependencyInitialized(IMvcBuilderConfigurer configurer) => _mvcBuilderConfigurers.Add(configurer);
         
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
-        internal void OnDependencyInitialized(IMvcRouteConfigurer configurer) => _routeConfigurers.Add(configurer);
+        internal void OnDependencyInitialized(IMvcConfigurer configurer) => _mvcConfigurers.Add(configurer);
+        
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyInitialized]
+        internal void OnDependencyInitialized(IRazorPagesConfigurer configurer) => _razorPagesConfigurers.Add(configurer);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyInitialized]
         internal void OnDependencyInitialized(IModelResolverProvider configurer) => _modelResolverProviders.Add(configurer);
+        #endregion Initialize
+        
+        #region Terminate
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyTerminated]
+        internal void OnDependencyTerminated(IRouteBuilderConfigurer configurer) => _routeBuilderConfigurers.Remove(configurer);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyTerminated]
-        internal void OnDependencyTerminated(IMvcConfigurer configurer) => _configurers.Remove(configurer);
+        internal void OnDependencyTerminated(IMvcBuilderConfigurer configurer) => _mvcBuilderConfigurers.Remove(configurer);
         
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyTerminated]
-        internal void OnDependencyTerminated(IMvcRouteConfigurer configurer) => _routeConfigurers.Remove(configurer);
+        internal void OnDependencyTerminated(IMvcConfigurer configurer) => _mvcConfigurers.Remove(configurer);
+        
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        [ModuleDependencyTerminated]
+        internal void OnDependencyTerminated(IRazorPagesConfigurer configurer) => _razorPagesConfigurers.Remove(configurer);
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleDependencyTerminated]
         internal void OnDependencyTerminated(IModelResolverProvider configurer) => _modelResolverProviders.Remove(configurer);
-
-        #if NETSTANDARD2_1_OR_NEWER
+        #endregion Terminate
+        
         void IServiceConfigurer.Configure(IServiceCollection services) 
         {
             // SEE: https://docs.microsoft.com/en-us/aspnet/core/migration/22-to-30?view=aspnetcore-3.1&tabs=visual-studio
+            // SEE: https://dotnettutorials.net/lesson/difference-between-addmvc-and-addmvccore-method/
 
-            // TODO
-            // services.AddControllers();
-            // services.AddControllersWithViews();
-            // services.AddRazorPages();
-            Configure(services.AddMvc());
-        }
-        #else
-        void IServiceConfigurer.Configure(IServiceCollection services) => Configure(services.AddMvc());
-        #endif
-        
-        #if NETSTANDARD2_1_OR_NEWER
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IWebHostEnvironment _)
-        {
-            app.UseMvc();
-        }
-        #else
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment _)
-        {
-            app.UseMvc(Configure);
-        }
-        #endif
-        
-        private void Configure(IMvcBuilder builder)
-        {
+            var razorPagesConfigured = false;
             #if NETSTANDARD2_1_OR_NEWER
-            builder.AddMvcOptions(options => options.EnableEndpointRouting = false);
+            IMvcBuilder builder;
+            if (_mvcBuilderConfigurers.All(c => c is IRazorPagesBuilderConfigurer))
+            {
+                builder = services.AddRazorPages(ConfigureRazorPages).AddMvcOptions(ConfigureMvc);
+                razorPagesConfigured = true;
+            }
+            else if (_mvcBuilderConfigurers.Any(c => c is IMvcBuilderConfigurer))
+            {
+                builder = services.AddMvc(ConfigureMvc);
+            }
+            else if (_mvcBuilderConfigurers.Any(c => c is IControllersWithViewsConfigurer))
+            {
+                builder = services.AddControllersWithViews(ConfigureMvc);
+            }
+            else
+            {
+                builder = services.AddControllers(ConfigureMvc);
+            }
+            #else
+            var builder = services.AddMvc(ConfigureMvc);
             #endif
             
-            foreach (var configurer in _configurers)
+            if (_razorPagesConfigurers.Count > 0 & !razorPagesConfigured)
             {
-                configurer.ConfigureMvc(builder);
+                builder.AddRazorPagesOptions(ConfigureRazorPages);
             }
-
-            builder.AddMvcOptions(OverrideModelBinding);
+            
+            foreach (var configurer in _mvcBuilderConfigurers)
+            {
+                configurer.Configure(builder);
+            }
         }
-
-        private void OverrideModelBinding(MvcOptions options)
+        
+        #if NETSTANDARD2_1_OR_NEWER
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IWebHostEnvironment _)
+        #else
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IHostingEnvironment _)
+        #endif
         {
+            app.UseMvc(ConfigureRouteBuilder);
+        }
+        
+        private void ConfigureRazorPages(RazorPagesOptions options)
+        {
+            foreach (var configurer in _razorPagesConfigurers)
+            {
+                configurer.Configure(options);
+            }
+        }
+        
+        private void ConfigureMvc(MvcOptions options)
+        {
+            #if NETSTANDARD2_1_OR_NEWER
+            options.EnableEndpointRouting = false;
+            #endif
+            
+            foreach (var configurer in _mvcConfigurers)
+            {
+                configurer.Configure(options);
+            }
+            
             foreach (var modelResolverProvider in _modelResolverProviders)
             {
                 modelResolverProvider.RegisterTypes(this);
@@ -123,9 +165,9 @@ namespace Axle.Web.AspNetCore.Mvc
             options.ModelBinderProviders.Insert(0, new AxleModelBinderProvider(_modelResolverTypes, _modelResolverProviders, bp));
         }
 
-        private void Configure(IRouteBuilder routeBuilder)
+        private void ConfigureRouteBuilder(IRouteBuilder routeBuilder)
         {
-            foreach (var configurer in _routeConfigurers)
+            foreach (var configurer in _routeBuilderConfigurers)
             {
                 configurer.ConfigureRoutes(routeBuilder);
             }

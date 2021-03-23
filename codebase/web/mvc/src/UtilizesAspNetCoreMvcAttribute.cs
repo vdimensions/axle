@@ -4,7 +4,7 @@ using Axle.Modularity;
 
 namespace Axle.Web.AspNetCore.Mvc
 {
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public sealed class UtilizesAspNetCoreMvcAttribute : UtilizesAttribute
     {
