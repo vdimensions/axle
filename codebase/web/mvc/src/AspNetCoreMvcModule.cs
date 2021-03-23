@@ -119,7 +119,7 @@ namespace Axle.Web.AspNetCore.Mvc
             
             if (_razorPagesConfigurers.Count > 0 & !razorPagesConfigured)
             {
-                builder.AddRazorPagesOptions(ConfigureRazorPages);
+                services.AddRazorPages(ConfigureRazorPages);
             }
             
             foreach (var configurer in _mvcBuilderConfigurers)
