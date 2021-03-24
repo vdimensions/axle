@@ -4,7 +4,6 @@
   </PropertyGroup>
 
   <Import Project="../../../../ref/Reference.Axle.Web.AspNetCore.targets" />
-  <Import Project="../../../../ref/Reference.Axle.Web.AspNetCore.Cors.targets" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.props" />
   <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Mvc.props" />
 </Project>
