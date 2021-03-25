@@ -7,6 +7,6 @@
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
-  <Import Project="../../../../ref/ext/Reference.System.Configuration.ConfigurationManager.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Configuration.ConfigurationManager.props" />
 
 </Project>

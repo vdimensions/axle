@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Diagnostics.CodeAnalysis;
+﻿using System.Diagnostics.CodeAnalysis;
 using Axle.Modularity;
 using Axle.Web.AspNetCore.Sdk;
 using Microsoft.AspNetCore.Hosting;

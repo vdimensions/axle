@@ -2,10 +2,7 @@
 using Axle.Web.AspNetCore.Routing;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Cors.Infrastructure;
-#if NETSTANDARD2_1_OR_NEWER
-#else
 using Microsoft.AspNetCore.Hosting;
-#endif
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Axle.Web.AspNetCore.Cors
@@ -42,10 +39,10 @@ namespace Axle.Web.AspNetCore.Cors
             }           
         }
 
-        #if NETSTANDARD2_1_OR_NEWER
-        public void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        #if NETCOREAPP3_0_OR_NEWER
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         #else
-        public void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         #endif
         {
             app.UseCors();

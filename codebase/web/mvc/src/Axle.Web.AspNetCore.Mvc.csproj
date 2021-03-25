@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp3.0;netcoreapp2.2;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;netcoreapp3.1;netcoreapp3.0;netcoreapp2.2;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <Import Project="../../../../ref/Reference.Axle.Web.AspNetCore.targets" />
-  <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.props" />
-  <Import Project="../../../../ref/ext/Reference.Microsoft.AspNetCore.Mvc.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Mvc.props" />
 </Project>

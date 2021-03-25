@@ -4,6 +4,7 @@ using Axle.Web.AspNetCore.Routing;
 using Axle.Web.AspNetCore.Sdk;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Axle.Web.AspNetCore.Authentication
@@ -22,10 +23,10 @@ namespace Axle.Web.AspNetCore.Authentication
             services.AddAuthentication(Configure);
         }
 
-        #if NETSTANDARD2_1_OR_NEWER
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env)
+        #if NETCOREAPP3_0_OR_NEWER
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IWebHostEnvironment env)
         #else
-        void IApplicationConfigurer.Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env)
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IHostingEnvironment env)
         #endif
         {
             app.UseAuthentication();

@@ -13,6 +13,11 @@ using Axle.Verification;
 
 namespace Axle.DependencyInjection.Sdk
 {
+    /// <summary>
+    /// The default implementation of the <see cref="IDependencyDescriptorProvider"/> interface.
+    /// </summary>
+    /// <seealso cref="IDependencyDescriptorProvider"/>
+    /// <seealso cref="AbstractDependencyDescriptorProvider"/>
     public class DefaultDependencyDescriptorProvider : AbstractDependencyDescriptorProvider
     {
         private const ScanOptions MemberScanOptions = ScanOptions.Instance|ScanOptions.Public|ScanOptions.NonPublic;

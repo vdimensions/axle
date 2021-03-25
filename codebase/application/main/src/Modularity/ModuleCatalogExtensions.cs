@@ -209,6 +209,9 @@ namespace Axle.Modularity
         /// Modules of the same rank can be simultaneously initialized in multiple threads, if parallel option is
         /// specified.
         /// </summary>
+        /// <param name="moduleCatalog">
+        /// The <see cref="IModuleCatalog"/> instance this extension method is invoked on.
+        /// </param>
         /// <param name="modulesToLaunch">
         /// An collection of modules to be ranked.
         /// </param>

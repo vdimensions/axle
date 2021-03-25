@@ -11,5 +11,5 @@
   </PropertyGroup>
 
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
-  <Import Project="../../../../ref/ext/Reference.System.Data.SqlClient.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.SqlClient.props" />
 </Project>

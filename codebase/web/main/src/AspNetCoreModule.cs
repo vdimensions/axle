@@ -118,7 +118,7 @@ namespace Axle.Web.AspNetCore
             lifeTime.ApplicationStopping.Register(OnApplicationStopping);
             lifeTime.ApplicationStopped.Register(OnApplicationStopped);
 
-            #if NETSTANDARD2_1_OR_NEWER
+            #if NETCOREAPP3_0_OR_NEWER
             var hostingEnvironment = services.GetService<IWebHostEnvironment>();
             #else
             var hostingEnvironment = services.GetService<IHostingEnvironment>();

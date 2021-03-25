@@ -62,11 +62,11 @@
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Versioning\AutoVersioning.targets" Condition=" '$(EnableAutoVersioning)' == 'true' " />
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.targets" Condition=" '$(EnablePackagingProperties)' == 'true' " />
   <ItemGroup>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="0.3.*">
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="0.4.*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="0.3.*">
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="0.4.*">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>

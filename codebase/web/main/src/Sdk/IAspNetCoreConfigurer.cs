@@ -4,7 +4,7 @@ namespace Axle.Web.AspNetCore.Sdk
     {
         void Configure(TOptions options);
     }
-    public interface IAspNetCoreConfigurer<TContext, in TOptions>
+    public interface IAspNetCoreConfigurer<in TContext, in TOptions>
     {
         void Configure(TContext context, TOptions options);
     }

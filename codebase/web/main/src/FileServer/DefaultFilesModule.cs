@@ -10,17 +10,13 @@ namespace Axle.Web.AspNetCore.FileServer
     {
         public DefaultFilesModule(IConfiguration configuration)
         {
-
         }
 
-        void IApplicationConfigurer.Configure(
-            Microsoft.AspNetCore.Builder.IApplicationBuilder app,
-            #if NETSTANDARD2_1_OR_NEWER
-            IWebHostEnvironment env
-            #else
-            IHostingEnvironment env
-            #endif
-            )
+        #if NETCOREAPP3_0_OR_NEWER
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        #else
+        void IApplicationConfigurer.Configure(IApplicationBuilder app, IHostingEnvironment env)
+        #endif
         {
             app.UseDefaultFiles();
         }

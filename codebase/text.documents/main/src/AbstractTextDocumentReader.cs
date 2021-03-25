@@ -17,6 +17,17 @@ namespace Axle.Text.Documents
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public abstract class AbstractTextDocumentReader : ITextDocumentReader
     {
+        /// <summary>
+        /// Tokenizes a composite key into a collection of simple keys.
+        /// </summary>
+        /// <param name="key">
+        /// The key to tokenize.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> array representing the simple keys that compose the provided <paramref name="key"/>
+        /// In case the provided key is a simple key itself, the result is a singleton array containing the provided
+        /// key.
+        /// </returns>
         protected static string[] TokenizeKey(string key) => TextDocumentObject.Tokenize(key);
         
         private static IEnumerable<ITextDocumentNode> FixHierarchy(string key, IEnumerable<ITextDocumentNode> nodes)
@@ -46,6 +57,13 @@ namespace Axle.Text.Documents
             return currentNodes;
         }
 
+        /// <summary>
+        /// When overriden in a derived class, initializes the members managed by the AbstractTextDocumentReader
+        /// abstract class.
+        /// </summary>
+        /// <param name="comparer">
+        /// An instance of <see cref="IEqualityComparer{T}"/> that will be used for key comparison during value lookup.
+        /// </param>
         protected AbstractTextDocumentReader(IEqualityComparer<string> comparer)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer)));
@@ -140,6 +158,9 @@ namespace Axle.Text.Documents
             return ReadStructuredData(CreateAdapter(data), Comparer);
         }
 
+        /// <summary>
+        /// The <see cref="IEqualityComparer{T}"/> that is used for key comparison.
+        /// </summary>
         protected IEqualityComparer<string> Comparer { get; }
     }
 }

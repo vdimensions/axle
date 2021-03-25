@@ -18,7 +18,7 @@ namespace Axle.Web.AspNetCore.Routing
     {
         void IServiceConfigurer.Configure(IServiceCollection services) => services.AddRouting(Configure);
 
-        #if NETSTANDARD2_1_OR_NEWER
+        #if NETCOREAPP3_0_OR_NEWER
         void IApplicationConfigurer.Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             app.UseRouting();

@@ -1,4 +1,4 @@
-#if NETSTANDARD2_1_OR_NEWER
+#if NETCOREAPP3_0_OR_NEWER
 using Axle.Web.AspNetCore.Sdk;
 using Microsoft.Extensions.DependencyInjection;
 

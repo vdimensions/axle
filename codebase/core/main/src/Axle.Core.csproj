@@ -10,12 +10,12 @@
     <Description>Axle Framework Core Library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../../ref/ext/Reference.System.Collections.Immutable.props" />
-  <Import Project="../../../../ref/ext/Reference.System.Diagnostics.TraceSource.props" />
-  <Import Project="../../../../ref/ext/Reference.System.Linq.props" />
-  <Import Project="../../../../ref/ext/Reference.System.Threading.Tasks.props" />
-  <Import Project="../../../../ref/ext/Reference.System.Threading.Thread.props" />
-  <Import Project="../../../../ref/ext/Reference.System.Xml.XmlSerializer.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Collections.Immutable.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Diagnostics.TraceSource.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Linq.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Threading.Tasks.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Threading.Thread.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Xml.XmlSerializer.props" />
 
   <ItemGroup>
     <Compile Remove="Collections\Extensions\Queue\**" />

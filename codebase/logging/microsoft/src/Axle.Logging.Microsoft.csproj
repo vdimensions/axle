@@ -5,6 +5,6 @@
   </PropertyGroup>
 
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
-  <Import Project="../../../../ref/ext/Reference.Microsoft.Extensions.Logging.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Logging.props" />
 
 </Project>

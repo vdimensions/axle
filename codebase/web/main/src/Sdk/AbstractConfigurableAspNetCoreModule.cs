@@ -4,7 +4,6 @@ using Axle.Modularity;
 
 namespace Axle.Web.AspNetCore.Sdk
 {
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
     internal abstract class AbstractConfigurableAspNetCoreModule<TConfigurer, TOptions> where TConfigurer: IAspNetCoreConfigurer<TOptions>
     {
@@ -27,7 +26,6 @@ namespace Axle.Web.AspNetCore.Sdk
         }
     }
     
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
     internal abstract class AbstractConfigurableAspNetCoreModule<TConfigurer, TContext, TOptions> where TConfigurer: IAspNetCoreConfigurer<TContext, TOptions>
     {

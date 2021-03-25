@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
-#if NETSTANDARD2_1_OR_NEWER
+#if NETCOREAPP3_0_OR_NEWER
 #else
 using Microsoft.AspNetCore.Mvc.Internal;
 #endif
@@ -39,7 +39,7 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
                     .Where(b => (metadata.IsComplexType) && !(b is SimpleTypeModelBinder))
                     .FirstOrDefault(x => x != null);
                 var binder = candidateBinder ?? context.CreateBinder(metadata);
-                #if NETSTANDARD2_1_OR_NEWER
+                #if NETCOREAPP3_0_OR_NEWER
                 if (binder.GetType().Name.Equals("PlaceholderBinder", StringComparison.Ordinal))
                 #else
                 if (binder is PlaceholderBinder)
