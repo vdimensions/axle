@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace Axle.Collections.Generic
+namespace Axle.Collections.ReadOnly
 {
     /// <summary>
     /// Represents a strongly-typed, read-only set of elements.
@@ -8,11 +8,7 @@ namespace Axle.Collections.Generic
     /// <typeparam name="T">
     /// The type of the elements.
     /// </typeparam>
-    #if NETSTANDARD
     public interface IReadOnlySet<T> : IReadOnlyCollection<T>
-    #else
-    public interface IReadOnlySet<T> : IEnumerable<T>
-    #endif
     {
         /// <summary>Determines whether this read-only set contains a specified element.</summary>
         /// <param name="value">The element to locate in the set.</param>

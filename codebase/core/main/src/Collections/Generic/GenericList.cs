@@ -7,7 +7,6 @@ using System.Diagnostics;
 using System.Linq;
 #endif
 
-
 namespace Axle.Collections.Generic
 {
     /// <summary>
@@ -21,11 +20,7 @@ namespace Axle.Collections.Generic
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [Serializable]
     #endif
-    #if NETSTANDARD
-    public sealed class GenericList<T> : IList<T>, IList, IReadOnlyList<T>
-    #else
-    public sealed class GenericList<T> : IList<T>, IList
-    #endif
+    public sealed class GenericList<T> : IList<T>, IList, Axle.Collections.ReadOnly.IReadOnlyList<T>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IList _underlyingCollection;
@@ -115,7 +110,7 @@ namespace Axle.Collections.Generic
 
         internal IList RawCollection => _underlyingCollection;
 
-        /// <inheritdoc />
+        /// <inheritdoc /> 
         public T this[int index]
         {
             get => _converter(_underlyingCollection[index]);
@@ -142,6 +137,8 @@ namespace Axle.Collections.Generic
         #if NETSTANDARD
         /// <inheritdoc />
         int IReadOnlyCollection<T>.Count => _underlyingCollection.Count;
+        #else
+        int Axle.Collections.ReadOnly.IReadOnlyCollection<T>.Count => _underlyingCollection.Count;
         #endif
         #endregion
 

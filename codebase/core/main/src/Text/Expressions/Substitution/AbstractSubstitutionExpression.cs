@@ -9,9 +9,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using Axle.Verification;
-
 
 namespace Axle.Text.Expressions.Substitution
 {

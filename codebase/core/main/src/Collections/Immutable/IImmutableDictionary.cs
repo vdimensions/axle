@@ -57,20 +57,44 @@ namespace Axle.Collections.Immutable
         /// </exception>
         IImmutableDictionary<TKey, TValue> AddRange(IEnumerable<KeyValuePair<TKey, TValue>> pairs);
 
-        /// <summary>Sets the specified key and value in the immutable dictionary, possibly overwriting an existing value for the key.</summary>
-        /// <param name="key">The key of the entry to add.</param>
-        /// <param name="value">The key value to set.</param>
-        /// <returns>A new immutable dictionary that contains the specified key/value pair.</returns>
+        /// <summary>
+        /// Sets the specified key and value in the immutable dictionary, possibly overwriting an existing value for
+        /// the key.
+        /// </summary>
+        /// <param name="key">
+        /// The key of the entry to add.
+        /// </param>
+        /// <param name="value">
+        /// The key value to set.
+        /// </param>
+        /// <returns>
+        /// A new immutable dictionary that contains the specified key/value pair.
+        /// </returns>
         IImmutableDictionary<TKey, TValue> SetItem(TKey key, TValue value);
 
-        /// <summary>Sets the specified key/value pairs in the immutable dictionary, possibly overwriting existing values for the keys.</summary>
-        /// <param name="items">The key/value pairs to set in the dictionary. If any of the keys already exist in the dictionary, this method will overwrite their previous values.</param>
-        /// <returns>A new immutable dictionary that contains the specified key/value pairs.</returns>
+        /// <summary>
+        /// Sets the specified key/value pairs in the immutable dictionary, possibly overwriting existing values for the
+        /// keys.
+        /// </summary>
+        /// <param name="items">
+        /// The key/value pairs to set in the dictionary. If any of the keys already exist in the dictionary,
+        /// this method will overwrite their previous values.
+        /// </param>
+        /// <returns>
+        /// A new immutable dictionary that contains the specified key/value pairs.
+        /// </returns>
         IImmutableDictionary<TKey, TValue> SetItems(IEnumerable<KeyValuePair<TKey, TValue>> items);
 
-        /// <summary>Removes the elements with the specified keys from the immutable dictionary.</summary>
-        /// <param name="keys">The keys of the elements to remove.</param>
-        /// <returns>A new immutable dictionary with the specified keys removed; or this instance if the specified keys cannot be found in the dictionary.</returns>
+        /// <summary>
+        /// Removes the elements with the specified <paramref name="keys"/> from the immutable dictionary.
+        /// </summary>
+        /// <param name="keys">
+        /// The keys of the elements to remove.
+        /// </param>
+        /// <returns>
+        /// A new immutable dictionary with the specified keys removed; or this instance if the specified keys cannot
+        /// be found in the dictionary.
+        /// </returns>
         IImmutableDictionary<TKey, TValue> RemoveRange(IEnumerable<TKey> keys);
 
         /// <summary>

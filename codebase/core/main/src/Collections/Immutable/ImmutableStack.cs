@@ -32,8 +32,19 @@ namespace Axle.Collections.Immutable
         }
     }
 
+    /// <summary>
+    /// Represents an immutable stack. 
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of elements in the stack.
+    /// </typeparam>
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class ImmutableStack<T> : IImmutableStack<T>
     {
+        /// <summary>
+        /// Gets a reference to an empty <see cref="ImmutableStack{T}"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
         public static readonly ImmutableStack<T> Empty = ImmutableStack.Create<T>();
         
         #if NETSTANDARD
@@ -56,7 +67,7 @@ namespace Axle.Collections.Immutable
         public IEnumerator<T> GetEnumerator() => ((IEnumerable<T>) _impl).GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableStack{T}.Clear" />
         public ImmutableStack<T> Clear()
         {
             #if NETSTANDARD
@@ -67,7 +78,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableStack<T> IImmutableStack<T>.Clear() => Clear();
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableStack{T}.Push" />
         public ImmutableStack<T> Push(T value)
         {
             #if NETSTANDARD
@@ -80,7 +91,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableStack<T> IImmutableStack<T>.Push(T value) => Push(value);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableStack{T}.Pop()" />
         public ImmutableStack<T> Pop()
         {
             #if NETSTANDARD
@@ -93,7 +104,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableStack<T> IImmutableStack<T>.Pop() => Pop();
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableStack{T}.Pop(out T)" />
         public ImmutableStack<T> Pop(out T value)
         {
             #if NETSTANDARD
@@ -123,6 +134,9 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public int Count => this.Count();
         #else
+        /// <summary>
+        /// Gets the number of elements in the collection.
+        /// </summary>
         public int Count => _impl.Count;
         #endif
     }

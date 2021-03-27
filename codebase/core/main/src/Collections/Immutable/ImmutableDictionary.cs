@@ -5,6 +5,7 @@ using Axle.Verification;
 
 namespace Axle.Collections.Immutable
 {
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public static class ImmutableDictionary
     {
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>()
@@ -57,8 +58,13 @@ namespace Axle.Collections.Immutable
         }
     }
     
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class ImmutableDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>
     {
+        /// <summary>
+        /// Gets a reference to an empty <see cref="ImmutableDictionary{TKey,TValue}"/> instance.
+        /// </summary>
         public static readonly ImmutableDictionary<TKey, TValue> Empty = ImmutableDictionary.Create<TKey, TValue>();
         
         #if NETSTANDARD

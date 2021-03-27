@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Axle.Collections.ReadOnly;
 
 namespace Axle.Collections.Generic
 {
@@ -8,11 +9,7 @@ namespace Axle.Collections.Generic
     /// <typeparam name="T">
     /// The type of the elements.
     /// </typeparam>
-    #if NETSTANDARD
     public interface ISet<T> : ICollection<T>, IReadOnlySet<T>
-    #else
-    public interface ISet<T> : ICollection<T>
-    #endif
     {
     }
 }

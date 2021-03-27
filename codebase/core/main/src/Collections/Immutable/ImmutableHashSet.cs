@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 #if NETSTANDARD
-using Axle.Collections.Generic;
+using Axle.Collections.ReadOnly;
 #else
 using System.Linq;
 #endif
@@ -46,8 +46,13 @@ namespace Axle.Collections.Immutable
         }
     }
 
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class ImmutableHashSet<T> : IImmutableHashSet<T>
     {
+        /// <summary>
+        /// Gets a reference to an empty <see cref="ImmutableHashSet{T}"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
         public static readonly ImmutableHashSet<T> Empty = ImmutableHashSet.Create<T>();
         
         #if NETSTANDARD
@@ -70,7 +75,7 @@ namespace Axle.Collections.Immutable
         public IEnumerator<T> GetEnumerator() => _impl.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.Clear" />
         public ImmutableHashSet<T> Clear()
         {
             #if NETSTANDARD
@@ -84,11 +89,11 @@ namespace Axle.Collections.Immutable
         /// <inheritdoc />
         public bool Contains(T value) => _impl.Contains(value);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.Add" />
         public ImmutableHashSet<T> Add(T value)
         {
             #if NETSTANDARD
-            return ImmutableHashSet.CreateRange<T>(Comparer, _impl.Add(value));
+            return ImmutableHashSet.CreateRange(Comparer, _impl.Add(value));
             #else
             var result = new HashSet<T>(_impl, Comparer);
             if (result.Add(value))
@@ -100,7 +105,7 @@ namespace Axle.Collections.Immutable
         }
         IImmutableHashSet<T> IImmutableHashSet<T>.Add(T value) => Add(value);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.Remove" />
         public ImmutableHashSet<T> Remove(T value)
         {
             #if NETSTANDARD
@@ -117,19 +122,19 @@ namespace Axle.Collections.Immutable
         IImmutableHashSet<T> IImmutableHashSet<T>.Remove(T value) => Remove(value);
 
         #if NETSTANDARD
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.TryGetValue" />
         public bool TryGetValue(T equalValue, out T actualValue) => _impl.TryGetValue(equalValue, out actualValue);
         bool IReadOnlySet<T>.TryGetValue(T equalValue, out T actualValue) => TryGetValue(equalValue, out actualValue);
         #endif
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.Intersect" />
         public ImmutableHashSet<T> Intersect(IEnumerable<T> other)
         {
             return ImmutableHashSet.CreateRange(Comparer, _impl.Intersect(other));
         }
         IImmutableHashSet<T> IImmutableHashSet<T>.Intersect(IEnumerable<T> other) => Intersect(other);
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.Except" />
         public ImmutableHashSet<T> Except(IEnumerable<T> other)
         {
             return ImmutableHashSet.CreateRange(Comparer, _impl.Except(other));
@@ -137,7 +142,7 @@ namespace Axle.Collections.Immutable
         IImmutableHashSet<T> IImmutableHashSet<T>.Except(IEnumerable<T> other) => Except(other);
 
         #if NETSTANDARD
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.SymmetricExcept" />
         public ImmutableHashSet<T> SymmetricExcept(IEnumerable<T> other)
         {
             return ImmutableHashSet.CreateRange(Comparer, _impl.SymmetricExcept(other));
@@ -145,7 +150,7 @@ namespace Axle.Collections.Immutable
         IImmutableHashSet<T> IImmutableHashSet<T>.SymmetricExcept(IEnumerable<T> other) => SymmetricExcept(other);
         #endif
 
-        /// <inheritdoc />
+        /// <inheritdoc cref="IImmutableHashSet{T}.Union" />
         public ImmutableHashSet<T> Union(IEnumerable<T> other)
         {
             return ImmutableHashSet.CreateRange(Comparer, _impl.Union(other));

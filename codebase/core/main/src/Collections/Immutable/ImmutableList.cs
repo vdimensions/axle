@@ -32,11 +32,13 @@ namespace Axle.Collections.Immutable
         }
     }
     
+    [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class ImmutableList<T> : IImmutableList<T>
     {
         /// <summary>
         /// Gets a reference to an empty <see cref="ImmutableList{T}"/> instance.
         /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
         public static readonly ImmutableList<T> Empty = ImmutableList.Create<T>();
         
         #if NETSTANDARD
