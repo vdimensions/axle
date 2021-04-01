@@ -8,8 +8,22 @@ using Axle.Verification;
 
 namespace Axle.Collections.Immutable
 {
+    /// <summary>
+    /// Provides a set of initialization methods for instances of the <see cref="ImmutableStack{T}"/> class.
+    /// </summary>
+    /// <seealso cref="ImmutableStack{T}"/>
+    /// <seealso cref="IImmutableStack{T}"/>
     public static class ImmutableStack
     {
+        /// <summary>
+        /// Creates an empty immutable stack.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of items to be stored in the immutable stack.
+        /// </typeparam>
+        /// <returns>
+        /// An empty immutable stack.
+        /// </returns>
         public static ImmutableStack<T> Create<T>()
         {
             #if NETSTANDARD
@@ -19,13 +33,25 @@ namespace Axle.Collections.Immutable
             #endif
         }
 
+        /// <summary>
+        /// Creates a new immutable stack that contains the specified items.
+        /// </summary>
+        /// <param name="items">
+        /// The items to add to the stack before it's immutable.
+        /// </param>
+        /// <typeparam name="T">
+        /// he type of items to be stored in the immutable stack.
+        /// </typeparam>
+        /// <returns>
+        /// An immutable stack that contains the specified items.
+        /// </returns>
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static ImmutableStack<T> CreateRange<T>(IEnumerable<T> items)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(items, nameof(items)));
             
             #if NETSTANDARD
-            return new ImmutableStack<T>(System.Collections.Immutable.ImmutableStack.CreateRange<T>(items));
+            return new ImmutableStack<T>(System.Collections.Immutable.ImmutableStack.CreateRange(items));
             #else
             return new ImmutableStack<T>(new Stack<T>(items));
             #endif

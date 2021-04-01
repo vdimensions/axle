@@ -9,8 +9,22 @@ using Axle.Verification;
 
 namespace Axle.Collections.Immutable
 {
+    /// <summary>
+    /// Provides a set of initialization methods for instances of the <see cref="ImmutableList{T}"/> class.
+    /// </summary>
+    /// <seealso cref="ImmutableList{T}"/>
+    /// <seealso cref="IImmutableList{T}"/>
     public static class ImmutableList
     {
+        /// <summary>
+        /// Creates an empty immutable list.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of items stored in the list.
+        /// </typeparam>
+        /// <returns>
+        /// An empty immutable list.
+        /// </returns>
         public static ImmutableList<T> Create<T>()
         {
             #if NETSTANDARD
@@ -20,18 +34,36 @@ namespace Axle.Collections.Immutable
             #endif
         }
 
+        /// <summary>
+        /// Creates a new immutable list that contains the specified <paramref name="items"/>.
+        /// </summary>
+        /// <param name="items">
+        /// The items to add to the list.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of items stored in the list.
+        /// </typeparam>
+        /// <returns>
+        /// An immutable list that contains the specified <paramref name="items"/>.
+        /// </returns>
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static ImmutableList<T> CreateRange<T>(IEnumerable<T> items)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(items, nameof(items)));
             #if NETSTANDARD
-            return new ImmutableList<T>(System.Collections.Immutable.ImmutableList.CreateRange<T>(items));
+            return new ImmutableList<T>(System.Collections.Immutable.ImmutableList.CreateRange(items));
             #else
             return new ImmutableList<T>(new List<T>(items));
             #endif
         }
     }
     
+    /// <summary>
+    /// Represents an immutable list, which is a strongly typed list of objects that can be accessed by index.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of elements in the list.
+    /// </typeparam>
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class ImmutableList<T> : IImmutableList<T>
     {

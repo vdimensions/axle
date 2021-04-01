@@ -5,9 +5,27 @@ using Axle.Verification;
 
 namespace Axle.Collections.Immutable
 {
+    /// <summary>
+    /// Provides a set of initialization methods for instances of the <see cref="ImmutableDictionary{TKey, TValue}"/>
+    /// class.
+    /// </summary>
+    /// <seealso cref="ImmutableDictionary{TKey, TValue}"/>
+    /// <seealso cref="IImmutableDictionary{TKey, TValue}"/>
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public static class ImmutableDictionary
     {
+        /// <summary>
+        /// Creates an empty immutable dictionary instance.
+        /// </summary>
+        /// <typeparam name="TKey">
+        /// The type of keys stored by the dictionary.
+        /// </typeparam>
+        /// <typeparam name="TValue">
+        /// The type of values stored by the dictionary.
+        /// </typeparam>
+        /// <returns>
+        /// An empty immutable dictionary.
+        /// </returns>
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>()
         #if NETSTANDARD
             => new ImmutableDictionary<TKey, TValue>(System.Collections.Immutable.ImmutableDictionary.Create<TKey, TValue>());
@@ -17,6 +35,23 @@ namespace Axle.Collections.Immutable
             return new ImmutableDictionary<TKey, TValue>(result, result.Comparer);
         }
         #endif
+        
+        /// <summary>
+        /// Creates an empty immutable dictionary that uses the specified key comparer.
+        /// </summary>
+        /// <param name="keyComparer">
+        /// The <see cref="IEqualityComparer{TKey}"/> implementation to use to determine the equality of keys in the
+        /// dictionary.
+        /// </param>
+        /// <typeparam name="TKey">
+        /// The type of keys stored by the dictionary.
+        /// </typeparam>
+        /// <typeparam name="TValue">
+        /// The type of values stored by the dictionary.
+        /// </typeparam>
+        /// <returns>
+        /// An empty immutable dictionary.
+        /// </returns>
         public static ImmutableDictionary<TKey, TValue> Create<TKey, TValue>(IEqualityComparer<TKey> keyComparer)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(keyComparer, nameof(keyComparer)));
@@ -27,6 +62,26 @@ namespace Axle.Collections.Immutable
             return new ImmutableDictionary<TKey, TValue>(new Dictionary<TKey, TValue>(keyComparer), keyComparer);
             #endif
         }
+        
+        /// <summary>
+        /// Creates a new immutable dictionary that contains the specified items and uses the specified key comparer.
+        /// </summary>
+        /// <param name="keyComparer">
+        /// The comparer implementation to use to compare keys for equality.
+        /// </param>
+        /// <param name="items">
+        /// The items to add to the dictionary before it's immutable.
+        /// </param>
+        /// <typeparam name="TKey">
+        /// The type of keys in the dictionary.
+        /// </typeparam>
+        /// <typeparam name="TValue">
+        /// The type of values in the dictionary.
+        /// </typeparam>
+        /// <returns>
+        /// A new immutable dictionary that contains the specified <paramref name="items"/> and uses the specified
+        /// <paramref name="keyComparer"/>.
+        /// </returns>
         public static ImmutableDictionary<TKey, TValue> CreateRange<TKey, TValue>(
             IEqualityComparer<TKey> keyComparer,
             IEnumerable<KeyValuePair<TKey, TValue>> items)
@@ -37,9 +92,11 @@ namespace Axle.Collections.Immutable
             return Create<TKey, TValue>(keyComparer).SetItems(items);
         }            
         #endif
-
+        
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>> items, IEqualityComparer<TKey> keyComparer)
+        public static ImmutableDictionary<TKey, TValue> ToImmutableDictionary<TKey, TValue>(
+            this IEnumerable<KeyValuePair<TKey, TValue>> items, 
+            IEqualityComparer<TKey> keyComparer)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(items, nameof(items)));
             Verifier.IsNotNull(Verifier.VerifyArgument(keyComparer, nameof(keyComparer)));
@@ -58,6 +115,15 @@ namespace Axle.Collections.Immutable
         }
     }
     
+    /// <summary>
+    /// Represents an immutable, unordered collection of keys and values. 
+    /// </summary>
+    /// <typeparam name="TKey">
+    /// The type of the keys in the dictionary.
+    /// </typeparam>
+    /// <typeparam name="TValue">
+    /// The type of the values in the dictionary.
+    /// </typeparam>
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public class ImmutableDictionary<TKey, TValue> : IImmutableDictionary<TKey, TValue>

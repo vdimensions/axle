@@ -18,8 +18,8 @@
   <!-- Versioning properties -->
   <PropertyGroup>
     <Deterministic>false</Deterministic>
-    <VersionMajor>1</VersionMajor>
-    <VersionMinor>10</VersionMinor>
+    <VersionMajor>2</VersionMajor>
+    <VersionMinor>0</VersionMinor>
   </PropertyGroup>
 
   <!-- Common props -->

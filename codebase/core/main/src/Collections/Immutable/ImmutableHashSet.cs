@@ -11,8 +11,21 @@ using Axle.Verification;
 
 namespace Axle.Collections.Immutable
 {
+    /// <summary>
+    /// Provides a set of initialization methods for instances of the <see cref="ImmutableHashSet{T}"/> class.
+    /// </summary>
+    /// <seealso cref="ImmutableHashSet{T}"/>
+    /// <seealso cref="IImmutableHashSet{T}"/>
     public static class ImmutableHashSet
     {
+        /// <summary>
+        /// Creates an empty immutable hash set.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The type of elements to be stored in the immutable hash set.</typeparam>
+        /// <returns>
+        /// An empty immutable hash set.
+        /// </returns>
         public static ImmutableHashSet<T> Create<T>()
         {
             #if NETSTANDARD
@@ -21,17 +34,45 @@ namespace Axle.Collections.Immutable
             return new ImmutableHashSet<T>(new HashSet<T>());
             #endif
         }
+        /// <summary>
+        /// Creates an empty immutable hash set that uses the specified equality <paramref name="comparer"/>.
+        /// </summary>
+        /// <param name="comparer">
+        /// The <see cref="IEqualityComparer{T}"/> instance to use for comparing elements in the set for equality.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of elements in the immutable hash set.
+        /// </typeparam>
+        /// <returns>
+        /// An empty immutable hash set.
+        /// </returns>
         public static ImmutableHashSet<T> Create<T>(IEqualityComparer<T> comparer)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(comparer, nameof(comparer)));
             
             #if NETSTANDARD
-            return new ImmutableHashSet<T>(System.Collections.Immutable.ImmutableHashSet.Create<T>(comparer));
+            return new ImmutableHashSet<T>(System.Collections.Immutable.ImmutableHashSet.Create(comparer));
             #else
             return new ImmutableHashSet<T>(new HashSet<T>(comparer));
             #endif
         }
 
+        /// <summary>
+        /// Creates a new immutable hash set that contains the specified <paramref name="items"/> and uses the specified
+        /// equality <paramref name="comparer"/> for the set type.
+        /// </summary>
+        /// <param name="comparer">
+        /// The <see cref="IEqualityComparer{T}"/> instance to use for comparing objects in the set for equality.
+        /// </param>
+        /// <param name="items">
+        /// The items add to the collection before immutability is applied.
+        /// </param>
+        /// <typeparam name="T">
+        /// The type of elements stored in the collection.
+        /// </typeparam>
+        /// <returns>
+        /// The new immutable hash set.
+        /// </returns>
         [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
         public static ImmutableHashSet<T> CreateRange<T>(IEqualityComparer<T> comparer, IEnumerable<T> items)
         {
@@ -46,6 +87,12 @@ namespace Axle.Collections.Immutable
         }
     }
 
+    /// <summary>
+    /// Represents a strongly-typed, immutable, unordered hash set.
+    /// </summary>
+    /// <typeparam name="T">
+    /// The type of elements in the immutable hash set.
+    /// </typeparam>
     [SuppressMessage("ReSharper", "MemberCanBePrivate.Global")]
     public class ImmutableHashSet<T> : IImmutableHashSet<T>
     {
@@ -122,7 +169,7 @@ namespace Axle.Collections.Immutable
         IImmutableHashSet<T> IImmutableHashSet<T>.Remove(T value) => Remove(value);
 
         #if NETSTANDARD
-        /// <inheritdoc cref="IImmutableHashSet{T}.TryGetValue" />
+        /// <inheritdoc cref="IReadOnlySet{T}.TryGetValue" />
         public bool TryGetValue(T equalValue, out T actualValue) => _impl.TryGetValue(equalValue, out actualValue);
         bool IReadOnlySet<T>.TryGetValue(T equalValue, out T actualValue) => TryGetValue(equalValue, out actualValue);
         #endif

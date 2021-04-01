@@ -4,7 +4,8 @@ using Axle.Modularity;
 namespace Axle.Resources
 {
     /// <summary>
-    /// An attribute that indicates the target module has a dependency on the <see cref="ResourcesModule"/>. 
+    /// An attribute which indicates that support for resources will be made available before the target module
+    /// initializes.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Interface, Inherited = true, AllowMultiple = false)]
     public sealed class RequiresResourcesAttribute : RequiresAttribute

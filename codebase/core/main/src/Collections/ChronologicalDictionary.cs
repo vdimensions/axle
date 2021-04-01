@@ -13,7 +13,7 @@ using Axle.Collections.Sdk;
 namespace Axle.Collections
 {
     /// <summary>
-    /// Represents a collection of key/value pairs that are sorted by the time of insertion (chronologically)
+    /// Represents a collection of key/value pairs that are sorted by the time of insertion (chronologically).
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
     /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>

@@ -13,7 +13,7 @@ namespace Axle.Reflection
     public interface ICombineAccessor : IAccessor
     {
         /// <summary>
-        /// Combines the target delegate with the one provided by the <paramref name="handler"/>.
+        /// Combines the represented delegate or event handler with the one provided by the <paramref name="handler"/>.
         /// </summary>
         /// <param name="target">
         /// The object instance that declares the <see cref="ICombinableMember"/> we are appending a
