@@ -19,7 +19,6 @@ using Axle.Verification;
 
 namespace Axle.Data.DataSources
 {
-    
     [Module]
     [Requires(typeof(DataModule))]
     [SuppressMessage("ReSharper", "UnusedMember.Global")]

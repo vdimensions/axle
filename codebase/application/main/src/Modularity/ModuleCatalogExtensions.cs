@@ -30,23 +30,23 @@ namespace Axle.Modularity
                 }
 
                 //
-                // Expand the 'required modules' with the 'utilized-by modules'
+                // Expand the 'required modules' with the 'provides-for modules'
                 //
-
-                //
-                // The explicitly required modules must be added as a dependency to each `UtilizedBy` module,
-                // in order to make sure the `UtilizedBy` module is not loaded before any of them.
-                //
-                var requiredSoFar = moduleInfo.RequiredModules;
+                //var requiredSoFar = moduleInfo.RequiredModules;
                 foreach (var providedFor in modulesToLaunch
                     .SelectMany(x => x.ProvidesForModules.Select(pf => new { ProvideFor = pf, Module = x }))
                     .Where(x => x.ProvideFor.Accepts(moduleInfo.Type))
                     .Select(x => x.Module))
                 {
-                    for (var j = 0; j < requiredSoFar.Length; j++)
-                    {
-                        requiredModules[providedFor].Add(requiredSoFar[j]);
-                    }
+                    // TODO: verify and remove the commented code, as it currently may cause a circular dependency issue
+                    //
+                    // The explicitly required modules must be added as a dependency to each `ProvidesFor` module,
+                    // in order to make sure the `ProvidesFor` module is not loaded before any of them.
+                    //
+                    // for (var j = 0; j < requiredSoFar.Length; j++)
+                    // {
+                    //     requiredModules[providedFor].Add(requiredSoFar[j]);
+                    // }
                     expandedRequiredModules.Add(providedFor);
                 }
             }

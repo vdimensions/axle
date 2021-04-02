@@ -30,7 +30,8 @@ namespace Axle.Data
 
         protected override void Initialize(IDependencyExporter exporter) => exporter.Export(this);
 
-        IEnumerator<IDbServiceProvider> IEnumerable<IDbServiceProvider>.GetEnumerator() => _providers.Values.GetEnumerator();
+        IEnumerator<IDbServiceProvider> IEnumerable<IDbServiceProvider>.GetEnumerator() 
+            => _providers.Values.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => _providers.Values.GetEnumerator();
         
         public IDbServiceProvider this[string name] => _providers.TryGetValue(name, out var provider) ? provider : null;

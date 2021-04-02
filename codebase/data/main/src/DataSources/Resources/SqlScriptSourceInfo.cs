@@ -15,7 +15,8 @@ namespace Axle.Data.DataSources.Resources
 
         public const string FileExtension = ".sql";
 
-        internal SqlScriptSourceInfo(SqlScriptSource sqlScriptSource, CultureInfo culture) : base(sqlScriptSource.Name, culture, MimeType)
+        internal SqlScriptSourceInfo(SqlScriptSource sqlScriptSource, CultureInfo culture) 
+            : base(sqlScriptSource.Name, culture, MimeType)
         {
             Value = sqlScriptSource;
         }
@@ -28,7 +29,8 @@ namespace Axle.Data.DataSources.Resources
         }
 
         /// <summary>
-        /// Gets the <see cref="SqlScriptSource"/> object represented by this <see cref="SqlScriptSourceInfo">resource</see> instance.
+        /// Gets the <see cref="SqlScriptSource"/> object represented by this
+        /// <see cref="SqlScriptSourceInfo">resource</see> instance.
         /// </summary>
         public SqlScriptSource Value { get; }
     }
