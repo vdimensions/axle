@@ -18,7 +18,8 @@ namespace Axle.Resources.Bundling
         /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class.
         /// </summary>
         /// <param name="caseSensitiveBundleNames">
-        /// A <see cref="bool">boolean</see> value specifying whether the resource bundle names should be case-sensitive.
+        /// A <see cref="bool">boolean</see> value specifying whether the resource bundle names should be
+        /// case-sensitive.
         /// </param>
         public DefaultResourceBundleRegistry(bool caseSensitiveBundleNames, IResourceBundleFactory bundleFactory)
         {
