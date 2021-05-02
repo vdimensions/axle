@@ -29,7 +29,8 @@ namespace Axle.Resources.Bundling
         }
 
         /// <summary>
-        /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class that is case-insensitive towards the resource bundle names.
+        /// Creates a new instance of the <see cref="DefaultResourceBundleRegistry"/> class that is case-insensitive
+        /// in regards to the resource bundle names.
         /// </summary>
         public DefaultResourceBundleRegistry(IResourceBundleFactory bundleFactory) : this(false, bundleFactory) { }
 
@@ -44,7 +45,8 @@ namespace Axle.Resources.Bundling
         }
 
         /// <inheritdoc />
-        public IEnumerator<IResourceBundleContent> GetEnumerator() => _perBundleContent.Values.Cast<IResourceBundleContent>().GetEnumerator();
+        public IEnumerator<IResourceBundleContent> GetEnumerator() 
+            => _perBundleContent.Values.Cast<IResourceBundleContent>().GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
