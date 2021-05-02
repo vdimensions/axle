@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Project>
-  <PropertyGroup>
-    <!-- make MSBuild track this file for incremental builds. -->
-    <!-- ref https://blogs.msdn.microsoft.com/msbuild/2005/09/26/how-to-ensure-changes-to-a-custom-target-file-prompt-a-rebuild/ -->
-    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
-  </PropertyGroup>
-  
+<Project> 
   <!-- Copyright info -->
   <PropertyGroup>
-    <Company>Virtual Dimensions</Company>
+    <Authors>Virtual Dimensions</Authors>
     <CopyrightYearSince>2013</CopyrightYearSince>
-    <Authors>$(Company)</Authors>
     <Trademark></Trademark>
     <License>Apache-2.0</License>
   </PropertyGroup>
@@ -54,19 +47,35 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <!-- TODO: handle versioning in a different way later on -->
-    <EnableAutoVersioning Condition=" '$(EnableAutoVersioning)' == '' ">true</EnableAutoVersioning>
-    <EnablePackagingProperties Condition=" '$(EnablePackagingProperties)' == '' ">true</EnablePackagingProperties>
+    <VDimensionsMSBuildSdkVersion>0.6.*</VDimensionsMSBuildSdkVersion>
   </PropertyGroup>
 
-  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Versioning\AutoVersioning.targets" Condition=" '$(EnableAutoVersioning)' == 'true' " />
-  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.targets" Condition=" '$(EnablePackagingProperties)' == 'true' " />
+  <!-- TODO: handle versioning in a different way later on -->
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Versioning\AutoVersioning.targets" />
+  <!-- TODO: handle restore in a different way later on -->
+  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.LocalRestore.targets" />
   <ItemGroup>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="0.4.*">
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="$(VDimensionsMSBuildSdkVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="0.4.*">
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Copyright" Version="$(VDimensionsMSBuildSdkVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Versioning" Version="$(VDimensionsMSBuildSdkVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Versioning.AppVeyor" Version="$(VDimensionsMSBuildSdkVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Nuspec" Version="$(VDimensionsMSBuildSdkVersion)">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="$(VDimensionsMSBuildSdkVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
@@ -74,35 +83,7 @@
 
   <!-- Versioning properties (after sdk) -->
   <PropertyGroup>
-    <Copyright>Copyright © $(Company) $(CopyrightYearSince)-$(CopyrightYearCurrent)</Copyright>
-    <VersionPrefix>$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionPrefix>
-    <PackageVersionRange>$(VersionMajor).$(VersionMinor).*</PackageVersionRange>
-  </PropertyGroup>
-
-  <!-- Assembly props -->
-  <PropertyGroup>
-    <AssemblyTitle>$(AssemblyName)</AssemblyTitle>
-    <AssemblyProduct>$(AssemblyTitle)</AssemblyProduct>
-    <AssemblyDescription>$(Description)</AssemblyDescription>
-    <AssemblyCompany>$(Company)</AssemblyCompany>
-    <AssemblyCopyright>$(Copyright)</AssemblyCopyright>  
-    <AssemblyTrademark>$(Trademark)</AssemblyTrademark>
-    <AssemblyVersion>$(Version)</AssemblyVersion>
-  </PropertyGroup>
-
-  <!-- NuGet package properties -->
-  <PropertyGroup>
-    <ContentTargetFolders>content</ContentTargetFolders>
-    <PackageLicense>$(License)</PackageLicense>
-    <PackageLicenseExpression>$(PackageLicense)</PackageLicenseExpression>
-    <PackageProjectUrl></PackageProjectUrl>
-    <PackageIconUri></PackageIconUri>
-    <PackageVersion Condition=" '$(PackageVersion)' == '' ">$(Version)</PackageVersion>
-    <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/vdimensions/axle</RepositoryUrl>
+    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionPrefix>
   </PropertyGroup>
 
   <ItemGroup>

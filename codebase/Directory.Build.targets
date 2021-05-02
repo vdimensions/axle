@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project> 
+  <!-- Versioning properties (after sdk) -->
+  <PropertyGroup Condition=" '$(VersionSuffix)' == '' ">
+    <PackageVersionRange>$(VersionMajor).$(VersionMinor).*</PackageVersionRange>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(VersionSuffix)' != '' ">
+    <PackageVersionRange>$(VersionPrefix)-$(VersionSuffix)</PackageVersionRange>
+  </PropertyGroup>
+
+  <!-- NuGet package properties -->
+  <PropertyGroup>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <PackageLicense>$(License)</PackageLicense>
+    <PackageLicenseExpression>$(PackageLicense)</PackageLicenseExpression>
+    <PackageProjectUrl></PackageProjectUrl>
+    <PackageIconUri></PackageIconUri>
+    <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/vdimensions/axle</RepositoryUrl>
+  </PropertyGroup>
+</Project>
