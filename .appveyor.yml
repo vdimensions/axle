@@ -27,10 +27,8 @@ for:
 
   - branches:
       only:
-        - /v\d+\.\d+\-(preview)/
+        - preview
     version: 2.0.{build}-preview
-    environment:
-      VERSION_SUFFIX: preview
     deploy:
       - provider: NuGet
         api_key:
@@ -38,10 +36,8 @@ for:
 
   - branches:
       only:
-        - /v\d+\.\d+\-(rc)/
+        - rc
     version: 2.0.{build}-rc
-    environment:
-      VERSION_SUFFIX: rc
     deploy:
       - provider: NuGet
         api_key:
