@@ -9,7 +9,7 @@
   
   <Import Project="../../../../ref/Reference.Axle.Data.targets" />
 
-  <Target Name="GenerateDefaultNamespaceAttribute" BeforeTargets="BeforeBuild">
+  <!-- <Target Name="GenerateDefaultNamespaceAttribute" BeforeTargets="BeforeBuild">
     <PropertyGroup>
       <RootNamespaceAssemblyAttributeFile>$(IntermediateOutputPath)$(MSBuildProjectName).RootNamespace$(DefaultLanguageSourceExtension)</RootNamespaceAssemblyAttributeFile>
     </PropertyGroup>
@@ -22,7 +22,7 @@
     <ItemGroup>
       <Compile Condition="Exists('$(RootNamespaceAssemblyAttributeFile)')" Include="$(RootNamespaceAssemblyAttributeFile)" />
     </ItemGroup>
-  </Target>
+  </Target> -->
 
   <ItemGroup>
     <EmbeddedResource Include="Properties\Queries\DbChangelog\MariaDB\*.sql" />
