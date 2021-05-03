@@ -51,7 +51,7 @@
   </PropertyGroup>
 
   <!-- TODO: handle versioning in a different way later on -->
-  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Versioning\AutoVersioning.targets" />
+  <!-- <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Versioning\AutoVersioning.targets" /> -->
   <!-- TODO: handle restore in a different way later on -->
   <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.LocalRestore.targets" />
   <ItemGroup>
@@ -83,7 +83,7 @@
 
   <!-- Versioning properties (after sdk) -->
   <PropertyGroup>
-    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionPrefix>
+    <!-- <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionPrefix> -->
   </PropertyGroup>
 
   <ItemGroup>

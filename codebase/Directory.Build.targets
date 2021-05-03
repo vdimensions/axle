@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project> 
+  
   <!-- Versioning properties (after sdk) -->
-  <PropertyGroup Condition=" '$(VersionSuffix)' == '' ">
-    <PackageVersionRange>$(VersionMajor).$(VersionMinor).*</PackageVersionRange>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(VersionSuffix)' != '' ">
-    <PackageVersionRange>$(VersionPrefix)-$(VersionSuffix)</PackageVersionRange>
+  <PropertyGroup>
+    <PackageVersionRange>$(Version)</PackageVersionRange>
   </PropertyGroup>
 
   <!-- NuGet package properties -->
