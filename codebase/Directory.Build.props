@@ -67,24 +67,11 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Versioning.AppVeyor" Version="$(VDimensionsMSBuildSdkVersion)">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="VDimensions.MSBuild.Sdk.Nuspec" Version="$(VDimensionsMSBuildSdkVersion)">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
-    </PackageReference>
     <PackageReference Include="VDimensions.MSBuild.Sdk.Multitargeting" Version="$(VDimensionsMSBuildSdkVersion)">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers</IncludeAssets>
     </PackageReference>
   </ItemGroup>
-
-  <!-- Versioning properties (after sdk) -->
-  <PropertyGroup>
-    <!-- <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild).$(VersionRevision)</VersionPrefix> -->
-  </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="packages\**" />
