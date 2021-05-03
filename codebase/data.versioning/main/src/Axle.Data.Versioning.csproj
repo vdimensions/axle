@@ -20,7 +20,7 @@
     </ItemGroup>
     <WriteCodeFragment Language="$(Language)" OutputFile="$(RootNamespaceAssemblyAttributeFile)" AssemblyAttributes="@(AssemblyAttributes)" />
     <ItemGroup>
-      <Compile Include="$(RootNamespaceAssemblyAttributeFile)" />
+      <Compile Condition="Exists('$(RootNamespaceAssemblyAttributeFile)')" Include="$(RootNamespaceAssemblyAttributeFile)" />
     </ItemGroup>
   </Target>
 
