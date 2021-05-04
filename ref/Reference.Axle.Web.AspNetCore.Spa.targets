@@ -13,7 +13,7 @@
   <Choose>
     <When Condition="Exists('$(AxlePath)\dist\restore')">
       <ItemGroup>
-        <PackageReference Include="Axle.Web.AspNetCore.Spa" Version="$(PackageVersionRange)" />
+        <PackageReference Include="Axle.Web.AspNetCore.Spa" Version="$(AxleVersion)" />
       </ItemGroup>
     </When>
     <Otherwise>

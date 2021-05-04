@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project> 
-  
   <!-- Versioning properties (after sdk) -->
   <PropertyGroup>
-    <PackageVersionRange>$(Version)</PackageVersionRange>
+    <AxleVersion>$(Version)</AxleVersion>
   </PropertyGroup>
 
-  <PropertyGroup>
-    <!-- Fix for F# compiler choking on source link configuration -->
-    <OtherFlags Condition=" '$(Language)' == 'F#' AND '$(Configuration)' != 'Debug' ">--debug:embedded</OtherFlags>
+  <!-- Fix for F# compiler choking on source link configuration -->
+  <PropertyGroup Condition=" '$(Language)' == 'F#' ">
+    <OtherFlags Condition="'$(Configuration)' != 'Debug' ">--debug:portable</OtherFlags>
+    <NoBuild Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">false</NoBuild>
   </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
-  </ItemGroup>
 
   <!-- NuGet package properties -->
   <PropertyGroup>
@@ -23,6 +19,12 @@
     <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
     <PackageIconUri></PackageIconUri>
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
-    <!-- <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder> -->
   </PropertyGroup>
+
+  <!-- Pin thrird-party dependency versions  -->
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Data.SQLite.Core.targets" />
 </Project>

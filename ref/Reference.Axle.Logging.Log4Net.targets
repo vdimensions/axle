@@ -13,7 +13,7 @@
   <Choose>
     <When Condition="Exists('$(AxlePath)\dist\restore')">
       <ItemGroup>
-        <PackageReference Include="Axle.Logging.Log4Net" Version="$(PackageVersionRange)" />
+        <PackageReference Include="Axle.Logging.Log4Net" Version="$(AxleVersion)" />
       </ItemGroup>
     </When>
     <Otherwise>

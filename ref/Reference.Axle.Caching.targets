@@ -13,7 +13,7 @@
   <Choose>
     <When Condition="Exists('$(AxlePath)\dist\restore')">
       <ItemGroup>
-        <PackageReference Include="Axle.Caching" Version="$(PackageVersionRange)" />
+        <PackageReference Include="Axle.Caching" Version="$(AxleVersion)" />
       </ItemGroup>
     </When>
     <Otherwise>

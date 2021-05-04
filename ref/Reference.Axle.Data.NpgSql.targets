@@ -13,7 +13,7 @@
   <Choose>
     <When Condition="Exists('$(AxlePath)\dist\restore')">
       <ItemGroup>
-        <PackageReference Include="Axle.Data.NpgSql" Version="$(PackageVersionRange)" />
+        <PackageReference Include="Axle.Data.NpgSql" Version="$(AxleVersion)" />
       </ItemGroup>
     </When>
     <Otherwise>
