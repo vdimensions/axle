@@ -5,7 +5,7 @@
     <AxleVersion>$(Version)</AxleVersion>
   </PropertyGroup>
 
-  <!-- Fix for F# compiler choking on source link configuration -->
+  <!-- F# quirks -->
   <PropertyGroup Condition=" '$(Language)' == 'F#' ">
     <OtherFlags Condition="'$(Configuration)' != 'Debug' ">--debug:portable</OtherFlags>
     <NoBuild Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">false</NoBuild>
