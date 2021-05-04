@@ -6,17 +6,18 @@
     <PackageVersionRange>$(Version)</PackageVersionRange>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
+  </ItemGroup>
+
   <!-- NuGet package properties -->
   <PropertyGroup>
     <ContentTargetFolders>content</ContentTargetFolders>
     <PackageLicense>$(License)</PackageLicense>
     <PackageLicenseExpression>$(PackageLicense)</PackageLicenseExpression>
-    <PackageProjectUrl></PackageProjectUrl>
+    <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
     <PackageIconUri></PackageIconUri>
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
-    <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-    
-    <RepositoryType>git</RepositoryType>
-    <RepositoryUrl>https://github.com/vdimensions/axle</RepositoryUrl>
+    <!-- <AllowedOutputExtensionsInPackageBuildOutputFolder Condition="'$(Configuration)' == 'Debug'">$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder> -->
   </PropertyGroup>
 </Project>
