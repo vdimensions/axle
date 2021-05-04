@@ -11,6 +11,8 @@ platform: Any CPU
 artifacts:
   - path: dist/*.nupkg
     name: NuGet Package
+  - path: dist/*.snupkg
+    name: NuGet Symbol Package
 cache:
   - '%USERPROFILE%\.nuget\packages'
   - '%LocalAppData%\NuGet\Cache'
