@@ -20,18 +20,12 @@ build_script:
   - ps: "git submodule init -q \ngit submodule update -q \ngit submodule -q foreach git fetch origin -q \ngit submodule -q foreach git pull origin master -q"
   - ps: "dotnet pack -p:Version=$env:VERSION -p:ContinuousIntegrationBuild=true"
 
-test_script:
-  - ps: "dotnet test -p:Version=$env:VERSION -p:ContinuousIntegrationBuild=true"
-
 for:
   - branches:
       only:
         - master
     init:
       - ps: "$env:VERSION=$env:APPVEYOR_BUILD_VERSION"
-    # build_script:
-    #   - ps: "git submodule init -q \ngit submodule update -q \ngit submodule -q foreach git fetch origin -q \ngit submodule -q foreach git pull origin master -q"
-    #   - ps: "dotnet pack    -p:Version=$env:APPVEYOR_BUILD_VERSION -p:ContinuousIntegrationBuild=true"
     deploy:
       - provider: NuGet
         api_key:
@@ -44,9 +38,6 @@ for:
         - /alpha|beta|preview|rc|snapshot/
     init:
       - ps: "$env:VERSION=$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH"
-    # build_script:
-    #   - ps: "git submodule init -q \ngit submodule update -q \ngit submodule foreach git fetch origin -q \ngit submodule foreach git pull origin master -q"
-    #   - ps: "dotnet pack    -p:VersionPrefix=$env:APPVEYOR_BUILD_VERSION -p:VersionSuffix=$env:APPVEYOR_REPO_BRANCH -p:ContinuousIntegrationBuild=true"
     deploy:
       - provider: NuGet
         api_key:
@@ -57,6 +48,3 @@ for:
         - pr
     init:
       - ps: "$env:VERSION=$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH-$env:APPVEYOR_PULL_REQUEST_HEAD_COMMIT"
-    # build_script:
-    #   - ps: "git submodule init -q \ngit submodule update -q \ngit submodule foreach git fetch origin -q \ngit submodule foreach git pull origin master -q"
-    #   - ps: "dotnet pack    -p:Version=$env:APPVEYOR_BUILD_VERSION -p:VersionSuffix=$env:APPVEYOR_PULL_REQUEST_HEAD_REPO_BRANCH-$env:APPVEYOR_PULL_REQUEST_HEAD_COMMIT -p:ContinuousIntegrationBuild=true"
