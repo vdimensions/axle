@@ -13,8 +13,12 @@
     <RepositoryUrl>https://github.com/vdimensions/axle</RepositoryUrl>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <ContinuousIntegrationBuild Condition=" '$(ContinuousIntegrationBuild)' == '' ">false</ContinuousIntegrationBuild>
-    <Deterministic Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">true</Deterministic>
-    <EmbedUntrackedSources Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">true</EmbedUntrackedSources>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">
+    <Deterministic>true</Deterministic>
+    <EmbedUntrackedSources>true</EmbedUntrackedSources>
+    <DebugType>portable</DebugType>
     <IncludeSymbols>true</IncludeSymbols>
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
