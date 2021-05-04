@@ -6,6 +6,11 @@
     <PackageVersionRange>$(Version)</PackageVersionRange>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <!-- Fix for F# compiler choking on source link configuration -->
+    <OtherFlags Condition=" '$(Language)' == 'F#' AND '$(Configuration)' != 'Debug' ">--debug:embedded</OtherFlags>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
   </ItemGroup>
