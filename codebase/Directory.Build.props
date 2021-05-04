@@ -25,7 +25,8 @@
   <PropertyGroup>
     <VersionMajor>2</VersionMajor>
     <VersionMinor>0</VersionMinor>
-    <VersionPrefix Condition=" '$(VersionPrefix)' == '' ">$(VersionMajor).$(VersionMinor)</VersionPrefix>
+    <VersionPrefix Condition=" '$(VersionPrefix)' == '' AND '$(VersionBuild)' == '' ">$(VersionMajor).$(VersionMinor)</VersionPrefix>
+    <VersionPrefix Condition=" '$(VersionPrefix)' == '' AND '$(VersionBuild)' != '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild)</VersionPrefix>
     <VersionSuffix Condition=" '$(VersionSuffix)' == '' ">snapshot</VersionSuffix>
   </PropertyGroup>
 
