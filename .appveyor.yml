@@ -26,6 +26,7 @@ for:
         - master
     init:
       - ps: "$env:VERSION=$env:APPVEYOR_BUILD_VERSION"
+    cache:
     deploy:
       - provider: NuGet
         api_key:

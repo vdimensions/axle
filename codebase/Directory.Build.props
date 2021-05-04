@@ -41,7 +41,7 @@
     <AddDotnetfeedProjectSource>false</AddDotnetfeedProjectSource>
     <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
     <RestoreSources>https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
-    <RestoreSources Condition="Exists('$(PackageOutputPath)\restore')">$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources>
+    <!-- <RestoreSources Condition="Exists('$(PackageOutputPath)\restore')">$(PackageOutputPath)\restore;$(RestoreSources)</RestoreSources> -->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
@@ -57,7 +57,7 @@
   </PropertyGroup>
 
   <!-- TODO: handle restore in a different way later on -->
-  <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.LocalRestore.targets" />
+  <!-- <Import Project="$(MSBuildProjectDirectory)\..\..\..\..\submodules\vdimensions_msbuild_sdk\src\Packaging\Packaging.LocalRestore.targets" /> -->
   <ItemGroup>
     <PackageReference Include="VDimensions.MSBuild.Sdk.Defaults" Version="$(VDimensionsMSBuildSdkVersion)">
       <PrivateAssets>all</PrivateAssets>
