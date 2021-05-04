@@ -24,7 +24,7 @@ for:
   - branches:
       only:
         - master
-    envrironment:
+    environment:
       CONFIGURATION: Release
     init:
       - ps: "$env:VERSION=$env:APPVEYOR_BUILD_VERSION"
@@ -39,7 +39,7 @@ for:
   - branches:
       only:
         - /alpha|beta|preview|rc|snapshot/
-    envrironment:
+    environment:
       CONFIGURATION: Release
     init:
       - ps: "$env:VERSION=$env:APPVEYOR_BUILD_VERSION-$env:APPVEYOR_REPO_BRANCH"
