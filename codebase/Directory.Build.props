@@ -17,7 +17,7 @@
     <EmbedUntrackedSources Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">true</EmbedUntrackedSources>
     <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
-  <ItemGroup>
+  <ItemGroup Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">
     <PackageReference Include="Microsoft.SourceLink.GitHub" PrivateAssets="All"/>
   </ItemGroup>
 
@@ -25,8 +25,6 @@
   <PropertyGroup>
     <VersionMajor>2</VersionMajor>
     <VersionMinor>0</VersionMinor>
-    <VersionPrefix Condition=" '$(VersionPrefix)' == '' AND '$(VersionBuild)' == '' ">$(VersionMajor).$(VersionMinor)</VersionPrefix>
-    <VersionPrefix Condition=" '$(VersionPrefix)' == '' AND '$(VersionBuild)' != '' ">$(VersionMajor).$(VersionMinor).$(VersionBuild)</VersionPrefix>
     <VersionSuffix Condition=" '$(VersionSuffix)' == '' ">snapshot</VersionSuffix>
   </PropertyGroup>
 
