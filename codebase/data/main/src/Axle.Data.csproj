@@ -1,7 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <!-- <TargetFrameworks>netstandard2.0;netstandard1.2;net46;net45;net40;net35</TargetFrameworks> -->
     <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.5;net45;net35</TargetFrameworks>
   </PropertyGroup>
 
@@ -11,7 +10,10 @@
     <Description>Axle's data access library</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.Data.Common" />
+    <PackageReference Include="System.Data.DataSetExtensions" />
+  </ItemGroup>
+
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.Common.props" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.DataSetExtensions.props" />
 </Project>

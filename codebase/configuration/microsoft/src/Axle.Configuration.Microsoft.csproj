@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.5;net461</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net461</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -9,9 +9,12 @@
     <Description>Axle framework configuration library</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.FileExtensions" />
+  </ItemGroup>
+
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
   <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
   <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Configuration.Binder.props" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Configuration.FileExtensions.props" />
 </Project>

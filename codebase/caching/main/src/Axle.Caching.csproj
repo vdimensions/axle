@@ -9,6 +9,9 @@
     <Description>Axle framework caching library</Description>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="LinqBridge" />
+  </ItemGroup>
+
   <Import Project="../../../../ref/Reference.Axle.Core.targets" />
-  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Linq.props" />
 </Project>

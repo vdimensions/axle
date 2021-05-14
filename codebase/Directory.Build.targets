@@ -20,17 +20,30 @@
     <PackageIconUri></PackageIconUri>
     <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
   </PropertyGroup>
-
-  <!-- Pin thrird-party dependency versions  -->
-  <ItemGroup>
-    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
-  </ItemGroup>
-
+  
   <!-- Courtesy of NickStrupat, https://github.com/dotnet/docs/issues/12304#issuecomment-755672578 -->
   <Target Name="PostClean" AfterTargets="Clean">
     <RemoveDir Condition="Exists('$(BaseIntermediateOutputPath)')" Directories="$(BaseIntermediateOutputPath)" /><!-- obj -->
     <RemoveDir Condition="Exists('$(BaseOutputPath)')" Directories="$(BaseOutputPath)" /><!-- bin -->
   </Target>
 
+  <!-- Pin thrird-party dependency versions  -->
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
+  </ItemGroup>
+
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/linqbridge/LinqBridge.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Configuration.Binder.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Configuration.EnvironmentVariables.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Configuration.FileExtensions.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Configuration.Json.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Collections.Immutable.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Configuration.ConfigurationManager.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Data.Common.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Data.DataSetExtensions.targets" />
   <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Data.SQLite.Core.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Diagnostics.TraceSource.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Threading.Tasks.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Threading.Thread.targets" />
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Xml.XmlSerializer.targets" />
 </Project>
