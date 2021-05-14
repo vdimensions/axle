@@ -38,6 +38,7 @@
     <AppDesignerFolder Condition=" '$(AppDesignerFolder)' == '' ">Properties</AppDesignerFolder>
     <GenerateAssemblyInfo Condition=" '$(GenerateAssemblyInfo)' == '' ">true</GenerateAssemblyInfo>
     <MultiProcessorCompilation>false</MultiProcessorCompilation>
+    <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
 
   <!-- Packaging properties -->
