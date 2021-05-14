@@ -1,5 +1,9 @@
 ﻿using System;
 
+namespace Axle.Threading
+{
+}
+
 
 namespace Axle.Threading
 {
@@ -35,6 +39,9 @@ namespace Axle.Threading
         /// A value of <c>-1</c> represents an infinite wait.
         /// </param>
         /// <seealso cref="System.Threading.Timeout.Infinite"/>
+        /// <returns>
+        /// <c>true</c> if the lock was acquired successfully; <c>false</c> otherwise.
+        /// </returns>
         bool TryEnter(int millisecondsTimeout);
 
         /// <summary>
@@ -43,6 +50,9 @@ namespace Axle.Threading
         /// <param name="timeout">
         /// A <see cref="TimeSpan"/> representing the amount of time to wait for the lock.
         /// </param>
+        /// <returns>
+        /// <c>true</c> if the lock was acquired successfully; <c>false</c> otherwise.
+        /// </returns>
         bool TryEnter(TimeSpan timeout);
     }
 }
