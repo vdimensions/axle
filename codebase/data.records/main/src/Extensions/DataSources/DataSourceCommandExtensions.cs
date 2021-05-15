@@ -14,7 +14,10 @@ namespace Axle.Data.Records.Extensions.DataSources
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public static T[] ExecuteQuery<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, DataTable results, IConverter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            DataTable results, 
+            IConverter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(command)));
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter)));
@@ -29,14 +32,19 @@ namespace Axle.Data.Records.Extensions.DataSources
         }
         public static T[] ExecuteQuery<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, IDataRecordConverter<T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            IDataRecordConverter<T> converter, 
+            params IDataParameter[] parameters)
         {
             return ExecuteQuery(command, connection, new DataTable(), converter, parameters);
         }
 
         public static T[] ExecuteQuery<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, DataTable results, Converter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            DataTable results, 
+            Converter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(command)));
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter)));
