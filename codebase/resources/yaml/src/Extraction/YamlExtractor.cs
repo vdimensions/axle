@@ -26,6 +26,9 @@ namespace Axle.Resources.Yaml.Extraction
         /// <param name="fileName">
         /// The name of the yaml file containing the values to extract.
         /// </param>
-        public YamlExtractor(string fileName)  : this(Encoding.UTF8, fileName) { }
+        /// <param name="keyPrefix">
+        /// An optional string to prefix each key.
+        /// </param>
+        public YamlExtractor(string fileName, string keyPrefix = null)  : this(Encoding.UTF8, fileName, keyPrefix) { }
     }
 }

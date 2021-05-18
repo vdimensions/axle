@@ -25,7 +25,10 @@ namespace Axle.Resources.Properties.Extraction
         /// <param name="fileName">
         /// The name of the properties file containing the values to extract.
         /// </param>
-        public PropertiesExtractor(string fileName) : this(Encoding.UTF8, fileName) { }
+        /// <param name="keyPrefix">
+        /// An optional string to prefix each key.
+        /// </param>
+        public PropertiesExtractor(string fileName, string keyPrefix = null) : this(Encoding.UTF8, fileName, keyPrefix) { }
         /// <summary>
         /// Initializes a new instance of the <see cref="PropertiesExtractor"/> class.
         /// </summary>
