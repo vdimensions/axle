@@ -20,7 +20,7 @@ namespace Axle.Text.Documents.Binding
             }
 
             public virtual object ItemAt(IEnumerable collection, int index) 
-                => collection.OfType<object>().Skip(index).Take(1);
+                => collection.OfType<object>().Skip(index).Take(1).SingleOrDefault();
 
             public abstract object SetItems(object collection, IEnumerable items);
 
@@ -36,7 +36,7 @@ namespace Axle.Text.Documents.Binding
             {
                 return ItemAt((TCollection) collection, index);
             }
-            public virtual object ItemAt(TCollection collection, int index) => collection.OfType<object>().Skip(index).Take(1);
+            public virtual object ItemAt(TCollection collection, int index) => collection.OfType<object>().Skip(index).Take(1).SingleOrDefault();
 
             public sealed override object SetItems(object collection, IEnumerable items)
             {
@@ -54,7 +54,7 @@ namespace Axle.Text.Documents.Binding
             {
                 return ItemAt((TCollection) collection, index);
             }
-            public virtual object ItemAt(TCollection collection, int index) => collection.Skip(index).Take(1);
+            public virtual object ItemAt(TCollection collection, int index) => collection.Skip(index).Take(1).SingleOrDefault();
 
             public sealed override object SetItems(object collection, IEnumerable items)
             {
@@ -230,7 +230,7 @@ namespace Axle.Text.Documents.Binding
                 #if NETSTANDARD2_0_OR_NEWER || NET35_OR_NEWER
                 case DBNull _:
                 #endif
-                    return new IReadWriteMember[0]; 
+                    return new IReadWriteMember[0];
                 case object obj:
                     var introspector = new TypeIntrospector(obj.GetType());
                     var flags = introspector.TypeFlags;

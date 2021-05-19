@@ -9,6 +9,7 @@ namespace Axle.Text.Documents.Binding
     internal sealed class DocumentDictionaryValueProvider : IDocumentComplexValueProvider
     {
         private static readonly Func<IDocumentValueProvider, IEnumerable<IDocumentValueProvider>> ExpandChildrenFn = ExpandChildren;
+        
         private static IEnumerable<IDocumentValueProvider> ExpandChildren(IDocumentValueProvider documentValueProvider)
         {
             switch (documentValueProvider)

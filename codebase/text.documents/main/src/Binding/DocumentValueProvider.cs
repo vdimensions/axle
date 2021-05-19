@@ -2,7 +2,7 @@
 
 namespace Axle.Text.Documents.Binding
 {
-    internal sealed class DocumentValueProvider
+    internal static class DocumentValueProvider
     {
         public static IDocumentValueProvider Get(ITextDocumentNode node)
         {
