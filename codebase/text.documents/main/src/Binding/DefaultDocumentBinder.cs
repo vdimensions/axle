@@ -8,6 +8,7 @@ namespace Axle.Text.Documents.Binding
 {
     internal sealed class DocumentDictionaryValueProvider : IDocumentComplexValueProvider
     {
+        private static readonly Func<IDocumentValueProvider, IEnumerable<IDocumentValueProvider>> ExpandChildrenFn = ExpandChildren;
         private static IEnumerable<IDocumentValueProvider> ExpandChildren(IDocumentValueProvider documentValueProvider)
         {
             switch (documentValueProvider)
@@ -19,12 +20,9 @@ namespace Axle.Text.Documents.Binding
                     }
                     break;
                 case IDocumentCollectionValueProvider collectionValueProvider:
-                    foreach (var sibling in collectionValueProvider)
+                    foreach (var child in collectionValueProvider.SelectMany(ExpandChildrenFn))
                     {
-                        foreach (var child in ExpandChildren(sibling))
-                        {
-                            yield return child;
-                        }
+                        yield return child;
                     }
                     break;
             }
@@ -37,7 +35,7 @@ namespace Axle.Text.Documents.Binding
             Name = valueProvider.Name;
             var comparer = StringComparer.Ordinal;
             _valueValueProviders = valueProvider
-                .SelectMany(ExpandChildren)
+                .SelectMany(ExpandChildrenFn)
                 .GroupBy(x => x.Name, comparer)
                 .ToDictionary(
                     x => x.Key,
@@ -166,11 +164,11 @@ namespace Axle.Text.Documents.Binding
                             return true;
                     }
                 case IDocumentComplexValueProvider complexProvider:
-                    var cAdapter = objectProvider.GetCollectionAdapter(targetType);
                     if (instance == null)
                     {
                         instance = objectProvider.CreateInstance(targetType);
                     }
+                    var cAdapter = objectProvider.GetCollectionAdapter(instance?.GetType() ?? targetType);
                     if (cAdapter != null)
                     {
                         return TryBind(
