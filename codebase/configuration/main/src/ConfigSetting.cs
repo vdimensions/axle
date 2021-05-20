@@ -17,8 +17,8 @@ namespace Axle.Configuration
         /// <returns>
         /// A new <see cref="IConfigSetting"/> instance from the provided <paramref name="value"/>.
         /// </returns>
-        public static IConfigSetting Create(CharSequence value) => new ConfigSetting(
-            Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))));
+        public static IConfigSetting Create(CharSequence value) 
+            => new ConfigSetting(Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))));
 
         private ConfigSetting(CharSequence value)
         {

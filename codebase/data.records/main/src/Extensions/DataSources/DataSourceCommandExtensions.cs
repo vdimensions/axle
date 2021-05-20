@@ -67,19 +67,26 @@ namespace Axle.Data.Records.Extensions.DataSources
         
         public static IEnumerable<T> ExecuteReader<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, IDataRecordConverter<T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            IDataRecordConverter<T> converter, 
+            params IDataParameter[] parameters)
         {
             return ExecuteReader(command, connection, CommandBehavior.Default, converter, parameters);
         }
         public static IEnumerable<T> ExecuteReader<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, IConverter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            IConverter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             return ExecuteReader(command, connection, CommandBehavior.Default, converter, parameters);
         }
         public static IEnumerable<T> ExecuteReader<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, CommandBehavior commandBehavior, IConverter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            CommandBehavior commandBehavior, 
+            IConverter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter)));
@@ -90,7 +97,10 @@ namespace Axle.Data.Records.Extensions.DataSources
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public static IEnumerable<T> ExecuteReader<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, CommandBehavior commandBehavior, Converter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            CommandBehavior commandBehavior, 
+            Converter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter)));
@@ -100,7 +110,9 @@ namespace Axle.Data.Records.Extensions.DataSources
         }
         public static IEnumerable<T> ExecuteReader<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, Converter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            Converter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             return ExecuteReader(command, connection, CommandBehavior.Default, converter, parameters);
         }

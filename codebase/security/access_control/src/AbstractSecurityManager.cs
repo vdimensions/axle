@@ -44,7 +44,7 @@ namespace Axle.Security.AccessControl
         /// authenticated principal.
         /// </returns>
         /// <seealso cref="IPrincipal" />
-        public IPrincipal CurrentPrincipal => _authenticator.CurrentUser;
+        public IPrincipal CurrentPrincipal => _authenticator.CurrentAccount;
 
         /// <summary>
         /// Gets a reference to the currently authenticated principal. 
@@ -53,7 +53,7 @@ namespace Axle.Security.AccessControl
         /// A reference to the currently authenticated user.
         /// </returns>
         /// <seealso cref="IPrincipal" />
-        public IPrincipal AuthenticatedPrincipal => _authenticator.AuthenticatedUser;
+        public IPrincipal AuthenticatedPrincipal => _authenticator.AuthenticatedAccount;
 
         public bool IsOwnerOf(IAccessLevelEntry accessLevelEntry) => IsOwnerOf(accessLevelEntry.Owner);
         public bool IsOwnerOf(string principal) => !IsAnonymous && CurrentPrincipal.Name.Equals(principal, StringComparison.Ordinal);

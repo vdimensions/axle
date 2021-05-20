@@ -10,16 +10,16 @@ namespace Axle.Security.AccessControl.Authorization
     {
         protected abstract IEnumerable<IAccessPolicy> GetAccessPolicies(string accessLevel, IEnumerable<IAccessRight> accessRights);
         protected abstract IEnumerable<IAccessPolicy> GetParentPolicies(IAccessPolicy accessPolicy);
-        protected abstract IEnumerable<IGroup> GetGroups(IGroupMember groupMember);
-        protected abstract IPrincipal GetPrincipal(string principal);
+        protected abstract IEnumerable<IGroup> GetParticipatingGroups(IGroupMember groupMember);
+        protected abstract IPrincipal ResolvePrincipal(string principal);
         [Obsolete]
-        protected abstract IAccessRight GetAccessRight(string value);
+        protected abstract IAccessRight ResolveAccessRight(string value);
 
         private void ExpandPrincipals(string principal, ICollection<IPrincipal> expandedPrincipals)
         {
-            var p = GetPrincipal(principal);
+            var p = ResolvePrincipal(principal);
             var groupMember = p as IGroupMember;
-            foreach (var group in GetGroups(groupMember))
+            foreach (var group in GetParticipatingGroups(groupMember))
             {
                 expandedPrincipals.Add(group);
             }  
@@ -95,7 +95,8 @@ namespace Axle.Security.AccessControl.Authorization
                 || ExpandPrincipals(principal1.Name).Any(x => comparer.Equals(x.Name, principal2.Name))
                 || ExpandPrincipals(principal2.Name).Any(x => comparer.Equals(x.Name, principal1.Name));
         }
-        public virtual bool ArePrincipalsRelated(string principal1, string principal2) { return ArePrincipalsRelated(GetPrincipal(principal1), GetPrincipal(principal2)); }
+        public virtual bool ArePrincipalsRelated(string principal1, string principal2) 
+            => ArePrincipalsRelated(ResolvePrincipal(principal1), ResolvePrincipal(principal2));
 
         public void DemandAccess(IPrincipal principal, IAccessLevelEntry accessLevelEntry, IEnumerable<IAccessRight> accessRights)
         {
@@ -153,7 +154,7 @@ namespace Axle.Security.AccessControl.Authorization
                 throw new ArgumentNullException(nameof(accessLevelEntry));
             }
             return principal.Name.Equals(accessLevelEntry.Owner, StringComparison.Ordinal) 
-                || DoHasAccess(principal.Name, accessLevelEntry.AccessLevel, accessRights.Select(GetAccessRight));
+                || DoHasAccess(principal.Name, accessLevelEntry.AccessLevel, accessRights.Select(ResolveAccessRight));
         }
         public bool HasAccess(IPrincipal principal, string accessLevel, IEnumerable<IAccessRight> accessRights)
         {
@@ -178,7 +179,7 @@ namespace Axle.Security.AccessControl.Authorization
             {
                 throw new ArgumentNullException(nameof(accessLevel));
             }
-            return DoHasAccess(principal.Name, accessLevel, accessRights.Select(GetAccessRight));
+            return DoHasAccess(principal.Name, accessLevel, accessRights.Select(ResolveAccessRight));
         }
 
         private static void ThrowInsufficientAccessRightsException()

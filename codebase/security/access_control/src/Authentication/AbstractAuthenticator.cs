@@ -4,17 +4,27 @@ namespace Axle.Security.AccessControl.Authentication
 {
     public abstract class AbstractAuthenticator : IAuthenticator
     {
-        private readonly object syncRoot = new object();
+        private readonly object _syncRoot = new object();
+
+        protected AbstractAuthenticator() { }
+
+        protected abstract IAccount GetAuthenticatedUser();
+
+        public abstract void DemandCredentials();
+
+        public abstract void SignIn(IAuthenticationToken authToken);
+
+        public abstract void SignOut();
 
         public abstract bool IsGuest { get; }
 
-        public abstract IAccount CurrentUser { get; protected set; }
+        public abstract IAccount CurrentAccount { get; protected set; }
 
-        public IAccount AuthenticatedUser
+        public IAccount AuthenticatedAccount
         {
             get
             {
-                lock (syncRoot)
+                lock (_syncRoot)
                 {
                     if (IsGuest)
                     {
@@ -29,15 +39,33 @@ namespace Axle.Security.AccessControl.Authentication
                 return GetAuthenticatedUser();
             }
         }
+    }
 
-        protected AbstractAuthenticator() { }
+    public abstract class AbstractAuthenticator<TToken> 
+        : AbstractAuthenticator,
+          IAuthenticationTokenProcessor<TToken>
+        where TToken: IAuthenticationToken
+    {
+        public virtual bool CanProcessToken(TToken token) => true;
 
-        protected abstract IAccount GetAuthenticatedUser();
+        public bool CanProcessToken(IAuthenticationToken token)
+        {
+            if (token is TToken supportedToken)
+            {
+                CanProcessToken(supportedToken);
+            }
+            throw new NotSupportedException("The provided auth token is not supported.");
+        }
 
-        public abstract void DemandCredentials();
+        public abstract void SignIn(TToken authToken);
 
-        public abstract void SignIn(IAuthenticationToken authToken);
-
-        public abstract void SignOut();
+        public sealed override void SignIn(IAuthenticationToken authToken)
+        {
+            if (authToken is TToken supportedToken && CanProcessToken(supportedToken))
+            {
+                SignIn(supportedToken);
+            }
+            throw new NotSupportedException("The provided auth token is not supported.");
+        }
     }
 }

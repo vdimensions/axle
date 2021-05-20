@@ -13,8 +13,8 @@ namespace Axle.Data.Records.Conversion
     [SuppressMessage("ReSharper", "UnusedType.Global")]
     public abstract class DataRecordConverter<T> : AbstractConverter<DataRecord, T>, IDataRecordConverter<T>
     {
-        public T Convert(DataRecord value, string fieldNameFormat) =>
-            DoConvert(value.VerifyArgument(nameof(value)).IsNotNull().Value, fieldNameFormat);
+        public T Convert(DataRecord value, string fieldNameFormat) 
+            => DoConvert(value.VerifyArgument(nameof(value)).IsNotNull().Value, fieldNameFormat);
 
         protected sealed override T DoConvert(DataRecord source) => DoConvert(source, "{0}");
 

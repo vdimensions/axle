@@ -25,7 +25,7 @@ namespace Axle.Security.AccessControl.Authentication
         void SignOut();
 
         bool IsGuest { get; }
-        IAccount CurrentUser { get; }
-        IAccount AuthenticatedUser { get; }
+        IAccount CurrentAccount { get; }
+        IAccount AuthenticatedAccount { get; }
     }
 }
