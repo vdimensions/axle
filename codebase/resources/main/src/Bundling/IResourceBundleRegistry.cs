@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using Axle.Collections.ReadOnly;
 
 namespace Axle.Resources.Bundling
 {
@@ -7,7 +7,7 @@ namespace Axle.Resources.Bundling
     /// to store instances of <see cref="IResourceBundleContent" /> to latter be used 
     /// by a <see cref="ResourceManager" /> implementation.
     /// </summary>
-    public interface IResourceBundleRegistry : IEnumerable<IResourceBundleContent>
+    public interface IResourceBundleRegistry : IReadOnlyCollection<IResourceBundleContent>
     {
         /// <summary>
         /// Exposes the <see cref="IResourceBundleContent"/> instance associated with the given <paramref name="bundle"/>,
@@ -20,6 +20,19 @@ namespace Axle.Resources.Bundling
         /// A <see cref="IResourceBundleContent"/> instance associated with the given <paramref name="bundle"/>. 
         /// </returns>
         IConfigurableBundleContent Configure(string bundle);
+
+        /// <summary>
+        /// Determines if the current <see cref="IResourceBundleRegistry"/> contains the provided
+        /// <paramref name="bundle"/>.
+        /// </summary>
+        /// <param name="bundle">
+        /// The name of the resource bundle to check.
+        /// </param>
+        /// <returns>
+        /// <c>true/<c> if the current <see cref="IResourceBundleRegistry"/> contains the provided
+        /// <paramref name="bundle"/>; <c>false</> otherwise.
+        /// </returns>
+        bool Contains(string bundle);
 
         /// <summary>
         /// Gets an instance of <see cref="IResourceBundleContent"/> object that represent the resource lookup locations

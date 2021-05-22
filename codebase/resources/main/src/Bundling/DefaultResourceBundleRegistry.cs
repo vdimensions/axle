@@ -43,6 +43,9 @@ namespace Axle.Resources.Bundling
             }
             return contentRegistry;
         }
+        
+        /// <inheritdoc />
+        public bool Contains(string bundle) => _perBundleContent.ContainsKey(bundle);
 
         /// <inheritdoc />
         public IEnumerator<IResourceBundleContent> GetEnumerator() 
@@ -62,5 +65,7 @@ namespace Axle.Resources.Bundling
                 return new ReadOnlyResourceBundleContent(bundleContent);
             }
         }
+
+        public int Count => _perBundleContent.Count;
     }
 }
