@@ -7,7 +7,7 @@ using Axle.Verification;
 
 namespace Axle.Configuration
 {
-    internal sealed class YamlConfigSource : IConfigSource
+    internal sealed class YamlFileConfigSource : IConfigSource
     {
         private const string DefaultConfigFileName = "{0}{1}.yml";
         private const string AlternateConfigFileName = "{0}{1}.yaml";
@@ -15,16 +15,16 @@ namespace Axle.Configuration
         private readonly IList<string> _fileNames;
         private readonly IConfigurationStreamProvider _configStreamProvider;
 
-        private YamlConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env, params string[] fileNameFormats)
+        private YamlFileConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env, params string[] fileNameFormats)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(fileName, nameof(fileName)));
             _configStreamProvider = configStreamProvider;
             var envFormat = string.IsNullOrEmpty(env) ? string.Empty : $".{env}";
             _fileNames = fileNameFormats.Select(f => string.Format(f, fileName, envFormat)).ToList();
         }
-        public YamlConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env)
+        public YamlFileConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env)
             : this(fileName, configStreamProvider, env, DefaultConfigFileName, AlternateConfigFileName) { }
-        public YamlConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider)
+        public YamlFileConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider)
             : this(fileName, configStreamProvider, null, DefaultConfigFileName, AlternateConfigFileName) { }
 
         public IConfiguration LoadConfiguration()

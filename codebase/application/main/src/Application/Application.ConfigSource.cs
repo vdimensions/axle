@@ -13,15 +13,15 @@ namespace Axle.Application
             if (string.IsNullOrEmpty(environmentName))
             {
                 return configManager
-                    .Append(new YamlConfigSource(configFileName, configStreamProvider))
+                    .Append(new YamlFileConfigSource(configFileName, configStreamProvider))
                     // TODO: JSON
-                    .Append(new PropertiesConfigSource(configFileName, configStreamProvider))
+                    .Append(new PropertiesFileConfigSource(configFileName, configStreamProvider))
                     ;
             }
             return configManager
-                .Append(new YamlConfigSource(configFileName, configStreamProvider, environmentName))
+                .Append(new YamlFileConfigSource(configFileName, configStreamProvider, environmentName))
                 // TODO: JSON
-                .Append(new PropertiesConfigSource(configFileName, configStreamProvider, environmentName))
+                .Append(new PropertiesFileConfigSource(configFileName, configStreamProvider, environmentName))
                 ;
         }
     }

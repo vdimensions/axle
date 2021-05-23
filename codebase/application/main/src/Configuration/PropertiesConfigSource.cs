@@ -1,34 +1,59 @@
-﻿using System;
+using System;
+using System.Collections.Generic;
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using System.Collections.Specialized;
+#endif
+using System.Linq;
 using Axle.Configuration.Text.Documents;
+using Axle.Text.Documents;
 using Axle.Text.Documents.Properties;
 using Axle.Verification;
+using Kajabity.Tools.Java;
 
 namespace Axle.Configuration
 {
-    internal sealed class PropertiesConfigSource : IConfigSource
+    public sealed class PropertiesConfigSource : AbstractTextDocumentConfigSource
     {
-        private const string DefaultConfigFileName = "{0}{1}.properties";
-        
-        private readonly string _fileName;
-        private readonly IConfigurationStreamProvider _configStreamProvider;
+        private readonly JavaProperties _properties;
 
-        public PropertiesConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider, string env)
+        public PropertiesConfigSource(JavaProperties properties)
         {
-            Verifier.IsNotNull(Verifier.VerifyArgument(configStreamProvider, nameof(configStreamProvider)));
-            _configStreamProvider = configStreamProvider;
-            var envFormat = string.IsNullOrEmpty(env) ? string.Empty : $".{env}";
-            _fileName = string.Format(DefaultConfigFileName, fileName, envFormat);
+            Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
+            _properties = properties;
         }
-        public PropertiesConfigSource(string fileName, IConfigurationStreamProvider configStreamProvider) 
-            : this(fileName, configStreamProvider, string.Empty) { }
-
-        public IConfiguration LoadConfiguration()
+        public PropertiesConfigSource(Dictionary<string, string> properties)
         {
-            var comparer = StringComparer.OrdinalIgnoreCase;
-            var reader = new PropertiesDocumentReader(comparer);
-            return new SafeConfigSource(
-                    new StreamDocumentConfigSource(reader, () => _configStreamProvider.LoadConfiguration(_fileName)))
-                .LoadConfiguration();
+            Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
+            _properties = new JavaProperties(properties);
+        }
+        public PropertiesConfigSource(IDictionary<string, string> properties)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
+            _properties = new JavaProperties(new Dictionary<string, string>(properties));
+        }
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        public PropertiesConfigSource(StringDictionary properties)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
+            _properties = new JavaProperties(
+                properties.Keys.Cast<string>().Select(x => new KeyValuePair<string, string>(
+                    x,
+                    properties[x])).ToDictionary(x => x.Key, x => x.Value));
+        }
+        #endif
+        
+        #if NETSTANDARD || NET45_OR_NEWER
+        public PropertiesConfigSource(IReadOnlyDictionary<string, string> properties)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
+            _properties = new JavaProperties(properties.ToDictionary(x => x.Key, x => x.Value));
+        }
+        #endif
+
+        protected override ITextDocumentRoot ReadDocument()
+        {
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
+            return reader.Read(reader.CreateAdapter(_properties));
         }
     }
 }
