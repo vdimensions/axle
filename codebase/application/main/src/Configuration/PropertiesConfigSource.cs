@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Collections.Specialized;
 #endif
 using System.Linq;
+using System.Text;
 using Axle.Configuration.Text.Documents;
 using Axle.Text.Documents;
 using Axle.Text.Documents.Properties;
@@ -41,6 +43,17 @@ namespace Axle.Configuration
                     properties[x])).ToDictionary(x => x.Key, x => x.Value));
         }
         #endif
+        public PropertiesConfigSource(string data)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(data, nameof(data)));
+            var properties = new JavaProperties();
+            var encoding = Encoding.UTF8;
+            using (var memStream = new MemoryStream(encoding.GetBytes(data)))
+            {
+                properties.Load(memStream, encoding);
+            }
+            _properties = properties;
+        }
         
         #if NETSTANDARD || NET45_OR_NEWER
         public PropertiesConfigSource(IReadOnlyDictionary<string, string> properties)
