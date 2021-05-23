@@ -157,6 +157,13 @@ namespace Axle.Text.Documents
             Verifier.IsNotNull(Verifier.VerifyArgument(data, nameof(data)));
             return ReadStructuredData(CreateAdapter(data), Comparer);
         }
+        
+        /// <inheritdoc />
+        public ITextDocumentRoot Read(ITextDocumentAdapter adapter)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(adapter, nameof(adapter)));
+            return ReadStructuredData(adapter, Comparer);
+        }
 
         /// <summary>
         /// The <see cref="IEqualityComparer{T}"/> that is used for key comparison.

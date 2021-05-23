@@ -36,5 +36,17 @@ namespace Axle.Text.Documents
         /// An instance of <see cref="ITextDocumentRoot"/> representing the interpreted document structure.
         /// </returns>
         ITextDocumentRoot Read(string document);
+
+        /// <summary>
+        /// Reads the provided raw text <paramref name="document"/> and produces an instance of
+        /// <see cref="ITextDocumentRoot"/> representing the interpreted document structure.
+        /// </summary>
+        /// <param name="document">
+        /// An <see cref="ITextDocumentAdapter"/> implementation representing the raw document contents.  
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="ITextDocumentRoot"/> representing the interpreted document structure.
+        /// </returns>
+        ITextDocumentRoot Read(ITextDocumentAdapter document);
     }
 }

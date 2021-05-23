@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Text;
+using Axle.Verification;
 
 namespace Axle.Text.Documents.Xml
 {
@@ -51,5 +52,20 @@ namespace Axle.Text.Documents.Xml
 
         internal sealed override XmlDocumentAdapter GetXmlRoot(Stream stream, Encoding encoding) => CreateXmlNode(GetXmlObject(stream, encoding));
         internal sealed override XmlDocumentAdapter GetXmlRoot(string xml) => CreateXmlNode(GetXmlObject(xml));
+
+        /// <summary>
+        /// Creates an instance of the <see cref="ITextDocumentAdapter"/> from the provided <paramref name="document"/>.
+        /// </summary>
+        /// <param name="document">
+        /// A pre-loaded xml document.
+        /// </param>
+        /// <returns>
+        /// A new instance of the <see cref="ITextDocumentAdapter"/> from the provided <paramref name="document"/>.
+        /// </returns>
+        public ITextDocumentAdapter CreateAdapter(TXml document)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(document, nameof(document)));
+            return CreateXmlNode(document);
+        }
     }
 }

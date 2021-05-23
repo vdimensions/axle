@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
@@ -94,7 +93,7 @@ namespace Axle.Text.Documents.Yaml
                     string name, 
                     IEnumerable<ITextDocumentAdapter> children, 
                     CharSequence value, 
-                    bool isCollection, 
+                    bool isCollection,
                     IEqualityComparer<string> keyComparer)
             {
                 Key = name;

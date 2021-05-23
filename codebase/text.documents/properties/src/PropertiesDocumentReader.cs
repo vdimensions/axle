@@ -3,6 +3,7 @@ using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
 using System.Text;
+using Axle.Verification;
 using Kajabity.Tools.Java;
 
 namespace Axle.Text.Documents.Properties
@@ -52,6 +53,21 @@ namespace Axle.Text.Documents.Properties
         {
             var enc = Encoding.UTF8;
             return CreateAdapter(new MemoryStream(enc.GetBytes(document)), enc);
+        }
+
+        /// <summary>
+        /// Creates an instance of the <see cref="ITextDocumentAdapter"/> from the provided <paramref name="document"/>.
+        /// </summary>
+        /// <param name="document">
+        /// A pre-loaded <see cref="JavaProperties"/> document.
+        /// </param>
+        /// <returns>
+        /// A new instance of the <see cref="ITextDocumentAdapter"/> from the provided <paramref name="document"/>.
+        /// </returns>
+        public ITextDocumentAdapter CreateAdapter(JavaProperties document)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(document, nameof(document)));
+            return new Adapter(document);
         }
     }
 }
