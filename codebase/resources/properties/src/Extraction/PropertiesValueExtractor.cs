@@ -30,27 +30,26 @@ namespace Axle.Resources.Properties.Extraction
         protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             IDictionary<string, CharSequence> data = new Dictionary<string, CharSequence>(PropertiesFileExtractor.DefaultKeyComparer);
-            foreach (var propertyFile in context.ExtractAll(_propertyFileName))
+            var propertyFile = context.Extract(_propertyFileName);
+            switch (propertyFile)
             {
-                switch (propertyFile)
-                {
-                    case null:
-                        return null;
-                    case TextDocumentResourceInfo jp:
-                        foreach (var kvp in jp.Data)
-                        {
-                            data[kvp.Key] = kvp.Value;
-                        }
-                        break;
-                    //default:
-                    //    using (var stream = propertyResource.Value.Open())
-                    //    if (stream != null)
-                    //    {
-                    //        var x = new PropertiesFileExtractor();
-                    //        x.ReadData(stream, props = new Dictionary<string, string>(PropertiesFileExtractor.DefaultKeyComparer));
-                    //    }
-                    //    break;
-                }
+                case null:
+                    return null;
+                case TextDocumentResourceInfo jp:
+                    foreach (var kvp in jp.Data)
+                    {
+                        data[kvp.Key] = kvp.Value;
+                    }
+
+                    break;
+                //default:
+                //    using (var stream = propertyResource.Value.Open())
+                //    if (stream != null)
+                //    {
+                //        var x = new PropertiesFileExtractor();
+                //        x.ReadData(stream, props = new Dictionary<string, string>(PropertiesFileExtractor.DefaultKeyComparer));
+                //    }
+                //    break;
             }
 
             if (data != null && data.TryGetValue($"{_keyPrefix}{name}", out var result))
