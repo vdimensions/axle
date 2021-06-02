@@ -25,7 +25,7 @@ build_script:
   - ps: "dotnet build -p:Version=$env:VERSION -p:ContinuousIntegrationBuild=true -c $env:CONFIGURATION \ndotnet pack -p:Version=$env:VERSION -p:ContinuousIntegrationBuild=true -c $env:CONFIGURATION --no-restore"
 
 for:
-  - version: 2.0.16.{build}
+  - version: 2.0.{build}
     branches:
       only:
         - master
@@ -39,7 +39,7 @@ for:
         on:
           branch: master
 
-  - version: 2.0.17-{branch}.{build}
+  - version: 2.1-{branch}.{build}
     branches:
       only:
         - /alpha|beta|preview|rc|snapshot/
