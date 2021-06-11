@@ -11,7 +11,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Properties\Messages.properties" />
+    <EmbeddedResource Include="Properties\*.properties" />
   </ItemGroup>
 
   <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />

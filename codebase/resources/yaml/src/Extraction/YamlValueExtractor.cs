@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Text;
+using Axle.Extensions.String;
 using Axle.Resources.Extraction;
 using Axle.Text;
 
@@ -7,15 +9,32 @@ namespace Axle.Resources.Yaml.Extraction
 {
     internal sealed class YamlValueExtractor : AbstractResourceExtractor
     {
+        internal static void DeconstructYamlFilePath(string yamlFilePath, out string yamlFileName, out string keyPrefix)
+        {
+            // TODO: this code relies on .yml being the extension name used. We should also support .yaml
+            
+            yamlFileName = keyPrefix = null;
+            const string ext = YamlResourceInfo.FileExtension;
+            const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
+            keyPrefix = yamlFilePath.TakeAfterLast(ext, cmp);
+            yamlFileName = yamlFilePath.TakeBeforeLast(keyPrefix, cmp);
+            const char slash = '/';
+            keyPrefix = keyPrefix.TrimStart(slash);
+            if (keyPrefix.EndsWith(slash.ToString()))
+            {
+                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
+            }
+        }
+        
         private readonly string _yamlFile;
         private readonly string _keyPrefix;
         private readonly Encoding _encoding;
 
         public YamlValueExtractor(Encoding encoding, string yamlFile, string keyPrefix)
         {
-            _yamlFile = yamlFile;
-            _keyPrefix = keyPrefix;
             _encoding = encoding;
+            DeconstructYamlFilePath(yamlFile, out _yamlFile, out var prefix);
+            _keyPrefix = string.IsNullOrEmpty(prefix) ?  keyPrefix : string.Concat(prefix, keyPrefix);
         }
 
         protected override ResourceInfo DoExtract(IResourceContext context, string name)

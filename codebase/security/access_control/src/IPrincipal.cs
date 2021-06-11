@@ -4,7 +4,7 @@ using Axle.Security.AccessControl.Authorization;
 namespace Axle.Security.AccessControl
 {
     /// <summary>
-    /// Represents a security principal; that is an entity which has security information assigned to it.
+    /// Represents a security principal; that is, an entity which has security information assigned to it.
     /// <para>
     /// Notable implementations of this interface include:
     /// <list type="bullet">

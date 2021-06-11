@@ -56,11 +56,11 @@ namespace Axle.Resources.Properties
             var result = new MemoryStream();
             // TODO: add support for char[]
             new JavaPropertyWriter(
-                Data.ToDictionary(
-                    x => x.Key,
-                    x => x.Value.ToString(),
-                    PropertiesFileExtractor.DefaultKeyComparer)
-                ).Write(result, null);
+                    Data.ToDictionary(
+                        x => x.Key,
+                        x => x.Value.ToString(),
+                        PropertiesFileExtractor.DefaultKeyComparer))
+                .Write(result, null);
             result.Seek(0, SeekOrigin.Begin);
             return result;
         }

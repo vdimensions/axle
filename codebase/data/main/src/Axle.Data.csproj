@@ -11,7 +11,14 @@
     <Description>Axle's data access library</Description>
   </PropertyGroup>
 
+  <!-- <ItemGroup>
+    <PackageReference Include="System.Data.Common" />
+    <PackageReference Include="System.Data.DataSetExtensions" />
+  </ItemGroup> -->
+
   <Import Project="../../../../ref/Reference.Axle.Application.targets" />
+  <!-- <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.Common.targets" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.DataSetExtensions.targets" /> -->
   <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.Common.props" />
   <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.DataSetExtensions.props" />
 </Project>

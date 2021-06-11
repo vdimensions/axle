@@ -7,10 +7,9 @@ namespace Axle.Configuration.Text.Documents
     /// An implementation of the <see cref="AbstractTextDocumentConfigSource"/> class which reads the underlying
     /// <see cref="ITextDocumentRoot"/> from a text value.
     /// </summary>
-    public class TextDocumentConfigSource : AbstractTextDocumentConfigSource
+    public sealed class TextDocumentConfigSource : AbstractTextDocumentConfigSource
     {
-        private readonly ITextDocumentReader _reader;
-        private readonly string _rawDocument;
+        private readonly ITextDocumentRoot _document;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TextDocumentConfigSource"/> class, using the
@@ -28,11 +27,10 @@ namespace Axle.Configuration.Text.Documents
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(reader, nameof(reader)));
             Verifier.IsNotNull(Verifier.VerifyArgument(rawDocument, nameof(rawDocument)));
-            _reader = reader;
-            _rawDocument = rawDocument;
+            _document = reader.Read(rawDocument);
         }
 
         /// <inheritdoc />
-        protected sealed override ITextDocumentRoot ReadDocument() => _reader.Read(_rawDocument);
+        protected override ITextDocumentRoot ReadDocument() => _document;
     }
 }

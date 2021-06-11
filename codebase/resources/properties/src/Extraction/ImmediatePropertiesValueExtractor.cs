@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Text;
-using Axle.Extensions.String;
 using Axle.Resources.Extraction;
 
 namespace Axle.Resources.Properties.Extraction
@@ -12,20 +11,10 @@ namespace Axle.Resources.Properties.Extraction
     {
         private static bool GetPropertiesFileData(Uri location, out string propertyFileName, out string keyPrefix)
         {
-            propertyFileName = keyPrefix = null;
-            const string ext = PropertiesResourceInfo.FileExtension;
-            const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
-            var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterLast(ext, cmp);
-            propertyFileName = locStr.TakeBeforeLast(keyPrefix, cmp);
-            const char slash = '/';
-            keyPrefix = keyPrefix.TrimStart(slash);
-            if (keyPrefix.EndsWith(slash.ToString()))
-            {
-                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
-            }
+            PropertiesValueExtractor.DeconstructPropertyFilePath(location.ToString(), out propertyFileName, out keyPrefix);
 
-            return !string.IsNullOrEmpty(propertyFileName) && propertyFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
+            return !string.IsNullOrEmpty(propertyFileName) 
+                && propertyFileName.EndsWith(PropertiesResourceInfo.FileExtension, StringComparison.OrdinalIgnoreCase);
         }
 
         private readonly Encoding _encoding;

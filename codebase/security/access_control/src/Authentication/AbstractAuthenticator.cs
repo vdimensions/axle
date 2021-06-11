@@ -31,9 +31,9 @@ namespace Axle.Security.AccessControl.Authentication
                         DemandCredentials();
                         if (IsGuest)
                         {
-                            throw new InvalidOperationException("The account is currently unavailable. Authentication might currently be in progress.");
+                            throw new SecurityException("The account is currently unavailable. Authentication might currently be in progress.");
                         }
-                        throw new NotSupportedException("The current session belongs to a guest user and there is no available mechanism for forcing authentication.");
+                        throw new SecurityException("The current session belongs to a guest user and there is no available mechanism for forcing authentication.");
                     }
                 }
                 return GetAuthenticatedUser();

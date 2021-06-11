@@ -16,31 +16,36 @@ namespace Axle.Configuration
 {
     public sealed class PropertiesConfigSource : AbstractTextDocumentConfigSource
     {
-        private readonly JavaProperties _properties;
+        private readonly ITextDocumentRoot _document;
 
         public PropertiesConfigSource(JavaProperties properties)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
-            _properties = properties;
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
+            _document = reader.Read(reader.CreateAdapter(properties));
         }
         public PropertiesConfigSource(Dictionary<string, string> properties)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
-            _properties = new JavaProperties(properties);
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
+            _document = reader.Read(reader.CreateAdapter(new JavaProperties(properties)));
         }
         public PropertiesConfigSource(IDictionary<string, string> properties)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
-            _properties = new JavaProperties(new Dictionary<string, string>(properties));
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
+            _document = reader.Read(reader.CreateAdapter(new JavaProperties(new Dictionary<string, string>(properties))));
         }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         public PropertiesConfigSource(StringDictionary properties)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
-            _properties = new JavaProperties(
-                properties.Keys.Cast<string>().Select(x => new KeyValuePair<string, string>(
-                    x,
-                    properties[x])).ToDictionary(x => x.Key, x => x.Value));
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
+            _document = reader.Read(
+                reader.CreateAdapter(new JavaProperties(
+                    properties.Keys.Cast<string>()
+                        .Select(x => new KeyValuePair<string, string>(x, properties[x]))
+                        .ToDictionary(x => x.Key, x => x.Value))));
         }
         #endif
         public PropertiesConfigSource(string data)
@@ -48,25 +53,23 @@ namespace Axle.Configuration
             Verifier.IsNotNull(Verifier.VerifyArgument(data, nameof(data)));
             var properties = new JavaProperties();
             var encoding = Encoding.UTF8;
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
             using (var memStream = new MemoryStream(encoding.GetBytes(data)))
             {
                 properties.Load(memStream, encoding);
             }
-            _properties = properties;
+            _document = reader.Read(reader.CreateAdapter(properties));
         }
         
         #if NETSTANDARD || NET45_OR_NEWER
         public PropertiesConfigSource(IReadOnlyDictionary<string, string> properties)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(properties, nameof(properties)));
-            _properties = new JavaProperties(properties.ToDictionary(x => x.Key, x => x.Value));
+            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
+            _document = reader.Read(reader.CreateAdapter(new JavaProperties(properties.ToDictionary(x => x.Key, x => x.Value))));
         }
         #endif
 
-        protected override ITextDocumentRoot ReadDocument()
-        {
-            var reader = new PropertiesDocumentReader(StringComparer.Ordinal);
-            return reader.Read(reader.CreateAdapter(_properties));
-        }
+        protected override ITextDocumentRoot ReadDocument() => _document;
     }
 }

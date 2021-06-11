@@ -1,25 +1,20 @@
 using System;
 using Axle.Configuration.Text.Documents;
-using Axle.Text.Documents;
 using Axle.Text.Documents.Yaml;
 using Axle.Verification;
 
 namespace Axle.Configuration
 {
-    public sealed class YamlConfigSource : AbstractTextDocumentConfigSource
+    public sealed class YamlConfigSource : IConfigSource
     {
-        private readonly string _data;
+        private readonly IConfigSource _impl;
 
         public YamlConfigSource(string data)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(data, nameof(data)));
-            _data = data;
+            _impl = new TextDocumentConfigSource(new YamlDocumentReader(StringComparer.Ordinal), data);
         }
 
-        protected override ITextDocumentRoot ReadDocument()
-        {
-            var reader = new YamlDocumentReader(StringComparer.Ordinal);
-            return reader.Read(_data);
-        }
+        public IConfiguration LoadConfiguration() => _impl.LoadConfiguration();
     }
 }
