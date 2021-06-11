@@ -4,6 +4,7 @@
     <ProjectGuid>{D8E36B44-60AF-4F8D-A148-F68F555876F9}</ProjectGuid>
     <OutputType>Library</OutputType>
     <IsTestProject>true</IsTestProject>
+    <TargetFramework>net46</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>

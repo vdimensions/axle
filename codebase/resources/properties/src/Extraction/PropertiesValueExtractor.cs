@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Text;
+using Axle.Extensions.String;
 using Axle.Resources.Extraction;
 using Axle.Resources.Text.Documents;
 using Axle.Text;
@@ -11,6 +13,21 @@ namespace Axle.Resources.Properties.Extraction
     /// </summary>
     internal sealed class PropertiesValueExtractor : AbstractResourceExtractor
     {
+        internal static void DeconstructPropertyFilePath(string propertyFilePath, out string propertyFileName, out string keyPrefix)
+        {
+            propertyFileName = keyPrefix = null;
+            const string ext = PropertiesResourceInfo.FileExtension;
+            const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
+            keyPrefix = propertyFilePath.TakeAfterLast(ext, cmp);
+            propertyFileName = propertyFilePath.TakeBeforeLast(keyPrefix, cmp);
+            const char slash = '/';
+            keyPrefix = keyPrefix.TrimStart(slash);
+            if (keyPrefix.EndsWith(slash.ToString()))
+            {
+                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
+            }
+        }
+        
         private readonly Encoding _encoding;
         private readonly string _propertyFileName;
         private readonly string _keyPrefix;
@@ -18,8 +35,8 @@ namespace Axle.Resources.Properties.Extraction
         public PropertiesValueExtractor(Encoding encoding, string propertyFileName, string keyPrefix)
         {
             _encoding = encoding;
-            _propertyFileName = propertyFileName;
-            _keyPrefix = keyPrefix;
+            DeconstructPropertyFilePath(propertyFileName, out _propertyFileName, out var prefix);
+            _keyPrefix = string.IsNullOrEmpty(prefix) ? keyPrefix : string.Concat(prefix, keyPrefix);
         }
         
         /// <inheritdoc />
@@ -52,7 +69,7 @@ namespace Axle.Resources.Properties.Extraction
                 //    break;
             }
 
-            if (data != null && data.TryGetValue($"{_keyPrefix}{name}", out var result))
+            if (data.Count > 0 && data.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
                 // TODO: avoid calling `result.ToString()` on a CharSequence. Change resource info type appropriately
                 return new TextResourceInfo(name, context.Culture, result.ToString(), _encoding);

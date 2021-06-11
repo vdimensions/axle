@@ -9,20 +9,9 @@ namespace Axle.Resources.Yaml.Extraction
     {
         private static bool GetYamlFileData(Uri location, out string yamlFileName, out string keyPrefix)
         {
-            yamlFileName = keyPrefix = null;
-            const string ext = YamlResourceInfo.FileExtension;
-            const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
-            var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterLast(ext, cmp);
-            yamlFileName = locStr.TakeBeforeLast(keyPrefix, cmp);
-            const char slash = '/';
-            keyPrefix = keyPrefix.TrimStart(slash);
-            if (keyPrefix.EndsWith(slash.ToString()))
-            {
-                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
-            }
+            YamlValueExtractor.DeconstructYamlFilePath(location.ToString(), out yamlFileName, out keyPrefix);
 
-            return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
+            return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(YamlResourceInfo.FileExtension, StringComparison.OrdinalIgnoreCase);
         }
 
         private readonly Encoding _encoding;

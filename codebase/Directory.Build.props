@@ -29,7 +29,7 @@
   <!-- Versioning properties -->
   <PropertyGroup>
     <VersionMajor>2</VersionMajor>
-    <VersionMinor>0</VersionMinor>
+    <VersionMinor>1</VersionMinor>
     <VersionSuffix Condition=" '$(VersionSuffix)' == '' ">snapshot</VersionSuffix>
   </PropertyGroup>
 
@@ -47,6 +47,7 @@
     <AddDotnetfeedProjectSource>false</AddDotnetfeedProjectSource>
     <PackageOutputPath>$(MSBuildProjectDirectory)\..\..\..\..\dist</PackageOutputPath>
     <RestoreSources>https://api.nuget.org/v3/index.json;$(RestoreSources)</RestoreSources>
+    <!-- <AxlePath>$(MSBuildProjectDirectory)\..\..\..\..</AxlePath> -->
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
