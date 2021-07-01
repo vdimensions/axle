@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Conversion
 {
@@ -18,9 +19,20 @@ namespace Axle.Conversion
         #endif
     {
         /// <summary>
+        /// Gets a reference to a shared <see cref="NullableEnumToInt64Converter{T}"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly NullableEnumToInt64Converter<T> Instance = new NullableEnumToInt64Converter<T>();
+        
+        /// <summary>
+        /// Initialized a new instance of the <see cref="NullableEnumToInt64Converter{T}"/> class
+        /// using the provided <paramref name="converter"/>.
+        /// </summary>
+        public NullableEnumToInt64Converter(EnumToInt64Converter<T> converter) 
+            : base(new NullableToStructTwoWayConverter<T, long>(converter)) { }
+        /// <summary>
         /// Initialized a new instance of the <see cref="NullableEnumToInt64Converter{T}"/> class.
         /// </summary>
-        public NullableEnumToInt64Converter() 
-            : base(new NullableToStructTwoWayConverter<T, long>(new EnumToInt64Converter<T>())) { }
+        public NullableEnumToInt64Converter() : this(EnumToInt64Converter<T>.Instance) { }
     }
 }

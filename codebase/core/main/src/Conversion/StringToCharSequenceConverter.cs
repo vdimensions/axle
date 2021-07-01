@@ -1,4 +1,5 @@
-﻿using Axle.Text;
+﻿using System.Diagnostics.CodeAnalysis;
+using Axle.Text;
 
 namespace Axle.Conversion
 {
@@ -11,6 +12,12 @@ namespace Axle.Conversion
     #endif
     public sealed class StringToCharSequenceConverter : AbstractTwoWayConverter<string, CharSequence>
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="StringToCharSequenceConverter"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly StringToCharSequenceConverter Instance = new StringToCharSequenceConverter();
+        
         /// <inheritdoc />
         protected override CharSequence DoConvert(string source) => source;
 

@@ -62,7 +62,7 @@ namespace Axle.Resources.Yaml.Extraction
                 //    break;
             }
 
-            if (data != null && data.TryGetValue($"{_keyPrefix}{name}", out var result))
+            if (data.Count > 0 && data.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
                 // TODO: avoid calling `result.ToString()` on a CharSequence. Change resource info type appropriately
                 return new TextResourceInfo(name, context.Culture, result.ToString(), _encoding);

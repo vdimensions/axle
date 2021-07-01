@@ -17,6 +17,11 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="EnumToInt32Converter{T}"/> instance.
+        /// </summary>
+        public static readonly EnumToInt32Converter<T> Instance = new EnumToInt32Converter<T>();
+
         /// <inheritdoc />
         protected override int DoConvert(T source) => (int) ((object) source);
 

@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using Axle.Verification;
 #if NETSTANDARD1_0
@@ -16,6 +17,32 @@ namespace Axle.Conversion
     #endif
     public sealed class BytesToStringConverter : AbstractTwoWayConverter<byte[], string>
     {
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Gets a reference to a shared <see cref="BytesToStringConverter"/> instance that uses the
+        /// <see cref="System.Text.Encoding.Default">default encoding</see>.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly BytesToStringConverter Default = new BytesToStringConverter();
+        /// <summary>
+        /// Gets a reference to a shared <see cref="BytesToStringConverter"/> instance that uses the
+        /// <see cref="System.Text.Encoding.ASCII">ASCII encoding</see>.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly BytesToStringConverter ASCII = new BytesToStringConverter(Encoding.ASCII);
+        #endif
+        
+        /// <summary>
+        /// Gets a reference to a shared <see cref="BytesToStringConverter"/> instance that uses the
+        /// <see cref="System.Text.Encoding.UTF8">UTF8 encoding</see>.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        public static readonly BytesToStringConverter UTF8 = new BytesToStringConverter(Encoding.UTF8);
+        #else
+        public static readonly BytesToStringConverter UTF8 = new BytesToStringConverter();
+        #endif
+        
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Encoding _encoding;
 

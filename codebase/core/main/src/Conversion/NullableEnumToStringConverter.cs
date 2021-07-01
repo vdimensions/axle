@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Conversion
 {
@@ -18,9 +19,20 @@ namespace Axle.Conversion
         #endif
     {
         /// <summary>
+        /// Gets a reference to a shared <see cref="NullableEnumToStringConverter{T}"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly NullableEnumToStringConverter<T> Instance = new NullableEnumToStringConverter<T>();
+        
+        /// <summary>
+        /// Initialized a new instance of the <see cref="NullableEnumToStringConverter{T}"/> class
+        /// using the provided <paramref name="converter"/>.
+        /// </summary>
+        public NullableEnumToStringConverter(EnumToStringConverter<T> converter) 
+            : base(new NullableToClassConverter<T, string>(converter)) { }
+        /// <summary>
         /// Initialized a new instance of the <see cref="NullableEnumToStringConverter{T}"/> class.
         /// </summary>
-        public NullableEnumToStringConverter() 
-            : base(new NullableToClassConverter<T, string>(new EnumToStringConverter<T>())) { }
+        public NullableEnumToStringConverter() : this(EnumToStringConverter<T>.Instance) { }
     }
 }

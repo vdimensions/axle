@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Conversion
 {
@@ -11,6 +12,18 @@ namespace Axle.Conversion
     #endif
     public sealed class DateTimeToTicksConverter : AbstractTwoWayConverter<DateTime, long>
     {
+        /// <summary>
+        /// A <see cref="DateTimeToTicksConverter"/> that converts ticks to local <see cref="DateTime"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly DateTimeToTicksConverter Local = new DateTimeToTicksConverter(DateTimeKind.Local);
+        
+        /// <summary>
+        /// A <see cref="DateTimeToTicksConverter"/> that converts ticks to utc <see cref="DateTime"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly DateTimeToTicksConverter Utc = new DateTimeToTicksConverter(DateTimeKind.Utc);
+        
         private readonly DateTimeKind _preferredDateTimeKind;
 
         /// <summary>

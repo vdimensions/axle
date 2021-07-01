@@ -17,6 +17,11 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="EnumToSByteConverter{T}"/> instance.
+        /// </summary>
+        public static readonly EnumToSByteConverter<T> Instance = new EnumToSByteConverter<T>();
+
         /// <inheritdoc />
         protected override sbyte DoConvert(T source) => (sbyte) ((object) source);
 

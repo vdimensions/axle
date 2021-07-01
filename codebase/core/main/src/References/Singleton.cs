@@ -19,7 +19,7 @@ namespace Axle.References
     /// <remarks>
     /// Using the <see cref="Singleton{T}"/> class for obtaining singleton instances provides a guarantee that the
     /// singleton requirements have been met (where an exception will be thrown if the provided type
-    /// <typeparamref name="T"/> is not compatible). It also provides an optimisation where the singleton instance is
+    /// <typeparamref name="T"/> is not compatible). It also provides an optimization where the singleton instance is
     /// going to be instantiated only when used.
     /// <para>
     /// However, it may be still possible to obtain multiple instance of the <typeparamref name="T"/> class, if it by
@@ -91,7 +91,7 @@ namespace Axle.References
                 if (Instance != null)
                 {
                     throw new InvalidOperationException(
-                        "Cannot create more than one instance of singleton type " + Instance.GetType().FullName);
+                        $"Cannot create more than one instance of singleton type {Instance.GetType().FullName}");
                 }
             }
         }

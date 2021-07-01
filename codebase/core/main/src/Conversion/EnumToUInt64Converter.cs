@@ -17,6 +17,11 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="EnumToUInt64Converter{T}"/> instance.
+        /// </summary>
+        public static readonly EnumToUInt64Converter<T> Instance = new EnumToUInt64Converter<T>();
+        
         /// <inheritdoc />
         protected override ulong DoConvert(T source) => (ulong) ((object) source);
 

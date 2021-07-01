@@ -17,6 +17,11 @@ namespace Axle.Conversion
         where T: struct, IComparable, IFormattable
         #endif
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="EnumToStringConverter{T}"/> instance.
+        /// </summary>
+        public static readonly EnumToStringConverter<T> Instance = new EnumToStringConverter<T>();
+
         /// <inheritdoc />
         protected override string DoConvert(T source) => Enum.GetName(typeof(T), source);
     }

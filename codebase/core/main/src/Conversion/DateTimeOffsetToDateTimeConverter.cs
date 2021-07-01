@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Conversion
 {
@@ -10,22 +11,40 @@ namespace Axle.Conversion
     #endif
     public sealed class DateTimeOffsetToDateTimeConverter : AbstractTwoWayConverter<DateTimeOffset, DateTime>
     {
+        /// <summary>
+        /// A shared <see cref="DateTimeOffsetToDateTimeConverter"/> instance that uses the
+        /// <see cref="DateTimeOffset.LocalDateTime"/> value during the conversion.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly DateTimeOffsetToDateTimeConverter Local
+            = new DateTimeOffsetToDateTimeConverter(DateTimeKind.Local);
+        
+        /// <summary>
+        /// A shared <see cref="DateTimeOffsetToDateTimeConverter"/> instance that uses the 
+        /// <see cref="DateTimeOffset.UtcDateTime"/> value during the conversion.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly DateTimeOffsetToDateTimeConverter Utc
+            = new DateTimeOffsetToDateTimeConverter(DateTimeKind.Utc);
+        
         private readonly DateTimeKind _preferredDateTimeKind;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DateTimeOffsetToDateTimeConverter"/> class. Converted
-        /// <see cref="DateTime"/> values will assume the provided <paramref name="preferredDateTimeKind"/> as their
-        /// <see cref="DateTime.Kind"/> value.
+        /// Creates a new instance of the <see cref="DateTimeOffsetToDateTimeConverter"/> class with the option to
+        /// determine whether to use local or utc dates.
         /// </summary>
-        /// <seealso cref="DateTimeKind"/>
+        /// <param name="preferredDateTimeKind">
+        /// Setting <see cref="DateTimeKind.Utc"/> will cause the date time value to be provided by the
+        /// <see cref="DateTimeOffset.UtcDateTime"/> property of the <see cref="DateTimeOffset"/> value being converted,
+        /// in all other cases the <see cref="DateTimeOffset.LocalDateTime"/> property is used.
+        /// </param>
         public DateTimeOffsetToDateTimeConverter(DateTimeKind preferredDateTimeKind)
         {
             _preferredDateTimeKind = preferredDateTimeKind;
         }
         /// <summary>
-        /// Initializes a new instance of the <see cref="DateTimeOffsetToDateTimeConverter"/> class. Converted
-        /// <see cref="DateTime"/> values will assume <see cref="DateTimeKind.Unspecified"/> as their
-        /// <see cref="DateTime.Kind"/> value.
+        /// Creates a new instance of the <see cref="DateTimeOffsetToDateTimeConverter"/> that converts a
+        /// <see cref="DateTimeOffset"/> value to a local <see cref="DateTime"/> value.
         /// </summary>
         public DateTimeOffsetToDateTimeConverter() : this(DateTimeKind.Unspecified) { }
         

@@ -70,7 +70,7 @@ namespace Axle.References
         /// <paramref name="valueFactory"/> is a <c>null</c> reference (<c>Nothing</c> in Visual Basic).
         /// </exception>
         public ThreadLocalRef(Func<T> valueFactory)
-            : this(new ThreadLocal<T>(valueFactory.VerifyArgument(nameof(valueFactory)).IsNotNull().Value)) { }
+            : this(new ThreadLocal<T>(Verifier.IsNotNull(Verifier.VerifyArgument(valueFactory, nameof(valueFactory))).Value)) { }
         
         /// <inheritdoc />
         public override bool Equals(object other)

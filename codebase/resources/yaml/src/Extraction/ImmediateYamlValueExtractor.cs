@@ -11,7 +11,8 @@ namespace Axle.Resources.Yaml.Extraction
         {
             YamlValueExtractor.DeconstructYamlFilePath(location.ToString(), out yamlFileName, out keyPrefix);
 
-            return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(YamlResourceInfo.FileExtension, StringComparison.OrdinalIgnoreCase);
+            return !string.IsNullOrEmpty(yamlFileName) 
+                && yamlFileName.EndsWith(YamlResourceInfo.FileExtension, StringComparison.OrdinalIgnoreCase);
         }
 
         private readonly Encoding _encoding;

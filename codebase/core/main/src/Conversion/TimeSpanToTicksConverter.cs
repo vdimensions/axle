@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Conversion
 {
@@ -10,6 +11,12 @@ namespace Axle.Conversion
     #endif
     public sealed class TimeSpanToTicksConverter : AbstractTwoWayConverter<TimeSpan, long>
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="TimeSpanToTicksConverter"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly TimeSpanToTicksConverter Instance = new TimeSpanToTicksConverter();
+        
         /// <inheritdoc />
         protected override long DoConvert(TimeSpan value) => value.Ticks;
         

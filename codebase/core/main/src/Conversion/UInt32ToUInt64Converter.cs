@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Axle.Conversion
 {
     /// <summary>
@@ -8,6 +10,12 @@ namespace Axle.Conversion
     #endif
     public sealed class UInt32ToUInt64Converter : AbstractTwoWayConverter<uint, ulong>
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="UInt32ToUInt64Converter"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly UInt32ToUInt64Converter Instance = new UInt32ToUInt64Converter();
+        
         /// <inheritdoc />
         protected override ulong DoConvert(uint source) => source;
 

@@ -1,6 +1,5 @@
 ﻿#if (NETSTANDARD1_4_OR_NEWER || NET46_OR_NEWER) && !NET45
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Axle.Reflection;
 
@@ -11,7 +10,6 @@ namespace Axle.References
     /// method. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class AsyncLocalRef<T> : IAsyncLocalReference<T>
     {
         private struct AsyncLocalRefValue
@@ -29,7 +27,6 @@ namespace Axle.References
 
         private static class AsyncLocalValueChangedArgsConstructor
         {
-            [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
             private static readonly IConstructor Constructor;
             private static readonly object False = false, True = true;
 

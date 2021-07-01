@@ -1,4 +1,6 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NET40_OR_NEWER
+﻿using System.Diagnostics.CodeAnalysis;
+
+#if NETSTANDARD2_0_OR_NEWER || NET40_OR_NEWER
 namespace Axle.Conversion
 {
     /// <summary>
@@ -11,6 +13,12 @@ namespace Axle.Conversion
     #endif
     public sealed class OACurrencyConverter : AbstractTwoWayConverter<decimal, long>
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="OACurrencyConverter"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly OACurrencyConverter Instance = new OACurrencyConverter();
+
         /// <summary>
         /// Converts the specified <see cref="decimal"/> value to the equivalent OLE Automation Currency value,
         /// which is contained in a <see cref="long">64-bit signed integer</see>.
