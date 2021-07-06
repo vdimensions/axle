@@ -144,11 +144,11 @@ namespace Axle.Data.Records
             }
         }
         
-        public static DataRecord FromDataRecord(DbDataRecord dataRecord) =>
-            new DataRecord(new DataRecordAdapter(dataRecord.VerifyArgument(nameof(dataRecord)).IsNotNull().Value));
+        public static DataRecord FromDataRecord(DbDataRecord dataRecord)
+            => new DataRecord(new DataRecordAdapter(dataRecord.VerifyArgument(nameof(dataRecord)).IsNotNull().Value));
 
-        public static DataRecord FromDataReader(DbDataReader dataReader) =>
-            new DataRecord(new DataRecordAdapter(dataReader.VerifyArgument(nameof(dataReader)).IsNotNull().Value));
+        public static DataRecord FromDataReader(DbDataReader dataReader)
+            => new DataRecord(new DataRecordAdapter(dataReader.VerifyArgument(nameof(dataReader)).IsNotNull().Value));
         
         public static implicit operator DataRecord(DbDataRecord dataRecord) => FromDataRecord(dataRecord);
 

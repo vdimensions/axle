@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Axle.Conversion;
 using Axle.Data.DataSources;
@@ -9,6 +10,8 @@ using Axle.Verification;
 
 namespace Axle.Data.Records.Extensions.DataSources
 {
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
+    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public static class DataSourceCommandExtensions
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -59,7 +62,9 @@ namespace Axle.Data.Records.Extensions.DataSources
         }
         public static T[] ExecuteQuery<T>(
             this IDataSourceCommand command, 
-            IDataSourceConnection connection, Converter<DataRecord, T> converter, params IDataParameter[] parameters)
+            IDataSourceConnection connection, 
+            Converter<DataRecord, T> converter, 
+            params IDataParameter[] parameters)
         {
             return ExecuteQuery(command, connection, new DataTable(), converter, parameters);
         }
@@ -91,7 +96,11 @@ namespace Axle.Data.Records.Extensions.DataSources
             Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter)));
             ICollection<T> result = new LinkedList<T>();
-            command.ExecuteReader(connection, commandBehavior, r => result.Add(converter.Convert(DataRecord.FromDataReader(r))), parameters);
+            command.ExecuteReader(
+                connection, 
+                commandBehavior, 
+                r => result.Add(converter.Convert(DataRecord.FromDataReader(r))), 
+                parameters);
             return result.ToArray();
         }
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -105,7 +114,11 @@ namespace Axle.Data.Records.Extensions.DataSources
             Verifier.IsNotNull(Verifier.VerifyArgument(command, nameof(command)));
             Verifier.IsNotNull(Verifier.VerifyArgument(converter, nameof(converter)));
             ICollection<T> result = new LinkedList<T>();
-            command.ExecuteReader(connection, commandBehavior, r => result.Add(converter(DataRecord.FromDataReader(r))), parameters);
+            command.ExecuteReader(
+                connection, 
+                commandBehavior, 
+                r => result.Add(converter(DataRecord.FromDataReader(r))), 
+                parameters);
             return result.ToArray();
         }
         public static IEnumerable<T> ExecuteReader<T>(
