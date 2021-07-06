@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using Axle.Resources.Extraction;
 
 
@@ -25,6 +25,10 @@ namespace Axle.Resources.Bundling
         /// </exception>
         IConfigurableBundleContent Register(Uri location);
 
-        IResourceExtractorRegistry Extractors { get; }
+        /// <summary>
+        /// Gets a reference to the <see cref="IResourceExtractorRegistry"/> that maintains the resource extractors
+        /// exclusively available for the resource bundle that is currently configured.
+        /// </summary>
+        new IResourceExtractorRegistry Extractors { get; }
     }
 }

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;netstandard1.3;netstandard1.0;net46;net45;net40;net35;net20</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.5;netstandard1.3;netstandard1.0;net46;net45;net40;net35;net20</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -10,42 +10,22 @@
     <Description>Axle Framework Core Library</Description>
   </PropertyGroup>
 
-  <Import Project="../../../targets/stator/src/Stator.props" />
-
-  <PropertyGroup>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Remove="System.Data" />
-    <Reference Remove="System.Xml" />
-    <Reference Remove="System.Xml.Linq" />
-  </ItemGroup>
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Collections.Immutable.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Diagnostics.TraceSource.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Linq.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Threading.Tasks.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Threading.Thread.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Xml.XmlSerializer.props" />
 
   <ItemGroup>
-    <Compile Remove="_Experimental\**" />
-    <EmbeddedResource Remove="_Experimental\**" />
-    <None Remove="_Experimental\**" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Remove="Conversion\Parsing\ContentTypeParser.cs" />
+    <Compile Remove="Collections\Extensions\Queue\**" />
+    <Compile Remove="Collections\Extensions\Stack\**" />
+    <Compile Remove="Text\Parsing\ContentTypeParser.cs" />
     <Compile Remove="IO\Extensions\Stream\StreamExtensions2.cs" />
     <Compile Remove="IO\Serialization\SoapSerializer.cs" />
-    <Compile Remove="Linq\Collection.cs" />
-    <Compile Remove="Linq\ISequence.cs" />
-    <Compile Remove="Linq\Sequence.cs" />
-    <Compile Remove="Linq\SequenceExtensions.cs" />
+    <EmbeddedResource Remove="Collections\Extensions\Queue\**" />
+    <EmbeddedResource Remove="Collections\Extensions\Stack\**" />
+    <None Remove="Collections\Extensions\Queue\**" />
+    <None Remove="Collections\Extensions\Stack\**" />
   </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../Axle.Core.Dependencies.targets" />
 </Project>

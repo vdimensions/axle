@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using System.IO;
@@ -19,7 +19,7 @@ namespace Axle.Resources.FileSystem
         internal FileSystemResourceInfo(Uri location, string name, CultureInfo culture) : this(location, name, culture, "application/octet-stream") { }
         internal FileSystemResourceInfo(Uri location, string name, CultureInfo culture, string contentType) : base(name, culture, contentType)
         {
-            _location = location.VerifyArgument(nameof(location)).IsNotNull().Value.Resolve(name);
+            _location = location.VerifyArgument(nameof(location)).IsNotNull().Value;
         }
 
         /// <inheritdoc />
@@ -39,15 +39,16 @@ namespace Axle.Resources.FileSystem
             }
         }
 
-        public override bool TryResolve(Type targetType, out object result)
+        /// <inheritdoc />
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(FileInfo))
+            if (type == typeof(FileInfo))
             {
                 var file = new FileInfo(_location.AbsolutePath);
                 result = file;
                 return file.Exists;
             }
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
     }
 }

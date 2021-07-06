@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net45</TargetFramework>
+    <ProjectGuid>{2F8DD6CD-BAFF-4271-A03E-BB67DC53B9E8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="data.properties">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.Properties.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
+</Project>

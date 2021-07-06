@@ -1,26 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 
-
 namespace Axle.Collections.Sdk
 {
     /// <summary>
-    /// An abstract base class that can be used as a wrapper over an <see cref="IDictionary{TKey, TValue}"/> instance.
-    /// Can be used as a base class for dictionary-based key/value collections. The initial implementation delegates all
-    /// <see cref="IDictionary{TKey, TValue}"/> logic to the provided inner dictionary class.
+    /// An abstract class that acts as a wrapper around an <see cref="IDictionary{TKey, TValue}"/> instance.
+    /// Can be used as a base class for dictionary-based key/value collections which delegate their implementation
+    /// to an internal <see cref="IDictionary{TKey, TValue}"/> member.
     /// </summary>
     /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
-    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary. </typeparam>
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
     [System.Serializable]
     #endif
-    public abstract class DictionaryDecorator<TKey, TValue> : IDictionary<TKey, TValue>
+    public abstract class DictionaryDecorator<TKey, TValue> 
+        : DictionaryDecorator<TKey, TValue, IDictionary<TKey, TValue>>
     {
-        /// <summary>
-        /// A reference to the decorated <see cref="IDictionary{TKey, TValue}"/>.
-        /// </summary>
-        protected readonly IDictionary<TKey, TValue> Target;
-
         /// <summary>
         /// Creates a new instance of the <see cref="DictionaryDecorator{TKey, TValue}"/>
         /// class.
@@ -28,14 +23,48 @@ namespace Axle.Collections.Sdk
         /// <param name="target">
         /// The decorated <see cref="IDictionary{TKey, TValue}"/> instance.
         /// </param>
-        protected DictionaryDecorator(IDictionary<TKey, TValue> target)
+        protected DictionaryDecorator(IDictionary<TKey, TValue> target) : base(target) { }
+    }
+    
+    /// <summary>
+    /// An abstract class that acts as a wrapper around an <see cref="IDictionary{TKey, TValue}"/> instance.
+    /// Can be used as a base class for dictionary-based key/value collections which delegate their implementation
+    /// to an internal <see cref="IDictionary{TKey, TValue}"/> member.
+    /// </summary>
+    /// <typeparam name="TKey">The type of the keys in the dictionary. </typeparam>
+    /// <typeparam name="TValue">The type of the values in the dictionary.</typeparam>
+    /// <typeparam name="TDict">The type of dictionary implementation to delegate calls to.</typeparam>
+    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    [System.Serializable]
+    #endif
+    public abstract class DictionaryDecorator<TKey, TValue, TDict> : IDictionary<TKey, TValue>
+        where TDict: class, IDictionary<TKey, TValue>
+    {
+        /// <summary>
+        /// A reference to the decorated <see cref="IDictionary{TKey, TValue}"/>.
+        /// </summary>
+        protected readonly TDict Target;
+
+        /// <summary>
+        /// Creates a new instance of the <see cref="DictionaryDecorator{TKey, TValue, TDict}"/>
+        /// class.
+        /// </summary>
+        /// <param name="target">
+        /// The decorated <see cref="IDictionary{TKey, TValue}"/> instance.
+        /// </param>
+        protected DictionaryDecorator(TDict target)
         {
             Target = target;
         }
 
         #region Implementation of IEnumerable
-        /// <summary>Returns an enumerator that iterates through the collection.</summary>
-        /// <returns>A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the collection.</returns>
+        /// <summary>
+        /// Returns an enumerator that iterates through the collection.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="T:System.Collections.Generic.IEnumerator`1" /> that can be used to iterate through the 
+        /// collection.
+        /// </returns>
         /// <filterpriority>1</filterpriority>
         public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => Target.GetEnumerator();
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -69,7 +98,8 @@ namespace Axle.Collections.Sdk
         /// </returns>
         protected virtual bool Contains(KeyValuePair<TKey, TValue> item) => Target.Contains(item);
 
-        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => CopyTo(array, arrayIndex);
+        void ICollection<KeyValuePair<TKey, TValue>>.CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) 
+            => CopyTo(array, arrayIndex);
         /// <summary>
         /// Copies the elements of the collection to the provided <paramref name="array"/>, starting from the specified
         /// <paramref name="arrayIndex"/>.
@@ -80,14 +110,15 @@ namespace Axle.Collections.Sdk
         /// <param name="arrayIndex">
         /// The start index of the array to store copying values.
         /// </param>
-        protected virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) => Target.CopyTo(array, arrayIndex);
+        protected virtual void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex) 
+            => Target.CopyTo(array, arrayIndex);
 
         bool ICollection<KeyValuePair<TKey, TValue>>.Remove(KeyValuePair<TKey, TValue> item) => Remove(item);
         /// <summary>
         /// Removes the first occurence of the specified <paramref name="item"/> of the collection.
         /// </summary>
         /// <param name="item">
-        /// The elemet to remove from the collection.
+        /// The element to remove from the collection.
         /// </param>
         /// <returns>
         /// <c>true</c> if an item was removed from the collection; <c>false</c> otherwise.

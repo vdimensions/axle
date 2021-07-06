@@ -10,14 +10,8 @@ using Axle.Data.Odbc.Conversion;
 
 namespace Axle.Data.Odbc
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal sealed class OdbcParameterValueSetter : DbParameterValueSetter<OdbcParameter, OdbcType>
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        [System.Serializable]
-        #endif
         private class OdbcTypeEqualityComparer : IEqualityComparer<OdbcType>
         {
             public bool Equals(OdbcType x, OdbcType y) => x == y;

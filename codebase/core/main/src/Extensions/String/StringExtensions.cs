@@ -1,8 +1,8 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Axle.Verification;
-
 
 namespace Axle.Extensions.String
 {
@@ -30,7 +30,8 @@ namespace Axle.Extensions.String
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
-        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c>
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
@@ -65,7 +66,8 @@ namespace Axle.Extensions.String
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
-        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c>
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
@@ -73,6 +75,7 @@ namespace Axle.Extensions.String
         /// <exception cref="ArgumentException">
         /// </exception>
         /// <seealso cref="string.IndexOf(string)"/>
+        [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.1")]
         public static bool Contains(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -82,6 +85,10 @@ namespace Axle.Extensions.String
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
             }
             return str.IndexOf(value) >= 0;
         }
@@ -104,7 +111,8 @@ namespace Axle.Extensions.String
         /// </param>
         /// <returns>
         /// A <c>true</c> if the <see cref="string"/> represented by the <paramref name="value"/> parameter is contained
-        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c> otherwise.
+        /// within the target <see cref="string"/> represented by the <paramref name="str"/> parameter; <c>false</c>
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="str"/> or <paramref name="value"/> is <c>null</c>
@@ -126,6 +134,10 @@ namespace Axle.Extensions.String
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
             }
             return str.IndexOf(value, startIndex, comparison) >= 0;
         }
@@ -154,6 +166,7 @@ namespace Axle.Extensions.String
         /// <paramref name="startIndex"/> is less than zero or greater than the length of <paramref name="str"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int)"/>
+        [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.2")]
         public static bool Contains(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -163,6 +176,10 @@ namespace Axle.Extensions.String
             if (str == null)
             {
                 throw new ArgumentNullException(nameof(str));
+            }
+            if (value == null)
+            {
+                throw new ArgumentNullException(nameof(value));
             }
             return str.IndexOf(value, startIndex) >= 0;
         }
@@ -198,7 +215,8 @@ namespace Axle.Extensions.String
         /// <para>-or-</para>
         /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
         /// <para>-or-</para>
-        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
+        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus
+        /// <paramref name="startIndex"/>.
         /// </exception>
         /// <exception cref="ArgumentException">
         /// <paramref name="comparison"/> is not a valid <see cref="StringComparison"/> value.
@@ -246,9 +264,11 @@ namespace Axle.Extensions.String
         /// <para>-or-</para>
         /// <paramref name="startIndex"/> is greater than the length of <paramref name="str"/>.
         /// <para>-or-</para>
-        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus <paramref name="startIndex"/>.
+        /// <paramref name="count"/> is greater than the length of <paramref name="str"/> minus
+        /// <paramref name="startIndex"/>.
         /// </exception>
         /// <seealso cref="string.IndexOf(string, int, int)"/>
+        [SuppressMessage("ReSharper", "StringIndexOfIsCultureSpecific.3")]
         public static bool Contains(
             #if NETSTANDARD || NET35_OR_NEWER
             this
@@ -268,7 +288,8 @@ namespace Axle.Extensions.String
         /// </summary>
         /// <param name="str">The target <see cref="string"/>.</param>
         /// <returns>
-        /// <c>true</c> if the <paramref name="str">target string</paramref> is an empty string instance; false otherwise.
+        /// <c>true</c> if the <paramref name="str">target string</paramref> is an empty string instance; false
+        /// otherwise.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="str"/> is <c>null</c>.
@@ -292,7 +313,8 @@ namespace Axle.Extensions.String
         /// </summary>
         /// <param name="str">The target <see cref="string"/>.</param>
         /// <returns>
-        /// <c>true</c> if the <paramref name="str">target string</paramref> is <c>null</c> or an empty string instance; false otherwise.
+        /// <c>true</c> if the <paramref name="str">target string</paramref> is <c>null</c> or an empty string instance;
+        /// false otherwise.
         /// </returns>
         /// <seealso cref="string.Empty"/>
         /// <seealso cref="string.IsNullOrEmpty(string)"/>
@@ -304,9 +326,11 @@ namespace Axle.Extensions.String
             string str) => string.IsNullOrEmpty(str);
 
         /// <summary>
-        /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed order.
+        /// Creates a <see cref="string"/> using all the characters from a target string instance, but in a reversed
+        /// order.
         /// </summary>
-        /// <param name="str">The <see cref="string">string instance</see> upon which the extension method is called upon.</param>
+        /// <param name="str">The <see cref="string">string instance</see> upon which the extension method is called
+        /// upon.</param>
         /// <returns>
         /// A new string instance using all the characters from a target string instance, but in a reversed order.
         /// </returns>
@@ -560,7 +584,8 @@ namespace Axle.Extensions.String
         #if NETSTANDARD || NET45_OR_NEWER
         [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
         #endif
-        private static string CutFromIndex(Func<string, char, int> searchFunc, string stringToTrim, char charToSearch, bool trimEnd)
+        private static string CutFromIndex(
+            Func<string, char, int> searchFunc, string stringToTrim, char charToSearch, bool trimEnd)
         {
             var index = searchFunc(stringToTrim, charToSearch);
             if (index < 0)
@@ -614,6 +639,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
@@ -653,6 +682,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             var candidate = CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
@@ -827,6 +860,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
         }
@@ -866,6 +903,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             var candidate = CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, true);
             return candidate.Length > 0 ? candidate : str;
@@ -1040,6 +1081,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             return CutFromIndex((x, y, z) => x.IndexOf(y, startIndex, z), str, value, comparison, false);
         }
 
@@ -1078,6 +1123,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             return CutFromIndex((x, y, z) => x.IndexOf(y, 0, z), str, value, comparison, false);
         }
@@ -1249,6 +1298,10 @@ namespace Axle.Extensions.String
             {
                 throw new ArgumentNullException(nameof(value));
             }
+            if (value.Length == 0)
+            {
+                return str;
+            }
             return CutFromIndex((x, y, z) => x.LastIndexOf(y, startIndex, z), str, value, comparison, false);
         }
 
@@ -1287,6 +1340,10 @@ namespace Axle.Extensions.String
             if (value == null)
             {
                 throw new ArgumentNullException(nameof(value));
+            }
+            if (value.Length == 0)
+            {
+                return str;
             }
             return CutFromIndex((x, y, z) => x.LastIndexOf(y, z), str, value, comparison, false);
         }
@@ -1442,7 +1499,8 @@ namespace Axle.Extensions.String
             #endif
             string str, string value, StringComparison comparison)
         {
-            return Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str))).Value.StartsWith(value, comparison)
+            Verifier.IsNotNull(Verifier.VerifyArgument(str, nameof(str)));
+            return str.StartsWith(value, comparison)
                 ? TakeAfterFirst(str, value, 0, comparison)
                 : str;
         }
@@ -1558,35 +1616,94 @@ namespace Axle.Extensions.String
             return string.Join(separator, strArr);
         }
 
+        /// <summary>
+        /// Concatenates all the elements of a string collection, using the specified <paramref name="separator"/>
+        /// between each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="string"/> to use as a separator. The <paramref name="separator"/> is included in the returned
+        /// string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// A collection that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> string.
+        /// If the <paramref name="values"/> collection is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             string separator, IEnumerable<string> values) => JoinInternal(values, separator);
+        /// <summary>
+        /// Concatenates all the elements of a string collection, using the specified <paramref name="separator"/>
+        /// between each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="char">character</see> to use as a separator. The <paramref name="separator"/> is included in
+        /// the returned string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// A collection that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> character.
+        /// If the <paramref name="values"/> collection is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             char separator, IEnumerable<string> values) => JoinInternal(values, separator.ToString());
+        /// <summary>
+        /// Concatenates all the elements of a string array, using the specified <paramref name="separator"/> between
+        /// each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="string"/> to use as a separator. The <paramref name="separator"/> is included in the returned
+        /// string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// An array that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> string.
+        /// If the <paramref name="values"/> array is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             string separator, params string[] values) => JoinInternal(values, separator);
+        /// <summary>
+        /// Concatenates all the elements of a string array, using the specified <paramref name="separator"/> between
+        /// each element.
+        /// </summary>
+        /// <param name="separator">
+        /// The <see cref="char">character</see> to use as a separator. The <paramref name="separator"/> is included in
+        /// the returned string only if <paramref name="values"/> has more than one element.
+        /// </param>
+        /// <param name="values">
+        /// An array that contains the elements to concatenate.
+        /// </param>
+        /// <returns>
+        /// A <see cref="string"/> that consists of the <paramref name="values"/> delimited by the
+        /// <paramref name="separator"/> character.
+        /// If the <paramref name="values"/> array is empty, the method returns an
+        /// <see cref="string.Empty">empty</see> string.
+        /// </returns>
         public static string Join(
             #if NETSTANDARD || NET35_OR_NEWER
             this
             #endif
             char separator, params string[] values) => JoinInternal(values, separator.ToString());
-
-        #if NETSTANDARD || NET35_OR_NEWER
-        [Obsolete] public static string Join(this IEnumerable<string> @this, string separator) { return JoinInternal(@this, separator); }
-        [Obsolete] public static string Join(this IEnumerable<string> @this, char separator) { return JoinInternal(@this, separator.ToString()); }
-        [Obsolete] public static string Join(this IEnumerable<string> @this) { return JoinInternal(@this, string.Empty); }
-        [Obsolete] public static string Join(this string[] @this, string separator) { return JoinInternal(@this, separator); }
-        [Obsolete] public static string Join(this string[] @this, char separator) { return JoinInternal(@this, separator.ToString()); }
-        [Obsolete] public static string Join(this string[] @this) { return JoinInternal(@this, string.Empty); }
-        #endif
     }
 }
 #endif

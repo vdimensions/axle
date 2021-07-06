@@ -1,9 +1,7 @@
-﻿using System.IO;
+using System.IO;
 using System.Text;
 using System.Xml.Linq;
-
 using Axle.Resources.Extraction;
-
 
 namespace Axle.Resources.Xml.Extraction
 {
@@ -27,7 +25,7 @@ namespace Axle.Resources.Xml.Extraction
         public XDocumentExtractor(LoadOptions options) { _loadOptions = options; }
 
         /// <inheritdoc />
-        protected override XDocumentResourceInfo ExtractXml(ResourceContext context, string name, ResourceInfo resource)
+        protected override XDocumentResourceInfo ExtractXml(IResourceContext context, string name, ResourceInfo resource)
         {
             XDocument xml;
             switch (resource)

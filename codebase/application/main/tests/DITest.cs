@@ -1,7 +1,7 @@
 ﻿using Axle.DependencyInjection;
 using NUnit.Framework;
 
-namespace Axle.ApplicationTests
+namespace Axle.Application.Tests
 {
     [TestFixture]
     public class DITests
@@ -24,7 +24,7 @@ namespace Axle.ApplicationTests
         [Test]
         public void TestContainerInstantiation()
         {
-            var c = new Container(null);
+            var c = new DependencyContainer(null);
             Assert.IsNotNull(c);
             Assert.IsNull(c.Parent);
         }
@@ -34,8 +34,8 @@ namespace Axle.ApplicationTests
         {
             const string name = "World";
 
-            var c = new Container(null);
-            c.RegisterInstance(name);
+            var c = new DependencyContainer(null);
+            c.Export(name);
             c.RegisterType<Person>();
 
             var p = c.Resolve<Person>();
@@ -51,8 +51,8 @@ namespace Axle.ApplicationTests
         {
             const string name = "World";
 
-            var c = new Container(null);
-            c.RegisterInstance(name);
+            var c = new DependencyContainer(null);
+            c.Export(name);
             c.RegisterType<Vip>();
 
             var p = c.Resolve<Person>();
@@ -71,8 +71,8 @@ namespace Axle.ApplicationTests
                 {
                     const string name = "World";
 
-                    var c = new Container(null);
-                    c.RegisterInstance(name);
+                    var c = new DependencyContainer(null);
+                    c.Export(name);
                     c.RegisterType<Person>();
                     c.RegisterType<Vip>();
 
@@ -87,9 +87,7 @@ namespace Axle.ApplicationTests
                 () =>
                 {
                     const string name = "World";
-                    var c = new Container(null);
-                    c.RegisterInstance(name);
-                    c.RegisterInstance(name);
+                    new DependencyContainer(null).Export(name).Export(name);
                 });
         }
     }

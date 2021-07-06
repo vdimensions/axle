@@ -1,5 +1,5 @@
-﻿using Axle.Conversion.Parsing;
-using Axle.Extensions.DateTimeOffset;
+﻿using Axle.Extensions.DateTimeOffset;
+using Axle.Text.Parsing;
 using Axle.Text.Formatting.Extensions;
 using NUnit.Framework;
 using System;

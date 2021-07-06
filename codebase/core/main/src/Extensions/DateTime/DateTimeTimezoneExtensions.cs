@@ -21,10 +21,12 @@ namespace Axle.Extensions.DateTime
         /// </param>
         /// <param name="assumedKind">
         /// A <see cref="DateTimeKind"/> value to be used as the assumed <see cref="DateTime.Kind">kind</see> of the
-        /// <paramref name="current">given</paramref> <see cref="DateTime"/> in case its kind was set to <see cref="DateTimeKind.Unspecified"/>
+        /// <paramref name="current">given</paramref> <see cref="DateTime"/> in case its kind was set to
+        /// <see cref="DateTimeKind.Unspecified"/>
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref>
+        /// <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
@@ -45,15 +47,17 @@ namespace Axle.Extensions.DateTime
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// <remarks>
-        /// In case the <paramref name="current"/> <see cref="DateTime.Kind"/> property is set to <see cref="DateTimeKind.Unspecified"/>,
-        /// it is assumed that the date is a local date (as if it were <see cref="DateTimeKind.Local"/>).
+        /// In case the <paramref name="current"/> <see cref="DateTime.Kind"/> property is set to
+        /// <see cref="DateTimeKind.Unspecified"/>, it is assumed that the date is a local date (as if it were
+        /// <see cref="DateTimeKind.Local"/>).
         /// </remarks>
         /// </summary>
         /// <param name="current">
         /// The <see cref="DateTime"/> value to convert.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref>
+        /// <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>
@@ -65,15 +69,17 @@ namespace Axle.Extensions.DateTime
         /// <summary>
         /// Converts the given <see cref="DateTime"/> value to local date time.
         /// <remarks>
-        /// In case the <paramref name="current"/> <see cref="DateTime.Kind"/> property is set to <see cref="DateTimeKind.Unspecified"/>,
-        /// it is assumed that the date is a local date (as if it were <see cref="DateTimeKind.Local"/>).
+        /// In case the <paramref name="current"/> <see cref="DateTime.Kind"/> property is set to
+        /// <see cref="DateTimeKind.Unspecified"/>, it is assumed that the date is a local date (as if it were
+        /// <see cref="DateTimeKind.Local"/>).
         /// </remarks>
         /// </summary>
         /// <param name="current">
         /// The <see cref="DateTime"/> value to convert.
         /// </param>
         /// <returns>
-        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref> <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
+        /// A <see cref="DateTime"/> value that represents <paramref name="current">a given</paramref>
+        /// <see cref="DateTime"/> value into the local <see cref="TimeZoneInfo"/>.
         /// </returns>
         /// <seealso cref="DateTime.Kind"/>
         /// <seealso cref="DateTimeKind"/>

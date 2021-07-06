@@ -1,7 +1,6 @@
 ﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 
-
 namespace Axle.Environment
 {
     /***************************************\

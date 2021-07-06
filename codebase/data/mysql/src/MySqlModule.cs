@@ -1,11 +1,10 @@
-﻿using System.Diagnostics.CodeAnalysis;
-using Axle.Modularity;
+﻿using Axle.Modularity;
 
 namespace Axle.Data.MySql
 {
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
-    internal sealed class MySqlModule : DatabaseServiceProviderModule
+    [DbServiceProvider(Name = MySqlServiceProvider.Name)]
+    internal sealed class MySqlModule : DbServiceProvider
     {
         public MySqlModule() : base(MySqlServiceProvider.Instance) { }
     }

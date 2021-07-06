@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System.Runtime.Serialization;
 #endif

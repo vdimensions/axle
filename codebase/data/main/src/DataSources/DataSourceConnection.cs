@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Data;
-using Axle.Resources;
 
 namespace Axle.Data.DataSources
 {

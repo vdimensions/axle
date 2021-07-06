@@ -32,7 +32,7 @@ namespace Axle.Text.Expressions.Path
             {
                 // assume windows path
 
-                // windows path is not case-sesnsitive
+                // windows path is not case-sensitive
                 options |= RegexOptions.IgnoreCase;
 
                 //var unixRes = res

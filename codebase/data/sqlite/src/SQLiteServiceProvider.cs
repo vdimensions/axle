@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.IO;
 
 using SQLiteConnection      = System.Data.SQLite.SQLiteConnection;
@@ -15,9 +14,6 @@ using Axle.References;
 
 namespace Axle.Data.SQLite
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
-    #endif
     public sealed class SQLiteServiceProvider : DbServiceProvider<
             SQLiteConnection,
             SQLiteTransaction,

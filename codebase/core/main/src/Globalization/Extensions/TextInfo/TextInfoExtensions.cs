@@ -10,20 +10,22 @@ namespace Axle.Globalization.Extensions.TextInfo
     using TextInfo = System.Globalization.TextInfo;
 
     /// <summary>
-    /// A <see langword="static"/> class providing extension methods for 
-    /// <see cref="System.Globalization.TextInfo"/> instances.
+    /// A <see langword="static"/> class providing extension methods for <see cref="System.Globalization.TextInfo"/>
+    /// instances.
     /// </summary>
     public static class TextInfoExtensions
     {
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         /// <summary>
-        /// Gets the encoding for the OEM code page of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// Gets the encoding for the original equipment manufacturer OEM code page of the writing system represented by
+        /// the current <see cref="TextInfo"/>. 
         /// </summary>
         /// <param name="textInfo">
         /// The <see cref="TextInfo"/> instance to get the encoding for. 
         /// </param>
         /// <returns>
-        /// A reference to the encoding for the OEM code page of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// A reference to the encoding for the OEM code page of the writing system represented by the current
+        /// <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.OEMCodePage"/>
         public static Encoding GetOemEncoding(
@@ -37,13 +39,15 @@ namespace Axle.Globalization.Extensions.TextInfo
         }
 
         /// <summary>
-        /// Gets the encoding for the EBCDIC codepage of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// Gets the encoding for the Extended Binary Coded Decimal Interchange Code (EBCDIC) codepage of the writing
+        /// system represented by the current <see cref="TextInfo"/>. 
         /// </summary>
         /// <param name="textInfo">
         /// The <see cref="TextInfo"/> instance to get the encoding for. 
         /// </param>
         /// <returns>
-        /// A reference to the encoding for the EBCDIC codepage of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// A reference to the encoding for the EBCDIC codepage of the writing system represented by the current
+        /// <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.EBCDICCodePage"/>
         public static Encoding GetEbcdicEncoding(
@@ -57,13 +61,15 @@ namespace Axle.Globalization.Extensions.TextInfo
         }
 
         /// <summary>
-        /// Gets the encoding for the ANSI codepage of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// Gets the encoding for the American National Standards Institute (ANSI) codepage of the writing system
+        /// represented by the current <see cref="TextInfo"/>. 
         /// </summary>
         /// <param name="textInfo">
         /// The <see cref="TextInfo"/> instance to get the encoding for. 
         /// </param>
         /// <returns>
-        /// A reference to the encoding for the ANSI codepage of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// A reference to the encoding for the American National Standards Institute (ANSI) codepage of the writing
+        /// system represented by the current <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.ANSICodePage"/>
         public static Encoding GetAnsiEncoding(
@@ -77,13 +83,15 @@ namespace Axle.Globalization.Extensions.TextInfo
         }
 
         /// <summary>
-        /// Gets the encoding for the Mac codepage of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// Gets the encoding for the Macintosh codepage of the writing system represented by the current
+        /// <see cref="TextInfo"/>. 
         /// </summary>
         /// <param name="textInfo">
         /// The <see cref="TextInfo"/> instance to get the encoding for. 
         /// </param>
         /// <returns>
-        /// A reference to the encoding for the Mac codepage of the writing system represented by the current <see cref="TextInfo"/>. 
+        /// A reference to the encoding for the Macintosh codepage of the writing system represented by the current
+        /// <see cref="TextInfo"/>. 
         /// </returns>
         /// <seealso cref="TextInfo.MacCodePage"/>
         public static Encoding GetMacEncoding(
@@ -139,7 +147,8 @@ namespace Axle.Globalization.Extensions.TextInfo
         /// The <see cref="TextInfo"/> instance to get the encoding for.
         /// </param>
         /// <returns>
-        /// A reference to the default encoding for the writing system represented by the current <see cref="TextInfo"/>. 
+        /// A reference to the default encoding for the writing system represented by the current
+        /// <see cref="TextInfo"/>. 
         /// In .NET Standard this method returns <see cref="Encoding.UTF8"/>.
         /// </returns>
         /// <seealso cref="Encoding" />

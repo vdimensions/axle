@@ -1,8 +1,6 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
-
 using Axle.Verification;
-
 
 namespace Axle.Collections.Extensions.Array
 {
@@ -26,7 +24,8 @@ namespace Axle.Collections.Extensions.Array
         /// A new array of the provided <paramref name="type"/>.
         /// </returns>
         /// <exception cref="InvalidCastException">
-        /// There is an element inside the <paramref name="array"/> which cannot be cast to the destination <paramref name="type"/>.
+        /// There is an element inside the <paramref name="array"/> which cannot be cast to the destination
+        /// <paramref name="type"/>.
         /// </exception>
         public static Array MakeGeneric(
             #if NETSTANDARD || NET35_OR_NEWER

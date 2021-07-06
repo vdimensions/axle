@@ -3,7 +3,10 @@ using System;
 
 namespace Axle.Reflection
 {
-    public sealed class PartiallyGenericMethodToken : MethodToken, IGenericMethod, IPartiallyGenericMethod
+    #if NETFRAMEWORK
+    [System.Serializable]
+    #endif
+    internal sealed class PartiallyGenericMethodToken : MethodToken, IGenericMethod, IPartiallyGenericMethod
     {
         public PartiallyGenericMethodToken(IMethod rawMethod, Type[] genericArguments) : base(rawMethod.ReflectedMember)
         {

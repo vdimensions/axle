@@ -1,5 +1,6 @@
 #if NETSTANDARD || NET20_OR_NEWER
 using System;
+using System.Diagnostics.CodeAnalysis;
 #if NETSTANDARD || NET35_OR_NEWER
 using System.Collections.Generic;
 #else
@@ -8,9 +9,7 @@ using System.Collections;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
-
 using Axle.Verification;
-
 
 namespace Axle.Text.Expressions.Substitution
 {
@@ -51,6 +50,17 @@ namespace Axle.Text.Expressions.Substitution
                     comparer));
         }
 
+        /// <summary>
+        /// When overriden in a derived class, creates a new instance of the
+        /// respective <see cref="AbstractSubstitutionExpression"/> implementation using the provided substitution
+        /// expression delimiters.
+        /// </summary>
+        /// <param name="exprStart">
+        /// The delimiter signifying the beginning of a substitution expression.
+        /// </param>
+        /// <param name="exprEnd">
+        /// The delimiter signifying the end of a substitution expression.
+        /// </param>
         protected AbstractSubstitutionExpression(string exprStart, string exprEnd)
         {
             _exprStart = exprStart;
@@ -60,6 +70,7 @@ namespace Axle.Text.Expressions.Substitution
         }
 
         /// <inheritdoc />
+        [SuppressMessage("ReSharper", "CognitiveComplexity")]
         public string Replace(string input, ISubstitutionProvider sp)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(sp, nameof(sp)));
@@ -120,6 +131,7 @@ namespace Axle.Text.Expressions.Substitution
 
             return result;
         }
+
 
         protected virtual string ExtractTokenValue(string token) => token.Substring(_exprStart.Length, token.Length - (_exprStart.Length + _exprEnd.Length));
 

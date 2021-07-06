@@ -1,14 +1,16 @@
 ﻿#if NETSTANDARD || NET40_OR_NEWER
+using System;
+
 namespace Axle.References
 {
     /// <summary>
     /// An interface representing a reference to a lazily initialized value.
     /// </summary>
     /// <typeparam name="T">
-    /// The type of the value that is lazy-initialized.
+    /// The type of the value that is being lazily-initialized.
     /// </typeparam>
     /// <seealso cref="System.Lazy{T}"/>
-    public interface ILazyReference<T> : IReference<T>
+    public interface ILazyReference<T> : IReference<T>, IEquatable<ILazyReference<T>>, IEquatable<T>
     {
         /// <summary>
         /// Tries to retrieve the value that is referenced by the current <see cref="ILazyReference{T}"/> object.
@@ -24,12 +26,6 @@ namespace Axle.References
         /// <c>true</c> if the target value was retrieved; <c>false</c> otherwise.
         /// </returns>
         new bool TryGetValue(out T value);
-
-        /// <summary>
-        /// Gets a boolean value that indicates whether the current
-        /// <see cref="ILazyReference{T}"/> has a <see cref="IReference{T}.Value"/> created.
-        /// </summary>
-        bool HasValue { get; }
     }
 }
 #endif

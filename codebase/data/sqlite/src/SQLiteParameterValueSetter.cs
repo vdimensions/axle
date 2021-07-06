@@ -1,22 +1,15 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-
 using Axle.Data.Common;
 using Axle.Data.Conversion;
 using Axle.Data.SQLite.Conversion;
-using SqliteParameter = System.Data.SQLite.SQLiteParameter;
-
 
 namespace Axle.Data.SQLite
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
+    using SqliteParameter = System.Data.SQLite.SQLiteParameter;
+    
     internal sealed class SQLiteParameterValueSetter : DbParameterValueSetter<SqliteParameter, SQLiteType>
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-        [System.Serializable]
-        #endif
         private class SQLiteDbTypeEqualityComparer : IEqualityComparer<SQLiteType>
         {
             public bool Equals(SQLiteType x, SQLiteType y) => x == y;
@@ -33,6 +26,7 @@ namespace Axle.Data.SQLite
             RegisterConverter(new SQLiteDoubleConverter());
             RegisterConverter(new SQLiteDecimalConverter());
             RegisterConverter(new SQLiteTextConverter());
+            RegisterConverter(new SQLiteDateTimeConverter());
         }
 
         private void RegisterConverter<T1, T2>(SQLiteDbTypeConverter<T1, T2> converter)

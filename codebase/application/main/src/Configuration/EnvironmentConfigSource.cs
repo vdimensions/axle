@@ -1,38 +1,41 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Axle.Environment;
 using Axle.References;
+using Axle.Text;
 
 namespace Axle.Configuration
 {
-    internal sealed class EnvironmentConfigSource : IConfigSource, IConfiguration
+    internal sealed class EnvironmentConfigSource : IConfigSource
     {
+        private sealed class EnvironmentConfig : IConfiguration
+        {
+            private readonly IDictionary<string, string> _env;
+
+            public EnvironmentConfig(IDictionary<string, string> env)
+            {
+                _env = env;
+            }
+
+            IEnumerable<string> IConfigSection.Keys => _env.Keys;
+            string IConfigSection.Name => string.Empty;
+            CharSequence IConfigSetting.Value => null;
+
+            IEnumerable<IConfigSetting> IConfigSection.this[string key] =>
+                _env.TryGetValue(key, out var val) 
+                    ? Enumerable.Repeat(ConfigSetting.Create(val), 1) 
+                    : Enumerable.Empty<IConfigSetting>();
+        }
+        
         public static EnvironmentConfigSource Instance => Singleton<EnvironmentConfigSource>.Instance;
 
-        private readonly IDictionary<string, string> _env;
+        private EnvironmentConfigSource() { }
 
-        private EnvironmentConfigSource()
+        public IConfiguration LoadConfiguration()
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-            var env = System.Environment.GetEnvironmentVariables(System.EnvironmentVariableTarget.Process);
-            #else
-            var env = System.Environment.GetEnvironmentVariables();
-            #endif
-            _env = Enumerable.ToDictionary(
-                Enumerable.OfType<DictionaryEntry>(env), 
-                x => x.Key.ToString(), 
-                x => x.Value.ToString(), 
-                StringComparer.OrdinalIgnoreCase);
+            var env = Platform.Environment.GetEnvironmentVariables();
+            return new EnvironmentConfig(new Dictionary<string, string>(env, StringComparer.OrdinalIgnoreCase));
         }
-
-        public IConfiguration LoadConfiguration() => this;
-
-        IConfigSetting IConfigSection.this[string key] => _env.TryGetValue(key, out var val) ? ConfigSetting.Create(val) : null;
-
-        IEnumerable<string> IConfigSection.Keys => _env.Keys;
-
-        public string Name => string.Empty;
-        public string Value => null;
     }
 }

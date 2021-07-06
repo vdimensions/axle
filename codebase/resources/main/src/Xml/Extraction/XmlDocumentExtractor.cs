@@ -1,18 +1,20 @@
-﻿#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using System.Xml;
-
 using Axle.Resources.Extraction;
-
 
 namespace Axle.Resources.Xml.Extraction
 {
     /// <summary>
-    /// An implementation of <see cref="IResourceExtractor"/> that loads XML documents using the <see cref="XmlDocument"/> class.
+    /// An implementation of <see cref="IResourceExtractor"/> that loads XML documents using the
+    /// <see cref="XmlDocument"/> class.
     /// </summary>
     public class XmlDocumentExtractor : AbstractXmlExtractor<XmlDocumentResourceInfo>
     {
         /// <inheritdoc />
-        protected override XmlDocumentResourceInfo ExtractXml(ResourceContext context, string name, ResourceInfo resource)
+        protected override XmlDocumentResourceInfo ExtractXml(
+            IResourceContext context, 
+            string name, 
+            ResourceInfo resource)
         {
             var xml = new XmlDocument();
             switch (resource)

@@ -176,7 +176,7 @@ namespace Axle.Reflection.Extensions.Type
         /// The potential subclassing type to check.
         /// </param>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <paramref name="type"/> is higher in the inheritence hierarchy
+        /// <c><see langword="true"/></c> if the current <paramref name="type"/> is higher in the inheritance hierarchy
         /// of the provided <paramref name="other"/> type;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
@@ -206,7 +206,7 @@ namespace Axle.Reflection.Extensions.Type
         /// The potential subclassing type to check.
         /// </typeparam>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <paramref name="type"/> is higher in the inheritence hierarchy
+        /// <c><see langword="true"/></c> if the current <paramref name="type"/> is higher in the inheritance hierarchy
         /// of the provided  type <typeparamref name="T"/>;
         /// <c><see langword="false"/></c> otherwise.
         /// </returns>
@@ -237,7 +237,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
-        /// <seealso cref="ITypeIntrospector.IsDelegate"/>
+        /// <seealso cref="TypeFlags.Delegate"/>
         public static bool IsDelegate(
                 #if NETSTANDARD || NET35_OR_NEWER
                 this
@@ -271,7 +271,7 @@ namespace Axle.Reflection.Extensions.Type
         /// <exception cref="ArgumentNullException">
         /// <paramref name="type"/> is <c><see langword="null"/></c>.
         /// </exception>
-        /// <seealso cref="ITypeIntrospector.IsNullableType"/>
+        /// <seealso cref="TypeFlags.NullableValueType"/>
         public static bool IsNullableType(
                 #if NETSTANDARD || NET35_OR_NEWER
                 this

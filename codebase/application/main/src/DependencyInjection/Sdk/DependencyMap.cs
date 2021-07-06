@@ -145,7 +145,6 @@ namespace Axle.DependencyInjection.Sdk
             RegisterConstructible(name.VerifyArgument(nameof(name)).IsNotNull(), type, ddp, resolver, (a, b, c, d) => new PrototypeDependencyState(a, b, c, d));
         }
 
-
         public object Resolve(string name, Type type)
         {
             if (!_states.TryGetValue(name, out var candidates))

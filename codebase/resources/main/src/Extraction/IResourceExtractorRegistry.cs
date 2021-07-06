@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-
-using Axle.References;
-
+using System.Collections.Generic;
 
 namespace Axle.Resources.Extraction
 {
@@ -24,6 +21,6 @@ namespace Axle.Resources.Extraction
         /// <exception cref="System.ArgumentNullException">
         /// <paramref name="extractor"/> is <c>null</c>.
         /// </exception>
-        IResourceExtractorRegistry Register(Nullsafe<IResourceExtractor> extractor);
+        IResourceExtractorRegistry Register(IResourceExtractor extractor);
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Linq;
 #if NETSTANDARD || NET45_OR_NEWER
 using System.Reflection;
 #endif
@@ -29,6 +30,11 @@ namespace Axle.Reflection
             if (ti.IsGenericTypeDefinition)
             {
                 result |= TypeFlags.GenericDefinition;
+            }
+
+            if (ti.IsPrimitive)
+            {
+                result |= TypeFlags.Primitive;
             }
 
             if (ti.IsValueType)
@@ -129,7 +135,13 @@ namespace Axle.Reflection
         
         /// Checks if a particular <paramref name="flag"/> is set.
         public static bool HasFlag(this TypeFlags value, TypeFlags flag) => (value & flag) == flag;
-        
+
+        /// Checks if at least one of a particular set of <paramref name="flags"/> is set.
+        public static bool HasAnyFlag(this TypeFlags value, params TypeFlags[] flags) => flags.Any(f => HasFlag(value, f));
+
+        /// Checks if all of a particular set of <paramref name="flags"/> are set.
+        public static bool HasAllFlags(this TypeFlags value, params TypeFlags[] flags) => flags.All(f => HasFlag(value, f));
+
         /// Checks if the <see cref="TypeFlags.Abstract"/> flag is set.
         public static bool IsAbstract(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Abstract);
         
@@ -180,5 +192,8 @@ namespace Axle.Reflection
         
         /// Checks if the <see cref="TypeFlags.ValueType"/> flag is set.
         public static bool IsValueType(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.ValueType);
+
+        /// Checks if the <see cref="TypeFlags.Primitive"/> flag is set.
+        public static bool IsPrimitive(this TypeFlags typeFlags) => HasFlag(typeFlags, TypeFlags.Primitive);
     }
 }

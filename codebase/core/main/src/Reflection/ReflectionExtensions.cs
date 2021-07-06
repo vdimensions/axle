@@ -1,8 +1,7 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 using Axle.Verification;
-
 
 namespace Axle.Reflection
 {
@@ -91,6 +90,7 @@ namespace Axle.Reflection
             return method is MethodInfo mi && IsOverrideUnchecked(mi);
         }
 
+        [SuppressMessage("ReSharper", "CognitiveComplexity")]
         internal static DeclarationType GetDeclarationTypeUnchecked(MethodInfo gm, MethodInfo sm)
         {
             var isStatic = (gm ?? sm).IsStatic;
@@ -310,6 +310,23 @@ namespace Axle.Reflection
             #endif
             DeclarationType declaration) => DeclarationTypeFlagCompare(declaration, DeclarationType.Sealed);
 
+        /// <summary>
+        /// Invokes the current method as a a static method. 
+        /// </summary>
+        /// <param name="this">
+        /// The method to invoke.
+        /// </param>
+        /// <param name="args">
+        /// An array of variable length that represents the values of any parameters that the reflected invokable may
+        /// have. The number of values supplied must match exactly the number of parameters of the reflected invokable.
+        /// </param>
+        /// <returns>
+        /// If the reflected method has a specific return value, then the result will contain return
+        /// value of the method, otherwise the value returned will be <c>null</c>.
+        /// </returns>
+        /// <exception cref="InvalidOperationException">
+        /// The current method is not a static method.
+        /// </exception>
         public static object InvokeStatic(
             #if NETSTANDARD || NET35_OR_NEWER
             this

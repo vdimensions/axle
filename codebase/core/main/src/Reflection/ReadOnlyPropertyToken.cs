@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Reflection;
 
-
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
-    public sealed class ReadOnlyPropertyToken : PropertyToken, IReadOnlyProperty
+    internal sealed class ReadOnlyPropertyToken : PropertyToken, IReadOnlyProperty
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly PropertyGetAccessor _getAccessor;

@@ -5,10 +5,14 @@
     /// <see cref="IGetAccessor">get accessor</see>.
     /// A readable member usually represents a field or property.
     /// </summary>
-    /// <seealso cref="IField"/>
-    /// <seealso cref="IProperty"/>
     /// <seealso cref="IGetAccessor"/>
     /// <seealso cref="IAccessible"/>
+    /// <seealso cref="IReadWriteMember"/>
+    /// <seealso cref="IWriteableMember"/>
+    /// <seealso cref="IField"/>
+    /// <seealso cref="IProperty"/>
+    /// <seealso cref="IReadOnlyProperty"/>
+    /// <seealso cref="IReadWriteProperty"/>
     public interface IReadableMember : IMember, IAccessible
     {
         /// <summary>

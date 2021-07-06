@@ -5,7 +5,7 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace Axle.Data.DataSources
 {
-    public interface IDataSourceCommand : IDataSourceObject
+    public interface IDataSourceCommand : IDataSourceAware
     {
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         void ExecuteReader(IDataSourceConnection connection, CommandBehavior behavior, Action<DbDataReader> readAction, params IDataParameter[] parameters);

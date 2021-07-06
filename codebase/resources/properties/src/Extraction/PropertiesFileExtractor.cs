@@ -1,27 +1,31 @@
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Text;
 using Axle.Resources.Extraction;
-using Axle.Resources.Text.Data;
-using Axle.Text.Data;
-using Axle.Text.Data.Properties;
+using Axle.Resources.Text.Documents;
+using Axle.Text;
+using Axle.Text.Documents;
+using Axle.Text.Documents.Properties;
 
 namespace Axle.Resources.Properties.Extraction
 {
     /// <summary>
     /// A <see cref="IResourceExtractor"/> implementations capable of creating Java properties files.
     /// </summary>
-    internal sealed class PropertiesFileExtractor : AbstractTextDataExtractor
+    internal sealed class PropertiesFileExtractor : AbstractTextDocumentExtractor
     {
         internal static readonly StringComparer DefaultKeyComparer = StringComparer.OrdinalIgnoreCase;
-            
-        protected override ITextDataReader GetReader(StringComparer comparer) 
-            => new PropertiesDataReader(comparer);
 
-        protected override TextDataResourceInfo CreateResourceInfo(
+        public PropertiesFileExtractor(Encoding encoding) : base(encoding) { }
+            
+        protected override ITextDocumentReader GetReader(StringComparer comparer) 
+            => new PropertiesDocumentReader(comparer);
+
+        protected override TextDocumentResourceInfo CreateResourceInfo(
             string name, 
             CultureInfo culture, 
-            IDictionary<string, string> data)
+            IDictionary<string, CharSequence> data)
         {
             return new PropertiesResourceInfo(name, culture, data);
         }

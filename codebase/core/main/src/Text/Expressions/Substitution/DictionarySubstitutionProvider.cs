@@ -28,7 +28,10 @@ namespace Axle.Text.Expressions.Substitution
         }
 
         /// <inheritdoc />
-        public bool TrySubstitute(string token, out string value) => 
-            _dictionary.TryGetValue(StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(token, nameof(token))).Value, out value);
+        public bool TrySubstitute(string token, out string value)
+        {
+            StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(token, nameof(token)));
+            return _dictionary.TryGetValue(token, out value);
+        }
     }
 }

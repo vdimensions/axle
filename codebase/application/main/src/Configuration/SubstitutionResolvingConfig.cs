@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Axle.Text;
 using Axle.Text.Expressions.Substitution;
 using Axle.Verification;
 
@@ -25,16 +27,23 @@ namespace Axle.Configuration
         bool ISubstitutionProvider.TrySubstitute(string token, out string value)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(token, nameof(token)));
-            if (_substSource[token] is IConfigSetting cv)
+            if (token.Length > 0)
             {
-                value = cv.Value;
-                return true;
+                var settingValue = _substSource[token]
+                    .Select(x => x.Value)
+                    .SingleOrDefault(x => x != null && x.Length > 0);
+                if (settingValue != null)
+                {
+                    // TODO: avoid calling .ToString() on CharSequence instance `settingValue`
+                    value = settingValue.ToString();
+                    return true;
+                }
             }
             value = null;
             return false;
         }
 
-        public IConfigSetting this[string key]
+        public IEnumerable<IConfigSetting> this[string key]
         {
             get
             {
@@ -45,22 +54,34 @@ namespace Axle.Configuration
                     // prevent recursive lookup
                     return originalResult;
                 }
-                switch (originalResult)
-                {
-                    case IConfigSection cs:
+                return originalResult.Select(
+                    item =>
                     {
-                        return GetSafeSubstitutionProvider(key, cs);
-                    }
-                    case IConfigSetting cv:
-                    {
-                        var substitutedValue = _expression.Replace(cv.Value, GetSafeSubstitutionProvider(key, _originalConfig));
-                        return ConfigSetting.Create(substitutedValue);
-                    }
-                    default:
-                    {
-                        return originalResult;
-                    }
-                }
+                        switch (item)
+                        {
+                            case IConfigSection cs:
+                            {
+                                return GetSafeSubstitutionProvider(key, cs);
+                            }
+                            case IConfigSetting cv:
+                            {
+                                // we avoid calling .ToString() on the non-string CharSequence values
+                                if (cv.Value is StringCharSequence)
+                                {
+                                    var substitutedValue = _expression.Replace(cv.Value.ToString(), GetSafeSubstitutionProvider(key, _originalConfig));
+                                    return ConfigSetting.Create(substitutedValue);
+                                }
+                                else 
+                                {
+                                    return cv;
+                                }
+                            }
+                            default:
+                            {
+                                return item;
+                            }
+                        }
+                    });
             }
         }
 
@@ -72,12 +93,15 @@ namespace Axle.Configuration
         public IEnumerable<string> Keys => _originalConfig.Keys;
 
         public string Name => _originalConfig.Name;
-        public string Value
+        public CharSequence Value
         {
             get
             {
                 var val = _originalConfig.Value;
-                return val == null ? null : _expression.Replace(val, this);
+                //
+                // avoid calling .ToString() on the CharSequence val if not StringCharSequence
+                //
+                return val == null || !(val is StringCharSequence) ? null : _expression.Replace(val.ToString(), this);
             }
         }
     }

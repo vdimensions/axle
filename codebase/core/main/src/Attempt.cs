@@ -67,7 +67,8 @@ namespace Axle
     /// The type of the second argument passed to the current <see cref="Attempt{TResult}"/> delegate.
     /// </typeparam>
     /// <typeparam name="TResult">
-    /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/> delegate.
+    /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/>
+    /// delegate.
     /// </typeparam>
     /// <param name="arg1">
     /// The first argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.
@@ -98,7 +99,8 @@ namespace Axle
     /// The type of the third argument passed to the current <see cref="Attempt{TResult}"/> delegate.
     /// </typeparam>
     /// <typeparam name="TResult">
-    /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/> delegate.
+    /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/>
+    /// delegate.
     /// </typeparam>
     /// <param name="arg1">
     /// The first argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.
@@ -135,7 +137,8 @@ namespace Axle
     /// The type of the fourth argument passed to the current <see cref="Attempt{TResult}"/> delegate.
     /// </typeparam>
     /// <typeparam name="TResult">
-    /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/> delegate.
+    /// The type of the result object produced by the action represented by the current <see cref="Attempt{TResult}"/>
+    /// delegate.
     /// </typeparam>
     /// <param name="arg1">
     /// The first argument to the action represented bu the current <see cref="Attempt{TResult}"/> delegate.

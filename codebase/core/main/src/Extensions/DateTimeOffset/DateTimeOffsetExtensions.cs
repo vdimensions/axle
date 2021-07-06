@@ -13,7 +13,7 @@ namespace Axle.Extensions.DateTimeOffset
     public static class DateTimeOffsetExtensions
     {
         /// <summary>
-        /// Convers the value of the current <paramref name="dateTimeOffset"/> to its ISO 8601 string representation.
+        /// Converts the value of the current <paramref name="dateTimeOffset"/> to its ISO 8601 string representation.
         /// </summary>
         /// <param name="dateTimeOffset">
         /// The <see cref="DateTimeOffset"/> value to convert to <see cref="string"/>

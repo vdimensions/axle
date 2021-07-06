@@ -7,7 +7,7 @@ namespace Axle.DependencyInjection
 {
     /// <summary>
     /// A class that describes a dependency which needs to be satisfied by a 
-    /// <see cref="IContainer">dependency container</see> during object construction.
+    /// <see cref="IDependencyContainer">dependency container</see> during object construction.
     /// </summary>
     public sealed class DependencyInfo
     {

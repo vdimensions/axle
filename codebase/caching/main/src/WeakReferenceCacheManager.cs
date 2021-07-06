@@ -1,17 +1,22 @@
-using System;
-using System.Collections.Concurrent;
-
-using Axle.Verification;
-
-
+#if NETSTANDARD1_1_OR_NEWER || NET35_OR_NEWER
 namespace Axle.Caching
 {
-    public sealed class WeakReferenceCacheManager : ICacheManager
+    /// <summary>
+    /// A <see cref="ICacheManager"/> implementation using <see cref="WeakReferenceCache"/> as an <see cref="ICache"/>
+    /// implementation. 
+    /// </summary>
+    public sealed class WeakReferenceCacheManager : AbstractCacheManager
     {
-        private readonly ConcurrentDictionary<string, ICache> _caches = new ConcurrentDictionary<string, ICache>(StringComparer.Ordinal); 
-
-        public ICache GetCache(string name) => _caches.GetOrAdd(name.VerifyArgument(nameof(name)).IsNotNull(), x => new WeakReferenceCache());
-
-        public void Invalidate(string name) => _caches.TryRemove(name.VerifyArgument(nameof(name)).IsNotNull(), out var _);
+        /// <summary>
+        /// Creates a <see cref="WeakReferenceCache"/> instance for the provided <paramref name="cacheName"/>.
+        /// </summary>
+        /// <param name="cacheName">
+        /// The cache name the returned <see cref="ICache"/> instance will be associated with.
+        /// </param>
+        /// <returns>
+        /// A <see cref="WeakReferenceCache"/> instance.
+        /// </returns>
+        protected override ICache CreateCache(string cacheName) => new WeakReferenceCache();
     }
 }
+#endif

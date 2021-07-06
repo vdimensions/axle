@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 #endif
 using System.Text.RegularExpressions;
+using Axle.Verification;
 
 
 namespace Axle.Text.Expressions.Regular
@@ -20,7 +21,8 @@ namespace Axle.Text.Expressions.Regular
         private readonly Regex _regex;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="RegularExpression"/> class using the provided <see cref="Regex"/> object.
+        /// Creates a new instance of the <see cref="RegularExpression"/> class using the provided <see cref="Regex"/>
+        /// object.
         /// </summary>
         /// <param name="regex">
         /// Teh underlying <see cref="Regex"/> object.
@@ -78,6 +80,51 @@ namespace Axle.Text.Expressions.Regular
         #endif
 
         /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(matchEvaluator, nameof(matchEvaluator)));
+            return _regex.Replace(input, matchEvaluator);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator, int count)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(matchEvaluator, nameof(matchEvaluator)));
+            return _regex.Replace(input, matchEvaluator, count);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator, int count, int startIndex)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(matchEvaluator, nameof(matchEvaluator)));
+            ComparableVerifier.IsLessThan(Verifier.VerifyArgument(startIndex, nameof(startIndex)), input.Length);
+            return _regex.Replace(input, matchEvaluator, count, startIndex);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, string replacement)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(replacement, nameof(replacement)));
+            return _regex.Replace(input, replacement);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, string replacement, int count)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(replacement, nameof(replacement)));
+            return _regex.Replace(input, replacement, count);
+        }
+        /// <inheritdoc />
+        public string Replace(string input, string replacement, int count, int startIndex)
+        {
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(input, nameof(input)));
+            Verifier.IsNotNull(argument: Verifier.VerifyArgument(replacement, nameof(replacement)));
+            ComparableVerifier.IsLessThan(Verifier.VerifyArgument(startIndex, nameof(startIndex)), input.Length);
+            return _regex.Replace(input, replacement, count, startIndex);
+        }
+
+        /// <inheritdoc />
         public string[] Split(string input) => _regex.Split(input);
         /// <inheritdoc />
         public string[] Split(string input, int count) => _regex.Split(input, count);
@@ -85,19 +132,29 @@ namespace Axle.Text.Expressions.Regular
         public string[] Split(string input, int count, int startIndex) => _regex.Split(input, count, startIndex);
 
         /// <summary>
-        /// Converts an instance of <see cref="RegularExpression"/> to the corresponding <see cref="Regex" /> equivalent
+        /// Converts an instance of <see cref="RegularExpression"/> to the corresponding <see cref="Regex" />
+        /// equivalent.
         /// </summary>
-        /// <param name="expr">The <see cref="RegularExpression"/> instance to convert.</param>
-        /// <returns>An instance of <see cref="Regex" /> equivalent the current <see cref="RegularExpression"/> instance</returns>
+        /// <param name="expr">
+        /// The <see cref="RegularExpression"/> instance to convert.
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="Regex" /> equivalent the current <see cref="RegularExpression"/> instance.
+        /// </returns>
         /// <seealso cref="RegularExpression"/>
         /// <seealso cref="Regex"/>
         public static implicit operator Regex (RegularExpression expr) => expr._regex;
 
         /// <summary>
-        /// Converts an instance of <see cref="Regex" /> to the corresponding <see cref="RegularExpression"/> equivalent.
+        /// Converts an instance of <see cref="Regex" /> to the corresponding <see cref="RegularExpression"/>
+        /// equivalent.
         /// </summary>
-        /// <param name="expr">The <see cref="Regex"/> instance to convert.</param>
-        /// <returns>An instance of <see cref="RegularExpression" /> equivalent the current <see cref="Regex"/> instance</returns>
+        /// <param name="expr">
+        /// The <see cref="Regex"/> instance to convert.
+        /// </param>
+        /// <returns>
+        /// An instance of <see cref="RegularExpression" /> equivalent the current <see cref="Regex"/> instance.
+        /// </returns>
         /// <seealso cref="RegularExpression"/>
         /// <seealso cref="Regex"/>
         public static explicit operator RegularExpression(Regex expr) => new RegularExpression(expr);

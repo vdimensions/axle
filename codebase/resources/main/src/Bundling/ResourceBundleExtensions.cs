@@ -1,7 +1,7 @@
-﻿using System.Reflection;
-using Axle.Conversion.Parsing;
+using System.Reflection;
 using Axle.Extensions.Uri;
 using Axle.Verification;
+using UriParser = Axle.Text.Parsing.UriParser;
 
 namespace Axle.Resources.Bundling
 {

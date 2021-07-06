@@ -14,7 +14,8 @@ namespace Axle.IO.Extensions.StreamReader
     public static class StreamReaderExtensions
     {
         /// <summary>
-        /// Sets the position within the <see cref="StreamReader.BaseStream">underlying stream</see> of the <see cref="StreamReader" />.
+        /// Sets the position within the <see cref="StreamReader.BaseStream">underlying stream</see> of the
+        /// <see cref="StreamReader" />.
         /// </summary>
         /// <param name="reader">
         /// The <see cref="StreamReader" /> instance that owns the stream. 
@@ -26,17 +27,20 @@ namespace Axle.IO.Extensions.StreamReader
         /// A value of type <see cref="SeekOrigin"/> indicating the reference point used to obtain the new position. 
         /// </param>
         /// <returns>
-        /// The new position within the <see cref="StreamReader.BaseStream">underlying stream</see> of the <see cref="StreamReader" />.
+        /// The new position within the <see cref="StreamReader.BaseStream">underlying stream</see> of the
+        /// <see cref="StreamReader" />.
         /// </returns>
         /// <exception cref="IOException">
         /// An I/O error occurs. 
         /// </exception>
         /// <exception cref="System.NotSupportedException">
-        /// The <see cref="StreamReader.BaseStream">underlying stream</see> of the <see cref="StreamReader" /> does not support seeking, 
+        /// The <see cref="StreamReader.BaseStream">underlying stream</see> of the <see cref="StreamReader" /> does not
+        /// support seeking, 
         /// such as if the stream is constructed from a pipe or console output. 
         /// </exception>
         /// <exception cref="System.ObjectDisposedException">
-        /// Methods were called after the <see cref="StreamReader" /> or its <see cref="StreamReader.BaseStream">underlying stream</see> were closed. 
+        /// Methods were called after the <see cref="StreamReader" /> or its
+        /// <see cref="StreamReader.BaseStream">underlying stream</see> were closed. 
         /// </exception>
         /// <seealso cref="StreamReader"/>
         /// <seealso cref="StreamReader.BaseStream"/>

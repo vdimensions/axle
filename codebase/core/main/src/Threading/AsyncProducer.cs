@@ -1,4 +1,5 @@
 ﻿#if NETSTANDARD1_3_OR_NEWER || NET35_OR_NEWER
+using Axle.Threading.Extensions;
 using Axle.Verification;
 using System;
 using System.Collections.Concurrent;
@@ -7,8 +8,7 @@ using System.Threading.Tasks;
 namespace Axle.Threading
 {
     /// <summary>
-    /// A producer-consumer queue implementation that allows externalization
-    /// of the consumer logic.
+    /// A producer-consumer queue implementation that allows externalization of the consumer logic.
     /// </summary>
     /// <typeparam name="T">
     /// The type of object representing the data being consumed.
@@ -20,8 +20,8 @@ namespace Axle.Threading
         private readonly IAsyncConsumer<T> _consumer;
 
         /// <summary>
-        /// Creates a new instance of the <see cref="AsyncProducer{T}"/> class
-        /// using the specified <paramref name="consumer"/>.
+        /// Creates a new instance of the <see cref="AsyncProducer{T}"/> class using the specified
+        /// <paramref name="consumer"/>.
         /// </summary>
         /// <param name="consumer">
         /// A <see cref="IAsyncConsumer{T}"/> object to process
@@ -38,44 +38,38 @@ namespace Axle.Threading
         /// </summary>
         ~AsyncProducer() => Dispose(false);
 
-        private Task StartWorker()
+        private void DoWork()
         {
-            #if NET35 || NET40
-            return Task.Factory.StartNew(() =>
-            #else
-            return Task.Run(() =>
-            #endif
+            while (!_dataItems.IsCompleted)
             {
-                while (!_dataItems.IsCompleted && !_wasDisposed)
+                try
                 {
+                    var data = _dataItems.Take();
                     try
                     {
-                        var data = _dataItems.Take();
-                        try
-                        {
-                            _consumer.Consume(data);
-                        }
-                        catch (Exception e)
-                        {
-                            _consumer.HandleError(e, data);
-                        }
+                        _consumer.Consume(data);
                     }
-                    catch (InvalidOperationException)
+                    catch (Exception e)
                     {
-                        // IOE means that Take() was called on a completed collection.
-                        // Some other thread can call CompleteAdding after we pass the
-                        // IsCompleted check but before we call Take. 
-                        // Here, we can simply catch the exception since the 
-                        // loop will break on the next iteration.
+                        _consumer.HandleError(e, data);
                     }
                 }
-                _consumer.Complete();
-            });
+                catch (InvalidOperationException)
+                {
+                    // IOE means that Take() was called on a completed collection.
+                    // Some other thread can call CompleteAdding after we pass the
+                    // IsCompleted check but before we call Take. 
+                    // Here, we can simply catch the exception since the 
+                    // loop will break on the next iteration.
+                }
+            }
+            _consumer.Complete();
         }
 
+        private Task StartWorker() => new Action(DoWork).InvokeAsync();
+
         /// <summary>
-        /// Adds an <paramref name="item"/> to the queue to be processed
-        /// by the consumer.
+        /// Adds an <paramref name="item"/> to the queue to be processed by the consumer.
         /// </summary>
         /// <param name="item">
         /// The item to be added for processing.
@@ -89,8 +83,8 @@ namespace Axle.Threading
         /// Disposes of the current <see cref="AsyncProducer{T}"/> instance.
         /// </summary>
         /// <param name="disposing">
-        /// A <see cref="bool"/> value indicating whether the dispose call is
-        /// being sent by a finalizer, or a manual dispose call.
+        /// A <see cref="bool"/> value indicating whether the dispose call is being sent by a finalizer, or a manual
+        /// dispose call.
         /// </param>
         protected virtual void Dispose(bool disposing)
         {

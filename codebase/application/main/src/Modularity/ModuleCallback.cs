@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Linq;
-
+using System.Threading.Tasks;
 using Axle.Reflection;
 using Axle.Verification;
 
-
 namespace Axle.Modularity
 {
-    public sealed class ModuleCallback
+    internal sealed class ModuleCallback
     {
         private readonly IInvokable _invokable;
 
@@ -21,7 +20,11 @@ namespace Axle.Modularity
 
         public void Invoke(object module, object arg)
         {
-            _invokable.Invoke(module, arg);
+            if (_invokable.Invoke(module, arg) is Task task && !task.IsCompleted)
+            {
+                // in case the method was async (returning a task), we should wait for it to complete
+                task.Wait();
+            }
         }
 
         public int Priority { get; }

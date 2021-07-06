@@ -1,30 +1,25 @@
-﻿#if NETSTANDARD || NET20_OR_NEWER
-using System.Diagnostics;
-
+﻿using System.Diagnostics;
 
 namespace Axle.Threading
 {
     internal sealed class UpgradeableReadLockHandle : ILockHandle
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private IReadWriteLock _readWriteLock;
+        private AbstractReadWriteLockProvider _readWriteLockProvider;
 
-        public UpgradeableReadLockHandle(IReadWriteLock readWriteLock)
+        internal UpgradeableReadLockHandle(AbstractReadWriteLockProvider readWriteLockProvider)
         {
-            (_readWriteLock = readWriteLock).EnterUpgradeableReadLock();
+            (_readWriteLockProvider = readWriteLockProvider).EnterUpgradeableReadLock();
         }
 
         public void Dispose()
         {
-            if (_readWriteLock == null)
+            if (_readWriteLockProvider == null)
             {
                 return;
             }
-            _readWriteLock.ExitUpgradeableReadLock();
-            _readWriteLock = null;
+            _readWriteLockProvider.ExitUpgradeableReadLock();
+            _readWriteLockProvider = null;
         }
-
-        ILock ILockHandle.Lock => _readWriteLock;
     }
 }
-#endif

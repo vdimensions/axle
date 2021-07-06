@@ -13,13 +13,14 @@ namespace Axle.Verification
     public static class ComparableVerifier
     {
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is greater than a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is greater than a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">The type of the argument represented by the
+        /// <paramref name="argument"/> parameter</typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="minValue">
         /// The comparison value above which the argument will be accepted as valid.
@@ -60,13 +61,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is greater than a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is greater than a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="minValue">
         /// The comparison value above which the argument will be accepted as valid.
@@ -97,10 +100,12 @@ namespace Axle.Verification
         /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
         /// is greater than or equal to a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="minValue">
         /// The comparison value above which the argument will be accepted as valid.
@@ -141,13 +146,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is greater than or equal to a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is greater than or equal to a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="minValue">
         /// The comparison value above which the argument will be accepted as valid.
@@ -175,13 +182,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is less than a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is less than a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="maxValue">
         /// The comparison value below which the argument will be accepted as valid.
@@ -222,13 +231,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is less than a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is less than a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="maxValue">The comparison value below which the argument will be accepted as valid.</param>
         /// <returns>
@@ -254,13 +265,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is less than or equal to a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is less than or equal to a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="maxValue">
         /// The comparison value below which the argument will be accepted as valid.
@@ -301,13 +314,15 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is less than or equal to a given value.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is less than or equal to a given value.
         /// </summary>
-        /// <typeparam name="T">The type of the argument represented by the <paramref name="argument"/> parameter</typeparam>
+        /// <typeparam name="T">
+        /// The type of the argument represented by the <paramref name="argument"/> parameter
+        /// </typeparam>
         /// <param name="argument">
-        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type <typeparamref name="T"/>
-        /// which is being verified.
+        /// An instance of <see cref="ArgumentReference{T}"/> that represents a method/constructor argument of type
+        /// <typeparamref name="T"/> which is being verified.
         /// </param>
         /// <param name="maxValue">
         /// The comparison value below which the argument will be accepted as valid.

@@ -1,0 +1,742 @@
+### YamlMime:ManagedReference
+items:
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  commentId: T:Axle.Resources.Properties.Extraction.PropertiesExtractor
+  id: PropertiesExtractor
+  parent: Axle.Resources.Properties.Extraction
+  children:
+  - Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor
+  - Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor(System.String,System.String)
+  - Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  - Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  langs:
+  - csharp
+  - vb
+  name: PropertiesExtractor
+  nameWithType: PropertiesExtractor
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  type: Class
+  source:
+    remote:
+      path: codebase/resources/properties/src/Extraction/PropertiesExtractor.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: PropertiesExtractor
+    path: ../src/Extraction/PropertiesExtractor.cs
+    startLine: 9
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties.Extraction
+  summary: "\nA class representing the resource extractor chain for the contents of a java properties file.\n"
+  example: []
+  syntax:
+    content: 'public sealed class PropertiesExtractor : IResourceExtractor'
+    content.vb: >-
+      Public NotInheritable Class PropertiesExtractor
+          Implements IResourceExtractor
+  inheritance:
+  - System.Object
+  implements:
+  - Axle.Resources.Extraction.IResourceExtractor
+  inheritedMembers:
+  - System.Object.Equals(System.Object)
+  - System.Object.Equals(System.Object,System.Object)
+  - System.Object.GetHashCode
+  - System.Object.GetType
+  - System.Object.MemberwiseClone
+  - System.Object.ReferenceEquals(System.Object,System.Object)
+  - System.Object.ToString
+  modifiers.csharp:
+  - public
+  - sealed
+  - class
+  modifiers.vb:
+  - Public
+  - NotInheritable
+  - Class
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor(System.String,System.String)
+  commentId: M:Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor(System.String,System.String)
+  id: '#ctor(System.String,System.String)'
+  parent: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  langs:
+  - csharp
+  - vb
+  name: PropertiesExtractor(String, String)
+  nameWithType: PropertiesExtractor.PropertiesExtractor(String, String)
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.PropertiesExtractor(System.String, System.String)
+  type: Constructor
+  source:
+    remote:
+      path: codebase/resources/properties/src/Extraction/PropertiesExtractor.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: .ctor
+    path: ../src/Extraction/PropertiesExtractor.cs
+    startLine: 24
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties.Extraction
+  syntax:
+    content: public PropertiesExtractor(string fileName, string keyPrefix = null)
+    parameters:
+    - id: fileName
+      type: System.String
+    - id: keyPrefix
+      type: System.String
+    content.vb: Public Sub New(fileName As String, keyPrefix As String = Nothing)
+  overload: Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor
+  commentId: M:Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor
+  id: '#ctor'
+  parent: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  langs:
+  - csharp
+  - vb
+  name: PropertiesExtractor()
+  nameWithType: PropertiesExtractor.PropertiesExtractor()
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.PropertiesExtractor()
+  type: Constructor
+  source:
+    remote:
+      path: codebase/resources/properties/src/Extraction/PropertiesExtractor.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: .ctor
+    path: ../src/Extraction/PropertiesExtractor.cs
+    startLine: 25
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties.Extraction
+  syntax:
+    content: public PropertiesExtractor()
+    content.vb: Public Sub New
+  overload: Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor*
+  modifiers.csharp:
+  - public
+  modifiers.vb:
+  - Public
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  commentId: M:Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  id: Axle#Resources#Extraction#IResourceExtractor#Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  isEii: true
+  parent: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  langs:
+  - csharp
+  - vb
+  name: IResourceExtractor.Extract(IResourceContext, String)
+  nameWithType: PropertiesExtractor.IResourceExtractor.Extract(IResourceContext, String)
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext, System.String)
+  type: Method
+  source:
+    remote:
+      path: codebase/resources/properties/src/Extraction/PropertiesExtractor.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: Axle.Resources.Extraction.IResourceExtractor.Extract
+    path: ../src/Extraction/PropertiesExtractor.cs
+    startLine: 27
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties.Extraction
+  syntax:
+    content: ResourceInfo IResourceExtractor.Extract(IResourceContext context, string name)
+    parameters:
+    - id: context
+      type: Axle.Resources.Extraction.IResourceContext
+    - id: name
+      type: System.String
+    return:
+      type: Axle.Resources.ResourceInfo
+    content.vb: Function Axle.Resources.Extraction.IResourceExtractor.Extract(context As IResourceContext, name As String) As ResourceInfo Implements IResourceExtractor.Extract
+  overload: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract*
+  implements:
+  - Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  nameWithType.vb: PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.Extract(IResourceContext, String)
+  name.vb: Axle.Resources.Extraction.IResourceExtractor.Extract(IResourceContext, String)
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  commentId: M:Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  id: Axle#Resources#Extraction#IResourceExtractor#ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  isEii: true
+  parent: Axle.Resources.Properties.Extraction.PropertiesExtractor
+  langs:
+  - csharp
+  - vb
+  name: IResourceExtractor.ExtractAsync(IResourceContext, String)
+  nameWithType: PropertiesExtractor.IResourceExtractor.ExtractAsync(IResourceContext, String)
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext, System.String)
+  type: Method
+  source:
+    remote:
+      path: codebase/resources/properties/src/Extraction/PropertiesExtractor.cs
+      branch: dev
+      repo: https://github.com/vdimensions/axle.git/
+    id: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+    path: ../src/Extraction/PropertiesExtractor.cs
+    startLine: 30
+  assemblies:
+  - Axle.Resources.Properties
+  namespace: Axle.Resources.Properties.Extraction
+  syntax:
+    content: Task<ResourceInfo> IResourceExtractor.ExtractAsync(IResourceContext context, string name)
+    parameters:
+    - id: context
+      type: Axle.Resources.Extraction.IResourceContext
+    - id: name
+      type: System.String
+    return:
+      type: System.Threading.Tasks.Task{Axle.Resources.ResourceInfo}
+    content.vb: Function Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(context As IResourceContext, name As String) As Task(Of ResourceInfo) Implements IResourceExtractor.ExtractAsync
+  overload: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync*
+  implements:
+  - Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  nameWithType.vb: PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(IResourceContext, String)
+  name.vb: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(IResourceContext, String)
+references:
+- uid: Axle.Resources.Properties.Extraction
+  commentId: N:Axle.Resources.Properties.Extraction
+  name: Axle.Resources.Properties.Extraction
+  nameWithType: Axle.Resources.Properties.Extraction
+  fullName: Axle.Resources.Properties.Extraction
+- uid: System.Object
+  commentId: T:System.Object
+  parent: System
+  isExternal: true
+  name: Object
+  nameWithType: Object
+  fullName: System.Object
+- uid: Axle.Resources.Extraction.IResourceExtractor
+  commentId: T:Axle.Resources.Extraction.IResourceExtractor
+  parent: Axle.Resources.Extraction
+  name: IResourceExtractor
+  nameWithType: IResourceExtractor
+  fullName: Axle.Resources.Extraction.IResourceExtractor
+- uid: System.Object.Equals(System.Object)
+  commentId: M:System.Object.Equals(System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object)
+  nameWithType: Object.Equals(Object)
+  fullName: System.Object.Equals(System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.Equals(System.Object,System.Object)
+  commentId: M:System.Object.Equals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: Equals(Object, Object)
+  nameWithType: Object.Equals(Object, Object)
+  fullName: System.Object.Equals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.Equals(System.Object,System.Object)
+    name: Equals
+    nameWithType: Object.Equals
+    fullName: System.Object.Equals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetHashCode
+  commentId: M:System.Object.GetHashCode
+  parent: System.Object
+  isExternal: true
+  name: GetHashCode()
+  nameWithType: Object.GetHashCode()
+  fullName: System.Object.GetHashCode()
+  spec.csharp:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetHashCode
+    name: GetHashCode
+    nameWithType: Object.GetHashCode
+    fullName: System.Object.GetHashCode
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.GetType
+  commentId: M:System.Object.GetType
+  parent: System.Object
+  isExternal: true
+  name: GetType()
+  nameWithType: Object.GetType()
+  fullName: System.Object.GetType()
+  spec.csharp:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.GetType
+    name: GetType
+    nameWithType: Object.GetType
+    fullName: System.Object.GetType
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.MemberwiseClone
+  commentId: M:System.Object.MemberwiseClone
+  parent: System.Object
+  isExternal: true
+  name: MemberwiseClone()
+  nameWithType: Object.MemberwiseClone()
+  fullName: System.Object.MemberwiseClone()
+  spec.csharp:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.MemberwiseClone
+    name: MemberwiseClone
+    nameWithType: Object.MemberwiseClone
+    fullName: System.Object.MemberwiseClone
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ReferenceEquals(System.Object,System.Object)
+  commentId: M:System.Object.ReferenceEquals(System.Object,System.Object)
+  parent: System.Object
+  isExternal: true
+  name: ReferenceEquals(Object, Object)
+  nameWithType: Object.ReferenceEquals(Object, Object)
+  fullName: System.Object.ReferenceEquals(System.Object, System.Object)
+  spec.csharp:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ReferenceEquals(System.Object,System.Object)
+    name: ReferenceEquals
+    nameWithType: Object.ReferenceEquals
+    fullName: System.Object.ReferenceEquals
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.Object
+    name: Object
+    nameWithType: Object
+    fullName: System.Object
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Object.ToString
+  commentId: M:System.Object.ToString
+  parent: System.Object
+  isExternal: true
+  name: ToString()
+  nameWithType: Object.ToString()
+  fullName: System.Object.ToString()
+  spec.csharp:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: System.Object.ToString
+    name: ToString
+    nameWithType: Object.ToString
+    fullName: System.Object.ToString
+    isExternal: true
+  - name: (
+    nameWithType: (
+    fullName: (
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System
+  commentId: N:System
+  isExternal: true
+  name: System
+  nameWithType: System
+  fullName: System
+- uid: Axle.Resources.Extraction
+  commentId: N:Axle.Resources.Extraction
+  name: Axle.Resources.Extraction
+  nameWithType: Axle.Resources.Extraction
+  fullName: Axle.Resources.Extraction
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor*
+  commentId: Overload:Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor
+  name: PropertiesExtractor
+  nameWithType: PropertiesExtractor.PropertiesExtractor
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.PropertiesExtractor
+- uid: System.String
+  commentId: T:System.String
+  parent: System
+  isExternal: true
+  name: String
+  nameWithType: String
+  fullName: System.String
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract*
+  commentId: Overload:Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract
+  name: IResourceExtractor.Extract
+  nameWithType: PropertiesExtractor.IResourceExtractor.Extract
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.Extract
+  nameWithType.vb: PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.Extract
+  name.vb: Axle.Resources.Extraction.IResourceExtractor.Extract
+- uid: Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  commentId: M:Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+  parent: Axle.Resources.Extraction.IResourceExtractor
+  isExternal: true
+  name: Extract(IResourceContext, String)
+  nameWithType: IResourceExtractor.Extract(IResourceContext, String)
+  fullName: Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext, System.String)
+  spec.csharp:
+  - uid: Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+    name: Extract
+    nameWithType: IResourceExtractor.Extract
+    fullName: Axle.Resources.Extraction.IResourceExtractor.Extract
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Axle.Resources.Extraction.IResourceContext
+    name: IResourceContext
+    nameWithType: IResourceContext
+    fullName: Axle.Resources.Extraction.IResourceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.Extraction.IResourceExtractor.Extract(Axle.Resources.Extraction.IResourceContext,System.String)
+    name: Extract
+    nameWithType: IResourceExtractor.Extract
+    fullName: Axle.Resources.Extraction.IResourceExtractor.Extract
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Axle.Resources.Extraction.IResourceContext
+    name: IResourceContext
+    nameWithType: IResourceContext
+    fullName: Axle.Resources.Extraction.IResourceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: Axle.Resources.Extraction.IResourceContext
+  commentId: T:Axle.Resources.Extraction.IResourceContext
+  parent: Axle.Resources.Extraction
+  name: IResourceContext
+  nameWithType: IResourceContext
+  fullName: Axle.Resources.Extraction.IResourceContext
+- uid: Axle.Resources.ResourceInfo
+  commentId: T:Axle.Resources.ResourceInfo
+  parent: Axle.Resources
+  name: ResourceInfo
+  nameWithType: ResourceInfo
+  fullName: Axle.Resources.ResourceInfo
+- uid: Axle.Resources
+  commentId: N:Axle.Resources
+  name: Axle.Resources
+  nameWithType: Axle.Resources
+  fullName: Axle.Resources
+- uid: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync*
+  commentId: Overload:Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync
+  name: IResourceExtractor.ExtractAsync
+  nameWithType: PropertiesExtractor.IResourceExtractor.ExtractAsync
+  fullName: Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+  nameWithType.vb: PropertiesExtractor.Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+  name.vb: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+- uid: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  commentId: M:Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+  parent: Axle.Resources.Extraction.IResourceExtractor
+  isExternal: true
+  name: ExtractAsync(IResourceContext, String)
+  nameWithType: IResourceExtractor.ExtractAsync(IResourceContext, String)
+  fullName: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext, System.String)
+  spec.csharp:
+  - uid: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+    name: ExtractAsync
+    nameWithType: IResourceExtractor.ExtractAsync
+    fullName: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Axle.Resources.Extraction.IResourceContext
+    name: IResourceContext
+    nameWithType: IResourceContext
+    fullName: Axle.Resources.Extraction.IResourceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+  spec.vb:
+  - uid: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)
+    name: ExtractAsync
+    nameWithType: IResourceExtractor.ExtractAsync
+    fullName: Axle.Resources.Extraction.IResourceExtractor.ExtractAsync
+  - name: (
+    nameWithType: (
+    fullName: (
+  - uid: Axle.Resources.Extraction.IResourceContext
+    name: IResourceContext
+    nameWithType: IResourceContext
+    fullName: Axle.Resources.Extraction.IResourceContext
+  - name: ', '
+    nameWithType: ', '
+    fullName: ', '
+  - uid: System.String
+    name: String
+    nameWithType: String
+    fullName: System.String
+    isExternal: true
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks.Task{Axle.Resources.ResourceInfo}
+  commentId: T:System.Threading.Tasks.Task{Axle.Resources.ResourceInfo}
+  parent: System.Threading.Tasks
+  definition: System.Threading.Tasks.Task`1
+  name: Task<ResourceInfo>
+  nameWithType: Task<ResourceInfo>
+  fullName: System.Threading.Tasks.Task<Axle.Resources.ResourceInfo>
+  nameWithType.vb: Task(Of ResourceInfo)
+  fullName.vb: System.Threading.Tasks.Task(Of Axle.Resources.ResourceInfo)
+  name.vb: Task(Of ResourceInfo)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - uid: Axle.Resources.ResourceInfo
+    name: ResourceInfo
+    nameWithType: ResourceInfo
+    fullName: Axle.Resources.ResourceInfo
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - uid: Axle.Resources.ResourceInfo
+    name: ResourceInfo
+    nameWithType: ResourceInfo
+    fullName: Axle.Resources.ResourceInfo
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks.Task`1
+  commentId: T:System.Threading.Tasks.Task`1
+  isExternal: true
+  name: Task<TResult>
+  nameWithType: Task<TResult>
+  fullName: System.Threading.Tasks.Task<TResult>
+  nameWithType.vb: Task(Of TResult)
+  fullName.vb: System.Threading.Tasks.Task(Of TResult)
+  name.vb: Task(Of TResult)
+  spec.csharp:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: <
+    nameWithType: <
+    fullName: <
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: '>'
+    nameWithType: '>'
+    fullName: '>'
+  spec.vb:
+  - uid: System.Threading.Tasks.Task`1
+    name: Task
+    nameWithType: Task
+    fullName: System.Threading.Tasks.Task
+    isExternal: true
+  - name: '(Of '
+    nameWithType: '(Of '
+    fullName: '(Of '
+  - name: TResult
+    nameWithType: TResult
+    fullName: TResult
+  - name: )
+    nameWithType: )
+    fullName: )
+- uid: System.Threading.Tasks
+  commentId: N:System.Threading.Tasks
+  isExternal: true
+  name: System.Threading.Tasks
+  nameWithType: System.Threading.Tasks
+  fullName: System.Threading.Tasks

@@ -1,0 +1,14 @@
+{
+  "Axle.Resources.Properties": "Axle.Resources.Properties.yml",
+  "Axle.Resources.Properties.Extraction": "Axle.Resources.Properties.Extraction.yml",
+  "Axle.Resources.Properties.Extraction.PropertiesExtractor": "Axle.Resources.Properties.Extraction.PropertiesExtractor.yml",
+  "Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor": "Axle.Resources.Properties.Extraction.PropertiesExtractor.yml",
+  "Axle.Resources.Properties.Extraction.PropertiesExtractor.#ctor(System.String,System.String)": "Axle.Resources.Properties.Extraction.PropertiesExtractor.yml",
+  "Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#Extract(Axle.Resources.Extraction.IResourceContext,System.String)": "Axle.Resources.Properties.Extraction.PropertiesExtractor.yml",
+  "Axle.Resources.Properties.Extraction.PropertiesExtractor.Axle#Resources#Extraction#IResourceExtractor#ExtractAsync(Axle.Resources.Extraction.IResourceContext,System.String)": "Axle.Resources.Properties.Extraction.PropertiesExtractor.yml",
+  "Axle.Resources.Properties.PropertiesResourceInfo": "Axle.Resources.Properties.PropertiesResourceInfo.yml",
+  "Axle.Resources.Properties.PropertiesResourceInfo.FileExtension": "Axle.Resources.Properties.PropertiesResourceInfo.yml",
+  "Axle.Resources.Properties.PropertiesResourceInfo.MimeType": "Axle.Resources.Properties.PropertiesResourceInfo.yml",
+  "Axle.Resources.Properties.PropertiesResourceInfo.Open": "Axle.Resources.Properties.PropertiesResourceInfo.yml",
+  "Axle.Resources.Properties.PropertiesResourceInfo.TryResolve(System.Type,System.Object@)": "Axle.Resources.Properties.PropertiesResourceInfo.yml"
+}

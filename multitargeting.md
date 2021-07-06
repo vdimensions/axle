@@ -1,0 +1,17 @@
+# Multi-targeting Support
+
+## Legend
+
+|Badge|Suppor Level|
+|--|--|
+|![fallback](https://img.shields.io/badge/-x.y-28a.svg)|Fallback to earlier version|
+|![fully supported](https://img.shields.io/badge/-x.y-brightgreen.svg)|Fully Supported|
+|![partially supported](https://img.shields.io/badge/-x.y-yellowgreen.svg)|Partially Supported|
+|![fully supported](https://img.shields.io/badge/-x.y-red.svg)|Not Supported|
+
+## Per-Library Framework Compatibility
+
+|Library|Package|[`.NETStandard`](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) Support|.NETFramework Support|
+|--|--|--|--|
+|`Axle.Core`|[![NuGet](https://img.shields.io/nuget/v/Axle.Core.svg)](https://www.nuget.org/packages/Axle.Core/)|![netstandard2.1 yes](https://img.shields.io/badge/-2.1-brightgreen.svg) ![netstandard2.0 yes](https://img.shields.io/badge/-2.0-brightgreen.svg) ![netstandard1.6 yes](https://img.shields.io/badge/-1.6-brightgreen.svg) ![netstandard1.5 yes](https://img.shields.io/badge/-1.5-brightgreen.svg) ![netstandard1.4 yes](https://img.shields.io/badge/-1.4-brightgreen.svg) ![netstandard1.3 yes](https://img.shields.io/badge/-1.3-brightgreen.svg) ![netstandard1.2 yes](https://img.shields.io/badge/-1.2-brightgreen.svg) ![netstandard1.1 yes](https://img.shields.io/badge/-1.1-brightgreen.svg) ![netstandard1.0 yes](https://img.shields.io/badge/-1.0-yellowgreen.svg)|![net4.5 yes](https://img.shields.io/badge/-4.5-brightgreen.svg) ![net4.0 yes](https://img.shields.io/badge/-4.0-brightgreen.svg) ![net3.5 yes](https://img.shields.io/badge/-3.5-brightgreen.svg) ![net2.0 yes](https://img.shields.io/badge/-2.0-yellowgreen.svg)|
+|`Axle.Caching`|[![NuGet](https://img.shields.io/nuget/v/Axle.Caching.svg)](https://www.nuget.org/packages/Axle.Caching/)|[![netstandard2.1 yes](https://img.shields.io/badge/-2.1-brightgreen.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard2.0 yes](https://img.shields.io/badge/-2.0-brightgreen.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.6 yes](https://img.shields.io/badge/-1.6-brightgreen.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.5 no](https://img.shields.io/badge/-1.5-red.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.4 no](https://img.shields.io/badge/-1.4-red.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.3 no](https://img.shields.io/badge/-1.3-red.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.2 no](https://img.shields.io/badge/-1.2-red.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.1 no](https://img.shields.io/badge/-1.1-red.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard) [![netstandard1.0 no](https://img.shields.io/badge/-1.0-red.svg)](https://docs.microsoft.com/en-us/dotnet/standard/net-standard)|![net4.5 yes](https://img.shields.io/badge/-4.5-brightgreen.svg) ![net4.0 yes](https://img.shields.io/badge/-4.0-brightgreen.svg) ![net3.5 yes](https://img.shields.io/badge/-3.5-brightgreen.svg) ![net2.0 yes](https://img.shields.io/badge/-2.0-brightgreen.svg)|

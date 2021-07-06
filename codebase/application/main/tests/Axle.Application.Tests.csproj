@@ -9,14 +9,8 @@
   <ItemGroup>
     <Reference Include="System" />
   </ItemGroup>
-  
-  <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
-  </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
     <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.*" />
   </ItemGroup>
 
@@ -26,6 +20,8 @@
     </None>
   </ItemGroup>
   
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Application.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.ConfigurationManager.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

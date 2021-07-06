@@ -1,3 +1,0 @@
-**/*.nuspec
-.fake/
-build.fsx.lock

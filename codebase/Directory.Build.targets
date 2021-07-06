@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project> 
+  <!-- Versioning properties (after sdk) -->
+  <PropertyGroup>
+    <AxleVersion>$(Version)</AxleVersion>
+  </PropertyGroup>
+
+  <!-- F# quirks -->
+  <PropertyGroup Condition=" '$(Language)' == 'F#' ">
+    <OtherFlags Condition="'$(Configuration)' != 'Debug' ">--debug:portable</OtherFlags>
+    <NoBuild Condition=" '$(ContinuousIntegrationBuild)' == 'true' ">false</NoBuild>
+  </PropertyGroup>
+
+  <!-- NuGet package properties -->
+  <PropertyGroup>
+    <ContentTargetFolders>content</ContentTargetFolders>
+    <PackageLicense>$(License)</PackageLicense>
+    <PackageLicenseExpression>$(PackageLicense)</PackageLicenseExpression>
+    <PackageProjectUrl>$(RepositoryUrl)</PackageProjectUrl>
+    <PackageIconUri></PackageIconUri>
+    <PackageTags Condition=" '$(PackageTags)' == '' ">$(AssemblyName)</PackageTags>
+  </PropertyGroup>
+
+  <!-- Pin thrird-party dependency versions  -->
+  <ItemGroup>
+    <PackageReference Update="Microsoft.SourceLink.GitHub" Version="1.0.0" />
+  </ItemGroup>
+
+  <!-- Courtesy of NickStrupat, https://github.com/dotnet/docs/issues/12304#issuecomment-755672578 -->
+  <Target Name="PostClean" AfterTargets="Clean">
+    <RemoveDir Condition="Exists('$(BaseIntermediateOutputPath)')" Directories="$(BaseIntermediateOutputPath)" /><!-- obj -->
+    <RemoveDir Condition="Exists('$(BaseOutputPath)')" Directories="$(BaseOutputPath)" /><!-- bin -->
+  </Target>
+
+  <Import Project="$(MSBuildThisFileDirectory)/../submodules/vdimensions_msbuild_references/system/System.Data.SQLite.Core.targets" />
+</Project>

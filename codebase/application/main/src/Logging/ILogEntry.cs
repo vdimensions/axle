@@ -4,17 +4,17 @@
 namespace Axle.Logging
 {
     /// <summary>
-    /// Represents a log entry; that is, a representation of an application event that is to be written to the application log.
+    /// Represents a log entry; that is, a representation of an application event that is to be written to the
+    /// application log.
     /// </summary>
     public interface ILogEntry
     {
         /// <summary>
         /// The exact date and time of the occurrence of the application event.
         /// </summary>
-        DateTime Timestamp { get; }
+        DateTimeOffset Timestamp { get; }
 
         #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
-
         /// <summary>
         /// The name of the thread where the application event occurred.
         /// </summary>
@@ -32,14 +32,14 @@ namespace Axle.Logging
         Type Type { get; }
 
         /// <summary>
-        /// A custom message describing the log event. In case of an <see cref="System.Exception">exception</see>, this could represent 
-        /// the actual <see cref="System.Exception.Message">exception message</see>.
+        /// A custom message describing the log event. In case of an <see cref="System.Exception">exception</see>, this
+        /// could represent the actual <see cref="System.Exception.Message">exception message</see>.
         /// </summary>
         string Message { get; }
 
         /// <summary>
-        /// Holds a reference to the <see cref="System.Exception">exception</see> instance that may be the cause of the event,
-        /// or <c>null</c> in case of non-exceptional application event.
+        /// Holds a reference to the <see cref="System.Exception">exception</see> instance that may be the cause of the
+        /// logged event, or <c>null</c> in case a non-exceptional application event is being logged.
         /// </summary>
         Exception Exception { get; }
     }

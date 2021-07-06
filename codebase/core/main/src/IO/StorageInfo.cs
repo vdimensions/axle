@@ -116,14 +116,20 @@ namespace Axle.IO
         }
 
         /// <summary>
-        /// Gets a <see cref="StorageInfo"/> list based on the subdirectories
-        /// found within the current <see cref="StorageInfo"/> location.
+        /// Gets a <see cref="StorageInfo"/> list based on the subdirectories found within the current
+        /// <see cref="StorageInfo"/> location.
         /// </summary>
         /// <returns>
-        /// A <see cref="StorageInfo"/> instances array, representing the subdirectories
-        /// of the location represented by the current <see cref="StorageInfo"/>.
+        /// A <see cref="StorageInfo"/> instances array, representing the subdirectories of the location represented by
+        /// the current <see cref="StorageInfo"/>.
         /// </returns>
-        public StorageInfo[] List() => Enumerable.ToArray(Enumerable.Select(Directory.GetDirectories(), d => new StorageInfo(d)));
+        public StorageInfo[] List() => 
+            Enumerable.ToArray(
+                Enumerable.Select(
+                    Directory.GetDirectories(), 
+                    d => new StorageInfo(d)
+                )
+            );
 
         /// <summary>
         /// Opens a <see cref="FileStream"/> on the specified <paramref name="path"/>,
@@ -136,20 +142,22 @@ namespace Axle.IO
         /// A <see cref="FileAccess"/> value that specifies the operations that can be performed on the file.
         /// </param>
         /// <returns>
-        /// An unshared <see cref="FileStream"/> that provides access to the specified file with the specified <paramref name="access"/> options.
+        /// An unshared <see cref="FileStream"/> that provides access to the specified file with the specified
+        /// <paramref name="access"/> options.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// <paramref name="path"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid characters
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid
+        /// characters
         /// as defined by <see cref="Path.GetInvalidPathChars"/>.
         /// </exception>
         /// <exception cref="IOException">
         /// An I/O error occurred while opening the file.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
-        /// The specified location points to a file that is read-only and access is not Read.
+        /// The specified location points to a file that is read-only and access is not <see cref="FileAccess.Read"/>.
         /// -or-
         /// the specified location is a directory.
         /// -or-
@@ -175,14 +183,14 @@ namespace Axle.IO
         /// <paramref name="path"/> is <c>null</c>.
         /// </exception>
         /// <exception cref="ArgumentException">
-        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid characters
-        /// as defined by <see cref="Path.GetInvalidPathChars"/>.
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid
+        /// characters as defined by <see cref="Path.GetInvalidPathChars"/>.
         /// </exception>
         /// <exception cref="IOException">
         /// An I/O error occurred while opening the file.
         /// </exception>
         /// <exception cref="UnauthorizedAccessException">
-        /// The specified location points to a file that is read-only and access is not Read.
+        /// The specified location points to a file that is read-only and access is not <see cref="FileAccess.Read"/>.
         /// -or-
         /// the specified location is a directory.
         /// -or-
@@ -194,9 +202,52 @@ namespace Axle.IO
             var filePath = uri.LocalPath;
             return File.Open(filePath, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         }
+        
+        /// <summary>
+        /// Gets a <see cref="FileInfo"/> object from the current storage corresponding to the provided
+        /// <paramref name="path"/>.
+        /// </summary>
+        /// <param name="path">
+        /// A path to a file, relative to the location represented by the current <see cref="StorageInfo"/> object.
+        /// </param>
+        /// <returns>
+        /// A <see cref="FileInfo"/> object from the current storage corresponding to the provided
+        /// <paramref name="path"/>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="path"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="path"/> is a zero-length string, contains only white space, or contains one or more invalid
+        /// characters as defined by <see cref="Path.GetInvalidPathChars"/>.
+        /// </exception>
+        /// <exception cref="UnauthorizedAccessException">
+        /// The specified location points to a file that is read-only and access is not <see cref="FileAccess.Read"/>.
+        /// -or-
+        /// the specified location is a directory.
+        /// -or-
+        /// The caller does not have the required permission.
+        /// </exception>
+        public FileInfo GetFile(string path)
+        {
+            var uri = UriExtensions.Resolve(Uri, path);
+            var filePath = uri.LocalPath;
+            return new FileInfo(filePath);
+        }
 
         /// <summary>
-        /// A <see cref="DirectoryInfo"/> reference to the represented by the current <see cref="StorageInfo"/> drive or directory.
+        /// Determines if the supplied by the <paramref name="path"/> location exists within the current
+        /// <see cref="StorageInfo"/> instance.
+        /// </summary>
+        public bool PathExists(string path)
+        {
+            var absPath = UriExtensions.Resolve(Uri, path).AbsolutePath;
+            return System.IO.Directory.Exists(absPath) || File.Exists(absPath);
+        }
+
+        /// <summary>
+        /// A <see cref="DirectoryInfo"/> reference to the represented by the current <see cref="StorageInfo"/> drive or
+        /// directory.
         /// </summary>
         public DirectoryInfo Directory { get; }
 
@@ -209,6 +260,20 @@ namespace Axle.IO
         /// Gets the <see cref="Uri"/> of the location represented by the current <see cref="StorageInfo"/> instance. 
         /// </summary>
         public Uri Uri => new Uri(Directory.FullName, UriKind.Absolute);
+
+        /// <summary>
+        /// Gets a <see cref="StorageInfo"/> instance based on the parent location of the current
+        /// <see cref="StorageInfo"/>, or <c>null</c> in case the current instance represents the root location
+        /// of the storage device.
+        /// </summary>
+        public StorageInfo Parent
+        {
+            get
+            {
+                var p = Directory.Parent;
+                return p != null ? FromDirectory(p) : null;
+            }
+        }
     }
 }
 #endif

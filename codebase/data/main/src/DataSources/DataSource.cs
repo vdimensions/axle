@@ -20,9 +20,11 @@ namespace Axle.Data.DataSources
             _resourceManager = Verifier.IsNotNull(Verifier.VerifyArgument(resourceManager, nameof(resourceManager)));
         }
 
+        /// <inheritdoc />
         public IDbParameterValueBuilder CreateParameter(string name, ParameterDirection direction) 
             => _serviceProvider.GetDbParameterBuilder().CreateParameter(name, direction);
 
+        /// <inheritdoc />
         public IDataSourceConnection OpenConnection() 
             => new DataSourceConnection(_serviceProvider, this);
 
@@ -32,7 +34,7 @@ namespace Axle.Data.DataSources
         private ICommandBuilder BuildScriptedCommand(string bundle, string scriptPath, CommandType commandType)
         {
             var res = _resourceManager.Load(bundle, scriptPath, CultureInfo.InvariantCulture);
-            if (res.HasValue && res.Value is SqlScriptSourceInfo scriptSourceInfo)
+            if (res != null && res is SqlScriptSourceInfo scriptSourceInfo)
             {
                 var commandText = scriptSourceInfo.Value.ResolveScript(_serviceProvider);
                 return BuildCommand(commandText, commandType);
@@ -46,6 +48,7 @@ namespace Axle.Data.DataSources
         //}
         private ICommandBuilder BuildStoredProcedureCall(string commandText) => BuildCommand(commandText, CommandType.StoredProcedure);
 
+        /// <inheritdoc />
         public IDataSourceCommand GetCommand(string commandText, CommandType commandType, BuildCommandCallback buildCommandCallback)
         {
             Verifier.IsNotNull(Verifier.VerifyArgument(buildCommandCallback, nameof(buildCommandCallback)));
@@ -54,6 +57,7 @@ namespace Axle.Data.DataSources
             return ((ICommandBuilderResult) b).Build();
         }
 
+        /// <inheritdoc />
         public IDataSourceCommand GetScript(string bundle, string scriptPath, CommandType commandType, BuildCommandCallback buildCommandCallback)
         {
             StringVerifier.IsNotNullOrEmpty(Verifier.VerifyArgument(bundle, nameof(bundle)));
@@ -63,8 +67,11 @@ namespace Axle.Data.DataSources
             return ((ICommandBuilderResult) b).Build();
         }
 
+        /// <inheritdoc />
         public string Name { get; }
+        /// <inheritdoc />
         public string ConnectionString { get; }
+        /// <inheritdoc />
         public string DialectName => _serviceProvider.DialectName;
     }
 }

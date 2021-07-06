@@ -1,9 +1,7 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System;
 using System.Diagnostics;
-
 using Axle.Verification;
-
 
 namespace Axle.Text.Formatting
 {
@@ -24,9 +22,17 @@ namespace Axle.Text.Formatting
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly ICustomFormatter _customFormatter;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="FormatProvider"/> class with the provided
+        /// <paramref name="formatter"/>
+        /// </summary>
+        /// <param name="formatter">
+        /// An <see cref="ICustomFormatter"/> instance to delegate formatting to.
+        /// </param>
         public FormatProvider(ICustomFormatter formatter)
         {
-            _customFormatter = Verifier.IsNotNull(Verifier.VerifyArgument(formatter, nameof(formatter))).Value;
+            Verifier.IsNotNull(Verifier.VerifyArgument(formatter, nameof(formatter)));
+            _customFormatter = formatter;
         }
 
         /// <inheritdoc />
@@ -37,13 +43,11 @@ namespace Axle.Text.Formatting
             return typeof(ICustomFormatter) == formatType;
         }
 
-        #region Implementation of ICustomFormatter
         /// <inheritdoc />
         string ICustomFormatter.Format(string format, object arg, IFormatProvider formatProvider)
         {
             return _customFormatter.Format(format, arg, formatProvider);
         }
-        #endregion
     }
 }
 #endif

@@ -1,8 +1,7 @@
-﻿#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using Axle.Extensions.String;
-using Axle.References;
 using Axle.Resources.Extraction;
 using Axle.Verification;
 
@@ -17,11 +16,17 @@ namespace Axle.Resources.ResX.Extraction
     {
         private const string UriSchemeResX = "resx";
 
+        private static bool IsResX(Uri location)
+        {
+            return location.IsAbsoluteUri &&
+                   location.Scheme.Equals(UriSchemeResX, StringComparison.OrdinalIgnoreCase);
+        }
+
         private static bool TryGetResXType(Uri location, out Type type, out string prefix)
         {
             type = null;
             prefix = string.Empty;
-            if (!location.IsAbsoluteUri || !location.Scheme.Equals(UriSchemeResX, StringComparison.OrdinalIgnoreCase))
+            if (!IsResX(location))
             {
                 return false;
             }
@@ -45,18 +50,24 @@ namespace Axle.Resources.ResX.Extraction
         protected AbstractResXResourceExtractor() : base() { }
 
         /// <inheritdoc />
-        protected sealed override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected sealed override ResourceInfo DoExtract(IResourceContext context, string name)
         {
             var location = context.Location;
             var culture = context.Culture;
             if (TryGetResXType(location, out var type, out var prefix))
             {
-                return ExtractResource(new Uri($"{prefix}/", UriKind.Relative), culture, type, name.VerifyArgument(nameof(name)).IsNotNullOrEmpty());
+                return ExtractResource(
+                    new Uri($"{prefix}/", UriKind.Relative), 
+                    culture, 
+                    type, 
+                    name.VerifyArgument(nameof(name)).IsNotNullOrEmpty().Value);
             }
             return null;
         }
 
-        protected abstract Nullsafe<ResourceInfo> ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
+        protected abstract ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name);
+
+        protected override bool Accepts(Uri location) => IsResX(location);
     }
 }
 #endif

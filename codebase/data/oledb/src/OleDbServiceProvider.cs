@@ -3,12 +3,8 @@ using System.Data.OleDb;
 using System.Diagnostics.CodeAnalysis;
 using Axle.Data.Common;
 
-
 namespace Axle.Data.OleDb
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class OleDbServiceProvider : DbServiceProvider<
         OleDbConnection,

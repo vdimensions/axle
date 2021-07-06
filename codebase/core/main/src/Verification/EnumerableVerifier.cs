@@ -14,8 +14,8 @@ namespace Axle.Verification
     public static class EnumerableVerifier
     {
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is not null or an empty collection.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is not null or an empty collection.
         /// </summary>
         /// <typeparam name="T">The type of the collection to be verified.</typeparam>
         /// <param name="argument">
@@ -25,7 +25,8 @@ namespace Axle.Verification
         /// An optional error message to use for the thrown exception in case the validation fails.
         /// </param>
         /// <returns>
-        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument, same as <paramref name="argument"/>.
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument, same as
+        /// <paramref name="argument"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Thrown if the verified <paramref name="argument"/> is <c>null</c>.
@@ -48,7 +49,10 @@ namespace Axle.Verification
             {
                 if (!e.MoveNext())
                 {
-                    throw new ArgumentException(message ?? string.Format("Argument `{0}` cannot be an empty collection.", argument.Name), argument.Name);
+                    throw new ArgumentException(message ?? string.Format(
+                                                    "Argument `{0}` cannot be an empty collection.", 
+                                                    argument.Name), 
+                                                    argument.Name);
                 }
                 return argument;
             }
@@ -62,15 +66,16 @@ namespace Axle.Verification
         }
 
         /// <summary>
-        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the <paramref name="argument"/>
-        /// is not null or an empty collection.
+        /// Ensures the <see cref="ArgumentReference{T}">argument reference</see> represented by the
+        /// <paramref name="argument"/> is not <c>null</c> or an empty collection.
         /// </summary>
         /// <typeparam name="T">The type of the collection to be verified.</typeparam>
         /// <param name="argument">
         /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument.
         /// </param>
         /// <returns>
-        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument, same as <paramref name="argument"/>.
+        /// The <see cref="ArgumentReference{T}"/> instance that represents the verified argument, same as
+        /// <paramref name="argument"/>.
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Thrown if the verified <paramref name="argument"/> is <c>null</c>.

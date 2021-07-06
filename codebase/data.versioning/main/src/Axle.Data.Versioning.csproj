@@ -1,0 +1,34 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net45;net40;net35</TargetFrameworks>
+    <ProjectGuid>D5F6B0B7-E0EC-4355-81EA-D7B5480BCDA0</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <Description>Axle's database migrations library</Description>
+  </PropertyGroup>
+  
+  <Import Project="../../../../ref/Reference.Axle.Data.targets" />
+
+  <!-- <Target Name="GenerateDefaultNamespaceAttribute" BeforeTargets="BeforeBuild">
+    <PropertyGroup>
+      <RootNamespaceAssemblyAttributeFile>$(IntermediateOutputPath)$(MSBuildProjectName).RootNamespace$(DefaultLanguageSourceExtension)</RootNamespaceAssemblyAttributeFile>
+    </PropertyGroup>
+    <ItemGroup>
+      <AssemblyAttributes Include="Axle.Resources.Embedded.RootNamespace">
+        <_Parameter1>$(RootNamespace)</_Parameter1>
+      </AssemblyAttributes>
+    </ItemGroup>
+    <WriteCodeFragment Language="$(Language)" OutputFile="$(RootNamespaceAssemblyAttributeFile)" AssemblyAttributes="@(AssemblyAttributes)" />
+    <ItemGroup>
+      <Compile Condition="Exists('$(RootNamespaceAssemblyAttributeFile)')" Include="$(RootNamespaceAssemblyAttributeFile)" />
+    </ItemGroup>
+  </Target> -->
+
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MariaDB\*.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MSSQL\*.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\MySQL\*.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\PostgreSQL\*.sql" />
+    <EmbeddedResource Include="Properties\Queries\DbChangelog\SQLite\*.sql" />
+  </ItemGroup>
+</Project>

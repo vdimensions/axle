@@ -17,13 +17,11 @@ namespace Axle.Modularity
         [ModuleDependencyInitialized]
         void DependencyInitialized(object module)
         {
-            //_logger.Trace("Module `{0}` loaded", module);
         }
 
         [ModuleDependencyTerminated]
         void DependencyTerminated(object module)
         {
-            //_logger.Trace("Module `{0}` terminated", module);
         }
         // ReSharper restore UnusedMember.Local
     }

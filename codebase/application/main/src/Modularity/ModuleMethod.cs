@@ -1,10 +1,12 @@
-﻿using Axle.Reflection;
+﻿using System.Threading.Tasks;
+using Axle.DependencyInjection;
+using Axle.Reflection;
 using Axle.Verification;
 
 
 namespace Axle.Modularity
 {
-    public sealed class ModuleMethod
+    internal sealed class ModuleMethod
     {
         private readonly IInvokable _invokable;
         private readonly IParameter[] _params;
@@ -15,26 +17,32 @@ namespace Axle.Modularity
             _params = invokable.GetParameters();
         }
 
-        public void Invoke(object module, ModuleExporter exporter, string[] args)
+        public void Invoke(object module, IDependencyExporter exporter, string[] args)
         {
+            Task task;
             switch (_params.Length)
             {
                 case 2:
                 {
-                    _invokable.Invoke(module, exporter, args);
+                    task = _invokable.Invoke(module, exporter, args) as Task;
                     break;
                 }
                 case 1:
                 {
                     var arg1 = _params[0].Type.IsArray ? (object) args : (object) exporter;
-                    _invokable.Invoke(module, arg1);
+                    task = _invokable.Invoke(module, arg1) as Task;
                     break;
                 }
                 default:
                 {
-                    _invokable.Invoke(module);
+                    task = _invokable.Invoke(module) as Task;
                     break;
                 }
+            }
+            // in case the method was async (returning a task), we should wait for it to complete
+            if (task != null && !task.IsCompleted)
+            {
+                task.Wait();
             }
         }
     }

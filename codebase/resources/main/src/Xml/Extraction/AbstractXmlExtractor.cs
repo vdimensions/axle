@@ -1,16 +1,13 @@
-﻿using System;
-
-using Axle.References;
+using System;
 using Axle.Resources.Extraction;
-
 
 namespace Axle.Resources.Xml.Extraction
 {
-    #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
     /// <summary>
     /// An abstract class to serve as a base for creating XML resource marshaller implementations.
     /// <para>
-    /// Known implementations of this class are the <see cref="XDocumentExtractor" /> and <see cref="XmlDocumentExtractor"/>.
+    /// Known implementations of this class are the <see cref="XDocumentExtractor" /> and
+    /// <see cref="XmlDocumentExtractor"/>.
     /// </para>
     /// </summary>
     /// <typeparam name="TX">
@@ -18,25 +15,13 @@ namespace Axle.Resources.Xml.Extraction
     /// </typeparam>
     /// <seealso cref="XDocumentExtractor"/>
     /// <seealso cref="XmlDocumentExtractor"/>
-    #else
-    /// <summary>
-    /// An abstract class to serve as a base for creating XML resource marshaller implementations.
-    /// <para>
-    /// Known implementations of this class is the <see cref="XDocumentExtractor" />.
-    /// </para>
-    /// </summary>
-    /// <typeparam name="TX">
-    /// The type representing the XML document from the unmarshalled resource.
-    /// </typeparam>
-    /// <seealso cref="XDocumentExtractor"/>
-    #endif
     public abstract class AbstractXmlExtractor<TX> : AbstractResourceExtractor where TX: XmlResourceInfo
     {
         /// <summary>
         /// Extracts a <typeparamref name="TX"/> representation of an XML resource.
         /// </summary>
         /// <param name="context">
-        /// The <see cref="ResourceContext"/> used for the extraction. 
+        /// The <see cref="IResourceContext"/> used for the extraction. 
         /// </param>
         /// <param name="name">
         /// A <see cref="string"/> object used to identify the requested resource. 
@@ -47,15 +32,15 @@ namespace Axle.Resources.Xml.Extraction
         /// <returns>
         /// An instance of <typeparamref name="TX"/> representing the XML resource. 
         /// </returns>
-        protected abstract TX ExtractXml(ResourceContext context, string name, ResourceInfo resource);
+        protected abstract TX ExtractXml(IResourceContext context, string name, ResourceInfo resource);
 
         /// <inheritdoc />
-        protected sealed override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected sealed override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            var xmlResource = context.ExtractionChain.Extract(name);
+            var xmlResource = context.Extract(name);
             try
             {
-                return xmlResource.HasValue ? ExtractXml(context, name, xmlResource.Value) : Nullsafe<ResourceInfo>.None;
+                return xmlResource != null ? ExtractXml(context, name, xmlResource) : null;
             }
             catch (Exception e)
             {

@@ -11,7 +11,7 @@ namespace Axle.DependencyInjection.Sdk
     /// <summary>
     /// A class representing a construction recepie; that is the constructor/factory method, 
     /// properties and fields of an object type that need to be populated by a 
-    /// <see cref="IContainer">dependency container</see> during the object construction.
+    /// <see cref="IDependencyContainer">dependency container</see> during the object construction.
     /// </summary>
     public class ConstructionRecepie
     {
@@ -158,9 +158,24 @@ namespace Axle.DependencyInjection.Sdk
             return instance;
         }
 
+        /// <summary>
+        /// The type which will be instantiated by a dependency container.
+        /// </summary>
         public Type TargetType { get; }
+        /// <summary>
+        /// The factory method that will be invoked by a dependency container when constructing an instance of the
+        /// <see cref="TargetType"/>.
+        /// </summary>
         public IFactoryDescriptor Factory { get; }
+        /// <summary>
+        /// Gets a collection of properties that would be populated by a dependency container when constructing an
+        /// instance of the <see cref="TargetType"/>.
+        /// </summary>
         public IEnumerable<IPropertyDependencyDescriptor> Properties { get; }
+        /// <summary>
+        /// Gets a collection of fields that would be populated by a dependency container when constructing an instance
+        /// of the <see cref="TargetType"/>.
+        /// </summary>
         public IEnumerable<IPropertyDependencyDescriptor> Fields { get; }
     }
 }

@@ -2,8 +2,7 @@
 using Axle.Modularity;
 using NUnit.Framework;
 
-
-namespace Axle.ApplicationTests.Modularity
+namespace Axle.Application.Tests.Modularity
 {
     [TestFixture]
     public class CommandLineTriggeringTests
@@ -11,7 +10,7 @@ namespace Axle.ApplicationTests.Modularity
         public abstract class AbstractModule
         {
             [ModuleInit]
-            internal void Init(ModuleExporter mex)
+            internal void Init(IDependencyExporter mex)
             {
                 mex.Export(this);
             }
@@ -30,7 +29,7 @@ namespace Axle.ApplicationTests.Modularity
         public class C
         {
             [ModuleInit]
-            internal void Init(ModuleExporter mex, string[] cmdArgs)
+            internal void Init(IDependencyExporter mex, string[] cmdArgs)
             {
                 mex.Export(this);
                 System.Console.WriteLine("Triggering command argument: {0}", cmdArgs[1]);
@@ -53,14 +52,14 @@ namespace Axle.ApplicationTests.Modularity
         [Test]
         public void TestTriggeredCommandLineTriggerrableModuleAndDependenciesLoad()
         {
-            IContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).ConfigureModules(ConfigureModules).Run("a"))
+            IDependencyContainer dependencyContainer = null;
+            using (Application.Build().ConfigureDependencies(c => dependencyContainer = c).ConfigureModules(ConfigureModules).Run("a"))
             {
-                if (!container.TryResolve<A>(out _))
+                if (!dependencyContainer.TryResolve<A>(out _))
                 {
                     Assert.Fail("Module triggered by command-line argument must load");
                 }
-                if (!container.TryResolve<A1>(out _))
+                if (!dependencyContainer.TryResolve<A1>(out _))
                 {
                     Assert.Fail("Dependent modules of module triggered by command-line argument must load");
                 }
@@ -70,18 +69,18 @@ namespace Axle.ApplicationTests.Modularity
         [Test]
         public void TestUntriggerredCommandLineTriggerableModuleAndDependenciesDoNotLoad()
         {
-            IContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).ConfigureModules(ConfigureModules).Run("a"))
+            IDependencyContainer dependencyContainer = null;
+            using (Application.Build().ConfigureDependencies(c => dependencyContainer = c).ConfigureModules(ConfigureModules).Run("a"))
             {
-                if (container.TryResolve<B>(out _))
+                if (dependencyContainer.TryResolve<B>(out _))
                 {
                     Assert.Fail("Module not triggered by command-line argument must not load");
                 }
-                if (container.TryResolve<B1>(out _))
+                if (dependencyContainer.TryResolve<B1>(out _))
                 {
                     Assert.Fail("Dependent modules of module not triggered by command-line argument must not load");
                 }
-                if (container.TryResolve<C>(out _))
+                if (dependencyContainer.TryResolve<C>(out _))
                 {
                     Assert.Fail("Module not triggered by command-line argument must not load");
                 }
@@ -91,26 +90,26 @@ namespace Axle.ApplicationTests.Modularity
         [Test]
         public void TestTriggeredLooseCommandLineTriggerrableModuleAndDependenciesLoad()
         {
-            IContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).ConfigureModules(ConfigureModules).Run("a", "whatever"))
+            IDependencyContainer dependencyContainer = null;
+            using (Application.Build().ConfigureDependencies(c => dependencyContainer = c).ConfigureModules(ConfigureModules).Run("a", "whatever"))
             {
-                if (!container.TryResolve<A>(out _))
+                if (!dependencyContainer.TryResolve<A>(out _))
                 {
                     Assert.Fail("Module triggered by command-line argument must load");
                 }
-                if (!container.TryResolve<A1>(out _))
+                if (!dependencyContainer.TryResolve<A1>(out _))
                 {
                     Assert.Fail("Dependent modules of module triggered by command-line argument must load");
                 }
-                if (container.TryResolve<B>(out _))
+                if (dependencyContainer.TryResolve<B>(out _))
                 {
                     Assert.Fail("Module not triggered by command-line argument must not load");
                 }
-                if (container.TryResolve<B1>(out _))
+                if (dependencyContainer.TryResolve<B1>(out _))
                 {
                     Assert.Fail("Dependent modules of module not triggered by command-line argument must not load");
                 }
-                if (!container.TryResolve<C>(out _))
+                if (!dependencyContainer.TryResolve<C>(out _))
                 {
                     Assert.Fail("Module triggered by command-line argument must load");
                 }

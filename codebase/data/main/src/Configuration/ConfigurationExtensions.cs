@@ -23,7 +23,7 @@ namespace Axle.Data.Configuration
         /// each representing a particular connection string configuration.
         /// </summary>
         /// <param name="config">
-        /// The <see cref="IConfigSection">configuration object</see> to obtain connection string information from,
+        /// The <see cref="IConfigSection">configuration object</see> to obtain connection string information from.
         /// </param>
         /// <returns>
         /// A collection of <see cref="ConnectionStringInfo"/> objects,
@@ -31,8 +31,8 @@ namespace Axle.Data.Configuration
         /// </returns>
         public static IEnumerable<ConnectionStringInfo> GetConnectionStrings(this IConfigSection config)
         {
-            var section = config.GetSection("ConnectionStrings");
-            return section.Keys.Select(k => section.GetSection<ConnectionStringData>(k))
+            var section = config.GetSection("ConnectionStrings") as IConfigSection;
+            return (section?.Keys ?? Enumerable.Empty<string>()).Select(k => section.GetSection<ConnectionStringData>(k))
                 .Select(x => new ConnectionStringInfo(x.Name, x.ProviderName, x.ConnectionString))
                 .ToArray();
         }

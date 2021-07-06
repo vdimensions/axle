@@ -3,12 +3,9 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-
 using Axle.Conversion;
-using Axle.Globalization.Extensions.TextInfo;
 using Axle.Reflection.Extensions.Type;
 using Axle.Verification;
-
 
 namespace Axle.Resources
 {
@@ -18,46 +15,52 @@ namespace Axle.Resources
     public sealed class TextResourceInfo : ResourceInfo
     {
         private readonly string _value;
+        private readonly Encoding _encoding;
 
         /// <summary>
         /// Creates a new instance of the <seealso cref="TextResourceInfo"/> class.
         /// </summary>
-        public TextResourceInfo(string name, CultureInfo culture, string value) : base(name, culture, "text/plain")
+        public TextResourceInfo(string name, CultureInfo culture, string value, Encoding encoding) : base(name, culture, "text/plain")
         {
             _value = value.VerifyArgument(nameof(value)).IsNotNull();
+            _encoding = encoding ?? Encoding.UTF8;
         }
+        /// <summary>
+        /// Creates a new instance of the <seealso cref="TextResourceInfo"/> class.
+        /// </summary>
+        public TextResourceInfo(string name, CultureInfo culture, string value) : this(name, culture, value, null) { }
 
         /// <inheritdoc />
         public override Stream Open()
         {
-            return new MemoryStream(new BytesToStringConverter(Culture.TextInfo.GetEncoding()).ConvertBack(_value));
+            return new MemoryStream(new BytesToStringConverter(_encoding).ConvertBack(_value));
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(string))
+            if (type == typeof(string))
             {
                 result = _value;
                 return true;
             }
-            if (targetType == typeof(StringBuilder))
+            if (type == typeof(StringBuilder))
             {
                 result = new StringBuilder(_value);
                 return true;
             }
-            if (targetType == typeof(TextReader) || targetType == typeof(StringReader))
+            if (type == typeof(TextReader) || type == typeof(StringReader))
             {
                 result = new StringReader(_value);
                 return true;
             }
-            if (targetType.ExtendsOrImplements<IEnumerable<char>>())
+            if (type.ExtendsOrImplements<IEnumerable<char>>())
             {
                 result = _value.ToCharArray();
                 return true;
             }
 
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <summary>

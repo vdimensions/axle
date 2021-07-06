@@ -1,16 +1,31 @@
-﻿using Axle.Verification;
+﻿using Axle.Text;
+using Axle.Verification;
 
 namespace Axle.Configuration
 {
+    /// <summary>
+    /// The default implementation class for the <see cref="IConfigSetting"/> interface.
+    /// </summary>
     public sealed class ConfigSetting : IConfigSetting
     {
-        public static IConfigSetting Create(string value) => new ConfigSetting(Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))));
+        /// <summary>
+        /// Creates a new <see cref="IConfigSetting"/> instance from the provided <paramref name="value"/>.
+        /// </summary>
+        /// <param name="value">
+        /// A <see cref="CharSequence"/> representing the value of the configuration setting.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="IConfigSetting"/> instance from the provided <paramref name="value"/>.
+        /// </returns>
+        public static IConfigSetting Create(CharSequence value) 
+            => new ConfigSetting(Verifier.IsNotNull(Verifier.VerifyArgument(value, nameof(value))));
 
-        private ConfigSetting(string value)
+        private ConfigSetting(CharSequence value)
         {
             Value = value;
         }
 
-        public string Value { get; }
+        /// <inheritdoc />
+        public CharSequence Value { get; }
     }
 }

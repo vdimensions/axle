@@ -11,15 +11,9 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build.sh" />
-    <EmbeddedResource Include="Properties\Messages.properties" />
-    <None Include="restore.sh" />
+    <EmbeddedResource Include="Properties\*.properties" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Resources.Properties" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
-
 
 namespace Axle.Reflection
 {
@@ -11,8 +11,9 @@ namespace Axle.Reflection
     public interface ITypeIntrospector : IAttributeTarget
     {
         /// <summary>
-        /// Looks up a <see cref="IConstructor"/> for the <see cref="IntrospectedType">introspected type</see>
-        /// that matches the provided <paramref name="scanOptions"/> and a signature conforming to the specified <paramref name="argumentTypes"/>.
+        /// Looks up a <see cref="IConstructor"/> for the <see cref="IntrospectedType">introspected type</see> that
+        /// matches the provided <paramref name="scanOptions"/> and a signature conforming to the specified
+        /// <paramref name="argumentTypes"/>.
         /// </summary>
         /// <param name="scanOptions">
         /// One of the <see cref="ScanOptions"/> values, representing the reflection lookup flags.
@@ -21,7 +22,8 @@ namespace Axle.Reflection
         /// An array of types to match the signature of the constructor being looked up.
         /// </param>
         /// <returns>
-        /// An instance of <see cref="IConstructor"/> representing the reflected constructor, or <c>null</c> if the lookup did not yield any results.
+        /// An instance of <see cref="IConstructor"/> representing the reflected constructor, or <c>null</c> if the
+        /// lookup did not yield any results.
         /// </returns>
         IConstructor GetConstructor(ScanOptions scanOptions, params Type[] argumentTypes);
         /// <summary>
@@ -36,17 +38,34 @@ namespace Axle.Reflection
         IConstructor GetConstructor(ConstructorInfo reflectedConstructor);
 
         /// <summary>
-        /// Looks up a collection of <see cref="IConstructor">constructors</see> for the <see cref="IntrospectedType">introspected type</see>
-        /// that match the provided <paramref name="scanOptions"/>.
+        /// Looks up a collection of <see cref="IConstructor">constructors</see> for the
+        /// <see cref="IntrospectedType">introspected type</see> that match the provided <paramref name="scanOptions"/>.
         /// </summary>
         /// <param name="scanOptions">
         /// One of the <see cref="ScanOptions"/> values, representing the reflection lookup flags.
         /// </param>
         /// <returns>
-        /// An array of <see cref="IConstructor"/> representing the reflected constructors, or an empty array if the lookup did not yield any results.
+        /// An array of <see cref="IConstructor"/> representing the reflected constructors, or an empty array if the
+        /// lookup did not yield any results.
         /// </returns>
         IConstructor[] GetConstructors(ScanOptions scanOptions);
 
+        /// <summary>
+        /// Gets a reflected <see cref="IMethod">method</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="methodName"/> and is filtered in
+        /// accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <param name="methodName">
+        /// The name of the reflected method to look for.
+        /// </param>
+        /// <returns>
+        /// A reflected <see cref="IMethod">method</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="methodName"/> filtered in
+        /// accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IMethod GetMethod(ScanOptions scanOptions, string methodName);
         /// <summary>
         /// Creates a <see cref="IMethod"/> instance from the provided <paramref name="reflectedMethod"/>.
@@ -59,8 +78,35 @@ namespace Axle.Reflection
         /// </returns>
         IMethod GetMethod(MethodInfo reflectedMethod);
 
+        /// <summary>
+        /// Gets an array representing the methods that are declared or inherited by the
+        /// <see cref="IntrospectedType"/>, filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <returns>
+        /// An array representing the methods that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IMethod[] GetMethods(ScanOptions scanOptions);
 
+        /// <summary>
+        /// Gets a reflected <see cref="IProperty">property</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="propertyName"/> and is filtered in
+        /// accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <param name="propertyName">
+        /// The name of the reflected property member to look for.
+        /// </param>
+        /// <returns>
+        /// A reflected <see cref="IProperty">property</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="propertyName"/> filtered in
+        /// accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IProperty GetProperty(ScanOptions scanOptions, string propertyName);
         /// <summary>
         /// Creates a <see cref="IProperty"/> instance from the provided <paramref name="reflectedProperty"/>.
@@ -74,8 +120,8 @@ namespace Axle.Reflection
         IProperty GetProperty(PropertyInfo reflectedProperty);
 
         /// <summary>
-        /// Gets an array representing the properties that are declared or inherited by the <see cref="IntrospectedType"/>,
-        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// Gets an array representing the properties that are declared or inherited by the
+        /// <see cref="IntrospectedType"/>, filtered in accordance to the provided <paramref name="scanOptions"/>.
         /// </summary>
         /// <param name="scanOptions">
         /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
@@ -86,6 +132,22 @@ namespace Axle.Reflection
         /// </returns>
         IProperty[] GetProperties(ScanOptions scanOptions);
 
+        /// <summary>
+        /// Gets a reflected <see cref="IField">field</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="fieldName"/> and is filtered in
+        /// accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <param name="fieldName">
+        /// The name of the reflected field member to look for.
+        /// </param>
+        /// <returns>
+        /// A reflected <see cref="IField">field</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="fieldName"/> filtered in accordance
+        /// to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IField GetField(ScanOptions scanOptions, string fieldName);
         /// <summary>
         /// Creates a <see cref="IField"/> instance from the provided <paramref name="reflectedField"/>.
@@ -111,6 +173,22 @@ namespace Axle.Reflection
         /// </returns>
         IField[] GetFields(ScanOptions scanOptions);
 
+        /// <summary>
+        /// Gets a reflected <see cref="IEvent">event</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="eventName"/> and is filtered in
+        /// accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <param name="eventName">
+        /// The name of the reflected event member to look for.
+        /// </param>
+        /// <returns>
+        /// A reflected <see cref="IEvent">event</see> that is declared or inherited by the
+        /// <see cref="IntrospectedType"/>, which has the specified <paramref name="eventName"/> filtered in accordance
+        /// to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IEvent GetEvent(ScanOptions scanOptions, string eventName);
         /// <summary>
         /// Creates an <see cref="IEvent"/> instance from the provided <paramref name="reflectedEvent"/>.
@@ -136,19 +214,30 @@ namespace Axle.Reflection
         /// </returns>
         IEvent[] GetEvents(ScanOptions scanOptions);
 
+        /// <summary>
+        /// Gets an array representing the reflected members that are declared or inherited by the
+        /// <see cref="IntrospectedType"/>, filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </summary>
+        /// <param name="scanOptions">
+        /// One, or a combination of the <see cref="ScanOptions"/> values representing the reflection search criteria.
+        /// </param>
+        /// <returns>
+        /// An array representing the members that are declared or inherited by the <see cref="IntrospectedType"/>,
+        /// filtered in accordance to the provided <paramref name="scanOptions"/>.
+        /// </returns>
         IMember[] GetMembers(ScanOptions scanOptions);
 
         /// <summary>
         /// Gets a <see cref="IGenericTypeIntrospector"/> for accessing the type's generic definition,
-        /// if the <see cref="IntrospectedType"/> is a generic type, or <c><see langword="null"/></c> otherwise.
+        /// if the <see cref="IntrospectedType"/> is a generic type, or <c>null</c> otherwise.
         /// </summary>
         /// <returns>
         /// A <see cref="IGenericTypeIntrospector"/> if the <see cref="IntrospectedType"/> is a generic type;
-        /// otherwise <c><see langword="null"/></c>
+        /// otherwise <c>null</c>
         /// </returns>
-        /// <seealso cref="IsGenericType"/>
-        /// <seealso cref="IsGenericTypeDefinition"/>
         /// <seealso cref="IGenericTypeIntrospector"/>
+        /// <seealso cref="Reflection.TypeFlags.Generic"/>
+        /// <seealso cref="Reflection.TypeFlags.GenericDefinition"/>
         IGenericTypeIntrospector GetGenericTypeDefinition();
 
         /// <summary>
@@ -163,7 +252,7 @@ namespace Axle.Reflection
         /// A new instance of the <see cref="IntrospectedType"/>.
         /// </returns>
         /// <exception cref="InvalidOperationException">
-        /// The <see cref="IntrospectedType"/> is <c><see langword="abstract"/></c> or an interface type.
+        /// The <see cref="IntrospectedType"/> is <c>abstract</c> or an interface type.
         /// -OR-
         /// The <see cref="IntrospectedType"/> is a generic definition with unbound type arguments.
         /// </exception>
@@ -173,18 +262,25 @@ namespace Axle.Reflection
         object CreateInstance(params object[] args);
 
         /// <summary>
-        /// The <see cref="Type"/> which the current <see cref="IIntrospector"/> instance provides reflected information for.
+        /// When overridden in a derived class, gets all the interfaces implemented or inherited by the
+        /// <see cref="IntrospectedType"/>.
+        /// </summary>
+        ITypeIntrospector[] GetInterfaces();
+
+        /// <summary>
+        /// The <see cref="Type"/> which the current <see cref="ITypeIntrospector"/> instance provides reflected
+        /// information for.
         /// </summary>
         Type IntrospectedType { get; }
 
         /// <summary>
-        /// Gets a value representing one or a combination of several <see cref="Axle.Reflection.TypeFlags"/> values which describe
-        /// the <see cref="IntrospectedType"/> properties;
+        /// Gets a value representing one or a combination of several <see cref="Axle.Reflection.TypeFlags"/> values
+        /// which describe the <see cref="IntrospectedType"/> properties;
         /// </summary>
         /// <seealso cref="Axle.Reflection.TypeFlags"/>
         TypeFlags TypeFlags { get; }
 
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
         /// <summary>
         /// Gets the <see cref="AccessModifier"/> for the given type.
         /// </summary>
@@ -202,60 +298,60 @@ namespace Axle.Reflection
         /// Checks whether the specified <see cref="IntrospectedType"/> is a generic type.
         /// </summary>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a generic type; 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if the current <see cref="IntrospectedType"/> is a generic type; 
+        /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsGenericType { get; }
 
         /// <summary>
         /// Checks whether the specified <see cref="IntrospectedType"/> is a generic type definition.
         /// </summary>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a generic type definition; 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if the current <see cref="IntrospectedType"/> is a generic type definition; 
+        /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsGenericTypeDefinition { get; }
 
         /// <summary>
         /// Determines if the <see cref="IntrospectedType"/> is a delegate.
         /// </summary>
         /// <returns>
-        /// <c><see langword="true"/></c> if the provided <see cref="IntrospectedType"/> is a delegate;
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if the provided <see cref="IntrospectedType"/> is a delegate;
+        /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsDelegate { get; }
 
         /// <summary>
         /// Checks whether the specified <see cref="IntrospectedType"/> is a nullable type.
         /// </summary>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is a nullable type; 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if the current <see cref="IntrospectedType"/> is a nullable type; 
+        /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsNullableType { get; }
 
         /// <summary>
         /// Checks whether the specified <see cref="IntrospectedType"/> is abstract.
         /// </summary>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> is abstract; 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if the current <see cref="IntrospectedType"/> is abstract; 
+        /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsAbstract { get; }
 
         /// <summary>
         /// Gets a value indicating whether the <see cref="IntrospectedType"/> represents an enumeration.
         /// </summary>
         /// <returns>
-        /// <c><see langword="true"/></c> if the current <see cref="IntrospectedType"/> represents an enumeration; 
-        /// <c><see langword="false"/></c> otherwise.
+        /// <c>true</c> if the current <see cref="IntrospectedType"/> represents an enumeration; 
+        /// <c>false</c> otherwise.
         /// </returns>
-        [Obsolete("Check against the ITypeIntrospector.Categories property instead")]
+        [Obsolete("Check against the ITypeIntrospector.TypeFlags property instead")]
         bool IsEnum { get; }
     }
 
@@ -265,5 +361,6 @@ namespace Axle.Reflection
     /// <typeparam name="T">
     /// The introspected by the current <see cref="ITypeIntrospector{T}"/> instance type.
     /// </typeparam>
+    [SuppressMessage("ReSharper", "UnusedTypeParameter")]
     public interface ITypeIntrospector<T> : ITypeIntrospector { }
 }

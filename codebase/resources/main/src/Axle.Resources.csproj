@@ -1,7 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.3;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.3;netstandard1.1;netstandard1.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -10,16 +10,10 @@
     <Description>Axle resource management library</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Extraction\IResourceExtractionChain.cs" />
-    <Compile Remove="Extraction\ResourceExtractionChain.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Text.Data" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../Resources.Package.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Caching.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Resources.ResourceManager.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Xml.XDocument.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Xml.XmlDocument.props" />
 </Project>

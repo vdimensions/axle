@@ -1,15 +1,11 @@
 ﻿using System.Data;
 using System.Diagnostics;
-
 using Axle.Data.Conversion;
 
 using SqliteType = Microsoft.Data.Sqlite.SqliteType;
 
 namespace Axle.Data.Sqlite.Microsoft.Conversion
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     internal abstract class SqliteDbTypeConverter<T1, T2> : DbTypeConverter<T1, T2>
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

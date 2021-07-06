@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 
-
 namespace Axle.Collections.Generic
 {
     /// <summary>
@@ -25,7 +24,9 @@ namespace Axle.Collections.Generic
         /// <summary>
         /// Creates a new instance of the <see cref="GenericEnumerable{T}"/> class.
         /// </summary>
-        /// <param name="collection">The underlying collection to be exposed as generic.</param>
+        /// <param name="collection">
+        /// The underlying collection to be exposed as generic.
+        /// </param>
         public GenericEnumerable(IEnumerable collection)
         {
             _innerCollection = collection;

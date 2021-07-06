@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Text;
-using Axle.Resources.Text.Data;
+using Axle.Resources.Text.Documents;
+using Axle.Text;
 using YamlDotNet.Core;
 using YamlDotNet.Serialization;
-
 
 namespace Axle.Resources.Yaml
 {
     /// <summary>
     /// A class representing a YAML file as a resource.
     /// </summary>
-    public sealed class YamlResourceInfo : TextDataResourceInfo
+    public sealed class YamlResourceInfo : TextDocumentResourceInfo
     {
         /// <summary>
         /// Gets the content (MIME) type of a java properties file.
@@ -25,14 +25,17 @@ namespace Axle.Resources.Yaml
         /// </summary>
         public const string FileExtension = ".yml";
 
-        internal YamlResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data) 
-            : base(name, culture, MimeType, data)
-        {
-        }
-        internal YamlResourceInfo(string name, CultureInfo culture, IDictionary<string, string> data, ResourceInfo originalResource) 
-            : base(name, culture, MimeType, data, originalResource)
-        {
-        }
+        internal YamlResourceInfo(
+                string name, 
+                CultureInfo culture, 
+                IDictionary<string, CharSequence> data) 
+            : base(name, culture, MimeType, data) { }
+        internal YamlResourceInfo(
+                string name, 
+                CultureInfo culture, 
+                IDictionary<string, CharSequence> data, 
+                ResourceInfo originalResource) 
+            : base(name, culture, MimeType, data, originalResource) { }
 
         /// <summary>
         /// Opens a <see cref="Stream">stream</see> object for reading the contents of the YAML file.
@@ -58,7 +61,7 @@ namespace Axle.Resources.Yaml
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
             try
             {
@@ -66,13 +69,13 @@ namespace Axle.Resources.Yaml
                 using (var stream = Open())
                 using (var reader = new StreamReader(stream))
                 {
-                    result = deserializer.Deserialize(new Parser(reader), targetType);
+                    result = deserializer.Deserialize(new Parser(reader), type);
                     return true;
                 }
             }
             catch
             {
-                if (base.TryResolve(targetType, out result))
+                if (base.TryResolve(type, out result))
                 {
                     return true;
                 }

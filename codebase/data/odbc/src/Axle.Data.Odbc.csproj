@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -10,11 +10,6 @@
     <Description>Axle's data access library for ODBC</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../Odbc.Package.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Data.targets" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Data.Odbc.props" />
 </Project>

@@ -4,9 +4,12 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using Axle.Application;
+using Axle.Caching;
 using Axle.Configuration;
 using Axle.Data.Configuration;
 using Axle.Data.DataSources.Resources.Extraction;
+using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
 using Axle.Resources;
@@ -23,30 +26,28 @@ namespace Axle.Data.DataSources
     {
         internal const string SqlScriptsBundle = "SqlScripts";
 
-        private readonly IDbServiceProviderRegistry _dbServiceProviders;
+        private readonly DataModule _dataModule;
         private readonly DataSourceConfiguration _configuration;
         private readonly ResourceManager _dataSourceResourceManager;
         private readonly IResourceExtractor _scriptExtractor;
         private readonly IDictionary<string, DataSource> _dataSources = new ConcurrentDictionary<string, DataSource>(StringComparer.OrdinalIgnoreCase);
 
-        public DataSourceModule(IDbServiceProviderRegistry dbServiceProviderRegistry, IConfiguration configuration, ILogger logger)
+        public DataSourceModule(DataModule dataModule, IApplicationHost host, IConfiguration configuration, ILogger logger)
         {
             Logger = logger;
-            _dbServiceProviders = dbServiceProviderRegistry;
+            _dataModule = dataModule;
             _configuration = new DataSourceConfiguration(configuration.GetConnectionStrings());
-            _dataSourceResourceManager = new DefaultResourceManager();
-            _scriptExtractor = new SqlScriptSourceExtractor(Enumerable.Select(dbServiceProviderRegistry, x => x.DialectName));
+            _dataSourceResourceManager = host.CreateResourceManager(new SimpleCacheManager());
+            _scriptExtractor = new SqlScriptSourceExtractor(Enumerable.Select(dataModule, x => x.DialectName));
         }
 
         [ModuleInit]
-        internal void OnInit(ModuleExporter exporter)
+        internal void OnInit(IDependencyExporter exporter)
         {
-            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             foreach (var cs in _configuration.ConnectionStrings)
             {
                 RegisterDataSource(cs);
             }
-            #endif
 
             foreach (var dataSource in _dataSources.Values)
             {
@@ -59,7 +60,7 @@ namespace Axle.Data.DataSources
             var dataSources = _dataSources;
             if (!string.IsNullOrEmpty(cs.ProviderName))
             {
-                var provider = _dbServiceProviders[cs.ProviderName];
+                var provider = _dataModule[cs.ProviderName];
                 if (provider == null)
                 {
                     Logger.Warn(
@@ -70,7 +71,7 @@ namespace Axle.Data.DataSources
                 else
                 {
                     var dataSource = new DataSource(cs.Name, provider, cs.ConnectionString, _dataSourceResourceManager);
-                    Logger.Trace(
+                    Logger.Info(
                         "A data source was successfully created for connection string '{0}', using the following data provider: {1}.",
                         cs.Name,
                         cs.ProviderName);
@@ -80,7 +81,7 @@ namespace Axle.Data.DataSources
             else
             {
                 Logger.Warn(
-                    "No data source will be associated with connection string '{0}'. The `{1}` field is not set.",
+                    "No data source could be associated with connection string '{0}'. The `{1}` field is not set.",
                     cs.Name,
                     nameof(cs.ProviderName));
             }

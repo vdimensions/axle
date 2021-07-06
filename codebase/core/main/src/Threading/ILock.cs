@@ -1,5 +1,9 @@
 ﻿using System;
 
+namespace Axle.Threading
+{
+}
+
 
 namespace Axle.Threading
 {
@@ -8,6 +12,15 @@ namespace Axle.Threading
     /// </summary>
     public interface ILock
     {
+        /// <summary>
+        /// Acquires a lock and creates a <see cref="IDisposable">disposable</see> <see cref="ILockHandle"/> object to
+        /// control the duration of the obtained lock.
+        /// </summary>
+        /// <returns>
+        /// A <see cref="ILockHandle"/> instance.
+        /// </returns>
+        ILockHandle CreateHandle();
+        
         /// <summary>
         /// Acquires an exclusive lock.
         /// </summary>
@@ -26,6 +39,9 @@ namespace Axle.Threading
         /// A value of <c>-1</c> represents an infinite wait.
         /// </param>
         /// <seealso cref="System.Threading.Timeout.Infinite"/>
+        /// <returns>
+        /// <c>true</c> if the lock was acquired successfully; <c>false</c> otherwise.
+        /// </returns>
         bool TryEnter(int millisecondsTimeout);
 
         /// <summary>
@@ -34,6 +50,9 @@ namespace Axle.Threading
         /// <param name="timeout">
         /// A <see cref="TimeSpan"/> representing the amount of time to wait for the lock.
         /// </param>
+        /// <returns>
+        /// <c>true</c> if the lock was acquired successfully; <c>false</c> otherwise.
+        /// </returns>
         bool TryEnter(TimeSpan timeout);
     }
 }

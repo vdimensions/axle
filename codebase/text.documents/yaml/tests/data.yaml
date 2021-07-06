@@ -1,0 +1,19 @@
+﻿singleKey: Value
+system:
+  text:
+  - encoding: UTF-8
+    defaultEncoding: UTF-8
+  - encoding: UTF-16
+    defaultEncoding: UTF-16
+axle:
+- text:
+    encoding: UTF-8
+- text:
+    encoding: UTF-16
+    
+# the test will validate that this can be parsed to a SecureString without instantiating a managed string
+secret: ['a', 'b', 'c'] 
+nested:
+  data: 123
+  secret: [ 'd', 'e', 'f' ]
+  otherData: "string"

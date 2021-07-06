@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Axle.Verification;
 
@@ -9,11 +8,11 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
     {
         private readonly ModelResolutionContext _next;
         private readonly IModelResolver _resolver;
-        private readonly IReadOnlyDictionary<string, object> _routeData;
+        private readonly IMvcMetadata _mvcMetadata;
 
-        public ModelResolverResolutionContext(IReadOnlyDictionary<string, object> routeData, IModelResolver resolver, ModelResolutionContext next)
+        public ModelResolverResolutionContext(IMvcMetadata mvcMetadata, IModelResolver resolver, ModelResolutionContext next)
         {
-            _routeData = routeData;
+            _mvcMetadata = mvcMetadata;
             _resolver = resolver;
             _next = next;
         }
@@ -21,7 +20,7 @@ namespace Axle.Web.AspNetCore.Mvc.ModelBinding
         public override async Task<object> Resolve(Type targetType)
         {
             targetType.VerifyArgument(nameof(targetType)).IsNotNull();
-            return await _resolver.Resolve(_routeData, _next) ?? await _next.Resolve(targetType);
+            return await _resolver.Resolve(_mvcMetadata, _next) ?? await _next.Resolve(targetType);
         }
     }
 }

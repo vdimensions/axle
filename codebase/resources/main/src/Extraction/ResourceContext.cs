@@ -1,74 +1,91 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
-
+using Axle.Resources.Bundling;
+using Axle.Verification;
 
 namespace Axle.Resources.Extraction
 {
-    /// <summary>
-    /// A class that provides the context for resource lookup and extraction, including the <see cref="Location">location</see>
-    /// where the resource should be looked up, the <see cref="Culture">culture</see> for which the resource has been requested, 
-    /// and an <see cref="ExtractionChain">extraction chain</see> that allows for querying up resources that would act as 
-    /// components for producing the requested resource.
-    /// </summary>
-    /// <seealso cref="IResourceExtractor"/>
-    /// <seealso cref="ResourceManager"/>
-    public sealed class ResourceContext
+    internal sealed class ResourceContext : IResourceContext
     {
-        private readonly Uri[] _locations;
-        private readonly int _currentLocationIndex;
-
-        internal ResourceContext(string bundle, Uri[] locations, CultureInfo culture, IEnumerable<IResourceExtractor> extractors)
-            : this(bundle, locations, 0, culture, extractors) { }
-            //: this(bundle, locations, -1, culture, extractors) { }
-        private ResourceContext(string bundle, Uri[] locations, int currentLocationIndex, CultureInfo culture, IEnumerable<IResourceExtractor> extractors)
+        private static IEnumerable<Tuple<Uri, IResourceExtractor>> ObtainLookupMap(IResourceBundleContent resourceBundle)
         {
-            Bundle = bundle;
-            _locations = locations;
-            _currentLocationIndex = currentLocationIndex;
-            Culture = culture;
-
-            var subContexts = GetSubContexts(extractors).ToArray();
-            ExtractionChain = new ContextExtractionChain(this, subContexts, extractors);
-        }
-
-        private IEnumerable<ResourceContext> GetSubContexts(IEnumerable<IResourceExtractor> extractors)
-        {
-            for (var i = _currentLocationIndex + 1; i < _locations.Length; i++)
+            foreach (var location in resourceBundle.Locations)
+            foreach (var extractor in resourceBundle.Extractors.Reverse())
             {
-                yield return new ResourceContext(Bundle, _locations, i, Culture, extractors);
+                yield return Tuple.Create(location, extractor);
             }
         }
 
-        internal ResourceContext MoveOneExtractorForward()
+        public static IResourceContext Create(IResourceBundleContent resourceBundle, CultureInfo culture)
         {
-            var ex = ExtractionChain.extractors.Skip(1);
-            return new ResourceContext(Bundle, _locations, _currentLocationIndex, Culture, ex);
+            var bundleName = resourceBundle.Bundle;
+            var lookupMap = ObtainLookupMap(resourceBundle).Reverse().ToArray();
+            var location = lookupMap[0].Item1;
+            var extractor = lookupMap[0].Item2;
+            IResourceContext result = new ResourceContext(bundleName, location, new NoopResourceExtractor(), culture, null);
+            for (var i = 1; i < lookupMap.Length; i++)
+            {
+                location = lookupMap[i].Item1;
+                var next = result;
+                result = new ResourceContext(bundleName, location, extractor, culture, next);
+                extractor = lookupMap[i].Item2;
+            }
+            return new ResourceContext(bundleName, null, extractor, culture, result);
         }
 
-        /// <summary>
-        /// Gets the name of the resource bundle this <see cref="ResourceContext">resource context</see> instance is representing.
-        /// </summary>
+        private ResourceContext(string bundle, Uri location, IResourceExtractor extractor, CultureInfo culture, IResourceContext next)
+        {
+            Bundle = bundle;
+            Location = location;
+            Culture = culture;
+            Extractor = extractor;
+            Next = next;
+        }
+
+        private IEnumerable<ResourceInfo> DoExtractAll(string name)
+        {
+            if (Next != null)
+            {
+                var resource = Extractor.Extract(Next, name);
+                if (resource != null)
+                {
+                    resource.Bundle = Bundle;
+                    yield return resource;
+                }
+
+                if (Next.Next != null)
+                {
+                    foreach (var extracted in Next.ExtractAll(name))
+                    {
+                        yield return extracted;
+                    }
+                }
+            }
+        }
+
+        ResourceInfo IResourceContext.Extract(string name)
+        {
+            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
+            return DoExtractAll(name).FirstOrDefault(x => x != null);
+        }
+
+        IEnumerable<ResourceInfo> IResourceContext.ExtractAll(string name)
+        {
+            name.VerifyArgument(nameof(name)).IsNotNullOrEmpty();
+            return DoExtractAll(name);
+        }
+
+        /// <inheritdoc />
         public string Bundle { get; }
-
-        /// <summary>
-        /// Gets the <see cref="Uri"/> for the resource lookup location of the current <see cref="ResourceContext"/> instance.
-        /// </summary>
-        public Uri Location => _currentLocationIndex < 0 ? null :_locations[_currentLocationIndex];
-
-        /// <summary>
-        /// Gets the <see cref="CultureInfo"/> representing the culture that the current <see cref="ResourceContext"/> instance will use
-        /// for resource lookup.
-        /// </summary>
+        /// <inheritdoc />
+        public Uri Location { get; }
+        /// <inheritdoc />
         public CultureInfo Culture { get; }
-
-        /// <summary>
-        /// Gets the <see cref="ContextExtractionChain"/> associated with the current <see cref="ResourceContext"/> instance.
-        /// The extraction chain can be accessed during resource extraction to obtain any additional resources that may be required to 
-        /// construct the final resource.
-        /// </summary>
-        public ContextExtractionChain ExtractionChain { get; }
+        /// <inheritdoc />
+        public IResourceExtractor Extractor { get; }
+        /// <inheritdoc />
+        public IResourceContext Next { get; }
     }
 }
-

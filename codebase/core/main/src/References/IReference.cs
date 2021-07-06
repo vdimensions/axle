@@ -11,6 +11,12 @@ namespace Axle.References
         /// <see cref="IReference"/> instance.
         /// </summary>
         object Value { get; }
+        
+        /// <summary>
+        /// Gets a boolean value determining whether the current <see cref="IReference"/>'s
+        /// <see cref="Value">value</see> has been initialized.
+        /// </summary>
+        bool HasValue { get; }
     }
 
     /// <summary>

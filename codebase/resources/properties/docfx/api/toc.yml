@@ -1,0 +1,11 @@
+### YamlMime:TableOfContent
+- uid: Axle.Resources.Properties
+  name: Axle.Resources.Properties
+  items:
+  - uid: Axle.Resources.Properties.PropertiesResourceInfo
+    name: PropertiesResourceInfo
+- uid: Axle.Resources.Properties.Extraction
+  name: Axle.Resources.Properties.Extraction
+  items:
+  - uid: Axle.Resources.Properties.Extraction.PropertiesExtractor
+    name: PropertiesExtractor

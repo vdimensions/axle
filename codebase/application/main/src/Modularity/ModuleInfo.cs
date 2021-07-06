@@ -2,48 +2,64 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
+using Axle.Application;
 using Axle.Verification;
-
 
 namespace Axle.Modularity
 {
+    /// <summary>
+    /// An object that acts as a descriptor for an application module. 
+    /// </summary>
     internal sealed class ModuleInfo
     {
         internal ModuleInfo(
-            Type type, 
-            ModuleMethod initMethod, 
-            IEnumerable<ModuleCallback> initCallbacks, 
-            IEnumerable<ModuleCallback> terminateCallbacks, 
-            ModuleMethod terminateMethod, 
+            Type type,
+            Type requiredApplicationHostType,
+            ModuleMethod initMethod,
+            ModuleMethod readyMethod,
             ModuleEntryMethod entryPointMethod,
-            IUsesAttribute[] utilizedModules,
-            UtilizedByAttribute[] utilizedByModules,
-            ModuleCommandLineTriggerAttribute commandLineTrigger, 
-            ModuleConfigSectionAttribute configSectionInfo, 
+            ModuleMethod terminateMethod,
+            IEnumerable<ModuleCallback> initCallbacks,
+            IEnumerable<ModuleCallback> terminateCallbacks,
+            IModuleReferenceAttribute[] utilizedModules,
+            ProvidesForAttribute[] providesForModules,
+            ModuleCommandLineTriggerAttribute commandLineTrigger,
+            ModuleConfigSectionAttribute configSectionInfo,
             params ModuleInfo[] requiredModules)
         {
             Type = type.VerifyArgument(nameof(type)).IsNotAbstract();
+            requiredApplicationHostType?
+                .VerifyArgument(nameof(requiredApplicationHostType))
+                .IsOfType<IApplicationHost>();
+            RequiredApplicationHostType = requiredApplicationHostType;
+            
             InitMethod = initMethod;
-            DependencyInitializedMethods = initCallbacks.OrderBy(x => x.Priority).ToArray();
-            DependencyTerminatedMethods = terminateCallbacks.OrderBy(x => x.Priority).ToArray();
-            TerminateMethod = terminateMethod;
+            ReadyMethod = readyMethod;
             EntryPointMethod = entryPointMethod;
+            TerminateMethod = terminateMethod;
+            
+            DependencyInitializedMethods = initCallbacks.OrderByDescending(x => x.Priority).ToArray();
+            DependencyTerminatedMethods = terminateCallbacks.OrderByDescending(x => x.Priority).ToArray();
+            
             UtilizedModules = utilizedModules;
-            UtilizedByModules = utilizedByModules;
+            ProvidesForModules = providesForModules;
             RequiredModules = requiredModules;
+            
             CommandLineTrigger = commandLineTrigger;
+            
             ConfigSectionInfo = configSectionInfo;
         }
-
         
         internal ModuleMethod InitMethod { get; }
+        internal ModuleMethod ReadyMethod { get; }
+        internal ModuleEntryMethod EntryPointMethod { get; }
+        internal ModuleMethod TerminateMethod { get; }
         internal ModuleCallback[] DependencyInitializedMethods { get; }
         internal ModuleCallback[] DependencyTerminatedMethods { get; }
-        internal ModuleMethod TerminateMethod { get; }
-        internal ModuleEntryMethod EntryPointMethod { get; }
         internal ModuleCommandLineTriggerAttribute CommandLineTrigger { get; }
         internal ModuleConfigSectionAttribute ConfigSectionInfo { get; }
+        
+        internal Type RequiredApplicationHostType { get; }
 
         public Type Type { get; }
 
@@ -53,9 +69,9 @@ namespace Axle.Modularity
         public Assembly Assembly => Type.Assembly;
         #endif
 
-        public IUsesAttribute[] UtilizedModules { get; }
+        public IModuleReferenceAttribute[] UtilizedModules { get; }
 
-        public UtilizedByAttribute[] UtilizedByModules { get; }
+        public ProvidesForAttribute[] ProvidesForModules { get; }
 
         public ModuleInfo[] RequiredModules { get; internal set; }
     }

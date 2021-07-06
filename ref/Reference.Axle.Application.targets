@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project>
+  <PropertyGroup Condition="'$(AxlePath)' == ''">
+    <AxlePath>$(MSBuildProjectDirectory)\..\..\..\..\..\axle</AxlePath>
+  </PropertyGroup>
+
+  <Choose>
+    <When Condition="Exists('$(AxlePath)\dist\restore')">
+      <ItemGroup>
+        <PackageReference Include="Axle.Application" Version="$(AxleVersion)" />
+      </ItemGroup>
+    </When>
+    <Otherwise>
+      <ItemGroup>
+        <PackageReference Remove="Axle.Application" />
+        <ProjectReference Include="$(AxlePath)\codebase\application\main\src\Axle.Application.csproj" />
+      </ItemGroup>
+    </Otherwise>
+  </Choose>
+</Project>

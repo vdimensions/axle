@@ -1,13 +1,8 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.IO;
-
 using Axle.IO.Serialization;
-
-//using System.Net.Mime;
-
 using Axle.Verification;
-
 
 namespace Axle.Resources
 {
@@ -56,45 +51,97 @@ namespace Axle.Resources
         public abstract Stream Open();
 
         /// <summary>
-        /// Returns an object instance that is represented by the current <see cref="ResourceInfo"/> implementation.
+        /// Returns the resource represented by the current <see cref="ResourceInfo"/> implementation as an instance of
+        /// the requested <paramref name="type" />.
         /// </summary>
+        /// <param name="type">
+        /// The <see cref="Type"/> of object to resolve the resource to.
+        /// </param>
         /// <returns>
-        /// An object instance that is represented by the current <see cref="ResourceInfo"/> implementation.
+        /// The resource represented by the current <see cref="ResourceInfo"/> implementation as an instance of
+        /// the requested <paramref name="type" />.
         /// </returns>
-        public object Resolve(Type targetType)
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="type"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="NotSupportedException">
+        /// The resource cannot be represented as an instance of the requested <paramref name="type"/>.
+        /// </exception>
+        public object Resolve(Type type)
         {
-            if (targetType == null)
+            if (type == null)
             {
-                throw new ArgumentNullException(nameof(targetType));
+                throw new ArgumentNullException(nameof(type));
             }
 
-            if (TryResolve(targetType, out var instance))
+            if (TryResolve(type, out var instance))
             {
                 return instance;
             }
 
-            throw new NotSupportedException($"Cannot convert the current resource representation to an instance of {targetType?.AssemblyQualifiedName}");
+            throw new NotSupportedException($"Cannot convert the current resource representation to an instance of {type?.AssemblyQualifiedName}");
         }
 
+        /// <summary>
+        /// Returns the resource represented by the current <see cref="ResourceInfo"/> implementation as an instance of
+        /// the requested <typeparamref name="T" />.
+        /// </summary>
+        /// <typeparam name="T">
+        /// The <see cref="Type"/> of object to resolve the resource to.
+        /// </typeparam>
+        /// <returns>
+        /// The resource represented by the current <see cref="ResourceInfo"/> implementation as an instance of
+        /// the requested type <typeparamref name="T" />.
+        /// </returns>
+        /// <exception cref="NotSupportedException">
+        /// The resource cannot be represented as an instance of the requested type <typeparamref name="T" />.
+        /// </exception>
         public T Resolve<T>() => (T) Resolve(typeof(T));
 
-        public virtual bool TryResolve(Type targetType, out object result)
+        /// <summary>
+        /// Attempts to resolve the value represented by the current <see cref="ResourceInfo"/> instance to an instance
+        /// of the specified <paramref name="type"/>.
+        /// </summary>
+        /// <param name="type">
+        /// The <see cref="Type"/> of object to resolve the resource to.
+        /// </param>
+        /// <param name="result">
+        /// A reference to the the resolved resource, or <c>null</c> in case the resource could not be resolved to an
+        /// instance of the requested <paramref name="type"/>.
+        /// <para>
+        /// This parameter is passed uninitialized.
+        /// </para>
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the resolution succeeded and <paramref name="result"/> was initialized during the call;
+        /// <c>false</c> otherwise.
+        /// </returns>
+        public virtual bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(Stream))
+            if (type == typeof(Stream))
             {
                 result = Open();
                 return true;
             }
 
-            if (targetType == typeof(BinaryReader))
+            if (type == typeof(BinaryReader))
             {
                 result = new BinaryReader(Open());
                 return true;
             }
 
-            if (targetType == typeof(TextReader) || targetType == typeof(StreamReader))
+            if (type == typeof(TextReader) || type == typeof(StreamReader))
             {
                 result = new StreamReader(Open());
+                return true;
+            }
+            
+            if (type == typeof(string))
+            {
+                using (var sr = new StreamReader(Open()))
+                {
+                    result = sr.ReadToEnd();
+                }
                 return true;
             }
 
@@ -104,7 +151,7 @@ namespace Axle.Resources
             {
                 using (var stream = Open())
                 {
-                    result = serializer.Deserialize(stream, targetType);
+                    result = serializer.Deserialize(stream, type);
                 }
                 return true;
             }
@@ -115,6 +162,24 @@ namespace Axle.Resources
             return false;
         }
 
+        /// <summary>
+        /// Attempts to resolve the value represented by the current <see cref="ResourceInfo"/> instance to an instance
+        /// of the specified type <typeparamref name="T"/>.
+        /// </summary>
+        /// <param name="result">
+        /// A reference to the the resolved resource, or <c>null</c> in case the resource could not be resolved to an
+        /// instance of the requested type <typeparamref name="T"/>.
+        /// <para>
+        /// This parameter is passed uninitialized.
+        /// </para>
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the resolution succeeded and <paramref name="result"/> was initialized during the call;
+        /// <c>false</c> otherwise.
+        /// </returns>
+        /// <typeparam name="T">
+        /// The <see cref="Type"/> of object to resolve the resource to.
+        /// </typeparam>
         public bool TryResolve<T>(out T result)
         {
             if (TryResolve(typeof(T), out var r))

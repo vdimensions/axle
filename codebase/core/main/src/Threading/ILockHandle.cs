@@ -4,16 +4,11 @@
 namespace Axle.Threading
 {
     /// <summary>
-    /// A <see cref="IDisposable">disposable</see> handle for a <see cref="ILock">synchronization lock</see> that is currently taking place.
+    /// A <see cref="IDisposable">disposable</see> handle that represents an active
+    /// <see cref="ILock">synchronization lock</see> that is used to control the lock duration.
     /// </summary>
     /// <remarks>
     /// Disposal of this instance will release the held lock.
     /// </remarks>
-    public interface ILockHandle : IDisposable
-    {
-        /// <summary>
-        /// Gets a reference to the <see cref="ILock">lock object</see> representing the active synchronization lock.
-        /// </summary>
-        ILock Lock { get; }
-    }
+    public interface ILockHandle : IDisposable { }
 }

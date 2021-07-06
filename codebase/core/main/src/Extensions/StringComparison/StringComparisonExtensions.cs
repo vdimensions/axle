@@ -5,8 +5,8 @@ using System;
 namespace Axle.Extensions.StringComparison
 {
     /// <summary>
-    /// A <see langword="static"/> class containing common extension methods to 
-    /// <see cref="StringComparison"/> instances.
+    /// A <see langword="static"/> class containing common extension methods to <see cref="StringComparison"/>
+    /// instances.
     /// </summary>
     public static class StringComparisonExtensions
     {

@@ -2,7 +2,13 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
+using Axle.Extensions.String;
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+using Axle.Text.Parsing;
+using Axle.Verification;
+#endif
 #if NETFRAMEWORK
 using System.Security.Policy;
 #endif
@@ -10,11 +16,6 @@ using System.Security.Policy;
 using System.Runtime.Loader;
 using Microsoft.Extensions.DependencyModel;
 #endif
-
-using Axle.Conversion.Parsing;
-using Axle.Extensions.String;
-using Axle.Verification;
-
 
 namespace Axle.Environment
 {
@@ -28,7 +29,11 @@ namespace Axle.Environment
         {
             var displayNameMethod = Type.GetType("Mono.Runtime")?.GetMethod("GetDisplayName", BindingFlags.NonPublic | BindingFlags.Static);
             return displayNameMethod != null
-                ? new VersionParser().Parse(StringExtensions.TakeBeforeFirst(displayNameMethod.Invoke(null, null).ToString(), " ", StringComparison.OrdinalIgnoreCase).Trim())
+                ? new VersionParser().Parse(
+                    StringExtensions.TakeBeforeFirst(
+                        displayNameMethod.Invoke(null, null).ToString(), 
+                        " ", 
+                        StringComparison.OrdinalIgnoreCase).Trim())
                 : null;
         }
         #endif
@@ -38,7 +43,7 @@ namespace Axle.Environment
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Version _frameworkVersion;
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private readonly RuntimeImplementation _impl = RuntimeImplementation.Unknown;
+        private readonly RuntimeImplementation _impl;
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         internal RuntimeInfo()
@@ -68,9 +73,24 @@ namespace Axle.Environment
             #endif
         }
 
-        #if NETFRAMEWORK
-        public Assembly LoadAssembly(string assemblyName) => LoadAssembly(assemblyName, null);
-        public Assembly LoadAssembly(string assemblyName, Evidence securityEvidence)
+        
+        /// <summary>
+        /// Loads an <see cref="Assembly">assembly</see> given the long form of its name.
+        /// </summary>
+        /// <param name="assemblyName">
+        /// The long form of the assembly name.
+        /// </param>
+        /// <returns>
+        /// The loaded assembly.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="assemblyName"/> is <c>null</c>
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="assemblyName"/> is an <see cref="string.Empty">empty string</see>.
+        /// </exception>
+        [SuppressMessage("ReSharper", "CognitiveComplexity")]
+        public Assembly LoadAssembly(string assemblyName)
         {
             if (assemblyName == null)
             {
@@ -81,18 +101,24 @@ namespace Axle.Environment
                 throw new ArgumentException("Assembly name cannot be an empty string,", nameof(assemblyName));
             }
 
+            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
             assemblyName = ResolveAssemblyName(assemblyName);
+            #endif
 
             const string ext = ".dll";
             var hasExt = assemblyName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
 
-            ICollection<Attempt<string, Evidence, Assembly>> chain = new List<Attempt<string, Evidence, Assembly>>(4)
+            ICollection<Attempt<string, Assembly>> chain = new List<Attempt<string, Assembly>>(4)
                 {
-                    (string a, Evidence e, out Assembly res) =>
+                    (string a, out Assembly res) =>
                     {
                         try
                         {
-                            res = e == null ? Assembly.Load(a) : Assembly.Load(a, e);
+                            #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                            res = Assembly.Load(a);
+                            #else
+                            res = Assembly.Load(new AssemblyName(a));
+                            #endif
                             return res != null;
                         }
                         catch
@@ -101,12 +127,13 @@ namespace Axle.Environment
                             return false;
                         }
                     },
-                    (string a, Evidence e, out Assembly res) =>
+                    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+                    (string a, out Assembly res) =>
                     {
-                        var name = !hasExt ? a : a + ext;
+                        var name = !hasExt ? a : $"{a}{ext}";
                         try
                         {
-                            res = e == null ? Assembly.LoadFrom(name) : Assembly.LoadFrom(name, e);
+                            res = Assembly.LoadFrom(name);
                             return res != null;
                         }
                         catch
@@ -115,12 +142,12 @@ namespace Axle.Environment
                             return false;
                         }
                     },
-                    (string a, Evidence e, out Assembly res) =>
+                    (string a, out Assembly res) =>
                     {
-                        var name = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), hasExt ? a : a + ext);
+                        var name = System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), hasExt ? a : $"{a}{ext}");
                         try
                         {
-                            res = e == null ? Assembly.LoadFrom(name) : Assembly.LoadFrom(name, e);
+                            res = Assembly.LoadFrom(name);
                             return res != null;
                         }
                         catch
@@ -129,19 +156,21 @@ namespace Axle.Environment
                             return false;
                         }
                     }
+                    #endif
                 };
 
             var noExtName = hasExt ? StringExtensions.TakeBeforeLast(assemblyName, '.') : assemblyName;
             foreach (var attempt in chain)
             {
-                if (attempt.Invoke(noExtName, securityEvidence, out var result))
+                if (attempt.Invoke(noExtName, out var result))
                 {
                     return result;
                 }
             }
             throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
         }
-        #else
+        
+        #if !NETSTANDARD2_0_OR_NEWER && !NETFRAMEWORK
         public IEnumerable<Assembly> GetReferencingAssemblies(string assemblyName)
         {
             var assemblies = new List<Assembly>();
@@ -168,75 +197,6 @@ namespace Axle.Environment
             return compilationLibrary.Name.Equals(assemblyName, cmp) || compilationLibrary.Dependencies.Any(d => d.Name.StartsWith(assemblyName, cmp));
         }
         #endif
-
-        public Assembly LoadAssembly(string assemblyName)
-        {
-            if (assemblyName == null)
-            {
-                throw new ArgumentNullException(nameof(assemblyName));
-            }
-            if (assemblyName.Length == 0)
-            {
-                throw new ArgumentException("Assembly name cannot be an empty string,", nameof(assemblyName));
-            }
-
-            //assemblyName = ResolveAssemblyName(assemblyName);
-
-            const string ext = ".dll";
-            var hasExt = assemblyName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
-
-            ICollection<Attempt<string, Assembly>> chain = new List<Attempt<string, Assembly>>(4)
-                {
-                    (string a, out Assembly res) =>
-                    {
-                        try
-                        {
-                            res = Assembly.Load(new AssemblyName(a));
-                            return res != null;
-                        }
-                        catch
-                        {
-                            res = null;
-                            return false;
-                        }
-                    },
-                    //(string a, out Assembly res) =>
-                    //{
-                    //    var name = !hasExt ? a : a + ext;
-                    //    try
-                    //    {
-                    //        res = Assembly.LoadFrom(name);
-                    //        return res != null;
-                    //    }
-                    //    catch
-                    //    {
-                    //        res = null;
-                    //        return false;
-                    //    }
-                    //},
-                    //(string a, out Assembly res) =>
-                    //{
-                    //    var name = Path.Combine(Directory.GetCurrentDirectory(), hasExt ? a : a + ext);
-                    //    try
-                    //    {
-                    //        res = Assembly.LoadFrom(name);
-                    //        return res != null;
-                    //    }
-                    //    catch
-                    //    {
-                    //        res = null;
-                    //        return false;
-                    //    }
-                    //}
-                };
-
-            var noExtName = hasExt ? StringExtensions.TakeBeforeLast(assemblyName, '.') : assemblyName;
-            if (chain.Any(noExtName, out var result))
-            {
-                return result;
-            }
-            throw new ArgumentException("Unable to load assembly, the given assembly name is invalid: '" + assemblyName + "'", nameof(assemblyName));
-        }
         #endif
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK

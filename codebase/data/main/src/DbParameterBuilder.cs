@@ -1,11 +1,9 @@
 ﻿using System.Data;
-using System.Linq;
-using Axle.Builder;
 using Axle.Verification;
 
 namespace Axle.Data
 {
-    internal sealed class DbParameterBuilder : IDbParameterBuilder, IDbParameterValueBuilder, IDbParameterOptionalPropertiesBuilder, IFluentBuilder<IDataParameter>
+    internal sealed class DbParameterBuilder : IDbParameterBuilder, IDbParameterValueBuilder, IDbParameterOptionalPropertiesBuilder
     {
         private readonly IDbServiceProvider _provider;
 
@@ -54,7 +52,5 @@ namespace Axle.Data
         {
             return _provider.CreateParameter(_parameterName, _parameterType, _parameterSize, _parameterDirection, _parameterValue);
         }
-
-        public IDataParameter[] BuildMany(int count) => Enumerable.Range(0, count).Select(x => Build()).ToArray();
     }
 }

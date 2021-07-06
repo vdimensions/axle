@@ -1,62 +1,71 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using Axle.Extensions.String;
-using Axle.References;
 using Axle.Resources.Extraction;
-
+using Axle.Text;
 
 namespace Axle.Resources.Yaml.Extraction
 {
     internal sealed class YamlValueExtractor : AbstractResourceExtractor
     {
-        private static bool GetYamlFileData(Uri location, out string yamlFileName, out string keyPrefix)
+        internal static void DeconstructYamlFilePath(string yamlFilePath, out string yamlFileName, out string keyPrefix)
         {
+            // TODO: this code relies on .yml being the extension name used. We should also support .yaml
+            
             yamlFileName = keyPrefix = null;
             const string ext = YamlResourceInfo.FileExtension;
             const StringComparison cmp = StringComparison.OrdinalIgnoreCase;
-            var locStr = location.ToString();
-            keyPrefix = locStr.TakeAfterFirst(ext, cmp);
-            yamlFileName = locStr.TakeBeforeFirst(keyPrefix, cmp);
+            keyPrefix = yamlFilePath.TakeAfterLast(ext, cmp);
+            yamlFileName = yamlFilePath.TakeBeforeLast(keyPrefix, cmp);
+            const char slash = '/';
+            keyPrefix = keyPrefix.TrimStart(slash);
+            if (keyPrefix.EndsWith(slash.ToString()))
+            {
+                keyPrefix = $"{keyPrefix.TrimEnd(slash)}.";
+            }
+        }
+        
+        private readonly string _yamlFile;
+        private readonly string _keyPrefix;
+        private readonly Encoding _encoding;
 
-            return !string.IsNullOrEmpty(yamlFileName) && yamlFileName.EndsWith(ext, StringComparison.OrdinalIgnoreCase);
+        public YamlValueExtractor(Encoding encoding, string yamlFile, string keyPrefix)
+        {
+            _encoding = encoding;
+            DeconstructYamlFilePath(yamlFile, out _yamlFile, out var prefix);
+            _keyPrefix = string.IsNullOrEmpty(prefix) ?  keyPrefix : string.Concat(prefix, keyPrefix);
         }
 
-        protected override Nullsafe<ResourceInfo> DoExtract(ResourceContext context, string name)
+        protected override ResourceInfo DoExtract(IResourceContext context, string name)
         {
-            if (!GetYamlFileData(context.Location, out var fileName, out var keyPrefix))
+            IDictionary<string, CharSequence> data = new Dictionary<string, CharSequence>(YamlFileExtractor.DefaultKeyComparer);
+            var yamlFile = context.Extract(_yamlFile);
+            switch (yamlFile)
             {
-                return Nullsafe<ResourceInfo>.None;
-            }
-
-            IDictionary<string, string> data;
-            var yamlRes = context.ExtractionChain.Extract(fileName);
-            if (!yamlRes.HasValue)
-            {
-                return Nullsafe<ResourceInfo>.None;
-            }
-            switch (yamlRes.Value)
-            {
+                case null:
+                    return null;
                 case YamlResourceInfo yaml:
-                    data = yaml.Data;
+                    foreach (var kvp in yaml.Data)
+                    {
+                        data[kvp.Key] = kvp.Value;
+                    }
+
                     break;
-                default:
-                    //using (var stream = yamlRes.Value.Open())
-                        //if (stream != null)
-                        //{
-                        //    var p = new Dictionary<string, string>();
-                        //    YamlFileExtractor.ReadData(stream, p);
-                        //    data = p;
-                        //}
-                        //else
-                        //{
-                            data = new Dictionary<string, string>(YamlFileExtractor.DefaultKeyComparer);
-                        //}
-                    break;
+                //default:
+                //    using (var stream = propertyResource.Value.Open())
+                //    if (stream != null)
+                //    {
+                //        var x = new PropertiesFileExtractor();
+                //        x.ReadData(stream, props = new Dictionary<string, string>(PropertiesFileExtractor.DefaultKeyComparer));
+                //    }
+                //    break;
             }
 
-            if (data != null && data.TryGetValue($"{keyPrefix}{name}", out var result))
+            if (data.Count > 0 && data.TryGetValue($"{_keyPrefix}{name}", out var result))
             {
-                return new TextResourceInfo(name, context.Culture, result);
+                // TODO: avoid calling `result.ToString()` on a CharSequence. Change resource info type appropriately
+                return new TextResourceInfo(name, context.Culture, result.ToString(), _encoding);
             }
 
             return null;

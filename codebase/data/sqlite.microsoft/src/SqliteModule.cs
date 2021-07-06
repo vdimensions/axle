@@ -5,7 +5,8 @@ namespace Axle.Data.Sqlite.Microsoft
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
-    internal sealed class SqliteModule : DatabaseServiceProviderModule
+    [DbServiceProvider(Name = SqliteServiceProvider.Name)]
+    internal sealed class SqliteModule : DbServiceProvider
     {
         public SqliteModule() : base(SqliteServiceProvider.Instance){ }
     }

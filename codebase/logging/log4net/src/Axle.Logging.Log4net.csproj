@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- TODO: add support for: netstandard1.3 -->
-    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net45;net40</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.5;net45;net40</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -10,10 +10,6 @@
     <Description>Axle framework's logging integration with popular log4net library</Description>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
-    <PackageReference Include="log4net" Version="2.0.10" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/log4net/log4net.props" />
+  <Import Project="../../../../ref/Reference.Axle.Application.targets" />
 </Project>

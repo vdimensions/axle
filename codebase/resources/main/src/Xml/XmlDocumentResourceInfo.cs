@@ -1,8 +1,7 @@
-#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
+#if NETSTANDARD1_3_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using System.Xml;
-
 
 namespace Axle.Resources.Xml
 {
@@ -18,14 +17,14 @@ namespace Axle.Resources.Xml
         }
 
         /// <inheritdoc />
-        public override bool TryResolve(Type targetType, out object result)
+        public override bool TryResolve(Type type, out object result)
         {
-            if (targetType == typeof(XmlDocument))
+            if (type == typeof(XmlDocument))
             {
                 result = Value;
                 return true;
             }
-            return base.TryResolve(targetType, out result);
+            return base.TryResolve(type, out result);
         }
 
         /// <inheritdoc />

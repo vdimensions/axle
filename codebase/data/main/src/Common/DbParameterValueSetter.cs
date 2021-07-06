@@ -1,9 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data;
-
 using Axle.Data.Conversion;
 using Axle.Verification;
-
 
 namespace Axle.Data.Common
 {

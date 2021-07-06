@@ -1,21 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
 using Axle.Configuration;
+using Axle.Configuration.Microsoft.Adapters;
+using Axle.DependencyInjection;
+using Axle.Logging;
+using Axle.Logging.Microsoft;
 using Axle.Modularity;
+using Axle.Web.AspNetCore.Hosting;
 using Axle.Web.AspNetCore.Lifecycle;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 
 namespace Axle.Web.AspNetCore
 {
+    /// <summary>
+    /// A module that enables AspNetCore into the Axle application ecosystem. 
+    /// </summary>
     [Module]
-    internal sealed class AspNetCoreModule
+    internal sealed class AspNetCoreModule : ILoggingServiceConfigurer
     {
-        private readonly IWebHostBuilder _host;
-        private readonly Application _app;
+        private readonly IWebHostBuilder _hostBuilder;
         private readonly IConfiguration _appConfig;
         private readonly IList<IWebHostConfigurer> _hostConfigurers = new List<IWebHostConfigurer>();
         private readonly IList<IServiceConfigurer> _serviceConfigurers = new List<IServiceConfigurer>();
@@ -23,18 +34,25 @@ namespace Axle.Web.AspNetCore
         private readonly IList<IAspNetCoreApplicationStartHandler> _appStartHandlers = new List<IAspNetCoreApplicationStartHandler>();
         private readonly IList<IAspNetCoreApplicationStoppedHandler> _appStoppedHandlers = new List<IAspNetCoreApplicationStoppedHandler>();
         private readonly IList<IAspNetCoreApplicationStoppingHandler> _appStoppingHandlers = new List<IAspNetCoreApplicationStoppingHandler>();
+        private readonly CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
+        private ILoggingServiceRegistry _loggingServiceRegistry;
+        private Task _runTask;
 
-        public AspNetCoreModule(Application app, IConfiguration appConfig, IWebHostBuilder host)
+        public AspNetCoreModule(IConfiguration appConfig, IWebHostBuilder hostBuilder)
         {
-            _host = host;
-            _app = app;
+            _hostBuilder = hostBuilder;
             _appConfig = appConfig;
         }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
         [ModuleInit]
-        internal void Init(ModuleExporter exporter)
+        internal void Init(IDependencyExporter exporter)
         {
+            // TODO: modules must not be aware of the application host implementation!
+            if (Host != null)
+            {
+                _serviceConfigurers.Add(Host);
+            }
         }
 
         [SuppressMessage("ReSharper", "UnusedMember.Global")]
@@ -92,19 +110,31 @@ namespace Axle.Web.AspNetCore
             }
         }
 
-        void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
+        private void ConfigureApp(Microsoft.AspNetCore.Builder.IApplicationBuilder app)
         {
             var services = app.ApplicationServices;
             var lifeTime = services.GetRequiredService<IApplicationLifetime>();
             lifeTime.ApplicationStarted.Register(OnApplicationStarted);
             lifeTime.ApplicationStopping.Register(OnApplicationStopping);
             lifeTime.ApplicationStopped.Register(OnApplicationStopped);
-            
+
+            #if NETCOREAPP3_0_OR_NEWER
+            var hostingEnvironment = services.GetService<IWebHostEnvironment>();
+            #else
             var hostingEnvironment = services.GetService<IHostingEnvironment>();
+            #endif
+            
             for (var i = 0; i < _appConfigurers.Count; i++)
             {
                 var cfg = _appConfigurers[i];
                 cfg.Configure(app, hostingEnvironment);
+            }
+
+            if (_loggingServiceRegistry != null)
+            {
+                var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+                var msLog = new MicrosoftLoggingService(loggerFactory);
+                _loggingServiceRegistry.RegisterLoggingService(msLog);
             }
         }
 
@@ -136,25 +166,37 @@ namespace Axle.Web.AspNetCore
             }
             finally
             {
-                _app.ShutDown();
+                _cancellationTokenSource.Cancel();
             }
         }
-
-        [ModuleEntryPoint]
-        [SuppressMessage("ReSharper", "UnusedMember.Global")]
-        internal void Run(string[] args)
+        
+        public void Configure(ILoggingServiceRegistry loggingServiceRegistry)
         {
-            Microsoft.Extensions.Configuration.IConfigurationProvider axleConfigurationProvider = new Axle.Configuration.Adapters.AxleConfigurationProvider(_appConfig);
-            string startupAssemblyKey = null, applicationKey = null, entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
-            var host = _host
+            _loggingServiceRegistry = loggingServiceRegistry;
+        }
+        
+        [ModuleReady]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        internal void Ready(string[] args)
+        {
+            _runTask = RunAsync();
+        }
+
+        private async Task RunAsync()
+        {
+            var axleConfigurationProvider = new AxleConfigurationProvider(_appConfig);
+            string startupAssemblyKey = null, 
+                   applicationKey = null, 
+                   entryAssemblyName = Assembly.GetEntryAssembly().GetName().Name;
+            var hostBuilder = _hostBuilder
                 // configure the web host with a re-adapted Axle application configuration
                 .UseConfiguration(new Microsoft.Extensions.Configuration.ConfigurationRoot(new[] { axleConfigurationProvider }))
                 // ensure ApplicationKey setting is passed, and fallback to the executing assembly name
-                .UseSetting(WebHostDefaults.ApplicationKey, applicationKey = (_host.GetSetting(WebHostDefaults.ApplicationKey) ?? entryAssemblyName))
+                .UseSetting(WebHostDefaults.ApplicationKey, applicationKey = (_hostBuilder.GetSetting(WebHostDefaults.ApplicationKey) ?? entryAssemblyName))
                 // ensure StartupAssemblyKey setting is passed, and fallback to the executing assembly name
-                .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey = (_host.GetSetting(WebHostDefaults.StartupAssemblyKey) ?? entryAssemblyName));
+                .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey = (_hostBuilder.GetSetting(WebHostDefaults.StartupAssemblyKey) ?? entryAssemblyName));
             
-            ConfigureHost(host)
+            await ConfigureHost(hostBuilder)
                 .ConfigureServices(ConfigureServices)
                 .Configure(ConfigureApp)
                 // we need to restore the ApplicationKey/StartupAssemblyKey as they are being reset by the `Configure` method.
@@ -162,15 +204,31 @@ namespace Axle.Web.AspNetCore
                 .UseSetting(WebHostDefaults.ApplicationKey, applicationKey)
                 .UseSetting(WebHostDefaults.StartupAssemblyKey, startupAssemblyKey)
                 .Build()
-                .Run();
+                .RunAsync(_cancellationTokenSource.Token);
         }
-        
+
+        [ModuleEntryPoint]
+        [SuppressMessage("ReSharper", "UnusedMember.Global")]
+        internal void Run(string[] args)
+        {
+            _runTask.Wait(_cancellationTokenSource.Token);
+        }
+
         [ModuleTerminate]
         internal void Terminate()
         {
             _appStartHandlers.Clear();
             _appStoppingHandlers.Clear();
             _appStoppedHandlers.Clear();
+            if (!_cancellationTokenSource.IsCancellationRequested)
+            {
+                _cancellationTokenSource.Cancel(false);
+            }
+            _cancellationTokenSource.Dispose();
+            _runTask?.Dispose();
         }
+        
+        [Obsolete("Modules must not be aware of the application host implementation")]
+        public AspNetCoreApplicationHost Host { get; set; }
     }
 }

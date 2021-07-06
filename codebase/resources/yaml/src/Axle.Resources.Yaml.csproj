@@ -1,36 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.3;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
     <ProjectGuid>F3F97266-80F8-4C54-8CBC-1D72A5042E19</ProjectGuid>
-    <RootNamespace>$(AssemblyName)</RootNamespace>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <PlatformTarget>AnyCPU</PlatformTarget>
-    <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
     <Description>Axle Framework resources library to handle yaml files</Description>
     <PackageTags>Axle.Resources.Yaml</PackageTags>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Axle.Text.Data.Yaml" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-  
-  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.Yaml.targets" />
 </Project>

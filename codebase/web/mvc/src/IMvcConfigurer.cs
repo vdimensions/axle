@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Axle.Web.AspNetCore.Sdk;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Axle.Web.AspNetCore.Mvc
 {
-    [RequiresAspNetMvc]
-    public interface IMvcConfigurer
+    [RequiresAspNetCoreMvc]
+    public interface IMvcConfigurer : IAspNetCoreConfigurer<MvcOptions>
     {
-        void ConfigureMvc(IMvcBuilder builder);
     }
 }

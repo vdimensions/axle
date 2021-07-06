@@ -1,10 +1,9 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.IO;
 using Axle.Extensions.Uri;
-using Axle.References;
 
 namespace Axle.Resources.ResX.Extraction
 {
@@ -14,9 +13,10 @@ namespace Axle.Resources.ResX.Extraction
     /// <remarks>
     /// This implementation does not depend on the <see cref="System.Drawing">System.Drawing</see> assembly.
     /// </remarks>
+    [SuppressMessage("ReSharper", "UnusedType.Global")]
     internal sealed class SimpleResXResourceExtractor : AbstractResXResourceExtractor
     {
-        protected override Nullsafe<ResourceInfo> ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
+        protected override ResourceInfo ExtractResource(Uri location, CultureInfo culture, Type resxType, string name)
         {
             location = location.Resolve(name);
             var resolver = new ResXResourceResolver(resxType);
@@ -31,7 +31,7 @@ namespace Axle.Resources.ResX.Extraction
                     // This will avoid issues when the resource is latter being marshaled to another form.
                     return new ResXStreamResourceInfo(resolver, location, name, culture);
                 default:
-                    return Nullsafe<ResourceInfo>.None;
+                    return null;
             }
         }
     }

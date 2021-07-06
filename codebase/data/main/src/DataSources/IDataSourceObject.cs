@@ -1,6 +1,6 @@
 ﻿namespace Axle.Data.DataSources
 {
-    public interface IDataSourceObject
+    public interface IDataSourceAware
     {
         IDataSource DataSource { get; }
     }

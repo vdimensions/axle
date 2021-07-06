@@ -2,9 +2,7 @@ using System;
 using System.Data;
 using System.Data.Common;
 using System.Diagnostics;
-
 using Axle.Verification;
-
 
 namespace Axle.Data.Common
 {
@@ -30,9 +28,6 @@ namespace Axle.Data.Common
     /// <typeparam name="TDbDataReader"></typeparam>
     /// <typeparam name="TDbParameter"></typeparam>
     /// <typeparam name="TDbType"></typeparam>
-    #endif
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [Serializable]
     #endif
     public abstract class DbServiceProvider<
             TDbConnection, 

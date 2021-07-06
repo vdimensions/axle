@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netcoreapp2.2;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netcoreapp3.0;netcoreapp2.2;netstandard2.0</TargetFrameworks>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -10,34 +10,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Application" Version="$(PackageVersionRange)" />
+    <Folder Include="Authorization\" />
   </ItemGroup>
 
-  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp2.2' OR '$(TargetFramework)' == 'netstandard2.0'" >
-    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.*" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.*" />
-    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="2.2.*" />
-  </ItemGroup>
-
-<!--  <ItemGroup Condition="'$(TargetFramework)' == 'netcoreapp3.0' OR '$(TargetFramework)' == 'netstandard2.1'" >-->
-<!--    <PackageReference Include="Microsoft.AspNetCore" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.MiddlewareAnalysis" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.Owin" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.Session" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="3.*" />-->
-<!--    <PackageReference Include="Microsoft.Extensions.Caching.Memory" Version="3.*" />-->
-<!--  </ItemGroup>-->
-
-  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.Microsoft.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Logging.Microsoft.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Application.targets" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Authentication.Abstractions.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Authentication.Core.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Authentication.OpenIdConnect.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Authorization.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Cors.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Hosting.Abstractions.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Hosting.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Http.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.MiddlewareAnalysis.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.NodeServices.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Owin.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Server.Kestrel.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.Session.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/aspnet/core/Microsoft.AspNetCore.StaticFiles.props" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/microsoft/extensions/Microsoft.Extensions.Caching.Memory.props" />
 </Project>

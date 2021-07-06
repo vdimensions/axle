@@ -1,14 +1,12 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Collections.Generic;
 
-
 namespace Axle
 {
     /// <summary>
-    /// An implementation of the <see cref="IEqualityComparer{T}"/> interface
-    /// that classifies two objects as equal only if they point to the same instance.
-    /// The equality is determined internally by using the 
-    /// <see cref="object.ReferenceEquals(object, object)"/> method.
+    /// An implementation of the <see cref="IEqualityComparer{T}"/> interface that classifies two objects as equal only
+    /// if they point to the same instance.
+    /// The equality is determined internally by using the <see cref="object.ReferenceEquals(object, object)"/> method.
     /// </summary>
     /// <typeparam name="T">
     /// The type of objects to compare.

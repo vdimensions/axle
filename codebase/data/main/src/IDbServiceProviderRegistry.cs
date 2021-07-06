@@ -1,10 +1,14 @@
 ﻿using System.Collections.Generic;
 
-
 namespace Axle.Data
 {
-    internal interface IDbServiceProviderRegistry : IEnumerable<IDbServiceProvider>
+    /// <summary>
+    /// An interface representing a registry for <see cref="IDbServiceProvider"/> implementations.
+    /// During application initialization, the included <see cref="IDbServiceProvider"/> modules will register
+    /// themselves with the application trough this interface.  
+    /// </summary>
+    public interface IDbServiceProviderRegistry : IEnumerable<IDbServiceProvider>
     {
-        IDbServiceProvider this[string providerName] { get; }
+        // TODO: implement register method and remove the abstract DbServiceProviderModule class 
     }
 }

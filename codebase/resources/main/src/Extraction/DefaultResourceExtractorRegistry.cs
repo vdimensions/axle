@@ -1,7 +1,5 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
-
-using Axle.References;
 using Axle.Verification;
 
 
@@ -21,9 +19,10 @@ namespace Axle.Resources.Extraction
         IEnumerator IEnumerable.GetEnumerator() => _extractors.GetEnumerator();
 
         /// <inheritdoc />
-        public IResourceExtractorRegistry Register(Nullsafe<IResourceExtractor> extractor)
+        public IResourceExtractorRegistry Register(IResourceExtractor extractor)
         {
-            _extractors.AddFirst(extractor.VerifyRefArg(nameof(extractor)).IsNotNull().Value);
+            Verifier.IsNotNull(Verifier.VerifyArgument(extractor, nameof(extractor)));
+            _extractors.AddLast(extractor);
             return this;
         }
     }

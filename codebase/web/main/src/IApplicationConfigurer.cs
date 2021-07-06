@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Hosting;
-
-namespace Axle.Web.AspNetCore
+﻿namespace Axle.Web.AspNetCore
 {
     [RequiresAspNetCore]
     public interface IApplicationConfigurer
     {
-        void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, IHostingEnvironment env);
+        #if NETCOREAPP3_0_OR_NEWER
+        void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IWebHostEnvironment env);
+        #else
+        void Configure(Microsoft.AspNetCore.Builder.IApplicationBuilder app, Microsoft.AspNetCore.Hosting.IHostingEnvironment env);
+        #endif
     }
 }

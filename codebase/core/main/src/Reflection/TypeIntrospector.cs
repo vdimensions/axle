@@ -1,4 +1,4 @@
-﻿#if NETSTANDARD || NET35_OR_NEWER
+﻿#if NETSTANDARD || NET20_OR_NEWER
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Linq;
@@ -104,7 +104,7 @@ namespace Axle.Reflection
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes();
             #else
-            return IntrospectedType.GetEffectiveAttributes();
+            return CustomAttributeProviderExtensions.GetEffectiveAttributes(IntrospectedType);
             #endif
         }
         /// <inheritdoc />
@@ -113,7 +113,7 @@ namespace Axle.Reflection
             #if NETSTANDARD || NET45_OR_NEWER
             return IntrospectedType.GetTypeInfo().GetEffectiveAttributes(attributeType);
             #else
-            return IntrospectedType.GetEffectiveAttributes(attributeType);
+            return CustomAttributeProviderExtensions.GetEffectiveAttributes(IntrospectedType, attributeType);
             #endif
         }
         /// <inheritdoc />
@@ -192,7 +192,7 @@ namespace Axle.Reflection
             #else
             var methods = IntrospectedType.GetMethods(bindingFlags);
             #endif
-            return methods.Select<MethodInfo, IMethod>(GetMethod).ToArray();
+            return methods.Select(GetMethod).ToArray();
         }
 
         /// <inheritdoc />
@@ -207,6 +207,7 @@ namespace Axle.Reflection
             return property != null ? GetProperty(property) : null;
         }
 
+        /// <inheritdoc />
         public override IProperty GetProperty(PropertyInfo reflectedProperty) => PropertyToken.Create(reflectedProperty);
 
         /// <inheritdoc />

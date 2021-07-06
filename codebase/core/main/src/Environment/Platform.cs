@@ -1,6 +1,5 @@
 ﻿#if NETSTANDARD || NET20_OR_NEWER
 using System.Diagnostics;
-
 #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
 using Axle.References;
 #endif
@@ -10,7 +9,7 @@ namespace Axle.Environment
     /// <summary>
     /// A static class that enables access to the current execution environment and .NET runtime properties.
     /// </summary>
-    public static partial class Platform
+    public static class Platform
     {
         #if NETSTANDARD1_5_OR_NEWER || NETFRAMEWORK
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]

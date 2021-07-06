@@ -12,7 +12,8 @@ namespace Axle.IO.Serialization
     public interface ISerializer
     {
         /// <summary>
-        /// Deserializes the contents of the given stream to an instance of the provided by the <paramref name="objectType"/> parameter type.
+        /// Deserializes the contents of the given stream to an instance of the provided by the
+        /// <paramref name="objectType"/> parameter type.
         /// </summary>
         /// <param name="stream">
         /// The stream containing the data to deserialize.
@@ -21,7 +22,8 @@ namespace Axle.IO.Serialization
         /// The type of the object to be deserialized.
         /// </param>
         /// <returns>
-        /// An instance of the provided by the <paramref name="objectType"/> type as deserialized from the <paramref name="stream"/>
+        /// An instance of the provided by the <paramref name="objectType"/> type as deserialized from the
+        /// <paramref name="stream"/>
         /// </returns>
         /// <exception cref="ArgumentNullException">
         /// Either <paramref name="stream"/> or <paramref name="objectType"/> is <c>null</c>.

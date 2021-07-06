@@ -1,21 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net45;net40;net35;net20</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
-    <ProjectGuid>7CDEE3ED-184E-497A-BD14-F949D544D52F</ProjectGuid>
-    <Description>Axle Framework security library</Description>
+    <ProjectGuid>AB4D08D0-AE39-4992-96DA-FDD3676E806B</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <Description>Axle's cryptography library</Description>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
-
+  
   <ItemGroup>
-    <Folder Include="Auditing\" />
+    <Compile Remove="Algorithms\Sdk\BaseXXEncryptionAlgorithm.cs" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(VersionMajor).$(VersionMinor)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
 </Project>

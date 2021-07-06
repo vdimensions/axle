@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-
-using Axle.References;
+using System.Collections.Generic;
 using Axle.Verification;
 
 
@@ -14,12 +11,7 @@ namespace Axle.Resources.Extraction
     {
         private static IResourceExtractorRegistry DoRegister(IResourceExtractorRegistry registry, IEnumerable<IResourceExtractor> extractors)
         {
-            var reg = registry;
-            foreach (var extractor in extractors.Reverse())
-            {
-                reg = registry.Register(Nullsafe<IResourceExtractor>.Some(extractor));
-            }
-            return reg;
+            return registry.Register(CompositeResourceExtractor.Create(extractors));
         }
 
         /// <summary>

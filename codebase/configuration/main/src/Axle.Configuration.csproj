@@ -1,24 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net461;net46;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.5;net461;net46;net45;net40;net35;net20</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
-    <ProjectGuid>{8DBBA160-18F0-4268-890F-6D1C26AA0746}</ProjectGuid>
+    <ProjectGuid>{161ADF9F-4E70-4968-971A-788057564219}</ProjectGuid>
     <Description>Axle framework configuration library</Description>
   </PropertyGroup>
 
-  <ItemGroup Condition=" '$(TargetFrameworkIdentifier)' == '.NETFramework' ">
-    <Reference Include="System.Configuration" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Text.Data" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../Axle.Configuration.Dependencies.targets" />
-  <Import Project="../../../core/main/Axle.Core.Dependencies.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
 </Project>

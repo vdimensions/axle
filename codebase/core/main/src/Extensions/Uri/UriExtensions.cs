@@ -3,7 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using Axle.Extensions.String;
+using Axle.Text.Expressions.Regular;
 using Axle.Verification;
 
 
@@ -13,20 +14,20 @@ namespace Axle.Extensions.Uri
 
     /// <summary>
     /// A <see langword="static"/> class containing common extension 
-    /// methods to <see cref="Uri"/> instances.
+    /// methods to <see cref="System.Uri"/> instances.
     /// </summary>
     public static class UriExtensions
     {
         /// <summary>
         /// The uri scheme for accessing resources embedded into an assembly. 
-        /// Similar to the <see cref="UriSchemeResource"/> but requires the assemby <em>name</em> 
-        /// to be provided as a host of the <see cref="Uri"/>.
+        /// Similar to the <see cref="UriSchemeResource"/> but requires the assembly <em>name</em> 
+        /// to be provided as a host of the <see cref="System.Uri"/>.
         /// </summary>
         public const string UriSchemeAssembly = "assembly";
         /// <summary>
         /// The uri scheme for accessing resources embedded into an assembly. 
-        /// Similar to the <see cref="UriSchemeAssembly"/> but requires the assemby <em>file name</em>
-        /// to be provided as a host of the <see cref="Uri"/>.
+        /// Similar to the <see cref="UriSchemeAssembly"/> but requires the assembly <em>file name</em>
+        /// to be provided as a host of the <see cref="System.Uri"/>.
         /// </summary>
         public const string UriSchemeResource = "res";
 
@@ -212,6 +213,25 @@ namespace Axle.Extensions.Uri
             return SchemeEquals(uri, UriSchemeAssembly) || SchemeEquals(uri, UriSchemeResource);
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="System.Uri"/> class based on the combination of a specified
+        /// base <see cref="System.Uri"/> instance and a relative <see cref="System.Uri"/> instance.
+        /// </summary>
+        /// <param name="uri">
+        /// A relative <see cref="System.Uri"/> instance that is combined with <paramref name="baseUri"/>.
+        /// </param>
+        /// <param name="baseUri">
+        /// An absolute <see cref="System.Uri"/> that is the base for the new <see cref="System.Uri"/> instance.
+        /// </param>
+        /// <returns>
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// Either <paramref name="uri"/> or <paramref name="baseUri"/> is <c>null</c>.
+        /// </exception>
+        /// <exception cref="ArgumentException">
+        /// <paramref name="baseUri"/> is not an <see cref="System.Uri.IsAbsoluteUri">absolute</see>
+        /// <see cref="System.Uri"/> instance.
+        /// </exception>
         public static System.Uri ChangeBase(this System.Uri uri, System.Uri baseUri)
         {
             if (uri == null)
@@ -221,6 +241,17 @@ namespace Axle.Extensions.Uri
             return new System.Uri(baseUri, uri);
         }
 
+        /// <summary>
+        /// Creates a new <see cref="System.Uri">URI</see> using the address of an existing
+        /// <see cref="System.Uri">URI</see>, but with a different <see cref="System.Uri.Host">host</see>.
+        /// </summary>
+        /// <param name="uri">The <see cref="System.Uri">URI</see> form which the address will be taken. </param>
+        /// <param name="hostname">The hostname to be used for the new <see cref="System.Uri">URI</see>.</param>
+        /// <returns>
+        /// A new <see cref="System.Uri">URI</see> using the address of an existing <see cref="System.Uri">URI</see>,
+        /// that uses the <see cref="System.Uri.Scheme">scheme</see> provided by the <paramref name="hostname"/>
+        /// parameter.
+        /// </returns>
         public static System.Uri ChangeHost(this System.Uri uri, string hostname) 
         {
             Verifier.IsTrue(Verifier.IsNotNull(Verifier.VerifyArgument(uri, nameof(uri))), x => x.IsAbsoluteUri, "Specified URI must be absolute!");
@@ -229,14 +260,15 @@ namespace Axle.Extensions.Uri
         }
 
         /// <summary>
-        /// Creates a new <see cref="System.Uri">URI</see> using the address of an existing <see cref="System.Uri">URI</see>,
-        /// but with a different <see cref="System.Uri.Scheme">scheme</see>.
+        /// Creates a new <see cref="System.Uri">URI</see> using the address of an existing
+        /// <see cref="System.Uri">URI</see>, but with a different <see cref="System.Uri.Scheme">scheme</see>.
         /// </summary>
         /// <param name="uri">The <see cref="System.Uri">URI</see> form which the address will be taken. </param>
         /// <param name="scheme">The schema to be used for the new <see cref="System.Uri">URI</see>.</param>
         /// <returns>
-        /// A new <see cref="System.Uri">URI</see> using the address of an existing <see cref="Uri">URI</see>,
-        /// that uses the <see cref="System.Uri.Scheme">scheme</see> provided by the <paramref name="scheme"/> parameter.
+        /// A new <see cref="System.Uri">URI</see> using the address of an existing <see cref="System.Uri">URI</see>,
+        /// that uses the <see cref="System.Uri.Scheme">scheme</see> provided by the <paramref name="scheme"/>
+        /// parameter.
         /// </returns>
         public static System.Uri ChangeScheme(this System.Uri uri, string scheme)
         {
@@ -371,30 +403,60 @@ namespace Axle.Extensions.Uri
         /// <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
         /// </summary>
         /// <param name="uri">The base <see cref="System.Uri">URI</see></param>
-        /// <param name="other">A string representation of the relative <see cref="System.Uri">URI</see>
+        /// <param name="path">A string representation of the relative <see cref="System.Uri">URI</see>
         /// to be combined with <paramref name="uri"/></param>
         /// <returns>
         /// An absolute <see cref="System.Uri">URI</see> instance based on the combination of
         /// a base <see cref="System.Uri">URI</see> and a relative <see cref="System.Uri">URI</see>.
         /// </returns>
         /// <remarks>
-        /// This method will immediately return the <paramref name="other"/> in case it represents an
+        /// This method will immediately return the <paramref name="path"/> in case it represents an
         /// <see cref="System.Uri.IsAbsoluteUri">absolute</see> URI.
         /// </remarks>
-        public static System.Uri Resolve(this System.Uri uri, string other)
+        public static System.Uri Resolve(this System.Uri uri, string path)
         {
             return Resolve(
                 uri,
                 new System.Uri(
-                    StringVerifier.IsNotEmpty(Verifier.IsNotNull(Verifier.VerifyArgument(other, nameof(other)))).Value,
+                    StringVerifier.IsNotEmpty(Verifier.IsNotNull(Verifier.VerifyArgument(path, nameof(path)))).Value,
                     UriKind.RelativeOrAbsolute));
+        }
+
+        private static string GetQueryStringInternal(System.Uri uri)
+        {
+            if (uri.IsAbsoluteUri)
+            {
+                return uri.Query;
+            }
+            return StringExtensions.TakeAfterLast(uri.ToString(), '?');
+        }
+        /// <summary>
+        /// Gets the query string of a <see cref="System.Uri"/> instance.
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="System.Uri">URI</see> to get the query string of.
+        /// </param>
+        /// <returns>
+        /// A string that contains any query information included in the specified The <see cref="System.Uri">URI</see>.
+        /// </returns>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="uri"/> is <c>null</c>.
+        /// </exception>
+        public static string GetQueryString(this System.Uri uri)
+        {
+            if (uri == null)
+            {
+                throw new ArgumentNullException(nameof(uri));
+            }
+
+            return GetQueryStringInternal(uri);
         }
 
         /// <summary>
         /// Gets a dictionary of key-value pairs representing the query parameters of the given <paramref name="uri"/>.
         /// </summary>
         /// <param name="uri">
-        /// The <see cref="Uri"/> instance to get the query parameters from.
+        /// The <see cref="System.Uri"/> instance to get the query parameters from.
         /// </param>
         /// <returns>
         /// A dictionary of key-value pairs representing the query parameters of the given <paramref name="uri"/>.
@@ -405,9 +467,10 @@ namespace Axle.Extensions.Uri
             {
                 throw new ArgumentNullException(nameof(uri));
             }
-
+            
+            var query = GetQueryStringInternal(uri);
             var comparer = StringComparer.OrdinalIgnoreCase;
-            if (uri.Query.Length == 0)
+            if (query.Length == 0)
             {
                 return new Dictionary<string, string>(comparer);
             }
@@ -415,7 +478,7 @@ namespace Axle.Extensions.Uri
             return Enumerable.ToDictionary(
                 Enumerable.GroupBy(
                     Enumerable.Select(
-                        uri.Query.TrimStart('?').Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries), 
+                        query.TrimStart('?').Split(new[] { '&', ';' }, StringSplitOptions.RemoveEmptyEntries), 
                         parameter => parameter.Split(new[] { '=' }, StringSplitOptions.RemoveEmptyEntries)), 
                     parts => parts[0], 
                     parts => parts.Length > 2 
@@ -429,6 +492,183 @@ namespace Axle.Extensions.Uri
                 grouping => string.Join(",", Enumerable.ToArray(grouping)),
                 #endif
                 comparer);
+        }
+
+        /// <summary>
+        /// Gets an array containing the path segments that make up the specified <paramref name="uri"/>.
+        /// <remarks>
+        /// This method does the same thing as the <see cref="System.Uri.Segments"/> property, but can be used
+        /// on relative URIs as well. 
+        /// </remarks>
+        /// </summary>
+        /// <param name="uri">
+        /// The uri to get the segments for.
+        /// </param>
+        /// <returns>
+        /// An array containing the path segments that make up the specified <paramref name="uri"/>.
+        /// </returns>
+        public static string[] GetSegments(this System.Uri uri)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(uri, nameof(uri)));
+            if (uri.IsAbsoluteUri)
+            {
+                return uri.Segments;
+            }
+            else
+            {
+                const char slash = '/';
+                var uriString = StringExtensions.TrimEnd(uri.ToString(), GetQueryStringInternal(uri), StringComparison.Ordinal);
+                var originalStringEndsInSlash = uriString[uriString.Length - 1] == slash;
+                var parts = uriString.Split(slash);
+                return parts
+                    .Select(
+                        (x, i) =>
+                        {
+                            var addSlash = i < parts.Length - 1 || originalStringEndsInSlash;
+                            return addSlash ? $"{x}/" : x;
+                        })
+                    .ToArray();
+            }
+        }
+
+        /// <summary>
+        /// Attempts to get the relative path to a resource provided by the <paramref name="targetUri"/> parameter
+        /// in respect to a given <paramref name="baseUri"></paramref>.
+        /// </summary>
+        /// <param name="baseUri">
+        /// The base <see cref="System.Uri"/> to evaluate a relative path from.
+        /// </param>
+        /// <param name="targetUri">
+        /// The <see cref="System.Uri"/> to get a relative path to.
+        /// </param>
+        /// <param name="result">
+        /// An output parameter representing the produced relative uri. 
+        /// </param>
+        /// <returns>
+        /// <c>true</c> if the resulting relative uri was successfully evaluated; <c>false</c> otherwise.
+        /// This method also returns <c>false</c> in case either the <paramref name="baseUri"/> or
+        /// <paramref name="targetUri"/> represent absolute uris themselves, but differ in their
+        /// <see cref="System.Uri.Scheme"/> or <see cref="System.Uri.Host"/>. 
+        /// </returns>
+        public static bool TryGetRelativePathFrom(this System.Uri baseUri, System.Uri targetUri, out System.Uri result)
+        {
+            Verifier.IsNotNull(Verifier.VerifyArgument(baseUri, nameof(baseUri)));
+            Verifier.IsNotNull(Verifier.VerifyArgument(targetUri, nameof(targetUri)));
+            
+            var comparer = StringComparer.OrdinalIgnoreCase;
+
+            if (baseUri.IsAbsoluteUri && targetUri.IsAbsoluteUri 
+                && (!comparer.Equals(baseUri.Scheme, targetUri.Scheme) || !comparer.Equals(baseUri.Host, targetUri.Host)))
+            {
+                result = null;
+                return false;
+            }
+
+            var pathBuilder = new StringBuilder();
+            var baseSegments = GetSegments(baseUri);
+            var targetSegments = GetSegments(targetUri);
+            int i, length = Math.Min(baseSegments.Length, targetSegments.Length);
+            if (length > 0 && !baseUri.IsAbsoluteUri && !comparer.Equals(baseSegments[0], targetSegments[0]))
+            {
+                result = null;
+                return false;
+            }
+            for (i = 0; i < length; ++i)
+            {
+                if (!comparer.Equals(baseSegments[i], targetSegments[i]))
+                {
+                    break;
+                }
+            }
+            for (var j = i; j < baseSegments.Length; ++j)
+            {
+                pathBuilder.Append("../");
+            }
+            for (var k = i; k < targetSegments.Length; ++k)
+            {
+                pathBuilder.Append(targetSegments[k]);
+            }
+            result = new System.Uri(pathBuilder.ToString(), UriKind.Relative);
+            return true;
+        }
+
+        /// <summary>
+        /// Processes the target <paramref name="uri"/> and performs various URI normalization changes, such as:
+        /// <list type="bullet">
+        ///   <item>
+        ///      Convert the scheme and host to lowercase.
+        ///   </item>
+        ///   <item>
+        ///      Convert percent-encoded triplets (e.g., '%3a' versus '%3A') to uppercase.
+        ///   </item>
+        ///   <item>
+        ///      Remove dot segments ("./" and "../")  along with the relevant path node.
+        ///   </item>
+        ///   <item>
+        ///      Remove the default port.
+        ///   </item>
+        /// </list>
+        /// </summary>
+        /// <param name="uri">
+        /// The <see cref="System.Uri"/> instance to normalize.
+        /// </param>
+        /// <returns>
+        /// A new <see cref="System.Uri"/> instance with the normalization changes applied. 
+        /// </returns>
+        public static System.Uri Normalize(this System.Uri uri)
+        {
+            var normalizedSegments = new List<string>();
+            var currentSegments = GetSegments(uri);
+            var currentNormalizedSegmentIndex = 0;
+            foreach (var segment in currentSegments)
+            {
+                if (segment.Equals("../") && currentNormalizedSegmentIndex > 0)
+                {
+                    currentNormalizedSegmentIndex--;
+                    for (var j = currentNormalizedSegmentIndex; j < normalizedSegments.Count; ++j)
+                    {
+                        normalizedSegments[j] = string.Empty;
+                    }
+                    continue;
+                }
+                if (segment.Equals("./"))
+                {
+                    continue;
+                }
+                if (currentNormalizedSegmentIndex >= normalizedSegments.Count)
+                {
+                    normalizedSegments.Add(segment);
+                    currentNormalizedSegmentIndex++;
+                }
+                else
+                {
+                    normalizedSegments[currentNormalizedSegmentIndex++] = segment;
+                }
+            }
+            var stringBuilder = new StringBuilder();
+            if (uri.IsAbsoluteUri)
+            {
+                stringBuilder
+                    .Append(uri.Scheme.ToLowerInvariant())
+                    .Append("://")
+                    .Append(uri.Host.ToLowerInvariant());
+                if (!uri.IsDefaultPort)
+                {
+                    stringBuilder.AppendFormat(":{0}", uri.Port);
+                }
+            }
+
+            stringBuilder
+                .Append(StringExtensions.Join(string.Empty, normalizedSegments))
+                .Append(GetQueryStringInternal(uri));
+
+            var regex = new RegularExpression(@"(\%[0-9A-Fa-f][0-9A-Fa-f])");
+            var normalizedUriString = regex.Replace(
+                stringBuilder.ToString(), 
+                x => x.Value.ToUpper());
+            return new System.Uri(
+                normalizedUriString,
+                UriKind.RelativeOrAbsolute);
         }
     }
 }

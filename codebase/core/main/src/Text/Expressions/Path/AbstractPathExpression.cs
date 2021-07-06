@@ -16,6 +16,7 @@ namespace Axle.Text.Expressions.Path
     #endif
     public abstract class AbstractPathExpression : IPathExpression
     {
+        /// The <see cref="RegExOptions"/> to use for the underlying <see cref="Regex"/> instance.
         protected const RegexOptions RegExOptions = RegexOptions.CultureInvariant;
         //private const string EscapedRegexTerminals = @"\!:?.&=-+%[](){}^$";
         private const string EscapedRegexTerminals = @"\!:?.&=%^$";
@@ -72,6 +73,25 @@ namespace Axle.Text.Expressions.Path
         public Match[] Match(string input) => _target.Match(input);
         /// <inheritdoc />
         public Match[] Match(string input, int startIndex) => _target.Match(input, startIndex);
+        
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator) 
+            => _target.Replace(input, matchEvaluator);
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator, int count) 
+            => _target.Replace(input, matchEvaluator, count);
+        /// <inheritdoc />
+        public string Replace(string input, MatchEvaluator matchEvaluator, int count, int startIndex) 
+            => _target.Replace(input, matchEvaluator, count, startIndex);
+        /// <inheritdoc />
+        public string Replace(string input, string replacement) 
+            => _target.Replace(input, replacement);
+        /// <inheritdoc />
+        public string Replace(string input, string replacement, int count) 
+            => _target.Replace(input, replacement, count);
+        /// <inheritdoc />
+        public string Replace(string input, string replacement, int count, int startIndex) 
+            => _target.Replace(input, replacement, count, startIndex);
 
         /// <inheritdoc />
         public string[] Split(string input) => _target.Split(input);

@@ -1,11 +1,12 @@
-﻿using Axle.Configuration;
+﻿using System.Linq;
+using Axle.Configuration;
+using Axle.Configuration.ConfigurationManager;
 using Axle.DependencyInjection;
 using Axle.Logging;
 using Axle.Modularity;
 using NUnit.Framework;
 
-
-namespace Axle.ApplicationTests.Modularity
+namespace Axle.Application.Tests.Modularity
 {
     [TestFixture]
     public class ModuleLoadingTests
@@ -60,24 +61,27 @@ namespace Axle.ApplicationTests.Modularity
         [Test]
         public void TestModuleInitialization()
         {
-            using (Application.Build().Load<AB>().Load<BC>().Load<AC>().Run()) { }
+            using (Application.Build().ConfigureModules(c => c.Load<AB>().Load<BC>().Load<AC>()).Run()) { }
         }
 
         [Test]
         public void TestMultipleModuleInitializations()
         {
-            using (Application.Build().Load<AB>().Load<BC>().Load<A>().Load<C>().Load<AC>().Run()) { }
+            using (Application.Build().ConfigureModules(c => c.Load<AB>().Load<BC>().Load<A>().Load<C>().Load<AC>()).Run()) { }
         }
 
         [Test]
         public void TestModuleConfig()
         {
-            IContainer container = null;
-            using (Application.Build().ConfigureDependencies(c => container = c).AddLegacyConfig().Run())
+            IDependencyContainer dependencyContainer = null;
+            using (Application.Build()
+                .ConfigureDependencies(c => dependencyContainer = c)
+                .ConfigureApplication(c => c.Add(new ConfigurationManagerConfigSource()))
+                .Run())
             {
-                var configuration = container.Resolve<IConfiguration>();
-                var message = configuration["message"].Value;
-                var messageFormat = configuration["messageFormat"].Value;
+                var configuration = dependencyContainer.Resolve<IConfiguration>();
+                var message = configuration["message"].Select(x => x.Value).SingleOrDefault();
+                var messageFormat = (string) configuration["messageFormat"].Select(x => x.Value).SingleOrDefault();
                 var user = System.Environment.UserName;
                 Assert.IsNotNull(configuration);
                 Assert.IsNotNull(message);

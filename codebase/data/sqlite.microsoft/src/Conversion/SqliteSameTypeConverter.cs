@@ -1,7 +1,5 @@
 ﻿using System.Data;
-
 using SqliteType = Microsoft.Data.Sqlite.SqliteType;
-
 
 namespace Axle.Data.Sqlite.Microsoft.Conversion
 {

@@ -1,4 +1,6 @@
-﻿namespace Axle.Conversion
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace Axle.Conversion
 {
     /// <summary>
     /// A class that can be used to convert values to and from <see cref="uint"/> and <see cref="double"/>.
@@ -8,6 +10,12 @@
     #endif
     public sealed class UInt32ToDoubleConverter : AbstractTwoWayConverter<uint, double>
     {
+        /// <summary>
+        /// Gets a reference to a shared <see cref="UInt32ToDoubleConverter"/> instance.
+        /// </summary>
+        [SuppressMessage("ReSharper", "UnusedMember.Global")] 
+        public static readonly UInt32ToDoubleConverter Instance = new UInt32ToDoubleConverter();
+        
         /// <inheritdoc />
         protected override double DoConvert(uint source) => source;
 

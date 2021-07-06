@@ -8,9 +8,6 @@ using Axle.References;
 
 namespace Axle.Data.Npgsql
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    [System.Serializable]
-    #endif
     public sealed class NpgsqlServiceProvider : DbServiceProvider<
         NpgsqlConnection,
         NpgsqlTransaction,
@@ -59,7 +56,7 @@ namespace Axle.Data.Npgsql
             return command;
         }
 
-        #if NETFRAMEWORK || NETSTANDARD2_0_OR_NEWER
+        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
         protected override NpgsqlCommandBuilder CreateCommandBuilder(NpgsqlDataAdapter dataAdapter) => new NpgsqlCommandBuilder(dataAdapter);
 
         protected override NpgsqlDataAdapter CreateDataAdapter(NpgsqlCommand command) => new NpgsqlDataAdapter(command);

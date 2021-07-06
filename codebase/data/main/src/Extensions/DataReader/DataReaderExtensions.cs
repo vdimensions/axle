@@ -2,9 +2,9 @@
 using System.Data;
 using Axle.Verification;
 
-
 namespace Axle.Data.Extensions.DataReader
 {
+    /// A static class to contan common extension methods for the <see cref="IDataReader"/> interface.
     public static class DataReaderExtensions
     {
         #if NETSTANDARD || NET45_OR_NEWER
@@ -62,7 +62,7 @@ namespace Axle.Data.Extensions.DataReader
             return false;
         }
 
-        //NOT PERFORMANCE FRIENDLY
+        //NOT PERFORMANCE OPTIMAL
         //
         //private static bool TryGetData(IDbRecord reader, string columnName, out object result)
         //{

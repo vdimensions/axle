@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+    <IsTestProject>true</IsTestProject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Cryptography" />
+  </ItemGroup>
+
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Security.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
+
+</Project>

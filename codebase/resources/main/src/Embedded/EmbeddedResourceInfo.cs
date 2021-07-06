@@ -1,11 +1,12 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-
+#if NETSTANDARD1_6_OR_NEWER || NETFRAMEWORK
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Reflection;
 using Axle.Extensions.String;
+using Axle.Reflection;
 using Axle.Verification;
 
 namespace Axle.Resources.Embedded
@@ -29,7 +30,11 @@ namespace Axle.Resources.Embedded
         /// </returns>
         private static string GetEmbeddedResourcePath(string resourceName)
         {
-            return resourceName.VerifyArgument(nameof(resourceName)).IsNotNull().Value.Replace(" ", "_").Replace("-", "_").Replace("\\", ".").Replace("/", ".");
+            return resourceName.VerifyArgument(nameof(resourceName)).IsNotNull().Value
+                .Replace(" ", "_")
+                .Replace("-", "_")
+                .Replace("\\", ".")
+                .Replace("/", ".");
         }
 
         internal static bool ContainsEmbeddedResource(Assembly asm, string resourceName)
@@ -37,8 +42,17 @@ namespace Axle.Resources.Embedded
             const string satelliteAssemblySuffix = ".resources";
             var assemblyName = asm.GetName().Name.TrimEnd(satelliteAssemblySuffix);
             var escapedResourceName = GetEmbeddedResourcePath(resourceName);
-            var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
-            return asm.GetManifestResourceNames().Any(x => StringComparer.Ordinal.Equals(manifestResourceName, x));
+            var rootNamespace = assemblyName;
+            var manifestResourceName = $"{rootNamespace}.{escapedResourceName}";
+            var found = asm.GetManifestResourceNames().Any(x => StringComparer.Ordinal.Equals(manifestResourceName, x));
+            if (!found)
+            {
+                using (var stream = LoadEmbeddedResource(asm, resourceName))
+                {
+                    return stream != null;
+                }
+            }
+            return true;
         }
 
         /// <exception cref="FileLoadException"></exception>
@@ -49,7 +63,6 @@ namespace Axle.Resources.Embedded
             const string satelliteAssemblySuffix = ".resources";
             var assemblyName = asm.GetName().Name.TrimEnd(satelliteAssemblySuffix);
             var escapedResourceName = GetEmbeddedResourcePath(resourceName);
-            var manifestResourceName = $"{assemblyName}.{escapedResourceName}";
             /***
              * In case we have a root namespace of the project different from the assembly name,
              * we will attempt to get the root namespace.
@@ -59,13 +72,32 @@ namespace Axle.Resources.Embedded
              * 
              * The namespaces will be tested sorted by length.
              */
-            var stream = asm.GetManifestResourceStream(manifestResourceName) ?? asm.GetTypes()
-                .Where(type => type.IsPublic && !type.IsNested)
-                .Select(type => type.Namespace ?? string.Empty)
-                .OrderBy(ns => ns.Length)
-                .Select(ns => asm.GetManifestResourceStream(ns.Length > 0 ? $"{ns}.{escapedResourceName}" : escapedResourceName))
+            var namespaces = new LinkedList<string>(
+                asm.GetTypes()
+                    .Select(t => new TypeIntrospector(t))
+                    .Where(ti => ti.AccessModifier == AccessModifier.Public && !ti.TypeFlags.HasFlag(TypeFlags.Nested))
+                    .Select(ti => ti.IntrospectedType.Namespace)
+                    .Where(ns => ns != null)
+                    .OrderBy(ns => ns.Length));
+            namespaces.AddFirst(string.Empty);
+            namespaces.AddFirst(assemblyName);
+            #if !NETSTANDARD
+            var rootNamespace = asm.GetCustomAttributes(false)
+            #else
+            var rootNamespace = asm.GetCustomAttributes()
+            #endif
+                .OfType<RootNamespaceAttribute>()
+                .Select(x => x.Namespace)
+                .SingleOrDefault();
+            if (!string.IsNullOrEmpty(rootNamespace))
+            {
+                namespaces.AddFirst(rootNamespace);
+            }
+            return namespaces
+                .Select(ns => ns.Length > 0 ? $"{ns}.{escapedResourceName}" : escapedResourceName)
+                .Where(manifestResourceName => !string.IsNullOrEmpty(manifestResourceName))
+                .Select(manifestResourceName => asm.GetManifestResourceStream(manifestResourceName))
                 .FirstOrDefault(x => x != null);
-            return stream;
         }
 
         private readonly Assembly _assembly;

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net45;net40;net35;net20</TargetFrameworks>
+  </PropertyGroup>
+  
+  <Import Project="../../../../ref/Reference.Axle.Core.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Text.Documents.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
+  <Import Project="../../../../submodules/vdimensions_msbuild_references/system/System.Configuration.ConfigurationManager.props" />
+
+</Project>

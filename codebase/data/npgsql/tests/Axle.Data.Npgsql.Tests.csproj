@@ -10,10 +10,7 @@
     <IsTestProject>true</IsTestProject>
   </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Data.Npgsql" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Data.Npgsql.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.ConfigurationManager.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

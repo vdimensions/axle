@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;netstandard1.6;netstandard1.5;net461;net46;net45;net40;net35</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.6;netstandard1.5;net461;net46;net45;net40;net35</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -16,33 +16,18 @@
     <DocumentationFile>$(OutputPath)\$(AssemblyName).xml</DocumentationFile>
   </PropertyGroup>
 
-  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <DefineConstants>$(DefineConstants);DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  
-  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <DefineConstants>$(DefineConstants);TRACE</DefineConstants>
-  </PropertyGroup>
-
   <ItemGroup>
-    <Compile Remove="Modularity\DynamicModuleLoader.cs" />
-    <Compile Remove="Modularity\IAssemblyLoadListener.cs" />
+    <EmbeddedResource Include="Application\host.Development.yml" />
+    <EmbeddedResource Include="Application\host.yml" />
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Properties\" />
+    <Folder Include="Application\Hosting" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Core" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Resources" Version="$(PackageVersionRange)" />
-    <PackageReference Include="Axle.Configuration" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../../ref/Reference.Axle.Caching.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Properties.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Yaml.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Configuration.targets" />
 </Project>

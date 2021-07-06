@@ -15,15 +15,24 @@ namespace Axle.Globalization.Extensions.CultureInfo
     public static class CultureInfoExtensions
     {
         /// <summary>
-        /// Returns a collection of <see cref="CultureInfo" /> instances that include the current culture and all parent cultures.
-        /// The cultures are ordered by their level of relation, starting from the culture specified by the <paramref name="culture"/> parameter
-        /// and continuing with its parent culture. The resulting list should represent the natural culture fallback order that occurs during localization.
+        /// Returns a collection of <see cref="CultureInfo" /> instances that include the current culture and all parent
+        /// cultures. The cultures are ordered by their level of relation, starting from the culture specified by the
+        /// <paramref name="culture"/> parameter and continuing with its parent culture. The resulting list should
+        /// represent the natural culture fallback order that occurs during localization.
         /// </summary>
-        /// <param name="culture">The <see cref="CultureInfo">culture</see> instance to expand.</param>
-        /// <returns>A collection of <see cref="CultureInfo" /> instances that include the current culture and its parent cultures.</returns>
-        /// <exception cref="System.ArgumentNullException"><paramref name="culture"/> is <c>null</c></exception>
+        /// <param name="culture">
+        /// The <see cref="CultureInfo">culture</see> instance to expand.
+        /// </param>
+        /// <returns>
+        /// A collection of <see cref="CultureInfo" /> instances that include the current culture and its parent
+        /// cultures.
+        /// </returns>
+        /// <exception cref="System.ArgumentNullException">
+        /// <paramref name="culture"/> is <c>null</c>
+        /// </exception>
         /// <example>
-        /// For instance, if we take the culture <c>bg-BG</c> (The Bulgarian official culture), the method will return the following list of culture objects:
+        /// For instance, if we take the culture <c>bg-BG</c> (The Bulgarian official culture), the method will return
+        /// the following list of culture objects:
         /// <list type="bullet">
         ///   <item>
         ///     <term>bg-BG</term>  
@@ -46,7 +55,8 @@ namespace Axle.Globalization.Extensions.CultureInfo
         ///     <term><see cref="CultureInfo.InvariantCulture">invariant culture</see></term>
         ///     <description>
         ///     <para>
-        ///     A reference to an <see cref="CultureInfo.InvariantCulture">invariant culture</see> object, which is the ultimate parent for all culture instances.
+        ///     A reference to an <see cref="CultureInfo.InvariantCulture">invariant culture</see> object, which is the
+        ///     ultimate parent for all culture instances.
         ///     </para>
         ///     </description>  
         ///   </item>

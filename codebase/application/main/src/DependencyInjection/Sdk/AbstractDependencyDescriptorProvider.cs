@@ -1,15 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
 #if NETSTANDARD
 using System.Reflection;
 #endif
-
 using Axle.DependencyInjection.Descriptors;
 using Axle.Reflection;
 using Axle.Verification;
-
 
 namespace Axle.DependencyInjection.Sdk
 {

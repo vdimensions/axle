@@ -5,10 +5,10 @@ using System.Reflection;
 
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
-    public class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod
+    internal class MethodToken : MethodBaseToken<MethodInfo>, IEquatable<MethodToken>, IMethod
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly Type _memberType;

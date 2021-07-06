@@ -1,16 +1,15 @@
 ﻿#if (NETSTANDARD1_4_OR_NEWER || NET46_OR_NEWER) && !NET45
 using System;
-using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using Axle.Reflection;
 
 namespace Axle.References
 {
     /// <summary>
-    /// Represents a reference to ambient data, that is local to a given asynchronous control flow, such as asynchronous method. 
+    /// Represents a reference to ambient data, that is local to a given asynchronous control flow, such as asynchronous
+    /// method. 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    [SuppressMessage("ReSharper", "UnusedMember.Global")]
     public sealed class AsyncLocalRef<T> : IAsyncLocalReference<T>
     {
         private struct AsyncLocalRefValue
@@ -28,7 +27,6 @@ namespace Axle.References
 
         private static class AsyncLocalValueChangedArgsConstructor
         {
-            [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
             private static readonly IConstructor Constructor;
             private static readonly object False = false, True = true;
 
@@ -76,7 +74,8 @@ namespace Axle.References
         }
 
         /// <summary>
-        /// Gets a value that indicates whether a <see cref="Value"/> has been initialized for the current asynchronous context.
+        /// Gets a value that indicates whether a <see cref="Value"/> has been initialized for the current asynchronous
+        /// context.
         /// </summary>
         public bool HasValue => _t.Value.HasValue;
 

@@ -1,5 +1,4 @@
-﻿#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-
+#if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using System;
 using System.Globalization;
 using Axle.Verification;
@@ -12,7 +11,7 @@ namespace Axle.Resources.ResX.Extraction
 
         internal ResXResourceResolver(Type resourceType) 
         {
-            _resourceType = resourceType.VerifyArgument(nameof(resourceType)).IsNotNull();
+            _resourceType = resourceType.VerifyArgument(nameof(resourceType)).IsNotNull().Value;
         }
 
         public object Resolve(Uri location, CultureInfo culture)

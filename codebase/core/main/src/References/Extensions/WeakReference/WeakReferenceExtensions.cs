@@ -11,13 +11,15 @@ namespace Axle.References.Extensions.WeakReference
     public static class WeakReferenceExtensions
     {
         /// <summary>
-        /// Tries to retrieve the target object that is referenced by the <paramref name="current"/> <see cref="System.WeakReference"/> object.
+        /// Tries to retrieve the target object that is referenced by the <paramref name="current"/>
+        /// <see cref="System.WeakReference"/> object.
         /// </summary>
         /// <param name="current">
         /// The <see cref="System.WeakReference"/> instance this extension method is called on.
         /// </param>
         /// <param name="target">
-        /// When this method returns, contains the target object, if it is available. This parameter is treated as uninitialized.
+        /// When this method returns, contains the target object, if it is available. This parameter is treated as
+        /// uninitialized.
         /// </param>
         /// <returns>
         /// <c><see langword="true"/></c> if the target was retrieved; 

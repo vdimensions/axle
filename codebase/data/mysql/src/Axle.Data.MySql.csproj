@@ -2,7 +2,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <!-- <TargetFrameworks>netstandard2.0;netstandard1.3;net46;net45</TargetFrameworks> -->
-    <TargetFrameworks>netstandard2.0;netstandard1.5;net46;net45</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;netstandard1.5;net45</TargetFrameworks>
   </PropertyGroup>
   
   <PropertyGroup>
@@ -12,9 +12,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Axle.Data" Version="$(PackageVersionRange)" />
     <PackageReference Include="MySqlConnector" Version="0.59" />
   </ItemGroup>
   
-  <Import Project="../../../Axle.Common.props" />
+  <Import Project="../../../../ref/Reference.Axle.Data.targets" />
 </Project>

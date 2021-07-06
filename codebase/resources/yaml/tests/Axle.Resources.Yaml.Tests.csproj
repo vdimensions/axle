@@ -9,6 +9,7 @@
     <AssemblyName>Axle.Resources.Yaml.Tests</AssemblyName>
     <RootNamespace>$(AssemblyName)</RootNamespace>
     <IsTestProject>true</IsTestProject>
+    <TargetFramework>net45</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,15 +17,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build.sh" />
     <EmbeddedResource Include="Properties\Messages.yml" />
-    <None Include="restore.sh" />
   </ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Axle.Resources.Yaml" Version="$(PackageVersionRange)" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.Yaml.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

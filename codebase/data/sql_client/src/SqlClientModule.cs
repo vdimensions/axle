@@ -5,7 +5,8 @@ namespace Axle.Data.SqlClient
 {
     [SuppressMessage("ReSharper", "UnusedMember.Global")]
     [Module]
-    internal sealed class SqlClientModule : DatabaseServiceProviderModule
+    [DbServiceProvider(Name = SqlServiceProvider.Name)]
+    internal sealed class SqlClientModule : DbServiceProvider
     {
         public SqlClientModule() : base(SqlServiceProvider.Instance) { } 
     }

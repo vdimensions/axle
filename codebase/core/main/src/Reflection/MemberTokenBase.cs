@@ -12,11 +12,10 @@ using Axle.References;
 
 namespace Axle.Reflection
 {
-
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
-    public abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
+    internal abstract partial class MemberTokenBase<T> : IReflected<T>, IMember, IEquatable<MemberTokenBase<T>>, IAttributeTarget
         where T: MemberInfo
     {
         public IAttributeInfo[] GetAttributes(T reflectedMember) => CustomAttributeProviderExtensions.GetEffectiveAttributes(reflectedMember) ?? new IAttributeInfo[0];
@@ -43,7 +42,7 @@ namespace Axle.Reflection
         #if NET20
         protected internal readonly ILock Lock = new MonitorLock();
         #else
-        protected readonly IReadWriteLock Lock = new ReadWriteLock();
+        protected readonly IReadWriteLockProvider LockProvider = new ReadWriteLockProvider();
         #endif
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
@@ -86,15 +85,23 @@ namespace Axle.Reflection
         public RuntimeTypeHandle TypeHandle => _typeHandle;
 
         #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        /// <summary>
+        /// Gets a reference to the <see cref="MemberInfo"/> obtained from the .NET framework.
+        /// </summary>
         public abstract T ReflectedMember { get; }
         #else
+        /// <summary>
+        /// Gets a reference to the <see cref="MemberInfo"/> obtained from the .NET framework.
+        /// </summary>
         public virtual T ReflectedMember { get; }
         #endif
     }
 
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
-    public abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>,
+    #endif
+    internal abstract partial class MemberTokenBase<T, THandle> : MemberTokenBase<T>,
         IEquatable<MemberTokenBase<T, THandle>>
         where T: MemberInfo
         where THandle: struct
@@ -126,10 +133,11 @@ namespace Axle.Reflection
                 T item = null;
                 #if NET20
                 return LockExtensions.Invoke(
-                #else
-                return ReaderWriterLockExtensions.Invoke(
-                #endif
                     Lock,
+                #else
+                return ReadWritLockProviderExtensions.Invoke(
+                    LockProvider,
+                #endif
                     () => item = _memberRef.Value,
                     xx => xx == null || !_memberRef.IsAlive,
                     #if NETSTANDARD

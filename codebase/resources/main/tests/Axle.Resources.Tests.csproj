@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <TargetFramework>net461</TargetFramework>
     <ProjectGuid>{CE2898DE-95CA-4476-AA7A-913353C4F6CF}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -14,11 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="build.sh" />
-    <None Include="restore.sh" />
     <None Include="paket.dependencies" />
-    <None Include="paket.lock" />
-    <None Include="paket.references" />
   </ItemGroup>
 
   <ItemGroup>
@@ -28,15 +25,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Content Include="Content\FileSystemTestFile.en.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\FileSystemTestFile.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\src\Axle.Resources.csproj" />
-  </ItemGroup>
-
-  <Import Project="../../../Axle.Common.props" />
-  <Import Project="../../../NUnit.Packages.targets" />
+  <Import Project="../../../../ref/Reference.Axle.Resources.targets" />
+  <Import Project="../../../../ref/ext/NUnit.Packages.targets" />
 </Project>

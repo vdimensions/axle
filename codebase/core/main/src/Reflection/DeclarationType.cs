@@ -50,7 +50,8 @@ namespace Axle.Reflection
         Override = (1 << 4),
 
         /// <summary>
-        /// Determines that only a member of the same kind with exactly the same signature is hidden in the derived class.
+        /// Determines that only a member of the same kind with exactly the same signature is hidden in the derived
+        /// class.
         /// </summary>
         /// <seealso cref="System.Reflection.MethodBase.IsHideBySig"/>
         HideBySig = (1 << 5),

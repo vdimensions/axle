@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-
 #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
 using Axle.Environment;
 #endif
@@ -34,18 +33,28 @@ namespace Axle.Modularity
         private static IList<TAttribute> CollectAttributes<TAttribute>(
                 IEnumerable<Type> types, 
                 IList<TAttribute> attributes, 
-                bool allowInheritingAttributeTypes = false) 
+                bool allowInheritingAttributeTypes = false,
+                bool allowAnnotatedAttributeTypes = false) 
             where TAttribute: Attribute
         {
             foreach (var type in types)
             {
                 var introspector = new TypeIntrospector(type);
-                var introspectedAttributes = allowInheritingAttributeTypes
-                    ? introspector.GetAttributes().Where(a => a.Attribute is TAttribute).ToArray()
-                    : introspector.GetAttributes<TAttribute>();
-                for (var i = 0; i < introspectedAttributes.Length; i++)
+                var infos = introspector.GetAttributes();
+                for (var i = 0; i < infos.Length; i++)
                 {
-                    attributes.Add((TAttribute) introspectedAttributes[i].Attribute);
+                    var a = infos[i];
+                    if (a.Attribute is TAttribute t)
+                    {
+                        if (allowInheritingAttributeTypes || t.GetType() == typeof(TAttribute)) 
+                        {
+                            attributes.Add(t);
+                        }
+                    }
+                    else if (allowAnnotatedAttributeTypes)
+                    {
+                        CollectAttributes(new[]{a.Attribute.GetType()}, attributes, allowInheritingAttributeTypes, false);
+                    }
                 }
             }
 
@@ -89,6 +98,13 @@ namespace Axle.Modularity
             return result.ToArray();
         }
 
+        public Type GetRequiredApplicationHostType(Type moduleType)
+        {
+            return CollectAttributes(new[] {moduleType}, new List<ModuleAttribute>())
+                .Select(ma => ma.HostableBy)
+                .SingleOrDefault();
+        }
+
         public ModuleMethod GetInitMethod(Type moduleType)
         {
             var introspector = new TypeIntrospector(moduleType);
@@ -97,54 +113,74 @@ namespace Axle.Modularity
                 .SingleOrDefault(x => x.IsDefined<ModuleInitAttribute>(true));
             return method == null ? null : new ModuleMethod(method);
         }
-
-        public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
+        
+        public ModuleMethod GetReadyMethod(Type moduleType)
         {
-            return TypeAndInterfaces(moduleType, new HashSet<Type>())
-                    .Select(t => new TypeIntrospector(t))
-                    .SelectMany(introspector => introspector
-                        .GetMethods(MemberScanOptions)
-                        .Select(method => 
-                            new
-                            {
-                                Method = method, 
-                                Attribute = method
-                                    .GetAttributes<ModuleDependencyInitializedAttribute>()
-                                    .Select(a => a.Attribute)
-                                    .Cast<ModuleDependencyInitializedAttribute>()
-                                    .SingleOrDefault()
-                            })
-                        .Where(x => x.Attribute != null)
-                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
-                    .ToArray();
-        }
-
-        public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
-        {
-            return TypeAndInterfaces(moduleType, new HashSet<Type>())
-                    .Select(t => new TypeIntrospector(t))
-                    .SelectMany(introspector => introspector
-                        .GetMethods(MemberScanOptions)
-                        .Select(method => 
-                            new
-                            {
-                                Method = method, 
-                                Attribute = method
-                                    .GetAttributes<ModuleDependencyTerminatedAttribute>()
-                                    .Select(a => a.Attribute)
-                                    .Cast<ModuleDependencyTerminatedAttribute>()
-                                    .SingleOrDefault()
-                            })
-                        .Where(x => x.Attribute != null)
-                        .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
-                    .ToArray();
+            var introspector = new TypeIntrospector(moduleType);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleReadyAttribute>(true));
+            return method == null ? null : new ModuleMethod(method);
         }
 
         public ModuleEntryMethod GetEntryPointMethod(Type moduleType)
         {
             var introspector = new TypeIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
-            return m == null ? null : new ModuleEntryMethod(m);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleEntryPointAttribute>(true));
+            return method == null ? null : new ModuleEntryMethod(method);
+        }
+
+        public ModuleMethod GetTerminateMethod(Type moduleType)
+        {
+            var introspector = new TypeIntrospector(moduleType);
+            var method = introspector
+                .GetMethods(MemberScanOptions)
+                .SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
+            return method == null ? null : new ModuleMethod(method);
+        }
+
+        public ModuleCallback[] GetDependencyInitializedMethods(Type moduleType)
+        {
+            return TypeAndInterfaces(moduleType, new HashSet<Type>())
+                .Select(t => new TypeIntrospector(t))
+                .SelectMany(introspector => introspector
+                    .GetMethods(MemberScanOptions)
+                    .Select(method => 
+                        new
+                        {
+                            Method = method, 
+                            Attribute = method
+                                .GetAttributes<ModuleDependencyInitializedAttribute>()
+                                .Select(a => a.Attribute)
+                                .Cast<ModuleDependencyInitializedAttribute>()
+                                .SingleOrDefault()
+                        })
+                    .Where(x => x.Attribute != null)
+                    .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
+                .ToArray();
+        }
+
+        public ModuleCallback[] GetDependencyTerminatedMethods(Type moduleType)
+        {
+            return TypeAndInterfaces(moduleType, new HashSet<Type>())
+                .Select(t => new TypeIntrospector(t))
+                .SelectMany(introspector => introspector
+                    .GetMethods(MemberScanOptions)
+                    .Select(method => 
+                        new
+                        {
+                            Method = method, 
+                            Attribute = method
+                                .GetAttributes<ModuleDependencyTerminatedAttribute>()
+                                .Select(a => a.Attribute)
+                                .Cast<ModuleDependencyTerminatedAttribute>()
+                                .SingleOrDefault()
+                        })
+                    .Where(x => x.Attribute != null)
+                    .Select(m => new ModuleCallback(m.Method, m.Attribute.Priority, m.Attribute.AllowParallelInvoke)))
+                .ToArray();
         }
 
         public ModuleConfigSectionAttribute GetConfigurationInfo(Type moduleType)
@@ -155,32 +191,33 @@ namespace Axle.Modularity
                 .LastOrDefault();
         }
 
-        public ModuleMethod GetTerminateMethod(Type moduleType)
-        {
-            var introspector = new TypeIntrospector(moduleType);
-            var m = introspector.GetMethods(MemberScanOptions).SingleOrDefault(x => x.IsDefined<ModuleTerminateAttribute>(true));
-            return m == null ? null : new ModuleMethod(m);
-        }
-
         public UtilizesAttribute[] GetUtilizedModules(Type moduleType)
         {
             return CollectAttributes(
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
                     new List<UtilizesAttribute>(),
                     //
-                    // Note - the `UtilizesAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `UtilizesAttribute` can be subclassed and we must take into account any derived attribute types.
+                    //
+                    true,
+                    //
+                    // Note - the `UtilizesAttribute` can be applied on another attribute. We are also scanning for them.
                     //
                     true)
                 .ToArray();
         }
 
-        public UtilizedByAttribute[] GetUtilizedByModules(Type moduleType)
+        public ProvidesForAttribute[] GetProvidesForModules(Type moduleType)
         {
             return CollectAttributes(
                     TypeAndInterfaces(moduleType, new HashSet<Type>()),
-                    new List<UtilizedByAttribute>(),
+                    new List<ProvidesForAttribute>(),
                     //
-                    // Note - the `UtilizedByAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `ProvidesForAttribute` can be subclassed and we must take into account any derived attribute types.
+                    //
+                    true,
+                    //
+                    // Note - the `ProvidesForAttribute` can be applied on another attribute. We are also scanning for them.
                     //
                     true)
                 .ToArray();
@@ -201,7 +238,11 @@ namespace Axle.Modularity
                     TypeAndInterfaces(moduleType, new HashSet<Type>()), 
                     new List<RequiresAttribute>(), 
                     //
-                    // Note - the `RequiresAttribute` can be subclassed and we must take into accounts any derived attribute types.
+                    // Note - the `RequiresAttribute` can be subclassed and we must take into account any derived attribute types.
+                    //
+                    true,
+                    //
+                    // Note - the `RequiresAttribute` can be applied on another attribute. We are also scanning for them.
                     //
                     true);
             for (var i = 0; i < attributes.Count; i++)

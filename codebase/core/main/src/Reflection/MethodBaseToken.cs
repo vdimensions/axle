@@ -17,17 +17,17 @@ namespace Axle.Reflection
     /// A suitable implementation of the <see cref="MethodBase"/> class representing the underlying reflected member 
     /// for the current <see cref="MethodBaseToken{T}"/> instance.
     /// </typeparam>
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    #if NETFRAMEWORK
     [Serializable]
     #endif
     #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
-    public abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
+    internal abstract class MethodBaseToken<T> : MemberTokenBase<T, RuntimeMethodHandle>, IEquatable<MethodBaseToken<T>>
     #else
-    public abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>>
+    internal abstract class MethodBaseToken<T> : MemberTokenBase<T>, IEquatable<MethodBaseToken<T>>
     #endif
         where T: MethodBase
     {
-        #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+        #if NETFRAMEWORK
         [Serializable]
         #endif
         internal sealed class Parameter : IParameter
@@ -36,6 +36,8 @@ namespace Axle.Reflection
             private readonly ParameterInfo _parameterInfo;
             [DebuggerBrowsable(DebuggerBrowsableState.Never)]
             private readonly ParameterDirection _direction;
+            [DebuggerBrowsable(DebuggerBrowsableState.Never)]
+            private readonly object _defaultValue;
 
             public Parameter(ParameterInfo parameterInfo)
             {
@@ -52,6 +54,13 @@ namespace Axle.Reflection
                 if (parameterInfo.IsRetval)
                 {
                     _direction &= ParameterDirection.ReturnValue;
+                }
+
+                _defaultValue = _parameterInfo.DefaultValue;
+                var hasDefault = (_parameterInfo.Attributes & ParameterAttributes.HasDefault) == ParameterAttributes.HasDefault;
+                if (!hasDefault)
+                {
+                    _defaultValue = null;
                 }
             }
 
@@ -87,7 +96,7 @@ namespace Axle.Reflection
             public string Name => _parameterInfo.Name;
             public Type Type => _parameterInfo.ParameterType;
             public bool IsOptional => _parameterInfo.IsOptional;
-            public object DefaultValue => _parameterInfo.DefaultValue;
+            public object DefaultValue => _defaultValue;
             public ParameterInfo ReflectedMember => _parameterInfo;
             public ParameterDirection Direction => _direction;
         }

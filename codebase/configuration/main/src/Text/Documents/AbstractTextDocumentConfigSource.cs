@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using Axle.Text;
+using Axle.Text.Documents;
+
+namespace Axle.Configuration.Text.Documents
+{
+    /// <summary>
+    /// An abstract class to serve as a base for implementing the <see cref="IConfigSource"/> interface which reads
+    /// configuration data from a <see cref="ITextDocumentRoot"/>.
+    /// </summary>
+    /// <seealso cref="IConfigSource"/>
+    /// <seealso cref="ITextDocumentRoot"/>
+    public abstract class AbstractTextDocumentConfigSource : IConfigSource
+    {
+        private abstract class AbstractTextDocumentConfig<TNode> where TNode: ITextDocumentNode
+        {
+            protected AbstractTextDocumentConfig(TNode documentNode)
+            {
+                DocumentNode = documentNode;
+            }
+
+            protected TNode DocumentNode { get; }
+
+            public string Name => DocumentNode.Key;
+            
+            public IEnumerable<string> Keys
+            {
+                get
+                {
+                    return DocumentNode is ITextDocumentObject o
+                        ? Enumerable.Select(o.GetChildren(), x => x.Key)
+                        : Enumerable.Empty<string>();
+                }
+            }
+        }
+
+        private sealed class TextDocumentConfigSetting : AbstractTextDocumentConfig<ITextDocumentValue>, IConfigSetting
+        {
+            public TextDocumentConfigSetting(ITextDocumentValue documentNode) : base(documentNode) { }
+            
+            public CharSequence Value => DocumentNode.Value;
+        }
+        private sealed class TextDocumentConfigSection : AbstractTextDocumentConfig<ITextDocumentObject>, IConfigSection
+        {
+            public TextDocumentConfigSection(ITextDocumentObject documentNode) : base(documentNode) { }
+
+            public IEnumerable<IConfigSetting> this[string key]
+            {
+                get
+                {
+                    var nodes = DocumentNode.GetValues(key)
+                        .Select<ITextDocumentNode, IConfigSetting>(
+                            node =>
+                            {
+                                switch (node)
+                                {
+                                    case null:
+                                        return null;
+                                    case ITextDocumentObject o:
+                                        return new TextDocumentConfigSection(o);
+                                    case ITextDocumentValue v:
+                                        return new TextDocumentConfigSetting(v);
+                                    default:
+                                        throw new InvalidOperationException($"Unknown document node type {node.GetType()}");
+                                }
+                            });
+                    return nodes.Where(x => x != null);
+                }
+            }
+
+            public CharSequence Value => null;
+        }
+        
+        private sealed class TextDocumentConfiguration : IConfiguration
+        {
+            private readonly TextDocumentConfigSection _configSection;
+            
+            public TextDocumentConfiguration(ITextDocumentRoot documentNode)
+            {
+                _configSection = new TextDocumentConfigSection(documentNode);
+            }
+
+            public CharSequence Value => _configSection.Value;
+            public IEnumerable<string> Keys => _configSection.Keys;
+            public string Name => _configSection.Name;
+
+            public IEnumerable<IConfigSetting> this[string key] => _configSection[key];
+        }
+
+        /// <inheritdoc />
+        public IConfiguration LoadConfiguration()
+        {
+            var doc = ReadDocument();
+            return doc == null ? null : new TextDocumentConfiguration(doc);
+        }
+
+        /// <summary>
+        /// When implemented in a derived class, obtains the <see cref="ITextDocumentRoot"/> upon which the current
+        /// <see cref="AbstractTextDocumentConfigSource"/> is based on. 
+        /// </summary>
+        /// <returns>
+        /// The <see cref="ITextDocumentRoot"/> upon which the current <see cref="AbstractTextDocumentConfigSource"/>
+        /// is based on.
+        /// </returns>
+        protected abstract ITextDocumentRoot ReadDocument();
+    }
+}

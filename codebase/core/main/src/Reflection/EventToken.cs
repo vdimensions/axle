@@ -4,13 +4,16 @@ using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 
-
 namespace Axle.Reflection
 {
-    #if NETSTANDARD2_0_OR_NEWER || NETFRAMEWORK
+    /// <summary>
+    /// A class representing an event object obtained via reflection. 
+    /// </summary>
+    /// <seealso cref="IEvent"/>
+    #if NETFRAMEWORK
     [Serializable]
     #endif
-    public class EventToken : MemberTokenBase<EventInfo>, IEquatable<EventToken>, IEvent
+    internal class EventToken : MemberTokenBase<EventInfo>, IEquatable<EventToken>, IEvent
     {
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly AccessModifier _accessModifier;
@@ -58,15 +61,30 @@ namespace Axle.Reflection
             }
         }
 
+        /// <inheritdoc />
         public override int GetHashCode() => base.GetHashCode();
 
+        /// <inheritdoc />
         public override AccessModifier AccessModifier => _accessModifier;
+
+        /// <inheritdoc />
         public override DeclarationType Declaration => _declaration;
+        
+        /// <summary>
+        /// Gets the object type of the underlying event-handler delegate associated with this event.
+        /// </summary>
         public override Type MemberType => ReflectedMember.EventHandlerType;
+
+        /// <inheritdoc />
         public ICombineAccessor CombineAccessor => _combineAccessor;
+
+        /// <inheritdoc />
         public IRemoveAccessor RemoveAccessor => _removeAccessor;
+        
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         IEnumerable<IAccessor> IAccessible.Accessors => new IAccessor[] { _combineAccessor, _removeAccessor };
+        
+        /// <inheritdoc />
         public override EventInfo ReflectedMember => _eventInfo;
     }
 }

@@ -19,7 +19,8 @@ namespace Axle.Globalization
         /// Creates a new <see cref="CultureScope"/> instance using the specified <paramref name="culture"/>.
         /// </summary>
         /// <param name="culture">
-        /// The <see cref="CultureInfo">culture</see> to be set as default culture and UI culture by the newly created <see cref="CultureScope">culture scope</see>.
+        /// The <see cref="CultureInfo">culture</see> to be set as default culture and UI culture by the newly created
+        /// <see cref="CultureScope">culture scope</see>.
         /// </param>
         /// <returns>
         /// A new <see cref="CultureScope"/> instance.
@@ -33,13 +34,16 @@ namespace Axle.Globalization
             return new CultureScope(culture, culture);
         }
         /// <summary>
-        /// Creates a new <see cref="CultureScope"/> instance using the specified <paramref name="culture"/> and <paramref name="uiCulture">UI culture</paramref>.
+        /// Creates a new <see cref="CultureScope"/> instance using the specified <paramref name="culture"/> and
+        /// <paramref name="uiCulture">UI culture</paramref>.
         /// </summary>
         /// <param name="culture">
-        /// The <see cref="CultureInfo">culture</see> to be set as default culture by the newly created <see cref="CultureScope">culture scope</see>.
+        /// The <see cref="CultureInfo">culture</see> to be set as default culture by the newly created
+        /// <see cref="CultureScope">culture scope</see>.
         /// </param>
         /// <param name="uiCulture">
-        /// The <see cref="CultureInfo">culture</see> to be set as default UI culture by the newly created <see cref="CultureScope">culture scope</see>.
+        /// The <see cref="CultureInfo">culture</see> to be set as default UI culture by the newly created
+        /// <see cref="CultureScope">culture scope</see>.
         /// </param>
         /// <returns>
         /// A new <see cref="CultureScope"/> instance.
@@ -56,7 +60,8 @@ namespace Axle.Globalization
         /// Creates a new <see cref="CultureScope"/> instance using the specified <paramref name="culture"/>.
         /// </summary>
         /// <param name="culture">
-        /// The name for the <see cref="CultureInfo">culture</see> to be set as default culture and UI culture by the newly created <see cref="CultureScope">culture scope</see>.
+        /// The name for the <see cref="CultureInfo">culture</see> to be set as default culture and UI culture by the
+        /// newly created <see cref="CultureScope">culture scope</see>.
         /// </param>
         /// <returns>
         /// A new <see cref="CultureScope"/> instance.
@@ -70,13 +75,16 @@ namespace Axle.Globalization
             return new CultureScope(culture, culture);
         }
         /// <summary>
-        /// Creates a new <see cref="CultureScope"/> instance using the specified <paramref name="culture"/> and <paramref name="uiCulture">UI culture</paramref>.
+        /// Creates a new <see cref="CultureScope"/> instance using the specified <paramref name="culture"/> and
+        /// <paramref name="uiCulture">UI culture</paramref>.
         /// </summary>
         /// <param name="culture">
-        /// The name of the <see cref="CultureInfo">culture</see> to be set as default culture by the newly created <see cref="CultureScope">culture scope</see>.
+        /// The name of the <see cref="CultureInfo">culture</see> to be set as default culture by the newly created
+        /// <see cref="CultureScope">culture scope</see>.
         /// </param>
         /// <param name="uiCulture">
-        /// The name of the <see cref="CultureInfo">culture</see> to be set as default UI culture by the newly created <see cref="CultureScope">culture scope</see>.
+        /// The name of the <see cref="CultureInfo">culture</see> to be set as default UI culture by the newly created
+        /// <see cref="CultureScope">culture scope</see>.
         /// </param>
         /// <returns>
         /// A new <see cref="CultureScope"/> instance.
@@ -119,14 +127,16 @@ namespace Axle.Globalization
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly CultureInfo _currentCulture;
         /// <summary>
-        /// Gets the <see cref="CultureInfo">culture</see> that the current <see cref="CultureScope">culture scope</see> was initialized with.
+        /// Gets the <see cref="CultureInfo">culture</see> that the current
+        /// <see cref="CultureScope">culture scope</see> was initialized with.
         /// </summary>
         public CultureInfo Culture => _currentCulture;
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly CultureInfo _currentUiCulture;
         /// <summary>
-        /// Gets the <see cref="CultureInfo">UI culture</see> that the current <see cref="CultureScope">culture scope</see> was initialized with.
+        /// Gets the <see cref="CultureInfo">UI culture</see> that the current
+        /// <see cref="CultureScope">culture scope</see> was initialized with.
         /// </summary>
         public CultureInfo UICulture => _currentUiCulture;
 
